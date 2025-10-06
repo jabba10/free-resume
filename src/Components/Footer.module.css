@@ -1,0 +1,652 @@
+/* Footer Base Styles */
+.footer {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #e2e8f0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Footer Top Section */
+.footerTop {
+  padding: 5rem 0 3rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.footerCard {
+  animation: fadeInUp 0.6s ease-out;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Left Card - Company Info */
+.footerCard:first-child {
+  justify-self: start;
+  text-align: left;
+}
+
+/* Center Card - Quick Links */
+.footerCard:nth-child(2) {
+  justify-self: center;
+  text-align: center;
+}
+
+/* Right Card - Resources */
+.footerCard:last-child {
+  justify-self: end;
+  text-align: right;
+}
+
+/* Company Card */
+.companyCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.footerLogo {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.footerAbout {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #cbd5e0;
+  margin: 0;
+  opacity: 0.9;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  max-width: 350px;
+}
+
+/* Social Links */
+.socialLinks {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Center card social links */
+.footerCard:nth-child(2) .socialLinks {
+  justify-content: center;
+}
+
+/* Right card social links */
+.footerCard:last-child .socialLinks {
+  justify-content: flex-end;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  color: #e2e8f0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.socialLink:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+.socialLink svg {
+  width: 22px;
+  height: 22px;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Links Cards */
+.linksCard,
+.contactCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.cardTitle {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.cardTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3px;
+}
+
+/* Left card title line */
+.footerCard:first-child .cardTitle::after {
+  left: 0;
+}
+
+/* Center card title line */
+.footerCard:nth-child(2) .cardTitle::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Right card title line */
+.footerCard:last-child .cardTitle::after {
+  right: 0;
+}
+
+.footerLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.footerLinkItem {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.footerLink {
+  color: #cbd5e0;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 0.35rem 0;
+  display: block;
+  position: relative;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Left card link hover effects */
+.footerCard:first-child .footerLink {
+  padding-left: 0;
+  text-align: left;
+}
+
+.footerCard:first-child .footerLink:hover {
+  color: #ffffff;
+  padding-left: 1rem;
+  transform: translateX(6px);
+}
+
+.footerCard:first-child .footerLink::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.footerCard:first-child .footerLink:hover::before {
+  width: 10px;
+}
+
+/* Center card link hover effects */
+.footerCard:nth-child(2) .footerLink {
+  text-align: center;
+  padding: 0.35rem 0;
+}
+
+.footerCard:nth-child(2) .footerLink:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Right card link hover effects */
+.footerCard:last-child .footerLink {
+  padding-right: 0;
+  text-align: right;
+}
+
+.footerCard:last-child .footerLink:hover {
+  color: #ffffff;
+  padding-right: 1rem;
+  transform: translateX(-6px);
+}
+
+.footerCard:last-child .footerLink::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.footerCard:last-child .footerLink:hover::before {
+  width: 10px;
+}
+
+/* Contact Card */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #cbd5e0;
+  font-size: 1.05rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Center card contact items */
+.footerCard:nth-child(2) .contactItem {
+  justify-content: center;
+}
+
+/* Right card contact items */
+.footerCard:last-child .contactItem {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.contactIcon {
+  color: #667eea;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+  text-align: center;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.35);
+  color: white;
+}
+
+/* Footer Bottom Section */
+.footerBottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 0;
+  background: rgba(0, 0, 0, 0.2);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.footerBottomContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.heartIcon {
+  color: #e53e3e;
+  animation: heartbeat 2s ease-in-out infinite;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive Design - Large Desktop */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1600px;
+    padding: 0 4rem;
+  }
+  
+  .footerGrid {
+    gap: 5rem;
+  }
+}
+
+/* Responsive Design - Laptop */
+@media (max-width: 1200px) {
+  .footerGrid {
+    gap: 3.5rem;
+  }
+  
+  .container {
+    padding: 0 2.5rem;
+  }
+  
+  .footerAbout {
+    max-width: 300px;
+  }
+}
+
+/* Responsive Design - Tablet */
+@media (max-width: 1024px) {
+  .footerGrid {
+    gap: 3rem;
+  }
+  
+  .container {
+    padding: 0 2rem;
+  }
+  
+  .footerTop {
+    padding: 4rem 0 2.5rem;
+  }
+  
+  .footerAbout {
+    max-width: 280px;
+  }
+}
+
+/* Responsive Design - Small Tablet */
+@media (max-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .footerCard:first-child,
+  .footerCard:nth-child(2),
+  .footerCard:last-child {
+    justify-self: center;
+    text-align: center;
+  }
+  
+  .footerAbout {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .socialLinks {
+    justify-content: center !important;
+  }
+  
+  .contactItem {
+    justify-content: center !important;
+    flex-direction: row !important;
+  }
+  
+  /* Reset all hover effects for mobile */
+  .footerCard:first-child .footerLink:hover,
+  .footerCard:last-child .footerLink:hover {
+    padding-left: 0;
+    padding-right: 0;
+    transform: none;
+  }
+  
+  .footerCard:first-child .footerLink:hover::before,
+  .footerCard:last-child .footerLink:hover::before {
+    width: 0;
+  }
+  
+  .footerCard:nth-child(2) .footerLink:hover {
+    transform: none;
+  }
+  
+  .footerLink:hover {
+    color: #ffffff;
+  }
+  
+  /* Center all title lines on mobile */
+  .cardTitle::after {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .footerTop {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footerGrid {
+    gap: 2.5rem;
+  }
+
+  .footerLogo {
+    font-size: 1.8rem;
+  }
+
+  .socialLink {
+    width: 44px;
+    height: 44px;
+  }
+
+  .socialLink svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ctaButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .copyright {
+    font-size: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .cardTitle {
+    font-size: 1.3rem;
+  }
+  
+  .footerLink {
+    font-size: 1rem;
+    padding: 0.3rem 0;
+  }
+  
+  .footerAbout {
+    max-width: 100%;
+    font-size: 1.05rem;
+  }
+}
+
+/* Responsive Design - Small Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .footerTop {
+    padding: 2.5rem 0 1rem;
+  }
+
+  .footerGrid {
+    gap: 2rem;
+  }
+
+  .footerLogo {
+    font-size: 1.6rem;
+  }
+
+  .socialLinks {
+    gap: 1rem;
+  }
+
+  .socialLink {
+    width: 42px;
+    height: 42px;
+  }
+
+  .socialLink svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footerAbout {
+    font-size: 1rem;
+  }
+  
+  .cardTitle {
+    font-size: 1.25rem;
+  }
+  
+  .footerLinks {
+    gap: 0.3rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .footerGrid {
+    gap: 1.75rem;
+  }
+  
+  .footerLogo {
+    font-size: 1.5rem;
+  }
+  
+  .socialLinks {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .socialLink,
+  .footerLink,
+  .ctaButton,
+  .footerCard {
+    transition: none;
+    animation: none;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  .heartIcon {
+    animation: none;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .footer {
+    background: #000000;
+    border-top: 2px solid #ffffff;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  .socialLink {
+    border: 2px solid #ffffff;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  .footerBottom {
+    border-top: 2px solid #ffffff;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+}

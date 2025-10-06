@@ -1,0 +1,107 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/careers-blog",
+      "regex": "^/careers\\-blog(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/careers\\-blog(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/cover-letter-guides",
+      "regex": "^/cover\\-letter\\-guides(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cover\\-letter\\-guides(?:/)?$"
+    },
+    {
+      "page": "/free-resume-builder",
+      "regex": "^/free\\-resume\\-builder(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/free\\-resume\\-builder(?:/)?$"
+    },
+    {
+      "page": "/interview-tips",
+      "regex": "^/interview\\-tips(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/interview\\-tips(?:/)?$"
+    },
+    {
+      "page": "/jobs-boards",
+      "regex": "^/jobs\\-boards(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/jobs\\-boards(?:/)?$"
+    },
+    {
+      "page": "/jobs-search-tips",
+      "regex": "^/jobs\\-search\\-tips(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/jobs\\-search\\-tips(?:/)?$"
+    },
+    {
+      "page": "/privacy-policy",
+      "regex": "^/privacy\\-policy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy\\-policy(?:/)?$"
+    },
+    {
+      "page": "/resume-guide",
+      "regex": "^/resume\\-guide(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/resume\\-guide(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
