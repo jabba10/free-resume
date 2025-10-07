@@ -1,10 +1,6 @@
-// next.config.js
-import cloudflare from '@opennextjs/cloudflare';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove output: 'export' — it kills SSR!
-  // Add other config only if needed (e.g., images, env)
+  // Add any custom Next.js config here
 };
 
-export default cloudflare(nextConfig);
+export default nextConfig;
