@@ -1,3 +1,9 @@
-# https://www.robotstxt.org/robotstxt.html
+# *
 User-agent: *
-Disallow:
+Allow: /
+
+# Host
+Host: https://www.professionalresumefree.com
+
+# Sitemaps
+Sitemap: https://www.professionalresumefree.com/sitemap.xml

@@ -1,17 +1,17 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/about": "pages/about.html",
+  "/_error": "pages/_error.js",
   "/careers-blog": "pages/careers-blog.html",
-  "/contact": "pages/contact.html",
   "/cover-letter-guides": "pages/cover-letter-guides.html",
+  "/contact": "pages/contact.html",
+  "/": "pages/index.html",
   "/free-resume-builder": "pages/free-resume-builder.html",
   "/interview-tips": "pages/interview-tips.html",
-  "/": "pages/index.html",
   "/jobs-boards": "pages/jobs-boards.html",
   "/jobs-search-tips": "pages/jobs-search-tips.html",
-  "/privacy-policy": "pages/privacy-policy.html",
   "/resume-guide": "pages/resume-guide.html",
+  "/privacy-policy": "pages/privacy-policy.html",
   "/404": "pages/404.html"
 }
