@@ -173,11 +173,7 @@ const PrivacyPolicy = () => {
                 <h4>Private</h4>
                 <p>No data stored</p>
               </div>
-              <div className={styles.floatingCard}>
-                <div className={styles.cardIcon}>🛡️</div>
-                <h4>Secure</h4>
-                <p>Encrypted in browser</p>
-              </div>
+              
               <div className={styles.floatingCard}>
                 <div className={styles.cardIcon}>🚀</div>
                 <h4>Simple</h4>

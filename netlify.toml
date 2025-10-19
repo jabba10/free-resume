@@ -1,10 +1,22 @@
 [build]
   command = "npm run build"
-  
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+[[redirects]]
+  from = "http://professionalresumefree.com/*"
+  to = "https://www.professionalresumefree.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://professionalresumefree.com/*"
+  to = "https://www.professionalresumefree.com/:splat"
+  status = 301
+  force = true
+
+# Sitemap and robots.txt - ensure they are accessible
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap.xml"
@@ -20,6 +32,7 @@
   to = "/robots.txt"
   status = 200
 
+# Catch-all for SPA routing (should be last)
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -185,11 +185,7 @@ const AboutPage = () => {
                 <h4>Modern</h4>
                 <p>Clean, contemporary designs</p>
               </div>
-              <div className={styles.floatingCard}>
-                <div className={styles.cardIcon}>🚀</div>
-                <h4>Effective</h4>
-                <p>Proven results</p>
-              </div>
+              
               <div className={styles.floatingCard}>
                 <div className={styles.cardIcon}>💫</div>
                 <h4>Simple</h4>
