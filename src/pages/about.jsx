@@ -69,7 +69,7 @@ const AboutPage = () => {
         <meta name="robots" content="index, follow" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/about" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/about/" />
 
         {/* Open Graph / Social Media */}
         <meta property="og:title" content="About Us | How Our Resume Builder Helps You Land Better Jobs" />

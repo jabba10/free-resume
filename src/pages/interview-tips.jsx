@@ -165,7 +165,7 @@ const InterviewTips = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-tips-and-interview-guide" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/resume-tips-and-interview-guide/" />
 
         {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />

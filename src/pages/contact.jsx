@@ -174,7 +174,7 @@ const ContactPage = () => {
         <title>Contact Us | ProfessionalResumeFree - Secure Contact Form</title>
         <meta name="description" content="Securely get in touch with our team. Protected contact form with spam prevention and quick response guarantee." />
         <meta name="keywords" content="secure contact form, resume builder contact, career help, protected messaging" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/contact" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/contact/" />
         <meta name="robots" content="index, follow" />
       </Head>
 

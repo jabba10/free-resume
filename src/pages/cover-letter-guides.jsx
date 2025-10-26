@@ -182,7 +182,7 @@ const CoverLetterGuide = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/cover-letter-guide" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/cover-letter-guide/" />
 
         {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Professional Cover Letter Guide 2026: Examples & Templates for Job Applications" />

@@ -167,13 +167,13 @@ const CareerBlog = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/blog/career-development-guide" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/blog/careers-development-guide/" />
 
         {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Career Change Guide 2026: How to Successfully Switch Careers & Advance" />
         <meta property="og:description" content="Proven career change strategies for 2026. Learn step-by-step how to transition careers, develop skills, and land your dream job with expert guidance." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/career-blog-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/blog/career-development-guide" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/blog/career-development-guide/" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content="2026-01-20T00:00:00+00:00" />

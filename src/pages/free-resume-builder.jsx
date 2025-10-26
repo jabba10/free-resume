@@ -890,7 +890,7 @@ const Resume = () => {
         <title>Professional Resume Builder | Create ATS-Friendly Resumes</title>
         <meta name="description" content="Create professional, ATS-friendly resumes with our free resume builder. Download as PDF and land your dream job." />
         <meta name="keywords" content="resume builder, professional resume, ATS resume, free resume template, job search, career, CV builder" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-builder" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-builder/" />
       </Head>
 
       {/* Hero Section */}

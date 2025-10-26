@@ -116,7 +116,7 @@ const ResumeGuide = () => {
         <meta name="robots" content="index, follow" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-guide" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/resume-guide/" />
 
         {/* Open Graph / Social Media */}
         <meta property="og:title" content="How to Beat the ATS & Get More Interviews (2024 Guide)" />

@@ -229,7 +229,7 @@ const JobBoardsBlog = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/blog/best-job-boards" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/blog/best-job-boards/" />
 
         {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Best Job Boards 2026: Remote, Hybrid & International Jobs with Visa Sponsorship" />

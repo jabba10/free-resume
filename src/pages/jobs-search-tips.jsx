@@ -178,7 +178,7 @@ const JobSearchTips = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/job-search-tips" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/job-search-tips/" />
 
         {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Job Search Tips 2026: Ultimate Guide to Land Your Dream Job Faster" />
