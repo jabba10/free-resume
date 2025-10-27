@@ -4,6 +4,7 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# HTTP to HTTPS redirects (MUST come first)
 [[redirects]]
   from = "http://professionalresumefree.com/*"
   to = "https://www.professionalresumefree.com/:splat"
@@ -11,29 +12,23 @@
   force = true
 
 [[redirects]]
+  from = "http://www.professionalresumefree.com/*"
+  to = "https://www.professionalresumefree.com/:splat"
+  status = 301
+  force = true
+
+# Non-www to www redirect
+[[redirects]]
   from = "https://professionalresumefree.com/*"
   to = "https://www.professionalresumefree.com/:splat"
   status = 301
   force = true
 
-# Sitemap and robots.txt - ensure they are accessible
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
-  status = 200
+# Remove all the sitemap/robots.txt redirects - they're not needed
 
-[[redirects]]
-  from = "/sitemap-0.xml"
-  to = "/sitemap-0.xml"
-  status = 200
-
-[[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
-
-# Catch-all for SPA routing (should be last)
+# SPA redirect for client-side routing (ONLY for 404s)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  conditions = {Status = "404"}
