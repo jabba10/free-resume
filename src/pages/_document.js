@@ -6,6 +6,13 @@ export default function Document() {
     <Html lang="en">
       <Head> 
         <link rel='canonical' href='https://www.professionalresumefree.com/' /> 
+        {/* Cloudflare Web Analytics */}
+        <script 
+          defer 
+          src='https://static.cloudflareinsights.com/beacon.min.js' 
+          data-cf-beacon='{"token": "4d89ae0dc5ad4c328cc8fbb0a0699c50"}'
+        />
+        {/* End Cloudflare Web Analytics */}
       </Head>
       <body>
         <Main />
