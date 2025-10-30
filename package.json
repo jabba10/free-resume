@@ -30,7 +30,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "postbuild": "next-sitemap",
     "deploy": "npx @cloudflare/next-on-pages && wrangler deploy"
@@ -38,18 +38,7 @@
   "reactSnap": {
     "source": "build",
     "include": [
-      "/",
-      "/professional-resume-builder-get-hired-fast",
-      "/resume-guide",
-      "/contact",
-      "/cover-letter",
-      "/job-boards",
-      "/career-advice",
-      "/about",
-      "/billing",
-      "/how-to-prepare-for-a-job-interview",
-      "/job-search-tips",
-      "/privacy-policy"
+      
     ],
     "skipThirdPartyRequests": true,
     "puppeteerArgs": [
