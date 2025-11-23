@@ -13,6 +13,7 @@ const Footer = () => {
     { href: '/careers-blog', label: 'Blog' },
     { href: '/jobs-search-tips', label: 'Jobs Search Tips' },
     { href: '/jobs-boards', label: 'Jobs Boards' },
+    
 
   ];
 
