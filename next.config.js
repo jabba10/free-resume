@@ -5,19 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Link',
-            value: '<https://www.professionalresumefree.com/>; rel="canonical"',
-          },
-        ],
-      },
-    ];
-  },
+  // Remove the headers() function - it doesn't work with static exports
 }
 
 module.exports = nextConfig
