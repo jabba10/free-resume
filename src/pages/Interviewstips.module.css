@@ -1,550 +1,468 @@
-/* Base Styles */
+/* Interviewstips.module.css */
+
 .interviewTips {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  color: #e2e8f0;
+  background-color: white;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
   overflow-x: hidden;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  box-sizing: border-box;
 }
 
-/* Hero Section */
+/* ——— HERO SECTION ——— */
+
 .heroSection {
-  padding: 6rem 0 4rem;
-  position: relative;
-  background: radial-gradient(ellipse at top, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  padding: 4rem 0 3rem;
+  text-align: center;
 }
 
-.heroContent {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+.trustBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 0.375rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.starIcon {
+  color: #666;
 }
 
 .heroTitle {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  line-height: 1.2;
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: #333;
 }
 
 .heroSubtitle {
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
-  line-height: 1.6;
-  color: #cbd5e0;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
 }
 
 .heroButtons {
   display: flex;
-  gap: 1.5rem;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.primaryButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.primaryButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
-}
-
-.buttonPulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 1;
-  }
-  100% {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-  }
-}
-
+.primaryButton,
 .secondaryButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
   text-decoration: none;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.125rem;
+  transition: all 0.2s;
+  min-height: 52px;
+  border: none;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background-color: black;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton:hover {
+  background-color: #333;
+}
+
+.secondaryButton {
+  background-color: white;
+  color: black;
+  border: 1px solid #ddd;
 }
 
 .secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
-  color: #ffffff;
+  background-color: #f9f9f9;
 }
 
-/* Stats Section */
+.buttonPulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
+.heroFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.featureBadge {
+  background: #f0f0f0;
+  padding: 0.375rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  color: #333;
+}
+
+/* ——— STATS SECTION ——— */
+
 .statsSection {
   padding: 3rem 0;
-  background: rgba(0, 0, 0, 0.2);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: #fafafa;
+}
+
+.statsHeader h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: black;
+}
+
+.statsHeader p {
+  text-align: center;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  font-size: 1rem;
 }
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
 }
 
 .statCard {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  transition: box-shadow 0.2s;
 }
 
 .statCard:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .statNumber {
-  font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  min-width: 80px;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: black;
+  margin-bottom: 0.5rem;
 }
 
 .statLabel {
-  font-size: 1.1rem;
   font-weight: 600;
-  color: #ffffff;
+  font-size: 1rem;
+  color: #333;
   margin-bottom: 0.25rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .statDescription {
-  font-size: 0.9rem;
-  color: #a0aec0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: #666;
 }
 
-/* Intro Section */
+/* ——— INTRO SECTION ——— */
+
 .introSection {
   padding: 4rem 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .introContent {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .introContent {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
 }
 
 .introText h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #ffffff 0%, #a0aec0 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 1.25rem;
+  color: black;
 }
 
 .introText p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #cbd5e0;
-  margin-bottom: 1.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
 .introVisual {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.25rem;
 }
 
 .visualCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: #f9f9f9;
   padding: 1.5rem;
+  border-radius: 0.75rem;
   text-align: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.visualCard:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid #eee;
 }
 
 .visualIcon {
   font-size: 2rem;
-  margin-bottom: 0.75rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 1rem;
 }
 
 .visualCard h4 {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin: 0 0 0.5rem;
+  color: black;
 }
 
 .visualCard p {
-  font-size: 0.9rem;
-  color: #a0aec0;
+  font-size: 0.9375rem;
+  color: #666;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-/* Section Common Styles */
+/* ——— SECTION HEADERS ——— */
+
 .sectionHeader {
   text-align: center;
-  margin-bottom: 4rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 2.5rem;
 }
 
-.sectionTitle {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+.sectionHeader h2 {
+  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, #a0aec0 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: black;
 }
 
-.sectionSubtitle {
-  font-size: 1.2rem;
-  color: #cbd5e0;
-  max-width: 600px;
+.sectionHeader p {
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  color: #555;
+  max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-/* Tips Section */
+/* ——— TIPS SECTION ——— */
+
 .tipsSection {
-  padding: 6rem 0;
-  background: rgba(0, 0, 0, 0.2);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  padding: 4rem 0 3rem;
 }
 
 .tipsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .tipCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  padding: 1.75rem;
   position: relative;
   overflow: hidden;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.tipCard:hover {
-  transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.tipCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.tipCard:hover::before {
-  transform: scaleX(1);
 }
 
 .cardHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 1.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 1rem;
 }
 
 .cardIconContainer {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f9f9f9;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.tipIcon {
-  width: 24px;
-  height: 24px;
-  color: white;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: #333;
+  font-size: 1.25rem;
 }
 
 .tipTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #ffffff;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: black;
 }
 
 .tipContent {
-  color: #cbd5e0;
-  line-height: 1.6;
   font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .cardNumber {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.3);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.875rem;
+  color: #ccc;
+  font-weight: 700;
 }
 
-/* Advanced Section */
+.tipIcon {
+  /* Inherits color from .cardIconContainer */
+}
+
+/* ——— ADVANCED TIPS ——— */
+
 .advancedSection {
-  padding: 6rem 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  padding: 3rem 0 4rem;
+  background: #fafafa;
 }
 
 .advancedGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .advancedCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.advancedCard:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  padding: 1.75rem;
 }
 
 .advancedHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .advancedIcon {
-  width: 24px;
-  height: 24px;
-  color: #667eea;
-  flex-shrink: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 1.125rem;
 }
 
 .advancedTitle {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #ffffff;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: black;
 }
 
 .advancedContent {
-  color: #cbd5e0;
-  line-height: 1.6;
   font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
   margin: 0;
-  padding-left: 2.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-/* CTA Section */
+.skillLevel {
+  margin-top: 1.25rem;
+}
+
+.levelBadge {
+  background: #e9ecef;
+  color: #495057;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* ——— CTA SECTION ——— */
+
 .ctaSection {
-  padding: 6rem 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  padding: 5rem 0;
   text-align: center;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.ctaContent {
-  max-width: 600px;
-  margin: 0 auto;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: white;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 .ctaTitle {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #ffffff;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 800;
+  margin: 0 0 1rem;
+  color: black;
 }
 
 .ctaSubtitle {
-  font-size: 1.2rem;
-  color: #cbd5e0;
-  margin-bottom: 3rem;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
   line-height: 1.6;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .ctaButtons {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 2rem;
 }
 
 .ctaButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem 3rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: black;
   color: white;
-  text-decoration: none;
-  border-radius: 12px;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  text-decoration: none;
+  font-size: 1.125rem;
+  transition: background 0.2s;
+  min-height: 52px;
 }
 
 .ctaButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-}
-
-.ctaButtonSecondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem 2.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.ctaButtonSecondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-3px);
-  color: #ffffff;
+  background: #333;
 }
 
 .ctaGuarantee {
@@ -552,203 +470,33 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: #a0aec0;
-  font-size: 0.9rem;
-  margin-top: 1.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: #666;
+  margin-bottom: 2rem;
 }
 
 .guaranteeIcon {
-  color: #48bb78;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: #333;
 }
 
-/* Responsive Design */
-@media (max-width: 968px) {
-  .introContent {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .tipsGrid {
-    grid-template-columns: 1fr;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
+.ctaFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 0 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .heroSection {
-    padding: 4rem 0 2rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .heroButtons {
-    flex-direction: column;
-    gap: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
-    max-width: 300px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .statsGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .statCard {
-    padding: 1.25rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .statNumber {
-    font-size: 2rem;
-    min-width: 60px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .introVisual {
-    flex-direction: row;
-    justify-content: center;
-    gap: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .visualCard {
-    padding: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .visualIcon {
-    font-size: 1.5rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .tipCard,
-  .advancedCard {
-    padding: 2rem 1.5rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .ctaButtons {
-    flex-direction: column;
-    gap: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .ctaButton,
-  .ctaButtonSecondary {
-    width: 100%;
-    max-width: 300px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: #555;
 }
 
-@media (max-width: 480px) {
-  .heroTitle {
-    font-size: 2rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .heroSubtitle {
-    font-size: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .sectionTitle {
-    font-size: 1.75rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .sectionSubtitle {
-    font-size: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .introVisual {
-    flex-direction: column;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .cardHeader {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.75rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .advancedHeader {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.75rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .advancedContent {
-    padding-left: 0;
-    text-align: center;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-}
-
-/* Large screens */
-@media (min-width: 1440px) {
-  .container {
-    max-width: 1400px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-}
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .primaryButton,
-  .secondaryButton,
-  .tipCard,
-  .advancedCard,
-  .statCard,
-  .visualCard,
-  .ctaButton,
-  .ctaButtonSecondary {
-    transition: none;
-    animation: none;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .buttonPulse {
-    animation: none;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .interviewTips {
-    background: #000000;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .tipCard,
-  .advancedCard,
-  .statCard,
-  .visualCard {
-    border: 2px solid #ffffff;
-    background: #000000;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
+.featureCheck {
+  color: #333;
+  flex-shrink: 0;
 }

@@ -1,369 +1,365 @@
-/* Base Styles */
+/* JobsSearchTips.module.css */
+
 .jobSearchTips {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  color: #e2e8f0;
+  background-color: white;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
   overflow-x: hidden;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  box-sizing: border-box;
 }
 
-/* Hero Section */
+/* ——— HERO SECTION ——— */
+
 .heroSection {
-  padding: 6rem 0 4rem;
-  position: relative;
-  background: radial-gradient(ellipse at top, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
-}
-
-.heroContent {
+  padding: 4rem 0 3rem;
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto 4rem;
 }
 
 .heroTag {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(102, 126, 234, 0.2);
-  border: 1px solid rgba(102, 126, 234, 0.3);
-  border-radius: 20px;
-  color: #667eea;
-  font-size: 0.9rem;
-  font-weight: 500;
+  background: #f0f0f0;
+  padding: 0.375rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  color: #333;
   margin-bottom: 1.5rem;
 }
 
 .tagIcon {
-  width: 16px;
-  height: 16px;
+  color: #555;
+  font-size: 1rem;
 }
 
 .heroTitle {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  line-height: 1.2;
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #333;
 }
 
 .heroSubtitle {
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto 2rem;
   line-height: 1.6;
-  color: #cbd5e0;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .heroButtons {
   display: flex;
-  gap: 1.5rem;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.primaryButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-}
-
-.primaryButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
-}
-
-.buttonPulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 1;
-  }
-  100% {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-  }
-}
-
+.primaryButton,
 .secondaryButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
   text-decoration: none;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.125rem;
+  transition: all 0.2s;
+  min-height: 52px;
+  border: none;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background: black;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton:hover {
+  background: #333;
+}
+
+.secondaryButton {
+  background: white;
+  color: black;
+  border: 1px solid #ddd;
 }
 
 .secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
-  color: #ffffff;
+  background: #f9f9f9;
 }
 
-/* Hero Stats */
+.buttonPulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
+.heroFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.featureBadge {
+  background: #f0f0f0;
+  padding: 0.375rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  color: #333;
+}
+
 .heroStats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .statCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2rem;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
   text-align: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.statCard:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  min-width: 140px;
 }
 
 .statIconContainer {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.statIcon {
-  width: 24px;
-  height: 24px;
-  color: white;
+  margin: 0 auto 1rem;
+  color: #333;
+  font-size: 1.25rem;
+  border: 1px solid #eee;
 }
 
 .statValue {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: black;
+  margin: 0 0 0.5rem;
 }
 
 .statLabel {
-  font-size: 1rem;
-  color: #cbd5e0;
-  font-weight: 500;
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
 }
 
-/* Section Headers */
+/* ——— SECTION HEADER ——— */
+
 .sectionHeader {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 .sectionTitle {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
   font-weight: 700;
-  margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, #ffffff 0%, #a0aec0 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin: 0 0 1rem;
+  color: black;
 }
 
 .sectionSubtitle {
-  font-size: 1.1rem;
-  color: #cbd5e0;
-  max-width: 600px;
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  color: #555;
+  max-width: 700px;
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* Strategies Section */
+/* ——— STRATEGIES SECTION ——— */
+
 .strategiesSection {
   padding: 4rem 0;
-  background: rgba(0, 0, 0, 0.2);
 }
 
 .strategiesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 3rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .strategiesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .strategyColumn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
   padding: 2rem;
-  backdrop-filter: blur(10px);
 }
 
 .columnHeader {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
 }
 
 .columnIcon {
   font-size: 2rem;
 }
 
-.columnHeader h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #ffffff;
+.columnTitle h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: black;
+}
+
+.columnTitle p {
+  font-size: 0.9375rem;
+  color: #666;
   margin: 0;
 }
 
 .tipsGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 
 .tipCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
   padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.tipCard:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .tipIcon {
   font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.tipTitle {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .tipContent {
-  font-size: 0.9rem;
-  color: #cbd5e0;
-  line-height: 1.5;
-  margin: 0;
+  flex: 1;
 }
 
-/* Motivation Section */
+.tipTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: black;
+}
+
+.tipDescription {
+  font-size: 0.9375rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tipNumber {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.875rem;
+  color: #ccc;
+  font-weight: 700;
+}
+
+/* ——— MOTIVATION SECTION ——— */
+
 .motivationSection {
   padding: 4rem 0;
+  background: white;
 }
 
 .motivationContent {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 3rem;
-  max-width: 1000px;
-  margin: 0 auto 3rem;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .motivationContent {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .motivationSubtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 1.5rem;
+  color: black;
 }
 
 .motivationIcon {
-  width: 20px;
-  height: 20px;
-  color: #667eea;
+  color: #555;
+  font-size: 1rem;
 }
 
 .quotesGrid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
 .quoteCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  backdrop-filter: blur(10px);
+  background: #f9f9f9;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
 }
 
 .quote {
-  font-size: 1rem;
   font-style: italic;
-  color: #e2e8f0;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
 }
 
 .author {
-  font-size: 0.9rem;
-  color: #667eea;
-  font-weight: 500;
+  font-size: 0.9375rem;
+  color: #666;
+  font-style: normal;
 }
 
 .successTipsList {
@@ -372,89 +368,86 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .successTip {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-  color: #cbd5e0;
-  line-height: 1.5;
-  font-size: 0.95rem;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: #555;
 }
 
 .tipIcon {
-  width: 16px;
-  height: 16px;
-  color: #48bb78;
-  margin-top: 0.125rem;
+  color: #333;
   flex-shrink: 0;
+  margin-top: 0.25rem;
 }
 
 .progressReminder {
+  background: #f9f9f9;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-top: 2.5rem;
   display: flex;
-  align-items: center;
-  gap: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-  backdrop-filter: blur(10px);
+  gap: 1rem;
+  align-items: flex-start;
 }
 
 .progressIcon {
-  font-size: 3rem;
+  font-size: 2rem;
   flex-shrink: 0;
 }
 
 .progressText h3 {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem;
+  color: black;
 }
 
 .progressText p {
-  color: #cbd5e0;
-  line-height: 1.5;
+  font-size: 0.9375rem;
+  color: #555;
   margin: 0;
 }
 
-/* CTA Section */
+/* ——— CTA SECTION ——— */
+
 .ctaSection {
   padding: 4rem 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  background: #fafafa;
   text-align: center;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 .ctaContent {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .ctaTitle {
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #ffffff;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 800;
+  margin: 0 0 1rem;
+  color: black;
 }
 
 .ctaSubtitle {
-  font-size: 1.1rem;
-  color: #cbd5e0;
-  margin-bottom: 2.5rem;
-  line-height: 1.5;
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  color: #555;
+  margin: 0 0 2rem;
+  line-height: 1.6;
 }
 
 .ctaButtons {
   display: flex;
-  gap: 1.25rem;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .ctaButton {
@@ -462,180 +455,41 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: black;
   color: white;
-  text-decoration: none;
-  border-radius: 10px;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+  text-decoration: none;
+  font-size: 1.125rem;
+  transition: background 0.2s;
+  min-height: 52px;
 }
 
 .ctaButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-}
-
-.ctaButton:hover .buttonIcon {
-  transform: translateX(3px);
+  background: #333;
 }
 
 .buttonIcon {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.3s ease;
+  font-size: 1.25rem;
 }
 
-/* Enhanced Responsive Design */
-@media (max-width: 1024px) {
-  .strategiesGrid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .motivationContent {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+.ctaFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 0 1rem;
-  }
-
-  .heroSection {
-    padding: 4rem 0 2rem;
-  }
-
-  .heroButtons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
-    max-width: 280px;
-    font-size: 0.95rem;
-    padding: 0.875rem 2rem;
-  }
-
-  .heroStats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  .statCard {
-    padding: 1.5rem 1rem;
-  }
-
-  .statValue {
-    font-size: 2rem;
-  }
-
-  .strategiesGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .strategyColumn {
-    padding: 1.5rem;
-  }
-
-  .motivationContent {
-    grid-template-columns: 1fr;
-  }
-
-  .progressReminder {
-    flex-direction: column;
-    text-align: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-  }
-
-  .ctaButtons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .ctaButton {
-    width: 100%;
-    max-width: 280px;
-    font-size: 0.95rem;
-    padding: 0.875rem 2rem;
-  }
+.ctaFeature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: #555;
 }
 
-@media (max-width: 480px) {
-  .heroTitle {
-    font-size: 2rem;
-  }
-
-  .heroSubtitle {
-    font-size: 0.95rem;
-  }
-
-  .sectionTitle {
-    font-size: 1.5rem;
-  }
-
-  .sectionSubtitle {
-    font-size: 0.9rem;
-  }
-
-  .heroStats {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .statCard {
-    padding: 1.25rem 1rem;
-  }
-
-  .strategiesGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .strategyColumn {
-    padding: 1.25rem;
-  }
-
-  .columnHeader {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  .tipCard {
-    padding: 1.25rem;
-  }
-}
-
-/* Large screens */
-@media (min-width: 1440px) {
-  .container {
-    max-width: 1400px;
-  }
-}
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .primaryButton,
-  .secondaryButton,
-  .statCard,
-  .tipCard,
-  .ctaButton {
-    transition: none;
-    animation: none;
-  }
-
-  .buttonPulse {
-    animation: none;
-  }
-
-  .buttonIcon {
-    transition: none;
-  }
+.featureIcon {
+  color: #333;
 }

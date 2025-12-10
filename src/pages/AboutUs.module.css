@@ -1,723 +1,395 @@
-/* Base Styles */
+/* AboutUs.module.css */
+
 .aboutPage {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  color: #e2e8f0;
+  background-color: white;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
   overflow-x: hidden;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  box-sizing: border-box;
 }
 
-/* Hero Section */
+/* ——— HERO SECTION ——— */
+
 .heroSection {
-  padding: 6rem 0 4rem;
-  position: relative;
-  background: radial-gradient(ellipse at top, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  padding: 4rem 0 3rem;
 }
 
 .heroContent {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
   align-items: center;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+@media (min-width: 768px) {
+  .heroContent {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .heroTitle {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: #333;
 }
 
 .heroSubtitle {
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: #555;
+  margin: 0;
   line-height: 1.6;
-  color: #cbd5e0;
-  margin-bottom: 2.5rem;
-  max-width: 500px;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .heroButtons {
   display: flex;
-  gap: 1.5rem;
-  align-items: center;
   flex-wrap: wrap;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  gap: 1rem;
 }
 
 .primaryButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: black;
   color: white;
-  text-decoration: none;
-  border-radius: 12px;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 1.125rem;
+  transition: background-color 0.2s;
   position: relative;
   overflow: hidden;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  min-height: 52px;
 }
 
 .primaryButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+  background-color: #333;
 }
 
 .buttonPulse {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 1;
-  }
-  100% {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-  }
+  0% { transform: scale(0.95); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(1.1); opacity: 0; }
 }
 
-.secondaryButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
-  color: #ffffff;
-}
-
-/* Hero Visual */
 .heroVisual {
-  position: relative;
-  height: 400px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .floatingCard {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
   padding: 1.5rem;
   text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  animation: float 6s ease-in-out infinite;
-  width: 140px;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.floatingCard:nth-child(1) {
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.floatingCard:nth-child(2) {
-  top: 50%;
-  right: 15%;
-  animation-delay: 2s;
-}
-
-.floatingCard:nth-child(3) {
-  bottom: 20%;
-  left: 20%;
-  animation-delay: 4s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
 }
 
 .cardIcon {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 1rem;
 }
 
 .floatingCard h4 {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin: 0 0 0.5rem;
+  color: black;
 }
 
 .floatingCard p {
-  font-size: 0.9rem;
-  color: #cbd5e0;
+  font-size: 0.9375rem;
+  color: #666;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-/* Mission Section */
+/* ——— MISSION SECTION ——— */
+
 .missionSection {
-  padding: 4rem 0;
-  background: rgba(0, 0, 0, 0.2);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  padding: 3rem 0;
+  background: #fafafa;
 }
 
 .missionContent {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .missionContent {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
 }
 
 .missionText h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #ffffff 0%, #a0aec0 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 1.25rem;
+  color: black;
 }
 
 .missionText p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #cbd5e0;
-  margin-bottom: 1.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
 }
 
 .missionStats {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 767px) {
+  .missionStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .missionStat {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
   text-align: center;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .statNumber {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: black;
+  margin-bottom: 0.25rem;
   display: block;
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .statLabel {
-  font-size: 1rem;
-  color: #a0aec0;
-  font-weight: 500;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
 }
 
-/* Section Common Styles */
+/* ——— SECTION HEADER ——— */
+
 .sectionHeader {
   text-align: center;
-  margin-bottom: 4rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin-bottom: 2.5rem;
 }
 
 .sectionTitle {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, #a0aec0 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: black;
 }
 
 .sectionSubtitle {
-  font-size: 1.2rem;
-  color: #cbd5e0;
-  max-width: 600px;
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  color: #555;
+  max-width: 650px;
   margin: 0 auto;
   line-height: 1.6;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-/* Features Section */
+/* ——— FEATURES SECTION ——— */
+
 .featuresSection {
-  padding: 6rem 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  padding: 4rem 0;
 }
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .featureCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  padding: 2rem 1.75rem;
   text-align: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.featureCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  transition: box-shadow 0.2s;
 }
 
 .featureCard:hover {
-  transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.featureCard:hover::before {
-  transform: scaleX(1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .featureIconContainer {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f9f9f9;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.featureIcon {
-  width: 32px;
-  height: 32px;
-  color: white;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin: 0 auto 1.25rem;
+  color: #333;
+  font-size: 1.5rem;
 }
 
 .featureTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: #ffffff;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin: 0 0 0.75rem;
+  color: black;
 }
 
 .featureDescription {
-  color: #cbd5e0;
-  line-height: 1.6;
   font-size: 1rem;
+  color: #555;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
 }
 
-/* Stats Section */
+/* ——— STATS SECTION ——— */
+
 .statsSection {
-  padding: 6rem 0;
-  background: rgba(0, 0, 0, 0.2);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  padding: 3rem 0;
+  background: white;
 }
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.75rem;
 }
 
 .statCard {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  padding: 1.75rem;
   text-align: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.statCard:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .statIconContainer {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 15px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.statIcon {
-  width: 24px;
-  height: 24px;
-  color: white;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  margin: 0 auto 1.25rem;
+  color: #333;
+  font-size: 1.25rem;
+  border: 1px solid #eee;
 }
 
 .statNumber {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: black;
+  margin: 0 0 0.5rem;
 }
 
 .statLabel {
-  font-size: 1.1rem;
-  color: #cbd5e0;
-  font-weight: 500;
+  font-size: 0.9375rem;
+  color: #666;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-/* CTA Section */
+/* ——— CTA SECTION ——— */
+
 .ctaSection {
-  padding: 6rem 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  padding: 4rem 0;
   text-align: center;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 .ctaContent {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .ctaTitle {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #ffffff;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 800;
+  margin: 0 0 1rem;
+  color: black;
 }
 
 .ctaSubtitle {
-  font-size: 1.2rem;
-  color: #cbd5e0;
-  margin-bottom: 3rem;
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  color: #555;
+  margin: 0 0 2rem;
   line-height: 1.6;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 .ctaButtons {
   display: flex;
-  gap: 1.5rem;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  gap: 1rem;
 }
 
-.ctaButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem 3rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-}
-
-.ctaButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-}
-
+.ctaButton,
 .ctaButtonSecondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem 2.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
   text-decoration: none;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.125rem;
+  transition: all 0.2s;
+  min-height: 52px;
+}
+
+.ctaButton {
+  background: black;
+  color: white;
+}
+
+.ctaButton:hover {
+  background: #333;
+}
+
+.ctaButtonSecondary {
+  background: white;
+  color: black;
+  border: 1px solid #ddd;
 }
 
 .ctaButtonSecondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-3px);
-  color: #ffffff;
-}
-
-/* Responsive Design */
-@media (max-width: 968px) {
-  .heroContent {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .missionContent {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .heroVisual {
-    height: 300px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .floatingCard {
-    width: 120px;
-    padding: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .heroSection {
-    padding: 4rem 0 2rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .heroButtons {
-    flex-direction: column;
-    gap: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
-    max-width: 300px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .featuresGrid,
-  .statsGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .missionStats {
-    flex-direction: row;
-    justify-content: center;
-    gap: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .missionStat {
-    padding: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .statNumber {
-    font-size: 1.5rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .ctaButtons {
-    flex-direction: column;
-    gap: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .ctaButton,
-  .ctaButtonSecondary {
-    width: 100%;
-    max-width: 300px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-}
-
-@media (max-width: 480px) {
-  .heroTitle {
-    font-size: 2rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .heroSubtitle {
-    font-size: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .sectionTitle {
-    font-size: 1.75rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .sectionSubtitle {
-    font-size: 1rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .featureCard,
-  .statCard {
-    padding: 2rem 1.5rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .floatingCard {
-    width: 100px;
-    padding: 0.75rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .floatingCard h4 {
-    font-size: 0.9rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .floatingCard p {
-    font-size: 0.8rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-}
-
-/* Large screens */
-@media (min-width: 1440px) {
-  .container {
-    max-width: 1400px;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-}
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .primaryButton,
-  .secondaryButton,
-  .featureCard,
-  .statCard,
-  .floatingCard,
-  .ctaButton,
-  .ctaButtonSecondary {
-    transition: none;
-    animation: none;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .buttonPulse {
-    animation: none;
-  }
-
-  .floatingCard {
-    animation: none;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .aboutPage {
-    background: #000000;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
-
-  .featureCard,
-  .statCard,
-  .floatingCard {
-    border: 2px solid #ffffff;
-    background: #000000;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  }
+  background: #f9f9f9;
 }
