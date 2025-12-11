@@ -188,6 +188,7 @@
 .contactFormContainer {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .contactFormCard {
@@ -197,6 +198,7 @@
   border: 1px solid #eee;
   border-radius: 0.75rem;
   padding: 2rem;
+  box-sizing: border-box;
 }
 
 .formHeader {
@@ -298,6 +300,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (min-width: 600px) {
@@ -308,6 +312,8 @@
 
 .formGroup {
   margin-bottom: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .formLabel {
@@ -318,6 +324,7 @@
   font-size: 0.9375rem;
   color: #333;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .labelIcon {
@@ -329,6 +336,7 @@
   font-size: 0.8125rem;
   color: #888;
   margin-left: 0.5rem;
+  white-space: nowrap;
 }
 
 .formInput,
@@ -341,6 +349,8 @@
   color: black;
   background: white;
   transition: border-color 0.2s;
+  box-sizing: border-box;
+  min-width: 0; /* Prevents overflow in flex/grid */
 }
 
 .formInput:focus,
@@ -379,6 +389,8 @@
   font-size: 0.875rem;
   color: #555;
   margin: 1.25rem 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .noticeIcon {
@@ -404,6 +416,7 @@
   justify-content: center;
   gap: 0.75rem;
   transition: background 0.2s;
+  box-sizing: border-box;
 }
 
 .submitBtn:hover:not(:disabled) {
@@ -491,6 +504,7 @@
   font-size: 1.125rem;
   transition: all 0.2s;
   min-height: 52px;
+  box-sizing: border-box;
 }
 
 .primaryCta {
