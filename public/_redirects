@@ -1,11 +1,1 @@
-# 1. Redirect HTTP (no www) -> HTTPS with www
-http://professionalresumefree.com/* https://www.professionalresumefree.com/:splat 301
-
-# 2. Redirect HTTP with www -> HTTPS with www  
-http://www.professionalresumefree.com/* https://www.professionalresumefree.com/:splat 301
-
-# 3. Redirect HTTPS (no www) -> HTTPS with www
-https://professionalresumefree.com/* https://www.professionalresumefree.com/:splat 301
-
-# 4. SPA fallback for your Next.js app
-/* /index.html 200
+http://* https://:splat 301!
