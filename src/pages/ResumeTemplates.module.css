@@ -1,0 +1,913 @@
+/* ResumeTemplates.module.css */
+
+.templatesPage {
+  background-color: white;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+/* ——— HERO SECTION ——— */
+
+.heroSection {
+  padding: 3rem 0 3rem;
+  text-align: center;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.trustBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f5f5f5;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.starIcon {
+  color: black;
+}
+
+.heroTitle {
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 800;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.gradientText {
+  color: black;
+  font-weight: 900;
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: black;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 3rem 0 0;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #ddd;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.statItem:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statNumber {
+  font-weight: 800;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  color: black;
+  line-height: 1;
+  margin-bottom: 0.375rem;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: black;
+  font-weight: 500;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* ——— SECTIONS ——— */
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.sectionTitle {
+  font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: black;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.sectionSubtitle {
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  color: black;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* ——— TEMPLATES SECTION ——— */
+
+.templatesSection {
+  padding: 4rem 0;
+  background: white;
+}
+
+.templatesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.templateCard {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.templateCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: #ddd;
+  background-color: #f5f5f5;
+}
+
+.templateHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.templateIconContainer {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.templateCard:hover .templateIconContainer {
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.templateIcon {
+  font-size: 1.5rem;
+  color: black;
+}
+
+.templateTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  color: black;
+  line-height: 1.3;
+  flex: 1;
+  text-align: left;
+}
+
+.templateDescription {
+  font-size: 0.9375rem;
+  color: black;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+  min-height: 4.5em;
+  opacity: 0.8;
+}
+
+.templateFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.featureTag {
+  background: #f5f5f5;
+  color: black;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.templateCard:hover .featureTag {
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.templateLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: black;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.templateLink:hover {
+  border-bottom-color: black;
+  gap: 0.75rem;
+}
+
+.linkIcon {
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+  color: black;
+}
+
+.templateLink:hover .linkIcon {
+  transform: translateX(4px);
+}
+
+.cardDecoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #ddd;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.templateCard:hover .cardDecoration {
+  opacity: 1;
+}
+
+/* ——— FEATURES SECTION ——— */
+
+.featuresSection {
+  padding: 4rem 0;
+  background: #f5f5f5;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.featureCard {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+}
+
+.featureIconContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: black;
+  color: white;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover .featureIconContainer {
+  background-color: black;
+}
+
+.featureIcon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.featureTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: black;
+}
+
+.featureDescription {
+  font-size: 0.875rem;
+  color: black;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* ——— HOW IT WORKS SECTION ——— */
+
+.howItWorksSection {
+  padding: 4rem 0;
+  background: white;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.stepCard {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.stepCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin: 0 auto 1rem;
+  transition: all 0.3s ease;
+}
+
+.stepCard:hover .stepNumber {
+  background-color: black;
+}
+
+.stepTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: black;
+}
+
+.stepDescription {
+  font-size: 0.875rem;
+  color: black;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* ——— FAQ SECTION ——— */
+
+.faqSection {
+  padding: 4rem 0;
+  background: #f5f5f5;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faqItem {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.faqItem:hover {
+  border-color: #ddd;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  background-color: #f5f5f5;
+}
+
+.faqQuestion {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  color: black;
+  line-height: 1.4;
+}
+
+.faqAnswer {
+  font-size: 0.9375rem;
+  color: black;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* ——— CTA SECTION ——— */
+
+.ctaSection {
+  background: white;
+  padding: 4rem 0;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.ctaTitle {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: black;
+  line-height: 1.2;
+}
+
+.ctaSubtitle {
+  font-size: clamp(0.875rem, 3vw, 1.125rem);
+  color: black;
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.ctaButtons {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: black;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  transition: all 0.3s ease;
+  border: 1px solid black;
+  min-height: 48px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  background: black;
+  color: white;
+}
+
+.buttonIcon {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  color: white;
+}
+
+.primaryButton:hover .buttonIcon {
+  transform: translateX(4px);
+  color: white;
+}
+
+.ctaGuarantee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: black;
+  background: #f5f5f5;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  flex-wrap: wrap;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.ctaGuarantee:hover {
+  background-color: #f5f5f5;
+}
+
+.guaranteeIcon {
+  color: black;
+  flex-shrink: 0;
+}
+
+/* ——— ANIMATIONS ——— */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ——— RESPONSIVE DESIGN ——— */
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  
+  .templatesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .heroSection {
+    padding: 2rem 0 2rem;
+  }
+  
+  .heroTitle {
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+    line-height: 1.3;
+  }
+  
+  .heroSubtitle {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+    margin: 0 auto 1.5rem;
+  }
+  
+  .heroStats {
+    gap: 1rem;
+    margin: 2rem 0 0;
+  }
+  
+  .statItem {
+    min-width: calc(50% - 0.5rem);
+    padding: 0.75rem;
+  }
+  
+  .templatesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  .stepsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  .faqGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .ctaSection {
+    padding: 3rem 1rem;
+  }
+  
+  .ctaTitle {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+  
+  .ctaSubtitle {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1.25rem, 4.5vw, 2rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
+  }
+  
+  .templateCard,
+  .featureCard,
+  .stepCard,
+  .faqItem {
+    padding: 1.5rem;
+  }
+  
+  .primaryButton {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    white-space: normal;
+    text-align: center;
+    color: white;
+  }
+  
+  .buttonIcon {
+    font-size: 0.875rem;
+    color: white;
+  }
+  
+  .templateDescription {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroStats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .statItem {
+    min-width: calc(50% - 0.5rem);
+    margin-bottom: 0.5rem;
+  }
+  
+  .templateFeatures {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .featureTag {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.5rem;
+  }
+  
+  .primaryButton {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+    color: white;
+  }
+  
+  .ctaGuarantee {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroStats {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .statItem {
+    width: 100%;
+    max-width: 180px;
+  }
+  
+  .heroTitle {
+    font-size: clamp(1.25rem, 6vw, 1.75rem);
+  }
+  
+  .heroSubtitle {
+    font-size: 0.875rem;
+  }
+  
+  .primaryButton {
+    font-size: 0.8125rem;
+    padding: 0.625rem 0.875rem;
+    min-height: 40px;
+    color: white;
+  }
+  
+  .templateCard {
+    padding: 1.25rem;
+  }
+  
+  .templateTitle {
+    font-size: 1rem;
+  }
+  
+  .templateDescription {
+    font-size: 0.875rem;
+  }
+  
+  .templateHeader {
+    gap: 0.75rem;
+  }
+  
+  .templateIconContainer {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .templateIcon {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  .heroSection {
+    padding: 1.5rem 0 1.5rem;
+  }
+  
+  .statItem {
+    min-width: 100%;
+    max-width: 160px;
+  }
+  
+  .primaryButton {
+    padding: 0.625rem;
+    font-size: 0.75rem;
+    color: white;
+  }
+  
+  .templateCard {
+    padding: 1rem;
+  }
+  
+  .templateFeatures {
+    justify-content: flex-start;
+  }
+}
+
+/* ——— REDUCED MOTION ——— */
+
+@media (prefers-reduced-motion: reduce) {
+  .templatesPage *,
+  .templatesPage *::before,
+  .templatesPage *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .primaryButton:hover,
+  .templateCard:hover,
+  .featureCard:hover,
+  .stepCard:hover,
+  .faqItem:hover,
+  .statItem:hover {
+    transform: none !important;
+  }
+  
+  .primaryButton:hover .buttonIcon,
+  .templateLink:hover .linkIcon {
+    transform: none !important;
+  }
+}
+
+/* ——— FOCUS STATES ——— */
+
+.primaryButton:focus-visible,
+.templateLink:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+/* ——— PRINT STYLES ——— */
+
+@media print {
+  .templatesPage {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .heroSection,
+  .templatesSection,
+  .featuresSection,
+  .howItWorksSection,
+  .faqSection,
+  .ctaSection {
+    padding: 1rem 0 !important;
+    background: white !important;
+  }
+  
+  .primaryButton {
+    display: none !important;
+  }
+  
+  .templateCard,
+  .featureCard,
+  .stepCard,
+  .faqItem {
+    break-inside: avoid;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ——— UTILITY CLASSES ——— */
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+/* ——— NEXT.JS SPECIFIC FIXES ——— */
+
+.templatesPage a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.templatesPage button {
+  font-family: inherit;
+}

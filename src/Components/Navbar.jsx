@@ -63,7 +63,7 @@ const Navbar = () => {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/free-resume-builder', label: 'Resume' },
+    { href: '/resume-templates', label: 'Resume Templates' },
     { href: '/interview-tips', label: 'Interview Tips' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' }

@@ -13,6 +13,20 @@ const Footer = () => {
     { href: '/careers-blog', label: 'Blog' },
     { href: '/jobs-search-tips', label: 'Jobs Search Tips' },
     { href: '/jobs-boards', label: 'Jobs Boards' },
+    { href: '/ats-friendly-medical-resume-builder', label: 'ATS-Friendly Medical Resumes' },
+    { href: '/ats-friendly-finance-resume-builder', label: 'ATS-Friendly Finance Resume' },
+    { href: '/ats-friendly-government-education-non-profit-resume-builder', label: 'ATS-Friendly Government, Education, Non-Profit Resume' },
+    { href: '/ats-friendly-industrial-manufacturing-resume-builder', label: 'ATS-Friendly Industrial, Manufacturing Resume' },
+    { href: '/ats-friendly-consumer-retail-resume-builder', label: 'ATS-Friendly Consumer, Retail Resume' },
+    { href: '/ats-friendly-logistics-transportation-resume-builder', label: 'ATS-Friendly Transportation, Logistics Resume' },
+    { href: '/ats-friendly-ceo-resume-builder', label: 'ATS-Friendly CEO Resume' },
+    { href: '/resume-templates', label: 'Resume Templates' },
+    { href: '/free-resume-builda', label: 'Free Resume Builder' },
+
+    
+    
+    
+    
     
     
 

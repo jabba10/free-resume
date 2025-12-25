@@ -580,7 +580,6 @@ CPT resume template,
 J-1 visa resume,
 remote job resume EU,
 digital nomad visa resume,
-
 resume builder with dark mode,
 lightweight resume tool,
 fast loading resume site,
@@ -1811,7 +1810,7 @@ together with all previous keywords...
             
             <div className={styles.ctaButtons}>
               <Link 
-                href="/free-resume-builder" 
+                href="/resume-templates" 
                 className={styles.primaryButton}
                 itemProp="url"
                 aria-label="Start Building Your Free Resume Now - No Sign Up Required"
@@ -2005,7 +2004,7 @@ together with all previous keywords...
             </p>
             <div className={styles.ctaButtons}>
               <Link 
-                href="/free-resume-builder" 
+                href="/resume-templates" 
                 className={styles.ctaButton}
                 aria-label="Create Your Free Resume Now - No Sign Up Required"
               >

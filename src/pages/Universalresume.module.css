@@ -1,0 +1,702 @@
+.resumeBuilder {
+  background-color: white;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+.heroSection {
+  padding: 2.5rem 0 2rem;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+.heroContent {
+  text-align: center;
+}
+.heroTitle {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+.gradientText {
+  color: #333;
+}
+.heroSubtitle {
+  font-size: clamp(0.9375rem, 3vw, 1.125rem);
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+.singleColumnLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+@media (min-width: 768px) {
+  .singleColumnLayout {
+    flex-direction: row;
+  }
+}
+.previewSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.previewHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .previewHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.previewActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+.previewButton,
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid #ddd;
+  background: white;
+  color: black;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.previewButton:hover,
+.downloadButton:not(:disabled):hover {
+  background: #f9f9f9;
+}
+.downloadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.templateSelector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: #333;
+  flex-wrap: wrap;
+}
+.formSelect {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  background: white;
+  color: black;
+  font-size: 0.9375rem;
+  min-width: 120px;
+  max-width: 100%;
+}
+.previewContainer {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+  max-height: 70vh;
+}
+.fullPreview {
+  background: white;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
+.resumePreviewCard {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.previewContent {
+  position: relative;
+  width: 100%;
+  max-width: 210mm;
+  min-height: 297mm;
+  overflow: visible;
+}
+.resumePreview {
+  display: none;
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  padding: 15mm 20mm 25mm;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  position: relative;
+}
+.resumePreview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #666, #999, #666);
+}
+.activePreview {
+  display: block;
+}
+.inactivePreview {
+  display: none;
+}
+.previewNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.previewNavButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.375rem;
+  background: white;
+  color: #333;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.previewNavButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.previewNavButton:not(:disabled):hover {
+  background: #f0f0f0;
+}
+.previewPageInfo {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9375rem;
+}
+.contentPagesInfo {
+  color: #666;
+  margin-left: 0.5rem;
+}
+.formSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+.pageManagement {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .pageManagement {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.pageControls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pageActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.pageButton,
+.addPageButton,
+.removePageButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.375rem;
+  background: white;
+  color: #333;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.pageButton:disabled,
+.removePageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pageButton:not(:disabled):hover,
+.addPageButton:hover,
+.removePageButton:not(:disabled):hover {
+  background: #f0f0f0;
+}
+.pageInfo {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+.formNavigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem 0.375rem 0 0;
+  background: #f9f9f9;
+  color: #555;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.navButton:hover {
+  background: #eee;
+}
+.navButton.active {
+  background: white;
+  border-color: #ddd;
+  border-bottom-color: white;
+  color: black;
+}
+.formContent {
+  flex: 1;
+  min-width: 0;
+}
+.formSectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: black;
+}
+.formCard {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.formGroup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  .formGroup {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9375rem;
+  width: 100%;
+}
+.formInput,
+.formTextarea {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  color: black;
+  background: white;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #333;
+}
+.formTextarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.subSectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.socialInput,
+.skillsInput {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+.socialInput > select,
+.socialInput > input,
+.skillsInput > input {
+  flex: 1;
+  min-width: 120px;
+  max-width: 100%;
+}
+.formActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.addButton,
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.addButton {
+  background: black;
+  color: white;
+  border: none;
+}
+.addButton:hover:not(:disabled) {
+  background: #333;
+}
+.addButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.cancelButton {
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+}
+.cancelButton:hover {
+  background: #ddd;
+}
+.itemsList {
+  margin-top: 1rem;
+}
+.emptyMessage {
+  color: #888;
+  font-style: italic;
+  margin: 0;
+}
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
+}
+.listItem:last-child {
+  border-bottom: none;
+}
+.itemInfo,
+.itemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.itemHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.itemTitle {
+  font-weight: 600;
+  color: black;
+  word-break: break-word;
+}
+.itemSubtitle,
+.institution {
+  color: #555;
+  font-size: 0.9375rem;
+  word-break: break-word;
+}
+.itemMeta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  color: #666;
+  font-size: 0.875rem;
+}
+.pageBadge {
+  background: #f0f0f0;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.itemDescription {
+  margin-top: 0.5rem;
+}
+.bulletPoint {
+  margin: 0.25rem 0;
+  font-size: 0.9375rem;
+  color: #555;
+}
+.itemActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+.editButton,
+.deleteButton {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.editButton:hover {
+  background: #e0e0e0;
+}
+.deleteButton {
+  background: #fee;
+  color: #c53030;
+}
+.deleteButton:hover {
+  background: #fdd;
+}
+.fullPreviewModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow: auto;
+}
+.fullPreviewContent {
+  background: white;
+  border-radius: 0.5rem;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.fullPreviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+.fullPreviewHeader h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  color: black;
+}
+.closeButton {
+  background: #f0f0f0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  font-size: 1.25rem;
+}
+.closeButton:hover {
+  background: #ddd;
+}
+.fullPreviewPages {
+  padding: 1.5rem;
+}
+.fullPreviewPage {
+  margin-bottom: 2rem;
+}
+.fullPreviewPage:last-child {
+  margin-bottom: 0;
+}
+.universalTemplate {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 11pt;
+  color: #000;
+  line-height: 1.4;
+  width: 170mm;
+  margin: 0 auto;
+}
+.resumeHeader {
+  text-align: center;
+  margin: 0 0 12pt;
+}
+.name {
+  font-size: 22pt;
+  font-weight: bold;
+  margin: 0;
+  color: #000;
+}
+.contactInfoRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8pt;
+  font-size: 9pt;
+  color: #555;
+  margin-top: 6pt;
+}
+.contactInfoItem {
+  display: flex;
+  align-items: center;
+  gap: 4pt;
+}
+.contactSeparator {
+  color: #999;
+}
+.section {
+  margin-bottom: 18pt;
+}
+.sectionTitle {
+  font-size: 10pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1pt;
+  margin: 0 0 6pt;
+  padding-bottom: 2pt;
+  border-bottom: 1pt solid #000;
+  color: #000;
+}
+.sectionContent {
+  margin-left: 4pt;
+}
+.summaryText {
+  margin: 0;
+  font-size: 10pt;
+}
+.experienceItem,
+.educationItem,
+.projectItem {
+  margin-bottom: 12pt;
+}
+.experienceHeader h3,
+.projectItem h3,
+.educationItem h3 {
+  font-size: 10pt;
+  font-weight: bold;
+  margin: 0 0 4pt;
+  color: #000;
+}
+.company,
+.institution {
+  font-size: 9pt;
+  color: #555;
+  margin: 0 0 6pt;
+}
+.honors {
+  font-size: 9pt;
+  color: #555;
+  margin-top: 4pt;
+  font-style: italic;
+}
+.bulletList {
+  margin: 4pt 0 0;
+  padding-left: 12pt;
+  list-style-type: disc;
+  font-size: 10pt;
+}
+.bulletList li {
+  margin-bottom: 4pt;
+}
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8pt;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 10pt;
+}
+.skillsList li {
+  background: #f9f9f9;
+  padding: 2pt 6pt;
+  border-radius: 3pt;
+  border: 1px solid #ddd;
+}
+.projectLink {
+  margin-top: 6pt;
+  font-size: 9pt;
+  color: #555;
+}
+.pageIndicator {
+  text-align: center;
+  font-size: 8pt;
+  color: #888;
+  margin-top: 24pt;
+}
