@@ -3,28 +3,25 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiBriefcase, 
-  FiBook, 
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiBriefcase,
+  FiBook,
   FiAward,
   FiGlobe,
-  FiFileText,
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
-  FiCheck,
   FiChevronLeft,
   FiChevronRight,
   FiEye,
-  FiTool,
-  FiHardHat,
-  FiSettings
+  FiTool
+  // ❌ Removed unused icons: FiFileText, FiCheck, FiHardHat, FiSettings
 } from 'react-icons/fi';
 import styles from './Industrialresume.module.css';
 
@@ -41,7 +38,6 @@ const Industrialresume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultEducation = () => ({
     institution: '',
     degree: '',
@@ -52,7 +48,6 @@ const Industrialresume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultCertification = () => ({
     name: '',
     issuingBody: '',
@@ -62,35 +57,30 @@ const Industrialresume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSkill = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultMachinery = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultSafetyCert = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultLanguage = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
@@ -123,7 +113,7 @@ const Industrialresume = () => {
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage());
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
 
-  const [selectedTemplate] = useState('industrial');
+  // ❌ Removed: const [selectedTemplate] = useState('industrial');
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -248,17 +238,7 @@ const Industrialresume = () => {
     }
   };
 
-  const editEducation = (index) => {
-    const edu = formData.education[index];
-    setCurrentEducation({ ...edu, isEditing: true, editIndex: index });
-    setCurrentPage(edu.page);
-  };
-
-  const deleteEducation = (index) => {
-    const updated = [...formData.education];
-    updated.splice(index, 1);
-    setFormData({ ...formData, education: updated });
-  };
+  // ❌ Removed: editEducation, deleteEducation
 
   // --- Certifications ---
   const addCertification = () => {
@@ -278,17 +258,7 @@ const Industrialresume = () => {
     }
   };
 
-  const editCertification = (index) => {
-    const cert = formData.certifications[index];
-    setCurrentCertification({ ...cert, isEditing: true, editIndex: index });
-    setCurrentPage(cert.page);
-  };
-
-  const deleteCertification = (index) => {
-    const updated = [...formData.certifications];
-    updated.splice(index, 1);
-    setFormData({ ...formData, certifications: updated });
-  };
+  // ❌ Removed: editCertification, deleteCertification
 
   // --- Skills ---
   const addSkill = () => {
@@ -308,17 +278,7 @@ const Industrialresume = () => {
     }
   };
 
-  const editSkill = (index) => {
-    const skill = formData.skills[index];
-    setCurrentSkill({ ...skill, isEditing: true, editIndex: index });
-    setCurrentPage(skill.page);
-  };
-
-  const deleteSkill = (index) => {
-    const updated = [...formData.skills];
-    updated.splice(index, 1);
-    setFormData({ ...formData, skills: updated });
-  };
+  // ❌ Removed: editSkill, deleteSkill
 
   // --- Machinery ---
   const addMachinery = () => {
@@ -338,17 +298,7 @@ const Industrialresume = () => {
     }
   };
 
-  const editMachinery = (index) => {
-    const m = formData.machinery[index];
-    setCurrentMachinery({ ...m, isEditing: true, editIndex: index });
-    setCurrentPage(m.page);
-  };
-
-  const deleteMachinery = (index) => {
-    const updated = [...formData.machinery];
-    updated.splice(index, 1);
-    setFormData({ ...formData, machinery: updated });
-  };
+  // ❌ Removed: editMachinery, deleteMachinery
 
   // --- Safety Certs ---
   const addSafetyCert = () => {
@@ -368,47 +318,10 @@ const Industrialresume = () => {
     }
   };
 
-  const editSafetyCert = (index) => {
-    const s = formData.safetyCerts[index];
-    setCurrentSafetyCert({ ...s, isEditing: true, editIndex: index });
-    setCurrentPage(s.page);
-  };
-
-  const deleteSafetyCert = (index) => {
-    const updated = [...formData.safetyCerts];
-    updated.splice(index, 1);
-    setFormData({ ...formData, safetyCerts: updated });
-  };
+  // ❌ Removed: editSafetyCert, deleteSafetyCert
 
   // --- Languages ---
-  const addLanguage = () => {
-    if (currentLanguage.name.trim()) {
-      const item = { ...currentLanguage, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.languages];
-        updated[item.editIndex] = { name: item.name.trim(), page: item.page };
-        setFormData({ ...formData, languages: updated });
-      } else {
-        setFormData({
-          ...formData,
-          languages: [...formData.languages, { name: item.name.trim(), page: item.page }]
-        });
-      }
-      setCurrentLanguage(defaultLanguage());
-    }
-  };
-
-  const editLanguage = (index) => {
-    const lang = formData.languages[index];
-    setCurrentLanguage({ ...lang, isEditing: true, editIndex: index });
-    setCurrentPage(lang.page);
-  };
-
-  const deleteLanguage = (index) => {
-    const updated = [...formData.languages];
-    updated.splice(index, 1);
-    setFormData({ ...formData, languages: updated });
-  };
+  // ❌ Removed: addLanguage, editLanguage, deleteLanguage
 
   // --- Social Links ---
   const addSocialLink = () => {
@@ -722,8 +635,8 @@ const Industrialresume = () => {
               <button onClick={() => setShowFullPreview(!showFullPreview)} className={styles.previewButton}>
                 <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
               </button>
-              <button 
-                onClick={generatePDF} 
+              <button
+                onClick={generatePDF}
                 className={styles.downloadButton}
                 disabled={isGeneratingPDF || actualPagesWithContent === 0}
               >
@@ -737,8 +650,8 @@ const Industrialresume = () => {
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
                 {Array.from({ length: totalPages }, (_, i) => (
-                  <div 
-                    key={i + 1} 
+                  <div
+                    key={i + 1}
                     className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
                     ref={resumeRefs[i]}
                   >
@@ -750,7 +663,7 @@ const Industrialresume = () => {
           </div>
 
           <div className={styles.previewNavigation}>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className={styles.previewNavButton}
@@ -761,7 +674,7 @@ const Industrialresume = () => {
               Page {currentPage} of {totalPages}
               {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
             </div>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className={styles.previewNavButton}
@@ -841,12 +754,12 @@ const Industrialresume = () => {
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Professional Summary*
-                    <textarea 
-                      name="summary" 
-                      value={formData.summary} 
-                      onChange={handleInputChange} 
-                      placeholder="Detail-oriented Manufacturing Technician with 8+ years in automotive assembly..." 
-                      required 
+                    <textarea
+                      name="summary"
+                      value={formData.summary}
+                      onChange={handleInputChange}
+                      placeholder="Detail-oriented Manufacturing Technician with 8+ years in automotive assembly..."
+                      required
                       className={styles.formTextarea}
                       rows="4"
                     />

@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { FaLinkedin, FaTwitter, FaGithub, FaInstagram, FaHeart } from 'react-icons/fa';
-import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -99,7 +97,7 @@ const Footer = () => {
           <div className={styles.footerBottomContent}>
             <p className={styles.copyright}>
               &copy; {currentYear} ProfessionalResumeFree. All rights reserved. 
-              Made with <FaHeart className={styles.heartIcon} /> by career enthusiasts.
+              Made with love and passion by career enthusiasts.
             </p>
           </div>
         </div>

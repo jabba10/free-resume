@@ -4,14 +4,13 @@ import { useState } from 'react';
 import Head from 'next/head';
 import { 
   FiMail, 
-  FiPhone, 
-  FiMapPin, 
   FiClock,
   FiSend,
   FiUser,
   FiMessageSquare,
   FiShield,
   FiAlertTriangle
+  // ❌ Removed unused: FiPhone, FiMapPin
 } from 'react-icons/fi';
 import styles from './Contact.module.css';
 
@@ -84,7 +83,6 @@ const ContactPage = () => {
     try {
       validateForm();
 
-      // Create FormData instead of JSON
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
       formDataToSend.append('email', formData.email);

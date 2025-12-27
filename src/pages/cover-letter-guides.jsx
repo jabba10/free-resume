@@ -7,7 +7,7 @@ import {
   FiEdit,
   FiTarget,
   FiTrendingUp,
-  FiUsers,
+  // ❌ Removed unused: FiUsers
   FiCheck,
   FiArrowRight,
   FiBook,
@@ -136,14 +136,10 @@ const CoverLetterGuide = () => {
 
   return (
     <div className={styles.coverLetterGuide}>
-      {/* Enhanced SEO Meta Tags with Competitive Keywords */}
       <Head>
-        {/* Primary Meta Tags - Optimized for Cover Letter Keywords */}
         <title>Professional Cover Letter Guide 2026: Examples & Templates for Job Applications</title>
         <meta name="title" content="Professional Cover Letter Guide 2026: Examples & Templates for Job Applications" />
         <meta name="description" content="Learn how to write a winning cover letter for 2026 job market. Get professional templates, examples, and step-by-step guide to land more interviews. Free cover letter builder included." />
-        
-        {/* Comprehensive Keyword Strategy */}
         <meta name="keywords" content="
           cover letter guide,
           how to write a cover letter 2026,
@@ -176,15 +172,11 @@ const CoverLetterGuide = () => {
           cover letter examples 2026,
           professional cover letter format
         " />
-        
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* Canonical URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/cover-letter-guide/" />
 
-        {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Professional Cover Letter Guide 2026: Examples & Templates for Job Applications" />
         <meta property="og:description" content="Master cover letter writing for 2026 job market. Get step-by-step guide, professional templates, and examples to land 3x more interviews. Free cover letter builder." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/cover-letter-preview.jpg" />
@@ -197,7 +189,6 @@ const CoverLetterGuide = () => {
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="cover letter, job application, career advice, resume writing" />
 
-        {/* Twitter Card - Enhanced */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Professional Cover Letter Guide 2026: Examples & Templates" />
         <meta name="twitter:description" content="Master cover letter writing for 2026 job market. Get step-by-step guide, templates, and examples to land 3x more interviews." />
@@ -209,7 +200,6 @@ const CoverLetterGuide = () => {
         <meta name="twitter:label2" content="Templates included" />
         <meta name="twitter:data2" content="15+" />
 
-        {/* Enhanced Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -251,7 +241,6 @@ const CoverLetterGuide = () => {
           }}
         />
 
-        {/* Additional FAQ Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -296,7 +285,6 @@ const CoverLetterGuide = () => {
           }}
         />
 
-        {/* Breadcrumb Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -328,7 +316,6 @@ const CoverLetterGuide = () => {
         />
       </Head>
 
-      {/* Enhanced Hero Section with SEO-rich Content */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -374,7 +361,6 @@ const CoverLetterGuide = () => {
         </div>
       </section>
 
-      {/* Enhanced Introduction Section */}
       <section className={styles.introSection}>
         <div className={styles.container}>
           <div className={styles.introContent}>
@@ -406,7 +392,6 @@ const CoverLetterGuide = () => {
         </div>
       </section>
 
-      {/* Cover Letter Types Section */}
       <section className={styles.typesSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -440,7 +425,6 @@ const CoverLetterGuide = () => {
         </div>
       </section>
 
-      {/* Step-by-Step Guide Section */}
       <section id="sections" className={styles.guideSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -508,7 +492,6 @@ const CoverLetterGuide = () => {
         </div>
       </section>
 
-      {/* Common Mistakes Section */}
       <section className={styles.mistakesSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -528,7 +511,6 @@ const CoverLetterGuide = () => {
         </div>
       </section>
 
-      {/* Enhanced CTA Section */}
       <section className={styles.ctaSection}>
         <div className={styles.container}>
           <div className={styles.ctaContent}>

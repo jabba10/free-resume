@@ -3,22 +3,17 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiBriefcase, 
-  FiBook, 
-  FiAward,
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
   FiGlobe,
-  FiFileText,
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
-  FiCheck,
   FiChevronLeft,
   FiChevronRight,
   FiEye,
@@ -42,7 +37,6 @@ const Ceoresume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultEducation = () => ({
     institution: '',
     degree: '',
@@ -54,7 +48,6 @@ const Ceoresume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultBoardRole = () => ({
     organization: '',
     role: '',
@@ -64,7 +57,6 @@ const Ceoresume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultStrategicInitiative = () => ({
     title: '',
     description: '',
@@ -73,21 +65,18 @@ const Ceoresume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSkill = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultLanguage = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
@@ -118,7 +107,6 @@ const Ceoresume = () => {
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage());
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
 
-  const [selectedTemplate] = useState('ceo');
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -167,7 +155,6 @@ const Ceoresume = () => {
   };
 
   const addNewPage = () => totalPages < 5 && setTotalPages(p => p + 1);
-
   const removeLastPage = () => {
     if (totalPages <= 1) return;
     const newTotal = totalPages - 1;
@@ -185,55 +172,71 @@ const Ceoresume = () => {
     if (currentPage > newTotal) setCurrentPage(newTotal);
   };
 
-  // --- CRUD Functions ---
-  const createAdd = (key, current, setter, isValid) => () => {
-    if (!isValid()) return;
-    const item = { ...current, page: currentPage };
-    if (item.isEditing) {
-      const updated = [...formData[key]];
-      updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
-      setFormData({ ...formData, [key]: updated });
+  // --- Add Functions Only (Used in UI) ---
+  const addLeadershipRole = () => {
+    if (!currentLeadershipRole.title || !currentLeadershipRole.company || !currentLeadershipRole.startDate) return;
+    const item = { ...currentLeadershipRole, page: currentPage, isEditing: false, editIndex: null };
+    if (currentLeadershipRole.isEditing) {
+      const updated = [...formData.leadershipRoles];
+      updated[currentLeadershipRole.editIndex] = item;
+      setFormData({ ...formData, leadershipRoles: updated });
     } else {
-      setFormData({ ...formData, [key]: [...formData[key], { ...item, isEditing: false, editIndex: null }] });
+      setFormData({ ...formData, leadershipRoles: [...formData.leadershipRoles, item] });
     }
-    setter(defaultLeadershipRole());
+    setCurrentLeadershipRole(defaultLeadershipRole());
   };
 
-  const createEdit = (key, setter) => (index) => {
-    const item = formData[key][index];
-    setter({ ...item, isEditing: true, editIndex: index });
-    setCurrentPage(item.page);
+  const addEducation = () => {
+    if (!currentEducation.institution || !currentEducation.degree) return;
+    const item = { ...currentEducation, page: currentPage, isEditing: false, editIndex: null };
+    if (currentEducation.isEditing) {
+      const updated = [...formData.education];
+      updated[currentEducation.editIndex] = item;
+      setFormData({ ...formData, education: updated });
+    } else {
+      setFormData({ ...formData, education: [...formData.education, item] });
+    }
+    setCurrentEducation(defaultEducation());
   };
 
-  const createDelete = (key) => (index) => {
-    const updated = [...formData[key]];
-    updated.splice(index, 1);
-    setFormData({ ...formData, [key]: updated });
+  const addBoardRole = () => {
+    if (!currentBoardRole.organization || !currentBoardRole.role) return;
+    const item = { ...currentBoardRole, page: currentPage, isEditing: false, editIndex: null };
+    if (currentBoardRole.isEditing) {
+      const updated = [...formData.boardRoles];
+      updated[currentBoardRole.editIndex] = item;
+      setFormData({ ...formData, boardRoles: updated });
+    } else {
+      setFormData({ ...formData, boardRoles: [...formData.boardRoles, item] });
+    }
+    setCurrentBoardRole(defaultBoardRole());
   };
 
-  const addLeadershipRole = createAdd('leadershipRoles', currentLeadershipRole, setCurrentLeadershipRole, () => currentLeadershipRole.title && currentLeadershipRole.company && currentLeadershipRole.startDate);
-  const editLeadershipRole = createEdit('leadershipRoles', setCurrentLeadershipRole);
-  const deleteLeadershipRole = createDelete('leadershipRoles');
+  const addStrategicInitiative = () => {
+    if (!currentStrategicInitiative.title || !currentStrategicInitiative.description) return;
+    const item = { ...currentStrategicInitiative, page: currentPage, isEditing: false, editIndex: null };
+    if (currentStrategicInitiative.isEditing) {
+      const updated = [...formData.strategicInitiatives];
+      updated[currentStrategicInitiative.editIndex] = item;
+      setFormData({ ...formData, strategicInitiatives: updated });
+    } else {
+      setFormData({ ...formData, strategicInitiatives: [...formData.strategicInitiatives, item] });
+    }
+    setCurrentStrategicInitiative(defaultStrategicInitiative());
+  };
 
-  const addEducation = createAdd('education', currentEducation, setCurrentEducation, () => currentEducation.institution && currentEducation.degree);
-  const editEducation = createEdit('education', setCurrentEducation);
-  const deleteEducation = createDelete('education');
-
-  const addBoardRole = createAdd('boardRoles', currentBoardRole, setCurrentBoardRole, () => currentBoardRole.organization && currentBoardRole.role);
-  const editBoardRole = createEdit('boardRoles', setCurrentBoardRole);
-  const deleteBoardRole = createDelete('boardRoles');
-
-  const addStrategicInitiative = createAdd('strategicInitiatives', currentStrategicInitiative, setCurrentStrategicInitiative, () => currentStrategicInitiative.title && currentStrategicInitiative.description);
-  const editStrategicInitiative = createEdit('strategicInitiatives', setCurrentStrategicInitiative);
-  const deleteStrategicInitiative = createDelete('strategicInitiatives');
-
-  const addSkill = createAdd('skills', currentSkill, setCurrentSkill, () => currentSkill.name.trim());
-  const editSkill = createEdit('skills', setCurrentSkill);
-  const deleteSkill = createDelete('skills');
-
-  const addLanguage = createAdd('languages', currentLanguage, setCurrentLanguage, () => currentLanguage.name.trim());
-  const editLanguage = createEdit('languages', setCurrentLanguage);
-  const deleteLanguage = createDelete('languages');
+  const addSkill = () => {
+    if (!currentSkill.name.trim()) return;
+    const item = { ...currentSkill, page: currentPage, isEditing: false, editIndex: null };
+    if (currentSkill.isEditing) {
+      const updated = [...formData.skills];
+      updated[currentSkill.editIndex] = item;
+      setFormData({ ...formData, skills: updated });
+    } else {
+      setFormData({ ...formData, skills: [...formData.skills, item] });
+    }
+    setCurrentSkill(defaultSkill());
+  };
 
   const addSocialLink = () => {
     if (!currentSocialLink.platform || !currentSocialLink.url) return;
@@ -284,20 +287,17 @@ const Ceoresume = () => {
         alert('Add content before generating PDF.');
         return;
       }
-
       const originalStates = [];
       for (let i = 0; i < pages.length; i++) {
         const pageNum = pages[i];
         const el = resumeRefs[pageNum - 1]?.current;
         if (!el) continue;
-
         originalStates[pageNum - 1] = {
           display: el.style.display,
           position: el.style.position,
           width: el.style.width,
           height: el.style.height
         };
-
         Object.assign(el.style, {
           display: 'block',
           position: 'fixed',
@@ -312,9 +312,7 @@ const Ceoresume = () => {
           background: '#ffffff',
           color: '#000000'
         });
-
         await new Promise(r => setTimeout(r, 300));
-
         const canvas = await html2canvas(el, {
           scale: 3,
           useCORS: true,
@@ -338,20 +336,17 @@ const Ceoresume = () => {
             }
           }
         });
-
         const imgData = canvas.toDataURL('image/png', 1.0);
         const imgWidth = 210;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         if (i > 0) pdf.addPage();
         pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
       }
-
       for (let i = 0; i < totalPages; i++) {
         const el = resumeRefs[i]?.current;
         const state = originalStates[i];
         if (el && state) Object.assign(el.style, state);
       }
-
       pdf.save(`${formData.fullName || 'ceo_resume'}_resume.pdf`);
     } catch (err) {
       console.error('PDF Error:', err);
@@ -370,7 +365,6 @@ const Ceoresume = () => {
     const hasInitiatives = pageData.strategicInitiatives.length > 0;
     const hasSkills = pageData.skills.length > 0;
     const hasLanguages = pageData.languages.length > 0;
-
     return (
       <div className={styles.ceoTemplate}>
         {pageNumber === 1 && (
@@ -390,7 +384,6 @@ const Ceoresume = () => {
             </div>
           </header>
         )}
-
         {hasSummary && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>EXECUTIVE SUMMARY</h2>
@@ -399,7 +392,6 @@ const Ceoresume = () => {
             </div>
           </section>
         )}
-
         {hasLeadership && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>EXECUTIVE LEADERSHIP</h2>
@@ -418,7 +410,6 @@ const Ceoresume = () => {
             </div>
           </section>
         )}
-
         {hasInitiatives && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>STRATEGIC INITIATIVES</h2>
@@ -435,7 +426,6 @@ const Ceoresume = () => {
             </div>
           </section>
         )}
-
         {hasBoard && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>BOARD & ADVISORY ROLES</h2>
@@ -450,7 +440,6 @@ const Ceoresume = () => {
             </div>
           </section>
         )}
-
         {hasEducation && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>EDUCATION</h2>
@@ -465,7 +454,6 @@ const Ceoresume = () => {
             </div>
           </section>
         )}
-
         {hasSkills && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>CORE EXECUTIVE COMPETENCIES</h2>
@@ -476,7 +464,6 @@ const Ceoresume = () => {
             </div>
           </section>
         )}
-
         {hasLanguages && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>LANGUAGES</h2>
@@ -487,7 +474,6 @@ const Ceoresume = () => {
             </div>
           </section>
         )}
-
         {getPagesWithContent().length > 1 && (
           <div className={styles.pageIndicator}>
             Page {getPagesWithContent().indexOf(pageNumber) + 1} of {getPagesWithContent().length}
@@ -503,14 +489,12 @@ const Ceoresume = () => {
   };
 
   const actualPages = getPagesWithContent().length;
-
   return (
     <div className={styles.resumeBuilder}>
       <Head>
         <title>CEO Resume Builder | Executive Leadership Across Industries</title>
         <meta name="description" content="Build a powerful executive resume for CEOs, founders, and C-suite leaders. Highlight P&L, strategy, board experience, and transformational impact." />
       </Head>
-
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -524,7 +508,6 @@ const Ceoresume = () => {
           </div>
         </div>
       </section>
-
       <div className={styles.singleColumnLayout}>
         {/* Preview */}
         <div className={styles.previewSection}>
@@ -533,8 +516,8 @@ const Ceoresume = () => {
               <button onClick={() => setShowFullPreview(!showFullPreview)} className={styles.previewButton}>
                 <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
               </button>
-              <button 
-                onClick={generatePDF} 
+              <button
+                onClick={generatePDF}
                 className={styles.downloadButton}
                 disabled={isGeneratingPDF || actualPages === 0}
               >
@@ -543,13 +526,12 @@ const Ceoresume = () => {
               </button>
             </div>
           </div>
-
           <div className={`${styles.previewContainer} ${showFullPreview ? styles.fullPreview : ''}`}>
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
                 {Array.from({ length: totalPages }, (_, i) => (
-                  <div 
-                    key={i + 1} 
+                  <div
+                    key={i + 1}
                     className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
                     ref={resumeRefs[i]}
                   >
@@ -559,9 +541,8 @@ const Ceoresume = () => {
               </div>
             </div>
           </div>
-
           <div className={styles.previewNavigation}>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className={styles.previewNavButton}
@@ -572,7 +553,7 @@ const Ceoresume = () => {
               Page {currentPage} of {totalPages}
               {actualPages > 0 && <span className={styles.contentPagesInfo}>({actualPages} with content)</span>}
             </div>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className={styles.previewNavButton}
@@ -602,7 +583,6 @@ const Ceoresume = () => {
               {totalPages > 1 && <button onClick={removeLastPage} className={styles.removePageButton}><FiX /> Remove Last Page</button>}
             </div>
           </div>
-
           <div className={styles.formNavigation}>
             {[
               { id: 'personal', label: 'Personal', icon: <FiUser /> },
@@ -619,7 +599,6 @@ const Ceoresume = () => {
               </button>
             ))}
           </div>
-
           <div className={styles.formContent}>
             {/* Personal */}
             {activeSection === 'personal' && currentPage === 1 && (
@@ -647,22 +626,20 @@ const Ceoresume = () => {
                     </label>
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Executive Summary*
-                    <textarea 
-                      name="summary" 
-                      value={formData.summary} 
-                      onChange={handleInputChange} 
-                      placeholder="Visionary CEO with 15+ years leading Fortune 500 and high-growth startups..." 
-                      required 
+                    <textarea
+                      name="summary"
+                      value={formData.summary}
+                      onChange={handleInputChange}
+                      placeholder="Visionary CEO with 15+ years leading Fortune 500 and high-growth startups..."
+                      required
                       className={styles.formTextarea}
                       rows="4"
                     />
                   </label>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}><FiGlobe /> Executive Presence</h4>
                   <div className={styles.socialInput}>
@@ -741,7 +718,7 @@ const Ceoresume = () => {
                   </label>
                   <div className={styles.formActions}>
                     <button type="button" onClick={addLeadershipRole} className={styles.addButton} disabled={!currentLeadershipRole.title || !currentLeadershipRole.company || !currentLeadershipRole.startDate}>
-                      <FiPlus /> {currentLeadershipRole.isEditing ? 'Update' : 'Add Role'}
+                      <FiPlus /> Add Role
                     </button>
                     {currentLeadershipRole.isEditing && <button type="button" onClick={() => setCurrentLeadershipRole(defaultLeadershipRole())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
@@ -770,19 +747,18 @@ const Ceoresume = () => {
                   </label>
                   <div className={styles.formActions}>
                     <button type="button" onClick={addStrategicInitiative} className={styles.addButton} disabled={!currentStrategicInitiative.title || !currentStrategicInitiative.description}>
-                      <FiPlus /> {currentStrategicInitiative.isEditing ? 'Update' : 'Add Initiative'}
+                      <FiPlus /> Add Initiative
                     </button>
                     {currentStrategicInitiative.isEditing && <button type="button" onClick={() => setCurrentStrategicInitiative(defaultStrategicInitiative())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Core Competencies</h4>
                   <div className={styles.skillsInput}>
                     <input value={currentSkill.name} onChange={(e) => setCurrentSkill({ ...currentSkill, name: e.target.value })} placeholder="P&L Management, M&A, Investor Relations" className={styles.formInput} />
                     <div className={styles.formActions}>
                       <button type="button" onClick={addSkill} className={styles.addButton} disabled={!currentSkill.name.trim()}>
-                        <FiPlus /> {currentSkill.isEditing ? 'Update' : 'Add Skill'}
+                        <FiPlus /> Add Skill
                       </button>
                       {currentSkill.isEditing && <button type="button" onClick={() => setCurrentSkill(defaultSkill())} className={styles.cancelButton}><FiX /> Cancel</button>}
                     </div>
@@ -805,13 +781,12 @@ const Ceoresume = () => {
                     </div>
                     <div className={styles.formActions}>
                       <button type="button" onClick={addBoardRole} className={styles.addButton} disabled={!currentBoardRole.organization || !currentBoardRole.role}>
-                        <FiPlus /> {currentBoardRole.isEditing ? 'Update' : 'Add Role'}
+                        <FiPlus /> Add Role
                       </button>
                       {currentBoardRole.isEditing && <button type="button" onClick={() => setCurrentBoardRole(defaultBoardRole())} className={styles.cancelButton}><FiX /> Cancel</button>}
                     </div>
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Education</h4>
                   <div className={styles.formCard}>
@@ -845,7 +820,7 @@ const Ceoresume = () => {
                     </label>
                     <div className={styles.formActions}>
                       <button type="button" onClick={addEducation} className={styles.addButton} disabled={!currentEducation.institution || !currentEducation.degree}>
-                        <FiPlus /> {currentEducation.isEditing ? 'Update' : 'Add Education'}
+                        <FiPlus /> Add Education
                       </button>
                       {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
                     </div>

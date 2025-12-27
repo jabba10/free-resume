@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { 
@@ -9,19 +8,12 @@ import {
   FiAward,
   FiCheck,
   FiArrowRight,
-  FiSearch,
-  FiLinkedin,
-  FiMail,
-  FiMessageCircle,
   FiTrendingUp,
-  FiUsers,
   FiGlobe
 } from 'react-icons/fi';
 import styles from './JobsSearchTips.module.css';
 
 const JobSearchTips = () => {
-  const [activeStep, setActiveStep] = useState(0);
-
   const onlineTips = [
     {
       title: "Optimize Your LinkedIn Profile",
@@ -424,8 +416,6 @@ const JobSearchTips = () => {
               </div>
             </div>
           </div>
-
-          
         </div>
       </section>
 

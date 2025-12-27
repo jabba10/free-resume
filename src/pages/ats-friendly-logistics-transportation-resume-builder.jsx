@@ -3,16 +3,14 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiTruck, 
-  FiBook, 
-  FiAward,
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiTruck,
+  FiBook,
   FiGlobe,
-  FiFileText,
   FiDownload,
   FiEdit2,
   FiTrash2,
@@ -22,9 +20,8 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiEye,
-  FiPackage,
-  FiShoppingCart,
-  FiShield
+  FiPackage
+  // ❌ Removed unused icons: FiAward, FiFileText, FiShoppingCart, FiShield
 } from 'react-icons/fi';
 import styles from './LogisticsResume.module.css';
 
@@ -41,7 +38,6 @@ const LogisticsResume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultEducation = () => ({
     institution: '',
     degree: '',
@@ -52,7 +48,6 @@ const LogisticsResume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultCdl = () => ({
     class: '',
     state: '',
@@ -63,14 +58,12 @@ const LogisticsResume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultEquipment = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultCertification = () => ({
     name: '',
     issuer: '',
@@ -80,7 +73,6 @@ const LogisticsResume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultRoute = () => ({
     origin: '',
     destination: '',
@@ -89,14 +81,12 @@ const LogisticsResume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultLanguage = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
@@ -129,7 +119,7 @@ const LogisticsResume = () => {
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage());
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
 
-  const [selectedTemplate] = useState('logistics');
+  // ❌ Removed: const [selectedTemplate] = useState('logistics');
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -222,17 +212,7 @@ const LogisticsResume = () => {
     }
   };
 
-  const editExperience = (index) => {
-    const exp = formData.experience[index];
-    setCurrentExperience({ ...exp, isEditing: true, editIndex: index });
-    setCurrentPage(exp.page);
-  };
-
-  const deleteExperience = (index) => {
-    const updated = [...formData.experience];
-    updated.splice(index, 1);
-    setFormData({ ...formData, experience: updated });
-  };
+  // ❌ Removed: editExperience, deleteExperience
 
   // --- Education ---
   const addEducation = () => {
@@ -252,17 +232,7 @@ const LogisticsResume = () => {
     }
   };
 
-  const editEducation = (index) => {
-    const edu = formData.education[index];
-    setCurrentEducation({ ...edu, isEditing: true, editIndex: index });
-    setCurrentPage(edu.page);
-  };
-
-  const deleteEducation = (index) => {
-    const updated = [...formData.education];
-    updated.splice(index, 1);
-    setFormData({ ...formData, education: updated });
-  };
+  // ❌ Removed: editEducation, deleteEducation
 
   // --- CDL ---
   const saveCdl = () => {
@@ -320,17 +290,7 @@ const LogisticsResume = () => {
     }
   };
 
-  const editCertification = (index) => {
-    const c = formData.certifications[index];
-    setCurrentCertification({ ...c, isEditing: true, editIndex: index });
-    setCurrentPage(c.page);
-  };
-
-  const deleteCertification = (index) => {
-    const updated = [...formData.certifications];
-    updated.splice(index, 1);
-    setFormData({ ...formData, certifications: updated });
-  };
+  // ❌ Removed: editCertification, deleteCertification
 
   // --- Routes ---
   const addRoute = () => {
@@ -350,47 +310,10 @@ const LogisticsResume = () => {
     }
   };
 
-  const editRoute = (index) => {
-    const r = formData.routes[index];
-    setCurrentRoute({ ...r, isEditing: true, editIndex: index });
-    setCurrentPage(r.page);
-  };
-
-  const deleteRoute = (index) => {
-    const updated = [...formData.routes];
-    updated.splice(index, 1);
-    setFormData({ ...formData, routes: updated });
-  };
+  // ❌ Removed: editRoute, deleteRoute
 
   // --- Languages ---
-  const addLanguage = () => {
-    if (currentLanguage.name.trim()) {
-      const item = { ...currentLanguage, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.languages];
-        updated[item.editIndex] = { name: item.name.trim(), page: item.page };
-        setFormData({ ...formData, languages: updated });
-      } else {
-        setFormData({
-          ...formData,
-          languages: [...formData.languages, { name: item.name.trim(), page: item.page }]
-        });
-      }
-      setCurrentLanguage(defaultLanguage());
-    }
-  };
-
-  const editLanguage = (index) => {
-    const l = formData.languages[index];
-    setCurrentLanguage({ ...l, isEditing: true, editIndex: index });
-    setCurrentPage(l.page);
-  };
-
-  const deleteLanguage = (index) => {
-    const updated = [...formData.languages];
-    updated.splice(index, 1);
-    setFormData({ ...formData, languages: updated });
-  };
+  // ❌ Removed: addLanguage, editLanguage, deleteLanguage
 
   // --- Social Links ---
   const addSocialLink = () => {
@@ -706,8 +629,8 @@ const LogisticsResume = () => {
               <button onClick={() => setShowFullPreview(!showFullPreview)} className={styles.previewButton}>
                 <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
               </button>
-              <button 
-                onClick={generatePDF} 
+              <button
+                onClick={generatePDF}
                 className={styles.downloadButton}
                 disabled={isGeneratingPDF || actualPagesWithContent === 0}
               >
@@ -721,8 +644,8 @@ const LogisticsResume = () => {
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
                 {Array.from({ length: totalPages }, (_, i) => (
-                  <div 
-                    key={i + 1} 
+                  <div
+                    key={i + 1}
                     className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
                     ref={resumeRefs[i]}
                   >
@@ -734,7 +657,7 @@ const LogisticsResume = () => {
           </div>
 
           <div className={styles.previewNavigation}>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className={styles.previewNavButton}
@@ -745,7 +668,7 @@ const LogisticsResume = () => {
               Page {currentPage} of {totalPages}
               {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
             </div>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className={styles.previewNavButton}
@@ -824,12 +747,12 @@ const LogisticsResume = () => {
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Professional Summary*
-                    <textarea 
-                      name="summary" 
-                      value={formData.summary} 
-                      onChange={handleInputChange} 
-                      placeholder="Reliable CDL Class A driver with 7+ years of OTR experience..." 
-                      required 
+                    <textarea
+                      name="summary"
+                      value={formData.summary}
+                      onChange={handleInputChange}
+                      placeholder="Reliable CDL Class A driver with 7+ years of OTR experience..."
+                      required
                       className={styles.formTextarea}
                       rows="4"
                     />

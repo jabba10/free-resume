@@ -11,17 +11,13 @@ import {
   FiBriefcase,
   FiBook,
   FiCode,
-  FiAward,
   FiGlobe,
-  FiFileText,
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
-  FiCheck,
   FiGitBranch,
-  FiStar,
   FiChevronLeft,
   FiChevronRight,
   FiEye
@@ -120,6 +116,7 @@ const ResumeApex = () => {
   });
 
   const addNewPage = () => totalPages < 5 && setTotalPages(p => { setCurrentPage(p + 1); return p + 1; });
+
   const removeLastPage = () => {
     if (totalPages <= 1) return;
     const last = totalPages;
@@ -148,11 +145,13 @@ const ResumeApex = () => {
     }));
     setCurrentExperience(defaultExperience());
   };
+
   const editExperience = (idx) => {
     const exp = formData.experience[idx];
     setCurrentExperience({ ...exp, isEditing: true, editIndex: idx });
     setCurrentPage(exp.page);
   };
+
   const deleteExperience = (idx) => setFormData(f => ({ ...f, experience: f.experience.filter((_, i) => i !== idx) }));
 
   // --- EDUCATION ---
@@ -167,11 +166,13 @@ const ResumeApex = () => {
     }));
     setCurrentEducation(defaultEducation());
   };
+
   const editEducation = (idx) => {
     const edu = formData.education[idx];
     setCurrentEducation({ ...edu, isEditing: true, editIndex: idx });
     setCurrentPage(edu.page);
   };
+
   const deleteEducation = (idx) => setFormData(f => ({ ...f, education: f.education.filter((_, i) => i !== idx) }));
 
   // --- SKILL ---
@@ -186,11 +187,13 @@ const ResumeApex = () => {
     }));
     setCurrentSkill(defaultSkill());
   };
+
   const editSkill = (idx) => {
     const skill = formData.skills[idx];
     setCurrentSkill({ name: skill.name, isEditing: true, editIndex: idx, page: skill.page });
     setCurrentPage(skill.page);
   };
+
   const deleteSkill = (idx) => setFormData(f => ({ ...f, skills: f.skills.filter((_, i) => i !== idx) }));
 
   // --- CERTIFICATION ---
@@ -205,11 +208,13 @@ const ResumeApex = () => {
     }));
     setCurrentCertification(defaultCertification());
   };
+
   const editCertification = (idx) => {
     const cert = formData.certifications[idx];
     setCurrentCertification({ name: cert.name, isEditing: true, editIndex: idx, page: cert.page });
     setCurrentPage(cert.page);
   };
+
   const deleteCertification = (idx) => setFormData(f => ({ ...f, certifications: f.certifications.filter((_, i) => i !== idx) }));
 
   // --- LANGUAGE ---
@@ -224,11 +229,13 @@ const ResumeApex = () => {
     }));
     setCurrentLanguage(defaultLanguage());
   };
+
   const editLanguage = (idx) => {
     const lang = formData.languages[idx];
     setCurrentLanguage({ name: lang.name, isEditing: true, editIndex: idx, page: lang.page });
     setCurrentPage(lang.page);
   };
+
   const deleteLanguage = (idx) => setFormData(f => ({ ...f, languages: f.languages.filter((_, i) => i !== idx) }));
 
   // --- SOCIAL LINK ---
@@ -244,10 +251,12 @@ const ResumeApex = () => {
     }));
     setCurrentSocialLink(defaultSocialLink());
   };
+
   const editSocialLink = (idx) => {
     const { platform, url } = formData.socialLinks[idx];
     setCurrentSocialLink({ platform, url: url.replace(/^https?:\/\//, '').replace(/\/$/, ''), isEditing: true, editIndex: idx });
   };
+
   const deleteSocialLink = (idx) => setFormData(f => ({ ...f, socialLinks: f.socialLinks.filter((_, i) => i !== idx) }));
 
   // --- PROJECT ---
@@ -262,11 +271,13 @@ const ResumeApex = () => {
     }));
     setCurrentProject(defaultProject());
   };
+
   const editProject = (idx) => {
     const proj = formData.projects[idx];
     setCurrentProject({ ...proj, isEditing: true, editIndex: idx });
     setCurrentPage(proj.page);
   };
+
   const deleteProject = (idx) => setFormData(f => ({ ...f, projects: f.projects.filter((_, i) => i !== idx) }));
 
   const generatePDF = async () => {
@@ -280,11 +291,13 @@ const ResumeApex = () => {
         setIsGeneratingPDF(false);
         return;
       }
+
       const originals = [];
       for (let i = 0; i < pages.length; i++) {
         const pageNum = pages[i];
         const el = resumeRefs[pageNum - 1]?.current;
         if (!el) continue;
+
         originals[pageNum - 1] = {
           display: el.style.display,
           position: el.style.position,
@@ -292,6 +305,7 @@ const ResumeApex = () => {
           height: el.style.height,
           transform: el.style.transform
         };
+
         Object.assign(el.style, {
           display: 'block',
           position: 'fixed',
@@ -306,22 +320,27 @@ const ResumeApex = () => {
           background: '#ffffff',
           color: '#000000'
         });
+
         await new Promise(r => setTimeout(r, 300));
+
         const canvas = await html2canvas(el, {
           scale: 3,
           backgroundColor: '#ffffff',
           useCORS: true,
           allowTaint: false
         });
+
         const img = canvas.toDataURL('image/png');
         if (i > 0) pdf.addPage();
         pdf.addImage(img, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
       }
+
       for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
         const el = resumeRefs[pageNum - 1]?.current;
         const state = originals[pageNum - 1];
         if (el && state) Object.assign(el.style, state);
       }
+
       pdf.save(`${formData.fullName || 'resume'}_apex.pdf`);
     } catch (e) {
       console.error(e);
@@ -630,6 +649,7 @@ const ResumeApex = () => {
                     </label>
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Professional Summary*
@@ -644,6 +664,7 @@ const ResumeApex = () => {
                     />
                   </label>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}><FiGlobe /> Social Links</h4>
                   <div className={styles.socialInput}>
@@ -688,6 +709,7 @@ const ResumeApex = () => {
                       )}
                     </div>
                   </div>
+
                   <div className={styles.itemsList}>
                     {formData.socialLinks.length === 0 ? (
                       <p className={styles.emptyMessage}>No social links added yet</p>
@@ -801,6 +823,7 @@ const ResumeApex = () => {
                     )}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Your Experience on Page {currentPage}</h4>
                   {getDataByPage(currentPage).experience.length === 0 ? (
@@ -906,6 +929,7 @@ const ResumeApex = () => {
                     )}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Your Projects on Page {currentPage}</h4>
                   {getDataByPage(currentPage).projects.length === 0 ? (
@@ -1035,6 +1059,7 @@ const ResumeApex = () => {
                     )}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Your Education on Page {currentPage}</h4>
                   {getDataByPage(currentPage).education.length === 0 ? (
@@ -1114,6 +1139,7 @@ const ResumeApex = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Certifications - Page {currentPage}</h4>
                   <div className={styles.skillsInput}>
@@ -1173,6 +1199,7 @@ const ResumeApex = () => {
                     )}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Languages - Page {currentPage}</h4>
                   <div className={styles.skillsInput}>
@@ -1232,6 +1259,7 @@ const ResumeApex = () => {
                     )}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Your Skills on Page {currentPage}</h4>
                   {getDataByPage(currentPage).skills.length === 0 ? (

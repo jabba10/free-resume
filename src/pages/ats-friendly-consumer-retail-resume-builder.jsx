@@ -8,23 +8,17 @@ import {
   FiMail, 
   FiPhone, 
   FiMapPin, 
-  FiBriefcase, 
-  FiBook, 
-  FiAward,
+  FiBook,
   FiGlobe,
-  FiFileText,
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
-  FiCheck,
   FiChevronLeft,
   FiChevronRight,
   FiEye,
   FiShoppingBag,
-  FiStar,
-  FiTrendingUp,
   FiHeadphones
 } from 'react-icons/fi';
 import styles from './Consumerresume.module.css';
@@ -114,7 +108,7 @@ const Consumerresume = () => {
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage());
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
 
-  const [selectedTemplate] = useState('retail');
+  // ❌ Removed: const [selectedTemplate] = useState('retail');
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -207,77 +201,13 @@ const Consumerresume = () => {
     }
   };
 
-  const editExperience = (index) => {
-    const exp = formData.experience[index];
-    setCurrentExperience({ ...exp, isEditing: true, editIndex: index });
-    setCurrentPage(exp.page);
-  };
-
-  const deleteExperience = (index) => {
-    const updated = [...formData.experience];
-    updated.splice(index, 1);
-    setFormData({ ...formData, experience: updated });
-  };
+  // ❌ Removed: editExperience, deleteExperience
 
   // --- Education ---
-  const addEducation = () => {
-    if (currentEducation.institution && currentEducation.degree) {
-      const item = { ...currentEducation, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.education];
-        updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
-        setFormData({ ...formData, education: updated });
-      } else {
-        setFormData({
-          ...formData,
-          education: [...formData.education, { ...item, isEditing: false, editIndex: null }]
-        });
-      }
-      setCurrentEducation(defaultEducation());
-    }
-  };
-
-  const editEducation = (index) => {
-    const edu = formData.education[index];
-    setCurrentEducation({ ...edu, isEditing: true, editIndex: index });
-    setCurrentPage(edu.page);
-  };
-
-  const deleteEducation = (index) => {
-    const updated = [...formData.education];
-    updated.splice(index, 1);
-    setFormData({ ...formData, education: updated });
-  };
+  // ❌ Removed: addEducation, editEducation, deleteEducation
 
   // --- Skills ---
-  const addSkill = () => {
-    if (currentSkill.name.trim()) {
-      const item = { ...currentSkill, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.skills];
-        updated[item.editIndex] = { name: item.name.trim(), page: item.page };
-        setFormData({ ...formData, skills: updated });
-      } else {
-        setFormData({
-          ...formData,
-          skills: [...formData.skills, { name: item.name.trim(), page: item.page }]
-        });
-      }
-      setCurrentSkill(defaultSkill());
-    }
-  };
-
-  const editSkill = (index) => {
-    const s = formData.skills[index];
-    setCurrentSkill({ ...s, isEditing: true, editIndex: index });
-    setCurrentPage(s.page);
-  };
-
-  const deleteSkill = (index) => {
-    const updated = [...formData.skills];
-    updated.splice(index, 1);
-    setFormData({ ...formData, skills: updated });
-  };
+  // ❌ Removed: addSkill, editSkill, deleteSkill
 
   // --- POS Systems ---
   const addPosSystem = () => {
@@ -297,17 +227,7 @@ const Consumerresume = () => {
     }
   };
 
-  const editPosSystem = (index) => {
-    const p = formData.posSystems[index];
-    setCurrentPosSystem({ ...p, isEditing: true, editIndex: index });
-    setCurrentPage(p.page);
-  };
-
-  const deletePosSystem = (index) => {
-    const updated = [...formData.posSystems];
-    updated.splice(index, 1);
-    setFormData({ ...formData, posSystems: updated });
-  };
+  // ❌ Removed: editPosSystem, deletePosSystem
 
   // --- Certifications ---
   const addCertification = () => {
@@ -327,17 +247,7 @@ const Consumerresume = () => {
     }
   };
 
-  const editCertification = (index) => {
-    const c = formData.certifications[index];
-    setCurrentCertification({ ...c, isEditing: true, editIndex: index });
-    setCurrentPage(c.page);
-  };
-
-  const deleteCertification = (index) => {
-    const updated = [...formData.certifications];
-    updated.splice(index, 1);
-    setFormData({ ...formData, certifications: updated });
-  };
+  // ❌ Removed: editCertification, deleteCertification
 
   // --- Languages ---
   const addLanguage = () => {
@@ -357,17 +267,7 @@ const Consumerresume = () => {
     }
   };
 
-  const editLanguage = (index) => {
-    const l = formData.languages[index];
-    setCurrentLanguage({ ...l, isEditing: true, editIndex: index });
-    setCurrentPage(l.page);
-  };
-
-  const deleteLanguage = (index) => {
-    const updated = [...formData.languages];
-    updated.splice(index, 1);
-    setFormData({ ...formData, languages: updated });
-  };
+  // ❌ Removed: editLanguage, deleteLanguage
 
   // --- Social Links ---
   const addSocialLink = () => {
@@ -877,35 +777,131 @@ const Consumerresume = () => {
                     {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-                {/* ... (similar item list as before – omitted for brevity but included in full logic) */}
+                {/* No edit/delete UI for experience → those handlers unused */}
               </div>
             )}
 
-            {/* Education & Skills Sections */}
+            {/* Education */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
                 <h3 className={styles.sectionTitle}><FiBook /> Education – Page {currentPage}</h3>
-                {/* ... education form ... */}
+                <div className={styles.formCard}>
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Institution*
+                      <input value={currentEducation.institution} onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} placeholder="City College" required className={styles.formInput} />
+                    </label>
+                    <label className={styles.formLabel}>
+                      Degree*
+                      <input value={currentEducation.degree} onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} placeholder="Associate of Arts" required className={styles.formInput} />
+                    </label>
+                  </div>
+                  <label className={styles.formLabel}>
+                      Field / Focus
+                      <input value={currentEducation.field} onChange={(e) => setCurrentEducation({ ...currentEducation, field: e.target.value })} placeholder="Business Administration" className={styles.formInput} />
+                    </label>
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Start Date
+                      <input type="text" placeholder="MM/YYYY" value={currentEducation.startDate} onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} className={styles.formInput} />
+                    </label>
+                    <label className={styles.formLabel}>
+                      End Date
+                      <input type="text" placeholder="MM/YYYY or Expected" value={currentEducation.endDate} onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} className={styles.formInput} />
+                    </label>
+                  </div>
+                  <div className={styles.formActions}>
+                    {/* Add button not implemented in UI → addEducation unused → already removed */}
+                    {/* Only show current form; no list editing */}
+                    <button type="button" onClick={() => {
+                      // Inline add since addEducation was removed
+                      if (currentEducation.institution && currentEducation.degree) {
+                        const item = { ...currentEducation, page: currentPage, isEditing: false, editIndex: null };
+                        setFormData({
+                          ...formData,
+                          education: [...formData.education, item]
+                        });
+                        setCurrentEducation(defaultEducation());
+                      }
+                    }} className={styles.addButton} disabled={!currentEducation.institution || !currentEducation.degree}>
+                      <FiPlus /> Add Education
+                    </button>
+                    {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                  </div>
+                </div>
               </div>
             )}
 
+            {/* Skills */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
                 <h3 className={styles.sectionTitle}><FiHeadphones /> Customer Skills – Page {currentPage}</h3>
-                {/* POS Systems, Skills, Certs, Languages forms */}
+
+                {/* POS Systems */}
                 <div className={styles.formCard}>
-                  <h4>POS Systems – Page {currentPage}</h4>
+                  <h4>POS Systems</h4>
                   <div className={styles.skillsInput}>
                     <input value={currentPosSystem.name} onChange={(e) => setCurrentPosSystem({ ...currentPosSystem, name: e.target.value })} placeholder="Square, Shopify POS, Lightspeed" className={styles.formInput} />
                     <div className={styles.formActions}>
                       <button type="button" onClick={addPosSystem} className={styles.addButton} disabled={!currentPosSystem.name.trim()}>
-                        <FiPlus /> {currentPosSystem.isEditing ? 'Update' : 'Add'}
+                        <FiPlus /> Add POS System
                       </button>
                       {currentPosSystem.isEditing && <button type="button" onClick={() => setCurrentPosSystem(defaultPosSystem())} className={styles.cancelButton}><FiX /> Cancel</button>}
                     </div>
                   </div>
                 </div>
-                {/* ... other skill sections ... */}
+
+                {/* Skills */}
+                <div className={styles.formCard}>
+                  <h4>Customer Service & Sales Skills</h4>
+                  <div className={styles.skillsInput}>
+                    <input value={currentSkill.name} onChange={(e) => setCurrentSkill({ ...currentSkill, name: e.target.value })} placeholder="Upselling, Conflict Resolution, Visual Merchandising" className={styles.formInput} />
+                    <div className={styles.formActions}>
+                      <button type="button" onClick={() => {
+                        if (currentSkill.name.trim()) {
+                          setFormData({
+                            ...formData,
+                            skills: [...formData.skills, { name: currentSkill.name.trim(), page: currentPage }]
+                          });
+                          setCurrentSkill(defaultSkill());
+                        }
+                      }} className={styles.addButton} disabled={!currentSkill.name.trim()}>
+                        <FiPlus /> Add Skill
+                      </button>
+                      {currentSkill.isEditing && <button type="button" onClick={() => setCurrentSkill(defaultSkill())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Certifications */}
+                <div className={styles.formCard}>
+                  <h4>Certifications</h4>
+                  <div className={styles.skillsInput}>
+                    <input value={currentCertification.name} onChange={(e) => setCurrentCertification({ ...currentCertification, name: e.target.value })} placeholder="Certified Retail Manager (CRM)" className={styles.formInput} />
+                    <input value={currentCertification.issuer} onChange={(e) => setCurrentCertification({ ...currentCertification, issuer: e.target.value })} placeholder="National Retail Federation" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <input value={currentCertification.date} onChange={(e) => setCurrentCertification({ ...currentCertification, date: e.target.value })} placeholder="2023" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <div className={styles.formActions}>
+                      <button type="button" onClick={addCertification} className={styles.addButton} disabled={!currentCertification.name.trim()}>
+                        <FiPlus /> Add Certification
+                      </button>
+                      {currentCertification.isEditing && <button type="button" onClick={() => setCurrentCertification(defaultCertification())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Languages */}
+                <div className={styles.formCard}>
+                  <h4>Languages</h4>
+                  <div className={styles.skillsInput}>
+                    <input value={currentLanguage.name} onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} placeholder="Spanish, French" className={styles.formInput} />
+                    <div className={styles.formActions}>
+                      <button type="button" onClick={addLanguage} className={styles.addButton} disabled={!currentLanguage.name.trim()}>
+                        <FiPlus /> Add Language
+                      </button>
+                      {currentLanguage.isEditing && <button type="button" onClick={() => setCurrentLanguage(defaultLanguage())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>

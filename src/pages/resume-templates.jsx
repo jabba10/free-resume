@@ -17,7 +17,7 @@ import {
 import styles from './ResumeTemplates.module.css';
 
 const ResumeTemplates = () => {
-  const currentDate = new Date().toISOString().split('T')[0];
+  
   
   // Template categories data
   const templateCategories = [

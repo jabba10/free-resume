@@ -3,17 +3,17 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiHeart, 
-  FiBook, 
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiHeart,
+  FiBook,
   FiActivity,
   FiShield,
   FiGlobe,
-  FiUsers,
+  // ❌ Removed unused: FiUsers
   FiDownload,
   FiEdit2,
   FiTrash2,
@@ -38,7 +38,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultEducation = () => ({
     institution: '',
     degree: '',
@@ -49,14 +48,12 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSpecialty = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultLicense = () => ({
     name: '',
     issuingAuthority: '',
@@ -66,7 +63,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultAffiliation = () => ({
     organization: '',
     role: '',
@@ -74,14 +70,12 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultProcedure = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultLanguage = () => ({
     name: '',
     proficiency: '',
@@ -89,7 +83,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
@@ -126,7 +119,10 @@ const Resume = () => {
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const resumeRefs = Array(5).fill().map(() => useRef(null));
+
+  // ✅ FIXED: useRef must be called statically at top level
+  const resumeRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
 
@@ -179,11 +175,11 @@ const Resume = () => {
 
   // --- Page Management ---
   const addNewPage = () => totalPages < 5 && setTotalPages(p => p + 1);
+
   const removeLastPage = () => {
     if (totalPages <= 1) return;
     setTotalPages(p => {
       const newTotal = p - 1;
-      // Shift all content from last page to previous
       const shiftPage = (items) => items.map(i => i.page === p ? { ...i, page: newTotal } : i);
       setFormData(f => ({
         ...f,
@@ -200,20 +196,18 @@ const Resume = () => {
     });
   };
 
-  // --- Item CRUD Functions (Experience, Education, etc.) ---
-  const createAddFunction = (key, current, setter, isEditingCheck = () => true) => {
-    return () => {
-      if (!isEditingCheck()) return;
-      const item = { ...current, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData[key]];
-        updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
-        setFormData({ ...formData, [key]: updated });
-      } else {
-        setFormData({ ...formData, [key]: [...formData[key], { ...item, isEditing: false, editIndex: null }] });
-      }
-      setter(defaultExperience());
-    };
+  // --- Item CRUD Functions ---
+  const createAddFunction = (key, current, setter, isValid) => () => {
+    if (!isValid()) return;
+    const item = { ...current, page: currentPage };
+    if (item.isEditing) {
+      const updated = [...formData[key]];
+      updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
+      setFormData({ ...formData, [key]: updated });
+    } else {
+      setFormData({ ...formData, [key]: [...formData[key], { ...item, isEditing: false, editIndex: null }] });
+    }
+    setter(defaultExperience());
   };
 
   const createEditFunction = (key, setter) => (index) => {
@@ -369,7 +363,6 @@ const Resume = () => {
         pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
       }
 
-      // Restore original
       for (let i = 0; i < totalPages; i++) {
         const el = resumeRefs[i]?.current;
         const state = originalStates[i];
@@ -539,7 +532,7 @@ const Resume = () => {
               Build Your <span className={styles.gradientText}>Healthcare Resume</span>
             </h1>
             <p className={styles.heroSubtitle}>
-              Tailored for nurses, doctors, therapists, lab techs, and all medical professionals. 
+              Tailored for nurses, doctors, therapists, lab techs, and all medical professionals.
               Highlight licenses, clinical experience, and patient care expertise.
             </p>
           </div>
@@ -554,8 +547,8 @@ const Resume = () => {
               <button onClick={() => setShowFullPreview(!showFullPreview)} className={styles.previewButton}>
                 <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
               </button>
-              <button 
-                onClick={generatePDF} 
+              <button
+                onClick={generatePDF}
                 className={styles.downloadButton}
                 disabled={isGeneratingPDF || actualPagesWithContent === 0}
               >
@@ -569,8 +562,8 @@ const Resume = () => {
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
                 {Array.from({ length: totalPages }, (_, i) => (
-                  <div 
-                    key={i + 1} 
+                  <div
+                    key={i + 1}
                     className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
                     ref={resumeRefs[i]}
                   >
@@ -582,7 +575,7 @@ const Resume = () => {
           </div>
 
           <div className={styles.previewNavigation}>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className={styles.previewNavButton}
@@ -593,7 +586,7 @@ const Resume = () => {
               Page {currentPage} of {totalPages}
               {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
             </div>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className={styles.previewNavButton}
@@ -673,12 +666,12 @@ const Resume = () => {
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Professional Summary*
-                    <textarea 
-                      name="summary" 
-                      value={formData.summary} 
-                      onChange={handleInputChange} 
-                      placeholder="Compassionate Registered Nurse with 5+ years in ICU and ER settings..." 
-                      required 
+                    <textarea
+                      name="summary"
+                      value={formData.summary}
+                      onChange={handleInputChange}
+                      placeholder="Compassionate Registered Nurse with 5+ years in ICU and ER settings..."
+                      required
                       className={styles.formTextarea}
                       rows="4"
                     />
@@ -769,7 +762,6 @@ const Resume = () => {
                     {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Your Experience on Page {currentPage}</h4>
                   {getDataByPage(currentPage).experience.length === 0 ? (
@@ -842,7 +834,6 @@ const Resume = () => {
                     {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Your Education on Page {currentPage}</h4>
                   {getDataByPage(currentPage).education.length === 0 ? (

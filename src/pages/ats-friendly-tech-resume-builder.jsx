@@ -3,28 +3,25 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiBriefcase, 
-  FiBook, 
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiBriefcase,
+  FiBook,
   FiCode,
-  FiAward,
   FiGlobe,
-  FiFileText,
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
-  FiCheck,
   FiGitBranch,
-  FiStar,
   FiChevronLeft,
   FiChevronRight,
   FiEye
+  // ❌ Removed unused icons: FiAward, FiFileText, FiCheck, FiStar
 } from 'react-icons/fi';
 import styles from './Resume.module.css';
 
@@ -139,7 +136,6 @@ const Resume = () => {
     });
   };
 
-  // Check if page has content
   const pageHasContent = (pageNumber) => {
     if (pageNumber === 1) {
       if (formData.fullName || formData.email || formData.summary || formData.socialLinks.length > 0) {
@@ -157,7 +153,6 @@ const Resume = () => {
     );
   };
 
-  // Get pages that actually have content
   const getPagesWithContent = () => {
     const pagesWithContent = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -168,7 +163,6 @@ const Resume = () => {
     return pagesWithContent;
   };
 
-  // Page management functions
   const addNewPage = () => {
     if (totalPages < 5) {
       setTotalPages(totalPages + 1);
@@ -179,22 +173,22 @@ const Resume = () => {
   const removeLastPage = () => {
     if (totalPages > 1) {
       const lastPage = totalPages;
-      const updatedExperience = formData.experience.map(exp => 
+      const updatedExperience = formData.experience.map(exp =>
         exp.page === lastPage ? { ...exp, page: lastPage - 1 } : exp
       );
-      const updatedEducation = formData.education.map(edu => 
+      const updatedEducation = formData.education.map(edu =>
         edu.page === lastPage ? { ...edu, page: lastPage - 1 } : edu
       );
-      const updatedProjects = formData.projects.map(proj => 
+      const updatedProjects = formData.projects.map(proj =>
         proj.page === lastPage ? { ...proj, page: lastPage - 1 } : proj
       );
-      const updatedSkills = formData.skills.map(skill => 
+      const updatedSkills = formData.skills.map(skill =>
         skill.page === lastPage ? { ...skill, page: lastPage - 1 } : skill
       );
-      const updatedCertifications = formData.certifications.map(cert => 
+      const updatedCertifications = formData.certifications.map(cert =>
         cert.page === lastPage ? { ...cert, page: lastPage - 1 } : cert
       );
-      const updatedLanguages = formData.languages.map(lang => 
+      const updatedLanguages = formData.languages.map(lang =>
         lang.page === lastPage ? { ...lang, page: lastPage - 1 } : lang
       );
       setFormData({
@@ -592,7 +586,6 @@ const Resume = () => {
     });
   };
 
-  // Filter data by page
   const getDataByPage = (page) => {
     return {
       experience: formData.experience.filter(exp => exp.page === page),
@@ -604,7 +597,6 @@ const Resume = () => {
     };
   };
 
-  // Generate PDF - ENHANCED: Super sharp PDF generation
   const generatePDF = async () => {
     if (isGeneratingPDF) return;
     setIsGeneratingPDF(true);
@@ -718,7 +710,6 @@ const Resume = () => {
     const hasSkills = pageData.skills.length > 0;
     const hasCertifications = pageData.certifications.length > 0;
     const hasLanguages = pageData.languages.length > 0;
-
     return (
       <div className={styles.elegantTemplate}>
         {/* Header only on first page */}
@@ -758,7 +749,6 @@ const Resume = () => {
             </div>
           </header>
         )}
-
         {/* Summary */}
         {hasSummary && (
           <section className={styles.section}>
@@ -768,7 +758,6 @@ const Resume = () => {
             </div>
           </section>
         )}
-
         {/* Experience */}
         {hasExperience && (
           <section className={styles.section}>
@@ -790,7 +779,6 @@ const Resume = () => {
             </div>
           </section>
         )}
-
         {/* Projects */}
         {hasProjects && (
           <section className={styles.section}>
@@ -809,7 +797,6 @@ const Resume = () => {
             </div>
           </section>
         )}
-
         {/* Education */}
         {hasEducation && (
           <section className={styles.section}>
@@ -824,7 +811,6 @@ const Resume = () => {
             </div>
           </section>
         )}
-
         {/* Skills */}
         {hasSkills && (
           <section className={styles.section}>
@@ -838,7 +824,6 @@ const Resume = () => {
             </div>
           </section>
         )}
-
         {/* Certifications */}
         {hasCertifications && (
           <section className={styles.section}>
@@ -852,7 +837,6 @@ const Resume = () => {
             </div>
           </section>
         )}
-
         {/* Languages */}
         {hasLanguages && (
           <section className={styles.section}>
@@ -866,7 +850,6 @@ const Resume = () => {
             </div>
           </section>
         )}
-
         {/* Page indicator */}
         {getPagesWithContent().length > 1 && (
           <div className={styles.pageIndicator}>
@@ -892,7 +875,6 @@ const Resume = () => {
         <meta name="keywords" content="resume builder, professional resume, ATS resume, free resume template, job search, career, CV builder" />
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-builder/" />
       </Head>
-
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
@@ -901,27 +883,26 @@ const Resume = () => {
               Create Your Tech <span className={styles.gradientText}>Resume</span>
             </h1>
             <p className={styles.heroSubtitle}>
-              Designed for software engineers, machine learning engineers, and ui/ux designers. Showcase your job experiences, and projects. 
+              Designed for software engineers, machine learning engineers, and ui/ux designers. Showcase your job experiences, and projects.
             </p>
           </div>
         </div>
       </section>
-
       {/* Single Column Layout */}
       <div className={styles.singleColumnLayout}>
         {/* Preview Section */}
         <div className={styles.previewSection}>
           <div className={styles.previewHeader}>
             <div className={styles.previewActions}>
-              <button 
+              <button
                 onClick={() => setShowFullPreview(!showFullPreview)}
                 className={styles.previewButton}
               >
                 <FiEye />
                 {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
               </button>
-              <button 
-                onClick={generatePDF} 
+              <button
+                onClick={generatePDF}
                 className={styles.downloadButton}
                 disabled={isGeneratingPDF || getPagesWithContent().length === 0}
               >
@@ -930,8 +911,8 @@ const Resume = () => {
               </button>
               <div className={styles.templateSelector}>
                 <label>Template:</label>
-                <select 
-                  value={selectedTemplate} 
+                <select
+                  value={selectedTemplate}
                   onChange={(e) => setSelectedTemplate(e.target.value)}
                   className={styles.formSelect}
                 >
@@ -944,8 +925,8 @@ const Resume = () => {
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
                 {Array.from({ length: totalPages }, (_, index) => (
-                  <div 
-                    key={index + 1} 
+                  <div
+                    key={index + 1}
                     className={`${styles.resumePreview} ${currentPage === index + 1 ? styles.activePreview : styles.inactivePreview}`}
                     ref={resumeRefs[index]}
                   >
@@ -956,7 +937,7 @@ const Resume = () => {
             </div>
           </div>
           <div className={styles.previewNavigation}>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className={styles.previewNavButton}
@@ -972,7 +953,7 @@ const Resume = () => {
                 </span>
               )}
             </div>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className={styles.previewNavButton}
@@ -982,13 +963,12 @@ const Resume = () => {
             </button>
           </div>
         </div>
-
         {/* Form Section */}
         <div className={styles.formSection}>
           {/* Page Management */}
           <div className={styles.pageManagement}>
             <div className={styles.pageControls}>
-              <button 
+              <button
                 onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
                 className={styles.pageButton}
@@ -997,14 +977,14 @@ const Resume = () => {
                 Previous
               </button>
               <div className={styles.pageInfo}>
-                Page {currentPage} of {totalPages} 
+                Page {currentPage} of {totalPages}
                 {actualPagesWithContent > 0 && (
                   <span className={styles.contentPagesInfo}>
                     ({actualPagesWithContent} with content)
                   </span>
                 )}
               </div>
-              <button 
+              <button
                 onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
                 className={styles.pageButton}
@@ -1028,7 +1008,6 @@ const Resume = () => {
               )}
             </div>
           </div>
-
           {/* Form Navigation */}
           <div className={styles.formNavigation}>
             {[
@@ -1048,7 +1027,6 @@ const Resume = () => {
               </button>
             ))}
           </div>
-
           {/* Form Content */}
           <div className={styles.formContent}>
             {/* Personal Information */}
@@ -1059,25 +1037,25 @@ const Resume = () => {
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Full Name*
-                      <input 
-                        type="text" 
-                        name="fullName" 
-                        value={formData.fullName} 
-                        onChange={handleInputChange} 
-                        placeholder="John Doe" 
-                        required 
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        placeholder="John Doe"
+                        required
                         className={styles.formInput}
                       />
                     </label>
                     <label className={styles.formLabel}>
                       Email*
-                      <input 
-                        type="email" 
-                        name="email" 
-                        value={formData.email} 
-                        onChange={handleInputChange} 
-                        placeholder="john@example.com" 
-                        required 
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="john@example.com"
+                        required
                         className={styles.formInput}
                       />
                     </label>
@@ -1085,23 +1063,23 @@ const Resume = () => {
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Phone
-                      <input 
-                        type="tel" 
-                        name="phone" 
-                        value={formData.phone} 
-                        onChange={handleInputChange} 
-                        placeholder="(123) 456-7890" 
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="(123) 456-7890"
                         className={styles.formInput}
                       />
                     </label>
                     <label className={styles.formLabel}>
                       Address
-                      <input 
-                        type="text" 
-                        name="address" 
-                        value={formData.address} 
-                        onChange={handleInputChange} 
-                        placeholder="City, Country" 
+                      <input
+                        type="text"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleInputChange}
+                        placeholder="City, Country"
                         className={styles.formInput}
                       />
                     </label>
@@ -1110,12 +1088,12 @@ const Resume = () => {
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Professional Summary*
-                    <textarea 
-                      name="summary" 
-                      value={formData.summary} 
-                      onChange={handleInputChange} 
-                      placeholder="Briefly describe your professional background..." 
-                      required 
+                    <textarea
+                      name="summary"
+                      value={formData.summary}
+                      onChange={handleInputChange}
+                      placeholder="Briefly describe your professional background..."
+                      required
                       className={styles.formTextarea}
                       rows="4"
                     />
@@ -1144,9 +1122,9 @@ const Resume = () => {
                       className={styles.formInput}
                     />
                     <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addSocialLink} 
+                      <button
+                        type="button"
+                        onClick={addSocialLink}
                         className={styles.addButton}
                         disabled={!currentSocialLink.platform || !currentSocialLink.url}
                       >
@@ -1154,9 +1132,9 @@ const Resume = () => {
                         {currentSocialLink.isEditing ? 'Update' : 'Add'}
                       </button>
                       {currentSocialLink.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentSocialLink(defaultSocialLink())} 
+                        <button
+                          type="button"
+                          onClick={() => setCurrentSocialLink(defaultSocialLink())}
                           className={styles.cancelButton}
                         >
                           <FiX />
@@ -1190,7 +1168,6 @@ const Resume = () => {
                 </div>
               </div>
             )}
-
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
@@ -1257,9 +1234,9 @@ const Resume = () => {
                     />
                   </label>
                   <div className={styles.formActions}>
-                    <button 
-                      type="button" 
-                      onClick={addExperience} 
+                    <button
+                      type="button"
+                      onClick={addExperience}
                       className={styles.addButton}
                       disabled={!currentExperience.position || !currentExperience.company || !currentExperience.startDate || !currentExperience.description}
                     >
@@ -1267,9 +1244,9 @@ const Resume = () => {
                       {currentExperience.isEditing ? 'Update Experience' : 'Add Experience'}
                     </button>
                     {currentExperience.isEditing && (
-                      <button 
-                        type="button" 
-                        onClick={() => setCurrentExperience(defaultExperience())} 
+                      <button
+                        type="button"
+                        onClick={() => setCurrentExperience(defaultExperience())}
                         className={styles.cancelButton}
                       >
                         <FiX />
@@ -1285,7 +1262,7 @@ const Resume = () => {
                   ) : (
                     <div className={styles.itemsList}>
                       {getDataByPage(currentPage).experience.map((exp, index) => {
-                        const globalIndex = formData.experience.findIndex(e => 
+                        const globalIndex = formData.experience.findIndex(e =>
                           e.company === exp.company && e.position === exp.position && e.page === currentPage
                         );
                         return (
@@ -1321,7 +1298,6 @@ const Resume = () => {
                 </div>
               </div>
             )}
-
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
@@ -1362,9 +1338,9 @@ const Resume = () => {
                     />
                   </label>
                   <div className={styles.formActions}>
-                    <button 
-                      type="button" 
-                      onClick={addProject} 
+                    <button
+                      type="button"
+                      onClick={addProject}
                       className={styles.addButton}
                       disabled={!currentProject.name || !currentProject.description}
                     >
@@ -1372,9 +1348,9 @@ const Resume = () => {
                       {currentProject.isEditing ? 'Update Project' : 'Add Project'}
                     </button>
                     {currentProject.isEditing && (
-                      <button 
-                        type="button" 
-                        onClick={() => setCurrentProject(defaultProject())} 
+                      <button
+                        type="button"
+                        onClick={() => setCurrentProject(defaultProject())}
                         className={styles.cancelButton}
                       >
                         <FiX />
@@ -1390,7 +1366,7 @@ const Resume = () => {
                   ) : (
                     <div className={styles.itemsList}>
                       {getDataByPage(currentPage).projects.map((project, index) => {
-                        const globalIndex = formData.projects.findIndex(p => 
+                        const globalIndex = formData.projects.findIndex(p =>
                           p.name === project.name && p.page === currentPage
                         );
                         return (
@@ -1427,7 +1403,6 @@ const Resume = () => {
                 </div>
               </div>
             )}
-
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
@@ -1491,9 +1466,9 @@ const Resume = () => {
                     </label>
                   </div>
                   <div className={styles.formActions}>
-                    <button 
-                      type="button" 
-                      onClick={addEducation} 
+                    <button
+                      type="button"
+                      onClick={addEducation}
                       className={styles.addButton}
                       disabled={!currentEducation.institution || !currentEducation.degree}
                     >
@@ -1501,9 +1476,9 @@ const Resume = () => {
                       {currentEducation.isEditing ? 'Update Education' : 'Add Education'}
                     </button>
                     {currentEducation.isEditing && (
-                      <button 
-                        type="button" 
-                        onClick={() => setCurrentEducation(defaultEducation())} 
+                      <button
+                        type="button"
+                        onClick={() => setCurrentEducation(defaultEducation())}
                         className={styles.cancelButton}
                       >
                         <FiX />
@@ -1519,7 +1494,7 @@ const Resume = () => {
                   ) : (
                     <div className={styles.itemsList}>
                       {getDataByPage(currentPage).education.map((edu, index) => {
-                        const globalIndex = formData.education.findIndex(e => 
+                        const globalIndex = formData.education.findIndex(e =>
                           e.institution === edu.institution && e.degree === edu.degree && e.page === currentPage
                         );
                         return (
@@ -1553,7 +1528,6 @@ const Resume = () => {
                 </div>
               </div>
             )}
-
             {/* Skills, Certifications, Languages */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
@@ -1569,9 +1543,9 @@ const Resume = () => {
                       className={styles.formInput}
                     />
                     <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addSkill} 
+                      <button
+                        type="button"
+                        onClick={addSkill}
                         className={styles.addButton}
                         disabled={!currentSkill.name.trim()}
                       >
@@ -1579,9 +1553,9 @@ const Resume = () => {
                         {currentSkill.isEditing ? 'Update Skill' : 'Add Skill'}
                       </button>
                       {currentSkill.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentSkill(defaultSkill())} 
+                        <button
+                          type="button"
+                          onClick={() => setCurrentSkill(defaultSkill())}
                           className={styles.cancelButton}
                         >
                           <FiX />
@@ -1591,7 +1565,6 @@ const Resume = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Certifications - Page {currentPage}</h4>
                   <div className={styles.skillsInput}>
@@ -1602,9 +1575,9 @@ const Resume = () => {
                       className={styles.formInput}
                     />
                     <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addCertification} 
+                      <button
+                        type="button"
+                        onClick={addCertification}
                         className={styles.addButton}
                         disabled={!currentCertification.name.trim()}
                       >
@@ -1612,9 +1585,9 @@ const Resume = () => {
                         {currentCertification.isEditing ? 'Update Certification' : 'Add Certification'}
                       </button>
                       {currentCertification.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentCertification(defaultCertification())} 
+                        <button
+                          type="button"
+                          onClick={() => setCurrentCertification(defaultCertification())}
                           className={styles.cancelButton}
                         >
                           <FiX />
@@ -1628,7 +1601,7 @@ const Resume = () => {
                       <p className={styles.emptyMessage}>No certifications added yet</p>
                     ) : (
                       getDataByPage(currentPage).certifications.map((cert, index) => {
-                        const globalIndex = formData.certifications.findIndex(c => 
+                        const globalIndex = formData.certifications.findIndex(c =>
                           c.name === cert.name && c.page === currentPage
                         );
                         return (
@@ -1651,7 +1624,6 @@ const Resume = () => {
                     )}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Languages - Page {currentPage}</h4>
                   <div className={styles.skillsInput}>
@@ -1662,9 +1634,9 @@ const Resume = () => {
                       className={styles.formInput}
                     />
                     <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addLanguage} 
+                      <button
+                        type="button"
+                        onClick={addLanguage}
                         className={styles.addButton}
                         disabled={!currentLanguage.name.trim()}
                       >
@@ -1672,9 +1644,9 @@ const Resume = () => {
                         {currentLanguage.isEditing ? 'Update Language' : 'Add Language'}
                       </button>
                       {currentLanguage.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentLanguage(defaultLanguage())} 
+                        <button
+                          type="button"
+                          onClick={() => setCurrentLanguage(defaultLanguage())}
                           className={styles.cancelButton}
                         >
                           <FiX />
@@ -1688,7 +1660,7 @@ const Resume = () => {
                       <p className={styles.emptyMessage}>No languages added yet</p>
                     ) : (
                       getDataByPage(currentPage).languages.map((lang, index) => {
-                        const globalIndex = formData.languages.findIndex(l => 
+                        const globalIndex = formData.languages.findIndex(l =>
                           l.name === lang.name && l.page === currentPage
                         );
                         return (
@@ -1711,7 +1683,6 @@ const Resume = () => {
                     )}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}>Your Skills on Page {currentPage}</h4>
                   {getDataByPage(currentPage).skills.length === 0 ? (
@@ -1719,7 +1690,7 @@ const Resume = () => {
                   ) : (
                     <div className={styles.itemsList}>
                       {getDataByPage(currentPage).skills.map((skill, index) => {
-                        const globalIndex = formData.skills.findIndex(s => 
+                        const globalIndex = formData.skills.findIndex(s =>
                           s.name === skill.name && s.page === currentPage
                         );
                         return (
@@ -1747,14 +1718,13 @@ const Resume = () => {
           </div>
         </div>
       </div>
-
       {/* Full Preview Modal */}
       {showFullPreview && (
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
               <h3>Full Resume Preview</h3>
-              <button 
+              <button
                 className={styles.closeButton}
                 onClick={() => setShowFullPreview(false)}
               >
@@ -1763,8 +1733,8 @@ const Resume = () => {
             </div>
             <div className={styles.fullPreviewPages}>
               {Array.from({ length: totalPages }, (_, index) => (
-                <div 
-                  key={index + 1} 
+                <div
+                  key={index + 1}
                   className={styles.fullPreviewPage}
                 >
                   {renderTemplate(index + 1)}

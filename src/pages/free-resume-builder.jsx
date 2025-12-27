@@ -12,13 +12,11 @@ import {
   FiBook,
   FiAward,
   FiGlobe,
-  FiFileText,
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
-  FiCheck,
   FiChevronLeft,
   FiChevronRight,
   FiEye,
@@ -215,18 +213,6 @@ const Universalresume = () => {
     }
   };
 
-  const editExperience = (index) => {
-    const exp = formData.experience[index];
-    setCurrentExperience({ ...exp, isEditing: true, editIndex: index });
-    setCurrentPage(exp.page);
-  };
-
-  const deleteExperience = (index) => {
-    const newExp = [...formData.experience];
-    newExp.splice(index, 1);
-    setFormData({ ...formData, experience: newExp });
-  };
-
   // --- Education ---
   const addEducation = () => {
     if (currentEducation.institution && currentEducation.degree) {
@@ -243,18 +229,6 @@ const Universalresume = () => {
       }
       setCurrentEducation(defaultEducation());
     }
-  };
-
-  const editEducation = (index) => {
-    const edu = formData.education[index];
-    setCurrentEducation({ ...edu, isEditing: true, editIndex: index });
-    setCurrentPage(edu.page);
-  };
-
-  const deleteEducation = (index) => {
-    const newEdu = [...formData.education];
-    newEdu.splice(index, 1);
-    setFormData({ ...formData, education: newEdu });
   };
 
   // --- Skills ---
@@ -275,18 +249,6 @@ const Universalresume = () => {
     }
   };
 
-  const editSkill = (index) => {
-    const s = formData.skills[index];
-    setCurrentSkill({ ...s, isEditing: true, editIndex: index });
-    setCurrentPage(s.page);
-  };
-
-  const deleteSkill = (index) => {
-    const newS = [...formData.skills];
-    newS.splice(index, 1);
-    setFormData({ ...formData, skills: newS });
-  };
-
   // --- Certifications ---
   const addCertification = () => {
     if (currentCertification.name.trim()) {
@@ -303,18 +265,6 @@ const Universalresume = () => {
       }
       setCurrentCertification(defaultCertification());
     }
-  };
-
-  const editCertification = (index) => {
-    const c = formData.certifications[index];
-    setCurrentCertification({ ...c, isEditing: true, editIndex: index });
-    setCurrentPage(c.page);
-  };
-
-  const deleteCertification = (index) => {
-    const newC = [...formData.certifications];
-    newC.splice(index, 1);
-    setFormData({ ...formData, certifications: newC });
   };
 
   // --- Projects ---
@@ -335,18 +285,6 @@ const Universalresume = () => {
     }
   };
 
-  const editProject = (index) => {
-    const p = formData.projects[index];
-    setCurrentProject({ ...p, isEditing: true, editIndex: index });
-    setCurrentPage(p.page);
-  };
-
-  const deleteProject = (index) => {
-    const newP = [...formData.projects];
-    newP.splice(index, 1);
-    setFormData({ ...formData, projects: newP });
-  };
-
   // --- Languages ---
   const addLanguage = () => {
     if (currentLanguage.name.trim()) {
@@ -363,18 +301,6 @@ const Universalresume = () => {
       }
       setCurrentLanguage(defaultLanguage());
     }
-  };
-
-  const editLanguage = (index) => {
-    const l = formData.languages[index];
-    setCurrentLanguage({ ...l, isEditing: true, editIndex: index });
-    setCurrentPage(l.page);
-  };
-
-  const deleteLanguage = (index) => {
-    const newL = [...formData.languages];
-    newL.splice(index, 1);
-    setFormData({ ...formData, languages: newL });
   };
 
   // --- Social Links ---

@@ -3,13 +3,13 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiBriefcase, 
-  FiBook, 
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiBriefcase,
+  FiBook,
   FiDollarSign,
   FiBarChart2,
   FiShield,
@@ -21,8 +21,8 @@ import {
   FiX,
   FiEye,
   FiChevronLeft,
-  FiChevronRight,
-  FiFileText
+  FiChevronRight
+  // ❌ Removed: FiFileText (unused)
 } from 'react-icons/fi';
 import styles from './Resume.module.css';
 
@@ -39,7 +39,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultEducation = () => ({
     institution: '',
     degree: '',
@@ -50,14 +49,12 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSkill = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultLicense = () => ({
     name: '',
     issuingBody: '',
@@ -67,7 +64,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultDeal = () => ({
     name: '',
     value: '',
@@ -76,7 +72,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultLanguage = () => ({
     name: '',
     proficiency: '',
@@ -84,14 +79,12 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
     isEditing: false,
     editIndex: null
   });
-
   const defaultTechnicalSkill = () => ({
     category: '',
     tools: '',
@@ -129,7 +122,10 @@ const Resume = () => {
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const resumeRefs = Array(5).fill().map(() => useRef(null));
+
+  // ✅ Fixed: useRef must be called at top level, not inside .map()
+  const resumeRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
 
@@ -175,31 +171,30 @@ const Resume = () => {
   const getPagesWithContent = () => {
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
-      if (pageHasContent(i)) pages.push(i); // ✅ FIXED: was "pageHasIt"
+      if (pageHasContent(i)) pages.push(i);
     }
     return pages;
   };
 
   // --- Page Management ---
   const addNewPage = () => totalPages < 5 && setTotalPages(p => p + 1);
+
   const removeLastPage = () => {
     if (totalPages <= 1) return;
-    setTotalPages(p => {
-      const newTotal = p - 1;
-      const shift = (items) => items.map(i => i.page === p ? { ...i, page: newTotal } : i);
-      setFormData(f => ({
-        ...f,
-        experience: shift(f.experience),
-        education: shift(f.education),
-        skills: shift(f.skills),
-        licenses: shift(f.licenses),
-        deals: shift(f.deals),
-        languages: shift(f.languages),
-        technicalSkills: shift(f.technicalSkills)
-      }));
-      if (currentPage > newTotal) setCurrentPage(newTotal);
-      return newTotal;
-    });
+    const newTotal = totalPages - 1;
+    const shift = (items) => items.map(i => i.page === totalPages ? { ...i, page: newTotal } : i);
+    setFormData(f => ({
+      ...f,
+      experience: shift(f.experience),
+      education: shift(f.education),
+      skills: shift(f.skills),
+      licenses: shift(f.licenses),
+      deals: shift(f.deals),
+      languages: shift(f.languages),
+      technicalSkills: shift(f.technicalSkills)
+    }));
+    setTotalPages(newTotal);
+    if (currentPage > newTotal) setCurrentPage(newTotal);
   };
 
   // --- Reusable CRUD ---
@@ -540,7 +535,7 @@ const Resume = () => {
               Build Your <span className={styles.gradientText}>Finance Resume</span>
             </h1>
             <p className={styles.heroSubtitle}>
-              Tailored for financial analysts, accountants, investment bankers, risk managers, and fintech professionals. 
+              Tailored for financial analysts, accountants, investment bankers, risk managers, and fintech professionals.
               Highlight certifications like CFA, CPA, and Series 7.
             </p>
           </div>
@@ -555,8 +550,8 @@ const Resume = () => {
               <button onClick={() => setShowFullPreview(!showFullPreview)} className={styles.previewButton}>
                 <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
               </button>
-              <button 
-                onClick={generatePDF} 
+              <button
+                onClick={generatePDF}
                 className={styles.downloadButton}
                 disabled={isGeneratingPDF || actualPagesWithContent === 0}
               >
@@ -570,8 +565,8 @@ const Resume = () => {
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
                 {Array.from({ length: totalPages }, (_, i) => (
-                  <div 
-                    key={i + 1} 
+                  <div
+                    key={i + 1}
                     className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
                     ref={resumeRefs[i]}
                   >
@@ -583,7 +578,7 @@ const Resume = () => {
           </div>
 
           <div className={styles.previewNavigation}>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className={styles.previewNavButton}
@@ -594,7 +589,7 @@ const Resume = () => {
               Page {currentPage} of {totalPages}
               {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
             </div>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className={styles.previewNavButton}
@@ -674,12 +669,12 @@ const Resume = () => {
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Professional Summary*
-                    <textarea 
-                      name="summary" 
-                      value={formData.summary} 
-                      onChange={handleInputChange} 
-                      placeholder="Detail-oriented Financial Analyst with 5+ years in equity research and portfolio management..." 
-                      required 
+                    <textarea
+                      name="summary"
+                      value={formData.summary}
+                      onChange={handleInputChange}
+                      placeholder="Detail-oriented Financial Analyst with 5+ years in equity research and portfolio management..."
+                      required
                       className={styles.formTextarea}
                       rows="4"
                     />
@@ -769,7 +764,6 @@ const Resume = () => {
                     {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Your Experience on Page {currentPage}</h4>
                   {getDataByPage(currentPage).experience.length === 0 ? (
@@ -832,7 +826,6 @@ const Resume = () => {
                     {currentDeal.isEditing && <button type="button" onClick={() => setCurrentDeal(defaultDeal())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Your Deals on Page {currentPage}</h4>
                   {getDataByPage(currentPage).deals.length === 0 ? (
@@ -899,7 +892,6 @@ const Resume = () => {
                     {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Your Education on Page {currentPage}</h4>
                   {getDataByPage(currentPage).education.length === 0 ? (

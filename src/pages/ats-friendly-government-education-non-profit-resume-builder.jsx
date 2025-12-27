@@ -3,13 +3,13 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiBriefcase, 
-  FiBook, 
+import {
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiBriefcase,
+  FiBook,
   FiAward,
   FiGlobe,
   FiDownload,
@@ -37,7 +37,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultEducation = () => ({
     institution: '',
     degree: '',
@@ -48,14 +47,12 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSkill = () => ({
     name: '',
     isEditing: false,
     editIndex: null,
     page: 1
   });
-
   const defaultCertification = () => ({
     name: '',
     issuingBody: '',
@@ -63,7 +60,6 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultLanguage = () => ({
     name: '',
     proficiency: '',
@@ -71,14 +67,12 @@ const Resume = () => {
     editIndex: null,
     page: 1
   });
-
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
     isEditing: false,
     editIndex: null
   });
-
   const defaultProject = () => ({
     name: '',
     role: '',
@@ -115,7 +109,10 @@ const Resume = () => {
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const resumeRefs = Array(5).fill(null).map(() => useRef(null));
+
+  // ✅ FIXED: useRef must be called statically at top level
+  const resumeRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
 
@@ -167,6 +164,7 @@ const Resume = () => {
 
   // --- Page Management ---
   const addNewPage = () => totalPages < 5 && setTotalPages(p => p + 1);
+
   const removeLastPage = () => {
     if (totalPages <= 1) return;
     setTotalPages(p => {
@@ -287,12 +285,14 @@ const Resume = () => {
         return;
       }
 
-      const originalStates = [];
+      // ❌ REMOVED: originalStates (was unused)
+
       for (let i = 0; i < pagesWithContent.length; i++) {
         const pageNum = pagesWithContent[i];
         const el = resumeRefs[pageNum - 1]?.current;
         if (!el) continue;
 
+        // Apply temporary styles for screenshot
         Object.assign(el.style, {
           display: 'block',
           position: 'fixed',
@@ -339,22 +339,20 @@ const Resume = () => {
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         if (i > 0) pdf.addPage();
         pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
-      }
 
-      // Restore original
-      for (let i = 0; i < totalPages; i++) {
-        const el = resumeRefs[i]?.current;
-        if (el) {
-          el.style.display = '';
-          el.style.position = '';
-          el.style.width = '';
-          el.style.height = '';
-          el.style.zIndex = '';
-          el.style.visibility = '';
-          el.style.opacity = '';
-          el.style.background = '';
-          el.style.color = '';
-        }
+        // Restore original inline styles
+        Object.assign(el.style, {
+          display: '',
+          position: '',
+          width: '',
+          height: '',
+          transform: '',
+          zIndex: '',
+          visibility: '',
+          opacity: '',
+          background: '',
+          color: ''
+        });
       }
 
       pdf.save(`${formData.fullName || 'public_service_resume'}_resume.pdf`);
@@ -507,7 +505,7 @@ const Resume = () => {
               Build Your <span className={styles.gradientText}>Public Service Resume</span>
             </h1>
             <p className={styles.heroSubtitle}>
-              Designed for government workers, educators, and non-profit professionals. 
+              Designed for government workers, educators, and non-profit professionals.
               Showcase policy work, teaching experience, grants, and community programs.
             </p>
           </div>
@@ -522,8 +520,8 @@ const Resume = () => {
               <button onClick={() => setShowFullPreview(!showFullPreview)} className={styles.previewButton}>
                 <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
               </button>
-              <button 
-                onClick={generatePDF} 
+              <button
+                onClick={generatePDF}
                 className={styles.downloadButton}
                 disabled={isGeneratingPDF || actualPagesWithContent === 0}
               >
@@ -537,8 +535,8 @@ const Resume = () => {
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
                 {Array.from({ length: totalPages }, (_, i) => (
-                  <div 
-                    key={i + 1} 
+                  <div
+                    key={i + 1}
                     className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
                     ref={resumeRefs[i]}
                   >
@@ -550,7 +548,7 @@ const Resume = () => {
           </div>
 
           <div className={styles.previewNavigation}>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className={styles.previewNavButton}
@@ -561,7 +559,7 @@ const Resume = () => {
               Page {currentPage} of {totalPages}
               {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
             </div>
-            <button 
+            <button
               onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className={styles.previewNavButton}
@@ -641,12 +639,12 @@ const Resume = () => {
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
                     Professional Summary*
-                    <textarea 
-                      name="summary" 
-                      value={formData.summary} 
-                      onChange={handleInputChange} 
-                      placeholder="Dedicated public servant with 8+ years in education policy and community program development..." 
-                      required 
+                    <textarea
+                      name="summary"
+                      value={formData.summary}
+                      onChange={handleInputChange}
+                      placeholder="Dedicated public servant with 8+ years in education policy and community program development..."
+                      required
                       className={styles.formTextarea}
                       rows="4"
                     />
@@ -712,9 +710,9 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Department / Division
-                    <input value={currentExperience.department} onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} placeholder="Office of Community Engagement" className={styles.formInput} />
-                  </label>
+                      Department / Division
+                      <input value={currentExperience.department} onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} placeholder="Office of Community Engagement" className={styles.formInput} />
+                    </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date*
@@ -726,9 +724,9 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Key Responsibilities*
-                    <textarea value={currentExperience.description} onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} placeholder="• Led $2M grant program for after-school initiatives..." required className={styles.formTextarea} rows="4" />
-                  </label>
+                      Key Responsibilities*
+                      <textarea value={currentExperience.description} onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} placeholder="• Led $2M grant program for after-school initiatives..." required className={styles.formTextarea} rows="4" />
+                    </label>
                   <div className={styles.formActions}>
                     <button type="button" onClick={addExperience} className={styles.addButton} disabled={!currentExperience.role || !currentExperience.organization || !currentExperience.startDate}>
                       <FiPlus /> {currentExperience.isEditing ? 'Update' : 'Add Experience'}
@@ -736,7 +734,6 @@ const Resume = () => {
                     {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Your Experience on Page {currentPage}</h4>
                   {getDataByPage(currentPage).experience.length === 0 ? (
@@ -789,9 +786,9 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Outcomes & Impact*
-                    <textarea value={currentProject.outcome} onChange={(e) => setCurrentProject({ ...currentProject, outcome: e.target.value })} placeholder="• Served 500+ students; improved graduation rates by 15%..." required className={styles.formTextarea} rows="4" />
-                  </label>
+                      Outcomes & Impact*
+                      <textarea value={currentProject.outcome} onChange={(e) => setCurrentProject({ ...currentProject, outcome: e.target.value })} placeholder="• Served 500+ students; improved graduation rates by 15%..." required className={styles.formTextarea} rows="4" />
+                    </label>
                   <div className={styles.formActions}>
                     <button type="button" onClick={addProject} className={styles.addButton} disabled={!currentProject.name || !currentProject.role}>
                       <FiPlus /> {currentProject.isEditing ? 'Update' : 'Add Initiative'}
@@ -799,7 +796,6 @@ const Resume = () => {
                     {currentProject.isEditing && <button type="button" onClick={() => setCurrentProject(defaultProject())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-
                 <div className={styles.formCard}>
                   <h4>Your Initiatives on Page {currentPage}</h4>
                   {getDataByPage(currentPage).projects.length === 0 ? (
@@ -845,9 +841,9 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Field of Study
-                    <input value={currentEducation.field} onChange={(e) => setCurrentEducation({ ...currentEducation, field: e.target.value })} placeholder="Public Policy" className={styles.formInput} />
-                  </label>
+                      Field of Study
+                      <input value={currentEducation.field} onChange={(e) => setCurrentEducation({ ...currentEducation, field: e.target.value })} placeholder="Public Policy" className={styles.formInput} />
+                    </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date
@@ -865,7 +861,6 @@ const Resume = () => {
                     {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
-                {/* Education list here similar to original — omitted for brevity but included in full logic */}
                 <div className={styles.formCard}>
                   <h4>Your Education on Page {currentPage}</h4>
                   {getDataByPage(currentPage).education.length === 0 ? (
@@ -903,6 +898,8 @@ const Resume = () => {
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
                 <h3 className={styles.sectionTitle}><FiAward /> Core Competencies – Page {currentPage}</h3>
+
+                {/* Skills */}
                 <div className={styles.formCard}>
                   <div className={styles.skillsInput}>
                     <input value={currentSkill.name} onChange={(e) => setCurrentSkill({ ...currentSkill, name: e.target.value })} placeholder="Stakeholder Engagement" className={styles.formInput} />
@@ -915,6 +912,7 @@ const Resume = () => {
                   </div>
                 </div>
 
+                {/* Certifications */}
                 <div className={styles.formCard}>
                   <h4>Certifications – Page {currentPage}</h4>
                   <div className={styles.skillsInput}>
@@ -943,6 +941,7 @@ const Resume = () => {
                   </div>
                 </div>
 
+                {/* Languages */}
                 <div className={styles.formCard}>
                   <h4>Languages – Page {currentPage}</h4>
                   <div className={styles.skillsInput}>
@@ -971,6 +970,7 @@ const Resume = () => {
                   </div>
                 </div>
 
+                {/* Skills List */}
                 <div className={styles.formCard}>
                   <h4>Your Skills on Page {currentPage}</h4>
                   {getDataByPage(currentPage).skills.length === 0 ? (

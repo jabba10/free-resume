@@ -4,13 +4,9 @@ import {
   FiSearch, 
   FiMessageCircle, 
   FiUser, 
-  FiClock,
-  FiSmile,
-  FiHelpCircle,
+  // ❌ Removed unused: FiClock, FiSmile, FiHelpCircle, FiMail, FiUsers
   FiStar,
-  FiMail,
   FiTrendingUp,
-  FiUsers,
   FiAward,
   FiCheckCircle,
   FiFileText,
@@ -124,14 +120,10 @@ const InterviewTips = () => {
 
   return (
     <div className={styles.interviewTips}>
-      {/* Enhanced SEO Meta Tags with Competitive Keywords */}
       <Head>
-        {/* Primary Meta Tags - Optimized for Interview & Resume Keywords */}
         <title>Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder</title>
         <meta name="title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta name="description" content="Expert resume writing tips & interview preparation guide. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates. Get hired faster in 2026." />
-        
-        {/* Comprehensive Keyword Strategy */}
         <meta name="keywords" content="
           resume writing tips,
           interview preparation guide,
@@ -159,15 +151,10 @@ const InterviewTips = () => {
           job application tips,
           career development guide
         " />
-        
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* Canonical URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-tips-and-interview-guide/" />
-
-        {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta property="og:description" content="Expert resume writing tips & interview preparation guide. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-tips-preview.jpg" />
@@ -179,8 +166,6 @@ const InterviewTips = () => {
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="resume tips, interview preparation, career advice" />
-
-        {/* Twitter Card - Enhanced */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta name="twitter:description" content="Expert resume writing tips & interview preparation guide. Create ATS-optimized resumes that get interviews. Free resume builder with templates." />
@@ -191,8 +176,6 @@ const InterviewTips = () => {
         <meta name="twitter:data1" content="15 minutes" />
         <meta name="twitter:label2" content="Category" />
         <meta name="twitter:data2" content="Career Advice" />
-
-        {/* Structured Data (JSON-LD) - Enhanced HowTo Article */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -257,8 +240,6 @@ const InterviewTips = () => {
             })
           }}
         />
-
-        {/* Additional FAQ Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -302,8 +283,6 @@ const InterviewTips = () => {
             })
           }}
         />
-
-        {/* Breadcrumb Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -335,7 +314,6 @@ const InterviewTips = () => {
         />
       </Head>
 
-      {/* Enhanced Hero Section with SEO-rich Content */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -368,7 +346,6 @@ const InterviewTips = () => {
         </div>
       </section>
 
-      {/* Enhanced Stats Section */}
       <section className={styles.statsSection}>
         <div className={styles.container}>
           <div className={styles.statsHeader}>
@@ -389,7 +366,6 @@ const InterviewTips = () => {
         </div>
       </section>
 
-      {/* Enhanced Intro Section with SEO Keywords */}
       <section className={styles.introSection}>
         <div className={styles.container}>
           <div className={styles.introContent}>
@@ -423,7 +399,6 @@ const InterviewTips = () => {
         </div>
       </section>
 
-      {/* Enhanced Main Tips Section */}
       <section id="main-tips" className={styles.tipsSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -449,7 +424,6 @@ const InterviewTips = () => {
         </div>
       </section>
 
-      {/* Enhanced Advanced Tips Section */}
       <section className={styles.advancedSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -475,7 +449,6 @@ const InterviewTips = () => {
         </div>
       </section>
 
-      {/* Enhanced CTA Section */}
       <section className={styles.ctaSection}>
         <div className={styles.container}>
           <div className={styles.ctaContent}>

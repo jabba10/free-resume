@@ -2,18 +2,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { 
   FiDownload, 
-  FiPrinter, 
   FiCheck, 
   FiAward, 
   FiUser, 
   FiFileText, 
-  FiSettings, 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
-  FiLinkedin, 
-  FiGithub, 
-  FiTwitter,
+  FiSettings,
   FiStar,
   FiArrowRight
 } from 'react-icons/fi';
@@ -1538,10 +1531,15 @@ together with all previous keywords...
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
-                "ratingCount": "4365",
+                "ratingCount": 4365,
                 "bestRating": "5",
                 "worstRating": "1",
-                "reviewCount": "4365"
+                "reviewCount": 4365,
+                "itemReviewed": {
+                  "@type": "SoftwareApplication",
+                  "name": "Professional Resume Free Builder",
+                  "applicationCategory": "BusinessApplication"
+                }
               },
               "description": "Free online ATS-friendly resume builder that helps job seekers create professional resumes and land interviews faster. ats optimized resume templates, instant PDF download, no sign up required.",
               "url": "https://www.professionalresumefree.com",
@@ -1797,7 +1795,10 @@ together with all previous keywords...
             {/* Microformat for rating */}
             <div className={styles.trustBadge} itemScope itemType="https://schema.org/AggregateRating">
               <FiStar className={styles.starIcon} />
-              <span>Rated <span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> by <span itemProp="ratingCount">4,365+</span> Users | Best Free Resume Builder 2026</span>
+              <span>Rated <span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> by 4,365+ Users | Best Free Resume Builder 2026</span>
+              <div style={{display: 'none'}} itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+                <span itemProp="name">Professional Resume Free Builder</span>
+              </div>
             </div>
             
             <h1 className={styles.heroTitle} itemProp="headline">
@@ -1920,32 +1921,32 @@ together with all previous keywords...
               </thead>
               <tbody>
                 <tr itemScope itemType="https://schema.org/PropertyValue">
-                  <td scope="row">ATS-Friendly Resume Templates</td>
+                  <th scope="row">ATS-Friendly Resume Templates</th>
                   <td itemProp="value">✓ Free ATS Professional Templates</td>
                   <td>Limited Basic Options</td>
                 </tr>
                 <tr itemScope itemType="https://schema.org/PropertyValue">
-                  <td scope="row">Smart Content Suggestions</td>
+                  <th scope="row">Smart Content Suggestions</th>
                   <td itemProp="value">✓ Included for Free</td>
                   <td>✗ Premium Feature</td>
                 </tr>
                 <tr itemScope itemType="https://schema.org/PropertyValue">
-                  <td scope="row">PDF Download Resume</td>
+                  <th scope="row">PDF Download Resume</th>
                   <td itemProp="value">✓ Free, No Watermark</td>
                   <td>Watermarked or Paid</td>
                 </tr>
                 <tr itemScope itemType="https://schema.org/PropertyValue">
-                  <td scope="row">No Account Required</td>
+                  <th scope="row">No Account Required</th>
                   <td itemProp="value">✓ Start Immediately</td>
                   <td>✗ Often Required</td>
                 </tr>
                 <tr itemScope itemType="https://schema.org/PropertyValue">
-                  <td scope="row">Mobile-Friendly Resume Builder</td>
+                  <th scope="row">Mobile-Friendly Resume Builder</th>
                   <td itemProp="value">✓ Full Mobile Support</td>
                   <td>Limited Mobile Experience</td>
                 </tr>
                 <tr itemScope itemType="https://schema.org/PropertyValue">
-                  <td scope="row">Free Forever</td>
+                  <th scope="row">Free Forever</th>
                   <td itemProp="value">✓ Completely Free</td>
                   <td>Limited Free Tier</td>
                 </tr>
@@ -2078,6 +2079,9 @@ const TestimonialCard = ({ name, role, quote, avatar, company, metric, index }) 
       <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating" style={{display: 'none'}}>
         <meta itemProp="ratingValue" content="5" />
         <meta itemProp="bestRating" content="5" />
+      </div>
+      <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication" style={{display: 'none'}}>
+        <span itemProp="name">Professional Resume Free Builder</span>
       </div>
     </div>
   );

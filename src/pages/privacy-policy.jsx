@@ -5,7 +5,6 @@ import {
   FiLock, 
   FiEye, 
   FiUserCheck,
-  FiFileText,
   FiCheck,
   FiX
 } from 'react-icons/fi';
@@ -89,10 +88,10 @@ const PrivacyPolicy = () => {
     <div className={styles.privacyPolicy}>
       {/* SEO Meta Tags */}
       <Head>
-        <title>Privacy Policy | Your Data, Your Control | ResumeCraft</title>
+        <title>Privacy Policy | Your Data, Your Control | ProfessionalResumeFree</title>
         <meta name="description" content="We don't store your resume or personal data. Learn how our resume builder protects your privacy with zero data retention and client-side processing." />
         <meta name="keywords" content="privacy policy, resume builder privacy, no data storage, secure resume, GDPR compliant, data protection, resume privacy" />
-        <meta name="author" content="ResumeCraft" />
+        <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow" />
 
         {/* Canonical URL */}
@@ -120,7 +119,7 @@ const PrivacyPolicy = () => {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebPage",
-              "name": "Privacy Policy - ResumeCraft",
+              "name": "Privacy Policy - ProfessionalResumeFree",
               "description": "Our commitment to your privacy: we do not store any personal data or resume content.",
               "url": "https://www.professionalresumefree.com/privacy-policy",
               "breadcrumb": {
