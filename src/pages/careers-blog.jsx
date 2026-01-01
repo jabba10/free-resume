@@ -329,7 +329,7 @@ const CareerBlog = () => {
               Learn proven strategies to switch careers, advance professionally, and achieve your career goals with confidence.
             </p>
             <div className={styles.heroButtons}>
-              <Link href="/free-resume-builder" className={styles.primaryButton}>
+              <Link href="/resume-templates" className={styles.primaryButton}>
                 Build Career Change Resume
                 <div className={styles.buttonPulse}></div>
               </Link>
@@ -476,7 +476,7 @@ const CareerBlog = () => {
               designed for career changers.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="/free-resume-builder" className={styles.ctaButton}>
+              <Link href="/resume-templates" className={styles.ctaButton}>
                 Build Your Career Change Resume
                 <FiArrowRight className={styles.buttonIcon} />
               </Link>

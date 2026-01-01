@@ -332,8 +332,8 @@ const CoverLetterGuide = () => {
               land <strong>3x more interviews</strong> and stand out from other applicants.
             </p>
             <div className={styles.heroButtons}>
-              <Link href="/free-cover-letter-builder" className={styles.primaryButton}>
-                Create Free Cover Letter
+              <Link href="/resume-templates" className={styles.primaryButton}>
+                Create Free Professional ATS Resume
                 <div className={styles.buttonPulse}></div>
               </Link>
               <a href="#sections" className={styles.secondaryButton}>
@@ -511,41 +511,7 @@ const CoverLetterGuide = () => {
         </div>
       </section>
 
-      <section className={styles.ctaSection}>
-        <div className={styles.container}>
-          <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle}>Ready to Create Your Winning Cover Letter for 2026?</h2>
-            <p className={styles.ctaSubtitle}>
-              Use our <strong>free cover letter builder</strong> to create professional, tailored cover letters in minutes. 
-              Choose from <strong>15+ ATS-optimized templates</strong> and get expert tips for your specific industry and experience level.
-            </p>
-            <div className={styles.ctaButtons}>
-              <Link href="/free-cover-letter-builder" className={styles.ctaButton}>
-                Build Your Cover Letter Now
-                <FiArrowRight className={styles.buttonIcon} />
-              </Link>
-            </div>
-            <div className={styles.ctaFeatures}>
-              <div className={styles.ctaFeature}>
-                <FiDownload className={styles.featureIcon} />
-                <span>Instant PDF Download</span>
-              </div>
-              <div className={styles.ctaFeature}>
-                <FiEdit className={styles.featureIcon} />
-                <span>Easy Customization</span>
-              </div>
-              <div className={styles.ctaFeature}>
-                <FiTarget className={styles.featureIcon} />
-                <span>Industry-Specific Templates</span>
-              </div>
-              <div className={styles.ctaFeature}>
-                <FiMail className={styles.featureIcon} />
-                <span>Professional Formatting</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 };

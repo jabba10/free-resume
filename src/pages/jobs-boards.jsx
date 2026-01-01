@@ -390,7 +390,7 @@ const JobBoardsBlog = () => {
               Discover <strong>50+ expert-reviewed job search sites</strong> for remote work, hybrid positions, and global opportunities with visa sponsorship. Find your dream job on platforms like We Work Remotely, LinkedIn Jobs, Remote OK, and specialized career websites.
             </p>
             <div className={styles.heroButtons}>
-              <Link href="/free-resume-builder" className={styles.primaryButton}>
+              <Link href="/resume-templates" className={styles.primaryButton}>
                 Build ATS-Optimized Resume
                 <div className={styles.buttonPulse}></div>
               </Link>
@@ -584,7 +584,7 @@ const JobBoardsBlog = () => {
               Our free resume builder helps you craft the perfect application for remote, hybrid, and international positions.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="/free-resume-builder" className={styles.ctaButton}>
+              <Link href="/resume-templates" className={styles.ctaButton}>
                 Build Your Free Resume Now
                 <FiArrowRight className={styles.buttonIcon} />
               </Link>

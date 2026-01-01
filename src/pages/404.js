@@ -22,7 +22,7 @@ export default function Custom404() {
           <Link href="/" className={styles.primaryButton}>
             🏠 Home Page
           </Link>
-          <Link href="/free-resume-builder" className={styles.secondaryButton}>
+          <Link href="/resume-templates" className={styles.secondaryButton}>
             📄 Resume Builder
           </Link>
           <Link href="/about" className={styles.secondaryButton}>

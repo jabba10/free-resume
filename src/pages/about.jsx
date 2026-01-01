@@ -172,7 +172,7 @@ const AboutPage = () => {
                 through beautifully designed, effective resumes that get you noticed.
               </p>
               <div className={styles.heroButtons}>
-                <Link href="/free-resume-builder" className={styles.primaryButton}>
+                <Link href="/resume-templates" className={styles.primaryButton}>
                   Start Building Now
                   <div className={styles.buttonPulse}></div>
                 </Link>

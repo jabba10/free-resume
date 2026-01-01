@@ -431,7 +431,7 @@ const ContactPage = () => {
             <h2>Ready to Build Your Secure Professional Profile?</h2>
             <p>Start creating your professional resume with our secure, privacy-focused platform.</p>
             <div className={styles.ctaButtons}>
-              <a href="/free-resume-builder" className={styles.primaryCta}>
+              <a href="/resume-templates" className={styles.primaryCta}>
                 Get Started Free
               </a>
               <a href="/privacy-policy" className={styles.secondaryCta}>

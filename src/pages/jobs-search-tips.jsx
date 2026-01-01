@@ -332,7 +332,7 @@ const JobSearchTips = () => {
               Learn LinkedIn optimization, networking secrets, ATS resume tips, and interview strategies that deliver results.
             </p>
             <div className={styles.heroButtons}>
-              <Link href="/free-resume-builder" className={styles.primaryButton}>
+              <Link href="/resume-templates" className={styles.primaryButton}>
                 Create ATS-Optimized Resume
                 <div className={styles.buttonPulse}></div>
               </Link>
@@ -481,7 +481,7 @@ const JobSearchTips = () => {
               Combine these job search strategies with a standout resume to accelerate your career growth.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="/free-resume-builder" className={styles.ctaButton}>
+              <Link href="/resume-templates" className={styles.ctaButton}>
                 Build Your Free Resume Now
                 <FiArrowRight className={styles.buttonIcon} />
               </Link>
