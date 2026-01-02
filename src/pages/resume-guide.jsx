@@ -225,7 +225,7 @@ const ResumeGuide = () => {
     <div className={styles.resumeGuide}>
       {/* SEO Meta Tags */}
       <Head>
-        <title>How to Beat the ATS & Get More Interviews (2024 Guide) | Professional Resume Optimization</title>
+        <title>How to Beat the ATS & Get More Interviews (2026 Guide) | Professional Resume Optimization</title>
         <meta name="description" content="Master ATS resume optimization with our comprehensive 2024 guide. Learn keyword strategies, formatting rules, CAR method examples, and get more interviews. Includes free checklist and tools." />
         <meta name="keywords" content="ATS resume, beat applicant tracking system, resume optimization 2024, resume keywords, CAR method, ATS checklist, resume tips, job search, career advancement, professional resume" />
         <meta name="author" content="ProfessionalResumeFree" />
@@ -279,7 +279,7 @@ const ResumeGuide = () => {
           <div className={styles.heroContent}>
             <div className={styles.heroTag}>
               <FiAward className={styles.tagIcon} />
-              <span>2024 Career Guide</span>
+              <span>2026 Career Guide</span>
             </div>
             <h1 className={styles.heroTitle}>
               Beat the ATS & <span className={styles.gradientText}>Get 5× More Interviews</span>
