@@ -328,7 +328,7 @@ const InterviewTips = () => {
               Master <strong>ATS-optimized resume writing</strong> and <strong>interview preparation techniques</strong> with our expert guide. Create professional resumes that pass tracking systems and prepare for job interviews that land you offers. Free resume builder included.
             </p>
             <div className={styles.heroButtons}>
-              <Link href="/free-resume-builder" className={styles.primaryButton}>
+              <Link href="/resume templates" className={styles.primaryButton}>
                 Create Free ATS Resume
                 <div className={styles.buttonPulse}></div>
               </Link>
@@ -457,7 +457,7 @@ const InterviewTips = () => {
               Join thousands of successful job seekers who landed their dream jobs using our <strong>free resume builder</strong> and <strong>expert career advice</strong>. Create a professional, ATS-friendly resume in minutes and start getting more interviews.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="/free-resume-builder" className={styles.ctaButton}>
+              <Link href="/resume-templates" className={styles.ctaButton}>
                 Build Your Free Resume Now
               </Link>
             </div>
