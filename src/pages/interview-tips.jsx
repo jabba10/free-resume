@@ -328,7 +328,7 @@ const InterviewTips = () => {
               Master <strong>ATS-optimized resume writing</strong> and <strong>interview preparation techniques</strong> with our expert guide. Create professional resumes that pass tracking systems and prepare for job interviews that land you offers. Free resume builder included.
             </p>
             <div className={styles.heroButtons}>
-              <Link href="/resume templates" className={styles.primaryButton}>
+              <Link href="/resume-templates" className={styles.primaryButton}>
                 Create Free ATS Resume
                 <div className={styles.buttonPulse}></div>
               </Link>
