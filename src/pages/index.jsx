@@ -326,13 +326,16 @@ best free resume builder that works on mobile and desktop
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
-                "ratingCount": 4365, // FIXED: Only include ratingCount OR reviewCount, not both
+                "ratingCount": 4365,
                 "bestRating": "5",
                 "worstRating": "1",
                 "itemReviewed": {
                   "@type": "SoftwareApplication",
-                  "name": "Professional Resume Free Builder",
-                  "applicationCategory": "BusinessApplication"
+                  "name": "Professional Resume Free Builder - ATS Optimized Resume Maker",
+                  "applicationCategory": "BusinessApplication",
+                  "operatingSystem": "Any",
+                  "url": "https://www.professionalresumefree.com",
+                  "description": "Free online ATS-friendly resume builder that helps job seekers create professional resumes and land interviews faster."
                 }
               },
               "description": "Free online ATS-friendly resume builder that helps job seekers create professional resumes and land interviews faster. ats optimized resume templates, instant PDF download, no sign up required.",
@@ -400,7 +403,7 @@ best free resume builder that works on mobile and desktop
           }}
         />
 
-        {/* Additional FAQ Structured Data - Enhanced with AggregateRating removed from here */}
+        {/* Additional FAQ Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -603,6 +606,10 @@ best free resume builder that works on mobile and desktop
                     "publisher": {
                       "@type": "Organization",
                       "name": "Professional Resume Free"
+                    },
+                    "itemReviewed": {
+                      "@type": "SoftwareApplication",
+                      "name": "Professional Resume Free Builder - ATS Optimized Resume Maker"
                     }
                   }
                 },
@@ -625,6 +632,10 @@ best free resume builder that works on mobile and desktop
                     "publisher": {
                       "@type": "Organization",
                       "name": "Professional Resume Free"
+                    },
+                    "itemReviewed": {
+                      "@type": "SoftwareApplication",
+                      "name": "Professional Resume Free Builder - ATS Optimized Resume Maker"
                     }
                   }
                 }
@@ -643,7 +654,11 @@ best free resume builder that works on mobile and desktop
               <FiStar className={styles.starIcon} />
               <span>Rated <span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> by <span itemProp="ratingCount">4,365</span>+ Users | Best Free Resume Builder 2026</span>
               <div style={{display: 'none'}} itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
-                <span itemProp="name">Professional Resume Free Builder</span>
+                <span itemProp="name">Professional Resume Free Builder - ATS Optimized Resume Maker</span>
+                <span itemProp="applicationCategory">BusinessApplication</span>
+                <span itemProp="operatingSystem">Any</span>
+                <link itemProp="url" href="https://www.professionalresumefree.com" />
+                <span itemProp="description">Free online ATS-friendly resume builder that helps job seekers create professional resumes and land interviews faster.</span>
               </div>
             </div>
             
@@ -927,7 +942,9 @@ const TestimonialCard = ({ name, role, quote, avatar, company, metric, index }) 
         <meta itemProp="bestRating" content="5" />
       </div>
       <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication" style={{display: 'none'}}>
-        <span itemProp="name">Professional Resume Free Builder</span>
+        <span itemProp="name">Professional Resume Free Builder - ATS Optimized Resume Maker</span>
+        <span itemProp="applicationCategory">BusinessApplication</span>
+        <link itemProp="url" href="https://www.professionalresumefree.com" />
       </div>
     </div>
   );
