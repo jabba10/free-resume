@@ -11,29 +11,27 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
   const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`;
   
-  // Add this line - Environment variable with fallback
-  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-ZKH84N99Z2';
+  const GA_MEASUREMENT_ID = 'G-ZKH84N99Z2';
 
-  // Track page views on route changes
+  // Track page views
   useEffect(() => {
     const handleRouteChange = (url) => {
-      if (window.gtag) {
-        window.gtag('config', GA_MEASUREMENT_ID, {
-          page_path: url,
-        });
-      }
+      window.gtag?.('config', GA_MEASUREMENT_ID, {
+        page_path: url,
+        anonymize_ip: true, // GDPR compliance
+      });
     };
     
-    // Track initial page load
+    // Track initial load
     handleRouteChange(router.asPath);
     
-    // Track subsequent route changes
+    // Track route changes
     router.events.on('routeChangeComplete', handleRouteChange);
     
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events, router.asPath, GA_MEASUREMENT_ID]); // Added GA_MEASUREMENT_ID to dependencies
+  }, [router.events, router.asPath]);
 
   return (
     <>
@@ -41,21 +39,23 @@ export default function App({ Component, pageProps }) {
         <link rel="canonical" href={canonicalUrl} key="canonical" />
       </Head>
       
-      {/* Google Analytics Scripts */}
+      {/* Google Analytics Script */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
       <Script
-        id="google-analytics"
+        id="gtag-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            
             gtag('config', '${GA_MEASUREMENT_ID}', {
               page_path: window.location.pathname,
+              anonymize_ip: true
             });
           `,
         }}
