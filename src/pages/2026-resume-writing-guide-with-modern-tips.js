@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -24,7 +23,7 @@ import {
 } from 'react-icons/fi';
 import styles from './ResumeGuide2026.module.css';
 
-const ResumeGuide2026 = () => {
+const ResumeGuide2026 = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [activeFormat, setActiveFormat] = useState('chronological');
 
@@ -241,6 +240,10 @@ LANGUAGES:
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-writing-guide-2026/" />
+        
+        {/* Static Date Meta Tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
 
         {/* Open Graph Tags */}
         <meta property="og:title" content="How to Write a Resume in 2026: The Ultimate Step-by-Step Guide" />
@@ -249,8 +252,8 @@ LANGUAGES:
         <meta property="og:url" content="https://www.professionalresumefree.com/resume-writing-guide-2026" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-01-20T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-03-15T00:00:00+00:00" />
+        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="resume writing, career advice, job search, resume formats" />
@@ -290,8 +293,8 @@ LANGUAGES:
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-01-20",
-              "dateModified": "2026-03-15",
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/resume-writing-guide-2026"
@@ -321,7 +324,8 @@ LANGUAGES:
                   "name": "What is the best resume format for 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "For most job seekers in 2026, the hybrid (combination) format is recommended as it combines the strengths of both chronological and functional formats. It highlights skills while maintaining a clear work history, making it highly effective for both ATS systems and human recruiters."
+                    "text": "For most job seekers in 2026, the hybrid (combination) format is recommended as it combines the strengths of both chronological and functional formats. It highlights skills while maintaining a clear work history, making it highly effective for both ATS systems and human recruiters.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -329,7 +333,8 @@ LANGUAGES:
                   "name": "How long should my resume be in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The ideal resume length in 2026 remains 1-2 pages. Recent graduates and early-career professionals should aim for 1 page, while experienced professionals with 10+ years can use 2 pages. Focus on relevance and impact rather than length."
+                    "text": "The ideal resume length in 2026 remains 1-2 pages. Recent graduates and early-career professionals should aim for 1 page, while experienced professionals with 10+ years can use 2 pages. Focus on relevance and impact rather than length.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -337,7 +342,8 @@ LANGUAGES:
                   "name": "How can I make my resume ATS-friendly in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "To optimize your resume for ATS in 2026: use standard section headings, incorporate keywords from the job description naturally, avoid tables and graphics, use simple formatting, save as PDF with selectable text, and include both spelled-out and acronym versions of technical terms."
+                    "text": "To optimize your resume for ATS in 2026: use standard section headings, incorporate keywords from the job description naturally, avoid tables and graphics, use simple formatting, save as PDF with selectable text, and include both spelled-out and acronym versions of technical terms.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -345,10 +351,13 @@ LANGUAGES:
                   "name": "Should I include a photo on my resume in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "In most cases, no. For US job markets, photos are generally discouraged as they can introduce unconscious bias. Exceptions include modeling/acting roles or certain international markets where photos are expected. Always research industry and regional norms."
+                    "text": "In most cases, no. For US job markets, photos are generally discouraged as they can introduce unconscious bias. Exceptions include modeling/acting roles or certain international markets where photos are expected. Always research industry and regional norms.",
+                    "dateCreated": lastModifiedDate
                   }
                 }
-              ]
+              ],
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate
             })
           }}
         />
@@ -390,14 +399,14 @@ LANGUAGES:
           <div className={styles.heroContent}>
             <div className={styles.heroTag}>
               <FiCalendar className={styles.tagIcon} />
-              Updated for 2026 Job Market
+              Updated for {currentDate} Job Market
             </div>
             <h1 className={styles.heroTitle}>
-              How to Write a <span className={styles.gradientText}>Winning Resume</span> in 2026
+              How to Write a <span className={styles.gradientText}>Winning Resume</span> in {currentDate.split('-')[0]}
             </h1>
             <p className={styles.heroSubtitle}>
               The <strong>complete step-by-step guide</strong> to crafting resumes that pass ATS screening, 
-              impress recruiters, and land interviews in the competitive 2026 job market. 
+              impress recruiters, and land interviews in the competitive {currentDate.split('-')[0]} job market. 
               Learn to choose between <strong>chronological, functional, and hybrid formats</strong>.
             </p>
             <div className={styles.heroButtons}>
@@ -412,7 +421,7 @@ LANGUAGES:
             <div className={styles.heroFeatures}>
               <span className={styles.featureBadge}>✓ 3 Format Types Covered</span>
               <span className={styles.featureBadge}>✓ ATS Optimization Guide</span>
-              <span className={styles.featureBadge}>✓ 2026 Trends Included</span>
+              <span className={styles.featureBadge}>✓ {currentDate.split('-')[0]} Trends Included</span>
               <span className={styles.featureBadge}>✓ Free Templates</span>
             </div>
           </div>
@@ -438,7 +447,7 @@ LANGUAGES:
               Choosing Between Chronological, Functional, and Hybrid Formats
             </h2>
             <p className={styles.sectionSubtitle}>
-              Select the right resume format for your career situation and <strong>maximize your chances</strong> in 2026
+              Select the right resume format for your career situation and <strong>maximize your chances</strong> in {currentDate.split('-')[0]}
             </p>
           </div>
 
@@ -516,9 +525,9 @@ LANGUAGES:
       <section className={styles.guideSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Step-by-Step Resume Writing Guide for 2026</h2>
+            <h2 className={styles.sectionTitle}>Step-by-Step Resume Writing Guide for {currentDate.split('-')[0]}</h2>
             <p className={styles.sectionSubtitle}>
-              Follow this <strong>proven structure</strong> to create a resume that stands out in the 2026 job market
+              Follow this <strong>proven structure</strong> to create a resume that stands out in the {currentDate.split('-')[0]} job market
             </p>
           </div>
 
@@ -549,7 +558,7 @@ LANGUAGES:
               <div className={styles.tipsColumn}>
                 <h4 className={styles.tipsTitle}>
                   <FiCheck className={styles.tipsIcon} />
-                  Best Practices for 2026
+                  Best Practices for {currentDate.split('-')[0]}
                 </h4>
                 <ul className={styles.tipsList}>
                   {resumeSections[activeSection].tips.map((tip, index) => (
@@ -584,7 +593,7 @@ LANGUAGES:
       <section className={styles.atsSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>ATS Optimization for 2026</h2>
+            <h2 className={styles.sectionTitle}>ATS Optimization for {currentDate.split('-')[0]}</h2>
             <p className={styles.sectionSubtitle}>
               Ensure your resume passes through <strong>Applicant Tracking Systems</strong> and reaches human recruiters
             </p>
@@ -605,7 +614,7 @@ LANGUAGES:
       <section className={styles.trendsSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Emerging Resume Trends for 2026</h2>
+            <h2 className={styles.sectionTitle}>Emerging Resume Trends for {currentDate.split('-')[0]}</h2>
             <p className={styles.sectionSubtitle}>
               Stay ahead of the curve with these <strong>modern resume strategies</strong>
             </p>
@@ -630,7 +639,7 @@ LANGUAGES:
         <div className={styles.container}>
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>
-              Ready to Create Your 2026 Resume?
+              Ready to Create Your {currentDate.split('-')[0]} Resume?
             </h2>
             <p className={styles.ctaSubtitle}>
               Use our free, ATS-optimized resume builder with templates for all formats and industries.
@@ -672,5 +681,26 @@ LANGUAGES:
     </div>
   );
 };
+
+// Static Generation with Incremental Static Regeneration
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD for currentDate
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO string for lastModifiedDate
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Revalidate every 24 hours for freshness
+    revalidate: 86400, // 24 hours in seconds
+  };
+}
 
 export default ResumeGuide2026;

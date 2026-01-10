@@ -16,9 +16,23 @@ import {
 } from 'react-icons/fi';
 import styles from './ResumeTemplates.module.css';
 
-const ResumeTemplates = () => {
-  
-  
+const ResumeTemplates = ({ 
+  seoData,
+  buildTimestamp 
+}) => {
+  const {
+    currentDate,
+    lastModifiedDate,
+    breadcrumbData
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+
   // Template categories data
   const templateCategories = [
     {
@@ -118,8 +132,6 @@ const ResumeTemplates = () => {
     }
   ];
 
-  
-
   return (
     <div className={styles.templatesPage} itemScope itemType="https://schema.org/ItemList">
       {/* SEO Meta Tags */}
@@ -133,12 +145,24 @@ const ResumeTemplates = () => {
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
         
         {/* Open Graph / Social Sharing */}
         <meta property="og:title" content="ATS-Friendly Resume Templates for Every Industry | Professional Resume Templates 2026" />
         <meta property="og:description" content="Browse our collection of ATS-optimized resume templates for medical, finance, government, manufacturing, retail, logistics, and executive roles." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.professionalresumefree.com/resume-templates" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ATS-Friendly Resume Templates for Every Industry" />
+        <meta name="twitter:description" content="Browse ATS-optimized resume templates for medical, finance, government, manufacturing, retail, logistics, and executive roles." />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
         {/* Structured Data */}
         <script
@@ -146,24 +170,117 @@ const ResumeTemplates = () => {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebPage",
+                  "@id": "https://www.professionalresumefree.com/resume-templates",
+                  "url": "https://www.professionalresumefree.com/resume-templates",
+                  "name": "ATS-Friendly Resume Templates for Every Industry | Professional Resume Templates 2026",
+                  "description": "Browse our collection of ATS-optimized resume templates for medical, finance, government, manufacturing, retail, logistics, and executive roles.",
+                  "datePublished": "2026-01-01",
+                  "dateModified": safeLastModifiedDate,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.professionalresumefree.com/#website",
+                    "url": "https://www.professionalresumefree.com",
+                    "name": "Professional Resume Free",
+                    "description": "Free online resume builder for job seekers"
+                  },
+                  "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": breadcrumbData
+                  }
+                },
+                {
+                  "@type": "ItemList",
+                  "name": "ATS-Friendly Resume Templates",
+                  "description": "Collection of professionally designed ATS-optimized resume templates for various industries",
+                  "numberOfItems": templateCategories.length,
+                  "itemListElement": templateCategories.map((template, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "CreativeWork",
+                      "name": template.title,
+                      "description": template.description,
+                      "url": `https://www.professionalresumefree.com${template.link}`,
+                      "dateCreated": safeCurrentDate,
+                      "creator": {
+                        "@type": "Organization",
+                        "name": "Professional Resume Free"
+                      }
+                    }
+                  }))
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "ATS Resume Template Builder",
+                  "applicationCategory": "BusinessApplication",
+                  "operatingSystem": "Any",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "priceValidUntil": "2026-12-31"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "ratingCount": 4365,
+                    "bestRating": "5",
+                    "worstRating": "1"
+                  },
+                  "description": "Free online ATS-friendly resume template builder that helps job seekers create professional resumes and land interviews faster.",
+                  "featureList": [
+                    "ATS-Optimized Templates",
+                    "Professional Content Suggestions",
+                    "One-Click PDF Download",
+                    "Real-Time ATS Analysis",
+                    "Mobile-Friendly Editor",
+                    "No Sign Up Required",
+                    "Free Forever"
+                  ],
+                  "softwareVersion": "2026.1.0",
+                  "screenshot": "https://www.professionalresumefree.com/images/screenshot-resume-builder.jpg",
+                  "applicationSuite": "Career Tools",
+                  "countriesSupported": "Global",
+                  "fileSize": "Web Application"
+                }
+              ]
+            })
+          }}
+        />
+        
+        {/* Additional Structured Data for Features */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
               "@type": "ItemList",
-              "name": "ATS-Friendly Resume Templates",
-              "description": "Collection of professionally designed ATS-optimized resume templates for various industries",
-              "numberOfItems": templateCategories.length,
-              "itemListElement": templateCategories.map((template, index) => ({
+              "name": "Resume Template Features",
+              "description": "Key features of our ATS-optimized resume templates",
+              "numberOfItems": pageFeatures.length,
+              "itemListElement": pageFeatures.map((feature, index) => ({
                 "@type": "ListItem",
                 "position": index + 1,
                 "item": {
-                  "@type": "CreativeWork",
-                  "name": template.title,
-                  "description": template.description,
-                  "url": `https://www.professionalresumefree.com${template.link}`
+                  "@type": "Product",
+                  "name": feature.title,
+                  "description": feature.description
                 }
               }))
             })
           }}
         />
       </Head>
+
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
 
       {/* Hero Section */}
       <section className={styles.heroSection} itemScope itemType="https://schema.org/WPHeader">
@@ -212,7 +329,7 @@ const ResumeTemplates = () => {
           
           <div className={styles.templatesGrid}>
             {templateCategories.map((template, index) => (
-              <TemplateCard key={index} {...template} index={index} />
+              <TemplateCard key={index} {...template} index={index} currentDate={safeCurrentDate} />
             ))}
           </div>
         </div>
@@ -285,7 +402,7 @@ const ResumeTemplates = () => {
 };
 
 // Template Card Component
-const TemplateCard = ({ title, description, icon, link, features, color, index }) => {
+const TemplateCard = ({ title, description, icon, link, features, color, index, currentDate }) => {
   return (
     <div 
       className={styles.templateCard}
@@ -321,8 +438,49 @@ const TemplateCard = ({ title, description, icon, link, features, color, index }
       </Link>
       
       <div className={styles.cardDecoration} style={{ backgroundColor: color }}></div>
+      
+      {/* Hidden date metadata */}
+      <meta itemProp="dateCreated" content={currentDate} style={{ display: 'none' }} />
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  
+  // Generate dates at build time
+  const currentDate = buildTime.toISOString().split('T')[0]; // YYYY-MM-DD
+  const lastModifiedDate = buildTime.toISOString(); // Full ISO string
+  
+  // Create breadcrumb data for structured data
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Resume Templates",
+      "item": "https://www.professionalresumefree.com/resume-templates"
+    }
+  ];
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        breadcrumbData
+      },
+      buildTimestamp
+    },
+    // Enable ISR for better SEO freshness (regenerate every 12 hours)
+    revalidate: 43200 // 12 hours
+  };
+}
 
 export default ResumeTemplates;

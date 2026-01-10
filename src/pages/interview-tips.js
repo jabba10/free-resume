@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { 
   FiSearch, 
   FiMessageCircle, 
-  FiUser, 
-  // ❌ Removed unused: FiClock, FiSmile, FiHelpCircle, FiMail, FiUsers
+  FiUser,
   FiStar,
   FiTrendingUp,
   FiAward,
@@ -16,7 +15,23 @@ import {
 } from 'react-icons/fi';
 import styles from './Interviewstips.module.css';
 
-const InterviewTips = () => {
+const InterviewTips = ({ 
+  seoData,
+  buildTimestamp 
+}) => {
+  const {
+    currentDate,
+    lastModifiedDate,
+    breadcrumbData
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+
   const tips = [
     {
       id: 1,
@@ -154,6 +169,9 @@ const InterviewTips = () => {
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-tips-and-interview-guide/" />
         <meta property="og:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta property="og:description" content="Expert resume writing tips & interview preparation guide. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates." />
@@ -162,10 +180,11 @@ const InterviewTips = () => {
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content="2026-01-01T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-04-05T00:00:00+00:00" />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="resume tips, interview preparation, career advice" />
+        
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta name="twitter:description" content="Expert resume writing tips & interview preparation guide. Create ATS-optimized resumes that get interviews. Free resume builder with templates." />
@@ -176,6 +195,7 @@ const InterviewTips = () => {
         <meta name="twitter:data1" content="15 minutes" />
         <meta name="twitter:label2" content="Category" />
         <meta name="twitter:data2" content="Career Advice" />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -199,7 +219,7 @@ const InterviewTips = () => {
                 }
               },
               "datePublished": "2026-01-01",
-              "dateModified": "2026-04-05",
+              "dateModified": safeLastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/resume-tips-and-interview-guide"
@@ -240,6 +260,7 @@ const InterviewTips = () => {
             })
           }}
         />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -252,7 +273,12 @@ const InterviewTips = () => {
                   "name": "How can I make my resume ATS-friendly for free?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Use our free ATS resume builder with optimized templates, include relevant keywords from job descriptions, use standard section headings, and avoid graphics or complex formatting that can confuse automated systems."
+                    "text": "Use our free ATS resume builder with optimized templates, include relevant keywords from job descriptions, use standard section headings, and avoid graphics or complex formatting that can confuse automated systems.",
+                    "datePublished": safeCurrentDate,
+                    "author": {
+                      "@type": "Person",
+                      "name": "Resume Builder Support Team"
+                    }
                   }
                 },
                 {
@@ -260,7 +286,12 @@ const InterviewTips = () => {
                   "name": "What are the most important resume tips for 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Key resume tips for 2026 include: tailoring your resume for each job, quantifying achievements with numbers, using ATS-friendly formats, optimizing your professional summary, and incorporating relevant industry keywords."
+                    "text": "Key resume tips for 2026 include: tailoring your resume for each job, quantifying achievements with numbers, using ATS-friendly formats, optimizing your professional summary, and incorporating relevant industry keywords.",
+                    "datePublished": safeCurrentDate,
+                    "author": {
+                      "@type": "Person",
+                      "name": "Resume Builder Support Team"
+                    }
                   }
                 },
                 {
@@ -268,7 +299,12 @@ const InterviewTips = () => {
                   "name": "How should I prepare for job interviews?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Prepare for job interviews by researching the company, practicing common interview questions, preparing stories about your achievements, aligning your resume with your online profiles, and being ready to discuss every point on your resume in detail."
+                    "text": "Prepare for job interviews by researching the company, practicing common interview questions, preparing stories about your achievements, aligning your resume with your online profiles, and being ready to discuss every point on your resume in detail.",
+                    "datePublished": safeCurrentDate,
+                    "author": {
+                      "@type": "Person",
+                      "name": "Resume Builder Support Team"
+                    }
                   }
                 },
                 {
@@ -276,43 +312,76 @@ const InterviewTips = () => {
                   "name": "Is the resume builder really free with no hidden costs?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, our resume builder is completely free with no hidden costs. You can create, edit, and download your ATS-optimized resume in multiple formats without any payment or subscription required."
+                    "text": "Yes, our resume builder is completely free with no hidden costs. You can create, edit, and download your ATS-optimized resume in multiple formats without any payment or subscription required.",
+                    "datePublished": safeCurrentDate,
+                    "author": {
+                      "@type": "Person",
+                      "name": "Resume Builder Support Team"
+                    }
                   }
                 }
               ]
             })
           }}
         />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
-              "itemListElement": [
+              "itemListElement": breadcrumbData
+            })
+          }}
+        />
+        
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
                 {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://www.professionalresumefree.com"
+                  "@type": "WebPage",
+                  "@id": "https://www.professionalresumefree.com/resume-tips-and-interview-guide",
+                  "url": "https://www.professionalresumefree.com/resume-tips-and-interview-guide",
+                  "name": "Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder",
+                  "description": "Expert resume writing tips & interview preparation guide. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates.",
+                  "datePublished": "2026-01-01",
+                  "dateModified": safeLastModifiedDate,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.professionalresumefree.com/#website",
+                    "url": "https://www.professionalresumefree.com",
+                    "name": "Professional Resume Free",
+                    "description": "Free online resume builder for job seekers"
+                  }
                 },
                 {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Career Advice",
-                  "item": "https://www.professionalresumefree.com/career-advice"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": "Resume Tips & Interview Guide 2026",
-                  "item": "https://www.professionalresumefree.com/resume-tips-and-interview-guide"
+                  "@type": "ItemList",
+                  "itemListElement": stats.map((stat, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "QuantitativeValue",
+                      "name": stat.label,
+                      "value": stat.number,
+                      "description": stat.description
+                    }
+                  }))
                 }
               ]
             })
           }}
         />
       </Head>
+
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
 
       <section className={styles.heroSection}>
         <div className={styles.container}>
@@ -489,5 +558,49 @@ const InterviewTips = () => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  
+  // Generate dates at build time
+  const currentDate = buildTime.toISOString().split('T')[0]; // YYYY-MM-DD
+  const lastModifiedDate = buildTime.toISOString(); // Full ISO string
+  
+  // Create breadcrumb data for structured data
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Career Advice",
+      "item": "https://www.professionalresumefree.com/career-advice"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Resume Tips & Interview Guide 2026",
+      "item": "https://www.professionalresumefree.com/resume-tips-and-interview-guide"
+    }
+  ];
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        breadcrumbData
+      },
+      buildTimestamp
+    },
+    // Enable ISR for better SEO freshness (regenerate every 12 hours)
+    revalidate: 43200 // 12 hours
+  };
+}
 
 export default InterviewTips;

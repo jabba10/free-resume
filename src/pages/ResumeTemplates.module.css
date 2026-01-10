@@ -1,4 +1,4 @@
-/* ResumeTemplates.module.css */
+/* ResumeTemplates.module.css - No global selectors, pure CSS modules */
 
 .templatesPage {
   background-color: white;
@@ -27,6 +27,11 @@
   overflow: hidden;
 }
 
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .trustBadge {
   display: inline-flex;
   align-items: center;
@@ -53,6 +58,7 @@
   line-height: 1.2;
   letter-spacing: -0.025em;
   animation: fadeInUp 0.8s ease-out 0.1s both;
+  color: #212529;
 }
 
 .gradientText {
@@ -62,7 +68,7 @@
 
 .heroSubtitle {
   font-size: clamp(1rem, 3.5vw, 1.25rem);
-  color: black;
+  color: #555;
   max-width: 700px;
   margin: 0 auto 2rem;
   line-height: 1.5;
@@ -85,14 +91,14 @@
   padding: 0.75rem 1.25rem;
   background: white;
   border-radius: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   min-width: 120px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .statItem:hover {
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -100,17 +106,16 @@
 .statNumber {
   font-weight: 800;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
-  color: black;
+  color: #212529;
   line-height: 1;
   margin-bottom: 0.375rem;
 }
 
 .statLabel {
   font-size: 0.75rem;
-  color: black;
+  color: #6c757d;
   font-weight: 500;
   text-align: center;
-  opacity: 0.7;
 }
 
 /* ——— SECTIONS ——— */
@@ -125,18 +130,17 @@
   font-size: clamp(1.5rem, 4.5vw, 2.5rem);
   font-weight: 700;
   margin-bottom: 1rem;
-  color: black;
+  color: #212529;
   line-height: 1.2;
   letter-spacing: -0.025em;
 }
 
 .sectionSubtitle {
   font-size: clamp(1rem, 3.5vw, 1.125rem);
-  color: black;
+  color: #6c757d;
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
-  opacity: 0.8;
 }
 
 /* ——— TEMPLATES SECTION ——— */
@@ -154,7 +158,7 @@
 
 .templateCard {
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e9ecef;
   border-radius: 1rem;
   padding: 1.75rem;
   position: relative;
@@ -166,8 +170,8 @@
 .templateCard:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  border-color: #ddd;
-  background-color: #f5f5f5;
+  border-color: #dee2e6;
+  background-color: #f8f9fa;
 }
 
 .templateHeader {
@@ -185,26 +189,26 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
   transition: all 0.3s ease;
 }
 
 .templateCard:hover .templateIconContainer {
-  background-color: #f5f5f5;
-  border-color: #ddd;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
 }
 
 .templateIcon {
   font-size: 1.5rem;
-  color: black;
+  color: #495057;
 }
 
 .templateTitle {
   font-size: 1.125rem;
   font-weight: 700;
   margin: 0;
-  color: black;
+  color: #212529;
   line-height: 1.3;
   flex: 1;
   text-align: left;
@@ -212,11 +216,10 @@
 
 .templateDescription {
   font-size: 0.9375rem;
-  color: black;
+  color: #6c757d;
   line-height: 1.6;
   margin: 0 0 1.25rem;
   min-height: 4.5em;
-  opacity: 0.8;
 }
 
 .templateFeatures {
@@ -227,28 +230,27 @@
 }
 
 .featureTag {
-  background: #f5f5f5;
-  color: black;
+  background: #f8f9fa;
+  color: #495057;
   padding: 0.25rem 0.625rem;
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 500;
-  border: 1px solid #ddd;
+  border: 1px solid #e9ecef;
   white-space: nowrap;
-  opacity: 0.8;
   transition: all 0.3s ease;
 }
 
 .templateCard:hover .featureTag {
-  background-color: #f5f5f5;
-  border-color: #ddd;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
 }
 
 .templateLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: black;
+  color: #212529;
   font-weight: 600;
   font-size: 0.9375rem;
   text-decoration: none;
@@ -258,14 +260,14 @@
 }
 
 .templateLink:hover {
-  border-bottom-color: black;
+  border-bottom-color: #212529;
   gap: 0.75rem;
 }
 
 .linkIcon {
   font-size: 0.875rem;
   transition: transform 0.3s ease;
-  color: black;
+  color: #212529;
 }
 
 .templateLink:hover .linkIcon {
@@ -278,7 +280,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background-color: #ddd;
+  background-color: #6c757d;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -291,7 +293,7 @@
 
 .featuresSection {
   padding: 4rem 0;
-  background: #f5f5f5;
+  background: #f8f9fa;
 }
 
 .featuresGrid {
@@ -302,7 +304,7 @@
 
 .featureCard {
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e9ecef;
   border-radius: 0.75rem;
   padding: 1.5rem;
   text-align: center;
@@ -312,7 +314,7 @@
 .featureCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
 }
 
 .featureIconContainer {
@@ -321,7 +323,7 @@
   justify-content: center;
   width: 56px;
   height: 56px;
-  background: black;
+  background: #212529;
   color: white;
   border-radius: 0.75rem;
   margin-bottom: 1rem;
@@ -330,7 +332,7 @@
 }
 
 .featureCard:hover .featureIconContainer {
-  background-color: black;
+  background-color: #495057;
 }
 
 .featureIcon {
@@ -342,15 +344,14 @@
   font-size: 1rem;
   font-weight: 700;
   margin: 0 0 0.5rem;
-  color: black;
+  color: #212529;
 }
 
 .featureDescription {
   font-size: 0.875rem;
-  color: black;
+  color: #6c757d;
   line-height: 1.5;
   margin: 0;
-  opacity: 0.8;
 }
 
 /* ——— HOW IT WORKS SECTION ——— */
@@ -368,7 +369,7 @@
 
 .stepCard {
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e9ecef;
   border-radius: 0.75rem;
   padding: 1.5rem;
   text-align: center;
@@ -379,13 +380,13 @@
 .stepCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
 }
 
 .stepNumber {
   width: 40px;
   height: 40px;
-  background: black;
+  background: #212529;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -398,165 +399,21 @@
 }
 
 .stepCard:hover .stepNumber {
-  background-color: black;
+  background-color: #495057;
 }
 
 .stepTitle {
   font-size: 1rem;
   font-weight: 700;
   margin: 0 0 0.5rem;
-  color: black;
+  color: #212529;
 }
 
 .stepDescription {
   font-size: 0.875rem;
-  color: black;
+  color: #6c757d;
   line-height: 1.5;
   margin: 0;
-  opacity: 0.8;
-}
-
-/* ——— FAQ SECTION ——— */
-
-.faqSection {
-  padding: 4rem 0;
-  background: #f5f5f5;
-}
-
-.faqGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.25rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.faqItem {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.faqItem:hover {
-  border-color: #ddd;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-  background-color: #f5f5f5;
-}
-
-.faqQuestion {
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin: 0 0 0.75rem;
-  color: black;
-  line-height: 1.4;
-}
-
-.faqAnswer {
-  font-size: 0.9375rem;
-  color: black;
-  line-height: 1.6;
-  margin: 0;
-  opacity: 0.8;
-}
-
-/* ——— CTA SECTION ——— */
-
-.ctaSection {
-  background: white;
-  padding: 4rem 0;
-  text-align: center;
-  border-top: 1px solid #ddd;
-}
-
-.ctaTitle {
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  font-weight: 700;
-  margin: 0 0 1rem;
-  color: black;
-  line-height: 1.2;
-}
-
-.ctaSubtitle {
-  font-size: clamp(0.875rem, 3vw, 1.125rem);
-  color: black;
-  max-width: 650px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
-  opacity: 0.8;
-}
-
-.ctaButtons {
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: center;
-}
-
-.primaryButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: black;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: clamp(0.875rem, 2.5vw, 1rem);
-  transition: all 0.3s ease;
-  border: 1px solid black;
-  min-height: 48px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  white-space: nowrap;
-  max-width: 100%;
-}
-
-.primaryButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  background: black;
-  color: white;
-}
-
-.buttonIcon {
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-  color: white;
-}
-
-.primaryButton:hover .buttonIcon {
-  transform: translateX(4px);
-  color: white;
-}
-
-.ctaGuarantee {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: black;
-  background: #f5f5f5;
-  padding: 0.5rem 1.25rem;
-  border-radius: 999px;
-  max-width: 500px;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  flex-wrap: wrap;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.ctaGuarantee:hover {
-  background-color: #f5f5f5;
-}
-
-.guaranteeIcon {
-  color: black;
-  flex-shrink: 0;
 }
 
 /* ——— ANIMATIONS ——— */
@@ -646,23 +503,6 @@
     gap: 1.25rem;
   }
   
-  .faqGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .ctaSection {
-    padding: 3rem 1rem;
-  }
-  
-  .ctaTitle {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-  }
-  
-  .ctaSubtitle {
-    font-size: clamp(0.875rem, 3.5vw, 1.125rem);
-  }
-  
   .sectionTitle {
     font-size: clamp(1.25rem, 4.5vw, 2rem);
   }
@@ -673,23 +513,8 @@
   
   .templateCard,
   .featureCard,
-  .stepCard,
-  .faqItem {
+  .stepCard {
     padding: 1.5rem;
-  }
-  
-  .primaryButton {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-    white-space: normal;
-    text-align: center;
-    color: white;
-  }
-  
-  .buttonIcon {
-    font-size: 0.875rem;
-    color: white;
   }
   
   .templateDescription {
@@ -718,21 +543,6 @@
     font-size: 0.6875rem;
     padding: 0.1875rem 0.5rem;
   }
-  
-  .primaryButton {
-    padding: 0.75rem;
-    font-size: 0.875rem;
-    min-height: 44px;
-    color: white;
-  }
-  
-  .ctaGuarantee {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    font-size: 0.75rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -753,13 +563,6 @@
   
   .heroSubtitle {
     font-size: 0.875rem;
-  }
-  
-  .primaryButton {
-    font-size: 0.8125rem;
-    padding: 0.625rem 0.875rem;
-    min-height: 40px;
-    color: white;
   }
   
   .templateCard {
@@ -802,12 +605,6 @@
     max-width: 160px;
   }
   
-  .primaryButton {
-    padding: 0.625rem;
-    font-size: 0.75rem;
-    color: white;
-  }
-  
   .templateCard {
     padding: 1rem;
   }
@@ -828,16 +625,13 @@
     transition-duration: 0.01ms !important;
   }
   
-  .primaryButton:hover,
   .templateCard:hover,
   .featureCard:hover,
   .stepCard:hover,
-  .faqItem:hover,
   .statItem:hover {
     transform: none !important;
   }
   
-  .primaryButton:hover .buttonIcon,
   .templateLink:hover .linkIcon {
     transform: none !important;
   }
@@ -845,9 +639,8 @@
 
 /* ——— FOCUS STATES ——— */
 
-.primaryButton:focus-visible,
 .templateLink:focus-visible {
-  outline: 2px solid black;
+  outline: 2px solid #212529;
   outline-offset: 2px;
 }
 
@@ -862,52 +655,21 @@
   .heroSection,
   .templatesSection,
   .featuresSection,
-  .howItWorksSection,
-  .faqSection,
-  .ctaSection {
+  .howItWorksSection {
     padding: 1rem 0 !important;
     background: white !important;
   }
   
-  .primaryButton {
-    display: none !important;
-  }
-  
   .templateCard,
   .featureCard,
-  .stepCard,
-  .faqItem {
+  .stepCard {
     break-inside: avoid;
     border: 1px solid #ccc !important;
     box-shadow: none !important;
   }
 }
 
-/* ——— UTILITY CLASSES ——— */
-
-.visuallyHidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.textCenter {
-  text-align: center;
-}
-
-/* ——— NEXT.JS SPECIFIC FIXES ——— */
-
-.templatesPage a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.templatesPage button {
-  font-family: inherit;
+/* Fix for empty freshness indicator */
+.freshnessIndicator {
+  display: none !important;
 }

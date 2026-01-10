@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -22,7 +21,7 @@ import {
 } from 'react-icons/fi';
 import styles from './ProfessionalSummary.module.css';
 
-const ProfessionalSummaryGuide = () => {
+const ProfessionalSummaryGuide = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
 
   const summarySections = [
@@ -221,6 +220,10 @@ const ProfessionalSummaryGuide = () => {
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.professionalresumefree.com/professional-summary-guide/" />
+        
+        {/* Static dates from getStaticProps */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
 
         <meta property="og:title" content="How to Write a Professional Summary That Hooks Recruiters in 6 Seconds" />
         <meta property="og:description" content="Learn to write professional summaries that capture attention in 6 seconds. Get examples for every career level and industry with proven formulas that work." />
@@ -228,8 +231,8 @@ const ProfessionalSummaryGuide = () => {
         <meta property="og:url" content="https://www.professionalresumefree.com/professional-summary-guide" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-05-15T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-09-30T00:00:00+00:00" />
+        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="professional summary, resume writing, career advice, job search" />
@@ -245,6 +248,7 @@ const ProfessionalSummaryGuide = () => {
         <meta name="twitter:label2" content="Examples included" />
         <meta name="twitter:data2" content="20+" />
 
+        {/* Article JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -267,8 +271,8 @@ const ProfessionalSummaryGuide = () => {
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-05-15",
-              "dateModified": "2026-09-30",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/professional-summary-guide"
@@ -286,6 +290,7 @@ const ProfessionalSummaryGuide = () => {
           }}
         />
 
+        {/* FAQPage JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -298,7 +303,8 @@ const ProfessionalSummaryGuide = () => {
                   "name": "How long should a professional summary be?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A professional summary should be 3-4 lines or 50-100 words. This is approximately the amount of text recruiters can scan in 6 seconds. It should be concise enough to read quickly but comprehensive enough to showcase your value proposition and key qualifications for the target role."
+                    "text": "A professional summary should be 3-4 lines or 50-100 words. This is approximately the amount of text recruiters can scan in 6 seconds. It should be concise enough to read quickly but comprehensive enough to showcase your value proposition and key qualifications for the target role.",
+                    "dateCreated": currentDate
                   }
                 },
                 {
@@ -306,7 +312,8 @@ const ProfessionalSummaryGuide = () => {
                   "name": "What's the difference between a professional summary and career objective?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A professional summary focuses on what you offer employers (experience, achievements, value), while a career objective focuses on what you want from employers (your career goals). For most professionals beyond entry-level, a professional summary is more effective as it demonstrates immediate value to hiring managers."
+                    "text": "A professional summary focuses on what you offer employers (experience, achievements, value), while a career objective focuses on what you want from employers (your career goals). For most professionals beyond entry-level, a professional summary is more effective as it demonstrates immediate value to hiring managers.",
+                    "dateCreated": currentDate
                   }
                 },
                 {
@@ -314,7 +321,8 @@ const ProfessionalSummaryGuide = () => {
                   "name": "Should I customize my professional summary for each job application?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, absolutely. You should customize your professional summary for each job application by incorporating keywords from the job description, emphasizing relevant achievements, and aligning your value proposition with the specific role's requirements. This increases both ATS compatibility and human reviewer engagement."
+                    "text": "Yes, absolutely. You should customize your professional summary for each job application by incorporating keywords from the job description, emphasizing relevant achievements, and aligning your value proposition with the specific role's requirements. This increases both ATS compatibility and human reviewer engagement.",
+                    "dateCreated": currentDate
                   }
                 },
                 {
@@ -322,7 +330,8 @@ const ProfessionalSummaryGuide = () => {
                   "name": "What are the most important elements to include in a professional summary?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The most important elements are: 1) Years of experience and specialization, 2) 2-3 key achievements with quantifiable results, 3) Target role/industry focus, 4) Relevant skills and certifications, and 5) Value proposition for the employer. These elements should be presented in a compelling, concise format that can be understood in 6 seconds."
+                    "text": "The most important elements are: 1) Years of experience and specialization, 2) 2-3 key achievements with quantifiable results, 3) Target role/industry focus, 4) Relevant skills and certifications, and 5) Value proposition for the employer. These elements should be presented in a compelling, concise format that can be understood in 6 seconds.",
+                    "dateCreated": currentDate
                   }
                 }
               ]
@@ -330,6 +339,7 @@ const ProfessionalSummaryGuide = () => {
           }}
         />
 
+        {/* BreadcrumbList JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -356,6 +366,33 @@ const ProfessionalSummaryGuide = () => {
                   "item": "https://www.professionalresumefree.com/professional-summary-guide"
                 }
               ]
+            })
+          }}
+        />
+
+        {/* HowTo JSON-LD for step-by-step guide */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to Write a Professional Summary That Hooks Recruiters in 6 Seconds",
+              "description": "Step-by-step guide to writing effective professional summaries for resumes",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
+              "estimatedCost": {
+                "@type": "MonetaryAmount",
+                "currency": "USD",
+                "value": "0"
+              },
+              "step": summarySections.map((section, index) => ({
+                "@type": "HowToStep",
+                "position": index + 1,
+                "name": section.title,
+                "text": section.content,
+                "url": `https://www.professionalresumefree.com/professional-summary-guide#step-${index + 1}`
+              }))
             })
           }}
         />
@@ -601,7 +638,6 @@ const ProfessionalSummaryGuide = () => {
             </p>
             
             <div className={styles.ctaButtons}>
-              
               <Link href="/resume-templates" className={styles.secondaryButton}>
                 <FiFileText className={styles.buttonIcon} />
                 View Resume Templates
@@ -632,5 +668,25 @@ const ProfessionalSummaryGuide = () => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  // Generate dates at build time for SSG
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate
+    },
+    // Enable Incremental Static Regeneration
+    revalidate: 86400 // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default ProfessionalSummaryGuide;

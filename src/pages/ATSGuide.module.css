@@ -279,37 +279,35 @@
   line-height: 1.5;
 }
 
-.typeUseCase {
-  font-size: 0.875rem;
-  color: #666;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
-.typeTips h4 {
+.typeFeatures h4,
+.typeOptimization h4 {
   font-size: 0.9375rem;
   font-weight: 600;
   margin: 0 0 0.5rem;
   color: black;
 }
 
-.typeTips ul {
+.typeFeatures ul,
+.typeOptimization ul {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
 }
 
-.typeTips li {
+.typeFeatures li,
+.typeOptimization li {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
   font-size: 0.9375rem;
   color: #555;
+  line-height: 1.4;
 }
 
+.featureIcon,
 .tipIcon {
   color: #333;
   flex-shrink: 0;
@@ -482,6 +480,7 @@
   padding: 1rem;
   border-radius: 4px;
   overflow-x: auto;
+  line-height: 1.5;
 }
 
 .copyButton {
@@ -585,11 +584,10 @@
   line-height: 1.5;
 }
 
-.integrationStrategies {
+.keywordStrategies {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  margin-top: 2rem;
 }
 
 .strategyCard {

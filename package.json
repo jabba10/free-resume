@@ -19,10 +19,10 @@
     "html2pdf.js": "^0.10.3",
     "jspdf": "^3.0.1",
     "mime-types": "^3.0.1",
-    "next": "^15.5.4",
+    "next": "^16.1.1",
     "next-sitemap": "^4.2.3",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-helmet": "^6.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
@@ -31,19 +31,10 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/indexnow.js",
     "start": "next start",
     "postbuild": "next-sitemap",
     "deploy": "npx @cloudflare/next-on-pages && wrangler deploy"
-  },
-  "reactSnap": {
-    "source": "build",
-    "include": [],
-    "skipThirdPartyRequests": true,
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ]
   },
   "eslintConfig": {
     "extends": [

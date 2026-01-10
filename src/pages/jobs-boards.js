@@ -17,7 +17,7 @@ import {
 } from 'react-icons/fi';
 import styles from './JobsBoardsBlog.module.css';
 
-const JobBoardsBlog = () => {
+const JobBoardsBlog = ({ currentDate, lastModifiedDate }) => {
   const [activeCategory, setActiveCategory] = useState(0);
 
   const jobCategories = [
@@ -226,6 +226,11 @@ const JobBoardsBlog = () => {
         
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        
+        {/* Date and freshness meta tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
@@ -238,8 +243,8 @@ const JobBoardsBlog = () => {
         <meta property="og:url" content="https://www.professionalresumefree.com/blog/best-job-boards" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-01-10T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-05-05T00:00:00+00:00" />
+        <meta property="article:published_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="job boards, remote work, career advice, job search" />
@@ -256,7 +261,7 @@ const JobBoardsBlog = () => {
         <meta name="twitter:label2" content="Job boards featured" />
         <meta name="twitter:data2" content="50+" />
 
-        {/* Enhanced Structured Data */}
+        {/* Enhanced Structured Data - Article */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -279,8 +284,8 @@ const JobBoardsBlog = () => {
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-01-10",
-              "dateModified": "2026-05-05",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/blog/best-job-boards"
@@ -311,7 +316,9 @@ const JobBoardsBlog = () => {
                   "name": "What are the best job boards for remote work in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The best remote job boards in 2026 include We Work Remotely, Remote OK, FlexJobs, Remotive, and LinkedIn Jobs with remote filters. These platforms specialize in fully remote positions across various industries and time zones."
+                    "text": "The best remote job boards in 2026 include We Work Remotely, Remote OK, FlexJobs, Remotive, and LinkedIn Jobs with remote filters. These platforms specialize in fully remote positions across various industries and time zones.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -319,7 +326,9 @@ const JobBoardsBlog = () => {
                   "name": "Which job sites offer international positions with visa sponsorship?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Top job boards for international positions with visa sponsorship include Relocate.me, USPONSORME, Landing.jobs, and Jobbatical. These platforms connect candidates with companies offering relocation assistance and visa support."
+                    "text": "Top job boards for international positions with visa sponsorship include Relocate.me, USPONSORME, Landing.jobs, and Jobbatical. These platforms connect candidates with companies offering relocation assistance and visa support.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -327,7 +336,9 @@ const JobBoardsBlog = () => {
                   "name": "Are there free job boards for hybrid work arrangements?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, free job boards like LinkedIn Jobs, Indeed, and Built In offer hybrid work opportunities. Use their filter options to find roles that combine office and remote work arrangements."
+                    "text": "Yes, free job boards like LinkedIn Jobs, Indeed, and Built In offer hybrid work opportunities. Use their filter options to find roles that combine office and remote work arrangements.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -335,7 +346,9 @@ const JobBoardsBlog = () => {
                   "name": "How do I optimize my resume for international job applications?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Optimize your resume for international applications by tailoring it to the country's standards, highlighting language skills, emphasizing cross-cultural experience, and using ATS-friendly formats that work globally."
+                    "text": "Optimize your resume for international applications by tailoring it to the country's standards, highlighting language skills, emphasizing cross-cultural experience, and using ATS-friendly formats that work globally.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 }
               ]
@@ -370,6 +383,38 @@ const JobBoardsBlog = () => {
                   "item": "https://www.professionalresumefree.com/blog/best-job-boards"
                 }
               ]
+            })
+          }}
+        />
+        
+        {/* ItemList Structured Data for job boards */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "name": "Best Job Boards for 2026",
+              "description": "Comprehensive list of top job boards for remote, hybrid, and international positions",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
+              "numberOfItems": jobCategories.reduce((total, category) => total + category.jobs.length, 0),
+              "itemListElement": jobCategories.flatMap((category, categoryIndex) => 
+                category.jobs.map((job, jobIndex) => ({
+                  "@type": "ListItem",
+                  "position": categoryIndex * 100 + jobIndex + 1,
+                  "item": {
+                    "@type": "WebSite",
+                    "name": job.name,
+                    "url": job.url,
+                    "description": job.description,
+                    "audience": {
+                      "@type": "Audience",
+                      "audienceType": category.title.replace(" Job Boards", "")
+                    }
+                  }
+                }))
+              )
             })
           }}
         />
@@ -609,5 +654,26 @@ const JobBoardsBlog = () => {
     </div>
   );
 };
+
+// SSG Implementation
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format for YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string for last modified
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Enable Incremental Static Regeneration (ISR) for freshness
+    revalidate: 86400, // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default JobBoardsBlog;

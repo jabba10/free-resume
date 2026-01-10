@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -23,7 +22,7 @@ import {
 } from 'react-icons/fi';
 import styles from './ATSGuide.module.css';
 
-const ATSGuide = () => {
+const ATSGuide = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
 
   const atsSections = [
@@ -183,7 +182,7 @@ const ATSGuide = () => {
       <Head>
         <title>How to Beat the ATS: Optimization Tips for Modern Hiring Software 2026</title>
         <meta name="title" content="How to Beat the ATS: Optimization Tips for Modern Hiring Software 2026" />
-        <meta name="description" content="Master ATS optimization with our 2025 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems and reaches hiring managers." />
+        <meta name="description" content="Master ATS optimization with our 2026 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems and reaches hiring managers." />
         <meta name="keywords" content="
           ATS optimization,
           Applicant Tracking System,
@@ -205,7 +204,7 @@ const ATSGuide = () => {
           ATS resume format,
           modern hiring software,
           resume optimization,
-          ATS tips 2025,
+          ATS tips 2026,
           resume writing for ATS,
           ATS resume checker,
           resume scanner,
@@ -230,15 +229,19 @@ const ATSGuide = () => {
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-optimization-guide/" />
+        
+        {/* Static dates from getStaticProps */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
 
-        <meta property="og:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring Software 2025" />
-        <meta property="og:description" content="Master ATS optimization for 2025. Learn proven strategies to ensure your resume passes Applicant Tracking Systems and reaches hiring managers with our comprehensive guide." />
+        <meta property="og:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring Software 2026" />
+        <meta property="og:description" content="Master ATS optimization for 2026. Learn proven strategies to ensure your resume passes Applicant Tracking Systems and reaches hiring managers with our comprehensive guide." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/ats-optimization-preview.jpg" />
         <meta property="og:url" content="https://www.professionalresumefree.com/ats-optimization-guide" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2025-03-20T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2025-05-15T00:00:00+00:00" />
+        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="ATS, resume optimization, job search, career advice" />
@@ -254,6 +257,7 @@ const ATSGuide = () => {
         <meta name="twitter:label2" content="Success rate increase" />
         <meta name="twitter:data2" content="300%" />
 
+        {/* Article JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -276,8 +280,8 @@ const ATSGuide = () => {
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2025-03-20",
-              "dateModified": "2025-05-15",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/ats-optimization-guide"
@@ -295,6 +299,7 @@ const ATSGuide = () => {
           }}
         />
 
+        {/* FAQPage JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -307,7 +312,8 @@ const ATSGuide = () => {
                   "name": "What percentage of companies use ATS in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "In 2026, approximately 90% of large companies and 75% of mid-sized companies use Applicant Tracking Systems for initial resume screening. This makes ATS optimization essential for modern job seekers."
+                    "text": "In 2026, approximately 90% of large companies and 75% of mid-sized companies use Applicant Tracking Systems for initial resume screening. This makes ATS optimization essential for modern job seekers.",
+                    "dateCreated": currentDate
                   }
                 },
                 {
@@ -315,7 +321,8 @@ const ATSGuide = () => {
                   "name": "How long does an ATS typically scan a resume?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Most ATS systems spend only 6-10 seconds scanning each resume during the initial screening phase. This makes strategic keyword placement and ATS-friendly formatting critically important for passing automated screening."
+                    "text": "Most ATS systems spend only 6-10 seconds scanning each resume during the initial screening phase. This makes strategic keyword placement and ATS-friendly formatting critically important for passing automated screening.",
+                    "dateCreated": currentDate
                   }
                 },
                 {
@@ -323,7 +330,8 @@ const ATSGuide = () => {
                   "name": "What are the most common ATS mistakes to avoid?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The most common ATS mistakes include: using images for text, creative/non-standard fonts, keyword stuffing without context, incompatible file formats, headers/footers for critical content, and missing essential contact information in the main document body."
+                    "text": "The most common ATS mistakes include: using images for text, creative/non-standard fonts, keyword stuffing without context, incompatible file formats, headers/footers for critical content, and missing essential contact information in the main document body.",
+                    "dateCreated": currentDate
                   }
                 },
                 {
@@ -331,7 +339,8 @@ const ATSGuide = () => {
                   "name": "How can I check if my resume is ATS-friendly?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "You can check ATS compatibility by: using our free ATS resume scanner, testing with different file formats, checking text selectability, avoiding tables and columns, using standard headings, and ensuring keyword density is natural and contextual rather than forced."
+                    "text": "You can check ATS compatibility by: using our free ATS resume scanner, testing with different file formats, checking text selectability, avoiding tables and columns, using standard headings, and ensuring keyword density is natural and contextual rather than forced.",
+                    "dateCreated": currentDate
                   }
                 }
               ]
@@ -339,6 +348,7 @@ const ATSGuide = () => {
           }}
         />
 
+        {/* BreadcrumbList JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -365,6 +375,59 @@ const ATSGuide = () => {
                   "item": "https://www.professionalresumefree.com/ats-optimization-guide"
                 }
               ]
+            })
+          }}
+        />
+
+        {/* HowTo JSON-LD for step-by-step guide */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to Beat the ATS: Optimization Tips for Modern Hiring Software 2026",
+              "description": "Step-by-step guide to optimizing resumes for Applicant Tracking Systems",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
+              "estimatedCost": {
+                "@type": "MonetaryAmount",
+                "currency": "USD",
+                "value": "0"
+              },
+              "step": atsSections.map((section, index) => ({
+                "@type": "HowToStep",
+                "position": index + 1,
+                "name": section.title,
+                "text": section.content,
+                "url": `https://www.professionalresumefree.com/ats-optimization-guide#step-${index + 1}`
+              }))
+            })
+          }}
+        />
+
+        {/* SoftwareApplication JSON-LD for ATS Software */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "ATS Optimization Guide 2026",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Web",
+              "description": "Comprehensive guide for optimizing resumes for Applicant Tracking Systems",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
+              "author": {
+                "@type": "Organization",
+                "name": "ProfessionalResumeFree"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              }
             })
           }}
         />
@@ -655,7 +718,6 @@ const ATSGuide = () => {
                 <FiDownload className={styles.buttonIcon} />
                 Free Resume Templates
               </Link>
-              
             </div>
             <div className={styles.ctaFeatures}>
               <div className={styles.ctaFeature}>
@@ -677,5 +739,25 @@ const ATSGuide = () => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  // Generate dates at build time for SSG
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate
+    },
+    // Enable Incremental Static Regeneration
+    revalidate: 86400 // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default ATSGuide;

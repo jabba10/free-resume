@@ -27,7 +27,7 @@ import {
 } from 'react-icons/fi';
 import styles from './Blog.module.css';
 
-const ResumeGuide = () => {
+const ResumeGuide = ({ currentDate, lastModifiedDate }) => {
   const strategies = [
     {
       number: '01',
@@ -226,34 +226,42 @@ const ResumeGuide = () => {
       {/* SEO Meta Tags */}
       <Head>
         <title>How to Beat the ATS & Get More Interviews (2026 Guide) | Professional Resume Optimization</title>
-        <meta name="description" content="Master ATS resume optimization with our comprehensive 2024 guide. Learn keyword strategies, formatting rules, CAR method examples, and get more interviews. Includes free checklist and tools." />
-        <meta name="keywords" content="ATS resume, beat applicant tracking system, resume optimization 2024, resume keywords, CAR method, ATS checklist, resume tips, job search, career advancement, professional resume" />
+        <meta name="description" content="Master ATS resume optimization with our comprehensive 2026 guide. Learn keyword strategies, formatting rules, CAR method examples, and get more interviews. Includes free checklist and tools." />
+        <meta name="keywords" content="ATS resume, beat applicant tracking system, resume optimization 2026, resume keywords, CAR method, ATS checklist, resume tips, job search, career advancement, professional resume" />
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        
+        {/* Freshness and Date Meta Tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-guide/" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="How to Beat the ATS & Get More Interviews (2024 Guide)" />
-        <meta property="og:description" content="Comprehensive guide to ATS resume optimization with proven strategies, real examples, and free tools to land more interviews in 2024." />
+        <meta property="og:title" content="How to Beat the ATS & Get More Interviews (2026 Guide)" />
+        <meta property="og:description" content="Comprehensive guide to ATS resume optimization with proven strategies, real examples, and free tools to land more interviews in 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-ats-preview.jpg" />
         <meta property="og:url" content="https://www.professionalresumefree.com/resume-guide" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
+        <meta property="article:published_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="How to Beat the ATS & Get More Interviews (2024 Guide)" />
+        <meta name="twitter:title" content="How to Beat the ATS & Get More Interviews (2026 Guide)" />
         <meta name="twitter:description" content="Master ATS optimization with our step-by-step guide. Get the interview callbacks you deserve." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/resume-ats-preview.jpg" />
         
-        {/* Structured Data */}
+        {/* HowTo Structured Data */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "HowTo",
           "name": "How to Optimize Your Resume for ATS Systems",
           "description": "Complete guide to creating ATS-friendly resumes with keyword optimization, proper formatting, and achievement quantification.",
+          "datePublished": lastModifiedDate,
+          "dateModified": lastModifiedDate,
           "totalTime": "PT60M",
           "supply": ["Computer", "Job descriptions", "Current resume"],
           "tool": ["ATS checker", "Grammar tool", "Keyword analyzer"],
@@ -270,6 +278,51 @@ const ResumeGuide = () => {
             "name": "ProfessionalResumeFree",
             "url": "https://www.professionalresumefree.com"
           }
+        })}} />
+        
+        {/* FAQPage Structured Data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqItems.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer,
+              "dateCreated": lastModifiedDate,
+              "dateModified": lastModifiedDate
+            }
+          }))
+        })}} />
+        
+        {/* Article Structured Data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "How to Beat the ATS & Get More Interviews (2026 Guide)",
+          "description": "Comprehensive guide to ATS resume optimization with proven strategies, real examples, and free tools to land more interviews in 2026.",
+          "datePublished": lastModifiedDate,
+          "dateModified": lastModifiedDate,
+          "author": {
+            "@type": "Organization",
+            "name": "ProfessionalResumeFree",
+            "url": "https://www.professionalresumefree.com"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "ProfessionalResumeFree",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.professionalresumefree.com/logo.png"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.professionalresumefree.com/resume-guide"
+          },
+          "image": "https://www.professionalresumefree.com/images/resume-ats-preview.jpg",
+          "keywords": "ATS resume, beat applicant tracking system, resume optimization 2026, resume keywords, CAR method, ATS checklist, resume tips, job search, career advancement, professional resume"
         })}} />
       </Head>
 
@@ -641,5 +694,26 @@ const ResumeGuide = () => {
     </div>
   );
 };
+
+// SSG Implementation
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format for YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string for last modified
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Enable Incremental Static Regeneration (ISR) for freshness
+    revalidate: 86400, // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default ResumeGuide;

@@ -7,7 +7,6 @@ import {
   FiEdit,
   FiTarget,
   FiTrendingUp,
-  // ❌ Removed unused: FiUsers
   FiCheck,
   FiArrowRight,
   FiBook,
@@ -19,7 +18,7 @@ import {
 } from 'react-icons/fi';
 import styles from './Guides.module.css';
 
-const CoverLetterGuide = () => {
+const CoverLetterGuide = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
 
   const coverLetterSections = [
@@ -174,6 +173,11 @@ const CoverLetterGuide = () => {
         " />
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        
+        {/* Date and freshness meta tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.professionalresumefree.com/cover-letter-guide/" />
 
@@ -183,8 +187,8 @@ const CoverLetterGuide = () => {
         <meta property="og:url" content="https://www.professionalresumefree.com/cover-letter-guide" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-01-25T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-05-10T00:00:00+00:00" />
+        <meta property="article:published_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="cover letter, job application, career advice, resume writing" />
@@ -200,6 +204,7 @@ const CoverLetterGuide = () => {
         <meta name="twitter:label2" content="Templates included" />
         <meta name="twitter:data2" content="15+" />
 
+        {/* Article Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -222,8 +227,8 @@ const CoverLetterGuide = () => {
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-01-25",
-              "dateModified": "2026-05-10",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/cover-letter-guide"
@@ -241,6 +246,7 @@ const CoverLetterGuide = () => {
           }}
         />
 
+        {/* FAQPage Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -253,7 +259,9 @@ const CoverLetterGuide = () => {
                   "name": "How long should a cover letter be in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "In 2026, the ideal cover letter length is 250-400 words or 3-4 paragraphs. Recruiters spend an average of 45 seconds reviewing each cover letter, so conciseness while maintaining impact is crucial for success in today's competitive job market."
+                    "text": "In 2026, the ideal cover letter length is 250-400 words or 3-4 paragraphs. Recruiters spend an average of 45 seconds reviewing each cover letter, so conciseness while maintaining impact is crucial for success in today's competitive job market.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -261,7 +269,9 @@ const CoverLetterGuide = () => {
                   "name": "What is the best cover letter format for 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The best cover letter format for 2026 includes: professional header with contact information, personalized salutation, compelling opening paragraph, 1-2 body paragraphs highlighting relevant achievements, strong closing with call to action, and professional sign-off. Our free templates are optimized for 2026 hiring trends."
+                    "text": "The best cover letter format for 2026 includes: professional header with contact information, personalized salutation, compelling opening paragraph, 1-2 body paragraphs highlighting relevant achievements, strong closing with call to action, and professional sign-off. Our free templates are optimized for 2026 hiring trends.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -269,7 +279,9 @@ const CoverLetterGuide = () => {
                   "name": "Do employers still read cover letters in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, 53% of employers prefer candidates who submit tailored cover letters. A well-written cover letter can increase your interview chances by 3x by demonstrating your communication skills, enthusiasm for the role, and understanding of the company's needs in the 2026 job market."
+                    "text": "Yes, 53% of employers prefer candidates who submit tailored cover letters. A well-written cover letter can increase your interview chances by 3x by demonstrating your communication skills, enthusiasm for the role, and understanding of the company's needs in the 2026 job market.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -277,7 +289,9 @@ const CoverLetterGuide = () => {
                   "name": "How can I make my cover letter stand out in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "To make your cover letter stand out in 2026: personalize it for each application, quantify your achievements, show knowledge of the company, use keywords from the job description, maintain clean formatting, and focus on how you can solve the employer's specific challenges."
+                    "text": "To make your cover letter stand out in 2026: personalize it for each application, quantify your achievements, show knowledge of the company, use keywords from the job description, maintain clean formatting, and focus on how you can solve the employer's specific challenges.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 }
               ]
@@ -285,6 +299,7 @@ const CoverLetterGuide = () => {
           }}
         />
 
+        {/* Breadcrumb Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -311,6 +326,37 @@ const CoverLetterGuide = () => {
                   "item": "https://www.professionalresumefree.com/cover-letter-guide"
                 }
               ]
+            })
+          }}
+        />
+        
+        {/* HowTo Structured Data for the step-by-step guide */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to Write a Professional Cover Letter in 2026",
+              "description": "Step-by-step guide to writing effective cover letters for the 2026 job market",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
+              "totalTime": "PT60M",
+              "supply": ["Computer", "Job description", "Resume"],
+              "tool": ["Cover letter builder", "Grammar checker", "ATS scanner"],
+              "step": coverLetterSections.map((section, i) => ({
+                "@type": "HowToStep",
+                "position": i + 1,
+                "name": section.title,
+                "text": `${section.content} ${section.tips.join(" ")}`,
+                "url": `https://www.professionalresumefree.com/cover-letter-guide#step-${i + 1}`
+              })),
+              "image": "https://www.professionalresumefree.com/images/cover-letter-preview.jpg",
+              "author": {
+                "@type": "Organization",
+                "name": "ProfessionalResumeFree",
+                "url": "https://www.professionalresumefree.com"
+              }
             })
           }}
         />
@@ -511,9 +557,67 @@ const CoverLetterGuide = () => {
         </div>
       </section>
 
-      
+      <section className={styles.ctaSection}>
+        <div className={styles.container}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaTitle}>Create Your Perfect Cover Letter Today</h2>
+            <p className={styles.ctaSubtitle}>
+              Use our professional cover letter builder with ATS optimization, real-time formatting, 
+              and expert-approved templates designed for the 2026 job market.
+            </p>
+            <div className={styles.ctaButtons}>
+              <Link href="/cover-letter-builder" className={styles.ctaButton}>
+                <span>Start Building Free</span>
+                <FiArrowRight className={styles.buttonIcon} />
+              </Link>
+              <a href="#sections" className={styles.secondaryButton}>
+                Continue Reading Guide
+              </a>
+            </div>
+            <div className={styles.ctaFeatures}>
+              <div className={styles.ctaFeature}>
+                <FiCheck className={styles.featureIcon} />
+                <span>ATS-Optimized Templates</span>
+              </div>
+              <div className={styles.ctaFeature}>
+                <FiCheck className={styles.featureIcon} />
+                <span>Industry-Specific Examples</span>
+              </div>
+              <div className={styles.ctaFeature}>
+                <FiCheck className={styles.featureIcon} />
+                <span>Professional Formatting</span>
+              </div>
+              <div className={styles.ctaFeature}>
+                <FiCheck className={styles.featureIcon} />
+                <span>Free to Use</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
+
+// SSG Implementation
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format for YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string for last modified
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Enable Incremental Static Regeneration (ISR) for freshness
+    revalidate: 86400, // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default CoverLetterGuide;

@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fi';
 import styles from './AboutUs.module.css';
 
-const AboutPage = () => {
+const AboutPage = ({ currentDate, lastModifiedDate }) => {
   const features = [
     {
       icon: <FiAward className={styles.featureIcon} />,
@@ -59,14 +59,19 @@ const AboutPage = () => {
 
   return (
     <div className={styles.aboutPage}>
-      {/* SEO Meta Tags with Next.js Head */}
       <Head>
         {/* Primary Meta Tags */}
         <title>About Us | How Our Resume Builder Helps You Land Better Jobs</title>
+        <meta name="title" content="About Us | How Our Resume Builder Helps You Land Better Jobs" />
         <meta name="description" content="Learn how our resume builder combines beautiful design and ATS optimization to help job seekers in 100+ countries land interviews faster and get hired." />
         <meta name="keywords" content="about us, resume builder company, ATS resume, job search tools, career success, professional resume service, resume design, job seeker tools" />
         <meta name="author" content="ProfessionalResumeFree" />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Static dates from getStaticProps */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
 
         {/* Canonical URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/about/" />
@@ -78,6 +83,7 @@ const AboutPage = () => {
         <meta property="og:url" content="https://www.professionalresumefree.com/about" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
+        <meta property="og:updated_time" content={lastModifiedDate} />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -85,6 +91,7 @@ const AboutPage = () => {
         <meta name="twitter:description" content="We help job seekers create professional, ATS-friendly resumes that get noticed. Learn about our mission, impact, and user success stories." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/about-us-preview.jpg" />
         <meta name="twitter:site" content="@ProfResumeFree" />
+        <meta name="twitter:creator" content="@ProfResumeFree" />
 
         {/* Structured Data: Organization */}
         <script
@@ -137,6 +144,8 @@ const AboutPage = () => {
               "name": "About Us - ProfessionalResumeFree",
               "description": "Learn about our mission to help job seekers succeed with professionally designed, ATS-optimized resumes.",
               "url": "https://www.professionalresumefree.com/about",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
               "breadcrumb": {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
@@ -154,6 +163,87 @@ const AboutPage = () => {
                   }
                 ]
               }
+            })
+          }}
+        />
+
+        {/* Structured Data: FAQPage for common questions */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What makes ProfessionalResumeFree different from other resume builders?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We combine beautiful, modern designs with ATS (Applicant Tracking System) optimization to ensure your resume looks great and passes automated screening. Our platform is used by job seekers in over 100 countries and has helped create 500K+ resumes with a 95% interview callback rate.",
+                    "dateCreated": currentDate
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is ProfessionalResumeFree really free?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, we offer a completely free resume builder with access to all essential features and templates. We believe everyone should have access to professional resume tools regardless of their budget.",
+                    "dateCreated": currentDate
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How does ATS optimization work?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "All our templates are designed to be ATS-friendly with proper formatting, standard fonts, and clean layouts that automated systems can easily parse. We also provide guidance on keyword optimization and content structure to maximize your chances of passing screening software.",
+                    "dateCreated": currentDate
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "In which countries is ProfessionalResumeFree available?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our platform is available worldwide and supports job seekers in over 100 countries. We offer region-specific formatting options and templates tailored to different international resume standards.",
+                    "dateCreated": currentDate
+                  }
+                }
+              ]
+            })
+          }}
+        />
+
+        {/* Structured Data: LocalBusiness */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "ProfessionalResumeFree",
+              "description": "Free online resume builder with ATS optimization and professional templates",
+              "url": "https://www.professionalresumefree.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "123 Career Lane",
+                "addressLocality": "San Francisco",
+                "addressRegion": "CA",
+                "postalCode": "94107",
+                "addressCountry": "US"
+              },
+              "openingHours": "Mo-Su 00:00-23:59",
+              "priceRange": "Free",
+              "telephone": "+1-555-123-4567",
+              "email": "support@professionalresumefree.com",
+              "image": "https://www.professionalresumefree.com/images/logo.png",
+              "sameAs": [
+                "https://www.linkedin.com/company/professionalresumefree",
+                "https://twitter.com/ProfResumeFree",
+                "https://www.facebook.com/professionalresumefree"
+              ]
             })
           }}
         />
@@ -176,7 +266,6 @@ const AboutPage = () => {
                   Start Building Now
                   <div className={styles.buttonPulse}></div>
                 </Link>
-                
               </div>
             </div>
             <div className={styles.heroVisual}>
@@ -294,5 +383,25 @@ const AboutPage = () => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  // Generate dates at build time for SSG
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate
+    },
+    // Enable Incremental Static Regeneration
+    revalidate: 86400 // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default AboutPage;

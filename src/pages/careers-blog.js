@@ -18,7 +18,7 @@ import {
 } from 'react-icons/fi';
 import styles from './Careerblog.module.css';
 
-const CareerBlog = () => {
+const CareerBlog = ({ currentDate, lastModifiedDate }) => {
   const [activeStep, setActiveStep] = useState(0);
 
   const careerDevelopmentStrategies = [
@@ -164,6 +164,11 @@ const CareerBlog = () => {
         
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        
+        {/* Date and freshness meta tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
@@ -176,8 +181,8 @@ const CareerBlog = () => {
         <meta property="og:url" content="https://www.professionalresumefree.com/blog/career-development-guide/" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-01-20T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-05-06T00:00:00+00:00" />
+        <meta property="article:published_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="career change, career development, professional growth, job transition" />
@@ -194,7 +199,7 @@ const CareerBlog = () => {
         <meta name="twitter:label2" content="Success rate" />
         <meta name="twitter:data2" content="89%" />
 
-        {/* Enhanced Structured Data */}
+        {/* Enhanced Structured Data - Article */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -217,8 +222,8 @@ const CareerBlog = () => {
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-01-20",
-              "dateModified": "2026-05-06",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/blog/career-development-guide"
@@ -249,7 +254,9 @@ const CareerBlog = () => {
                   "name": "How long does a successful career change typically take in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Most successful career transitions take 4-8 months with proper planning. This includes skill assessment, training, networking, and job searching. Having a structured career change plan significantly reduces transition time and increases success rates to 89%."
+                    "text": "Most successful career transitions take 4-8 months with proper planning. This includes skill assessment, training, networking, and job searching. Having a structured career change plan significantly reduces transition time and increases success rates to 89%.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -257,7 +264,9 @@ const CareerBlog = () => {
                   "name": "What are the most important steps for changing careers in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The key steps for a successful career change in 2026 include: comprehensive self-assessment, identifying transferable skills, targeted skill development, strategic networking, creating a career change resume, and preparing for industry-specific interviews. Following a structured roadmap is crucial for success."
+                    "text": "The key steps for a successful career change in 2026 include: comprehensive self-assessment, identifying transferable skills, targeted skill development, strategic networking, creating a career change resume, and preparing for industry-specific interviews. Following a structured roadmap is crucial for success.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -265,7 +274,9 @@ const CareerBlog = () => {
                   "name": "How do I write a resume for a career change in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "For a career change resume in 2026, focus on transferable skills, use a functional or combination format, highlight relevant accomplishments, include a powerful summary statement, and emphasize recent training or education. Our free resume builder includes career change templates optimized for 2026 job markets."
+                    "text": "For a career change resume in 2026, focus on transferable skills, use a functional or combination format, highlight relevant accomplishments, include a powerful summary statement, and emphasize recent training or education. Our free resume builder includes career change templates optimized for 2026 job markets.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -273,7 +284,9 @@ const CareerBlog = () => {
                   "name": "What percentage of workers are considering career changes in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Recent studies show that 72% of workers are actively considering or planning career changes in 2026, driven by evolving job markets, remote work opportunities, and desire for better work-life balance and fulfillment."
+                    "text": "Recent studies show that 72% of workers are actively considering or planning career changes in 2026, driven by evolving job markets, remote work opportunities, and desire for better work-life balance and fulfillment.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 }
               ]
@@ -308,6 +321,37 @@ const CareerBlog = () => {
                   "item": "https://www.professionalresumefree.com/blog/career-development-guide"
                 }
               ]
+            })
+          }}
+        />
+        
+        {/* HowTo Structured Data for career development strategies */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to Develop Your Career Successfully in 2026",
+              "description": "Step-by-step guide to career development and advancement strategies for 2026",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
+              "totalTime": "PT90M",
+              "supply": ["Career goals", "Skills assessment", "Professional contacts"],
+              "tool": ["Resume builder", "Networking platforms", "Learning courses"],
+              "step": careerDevelopmentStrategies.map((strategy, i) => ({
+                "@type": "HowToStep",
+                "position": i + 1,
+                "name": strategy.title,
+                "text": `${strategy.content} ${strategy.tips.join(" ")}`,
+                "url": `https://www.professionalresumefree.com/blog/career-development-guide#step-${i + 1}`
+              })),
+              "image": "https://www.professionalresumefree.com/images/career-blog-preview.jpg",
+              "author": {
+                "@type": "Organization",
+                "name": "ProfessionalResumeFree",
+                "url": "https://www.professionalresumefree.com"
+              }
             })
           }}
         />
@@ -401,7 +445,7 @@ const CareerBlog = () => {
           
           <div className={styles.cardsGrid}>
             {careerDevelopmentStrategies.map((strategy, index) => (
-              <div key={index} className={styles.strategyCard}>
+              <div key={index} className={styles.strategyCard} id={`step-${index + 1}`}>
                 <div className={styles.cardHeader}>
                   <div className={styles.cardIconContainer}>
                     {strategy.icon}
@@ -501,5 +545,26 @@ const CareerBlog = () => {
     </div>
   );
 };
+
+// SSG Implementation
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format for YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string for last modified
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Enable Incremental Static Regeneration (ISR) for freshness
+    revalidate: 86400, // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default CareerBlog;

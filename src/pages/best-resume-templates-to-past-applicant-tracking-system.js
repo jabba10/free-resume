@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -22,7 +21,7 @@ import {
 } from 'react-icons/fi';
 import styles from './ATSResumeTemplates.module.css';
 
-const ATSResumeTemplates = () => {
+const ATSResumeTemplates = ({ currentDate, lastModifiedDate }) => {
   const [activeTemplate, setActiveTemplate] = useState(0);
 
   const topTemplates = [
@@ -117,6 +116,8 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
     "Unique designs often lack proper keyword placement"
   ];
 
+  const currentYear = currentDate.split('-')[0];
+
   return (
     <div className={styles.atsResumeTemplates}>
       <Head>
@@ -159,19 +160,25 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-resume-templates/" />
+        
+        {/* Static Date Meta Tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
 
+        {/* Open Graph Tags */}
         <meta property="og:title" content="The 10 Best Resume Templates for Getting Past Applicant Tracking Systems (ATS)" />
         <meta property="og:description" content="Top 10 ATS-friendly resume templates that actually work. Learn why fancy designs get rejected and get templates that pass automated screening systems." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/ats-templates-preview.jpg" />
         <meta property="og:url" content="https://www.professionalresumefree.com/ats-resume-templates" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-02-15T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-06-20T00:00:00+00:00" />
+        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="resume templates, ATS, job search, career advice" />
 
+        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="10 Best ATS Resume Templates: Beat Applicant Tracking Systems" />
         <meta name="twitter:description" content="Discover resume templates that pass ATS screening. Learn why fancy designs hurt your chances and get working templates for 2026 job market." />
@@ -183,6 +190,7 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
         <meta name="twitter:label2" content="ATS Score" />
         <meta name="twitter:data2" content="90-99%" />
 
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -205,8 +213,8 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-02-15",
-              "dateModified": "2026-06-20",
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/ats-resume-templates"
@@ -236,7 +244,8 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
                   "name": "Why do fancy resume designs get rejected by ATS?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Fancy resume designs often use graphics, tables, columns, creative fonts, and headers/footers that ATS systems cannot properly parse. These elements appear as blank spaces, unreadable characters, or scrambled information to the software, causing qualified candidates to be automatically rejected before human review."
+                    "text": "Fancy resume designs often use graphics, tables, columns, creative fonts, and headers/footers that ATS systems cannot properly parse. These elements appear as blank spaces, unreadable characters, or scrambled information to the software, causing qualified candidates to be automatically rejected before human review.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -244,7 +253,8 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
                   "name": "What makes a resume template ATS-friendly?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "ATS-friendly resumes use: 1) Standard section headings (Experience, Education, Skills), 2) Simple bullet points, 3) Standard fonts (Arial, Calibri, Times New Roman), 4) No tables or columns, 5) Keywords from job descriptions, 6) .docx or text-based PDF format, and 7) Clear contact information at the top."
+                    "text": "ATS-friendly resumes use: 1) Standard section headings (Experience, Education, Skills), 2) Simple bullet points, 3) Standard fonts (Arial, Calibri, Times New Roman), 4) No tables or columns, 5) Keywords from job descriptions, 6) .docx or text-based PDF format, and 7) Clear contact information at the top.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -252,7 +262,8 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
                   "name": "Should I use a PDF or Word document for ATS?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "For maximum ATS compatibility, use a Microsoft Word (.docx) document. If using PDF, ensure it's a text-based PDF (not image-based) and test it with ATS software. Many systems still parse Word documents most accurately, though modern ATS systems handle text-based PDFs well."
+                    "text": "For maximum ATS compatibility, use a Microsoft Word (.docx) document. If using PDF, ensure it's a text-based PDF (not image-based) and test it with ATS software. Many systems still parse Word documents most accurately, though modern ATS systems handle text-based PDFs well.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -260,10 +271,13 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
                   "name": "How can I check if my resume is ATS-friendly?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "You can check ATS compatibility by: 1) Using free online ATS scanners, 2) Testing readability in plain text format, 3) Ensuring all text is selectable and searchable, 4) Checking for proper keyword placement, and 5) Verifying standard section headings are used. Our templates are pre-tested for 90-99% ATS compatibility."
+                    "text": "You can check ATS compatibility by: 1) Using free online ATS scanners, 2) Testing readability in plain text format, 3) Ensuring all text is selectable and searchable, 4) Checking for proper keyword placement, and 5) Verifying standard section headings are used. Our templates are pre-tested for 90-99% ATS compatibility.",
+                    "dateCreated": lastModifiedDate
                   }
                 }
-              ]
+              ],
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate
             })
           }}
         />
@@ -305,7 +319,7 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
           <div className={styles.heroContent}>
             <div className={styles.heroTag}>
               <FiGrid className={styles.tagIcon} />
-              ATS-Optimized Templates 2026
+              ATS-Optimized Templates {currentYear}
             </div>
             <h1 className={styles.heroTitle}>
               The <span className={styles.gradientText}>10 Best Resume Templates</span> for Getting Past ATS
@@ -330,7 +344,7 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
               <span className={styles.featureBadge}>✓ 90-99% ATS Compatibility</span>
               <span className={styles.featureBadge}>✓ 10 Industry-Specific Templates</span>
               <span className={styles.featureBadge}>✓ Free Instant Download</span>
-              <span className={styles.featureBadge}>✓ 2026 Optimized</span>
+              <span className={styles.featureBadge}>✓ {currentYear} Optimized</span>
             </div>
           </div>
           <div className={styles.heroStats}>
@@ -576,7 +590,6 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
                 <FiDownload className={styles.buttonIcon} />
                 Create Your ATS-Optimized Resume
               </Link>
-              
             </div>
             
             <div className={styles.ctaFeatures}>
@@ -594,7 +607,7 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
               </div>
               <div className={styles.ctaFeature}>
                 <FiCheck className={styles.featureIcon} />
-                <span>2026 Updated Formats</span>
+                <span>{currentYear} Updated Formats</span>
               </div>
             </div>
           </div>
@@ -603,5 +616,26 @@ UI/UX Design, Figma, User Research, Wireframing, Prototyping...`
     </div>
   );
 };
+
+// Static Generation with Incremental Static Regeneration
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD for currentDate
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO string for lastModifiedDate
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Revalidate every 24 hours for freshness
+    revalidate: 86400, // 24 hours in seconds
+  };
+}
 
 export default ATSResumeTemplates;

@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -23,7 +22,7 @@ import {
 } from 'react-icons/fi';
 import styles from './ResumeFormatting.module.css';
 
-const ResumeFormattingGuide = () => {
+const ResumeFormattingGuide = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
 
   const formattingSections = [
@@ -329,6 +328,8 @@ SKILLS
     "Poor alignment and inconsistent spacing"
   ];
 
+  const currentYear = currentDate.split('-')[0];
+
   return (
     <div className={styles.resumeFormattingGuide}>
       <Head>
@@ -371,19 +372,25 @@ SKILLS
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-formatting-guide/" />
+        
+        {/* Static Date Meta Tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
 
+        {/* Open Graph Tags */}
         <meta property="og:title" content="What Should a Resume Look Like? (With Visual Examples)" />
         <meta property="og:description" content="Complete guide to professional resume formatting with visual examples. Learn standard margins, font sizes, layouts, and formatting best practices for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-formatting-preview.jpg" />
         <meta property="og:url" content="https://www.professionalresumefree.com/resume-formatting-guide" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-03-10T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-07-15T00:00:00+00:00" />
+        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="resume formatting, career advice, job search, resume design" />
 
+        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Formatting Guide: What Should a Resume Look Like?" />
         <meta name="twitter:description" content="Learn proper resume formatting with visual examples. Standard margins, font sizes, professional layouts, and formatting best practices for 2026." />
@@ -395,6 +402,7 @@ SKILLS
         <meta name="twitter:label2" content="Visual examples" />
         <meta name="twitter:data2" content="12+" />
 
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -417,8 +425,8 @@ SKILLS
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-03-10",
-              "dateModified": "2026-07-15",
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/resume-formatting-guide"
@@ -448,7 +456,8 @@ SKILLS
                   "name": "What are the standard margins for a professional resume?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Standard professional resume margins are 0.5 to 1 inch on all sides. One-inch margins are most common and ensure your resume looks balanced and professional while being compatible with all printing and scanning systems. Margins smaller than 0.5 inches look crowded, while larger margins waste valuable space."
+                    "text": "Standard professional resume margins are 0.5 to 1 inch on all sides. One-inch margins are most common and ensure your resume looks balanced and professional while being compatible with all printing and scanning systems. Margins smaller than 0.5 inches look crowded, while larger margins waste valuable space.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -456,7 +465,8 @@ SKILLS
                   "name": "What font size should I use on my resume?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Use these standard font sizes: Your name should be 20-24 point, section headings 14-16 point, and body text 11-12 point. These sizes ensure readability while maintaining a professional appearance. Never use font sizes below 10 point as they become difficult to read, especially for recruiters reviewing hundreds of resumes."
+                    "text": "Use these standard font sizes: Your name should be 20-24 point, section headings 14-16 point, and body text 11-12 point. These sizes ensure readability while maintaining a professional appearance. Never use font sizes below 10 point as they become difficult to read, especially for recruiters reviewing hundreds of resumes.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -464,7 +474,8 @@ SKILLS
                   "name": "Should I use a one-column or two-column resume layout?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "For most traditional industries (finance, law, healthcare, corporate), use a single-column layout as it's most ATS-friendly and professional. For creative fields (design, marketing, tech), a two-column layout can work well if designed properly. Always prioritize readability and ATS compatibility over design creativity."
+                    "text": "For most traditional industries (finance, law, healthcare, corporate), use a single-column layout as it's most ATS-friendly and professional. For creative fields (design, marketing, tech), a two-column layout can work well if designed properly. Always prioritize readability and ATS compatibility over design creativity.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -472,10 +483,13 @@ SKILLS
                   "name": "How much white space should be on a resume?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A well-formatted resume should have approximately 30-40% white space. This includes margins, spacing between sections, line spacing, and space around headings. Adequate white space improves readability by 40% and makes your resume appear more professional and less cluttered to hiring managers."
+                    "text": "A well-formatted resume should have approximately 30-40% white space. This includes margins, spacing between sections, line spacing, and space around headings. Adequate white space improves readability by 40% and makes your resume appear more professional and less cluttered to hiring managers.",
+                    "dateCreated": lastModifiedDate
                   }
                 }
-              ]
+              ],
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate
             })
           }}
         />
@@ -516,7 +530,7 @@ SKILLS
           <div className={styles.heroContent}>
             <div className={styles.heroTag}>
               <FiLayout className={styles.tagIcon} />
-              Professional Formatting Guide 2026
+              Professional Formatting Guide {currentYear}
             </div>
             <h1 className={styles.heroTitle}>
               What Should a <span className={styles.gradientText}>Resume Look Like?</span>
@@ -541,7 +555,7 @@ SKILLS
               <span className={styles.featureBadge}>✓ Visual Examples Included</span>
               <span className={styles.featureBadge}>✓ Standard Formatting Rules</span>
               <span className={styles.featureBadge}>✓ Professional Layout Templates</span>
-              <span className={styles.featureBadge}>✓ 2026 Best Practices</span>
+              <span className={styles.featureBadge}>✓ {currentYear} Best Practices</span>
             </div>
           </div>
           <div className={styles.heroStats}>
@@ -564,7 +578,7 @@ SKILLS
             <p className={styles.leadText}>
               In today's competitive job market, <strong>proper resume formatting can increase your interview chances by 300%</strong>. 
               This comprehensive guide shows you exactly what a professional resume should look like, with 
-              <strong> visual examples, standard measurements, and proven layouts</strong> that work for the 2026 job market.
+              <strong> visual examples, standard measurements, and proven layouts</strong> that work for the {currentYear} job market.
             </p>
             <div className={styles.introHighlights}>
               <div className={styles.highlightItem}>
@@ -591,7 +605,7 @@ SKILLS
       <section className={styles.typesSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Professional Resume Layouts for 2026</h2>
+            <h2 className={styles.sectionTitle}>Professional Resume Layouts for {currentYear}</h2>
             <p className={styles.sectionSubtitle}>
               Choose the right layout for your industry and <strong>maximize visual impact</strong>
             </p>
@@ -783,5 +797,26 @@ SKILLS
     </div>
   );
 };
+
+// Static Generation with Incremental Static Regeneration
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD for currentDate
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO string for lastModifiedDate
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Revalidate every 24 hours for freshness
+    revalidate: 86400, // 24 hours in seconds
+  };
+}
 
 export default ResumeFormattingGuide;

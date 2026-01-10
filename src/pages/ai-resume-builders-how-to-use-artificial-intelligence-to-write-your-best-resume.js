@@ -1,12 +1,9 @@
-'use client';
 import { useState } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
 import styles from './AIResumeGuide.module.css';
 
-// Instead of importing from react-icons, we'll use simple text/icons
-// You can replace these with actual icon components later
-
-const AIResumeGuide = () => {
+const AIResumeGuide = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
 
   const aiSections = [
@@ -200,11 +197,259 @@ After AI + Human Review:
 
   return (
     <div className={styles.aiResumeGuide}>
-      {/* Metadata */}
-      <head>
+      <Head>
         <title>AI Resume Builders 2026: How to Use Artificial Intelligence to Write Your Best Resume</title>
-        <meta name="description" content="Master AI resume building for 2025. Learn to balance AI efficiency with human touch, create ATS-optimized resumes, and land 40% more interviews." />
-      </head>
+        <meta name="title" content="AI Resume Builders 2026: How to Use Artificial Intelligence to Write Your Best Resume" />
+        <meta name="description" content="Master AI resume building for 2026. Learn to balance AI efficiency with human touch, create ATS-optimized resumes, and land 40% more interviews." />
+        <meta name="keywords" content="
+          AI resume builder,
+          artificial intelligence resume,
+          AI resume writing,
+          AI resume generator,
+          resume AI tools,
+          AI resume optimization,
+          machine learning resume,
+          AI resume creator,
+          best AI resume builder 2026,
+          AI resume assistant,
+          resume writing AI,
+          AI powered resume,
+          AI resume templates,
+          AI resume maker,
+          AI resume software,
+          AI resume review,
+          AI resume analyzer,
+          AI resume scanner,
+          AI resume formatting,
+          AI resume design,
+          AI resume technology,
+          AI resume tips 2026,
+          AI resume guide,
+          AI resume strategies,
+          AI resume examples,
+          AI resume samples,
+          AI resume generator free,
+          AI resume builder online,
+          AI resume tools 2026,
+          AI resume applications,
+          AI resume platforms,
+          AI resume services,
+          AI resume writing assistant,
+          AI resume optimization tools,
+          AI resume analysis,
+          AI resume improvement,
+          AI resume creation software,
+          AI resume writing software,
+          AI resume builder review,
+          AI resume generator tools
+        " />
+        <meta name="author" content="ProfessionalResumeFree" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/ai-resume-builder-guide/" />
+        
+        {/* Static dates from getStaticProps */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
+
+        <meta property="og:title" content="AI Resume Builders 2026: How to Use Artificial Intelligence to Write Your Best Resume" />
+        <meta property="og:description" content="Master AI resume building for 2026. Learn to balance AI efficiency with human touch, create ATS-optimized resumes, and land 40% more interviews." />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/ai-resume-builder-preview.jpg" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/ai-resume-builder-guide" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="ProfessionalResumeFree" />
+        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
+        <meta property="article:author" content="ProfessionalResumeFree" />
+        <meta property="article:section" content="Career Technology" />
+        <meta property="article:tag" content="AI resume, artificial intelligence, resume writing, career technology" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI Resume Builders 2026: Master Artificial Intelligence Resume Writing" />
+        <meta name="twitter:description" content="Learn to use AI resume builders effectively. Balance AI efficiency with human authenticity for 40% more interviews." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/ai-resume-builder-preview.jpg" />
+        <meta name="twitter:site" content="@ProfResumeFree" />
+        <meta name="twitter:creator" content="@ProfResumeFree" />
+        <meta name="twitter:label1" content="Reading time" />
+        <meta name="twitter:data1" content="12 minutes" />
+        <meta name="twitter:label2" content="Interview increase" />
+        <meta name="twitter:data2" content="40%" />
+
+        {/* Article JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": "AI Resume Builders 2026: How to Use Artificial Intelligence to Write Your Best Resume",
+              "description": "A comprehensive guide to using AI resume builders effectively, including balancing AI efficiency with human authenticity and optimizing resumes for modern hiring technology.",
+              "image": "https://www.professionalresumefree.com/images/ai-resume-builder-preview.jpg",
+              "author": {
+                "@type": "Organization",
+                "name": "ProfessionalResumeFree",
+                "url": "https://www.professionalresumefree.com"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "ProfessionalResumeFree",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://www.professionalresumefree.com/images/logo.png"
+                }
+              },
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://www.professionalresumefree.com/ai-resume-builder-guide"
+              },
+              "articleSection": "Career Technology",
+              "keywords": "AI resume builder, artificial intelligence, resume writing, career technology, machine learning, resume optimization",
+              "speakable": {
+                "@type": "SpeakableSpecification",
+                "xpath": [
+                  "/html/head/title",
+                  "/html/head/meta[@name='description']/@content"
+                ]
+              }
+            })
+          }}
+        />
+
+        {/* FAQPage JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What is an AI resume builder and how does it work?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "An AI resume builder is software that uses artificial intelligence, including natural language processing and machine learning, to analyze, generate, and optimize resume content. It works by analyzing job descriptions, matching skills to industry requirements, suggesting keywords, and creating optimized content variations based on user input.",
+                    "dateCreated": currentDate
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How effective are AI-generated resumes compared to traditional ones?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "AI-optimized resumes can be up to 85% more ATS-compatible and generate 40% more interviews than traditional resumes. However, the most effective approach combines AI optimization with human customization to maintain authenticity while leveraging AI's analytical capabilities.",
+                    "dateCreated": currentDate
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can AI resume builders maintain my personal voice and authenticity?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "While AI can generate content, maintaining personal voice requires human oversight. The best practice is to use AI for structure, optimization, and suggestions, while personally writing achievement statements and unique experiences. Always review and customize AI-generated content to ensure it reflects your authentic voice.",
+                    "dateCreated": currentDate
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What are the main benefits of using AI for resume creation in 2026?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Key benefits include: 3x faster resume creation, 85% higher ATS compatibility, automatic keyword optimization, industry-specific language suggestions, professional formatting assistance, and the ability to generate multiple resume versions for different job applications while maintaining consistency.",
+                    "dateCreated": currentDate
+                  }
+                }
+              ]
+            })
+          }}
+        />
+
+        {/* BreadcrumbList JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.professionalresumefree.com"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Career Technology",
+                  "item": "https://www.professionalresumefree.com/career-technology"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "AI Resume Builder Guide 2026",
+                  "item": "https://www.professionalresumefree.com/ai-resume-builder-guide"
+                }
+              ]
+            })
+          }}
+        />
+
+        {/* HowTo JSON-LD for step-by-step guide */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to Use AI Resume Builders Effectively in 2026",
+              "description": "Step-by-step guide to creating optimized resumes using artificial intelligence",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
+              "estimatedCost": {
+                "@type": "MonetaryAmount",
+                "currency": "USD",
+                "value": "0"
+              },
+              "step": aiSections.map((section, index) => ({
+                "@type": "HowToStep",
+                "position": index + 1,
+                "name": section.title,
+                "text": section.content,
+                "url": `https://www.professionalresumefree.com/ai-resume-builder-guide#step-${index + 1}`
+              }))
+            })
+          }}
+        />
+
+        {/* SoftwareApplication JSON-LD for AI Tools */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "AI Resume Builder Guide 2026",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Web",
+              "description": "Comprehensive guide for using artificial intelligence to create optimized resumes",
+              "datePublished": currentDate,
+              "dateModified": lastModifiedDate.split('T')[0],
+              "author": {
+                "@type": "Organization",
+                "name": "ProfessionalResumeFree"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              }
+            })
+          }}
+        />
+      </Head>
 
       <section className={styles.heroSection}>
         <div className={styles.container}>
@@ -476,7 +721,6 @@ After AI + Human Review:
                 <span className={styles.buttonIcon}>{icons.cpu}</span>
                 Create Your Resume Now
               </Link>
-              
             </div>
             <div className={styles.ctaFeatures}>
               <div className={styles.ctaFeature}>
@@ -498,5 +742,25 @@ After AI + Human Review:
     </div>
   );
 };
+
+export async function getStaticProps() {
+  // Generate dates at build time for SSG
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate
+    },
+    // Enable Incremental Static Regeneration
+    revalidate: 86400 // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default AIResumeGuide;

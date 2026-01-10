@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fi';
 import styles from './JobsSearchTips.module.css';
 
-const JobSearchTips = () => {
+const JobSearchTips = ({ currentDate, lastModifiedDate }) => {
   const onlineTips = [
     {
       title: "Optimize Your LinkedIn Profile",
@@ -167,6 +167,11 @@ const JobSearchTips = () => {
         
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        
+        {/* Date and freshness meta tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
@@ -179,8 +184,8 @@ const JobSearchTips = () => {
         <meta property="og:url" content="https://www.professionalresumefree.com/job-search-tips" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-01-15T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-05-01T00:00:00+00:00" />
+        <meta property="article:published_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="job search, career advice, networking, resume tips" />
@@ -197,7 +202,7 @@ const JobSearchTips = () => {
         <meta name="twitter:label2" content="Tips included" />
         <meta name="twitter:data2" content="50+" />
 
-        {/* Enhanced Structured Data */}
+        {/* Enhanced Structured Data - Article */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -220,8 +225,8 @@ const JobSearchTips = () => {
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-01-15",
-              "dateModified": "2026-05-01",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/job-search-tips"
@@ -252,7 +257,9 @@ const JobSearchTips = () => {
                   "name": "What are the most effective job search strategies for 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The most effective job search strategies for 2026 include LinkedIn optimization, targeted networking, ATS-friendly resume customization, direct company outreach, and leveraging both online platforms and offline connections for comprehensive coverage."
+                    "text": "The most effective job search strategies for 2026 include LinkedIn optimization, targeted networking, ATS-friendly resume customization, direct company outreach, and leveraging both online platforms and offline connections for comprehensive coverage.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -260,7 +267,9 @@ const JobSearchTips = () => {
                   "name": "How can I optimize my LinkedIn profile for job search in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Optimize your LinkedIn profile by using a professional photo, crafting a compelling headline, writing a detailed summary with keywords, showcasing achievements with metrics, gathering recommendations, and actively engaging with industry content to increase visibility."
+                    "text": "Optimize your LinkedIn profile by using a professional photo, crafting a compelling headline, writing a detailed summary with keywords, showcasing achievements with metrics, gathering recommendations, and actively engaging with industry content to increase visibility.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -268,7 +277,9 @@ const JobSearchTips = () => {
                   "name": "What percentage of jobs are found through networking?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Approximately 80% of jobs are found through networking, making it the most effective job search strategy. Building professional relationships and leveraging connections significantly increases your chances of finding hidden opportunities."
+                    "text": "Approximately 80% of jobs are found through networking, making it the most effective job search strategy. Building professional relationships and leveraging connections significantly increases your chances of finding hidden opportunities.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 },
                 {
@@ -276,7 +287,9 @@ const JobSearchTips = () => {
                   "name": "How do I tailor my resume for ATS systems in 2026?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Tailor your resume for ATS systems by using relevant keywords from job descriptions, maintaining a clean format without graphics, using standard section headings, including both acronyms and full terms for skills, and ensuring your resume is easily scannable by automated systems."
+                    "text": "Tailor your resume for ATS systems by using relevant keywords from job descriptions, maintaining a clean format without graphics, using standard section headings, including both acronyms and full terms for skills, and ensuring your resume is easily scannable by automated systems.",
+                    "dateCreated": lastModifiedDate,
+                    "dateModified": lastModifiedDate
                   }
                 }
               ]
@@ -311,6 +324,37 @@ const JobSearchTips = () => {
                   "item": "https://www.professionalresumefree.com/job-search-tips"
                 }
               ]
+            })
+          }}
+        />
+        
+        {/* HowTo Structured Data for job search strategies */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to Find a Job Successfully in 2026",
+              "description": "Comprehensive guide to effective job search strategies including online and offline techniques for 2026",
+              "datePublished": lastModifiedDate,
+              "dateModified": lastModifiedDate,
+              "totalTime": "PT120M",
+              "supply": ["Resume", "Cover letter", "Professional references"],
+              "tool": ["LinkedIn", "Job search engines", "Networking platforms"],
+              "step": [...onlineTips, ...offlineTips].map((tip, i) => ({
+                "@type": "HowToStep",
+                "position": i + 1,
+                "name": tip.title,
+                "text": tip.content,
+                "url": `https://www.professionalresumefree.com/job-search-tips#tip-${i + 1}`
+              })),
+              "image": "https://www.professionalresumefree.com/images/job-search-tips-preview.jpg",
+              "author": {
+                "@type": "Organization",
+                "name": "ProfessionalResumeFree",
+                "url": "https://www.professionalresumefree.com"
+              }
             })
           }}
         />
@@ -382,7 +426,7 @@ const JobSearchTips = () => {
               </div>
               <div className={styles.tipsGrid}>
                 {onlineTips.map((tip, index) => (
-                  <div key={index} className={styles.tipCard}>
+                  <div key={index} className={styles.tipCard} id={`tip-${index + 1}`}>
                     <div className={styles.tipIcon}>{tip.icon}</div>
                     <div className={styles.tipContent}>
                       <h4 className={styles.tipTitle}>{tip.title}</h4>
@@ -404,13 +448,13 @@ const JobSearchTips = () => {
               </div>
               <div className={styles.tipsGrid}>
                 {offlineTips.map((tip, index) => (
-                  <div key={index} className={styles.tipCard}>
+                  <div key={index} className={styles.tipCard} id={`tip-${onlineTips.length + index + 1}`}>
                     <div className={styles.tipIcon}>{tip.icon}</div>
                     <div className={styles.tipContent}>
                       <h4 className={styles.tipTitle}>{tip.title}</h4>
                       <p className={styles.tipDescription}>{tip.content}</p>
                     </div>
-                    <div className={styles.tipNumber}>{index + 1}</div>
+                    <div className={styles.tipNumber}>{onlineTips.length + index + 1}</div>
                   </div>
                 ))}
               </div>
@@ -506,5 +550,26 @@ const JobSearchTips = () => {
     </div>
   );
 };
+
+// SSG Implementation
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format for YYYY-MM-DD
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO 8601 string for last modified
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Enable Incremental Static Regeneration (ISR) for freshness
+    revalidate: 86400, // Regenerate every 24 hours (86400 seconds)
+  };
+}
 
 export default JobSearchTips;
