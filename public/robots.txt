@@ -1,13 +1,9 @@
-
-# User-agent
+# *
 User-agent: *
-
-# Allow crawling of entire site except specified paths
 Allow: /
-Disallow: /es/
 
-# Host (note: "Host" directive is non-standard and ignored by most crawlers; included for legacy reference)
-# Host: https://www.professionalresumefree.com
+# Host
+Host: https://www.professionalresumefree.com
 
-# Sitemap
+# Sitemaps
 Sitemap: https://www.professionalresumefree.com/sitemap.xml
