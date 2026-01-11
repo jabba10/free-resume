@@ -1,3 +1,29 @@
+# Force HTTPS and www
 http://professionalresumefree.com/* https://www.professionalresumefree.com/:splat 301
 http://www.professionalresumefree.com/* https://www.professionalresumefree.com/:splat 301
 https://professionalresumefree.com/* https://www.professionalresumefree.com/:splat 301
+
+# Redirect non-existent pages to homepage or closest valid section
+/cover-letter / 301
+/cover-letter/ / 301
+
+/cover-letter-guide / 301
+/cover-letter-guide/ / 301
+
+/free-cover-letter-builder / 301
+/free-cover-letter-builder/ / 301
+
+/html/head/title / 301
+/html/head/title/ / 301
+
+/career-resources / 301
+/career-resources/ / 301
+
+/career-advice / 301
+/career-advice/ / 301
+
+/blog/best-job-boards /blog 301
+/blog/best-job-boards/ /blog 301
+
+/job-search-tips / 301
+/job-search-tips/ / 301

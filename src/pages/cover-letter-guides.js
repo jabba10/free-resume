@@ -179,12 +179,12 @@ const CoverLetterGuide = ({ currentDate, lastModifiedDate }) => {
         <meta name="last-modified" content={lastModifiedDate} />
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/cover-letter-guide/" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/cover-letter-guides/" />
 
         <meta property="og:title" content="Professional Cover Letter Guide 2026: Examples & Templates for Job Applications" />
         <meta property="og:description" content="Master cover letter writing for 2026 job market. Get step-by-step guide, professional templates, and examples to land 3x more interviews. Free cover letter builder." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/cover-letter-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/cover-letter-guide" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/cover-letter-guides/" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content={lastModifiedDate} />
@@ -231,7 +231,7 @@ const CoverLetterGuide = ({ currentDate, lastModifiedDate }) => {
               "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/cover-letter-guide"
+                "@id": "https://www.professionalresumefree.com/cover-letter-guides/"
               },
               "articleSection": "Career Resources",
               "keywords": "cover letter, job application, career advice, resume writing, cover letter examples, cover letter templates, professional cover letter",
@@ -317,13 +317,13 @@ const CoverLetterGuide = ({ currentDate, lastModifiedDate }) => {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Career Resources",
-                  "item": "https://www.professionalresumefree.com/career-resources"
+                  "item": "https://www.professionalresumefree.com/cover-letter-guides"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Cover Letter Guide 2026",
-                  "item": "https://www.professionalresumefree.com/cover-letter-guide"
+                  "item": "https://www.professionalresumefree.com/cover-letter-guides/"
                 }
               ]
             })
@@ -349,7 +349,7 @@ const CoverLetterGuide = ({ currentDate, lastModifiedDate }) => {
                 "position": i + 1,
                 "name": section.title,
                 "text": `${section.content} ${section.tips.join(" ")}`,
-                "url": `https://www.professionalresumefree.com/cover-letter-guide#step-${i + 1}`
+                "url": `https://www.professionalresumefree.com/cover-letter-guides#step-${i + 1}`
               })),
               "image": "https://www.professionalresumefree.com/images/cover-letter-preview.jpg",
               "author": {
@@ -566,7 +566,7 @@ const CoverLetterGuide = ({ currentDate, lastModifiedDate }) => {
               and expert-approved templates designed for the 2026 job market.
             </p>
             <div className={styles.ctaButtons}>
-              <Link href="/cover-letter-builder" className={styles.ctaButton}>
+              <Link href="/resume-templates" className={styles.ctaButton}>
                 <span>Start Building Free</span>
                 <FiArrowRight className={styles.buttonIcon} />
               </Link>

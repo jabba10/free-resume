@@ -30,12 +30,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && node scripts/indexnow.js",
-    "start": "next start",
-    "postbuild": "next-sitemap",
-    "deploy": "npx @cloudflare/next-on-pages && wrangler deploy"
-  },
+  "dev": "next dev",
+  "build": "next build && node scripts/indexnow.js",
+  "start": "next start",
+  "postbuild": "next-sitemap",
+  "deploy": "npx @cloudflare/next-on-pages && wrangler deploy"
+}
+,
   "eslintConfig": {
     "extends": [
       "react-app",

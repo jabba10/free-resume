@@ -368,7 +368,7 @@ const LandingPage = ({
           <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
             <span itemProp="name" className={styles.breadcrumbCurrent}></span>
             <meta itemProp="position" content="2" />
-            <meta itemProp="item" content="https://www.professionalresumefree.com/free-resume-builder" />
+            <meta itemProp="item" content="https://www.professionalresumefree.com/resume-templates" />
           </li>
         </ol>
       </nav>
@@ -923,7 +923,7 @@ export async function getStaticProps() {
             "@type": "ListItem",
             "position": 2,
             "name": "Free Resume Builder",
-            "item": "https://www.professionalresumefree.com/free-resume-builder"
+            "item": "https://www.professionalresumefree.com/resume-templates"
           }
         ]
       },
