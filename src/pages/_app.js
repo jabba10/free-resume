@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
   
   const GA_MEASUREMENT_ID = 'G-ZKH84N99Z2';
 
-  // Track page views
+  // Track page views for Google Analytics
   useEffect(() => {
     const handleRouteChange = (url) => {
       window.gtag?.('config', GA_MEASUREMENT_ID, {
@@ -61,6 +61,14 @@ export default function App({ Component, pageProps }) {
         }}
       />
       
+      {/* GoatCounter Analytics Script */}
+      <Script
+        data-goatcounter="https://professionalresumefree.goatcounter.com/count"
+        src="//gc.zgo.at/count.js"
+        strategy="afterInteractive"
+        async
+      />
+      
       <Navbar />
       <main className="app-wrapper">
         <Component {...pageProps} />
@@ -68,4 +76,4 @@ export default function App({ Component, pageProps }) {
       <Footer />
     </>
   );
-}
+} 

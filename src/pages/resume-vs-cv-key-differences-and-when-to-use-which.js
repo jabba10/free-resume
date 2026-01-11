@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -22,7 +21,7 @@ import {
 } from 'react-icons/fi';
 import styles from './ResumeVsCV.module.css';
 
-const ResumeVsCVGuide = () => {
+const ResumeVsCVGuide = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
 
   const comparisonSections = [
@@ -267,6 +266,8 @@ CONVERTING RESUME TO CV:
     "Not adapting length for target country standards"
   ];
 
+  const currentYear = currentDate.split('-')[0];
+
   return (
     <div className={styles.resumeVsCVGuide}>
       <Head>
@@ -308,19 +309,25 @@ CONVERTING RESUME TO CV:
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-vs-cv-guide/" />
+        
+        {/* Static Date Meta Tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
 
+        {/* Open Graph Tags */}
         <meta property="og:title" content="Resume vs. CV: Key Differences and When to Use Which" />
         <meta property="og:description" content="Complete guide to Resume vs CV differences with global standards for US, UK, and EU job markets. Learn when to use each document with examples." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-vs-cv-preview.jpg" />
         <meta property="og:url" content="https://www.professionalresumefree.com/resume-vs-cv-guide" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content="2026-04-05T00:00:00+00:00" />
-        <meta property="article:modified_time" content="2026-08-20T00:00:00+00:00" />
+        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="ProfessionalResumeFree" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="resume, CV, job applications, international careers" />
 
+        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume vs. CV: Complete Guide with Global Standards" />
         <meta name="twitter:description" content="Learn Resume vs CV differences for US, UK, and EU job markets. When to use each document with international standards and examples." />
@@ -332,6 +339,7 @@ CONVERTING RESUME TO CV:
         <meta name="twitter:label2" content="Document types" />
         <meta name="twitter:data2" content="Resume & CV" />
 
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -354,8 +362,8 @@ CONVERTING RESUME TO CV:
                   "url": "https://www.professionalresumefree.com/images/logo.png"
                 }
               },
-              "datePublished": "2026-04-05",
-              "dateModified": "2026-08-20",
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/resume-vs-cv-guide"
@@ -385,7 +393,8 @@ CONVERTING RESUME TO CV:
                   "name": "What is the main difference between a resume and a CV?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The main difference is length and purpose. A resume is a concise 1-2 page document tailored for specific job applications, focusing on skills and achievements. A CV (Curriculum Vitae) is a comprehensive 2+ page document detailing your complete academic and professional history, used for academic, research, medical, and international job applications."
+                    "text": "The main difference is length and purpose. A resume is a concise 1-2 page document tailored for specific job applications, focusing on skills and achievements. A CV (Curriculum Vitae) is a comprehensive 2+ page document detailing your complete academic and professional history, used for academic, research, medical, and international job applications.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -393,7 +402,8 @@ CONVERTING RESUME TO CV:
                   "name": "Should I use a resume or CV for jobs in the United States?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "For most jobs in the United States, use a resume. American employers typically expect a 1-page resume for corporate, private sector, and government positions. Only use a CV if you're applying for academic, research, medical, or scientific positions where a comprehensive publication and research history is required."
+                    "text": "For most jobs in the United States, use a resume. American employers typically expect a 1-page resume for corporate, private sector, and government positions. Only use a CV if you're applying for academic, research, medical, or scientific positions where a comprehensive publication and research history is required.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -401,7 +411,8 @@ CONVERTING RESUME TO CV:
                   "name": "Do I need to include a photo on my CV for European jobs?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Photo requirements vary by European country. In Germany, Austria, and several other EU countries, photos are expected on CVs. In the UK and Ireland, photos are generally not included. In France, it's common but not mandatory. Always research the specific country's standards before submitting your application."
+                    "text": "Photo requirements vary by European country. In Germany, Austria, and several other EU countries, photos are expected on CVs. In the UK and Ireland, photos are generally not included. In France, it's common but not mandatory. Always research the specific country's standards before submitting your application.",
+                    "dateCreated": lastModifiedDate
                   }
                 },
                 {
@@ -409,10 +420,13 @@ CONVERTING RESUME TO CV:
                   "name": "How long should my CV be for UK job applications?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "For UK job applications, your CV should typically be 2 pages. Unlike the US resume, UK CVs are more comprehensive and include detailed work history, education, and professional achievements. Senior professionals with extensive experience may extend to 3 pages, but 2 pages is the standard expectation for most positions."
+                    "text": "For UK job applications, your CV should typically be 2 pages. Unlike the US resume, UK CVs are more comprehensive and include detailed work history, education, and professional achievements. Senior professionals with extensive experience may extend to 3 pages, but 2 pages is the standard expectation for most positions.",
+                    "dateCreated": lastModifiedDate
                   }
                 }
-              ]
+              ],
+              "datePublished": `${currentDate}T00:00:00+00:00`,
+              "dateModified": lastModifiedDate
             })
           }}
         />
@@ -453,7 +467,7 @@ CONVERTING RESUME TO CV:
           <div className={styles.heroContent}>
             <div className={styles.heroTag}>
               <FiGlobe className={styles.tagIcon} />
-              International Career Guide 2026
+              International Career Guide {currentYear}
             </div>
             <h1 className={styles.heroTitle}>
               <span className={styles.gradientText}>Resume vs. CV:</span> Key Differences
@@ -468,13 +482,12 @@ CONVERTING RESUME TO CV:
                 Create Your Resume Now
                 <div className={styles.buttonPulse}></div>
               </Link>
-              
             </div>
             <div className={styles.heroFeatures}>
               <span className={styles.featureBadge}>✓ US, UK, EU Standards</span>
               <span className={styles.featureBadge}>✓ When to Use Each Document</span>
               <span className={styles.featureBadge}>✓ Conversion Guide</span>
-              <span className={styles.featureBadge}>✓ 2026 Global Standards</span>
+              <span className={styles.featureBadge}>✓ {currentYear} Global Standards</span>
             </div>
           </div>
           <div className={styles.heroStats}>
@@ -498,7 +511,7 @@ CONVERTING RESUME TO CV:
               Choosing between a resume and CV can make or break your international job application. 
               <strong> 75% of hiring managers reject applications using the wrong document type.</strong> 
               This comprehensive guide provides everything you need to understand 
-              <strong> global standards, regional expectations, and proper usage</strong> for 2026 job markets.
+              <strong> global standards, regional expectations, and proper usage</strong> for {currentYear} job markets.
             </p>
             <div className={styles.introHighlights}>
               <div className={styles.highlightItem}>
@@ -701,7 +714,6 @@ CONVERTING RESUME TO CV:
                 <FiDownload className={styles.buttonIcon} />
                 Build Your Resume Now
               </Link>
-              
             </div>
             
             <div className={styles.ctaFeatures}>
@@ -719,7 +731,7 @@ CONVERTING RESUME TO CV:
               </div>
               <div className={styles.ctaFeature}>
                 <FiCheck className={styles.featureIcon} />
-                <span>2026 Global Standards</span>
+                <span>{currentYear} Global Standards</span>
               </div>
             </div>
           </div>
@@ -728,5 +740,26 @@ CONVERTING RESUME TO CV:
     </div>
   );
 };
+
+// Static Generation with Incremental Static Regeneration
+export async function getStaticProps() {
+  // Generate dates at build time
+  const now = new Date();
+  
+  // Format: YYYY-MM-DD for currentDate
+  const currentDate = now.toISOString().split('T')[0];
+  
+  // Full ISO string for lastModifiedDate
+  const lastModifiedDate = now.toISOString();
+  
+  return {
+    props: {
+      currentDate,
+      lastModifiedDate,
+    },
+    // Revalidate every 24 hours for freshness
+    revalidate: 86400, // 24 hours in seconds
+  };
+}
 
 export default ResumeVsCVGuide;

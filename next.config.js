@@ -1,4 +1,4 @@
-// next.config.js - ISR Compatible Version
+// next.config.js - Combined ISR & GoatCounter Version
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable trailing slashes for better SEO
@@ -15,7 +15,17 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   
-  // Security headers
+  // GoatCounter rewrite rule
+  async rewrites() {
+    return [
+      {
+        source: '/stats',
+        destination: 'https://professionalresumefree.goatcounter.com',
+      },
+    ];
+  },
+  
+  // Security headers - Updated to include GoatCounter domains
   async headers() {
     return [
       {
@@ -23,7 +33,21 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+            value: "default-src 'self'; " +
+                   "script-src 'self' 'unsafe-inline' " +
+                   "https://www.googletagmanager.com " +
+                   "https://www.google-analytics.com " +
+                   "https://gc.zgo.at " +
+                   "https://professionalresumefree.goatcounter.com; " +
+                   "style-src 'self' 'unsafe-inline'; " +
+                   "img-src 'self' data: https:; " +
+                   "font-src 'self'; " +
+                   "connect-src 'self' " +
+                   "https://www.google-analytics.com " +
+                   "https://professionalresumefree.goatcounter.com; " +
+                   "frame-ancestors 'none'; " +
+                   "base-uri 'self'; " +
+                   "form-action 'self'"
           },
           {
             key: 'X-Frame-Options',
