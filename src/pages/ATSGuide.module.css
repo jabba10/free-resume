@@ -1,4 +1,4 @@
-/* ATSGuide.module.css - Fully consistent with Guides.module.css */
+/* ATSGuide.module.css */
 
 .atsGuide {
   background-color: white;
@@ -6,6 +6,9 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .container {
@@ -14,6 +17,8 @@
   margin: 0 auto;
   padding: 0 1.5rem;
   box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* ——— HERO SECTION ——— */
@@ -21,6 +26,8 @@
 .heroSection {
   padding: 4rem 0 3rem;
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .heroTag {
@@ -33,11 +40,16 @@
   font-size: 0.875rem;
   color: #333;
   margin-bottom: 1.5rem;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tagIcon {
   color: #555;
   font-size: 1rem;
+  flex-shrink: 0;
 }
 
 .heroTitle {
@@ -45,6 +57,9 @@
   font-weight: 800;
   margin: 0 0 1rem;
   line-height: 1.2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .gradientText {
@@ -57,6 +72,8 @@
   max-width: 700px;
   margin: 0 auto 2rem;
   line-height: 1.6;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .heroButtons {
@@ -65,6 +82,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .primaryButton,
@@ -73,15 +91,19 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  padding: 0.875rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
   text-decoration: none;
-  font-size: 1.125rem;
+  font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
   transition: all 0.2s;
   min-height: 52px;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .primaryButton {
@@ -129,6 +151,7 @@
   justify-content: center;
   gap: 0.75rem;
   margin-top: 1.5rem;
+  width: 100%;
 }
 
 .featureBadge {
@@ -137,6 +160,10 @@
   border-radius: 999px;
   font-size: 0.875rem;
   color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .heroStats {
@@ -145,6 +172,7 @@
   justify-content: center;
   gap: 1.5rem;
   margin-top: 2.5rem;
+  width: 100%;
 }
 
 .statCard {
@@ -154,6 +182,9 @@
   padding: 1.5rem;
   text-align: center;
   min-width: 140px;
+  flex: 1;
+  min-width: min-content;
+  box-sizing: border-box;
 }
 
 .statIconContainer {
@@ -168,6 +199,7 @@
   color: #333;
   font-size: 1.25rem;
   border: 1px solid #eee;
+  flex-shrink: 0;
 }
 
 .statValue {
@@ -175,12 +207,16 @@
   font-weight: 800;
   color: black;
   margin: 0 0 0.5rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .statLabel {
   font-size: 0.875rem;
   color: #666;
   margin: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* ——— INTRO SECTION ——— */
@@ -188,12 +224,15 @@
 .introSection {
   padding: 3rem 0;
   background: #fafafa;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .introContent {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .leadText {
@@ -201,6 +240,8 @@
   color: #555;
   margin: 0 0 2rem;
   line-height: 1.6;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .introHighlights {
@@ -208,6 +249,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.25rem;
+  width: 100%;
 }
 
 .highlightItem {
@@ -217,11 +259,16 @@
   font-weight: 500;
   color: #333;
   font-size: 0.9375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .highlightIcon {
   color: #555;
   font-size: 1rem;
+  flex-shrink: 0;
 }
 
 /* ——— SECTION HEADER ——— */
@@ -229,6 +276,7 @@
 .sectionHeader {
   text-align: center;
   margin-bottom: 2.5rem;
+  width: 100%;
 }
 
 .sectionTitle {
@@ -236,6 +284,9 @@
   font-weight: 700;
   margin: 0 0 1rem;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .sectionSubtitle {
@@ -244,18 +295,23 @@
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* ——— TYPES SECTION ——— */
 
 .typesSection {
   padding: 4rem 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .typesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 2rem;
+  width: 100%;
 }
 
 .typeCard {
@@ -263,6 +319,9 @@
   border: 1px solid #eee;
   border-radius: 0.75rem;
   padding: 1.75rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .typeTitle {
@@ -270,6 +329,8 @@
   font-weight: 600;
   margin: 0 0 0.75rem;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .typeDescription {
@@ -277,6 +338,8 @@
   color: #555;
   margin: 0 0 1rem;
   line-height: 1.5;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .typeFeatures h4,
@@ -285,6 +348,8 @@
   font-weight: 600;
   margin: 0 0 0.5rem;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .typeFeatures ul,
@@ -295,6 +360,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
+  width: 100%;
 }
 
 .typeFeatures li,
@@ -305,13 +371,15 @@
   font-size: 0.9375rem;
   color: #555;
   line-height: 1.4;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .featureIcon,
 .tipIcon {
   color: #333;
   flex-shrink: 0;
-  margin-top: 0.25rem;
+  margin-top: 0.125rem;
 }
 
 /* ——— GUIDE SECTION ——— */
@@ -319,6 +387,8 @@
 .guideSection {
   padding: 4rem 0;
   background: white;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .guideNavigation {
@@ -327,6 +397,7 @@
   gap: 0.5rem;
   margin-bottom: 2rem;
   justify-content: center;
+  width: 100%;
 }
 
 .guideTab {
@@ -343,6 +414,11 @@
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
 }
 
 .guideTab:hover {
@@ -366,6 +442,7 @@
   justify-content: center;
   font-size: 0.75rem;
   font-weight: bold;
+  flex-shrink: 0;
 }
 
 .guideTab.active .tabNumber {
@@ -377,11 +454,15 @@
   background: #fafafa;
   border-radius: 0.75rem;
   padding: 2rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .contentHeader {
   text-align: center;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .contentTitle {
@@ -389,6 +470,8 @@
   font-weight: 700;
   color: black;
   margin: 0 0 0.75rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .contentDescription {
@@ -396,12 +479,15 @@
   color: #555;
   margin: 0;
   line-height: 1.6;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .contentGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -415,6 +501,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-width: 0;
 }
 
 .tipsTitle,
@@ -426,12 +513,15 @@
   align-items: center;
   gap: 0.5rem;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .tipsIcon,
 .exampleIcon {
   color: #555;
   font-size: 1rem;
+  flex-shrink: 0;
 }
 
 .tipsList {
@@ -449,6 +539,8 @@
   font-size: 0.9375rem;
   color: #555;
   line-height: 1.5;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .tipItem::before {
@@ -460,6 +552,7 @@
   height: 6px;
   background: #333;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .exampleBox {
@@ -468,6 +561,7 @@
   border-radius: 6px;
   padding: 1.25rem;
   position: relative;
+  overflow: hidden;
 }
 
 .exampleText {
@@ -481,6 +575,9 @@
   border-radius: 4px;
   overflow-x: auto;
   line-height: 1.5;
+  max-width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
 }
 
 .copyButton {
@@ -496,6 +593,8 @@
   border: none;
   cursor: pointer;
   transition: background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .copyButton:hover {
@@ -511,13 +610,16 @@
 .keywordsSection {
   padding: 4rem 0;
   background: white;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .keywordsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
+  width: 100%;
 }
 
 .keywordCard {
@@ -525,6 +627,9 @@
   border: 1px solid #eee;
   border-radius: 0.75rem;
   padding: 1.75rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .keywordHeader {
@@ -534,11 +639,13 @@
   margin-bottom: 1.25rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #eee;
+  min-width: 0;
 }
 
 .industryIcon {
   color: #555;
   font-size: 1.25rem;
+  flex-shrink: 0;
 }
 
 .industryTitle {
@@ -546,6 +653,9 @@
   font-weight: 600;
   margin: 0;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .keywordList {
@@ -553,6 +663,7 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .keywordTag {
@@ -562,12 +673,19 @@
   border-radius: 999px;
   font-size: 0.8125rem;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .integrationTip {
   background: #fafafa;
   padding: 1rem;
   border-radius: 6px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .integrationTip h4 {
@@ -575,6 +693,8 @@
   font-weight: 600;
   margin: 0 0 0.5rem;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .integrationTip p {
@@ -582,12 +702,15 @@
   color: #555;
   margin: 0;
   line-height: 1.5;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .keywordStrategies {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
 .strategyCard {
@@ -595,6 +718,9 @@
   border: 1px solid #eee;
   border-radius: 0.75rem;
   padding: 1.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .strategyCard h3 {
@@ -602,6 +728,8 @@
   font-weight: 600;
   margin: 0 0 1rem;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .strategyCard ul {
@@ -619,6 +747,8 @@
   font-size: 0.875rem;
   color: #555;
   line-height: 1.5;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .strategyCard li::before {
@@ -633,12 +763,15 @@
 .mistakesSection {
   padding: 4rem 0;
   background: white;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mistakesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
 .mistakeCard {
@@ -648,6 +781,10 @@
   padding: 1.5rem;
   display: flex;
   gap: 1rem;
+  align-items: flex-start;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .mistakeNumber {
@@ -661,6 +798,7 @@
   justify-content: center;
   font-weight: bold;
   flex-shrink: 0;
+  margin-top: 0.25rem;
 }
 
 .mistakeText {
@@ -668,6 +806,10 @@
   color: #555;
   margin: 0;
   line-height: 1.5;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  flex: 1;
+  min-width: 0;
 }
 
 /* ——— CTA SECTION ——— */
@@ -678,11 +820,14 @@
   text-align: center;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ctaContent {
   max-width: 800px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .ctaTitle {
@@ -690,6 +835,9 @@
   font-weight: 800;
   margin: 0 0 1rem;
   color: black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .ctaSubtitle {
@@ -697,6 +845,8 @@
   color: #555;
   margin: 0 0 2rem;
   line-height: 1.6;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .ctaButtons {
@@ -705,6 +855,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .ctaButton {
@@ -714,13 +865,17 @@
   gap: 0.5rem;
   background: black;
   color: white;
-  padding: 0.875rem 2rem;
+  padding: 0.875rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
   text-decoration: none;
-  font-size: 1.125rem;
+  font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
   transition: background 0.2s;
   min-height: 52px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .ctaButton:hover {
@@ -729,6 +884,7 @@
 
 .buttonIcon {
   font-size: 1.25rem;
+  flex-shrink: 0;
 }
 
 .ctaFeatures {
@@ -737,6 +893,7 @@
   justify-content: center;
   gap: 1.25rem;
   margin-top: 1.5rem;
+  width: 100%;
 }
 
 .ctaFeature {
@@ -745,10 +902,15 @@
   gap: 0.5rem;
   font-size: 0.9375rem;
   color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .featureIcon {
   color: #333;
+  flex-shrink: 0;
 }
 
 /* ——— RESPONSIVE DESIGN ——— */
@@ -769,22 +931,51 @@
   .ctaButton {
     width: 100%;
     justify-content: center;
+    padding: 0.875rem 1rem;
   }
 
   .guideTab {
-    flex: 1;
+    flex: 1 0 auto;
     min-width: 140px;
     justify-content: center;
+    font-size: 0.8125rem;
+    padding: 0.625rem 0.875rem;
   }
 
   .heroStats {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 
   .statCard {
     width: 100%;
     max-width: 250px;
+    padding: 1.25rem;
+  }
+
+  .keywordStrategies {
+    grid-template-columns: 1fr;
+  }
+
+  .guideContent {
+    padding: 1.5rem;
+  }
+
+  .keywordsGrid {
+    gap: 1.5rem;
+  }
+
+  .keywordCard {
+    padding: 1.5rem;
+  }
+
+  .contentGrid {
+    gap: 1.5rem;
+  }
+
+  .typesGrid {
+    gap: 1.5rem;
   }
 }
 
@@ -806,8 +997,41 @@
   }
 
   .guideTab {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
+    min-width: 120px;
+  }
+
+  .typesGrid,
+  .keywordsGrid,
+  .mistakesGrid {
+    gap: 1rem;
+  }
+
+  .typeCard,
+  .keywordCard,
+  .mistakeCard,
+  .strategyCard {
+    padding: 1.25rem;
+  }
+
+  .exampleText {
+    font-size: 0.8125rem;
+    padding: 0.75rem;
+  }
+
+  .heroTag,
+  .featureBadge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+  }
+
+  .highlightItem {
+    font-size: 0.8125rem;
+  }
+
+  .guideNavigation {
+    gap: 0.375rem;
   }
 
   .keywordTag {
@@ -816,11 +1040,91 @@
   }
 }
 
-/* ——— ICONS ——— */
+/* Extra small screens */
+@media (max-width: 320px) {
+  .container {
+    padding: 0 0.75rem;
+  }
 
+  .guideTab {
+    min-width: 100px;
+    font-size: 0.6875rem;
+    padding: 0.375rem 0.5rem;
+  }
+
+  .tabNumber {
+    width: 16px;
+    height: 16px;
+    font-size: 0.625rem;
+  }
+
+  .primaryButton,
+  .secondaryButton,
+  .ctaButton {
+    font-size: 0.875rem;
+    padding: 0.75rem 0.875rem;
+    min-height: 44px;
+  }
+
+  .mistakeNumber {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+  }
+
+  .keywordTag {
+    font-size: 0.6875rem;
+    padding: 0.125rem 0.375rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .atsGuide {
+    max-width: 100%;
+    overflow: visible;
+  }
+  
+  .primaryButton,
+  .secondaryButton,
+  .ctaButton,
+  .copyButton,
+  .buttonPulse {
+    display: none !important;
+  }
+  
+  .heroTag,
+  .featureBadge,
+  .keywordTag {
+    background: #f0f0f0 !important;
+    color: #333 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Ensure icons don't overflow */
 .statIcon,
 .highlightIcon,
 .tipIcon,
-.exampleIcon {
-  /* Inherits color from parent */
+.exampleIcon,
+.featureIcon,
+.tagIcon,
+.industryIcon,
+.copyIcon,
+.buttonIcon {
+  flex-shrink: 0;
+  min-width: 1em;
+}
+
+/* Prevent text selection issues on mobile */
+@media (max-width: 768px) {
+  .guideTab,
+  .primaryButton,
+  .secondaryButton,
+  .ctaButton,
+  .copyButton {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
 }
