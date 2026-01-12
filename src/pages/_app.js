@@ -1,3 +1,5 @@
+
+
 // src/pages/_app.js
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -10,36 +12,49 @@ import './globals.css';
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`;
-  
+
   const GA_MEASUREMENT_ID = 'G-ZKH84N99Z2';
 
-  // Track page views for Google Analytics
+  // Google Analytics route tracking
   useEffect(() => {
     const handleRouteChange = (url) => {
       window.gtag?.('config', GA_MEASUREMENT_ID, {
         page_path: url,
-        anonymize_ip: true, // GDPR compliance
+        anonymize_ip: true,
       });
     };
-    
+
     // Track initial load
     handleRouteChange(router.asPath);
-    
+
     // Track route changes
     router.events.on('routeChangeComplete', handleRouteChange);
-    
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events, router.asPath]);
+
+  // GoatCounter route tracking (fixes undercounting)
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count();
+      }
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <>
       <Head>
         <link rel="canonical" href={canonicalUrl} key="canonical" />
       </Head>
-      
-      {/* Google Analytics Script */}
+
+      {/* Google Analytics */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
@@ -52,7 +67,6 @@ export default function App({ Component, pageProps }) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            
             gtag('config', '${GA_MEASUREMENT_ID}', {
               page_path: window.location.pathname,
               anonymize_ip: true
@@ -60,15 +74,14 @@ export default function App({ Component, pageProps }) {
           `,
         }}
       />
-      
-      {/* GoatCounter Analytics Script */}
+
+      {/* GoatCounter */}
       <Script
         data-goatcounter="https://professionalresumefree.goatcounter.com/count"
-        src="//gc.zgo.at/count.js"
+        src="https://gc.zgo.at/count.js"
         strategy="afterInteractive"
-        async
       />
-      
+
       <Navbar />
       <main className="app-wrapper">
         <Component {...pageProps} />
@@ -76,4 +89,5 @@ export default function App({ Component, pageProps }) {
       <Footer />
     </>
   );
-} 
+}
+
