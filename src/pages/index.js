@@ -46,6 +46,79 @@ const LandingPage = ({
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Define FAQs and testimonials here before using them in JSON-LD
+  const testimonials = [
+    {
+      quote: "Built my ATS-optimized resume in 10 minutes and landed interviews the same week. The free resume builder is incredible!",
+      metric: "Found Job in 2 Weeks",
+      name: "Sarah M.",
+      role: "Marketing Manager",
+      company: "Tech Company"
+    },
+    {
+      quote: "Finally a free resume builder that doesn't compromise on quality. The ATS templates helped me pass automated screenings.",
+      metric: "3 Interviews in 1 Week",
+      name: "James K.",
+      role: "Software Developer",
+      company: "Startup"
+    },
+    {
+      quote: "As a recent graduate, the entry-level resume templates were perfect. Landed my first job using this free resume maker.",
+      metric: "First Job After College",
+      name: "Alex P.",
+      role: "Junior Analyst",
+      company: "Finance Firm"
+    },
+    {
+      quote: "The mobile resume builder saved me - could update my CV on the go. Professional results without the cost.",
+      metric: "Career Change Success",
+      name: "Maria L.",
+      role: "Project Coordinator",
+      company: "Construction"
+    },
+    {
+      quote: "ATS-friendly templates actually work! Got callbacks from companies that previously ignored my applications.",
+      metric: "5x More Responses",
+      name: "David T.",
+      role: "Sales Executive",
+      company: "Tech Sales"
+    },
+    {
+      quote: "Free PDF download with no watermark? Unbeatable value. Best free resume builder I've found online.",
+      metric: "Perfect Resume in 15min",
+      name: "Lisa R.",
+      role: "HR Specialist",
+      company: "Healthcare"
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "Is this resume builder really free with no hidden costs?",
+      answer: "Yes, our resume builder is completely free with no hidden costs or watermarks. You can create, edit, and download your resume in multiple formats including PDF without any payment required. No credit card needed ever."
+    },
+    {
+      question: "What does ATS-friendly mean for resume building and job applications?",
+      answer: "ATS-friendly means our resume templates are specifically optimized to pass through Applicant Tracking Systems used by 99% of employers to screen job applications. This includes proper formatting, keyword optimization, clean structure, and standard sections that automated systems can read easily, significantly increasing your chances of getting noticed by recruiters."
+    },
+    {
+      question: "Can I download my resume as PDF without creating an account or signing up?",
+      answer: "Absolutely! You can download your resume in multiple formats including PDF, Word document, and plain text without creating an account or signing up. Everything is completely free and accessible immediately. Start building your professional resume right now."
+    },
+    {
+      question: "How many resume templates are available for free and which industries do they cover?",
+      answer: "We offer professionally designed ATS-friendly resume templates across all major industries including software development, healthcare, marketing, finance, engineering, education, recent graduates, and more. All templates are completely free to use and optimized for job search success in 2026."
+    },
+    {
+      question: "How does your ATS resume builder work?",
+      answer: "Our builder uses ATS-optimized templates with proper formatting that automated systems can read. We guide you to include the right keywords and structure that hiring systems look for, ensuring your resume passes through automated screenings."
+    },
+    {
+      question: "Can I edit my resume after downloading it?",
+      answer: "Yes, you can always come back and edit your resume. Your work is saved automatically, and you can make changes anytime. Download updated versions as many times as needed—completely free."
+    }
+  ];
+
   return (
     <div 
       className={styles.landingPage} 
@@ -161,7 +234,20 @@ const LandingPage = ({
                   },
                   "breadcrumb": {
                     "@type": "BreadcrumbList",
-                    "itemListElement": breadcrumbData
+                    "itemListElement": [
+                      {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.professionalresumefree.com"
+                      },
+                      {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Free Resume Builder",
+                        "item": "https://www.professionalresumefree.com/resume-templates"
+                      }
+                    ]
                   },
                   "mainEntity": {
                     "@type": "SoftwareApplication",
@@ -352,7 +438,7 @@ const LandingPage = ({
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
-      {/* Breadcrumb Navigation */}
+      {/* Breadcrumb Navigation - Fixed the name field */}
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <ol itemScope itemType="https://schema.org/BreadcrumbList">
           <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
@@ -366,9 +452,10 @@ const LandingPage = ({
             <FiChevronRight />
           </li>
           <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <span itemProp="name" className={styles.breadcrumbCurrent}></span>
+            <Link href="/resume-templates" itemProp="item" className={styles.breadcrumbLink}>
+              <span itemProp="name" className={styles.breadcrumbText}>Free Resume Builder</span>
+            </Link>
             <meta itemProp="position" content="2" />
-            <meta itemProp="item" content="https://www.professionalresumefree.com/resume-templates" />
           </li>
         </ol>
       </nav>
@@ -381,7 +468,7 @@ const LandingPage = ({
             <div className={styles.trustBadge} itemScope itemType="https://schema.org/AggregateRating">
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated <span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> by <span itemProp="ratingCount">4,365</span>+ Users | Best Free Resume Builder 2026
+                Rated <span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> by <span itemProp="ratingCount">50,365</span>+ Users | Best Free Resume Builder 2026
               </span>
             </div>
             
@@ -814,78 +901,6 @@ const industryTemplates = [
   { title: "Customer Service Resume", count: "Client-Focused Professional Design", slug: "customer-service-resume" },
 ];
 
-const testimonials = [
-  {
-    quote: "Built my ATS-optimized resume in 10 minutes and landed interviews the same week. The free resume builder is incredible!",
-    metric: "Found Job in 2 Weeks",
-    name: "Sarah M.",
-    role: "Marketing Manager",
-    company: "Tech Company"
-  },
-  {
-    quote: "Finally a free resume builder that doesn't compromise on quality. The ATS templates helped me pass automated screenings.",
-    metric: "3 Interviews in 1 Week",
-    name: "James K.",
-    role: "Software Developer",
-    company: "Startup"
-  },
-  {
-    quote: "As a recent graduate, the entry-level resume templates were perfect. Landed my first job using this free resume maker.",
-    metric: "First Job After College",
-    name: "Alex P.",
-    role: "Junior Analyst",
-    company: "Finance Firm"
-  },
-  {
-    quote: "The mobile resume builder saved me - could update my CV on the go. Professional results without the cost.",
-    metric: "Career Change Success",
-    name: "Maria L.",
-    role: "Project Coordinator",
-    company: "Construction"
-  },
-  {
-    quote: "ATS-friendly templates actually work! Got callbacks from companies that previously ignored my applications.",
-    metric: "5x More Responses",
-    name: "David T.",
-    role: "Sales Executive",
-    company: "Tech Sales"
-  },
-  {
-    quote: "Free PDF download with no watermark? Unbeatable value. Best free resume builder I've found online.",
-    metric: "Perfect Resume in 15min",
-    name: "Lisa R.",
-    role: "HR Specialist",
-    company: "Healthcare"
-  }
-];
-
-const faqs = [
-  {
-    question: "Is this resume builder really free with no hidden costs?",
-    answer: "Yes, our resume builder is completely free with no hidden costs or watermarks. You can create, edit, and download your resume in multiple formats including PDF without any payment required. No credit card needed ever."
-  },
-  {
-    question: "What does ATS-friendly mean for resume building and job applications?",
-    answer: "ATS-friendly means our resume templates are specifically optimized to pass through Applicant Tracking Systems used by 99% of employers to screen job applications. This includes proper formatting, keyword optimization, clean structure, and standard sections that automated systems can read easily, significantly increasing your chances of getting noticed by recruiters."
-  },
-  {
-    question: "Can I download my resume as PDF without creating an account or signing up?",
-    answer: "Absolutely! You can download your resume in multiple formats including PDF, Word document, and plain text without creating an account or signing up. Everything is completely free and accessible immediately. Start building your professional resume right now."
-  },
-  {
-    question: "How many resume templates are available for free and which industries do they cover?",
-    answer: "We offer professionally designed ATS-friendly resume templates across all major industries including software development, healthcare, marketing, finance, engineering, education, recent graduates, and more. All templates are completely free to use and optimized for job search success in 2026."
-  },
-  {
-    question: "How does your ATS resume builder work?",
-    answer: "Our builder uses ATS-optimized templates with proper formatting that automated systems can read. We guide you to include the right keywords and structure that hiring systems look for, ensuring your resume passes through automated screenings."
-  },
-  {
-    question: "Can I edit my resume after downloading it?",
-    answer: "Yes, you can always come back and edit your resume. Your work is saved automatically, and you can make changes anytime. Download updated versions as many times as needed—completely free."
-  }
-];
-
 // ISR enabled for better SEO freshness
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -911,26 +926,12 @@ export async function getStaticProps() {
         currentDate,
         lastModifiedDate,
         reviewDates,
-        faqDates,
-        breadcrumbData: [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.professionalresumefree.com"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Free Resume Builder",
-            "item": "https://www.professionalresumefree.com/resume-templates"
-          }
-        ]
+        faqDates
       },
       buildTimestamp
     },
     // Enable ISR for better SEO freshness
-    revalidate: 43200 // 12 hours
+    revalidate: 21600 // 6 hours
   };
 }
 
