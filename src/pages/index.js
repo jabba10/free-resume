@@ -248,10 +248,10 @@ const LandingPage = ({
                     },
                     "aggregateRating": {
                       "@type": "AggregateRating",
-                      "ratingValue": "4.9",
+                      "ratingValue": 4.9,
                       "ratingCount": 50365,
-                      "bestRating": "5",
-                      "worstRating": "1"
+                      "bestRating": 5,
+                      "worstRating": 1
                     },
                     "description": "Free online ATS-friendly resume builder that helps job seekers create professional resumes and land interviews faster.",
                     "featureList": [
@@ -391,8 +391,8 @@ const LandingPage = ({
                       "@type": "Review",
                       "reviewRating": {
                         "@type": "Rating",
-                        "ratingValue": "5",
-                        "bestRating": "5"
+                        "ratingValue": 5,
+                        "bestRating": 5
                       },
                       "author": {
                         "@type": "Person",
@@ -456,7 +456,7 @@ const LandingPage = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 50,365+ Users | Best Free Resume Builder 2026
+                Rated 4.9/5 by 50365+ Users | Best Free Resume Builder 2026
               </span>
             </div>
             
