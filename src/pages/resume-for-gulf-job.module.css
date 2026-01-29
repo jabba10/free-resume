@@ -1,0 +1,562 @@
+/* ResumeForGulfJob.module.css */
+
+/* PAGE WRAPPER */
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 16px;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #000000;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Apply box-sizing to all elements within the module */
+.pageWrapper * {
+  box-sizing: border-box;
+}
+
+.pageWrapper *::before,
+.pageWrapper *::after {
+  box-sizing: border-box;
+}
+
+/* MAIN CARD */
+.card {
+  width: 100%;
+  max-width: 1100px;
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 16px;
+  padding: clamp(20px, 4vw, 40px);
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  width: 100%;
+  margin-bottom: clamp(32px, 5vw, 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
+  border-radius: 999px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: clamp(13px, 1.5vw, 15px);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: clamp(16px, 2vw, 20px);
+  font-weight: 600;
+  text-align: center;
+  max-width: 100%;
+  word-break: keep-all;
+}
+
+.title {
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.3;
+  margin: 0 0 clamp(16px, 2vw, 20px) 0;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  padding: 0 clamp(8px, 2vw, 16px);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.subtitle {
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+  margin: 0 auto clamp(20px, 3vw, 24px) auto;
+  max-width: min(860px, 95%);
+  text-align: center;
+  color: #333333;
+  padding: 0 clamp(8px, 2vw, 16px);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* META */
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 1.5vw, 16px);
+  margin-bottom: clamp(20px, 3vw, 28px);
+  width: 100%;
+  padding: 0 clamp(8px, 2vw, 16px);
+}
+
+.metaItem {
+  font-size: clamp(13px, 1.5vw, 15px);
+  padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
+  border-radius: 999px;
+  border: 1px solid #000000;
+  background-color: #e0e0e0;
+  font-weight: 500;
+  text-align: center;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* BUTTONS */
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(12px, 2vw, 16px);
+  width: 100%;
+  padding: 0 clamp(8px, 2vw, 16px);
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 2vw, 14px) clamp(20px, 3vw, 28px);
+  border-radius: 999px;
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #000000;
+  transition: all 0.2s ease;
+  text-align: center;
+  width: auto;
+  min-width: min(200px, 100%);
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  flex-shrink: 1;
+}
+
+.primaryButton {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* TABLE OF CONTENTS */
+.toc {
+  margin-bottom: clamp(32px, 4vw, 48px);
+  padding: clamp(16px, 3vw, 24px);
+  border-radius: 12px;
+  background-color: #e6e6e6;
+  border: 1px solid #000000;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionHeading {
+  font-size: clamp(22px, 3vw, 28px);
+  margin: 0 0 clamp(16px, 2vw, 20px) 0;
+  text-align: center;
+  font-weight: 700;
+  width: 100%;
+  padding: 0 clamp(8px, 2vw, 16px);
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 800px;
+}
+
+.tocList li {
+  margin-bottom: clamp(8px, 1.5vw, 12px);
+  width: 100%;
+}
+
+.tocList a {
+  color: #000000;
+  text-decoration: none;
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 500;
+  display: block;
+  padding: clamp(3px, 0.5vw, 4px) 0;
+  transition: color 0.2s ease;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.tocList a:hover {
+  text-decoration: underline;
+  color: #333333;
+}
+
+/* SECTIONS */
+.section {
+  margin-bottom: clamp(32px, 4vw, 48px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paragraph {
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.7;
+  margin: 0 0 clamp(16px, 2vw, 20px) 0;
+  color: #333333;
+  width: 100%;
+  max-width: 800px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-align: left;
+}
+
+.paragraphSmall {
+  font-size: clamp(15px, 1.8vw, 17px);
+  line-height: 1.6;
+  margin: 0 0 clamp(12px, 1.5vw, 16px) 0;
+  color: #333333;
+  width: 100%;
+  max-width: 800px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.inlineLink {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+
+.inlineLink:hover {
+  color: #333333;
+}
+
+/* GRID CARDS */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: clamp(16px, 3vw, 24px);
+  margin: clamp(20px, 3vw, 24px) 0;
+  width: 100%;
+  max-width: 900px;
+}
+
+.infoCard {
+  background-color: #d9d9d9;
+  border-radius: 12px;
+  border: 1px solid #000000;
+  padding: clamp(16px, 3vw, 24px);
+  text-align: left;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.infoCard * {
+  box-sizing: border-box;
+}
+
+.cardTitle {
+  font-size: clamp(18px, 2.5vw, 22px);
+  margin: 0 0 clamp(12px, 1.5vw, 16px) 0;
+  font-weight: 700;
+  color: #000000;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.list {
+  margin: 0;
+  padding-left: clamp(16px, 3vw, 20px);
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.6;
+}
+
+.list li {
+  margin-bottom: clamp(6px, 1vw, 8px);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* TABLES */
+.tableWrapper {
+  margin-top: clamp(20px, 3vw, 24px);
+  width: 100%;
+  max-width: 900px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(14px, 1.8vw, 16px);
+  min-width: 300px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #000000;
+  padding: clamp(10px, 2vw, 14px);
+  text-align: left;
+  vertical-align: top;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  min-width: 100px;
+}
+
+.table th {
+  background-color: #cccccc;
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 17px);
+}
+
+.subHeading {
+  font-size: clamp(20px, 3vw, 24px);
+  margin: 0 0 clamp(12px, 1.5vw, 16px) 0;
+  text-align: center;
+  font-weight: 700;
+  color: #000000;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 clamp(8px, 2vw, 16px);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* EXAMPLES */
+.exampleBlock {
+  margin-top: clamp(16px, 2vw, 20px);
+  padding: clamp(16px, 3vw, 20px);
+  border-radius: 12px;
+  background-color: #d9d9d9;
+  border: 1px solid #000000;
+  text-align: left;
+  width: 100%;
+  max-width: 800px;
+}
+
+.exampleLabel {
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 700;
+  margin: 0 0 clamp(6px, 1vw, 8px) 0;
+  color: #000000;
+  word-break: break-word;
+}
+
+.exampleText {
+  font-size: clamp(15px, 2vw, 17px);
+  margin: 0 0 clamp(12px, 1.5vw, 16px) 0;
+  line-height: 1.6;
+  color: #333333;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* FAQ */
+.faqItem {
+  margin-bottom: clamp(24px, 3vw, 32px);
+  width: 100%;
+  max-width: 800px;
+  padding: clamp(12px, 2vw, 16px);
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  border: 1px solid #dddddd;
+  text-align: left;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .ctaRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .metaRow {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .metaItem {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tableWrapper {
+    margin-left: -8px;
+    margin-right: -8px;
+    width: calc(100% + 16px);
+  }
+  
+  .table {
+    font-size: 14px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageWrapper {
+    padding: 16px 12px;
+  }
+  
+  .card {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+  
+  .toc,
+  .infoCard,
+  .exampleBlock,
+  .faqItem {
+    padding: 16px;
+  }
+  
+  .list {
+    padding-left: 20px;
+  }
+  
+  .table {
+    min-width: 280px;
+  }
+  
+  .badge {
+    padding: 6px 14px;
+  }
+  
+  .metaItem {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pageWrapper {
+    padding: 12px 10px;
+  }
+  
+  .card {
+    padding: 16px 12px;
+    border-radius: 10px;
+  }
+  
+  .toc,
+  .infoCard,
+  .exampleBlock,
+  .faqItem {
+    padding: 14px;
+  }
+  
+  .list {
+    padding-left: 18px;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .sectionHeading {
+    font-size: 22px;
+  }
+}
+
+/* PRINT STYLES */
+@media print {
+  .pageWrapper {
+    padding: 0;
+    background-color: white;
+  }
+  
+  .pageWrapper * {
+    box-sizing: border-box;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 0;
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  .primaryButton,
+  .secondaryButton,
+  .ctaRow,
+  .badge {
+    display: none;
+  }
+  
+  .tableWrapper {
+    overflow-x: visible;
+  }
+}

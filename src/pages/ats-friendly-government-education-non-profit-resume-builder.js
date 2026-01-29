@@ -15,7 +15,6 @@ import {
   FiDownload,
   FiEdit2,
   FiTrash2,
-  FiPlus,
   FiX,
   FiEye,
   FiChevronLeft,
@@ -97,7 +96,6 @@ const Resume = () => {
     socialLinks: [],
     projects: []
   });
-
   const [currentExperience, setCurrentExperience] = useState(defaultExperience());
   const [currentEducation, setCurrentEducation] = useState(defaultEducation());
   const [currentSkill, setCurrentSkill] = useState(defaultSkill());
@@ -105,14 +103,12 @@ const Resume = () => {
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage());
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
   const [currentProject, setCurrentProject] = useState(defaultProject());
-
   const [activeSection, setActiveSection] = useState('personal');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   // ✅ FIXED: useRef must be called statically at top level
   const resumeRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
-
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
 
@@ -164,7 +160,6 @@ const Resume = () => {
 
   // --- Page Management ---
   const addNewPage = () => totalPages < 5 && setTotalPages(p => p + 1);
-
   const removeLastPage = () => {
     if (totalPages <= 1) return;
     setTotalPages(p => {
@@ -285,8 +280,6 @@ const Resume = () => {
         return;
       }
 
-      // ❌ REMOVED: originalStates (was unused)
-
       for (let i = 0; i < pagesWithContent.length; i++) {
         const pageNum = pagesWithContent[i];
         const el = resumeRefs[pageNum - 1]?.current;
@@ -309,7 +302,6 @@ const Resume = () => {
         });
 
         await new Promise(r => setTimeout(r, 300));
-
         const canvas = await html2canvas(el, {
           scale: 3,
           useCORS: true,
@@ -585,7 +577,7 @@ const Resume = () => {
               </button>
             </div>
             <div className={styles.pageActions}>
-              {totalPages < 5 && <button onClick={addNewPage} className={styles.addPageButton}><FiPlus /> Add Page</button>}
+              {/* ❌ REMOVED: Add Page button */}
               {totalPages > 1 && <button onClick={removeLastPage} className={styles.removePageButton}><FiX /> Remove Last Page</button>}
             </div>
           </div>
@@ -662,9 +654,7 @@ const Resume = () => {
                     </select>
                     <input type="url" placeholder="URL" value={currentSocialLink.url} onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, url: e.target.value })} className={styles.formInput} />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addSocialLink} className={styles.addButton} disabled={!currentSocialLink.platform || !currentSocialLink.url}>
-                        <FiPlus /> {currentSocialLink.isEditing ? 'Update' : 'Add'}
-                      </button>
+                      {/* ❌ REMOVED: Add Social Link button */}
                       {currentSocialLink.isEditing && (
                         <button type="button" onClick={() => setCurrentSocialLink(defaultSocialLink())} className={styles.cancelButton}>
                           <FiX /> Cancel
@@ -672,6 +662,7 @@ const Resume = () => {
                       )}
                     </div>
                   </div>
+
                   <div className={styles.itemsList}>
                     {formData.socialLinks.length === 0 ? (
                       <p className={styles.emptyMessage}>No links added</p>
@@ -710,9 +701,9 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                      Department / Division
-                      <input value={currentExperience.department} onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} placeholder="Office of Community Engagement" className={styles.formInput} />
-                    </label>
+                    Department / Division
+                    <input value={currentExperience.department} onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} placeholder="Office of Community Engagement" className={styles.formInput} />
+                  </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date*
@@ -724,16 +715,15 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                      Key Responsibilities*
-                      <textarea value={currentExperience.description} onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} placeholder="• Led $2M grant program for after-school initiatives..." required className={styles.formTextarea} rows="4" />
-                    </label>
+                    Key Responsibilities*
+                    <textarea value={currentExperience.description} onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} placeholder="• Led $2M grant program for after-school initiatives..." required className={styles.formTextarea} rows="4" />
+                  </label>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addExperience} className={styles.addButton} disabled={!currentExperience.role || !currentExperience.organization || !currentExperience.startDate}>
-                      <FiPlus /> {currentExperience.isEditing ? 'Update' : 'Add Experience'}
-                    </button>
+                    {/* ❌ REMOVED: Add/Update Experience button */}
                     {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4>Your Experience on Page {currentPage}</h4>
                   {getDataByPage(currentPage).experience.length === 0 ? (
@@ -786,16 +776,15 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                      Outcomes & Impact*
-                      <textarea value={currentProject.outcome} onChange={(e) => setCurrentProject({ ...currentProject, outcome: e.target.value })} placeholder="• Served 500+ students; improved graduation rates by 15%..." required className={styles.formTextarea} rows="4" />
-                    </label>
+                    Outcomes & Impact*
+                    <textarea value={currentProject.outcome} onChange={(e) => setCurrentProject({ ...currentProject, outcome: e.target.value })} placeholder="• Served 500+ students; improved graduation rates by 15%..." required className={styles.formTextarea} rows="4" />
+                  </label>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addProject} className={styles.addButton} disabled={!currentProject.name || !currentProject.role}>
-                      <FiPlus /> {currentProject.isEditing ? 'Update' : 'Add Initiative'}
-                    </button>
+                    {/* ❌ REMOVED: Add Initiative button */}
                     {currentProject.isEditing && <button type="button" onClick={() => setCurrentProject(defaultProject())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4>Your Initiatives on Page {currentPage}</h4>
                   {getDataByPage(currentPage).projects.length === 0 ? (
@@ -841,9 +830,9 @@ const Resume = () => {
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                      Field of Study
-                      <input value={currentEducation.field} onChange={(e) => setCurrentEducation({ ...currentEducation, field: e.target.value })} placeholder="Public Policy" className={styles.formInput} />
-                    </label>
+                    Field of Study
+                    <input value={currentEducation.field} onChange={(e) => setCurrentEducation({ ...currentEducation, field: e.target.value })} placeholder="Public Policy" className={styles.formInput} />
+                  </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date
@@ -855,12 +844,11 @@ const Resume = () => {
                     </label>
                   </div>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addEducation} className={styles.addButton} disabled={!currentEducation.institution || !currentEducation.degree}>
-                      <FiPlus /> {currentEducation.isEditing ? 'Update' : 'Add Education'}
-                    </button>
+                    {/* ❌ REMOVED: Add Education button */}
                     {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
                   </div>
                 </div>
+
                 <div className={styles.formCard}>
                   <h4>Your Education on Page {currentPage}</h4>
                   {getDataByPage(currentPage).education.length === 0 ? (
@@ -904,9 +892,7 @@ const Resume = () => {
                   <div className={styles.skillsInput}>
                     <input value={currentSkill.name} onChange={(e) => setCurrentSkill({ ...currentSkill, name: e.target.value })} placeholder="Stakeholder Engagement" className={styles.formInput} />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addSkill} className={styles.addButton} disabled={!currentSkill.name.trim()}>
-                        <FiPlus /> {currentSkill.isEditing ? 'Update' : 'Add Skill'}
-                      </button>
+                      {/* ❌ REMOVED: Add Skill button */}
                       {currentSkill.isEditing && <button type="button" onClick={() => setCurrentSkill(defaultSkill())} className={styles.cancelButton}><FiX /> Cancel</button>}
                     </div>
                   </div>
@@ -919,9 +905,7 @@ const Resume = () => {
                     <input value={currentCertification.name} onChange={(e) => setCurrentCertification({ ...currentCertification, name: e.target.value })} placeholder="Certified Public Manager (CPM)" className={styles.formInput} />
                     <input value={currentCertification.issuingBody} onChange={(e) => setCurrentCertification({ ...currentCertification, issuingBody: e.target.value })} placeholder="National CPM Consortium" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addCertification} className={styles.addButton} disabled={!currentCertification.name.trim()}>
-                        <FiPlus /> {currentCertification.isEditing ? 'Update' : 'Add Certification'}
-                      </button>
+                      {/* ❌ REMOVED: Add Certification button */}
                       {currentCertification.isEditing && <button type="button" onClick={() => setCurrentCertification(defaultCertification())} className={styles.cancelButton}><FiX /> Cancel</button>}
                     </div>
                   </div>
@@ -948,9 +932,7 @@ const Resume = () => {
                     <input value={currentLanguage.name} onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} placeholder="Spanish" className={styles.formInput} />
                     <input value={currentLanguage.proficiency} onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} placeholder="Fluent" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addLanguage} className={styles.addButton} disabled={!currentLanguage.name.trim()}>
-                        <FiPlus /> {currentLanguage.isEditing ? 'Update' : 'Add Language'}
-                      </button>
+                      {/* ❌ REMOVED: Add Language button */}
                       {currentLanguage.isEditing && <button type="button" onClick={() => setCurrentLanguage(defaultLanguage())} className={styles.cancelButton}><FiX /> Cancel</button>}
                     </div>
                   </div>

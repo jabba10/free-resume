@@ -1,0 +1,844 @@
+/* Main Container */
+.pageContainer {
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.mainArticle {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Universal box-sizing and overflow prevention without "*" */
+.pageContainer,
+.mainArticle,
+.breadcrumbNav,
+.heroSection,
+.tocSection,
+.contentMain,
+.contentSection,
+.dataCard,
+.stepCard,
+.resourceCard,
+.faqCard,
+.tocCard,
+.actionCard {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumbNav {
+  width: 100%;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.breadcrumbList {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 10px;
+  justify-content: center;
+}
+
+.breadcrumbItem {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.breadcrumbItem:not(:last-child)::after {
+  content: '›';
+  margin-left: 10px;
+  color: #999;
+}
+
+.breadcrumbLink {
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-weight: 500;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.breadcrumbLink:hover {
+  color: #333333;
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.heroSection {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.heroContent {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topicBadge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #000000;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.mainTitle {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.publicationMeta {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+  text-align: center;
+  width: 100%;
+}
+
+.heroDescription {
+  font-size: 18px;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  line-height: 1.7;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.primaryCta,
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.primaryCta {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #000000;
+}
+
+.primaryCta:hover {
+  background-color: #333333;
+  border-color: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.secondaryCta {
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
+}
+
+.secondaryCta:hover {
+  background-color: #f8f8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Table of Contents */
+.tocSection {
+  width: 100%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tocCard {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.tocLink {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: block;
+  text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.tocLink:hover {
+  background-color: #e9ecef;
+  text-decoration: underline;
+}
+
+/* Main Content */
+.contentMain {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contentSection {
+  width: 100%;
+  margin-bottom: 50px;
+  scroll-margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #000000;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.subsectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 30px 0 15px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.sectionContent {
+  font-size: 17px;
+  color: #333;
+  line-height: 1.7;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionContent p {
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Cards and Grids */
+.dataCard,
+.stepCard,
+.resourceCard,
+.faqCard {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 25px;
+  margin: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.stepTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.dataTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.dataList {
+  padding-left: 20px;
+  margin: 15px 0;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dataList li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Grid Layouts */
+.anatomyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin: 25px 0;
+  width: 100%;
+  justify-items: center;
+}
+
+.resourcesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 30px 0;
+  width: 100%;
+  justify-items: center;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin: 30px 0;
+  width: 100%;
+  justify-items: center;
+}
+
+/* Tables */
+.comparisonTable {
+  overflow-x: auto;
+  margin: 25px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.dataTable {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  margin: 25px 0;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.dataTable th {
+  background-color: #f5f5f5;
+  color: #000000;
+  font-weight: 600;
+  text-align: left;
+  padding: 15px;
+  border-bottom: 2px solid #e0e0e0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.dataTable td {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.dataTable tr:hover {
+  background-color: #f8f8f8;
+}
+
+/* Resources Section */
+.resourcesSection {
+  width: 100%;
+  margin: 60px 0;
+  padding: 40px 0;
+  border-top: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.resourcesDescription {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 40px;
+  max-width: 800px;
+  line-height: 1.7;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.resourceTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.resourceDescription {
+  flex-grow: 1;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.resourceButton {
+  display: block;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  border: 2px solid #000000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.resourceButton:hover {
+  background-color: #333333;
+  border-color: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* FAQ Section */
+.faqSection {
+  width: 100%;
+  margin: 60px 0;
+  padding: 40px 0;
+  border-top: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.faqQuestion {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #000000;
+  line-height: 1.4;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.faqAnswer {
+  color: #333;
+  line-height: 1.7;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Conclusion Section */
+.conclusionSection {
+  width: 100%;
+  margin: 50px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actionCard {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  margin: 40px 0;
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.finalNote {
+  font-size: 16px;
+  color: #333;
+  font-style: italic;
+  margin-top: 30px;
+  padding: 20px;
+  border-left: 4px solid #000000;
+  background-color: #f8f9fa;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .mainTitle {
+    font-size: 32px;
+  }
+  
+  .sectionTitle {
+    font-size: 26px;
+  }
+  
+  .anatomyGrid,
+  .resourcesGrid,
+  .faqGrid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .dataTable {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 15px;
+  }
+  
+  .mainTitle {
+    font-size: 28px;
+    padding: 0 10px;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+    padding: 0 10px;
+  }
+  
+  .subsectionTitle {
+    font-size: 19px;
+    padding: 0 10px;
+  }
+  
+  .sectionContent {
+    font-size: 16px;
+  }
+  
+  .heroDescription {
+    font-size: 17px;
+    padding: 0 10px;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .primaryCta,
+  .secondaryCta {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+  
+  .anatomyGrid,
+  .resourcesGrid,
+  .faqGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .tocCard {
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .actionCard {
+    padding: 30px 20px;
+    margin: 20px 10px;
+  }
+  
+  .dataTable {
+    font-size: 14px;
+    min-width: 100%;
+  }
+  
+  .dataTable th,
+  .dataTable td {
+    padding: 12px 8px;
+  }
+  
+  .dataCard,
+  .stepCard,
+  .resourceCard,
+  .faqCard {
+    padding: 20px;
+    margin: 15px 10px;
+  }
+  
+  .comparisonTable {
+    margin: 15px 10px;
+    width: calc(100% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContainer {
+    padding: 12px;
+  }
+  
+  .mainTitle {
+    font-size: 24px;
+    padding: 0 8px;
+  }
+  
+  .sectionTitle {
+    font-size: 22px;
+    padding: 0 8px;
+  }
+  
+  .heroDescription {
+    font-size: 16px;
+    padding: 0 8px;
+  }
+  
+  .topicBadge {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+  
+  .dataCard,
+  .stepCard,
+  .resourceCard,
+  .faqCard {
+    padding: 18px 12px;
+    margin: 12px 8px;
+  }
+  
+  .resourceButton {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .dataTable th,
+  .dataTable td {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+  
+  .actionCard {
+    padding: 25px 15px;
+    margin: 15px 8px;
+  }
+  
+  .tocCard {
+    padding: 18px 12px;
+    margin: 0 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pageContainer {
+    padding: 10px;
+  }
+  
+  .mainTitle {
+    font-size: 22px;
+  }
+  
+  .sectionTitle {
+    font-size: 20px;
+  }
+  
+  .heroDescription {
+    font-size: 15px;
+  }
+  
+  .primaryCta,
+  .secondaryCta,
+  .resourceButton {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+  
+  .dataTable th,
+  .dataTable td {
+    padding: 8px 5px;
+    font-size: 12px;
+  }
+}
+
+/* Ensure all text elements within the main article don't overflow */
+.mainArticle p,
+.mainArticle h1,
+.mainArticle h2,
+.mainArticle h3,
+.mainArticle h4,
+.mainArticle h5,
+.mainArticle h6,
+.mainArticle li,
+.mainArticle td,
+.mainArticle th,
+.mainArticle span,
+.mainArticle a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Center all text elements within the content */
+.contentMain h1,
+.contentMain h2,
+.contentMain h3,
+.contentMain h4,
+.contentMain h5,
+.contentMain h6,
+.contentMain p,
+.contentMain li,
+.contentMain span {
+  text-align: center;
+}
+
+/* Prevent horizontal scrolling on the entire page */
+html, body {
+  overflow-x: hidden;
+}

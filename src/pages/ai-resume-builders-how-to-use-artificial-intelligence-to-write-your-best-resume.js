@@ -246,7 +246,7 @@ After AI + Human Review:
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ai-resume-builder-guide/" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" />
         
         {/* Static dates from getStaticProps */}
         <meta name="date" content={currentDate} />
@@ -255,7 +255,7 @@ After AI + Human Review:
         <meta property="og:title" content="AI Resume Builders 2026: How to Use Artificial Intelligence to Write Your Best Resume" />
         <meta property="og:description" content="Master AI resume building for 2026. Learn to balance AI efficiency with human touch, create ATS-optimized resumes, and land 40% more interviews." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/ai-resume-builder-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ai-resume-builder-guide" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
@@ -302,7 +302,7 @@ After AI + Human Review:
               "dateModified": lastModifiedDate.split('T')[0],
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/ai-resume-builder-guide"
+                "@id": "https://www.professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume"
               },
               "articleSection": "Career Technology",
               "keywords": "AI resume builder, artificial intelligence, resume writing, career technology, machine learning, resume optimization",
@@ -383,14 +383,14 @@ After AI + Human Review:
                 {
                   "@type": "ListItem",
                   "position": 2,
-                  "name": "Career Technology",
-                  "item": "https://www.professionalresumefree.com/career-technology"
+                  "name": "Free Resume Tools",
+                  "item": "https://www.professionalresumefree.com/free-resume-tools"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "AI Resume Builder Guide 2026",
-                  "item": "https://www.professionalresumefree.com/ai-resume-builder-guide"
+                  "item": "https://www.professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume"
                 }
               ]
             })
@@ -418,7 +418,7 @@ After AI + Human Review:
                 "position": index + 1,
                 "name": section.title,
                 "text": section.content,
-                "url": `https://www.professionalresumefree.com/ai-resume-builder-guide#step-${index + 1}`
+                "url": `https://www.professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume#step-${index + 1}`
               }))
             })
           }}

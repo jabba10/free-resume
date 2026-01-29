@@ -61,7 +61,7 @@
   flex-shrink: 0;
 }
 
-.breadcrumbCurrent {
+.breadcrumbText {
   font-size: 0.875rem;
   color: #333;
   font-weight: 500;
@@ -101,6 +101,12 @@
   flex-shrink: 0;
 }
 
+.trustBadgeText {
+  font-size: 0.875rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 .heroTitle {
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 800;
@@ -121,7 +127,7 @@
   font-size: clamp(1rem, 3.5vw, 1.25rem);
   color: #555;
   max-width: 700px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 2.5rem;
   line-height: 1.5;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -132,12 +138,13 @@
   font-weight: 600;
 }
 
+/* ===== CTA BUTTONS STYLES ===== */
 .ctaButtons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .primaryButton {
@@ -158,10 +165,43 @@
   position: relative;
   overflow: hidden;
   gap: 0.75rem;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
 }
 
 .primaryButton:hover {
   background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s;
+  min-height: 52px;
+  border: 2px solid #e5e7eb;
+  cursor: pointer;
+  background-color: white;
+  color: #333;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 180px;
+  max-width: 250px;
+}
+
+.secondaryButton:hover {
+  background-color: #f8fafc;
+  border-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .buttonText {
@@ -169,11 +209,20 @@
   word-break: break-word;
   overflow-wrap: break-word;
   text-align: center;
+  font-size: 1rem;
+}
+
+.primaryButton .buttonText {
+  font-size: 1.125rem;
 }
 
 .buttonIcon {
   font-size: 1.25rem;
   flex-shrink: 0;
+}
+
+.secondaryButton .buttonIcon {
+  font-size: 1.125rem;
 }
 
 .buttonPulse {
@@ -342,13 +391,6 @@
   box-sizing: border-box;
 }
 
-.cardHeader {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
 .iconContainer {
   width: 48px;
   height: 48px;
@@ -359,6 +401,7 @@
   justify-content: center;
   color: #333;
   font-size: 1.25rem;
+  margin-bottom: 1rem;
   flex-shrink: 0;
 }
 
@@ -369,7 +412,7 @@
 .featureTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 0.75rem;
   color: #212529;
   line-height: 1.3;
   overflow-wrap: break-word;
@@ -383,15 +426,6 @@
   margin: 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
-}
-
-.cardNumber {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  font-size: 0.875rem;
-  color: #ccc;
-  font-weight: 700;
 }
 
 /* ===== TEMPLATES SECTION ===== */
@@ -938,6 +972,26 @@
 }
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 1024px) {
+  .ctaButtons {
+    gap: 0.75rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    min-width: 160px;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .buttonText {
+    font-size: 0.9375rem;
+  }
+  
+  .primaryButton .buttonText {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 1rem;
@@ -954,12 +1008,26 @@
   
   .ctaButtons {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    gap: 0.75rem;
   }
   
-  .primaryButton, .ctaButton {
+  .primaryButton,
+  .secondaryButton {
     width: 100%;
-    justify-content: center;
+    max-width: 300px;
+    min-width: unset;
+    padding: 0.875rem 1.5rem;
+  }
+  
+  .secondaryButton {
+    justify-content: flex-start;
+    padding-left: 1.75rem;
+  }
+  
+  .buttonText {
+    text-align: left;
+    flex-grow: 1;
   }
   
   .comparisonContainer {
@@ -1030,6 +1098,32 @@
   .ctaFeatures {
     flex-direction: column;
     align-items: center;
+  }
+  
+  .ctaButtons {
+    gap: 0.5rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 0.75rem 1rem;
+    min-height: 48px;
+  }
+  
+  .buttonText {
+    font-size: 0.875rem;
+  }
+  
+  .primaryButton .buttonText {
+    font-size: 0.9375rem;
+  }
+  
+  .buttonIcon {
+    font-size: 1.125rem;
+  }
+  
+  .secondaryButton .buttonIcon {
+    font-size: 1rem;
   }
 }
 

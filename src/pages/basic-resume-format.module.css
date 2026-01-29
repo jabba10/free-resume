@@ -1,0 +1,688 @@
+/* Base Container - Centered and Responsive */
+.container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Content Wrapper for Perfect Centering */
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+/* Header Styles - Centered and Responsive */
+.header {
+  width: 100%;
+  text-align: center;
+  padding: 40px 20px;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.breadcrumb a {
+  color: #000000;
+  text-decoration: none;
+  margin: 0 5px;
+  word-break: break-word;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  margin-left: 5px;
+  color: #666;
+}
+
+.title {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 20px 0;
+  color: #000000;
+  text-align: center;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: #444;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+  word-wrap: break-word;
+}
+
+.metaInfo {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 14px;
+  color: #666;
+  flex-wrap: wrap;
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+.metaInfo span {
+  white-space: nowrap;
+}
+
+/* Hero Section - Centered */
+.hero {
+  width: 100%;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.heroCard {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: clamp(25px, 5vw, 40px);
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.heroTitle {
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  margin-bottom: 20px;
+  color: #000000;
+  word-wrap: break-word;
+}
+
+/* CTA Button - Responsive and Centered */
+.ctaButton {
+  display: inline-block;
+  background-color: #000000;
+  color: #ffffff;
+  padding: clamp(12px, 3vw, 15px) clamp(20px, 4vw, 30px);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  border: 2px solid #000000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  text-align: center;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.ctaButton:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Table of Contents - Responsive */
+.toc {
+  width: 100%;
+  max-width: 900px;
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: clamp(20px, 4vw, 30px);
+  margin: 0 auto 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tocTitle {
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  margin-bottom: 20px;
+  color: #000000;
+  text-align: center;
+}
+
+.tocList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tocList li {
+  margin: 10px 0;
+  word-wrap: break-word;
+}
+
+.tocList a {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  word-break: break-word;
+  display: block;
+  padding: 5px 0;
+}
+
+.tocList a:hover {
+  color: #666;
+  text-decoration: underline;
+}
+
+/* Content Sections - Centered and Responsive */
+.content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.section {
+  margin-bottom: clamp(40px, 6vw, 60px);
+  padding: clamp(20px, 4vw, 30px) 0;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.section h2 {
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  color: #000000;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+
+.section h3 {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  color: #000000;
+  margin: clamp(15px, 4vw, 25px) 0 15px;
+  word-wrap: break-word;
+}
+
+.section p {
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.section ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.section li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+/* Cards - Responsive */
+.card {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: clamp(15px, 3vw, 20px);
+  margin: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Comparison Table - Responsive Grid */
+.comparisonTable {
+  width: 100%;
+  margin: 30px 0;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+}
+
+.tableContainer {
+  width: 100%;
+  min-width: 300px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  border-bottom: 1px solid #e0e0e0;
+  min-width: 100%;
+}
+
+.tableHeader {
+  font-weight: 700;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  text-align: center;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.tableCell {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  word-break: break-word;
+  min-width: 0;
+}
+
+/* FAQ Section - Responsive */
+.faqContainer {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.faqItem {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: clamp(15px, 4vw, 25px);
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.faqItem h3 {
+  color: #000000;
+  margin-bottom: 15px;
+  word-wrap: break-word;
+}
+
+/* Conclusion - Centered */
+.conclusion {
+  margin-top: 50px;
+  padding: clamp(25px, 5vw, 40px);
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+}
+
+.actionCard {
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: clamp(20px, 4vw, 30px);
+  text-align: center;
+  margin-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Internal Links - Responsive Grid */
+.internalLinks {
+  margin: clamp(40px, 6vw, 60px) 0;
+  width: 100%;
+}
+
+.linkGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(15px, 4vw, 25px);
+  margin-top: 30px;
+  width: 100%;
+}
+
+.linkCard {
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: clamp(15px, 3vw, 25px);
+  text-decoration: none;
+  color: #000000;
+  transition: transform 0.3s ease;
+  display: block;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 150px;
+  overflow: hidden;
+}
+
+.linkCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.linkCard h3 {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+.linkCard p {
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  color: #666;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+/* Footer - Centered */
+.footer {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 2px solid #e0e0e0;
+  margin-top: 60px;
+  color: #666;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px 10px;
+  }
+  
+  .header {
+    padding: 30px 15px;
+    margin-bottom: 30px;
+  }
+  
+  .breadcrumb {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+  
+  .metaInfo {
+    gap: 15px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+  
+  .hero {
+    padding: 0 15px;
+    margin-bottom: 40px;
+  }
+  
+  .heroCard {
+    padding: 25px 15px;
+  }
+  
+  .toc {
+    padding: 20px 15px;
+    margin-bottom: 30px;
+  }
+  
+  .content {
+    padding: 0 15px;
+  }
+  
+  .section {
+    padding: 20px 0;
+    margin-bottom: 40px;
+  }
+  
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .tableHeader, 
+  .tableCell {
+    text-align: left;
+    padding: 12px;
+  }
+  
+  .linkGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .conclusion {
+    margin-top: 40px;
+    padding: 25px 15px;
+  }
+  
+  .actionCard {
+    padding: 20px 15px;
+  }
+  
+  .footer {
+    padding: 30px 15px;
+    margin-top: 40px;
+  }
+  
+  /* Prevent text overflow */
+  .title,
+  .subtitle,
+  .section h2,
+  .section h3,
+  .section p,
+  .section li,
+  .faqItem h3,
+  .linkCard h3,
+  .linkCard p {
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px 5px;
+  }
+  
+  .header {
+    padding: 20px 10px;
+    margin-bottom: 20px;
+  }
+  
+  .breadcrumb {
+    font-size: 12px;
+    padding: 0 5px;
+  }
+  
+  .title {
+    padding: 0 10px;
+  }
+  
+  .subtitle {
+    padding: 0 10px;
+  }
+  
+  .hero {
+    padding: 0 10px;
+    margin-bottom: 30px;
+  }
+  
+  .heroCard {
+    padding: 20px 10px;
+  }
+  
+  .ctaButton {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+  
+  .toc {
+    padding: 15px 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tocList a {
+    font-size: 14px;
+  }
+  
+  .content {
+    padding: 0 10px;
+  }
+  
+  .section {
+    padding: 15px 0;
+    margin-bottom: 30px;
+  }
+  
+  .card,
+  .faqItem,
+  .linkCard {
+    padding: 15px 10px;
+  }
+  
+  .metaInfo {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+  
+  .footer {
+    padding: 20px 10px;
+    margin-top: 30px;
+    font-size: 12px;
+  }
+  
+  /* Force line breaks on very small screens */
+  .title {
+    word-break: break-word;
+  }
+  
+  /* Ensure buttons don't overflow */
+  .ctaButton {
+    white-space: normal;
+    height: auto;
+    line-height: 1.4;
+  }
+}
+
+/* Extra Small Devices (320px and below) */
+@media (max-width: 320px) {
+  .container {
+    padding: 8px 4px;
+  }
+  
+  .header,
+  .hero,
+  .toc,
+  .content,
+  .footer {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .title {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .ctaButton {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+  
+  /* Reduce gaps further */
+  .section {
+    margin-bottom: 25px;
+    padding: 12px 0;
+  }
+  
+  .linkGrid {
+    gap: 10px;
+  }
+}
+
+/* Large Screens - Ensure perfect centering */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1300px;
+  }
+  
+  .contentWrapper {
+    max-width: 1100px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .ctaButton,
+  .toc,
+  .internalLinks {
+    display: none;
+  }
+  
+  .container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contentWrapper {
+    max-width: 100%;
+  }
+  
+  .section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  .header,
+  .hero,
+  .content,
+  .conclusion,
+  .footer {
+    padding: 20px;
+  }
+}

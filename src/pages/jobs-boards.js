@@ -234,13 +234,13 @@ const JobBoardsBlog = ({ currentDate, lastModifiedDate }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/blog/best-job-boards/" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/jobs-boards/" />
 
         {/* Open Graph / Social Media - Enhanced */}
         <meta property="og:title" content="Best Job Boards 2026: Remote, Hybrid & International Jobs with Visa Sponsorship" />
         <meta property="og:description" content="Expert guide to 50+ top job boards for remote work, hybrid positions & international careers with visa sponsorship. Find your dream job worldwide." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/job-boards-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/blog/best-job-boards" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/jobs-boards" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content={lastModifiedDate} />
@@ -288,7 +288,7 @@ const JobBoardsBlog = ({ currentDate, lastModifiedDate }) => {
               "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/blog/best-job-boards"
+                "@id": "https://www.professionalresumefree.com/jobs-boards"
               },
               "articleSection": "Career Resources",
               "keywords": "job boards, remote jobs, hybrid work, international jobs, visa sponsorship, career websites, employment platforms",
@@ -374,13 +374,13 @@ const JobBoardsBlog = ({ currentDate, lastModifiedDate }) => {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Career Blog",
-                  "item": "https://www.professionalresumefree.com/blog"
+                  "item": "https://www.professionalresumefree.com/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Best Job Boards 2026",
-                  "item": "https://www.professionalresumefree.com/blog/best-job-boards"
+                  "item": "https://www.professionalresumefree.com/jobs-boards"
                 }
               ]
             })

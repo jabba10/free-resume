@@ -20,7 +20,9 @@ import {
   FiSearch,
   FiEdit,
   FiBarChart,
-  FiTarget
+  FiTarget,
+
+  FiLayers
 } from 'react-icons/fi';
 import styles from './LandingPage.module.css';
 
@@ -438,7 +440,7 @@ const LandingPage = ({
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
-      {/* Breadcrumb Navigation - Fixed the name field */}
+      {/* Breadcrumb Navigation */}
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <ol itemScope itemType="https://schema.org/BreadcrumbList">
           <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
@@ -493,6 +495,28 @@ const LandingPage = ({
                 <span className={styles.buttonText}>Start Building Your Resume Now</span>
                 <FiArrowRight className={styles.buttonIcon} />
                 <div className={styles.buttonPulse}></div>
+              </Link>
+              
+              {/* New Button 1: Free Resume Tools */}
+              <Link
+                href="/free-resume-tools"
+                className={styles.secondaryButton}
+                aria-label="Explore free resume tools including resume score checker, ATS checker, and more"
+                prefetch={false}
+              >
+                <FiTool className={styles.buttonIcon} />
+                <span className={styles.buttonText}>Free Resume Tools</span>
+              </Link>
+              
+              {/* New Button 2: Resume Clusters */}
+              <Link
+                href="/complete-resume-resource-library"
+                className={styles.secondaryButton}
+                aria-label="Browse resume clusters and categories"
+                prefetch={false}
+              >
+                <FiLayers className={styles.buttonIcon} />
+                <span className={styles.buttonText}>Resume Clusters</span>
               </Link>
             </div>
 

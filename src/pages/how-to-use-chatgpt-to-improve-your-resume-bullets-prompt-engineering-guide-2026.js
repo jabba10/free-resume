@@ -238,7 +238,7 @@ After ChatGPT + Verification:
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/chatgpt-resume-guide/" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" />
         
         {/* Static dates from getStaticProps */}
         <meta name="date" content={currentDate} />
@@ -247,7 +247,7 @@ After ChatGPT + Verification:
         <meta property="og:title" content="How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026" />
         <meta property="og:description" content="Master ChatGPT for resume optimization. Learn prompt engineering techniques to transform basic job descriptions into powerful, ATS-friendly resume bullet points." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/chatgpt-resume-guide-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/chatgpt-resume-guide" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
@@ -294,7 +294,7 @@ After ChatGPT + Verification:
               "dateModified": lastModifiedDate.split('T')[0],
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/chatgpt-resume-guide"
+                "@id": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026"
               },
               "articleSection": "AI Career Tools",
               "keywords": "ChatGPT resume, AI resume writing, prompt engineering, resume optimization, career tools, artificial intelligence",
@@ -375,14 +375,14 @@ After ChatGPT + Verification:
                 {
                   "@type": "ListItem",
                   "position": 2,
-                  "name": "AI Career Tools",
-                  "item": "https://www.professionalresumefree.com/ai-career-tools"
+                  "name": "Free Resume Tools",
+                  "item": "https://www.professionalresumefree.com/free-resume-tools"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "ChatGPT Resume Guide 2026",
-                  "item": "https://www.professionalresumefree.com/chatgpt-resume-guide"
+                  "item": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026"
                 }
               ]
             })
@@ -410,7 +410,7 @@ After ChatGPT + Verification:
                 "position": index + 1,
                 "name": section.title,
                 "text": section.content,
-                "url": `https://www.professionalresumefree.com/chatgpt-resume-guide#step-${index + 1}`
+                "url": `https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#step-${index + 1}`
               }))
             })
           }}

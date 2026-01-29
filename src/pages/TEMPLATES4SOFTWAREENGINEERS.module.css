@@ -1,0 +1,455 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.main {
+  width: 100%;
+  max-width: 1200px;
+  padding: 32px 24px 64px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Universal box-sizing and overflow prevention without "*" */
+.page *,
+.main * {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Ensure text doesn't cause horizontal overflow */
+.page p,
+.page h1,
+.page h2,
+.page h3,
+.page h4,
+.page h5,
+.page h6,
+.page li,
+.page td,
+.page th,
+.page span,
+.page a,
+.main p,
+.main h1,
+.main h2,
+.main h3,
+.main h4,
+.main h5,
+.main h6,
+.main li,
+.main td,
+.main th,
+.main span,
+.main a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.heroContent {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #000000;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  text-align: center;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 28px;
+  text-align: center;
+  max-width: 100%;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid #000000;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  min-width: 180px;
+  text-align: center;
+}
+
+.secondaryButton {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.helperText {
+  font-size: 14px;
+  color: #333333;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.tocSection {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  margin: 0 0 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.subheading {
+  font-size: 20px;
+  margin: 20px 0 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.paragraph {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+  text-align: center;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 24px 0 24px;
+  width: 100%;
+}
+
+.card {
+  background-color: #f2f2f2;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.cardTitle {
+  font-size: 18px;
+  margin: 0 0 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.tocList {
+  margin: 0;
+  padding-left: 22px;
+  font-size: 17px;
+  width: 100%;
+}
+
+.anchorLink {
+  color: #000000;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.inlineLink {
+  color: #000000;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.list {
+  margin: 12px 0 0;
+  padding-left: 22px;
+  font-size: 17px;
+  width: 100%;
+  text-align: left;
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.faqItem {
+  background-color: #f2f2f2;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.faqQuestion {
+  font-size: 18px;
+  margin: 0 0 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #000000;
+  padding: 12px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.visualPlaceholder {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px dashed #000000;
+  background-color: #f9f9f9;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visualText {
+  font-size: 15px;
+  margin: 0;
+  text-align: center;
+}
+
+.inlineLink:hover,
+.anchorLink:hover {
+  text-decoration-style: solid;
+}
+
+/* Center all text elements within main */
+.main h1,
+.main h2,
+.main h3,
+.main h4,
+.main h5,
+.main h6,
+.main p,
+.main li,
+.main span {
+  text-align: center;
+}
+
+/* Ensure buttons don't overflow on small screens */
+.primaryButton, .secondaryButton {
+  white-space: normal;
+  word-break: break-word;
+}
+
+@media (max-width: 1024px) {
+  .main {
+    padding: 28px 20px 56px;
+    max-width: 95%;
+  }
+  
+  .title {
+    font-size: 32px;
+  }
+  
+  .subtitle {
+    font-size: 17px;
+  }
+  
+  .sectionTitle {
+    font-size: 26px;
+  }
+  
+  .cardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 24px 16px 48px;
+  }
+  
+  .title {
+    font-size: 28px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+  }
+  
+  .subheading {
+    font-size: 19px;
+  }
+  
+  .paragraph {
+    font-size: 16px;
+  }
+  
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+  
+  .heroActions {
+    flex-direction: column;
+  }
+  
+  .table {
+    min-width: 100%;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 20px 12px 40px;
+  }
+  
+  .title {
+    font-size: 24px;
+    padding: 0 8px;
+  }
+  
+  .subtitle {
+    font-size: 15px;
+    padding: 0 8px;
+  }
+  
+  .sectionTitle {
+    font-size: 22px;
+    padding: 0 8px;
+  }
+  
+  .subheading {
+    font-size: 18px;
+    padding: 0 8px;
+  }
+  
+  .paragraph {
+    font-size: 15px;
+    padding: 0 8px;
+  }
+  
+  .badge {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+  
+  .card,
+  .faqItem {
+    padding: 16px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+}

@@ -228,7 +228,7 @@ const ATSGuide = ({ currentDate, lastModifiedDate }) => {
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-optimization-guide/" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" />
         
         {/* Static dates from getStaticProps */}
         <meta name="date" content={currentDate} />
@@ -237,7 +237,7 @@ const ATSGuide = ({ currentDate, lastModifiedDate }) => {
         <meta property="og:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring Software 2026" />
         <meta property="og:description" content="Master ATS optimization for 2026. Learn proven strategies to ensure your resume passes Applicant Tracking Systems and reaches hiring managers with our comprehensive guide." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/ats-optimization-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-optimization-guide" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
@@ -284,7 +284,7 @@ const ATSGuide = ({ currentDate, lastModifiedDate }) => {
               "dateModified": lastModifiedDate.split('T')[0],
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/ats-optimization-guide"
+                "@id": "https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software"
               },
               "articleSection": "Career Resources",
               "keywords": "ATS optimization, resume writing, job search, career advice, hiring software, resume screening",
@@ -366,13 +366,13 @@ const ATSGuide = ({ currentDate, lastModifiedDate }) => {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Career Resources",
-                  "item": "https://www.professionalresumefree.com/career-resources"
+                  "item": "https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "ATS Optimization Guide 2026",
-                  "item": "https://www.professionalresumefree.com/ats-optimization-guide"
+                  "item": "https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software"
                 }
               ]
             })
@@ -400,7 +400,7 @@ const ATSGuide = ({ currentDate, lastModifiedDate }) => {
                 "position": index + 1,
                 "name": section.title,
                 "text": section.content,
-                "url": `https://www.professionalresumefree.com/ats-optimization-guide#step-${index + 1}`
+                "url": `https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software#step-${index + 1}`
               }))
             })
           }}

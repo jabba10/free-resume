@@ -219,7 +219,7 @@ const ProfessionalSummaryGuide = ({ currentDate, lastModifiedDate }) => {
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/professional-summary-guide/" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" />
         
         {/* Static dates from getStaticProps */}
         <meta name="date" content={currentDate} />
@@ -228,7 +228,7 @@ const ProfessionalSummaryGuide = ({ currentDate, lastModifiedDate }) => {
         <meta property="og:title" content="How to Write a Professional Summary That Hooks Recruiters in 6 Seconds" />
         <meta property="og:description" content="Learn to write professional summaries that capture attention in 6 seconds. Get examples for every career level and industry with proven formulas that work." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/professional-summary-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/professional-summary-guide" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
         <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
@@ -275,7 +275,7 @@ const ProfessionalSummaryGuide = ({ currentDate, lastModifiedDate }) => {
               "dateModified": lastModifiedDate.split('T')[0],
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/professional-summary-guide"
+                "@id": "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds"
               },
               "articleSection": "Career Resources",
               "keywords": "professional summary, resume writing, career advice, job search, resume tips",
@@ -357,13 +357,13 @@ const ProfessionalSummaryGuide = ({ currentDate, lastModifiedDate }) => {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Career Resources",
-                  "item": "https://www.professionalresumefree.com/career-resources"
+                  "item": "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Professional Summary Guide",
-                  "item": "https://www.professionalresumefree.com/professional-summary-guide"
+                  "item": "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds"
                 }
               ]
             })
@@ -391,7 +391,7 @@ const ProfessionalSummaryGuide = ({ currentDate, lastModifiedDate }) => {
                 "position": index + 1,
                 "name": section.title,
                 "text": section.content,
-                "url": `https://www.professionalresumefree.com/professional-summary-guide#step-${index + 1}`
+                "url": `https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds#step-${index + 1}`
               }))
             })
           }}
