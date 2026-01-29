@@ -21,7 +21,6 @@ import {
   FiEdit,
   FiBarChart,
   FiTarget,
-
   FiLayers
 } from 'react-icons/fi';
 import styles from './LandingPage.module.css';
@@ -423,8 +422,16 @@ const LandingPage = ({
                       },
                       "itemReviewed": {
                         "@type": "SoftwareApplication",
-                        "name": "Professional Resume Free Builder",
-                        "applicationCategory": "BusinessApplication"
+                        "name": "Professional Resume Free Builder - ATS Optimized Resume Maker",
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "Any",
+                        "offers": {
+                          "@type": "Offer",
+                          "price": "0",
+                          "priceCurrency": "USD"
+                        },
+                        "description": "Free online ATS-friendly resume builder that helps job seekers create professional resumes and land interviews faster.",
+                        "url": "https://www.professionalresumefree.com"
                       }
                     }
                   }))
@@ -783,9 +790,7 @@ const LandingPage = ({
               <li><Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className={styles.additionalLink}>How to Use Artificial Intelligence to Write Your Best Resume?</Link></li>
               <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2025" className={styles.additionalLink}>How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026?</Link></li>
               <li><Link href="/best-resume-templates-to-past-applicant-tracking-system" className={styles.additionalLink}>Best Resume Templates to Past Applicant Tracking System?</Link></li>
-              
             </ul>
-  
           </div>
           <div className={styles.sectionCta}>
             <Link href="/resume-templates" className={styles.sectionButton}>
