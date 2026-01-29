@@ -25,7 +25,6 @@ import {
 } from 'react-icons/fi';
 import styles from './LandingPage.module.css';
 
-// Main Page Component
 const LandingPage = ({ 
   seoData,
   buildTimestamp
@@ -47,7 +46,6 @@ const LandingPage = ({
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
-  // Define FAQs and testimonials here before using them in JSON-LD
   const testimonials = [
     {
       quote: "Built my ATS-optimized resume in 10 minutes and landed interviews the same week. The free resume builder is incredible!",
@@ -121,29 +119,19 @@ const LandingPage = ({
   ];
 
   return (
-    <div 
-      className={styles.landingPage} 
-      itemScope 
-      itemType="https://schema.org/WebPage"
-      lang="en-US"
-    >
+    <div className={styles.landingPage} lang="en-US">
       <Head>
-        <title itemProp="name">Free Resume Builder Online - ATS Friendly Templates 2026 | Professional Resume Maker</title>
+        <title>Free Resume Builder Online - ATS Friendly Templates 2026 | Professional Resume Maker</title>
         <meta name="title" content="Free Resume Builder Online - ATS Friendly Templates 2026 | Professional Resume Maker" />
         <meta name="description" content="Create professional ATS-optimized resumes for free. Land interviews 3x faster with our resume builder. ATS-optimized templates, instant PDF download. Trusted by 4M+ job seekers worldwide." />
-        
         <meta name="keywords" content="free resume builder, ATS friendly resume, professional resume maker, resume templates 2026, online resume creator, download resume PDF, no sign up, ATS optimized resume, best free resume builder, resume builder for students" />
-        
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
-        
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
         <link rel="canonical" href="https://www.professionalresumefree.com/" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-US" />
@@ -151,7 +139,6 @@ const LandingPage = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="x-default" />
-
         <meta property="og:title" content="Free Resume Builder Online - ATS Friendly Templates 2026 | Professional Resume Maker" />
         <meta property="og:description" content="Create professional ATS-optimized resumes for free. Land interviews 3x faster. ATS-optimized templates, instant PDF download. Trusted by 4M+ job seekers." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-builder-preview.jpg" />
@@ -166,7 +153,6 @@ const LandingPage = ({
         <meta property="og:locale:alternate" content="en_CA" />
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
-        
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Builder Online - ATS Friendly Templates 2026" />
         <meta name="twitter:description" content="Create professional ATS-optimized resumes for free. Land interviews 3x faster. ATS-optimized templates, instant PDF download." />
@@ -174,14 +160,12 @@ const LandingPage = ({
         <meta name="twitter:image:alt" content="Free Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
-
         <meta name="theme-color" content="#667eea" />
         <meta name="msapplication-TileColor" content="#667eea" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-
         <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -265,7 +249,7 @@ const LandingPage = ({
                     "aggregateRating": {
                       "@type": "AggregateRating",
                       "ratingValue": "4.9",
-                      "ratingCount": 4365,
+                      "ratingCount": 50365,
                       "bestRating": "5",
                       "worstRating": "1"
                     },
@@ -447,51 +431,43 @@ const LandingPage = ({
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
-      {/* Breadcrumb Navigation */}
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-        <ol itemScope itemType="https://schema.org/BreadcrumbList">
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <Link href="/" itemProp="item" className={styles.breadcrumbLink}>
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink}>
               <FiHome className={styles.breadcrumbIcon} />
-              <span itemProp="name" className={styles.breadcrumbText}>No Sign Up Required Free Forever</span>
+              <span className={styles.breadcrumbText}>No Sign Up Required Free Forever</span>
             </Link>
-            <meta itemProp="position" content="1" />
           </li>
           <li className={styles.breadcrumbSeparator}>
             <FiChevronRight />
           </li>
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <Link href="/resume-templates" itemProp="item" className={styles.breadcrumbLink}>
-              <span itemProp="name" className={styles.breadcrumbText}>Free Resume Builder</span>
+          <li>
+            <Link href="/resume-templates" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText}>Free Resume Builder</span>
             </Link>
-            <meta itemProp="position" content="2" />
           </li>
         </ol>
       </nav>
 
-      {/* Hero Section */}
-      <section className={styles.heroSection} itemScope itemType="https://schema.org/WPHeader">
+      <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            {/* Trust Badge */}
-            <div className={styles.trustBadge} itemScope itemType="https://schema.org/AggregateRating">
+            <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated <span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> by <span itemProp="ratingCount">50,365</span>+ Users | Best Free Resume Builder 2026
+                Rated 4.9/5 by 50,365+ Users | Best Free Resume Builder 2026
               </span>
             </div>
             
-            {/* Hero Title */}
-            <h1 className={styles.heroTitle} itemProp="headline">
+            <h1 className={styles.heroTitle}>
               Free Professional Resume Builder <span className={styles.gradientText}>Loved by 4M+ Job Seekers</span>
             </h1>
             
-            {/* Hero Subtitle */}
-            <p className={styles.heroSubtitle} itemProp="description">
+            <p className={styles.heroSubtitle}>
               Create a <strong className={styles.heroHighlight}>professional, ATS-optimized resume for free in minutes.</strong> Our resume builder ensures your resume passes automated employer tracking systems and gets you noticed.
             </p>
 
-            {/* Hero CTA */}
             <div className={styles.ctaButtons}>
               <Link
                 href="/resume-templates"
@@ -504,7 +480,6 @@ const LandingPage = ({
                 <div className={styles.buttonPulse}></div>
               </Link>
               
-              {/* New Button 1: Free Resume Tools */}
               <Link
                 href="/free-resume-tools"
                 className={styles.secondaryButton}
@@ -515,7 +490,6 @@ const LandingPage = ({
                 <span className={styles.buttonText}>Free Resume Tools</span>
               </Link>
               
-              {/* New Button 2: Resume Clusters */}
               <Link
                 href="/complete-resume-resource-library"
                 className={styles.secondaryButton}
@@ -527,10 +501,9 @@ const LandingPage = ({
               </Link>
             </div>
 
-            {/* Hero Stats */}
-            <div className={styles.heroStats} itemScope itemType="https://schema.org/Organization">
+            <div className={styles.heroStats}>
               <div className={styles.statItem}>
-                <span className={styles.statNumber} itemProp="numberOfEmployees">4M+</span>
+                <span className={styles.statNumber}>4M+</span>
                 <span className={styles.statLabel}>Resumes Created</span>
               </div>
               <div className={styles.statItem}>
@@ -547,7 +520,6 @@ const LandingPage = ({
               </div>
             </div>
 
-            {/* Press Logos */}
             <div className={styles.pressLogos}>
               <p className={styles.pressLogosTitle}>Professional Resumes. Zero Cost. ATS Optimized.</p>
               <div className={styles.logoGrid}>
@@ -558,7 +530,6 @@ const LandingPage = ({
               </div>
             </div>
 
-            {/* Industry Badges */}
             <div className={styles.industryBadges}>
               {industries.slice(0, 8).map((industry, index) => (
                 <Link
@@ -576,7 +547,6 @@ const LandingPage = ({
         </div>
       </section>
 
-      {/* Features Section */}
       <section className={styles.featuresSection} aria-labelledby="features-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -609,7 +579,6 @@ const LandingPage = ({
         </div>
       </section>
 
-      {/* Templates Section */}
       <section className={styles.industriesSection} aria-labelledby="templates-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -662,7 +631,6 @@ const LandingPage = ({
         </div>
       </section>
 
-      {/* Comparison Section */}
       <section className={styles.comparisonSection} aria-labelledby="comparison-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -725,7 +693,6 @@ const LandingPage = ({
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className={styles.testimonialsSection} aria-labelledby="testimonials-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -738,7 +705,7 @@ const LandingPage = ({
             {testimonials.map((testimonial, index) => (
               <div key={index} className={styles.testimonialCard}>
                 <div className={styles.quoteMark} aria-hidden="true">"</div>
-                <p className={styles.quote} itemProp="reviewBody">"{testimonial.quote}"</p>
+                <p className={styles.quote}>"{testimonial.quote}"</p>
                 <div className={styles.testimonialMetric}>
                   <FiCheck className={styles.metricIcon} />
                   <span className={styles.metricText}>{testimonial.metric}</span>
@@ -762,7 +729,6 @@ const LandingPage = ({
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
@@ -801,7 +767,6 @@ const LandingPage = ({
         </div>
       </section>
 
-      {/* Final CTA Section */}
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
@@ -849,7 +814,6 @@ const LandingPage = ({
   );
 };
 
-// Helper function to get template icons
 const getTemplateIcon = (slug) => {
   switch(slug) {
     case 'software-engineer-resume':
@@ -869,7 +833,6 @@ const getTemplateIcon = (slug) => {
   }
 };
 
-// Data arrays
 const industries = [
   { title: "Software Development", slug: "software-development" },
   { title: "Healthcare & Nursing", slug: "healthcare-nursing" },
@@ -930,7 +893,6 @@ const industryTemplates = [
   { title: "Customer Service Resume", count: "Client-Focused Professional Design", slug: "customer-service-resume" },
 ];
 
-// ISR enabled for better SEO freshness
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
@@ -959,8 +921,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    // Enable ISR for better SEO freshness
-    revalidate: 21600 // 6 hours
+    revalidate: 3600
   };
 }
 
