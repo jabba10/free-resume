@@ -7,7 +7,7 @@ export async function getStaticProps() {
     props: {
       lastUpdated: new Date().toISOString().split('T')[0],
     },
-    revalidate: 7200, // ISR: Regenerate every 2 hours
+    revalidate: 3600, // ISR: Regenerate every 2 hours
   };
 }
 

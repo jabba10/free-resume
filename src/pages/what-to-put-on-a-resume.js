@@ -7,7 +7,7 @@ export async function getStaticProps() {
     props: {
       lastUpdated: new Date().toISOString().split('T')[0],
     },
-    revalidate: 7200, // ISR: Regenerate every 2 hours
+    revalidate: 3600, // ISR: Regenerate every 2 hours
   };
 }
 
@@ -85,7 +85,7 @@ export default function WhatToPutOnResume({ lastUpdated }) {
                 {
                   "@type": "ListItem",
                   "position": 2,
-                  "name": "Guides",
+                  "name": "What to Put on a Resume",
                   "item": "https://www.professionalresumefree.com/what-to-put-on-a-resume"
                 },
                 {
@@ -132,7 +132,7 @@ export default function WhatToPutOnResume({ lastUpdated }) {
         <header className={styles.header}>
           <div className={styles.breadcrumb}>
             <Link href="/">Home</Link> &gt; 
-            <Link href="/what-to-put-on-a-resume">Guides</Link> &gt; 
+            <Link href="/what-to-put-on-a-resume">What to Put on a Resume</Link> &gt; 
             <span>What to Put on a Resume</span>
           </div>
           <h1 className={styles.title}>WHAT TO PUT ON A RESUME: The Complete 2026 Guide</h1>

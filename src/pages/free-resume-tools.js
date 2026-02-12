@@ -55,6 +55,12 @@ const ResumeToolsPage = ({
       icon: <FiEdit className={styles.toolIcon} />
     },
     { 
+      href: '/free-cover-letter-generator', 
+      label: 'Free Cover Letter Generator',
+      description: 'Generate compelling cover letters that get interviews.',
+      icon: <FiFileText className={styles.toolIcon} />
+    },
+    { 
       href: '/free-resume-keyword-matcher', 
       label: 'Free Resume Keyword Matcher',
       description: 'Match your resume keywords with job descriptions for better ATS compatibility.',
@@ -96,6 +102,12 @@ const ResumeToolsPage = ({
       description: 'Find powerful action verbs to make your bullet points more impactful.',
       icon: <FiEdit className={styles.toolIcon} />
     },
+    { 
+      href: '/free-resume-bullet-point-generator', 
+      label: 'Free Resume Bullet Point Generator',
+      description: 'Generate compelling bullet points that grab recruiters attention.',
+      icon: <FiStar className={styles.toolIcon} />
+    }
   ];
 
   return (
@@ -432,11 +444,11 @@ const ResumeToolsPage = ({
             </p>
             <div className={styles.ctaButtons}>
               <Link
-                href="#tools-title"
+                href="/resume-templates"
                 className={styles.ctaButton}
-                aria-label="Browse all free resume tools"
+                aria-label="Browse all free resume templates"
               >
-                <span className={styles.ctaButtonText}>Browse All Tools</span>
+                <span className={styles.ctaButtonText}>Browse All Templates</span>
                 <FiArrowRight className={styles.ctaButtonIcon} />
               </Link>
             </div>
@@ -469,7 +481,7 @@ export async function getStaticProps() {
       buildTimestamp
     },
     // Enable ISR for better SEO freshness
-    revalidate: 21600 // 6 hours
+    revalidate: 3600 // 6 hours
   };
 }
 

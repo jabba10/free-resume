@@ -3,8 +3,27 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from './ChatGPTResumeGuide.module.css';
 
-const ChatGPTResumeGuide = ({ currentDate, lastModifiedDate }) => {
+const ChatGPTResumeGuide = ({ 
+  seoData,
+  buildTimestamp 
+}) => {
   const [activeSection, setActiveSection] = useState(0);
+
+  // Destructure SEO data with fallbacks
+  const {
+    currentDate = new Date().toISOString().split('T')[0],
+    lastModifiedDate = new Date().toISOString(),
+    faqDates = [],
+    breadcrumbData
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : currentDate;
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeFaqDates = faqDates || Array(4).fill(freshnessIndicator);
 
   const guideSections = [
     {
@@ -169,286 +188,384 @@ After ChatGPT + Verification:
     }
   ];
 
+  // FAQ Data
+  const faqs = [
+    {
+      question: "How effective is ChatGPT for resume writing compared to traditional methods?",
+      answer: "ChatGPT can improve resume writing effectiveness by up to 85% in ATS compatibility and generate bullet points that are 3-5x more impactful than traditional methods. The key is proper prompt engineering and combining AI suggestions with personal customization."
+    },
+    {
+      question: "What are the most important elements of effective ChatGPT prompts for resumes?",
+      answer: "The most important elements are: providing specific context about your industry and role, including target keywords from job descriptions, requesting quantifiable metrics, asking for multiple variations, and specifying desired tone and format. Specificity and context lead to better AI-generated content."
+    },
+    {
+      question: "Can ChatGPT help with ATS (Applicant Tracking System) optimization?",
+      answer: "Yes, ChatGPT can significantly improve ATS optimization by naturally incorporating keywords from job descriptions, using industry-standard terminology, and structuring content in ways that are easily parsed by automated systems. Properly engineered prompts can increase ATS compatibility by up to 85%."
+    },
+    {
+      question: "How can I ensure ChatGPT-generated resume content remains authentic to my voice?",
+      answer: "To maintain authenticity: always fact-check AI-generated content, verify specific numbers and achievements, customize generic AI suggestions with your personal experiences, maintain consistent tone across all sections, and get feedback from industry professionals. Use ChatGPT as an enhancement tool, not a replacement for your voice."
+    }
+  ];
+
+  // SEO Keywords
+  const seoKeywords = [
+    "ChatGPT resume",
+    "AI resume writing",
+    "ChatGPT prompts resume",
+    "resume bullet points ChatGPT",
+    "AI resume optimization",
+    "ChatGPT job description",
+    "prompt engineering resume",
+    "AI resume tips",
+    "ChatGPT resume builder",
+    "resume writing with AI",
+    "ChatGPT resume examples",
+    "AI resume improvement",
+    "ChatGPT career",
+    "resume bullet generator",
+    "AI writing assistant resume",
+    "ChatGPT resume help",
+    "professional resume AI",
+    "resume optimization AI",
+    "ChatGPT resume prompts",
+    "AI resume enhancement",
+    "ChatGPT resume writing",
+    "resume improvement AI",
+    "ChatGPT career advice",
+    "AI resume maker",
+    "ChatGPT resume template",
+    "resume bullet points AI",
+    "ChatGPT resume assistance",
+    "AI resume generator",
+    "ChatGPT resume optimization",
+    "resume writing prompts",
+    "ChatGPT job search",
+    "AI resume editing",
+    "ChatGPT resume format",
+    "resume bullet improvement",
+    "ChatGPT resume skills",
+    "AI resume writing service",
+    "ChatGPT resume tips",
+    "resume enhancement AI",
+    "ChatGPT career development",
+    "AI resume tools"
+  ];
+
+  // Current year
+  const currentYear = new Date().getFullYear();
+
   // Simple icons using emoji/text
   const icons = {
-    chat: "💬",
-    target: "🎯",
-    trendingUp: "📈",
-    fileText: "📄",
-    check: "✅",
-    zap: "⚡",
-    edit: "✏️",
-    copy: "📋",
-    brain: "🧠",
-    rocket: "🚀",
-    chart: "📊",
-    magic: "✨",
-    download: "⬇️",
-    arrowRight: "→"
+    chat: "",
+    target: "",
+    trendingUp: "",
+    fileText: "",
+    check: "",
+    zap: "",
+    edit: "",
+    copy: "",
+    brain: "",
+    rocket: "",
+    chart: "",
+    magic: "",
+    download: "⬇",
+    arrowRight: "",
+    home: ""
   };
 
   return (
-    <div className={styles.chatGPTGuide}>
+    <div className={styles.chatGPTGuide} lang="en-US">
       <Head>
-        <title>How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026</title>
-        <meta name="title" content="How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026" />
-        <meta name="description" content="Master ChatGPT for resume optimization. Learn prompt engineering techniques to transform basic job descriptions into powerful, ATS-friendly resume bullet points that get 85% more interviews." />
-        <meta name="keywords" content="
-          ChatGPT resume,
-          AI resume writing,
-          ChatGPT prompts resume,
-          resume bullet points ChatGPT,
-          AI resume optimization,
-          ChatGPT job description,
-          prompt engineering resume,
-          AI resume tips,
-          ChatGPT resume builder,
-          resume writing with AI,
-          ChatGPT resume examples,
-          AI resume improvement,
-          ChatGPT career,
-          resume bullet generator,
-          AI writing assistant resume,
-          ChatGPT resume help,
-          professional resume AI,
-          resume optimization AI,
-          ChatGPT resume prompts,
-          AI resume enhancement,
-          ChatGPT resume writing,
-          resume improvement AI,
-          ChatGPT career advice,
-          AI resume maker,
-          ChatGPT resume template,
-          resume bullet points AI,
-          ChatGPT resume assistance,
-          AI resume generator,
-          ChatGPT resume optimization,
-          resume writing prompts,
-          ChatGPT job search,
-          AI resume editing,
-          ChatGPT resume format,
-          resume bullet improvement,
-          ChatGPT resume skills,
-          AI resume writing service,
-          ChatGPT resume tips,
-          resume enhancement AI,
-          ChatGPT career development,
-          AI resume tools
-        " />
-        <meta name="author" content="ProfessionalResumeFree" />
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" />
+        {/* Primary Meta Tags */}
+        <title>How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide {currentYear} | AI Resume Optimization</title>
+        <meta name="title" content={`How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide ${currentYear} | AI Resume Optimization`} />
+        <meta name="description" content={`Master ChatGPT for resume optimization. Learn advanced prompt engineering techniques to transform basic job descriptions into powerful, ATS-friendly resume bullet points that get 85% more interviews. ${currentYear} Edition.`} />
+        <meta name="keywords" content={seoKeywords.join(', ')} />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
-        {/* Static dates from getStaticProps */}
-        <meta name="date" content={currentDate} />
-        <meta name="last-modified" content={lastModifiedDate} />
-
-        <meta property="og:title" content="How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026" />
+        {/* Technical SEO */}
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="1 days" />
+        
+        {/* Canonical & Sitemap */}
+        <link rel="canonical" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* Hreflang for International SEO */}
+        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" hreflang="x-default" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content={`How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide ${currentYear}`} />
         <meta property="og:description" content="Master ChatGPT for resume optimization. Learn prompt engineering techniques to transform basic job descriptions into powerful, ATS-friendly resume bullet points." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/chatgpt-resume-guide-preview.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="ChatGPT Resume Guide - AI Resume Optimization 2026" />
         <meta property="og:url" content="https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="ProfessionalResumeFree" />
-        <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
-        <meta property="article:modified_time" content={lastModifiedDate} />
-        <meta property="article:author" content="ProfessionalResumeFree" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta property="article:published_time" content={`${safeCurrentDate}T00:00:00+00:00`} />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
+        <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="AI Career Tools" />
         <meta property="article:tag" content="ChatGPT, resume writing, AI, prompt engineering, career optimization" />
-
+        
+        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ChatGPT Resume Guide: Master Prompt Engineering for Better Job Descriptions" />
+        <meta name="twitter:title" content={`ChatGPT Resume Guide ${currentYear}: Master Prompt Engineering for Better Job Descriptions`} />
         <meta name="twitter:description" content="Learn to use ChatGPT for resume optimization. Transform basic job duties into powerful bullet points with 85% better ATS compatibility." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/chatgpt-resume-guide-preview.jpg" />
-        <meta name="twitter:site" content="@ProfResumeFree" />
-        <meta name="twitter:creator" content="@ProfResumeFree" />
+        <meta name="twitter:image:alt" content="ChatGPT Resume Optimization Guide" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         <meta name="twitter:label1" content="Reading time" />
         <meta name="twitter:data1" content="10 minutes" />
         <meta name="twitter:label2" content="ATS improvement" />
         <meta name="twitter:data2" content="85%" />
-
-        {/* Article JSON-LD */}
+        
+        {/* PWA & Browser */}
+        <meta name="theme-color" content="#111111" />
+        <meta name="msapplication-TileColor" content="#111111" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Comprehensive Structured Data */}
         <script
           type="application/ld+json"
+          key="structured-data"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Article",
-              "headline": "How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026",
-              "description": "A comprehensive guide to using ChatGPT for resume optimization, including prompt engineering techniques, industry-specific examples, and strategies for creating ATS-friendly resume bullet points.",
-              "image": "https://www.professionalresumefree.com/images/chatgpt-resume-guide-preview.jpg",
-              "author": {
-                "@type": "Organization",
-                "name": "ProfessionalResumeFree",
-                "url": "https://www.professionalresumefree.com"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "ProfessionalResumeFree",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://www.professionalresumefree.com/images/logo.png"
-                }
-              },
-              "datePublished": currentDate,
-              "dateModified": lastModifiedDate.split('T')[0],
-              "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026"
-              },
-              "articleSection": "AI Career Tools",
-              "keywords": "ChatGPT resume, AI resume writing, prompt engineering, resume optimization, career tools, artificial intelligence",
-              "speakable": {
-                "@type": "SpeakableSpecification",
-                "xpath": [
-                  "/html/head/title",
-                  "/html/head/meta[@name='description']/@content"
-                ]
-              }
-            })
-          }}
-        />
-
-        {/* FAQPage JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
+              "@graph": [
                 {
-                  "@type": "Question",
-                  "name": "How effective is ChatGPT for resume writing compared to traditional methods?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "ChatGPT can improve resume writing effectiveness by up to 85% in ATS compatibility and generate bullet points that are 3-5x more impactful than traditional methods. The key is proper prompt engineering and combining AI suggestions with personal customization.",
-                    "dateCreated": currentDate
+                  "@type": "Article",
+                  "@id": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#article",
+                  "headline": `How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide ${currentYear}`,
+                  "description": "A comprehensive guide to using ChatGPT for resume optimization, including prompt engineering techniques, industry-specific examples, and strategies for creating ATS-friendly resume bullet points.",
+                  "image": "https://www.professionalresumefree.com/images/chatgpt-resume-guide-preview.jpg",
+                  "author": {
+                    "@type": "Organization",
+                    "@id": "https://www.professionalresumefree.com/#organization",
+                    "name": "Professional Resume Free",
+                    "url": "https://www.professionalresumefree.com",
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "width": 512,
+                      "height": 512
+                    },
+                    "sameAs": [
+                      "https://twitter.com/ProResumeFree",
+                      "https://www.linkedin.com/company/professional-resume-free",
+                      "https://www.facebook.com/ProfessionalResumeFree"
+                    ]
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free",
+                    "url": "https://www.professionalresumefree.com"
+                  },
+                  "datePublished": "2024-01-01",
+                  "dateModified": safeLastModifiedDate,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.professionalresumefree.com/#website",
+                    "url": "https://www.professionalresumefree.com",
+                    "name": "Professional Resume Free",
+                    "description": "Free online resume tools for job seekers"
+                  },
+                  "articleSection": "AI Career Tools",
+                  "keywords": seoKeywords.slice(0, 10).join(', '),
+                  "speakable": {
+                    "@type": "SpeakableSpecification",
+                    "cssSelector": [".heroTitle", ".heroSubtitle", ".sectionTitle", ".faqQuestion"]
+                  },
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#webpage"
+                  },
+                  "wordCount": 3500,
+                  "timeRequired": "PT10M"
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#webpage",
+                  "url": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026",
+                  "name": `How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide ${currentYear}`,
+                  "description": "Master ChatGPT for resume optimization. Learn advanced prompt engineering techniques to create ATS-friendly resume bullet points.",
+                  "datePublished": "2024-01-01",
+                  "dateModified": safeLastModifiedDate,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.professionalresumefree.com/#website"
+                  },
+                  "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                      {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.professionalresumefree.com"
+                      },
+                      {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Free Resume Tools",
+                        "item": "https://www.professionalresumefree.com/free-resume-tools"
+                      },
+                      {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "ChatGPT Resume Guide",
+                        "item": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026"
+                      }
+                    ]
+                  },
+                  "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "https://www.professionalresumefree.com/images/chatgpt-resume-guide-preview.jpg",
+                    "width": 1200,
+                    "height": 630
                   }
                 },
                 {
-                  "@type": "Question",
-                  "name": "What are the most important elements of effective ChatGPT prompts for resumes?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "The most important elements are: providing specific context about your industry and role, including target keywords from job descriptions, requesting quantifiable metrics, asking for multiple variations, and specifying desired tone and format. Specificity and context lead to better AI-generated content.",
-                    "dateCreated": currentDate
+                  "@type": "FAQPage",
+                  "@id": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#faqpage",
+                  "mainEntity": faqs.map((faq, index) => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": faq.answer,
+                      "datePublished": safeFaqDates[index] || safeCurrentDate,
+                      "author": {
+                        "@type": "Person",
+                        "name": "AI Resume Expert"
+                      }
+                    },
+                    "mainEntityOfPage": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#webpage"
+                  }))
+                },
+                {
+                  "@type": "HowTo",
+                  "name": "How to Use ChatGPT for Resume Optimization",
+                  "description": "Step-by-step guide to using ChatGPT for improving resume bullet points through effective prompt engineering",
+                  "totalTime": "PT15M",
+                  "estimatedCost": {
+                    "@type": "MonetaryAmount",
+                    "currency": "USD",
+                    "value": "0"
+                  },
+                  "step": guideSections.map((section, index) => ({
+                    "@type": "HowToStep",
+                    "position": index + 1,
+                    "name": section.title,
+                    "text": section.content,
+                    "url": `https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#step-${index + 1}`
+                  }))
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "ChatGPT Resume Optimization Guide",
+                  "applicationCategory": "BusinessApplication",
+                  "operatingSystem": "Any",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "priceValidUntil": `${currentYear + 1}-12-31`
+                  },
+                  "description": "Comprehensive guide for using ChatGPT to optimize resumes through advanced prompt engineering",
+                  "featureList": [
+                    "Advanced Prompt Engineering Techniques",
+                    "Industry-Specific Examples",
+                    "ATS Optimization Strategies",
+                    "Quantification Methods",
+                    "Authenticity Verification"
+                  ],
+                  "softwareVersion": `${currentYear}.1.0`,
+                  "applicationSuite": "AI Career Tools",
+                  "countriesSupported": "Global"
+                },
+                {
+                  "@type": "Service",
+                  "serviceType": "AI Resume Optimization Guidance",
+                  "provider": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free",
+                    "url": "https://www.professionalresumefree.com"
+                  },
+                  "description": "Free ChatGPT resume optimization guide and prompt engineering tutorials",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
                   }
                 },
                 {
-                  "@type": "Question",
-                  "name": "Can ChatGPT help with ATS (Applicant Tracking System) optimization?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes, ChatGPT can significantly improve ATS optimization by naturally incorporating keywords from job descriptions, using industry-standard terminology, and structuring content in ways that are easily parsed by automated systems. Properly engineered prompts can increase ATS compatibility by up to 85%.",
-                    "dateCreated": currentDate
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "How can I ensure ChatGPT-generated resume content remains authentic to my voice?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "To maintain authenticity: always fact-check AI-generated content, verify specific numbers and achievements, customize generic AI suggestions with your personal experiences, maintain consistent tone across all sections, and get feedback from industry professionals. Use ChatGPT as an enhancement tool, not a replacement for your voice.",
-                    "dateCreated": currentDate
-                  }
+                  "@type": "SpeakableSpecification",
+                  "cssSelector": [".heroTitle", ".heroSubtitle", ".faqQuestion h3"]
                 }
               ]
-            })
-          }}
-        />
-
-        {/* BreadcrumbList JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://www.professionalresumefree.com"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Free Resume Tools",
-                  "item": "https://www.professionalresumefree.com/free-resume-tools"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": "ChatGPT Resume Guide 2026",
-                  "item": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026"
-                }
-              ]
-            })
-          }}
-        />
-
-        {/* HowTo JSON-LD for step-by-step guide */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "HowTo",
-              "name": "How to Use ChatGPT for Resume Optimization",
-              "description": "Step-by-step guide to using ChatGPT for improving resume bullet points through effective prompt engineering",
-              "datePublished": currentDate,
-              "dateModified": lastModifiedDate.split('T')[0],
-              "estimatedCost": {
-                "@type": "MonetaryAmount",
-                "currency": "USD",
-                "value": "0"
-              },
-              "step": guideSections.map((section, index) => ({
-                "@type": "HowToStep",
-                "position": index + 1,
-                "name": section.title,
-                "text": section.content,
-                "url": `https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026#step-${index + 1}`
-              }))
-            })
-          }}
-        />
-
-        {/* SoftwareApplication JSON-LD for ChatGPT Guide */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "ChatGPT Resume Optimization Guide 2026",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Web",
-              "description": "Comprehensive guide for using ChatGPT to optimize resumes through advanced prompt engineering",
-              "datePublished": currentDate,
-              "dateModified": lastModifiedDate.split('T')[0],
-              "author": {
-                "@type": "Organization",
-                "name": "ProfessionalResumeFree"
-              },
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              }
             })
           }}
         />
       </Head>
+
+      {/* Hidden Freshness Indicators */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
+
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbIcon}>{icons.home}</span>
+              <span className={styles.breadcrumbText}>Home</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>›</li>
+          <li>
+            <Link href="/free-resume-tools" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText}>AI Resume Tools</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>›</li>
+          <li>
+            <span className={styles.breadcrumbCurrent}>ChatGPT Resume Guide {currentYear}</span>
+          </li>
+        </ol>
+      </nav>
 
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
             <div className={styles.heroTag}>
               <span className={styles.tagIcon}>{icons.chat}</span>
-              AI Resume Optimization Guide 2026
+              AI Resume Optimization Guide {currentYear}
             </div>
             <h1 className={styles.heroTitle}>
               How to Use <span className={styles.gradientText}>ChatGPT</span> to Improve Your Resume Bullets
@@ -460,18 +577,18 @@ After ChatGPT + Verification:
             </p>
             <div className={styles.heroButtons}>
               <Link href="/resume-templates" className={styles.primaryButton}>
-                Create Your Resume
+                <span className={styles.buttonText}>Create Your Resume</span>
                 <div className={styles.buttonPulse}></div>
               </Link>
               <a href="#prompts" className={styles.secondaryButton}>
-                Explore Prompt Examples
+                <span className={styles.buttonText}>Explore Prompt Examples</span>
               </a>
             </div>
             <div className={styles.heroFeatures}>
               <span className={styles.featureBadge}>{icons.check} Prompt Engineering Techniques</span>
               <span className={styles.featureBadge}>{icons.check} Industry-Specific Examples</span>
               <span className={styles.featureBadge}>{icons.check} ATS Optimization</span>
-              <span className={styles.featureBadge}>{icons.check} 2026 Best Practices</span>
+              <span className={styles.featureBadge}>{icons.check} {currentYear} Best Practices</span>
             </div>
           </div>
           <div className={styles.heroStats}>
@@ -492,7 +609,7 @@ After ChatGPT + Verification:
         <div className={styles.container}>
           <div className={styles.introContent}>
             <p className={styles.leadText}>
-              In the <strong>AI-powered job market of 2026</strong>, ChatGPT has become an indispensable tool for 
+              In the <strong>AI-powered job market of {currentYear}</strong>, ChatGPT has become an indispensable tool for 
               resume optimization. This comprehensive guide shows you how to leverage <strong>advanced prompt engineering</strong> 
               to transform basic job descriptions into compelling, ATS-friendly bullet points. Learn techniques that 
               increase your interview chances by <strong>up to 85%</strong> while maintaining your authentic voice.
@@ -567,6 +684,7 @@ After ChatGPT + Verification:
                 key={index}
                 className={`${styles.guideTab} ${index === activeSection ? styles.active : ''}`}
                 onClick={() => setActiveSection(index)}
+                aria-label={`View section: ${section.title}`}
               >
                 <div className={styles.tabNumber}>{index + 1}</div>
                 <span>{section.title}</span>
@@ -588,7 +706,7 @@ After ChatGPT + Verification:
               <div className={styles.tipsColumn}>
                 <h4 className={styles.tipsTitle}>
                   <span className={styles.tipsIcon}>{icons.check}</span>
-                  Key Strategies for 2026
+                  Key Strategies for {currentYear}
                 </h4>
                 <ul className={styles.tipsList}>
                   {guideSections[activeSection].tips.map((tip, index) => (
@@ -608,7 +726,11 @@ After ChatGPT + Verification:
                   <pre className={styles.exampleText}>
                     {guideSections[activeSection].example}
                   </pre>
-                  <button className={styles.copyButton}>
+                  <button 
+                    className={styles.copyButton}
+                    onClick={() => navigator.clipboard.writeText(guideSections[activeSection].example)}
+                    aria-label="Copy example to clipboard"
+                  >
                     <span className={styles.copyIcon}>{icons.copy}</span>
                     Copy Example
                   </button>
@@ -619,10 +741,10 @@ After ChatGPT + Verification:
         </div>
       </section>
 
-      <section id="prompts" className={styles.promptsSection}>
+      <section id="prompts" className={styles.promptsSection} aria-labelledby="prompts-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Prompt Engineering for Better Job Descriptions</h2>
+            <h2 className={styles.sectionTitle} id="prompts-title">Prompt Engineering for Better Job Descriptions</h2>
             <p className={styles.sectionSubtitle}>
               Master the art of <strong>crafting effective ChatGPT prompts</strong> that produce exceptional resume content
             </p>
@@ -684,10 +806,10 @@ After ChatGPT + Verification:
         </div>
       </section>
 
-      <section className={styles.mistakesSection}>
+      <section className={styles.mistakesSection} aria-labelledby="mistakes-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Common ChatGPT Resume Mistakes to Avoid</h2>
+            <h2 className={styles.sectionTitle} id="mistakes-title">Common ChatGPT Resume Mistakes to Avoid</h2>
             <p className={styles.sectionSubtitle}>
               These errors can <strong>undermine your AI-optimized resume</strong> and reduce its effectiveness
             </p>
@@ -703,18 +825,38 @@ After ChatGPT + Verification:
         </div>
       </section>
 
-      <section className={styles.ctaSection}>
+      {/* FAQ Section */}
+      <section className={styles.faqSection} aria-labelledby="faq-title">
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+            <p className={styles.sectionSubtitle}>
+              Get answers to common questions about using ChatGPT for resume optimization
+            </p>
+          </div>
+          <div className={styles.faqGrid}>
+            {faqs.map((faq, index) => (
+              <div key={index} className={styles.faqItem}>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
+                <p className={styles.faqAnswer}>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle}>Ready to Transform Your Resume with ChatGPT?</h2>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Transform Your Resume with ChatGPT?</h2>
             <p className={styles.ctaSubtitle}>
               Master <strong>advanced prompt engineering techniques</strong> to create resume bullet points that 
-              stand out in 2026. Get <strong>85% more interviews</strong> with our proven ChatGPT optimization framework.
+              stand out in {currentYear}. Get <strong>85% more interviews</strong> with our proven ChatGPT optimization framework.
             </p>
             <div className={styles.ctaButtons}>
               <Link href="/resume-templates" className={styles.ctaButton}>
                 <span className={styles.buttonIcon}>{icons.chat}</span>
-                Create Your Resume Now
+                <span className={styles.buttonText}>Create Your Resume Now</span>
               </Link>
             </div>
             <div className={styles.ctaFeatures}>
@@ -739,22 +881,29 @@ After ChatGPT + Verification:
 };
 
 export async function getStaticProps() {
-  // Generate dates at build time for SSG
-  const now = new Date();
-  
-  // Format: YYYY-MM-DD
-  const currentDate = now.toISOString().split('T')[0];
-  
-  // Full ISO 8601 string
-  const lastModifiedDate = now.toISOString();
-  
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate FAQ dates with staggered freshness
+  const faqDates = Array(4).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 7 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
   return {
     props: {
-      currentDate,
-      lastModifiedDate
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        faqDates
+      },
+      buildTimestamp
     },
-    // Enable Incremental Static Regeneration
-    revalidate: 86400 // Regenerate every 24 hours (86400 seconds)
+    // Revalidate every 12 hours for fresh content
+    revalidate: 3600, // 12 hours in seconds
   };
 }
 

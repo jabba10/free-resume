@@ -1,15 +1,20 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 import styles from './free-resume-summary-generator.module.css';
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
+const CURRENT_DATE = new Date().toISOString().split('T')[0];
+const SITE_URL = 'https://www.professionalresumefree.com';
+const PAGE_URL = `${SITE_URL}/free-resume-summary-generator`;
 
-// Template Categories (icons removed)
+// Template Categories
 const SUMMARY_TEMPLATES = [
   {
     id: 'experienced',
     name: 'Experienced Professional',
+    description: 'Templates for professionals with 5+ years of experience',
     templates: [
       {
         title: 'Senior Executive',
@@ -26,6 +31,7 @@ const SUMMARY_TEMPLATES = [
   {
     id: 'career-change',
     name: 'Career Changer',
+    description: 'Templates for professionals transitioning to new industries',
     templates: [
       {
         title: 'Transferable Skills Focus',
@@ -37,6 +43,7 @@ const SUMMARY_TEMPLATES = [
   {
     id: 'recent-grad',
     name: 'Recent Graduate',
+    description: 'Templates for new graduates and entry-level professionals',
     templates: [
       {
         title: 'Academic Excellence',
@@ -53,6 +60,7 @@ const SUMMARY_TEMPLATES = [
   {
     id: 'leadership',
     name: 'Leadership',
+    description: 'Templates for management and leadership roles',
     templates: [
       {
         title: 'Transformational Leader',
@@ -64,6 +72,7 @@ const SUMMARY_TEMPLATES = [
   {
     id: 'technical',
     name: 'Technical',
+    description: 'Templates for technology and engineering professionals',
     templates: [
       {
         title: 'Software Developer',
@@ -126,16 +135,21 @@ const FAQS = [
 
 // SEO-optimized keywords
 const SEO_KEYWORDS = [
-  'resume summary generator',
+  'free resume summary generator',
   'professional summary creator',
   'career profile builder',
   'resume introduction maker',
-  'ATS-friendly summary',
+  'ATS-friendly summary generator',
   'executive summary generator',
   'career summary template',
   'professional bio creator',
   'resume headline generator',
-  'summary statement builder'
+  'summary statement builder',
+  'resume summary examples',
+  'professional summary writer',
+  'resume profile generator',
+  'cv summary creator',
+  'job application summary'
 ];
 
 const ResumeSummaryGenerator = () => {
@@ -155,6 +169,235 @@ const ResumeSummaryGenerator = () => {
   const [characterCount, setCharacterCount] = useState(0);
   const [wordCount, setWordCount] = useState(0);
   const formRef = useRef(null);
+
+  // Schema data for JSON-LD
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${PAGE_URL}#webpage`,
+        "url": PAGE_URL,
+        "name": "Free Resume Summary Generator - Professional Career Profile Builder 2026",
+        "description": "Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary.",
+        "datePublished": "2024-01-01",
+        "dateModified": CURRENT_DATE,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": `${SITE_URL}#website`,
+          "url": SITE_URL,
+          "name": "Professional Resume Free",
+          "description": "Free resume building tools and resources for job seekers",
+          "publisher": {
+            "@type": "Organization",
+            "@id": `${SITE_URL}#organization`,
+            "name": "Professional Resume Free",
+            "url": SITE_URL,
+            "logo": {
+              "@type": "ImageObject",
+              "url": `${SITE_URL}/logo.png`,
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://twitter.com/ProResumeFree",
+              "https://www.linkedin.com/company/professional-resume-free",
+              "https://www.facebook.com/ProfessionalResumeFree"
+            ]
+          }
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": SITE_URL
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Free Resume Summary Generator",
+              "item": PAGE_URL
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Resume Summary Generator",
+        "description": "Free professional resume summary generator with template recommendations, keyword optimization, and industry-specific suggestions",
+        "url": PAGE_URL,
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-12-31"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "215",
+          "bestRating": "5",
+          "worstRating": "1",
+          "itemReviewed": {
+            "@type": "SoftwareApplication",
+            "name": "Resume Summary Generator"
+          }
+        },
+        "featureList": [
+          "20+ Professional Templates",
+          "ATS-Friendly Formatting",
+          "Keyword Optimization",
+          "Industry-Specific Suggestions",
+          "Real-Time Preview",
+          "Free PDF Export",
+          "No Sign Up Required"
+        ],
+        "softwareVersion": "2026.1.0",
+        "screenshot": `${SITE_URL}/images/summary-generator-screenshot.jpg`,
+        "applicationSuite": "Career Tools",
+        "countriesSupported": "Global",
+        "fileSize": "Web Application"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": FAQS.map((faq, index) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer,
+            "datePublished": CURRENT_DATE,
+            "author": {
+              "@type": "Person",
+              "name": "Resume Builder Team"
+            }
+          },
+          "mainEntityOfPage": `${PAGE_URL}#faq-${index + 1}`
+        }))
+      },
+      {
+        "@type": "ItemList",
+        "name": "Summary Template Categories",
+        "description": "Professional resume summary templates for different career levels",
+        "numberOfItems": SUMMARY_TEMPLATES.length,
+        "itemListElement": SUMMARY_TEMPLATES.map((category, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "CreativeWork",
+            "name": category.name,
+            "description": category.description,
+            "hasPart": {
+              "@type": "ItemList",
+              "numberOfItems": category.templates.length,
+              "itemListElement": category.templates.map((template, tIndex) => ({
+                "@type": "ListItem",
+                "position": tIndex + 1,
+                "item": {
+                  "@type": "CreativeWork",
+                  "name": template.title,
+                  "keywords": template.keywords.join(', ')
+                }
+              }))
+            }
+          }
+        }))
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Create a Professional Resume Summary",
+        "description": "Step-by-step guide to create an effective resume summary using our generator",
+        "totalTime": "PT5M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter Your Career Information",
+            "text": "Fill in your job title, experience, industry, skills, achievements, and target role.",
+            "url": `${PAGE_URL}#form`
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Choose a Template",
+            "text": "Select from professional templates tailored to your career level and goals.",
+            "url": `${PAGE_URL}#templates`
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Add Keywords",
+            "text": "Select relevant keywords and power words to optimize your summary for ATS.",
+            "url": `${PAGE_URL}#keywords`
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Generate & Copy",
+            "text": "Generate your professional summary and copy it to your resume instantly.",
+            "url": `${PAGE_URL}#generate`
+          }
+        ],
+        "supply": [
+          {
+            "@type": "HowToSupply",
+            "name": "Career Information"
+          }
+        ],
+        "tool": [
+          {
+            "@type": "HowToTool",
+            "name": "Resume Summary Generator"
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "serviceType": "Online Resume Summary Generation",
+        "provider": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "url": SITE_URL
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Global"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Free Resume Building Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Professional Summary Generation"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Keyword Optimization"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  };
 
   // Update character and word counts
   useEffect(() => {
@@ -184,10 +427,9 @@ const ResumeSummaryGenerator = () => {
   // Handle template selection
   const handleTemplateSelect = (template) => {
     setSelectedTemplate(template);
-    // Auto-populate form based on template keywords
     if (template.keywords && template.keywords.length > 0) {
       const newKeywords = [...new Set([...selectedKeywords, ...template.keywords])];
-      setSelectedKeywords(newKeywords.slice(0, 6)); // Limit to 6 keywords
+      setSelectedKeywords(newKeywords.slice(0, 6));
     }
   };
 
@@ -195,14 +437,12 @@ const ResumeSummaryGenerator = () => {
   const generateSummary = useCallback(() => {
     if (selectedTemplate) {
       let summary = selectedTemplate.summary;
-      // Replace placeholders with form data
       Object.entries(formData).forEach(([key, value]) => {
         if (value.trim()) {
           const placeholder = `[${key.replace(/([A-Z])/g, ' $1').trim()}]`;
           summary = summary.replace(new RegExp(placeholder, 'gi'), value);
         }
       });
-      // Replace generic placeholders
       summary = summary.replace(/\[Key Skill \d+\]/g, () => {
         const skills = formData.keySkills.split(',').filter(s => s.trim());
         return skills.length > 0 ? skills.shift().trim() : 'relevant skills';
@@ -211,14 +451,11 @@ const ResumeSummaryGenerator = () => {
         const achievements = formData.achievements.split('.').filter(a => a.trim());
         return achievements.length > 0 ? achievements.shift().trim() : 'key achievements';
       });
-      // Add selected keywords
       if (selectedKeywords.length > 0) {
         const keywordString = selectedKeywords.slice(0, 4).join(', ');
         summary += ` Proficient in ${keywordString} with a commitment to excellence and continuous improvement.`;
       }
-      // Ensure proper formatting
       summary = summary.replace(/\s+/g, ' ').trim();
-      // Capitalize first letter
       summary = summary.charAt(0).toUpperCase() + summary.slice(1);
       setGeneratedSummary(summary);
     }
@@ -283,101 +520,123 @@ const ResumeSummaryGenerator = () => {
     return industryData ? industryData.keywords : [];
   };
 
-  // Schema data
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebApplication",
-        "name": "Resume Summary Generator",
-        "description": "Free professional resume summary generator with template recommendations, keyword optimization, and industry-specific suggestions",
-        "url": "https://www.professionalresumefree.com/free-resume-summary-generator",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "215",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "author": {
-          "@type": "Organization",
-          "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": FAQS.map(faq => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer
-          }
-        }))
-      },
-      {
-        "@type": "ItemList",
-        "name": "Summary Template Categories",
-        "itemListElement": SUMMARY_TEMPLATES.map((category, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "name": category.name,
-          "description": `${category.templates.length} professional templates`
-        }))
-      }
-    ]
-  };
-
   return (
     <>
       <Head>
-        <title>Resume Summary Generator – Professional Career Profile Builder {CURRENT_YEAR}</title>
+        <title>Free Resume Summary Generator 2026 - Professional Career Profile Builder</title>
         <meta
           name="description"
-          content={`Free professional resume summary generator with template recommendations, keyword optimization, and industry-specific suggestions. ${CURRENT_YEAR}`}
+          content={`Create ATS-friendly professional resume summaries instantly. ${CURRENT_YEAR}'s best free resume summary generator with 20+ templates, keyword optimization & industry-specific suggestions.`}
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="date" content={CURRENT_DATE} />
+        <meta name="last-modified" content={CURRENT_DATE} />
+        <meta name="revisit-after" content="7 days" />
+        
+        {/* Canonical & Alternate URLs */}
+        <link rel="canonical" href={PAGE_URL} />
+        <link rel="alternate" href={PAGE_URL} hreflang="en" />
+        <link rel="alternate" href={PAGE_URL} hreflang="en-US" />
+        <link rel="alternate" href={PAGE_URL} hreflang="en-GB" />
+        <link rel="alternate" href={PAGE_URL} hreflang="en-CA" />
+        <link rel="alternate" href={PAGE_URL} hreflang="en-AU" />
+        <link rel="alternate" href={PAGE_URL} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Resume Summary Generator – Professional Career Profile Builder" />
-        <meta property="og:description" content="Free resume summary generator with template recommendations and keyword optimization" />
+        <meta property="og:title" content="Free Resume Summary Generator 2026 - Professional Career Profile Builder" />
+        <meta property="og:description" content="Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-summary-generator" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-summary-generator.jpg" />
+        <meta property="og:url" content={PAGE_URL} />
+        <meta property="og:image" content={`${SITE_URL}/images/og-resume-summary-generator.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume Summary Generator Interface" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={CURRENT_DATE} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Summary Generator" />
-        <meta name="twitter:description" content="Professional summary generator with template recommendations and keyword optimization" />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-summary-generator.jpg" />
+        <meta name="twitter:title" content="Free Resume Summary Generator 2026" />
+        <meta name="twitter:description" content="Create professional ATS-friendly resume summaries instantly. 20+ templates, keyword optimization, free to use." />
+        <meta name="twitter:image" content={`${SITE_URL}/images/twitter-resume-summary-generator.jpg`} />
+        <meta name="twitter:image:alt" content="Professional Resume Summary Generator" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Canonical */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-summary-generator" />
+        {/* Additional Meta Tags */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-        />
+        {/* Preload and Preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </Head>
 
+      {/* Structured Data */}
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+
+      {/* Google Analytics Script */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX');
+        `}
+      </Script>
+
       <div className={styles.container}>
+        {/* Breadcrumb Navigation */}
+        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+          <ol itemScope itemType="https://schema.org/BreadcrumbList">
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <a itemProp="item" href={SITE_URL}>
+                <span itemProp="name">Home</span>
+              </a>
+              <meta itemProp="position" content="1" />
+            </li>
+            <li className={styles.breadcrumbSeparator}>›</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <a itemProp="item" href={`${SITE_URL}/tools`}>
+                <span itemProp="name">Tools</span>
+              </a>
+              <meta itemProp="position" content="2" />
+            </li>
+            <li className={styles.breadcrumbSeparator}>›</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <span itemProp="name">Resume Summary Generator</span>
+              <meta itemProp="position" content="3" />
+            </li>
+          </ol>
+        </nav>
+
         <header className={styles.header}>
-          <h1 className={styles.title}>Resume Summary Generator</h1>
+          <h1 className={styles.title}>Free Resume Summary Generator {CURRENT_YEAR}</h1>
           <p className={styles.subtitle}>
             Create compelling professional summaries that get noticed by employers
             <span className={styles.templateCount}>
-              {SUMMARY_TEMPLATES.reduce((total, cat) => total + cat.templates.length, 0)}+ Templates
+              {SUMMARY_TEMPLATES.reduce((total, cat) => total + cat.templates.length, 0)}+ Professional Templates
             </span>
           </p>
           <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
@@ -385,31 +644,34 @@ const ResumeSummaryGenerator = () => {
             <meta itemProp="ratingCount" content="215" />
             <div className={styles.ratingStars}>
               {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.8/5</span>
+              <span className={styles.ratingValue}>4.8/5 Rating</span>
             </div>
-            <div className={styles.ratingText}>Used by 18,000+ job seekers</div>
+            <div className={styles.ratingText}>Used by 18,000+ job seekers worldwide</div>
           </div>
         </header>
 
         <main className={styles.main}>
-          {/* Main Generator Section */}
-          <div className={styles.generatorSection}>
+          {/* Generator Section */}
+          <section className={styles.generatorSection} id="generator">
             <div className={styles.generatorHeader}>
-              <h2>Generate Your Professional Summary</h2>
+              <h2>Generate Your Professional Resume Summary</h2>
               <p>
-                Fill in your details, choose a template, and get a professionally crafted summary tailored to your career goals.
+                Fill in your details, choose a template, and get a professionally crafted summary tailored to your career goals. 
+                <strong> Optimized for ATS systems and human recruiters.</strong>
               </p>
             </div>
+            
             <div className={styles.generatorContainer}>
-              {/* Left Column: Form and Templates */}
+              {/* Form Column */}
               <div className={styles.inputColumn}>
-                <div className={styles.formSection}>
+                <div className={styles.formSection} id="form">
                   <div className={styles.formHeader}>
                     <h3>Your Career Information</h3>
                     <button
                       className={styles.exampleButton}
                       onClick={loadExample}
                       type="button"
+                      aria-label="Load example data to see how the generator works"
                     >
                       Load Example
                     </button>
@@ -426,6 +688,7 @@ const ResumeSummaryGenerator = () => {
                         onChange={handleInputChange}
                         placeholder="e.g., Senior Marketing Manager"
                         className={styles.formInput}
+                        aria-required="true"
                       />
                     </div>
                     <div className={styles.formGroup}>
@@ -474,7 +737,11 @@ const ResumeSummaryGenerator = () => {
                         placeholder="e.g., Project Management, Data Analysis, Team Leadership, Strategic Planning"
                         className={styles.formTextarea}
                         rows={3}
+                        aria-describedby="skillsHelp"
                       />
+                      <div id="skillsHelp" className={styles.helpText}>
+                        Separate skills with commas for best results
+                      </div>
                     </div>
                     <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                       <label htmlFor="achievements">Key Achievements</label>
@@ -486,14 +753,19 @@ const ResumeSummaryGenerator = () => {
                         placeholder="e.g., Increased sales by 30% through new strategy. Reduced costs by 25% by optimizing processes."
                         className={styles.formTextarea}
                         rows={4}
+                        aria-describedby="achievementsHelp"
                       />
+                      <div id="achievementsHelp" className={styles.helpText}>
+                        Use numbers and metrics when possible
+                      </div>
                     </div>
                   </div>
                 </div>
-                {/* Template Selection */}
-                <div className={styles.templatesSection}>
+
+                {/* Templates Section */}
+                <div className={styles.templatesSection} id="templates">
                   <div className={styles.sectionHeader}>
-                    <h3>Choose a Template</h3>
+                    <h3>Choose a Professional Template</h3>
                     <div className={styles.templateCount}>
                       {selectedTemplate ? '1 selected' : 'None selected'}
                     </div>
@@ -503,6 +775,7 @@ const ResumeSummaryGenerator = () => {
                       <div key={category.id} className={styles.templateCategory}>
                         <div className={styles.categoryHeader}>
                           <span className={styles.categoryName}>{category.name}</span>
+                          <span className={styles.categoryCount}>{category.templates.length} templates</span>
                         </div>
                         <div className={styles.categoryTemplates}>
                           {category.templates.map((template, index) => (
@@ -513,6 +786,7 @@ const ResumeSummaryGenerator = () => {
                               }`}
                               onClick={() => handleTemplateSelect(template)}
                               type="button"
+                              aria-label={`Select ${template.title} template`}
                             >
                               <div className={styles.templateTitle}>{template.title}</div>
                               <div className={styles.templatePreview}>
@@ -526,7 +800,8 @@ const ResumeSummaryGenerator = () => {
                   </div>
                 </div>
               </div>
-              {/* Right Column: Generated Summary */}
+
+              {/* Output Column */}
               <div className={styles.outputColumn}>
                 <div className={styles.summarySection}>
                   <div className={styles.sectionHeader}>
@@ -555,121 +830,133 @@ const ResumeSummaryGenerator = () => {
                           className={styles.copyButton}
                           onClick={copyToClipboard}
                           type="button"
+                          aria-label="Copy summary to clipboard"
                         >
-                          {copied ? 'Copied!' : 'Copy Summary'}
+                          {copied ? '✓ Copied!' : 'Copy Summary'}
                         </button>
                         <button
                           className={styles.regenerateButton}
                           onClick={generateSummary}
                           type="button"
+                          aria-label="Regenerate summary with current data"
                         >
                           Regenerate
                         </button>
                       </div>
                     )}
                   </div>
-                  {/* Keywords Section */}
-                  <div className={styles.keywordsSection}>
-                    <div className={styles.sectionHeader}>
-                      <h3>Keywords & Power Words</h3>
-                      <div className={styles.keywordsCount}>
-                        {selectedKeywords.length} selected
-                      </div>
+                </div>
+
+                {/* Keywords Section */}
+                <div className={styles.keywordsSection} id="keywords">
+                  <div className={styles.sectionHeader}>
+                    <h3>Keywords & Power Words</h3>
+                    <div className={styles.keywordsCount}>
+                      {selectedKeywords.length} selected
                     </div>
-                    <div className={styles.keywordsGrid}>
-                      {getIndustrySuggestions(formData.industry).map((keyword, index) => (
+                  </div>
+                  <div className={styles.keywordsGrid}>
+                    {getIndustrySuggestions(formData.industry).map((keyword, index) => (
+                      <button
+                        key={`industry-${index}`}
+                        className={`${styles.keywordButton} ${
+                          selectedKeywords.includes(keyword) ? styles.selected : ''
+                        }`}
+                        onClick={() => handleKeywordSelect(keyword)}
+                        type="button"
+                        aria-label={`Select keyword: ${keyword}`}
+                      >
+                        {keyword}
+                      </button>
+                    ))}
+                    {POWER_WORDS.slice(0, 12).map((word, index) => (
+                      <button
+                        key={`power-${index}`}
+                        className={`${styles.keywordButton} ${
+                          selectedKeywords.includes(word) ? styles.selected : ''
+                        }`}
+                        onClick={() => handleKeywordSelect(word)}
+                        type="button"
+                        aria-label={`Select power word: ${word}`}
+                      >
+                        {word}
+                      </button>
+                    ))}
+                  </div>
+                  <div className={styles.industryKeywords}>
+                    <h4>Quick Industry Select</h4>
+                    <div className={styles.industryList}>
+                      {INDUSTRY_KEYWORDS.map((industry, index) => (
                         <button
-                          key={`industry-${index}`}
-                          className={`${styles.keywordButton} ${
-                            selectedKeywords.includes(keyword) ? styles.selected : ''
-                          }`}
-                          onClick={() => handleKeywordSelect(keyword)}
+                          key={index}
+                          className={styles.industryButton}
+                          onClick={() => {
+                            setFormData(prev => ({ ...prev, industry: industry.industry }));
+                            setSelectedKeywords(prev => [...prev, ...industry.keywords.slice(0, 2)]);
+                          }}
                           type="button"
+                          aria-label={`Set industry to ${industry.industry}`}
                         >
-                          {keyword}
+                          {industry.industry}
                         </button>
                       ))}
-                      {POWER_WORDS.slice(0, 12).map((word, index) => (
-                        <button
-                          key={`power-${index}`}
-                          className={`${styles.keywordButton} ${
-                            selectedKeywords.includes(word) ? styles.selected : ''
-                          }`}
-                          onClick={() => handleKeywordSelect(word)}
-                          type="button"
-                        >
-                          {word}
-                        </button>
-                      ))}
-                    </div>
-                    <div className={styles.industryKeywords}>
-                      <h4>Industry Keywords</h4>
-                      <div className={styles.industryList}>
-                        {INDUSTRY_KEYWORDS.map((industry, index) => (
-                          <button
-                            key={index}
-                            className={styles.industryButton}
-                            onClick={() => {
-                              setFormData(prev => ({ ...prev, industry: industry.industry }));
-                              setSelectedKeywords(prev => [...prev, ...industry.keywords.slice(0, 2)]);
-                            }}
-                            type="button"
-                          >
-                            {industry.industry}
-                          </button>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className={styles.generatorActions}>
-            <button
-              className={styles.generateButton}
-              onClick={generateSummary}
-              disabled={!selectedTemplate}
-              type="button"
-            >
-              Generate Summary
-            </button>
-            <button
-              className={styles.resetButton}
-              onClick={handleReset}
-              type="button"
-            >
-              Reset All
-            </button>
-          </div>
+            {/* Generator Actions */}
+            <div className={styles.generatorActions} id="generate">
+              <button
+                className={styles.generateButton}
+                onClick={generateSummary}
+                disabled={!selectedTemplate}
+                type="button"
+                aria-label="Generate professional summary"
+              >
+                Generate Summary
+              </button>
+              <button
+                className={styles.resetButton}
+                onClick={handleReset}
+                type="button"
+                aria-label="Reset all form data"
+              >
+                Reset All
+              </button>
+            </div>
+          </section>
 
           {/* Tips Section */}
           <section className={styles.tipsSection}>
-            <h2 className={styles.sectionTitle}>Writing Tips for Powerful Summaries</h2>
+            <h2 className={styles.sectionTitle}>Writing Tips for Powerful Resume Summaries</h2>
+            <p className={styles.sectionSubtitle}>
+              Follow these expert tips to create summaries that get results
+            </p>
             <div className={styles.tipsGrid}>
               <div className={styles.tipCard}>
-                <h3 className={styles.tipTitle}>Be Specific</h3>
+                <h3 className={styles.tipTitle}>Be Specific & Quantifiable</h3>
                 <p className={styles.tipDescription}>
-                  Include specific achievements with numbers and metrics. Instead of "improved sales," say "increased sales by 25% through targeted marketing campaigns."
+                  Include specific achievements with numbers and metrics. Instead of "improved sales," say "increased sales by 25% through targeted marketing campaigns that expanded market reach by 15%."
                 </p>
               </div>
               <div className={styles.tipCard}>
-                <h3 className={styles.tipTitle}>Use Keywords</h3>
+                <h3 className={styles.tipTitle}>Use ATS Keywords</h3>
                 <p className={styles.tipDescription}>
-                  Incorporate keywords from the job description. This helps with ATS scanning and shows you're a perfect fit for the specific role.
+                  Incorporate keywords from the job description. This helps with Applicant Tracking System scanning and shows you're a perfect fit for the specific role. Use our keyword selector above.
                 </p>
               </div>
               <div className={styles.tipCard}>
                 <h3 className={styles.tipTitle}>Start Strong</h3>
                 <p className={styles.tipDescription}>
-                  Begin with your strongest selling point. The first sentence should capture attention and make recruiters want to keep reading.
+                  Begin with your strongest selling point. The first sentence should capture attention and make recruiters want to keep reading. Lead with your most impressive achievement or unique value proposition.
                 </p>
               </div>
               <div className={styles.tipCard}>
                 <h3 className={styles.tipTitle}>Keep it Concise</h3>
                 <p className={styles.tipDescription}>
-                  Limit your summary to 3-5 sentences. Recruiters spend seconds scanning, so every word needs to count and add value.
+                  Limit your summary to 3-5 sentences (50-100 words). Recruiters spend only 6-7 seconds scanning resumes, so every word needs to count and add value. Remove fluff and focus on impact.
                 </p>
               </div>
             </div>
@@ -677,7 +964,7 @@ const ResumeSummaryGenerator = () => {
 
           {/* Examples Section */}
           <section className={styles.examplesSection}>
-            <h2 className={styles.sectionTitle}>Example Summaries</h2>
+            <h2 className={styles.sectionTitle}>Professional Summary Examples</h2>
             <p className={styles.sectionSubtitle}>
               See how effective summaries are structured across different career levels
             </p>
@@ -685,39 +972,45 @@ const ResumeSummaryGenerator = () => {
               <div className={styles.exampleCard}>
                 <div className={styles.exampleHeader}>
                   <div className={styles.exampleTitle}>Senior Executive</div>
+                  <div className={styles.exampleBadge}>15+ Years Experience</div>
                 </div>
                 <div className={styles.exampleContent}>
-                  <p>Visionary CEO with 15+ years of experience driving growth in technology startups. Successfully scaled three companies from seed to Series C, generating over $500M in collective enterprise value. Expertise in fundraising, team building, and market expansion.</p>
+                  <p>Visionary CEO with 15+ years of experience driving growth in technology startups. Successfully scaled three companies from seed to Series C, generating over $500M in collective enterprise value. Expertise in fundraising, team building, and market expansion with a proven track record of delivering 35%+ annual growth.</p>
                   <div className={styles.exampleKeywords}>
                     <span>Strategic Leadership</span>
                     <span>Business Growth</span>
                     <span>Team Development</span>
+                    <span>Market Expansion</span>
                   </div>
                 </div>
               </div>
               <div className={styles.exampleCard}>
                 <div className={styles.exampleHeader}>
                   <div className={styles.exampleTitle}>Software Engineer</div>
+                  <div className={styles.exampleBadge}>5 Years Experience</div>
                 </div>
                 <div className={styles.exampleContent}>
-                  <p>Full-stack developer with 5 years of experience building scalable web applications. Proficient in React, Node.js, and AWS. Led development of customer portal serving 100K+ users, improving load times by 40%. Passionate about clean code and agile methodologies.</p>
+                  <p>Full-stack developer with 5 years of experience building scalable web applications. Proficient in React, Node.js, and AWS. Led development of customer portal serving 100K+ users, improving load times by 40% and reducing bounce rate by 25%. Passionate about clean code, agile methodologies, and mentoring junior developers.</p>
                   <div className={styles.exampleKeywords}>
                     <span>Full-Stack Development</span>
                     <span>System Architecture</span>
                     <span>Performance Optimization</span>
+                    <span>Team Leadership</span>
                   </div>
                 </div>
               </div>
               <div className={styles.exampleCard}>
                 <div className={styles.exampleHeader}>
                   <div className={styles.exampleTitle}>Recent Graduate</div>
+                  <div className={styles.exampleBadge}>Entry Level</div>
                 </div>
                 <div className={styles.exampleContent}>
-                  <p>Recent Computer Science graduate with strong academic background and hands-on internship experience. Developed skills in Python, machine learning, and data analysis through coursework and research projects. Eager to apply theoretical knowledge in practical data science role.</p>
+                  <p>Recent Computer Science graduate with strong academic background (3.8 GPA) and hands-on internship experience. Developed skills in Python, machine learning, and data analysis through coursework and research projects. Completed summer internship at TechCorp, contributing to data pipeline optimization that improved processing speed by 30%.</p>
                   <div className={styles.exampleKeywords}>
                     <span>Technical Skills</span>
                     <span>Academic Excellence</span>
                     <span>Fast Learner</span>
+                    <span>Research Experience</span>
                   </div>
                 </div>
               </div>
@@ -727,63 +1020,85 @@ const ResumeSummaryGenerator = () => {
           {/* Common Mistakes Section */}
           <section className={styles.mistakesSection}>
             <h2 className={styles.sectionTitle}>Common Summary Mistakes to Avoid</h2>
+            <p className={styles.sectionSubtitle}>
+              Don't let these errors undermine your resume's effectiveness
+            </p>
             <div className={styles.mistakesGrid}>
               <div className={styles.mistakeCard}>
                 <div className={styles.mistakeHeader}>
                   <div className={styles.mistakeNumber}>01</div>
-                  <div className={styles.mistakeTitle}>Too Generic</div>
+                  <div className={styles.mistakeTitle}>Too Generic & Vague</div>
                 </div>
                 <div className={styles.mistakeContent}>
-                  <p>Avoid vague statements like "hard worker" or "team player." Be specific about what you actually achieved and how you contributed.</p>
+                  <p>Avoid vague statements like "hard worker" or "team player." Be specific about what you actually achieved and how you contributed. Use concrete examples and measurable results.</p>
                 </div>
               </div>
               <div className={styles.mistakeCard}>
                 <div className={styles.mistakeHeader}>
                   <div className={styles.mistakeNumber}>02</div>
-                  <div className={styles.mistakeTitle}>Too Long</div>
+                  <div className={styles.mistakeTitle}>Too Long & Wordy</div>
                 </div>
                 <div className={styles.mistakeContent}>
-                  <p>Summaries longer than 5 sentences lose impact. Be concise and focus only on your most relevant and impressive achievements.</p>
+                  <p>Summaries longer than 5 sentences lose impact. Be concise and focus only on your most relevant and impressive achievements. Remove fluff and redundant information.</p>
                 </div>
               </div>
               <div className={styles.mistakeCard}>
                 <div className={styles.mistakeHeader}>
                   <div className={styles.mistakeNumber}>03</div>
-                  <div className={styles.mistakeTitle}>Missing Keywords</div>
+                  <div className={styles.mistakeTitle}>Missing ATS Keywords</div>
                 </div>
                 <div className={styles.mistakeContent}>
-                  <p>Not including job-specific keywords can cause ATS rejection. Always tailor your summary with keywords from the job description.</p>
+                  <p>Not including job-specific keywords can cause ATS rejection. Always tailor your summary with keywords from the job description. Use our keyword optimization tools above.</p>
                 </div>
               </div>
               <div className={styles.mistakeCard}>
                 <div className={styles.mistakeHeader}>
                   <div className={styles.mistakeNumber}>04</div>
-                  <div className={styles.mistakeTitle}>Focusing on Duties</div>
+                  <div className={styles.mistakeTitle}>Focusing on Duties Instead of Achievements</div>
                 </div>
                 <div className={styles.mistakeContent}>
-                  <p>Don't just list job responsibilities. Focus on achievements, results, and the value you brought to previous employers.</p>
+                  <p>Don't just list job responsibilities. Focus on achievements, results, and the value you brought to previous employers. Show impact, not just activity.</p>
                 </div>
               </div>
             </div>
           </section>
 
           {/* FAQ Section */}
-          <section className={styles.faqSection}>
+          <section className={styles.faqSection} id="faqs">
             <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
+            <p className={styles.sectionSubtitle}>
+              Everything you need to know about creating effective resume summaries
+            </p>
             <div className={styles.faqList}>
               {FAQS.map((faq, index) => (
                 <div
                   key={index}
                   className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  id={`faq-${index + 1}`}
+                  itemScope
+                  itemProp="mainEntity"
+                  itemType="https://schema.org/Question"
                 >
-                  <div className={styles.faqQuestion}>
-                    <h3>{faq.question}</h3>
+                  <div 
+                    className={styles.faqQuestion}
+                    onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={activeFaq === index}
+                    aria-controls={`faq-answer-${index}`}
+                  >
+                    <h3 itemProp="name">{faq.question}</h3>
                     <span className={styles.faqToggle}>{activeFaq === index ? '−' : '+'}</span>
                   </div>
                   {activeFaq === index && (
-                    <div className={styles.faqAnswer}>
-                      <p>{faq.answer}</p>
+                    <div 
+                      className={styles.faqAnswer} 
+                      id={`faq-answer-${index}`}
+                      itemScope
+                      itemProp="acceptedAnswer"
+                      itemType="https://schema.org/Answer"
+                    >
+                      <p itemProp="text">{faq.answer}</p>
                     </div>
                   )}
                 </div>
@@ -793,29 +1108,78 @@ const ResumeSummaryGenerator = () => {
 
           {/* Benefits Section */}
           <section className={styles.benefitsSection}>
-            <h2 className={styles.sectionTitle}>Why a Strong Summary Matters</h2>
+            <h2 className={styles.sectionTitle}>Why a Strong Resume Summary Matters</h2>
+            <p className={styles.sectionSubtitle}>
+              Your summary is your first impression - make it count
+            </p>
             <div className={styles.benefitsGrid}>
               <div className={styles.benefitCard}>
-                <h3 className={styles.benefitTitle}>First Impression</h3>
+                <h3 className={styles.benefitTitle}>First Impression Advantage</h3>
                 <p className={styles.benefitDescription}>
-                  Your summary is the first thing recruiters read. A strong opening captures attention and encourages them to read the rest of your resume.
+                  Your summary is the first thing recruiters read. A strong opening captures attention and encourages them to read the rest of your resume. 75% of hiring decisions are made in the first 30 seconds.
                 </p>
               </div>
               <div className={styles.benefitCard}>
                 <h3 className={styles.benefitTitle}>ATS Optimization</h3>
                 <p className={styles.benefitDescription}>
-                  Well-crafted summaries with relevant keywords perform better in Applicant Tracking Systems, increasing your chances of getting seen by humans.
+                  Well-crafted summaries with relevant keywords perform better in Applicant Tracking Systems used by 99% of employers. This increases your chances of getting seen by human recruiters by up to 300%.
                 </p>
               </div>
               <div className={styles.benefitCard}>
                 <h3 className={styles.benefitTitle}>Career Positioning</h3>
                 <p className={styles.benefitDescription}>
-                  A targeted summary positions you for the specific role you want, highlighting the exact skills and experiences employers are looking for.
+                  A targeted summary positions you for the specific role you want, highlighting the exact skills and experiences employers are looking for. It tells your career story in a compelling, concise way.
                 </p>
               </div>
             </div>
           </section>
+
+          {/* Final CTA */}
+          <section className={styles.ctaSection}>
+            <div className={styles.ctaContent}>
+              <h2 className={styles.ctaTitle}>Ready to Create Your Perfect Resume Summary?</h2>
+              <p className={styles.ctaSubtitle}>
+                Join 18,000+ professionals who have improved their resumes with our free generator
+              </p>
+              <div className={styles.ctaButtons}>
+                <button
+                  className={styles.ctaPrimaryButton}
+                  onClick={() => {
+                    if (formRef.current) formRef.current.focus();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  aria-label="Start creating your professional resume summary"
+                >
+                  Start Creating Now
+                </button>
+                <button
+                  className={styles.ctaSecondaryButton}
+                  onClick={loadExample}
+                  aria-label="Try with example data to see how it works"
+                >
+                  Try Example First
+                </button>
+              </div>
+              <div className={styles.ctaFeatures}>
+                <div className={styles.ctaFeature}>
+                  <span className={styles.featureCheck}>✓</span>
+                  <span>100% Free - No Sign Up Required</span>
+                </div>
+                <div className={styles.ctaFeature}>
+                  <span className={styles.featureCheck}>✓</span>
+                  <span>ATS-Optimized Templates</span>
+                </div>
+                <div className={styles.ctaFeature}>
+                  <span className={styles.featureCheck}>✓</span>
+                  <span>Instant Results - No Watermarks</span>
+                </div>
+              </div>
+            </div>
+          </section>
         </main>
+
+        
+          
       </div>
     </>
   );
@@ -823,13 +1187,19 @@ const ResumeSummaryGenerator = () => {
 
 // SSG with ISR
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildDate = new Date(buildTimestamp).toISOString().split('T')[0];
+  
   return {
     props: {
-      lastUpdated: new Date().toISOString(),
-      buildYear: CURRENT_YEAR,
+      seoData: {
+        currentDate: buildDate,
+        lastModifiedDate: new Date(buildTimestamp).toISOString(),
+        buildTimestamp
+      }
     },
     // Revalidate every 2 hours
-    revalidate: 7200,
+    revalidate: 3600,
   };
 }
 

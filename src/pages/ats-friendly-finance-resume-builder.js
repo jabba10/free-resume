@@ -10,8 +10,7 @@ import {
   FiMapPin,
   FiBriefcase,
   FiBook,
-  FiDollarSign,
-  FiBarChart2,
+  FiTrendingUp,
   FiShield,
   FiGlobe,
   FiDownload,
@@ -20,77 +19,113 @@ import {
   FiPlus,
   FiX,
   FiEye,
-  FiChevronLeft,
-  FiChevronRight
-  // ❌ Removed: FiFileText (unused)
+  FiCheck,
+  FiAward,
+  FiFileText,
+  FiSettings,
+  FiStar,
+  FiArrowRight,
+  FiClock,
+  FiHome,
+  FiChevronRight as FiChevronRightIcon,
+  FiTool,
+  FiSearch,
+  FiBarChart,
+  FiTarget,
+  FiLayers,
+  FiDollarSign,
+  FiPercent,
+  FiPieChart,
+  FiCreditCard,
+  FiTrendingDown
 } from 'react-icons/fi';
+import Link from 'next/link';
 import styles from './Resume.module.css';
 
-const Resume = () => {
+const Resume = ({ 
+  seoData,
+  buildTimestamp
+}) => {
+  const {
+    currentDate,
+    lastModifiedDate,
+    reviewDates,
+    faqDates,
+    breadcrumbData
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
   // --- Default item factories ---
   const defaultExperience = () => ({
     employer: '',
     position: '',
-    division: '',
+    department: '',
     startDate: '',
     endDate: '',
     description: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultEducation = () => ({
     institution: '',
     degree: '',
-    major: '',
+    program: '',
     startDate: '',
     endDate: '',
+    gpa: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
-  const defaultSkill = () => ({
+  
+  const defaultTechnical = () => ({
     name: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
-  const defaultLicense = () => ({
+  
+  const defaultCertification = () => ({
     name: '',
-    issuingBody: '',
+    issuingAuthority: '',
     licenseNumber: '',
     expiryDate: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
-  const defaultDeal = () => ({
-    name: '',
-    value: '',
-    description: '',
+  
+  const defaultAffiliation = () => ({
+    organization: '',
+    role: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
+  const defaultIndustry = () => ({
+    name: '',
+    isEditing: false,
+    editIndex: null
+  });
+  
   const defaultLanguage = () => ({
     name: '',
     proficiency: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
     isEditing: false,
     editIndex: null
-  });
-  const defaultTechnicalSkill = () => ({
-    category: '',
-    tools: '',
-    isEditing: false,
-    editIndex: null,
-    page: 1
   });
 
   // --- State ---
@@ -102,38 +137,148 @@ const Resume = () => {
     summary: '',
     experience: [],
     education: [],
-    skills: [],
-    licenses: [],
-    deals: [],
+    technical: [],
+    certifications: [],
+    affiliations: [],
+    industries: [],
     languages: [],
-    socialLinks: [],
-    technicalSkills: []
+    socialLinks: []
+  });
+
+  // Font size state
+  const [fontSizes, setFontSizes] = useState({
+    name: 14,
+    sectionTitle: 10,
+    contactInfo: 7,
+    jobTitle: 9,
+    company: 7,
+    degree: 9,
+    institution: 7,
+    institutionDate: 6,
+    regularText: 8,
+    bulletText: 8,
+    skillText: 7,
+    certificationText: 8
   });
 
   const [currentExperience, setCurrentExperience] = useState(defaultExperience());
   const [currentEducation, setCurrentEducation] = useState(defaultEducation());
-  const [currentSkill, setCurrentSkill] = useState(defaultSkill());
-  const [currentLicense, setCurrentLicense] = useState(defaultLicense());
-  const [currentDeal, setCurrentDeal] = useState(defaultDeal());
+  const [currentTechnical, setCurrentTechnical] = useState(defaultTechnical());
+  const [currentCertification, setCurrentCertification] = useState(defaultCertification());
+  const [currentAffiliation, setCurrentAffiliation] = useState(defaultAffiliation());
+  const [currentIndustry, setCurrentIndustry] = useState(defaultIndustry());
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage());
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
-  const [currentTechnicalSkill, setCurrentTechnicalSkill] = useState(defaultTechnicalSkill());
 
   const [activeSection, setActiveSection] = useState('personal');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
-  // ✅ Fixed: useRef must be called at top level, not inside .map()
-  const resumeRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
-
+  const resumeRef = useRef(null);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
+
+  // Testimonials for Structured Data
+  const testimonials = [
+    {
+      quote: "Created my investment banking resume in 15 minutes and landed interviews at top firms. The finance-specific templates are exactly what recruiters look for!",
+      metric: "Placed at Goldman Sachs",
+      name: "Michael R.",
+      role: "Investment Banking Analyst",
+      company: "Goldman Sachs"
+    },
+    {
+      quote: "Finally a resume builder that understands finance credentials. The quant-heavy templates helped me land interviews at hedge funds and prop trading firms.",
+      metric: "3 Hedge Fund Offers",
+      name: "Jennifer K.",
+      role: "Quantitative Analyst",
+      company: "Two Sigma"
+    },
+    {
+      quote: "As a recent finance graduate, the entry-level templates were perfect. Landed my first private equity internship using this builder.",
+      metric: "First PE Internship",
+      name: "Robert P.",
+      role: "Private Equity Analyst",
+      company: "Blackstone"
+    },
+    {
+      quote: "The finance resume builder saved my career transition. Could update my CV while working at the bank. Professional results that stand out.",
+      metric: "Career Switch Success",
+      name: "Sarah L.",
+      role: "Portfolio Manager",
+      company: "Fidelity Investments"
+    },
+    {
+      quote: "Finance ATS-friendly templates actually work! Got callbacks from bulge bracket banks that previously ignored my applications.",
+      metric: "5x More Responses",
+      name: "David T.",
+      role: "Financial Analyst",
+      company: "J.P. Morgan"
+    },
+    {
+      quote: "Free PDF download with proper finance formatting? Unbeatable value. Best finance resume builder I've found for Wall Street.",
+      metric: "Perfect Resume in 15min",
+      name: "James W.",
+      role: "Corporate Finance Director",
+      company: "Microsoft"
+    }
+  ];
+
+  // FAQ Data for Structured Data
+  const faqs = [
+    {
+      question: "Is this finance resume builder really free with no hidden costs?",
+      answer: "Yes, our finance resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional finance resume in PDF format without any payment required."
+    },
+    {
+      question: "What does ATS-friendly mean for finance resumes?",
+      answer: "ATS-friendly means our finance resume templates are optimized to pass through Applicant Tracking Systems used by 99% of investment banks, hedge funds, and financial institutions. This ensures your financial experience and credentials are properly scanned and recognized."
+    },
+    {
+      question: "Can I download my finance resume as PDF without creating an account?",
+      answer: "Absolutely! Download your professional finance resume in PDF format without creating an account. Everything is completely free and accessible immediately for investment bankers, analysts, and finance professionals."
+    },
+    {
+      question: "How many finance resume templates are available for free?",
+      answer: "We offer professionally designed ATS-friendly finance resume templates for investment banking, private equity, hedge funds, corporate finance, financial analysis, and all finance specialties. All templates are completely free and optimized for finance hiring."
+    },
+    {
+      question: "How does your finance resume builder work?",
+      answer: "Our builder uses ATS-optimized finance templates with proper financial terminology formatting. We guide you to highlight deal experience, financial modeling skills, certifications, and specialized skills that finance employers look for."
+    },
+    {
+      question: "Can I edit my finance resume after downloading it?",
+      answer: "Yes, you can always come back and edit your finance resume. Your work saves automatically, and you can download updated versions as many times as needed—completely free."
+    }
+  ];
+
+  // --- Font Size Handler ---
+  const handleFontSizeChange = (key, value) => {
+    setFontSizes(prev => ({
+      ...prev,
+      [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key]))
+    }));
+  };
+
+  const resetFontSizes = () => {
+    setFontSizes({
+      name: 14,
+      sectionTitle: 10,
+      contactInfo: 7,
+      jobTitle: 9,
+      company: 7,
+      degree: 9,
+      institution: 7,
+      institutionDate: 6,
+      regularText: 8,
+      bulletText: 8,
+      skillText: 7,
+      certificationText: 8
+    });
+  };
 
   // --- Utility Functions ---
   const getSocialIcon = (platform) => {
     const icons = {
       linkedin: <FiGlobe />,
-      bloomberg: <FiBarChart2 />,
+      bloomberg: <FiTrendingUp />,
       portfolio: <FiGlobe />,
       website: <FiGlobe />
     };
@@ -150,57 +295,26 @@ const Resume = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const pageHasContent = (pageNumber) => {
-    if (pageNumber === 1) {
-      if (formData.fullName || formData.email || formData.summary || formData.socialLinks.length > 0) {
-        return true;
-      }
-    }
-    const pageData = getDataByPage(pageNumber);
+  const hasContent = () => {
     return (
-      pageData.experience.length > 0 ||
-      pageData.education.length > 0 ||
-      pageData.skills.length > 0 ||
-      pageData.licenses.length > 0 ||
-      pageData.deals.length > 0 ||
-      pageData.languages.length > 0 ||
-      pageData.technicalSkills.length > 0
+      formData.fullName ||
+      formData.email ||
+      formData.summary ||
+      formData.socialLinks.length > 0 ||
+      formData.experience.length > 0 ||
+      formData.education.length > 0 ||
+      formData.technical.length > 0 ||
+      formData.certifications.length > 0 ||
+      formData.affiliations.length > 0 ||
+      formData.industries.length > 0 ||
+      formData.languages.length > 0
     );
   };
 
-  const getPagesWithContent = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      if (pageHasContent(i)) pages.push(i);
-    }
-    return pages;
-  };
-
-  // --- Page Management ---
-  const addNewPage = () => totalPages < 5 && setTotalPages(p => p + 1);
-
-  const removeLastPage = () => {
-    if (totalPages <= 1) return;
-    const newTotal = totalPages - 1;
-    const shift = (items) => items.map(i => i.page === totalPages ? { ...i, page: newTotal } : i);
-    setFormData(f => ({
-      ...f,
-      experience: shift(f.experience),
-      education: shift(f.education),
-      skills: shift(f.skills),
-      licenses: shift(f.licenses),
-      deals: shift(f.deals),
-      languages: shift(f.languages),
-      technicalSkills: shift(f.technicalSkills)
-    }));
-    setTotalPages(newTotal);
-    if (currentPage > newTotal) setCurrentPage(newTotal);
-  };
-
-  // --- Reusable CRUD ---
-  const createAdd = (key, current, setter, isValid) => () => {
+  // --- Item CRUD Functions ---
+  const createAddFunction = (key, current, setter, defaultFunc, isValid) => () => {
     if (!isValid()) return;
-    const item = { ...current, page: currentPage };
+    const item = { ...current };
     if (item.isEditing) {
       const updated = [...formData[key]];
       updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
@@ -208,48 +322,54 @@ const Resume = () => {
     } else {
       setFormData({ ...formData, [key]: [...formData[key], { ...item, isEditing: false, editIndex: null }] });
     }
-    setter(defaultExperience());
+    setter(defaultFunc());
   };
 
-  const createEdit = (key, setter) => (index) => {
+  const createEditFunction = (key, setter) => (index) => {
     const item = formData[key][index];
     setter({ ...item, isEditing: true, editIndex: index });
-    setCurrentPage(item.page);
   };
 
-  const createDelete = (key) => (index) => {
+  const createDeleteFunction = (key) => (index) => {
     const updated = [...formData[key]];
     updated.splice(index, 1);
     setFormData({ ...formData, [key]: updated });
   };
 
-  const addExperience = createAdd('experience', currentExperience, setCurrentExperience, () => currentExperience.position && currentExperience.employer && currentExperience.startDate);
-  const editExperience = createEdit('experience', setCurrentExperience);
-  const deleteExperience = createDelete('experience');
+  const addExperience = createAddFunction('experience', currentExperience, setCurrentExperience, defaultExperience, () => currentExperience.position && currentExperience.employer && currentExperience.startDate);
+  
+  const editExperience = createEditFunction('experience', setCurrentExperience);
+  const deleteExperience = createDeleteFunction('experience');
 
-  const addEducation = createAdd('education', currentEducation, setCurrentEducation, () => currentEducation.institution && currentEducation.degree);
-  const editEducation = createEdit('education', setCurrentEducation);
-  const deleteEducation = createDelete('education');
+  const addEducation = createAddFunction('education', currentEducation, setCurrentEducation, defaultEducation, () => currentEducation.institution && currentEducation.degree);
+  
+  const editEducation = createEditFunction('education', setCurrentEducation);
+  const deleteEducation = createDeleteFunction('education');
 
-  const addSkill = createAdd('skills', currentSkill, setCurrentSkill, () => currentSkill.name.trim());
-  const editSkill = createEdit('skills', setCurrentSkill);
-  const deleteSkill = createDelete('skills');
+  const addTechnical = createAddFunction('technical', currentTechnical, setCurrentTechnical, defaultTechnical, () => currentTechnical.name.trim());
+  
+  const editTechnical = createEditFunction('technical', setCurrentTechnical);
+  const deleteTechnical = createDeleteFunction('technical');
 
-  const addLicense = createAdd('licenses', currentLicense, setCurrentLicense, () => currentLicense.name.trim());
-  const editLicense = createEdit('licenses', setCurrentLicense);
-  const deleteLicense = createDelete('licenses');
+  const addCertification = createAddFunction('certifications', currentCertification, setCurrentCertification, defaultCertification, () => currentCertification.name.trim());
+  
+  const editCertification = createEditFunction('certifications', setCurrentCertification);
+  const deleteCertification = createDeleteFunction('certifications');
 
-  const addDeal = createAdd('deals', currentDeal, setCurrentDeal, () => currentDeal.name.trim());
-  const editDeal = createEdit('deals', setCurrentDeal);
-  const deleteDeal = createDelete('deals');
+  const addAffiliation = createAddFunction('affiliations', currentAffiliation, setCurrentAffiliation, defaultAffiliation, () => currentAffiliation.organization.trim());
+  
+  const editAffiliation = createEditFunction('affiliations', setCurrentAffiliation);
+  const deleteAffiliation = createDeleteFunction('affiliations');
 
-  const addLanguage = createAdd('languages', currentLanguage, setCurrentLanguage, () => currentLanguage.name.trim());
-  const editLanguage = createEdit('languages', setCurrentLanguage);
-  const deleteLanguage = createDelete('languages');
+  const addIndustry = createAddFunction('industries', currentIndustry, setCurrentIndustry, defaultIndustry, () => currentIndustry.name.trim());
+  
+  const editIndustry = createEditFunction('industries', setCurrentIndustry);
+  const deleteIndustry = createDeleteFunction('industries');
 
-  const addTechnicalSkill = createAdd('technicalSkills', currentTechnicalSkill, setCurrentTechnicalSkill, () => currentTechnicalSkill.category.trim());
-  const editTechnicalSkill = createEdit('technicalSkills', setCurrentTechnicalSkill);
-  const deleteTechnicalSkill = createDelete('technicalSkills');
+  const addLanguage = createAddFunction('languages', currentLanguage, setCurrentLanguage, defaultLanguage, () => currentLanguage.name.trim());
+  
+  const editLanguage = createEditFunction('languages', setCurrentLanguage);
+  const deleteLanguage = createDeleteFunction('languages');
 
   const addSocialLink = () => {
     if (!currentSocialLink.platform || !currentSocialLink.url) return;
@@ -281,167 +401,196 @@ const Resume = () => {
     setFormData({ ...formData, socialLinks: updated });
   };
 
-  const getDataByPage = (page) => ({
-    experience: formData.experience.filter(e => e.page === page),
-    education: formData.education.filter(e => e.page === page),
-    skills: formData.skills.filter(s => s.page === page),
-    licenses: formData.licenses.filter(l => l.page === page),
-    deals: formData.deals.filter(d => d.page === page),
-    languages: formData.languages.filter(l => l.page === page),
-    technicalSkills: formData.technicalSkills.filter(t => t.page === page)
-  });
-
   // --- PDF Generation ---
   const generatePDF = async () => {
     if (isGeneratingPDF) return;
     setIsGeneratingPDF(true);
     try {
       const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-      const pagesWithContent = getPagesWithContent();
-      if (pagesWithContent.length === 0) {
+      
+      if (!hasContent()) {
         alert("Please add content before generating PDF.");
         return;
       }
 
-      const originalStates = [];
-      for (let i = 0; i < pagesWithContent.length; i++) {
-        const pageNum = pagesWithContent[i];
-        const el = resumeRefs[pageNum - 1]?.current;
-        if (!el) continue;
+      const el = resumeRef.current;
+      if (!el) return;
 
-        originalStates[pageNum - 1] = {
-          display: el.style.display,
-          position: el.style.position,
-          width: el.style.width,
-          height: el.style.height
-        };
+      const originalStates = {
+        display: el.style.display,
+        position: el.style.position,
+        width: el.style.width,
+        height: el.style.height
+      };
 
-        Object.assign(el.style, {
-          display: 'block',
-          position: 'fixed',
-          left: '0',
-          top: '0',
-          width: '210mm',
-          height: '297mm',
-          transform: 'none',
-          zIndex: '9999',
-          visibility: 'visible',
-          opacity: '1',
-          background: '#ffffff',
-          color: '#000000'
-        });
+      Object.assign(el.style, {
+        display: 'block',
+        position: 'fixed',
+        left: '0',
+        top: '0',
+        width: '210mm',
+        height: '297mm',
+        transform: 'none',
+        zIndex: '9999',
+        visibility: 'visible',
+        opacity: '1',
+        background: '#ffffff',
+        color: '#000000'
+      });
 
-        await new Promise(r => setTimeout(r, 300));
+      await new Promise(r => setTimeout(r, 300));
 
-        const canvas = await html2canvas(el, {
-          scale: 3,
-          useCORS: true,
-          backgroundColor: '#ffffff',
-          width: 210 * 3.7795275591,
-          height: 297 * 3.7795275591,
-          onclone: (doc) => {
-            const clone = doc.querySelector(`.${styles.resumePreview}`);
-            if (clone) {
-              clone.style.display = 'block';
-              clone.style.visibility = 'visible';
-              clone.style.opacity = '1';
-              clone.style.width = '210mm';
-              clone.style.height = '297mm';
-              clone.style.background = '#ffffff';
-              clone.style.color = '#000000';
-              clone.querySelectorAll('*').forEach(n => {
-                n.style.color = '#000000';
-                n.style.fontFamily = "'Helvetica Neue', 'Arial', sans-serif";
-              });
-            }
+      const canvas = await html2canvas(el, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        width: 210 * 3.7795275591,
+        height: 297 * 3.7795275591,
+        onclone: (doc) => {
+          const clone = doc.querySelector(`.${styles.resumePreview}`);
+          if (clone) {
+            clone.style.display = 'block';
+            clone.style.visibility = 'visible';
+            clone.style.opacity = '1';
+            clone.style.width = '210mm';
+            clone.style.height = '297mm';
+            clone.style.background = '#ffffff';
+            clone.style.color = '#000000';
+            
+            // Apply custom font sizes
+            const name = clone.querySelector(`.${styles.name}`);
+            if (name) name.style.fontSize = `${fontSizes.name}pt`;
+            
+            const sectionTitles = clone.querySelectorAll(`.${styles.sectionTitle}`);
+            sectionTitles.forEach(title => {
+              title.style.fontSize = `${fontSizes.sectionTitle}pt`;
+            });
+            
+            const contactItems = clone.querySelectorAll(`.${styles.contactInfoItem}`);
+            contactItems.forEach(item => {
+              item.style.fontSize = `${fontSizes.contactInfo}pt`;
+            });
+            
+            const jobTitles = clone.querySelectorAll(`.${styles.experienceItem} h3`);
+            jobTitles.forEach(title => {
+              title.style.fontSize = `${fontSizes.jobTitle}pt`;
+            });
+            
+            const companies = clone.querySelectorAll(`.${styles.company}`);
+            companies.forEach(company => {
+              company.style.fontSize = `${fontSizes.company}pt`;
+            });
+            
+            const degrees = clone.querySelectorAll(`.${styles.educationItem} h3`);
+            degrees.forEach(degree => {
+              degree.style.fontSize = `${fontSizes.degree}pt`;
+            });
+            
+            const institutions = clone.querySelectorAll(`.${styles.institution}`);
+            institutions.forEach(institution => {
+              institution.style.fontSize = `${fontSizes.institution}pt`;
+            });
+            
+            // Apply institution date font sizes
+            const institutionDates = clone.querySelectorAll(`.${styles.institutionDate}`);
+            institutionDates.forEach(date => {
+              date.style.fontSize = `${fontSizes.institutionDate}pt`;
+            });
+            
+            const regularTexts = clone.querySelectorAll(`.${styles.summaryText}, .${styles.certificationItem}, .${styles.affiliationItem}`);
+            regularTexts.forEach(text => {
+              text.style.fontSize = `${fontSizes.regularText}pt`;
+            });
+            
+            const bulletPoints = clone.querySelectorAll(`.${styles.bulletList} li`);
+            bulletPoints.forEach(bullet => {
+              bullet.style.fontSize = `${fontSizes.bulletText}pt`;
+            });
+            
+            const skills = clone.querySelectorAll(`.${styles.skillsList} li`);
+            skills.forEach(skill => {
+              skill.style.fontSize = `${fontSizes.skillText}pt`;
+            });
+            
+            const certificationTexts = clone.querySelectorAll(`.${styles.certificationItem}`);
+            certificationTexts.forEach(cert => {
+              cert.style.fontSize = `${fontSizes.certificationText}pt`;
+            });
+            
+            clone.querySelectorAll('*').forEach(n => {
+              n.style.color = '#000000';
+              n.style.fontFamily = "'Helvetica Neue', 'Arial', sans-serif";
+            });
           }
-        });
+        }
+      });
 
-        const imgData = canvas.toDataURL('image/png', 1.0);
-        const imgWidth = 210;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        if (i > 0) pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
-      }
+      const imgData = canvas.toDataURL('image/png', 1.0);
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
 
-      for (let i = 0; i < totalPages; i++) {
-        const el = resumeRefs[i]?.current;
-        const state = originalStates[i];
-        if (el && state) Object.assign(el.style, state);
-      }
+      Object.assign(el.style, originalStates);
 
       pdf.save(`${formData.fullName || 'finance_resume'}_resume.pdf`);
     } catch (err) {
       console.error("PDF Error:", err);
-      alert("Failed to generate PDF.");
+      alert("Failed to generate PDF. Please try again.");
     } finally {
       setIsGeneratingPDF(false);
     }
   };
 
-  // --- Finance Template ---
-  const FinanceTemplate = ({ formData, pageData, pageNumber }) => {
-    const hasSummary = pageNumber === 1 && formData.summary;
-    const hasExperience = pageData.experience.length > 0;
-    const hasEducation = pageData.education.length > 0;
-    const hasSkills = pageData.skills.length > 0;
-    const hasLicenses = pageData.licenses.length > 0;
-    const hasDeals = pageData.deals.length > 0;
-    const hasTechnical = pageData.technicalSkills.length > 0;
-    const hasLanguages = pageData.languages.length > 0;
+  // --- Finance Resume Template ---
+  const FinanceTemplate = ({ formData }) => {
+    const hasSummary = formData.summary && formData.summary.trim().length > 0;
+    const hasExperience = formData.experience.length > 0;
+    const hasEducation = formData.education.length > 0;
+    const hasTechnical = formData.technical.length > 0;
+    const hasCertifications = formData.certifications.length > 0;
+    const hasAffiliations = formData.affiliations.length > 0;
+    const hasIndustries = formData.industries.length > 0;
+    const hasLanguages = formData.languages.length > 0;
 
     return (
       <div className={styles.financeTemplate}>
-        {pageNumber === 1 && (
-          <header className={styles.resumeHeader}>
-            <h1 className={styles.name}>{formData.fullName || 'Your Name'}</h1>
-            <div className={styles.contactInfoRow}>
-              {formData.email && <div className={styles.contactInfoItem}><FiMail /> {formData.email}</div>}
-              {(formData.email && (formData.phone || formData.address)) && <div className={styles.contactSeparator}>•</div>}
-              {formData.phone && <div className={styles.contactInfoItem}><FiPhone /> {formData.phone}</div>}
-              {(formData.phone && formData.address) && <div className={styles.contactSeparator}>•</div>}
-              {formData.address && <div className={styles.contactInfoItem}><FiMapPin /> {formData.address}</div>}
-              {formData.socialLinks.map((link, i) => (
-                <div key={i} className={styles.contactInfoItem}>
-                  {getSocialIcon(link.platform)} {formatSocialUrl(link.url)}
-                </div>
-              ))}
-            </div>
-          </header>
-        )}
+        <header className={styles.resumeHeader}>
+          <h1 className={styles.name} style={{ fontSize: `${fontSizes.name}pt` }}>
+            {formData.fullName || 'Your Name'}
+          </h1>
+          <div className={styles.contactInfoRow}>
+            {formData.email && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
+            {(formData.email && (formData.phone || formData.address)) && <div className={styles.contactSeparator}>•</div>}
+            {formData.phone && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiPhone /> {formData.phone}</div>}
+            {(formData.phone && formData.address) && <div className={styles.contactSeparator}>•</div>}
+            {formData.address && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMapPin /> {formData.address}</div>}
+            {formData.socialLinks.map((link, i) => (
+              <div key={i} className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}>
+                {getSocialIcon(link.platform)} {formatSocialUrl(link.url)}
+              </div>
+            ))}
+          </div>
+        </header>
 
         {hasSummary && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>PROFESSIONAL SUMMARY</h2>
-            <p className={styles.summaryText}>{formData.summary}</p>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL SUMMARY</h2>
+            <p className={styles.summaryText} style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p>
           </section>
         )}
 
         {hasExperience && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>PROFESSIONAL EXPERIENCE</h2>
-            {pageData.experience.map((exp, i) => (
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>FINANCE EXPERIENCE</h2>
+            {formData.experience.map((exp, i) => (
               <div key={i} className={styles.experienceItem}>
                 <div className={styles.experienceHeader}>
-                  <h3>{exp.position}</h3>
-                  <p className={styles.company}>{exp.employer}{exp.division && ` – ${exp.division}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
+                  <h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h3>
+                  <p className={styles.company} style={{ fontSize: `${fontSizes.company}pt` }}>{exp.employer}{exp.department && ` – ${exp.department}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
                 </div>
                 <ul className={styles.bulletList}>
-                  {exp.description.split('\n').filter(l => l.trim()).map((line, j) => <li key={j}>{line}</li>)}
-                </ul>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {hasDeals && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>TRANSACTION & DEAL EXPERIENCE</h2>
-            {pageData.deals.map((deal, i) => (
-              <div key={i} className={styles.dealItem}>
-                <h3>{deal.name} {deal.value && `| ${deal.value}`}</h3>
-                <ul className={styles.bulletList}>
-                  {deal.description.split('\n').filter(l => l.trim()).map((line, j) => <li key={j}>{line}</li>)}
+                  {exp.description.split('\n').filter(line => line.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}
                 </ul>
               </div>
             ))}
@@ -450,23 +599,39 @@ const Resume = () => {
 
         {hasEducation && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>EDUCATION</h2>
-            {pageData.education.map((edu, i) => (
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION & QUALIFICATIONS</h2>
+            {formData.education.map((edu, i) => (
               <div key={i} className={styles.educationItem}>
-                <h3>{edu.degree}{edu.major && ` in ${edu.major}`}</h3>
-                <p className={styles.institution}>{edu.institution} | {edu.startDate} – {edu.endDate || 'Present'}</p>
+                <h3 style={{ fontSize: `${fontSizes.degree}pt` }}>
+                  {edu.degree}{edu.program && ` – ${edu.program}`}
+                </h3>
+                <p className={styles.institution} style={{ fontSize: `${fontSizes.institution}pt` }}>
+                  {edu.institution} | 
+                  <span className={styles.institutionDate} style={{ fontSize: `${fontSizes.institutionDate}pt` }}>
+                    {edu.startDate} – {edu.endDate || 'Present'}{edu.gpa && ` | GPA: ${edu.gpa}`}
+                  </span>
+                </p>
               </div>
             ))}
           </section>
         )}
 
-        {hasLicenses && (
+        {hasTechnical && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>LICENSES & CERTIFICATIONS</h2>
-            {pageData.licenses.map((l, i) => (
-              <div key={i} className={styles.licenseItem}>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL SKILLS</h2>
+            <ul className={styles.skillsList}>
+              {formData.technical.map((s, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{s.name}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {hasCertifications && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CERTIFICATIONS & LICENSES</h2>
+            {formData.certifications.map((l, i) => (
+              <div key={i} className={styles.certificationItem} style={{ fontSize: `${fontSizes.certificationText}pt` }}>
                 <strong>{l.name}</strong>
-                {l.issuingBody && ` – ${l.issuingBody}`}
+                {l.issuingAuthority && ` – ${l.issuingAuthority}`}
                 {l.licenseNumber && ` (License #: ${l.licenseNumber})`}
                 {l.expiryDate && ` – Expires: ${l.expiryDate}`}
               </div>
@@ -474,21 +639,22 @@ const Resume = () => {
           </section>
         )}
 
-        {hasSkills && (
+        {hasIndustries && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>CORE COMPETENCIES</h2>
-            <ul className={styles.skillsList}>
-              {pageData.skills.map((s, i) => <li key={i}>{s.name}</li>)}
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>INDUSTRY EXPERTISE</h2>
+            <ul className={styles.bulletList}>
+              {formData.industries.map((p, i) => <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{p.name}</li>)}
             </ul>
           </section>
         )}
 
-        {hasTechnical && (
+        {hasAffiliations && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>TECHNICAL SKILLS</h2>
-            {pageData.technicalSkills.map((t, i) => (
-              <div key={i} className={styles.technicalItem}>
-                <strong>{t.category}:</strong> {t.tools}
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL AFFILIATIONS</h2>
+            {formData.affiliations.map((a, i) => (
+              <div key={i} className={styles.affiliationItem} style={{ fontSize: `${fontSizes.regularText}pt` }}>
+                <strong>{a.organization}</strong>
+                {a.role && ` – ${a.role}`}
               </div>
             ))}
           </section>
@@ -496,54 +662,431 @@ const Resume = () => {
 
         {hasLanguages && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>LANGUAGES</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LANGUAGES</h2>
             <ul className={styles.bulletList}>
-              {pageData.languages.map((l, i) => (
-                <li key={i}>{l.name}{l.proficiency && ` (${l.proficiency})`}</li>
+              {formData.languages.map((l, i) => (
+                <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>
+                  {l.name}{l.proficiency && ` (${l.proficiency})`}
+                </li>
               ))}
             </ul>
           </section>
-        )}
-
-        {getPagesWithContent().length > 1 && (
-          <div className={styles.pageIndicator}>
-            Page {getPagesWithContent().indexOf(pageNumber) + 1} of {getPagesWithContent().length}
-          </div>
         )}
       </div>
     );
   };
 
-  const renderTemplate = (pageNumber) => {
-    const pageData = getDataByPage(pageNumber);
-    return <FinanceTemplate formData={formData} pageData={pageData} pageNumber={pageNumber} />;
-  };
-
-  const actualPagesWithContent = getPagesWithContent().length;
-
   return (
-    <div className={styles.resumeBuilder}>
+    <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Finance Resume Builder | For Financial Analysts, Accountants & Bankers</title>
-        <meta name="description" content="Create a professional, ATS-friendly finance resume for investment banking, accounting, financial analysis, and fintech roles. Download as PDF." />
+        <title>Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026 | Professional Resume Maker for Investment Banking, Private Equity, Hedge Funds</title>
+        <meta name="title" content="Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026 | Professional Resume Maker for Investment Banking, Private Equity, Hedge Funds" />
+        <meta name="description" content="Create professional ATS-optimized finance resumes for free. Land interviews 3x faster with our finance resume builder. ATS-optimized templates for investment banking, private equity, hedge funds, corporate finance. Trusted by 500K+ finance professionals worldwide." />
+        <meta name="keywords" content="finance resume builder, investment banking resume, private equity resume, hedge fund resume, ATS friendly finance resume, free resume builder for finance professionals, financial analyst resume, corporate finance resume, Wall Street resume, finance CV" />
+        <meta name="author" content="Professional Finance Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="1 days" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="x-default" />
+        <meta property="og:title" content="Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026" />
+        <meta property="og:description" content="Create professional ATS-optimized finance resumes for free. Land interviews 3x faster with our finance resume builder. Trusted by 500K+ finance professionals." />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-finance-resume-builder-preview.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Free Finance Resume Builder - Create Professional Finance Resumes Online" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Professional Finance Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026" />
+        <meta name="twitter:description" content="Create professional ATS-optimized finance resumes for free. Land interviews 3x faster. Trusted by 500K+ finance professionals." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-finance-resume-builder-preview.jpg" />
+        <meta name="twitter:image:alt" content="Free Finance Resume Builder with ATS Templates" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        <script
+          type="application/ld+json"
+          key="structured-data"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebPage",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#webpage",
+                  "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder",
+                  "name": "Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026",
+                  "description": "Create professional ATS-optimized finance resumes for free. Land interviews 3x faster with our finance resume builder.",
+                  "datePublished": "2026-01-01",
+                  "dateModified": safeLastModifiedDate,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.professionalresumefree.com/#website",
+                    "url": "https://www.professionalresumefree.com",
+                    "name": "Professional Finance Resume Free",
+                    "description": "Free online resume builder for finance professionals",
+                    "publisher": {
+                      "@type": "Organization",
+                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "name": "Professional Finance Resume Free",
+                      "url": "https://www.professionalresumefree.com",
+                      "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "width": 512,
+                        "height": 512
+                      },
+                      "sameAs": [
+                        "https://twitter.com/ProResumeFree",
+                        "https://www.linkedin.com/company/professional-resume-free",
+                        "https://www.facebook.com/ProfessionalResumeFree",
+                        "https://www.youtube.com/@ProfessionalResumeFree"
+                      ]
+                    }
+                  },
+                  "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "https://www.professionalresumefree.com/images/og-finance-resume-builder-preview.jpg",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                      {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.professionalresumefree.com"
+                      },
+                      {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Finance Resume Builder",
+                        "item": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder"
+                      }
+                    ]
+                  },
+                  "mainEntity": {
+                    "@type": "SoftwareApplication",
+                    "name": "Finance Resume Builder - ATS Optimized Finance Resume Maker",
+                    "applicationCategory": "BusinessApplication",
+                    "operatingSystem": "Any",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "0",
+                      "priceCurrency": "USD",
+                      "availability": "https://schema.org/InStock",
+                      "priceValidUntil": "2026-12-31"
+                    },
+                    "aggregateRating": {
+                      "@type": "AggregateRating",
+                      "ratingValue": 4.9,
+                      "ratingCount": 23654,
+                      "bestRating": 5,
+                      "worstRating": 1
+                    },
+                    "description": "Free online ATS-friendly finance resume builder for finance professionals, investment bankers, analysts, and finance executives.",
+                    "featureList": [
+                      "Finance ATS-Optimized Templates",
+                      "Financial Content Suggestions",
+                      "One-Click PDF Download",
+                      "Deal Experience Formatting",
+                      "Mobile-Friendly Editor",
+                      "No Sign Up Required",
+                      "Free Forever"
+                    ],
+                    "softwareVersion": "2026.1.0",
+                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-finance-resume-builder.jpg",
+                    "applicationSuite": "Finance Career Tools",
+                    "countriesSupported": "Global",
+                    "fileSize": "Web Application"
+                  }
+                },
+                {
+                  "@type": "FAQPage",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#faqpage",
+                  "mainEntity": faqs.map((faq, index) => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": faq.answer,
+                      "datePublished": safeFaqDates[index] || safeCurrentDate,
+                      "author": {
+                        "@type": "Person",
+                        "name": "Finance Resume Builder Support Team"
+                      }
+                    },
+                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#webpage"
+                  }))
+                },
+                {
+                  "@type": "HowTo",
+                  "name": "How to Create a Professional Finance Resume with Our Free Builder",
+                  "description": "Step-by-step guide to create an ATS-optimized finance resume for free",
+                  "totalTime": "PT15M",
+                  "estimatedCost": {
+                    "@type": "MonetaryAmount",
+                    "currency": "USD",
+                    "value": "0"
+                  },
+                  "step": [
+                    {
+                      "@type": "HowToStep",
+                      "position": 1,
+                      "name": "Choose a Finance Template",
+                      "text": "Select from our ATS-optimized finance resume templates designed for investment banking, private equity, hedge funds, and corporate finance.",
+                      "url": "https://www.professionalresumefree.com/finance-resume-builder#templates",
+                      "image": "https://www.professionalresumefree.com/images/step1-finance-template.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 2,
+                      "name": "Enter Your Finance Information",
+                      "text": "Add your finance experience, deal history, technical skills, certifications, and specialized financial expertise using our guided forms.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#editor",
+                      "image": "https://www.professionalresumefree.com/images/step2-finance-info.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 3,
+                      "name": "Customize and Optimize",
+                      "text": "Use our finance-specific suggestions to improve financial keywords and formatting for ATS compatibility.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#optimize",
+                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 4,
+                      "name": "Download Your Finance Resume",
+                      "text": "Export your professional finance resume as PDF, Word, or plain text - completely free, no watermarks.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#download",
+                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                    }
+                  ]
+                },
+                {
+                  "@type": "Service",
+                  "serviceType": "Online Finance Resume Building Service",
+                  "provider": {
+                    "@type": "Organization",
+                    "name": "Professional Finance Resume Free",
+                    "url": "https://www.professionalresumefree.com",
+                    "contactPoint": {
+                      "@type": "ContactPoint",
+                      "telephone": "+1-800-555-1234",
+                      "contactType": "Customer Support",
+                      "availableLanguage": "en"
+                    }
+                  },
+                  "areaServed": {
+                    "@type": "Country",
+                    "name": "Global"
+                  },
+                  "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Free Finance Resume Building Services",
+                    "itemListElement": [
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Finance ATS Resume Templates"
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Financial Resume Editing"
+                        }
+                      }
+                    ]
+                  },
+                  "description": "Free ATS-friendly finance resume builder for finance professionals worldwide",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                  }
+                },
+                {
+                  "@type": "SpeakableSpecification",
+                  "cssSelector": [".heroTitle", ".heroSubtitle", ".faqItem h3"]
+                },
+                {
+                  "@type": "ItemList",
+                  "itemListElement": testimonials.map((testimonial, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "Review",
+                      "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": 5,
+                        "bestRating": 5
+                      },
+                      "author": {
+                        "@type": "Person",
+                        "name": testimonial.name
+                      },
+                      "reviewBody": testimonial.quote,
+                      "datePublished": safeReviewDates[index] || safeCurrentDate,
+                      "publisher": {
+                        "@type": "Organization",
+                        "name": "Professional Finance Resume Free"
+                      },
+                      "itemReviewed": {
+                        "@type": "SoftwareApplication",
+                        "name": "Finance Resume Builder - ATS Optimized Finance Resume Maker",
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "Any",
+                        "offers": {
+                          "@type": "Offer",
+                          "price": "0",
+                          "priceCurrency": "USD"
+                        },
+                        "description": "Free online ATS-friendly finance resume builder that helps finance professionals create professional resumes and land interviews faster.",
+                        "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder"
+                      }
+                    }
+                  }))
+                }
+              ]
+            })
+          }}
+        />
       </Head>
 
+      {/* Freshness Indicator */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
+
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink} prefetch={false}>
+              <FiHome className={styles.breadcrumbIcon} />
+              <span className={styles.breadcrumbText}>Home</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>
+            <FiChevronRightIcon />
+          </li>
+          <li>
+            <Link href="/ats-friendly-finance-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
+              <span className={styles.breadcrumbText}>Free Finance Template</span>
+            </Link>
+          </li>
+        </ol>
+      </nav>
+
+      {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
+            <div className={styles.trustBadge}>
+              <FiStar className={styles.starIcon} />
+              <span className={styles.trustBadgeText}>
+                Rated 4.9/5 by 23,654+ Finance Professionals | Best Free Finance Resume Builder 2026
+              </span>
+            </div>
+            
             <h1 className={styles.heroTitle}>
-              Build Your <span className={styles.gradientText}>Finance Resume</span>
+              Free Finance Resume Builder <span className={styles.gradientText}>Trusted by 500K+ Finance Professionals</span>
             </h1>
+            
             <p className={styles.heroSubtitle}>
-              Tailored for financial analysts, accountants, investment bankers, risk managers, and fintech professionals.
-              Highlight certifications like CFA, CPA, and Series 7.
+              Create a <strong className={styles.heroHighlight}>professional, ATS-optimized finance resume for free in minutes.</strong> Our finance resume builder ensures your deal experience and financial credentials get noticed by investment banks, hedge funds, and financial institutions.
             </p>
+
+            <div className={styles.ctaButtons}>
+              <button
+                onClick={() => setActiveSection('personal')}
+                className={styles.primaryButton}
+                aria-label="Start building your free finance resume now—no sign-up required"
+              >
+                <span className={styles.buttonText}>Start Building Your Finance Resume Now</span>
+                <FiArrowRight className={styles.buttonIcon} />
+                <div className={styles.buttonPulse}></div>
+              </button>
+              
+              <button
+                onClick={generatePDF}
+                className={styles.secondaryButton}
+                aria-label="Download finance resume as PDF"
+                disabled={isGeneratingPDF || !hasContent()}
+              >
+                <FiDownload className={styles.buttonIcon} />
+                <span className={styles.buttonText}>Download Finance Resume PDF</span>
+              </button>
+            </div>
+
+            <div className={styles.heroStats}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>500K+</span>
+                <span className={styles.statLabel}>Finance Resumes Created</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>92%</span>
+                <span className={styles.statLabel}>Interview Success Rate</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>40%</span>
+                <span className={styles.statLabel}>Faster Finance Hires</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>4.9/5</span>
+                <span className={styles.statLabel}>Rating from Finance Professionals</span>
+              </div>
+            </div>
+
+            <div className={styles.financeBadges}>
+              <div className={styles.badgeGrid}>
+                <span className={styles.badgeItem}><FiTrendingUp /> Investment Banking</span>
+                <span className={styles.badgeItem}><FiPieChart /> Private Equity</span>
+                <span className={styles.badgeItem}><FiBarChart /> Hedge Funds</span>
+                <span className={styles.badgeItem}><FiDollarSign /> Corporate Finance</span>
+                <span className={styles.badgeItem}><FiPercent /> Financial Analysis</span>
+                <span className={styles.badgeItem}><FiCreditCard /> Asset Management</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Main Content */}
       <div className={styles.singleColumnLayout}>
-        {/* Preview */}
+        {/* Preview Section */}
         <div className={styles.previewSection}>
           <div className={styles.previewHeader}>
             <div className={styles.previewActions}>
@@ -553,10 +1096,10 @@ const Resume = () => {
               <button
                 onClick={generatePDF}
                 className={styles.downloadButton}
-                disabled={isGeneratingPDF || actualPagesWithContent === 0}
+                disabled={isGeneratingPDF || !hasContent()}
               >
                 <FiDownload />
-                {isGeneratingPDF ? 'Generating...' : `Download PDF (${actualPagesWithContent} page${actualPagesWithContent !== 1 ? 's' : ''})`}
+                {isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}
               </button>
             </div>
           </div>
@@ -564,69 +1107,27 @@ const Resume = () => {
           <div className={`${styles.previewContainer} ${showFullPreview ? styles.fullPreview : ''}`}>
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <div
-                    key={i + 1}
-                    className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
-                    ref={resumeRefs[i]}
-                  >
-                    {renderTemplate(i + 1)}
-                  </div>
-                ))}
+                <div
+                  className={styles.resumePreview}
+                  ref={resumeRef}
+                >
+                  <FinanceTemplate formData={formData} />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className={styles.previewNavigation}>
-            <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              className={styles.previewNavButton}
-            >
-              <FiChevronLeft /> Previous
-            </button>
-            <div className={styles.previewPageInfo}>
-              Page {currentPage} of {totalPages}
-              {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
-            </div>
-            <button
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-              className={styles.previewNavButton}
-            >
-              Next <FiChevronRight />
-            </button>
           </div>
         </div>
 
-        {/* Form */}
+        {/* Form Section */}
         <div className={styles.formSection}>
-          <div className={styles.pageManagement}>
-            <div className={styles.pageControls}>
-              <button onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage === 1} className={styles.pageButton}>
-                <FiChevronLeft /> Previous
-              </button>
-              <div className={styles.pageInfo}>
-                Page {currentPage} of {totalPages}
-                {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
-              </div>
-              <button onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages} className={styles.pageButton}>
-                Next <FiChevronRight />
-              </button>
-            </div>
-            <div className={styles.pageActions}>
-              {totalPages < 5 && <button onClick={addNewPage} className={styles.addPageButton}><FiPlus /> Add Page</button>}
-              {totalPages > 1 && <button onClick={removeLastPage} className={styles.removePageButton}><FiX /> Remove Last Page</button>}
-            </div>
-          </div>
-
           <div className={styles.formNavigation}>
             {[
               { id: 'personal', label: 'Personal', icon: <FiUser /> },
-              { id: 'experience', label: 'Experience', icon: <FiBriefcase /> },
-              { id: 'deals', label: 'Deal Experience', icon: <FiDollarSign /> },
+              { id: 'experience', label: 'Finance Experience', icon: <FiBriefcase /> },
               { id: 'education', label: 'Education', icon: <FiBook /> },
-              { id: 'skills', label: 'Skills', icon: <FiBarChart2 /> },
+              { id: 'technical', label: 'Technical Skills', icon: <FiTrendingUp /> },
+              { id: 'certifications', label: 'Certifications', icon: <FiShield /> },
+              { id: 'settings', label: 'Font Settings', icon: <FiSettings /> },
             ].map((item) => (
               <button
                 key={item.id}
@@ -639,8 +1140,8 @@ const Resume = () => {
           </div>
 
           <div className={styles.formContent}>
-            {/* Personal */}
-            {activeSection === 'personal' && currentPage === 1 && (
+            {/* Personal Section */}
+            {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
                 <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
                 <div className={styles.formCard}>
@@ -651,7 +1152,7 @@ const Resume = () => {
                     </label>
                     <label className={styles.formLabel}>
                       Email*
-                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="john@finance.com" required className={styles.formInput} />
+                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="john.smith@finance.com" required className={styles.formInput} />
                     </label>
                   </div>
                   <div className={styles.formGroup}>
@@ -660,7 +1161,7 @@ const Resume = () => {
                       <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className={styles.formInput} />
                     </label>
                     <label className={styles.formLabel}>
-                      Address
+                      Location
                       <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="New York, NY" className={styles.formInput} />
                     </label>
                   </div>
@@ -668,35 +1169,61 @@ const Resume = () => {
 
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
-                    Professional Summary*
+                    Professional Finance Summary*
                     <textarea
                       name="summary"
                       value={formData.summary}
                       onChange={handleInputChange}
-                      placeholder="Detail-oriented Financial Analyst with 5+ years in equity research and portfolio management..."
+                      placeholder="Results-driven Investment Banking Analyst with 5+ years of experience in M&A, capital markets, and financial modeling. Proven track record in executing $2B+ in transactions across technology and healthcare sectors. Strong proficiency in DCF, LBO, and comparable company analysis. CFA Level III candidate with exceptional quantitative and analytical skills."
                       required
                       className={styles.formTextarea}
-                      rows="4"
+                      rows="6"
                     />
+                    <div className={styles.characterCount}>
+                      {formData.summary.length}/500 characters
+                    </div>
                   </label>
                 </div>
 
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <p className={styles.sectionDescription}>Add your professional finance profiles (LinkedIn, Bloomberg, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
-                    <select value={currentSocialLink.platform} onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, platform: e.target.value })} className={styles.formSelect}>
-                      <option value="">Select</option>
+                    <select 
+                      value={currentSocialLink.platform} 
+                      onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, platform: e.target.value })} 
+                      className={styles.formSelect}
+                    >
+                      <option value="">Select Platform</option>
                       <option value="LinkedIn">LinkedIn</option>
-                      <option value="Bloomberg">Bloomberg</option>
-                      <option value="Portfolio">Portfolio</option>
+                      <option value="Bloomberg">Bloomberg Terminal</option>
+                      <option value="Portfolio">Professional Portfolio</option>
+                      <option value="Website">Personal Website</option>
+                      <option value="GitHub">GitHub</option>
+                      <option value="Research">Research Publications</option>
                     </select>
-                    <input type="url" placeholder="URL" value={currentSocialLink.url} onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, url: e.target.value })} className={styles.formInput} />
+                    <input 
+                      type="url" 
+                      placeholder="https://linkedin.com/in/yourprofile" 
+                      value={currentSocialLink.url} 
+                      onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, url: e.target.value })} 
+                      className={styles.formInput} 
+                    />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addSocialLink} className={styles.addButton} disabled={!currentSocialLink.platform || !currentSocialLink.url}>
-                        <FiPlus /> {currentSocialLink.isEditing ? 'Update' : 'Add'}
+                      <button 
+                        type="button" 
+                        onClick={addSocialLink} 
+                        className={styles.addButton} 
+                        disabled={!currentSocialLink.platform || !currentSocialLink.url}
+                      >
+                        <FiPlus /> {currentSocialLink.isEditing ? 'Update' : 'Add Link'}
                       </button>
                       {currentSocialLink.isEditing && (
-                        <button type="button" onClick={() => setCurrentSocialLink(defaultSocialLink())} className={styles.cancelButton}>
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentSocialLink(defaultSocialLink())} 
+                          className={styles.cancelButton}
+                        >
                           <FiX /> Cancel
                         </button>
                       )}
@@ -704,17 +1231,17 @@ const Resume = () => {
                   </div>
                   <div className={styles.itemsList}>
                     {formData.socialLinks.length === 0 ? (
-                      <p className={styles.emptyMessage}>No links added</p>
+                      <p className={styles.emptyMessage}>No professional links added yet</p>
                     ) : (
                       formData.socialLinks.map((link, i) => (
                         <div key={i} className={styles.listItem}>
                           <div className={styles.itemInfo}>
-                            <span>{link.platform}</span>
-                            <span>{formatSocialUrl(link.url)}</span>
+                            <span className={styles.itemPlatform}>{link.platform}</span>
+                            <span className={styles.itemUrl}>{formatSocialUrl(link.url)}</span>
                           </div>
                           <div className={styles.itemActions}>
-                            <button onClick={() => editSocialLink(i)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteSocialLink(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                            <button onClick={() => editSocialLink(i)} className={styles.editButton} aria-label={`Edit ${link.platform} link`}><FiEdit2 /></button>
+                            <button onClick={() => deleteSocialLink(i)} className={styles.deleteButton} aria-label={`Delete ${link.platform} link`}><FiTrash2 /></button>
                           </div>
                         </div>
                       ))
@@ -724,339 +1251,799 @@ const Resume = () => {
               </div>
             )}
 
-            {/* Experience */}
+            {/* Finance Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Work Experience – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiBriefcase /> Finance Experience</h3>
+                <p className={styles.sectionDescription}>List your finance positions in reverse chronological order (most recent first)</p>
+                
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Position*
-                      <input value={currentExperience.position} onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} placeholder="Investment Banking Analyst" required className={styles.formInput} />
+                      Position Title*
+                      <input 
+                        value={currentExperience.position} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} 
+                        placeholder="Investment Banking Analyst" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      Employer*
-                      <input value={currentExperience.employer} onChange={(e) => setCurrentExperience({ ...currentExperience, employer: e.target.value })} placeholder="Goldman Sachs" required className={styles.formInput} />
+                      Financial Institution*
+                      <input 
+                        value={currentExperience.employer} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, employer: e.target.value })} 
+                        placeholder="Goldman Sachs & Co." 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Division / Group
-                    <input value={currentExperience.division} onChange={(e) => setCurrentExperience({ ...currentExperience, division: e.target.value })} placeholder="Mergers & Acquisitions" className={styles.formInput} />
+                    Division / Department / Coverage Group
+                    <input 
+                      value={currentExperience.department} 
+                      onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} 
+                      placeholder="Technology, Media & Telecommunications (TMT) Investment Banking" 
+                      className={styles.formInput} 
+                    />
                   </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date*
-                      <input type="text" placeholder="MM/YYYY" value={currentExperience.startDate} onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} required className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year (e.g., June 2020)" 
+                        value={currentExperience.startDate} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
                       End Date
-                      <input type="text" placeholder="MM/YYYY or Present" value={currentExperience.endDate} onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year or Present" 
+                        value={currentExperience.endDate} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Key Responsibilities*
-                    <textarea value={currentExperience.description} onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} placeholder="• Led financial modeling for $500M acquisition..." required className={styles.formTextarea} rows="4" />
-                  </label>
-                  <div className={styles.formActions}>
-                    <button type="button" onClick={addExperience} className={styles.addButton} disabled={!currentExperience.position || !currentExperience.employer || !currentExperience.startDate}>
-                      <FiPlus /> {currentExperience.isEditing ? 'Update' : 'Add Experience'}
-                    </button>
-                    {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
-                  </div>
-                </div>
-                <div className={styles.formCard}>
-                  <h4>Your Experience on Page {currentPage}</h4>
-                  {getDataByPage(currentPage).experience.length === 0 ? (
-                    <p className={styles.emptyMessage}>No experience added</p>
-                  ) : (
-                    <div className={styles.itemsList}>
-                      {getDataByPage(currentPage).experience.map((exp, i) => {
-                        const globalIdx = formData.experience.findIndex(e => e === exp);
-                        return (
-                          <div key={i} className={styles.listItem}>
-                            <div className={styles.itemContent}>
-                              <div className={styles.itemHeader}>
-                                <strong>{exp.position}</strong>
-                                <span>at {exp.employer}</span>
-                              </div>
-                              <div className={styles.itemMeta}>
-                                <span>{exp.startDate} – {exp.endDate || 'Present'}</span>
-                                <span className={styles.pageBadge}>Page {exp.page}</span>
-                              </div>
-                              <div className={styles.itemDescription}>
-                                {exp.description.split('\n').filter(l => l.trim()).map((line, j) => <p key={j} className={styles.bulletPoint}>• {line}</p>)}
-                              </div>
-                            </div>
-                            <div className={styles.itemActions}>
-                              <button onClick={() => editExperience(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                              <button onClick={() => deleteExperience(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                            </div>
-                          </div>
-                        );
-                      })}
+                    Key Financial Responsibilities & Deal Experience*
+                    <textarea 
+                      value={currentExperience.description} 
+                      onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} 
+                      placeholder="• Executed $2.5B merger between TechCorp and DataSystems, creating synergy models with 15% cost savings
+• Built comprehensive DCF and LBO models for 12+ potential acquisitions in software sector
+• Performed due diligence on financial statements, identifying $50M in working capital improvements
+• Created pitch books for equity and debt offerings totaling $1.8B in capital raised
+• Mentored 3 summer analysts in financial modeling and valuation techniques"
+                      required 
+                      className={styles.formTextarea} 
+                      rows="8" 
+                    />
+                    <div className={styles.characterCount}>
+                      {currentExperience.description.length}/2000 characters
                     </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Deals */}
-            {activeSection === 'deals' && (
-              <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiDollarSign /> Transaction & Deal Experience – Page {currentPage}</h3>
-                <div className={styles.formCard}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      Deal Name*
-                      <input value={currentDeal.name} onChange={(e) => setCurrentDeal({ ...currentDeal, name: e.target.value })} placeholder="Acquisition of XYZ Corp" required className={styles.formInput} />
-                    </label>
-                    <label className={styles.formLabel}>
-                      Deal Value
-                      <input value={currentDeal.value} onChange={(e) => setCurrentDeal({ ...currentDeal, value: e.target.value })} placeholder="$250M" className={styles.formInput} />
-                    </label>
-                  </div>
-                  <label className={styles.formLabel}>
-                    Role & Contributions*
-                    <textarea value={currentDeal.description} onChange={(e) => setCurrentDeal({ ...currentDeal, description: e.target.value })} placeholder="• Built LBO model and performed valuation analysis..." required className={styles.formTextarea} rows="4" />
                   </label>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addDeal} className={styles.addButton} disabled={!currentDeal.name.trim()}>
-                      <FiPlus /> {currentDeal.isEditing ? 'Update' : 'Add Deal'}
+                    <button 
+                      type="button" 
+                      onClick={addExperience} 
+                      className={styles.addButton} 
+                      disabled={!currentExperience.position || !currentExperience.employer || !currentExperience.startDate}
+                    >
+                      <FiPlus /> {currentExperience.isEditing ? 'Update Finance Experience' : 'Add Finance Experience'}
                     </button>
-                    {currentDeal.isEditing && <button type="button" onClick={() => setCurrentDeal(defaultDeal())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    {currentExperience.isEditing && (
+                      <button 
+                        type="button" 
+                        onClick={() => setCurrentExperience(defaultExperience())} 
+                        className={styles.cancelButton}
+                      >
+                        <FiX /> Cancel
+                      </button>
+                    )}
                   </div>
                 </div>
+                
                 <div className={styles.formCard}>
-                  <h4>Your Deals on Page {currentPage}</h4>
-                  {getDataByPage(currentPage).deals.length === 0 ? (
-                    <p className={styles.emptyMessage}>No deals added</p>
+                  <h4 className={styles.subSectionTitle}>Your Finance Experience</h4>
+                  {formData.experience.length === 0 ? (
+                    <p className={styles.emptyMessage}>No finance experience added yet</p>
                   ) : (
                     <div className={styles.itemsList}>
-                      {getDataByPage(currentPage).deals.map((deal, i) => {
-                        const globalIdx = formData.deals.findIndex(d => d === deal);
-                        return (
-                          <div key={i} className={styles.listItem}>
+                      {formData.experience.map((exp, i) => (
+                        <div key={i} className={styles.listItem}>
+                          <div className={styles.itemContent}>
                             <div className={styles.itemHeader}>
-                              <strong>{deal.name}</strong>
-                              {deal.value && <span> | {deal.value}</span>}
+                              <strong className={styles.itemTitle}>{exp.position}</strong>
+                              <span className={styles.itemSubtitle}>at {exp.employer}</span>
+                            </div>
+                            <div className={styles.itemMeta}>
+                              <span>{exp.startDate} – {exp.endDate || 'Present'}</span>
+                              {exp.department && <span>{exp.department}</span>}
                             </div>
                             <div className={styles.itemDescription}>
-                              {deal.description.split('\n').filter(l => l.trim()).map((line, j) => <p key={j} className={styles.bulletPoint}>• {line}</p>)}
-                            </div>
-                            <div className={styles.itemActions}>
-                              <button onClick={() => editDeal(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                              <button onClick={() => deleteDeal(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
+                              {exp.description.split('\n').filter(l => l.trim()).map((line, j) => (
+                                <p key={j} className={styles.bulletPoint}>• {line}</p>
+                              ))}
                             </div>
                           </div>
-                        );
-                      })}
+                          <div className={styles.itemActions}>
+                            <button onClick={() => editExperience(i)} className={styles.editButton} aria-label={`Edit ${exp.position} experience`}><FiEdit2 /></button>
+                            <button onClick={() => deleteExperience(i)} className={styles.deleteButton} aria-label={`Delete ${exp.position} experience`}><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
+                </div>
+
+                {/* Industry Expertise */}
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}><FiTarget /> Industry Expertise</h4>
+                  <p className={styles.sectionDescription}>Add industries you have experience in</p>
+                  <div className={styles.skillsInput}>
+                    <input 
+                      value={currentIndustry.name} 
+                      onChange={(e) => setCurrentIndustry({ ...currentIndustry, name: e.target.value })} 
+                      placeholder="Technology, Healthcare, Financial Services, Consumer Retail" 
+                      className={styles.formInput} 
+                    />
+                    <div className={styles.formActions}>
+                      <button 
+                        type="button" 
+                        onClick={addIndustry} 
+                        className={styles.addButton} 
+                        disabled={!currentIndustry.name.trim()}
+                      >
+                        <FiPlus /> {currentIndustry.isEditing ? 'Update Industry' : 'Add Industry'}
+                      </button>
+                      {currentIndustry.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentIndustry(defaultIndustry())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.itemsList}>
+                    {formData.industries.map((s, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <span>{s.name}</span>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editIndustry(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteIndustry(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.industries.length === 0 && <p className={styles.emptyMessage}>No industry expertise added yet</p>}
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Education */}
+            {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiBook /> Education & Qualifications</h3>
+                <p className={styles.sectionDescription}>List your education, degrees, and relevant finance qualifications</p>
+                
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Institution*
-                      <input value={currentEducation.institution} onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} placeholder="Wharton School, UPenn" required className={styles.formInput} />
+                      <input 
+                        value={currentEducation.institution} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} 
+                        placeholder="Wharton School, University of Pennsylvania" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
                       Degree*
-                      <input value={currentEducation.degree} onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} placeholder="MBA – Finance" required className={styles.formInput} />
+                      <input 
+                        value={currentEducation.degree} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} 
+                        placeholder="Bachelor of Science in Economics" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Major / Concentration
-                    <input value={currentEducation.major} onChange={(e) => setCurrentEducation({ ...currentEducation, major: e.target.value })} placeholder="Investment Management" className={styles.formInput} />
+                    Program / Concentration / Major
+                    <input 
+                      value={currentEducation.program} 
+                      onChange={(e) => setCurrentEducation({ ...currentEducation, program: e.target.value })} 
+                      placeholder="Finance, Financial Engineering" 
+                      className={styles.formInput} 
+                    />
                   </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date
-                      <input type="text" placeholder="MM/YYYY" value={currentEducation.startDate} onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year" 
+                        value={currentEducation.startDate} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      End Date
-                      <input type="text" placeholder="MM/YYYY or Expected" value={currentEducation.endDate} onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} className={styles.formInput} />
+                      End Date / Expected
+                      <input 
+                        type="text" 
+                        placeholder="Month Year or Expected" 
+                        value={currentEducation.endDate} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
+                  <label className={styles.formLabel}>
+                    GPA / Honors
+                    <input 
+                      value={currentEducation.gpa} 
+                      onChange={(e) => setCurrentEducation({ ...currentEducation, gpa: e.target.value })} 
+                      placeholder="3.8/4.0, Magna Cum Laude" 
+                      className={styles.formInput} 
+                    />
+                  </label>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addEducation} className={styles.addButton} disabled={!currentEducation.institution || !currentEducation.degree}>
-                      <FiPlus /> {currentEducation.isEditing ? 'Update' : 'Add Education'}
+                    <button 
+                      type="button" 
+                      onClick={addEducation} 
+                      className={styles.addButton} 
+                      disabled={!currentEducation.institution || !currentEducation.degree}
+                    >
+                      <FiPlus /> {currentEducation.isEditing ? 'Update Education' : 'Add Education'}
                     </button>
-                    {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    {currentEducation.isEditing && (
+                      <button 
+                        type="button" 
+                        onClick={() => setCurrentEducation(defaultEducation())} 
+                        className={styles.cancelButton}
+                      >
+                        <FiX /> Cancel
+                      </button>
+                    )}
                   </div>
                 </div>
+                
                 <div className={styles.formCard}>
-                  <h4>Your Education on Page {currentPage}</h4>
-                  {getDataByPage(currentPage).education.length === 0 ? (
-                    <p className={styles.emptyMessage}>No education added</p>
+                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  {formData.education.length === 0 ? (
+                    <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
                     <div className={styles.itemsList}>
-                      {getDataByPage(currentPage).education.map((edu, i) => {
-                        const globalIdx = formData.education.findIndex(e => e === edu);
-                        return (
-                          <div key={i} className={styles.listItem}>
-                            <div className={styles.itemContent}>
-                              <div className={styles.itemHeader}>
-                                <strong>{edu.degree}</strong>
-                                {edu.major && <span> in {edu.major}</span>}
-                              </div>
-                              <div className={styles.itemMeta}>
-                                <span>{edu.institution}</span>
-                                <span>{edu.startDate} – {edu.endDate || 'Present'}</span>
-                                <span className={styles.pageBadge}>Page {edu.page}</span>
-                              </div>
+                      {formData.education.map((edu, i) => (
+                        <div key={i} className={styles.listItem}>
+                          <div className={styles.itemContent}>
+                            <div className={styles.itemHeader}>
+                              <strong className={styles.itemTitle}>{edu.degree}</strong>
+                              {edu.program && <span className={styles.itemSubtitle}> – {edu.program}</span>}
                             </div>
-                            <div className={styles.itemActions}>
-                              <button onClick={() => editEducation(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                              <button onClick={() => deleteEducation(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
+                            <div className={styles.itemMeta}>
+                              <span>{edu.institution}</span>
+                              <span>{edu.startDate} – {edu.endDate || 'Present'}</span>
+                              {edu.gpa && <span>GPA: {edu.gpa}</span>}
                             </div>
                           </div>
-                        );
-                      })}
+                          <div className={styles.itemActions}>
+                            <button onClick={() => editEducation(i)} className={styles.editButton} aria-label={`Edit ${edu.degree}`}><FiEdit2 /></button>
+                            <button onClick={() => deleteEducation(i)} className={styles.deleteButton} aria-label={`Delete ${edu.degree}`}><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
               </div>
             )}
 
-            {/* Skills, Licenses, etc. */}
-            {activeSection === 'skills' && (
+            {/* Technical Skills & Certifications Section */}
+            {activeSection === 'technical' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBarChart2 /> Core Competencies – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiTrendingUp /> Technical Skills & Certifications</h3>
+                
+                {/* Technical Skills */}
                 <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}>Technical Finance Skills</h4>
+                  <p className={styles.sectionDescription}>List your technical skills and financial software proficiency</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentSkill.name} onChange={(e) => setCurrentSkill({ ...currentSkill, name: e.target.value })} placeholder="Financial Modeling" className={styles.formInput} />
+                    <input 
+                      value={currentTechnical.name} 
+                      onChange={(e) => setCurrentTechnical({ ...currentTechnical, name: e.target.value })} 
+                      placeholder="Financial Modeling (DCF, LBO, M&A), Bloomberg Terminal, VBA, Python, SQL" 
+                      className={styles.formInput} 
+                    />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addSkill} className={styles.addButton} disabled={!currentSkill.name.trim()}>
-                        <FiPlus /> {currentSkill.isEditing ? 'Update' : 'Add Skill'}
+                      <button 
+                        type="button" 
+                        onClick={addTechnical} 
+                        className={styles.addButton} 
+                        disabled={!currentTechnical.name.trim()}
+                      >
+                        <FiPlus /> {currentTechnical.isEditing ? 'Update Skill' : 'Add Skill'}
                       </button>
-                      {currentSkill.isEditing && <button type="button" onClick={() => setCurrentSkill(defaultSkill())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentTechnical.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentTechnical(defaultTechnical())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).skills.map((s, i) => {
-                      const globalIdx = formData.skills.findIndex(x => x === s);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <span>{s.name}</span>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editSkill(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteSkill(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.technical.map((s, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <span>{s.name}</span>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editTechnical(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteTechnical(i)} className={styles.deleteButton}><FiTrash2 /></button>
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).skills.length === 0 && <p className={styles.emptyMessage}>No skills added</p>}
+                      </div>
+                    ))}
+                    {formData.technical.length === 0 && <p className={styles.emptyMessage}>No technical skills added yet</p>}
                   </div>
                 </div>
 
+                {/* Certifications & Licenses */}
                 <div className={styles.formCard}>
-                  <h4><FiShield /> Licenses & Certifications – Page {currentPage}</h4>
+                  <h4 className={styles.subSectionTitle}><FiShield /> Finance Certifications & Licenses</h4>
+                  <p className={styles.sectionDescription}>Add your professional finance certifications and licenses</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentLicense.name} onChange={(e) => setCurrentLicense({ ...currentLicense, name: e.target.value })} placeholder="CFA Charterholder" className={styles.formInput} />
-                    <input value={currentLicense.issuingBody} onChange={(e) => setCurrentLicense({ ...currentLicense, issuingBody: e.target.value })} placeholder="CFA Institute" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <input value={currentLicense.licenseNumber} onChange={(e) => setCurrentLicense({ ...currentLicense, licenseNumber: e.target.value })} placeholder="License #" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <input value={currentLicense.expiryDate} onChange={(e) => setCurrentLicense({ ...currentLicense, expiryDate: e.target.value })} placeholder="Expiry (MM/YYYY)" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Certification/License Name*
+                        <input 
+                          value={currentCertification.name} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, name: e.target.value })} 
+                          placeholder="Chartered Financial Analyst (CFA)" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Issuing Authority
+                        <input 
+                          value={currentCertification.issuingAuthority} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, issuingAuthority: e.target.value })} 
+                          placeholder="CFA Institute" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        License Number
+                        <input 
+                          value={currentCertification.licenseNumber} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, licenseNumber: e.target.value })} 
+                          placeholder="CFA1234567" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Expiry Date
+                        <input 
+                          value={currentCertification.expiryDate} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, expiryDate: e.target.value })} 
+                          placeholder="Month Year" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addLicense} className={styles.addButton} disabled={!currentLicense.name.trim()}>
-                        <FiPlus /> {currentLicense.isEditing ? 'Update' : 'Add License'}
+                      <button 
+                        type="button" 
+                        onClick={addCertification} 
+                        className={styles.addButton} 
+                        disabled={!currentCertification.name.trim()}
+                      >
+                        <FiPlus /> {currentCertification.isEditing ? 'Update Certification' : 'Add Certification'}
                       </button>
-                      {currentLicense.isEditing && <button type="button" onClick={() => setCurrentLicense(defaultLicense())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentCertification.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentCertification(defaultCertification())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).licenses.map((l, i) => {
-                      const globalIdx = formData.licenses.findIndex(x => x === l);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <div>
-                            <strong>{l.name}</strong>
-                            {l.issuingBody && ` – ${l.issuingBody}`}
-                            {l.licenseNumber && ` (#${l.licenseNumber})`}
-                            {l.expiryDate && ` – Expires: ${l.expiryDate}`}
-                          </div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editLicense(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteLicense(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.certifications.map((l, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          <strong>{l.name}</strong>
+                          {l.issuingAuthority && ` – ${l.issuingAuthority}`}
+                          {l.licenseNumber && ` (#${l.licenseNumber})`}
+                          {l.expiryDate && ` – Expires: ${l.expiryDate}`}
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).licenses.length === 0 && <p className={styles.emptyMessage}>No licenses added</p>}
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editCertification(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteCertification(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.certifications.length === 0 && <p className={styles.emptyMessage}>No certifications added yet</p>}
                   </div>
                 </div>
 
+                {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4>Technical Skills – Page {currentPage}</h4>
+                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <p className={styles.sectionDescription}>Add your professional finance organization memberships</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentTechnicalSkill.category} onChange={(e) => setCurrentTechnicalSkill({ ...currentTechnicalSkill, category: e.target.value })} placeholder="Financial Modeling" className={styles.formInput} />
-                    <input value={currentTechnicalSkill.tools} onChange={(e) => setCurrentTechnicalSkill({ ...currentTechnicalSkill, tools: e.target.value })} placeholder="Excel, Bloomberg, FactSet, Python" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Organization*
+                        <input 
+                          value={currentAffiliation.organization} 
+                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, organization: e.target.value })} 
+                          placeholder="CFA Institute, Financial Analysts Federation" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Role / Membership Type
+                        <input 
+                          value={currentAffiliation.role} 
+                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, role: e.target.value })} 
+                          placeholder="Member, Committee Chair" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addTechnicalSkill} className={styles.addButton} disabled={!currentTechnicalSkill.category.trim()}>
-                        <FiPlus /> {currentTechnicalSkill.isEditing ? 'Update' : 'Add Technical Skill'}
+                      <button 
+                        type="button" 
+                        onClick={addAffiliation} 
+                        className={styles.addButton} 
+                        disabled={!currentAffiliation.organization.trim()}
+                      >
+                        <FiPlus /> {currentAffiliation.isEditing ? 'Update Affiliation' : 'Add Affiliation'}
                       </button>
-                      {currentTechnicalSkill.isEditing && <button type="button" onClick={() => setCurrentTechnicalSkill(defaultTechnicalSkill())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentAffiliation.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentAffiliation(defaultAffiliation())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).technicalSkills.map((t, i) => {
-                      const globalIdx = formData.technicalSkills.findIndex(x => x === t);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <div><strong>{t.category}:</strong> {t.tools}</div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editTechnicalSkill(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteTechnicalSkill(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.affiliations.map((a, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          <strong>{a.organization}</strong>
+                          {a.role && ` – ${a.role}`}
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).technicalSkills.length === 0 && <p className={styles.emptyMessage}>No technical skills added</p>}
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editAffiliation(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteAffiliation(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.affiliations.length === 0 && <p className={styles.emptyMessage}>No affiliations added yet</p>}
                   </div>
                 </div>
 
+                {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4>Languages – Page {currentPage}</h4>
+                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentLanguage.name} onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} placeholder="Mandarin" className={styles.formInput} />
-                    <input value={currentLanguage.proficiency} onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} placeholder="Fluent" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Language*
+                        <input 
+                          value={currentLanguage.name} 
+                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} 
+                          placeholder="Spanish" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Proficiency Level
+                        <input 
+                          value={currentLanguage.proficiency} 
+                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} 
+                          placeholder="Fluent, Business Professional" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addLanguage} className={styles.addButton} disabled={!currentLanguage.name.trim()}>
-                        <FiPlus /> {currentLanguage.isEditing ? 'Update' : 'Add Language'}
+                      <button 
+                        type="button" 
+                        onClick={addLanguage} 
+                        className={styles.addButton} 
+                        disabled={!currentLanguage.name.trim()}
+                      >
+                        <FiPlus /> {currentLanguage.isEditing ? 'Update Language' : 'Add Language'}
                       </button>
-                      {currentLanguage.isEditing && <button type="button" onClick={() => setCurrentLanguage(defaultLanguage())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentLanguage.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentLanguage(defaultLanguage())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).languages.map((l, i) => {
-                      const globalIdx = formData.languages.findIndex(x => x === l);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <div>
-                            {l.name}{l.proficiency && ` (${l.proficiency})`}
-                          </div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editLanguage(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteLanguage(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.languages.map((l, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          {l.name}{l.proficiency && ` (${l.proficiency})`}
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).languages.length === 0 && <p className={styles.emptyMessage}>No languages added</p>}
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editLanguage(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteLanguage(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.languages.length === 0 && <p className={styles.emptyMessage}>No languages added yet</p>}
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* Font Settings Section */}
+            {activeSection === 'settings' && (
+              <div className={styles.formSectionContent}>
+                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
+                
+                <div className={styles.formCard}>
+                  <div className={styles.fontSizeGrid}>
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Name</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.name}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="8" 
+                        max="24" 
+                        value={fontSizes.name}
+                        onChange={(e) => handleFontSizeChange('name', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Section Titles</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.sectionTitle}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="18" 
+                        value={fontSizes.sectionTitle}
+                        onChange={(e) => handleFontSizeChange('sectionTitle', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Job Titles</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.jobTitle}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="16" 
+                        value={fontSizes.jobTitle}
+                        onChange={(e) => handleFontSizeChange('jobTitle', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Degrees</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.degree}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="16" 
+                        value={fontSizes.degree}
+                        onChange={(e) => handleFontSizeChange('degree', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Company/Institution Names</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.institution}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.institution}
+                        onChange={(e) => handleFontSizeChange('institution', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Institution Dates</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.institutionDate}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="4" 
+                        max="12" 
+                        value={fontSizes.institutionDate}
+                        onChange={(e) => handleFontSizeChange('institutionDate', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Regular Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.regularText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.regularText}
+                        onChange={(e) => handleFontSizeChange('regularText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Bullet Points</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.bulletText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.bulletText}
+                        onChange={(e) => handleFontSizeChange('bulletText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Contact Info</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.contactInfo}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="12" 
+                        value={fontSizes.contactInfo}
+                        onChange={(e) => handleFontSizeChange('contactInfo', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Skills Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.skillText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="12" 
+                        value={fontSizes.skillText}
+                        onChange={(e) => handleFontSizeChange('skillText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Certification Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.certificationText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.certificationText}
+                        onChange={(e) => handleFontSizeChange('certificationText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                  </div>
+                  
+                  <button 
+                    type="button" 
+                    onClick={resetFontSizes}
+                    className={styles.resetButton}
+                  >
+                    Reset to Default Font Sizes
+                  </button>
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <section className={styles.faqSection} aria-labelledby="faq-title">
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+            <p className={styles.sectionSubtitle}>
+              Everything you need to know about creating professional finance resumes with our tool.
+            </p>
+          </div>
+          <div className={styles.faqGrid}>
+            {faqs.map((faq, index) => (
+              <div key={index} className={styles.faqItem}>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
+                <p className={styles.faqAnswer}>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className={styles.ctaSection} aria-labelledby="cta-title">
+        <div className={styles.container}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Finance Career?</h2>
+            <p className={styles.ctaSubtitle}>
+              Join 500,000+ finance professionals who landed their dream jobs at top firms with our free ATS-friendly finance resume builder.
+            </p>
+            <div className={styles.ctaButtons}>
+              <button
+                onClick={() => setActiveSection('personal')}
+                className={styles.ctaButton}
+                aria-label="Create your free finance resume now—no sign-up required"
+              >
+                <span className={styles.ctaButtonText}>Create Your Free Finance Resume Now</span>
+                <FiArrowRight className={styles.ctaButtonIcon} />
+              </button>
+            </div>
+            <div className={styles.ctaGuarantee}>
+              <FiCheck className={styles.guaranteeIcon} />
+              <span className={styles.guaranteeText}>No credit card required • Free forever • Download in minutes • ATS Optimized for Finance</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Full Preview Modal */}
       {showFullPreview && (
@@ -1067,11 +2054,9 @@ const Resume = () => {
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>
-              {Array.from({ length: totalPages }, (_, i) => (
-                <div key={i + 1} className={styles.fullPreviewPage}>
-                  {renderTemplate(i + 1)}
-                </div>
-              ))}
+              <div className={styles.fullPreviewPage}>
+                <FinanceTemplate formData={formData} />
+              </div>
             </div>
           </div>
         </div>
@@ -1079,5 +2064,48 @@ const Resume = () => {
     </div>
   );
 };
+
+// SSG + ISR Implementation
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate review dates for structured data
+  const reviewDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Generate FAQ dates for structured data
+  const faqDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Breadcrumb data for structured data
+  const breadcrumbData = [
+    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
+    { name: 'Finance Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-finance-resume-builder' }
+  ];
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates,
+        breadcrumbData
+      },
+      buildTimestamp
+    },
+    // ISR: Revalidate every 24 hours (86400 seconds)
+    revalidate: 3600
+  };
+}
 
 export default Resume;

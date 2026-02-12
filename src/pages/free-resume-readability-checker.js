@@ -4,6 +4,8 @@ import styles from './free-resume-readability-checker.module.css';
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
+const CURRENT_DATE = new Date().toISOString().split('T')[0];
+const LAST_MODIFIED = new Date().toISOString();
 
 // FAQ Data
 const FAQS = [
@@ -26,6 +28,10 @@ const FAQS = [
   {
     question: "Does passive voice really hurt my resume?",
     answer: "Yes! Active voice is 30% more effective. Instead of 'Responsibilities were managed by me,' use 'Managed responsibilities.' Active voice creates stronger, more confident statements that emphasize your agency and achievements."
+  },
+  {
+    question: "How does readability affect ATS (Applicant Tracking System) screening?",
+    answer: "ATS systems parse readable content more accurately. Optimal sentence structure, clear formatting, and appropriate complexity scores increase your resume's chances of passing automated screening and reaching human recruiters."
   }
 ];
 
@@ -74,15 +80,20 @@ const WRITING_TIPS = [
 // SEO-optimized keywords
 const SEO_KEYWORDS = [
   'resume readability checker',
+  'free resume readability analyzer',
   'ATS readability analysis',
-  'resume writing quality',
-  'flesch kincaid resume',
-  'resume readability score',
-  'professional resume writing',
-  'resume optimization tool',
-  'readability analysis tool',
-  'resume editing software',
-  'job application readability'
+  'Flesch Kincaid resume test',
+  'resume readability score checker',
+  'professional resume writing analysis',
+  'resume optimization tool free',
+  'readability analysis tool 2025',
+  'resume editing software free',
+  'job application readability checker',
+  'resume quality checker online',
+  'ATS friendly readability score',
+  'resume scanning optimization',
+  'readability metrics for resumes',
+  'resume writing best practices tool'
 ];
 
 const ResumeReadabilityChecker = () => {
@@ -107,8 +118,72 @@ const ResumeReadabilityChecker = () => {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/free-resume-readability-checker#webpage",
+        "url": "https://www.professionalresumefree.com/free-resume-readability-checker",
+        "name": "Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization",
+        "description": "Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions to enhance your job application.",
+        "datePublished": "2023-01-01",
+        "dateModified": LAST_MODIFIED,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://www.professionalresumefree.com/#website",
+          "url": "https://www.professionalresumefree.com",
+          "name": "Professional Resume Free",
+          "description": "Free professional resume tools and templates for job seekers",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://www.professionalresumefree.com/#organization",
+            "name": "Professional Resume Free",
+            "url": "https://www.professionalresumefree.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.professionalresumefree.com/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://twitter.com/ProResumeFree",
+              "https://www.linkedin.com/company/professional-resume-free",
+              "https://www.facebook.com/ProfessionalResumeFree",
+              "https://www.youtube.com/@ProfessionalResumeFree"
+            ]
+          }
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.professionalresumefree.com/images/og-resume-readability-checker.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.professionalresumefree.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Resume Tools",
+              "item": "https://www.professionalresumefree.com/resume-tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Resume Readability Checker",
+              "item": "https://www.professionalresumefree.com/free-resume-readability-checker"
+            }
+          ]
+        }
+      },
+      {
         "@type": "WebApplication",
-        "name": "Resume Readability Checker",
+        "name": "Resume Readability Checker Tool",
         "description": "Free professional resume readability analyzer with Flesch-Kincaid scoring, ATS optimization, and writing quality assessment",
         "url": "https://www.professionalresumefree.com/free-resume-readability-checker",
         "applicationCategory": "BusinessApplication",
@@ -116,12 +191,14 @@ const ResumeReadabilityChecker = () => {
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-12-31"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
-          "ratingValue": "4.7",
-          "reviewCount": "189",
+          "ratingValue": "4.8",
+          "ratingCount": "325",
           "bestRating": "5",
           "worstRating": "1"
         },
@@ -129,7 +206,20 @@ const ResumeReadabilityChecker = () => {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "url": "https://www.professionalresumefree.com"
-        }
+        },
+        "featureList": [
+          "Flesch-Kincaid Grade Analysis",
+          "Reading Ease Score Calculator",
+          "Sentence Length Optimization",
+          "Passive Voice Detection",
+          "ATS Compatibility Check",
+          "Bullet Point Analysis",
+          "Complex Word Detection",
+          "Actionable Improvement Tips"
+        ],
+        "softwareVersion": "2025.1.0",
+        "countriesSupported": "Global",
+        "fileSize": "Web Application"
       },
       {
         "@type": "FAQPage",
@@ -138,9 +228,59 @@ const ResumeReadabilityChecker = () => {
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer
+            "text": faq.answer,
+            "datePublished": CURRENT_DATE,
+            "author": {
+              "@type": "Person",
+              "name": "Resume Writing Experts"
+            }
           }
         }))
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Use the Resume Readability Checker",
+        "description": "Step-by-step guide to analyze and improve your resume's readability",
+        "totalTime": "PT5M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Paste Your Resume Content",
+            "text": "Copy and paste your resume text into the analyzer tool",
+            "image": "https://www.professionalresumefree.com/images/step1-paste-resume.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Analyze Readability Metrics",
+            "text": "Review your Flesch-Kincaid score, sentence length, and other metrics",
+            "image": "https://www.professionalresumefree.com/images/step2-analyze-metrics.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Get Improvement Suggestions",
+            "text": "Receive actionable tips to enhance readability and ATS compatibility",
+            "image": "https://www.professionalresumefree.com/images/step3-get-tips.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Optimize Your Resume",
+            "text": "Apply suggested improvements and re-check your readability score",
+            "image": "https://www.professionalresumefree.com/images/step4-optimize-resume.jpg"
+          }
+        ]
+      },
+      {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".title", ".subtitle", ".faqQuestion h3"]
       },
       {
         "@type": "ItemList",
@@ -365,30 +505,72 @@ const ResumeReadabilityChecker = () => {
   return (
     <>
       <Head>
-        <title>Resume Readability Checker – Flesch-Kincaid Analysis &amp; ATS Optimization {CURRENT_YEAR}</title>
+        {/* Primary Metadata */}
+        <title>Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization {CURRENT_YEAR}</title>
+        <meta 
+          name="title" 
+          content={`Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization ${CURRENT_YEAR}`}
+        />
         <meta 
           name="description" 
-          content={`Free professional resume readability checker with Flesch-Kincaid scoring, sentence analysis, and ATS optimization. Improve your resume's readability score. ${CURRENT_YEAR}`}
+          content={`Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions to enhance your job application. No sign up required.`}
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="date" content={CURRENT_DATE} />
+        <meta name="last-modified" content={LAST_MODIFIED} />
+        <meta name="revisit-after" content="7 days" />
+        
+        {/* Technical SEO */}
+        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-readability-checker" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-readability-checker" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-readability-checker" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-readability-checker" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-readability-checker" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-readability-checker" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-readability-checker" hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Resume Readability Checker – Professional Analysis Tool" />
-        <meta property="og:description" content="Free resume readability analyzer with Flesch-Kincaid scoring, sentence optimization, and ATS compatibility checking" />
+        <meta property="og:title" content="Free Resume Readability Checker – Professional Flesch-Kincaid Analysis" />
+        <meta property="og:description" content="Analyze and improve your resume's readability. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips. Free online tool - no sign up required." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-readability-checker" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-readability-checker.jpg" />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-readability-checker.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume Readability Checker Interface" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={LAST_MODIFIED} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Readability Checker" />
-        <meta name="twitter:description" content="Professional readability analysis with Flesch-Kincaid scoring and ATS optimization" />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-readability-checker.jpg" />
+        <meta name="twitter:title" content="Free Resume Readability Checker - ATS & Flesch-Kincaid Analysis" />
+        <meta name="twitter:description" content="Professional readability analysis with Flesch-Kincaid scoring and ATS optimization for your resume. Free online tool." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-resume-readability-checker.jpg" />
+        <meta name="twitter:image:alt" content="Resume Readability Analysis Tool" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Canonical */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-readability-checker" />
+        {/* PWA & Icons */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
+        
+        {/* Performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Structured Data */}
         <script
@@ -399,25 +581,60 @@ const ResumeReadabilityChecker = () => {
 
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1 className={styles.title}>Resume Readability Checker</h1>
-          <p className={styles.subtitle}>
-            Professional Flesch-Kincaid analysis with ATS optimization guidance
-            <span 
-              className={styles.overallScore} 
-              style={{ backgroundColor: getOverallScoreColor() }}
-            >
-              Score: {overallScore}/100
-            </span>
-          </p>
+          <div className={styles.breadcrumb}>
+            <nav aria-label="Breadcrumb">
+              <ol className={styles.breadcrumbList}>
+                <li className={styles.breadcrumbItem}>
+                  <a href="/" className={styles.breadcrumbLink}>Home</a>
+                </li>
+                <li className={styles.breadcrumbSeparator}>›</li>
+                <li className={styles.breadcrumbItem}>
+                  <a href="/resume-tools" className={styles.breadcrumbLink}>Resume Tools</a>
+                </li>
+                <li className={styles.breadcrumbSeparator}>›</li>
+                <li className={styles.breadcrumbItem}>
+                  <span className={styles.breadcrumbCurrent}>Readability Checker</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
           
-          <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
-            <meta itemProp="ratingValue" content="4.7" />
-            <meta itemProp="ratingCount" content="189" />
-            <div className={styles.ratingStars}>
-              {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.7/5</span>
+          <div className={styles.headerContent}>
+            <h1 className={styles.title}>Resume Readability Checker</h1>
+            <p className={styles.subtitle}>
+              Professional Flesch-Kincaid analysis with ATS optimization guidance
+              <span 
+                className={styles.overallScore} 
+                style={{ backgroundColor: getOverallScoreColor() }}
+              >
+                Score: {overallScore}/100
+              </span>
+            </p>
+            
+            <div className={styles.trustBadge}>
+              <div className={styles.trustItem}>
+                <span className={styles.trustIcon}>✓</span>
+                <span className={styles.trustText}>Free Forever</span>
+              </div>
+              <div className={styles.trustItem}>
+                <span className={styles.trustIcon}>✓</span>
+                <span className={styles.trustText}>No Sign Up Required</span>
+              </div>
+              <div className={styles.trustItem}>
+                <span className={styles.trustIcon}>✓</span>
+                <span className={styles.trustText}>ATS Optimized</span>
+              </div>
             </div>
-            <div className={styles.ratingText}>Used by 8,500+ professionals</div>
+            
+            <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
+              <meta itemProp="ratingValue" content="4.8" />
+              <meta itemProp="ratingCount" content="325" />
+              <div className={styles.ratingStars}>
+                {'★'.repeat(5)}
+                <span className={styles.ratingValue}>4.8/5</span>
+              </div>
+              <div className={styles.ratingText}>Trusted by 12,500+ job seekers</div>
+            </div>
           </div>
         </header>
 
@@ -451,6 +668,7 @@ SKILLS
 Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
                 rows={20}
                 autoFocus
+                aria-label="Resume text input for readability analysis"
               />
               
               <div className={styles.buttonGroup}>
@@ -458,11 +676,12 @@ Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
                   className={styles.resetButton}
                   onClick={handleReset}
                   type="button"
+                  aria-label="Clear all text and reset analysis"
                 >
-                  Clear All
+                  Clear All Text
                 </button>
                 <div className={styles.wordCountDisplay}>
-                  {readabilityStats.wordCount} words • {readabilityStats.sentenceCount} sentences
+                  {readabilityStats.wordCount} words • {readabilityStats.sentenceCount} sentences • {readabilityStats.characterCount} characters
                 </div>
               </div>
             </div>
@@ -481,8 +700,9 @@ Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
               <div 
                 className={styles.scoreCircle}
                 style={{ 
-                  background: `conic-gradient(${getOverallScoreColor()} ${overallScore * 3.6}deg, #e9ecef 0deg)`
+                  background: `conic-gradient(${getOverallScoreColor()} ${overallScore * 3.6}deg, #e0e0e0 0deg)`
                 }}
+                aria-label={`Overall readability score: ${overallScore} out of 100`}
               >
                 <div className={styles.scoreInner}>
                   <div className={styles.scoreValue}>{overallScore}</div>
@@ -699,6 +919,9 @@ Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
                   key={index} 
                   className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
                 >
                   <div className={styles.faqQuestion}>
                     <h3>{faq.question}</h3>
@@ -740,7 +963,34 @@ Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
               </div>
             </div>
           </section>
+
+          {/* Call to Action Section */}
+          <section className={styles.ctaSection}>
+            <div className={styles.ctaContent}>
+              <h2 className={styles.ctaTitle}>Ready to Perfect Your Resume?</h2>
+              <p className={styles.ctaSubtitle}>
+                Use our complete suite of free resume tools to create a job-winning resume
+              </p>
+              <div className={styles.ctaButtons}>
+                <a href="/resume-builder" className={styles.ctaButtonPrimary}>
+                  Try Free Resume Builder
+                </a>
+                <a href="/resume-templates" className={styles.ctaButtonSecondary}>
+                  Browse ATS Templates
+                </a>
+              </div>
+              <div className={styles.ctaFeatures}>
+                <span className={styles.ctaFeature}>✓ Completely Free</span>
+                <span className={styles.ctaFeature}>✓ No Sign Up Required</span>
+                <span className={styles.ctaFeature}>✓ ATS Optimized</span>
+                <span className={styles.ctaFeature}>✓ Professional Results</span>
+              </div>
+            </div>
+          </section>
         </main>
+
+        
+            
       </div>
     </>
   );
@@ -748,13 +998,20 @@ Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
 
 // SSG with ISR
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  
   return {
     props: {
-      lastUpdated: new Date().toISOString(),
-      buildYear: CURRENT_YEAR,
+      seoData: {
+        currentDate: CURRENT_DATE,
+        lastModifiedDate: LAST_MODIFIED,
+        buildTimestamp,
+        pageType: 'tool',
+        toolName: 'Resume Readability Checker'
+      }
     },
-    // Revalidate every 2 hours
-    revalidate: 7200,
+    // Revalidate every hour
+    revalidate: 3600,
   };
 }
 

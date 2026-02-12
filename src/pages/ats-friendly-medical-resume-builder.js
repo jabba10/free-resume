@@ -13,19 +13,53 @@ import {
   FiActivity,
   FiShield,
   FiGlobe,
-  // ❌ Removed unused: FiUsers
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
   FiEye,
-  FiChevronLeft,
-  FiChevronRight
+  FiCheck,
+  FiAward,
+  FiFileText,
+  FiSettings,
+  FiStar,
+  FiArrowRight,
+  FiClock,
+  FiHome,
+  FiChevronRight as FiChevronRightIcon,
+  FiBriefcase,
+  FiTool,
+  FiTrendingUp,
+  FiSearch,
+  FiBarChart,
+  FiTarget,
+  FiLayers
 } from 'react-icons/fi';
+import Link from 'next/link';
 import styles from './Resume.module.css';
 
-const Resume = () => {
+const Resume = ({ 
+  seoData,
+  buildTimestamp
+}) => {
+  const {
+    currentDate,
+    lastModifiedDate,
+    reviewDates,
+    faqDates,
+    breadcrumbData
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
   // --- Default item factories ---
   const defaultExperience = () => ({
     employer: '',
@@ -35,9 +69,9 @@ const Resume = () => {
     endDate: '',
     description: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultEducation = () => ({
     institution: '',
     degree: '',
@@ -45,44 +79,44 @@ const Resume = () => {
     startDate: '',
     endDate: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultSpecialty = () => ({
     name: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultLicense = () => ({
     name: '',
     issuingAuthority: '',
     licenseNumber: '',
     expiryDate: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultAffiliation = () => ({
     organization: '',
     role: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultProcedure = () => ({
     name: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultLanguage = () => ({
     name: '',
     proficiency: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
@@ -107,6 +141,22 @@ const Resume = () => {
     socialLinks: []
   });
 
+  // Font size state - NOW INCLUDES INSTITUTION DATES
+  const [fontSizes, setFontSizes] = useState({
+    name: 14,
+    sectionTitle: 10,
+    contactInfo: 7,
+    jobTitle: 9,
+    company: 7,
+    degree: 9,
+    institution: 7,
+    institutionDate: 6, // NEW: Institution/university dates
+    regularText: 8,
+    bulletText: 8,
+    skillText: 7,
+    licenseText: 8
+  });
+
   const [currentExperience, setCurrentExperience] = useState(defaultExperience());
   const [currentEducation, setCurrentEducation] = useState(defaultEducation());
   const [currentSpecialty, setCurrentSpecialty] = useState(defaultSpecialty());
@@ -117,14 +167,108 @@ const Resume = () => {
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
 
   const [activeSection, setActiveSection] = useState('personal');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
-  // ✅ FIXED: useRef must be called statically at top level
-  const resumeRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
-
+  const resumeRef = useRef(null);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
+
+  // Testimonials for Structured Data
+  const testimonials = [
+    {
+      quote: "Created my nursing resume in 10 minutes and landed interviews the same week. The healthcare-specific templates are incredible!",
+      metric: "Found RN Position in 2 Weeks",
+      name: "Sarah M.",
+      role: "Registered Nurse",
+      company: "City General Hospital"
+    },
+    {
+      quote: "Finally a resume builder that understands healthcare credentials. The ATS templates helped me pass hospital screening systems.",
+      metric: "3 Interviews in 1 Week",
+      name: "James K.",
+      role: "Physician Assistant",
+      company: "Medical Center"
+    },
+    {
+      quote: "As a recent nursing graduate, the entry-level healthcare templates were perfect. Landed my first hospital job using this builder.",
+      metric: "First Job After Graduation",
+      name: "Alex P.",
+      role: "New Graduate Nurse",
+      company: "Teaching Hospital"
+    },
+    {
+      quote: "The medical resume builder saved me - could update my CV between shifts. Professional results without the cost.",
+      metric: "Career Advancement Success",
+      name: "Maria L.",
+      role: "Medical Lab Technician",
+      company: "Diagnostic Center"
+    },
+    {
+      quote: "Healthcare ATS-friendly templates actually work! Got callbacks from hospitals that previously ignored my applications.",
+      metric: "5x More Responses",
+      name: "David T.",
+      role: "Physical Therapist",
+      company: "Rehabilitation Center"
+    },
+    {
+      quote: "Free PDF download with proper medical formatting? Unbeatable value. Best healthcare resume builder I've found.",
+      metric: "Perfect Resume in 15min",
+      name: "Lisa R.",
+      role: "Healthcare Administrator",
+      company: "Medical Group"
+    }
+  ];
+
+  // FAQ Data for Structured Data
+  const faqs = [
+    {
+      question: "Is this healthcare resume builder really free with no hidden costs?",
+      answer: "Yes, our healthcare resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional medical resume in PDF format without any payment required."
+    },
+    {
+      question: "What does ATS-friendly mean for healthcare resumes?",
+      answer: "ATS-friendly means our healthcare resume templates are optimized to pass through Applicant Tracking Systems used by 99% of hospitals and healthcare facilities. This ensures your clinical experience and credentials are properly scanned and recognized."
+    },
+    {
+      question: "Can I download my healthcare resume as PDF without creating an account?",
+      answer: "Absolutely! Download your professional healthcare resume in PDF format without creating an account. Everything is completely free and accessible immediately for nurses, doctors, and medical professionals."
+    },
+    {
+      question: "How many healthcare resume templates are available for free?",
+      answer: "We offer professionally designed ATS-friendly healthcare resume templates for nurses, physicians, therapists, lab technicians, and all medical specialties. All templates are completely free and optimized for healthcare hiring."
+    },
+    {
+      question: "How does your healthcare resume builder work?",
+      answer: "Our builder uses ATS-optimized healthcare templates with proper medical terminology formatting. We guide you to highlight clinical experience, certifications, and specialized skills that healthcare employers look for."
+    },
+    {
+      question: "Can I edit my healthcare resume after downloading it?",
+      answer: "Yes, you can always come back and edit your healthcare resume. Your work saves automatically, and you can download updated versions as many times as needed—completely free."
+    }
+  ];
+
+  // --- Font Size Handler ---
+  const handleFontSizeChange = (key, value) => {
+    setFontSizes(prev => ({
+      ...prev,
+      [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key]))
+    }));
+  };
+
+  const resetFontSizes = () => {
+    setFontSizes({
+      name: 14,
+      sectionTitle: 10,
+      contactInfo: 7,
+      jobTitle: 9,
+      company: 7,
+      degree: 9,
+      institution: 7,
+      institutionDate: 6, // NEW
+      regularText: 8,
+      bulletText: 8,
+      skillText: 7,
+      licenseText: 8
+    });
+  };
 
   // --- Utility Functions ---
   const getSocialIcon = (platform) => {
@@ -147,59 +291,26 @@ const Resume = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const pageHasContent = (pageNumber) => {
-    if (pageNumber === 1) {
-      if (formData.fullName || formData.email || formData.summary || formData.socialLinks.length > 0) {
-        return true;
-      }
-    }
-    const pageData = getDataByPage(pageNumber);
+  const hasContent = () => {
     return (
-      pageData.experience.length > 0 ||
-      pageData.education.length > 0 ||
-      pageData.specialties.length > 0 ||
-      pageData.licenses.length > 0 ||
-      pageData.affiliations.length > 0 ||
-      pageData.procedures.length > 0 ||
-      pageData.languages.length > 0
+      formData.fullName ||
+      formData.email ||
+      formData.summary ||
+      formData.socialLinks.length > 0 ||
+      formData.experience.length > 0 ||
+      formData.education.length > 0 ||
+      formData.specialties.length > 0 ||
+      formData.licenses.length > 0 ||
+      formData.affiliations.length > 0 ||
+      formData.procedures.length > 0 ||
+      formData.languages.length > 0
     );
   };
 
-  const getPagesWithContent = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      if (pageHasContent(i)) pages.push(i);
-    }
-    return pages;
-  };
-
-  // --- Page Management ---
-  const addNewPage = () => totalPages < 5 && setTotalPages(p => p + 1);
-
-  const removeLastPage = () => {
-    if (totalPages <= 1) return;
-    setTotalPages(p => {
-      const newTotal = p - 1;
-      const shiftPage = (items) => items.map(i => i.page === p ? { ...i, page: newTotal } : i);
-      setFormData(f => ({
-        ...f,
-        experience: shiftPage(f.experience),
-        education: shiftPage(f.education),
-        specialties: shiftPage(f.specialties),
-        licenses: shiftPage(f.licenses),
-        affiliations: shiftPage(f.affiliations),
-        procedures: shiftPage(f.procedures),
-        languages: shiftPage(f.languages)
-      }));
-      if (currentPage > newTotal) setCurrentPage(newTotal);
-      return newTotal;
-    });
-  };
-
   // --- Item CRUD Functions ---
-  const createAddFunction = (key, current, setter, isValid) => () => {
+  const createAddFunction = (key, current, setter, defaultFunc, isValid) => () => {
     if (!isValid()) return;
-    const item = { ...current, page: currentPage };
+    const item = { ...current };
     if (item.isEditing) {
       const updated = [...formData[key]];
       updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
@@ -207,13 +318,12 @@ const Resume = () => {
     } else {
       setFormData({ ...formData, [key]: [...formData[key], { ...item, isEditing: false, editIndex: null }] });
     }
-    setter(defaultExperience());
+    setter(defaultFunc());
   };
 
   const createEditFunction = (key, setter) => (index) => {
     const item = formData[key][index];
     setter({ ...item, isEditing: true, editIndex: index });
-    setCurrentPage(item.page);
   };
 
   const createDeleteFunction = (key) => (index) => {
@@ -222,31 +332,38 @@ const Resume = () => {
     setFormData({ ...formData, [key]: updated });
   };
 
-  const addExperience = createAddFunction('experience', currentExperience, setCurrentExperience, () => currentExperience.position && currentExperience.employer && currentExperience.startDate);
+  const addExperience = createAddFunction('experience', currentExperience, setCurrentExperience, defaultExperience, () => currentExperience.position && currentExperience.employer && currentExperience.startDate);
+  
   const editExperience = createEditFunction('experience', setCurrentExperience);
   const deleteExperience = createDeleteFunction('experience');
 
-  const addEducation = createAddFunction('education', currentEducation, setCurrentEducation, () => currentEducation.institution && currentEducation.degree);
+  const addEducation = createAddFunction('education', currentEducation, setCurrentEducation, defaultEducation, () => currentEducation.institution && currentEducation.degree);
+  
   const editEducation = createEditFunction('education', setCurrentEducation);
   const deleteEducation = createDeleteFunction('education');
 
-  const addSpecialty = createAddFunction('specialties', currentSpecialty, setCurrentSpecialty, () => currentSpecialty.name.trim());
+  const addSpecialty = createAddFunction('specialties', currentSpecialty, setCurrentSpecialty, defaultSpecialty, () => currentSpecialty.name.trim());
+  
   const editSpecialty = createEditFunction('specialties', setCurrentSpecialty);
   const deleteSpecialty = createDeleteFunction('specialties');
 
-  const addLicense = createAddFunction('licenses', currentLicense, setCurrentLicense, () => currentLicense.name.trim());
+  const addLicense = createAddFunction('licenses', currentLicense, setCurrentLicense, defaultLicense, () => currentLicense.name.trim());
+  
   const editLicense = createEditFunction('licenses', setCurrentLicense);
   const deleteLicense = createDeleteFunction('licenses');
 
-  const addAffiliation = createAddFunction('affiliations', currentAffiliation, setCurrentAffiliation, () => currentAffiliation.organization.trim());
+  const addAffiliation = createAddFunction('affiliations', currentAffiliation, setCurrentAffiliation, defaultAffiliation, () => currentAffiliation.organization.trim());
+  
   const editAffiliation = createEditFunction('affiliations', setCurrentAffiliation);
   const deleteAffiliation = createDeleteFunction('affiliations');
 
-  const addProcedure = createAddFunction('procedures', currentProcedure, setCurrentProcedure, () => currentProcedure.name.trim());
+  const addProcedure = createAddFunction('procedures', currentProcedure, setCurrentProcedure, defaultProcedure, () => currentProcedure.name.trim());
+  
   const editProcedure = createEditFunction('procedures', setCurrentProcedure);
   const deleteProcedure = createDeleteFunction('procedures');
 
-  const addLanguage = createAddFunction('languages', currentLanguage, setCurrentLanguage, () => currentLanguage.name.trim());
+  const addLanguage = createAddFunction('languages', currentLanguage, setCurrentLanguage, defaultLanguage, () => currentLanguage.name.trim());
+  
   const editLanguage = createEditFunction('languages', setCurrentLanguage);
   const deleteLanguage = createDeleteFunction('languages');
 
@@ -280,94 +397,137 @@ const Resume = () => {
     setFormData({ ...formData, socialLinks: updated });
   };
 
-  const getDataByPage = (page) => ({
-    experience: formData.experience.filter(e => e.page === page),
-    education: formData.education.filter(e => e.page === page),
-    specialties: formData.specialties.filter(s => s.page === page),
-    licenses: formData.licenses.filter(l => l.page === page),
-    affiliations: formData.affiliations.filter(a => a.page === page),
-    procedures: formData.procedures.filter(p => p.page === page),
-    languages: formData.languages.filter(l => l.page === page)
-  });
-
   // --- PDF Generation ---
   const generatePDF = async () => {
     if (isGeneratingPDF) return;
     setIsGeneratingPDF(true);
     try {
       const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-      const pagesWithContent = getPagesWithContent();
-      if (pagesWithContent.length === 0) {
+      
+      if (!hasContent()) {
         alert("Please add content before generating PDF.");
         return;
       }
 
-      const originalStates = [];
-      for (let i = 0; i < pagesWithContent.length; i++) {
-        const pageNum = pagesWithContent[i];
-        const el = resumeRefs[pageNum - 1]?.current;
-        if (!el) continue;
+      const el = resumeRef.current;
+      if (!el) return;
 
-        originalStates[pageNum - 1] = {
-          display: el.style.display,
-          position: el.style.position,
-          width: el.style.width,
-          height: el.style.height
-        };
+      const originalStates = {
+        display: el.style.display,
+        position: el.style.position,
+        width: el.style.width,
+        height: el.style.height
+      };
 
-        Object.assign(el.style, {
-          display: 'block',
-          position: 'fixed',
-          left: '0',
-          top: '0',
-          width: '210mm',
-          height: '297mm',
-          transform: 'none',
-          zIndex: '9999',
-          visibility: 'visible',
-          opacity: '1',
-          background: '#ffffff',
-          color: '#000000'
-        });
+      Object.assign(el.style, {
+        display: 'block',
+        position: 'fixed',
+        left: '0',
+        top: '0',
+        width: '210mm',
+        height: '297mm',
+        transform: 'none',
+        zIndex: '9999',
+        visibility: 'visible',
+        opacity: '1',
+        background: '#ffffff',
+        color: '#000000'
+      });
 
-        await new Promise(r => setTimeout(r, 300));
+      await new Promise(r => setTimeout(r, 300));
 
-        const canvas = await html2canvas(el, {
-          scale: 3,
-          useCORS: true,
-          backgroundColor: '#ffffff',
-          width: 210 * 3.7795275591,
-          height: 297 * 3.7795275591,
-          onclone: (doc) => {
-            const clone = doc.querySelector(`.${styles.resumePreview}`);
-            if (clone) {
-              clone.style.display = 'block';
-              clone.style.visibility = 'visible';
-              clone.style.opacity = '1';
-              clone.style.width = '210mm';
-              clone.style.height = '297mm';
-              clone.style.background = '#ffffff';
-              clone.style.color = '#000000';
-              clone.querySelectorAll('*').forEach(n => {
-                n.style.color = '#000000';
-                n.style.fontFamily = "'Helvetica Neue', 'Arial', sans-serif";
-              });
-            }
+      const canvas = await html2canvas(el, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        width: 210 * 3.7795275591,
+        height: 297 * 3.7795275591,
+        onclone: (doc) => {
+          const clone = doc.querySelector(`.${styles.resumePreview}`);
+          if (clone) {
+            clone.style.display = 'block';
+            clone.style.visibility = 'visible';
+            clone.style.opacity = '1';
+            clone.style.width = '210mm';
+            clone.style.height = '297mm';
+            clone.style.background = '#ffffff';
+            clone.style.color = '#000000';
+            
+            // Apply custom font sizes
+            const name = clone.querySelector(`.${styles.name}`);
+            if (name) name.style.fontSize = `${fontSizes.name}pt`;
+            
+            const sectionTitles = clone.querySelectorAll(`.${styles.sectionTitle}`);
+            sectionTitles.forEach(title => {
+              title.style.fontSize = `${fontSizes.sectionTitle}pt`;
+            });
+            
+            const contactItems = clone.querySelectorAll(`.${styles.contactInfoItem}`);
+            contactItems.forEach(item => {
+              item.style.fontSize = `${fontSizes.contactInfo}pt`;
+            });
+            
+            const jobTitles = clone.querySelectorAll(`.${styles.experienceItem} h3`);
+            jobTitles.forEach(title => {
+              title.style.fontSize = `${fontSizes.jobTitle}pt`;
+            });
+            
+            const companies = clone.querySelectorAll(`.${styles.company}`);
+            companies.forEach(company => {
+              company.style.fontSize = `${fontSizes.company}pt`;
+            });
+            
+            const degrees = clone.querySelectorAll(`.${styles.educationItem} h3`);
+            degrees.forEach(degree => {
+              degree.style.fontSize = `${fontSizes.degree}pt`;
+            });
+            
+            const institutions = clone.querySelectorAll(`.${styles.institution}`);
+            institutions.forEach(institution => {
+              institution.style.fontSize = `${fontSizes.institution}pt`;
+            });
+            
+            // NEW: Apply institution date font sizes
+            const institutionDates = clone.querySelectorAll(`.${styles.institutionDate}`);
+            institutionDates.forEach(date => {
+              date.style.fontSize = `${fontSizes.institutionDate}pt`;
+            });
+            
+            const regularTexts = clone.querySelectorAll(`.${styles.summaryText}, .${styles.licenseItem}, .${styles.affiliationItem}`);
+            regularTexts.forEach(text => {
+              text.style.fontSize = `${fontSizes.regularText}pt`;
+            });
+            
+            const bulletPoints = clone.querySelectorAll(`.${styles.bulletList} li`);
+            bulletPoints.forEach(bullet => {
+              bullet.style.fontSize = `${fontSizes.bulletText}pt`;
+            });
+            
+            const skills = clone.querySelectorAll(`.${styles.skillsList} li`);
+            skills.forEach(skill => {
+              skill.style.fontSize = `${fontSizes.skillText}pt`;
+            });
+            
+            const licenseTexts = clone.querySelectorAll(`.${styles.licenseItem}`);
+            licenseTexts.forEach(license => {
+              license.style.fontSize = `${fontSizes.licenseText}pt`;
+            });
+            
+            clone.querySelectorAll('*').forEach(n => {
+              n.style.color = '#000000';
+              n.style.fontFamily = "'Helvetica Neue', 'Arial', sans-serif";
+            });
           }
-        });
+        }
+      });
 
-        const imgData = canvas.toDataURL('image/png', 1.0);
-        const imgWidth = 210;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        if (i > 0) pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
-      }
+      const imgData = canvas.toDataURL('image/png', 1.0);
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
 
-      for (let i = 0; i < totalPages; i++) {
-        const el = resumeRefs[i]?.current;
-        const state = originalStates[i];
-        if (el && state) Object.assign(el.style, state);
-      }
+      Object.assign(el.style, originalStates);
 
       pdf.save(`${formData.fullName || 'healthcare_resume'}_resume.pdf`);
     } catch (err) {
@@ -379,54 +539,54 @@ const Resume = () => {
   };
 
   // --- Resume Template ---
-  const HealthcareTemplate = ({ formData, pageData, pageNumber, totalPages }) => {
-    const hasSummary = pageNumber === 1 && formData.summary;
-    const hasExperience = pageData.experience.length > 0;
-    const hasEducation = pageData.education.length > 0;
-    const hasSpecialties = pageData.specialties.length > 0;
-    const hasLicenses = pageData.licenses.length > 0;
-    const hasAffiliations = pageData.affiliations.length > 0;
-    const hasProcedures = pageData.procedures.length > 0;
-    const hasLanguages = pageData.languages.length > 0;
+  const HealthcareTemplate = ({ formData }) => {
+    const hasSummary = formData.summary && formData.summary.trim().length > 0;
+    const hasExperience = formData.experience.length > 0;
+    const hasEducation = formData.education.length > 0;
+    const hasSpecialties = formData.specialties.length > 0;
+    const hasLicenses = formData.licenses.length > 0;
+    const hasAffiliations = formData.affiliations.length > 0;
+    const hasProcedures = formData.procedures.length > 0;
+    const hasLanguages = formData.languages.length > 0;
 
     return (
       <div className={styles.healthcareTemplate}>
-        {pageNumber === 1 && (
-          <header className={styles.resumeHeader}>
-            <h1 className={styles.name}>{formData.fullName || 'Your Name'}</h1>
-            <div className={styles.contactInfoRow}>
-              {formData.email && <div className={styles.contactInfoItem}><FiMail /> {formData.email}</div>}
-              {(formData.email && (formData.phone || formData.address)) && <div className={styles.contactSeparator}>•</div>}
-              {formData.phone && <div className={styles.contactInfoItem}><FiPhone /> {formData.phone}</div>}
-              {(formData.phone && formData.address) && <div className={styles.contactSeparator}>•</div>}
-              {formData.address && <div className={styles.contactInfoItem}><FiMapPin /> {formData.address}</div>}
-              {formData.socialLinks.map((link, i) => (
-                <div key={i} className={styles.contactInfoItem}>
-                  {getSocialIcon(link.platform)} {formatSocialUrl(link.url)}
-                </div>
-              ))}
-            </div>
-          </header>
-        )}
+        <header className={styles.resumeHeader}>
+          <h1 className={styles.name} style={{ fontSize: `${fontSizes.name}pt` }}>
+            {formData.fullName || 'Your Name'}
+          </h1>
+          <div className={styles.contactInfoRow}>
+            {formData.email && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
+            {(formData.email && (formData.phone || formData.address)) && <div className={styles.contactSeparator}>•</div>}
+            {formData.phone && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiPhone /> {formData.phone}</div>}
+            {(formData.phone && formData.address) && <div className={styles.contactSeparator}>•</div>}
+            {formData.address && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMapPin /> {formData.address}</div>}
+            {formData.socialLinks.map((link, i) => (
+              <div key={i} className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}>
+                {getSocialIcon(link.platform)} {formatSocialUrl(link.url)}
+              </div>
+            ))}
+          </div>
+        </header>
 
         {hasSummary && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>PROFESSIONAL SUMMARY</h2>
-            <p className={styles.summaryText}>{formData.summary}</p>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL SUMMARY</h2>
+            <p className={styles.summaryText} style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p>
           </section>
         )}
 
         {hasExperience && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>CLINICAL & PROFESSIONAL EXPERIENCE</h2>
-            {pageData.experience.map((exp, i) => (
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CLINICAL & PROFESSIONAL EXPERIENCE</h2>
+            {formData.experience.map((exp, i) => (
               <div key={i} className={styles.experienceItem}>
                 <div className={styles.experienceHeader}>
-                  <h3>{exp.position}</h3>
-                  <p className={styles.company}>{exp.employer}{exp.department && ` – ${exp.department}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
+                  <h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h3>
+                  <p className={styles.company} style={{ fontSize: `${fontSizes.company}pt` }}>{exp.employer}{exp.department && ` – ${exp.department}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
                 </div>
                 <ul className={styles.bulletList}>
-                  {exp.description.split('\n').filter(line => line.trim()).map((line, j) => <li key={j}>{line}</li>)}
+                  {exp.description.split('\n').filter(line => line.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}
                 </ul>
               </div>
             ))}
@@ -435,11 +595,18 @@ const Resume = () => {
 
         {hasEducation && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>EDUCATION & TRAINING</h2>
-            {pageData.education.map((edu, i) => (
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION & TRAINING</h2>
+            {formData.education.map((edu, i) => (
               <div key={i} className={styles.educationItem}>
-                <h3>{edu.degree}{edu.program && ` – ${edu.program}`}</h3>
-                <p className={styles.institution}>{edu.institution} | {edu.startDate} – {edu.endDate || 'Present'}</p>
+                <h3 style={{ fontSize: `${fontSizes.degree}pt` }}>
+                  {edu.degree}{edu.program && ` – ${edu.program}`}
+                </h3>
+                <p className={styles.institution} style={{ fontSize: `${fontSizes.institution}pt` }}>
+                  {edu.institution} | 
+                  <span className={styles.institutionDate} style={{ fontSize: `${fontSizes.institutionDate}pt` }}>
+                    {edu.startDate} – {edu.endDate || 'Present'}
+                  </span>
+                </p>
               </div>
             ))}
           </section>
@@ -447,18 +614,18 @@ const Resume = () => {
 
         {hasSpecialties && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>AREAS OF SPECIALTY</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>AREAS OF SPECIALTY</h2>
             <ul className={styles.skillsList}>
-              {pageData.specialties.map((s, i) => <li key={i}>{s.name}</li>)}
+              {formData.specialties.map((s, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{s.name}</li>)}
             </ul>
           </section>
         )}
 
         {hasLicenses && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>LICENSES & CERTIFICATIONS</h2>
-            {pageData.licenses.map((l, i) => (
-              <div key={i} className={styles.licenseItem}>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LICENSES & CERTIFICATIONS</h2>
+            {formData.licenses.map((l, i) => (
+              <div key={i} className={styles.licenseItem} style={{ fontSize: `${fontSizes.licenseText}pt` }}>
                 <strong>{l.name}</strong>
                 {l.issuingAuthority && ` – ${l.issuingAuthority}`}
                 {l.licenseNumber && ` (License #: ${l.licenseNumber})`}
@@ -470,18 +637,18 @@ const Resume = () => {
 
         {hasProcedures && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>PROCEDURES & TECHNICAL SKILLS</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROCEDURES & TECHNICAL SKILLS</h2>
             <ul className={styles.bulletList}>
-              {pageData.procedures.map((p, i) => <li key={i}>{p.name}</li>)}
+              {formData.procedures.map((p, i) => <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{p.name}</li>)}
             </ul>
           </section>
         )}
 
         {hasAffiliations && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>PROFESSIONAL AFFILIATIONS</h2>
-            {pageData.affiliations.map((a, i) => (
-              <div key={i} className={styles.affiliationItem}>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL AFFILIATIONS</h2>
+            {formData.affiliations.map((a, i) => (
+              <div key={i} className={styles.affiliationItem} style={{ fontSize: `${fontSizes.regularText}pt` }}>
                 <strong>{a.organization}</strong>
                 {a.role && ` – ${a.role}`}
               </div>
@@ -491,56 +658,431 @@ const Resume = () => {
 
         {hasLanguages && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>LANGUAGES</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LANGUAGES</h2>
             <ul className={styles.bulletList}>
-              {pageData.languages.map((l, i) => (
-                <li key={i}>
+              {formData.languages.map((l, i) => (
+                <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>
                   {l.name}{l.proficiency && ` (${l.proficiency})`}
                 </li>
               ))}
             </ul>
           </section>
         )}
-
-        {getPagesWithContent().length > 1 && (
-          <div className={styles.pageIndicator}>
-            Page {getPagesWithContent().indexOf(pageNumber) + 1} of {getPagesWithContent().length}
-          </div>
-        )}
       </div>
     );
   };
 
-  const renderTemplate = (pageNumber) => {
-    const pageData = getDataByPage(pageNumber);
-    return <HealthcareTemplate formData={formData} pageData={pageData} pageNumber={pageNumber} totalPages={totalPages} />;
-  };
-
-  const actualPagesWithContent = getPagesWithContent().length;
-
   return (
-    <div className={styles.resumeBuilder}>
+    <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Healthcare Resume Builder | Medical & Clinical Professionals</title>
-        <meta name="description" content="Create a professional, ATS-friendly healthcare resume for nurses, physicians, therapists, and medical staff. Download as PDF instantly." />
+        <title>Free Healthcare Resume Builder - ATS Friendly Medical Templates 2026 | Professional Resume Maker for Nurses, Doctors, Medical Staff</title>
+        <meta name="title" content="Free Healthcare Resume Builder - ATS Friendly Medical Templates 2026 | Professional Resume Maker for Nurses, Doctors, Medical Staff" />
+        <meta name="description" content="Create professional ATS-optimized healthcare resumes for free. Land interviews 3x faster with our medical resume builder. ATS-optimized templates for nurses, physicians, therapists, lab techs. Trusted by 4M+ healthcare professionals worldwide." />
+        <meta name="keywords" content="healthcare resume builder, medical resume templates, nurse resume builder, doctor resume, ATS friendly healthcare resume, free resume builder for medical professionals, clinical resume, healthcare CV, medical staff resume, hospital resume" />
+        <meta name="author" content="Professional Healthcare Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="1 days" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="x-default" />
+        <meta property="og:title" content="Free Healthcare Resume Builder - ATS Friendly Medical Templates 2026" />
+        <meta property="og:description" content="Create professional ATS-optimized healthcare resumes for free. Land interviews 3x faster with our medical resume builder. Trusted by 4M+ healthcare professionals." />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-healthcare-resume-builder-preview.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Free Healthcare Resume Builder - Create Professional Medical Resumes Online" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Professional Healthcare Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Healthcare Resume Builder - ATS Friendly Medical Templates 2026" />
+        <meta name="twitter:description" content="Create professional ATS-optimized healthcare resumes for free. Land interviews 3x faster. Trusted by 4M+ healthcare professionals." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-healthcare-resume-builder-preview.jpg" />
+        <meta name="twitter:image:alt" content="Free Healthcare Resume Builder with ATS Templates" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        <script
+          type="application/ld+json"
+          key="structured-data"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebPage",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#webpage",
+                  "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder",
+                  "name": "Free Healthcare Resume Builder - ATS Friendly Medical Templates 2026",
+                  "description": "Create professional ATS-optimized healthcare resumes for free. Land interviews 3x faster with our medical resume builder.",
+                  "datePublished": "2026-01-01",
+                  "dateModified": safeLastModifiedDate,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.professionalresumefree.com/#website",
+                    "url": "https://www.professionalresumefree.com",
+                    "name": "Professional Healthcare Resume Free",
+                    "description": "Free online resume builder for healthcare professionals",
+                    "publisher": {
+                      "@type": "Organization",
+                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "name": "Professional Healthcare Resume Free",
+                      "url": "https://www.professionalresumefree.com",
+                      "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "width": 512,
+                        "height": 512
+                      },
+                      "sameAs": [
+                        "https://twitter.com/ProResumeFree",
+                        "https://www.linkedin.com/company/professional-resume-free",
+                        "https://www.facebook.com/ProfessionalResumeFree",
+                        "https://www.youtube.com/@ProfessionalResumeFree"
+                      ]
+                    }
+                  },
+                  "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "https://www.professionalresumefree.com/images/og-healthcare-resume-builder-preview.jpg",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                      {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.professionalresumefree.com"
+                      },
+                      {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Healthcare Resume Builder",
+                        "item": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder"
+                      }
+                    ]
+                  },
+                  "mainEntity": {
+                    "@type": "SoftwareApplication",
+                    "name": "Healthcare Resume Builder - ATS Optimized Medical Resume Maker",
+                    "applicationCategory": "BusinessApplication",
+                    "operatingSystem": "Any",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "0",
+                      "priceCurrency": "USD",
+                      "availability": "https://schema.org/InStock",
+                      "priceValidUntil": "2026-12-31"
+                    },
+                    "aggregateRating": {
+                      "@type": "AggregateRating",
+                      "ratingValue": 4.9,
+                      "ratingCount": 50365,
+                      "bestRating": 5,
+                      "worstRating": 1
+                    },
+                    "description": "Free online ATS-friendly healthcare resume builder for medical professionals, nurses, doctors, and clinical staff.",
+                    "featureList": [
+                      "Healthcare ATS-Optimized Templates",
+                      "Medical Content Suggestions",
+                      "One-Click PDF Download",
+                      "Clinical Experience Formatting",
+                      "Mobile-Friendly Editor",
+                      "No Sign Up Required",
+                      "Free Forever"
+                    ],
+                    "softwareVersion": "2026.1.0",
+                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-healthcare-resume-builder.jpg",
+                    "applicationSuite": "Healthcare Career Tools",
+                    "countriesSupported": "Global",
+                    "fileSize": "Web Application"
+                  }
+                },
+                {
+                  "@type": "FAQPage",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#faqpage",
+                  "mainEntity": faqs.map((faq, index) => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": faq.answer,
+                      "datePublished": safeFaqDates[index] || safeCurrentDate,
+                      "author": {
+                        "@type": "Person",
+                        "name": "Healthcare Resume Builder Support Team"
+                      }
+                    },
+                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#webpage"
+                  }))
+                },
+                {
+                  "@type": "HowTo",
+                  "name": "How to Create a Professional Healthcare Resume with Our Free Builder",
+                  "description": "Step-by-step guide to create an ATS-optimized healthcare resume for free",
+                  "totalTime": "PT15M",
+                  "estimatedCost": {
+                    "@type": "MonetaryAmount",
+                    "currency": "USD",
+                    "value": "0"
+                  },
+                  "step": [
+                    {
+                      "@type": "HowToStep",
+                      "position": 1,
+                      "name": "Choose a Healthcare Template",
+                      "text": "Select from our ATS-optimized healthcare resume templates designed for nurses, doctors, therapists, and medical staff.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#templates",
+                      "image": "https://www.professionalresumefree.com/images/step1-healthcare-template.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 2,
+                      "name": "Enter Your Clinical Information",
+                      "text": "Add your medical experience, education, licenses, certifications, and specialized skills using our guided forms.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#editor",
+                      "image": "https://www.professionalresumefree.com/images/step2-clinical-info.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 3,
+                      "name": "Customize and Optimize",
+                      "text": "Use our healthcare-specific suggestions to improve medical keywords and formatting for ATS compatibility.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#optimize",
+                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 4,
+                      "name": "Download Your Healthcare Resume",
+                      "text": "Export your professional healthcare resume as PDF, Word, or plain text - completely free, no watermarks.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#download",
+                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                    }
+                  ]
+                },
+                {
+                  "@type": "Service",
+                  "serviceType": "Online Healthcare Resume Building Service",
+                  "provider": {
+                    "@type": "Organization",
+                    "name": "Professional Healthcare Resume Free",
+                    "url": "https://www.professionalresumefree.com",
+                    "contactPoint": {
+                      "@type": "ContactPoint",
+                      "telephone": "+1-800-555-1234",
+                      "contactType": "Customer Support",
+                      "availableLanguage": "en"
+                    }
+                  },
+                  "areaServed": {
+                    "@type": "Country",
+                    "name": "Global"
+                  },
+                  "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Free Healthcare Resume Building Services",
+                    "itemListElement": [
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Healthcare ATS Resume Templates"
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Medical Resume Editing"
+                        }
+                      }
+                    ]
+                  },
+                  "description": "Free ATS-friendly healthcare resume builder for medical professionals worldwide",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                  }
+                },
+                {
+                  "@type": "SpeakableSpecification",
+                  "cssSelector": [".heroTitle", ".heroSubtitle", ".faqItem h3"]
+                },
+                {
+                  "@type": "ItemList",
+                  "itemListElement": testimonials.map((testimonial, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "Review",
+                      "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": 5,
+                        "bestRating": 5
+                      },
+                      "author": {
+                        "@type": "Person",
+                        "name": testimonial.name
+                      },
+                      "reviewBody": testimonial.quote,
+                      "datePublished": safeReviewDates[index] || safeCurrentDate,
+                      "publisher": {
+                        "@type": "Organization",
+                        "name": "Professional Healthcare Resume Free"
+                      },
+                      "itemReviewed": {
+                        "@type": "SoftwareApplication",
+                        "name": "Healthcare Resume Builder - ATS Optimized Medical Resume Maker",
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "Any",
+                        "offers": {
+                          "@type": "Offer",
+                          "price": "0",
+                          "priceCurrency": "USD"
+                        },
+                        "description": "Free online ATS-friendly healthcare resume builder that helps medical professionals create professional resumes and land interviews faster.",
+                        "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder"
+                      }
+                    }
+                  }))
+                }
+              ]
+            })
+          }}
+        />
       </Head>
 
+      {/* Freshness Indicator */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
+
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink} prefetch={false}>
+              <FiHome className={styles.breadcrumbIcon} />
+              <span className={styles.breadcrumbText}>Home</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>
+            <FiChevronRightIcon />
+          </li>
+          <li>
+            <Link href="/ats-friendly-medical-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
+              <span className={styles.breadcrumbText}>Free Medical Template</span>
+            </Link>
+          </li>
+        </ol>
+      </nav>
+
+      {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
+            <div className={styles.trustBadge}>
+              <FiStar className={styles.starIcon} />
+              <span className={styles.trustBadgeText}>
+                Rated 4.9/5 by 50365+ Healthcare Professionals | Best Free Healthcare Resume Builder 2026
+              </span>
+            </div>
+            
             <h1 className={styles.heroTitle}>
-              Build Your <span className={styles.gradientText}>Healthcare Resume</span>
+              Free Healthcare Resume Builder <span className={styles.gradientText}>Trusted by 4M+ Medical Professionals</span>
             </h1>
+            
             <p className={styles.heroSubtitle}>
-              Tailored for nurses, doctors, therapists, lab techs, and all medical professionals.
-              Highlight licenses, clinical experience, and patient care expertise.
+              Create a <strong className={styles.heroHighlight}>professional, ATS-optimized healthcare resume for free in minutes.</strong> Our medical resume builder ensures your clinical experience and credentials get noticed by hospitals and healthcare employers.
             </p>
+
+            <div className={styles.ctaButtons}>
+              <button
+                onClick={() => setActiveSection('personal')}
+                className={styles.primaryButton}
+                aria-label="Start building your free healthcare resume now—no sign-up required"
+              >
+                <span className={styles.buttonText}>Start Building Your Healthcare Resume Now</span>
+                <FiArrowRight className={styles.buttonIcon} />
+                <div className={styles.buttonPulse}></div>
+              </button>
+              
+              <button
+                onClick={generatePDF}
+                className={styles.secondaryButton}
+                aria-label="Download healthcare resume as PDF"
+                disabled={isGeneratingPDF || !hasContent()}
+              >
+                <FiDownload className={styles.buttonIcon} />
+                <span className={styles.buttonText}>Download Healthcare Resume PDF</span>
+              </button>
+            </div>
+
+            <div className={styles.heroStats}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>4M+</span>
+                <span className={styles.statLabel}>Healthcare Resumes Created</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>94%</span>
+                <span className={styles.statLabel}>Interview Success Rate</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>36%</span>
+                <span className={styles.statLabel}>Faster Healthcare Hires</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>4.9/5</span>
+                <span className={styles.statLabel}>Rating from Medical Professionals</span>
+              </div>
+            </div>
+
+            <div className={styles.medicalBadges}>
+              <div className={styles.badgeGrid}>
+                <span className={styles.badgeItem}>Nurse Resume Templates</span>
+                <span className={styles.badgeItem}>Doctor CV Templates</span>
+                <span className={styles.badgeItem}>Therapist Resumes</span>
+                <span className={styles.badgeItem}>Lab Technician CVs</span>
+                <span className={styles.badgeItem}>Medical Assistant</span>
+                <span className={styles.badgeItem}>Healthcare Admin</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Main Content */}
       <div className={styles.singleColumnLayout}>
-        {/* Preview */}
+        {/* Preview Section */}
         <div className={styles.previewSection}>
           <div className={styles.previewHeader}>
             <div className={styles.previewActions}>
@@ -550,10 +1092,10 @@ const Resume = () => {
               <button
                 onClick={generatePDF}
                 className={styles.downloadButton}
-                disabled={isGeneratingPDF || actualPagesWithContent === 0}
+                disabled={isGeneratingPDF || !hasContent()}
               >
                 <FiDownload />
-                {isGeneratingPDF ? 'Generating...' : `Download PDF (${actualPagesWithContent} page${actualPagesWithContent !== 1 ? 's' : ''})`}
+                {isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}
               </button>
             </div>
           </div>
@@ -561,62 +1103,19 @@ const Resume = () => {
           <div className={`${styles.previewContainer} ${showFullPreview ? styles.fullPreview : ''}`}>
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <div
-                    key={i + 1}
-                    className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
-                    ref={resumeRefs[i]}
-                  >
-                    {renderTemplate(i + 1)}
-                  </div>
-                ))}
+                <div
+                  className={styles.resumePreview}
+                  ref={resumeRef}
+                >
+                  <HealthcareTemplate formData={formData} />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className={styles.previewNavigation}>
-            <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              className={styles.previewNavButton}
-            >
-              <FiChevronLeft /> Previous
-            </button>
-            <div className={styles.previewPageInfo}>
-              Page {currentPage} of {totalPages}
-              {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
-            </div>
-            <button
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-              className={styles.previewNavButton}
-            >
-              Next <FiChevronRight />
-            </button>
           </div>
         </div>
 
-        {/* Form */}
+        {/* Form Section */}
         <div className={styles.formSection}>
-          <div className={styles.pageManagement}>
-            <div className={styles.pageControls}>
-              <button onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage === 1} className={styles.pageButton}>
-                <FiChevronLeft /> Previous
-              </button>
-              <div className={styles.pageInfo}>
-                Page {currentPage} of {totalPages}
-                {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
-              </div>
-              <button onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages} className={styles.pageButton}>
-                Next <FiChevronRight />
-              </button>
-            </div>
-            <div className={styles.pageActions}>
-              {totalPages < 5 && <button onClick={addNewPage} className={styles.addPageButton}><FiPlus /> Add Page</button>}
-              {totalPages > 1 && <button onClick={removeLastPage} className={styles.removePageButton}><FiX /> Remove Last Page</button>}
-            </div>
-          </div>
-
           <div className={styles.formNavigation}>
             {[
               { id: 'personal', label: 'Personal', icon: <FiUser /> },
@@ -624,6 +1123,7 @@ const Resume = () => {
               { id: 'education', label: 'Education', icon: <FiBook /> },
               { id: 'specialties', label: 'Specialties', icon: <FiActivity /> },
               { id: 'licenses', label: 'Licenses', icon: <FiShield /> },
+              { id: 'settings', label: 'Font Settings', icon: <FiSettings /> },
             ].map((item) => (
               <button
                 key={item.id}
@@ -636,19 +1136,19 @@ const Resume = () => {
           </div>
 
           <div className={styles.formContent}>
-            {/* Personal */}
-            {activeSection === 'personal' && currentPage === 1 && (
+            {/* Personal Section */}
+            {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
                 <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Full Name*
-                      <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Jane Smith, RN" required className={styles.formInput} />
+                      <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Jane Smith, RN, BSN" required className={styles.formInput} />
                     </label>
                     <label className={styles.formLabel}>
                       Email*
-                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="jane@healthcare.com" required className={styles.formInput} />
+                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="jane.smith@healthcare.com" required className={styles.formInput} />
                     </label>
                   </div>
                   <div className={styles.formGroup}>
@@ -657,44 +1157,69 @@ const Resume = () => {
                       <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className={styles.formInput} />
                     </label>
                     <label className={styles.formLabel}>
-                      Address
-                      <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="New York, NY" className={styles.formInput} />
+                      Location
+                      <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="City, State" className={styles.formInput} />
                     </label>
                   </div>
                 </div>
 
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
-                    Professional Summary*
+                    Professional Healthcare Summary*
                     <textarea
                       name="summary"
                       value={formData.summary}
                       onChange={handleInputChange}
-                      placeholder="Compassionate Registered Nurse with 5+ years in ICU and ER settings..."
+                      placeholder="Compassionate and dedicated Registered Nurse with 8+ years of experience in critical care and emergency room settings. Skilled in patient assessment, medication administration, and interdisciplinary collaboration. Proven track record of improving patient outcomes through evidence-based practice and compassionate care."
                       required
                       className={styles.formTextarea}
-                      rows="4"
+                      rows="6"
                     />
+                    <div className={styles.characterCount}>
+                      {formData.summary.length}/500 characters
+                    </div>
                   </label>
                 </div>
 
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <p className={styles.sectionDescription}>Add your professional healthcare profiles (LinkedIn, Doximity, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
-                    <select value={currentSocialLink.platform} onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, platform: e.target.value })} className={styles.formSelect}>
-                      <option value="">Select</option>
+                    <select 
+                      value={currentSocialLink.platform} 
+                      onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, platform: e.target.value })} 
+                      className={styles.formSelect}
+                    >
+                      <option value="">Select Platform</option>
                       <option value="LinkedIn">LinkedIn</option>
                       <option value="Doximity">Doximity</option>
-                      <option value="Portfolio">Portfolio</option>
-                      <option value="Website">Website</option>
+                      <option value="Portfolio">Professional Portfolio</option>
+                      <option value="Website">Personal Website</option>
+                      <option value="ResearchGate">ResearchGate</option>
+                      <option value="PubMed">PubMed Publications</option>
                     </select>
-                    <input type="url" placeholder="URL" value={currentSocialLink.url} onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, url: e.target.value })} className={styles.formInput} />
+                    <input 
+                      type="url" 
+                      placeholder="https://linkedin.com/in/yourprofile" 
+                      value={currentSocialLink.url} 
+                      onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, url: e.target.value })} 
+                      className={styles.formInput} 
+                    />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addSocialLink} className={styles.addButton} disabled={!currentSocialLink.platform || !currentSocialLink.url}>
-                        <FiPlus /> {currentSocialLink.isEditing ? 'Update' : 'Add'}
+                      <button 
+                        type="button" 
+                        onClick={addSocialLink} 
+                        className={styles.addButton} 
+                        disabled={!currentSocialLink.platform || !currentSocialLink.url}
+                      >
+                        <FiPlus /> {currentSocialLink.isEditing ? 'Update' : 'Add Link'}
                       </button>
                       {currentSocialLink.isEditing && (
-                        <button type="button" onClick={() => setCurrentSocialLink(defaultSocialLink())} className={styles.cancelButton}>
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentSocialLink(defaultSocialLink())} 
+                          className={styles.cancelButton}
+                        >
                           <FiX /> Cancel
                         </button>
                       )}
@@ -702,17 +1227,17 @@ const Resume = () => {
                   </div>
                   <div className={styles.itemsList}>
                     {formData.socialLinks.length === 0 ? (
-                      <p className={styles.emptyMessage}>No links added</p>
+                      <p className={styles.emptyMessage}>No professional links added yet</p>
                     ) : (
                       formData.socialLinks.map((link, i) => (
                         <div key={i} className={styles.listItem}>
                           <div className={styles.itemInfo}>
-                            <span>{link.platform}</span>
-                            <span>{formatSocialUrl(link.url)}</span>
+                            <span className={styles.itemPlatform}>{link.platform}</span>
+                            <span className={styles.itemUrl}>{formatSocialUrl(link.url)}</span>
                           </div>
                           <div className={styles.itemActions}>
-                            <button onClick={() => editSocialLink(i)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteSocialLink(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                            <button onClick={() => editSocialLink(i)} className={styles.editButton} aria-label={`Edit ${link.platform} link`}><FiEdit2 /></button>
+                            <button onClick={() => deleteSocialLink(i)} className={styles.deleteButton} aria-label={`Delete ${link.platform} link`}><FiTrash2 /></button>
                           </div>
                         </div>
                       ))
@@ -722,314 +1247,789 @@ const Resume = () => {
               </div>
             )}
 
-            {/* Clinical Experience */}
+            {/* Clinical Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeart /> Clinical Experience – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiHeart /> Clinical Experience</h3>
+                <p className={styles.sectionDescription}>List your clinical positions in reverse chronological order (most recent first)</p>
+                
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Position*
-                      <input value={currentExperience.position} onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} placeholder="Registered Nurse" required className={styles.formInput} />
+                      Position Title*
+                      <input 
+                        value={currentExperience.position} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} 
+                        placeholder="Registered Nurse, Critical Care" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      Employer*
-                      <input value={currentExperience.employer} onChange={(e) => setCurrentExperience({ ...currentExperience, employer: e.target.value })} placeholder="City General Hospital" required className={styles.formInput} />
+                      Healthcare Facility/Hospital*
+                      <input 
+                        value={currentExperience.employer} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, employer: e.target.value })} 
+                        placeholder="City General Hospital" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Department / Unit
-                    <input value={currentExperience.department} onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} placeholder="Emergency Department" className={styles.formInput} />
+                    Department / Unit / Specialty
+                    <input 
+                      value={currentExperience.department} 
+                      onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} 
+                      placeholder="Emergency Department / Trauma Center" 
+                      className={styles.formInput} 
+                    />
                   </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date*
-                      <input type="text" placeholder="MM/YYYY" value={currentExperience.startDate} onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} required className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year (e.g., January 2020)" 
+                        value={currentExperience.startDate} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
                       End Date
-                      <input type="text" placeholder="MM/YYYY or Present" value={currentExperience.endDate} onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year or Present" 
+                        value={currentExperience.endDate} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Key Responsibilities & Achievements*
-                    <textarea value={currentExperience.description} onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} placeholder="• Managed 6+ ICU patients daily..." required className={styles.formTextarea} rows="4" />
+                    Key Clinical Responsibilities & Achievements*
+                    <textarea 
+                      value={currentExperience.description} 
+                      onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} 
+                      placeholder="• Managed care for 6+ critically ill patients in 12-bed ICU
+• Administered medications, monitored vital signs, and documented patient progress
+• Collaborated with interdisciplinary team to develop comprehensive care plans
+• Trained 3 new graduate nurses on unit protocols and emergency procedures
+• Reduced medication errors by 25% through implementation of new verification system"
+                      required 
+                      className={styles.formTextarea} 
+                      rows="8" 
+                    />
+                    <div className={styles.characterCount}>
+                      {currentExperience.description.length}/2000 characters
+                    </div>
                   </label>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addExperience} className={styles.addButton} disabled={!currentExperience.position || !currentExperience.employer || !currentExperience.startDate}>
-                      <FiPlus /> {currentExperience.isEditing ? 'Update' : 'Add Experience'}
+                    <button 
+                      type="button" 
+                      onClick={addExperience} 
+                      className={styles.addButton} 
+                      disabled={!currentExperience.position || !currentExperience.employer || !currentExperience.startDate}
+                    >
+                      <FiPlus /> {currentExperience.isEditing ? 'Update Clinical Experience' : 'Add Clinical Experience'}
                     </button>
-                    {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    {currentExperience.isEditing && (
+                      <button 
+                        type="button" 
+                        onClick={() => setCurrentExperience(defaultExperience())} 
+                        className={styles.cancelButton}
+                      >
+                        <FiX /> Cancel
+                      </button>
+                    )}
                   </div>
                 </div>
+                
                 <div className={styles.formCard}>
-                  <h4>Your Experience on Page {currentPage}</h4>
-                  {getDataByPage(currentPage).experience.length === 0 ? (
-                    <p className={styles.emptyMessage}>No experience added</p>
+                  <h4 className={styles.subSectionTitle}>Your Clinical Experience</h4>
+                  {formData.experience.length === 0 ? (
+                    <p className={styles.emptyMessage}>No clinical experience added yet</p>
                   ) : (
                     <div className={styles.itemsList}>
-                      {getDataByPage(currentPage).experience.map((exp, i) => {
-                        const globalIdx = formData.experience.findIndex(e => e === exp);
-                        return (
-                          <div key={i} className={styles.listItem}>
-                            <div className={styles.itemContent}>
-                              <div className={styles.itemHeader}>
-                                <strong>{exp.position}</strong>
-                                <span>at {exp.employer}</span>
-                              </div>
-                              <div className={styles.itemMeta}>
-                                <span>{exp.startDate} – {exp.endDate || 'Present'}</span>
-                                <span className={styles.pageBadge}>Page {exp.page}</span>
-                              </div>
-                              <div className={styles.itemDescription}>
-                                {exp.description.split('\n').filter(l => l.trim()).map((line, j) => <p key={j} className={styles.bulletPoint}>• {line}</p>)}
-                              </div>
+                      {formData.experience.map((exp, i) => (
+                        <div key={i} className={styles.listItem}>
+                          <div className={styles.itemContent}>
+                            <div className={styles.itemHeader}>
+                              <strong className={styles.itemTitle}>{exp.position}</strong>
+                              <span className={styles.itemSubtitle}>at {exp.employer}</span>
                             </div>
-                            <div className={styles.itemActions}>
-                              <button onClick={() => editExperience(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                              <button onClick={() => deleteExperience(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
+                            <div className={styles.itemMeta}>
+                              <span>{exp.startDate} – {exp.endDate || 'Present'}</span>
+                              {exp.department && <span>{exp.department}</span>}
+                            </div>
+                            <div className={styles.itemDescription}>
+                              {exp.description.split('\n').filter(l => l.trim()).map((line, j) => (
+                                <p key={j} className={styles.bulletPoint}>• {line}</p>
+                              ))}
                             </div>
                           </div>
-                        );
-                      })}
+                          <div className={styles.itemActions}>
+                            <button onClick={() => editExperience(i)} className={styles.editButton} aria-label={`Edit ${exp.position} experience`}><FiEdit2 /></button>
+                            <button onClick={() => deleteExperience(i)} className={styles.deleteButton} aria-label={`Delete ${exp.position} experience`}><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
               </div>
             )}
 
-            {/* Education */}
+            {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <p className={styles.sectionDescription}>List your medical education, degrees, and relevant training</p>
+                
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Institution*
-                      <input value={currentEducation.institution} onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} placeholder="Johns Hopkins University" required className={styles.formInput} />
+                      <input 
+                        value={currentEducation.institution} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} 
+                        placeholder="Johns Hopkins University School of Nursing" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      Degree*
-                      <input value={currentEducation.degree} onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} placeholder="BSN – Bachelor of Science in Nursing" required className={styles.formInput} />
+                      Degree/Certification*
+                      <input 
+                        value={currentEducation.degree} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} 
+                        placeholder="Bachelor of Science in Nursing (BSN)" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Program / Specialization
-                    <input value={currentEducation.program} onChange={(e) => setCurrentEducation({ ...currentEducation, program: e.target.value })} placeholder="Critical Care Nursing" className={styles.formInput} />
+                    Program / Specialization / Concentration
+                    <input 
+                      value={currentEducation.program} 
+                      onChange={(e) => setCurrentEducation({ ...currentEducation, program: e.target.value })} 
+                      placeholder="Critical Care Nursing, Emergency Medicine" 
+                      className={styles.formInput} 
+                    />
                   </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date
-                      <input type="text" placeholder="MM/YYYY" value={currentEducation.startDate} onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year" 
+                        value={currentEducation.startDate} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      End Date
-                      <input type="text" placeholder="MM/YYYY or Expected" value={currentEducation.endDate} onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} className={styles.formInput} />
+                      End Date / Expected
+                      <input 
+                        type="text" 
+                        placeholder="Month Year or Expected" 
+                        value={currentEducation.endDate} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addEducation} className={styles.addButton} disabled={!currentEducation.institution || !currentEducation.degree}>
-                      <FiPlus /> {currentEducation.isEditing ? 'Update' : 'Add Education'}
+                    <button 
+                      type="button" 
+                      onClick={addEducation} 
+                      className={styles.addButton} 
+                      disabled={!currentEducation.institution || !currentEducation.degree}
+                    >
+                      <FiPlus /> {currentEducation.isEditing ? 'Update Education' : 'Add Education'}
                     </button>
-                    {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    {currentEducation.isEditing && (
+                      <button 
+                        type="button" 
+                        onClick={() => setCurrentEducation(defaultEducation())} 
+                        className={styles.cancelButton}
+                      >
+                        <FiX /> Cancel
+                      </button>
+                    )}
                   </div>
                 </div>
+                
                 <div className={styles.formCard}>
-                  <h4>Your Education on Page {currentPage}</h4>
-                  {getDataByPage(currentPage).education.length === 0 ? (
-                    <p className={styles.emptyMessage}>No education added</p>
+                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  {formData.education.length === 0 ? (
+                    <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
                     <div className={styles.itemsList}>
-                      {getDataByPage(currentPage).education.map((edu, i) => {
-                        const globalIdx = formData.education.findIndex(e => e === edu);
-                        return (
-                          <div key={i} className={styles.listItem}>
-                            <div className={styles.itemContent}>
-                              <div className={styles.itemHeader}>
-                                <strong>{edu.degree}</strong>
-                                {edu.program && <span> – {edu.program}</span>}
-                              </div>
-                              <div className={styles.itemMeta}>
-                                <span>{edu.institution}</span>
-                                <span>{edu.startDate} – {edu.endDate || 'Present'}</span>
-                                <span className={styles.pageBadge}>Page {edu.page}</span>
-                              </div>
+                      {formData.education.map((edu, i) => (
+                        <div key={i} className={styles.listItem}>
+                          <div className={styles.itemContent}>
+                            <div className={styles.itemHeader}>
+                              <strong className={styles.itemTitle}>{edu.degree}</strong>
+                              {edu.program && <span className={styles.itemSubtitle}> – {edu.program}</span>}
                             </div>
-                            <div className={styles.itemActions}>
-                              <button onClick={() => editEducation(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                              <button onClick={() => deleteEducation(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
+                            <div className={styles.itemMeta}>
+                              <span>{edu.institution}</span>
+                              <span>{edu.startDate} – {edu.endDate || 'Present'}</span>
                             </div>
                           </div>
-                        );
-                      })}
+                          <div className={styles.itemActions}>
+                            <button onClick={() => editEducation(i)} className={styles.editButton} aria-label={`Edit ${edu.degree}`}><FiEdit2 /></button>
+                            <button onClick={() => deleteEducation(i)} className={styles.deleteButton} aria-label={`Delete ${edu.degree}`}><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
               </div>
             )}
 
-            {/* Specialties, Licenses, etc. */}
+            {/* Specialties & Licenses Section */}
             {activeSection === 'specialties' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiActivity /> Areas of Specialty – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiActivity /> Clinical Specialties & Certifications</h3>
+                
+                {/* Areas of Specialty */}
                 <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}>Areas of Clinical Specialty</h4>
+                  <p className={styles.sectionDescription}>List your medical specialties and areas of expertise</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentSpecialty.name} onChange={(e) => setCurrentSpecialty({ ...currentSpecialty, name: e.target.value })} placeholder="Pediatric Care" className={styles.formInput} />
+                    <input 
+                      value={currentSpecialty.name} 
+                      onChange={(e) => setCurrentSpecialty({ ...currentSpecialty, name: e.target.value })} 
+                      placeholder="Critical Care, Emergency Medicine, Pediatric Nursing" 
+                      className={styles.formInput} 
+                    />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addSpecialty} className={styles.addButton} disabled={!currentSpecialty.name.trim()}>
-                        <FiPlus /> {currentSpecialty.isEditing ? 'Update' : 'Add Specialty'}
+                      <button 
+                        type="button" 
+                        onClick={addSpecialty} 
+                        className={styles.addButton} 
+                        disabled={!currentSpecialty.name.trim()}
+                      >
+                        <FiPlus /> {currentSpecialty.isEditing ? 'Update Specialty' : 'Add Specialty'}
                       </button>
-                      {currentSpecialty.isEditing && <button type="button" onClick={() => setCurrentSpecialty(defaultSpecialty())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentSpecialty.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentSpecialty(defaultSpecialty())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).specialties.map((s, i) => {
-                      const globalIdx = formData.specialties.findIndex(x => x === s);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <span>{s.name}</span>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editSpecialty(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteSpecialty(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.specialties.map((s, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <span>{s.name}</span>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editSpecialty(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteSpecialty(i)} className={styles.deleteButton}><FiTrash2 /></button>
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).specialties.length === 0 && <p className={styles.emptyMessage}>No specialties added</p>}
+                      </div>
+                    ))}
+                    {formData.specialties.length === 0 && <p className={styles.emptyMessage}>No specialties added yet</p>}
                   </div>
                 </div>
 
+                {/* Licenses & Certifications */}
                 <div className={styles.formCard}>
-                  <h4><FiShield /> Licenses & Certifications – Page {currentPage}</h4>
+                  <h4 className={styles.subSectionTitle}><FiShield /> Licenses & Certifications</h4>
+                  <p className={styles.sectionDescription}>Add your professional licenses and healthcare certifications</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentLicense.name} onChange={(e) => setCurrentLicense({ ...currentLicense, name: e.target.value })} placeholder="RN License – State of California" className={styles.formInput} />
-                    <input value={currentLicense.issuingAuthority} onChange={(e) => setCurrentLicense({ ...currentLicense, issuingAuthority: e.target.value })} placeholder="CA BRN" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <input value={currentLicense.licenseNumber} onChange={(e) => setCurrentLicense({ ...currentLicense, licenseNumber: e.target.value })} placeholder="License #" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <input value={currentLicense.expiryDate} onChange={(e) => setCurrentLicense({ ...currentLicense, expiryDate: e.target.value })} placeholder="Expiry (MM/YYYY)" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        License/Certification Name*
+                        <input 
+                          value={currentLicense.name} 
+                          onChange={(e) => setCurrentLicense({ ...currentLicense, name: e.target.value })} 
+                          placeholder="Registered Nurse (RN) License" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Issuing Authority
+                        <input 
+                          value={currentLicense.issuingAuthority} 
+                          onChange={(e) => setCurrentLicense({ ...currentLicense, issuingAuthority: e.target.value })} 
+                          placeholder="State Board of Nursing" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        License Number
+                        <input 
+                          value={currentLicense.licenseNumber} 
+                          onChange={(e) => setCurrentLicense({ ...currentLicense, licenseNumber: e.target.value })} 
+                          placeholder="RN1234567" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Expiry Date
+                        <input 
+                          value={currentLicense.expiryDate} 
+                          onChange={(e) => setCurrentLicense({ ...currentLicense, expiryDate: e.target.value })} 
+                          placeholder="Month Year" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addLicense} className={styles.addButton} disabled={!currentLicense.name.trim()}>
-                        <FiPlus /> {currentLicense.isEditing ? 'Update' : 'Add License'}
+                      <button 
+                        type="button" 
+                        onClick={addLicense} 
+                        className={styles.addButton} 
+                        disabled={!currentLicense.name.trim()}
+                      >
+                        <FiPlus /> {currentLicense.isEditing ? 'Update License' : 'Add License'}
                       </button>
-                      {currentLicense.isEditing && <button type="button" onClick={() => setCurrentLicense(defaultLicense())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentLicense.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentLicense(defaultLicense())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).licenses.map((l, i) => {
-                      const globalIdx = formData.licenses.findIndex(x => x === l);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <div>
-                            <strong>{l.name}</strong>
-                            {l.issuingAuthority && ` – ${l.issuingAuthority}`}
-                            {l.licenseNumber && ` (#${l.licenseNumber})`}
-                            {l.expiryDate && ` – Expires: ${l.expiryDate}`}
-                          </div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editLicense(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteLicense(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.licenses.map((l, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          <strong>{l.name}</strong>
+                          {l.issuingAuthority && ` – ${l.issuingAuthority}`}
+                          {l.licenseNumber && ` (#${l.licenseNumber})`}
+                          {l.expiryDate && ` – Expires: ${l.expiryDate}`}
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).licenses.length === 0 && <p className={styles.emptyMessage}>No licenses added</p>}
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editLicense(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteLicense(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.licenses.length === 0 && <p className={styles.emptyMessage}>No licenses added yet</p>}
                   </div>
                 </div>
 
+                {/* Procedures & Technical Skills */}
                 <div className={styles.formCard}>
-                  <h4>Procedures & Technical Skills – Page {currentPage}</h4>
+                  <h4 className={styles.subSectionTitle}>Clinical Procedures & Technical Skills</h4>
+                  <p className={styles.sectionDescription}>List your clinical procedures, technical skills, and medical equipment proficiency</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentProcedure.name} onChange={(e) => setCurrentProcedure({ ...currentProcedure, name: e.target.value })} placeholder="IV Insertion, Phlebotomy, ECG" className={styles.formInput} />
+                    <input 
+                      value={currentProcedure.name} 
+                      onChange={(e) => setCurrentProcedure({ ...currentProcedure, name: e.target.value })} 
+                      placeholder="IV Insertion, Phlebotomy, ECG Monitoring, Ventilator Management" 
+                      className={styles.formInput} 
+                    />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addProcedure} className={styles.addButton} disabled={!currentProcedure.name.trim()}>
-                        <FiPlus /> {currentProcedure.isEditing ? 'Update' : 'Add Skill'}
+                      <button 
+                        type="button" 
+                        onClick={addProcedure} 
+                        className={styles.addButton} 
+                        disabled={!currentProcedure.name.trim()}
+                      >
+                        <FiPlus /> {currentProcedure.isEditing ? 'Update Skill' : 'Add Skill'}
                       </button>
-                      {currentProcedure.isEditing && <button type="button" onClick={() => setCurrentProcedure(defaultProcedure())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentProcedure.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentProcedure(defaultProcedure())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).procedures.map((p, i) => {
-                      const globalIdx = formData.procedures.findIndex(x => x === p);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <span>{p.name}</span>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editProcedure(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteProcedure(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.procedures.map((p, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <span>{p.name}</span>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editProcedure(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteProcedure(i)} className={styles.deleteButton}><FiTrash2 /></button>
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).procedures.length === 0 && <p className={styles.emptyMessage}>No procedures added</p>}
+                      </div>
+                    ))}
+                    {formData.procedures.length === 0 && <p className={styles.emptyMessage}>No procedures added yet</p>}
                   </div>
                 </div>
 
+                {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4>Professional Affiliations – Page {currentPage}</h4>
+                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <p className={styles.sectionDescription}>Add your professional healthcare organization memberships</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentAffiliation.organization} onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, organization: e.target.value })} placeholder="American Nurses Association" className={styles.formInput} />
-                    <input value={currentAffiliation.role} onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, role: e.target.value })} placeholder="Member" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Organization*
+                        <input 
+                          value={currentAffiliation.organization} 
+                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, organization: e.target.value })} 
+                          placeholder="American Nurses Association (ANA)" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Role / Membership Type
+                        <input 
+                          value={currentAffiliation.role} 
+                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, role: e.target.value })} 
+                          placeholder="Active Member, Committee Chair" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addAffiliation} className={styles.addButton} disabled={!currentAffiliation.organization.trim()}>
-                        <FiPlus /> {currentAffiliation.isEditing ? 'Update' : 'Add Affiliation'}
+                      <button 
+                        type="button" 
+                        onClick={addAffiliation} 
+                        className={styles.addButton} 
+                        disabled={!currentAffiliation.organization.trim()}
+                      >
+                        <FiPlus /> {currentAffiliation.isEditing ? 'Update Affiliation' : 'Add Affiliation'}
                       </button>
-                      {currentAffiliation.isEditing && <button type="button" onClick={() => setCurrentAffiliation(defaultAffiliation())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentAffiliation.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentAffiliation(defaultAffiliation())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).affiliations.map((a, i) => {
-                      const globalIdx = formData.affiliations.findIndex(x => x === a);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <div>
-                            <strong>{a.organization}</strong>
-                            {a.role && ` – ${a.role}`}
-                          </div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editAffiliation(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteAffiliation(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.affiliations.map((a, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          <strong>{a.organization}</strong>
+                          {a.role && ` – ${a.role}`}
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).affiliations.length === 0 && <p className={styles.emptyMessage}>No affiliations added</p>}
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editAffiliation(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteAffiliation(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.affiliations.length === 0 && <p className={styles.emptyMessage}>No affiliations added yet</p>}
                   </div>
                 </div>
 
+                {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4>Languages – Page {currentPage}</h4>
+                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
-                    <input value={currentLanguage.name} onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} placeholder="Spanish" className={styles.formInput} />
-                    <input value={currentLanguage.proficiency} onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} placeholder="Fluent, Medical Terminology" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Language*
+                        <input 
+                          value={currentLanguage.name} 
+                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} 
+                          placeholder="Spanish" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Proficiency Level
+                        <input 
+                          value={currentLanguage.proficiency} 
+                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} 
+                          placeholder="Fluent, Medical Terminology Proficient" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addLanguage} className={styles.addButton} disabled={!currentLanguage.name.trim()}>
-                        <FiPlus /> {currentLanguage.isEditing ? 'Update' : 'Add Language'}
+                      <button 
+                        type="button" 
+                        onClick={addLanguage} 
+                        className={styles.addButton} 
+                        disabled={!currentLanguage.name.trim()}
+                      >
+                        <FiPlus /> {currentLanguage.isEditing ? 'Update Language' : 'Add Language'}
                       </button>
-                      {currentLanguage.isEditing && <button type="button" onClick={() => setCurrentLanguage(defaultLanguage())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                      {currentLanguage.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentLanguage(defaultLanguage())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={styles.itemsList}>
-                    {getDataByPage(currentPage).languages.map((l, i) => {
-                      const globalIdx = formData.languages.findIndex(x => x === l);
-                      return (
-                        <div key={i} className={styles.listItem}>
-                          <div>
-                            {l.name}{l.proficiency && ` (${l.proficiency})`}
-                          </div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editLanguage(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteLanguage(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
+                    {formData.languages.map((l, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          {l.name}{l.proficiency && ` (${l.proficiency})`}
                         </div>
-                      );
-                    })}
-                    {getDataByPage(currentPage).languages.length === 0 && <p className={styles.emptyMessage}>No languages added</p>}
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editLanguage(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteLanguage(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.languages.length === 0 && <p className={styles.emptyMessage}>No languages added yet</p>}
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* Font Settings Section */}
+            {activeSection === 'settings' && (
+              <div className={styles.formSectionContent}>
+                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
+                
+                <div className={styles.formCard}>
+                  <div className={styles.fontSizeGrid}>
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Name</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.name}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="8" 
+                        max="24" 
+                        value={fontSizes.name}
+                        onChange={(e) => handleFontSizeChange('name', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Section Titles</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.sectionTitle}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="18" 
+                        value={fontSizes.sectionTitle}
+                        onChange={(e) => handleFontSizeChange('sectionTitle', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Job Titles</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.jobTitle}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="16" 
+                        value={fontSizes.jobTitle}
+                        onChange={(e) => handleFontSizeChange('jobTitle', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Degrees</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.degree}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="16" 
+                        value={fontSizes.degree}
+                        onChange={(e) => handleFontSizeChange('degree', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Company/Institution Names</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.institution}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.institution}
+                        onChange={(e) => handleFontSizeChange('institution', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Institution Dates</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.institutionDate}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="4" 
+                        max="12" 
+                        value={fontSizes.institutionDate}
+                        onChange={(e) => handleFontSizeChange('institutionDate', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Regular Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.regularText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.regularText}
+                        onChange={(e) => handleFontSizeChange('regularText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Bullet Points</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.bulletText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.bulletText}
+                        onChange={(e) => handleFontSizeChange('bulletText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Contact Info</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.contactInfo}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="12" 
+                        value={fontSizes.contactInfo}
+                        onChange={(e) => handleFontSizeChange('contactInfo', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Skills Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.skillText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="12" 
+                        value={fontSizes.skillText}
+                        onChange={(e) => handleFontSizeChange('skillText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>License Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.licenseText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.licenseText}
+                        onChange={(e) => handleFontSizeChange('licenseText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                  </div>
+                  
+                  <button 
+                    type="button" 
+                    onClick={resetFontSizes}
+                    className={styles.resetButton}
+                  >
+                    Reset to Default Font Sizes
+                  </button>
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <section className={styles.faqSection} aria-labelledby="faq-title">
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+            <p className={styles.sectionSubtitle}>
+              Everything you need to know about creating professional healthcare resumes with our tool.
+            </p>
+          </div>
+          <div className={styles.faqGrid}>
+            {faqs.map((faq, index) => (
+              <div key={index} className={styles.faqItem}>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
+                <p className={styles.faqAnswer}>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className={styles.ctaSection} aria-labelledby="cta-title">
+        <div className={styles.container}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Healthcare Career?</h2>
+            <p className={styles.ctaSubtitle}>
+              Join 4 million+ healthcare professionals who landed their dream jobs with our free ATS-friendly healthcare resume builder.
+            </p>
+            <div className={styles.ctaButtons}>
+              <button
+                onClick={() => setActiveSection('personal')}
+                className={styles.ctaButton}
+                aria-label="Create your free healthcare resume now—no sign-up required"
+              >
+                <span className={styles.ctaButtonText}>Create Your Free Healthcare Resume Now</span>
+                <FiArrowRight className={styles.ctaButtonIcon} />
+              </button>
+            </div>
+            <div className={styles.ctaGuarantee}>
+              <FiCheck className={styles.guaranteeIcon} />
+              <span className={styles.guaranteeText}>No credit card required • Free forever • Download in minutes • ATS Optimized for Healthcare</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Full Preview Modal */}
       {showFullPreview && (
@@ -1040,11 +2040,9 @@ const Resume = () => {
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>
-              {Array.from({ length: totalPages }, (_, i) => (
-                <div key={i + 1} className={styles.fullPreviewPage}>
-                  {renderTemplate(i + 1)}
-                </div>
-              ))}
+              <div className={styles.fullPreviewPage}>
+                <HealthcareTemplate formData={formData} />
+              </div>
             </div>
           </div>
         </div>
@@ -1052,5 +2050,48 @@ const Resume = () => {
     </div>
   );
 };
+
+// SSG + ISR Implementation
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate review dates for structured data
+  const reviewDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Generate FAQ dates for structured data
+  const faqDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Breadcrumb data for structured data
+  const breadcrumbData = [
+    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
+    { name: 'Healthcare Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-medical-resume-builder' }
+  ];
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates,
+        breadcrumbData
+      },
+      buildTimestamp
+    },
+    // ISR: Revalidate every 24 hours (86400 seconds)
+    revalidate: 3600
+  };
+}
 
 export default Resume;

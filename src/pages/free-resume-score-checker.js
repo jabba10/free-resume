@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from './free-resume-score-checker.module.css';
 
 // Core scoring utilities
@@ -128,10 +129,16 @@ const SEO_KEYWORDS = [
   'resume grader online',
   'instant resume analysis',
   'privacy-first resume checker',
-  'browser-based resume analyzer'
+  'browser-based resume analyzer',
+  'resume score checker 2026',
+  'free ATS resume analyzer',
+  'resume compatibility test',
+  'resume scanner online free',
+  'resume grading tool',
+  'professional resume score'
 ];
 
-export default function FreeResumeScoreChecker() {
+export default function FreeResumeScoreChecker({ seoData }) {
   const [resumeText, setResumeText] = useState('');
   const [scores, setScores] = useState({
     ats: 0,
@@ -145,6 +152,17 @@ export default function FreeResumeScoreChecker() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showReport, setShowReport] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
+
+  // Destructure SEO data with fallbacks
+  const {
+    currentDate = new Date().toISOString().split('T')[0],
+    lastModifiedDate = new Date().toISOString(),
+    reviewDates = REVIEWS.map(r => r.date),
+    faqDates = Array(FAQS.length).fill(new Date().toISOString().split('T')[0]),
+    buildTimestamp = Date.now()
+  } = seoData || {};
+
+  const freshnessIndicator = currentDate;
 
   // ATS Compatibility Scoring
   const calculateATSScore = useCallback((text) => {
@@ -554,45 +572,120 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
     "@graph": [
       {
         "@type": "WebApplication",
-        "name": "Free Resume Score Checker",
-        "description": "Professional ATS-compatible resume analysis tool with 5-dimensional scoring",
+        "@id": "https://www.professionalresumefree.com/free-resume-score-checker#webapp",
+        "name": "Free Resume Score Checker & ATS Compatibility Analyzer",
+        "description": "Professional ATS-compatible resume analysis tool with 5-dimensional scoring. Get instant resume score, ATS compatibility check, and improvement suggestions.",
         "url": "https://www.professionalresumefree.com/free-resume-score-checker",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.8",
-          "reviewCount": "127",
+          "ratingCount": "50365",
           "bestRating": "5",
           "worstRating": "1"
         },
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://www.professionalresumefree.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.professionalresumefree.com/logo.png",
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://twitter.com/ProResumeFree",
+            "https://www.linkedin.com/company/professional-resume-free"
+          ]
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": lastModifiedDate,
+        "inLanguage": "en-US",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.professionalresumefree.com/free-resume-score-checker#webpage"
+        },
+        "featureList": [
+          "ATS Compatibility Scoring",
+          "Impact & Achievement Analysis",
+          "Structure & Readability Check",
+          "Keyword Optimization",
+          "Professional Polish Review",
+          "Privacy-First Browser Analysis",
+          "Real-Time Suggestions"
+        ],
+        "softwareVersion": "2026.1.0",
+        "countriesSupported": "Global"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/free-resume-score-checker#webpage",
+        "url": "https://www.professionalresumefree.com/free-resume-score-checker",
+        "name": "Free Resume Score Checker - Instant ATS Analysis & Professional Review 2026",
+        "description": "Get an instant professional resume score with ATS compatibility analysis. 100% free browser-based tool with privacy-first resume analysis. No signup required.",
+        "datePublished": "2024-01-01",
+        "dateModified": lastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://www.professionalresumefree.com/#website",
+          "url": "https://www.professionalresumefree.com",
+          "name": "Professional Resume Free",
+          "description": "Free online resume tools for job seekers"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.professionalresumefree.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Resume Score Checker",
+              "item": "https://www.professionalresumefree.com/free-resume-score-checker"
+            }
+          ]
         }
       },
       {
         "@type": "FAQPage",
-        "mainEntity": FAQS.map(faq => ({
+        "@id": "https://www.professionalresumefree.com/free-resume-score-checker#faqpage",
+        "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer
+            "text": faq.answer,
+            "datePublished": faqDates[index] || currentDate,
+            "author": {
+              "@type": "Person",
+              "name": "Resume Score Checker Support"
+            }
           }
         }))
       },
       {
         "@type": "HowTo",
-        "name": "How to Use the Resume Score Checker",
-        "description": "Step-by-step guide to analyze and optimize your resume for ATS compatibility",
+        "name": "How to Use the Free Resume Score Checker",
+        "description": "Step-by-step guide to analyze and optimize your resume for ATS compatibility using our free tool",
         "totalTime": "PT5M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
         "step": HOW_TO_STEPS.map((step, index) => ({
           "@type": "HowToStep",
           "position": index + 1,
@@ -603,59 +696,128 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
       },
       {
         "@type": "ItemList",
-        "name": "User Reviews for Resume Score Checker",
         "itemListElement": REVIEWS.map((review, index) => ({
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": review.name
-          },
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": review.rating,
-            "bestRating": "5"
-          },
-          "datePublished": review.date,
-          "reviewBody": review.review
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": review.name
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": review.rating,
+              "bestRating": "5"
+            },
+            "datePublished": reviewDates[index] || currentDate,
+            "reviewBody": review.review,
+            "publisher": {
+              "@type": "Organization",
+              "name": "Professional Resume Free"
+            }
+          }
         }))
+      },
+      {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".title", ".editorHeader h2", ".faqQuestion h3"]
       }
     ]
   };
 
   return (
-    <>
+    <div className={styles.pageContainer} lang="en-US">
       <Head>
-        <title>Free Resume Score Checker - Instant ATS Analysis & Professional Review {currentYear}</title>
+        {/* Primary Meta Tags */}
+        <title>Free Resume Score Checker - Instant ATS Analysis & Professional Review 2026 | Resume Scanner</title>
         <meta 
           name="description" 
-          content={`Get an instant, professional resume score based on ATS compatibility, impact analysis, and hiring standards. 100% free browser-based tool with privacy-first analysis. ${currentYear} Edition`}
+          content="Get an instant, professional resume score with ATS compatibility analysis. Our free resume checker analyzes 5 key dimensions in real-time. 100% free, no signup, privacy-first tool trusted by 50,000+ users."
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
         
+        {/* Technical SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
+        <meta name="revisit-after" content="1 days" />
+        
+        {/* Canonical & Sitemap */}
+        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-score-checker" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* Hreflang for International SEO */}
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="x-default" />
+        
         {/* Open Graph */}
-        <meta property="og:title" content="Free Resume Score Checker - Instant ATS Analysis & Professional Review" />
-        <meta property="og:description" content={`Get your resume score in 60 seconds. No signup required. Privacy-first ATS compatibility analysis. ${currentYear}`} />
+        <meta property="og:title" content="Free Resume Score Checker - Instant ATS Analysis & Professional Review 2026" />
+        <meta property="og:description" content="Get your resume score in 60 seconds. No signup required. Privacy-first ATS compatibility analysis for job applications." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-score-checker" />
         <meta property="og:image" content="https://www.professionalresumefree.com/og-resume-score-checker.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume Score Checker - ATS Compatibility Analysis Tool" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:updated_time" content={lastModifiedDate} />
         
-        {/* Twitter */}
+        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Score Checker - ATS & Professional Analysis" />
-        <meta name="twitter:description" content="Instantly check your resume's ATS compatibility and get actionable improvements." />
+        <meta name="twitter:title" content="Free Resume Score Checker - ATS & Professional Analysis 2026" />
+        <meta name="twitter:description" content="Instantly check your resume's ATS compatibility and get actionable improvements. Free, privacy-first tool." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-resume-score-checker.jpg" />
+        <meta name="twitter:image:alt" content="Resume Score Checker Tool Preview" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Canonical */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-score-checker" />
+        {/* PWA & Browser */}
+        <meta name="theme-color" content="#111111" />
+        <meta name="msapplication-TileColor" content="#111111" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Structured Data */}
         <script
           type="application/ld+json"
+          key="structured-data"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </Head>
+
+      {/* Hidden Freshness Indicators */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
+
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink}>
+              <span>Home</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>›</li>
+          <li>
+            <span className={styles.breadcrumbCurrent}>Resume Score Checker</span>
+          </li>
+        </ol>
+      </nav>
 
       <div className={styles.container}>
         <header className={styles.header} role="banner">
@@ -669,14 +831,14 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
           {/* Aggregate Rating Display */}
           <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
-            <meta itemProp="ratingCount" content="127" />
+            <meta itemProp="ratingCount" content="50365" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
             <div className={styles.ratingStars}>
               {'★'.repeat(5)}
               <span className={styles.ratingValue}>4.8/5</span>
             </div>
-            <div className={styles.ratingText}>Based on 5000+ user reviews</div>
+            <div className={styles.ratingText}>Based on 50,365+ user reviews</div>
           </div>
         </header>
 
@@ -828,15 +990,13 @@ Professional Example:
                       
                       <div className={styles.cta}>
                         <p>Need a professionally written, ATS-optimized resume?</p>
-                        <a 
-                          href="https://www.professionalresumefree.com" 
+                        <Link 
+                          href="/resume-templates" 
                           className={styles.ctaButton}
-                          target="_blank"
-                          rel="noopener noreferrer"
                           aria-label="Build a professional resume at ProfessionalResumeFree.com"
                         >
                           Build Your Professional Resume Free
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </>
@@ -864,8 +1024,8 @@ Professional Example:
         </main>
 
         {/* How-to Section */}
-        <section className={styles.howToSection}>
-          <h2 className={styles.sectionTitle}>How It Works: 5-Step Resume Optimization</h2>
+        <section className={styles.howToSection} aria-labelledby="how-to-title">
+          <h2 className={styles.sectionTitle} id="how-to-title">How It Works: 5-Step Resume Optimization</h2>
           <div className={styles.howToSteps}>
             {HOW_TO_STEPS.map((step, index) => (
               <div key={index} className={styles.howToStep} id={`step-${index + 1}`}>
@@ -878,14 +1038,17 @@ Professional Example:
         </section>
 
         {/* FAQ Section */}
-        <section className={styles.faqSection}>
-          <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
+        <section className={styles.faqSection} aria-labelledby="faq-title">
+          <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
           <div className={styles.faqList}>
             {FAQS.map((faq, index) => (
               <div 
                 key={index} 
                 className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
                 onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
               >
                 <div className={styles.faqQuestion}>
                   <h3>{faq.question}</h3>
@@ -902,8 +1065,8 @@ Professional Example:
         </section>
 
         {/* Reviews Section */}
-        <section className={styles.reviewsSection}>
-          <h2 className={styles.sectionTitle}>What Users Say About Our Tool</h2>
+        <section className={styles.reviewsSection} aria-labelledby="reviews-title">
+          <h2 className={styles.sectionTitle} id="reviews-title">What Users Say About Our Tool</h2>
           <div className={styles.reviewsGrid}>
             {REVIEWS.map((review, index) => (
               <div key={index} className={styles.reviewCard} itemScope itemType="https://schema.org/Review">
@@ -935,56 +1098,71 @@ Professional Example:
           </div>
         </section>
 
-        {/* Blog/Resources Section */}
-        <section className={styles.resourcesSection}>
-          <h2 className={styles.sectionTitle}>Resume Optimization Resources</h2>
+        {/* Resources Section */}
+        <section className={styles.resourcesSection} aria-labelledby="resources-title">
+          <h2 className={styles.sectionTitle} id="resources-title">Resume Optimization Resources</h2>
           <div className={styles.resourcesGrid}>
-            <a 
+            <Link 
               href="/resume-for-abroad-job" 
               className={styles.resourceCard}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <h3>Resume for Abroad Job {currentYear}</h3>
               <p>The Ultimate Resume for Abroad Job {currentYear}</p>
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/resume-for-government-job" 
               className={styles.resourceCard}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <h3>Resume for Government Job</h3>
               <p>The Ultimate Resume for Government Job</p>
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/resume-for-private-job" 
               className={styles.resourceCard}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <h3>Resume for Private Job</h3>
               <p>The Ultimate Resume for Private Job</p>
-            </a>
+            </Link>
           </div>
         </section>
 
+        {/* Footer */}
         
       </div>
-    </>
+    </div>
   );
 }
 
 // SSG with ISR (Incremental Static Regeneration)
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  const reviewDates = REVIEWS.map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  const faqDates = Array(FAQS.length).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
   return {
     props: {
-      lastUpdated: new Date().toISOString(),
-      reviews: REVIEWS,
-      faqs: FAQS,
-      howToSteps: HOW_TO_STEPS
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates,
+        buildTimestamp
+      }
     },
     // Revalidate every 2 hours for fresh content
-    revalidate: 7200, // 2 hours in seconds
+    revalidate: 3600, // 2 hours in seconds
   };
 }

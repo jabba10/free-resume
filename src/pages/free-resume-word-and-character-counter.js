@@ -100,45 +100,172 @@ const ResumeWordCharacterCounter = () => {
   const [activeFaq, setActiveFaq] = useState(null);
   const textareaRef = useRef(null);
 
-  // Schema data
+  // Current date for freshness
+  const currentDate = new Date().toISOString().split('T')[0];
+  const lastModifiedDate = new Date().toISOString();
+
+  // Schema data - Expanded with comprehensive structured data
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebApplication",
-        "name": "Resume Word & Character Counter",
-        "description": "Free professional resume word and character counter with ATS optimization guidance and industry-standard length recommendations",
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/free-resume-word-character-counter#webpage",
         "url": "https://www.professionalresumefree.com/free-resume-word-character-counter",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "142",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "author": {
-          "@type": "Organization",
+        "name": "Resume Word & Character Counter - Professional Length Checker 2024",
+        "description": "Free professional resume word counter and character counter with ATS optimization guidance. Check your resume length against industry standards with real-time analysis.",
+        "datePublished": "2024-01-01",
+        "dateModified": lastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://www.professionalresumefree.com/#website",
+          "url": "https://www.professionalresumefree.com",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "description": "Free online resume building tools for job seekers",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://www.professionalresumefree.com/#organization",
+            "name": "Professional Resume Free",
+            "url": "https://www.professionalresumefree.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.professionalresumefree.com/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://twitter.com/ProResumeFree",
+              "https://www.linkedin.com/company/professional-resume-free"
+            ]
+          }
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.professionalresumefree.com/og-word-counter.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.professionalresumefree.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Resume Tools",
+              "item": "https://www.professionalresumefree.com/resume-tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Word & Character Counter",
+              "item": "https://www.professionalresumefree.com/free-resume-word-character-counter"
+            }
+          ]
+        },
+        "mainEntity": {
+          "@type": "SoftwareApplication",
+          "name": "Resume Word & Character Counter - ATS Optimized Resume Length Checker",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": "2025-12-31"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 4.8,
+            "ratingCount": 142,
+            "bestRating": 5,
+            "worstRating": 1
+          },
+          "description": "Free online ATS-friendly resume word and character counter that helps job seekers optimize resume length for better ATS performance.",
+          "featureList": [
+            "Real-time Word Count",
+            "Character Count with/without Spaces",
+            "ATS-Optimized Length Guidelines",
+            "Professional Resume Tips",
+            "One-Click Clear Options",
+            "Mobile-Friendly Interface",
+            "No Sign Up Required",
+            "Free Forever"
+          ],
+          "softwareVersion": "2024.1.0",
+          "applicationSuite": "Resume Optimization Tools",
+          "countriesSupported": "Global"
         }
       },
       {
         "@type": "FAQPage",
-        "mainEntity": FAQS.map(faq => ({
+        "@id": "https://www.professionalresumefree.com/free-resume-word-character-counter#faqpage",
+        "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer
-          }
+            "text": faq.answer,
+            "datePublished": lastModifiedDate,
+            "author": {
+              "@type": "Person",
+              "name": "Resume Expert Team"
+            }
+          },
+          "mainEntityOfPage": "https://www.professionalresumefree.com/free-resume-word-character-counter#webpage"
         }))
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Use the Resume Word Counter to Optimize Your Resume",
+        "description": "Step-by-step guide to check and optimize your resume length using our free tool",
+        "totalTime": "PT5M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Paste Your Resume Content",
+            "text": "Copy and paste your entire resume content into the text area.",
+            "url": "https://www.professionalresumefree.com/free-resume-word-character-counter#paste",
+            "image": "https://www.professionalresumefree.com/images/step1-paste.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Review Real-Time Statistics",
+            "text": "Watch as the tool instantly calculates words, characters, paragraphs, and estimated pages.",
+            "url": "https://www.professionalresumefree.com/free-resume-word-character-counter#stats",
+            "image": "https://www.professionalresumefree.com/images/step2-stats.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Check Against Guidelines",
+            "text": "Compare your word count against professional resume length guidelines for your career level.",
+            "url": "https://www.professionalresumefree.com/free-resume-word-character-counter#guidelines",
+            "image": "https://www.professionalresumefree.com/images/step3-guidelines.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Optimize and Adjust",
+            "text": "Use the tips and recommendations to adjust your resume content for optimal length and impact.",
+            "url": "https://www.professionalresumefree.com/free-resume-word-character-counter#optimize",
+            "image": "https://www.professionalresumefree.com/images/step4-optimize.jpg"
+          }
+        ]
       },
       {
         "@type": "ItemList",
@@ -146,9 +273,13 @@ const ResumeWordCharacterCounter = () => {
         "itemListElement": LENGTH_GUIDELINES.map((guideline, index) => ({
           "@type": "ListItem",
           "position": index + 1,
-          "name": guideline.level,
-          "description": `${guideline.words} (${guideline.pages}) - Focus on: ${guideline.focus}`
+          "name": `${guideline.level}: ${guideline.words}`,
+          "description": `Professional resume length recommendation for ${guideline.level} professionals. Focus on ${guideline.focus}.`
         }))
+      },
+      {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".heroTitle", ".heroSubtitle", ".sectionTitle", ".faqQuestion h3"]
       }
     ]
   };
@@ -217,87 +348,165 @@ const ResumeWordCharacterCounter = () => {
   const isUnderLimit = stats.words < 300;
 
   const getWordCountStatus = () => {
-    if (isWithinRange) return { text: 'Perfect length!', color: '#28a745' };
-    if (isUnderLimit) return { text: 'Add more content', color: '#dc3545' };
-    return { text: 'Consider shortening', color: '#ff6b35' };
+    if (isWithinRange) return { text: '✓ Perfect length!', color: '#28a745' };
+    if (isUnderLimit) return { text: '⚠ Add more content', color: '#dc3545' };
+    return { text: '⚠ Consider shortening', color: '#ff6b35' };
   };
 
   const status = getWordCountStatus();
 
   return (
-    <>
+    <div className={styles.container} lang="en-US">
       <Head>
-        <title>Resume Word & Character Counter – Professional Length Checker {CURRENT_YEAR}</title>
+        {/* Primary Meta Tags */}
+        <title>Resume Word & Character Counter – Professional Length Checker {CURRENT_YEAR} | Free ATS Optimized Tool</title>
         <meta 
           name="description" 
-          content={`Free professional resume word counter and character counter with ATS optimization. Check your resume length against industry standards. Real-time analysis. ${CURRENT_YEAR}`}
+          content={`Free professional resume word counter and character counter with ATS optimization. Check your resume length against industry standards. Real-time analysis with word count, character count, and professional recommendations. ${CURRENT_YEAR}`}
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        
+        {/* Freshness Meta Tags */}
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
+        <meta name="revisit-after" content="2 days" />
+        
+        {/* Canonical & Internationalization */}
+        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-word-character-counter" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-word-character-counter" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-word-character-counter" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-word-character-counter" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-word-character-counter" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-word-character-counter" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-word-character-counter" hreflang="x-default" />
+        
+        {/* Sitemap */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Resume Word & Character Counter – Professional Length Checker" />
+        <meta property="og:title" content="Resume Word & Character Counter – Professional Length Checker 2024" />
         <meta property="og:description" content="Free professional resume word counter with ATS optimization guidance. Check length, characters, and get industry-standard recommendations." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-word-character-counter" />
         <meta property="og:image" content="https://www.professionalresumefree.com/og-word-counter.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume Word & Character Counter - Free Professional Tool" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={lastModifiedDate} />
         
-        {/* Twitter */}
+        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Word & Character Counter" />
         <meta name="twitter:description" content="Professional resume length checker with ATS optimization and real-time analysis" />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-word-counter.jpg" />
+        <meta name="twitter:image:alt" content="Resume Word Counter Tool" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Canonical */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-word-character-counter" />
+        {/* Mobile & PWA */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        
+        {/* Performance */}
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Structured Data */}
         <script
           type="application/ld+json"
+          key="structured-data"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </Head>
 
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <h1 className={styles.title}>Resume Word & Character Counter</h1>
-          <p className={styles.subtitle}>
-            Professional resume length analyzer with ATS optimization guidance
-            <span className={`${styles.wordCount} ${isWithinRange ? styles.inRange : styles.outOfRange}`}>
-              {stats.words} words
-            </span>
-          </p>
-          
-          <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
-            <meta itemProp="ratingValue" content="4.8" />
-            <meta itemProp="ratingCount" content="142" />
-            <div className={styles.ratingStars}>
-              {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.8/5</span>
-            </div>
-            <div className={styles.ratingText}>Trusted by 10,000+ professionals</div>
-          </div>
-        </header>
+      {/* Hidden freshness indicator */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={Date.now()} />
+        <meta name="content-freshness" content={currentDate} />
+      </div>
 
-        <main className={styles.main}>
-          {/* Main Editor Section */}
-          <div className={styles.editorSection}>
-            <div className={styles.editorHeader}>
-              <h2>Paste Your Resume Content</h2>
-              <p>
-                Paste or type your resume content below for real-time analysis. All processing happens in your browser - your data never leaves your device.
-              </p>
-            </div>
-            
-            <div className={styles.textAreaContainer}>
-              <textarea
-                ref={textareaRef}
-                className={styles.textarea}
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder={`Paste your resume content here...
-                
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol itemScope itemType="https://schema.org/BreadcrumbList">
+          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <a itemProp="item" href="https://www.professionalresumefree.com" className={styles.breadcrumbLink}>
+              <span itemProp="name">Home</span>
+            </a>
+            <meta itemProp="position" content="1" />
+          </li>
+          <li className={styles.breadcrumbSeparator}>›</li>
+          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <a itemProp="item" href="https://www.professionalresumefree.com/resume-tools" className={styles.breadcrumbLink}>
+              <span itemProp="name">Resume Tools</span>
+            </a>
+            <meta itemProp="position" content="2" />
+          </li>
+          <li className={styles.breadcrumbSeparator}>›</li>
+          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <a itemProp="item" href="https://www.professionalresumefree.com/free-resume-word-character-counter" className={styles.breadcrumbLink}>
+              <span itemProp="name">Word & Character Counter</span>
+            </a>
+            <meta itemProp="position" content="3" />
+          </li>
+        </ol>
+      </nav>
+
+      <header className={styles.header}>
+        <h1 className={styles.title}>
+          Resume Word & Character Counter
+          <span className={styles.yearBadge}>{CURRENT_YEAR}</span>
+        </h1>
+        <p className={styles.subtitle}>
+          Professional resume length analyzer with ATS optimization guidance
+          <span className={`${styles.wordCount} ${isWithinRange ? styles.inRange : styles.outOfRange}`}>
+            {stats.words} words
+          </span>
+        </p>
+        
+        <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
+          <meta itemProp="ratingValue" content="4.8" />
+          <meta itemProp="ratingCount" content="142" />
+          <meta itemProp="bestRating" content="5" />
+          <meta itemProp="worstRating" content="1" />
+          <div className={styles.ratingStars}>
+            {'★'.repeat(5)}
+            <span className={styles.ratingValue} itemProp="ratingValue">4.8/5</span>
+          </div>
+          <div className={styles.ratingText} itemProp="ratingCount">Trusted by 10,000+ professionals</div>
+        </div>
+      </header>
+
+      <main className={styles.main}>
+        {/* Main Editor Section */}
+        <section className={styles.editorSection} aria-labelledby="editor-title">
+          <div className={styles.editorHeader}>
+            <h2 id="editor-title">Paste Your Resume Content</h2>
+            <p>
+              Paste or type your resume content below for real-time analysis. All processing happens in your browser - your data never leaves your device.
+            </p>
+          </div>
+          
+          <div className={styles.textAreaContainer}>
+            <textarea
+              ref={textareaRef}
+              className={styles.textarea}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder={`Paste your resume content here...
+              
 For example:
 John Doe
 Software Engineer
@@ -309,279 +518,360 @@ Results-driven software engineer with 5+ years of experience...
 
 EXPERIENCE
 Senior Developer | Tech Company | 2020-Present
-• Led development of scalable web applications...`}
-                rows={20}
-                autoFocus
-              />
-              
-              <div className={styles.buttonGroup}>
-                <button
-                  className={styles.resetButton}
-                  onClick={handleReset}
-                  type="button"
-                >
-                  Clear All
-                </button>
-                <button
-                  className={styles.clearOptionsButton}
-                  onClick={handleClearOptions}
-                  type="button"
-                >
-                  Reset Options
-                </button>
+• Led development of scalable web applications...
+• Reduced page load time by 40%...
+• Mentored 3 junior developers...`}
+              rows={20}
+              autoFocus
+              aria-label="Resume content input area"
+            />
+            
+            <div className={styles.buttonGroup}>
+              <button
+                className={`${styles.resetButton} ${styles.primaryButton}`}
+                onClick={handleReset}
+                type="button"
+                aria-label="Clear all text from the input area"
+              >
+                Clear All Text
+              </button>
+              <button
+                className={`${styles.clearOptionsButton} ${styles.secondaryButton}`}
+                onClick={handleClearOptions}
+                type="button"
+                aria-label="Reset counting options to default settings"
+              >
+                Reset Options
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats Display Section */}
+        <section className={styles.statsSection} aria-labelledby="stats-title">
+          <div className={styles.statsHeader}>
+            <h2 id="stats-title">Resume Analysis Results</h2>
+            <div className={styles.statusIndicator} style={{ color: status.color }}>
+              <span className={styles.statusText}>{status.text}</span>
+            </div>
+          </div>
+          
+          <div className={styles.statsGrid}>
+            <div className={styles.statCard} itemScope itemType="https://schema.org/QuantitativeValue">
+              <div className={styles.statHeader}>
+                <div className={styles.statLabel}>Word Count</div>
+              </div>
+              <div className={`${styles.statValue} ${isUnderLimit ? styles.underLimit : ''} ${isOverLimit ? styles.overLimit : ''}`} itemProp="value">
+                {stats.words.toLocaleString()}
+                <div className={styles.statSubtext}>
+                  {isWithinRange ? 'Ideal range: 300-800' : isUnderLimit ? 'Below minimum: 300' : 'Above maximum: 800'}
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.statCard} itemScope itemType="https://schema.org/QuantitativeValue">
+              <div className={styles.statHeader}>
+                <div className={styles.statLabel}>Characters</div>
+              </div>
+              <div className={styles.statValue} itemProp="value">
+                {stats.charactersWithSpaces.toLocaleString()}
+                <div className={styles.statSubtext}>including spaces</div>
+              </div>
+            </div>
+
+            <div className={styles.statCard} itemScope itemType="https://schema.org/QuantitativeValue">
+              <div className={styles.statHeader}>
+                <div className={styles.statLabel}>Characters</div>
+              </div>
+              <div className={styles.statValue} itemProp="value">
+                {stats.charactersWithoutSpaces.toLocaleString()}
+                <div className={styles.statSubtext}>excluding spaces</div>
+              </div>
+            </div>
+
+            <div className={styles.statCard} itemScope itemType="https://schema.org/QuantitativeValue">
+              <div className={styles.statHeader}>
+                <div className={styles.statLabel}>Lines</div>
+              </div>
+              <div className={styles.statValue} itemProp="value">
+                {stats.lines}
+                <div className={styles.statSubtext}>non-empty lines</div>
+              </div>
+            </div>
+
+            <div className={styles.statCard} itemScope itemType="https://schema.org/QuantitativeValue">
+              <div className={styles.statHeader}>
+                <div className={styles.statLabel}>Paragraphs</div>
+              </div>
+              <div className={styles.statValue} itemProp="value">
+                {stats.paragraphs}
+                <div className={styles.statSubtext}>content sections</div>
+              </div>
+            </div>
+
+            <div className={styles.statCard} itemScope itemType="https://schema.org/QuantitativeValue">
+              <div className={styles.statHeader}>
+                <div className={styles.statLabel}>Estimated Pages</div>
+              </div>
+              <div className={styles.statValue} itemProp="value">
+                {stats.estimatedPages}
+                <div className={styles.statSubtext}>based on 475 words/page</div>
               </div>
             </div>
           </div>
 
-          {/* Stats Display Section */}
-          <div className={styles.statsSection}>
-            <div className={styles.statsHeader}>
-              <h2>Resume Analysis Results</h2>
-              <div className={styles.statusIndicator} style={{ color: status.color }}>
-                <span className={styles.statusText}>{status.text}</span>
+          {/* Range Indicator */}
+          <div className={styles.rangeSection}>
+            <div className={styles.rangeHeader}>
+              <h3>Word Count Range Analysis</h3>
+              <div className={styles.currentPosition}>
+                Current: <strong>{stats.words} words</strong>
               </div>
             </div>
             
-            <div className={styles.statsGrid}>
-              <div className={styles.statCard}>
-                <div className={styles.statHeader}>
-                  <div className={styles.statLabel}>Word Count</div>
-                </div>
-                <div className={`${styles.statValue} ${isUnderLimit ? styles.underLimit : ''} ${isOverLimit ? styles.overLimit : ''}`}>
-                  {stats.words.toLocaleString()}
-                  <div className={styles.statSubtext}>
-                    {isWithinRange ? 'Ideal range: 300-800' : isUnderLimit ? 'Below minimum: 300' : 'Above maximum: 800'}
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.statCard}>
-                <div className={styles.statHeader}>
-                  <div className={styles.statLabel}>Characters</div>
-                </div>
-                <div className={styles.statValue}>
-                  {stats.charactersWithSpaces.toLocaleString()}
-                  <div className={styles.statSubtext}>including spaces</div>
-                </div>
-              </div>
-
-              <div className={styles.statCard}>
-                <div className={styles.statHeader}>
-                  <div className={styles.statLabel}>Characters</div>
-                </div>
-                <div className={styles.statValue}>
-                  {stats.charactersWithoutSpaces.toLocaleString()}
-                  <div className={styles.statSubtext}>excluding spaces</div>
-                </div>
-              </div>
-
-              <div className={styles.statCard}>
-                <div className={styles.statHeader}>
-                  <div className={styles.statLabel}>Lines</div>
-                </div>
-                <div className={styles.statValue}>
-                  {stats.lines}
-                  <div className={styles.statSubtext}>non-empty lines</div>
-                </div>
-              </div>
-
-              <div className={styles.statCard}>
-                <div className={styles.statHeader}>
-                  <div className={styles.statLabel}>Paragraphs</div>
-                </div>
-                <div className={styles.statValue}>
-                  {stats.paragraphs}
-                  <div className={styles.statSubtext}>content sections</div>
-                </div>
-              </div>
-
-              <div className={styles.statCard}>
-                <div className={styles.statHeader}>
-                  <div className={styles.statLabel}>Estimated Pages</div>
-                </div>
-                <div className={styles.statValue}>
-                  {stats.estimatedPages}
-                  <div className={styles.statSubtext}>based on 475 words/page</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Range Indicator */}
-            <div className={styles.rangeSection}>
-              <div className={styles.rangeHeader}>
-                <h3>Word Count Range Analysis</h3>
-                <div className={styles.currentPosition}>
-                  Current: <strong>{stats.words} words</strong>
-                </div>
+            <div className={styles.rangeIndicator}>
+              <div className={styles.rangeLabels}>
+                <span className={`${styles.rangeLabel} ${isUnderLimit ? styles.activeWarning : ''}`}>
+                  Too Short ({stats.words < 300 ? '←' : ''})
+                </span>
+                <span className={`${styles.rangeLabel} ${isWithinRange ? styles.activeSuccess : ''}`}>
+                  Ideal Range
+                </span>
+                <span className={`${styles.rangeLabel} ${isOverLimit ? styles.activeWarning : ''}`}>
+                  Too Long ({stats.words > 800 ? '→' : ''})
+                </span>
               </div>
               
-              <div className={styles.rangeIndicator}>
-                <div className={styles.rangeLabels}>
-                  <span className={`${styles.rangeLabel} ${isUnderLimit ? styles.activeWarning : ''}`}>
-                    Too Short ({stats.words < 300 ? '←' : ''})
-                  </span>
-                  <span className={`${styles.rangeLabel} ${isWithinRange ? styles.activeSuccess : ''}`}>
-                    Ideal Range
-                  </span>
-                  <span className={`${styles.rangeLabel} ${isOverLimit ? styles.activeWarning : ''}`}>
-                    Too Long ({stats.words > 800 ? '→' : ''})
-                  </span>
-                </div>
-                
-                <div className={styles.rangeBar}>
-                  <div 
-                    className={`${styles.rangeProgress} ${isWithinRange ? styles.inRangeBar : isUnderLimit ? styles.underBar : styles.overBar}`}
-                    style={{ width: `${Math.min(Math.max(stats.words / 1000 * 100, 2), 100)}%` }}
-                  />
-                  <div className={styles.rangeMarkers}>
-                    <div className={styles.rangeMarker} style={{ left: '0%' }}>0</div>
-                    <div className={styles.rangeMarker} style={{ left: '30%' }}>300</div>
-                    <div className={styles.rangeMarker} style={{ left: '80%' }}>800</div>
-                    <div className={styles.rangeMarker} style={{ left: '100%' }}>1000</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Options Section */}
-            <div className={styles.optionsSection}>
-              <h3>Counting Options</h3>
-              <div className={styles.optionsGrid}>
-                <label className={styles.option}>
-                  <input
-                    type="checkbox"
-                    checked={excludeBullets}
-                    onChange={(e) => setExcludeBullets(e.target.checked)}
-                  />
-                  <div className={styles.optionContent}>
-                    <div className={styles.optionTitle}>Exclude bullet points</div>
-                    <div className={styles.optionDescription}>Ignore lines starting with •, -, or *</div>
-                  </div>
-                </label>
-                
-                <label className={styles.option}>
-                  <input
-                    type="checkbox"
-                    checked={countOnlyBody}
-                    onChange={(e) => setCountOnlyBody(e.target.checked)}
-                  />
-                  <div className={styles.optionContent}>
-                    <div className={styles.optionTitle}>Count only body text</div>
-                    <div className={styles.optionDescription}>Skip first 2 lines (header/contact info)</div>
-                  </div>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          {/* Length Guidelines Section */}
-          <section className={styles.guidelinesSection}>
-            <h2 className={styles.sectionTitle}>Professional Resume Length Guidelines</h2>
-            <p className={styles.sectionSubtitle}>
-              Industry standards for different career levels (based on ATS optimization research)
-            </p>
-            
-            <div className={styles.guidelinesGrid}>
-              {LENGTH_GUIDELINES.map((guideline, index) => (
-                <div key={index} className={styles.guidelineCard}>
-                  <div className={styles.guidelineHeader}>
-                    <div className={styles.guidelineLevel}>{guideline.level}</div>
-                    <div className={styles.guidelineWords}>{guideline.words}</div>
-                  </div>
-                  <div className={styles.guidelineBody}>
-                    <div className={styles.guidelinePages}>
-                      <span className={styles.guidelineLabel}>Pages:</span>
-                      <span className={styles.guidelineValue}>{guideline.pages}</span>
-                    </div>
-                    <div className={styles.guidelineFocus}>
-                      <span className={styles.guidelineLabel}>Focus on:</span>
-                      <span className={styles.guidelineValue}>{guideline.focus}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Tips Section */}
-          <section className={styles.tipsSection}>
-            <h2 className={styles.sectionTitle}>Professional Resume Writing Tips</h2>
-            <div className={styles.tipsGrid}>
-              {RESUME_TIPS.map((tip, index) => (
-                <div key={index} className={styles.tipCard}>
-                  <div className={styles.tipNumber}>{String(index + 1).padStart(2, '0')}</div>
-                  <div className={styles.tipContent}>{tip}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* FAQ Section */}
-          <section className={styles.faqSection}>
-            <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-            <div className={styles.faqList}>
-              {FAQS.map((faq, index) => (
+              <div className={styles.rangeBar}>
                 <div 
-                  key={index} 
-                  className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                >
-                  <div className={styles.faqQuestion}>
-                    <h3>{faq.question}</h3>
-                    <span className={styles.faqToggle}>{activeFaq === index ? '−' : '+'}</span>
-                  </div>
-                  {activeFaq === index && (
-                    <div className={styles.faqAnswer}>
-                      <p>{faq.answer}</p>
-                    </div>
-                  )}
+                  className={`${styles.rangeProgress} ${isWithinRange ? styles.inRangeBar : isUnderLimit ? styles.underBar : styles.overBar}`}
+                  style={{ width: `${Math.min(Math.max(stats.words / 1000 * 100, 2), 100)}%` }}
+                />
+                <div className={styles.rangeMarkers}>
+                  <div className={styles.rangeMarker} style={{ left: '0%' }}>0</div>
+                  <div className={styles.rangeMarker} style={{ left: '30%' }}>300</div>
+                  <div className={styles.rangeMarker} style={{ left: '80%' }}>800</div>
+                  <div className={styles.rangeMarker} style={{ left: '100%' }}>1000</div>
                 </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Benefits Section */}
-          <section className={styles.benefitsSection}>
-            <h2 className={styles.sectionTitle}>Why Optimize Resume Length?</h2>
-            <div className={styles.benefitsGrid}>
-              <div className={styles.benefitCard}>
-                <h3 className={styles.benefitTitle}>ATS Friendly</h3>
-                <p className={styles.benefitDescription}>
-                  Applicant Tracking Systems prefer concise, well-structured resumes. Optimal length improves parsing accuracy.
-                </p>
-              </div>
-              
-              <div className={styles.benefitCard}>
-                <h3 className={styles.benefitTitle}>Recruiter Attention</h3>
-                <p className={styles.benefitDescription}>
-                  Recruiters spend 6-7 seconds per resume. The right length ensures key information gets noticed quickly.
-                </p>
-              </div>
-              
-              <div className={styles.benefitCard}>
-                <h3 className={styles.benefitTitle}>Professional Standards</h3>
-                <p className={styles.benefitDescription}>
-                  Following industry length standards shows professionalism and respect for the hiring process.
-                </p>
               </div>
             </div>
-          </section>
-        </main>
+          </div>
 
-      </div>
-    </>
+          {/* Options Section */}
+          <div className={styles.optionsSection}>
+            <h3>Counting Options</h3>
+            <div className={styles.optionsGrid}>
+              <label className={styles.option}>
+                <input
+                  type="checkbox"
+                  checked={excludeBullets}
+                  onChange={(e) => setExcludeBullets(e.target.checked)}
+                  aria-label="Exclude bullet points from word count"
+                />
+                <div className={styles.optionContent}>
+                  <div className={styles.optionTitle}>Exclude bullet points</div>
+                  <div className={styles.optionDescription}>Ignore lines starting with •, -, or *</div>
+                </div>
+              </label>
+              
+              <label className={styles.option}>
+                <input
+                  type="checkbox"
+                  checked={countOnlyBody}
+                  onChange={(e) => setCountOnlyBody(e.target.checked)}
+                  aria-label="Count only body text, skip first 2 lines"
+                />
+                <div className={styles.optionContent}>
+                  <div className={styles.optionTitle}>Count only body text</div>
+                  <div className={styles.optionDescription}>Skip first 2 lines (header/contact info)</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        {/* Length Guidelines Section */}
+        <section className={styles.guidelinesSection} aria-labelledby="guidelines-title">
+          <h2 className={styles.sectionTitle} id="guidelines-title">Professional Resume Length Guidelines</h2>
+          <p className={styles.sectionSubtitle}>
+            Industry standards for different career levels (based on ATS optimization research)
+          </p>
+          
+          <div className={styles.guidelinesGrid}>
+            {LENGTH_GUIDELINES.map((guideline, index) => (
+              <div key={index} className={styles.guidelineCard} itemScope itemType="https://schema.org/ListItem">
+                <div className={styles.guidelineHeader}>
+                  <div className={styles.guidelineLevel} itemProp="name">{guideline.level}</div>
+                  <div className={styles.guidelineWords}>{guideline.words}</div>
+                </div>
+                <div className={styles.guidelineBody}>
+                  <div className={styles.guidelinePages}>
+                    <span className={styles.guidelineLabel}>Pages:</span>
+                    <span className={styles.guidelineValue}>{guideline.pages}</span>
+                  </div>
+                  <div className={styles.guidelineFocus}>
+                    <span className={styles.guidelineLabel}>Focus on:</span>
+                    <span className={styles.guidelineValue}>{guideline.focus}</span>
+                  </div>
+                </div>
+                <meta itemProp="position" content={index + 1} />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Tips Section */}
+        <section className={styles.tipsSection} aria-labelledby="tips-title">
+          <h2 className={styles.sectionTitle} id="tips-title">Professional Resume Writing Tips</h2>
+          <div className={styles.tipsGrid}>
+            {RESUME_TIPS.map((tip, index) => (
+              <div key={index} className={styles.tipCard}>
+                <div className={styles.tipNumber}>{String(index + 1).padStart(2, '0')}</div>
+                <div className={styles.tipContent}>{tip}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className={styles.faqSection} aria-labelledby="faq-title">
+          <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+          <div className={styles.faqList} itemScope itemType="https://schema.org/FAQPage">
+            {FAQS.map((faq, index) => (
+              <div 
+                key={index} 
+                className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
+                itemScope 
+                itemProp="mainEntity" 
+                itemType="https://schema.org/Question"
+                onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                onKeyDown={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
+                tabIndex={0}
+                role="button"
+                aria-expanded={activeFaq === index}
+                aria-controls={`faq-answer-${index}`}
+              >
+                <div className={styles.faqQuestion}>
+                  <h3 itemProp="name">{faq.question}</h3>
+                  <span className={styles.faqToggle} aria-hidden="true">
+                    {activeFaq === index ? '−' : '+'}
+                  </span>
+                </div>
+                {activeFaq === index && (
+                  <div 
+                    className={styles.faqAnswer} 
+                    id={`faq-answer-${index}`}
+                    itemScope 
+                    itemProp="acceptedAnswer" 
+                    itemType="https://schema.org/Answer"
+                  >
+                    <p itemProp="text">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className={styles.benefitsSection} aria-labelledby="benefits-title">
+          <h2 className={styles.sectionTitle} id="benefits-title">Why Optimize Resume Length?</h2>
+          <div className={styles.benefitsGrid}>
+            <div className={styles.benefitCard}>
+              <h3 className={styles.benefitTitle}>ATS Friendly</h3>
+              <p className={styles.benefitDescription}>
+                Applicant Tracking Systems prefer concise, well-structured resumes. Optimal length improves parsing accuracy.
+              </p>
+            </div>
+            
+            <div className={styles.benefitCard}>
+              <h3 className={styles.benefitTitle}>Recruiter Attention</h3>
+              <p className={styles.benefitDescription}>
+                Recruiters spend 6-7 seconds per resume. The right length ensures key information gets noticed quickly.
+              </p>
+            </div>
+            
+            <div className={styles.benefitCard}>
+              <h3 className={styles.benefitTitle}>Professional Standards</h3>
+              <p className={styles.benefitDescription}>
+                Following industry length standards shows professionalism and respect for the hiring process.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className={styles.ctaSection}>
+          <div className={styles.ctaCard}>
+            <h2>Ready to Optimize Your Resume?</h2>
+            <p>Use our free resume builder to create ATS-optimized resumes with perfect length and formatting.</p>
+            <a href="https://www.professionalresumefree.com/resume-templates" className={`${styles.ctaButton} ${styles.primaryButton}`}>
+              Create Professional Resume
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>Professional Resume Free</h3>
+            <p className={styles.footerDescription}>
+              Free resume building tools trusted by professionals worldwide. All tools work entirely in your browser - no data stored.
+            </p>
+          </div>
+          
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>More Free Tools</h3>
+            <ul className={styles.featureList}>
+              <li><a href="https://www.professionalresumefree.com/free-resume-builder">Free Resume Builder</a></li>
+              <li><a href="https://www.professionalresumefree.com/resume-templates">ATS Resume Templates</a></li>
+              <li><a href="https://www.professionalresumefree.com/cover-letter-builder">Cover Letter Builder</a></li>
+              <li><a href="https://www.professionalresumefree.com/resume-checker">Resume ATS Checker</a></li>
+            </ul>
+          </div>
+          
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>Usage Stats</h3>
+            <div className={styles.statsList}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>10K+</span>
+                <span className={styles.statLabel}>Monthly Users</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>4.8/5</span>
+                <span className={styles.statLabel}>Average Rating</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className={styles.copyright}>
+          <p>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+          <p className={styles.privacyNote}>All tools work entirely in your browser. No data is stored on our servers.</p>
+        </div>
+      </footer>
+    </div>
   );
 };
 
 // SSG with ISR
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
   return {
     props: {
-      lastUpdated: new Date().toISOString(),
-      buildYear: CURRENT_YEAR,
+      seoData: {
+        currentDate,
+        lastModifiedDate
+      },
+      buildTimestamp
     },
     // Revalidate every 2 hours
-    revalidate: 7200,
+    revalidate: 3600,
   };
 }
 

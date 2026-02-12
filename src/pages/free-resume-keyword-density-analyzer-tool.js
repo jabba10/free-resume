@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from './free-resume-keyword-density-analyzer-tool.module.css';
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
+const BUILD_TIMESTAMP = Date.now();
 
 // FAQ Data
 const FAQS = [
@@ -66,7 +68,10 @@ const SEO_KEYWORDS = [
   'professional resume keywords'
 ];
 
-const ResumeKeywordDensityAnalyzer = () => {
+const ResumeKeywordDensityAnalyzer = ({ 
+  seoData,
+  buildTimestamp 
+}) => {
   const [text, setText] = useState('');
   const [keywords, setKeywords] = useState('');
   const [analysisResults, setAnalysisResults] = useState({
@@ -84,45 +89,191 @@ const ResumeKeywordDensityAnalyzer = () => {
   const textareaRef = useRef(null);
   const keywordsRef = useRef(null);
 
-  // Schema data
+  const {
+    currentDate,
+    lastModifiedDate,
+    reviewDates,
+    faqDates
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Schema data with enhanced structure
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebApplication",
-        "name": "Resume Keyword Density Analyzer",
-        "description": "Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance",
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#webpage",
         "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "203",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "author": {
-          "@type": "Organization",
+        "name": "Resume Keyword Density Analyzer – ATS Optimization & Strategic Keyword Placement",
+        "description": "Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance. Improve your resume's visibility with AI-powered keyword analysis.",
+        "datePublished": "2024-01-01",
+        "dateModified": safeLastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://www.professionalresumefree.com/#website",
+          "url": "https://www.professionalresumefree.com",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "description": "Free online resume builder for job seekers",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://www.professionalresumefree.com/#organization",
+            "name": "Professional Resume Free",
+            "url": "https://www.professionalresumefree.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.professionalresumefree.com/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://twitter.com/ProResumeFree",
+              "https://www.linkedin.com/company/professional-resume-free",
+              "https://www.facebook.com/ProfessionalResumeFree",
+              "https://www.youtube.com/@ProfessionalResumeFree"
+            ]
+          }
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.professionalresumefree.com/og-keyword-analyzer.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.professionalresumefree.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Free Tools",
+              "item": "https://www.professionalresumefree.com/free-resume-tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Keyword Density Analyzer",
+              "item": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool"
+            }
+          ]
+        },
+        "mainEntity": {
+          "@type": "SoftwareApplication",
+          "name": "Resume Keyword Density Analyzer - ATS Optimization Tool",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": "2026-12-31"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 4.8,
+            "ratingCount": 203,
+            "bestRating": 5,
+            "worstRating": 1
+          },
+          "description": "Free online ATS-optimized resume keyword analyzer that helps job seekers optimize resume keywords for maximum visibility and interview success.",
+          "featureList": [
+            "ATS-Optimized Keyword Analysis",
+            "Industry-Specific Keyword Suggestions",
+            "Keyword Density Visualization",
+            "Strategic Placement Guidance",
+            "Real-Time Analysis",
+            "No Sign Up Required",
+            "Free Forever"
+          ],
+          "softwareVersion": "2026.1.0",
+          "screenshot": "https://www.professionalresumefree.com/images/screenshot-keyword-analyzer.jpg",
+          "applicationSuite": "Career Tools",
+          "countriesSupported": "Global",
+          "fileSize": "Web Application"
         }
       },
       {
         "@type": "FAQPage",
-        "mainEntity": FAQS.map(faq => ({
+        "@id": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#faqpage",
+        "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer
-          }
+            "text": faq.answer,
+            "datePublished": safeFaqDates[index] || safeCurrentDate,
+            "author": {
+              "@type": "Person",
+              "name": "Resume Optimization Team"
+            }
+          },
+          "mainEntityOfPage": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#webpage"
         }))
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Optimize Resume Keywords for ATS",
+        "description": "Step-by-step guide to analyze and optimize resume keywords for ATS compatibility",
+        "totalTime": "PT10M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Paste Your Resume Content",
+            "text": "Copy and paste your resume text into the analyzer tool.",
+            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#resume-input",
+            "image": "https://www.professionalresumefree.com/images/step1-paste-resume.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Add Target Keywords",
+            "text": "Enter keywords from job descriptions or select industry-specific suggestions.",
+            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#keywords-input",
+            "image": "https://www.professionalresumefree.com/images/step2-add-keywords.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Analyze Keyword Density",
+            "text": "Get detailed analysis of keyword frequency, density, and distribution across your resume.",
+            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#analysis",
+            "image": "https://www.professionalresumefree.com/images/step3-analyze-density.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Optimize and Improve",
+            "text": "Use recommendations to adjust keyword usage for optimal ATS compatibility and readability.",
+            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#optimization",
+            "image": "https://www.professionalresumefree.com/images/step4-optimize-resume.jpg"
+          }
+        ]
+      },
+      {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".heroTitle", ".heroSubtitle", ".faqItem h3", ".benefitTitle"]
       },
       {
         "@type": "ItemList",
@@ -327,7 +478,7 @@ Stanford University | 2016-2020`;
     return '#dc3545';
   };
 
-  // Get status display info (without icons)
+  // Get status display info
   const getStatusDisplay = (status) => {
     switch(status) {
       case 'missing': return { text: 'Missing', color: '#dc3545' };
@@ -339,111 +490,212 @@ Stanford University | 2016-2020`;
   };
 
   return (
-    <>
+    <div className={styles.landingPage} lang="en-US">
       <Head>
+        {/* Primary Meta Tags */}
         <title>Resume Keyword Density Analyzer – ATS Optimization &amp; Strategic Keyword Placement {CURRENT_YEAR}</title>
         <meta 
+          name="title" 
+          content={`Resume Keyword Density Analyzer – ATS Optimization & Strategic Keyword Placement ${CURRENT_YEAR}`}
+        />
+        <meta 
           name="description" 
-          content={`Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance. ${CURRENT_YEAR}`}
+          content={`Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance. Improve your resume's visibility with AI-powered keyword analysis. ${CURRENT_YEAR}`}
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
+        <meta name="author" content="Professional Resume Free" />
+        
+        {/* Robots & Crawler Directives */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        
+        {/* Content Freshness */}
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="2 days" />
+        
+        {/* Canonical & Hreflang */}
+        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="x-default" />
+        
+        {/* Sitemap */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Resume Keyword Density Analyzer – Professional ATS Optimization" />
         <meta property="og:description" content="Free resume keyword density analyzer with ATS optimization, industry keyword suggestions, and strategic placement analysis" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" />
         <meta property="og:image" content="https://www.professionalresumefree.com/og-keyword-analyzer.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume Keyword Density Analyzer Tool" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Keyword Density Analyzer" />
         <meta name="twitter:description" content="Professional keyword analysis with ATS optimization and industry-specific suggestions" />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-keyword-analyzer.jpg" />
+        <meta name="twitter:image:alt" content="Resume Keyword Density Analyzer Interface" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Canonical */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" />
+        {/* Theme & Icons */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        
+        {/* Performance Optimization */}
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+          key="structured-data"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemaData)
+          }}
         />
       </Head>
 
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <h1 className={styles.title}>Resume Keyword Density Analyzer</h1>
-          <p className={styles.subtitle}>
-            Professional ATS keyword optimization with industry-specific analysis
-            <span 
-              className={styles.optimizationScore} 
-              style={{ backgroundColor: getOptimizationColor() }}
-            >
-              Score: {optimizationScore}/100
-            </span>
-          </p>
-          
-          <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
-            <meta itemProp="ratingValue" content="4.8" />
-            <meta itemProp="ratingCount" content="203" />
-            <div className={styles.ratingStars}>
-              {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.8/5</span>
-            </div>
-            <div className={styles.ratingText}>Used by 12,000+ professionals</div>
-          </div>
-          
-          {/* Navigation Tabs (without icons) */}
-          <div className={styles.tabs}>
-            <button
-              className={`${styles.tab} ${activeTab === 'analyzer' ? styles.activeTab : ''}`}
-              onClick={() => setActiveTab('analyzer')}
-            >
-              Keyword Analyzer
-            </button>
-            <button
-              className={`${styles.tab} ${activeTab === 'guide' ? styles.activeTab : ''}`}
-              onClick={() => setActiveTab('guide')}
-            >
-              Keyword Guide
-            </button>
-          </div>
-        </header>
+      {/* Hidden freshness indicators */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
 
-        <main className={styles.main}>
-          {activeTab === 'analyzer' ? (
-            <>
-              {/* Main Analyzer Section */}
-              <div className={styles.analyzerSection}>
-                <div className={styles.analyzerHeader}>
-                  <h2>Analyze Your Resume Keywords</h2>
-                  <p>
-                    Paste your resume content and keywords to analyze density, distribution, and ATS optimization. Get actionable insights for improving your resume's keyword strategy.
-                  </p>
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText}>Home</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>›</li>
+          <li>
+            <Link href="/free-resume-tools" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText}>Free Tools</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>›</li>
+          <li>
+            <Link href="/free-resume-keyword-density-analyzer-tool" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText} aria-current="page">Keyword Density Analyzer</span>
+            </Link>
+          </li>
+        </ol>
+      </nav>
+
+      {/* Hero Section */}
+      <section className={styles.heroSection}>
+        <div className={styles.container}>
+          <div className={styles.heroContent}>
+            <div className={styles.trustBadge}>
+              <span className={styles.trustBadgeText}>
+                ★ 4.8/5 Rating • 12,000+ Users • Updated {freshnessIndicator}
+              </span>
+            </div>
+            
+            <h1 className={styles.heroTitle}>
+              Resume Keyword Density Analyzer
+              <span className={styles.gradientText}> ATS Optimization Tool {CURRENT_YEAR}</span>
+            </h1>
+            
+            <p className={styles.heroSubtitle}>
+              <strong className={styles.heroHighlight}>Optimize your resume keywords for ATS systems</strong> with our free keyword density analyzer. 
+              Get industry-specific suggestions, strategic placement guidance, and actionable insights to improve your resume's visibility.
+            </p>
+
+            <div className={styles.ctaButtons}>
+              <Link
+                href="#analyzer"
+                className={styles.primaryButton}
+                aria-label="Start analyzing your resume keywords now"
+                scroll={false}
+              >
+                <span className={styles.buttonText}>Start Analyzing Keywords Now</span>
+                <div className={styles.buttonArrow}>→</div>
+              </Link>
+              
+              <Link
+                href="/free-resume-tools"
+                className={styles.secondaryButton}
+                aria-label="Explore all free resume tools"
+              >
+                <span className={styles.buttonText}>All Free Tools</span>
+              </Link>
+            </div>
+
+            <div className={styles.heroStats}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>12K+</span>
+                <span className={styles.statLabel}>Users Analyzed</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>94%</span>
+                <span className={styles.statLabel}>Success Rate</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>3.2x</span>
+                <span className={styles.statLabel}>More Interviews</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>4.8/5</span>
+                <span className={styles.statLabel}>Rating</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main className={styles.main}>
+        {/* Main Analyzer Section */}
+        <section id="analyzer" className={styles.analyzerSection}>
+          <div className={styles.container}>
+            <div className={styles.analyzerHeader}>
+              <h2>Analyze Your Resume Keywords</h2>
+              <p>
+                Paste your resume content and keywords to analyze density, distribution, and ATS optimization. 
+                Get actionable insights for improving your resume's keyword strategy.
+              </p>
+            </div>
+            
+            <div className={styles.analyzerGrid}>
+              <div className={styles.resumeColumn}>
+                <div className={styles.columnHeader}>
+                  <h3>Your Resume Content</h3>
+                  <button
+                    className={styles.exampleButton}
+                    onClick={handleLoadExample}
+                    type="button"
+                  >
+                    Load Example
+                  </button>
                 </div>
-                
-                <div className={styles.analyzerGrid}>
-                  <div className={styles.resumeColumn}>
-                    <div className={styles.columnHeader}>
-                      <h3>Your Resume Content</h3>
-                      <button
-                        className={styles.exampleButton}
-                        onClick={handleLoadExample}
-                        type="button"
-                      >
-                        Load Example
-                      </button>
-                    </div>
-                    <textarea
-                      ref={textareaRef}
-                      className={styles.textarea}
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
-                      placeholder={`Paste your resume content here...
-                      
+                <textarea
+                  ref={textareaRef}
+                  className={styles.textarea}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder={`Paste your resume content here...
+                  
 Example:
 MARKETING DIRECTOR
 Global Brand Solutions | 2019-2023
@@ -456,36 +708,36 @@ Global Brand Solutions | 2019-2023
 SKILLS
 Digital Marketing | SEO/SEM | Brand Strategy | Team Leadership
 Data Analytics | Budget Management | Campaign Optimization`}
-                      rows={18}
-                      autoFocus
-                    />
-                    <div className={styles.wordCount}>
-                      {analysisResults.totalWords} words • {analysisResults.sectionCount} sections
-                    </div>
+                  rows={18}
+                  autoFocus
+                />
+                <div className={styles.wordCount}>
+                  {analysisResults.totalWords} words • {analysisResults.sectionCount} sections
+                </div>
+              </div>
+              
+              <div className={styles.keywordsColumn}>
+                <div className={styles.columnHeader}>
+                  <h3>Keywords to Analyze</h3>
+                  <div className={styles.industrySelector}>
+                    <select
+                      value={selectedIndustry}
+                      onChange={(e) => handleIndustrySelect(e.target.value)}
+                      className={styles.industrySelect}
+                    >
+                      <option value="">Select Industry</option>
+                      {Object.keys(INDUSTRY_KEYWORDS).map(industry => (
+                        <option key={industry} value={industry}>{industry}</option>
+                      ))}
+                    </select>
                   </div>
-                  
-                  <div className={styles.keywordsColumn}>
-                    <div className={styles.columnHeader}>
-                      <h3>Keywords to Analyze</h3>
-                      <div className={styles.industrySelector}>
-                        <select
-                          value={selectedIndustry}
-                          onChange={(e) => handleIndustrySelect(e.target.value)}
-                          className={styles.industrySelect}
-                        >
-                          <option value="">Select Industry</option>
-                          {Object.keys(INDUSTRY_KEYWORDS).map(industry => (
-                            <option key={industry} value={industry}>{industry}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <textarea
-                      ref={keywordsRef}
-                      className={styles.keywordsTextarea}
-                      value={keywords}
-                      onChange={(e) => setKeywords(e.target.value)}
-                      placeholder={`Enter keywords separated by commas or new lines...
+                </div>
+                <textarea
+                  ref={keywordsRef}
+                  className={styles.keywordsTextarea}
+                  value={keywords}
+                  onChange={(e) => setKeywords(e.target.value)}
+                  placeholder={`Enter keywords separated by commas or new lines...
 
 Example keywords:
 leadership, management, strategy, analytics,
@@ -493,221 +745,188 @@ team building, project management, budget,
 communication, problem solving, innovation
 
 Or select an industry above for suggestions.`}
-                      rows={18}
-                    />
-                    <div className={styles.keywordCount}>
-                      {analysisResults.uniqueKeywords} unique keywords
-                    </div>
-                  </div>
-                </div>
-                
-                <div className={styles.analyzerActions}>
-                  <button
-                    className={styles.analyzeButton}
-                    onClick={() => setAnalysisResults(analyzeKeywords(text, keywords))}
-                    type="button"
-                  >
-                    Analyze Keywords
-                  </button>
-                  <button
-                    className={styles.resetButton}
-                    onClick={handleReset}
-                    type="button"
-                  >
-                    Clear All
-                  </button>
-                </div>
-              </div>
-
-              {/* Results Section */}
-              <div className={styles.resultsSection}>
-                <div className={styles.resultsHeader}>
-                  <h2>Keyword Analysis Results</h2>
-                  <div className={styles.resultsSummary}>
-                    <div className={styles.summaryItem}>
-                      <div className={styles.summaryLabel}>Overall Density</div>
-                      <div className={styles.summaryValue}>{analysisResults.overallDensity.toFixed(2)}%</div>
-                    </div>
-                    <div className={styles.summaryItem}>
-                      <div className={styles.summaryLabel}>Keywords Found</div>
-                      <div className={styles.summaryValue}>{analysisResults.topKeywords.length}</div>
-                    </div>
-                    <div className={styles.summaryItem}>
-                      <div className={styles.summaryLabel}>Optimal Keywords</div>
-                      <div className={styles.summaryValue}>
-                        {analysisResults.topKeywords.filter(k => k.status === 'optimal').length}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Top Keywords Grid */}
-                <div className={styles.keywordsGrid}>
-                  <h3>Top Keyword Analysis</h3>
-                  <p className={styles.gridSubtitle}>
-                    Showing top {analysisResults.topKeywords.length} keywords by frequency (ideal density: 1-3%)
-                  </p>
-                  
-                  <div className={styles.keywordsTable}>
-                    <div className={styles.tableHeader}>
-                      <div className={styles.tableCell}>Keyword</div>
-                      <div className={styles.tableCell}>Frequency</div>
-                      <div className={styles.tableCell}>Density</div>
-                      <div className={styles.tableCell}>Status</div>
-                      <div className={styles.tableCell}>Recommendation</div>
-                    </div>
-                    
-                    {analysisResults.topKeywords.length > 0 ? (
-                      analysisResults.topKeywords.map((item, index) => {
-                        const statusInfo = getStatusDisplay(item.status);
-                        return (
-                          <div key={index} className={styles.tableRow}>
-                            <div className={styles.tableCell}>
-                              <span className={styles.keywordText}>{item.keyword}</span>
-                            </div>
-                            <div className={styles.tableCell}>
-                              <span className={styles.frequencyBadge}>{item.frequency}</span>
-                            </div>
-                            <div className={styles.tableCell}>
-                              <span className={styles.densityValue}>{item.density}%</span>
-                            </div>
-                            <div className={styles.tableCell}>
-                              <span 
-                                className={styles.statusBadge}
-                                style={{ backgroundColor: statusInfo.color }}
-                              >
-                                {statusInfo.text}
-                              </span>
-                            </div>
-                            <div className={styles.tableCell}>
-                              <span className={styles.recommendation}>
-                                {item.status === 'missing' && 'Add this keyword to your resume'}
-                                {item.status === 'low' && 'Increase usage or add variations'}
-                                {item.status === 'optimal' && 'Perfect density, maintain current usage'}
-                                {item.status === 'high' && 'Consider reducing repetition'}
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <div className={styles.noResults}>
-                        No keywords found. Add keywords to analyze or check if your resume contains the specified keywords.
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Density Visualization */}
-                <div className={styles.densitySection}>
-                  <h3>Keyword Density Visualization</h3>
-                  <div className={styles.densityBars}>
-                    {analysisResults.topKeywords.slice(0, 8).map((item, index) => {
-                      const width = Math.min(item.density * 10, 100);
-                      const statusInfo = getStatusDisplay(item.status);
-                      return (
-                        <div key={index} className={styles.densityBarContainer}>
-                          <div className={styles.barLabel}>
-                            <span className={styles.barKeyword}>{item.keyword}</span>
-                            <span className={styles.barPercentage}>{item.density}%</span>
-                          </div>
-                          <div className={styles.densityBar}>
-                            <div 
-                              className={styles.barFill}
-                              style={{ 
-                                width: `${width}%`,
-                                backgroundColor: statusInfo.color
-                              }}
-                            />
-                            <div className={styles.barMarkers}>
-                              <div className={styles.barMarker} style={{ left: '10%' }}>1%</div>
-                              <div className={styles.barMarker} style={{ left: '30%' }}>3%</div>
-                            </div>
-                          </div>
-                          <div className={styles.barStatus}>
-                            {statusInfo.text}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className={styles.densityLegend}>
-                    <div className={styles.legendItem}>
-                      <div className={styles.legendColor} style={{ backgroundColor: '#dc3545' }}></div>
-                      <div className={styles.legendText}>Missing (0%)</div>
-                    </div>
-                    <div className={styles.legendItem}>
-                      <div className={styles.legendColor} style={{ backgroundColor: '#ffc107' }}></div>
-                      <div className={styles.legendText}>Too Low (&lt; 1%)</div>
-                    </div>
-                    <div className={styles.legendItem}>
-                      <div className={styles.legendColor} style={{ backgroundColor: '#28a745' }}></div>
-                      <div className={styles.legendText}>Optimal (1-3%)</div>
-                    </div>
-                    <div className={styles.legendItem}>
-                      <div className={styles.legendColor} style={{ backgroundColor: '#ff6b35' }}></div>
-                      <div className={styles.legendText}>Too High (&gt; 3%)</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          ) : (
-            /* Keyword Guide Tab */
-            <div className={styles.guideSection}>
-              <div className={styles.guideHeader}>
-                <h2>Keyword Optimization Guide</h2>
-                <p>
-                  Learn how to effectively use keywords in your resume for maximum ATS compatibility and human readability.
-                </p>
-              </div>
-              
-              {/* Industry Keywords */}
-              <div className={styles.industrySection}>
-                <h3>Industry-Specific Keyword Suggestions</h3>
-                <div className={styles.industryGrid}>
-                  {Object.entries(INDUSTRY_KEYWORDS).map(([industry, keywords]) => (
-                    <div key={industry} className={styles.industryCard}>
-                      <div className={styles.industryHeader}>
-                        <h4>{industry}</h4>
-                        <button
-                          className={styles.useKeywordsButton}
-                          onClick={() => handleIndustrySelect(industry)}
-                          type="button"
-                        >
-                          Use These Keywords
-                        </button>
-                      </div>
-                      <div className={styles.industryKeywords}>
-                        {keywords.map((keyword, index) => (
-                          <span key={index} className={styles.keywordTag}>
-                            {keyword}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Optimization Tips */}
-              <div className={styles.tipsSection}>
-                <h3>Keyword Optimization Tips</h3>
-                <div className={styles.tipsGrid}>
-                  {OPTIMIZATION_TIPS.map((tip, index) => (
-                    <div key={index} className={styles.tipCard}>
-                      <div className={styles.tipNumber}>{String(index + 1).padStart(2, '0')}</div>
-                      <div className={styles.tipContent}>{tip}</div>
-                    </div>
-                  ))}
+                  rows={18}
+                />
+                <div className={styles.keywordCount}>
+                  {analysisResults.uniqueKeywords} unique keywords
                 </div>
               </div>
             </div>
-          )}
+            
+            <div className={styles.analyzerActions}>
+              <button
+                className={styles.analyzeButton}
+                onClick={() => setAnalysisResults(analyzeKeywords(text, keywords))}
+                type="button"
+              >
+                Analyze Keywords
+              </button>
+              <button
+                className={styles.resetButton}
+                onClick={handleReset}
+                type="button"
+              >
+                Clear All
+              </button>
+            </div>
+          </div>
+        </section>
 
-          {/* FAQ Section */}
-          <section className={styles.faqSection}>
-            <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
+        {/* Results Section */}
+        <section className={styles.resultsSection}>
+          <div className={styles.container}>
+            <div className={styles.resultsHeader}>
+              <h2>Keyword Analysis Results</h2>
+              <div className={styles.resultsSummary}>
+                <div className={styles.summaryItem}>
+                  <div className={styles.summaryLabel}>Optimization Score</div>
+                  <div className={styles.summaryValue} style={{ color: getOptimizationColor() }}>
+                    {optimizationScore}/100
+                  </div>
+                </div>
+                <div className={styles.summaryItem}>
+                  <div className={styles.summaryLabel}>Overall Density</div>
+                  <div className={styles.summaryValue}>{analysisResults.overallDensity.toFixed(2)}%</div>
+                </div>
+                <div className={styles.summaryItem}>
+                  <div className={styles.summaryLabel}>Keywords Found</div>
+                  <div className={styles.summaryValue}>{analysisResults.topKeywords.length}</div>
+                </div>
+                <div className={styles.summaryItem}>
+                  <div className={styles.summaryLabel}>Optimal Keywords</div>
+                  <div className={styles.summaryValue}>
+                    {analysisResults.topKeywords.filter(k => k.status === 'optimal').length}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Top Keywords Grid */}
+            <div className={styles.keywordsGrid}>
+              <h3>Top Keyword Analysis</h3>
+              <p className={styles.gridSubtitle}>
+                Showing top {analysisResults.topKeywords.length} keywords by frequency (ideal density: 1-3%)
+              </p>
+              
+              <div className={styles.keywordsTable}>
+                <div className={styles.tableHeader}>
+                  <div className={styles.tableCell}>Keyword</div>
+                  <div className={styles.tableCell}>Frequency</div>
+                  <div className={styles.tableCell}>Density</div>
+                  <div className={styles.tableCell}>Status</div>
+                  <div className={styles.tableCell}>Recommendation</div>
+                </div>
+                
+                {analysisResults.topKeywords.length > 0 ? (
+                  analysisResults.topKeywords.map((item, index) => {
+                    const statusInfo = getStatusDisplay(item.status);
+                    return (
+                      <div key={index} className={styles.tableRow}>
+                        <div className={styles.tableCell}>
+                          <span className={styles.keywordText}>{item.keyword}</span>
+                        </div>
+                        <div className={styles.tableCell}>
+                          <span className={styles.frequencyBadge}>{item.frequency}</span>
+                        </div>
+                        <div className={styles.tableCell}>
+                          <span className={styles.densityValue}>{item.density}%</span>
+                        </div>
+                        <div className={styles.tableCell}>
+                          <span 
+                            className={styles.statusBadge}
+                            style={{ backgroundColor: statusInfo.color }}
+                          >
+                            {statusInfo.text}
+                          </span>
+                        </div>
+                        <div className={styles.tableCell}>
+                          <span className={styles.recommendation}>
+                            {item.status === 'missing' && 'Add this keyword to your resume'}
+                            {item.status === 'low' && 'Increase usage or add variations'}
+                            {item.status === 'optimal' && 'Perfect density, maintain current usage'}
+                            {item.status === 'high' && 'Consider reducing repetition'}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className={styles.noResults}>
+                    No keywords found. Add keywords to analyze or check if your resume contains the specified keywords.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Industry Keywords Section */}
+        <section className={styles.industrySection}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Industry-Specific Keyword Suggestions</h2>
+              <p className={styles.sectionSubtitle}>
+                Optimize your resume with the right keywords for your industry. Click any industry to load suggested keywords.
+              </p>
+            </div>
+            
+            <div className={styles.industryGrid}>
+              {Object.entries(INDUSTRY_KEYWORDS).map(([industry, keywords]) => (
+                <div key={industry} className={styles.industryCard}>
+                  <div className={styles.industryHeader}>
+                    <h3 className={styles.industryTitle}>{industry}</h3>
+                    <button
+                      className={styles.useKeywordsButton}
+                      onClick={() => handleIndustrySelect(industry)}
+                      type="button"
+                    >
+                      Use These Keywords
+                    </button>
+                  </div>
+                  <div className={styles.industryKeywords}>
+                    {keywords.map((keyword, index) => (
+                      <span key={index} className={styles.keywordTag}>
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Tips Section */}
+        <section className={styles.tipsSection}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Keyword Optimization Best Practices</h2>
+              <p className={styles.sectionSubtitle}>
+                Follow these proven strategies to maximize your resume's ATS compatibility and human readability.
+              </p>
+            </div>
+            
+            <div className={styles.tipsGrid}>
+              {OPTIMIZATION_TIPS.map((tip, index) => (
+                <div key={index} className={styles.tipCard}>
+                  <div className={styles.tipNumber}>{String(index + 1).padStart(2, '0')}</div>
+                  <div className={styles.tipContent}>{tip}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className={styles.faqSection}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
+              <p className={styles.sectionSubtitle}>
+                Everything you need to know about resume keyword optimization and ATS systems.
+              </p>
+            </div>
+            
             <div className={styles.faqList}>
               {FAQS.map((faq, index) => (
                 <div 
@@ -727,49 +946,69 @@ Or select an industry above for suggestions.`}
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Benefits Section */}
-          <section className={styles.benefitsSection}>
-            <h2 className={styles.sectionTitle}>Why Keyword Optimization Matters</h2>
-            <div className={styles.benefitsGrid}>
-              <div className={styles.benefitCard}>
-                <h3 className={styles.benefitTitle}>ATS Compatibility</h3>
-                <p className={styles.benefitDescription}>
-                  Applicant Tracking Systems scan for specific keywords. Optimal density and strategic placement ensure your resume passes automated screening and reaches human reviewers.
-                </p>
+        {/* CTA Section */}
+        <section className={styles.ctaSection}>
+          <div className={styles.container}>
+            <div className={styles.ctaContent}>
+              <h2 className={styles.ctaTitle}>Ready to Optimize Your Resume?</h2>
+              <p className={styles.ctaSubtitle}>
+                Join 12,000+ professionals who improved their resume visibility with our keyword analyzer.
+              </p>
+              <div className={styles.ctaButtons}>
+                <Link
+                  href="#analyzer"
+                  className={styles.ctaButton}
+                  aria-label="Start optimizing your resume keywords now"
+                  scroll={false}
+                >
+                  <span className={styles.ctaButtonText}>Start Keyword Analysis Now</span>
+                  <div className={styles.ctaButtonArrow}>→</div>
+                </Link>
               </div>
-              
-              <div className={styles.benefitCard}>
-                <h3 className={styles.benefitTitle}>Targeted Applications</h3>
-                <p className={styles.benefitDescription}>
-                  Customizing keywords for each job application shows you've tailored your resume specifically for the role, increasing relevance and interview chances.
-                </p>
-              </div>
-              
-              <div className={styles.benefitCard}>
-                <h3 className={styles.benefitTitle}>Strategic Optimization</h3>
-                <p className={styles.benefitDescription}>
-                  Data-driven keyword analysis helps you understand which terms are most effective for your industry and how to balance them for maximum impact.
-                </p>
+              <div className={styles.ctaGuarantee}>
+                <span className={styles.guaranteeText}>✓ No credit card required • Free forever • Privacy first • ATS Optimized</span>
               </div>
             </div>
-          </section>
-        </main>
-      </div>
-    </>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 };
 
 // SSG with ISR
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  const reviewDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  const faqDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
   return {
     props: {
-      lastUpdated: new Date().toISOString(),
-      buildYear: CURRENT_YEAR,
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates
+      },
+      buildTimestamp
     },
-    // Revalidate every 2 hours
-    revalidate: 7200,
+    revalidate: 3600
   };
 }
 

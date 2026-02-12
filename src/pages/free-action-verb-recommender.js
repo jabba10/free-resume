@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from './free-action-verb-recommender.module.css';
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
 
-// Action Verb Categories (icons removed)
+// Action Verb Categories
 const VERB_CATEGORIES = [
   {
     id: 'leadership',
@@ -151,10 +152,32 @@ const SEO_KEYWORDS = [
   'resume writing tips',
   'career achievement verbs',
   'resume optimization',
-  'ATS-friendly verbs'
+  'ATS-friendly verbs',
+  'free resume verb finder',
+  'powerful resume words',
+  'strong action verbs',
+  'resume bullet points',
+  'professional vocabulary'
 ];
 
-const ResumeActionVerbRecommender = () => {
+const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
+  const {
+    currentDate,
+    lastModifiedDate,
+    reviewDates,
+    faqDates,
+    breadcrumbData
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedVerbs, setSelectedVerbs] = useState([]);
@@ -253,112 +276,297 @@ const ResumeActionVerbRecommender = () => {
     return samples;
   };
 
-  // Schema data
+  // Schema data with improved structure
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebApplication",
-        "name": "Resume Action Verb Recommender",
-        "description": "Free professional resume action verb generator with category recommendations, weak verb replacements, and industry-specific suggestions",
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/free-action-verb-recommender/#webpage",
         "url": "https://www.professionalresumefree.com/free-action-verb-recommender",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "189",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "author": {
-          "@type": "Organization",
+        "name": "Free Resume Action Verb Recommender & Generator - Professional Power Verbs List",
+        "description": "Completely free resume action verb recommender with 150+ powerful verbs categorized by industry. Find strong action verbs to replace weak words and optimize your resume for ATS systems.",
+        "datePublished": safeCurrentDate,
+        "dateModified": safeLastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://www.professionalresumefree.com/#website",
+          "url": "https://www.professionalresumefree.com",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "description": "Free online resume builder and career tools",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://www.professionalresumefree.com/#organization",
+            "name": "Professional Resume Free",
+            "url": "https://www.professionalresumefree.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.professionalresumefree.com/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://twitter.com/ProResumeFree",
+              "https://www.linkedin.com/company/professional-resume-free",
+              "https://www.facebook.com/ProfessionalResumeFree"
+            ]
+          }
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.professionalresumefree.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Resume Tools",
+              "item": "https://www.professionalresumefree.com/resume-tools"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Action Verb Recommender",
+              "item": "https://www.professionalresumefree.com/free-action-verb-recommender"
+            }
+          ]
+        },
+        "mainEntity": {
+          "@type": "SoftwareApplication",
+          "name": "Resume Action Verb Recommender - Free Professional Tool",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": `${CURRENT_YEAR + 1}-12-31`
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 4.8,
+            "ratingCount": 189,
+            "bestRating": 5,
+            "worstRating": 1
+          },
+          "description": "Free online resume action verb recommender that helps job seekers find powerful verbs to strengthen their resume bullet points and pass ATS screenings.",
+          "featureList": [
+            "150+ Professional Action Verbs",
+            "Industry-Specific Recommendations",
+            "Weak Verb Replacement Guide",
+            "One-Click Copy Function",
+            "Mobile-Friendly Interface",
+            "No Sign Up Required",
+            "Free Forever"
+          ],
+          "softwareVersion": `${CURRENT_YEAR}.1.0`,
+          "countriesSupported": "Global"
         }
       },
       {
         "@type": "FAQPage",
-        "mainEntity": FAQS.map(faq => ({
+        "@id": "https://www.professionalresumefree.com/free-action-verb-recommender/#faqpage",
+        "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer
-          }
+            "text": faq.answer,
+            "datePublished": safeFaqDates[index] || safeCurrentDate,
+            "author": {
+              "@type": "Person",
+              "name": "Resume Writing Expert"
+            }
+          },
+          "mainEntityOfPage": "https://www.professionalresumefree.com/free-action-verb-recommender/#webpage"
         }))
       },
       {
+        "@type": "HowTo",
+        "name": "How to Use Action Verbs Effectively in Your Resume",
+        "description": "Step-by-step guide to using powerful action verbs to strengthen your resume",
+        "totalTime": "PT10M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Identify Weak Verbs",
+            "text": "Scan your resume for weak verbs like 'responsible for', 'helped', 'did', and replace them with powerful alternatives.",
+            "url": "https://www.professionalresumefree.com/free-action-verb-recommender#weak-verbs"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Choose Industry-Specific Verbs",
+            "text": "Select verbs relevant to your field from our categorized lists to make your resume more targeted.",
+            "url": "https://www.professionalresumefree.com/free-action-verb-recommender#industry-verbs"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Create Powerful Bullet Points",
+            "text": "Start each bullet point with an action verb and follow with quantifiable achievements.",
+            "url": "https://www.professionalresumefree.com/free-action-verb-recommender#samples"
+          }
+        ]
+      },
+      {
         "@type": "ItemList",
-        "name": "Action Verb Categories",
+        "name": "Resume Action Verb Categories",
         "itemListElement": VERB_CATEGORIES.map((category, index) => ({
           "@type": "ListItem",
           "position": index + 1,
           "name": category.name,
-          "description": `${category.verbs.length} powerful verbs`
+          "description": `${category.verbs.length} powerful action verbs for ${category.name.toLowerCase()}`
         }))
       }
     ]
   };
 
   return (
-    <>
+    <div className={styles.landingPage} lang="en-US">
       <Head>
-        <title>Resume Action Verb Recommender – Powerful Verbs for Impactful Resumes {CURRENT_YEAR}</title>
-        <meta 
-          name="description" 
-          content={`Free professional resume action verb generator with category recommendations, weak verb replacements, and industry-specific suggestions. ${CURRENT_YEAR}`}
-        />
+        {/* Primary Meta Tags */}
+        <title>Free Resume Action Verb Recommender – 150+ Power Verbs for ATS-Optimized Resumes {CURRENT_YEAR}</title>
+        <meta name="title" content="Free Resume Action Verb Recommender – 150+ Power Verbs for ATS-Optimized Resumes" />
+        <meta name="description" content={`Generate powerful resume action verbs instantly. Our free verb recommender provides 150+ professional verbs categorized by industry, weak verb replacements, and usage examples. Boost your resume's impact for ${CURRENT_YEAR}.`} />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        
+        {/* Content Freshness */}
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="7 days" />
+        
+        {/* Canonical & Internationalization */}
+        <link rel="canonical" href="https://www.professionalresumefree.com/free-action-verb-recommender" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-action-verb-recommender" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-action-verb-recommender" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-action-verb-recommender" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-action-verb-recommender" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-action-verb-recommender" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/free-action-verb-recommender" hreflang="x-default" />
+        
+        {/* Sitemap */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Resume Action Verb Recommender – Powerful Verbs for Impactful Resumes" />
-        <meta property="og:description" content="Free resume action verb generator with category recommendations and industry-specific suggestions" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-action-verb-recommender" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-verb-recommender.jpg" />
+        <meta property="og:title" content="Free Resume Action Verb Recommender – 150+ Power Verbs for ATS-Optimized Resumes" />
+        <meta property="og:description" content="Generate powerful resume action verbs instantly. Categorized by industry with weak verb replacements and usage examples. Completely free." />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-verb-recommender-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume Action Verb Recommender - Free Professional Tool" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/free-action-verb-recommender" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
         
-        {/* Twitter */}
+        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Action Verb Recommender" />
-        <meta name="twitter:description" content="Professional action verb generator with category recommendations and weak verb replacements" />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-verb-recommender.jpg" />
+        <meta name="twitter:title" content="Free Resume Action Verb Recommender - 150+ Power Verbs" />
+        <meta name="twitter:description" content="Generate powerful resume action verbs instantly. Categorized by industry with examples. Completely free." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-verb-recommender-preview.jpg" />
+        <meta name="twitter:image:alt" content="Free Resume Action Verb Generator" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Canonical */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-action-verb-recommender" />
+        {/* App & Browser */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        
+        {/* Performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Structured Data */}
         <script
           type="application/ld+json"
+          key="structured-data"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </Head>
 
+      {/* Hidden Freshness Indicators */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
+
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText}>Home</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>/</li>
+          <li>
+            <Link href="/free-action-verb-recommender" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText}>Action Verb Recommender</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>/</li>
+          <li>
+            <span className={styles.breadcrumbCurrent}>Action Verb Recommender</span>
+          </li>
+        </ol>
+      </nav>
+
+      {/* Main Container */}
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1 className={styles.title}>Resume Action Verb Recommender</h1>
-          <p className={styles.subtitle}>
-            Transform your resume with powerful action verbs that showcase achievements
-            <span className={styles.verbCount}>
-              {VERB_CATEGORIES.reduce((total, cat) => total + cat.verbs.length, 0)}+ Verbs
+          <div className={styles.trustBadge}>
+            <span className={styles.trustBadgeText}>
+              Free Tool • No Sign Up • Professional Grade
             </span>
-          </p>
+          </div>
           
-          <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
-            <meta itemProp="ratingValue" content="4.8" />
-            <meta itemProp="ratingCount" content="189" />
-            <div className={styles.ratingStars}>
-              {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.8/5</span>
+          <h1 className={styles.title}>Resume Action Verb Recommender</h1>
+          
+          <p className={styles.subtitle}>
+            Transform your resume with <strong className={styles.highlight}>150+ powerful action verbs</strong> that showcase achievements and pass ATS systems
+          </p>
+
+          <div className={styles.heroStats}>
+            <div className={styles.statItem}>
+              <span className={styles.statNumber}>150+</span>
+              <span className={styles.statLabel}>Action Verbs</span>
             </div>
-            <div className={styles.ratingText}>Used by 12,000+ professionals</div>
+            <div className={styles.statItem}>
+              <span className={styles.statNumber}>7</span>
+              <span className={styles.statLabel}>Categories</span>
+            </div>
+            <div className={styles.statItem}>
+              <span className={styles.statNumber}>5</span>
+              <span className={styles.statLabel}>Industries</span>
+            </div>
+            <div className={styles.statItem}>
+              <span className={styles.statNumber}>4.8/5</span>
+              <span className={styles.statLabel}>Rating</span>
+            </div>
           </div>
         </header>
 
@@ -383,6 +591,7 @@ const ResumeActionVerbRecommender = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     autoFocus
+                    aria-label="Search action verbs"
                   />
                   {searchQuery && (
                     <button
@@ -425,6 +634,7 @@ const ResumeActionVerbRecommender = () => {
                       className={styles.clearAllButton}
                       onClick={handleClearAll}
                       type="button"
+                      aria-label="Clear all selected verbs"
                     >
                       Clear All
                     </button>
@@ -441,7 +651,7 @@ const ResumeActionVerbRecommender = () => {
                             className={styles.copyButton}
                             onClick={() => copyToClipboard(verb)}
                             type="button"
-                            title="Copy to clipboard"
+                            aria-label={`Copy ${verb} to clipboard`}
                           >
                             {copiedVerb === verb ? 'Copied!' : 'Copy'}
                           </button>
@@ -449,7 +659,7 @@ const ResumeActionVerbRecommender = () => {
                             className={styles.removeButton}
                             onClick={() => handleVerbSelect(verb)}
                             type="button"
-                            title="Remove"
+                            aria-label={`Remove ${verb}`}
                           >
                             ×
                           </button>
@@ -467,8 +677,12 @@ const ResumeActionVerbRecommender = () => {
                   <div className={styles.copyAllSection}>
                     <button
                       className={styles.copyAllButton}
-                      onClick={() => copyToClipboard(selectedVerbs.join(', '))}
+                      onClick={() => {
+                        copyToClipboard(selectedVerbs.join(', '));
+                        setCopiedVerb('all');
+                      }}
                       type="button"
+                      aria-label="Copy all selected verbs to clipboard"
                     >
                       {copiedVerb === 'all' ? 'Copied!' : 'Copy All Verbs'}
                     </button>
@@ -479,9 +693,9 @@ const ResumeActionVerbRecommender = () => {
           </div>
 
           {/* Verbs Grid Section */}
-          <div className={styles.verbsSection}>
+          <section className={styles.verbsSection} aria-labelledby="verbs-title">
             <div className={styles.sectionHeader}>
-              <h2>
+              <h2 id="verbs-title">
                 {selectedCategory === 'all' ? 'All Action Verbs' : 
                  VERB_CATEGORIES.find(c => c.id === selectedCategory)?.name || 'Action Verbs'}
                 <span className={styles.verbsCount}> ({filteredVerbs().length})</span>
@@ -490,6 +704,7 @@ const ResumeActionVerbRecommender = () => {
                 className={styles.examplesToggle}
                 onClick={() => setShowExamples(!showExamples)}
                 type="button"
+                aria-label={showExamples ? 'Hide examples' : 'Show examples'}
               >
                 {showExamples ? 'Hide Examples' : 'Show Examples'}
               </button>
@@ -502,6 +717,10 @@ const ResumeActionVerbRecommender = () => {
                     key={index} 
                     className={`${styles.verbCard} ${selectedVerbs.includes(item.verb) ? styles.selected : ''}`}
                     onClick={() => handleVerbSelect(item.verb)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={(e) => e.key === 'Enter' && handleVerbSelect(item.verb)}
+                    aria-label={`Select ${item.verb} from ${item.category} category`}
                   >
                     <div className={styles.verbHeader}>
                       <div className={styles.verbCategory}>
@@ -539,6 +758,7 @@ const ResumeActionVerbRecommender = () => {
                           copyToClipboard(item.verb);
                         }}
                         type="button"
+                        aria-label={`Copy ${item.verb} to clipboard`}
                       >
                         {copiedVerb === item.verb ? 'Copied!' : 'Copy'}
                       </button>
@@ -549,6 +769,7 @@ const ResumeActionVerbRecommender = () => {
                           setShowExamples(true);
                         }}
                         type="button"
+                        aria-label={`Show example for ${item.verb}`}
                       >
                         Example
                       </button>
@@ -563,14 +784,16 @@ const ResumeActionVerbRecommender = () => {
                 </div>
               </div>
             )}
-          </div>
+          </section>
 
           {/* Weak Verbs Section */}
-          <section className={styles.weakVerbsSection}>
-            <h2 className={styles.sectionTitle}>Replace Weak Verbs</h2>
-            <p className={styles.sectionSubtitle}>
-              Strengthen your resume by replacing common weak verbs with powerful alternatives
-            </p>
+          <section className={styles.weakVerbsSection} aria-labelledby="weak-verbs-title">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle} id="weak-verbs-title">Replace Weak Verbs</h2>
+              <p className={styles.sectionSubtitle}>
+                Strengthen your resume by replacing common weak verbs with powerful alternatives
+              </p>
+            </div>
             
             <div className={styles.weakVerbsGrid}>
               {WEAK_VERBS.map((item, index) => (
@@ -590,11 +813,13 @@ const ResumeActionVerbRecommender = () => {
           </section>
 
           {/* Industry Verbs Section */}
-          <section className={styles.industrySection}>
-            <h2 className={styles.sectionTitle}>Industry-Specific Verbs</h2>
-            <p className={styles.sectionSubtitle}>
-              Tailored verb recommendations for different professional fields
-            </p>
+          <section className={styles.industrySection} aria-labelledby="industry-verbs-title">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle} id="industry-verbs-title">Industry-Specific Verbs</h2>
+              <p className={styles.sectionSubtitle}>
+                Tailored verb recommendations for different professional fields
+              </p>
+            </div>
             
             <div className={styles.industryGrid}>
               {INDUSTRY_VERBS.map((industry, index) => (
@@ -612,6 +837,7 @@ const ResumeActionVerbRecommender = () => {
                           copyToClipboard(verb);
                         }}
                         type="button"
+                        aria-label={`Select ${verb} for ${industry.industry}`}
                       >
                         {verb}
                       </button>
@@ -623,11 +849,13 @@ const ResumeActionVerbRecommender = () => {
           </section>
 
           {/* Sample Bullet Points */}
-          <section className={styles.samplesSection}>
-            <h2 className={styles.sectionTitle}>Sample Bullet Points</h2>
-            <p className={styles.sectionSubtitle}>
-              See how powerful action verbs transform resume bullet points
-            </p>
+          <section className={styles.samplesSection} aria-labelledby="samples-title">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle} id="samples-title">Sample Bullet Points</h2>
+              <p className={styles.sectionSubtitle}>
+                See how powerful action verbs transform resume bullet points
+              </p>
+            </div>
             
             <div className={styles.samplesGrid}>
               {generateSampleBullets().map((bullet, index) => (
@@ -639,6 +867,7 @@ const ResumeActionVerbRecommender = () => {
                       className={styles.copySampleButton}
                       onClick={() => copyToClipboard(bullet)}
                       type="button"
+                      aria-label={`Copy bullet point: ${bullet}`}
                     >
                       {copiedVerb === bullet ? 'Copied!' : 'Copy'}
                     </button>
@@ -649,8 +878,10 @@ const ResumeActionVerbRecommender = () => {
           </section>
 
           {/* Verb Usage Tips */}
-          <section className={styles.tipsSection}>
-            <h2 className={styles.sectionTitle}>Action Verb Usage Tips</h2>
+          <section className={styles.tipsSection} aria-labelledby="tips-title">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle} id="tips-title">Action Verb Usage Tips</h2>
+            </div>
             <div className={styles.tipsGrid}>
               <div className={styles.tipCard}>
                 <h3 className={styles.tipTitle}>Be Specific</h3>
@@ -683,14 +914,22 @@ const ResumeActionVerbRecommender = () => {
           </section>
 
           {/* FAQ Section */}
-          <section className={styles.faqSection}>
-            <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
+          <section className={styles.faqSection} aria-labelledby="faq-title">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+              <p className={styles.sectionSubtitle}>
+                Everything you need to know about using action verbs effectively
+              </p>
+            </div>
             <div className={styles.faqList}>
               {FAQS.map((faq, index) => (
                 <div 
                   key={index} 
                   className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
                 >
                   <div className={styles.faqQuestion}>
                     <h3>{faq.question}</h3>
@@ -707,8 +946,10 @@ const ResumeActionVerbRecommender = () => {
           </section>
 
           {/* Benefits Section */}
-          <section className={styles.benefitsSection}>
-            <h2 className={styles.sectionTitle}>Why Action Verbs Matter</h2>
+          <section className={styles.benefitsSection} aria-labelledby="benefits-title">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle} id="benefits-title">Why Action Verbs Matter</h2>
+            </div>
             <div className={styles.benefitsGrid}>
               <div className={styles.benefitCard}>
                 <h3 className={styles.benefitTitle}>Showcase Achievements</h3>
@@ -732,21 +973,80 @@ const ResumeActionVerbRecommender = () => {
               </div>
             </div>
           </section>
+
+          {/* CTA Section */}
+          <section className={styles.ctaSection} aria-labelledby="cta-title">
+            <div className={styles.ctaContent}>
+              <h2 className={styles.ctaTitle} id="cta-title">Ready to Transform Your Resume?</h2>
+              <p className={styles.ctaSubtitle}>
+                Start using powerful action verbs today and make your resume stand out
+              </p>
+              <div className={styles.ctaButtons}>
+                <button
+                  className={styles.ctaButton}
+                  onClick={handleClearAll}
+                  type="button"
+                  aria-label="Start building your resume with action verbs"
+                >
+                  <span className={styles.ctaButtonText}>Start Building Your Resume</span>
+                </button>
+                <Link href="/resume-templates" className={styles.secondaryButton}>
+                  <span className={styles.secondaryButtonText}>View Resume Templates</span>
+                </Link>
+              </div>
+              <div className={styles.ctaFeatures}>
+                <div className={styles.featureItem}>
+                  <span>✓ 150+ Professional Verbs</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span>✓ Industry-Specific Lists</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span>✓ Weak Verb Replacements</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span>✓ One-Click Copy</span>
+                </div>
+              </div>
+            </div>
+          </section>
         </main>
       </div>
-    </>
+    </div>
   );
 };
 
 // SSG with ISR
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  const reviewDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  const faqDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
   return {
     props: {
-      lastUpdated: new Date().toISOString(),
-      buildYear: CURRENT_YEAR,
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates
+      },
+      buildTimestamp
     },
-    // Revalidate every 2 hours
-    revalidate: 7200,
+    // Revalidate every hour
+    revalidate: 3600
   };
 }
 

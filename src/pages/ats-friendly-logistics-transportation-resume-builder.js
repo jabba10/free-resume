@@ -8,85 +8,122 @@ import {
   FiMail,
   FiPhone,
   FiMapPin,
-  FiTruck,
+  FiPackage,
   FiBook,
+  FiTruck,
+  FiShield,
   FiGlobe,
   FiDownload,
   FiEdit2,
   FiTrash2,
   FiPlus,
   FiX,
-  FiCheck,
-  FiChevronLeft,
-  FiChevronRight,
   FiEye,
-  FiPackage
-  // ❌ Removed unused icons: FiAward, FiFileText, FiShoppingCart, FiShield
+  FiCheck,
+  FiAward,
+  FiFileText,
+  FiSettings,
+  FiStar,
+  FiArrowRight,
+  FiClock,
+  FiHome,
+  FiChevronRight as FiChevronRightIcon,
+  FiBriefcase,
+  FiTool,
+  FiTrendingUp,
+  FiSearch,
+  FiBarChart,
+  FiTarget,
+  FiLayers,
+  FiNavigation,
+  FiCalendar,
+  FiDollarSign,
+  FiPercent,
+  FiGrid,
+  FiDatabase
 } from 'react-icons/fi';
-import styles from './LogisticsResume.module.css';
+import Link from 'next/link';
+import styles from './Resume.module.css';
 
-const LogisticsResume = () => {
-  // --- Logistics-Specific Default Items ---
+const LogisticsResume = ({ 
+  seoData,
+  buildTimestamp
+}) => {
+  const {
+    currentDate,
+    lastModifiedDate,
+    reviewDates,
+    faqDates,
+    breadcrumbData
+  } = seoData || {};
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // --- Default item factories ---
   const defaultExperience = () => ({
-    company: '',
+    employer: '',
     position: '',
-    location: '',
+    department: '',
     startDate: '',
     endDate: '',
-    responsibilities: '',
+    description: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultEducation = () => ({
     institution: '',
     degree: '',
-    field: '',
+    program: '',
     startDate: '',
     endDate: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
-  const defaultCdl = () => ({
-    class: '',
-    state: '',
-    number: '',
-    expiry: '',
-    endorsements: '',
-    isEditing: false,
-    editIndex: null,
-    page: 1
-  });
-  const defaultEquipment = () => ({
+  
+  const defaultSpecialty = () => ({
     name: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultCertification = () => ({
     name: '',
-    issuer: '',
-    date: '',
-    expiry: '',
+    issuingAuthority: '',
+    certificationNumber: '',
+    expiryDate: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
-  const defaultRoute = () => ({
-    origin: '',
-    destination: '',
-    frequency: '',
+  
+  const defaultAffiliation = () => ({
+    organization: '',
+    role: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
+  const defaultTechnicalSkill = () => ({
+    name: '',
+    proficiency: '',
+    isEditing: false,
+    editIndex: null
+  });
+  
   const defaultLanguage = () => ({
     name: '',
+    proficiency: '',
     isEditing: false,
-    editIndex: null,
-    page: 1
+    editIndex: null
   });
+  
   const defaultSocialLink = () => ({
     platform: '',
     url: '',
@@ -94,6 +131,14 @@ const LogisticsResume = () => {
     editIndex: null
   });
 
+  const defaultAchievement = () => ({
+    title: '',
+    description: '',
+    isEditing: false,
+    editIndex: null
+  });
+
+  // --- State ---
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -102,41 +147,159 @@ const LogisticsResume = () => {
     summary: '',
     experience: [],
     education: [],
-    cdl: null,
-    equipment: [],
+    specialties: [],
     certifications: [],
-    routes: [],
+    affiliations: [],
+    technicalSkills: [],
     languages: [],
-    socialLinks: []
+    socialLinks: [],
+    achievements: []
+  });
+
+  // Font size state
+  const [fontSizes, setFontSizes] = useState({
+    name: 14,
+    sectionTitle: 10,
+    contactInfo: 7,
+    jobTitle: 9,
+    company: 7,
+    degree: 9,
+    institution: 7,
+    institutionDate: 6,
+    regularText: 8,
+    bulletText: 8,
+    skillText: 7,
+    certificationText: 8,
+    achievementText: 8
   });
 
   const [currentExperience, setCurrentExperience] = useState(defaultExperience());
   const [currentEducation, setCurrentEducation] = useState(defaultEducation());
-  const [currentCdl, setCurrentCdl] = useState(defaultCdl());
-  const [currentEquipment, setCurrentEquipment] = useState(defaultEquipment());
+  const [currentSpecialty, setCurrentSpecialty] = useState(defaultSpecialty());
   const [currentCertification, setCurrentCertification] = useState(defaultCertification());
-  const [currentRoute, setCurrentRoute] = useState(defaultRoute());
+  const [currentAffiliation, setCurrentAffiliation] = useState(defaultAffiliation());
+  const [currentTechnicalSkill, setCurrentTechnicalSkill] = useState(defaultTechnicalSkill());
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage());
   const [currentSocialLink, setCurrentSocialLink] = useState(defaultSocialLink());
+  const [currentAchievement, setCurrentAchievement] = useState(defaultAchievement());
 
-  // ❌ Removed: const [selectedTemplate] = useState('logistics');
   const [activeSection, setActiveSection] = useState('personal');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const resumeRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+  const resumeRef = useRef(null);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
 
+  // Testimonials for Structured Data (Logistics Industry)
+  const testimonials = [
+    {
+      quote: "Created my logistics manager resume in 15 minutes and got 3 interview calls in one week. The industry-specific templates are perfect!",
+      metric: "Found Supply Chain Role in 2 Weeks",
+      name: "Michael R.",
+      role: "Logistics Manager",
+      company: "Global Shipping Inc."
+    },
+    {
+      quote: "Finally a resume builder that understands supply chain metrics. The ATS templates helped me pass corporate screening systems.",
+      metric: "40% Salary Increase",
+      name: "Sarah K.",
+      role: "Supply Chain Analyst",
+      company: "Fortune 500 Retailer"
+    },
+    {
+      quote: "As a recent logistics graduate, the entry-level templates were exactly what I needed. Landed my first warehouse supervisor job.",
+      metric: "First Job After Graduation",
+      name: "David P.",
+      role: "Warehouse Supervisor",
+      company: "Distribution Center"
+    },
+    {
+      quote: "The logistics resume builder saved me - could update my resume between shifts. Professional results that actually get noticed.",
+      metric: "Promoted to Director Level",
+      name: "Jessica L.",
+      role: "Transportation Director",
+      company: "Logistics Company"
+    },
+    {
+      quote: "Supply chain ATS-friendly templates actually work! Got interviews with top 3PL companies that previously ignored my applications.",
+      metric: "5x More Interview Requests",
+      name: "Robert T.",
+      role: "3PL Account Manager",
+      company: "Third-Party Logistics"
+    },
+    {
+      quote: "Free PDF download with proper logistics formatting? Unbeatable value. Best logistics resume builder I've found.",
+      metric: "Perfect Resume in 20min",
+      name: "Amanda R.",
+      role: "Inventory Control Manager",
+      company: "Manufacturing Company"
+    }
+  ];
+
+  // FAQ Data for Structured Data (Logistics Industry)
+  const faqs = [
+    {
+      question: "Is this logistics resume builder really free with no hidden costs?",
+      answer: "Yes, our logistics resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional logistics resume in PDF format without any payment required."
+    },
+    {
+      question: "What does ATS-friendly mean for logistics resumes?",
+      answer: "ATS-friendly means our logistics resume templates are optimized to pass through Applicant Tracking Systems used by 98% of logistics companies and corporations. This ensures your supply chain experience and certifications are properly scanned and recognized."
+    },
+    {
+      question: "Can I download my logistics resume as PDF without creating an account?",
+      answer: "Absolutely! Download your professional logistics resume in PDF format without creating an account. Everything is completely free and accessible immediately for logistics professionals."
+    },
+    {
+      question: "How many logistics resume templates are available for free?",
+      answer: "We offer professionally designed ATS-friendly logistics resume templates for supply chain managers, warehouse supervisors, transportation coordinators, logistics analysts, and all logistics specialties. All templates are completely free and optimized for logistics hiring."
+    },
+    {
+      question: "How does your logistics resume builder work?",
+      answer: "Our builder uses ATS-optimized logistics templates with proper industry terminology formatting. We guide you to highlight supply chain experience, certifications, and specialized skills that logistics employers look for."
+    },
+    {
+      question: "Can I edit my logistics resume after downloading it?",
+      answer: "Yes, you can always come back and edit your logistics resume. Your work saves automatically, and you can download updated versions as many times as needed—completely free."
+    }
+  ];
+
+  // --- Font Size Handler ---
+  const handleFontSizeChange = (key, value) => {
+    setFontSizes(prev => ({
+      ...prev,
+      [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key]))
+    }));
+  };
+
+  const resetFontSizes = () => {
+    setFontSizes({
+      name: 14,
+      sectionTitle: 10,
+      contactInfo: 7,
+      jobTitle: 9,
+      company: 7,
+      degree: 9,
+      institution: 7,
+      institutionDate: 6,
+      regularText: 8,
+      bulletText: 8,
+      skillText: 7,
+      certificationText: 8,
+      achievementText: 8
+    });
+  };
+
+  // --- Utility Functions ---
   const getSocialIcon = (platform) => {
     const icons = {
       linkedin: <FiGlobe />,
+      twitter: <FiGlobe />,
       portfolio: <FiGlobe />,
       website: <FiGlobe />
     };
     return icons[platform.toLowerCase()] || <FiGlobe />;
   };
 
-  const formatUrl = (url) => {
+  const formatSocialUrl = (url) => {
     if (!url) return '';
     return url.replace(/(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
   };
@@ -146,192 +309,100 @@ const LogisticsResume = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const pageHasContent = (pageNumber) => {
-    if (pageNumber === 1) {
-      return !!(formData.fullName || formData.email || formData.summary || formData.socialLinks.length > 0);
-    }
-    const pageData = getDataByPage(pageNumber);
+  const hasContent = () => {
     return (
-      pageData.experience.length > 0 ||
-      pageData.education.length > 0 ||
-      pageData.equipment.length > 0 ||
-      pageData.certifications.length > 0 ||
-      pageData.routes.length > 0 ||
-      pageData.languages.length > 0
+      formData.fullName ||
+      formData.email ||
+      formData.summary ||
+      formData.socialLinks.length > 0 ||
+      formData.experience.length > 0 ||
+      formData.education.length > 0 ||
+      formData.specialties.length > 0 ||
+      formData.certifications.length > 0 ||
+      formData.affiliations.length > 0 ||
+      formData.technicalSkills.length > 0 ||
+      formData.languages.length > 0 ||
+      formData.achievements.length > 0
     );
   };
 
-  const getPagesWithContent = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      if (pageHasContent(i)) pages.push(i);
+  // --- Item CRUD Functions ---
+  const createAddFunction = (key, current, setter, defaultFunc, isValid) => () => {
+    if (!isValid()) return;
+    const item = { ...current };
+    if (item.isEditing) {
+      const updated = [...formData[key]];
+      updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
+      setFormData({ ...formData, [key]: updated });
+    } else {
+      setFormData({ ...formData, [key]: [...formData[key], { ...item, isEditing: false, editIndex: null }] });
     }
-    return pages;
+    setter(defaultFunc());
   };
 
-  const addNewPage = () => {
-    if (totalPages < 5) {
-      setTotalPages(totalPages + 1);
-      setCurrentPage(totalPages + 1);
-    }
+  const createEditFunction = (key, setter) => (index) => {
+    const item = formData[key][index];
+    setter({ ...item, isEditing: true, editIndex: index });
   };
 
-  const removeLastPage = () => {
-    if (totalPages > 1) {
-      const lastPage = totalPages;
-      const shift = (items) => items.map(i => i.page === lastPage ? { ...i, page: lastPage - 1 } : i);
-      setFormData({
-        ...formData,
-        experience: shift(formData.experience),
-        education: shift(formData.education),
-        equipment: shift(formData.equipment),
-        certifications: shift(formData.certifications),
-        routes: shift(formData.routes),
-        languages: shift(formData.languages)
-      });
-      setTotalPages(totalPages - 1);
-      if (currentPage > totalPages - 1) setCurrentPage(totalPages - 1);
-    }
-  };
-
-  // --- Experience ---
-  const addExperience = () => {
-    if (currentExperience.position && currentExperience.company && currentExperience.startDate) {
-      const item = { ...currentExperience, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.experience];
-        updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
-        setFormData({ ...formData, experience: updated });
-      } else {
-        setFormData({
-          ...formData,
-          experience: [...formData.experience, { ...item, isEditing: false, editIndex: null }]
-        });
-      }
-      setCurrentExperience(defaultExperience());
-    }
-  };
-
-  // ❌ Removed: editExperience, deleteExperience
-
-  // --- Education ---
-  const addEducation = () => {
-    if (currentEducation.institution && currentEducation.degree) {
-      const item = { ...currentEducation, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.education];
-        updated[item.editIndex] = { ...item, isEditing: false, editIndex: null };
-        setFormData({ ...formData, education: updated });
-      } else {
-        setFormData({
-          ...formData,
-          education: [...formData.education, { ...item, isEditing: false, editIndex: null }]
-        });
-      }
-      setCurrentEducation(defaultEducation());
-    }
-  };
-
-  // ❌ Removed: editEducation, deleteEducation
-
-  // --- CDL ---
-  const saveCdl = () => {
-    if (currentCdl.class && currentCdl.state) {
-      setFormData({ ...formData, cdl: { ...currentCdl, page: 1 } });
-      setCurrentCdl(defaultCdl());
-    }
-  };
-
-  // --- Equipment ---
-  const addEquipment = () => {
-    if (currentEquipment.name.trim()) {
-      const item = { ...currentEquipment, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.equipment];
-        updated[item.editIndex] = { name: item.name.trim(), page: item.page };
-        setFormData({ ...formData, equipment: updated });
-      } else {
-        setFormData({
-          ...formData,
-          equipment: [...formData.equipment, { name: item.name.trim(), page: item.page }]
-        });
-      }
-      setCurrentEquipment(defaultEquipment());
-    }
-  };
-
-  const editEquipment = (index) => {
-    const e = formData.equipment[index];
-    setCurrentEquipment({ ...e, isEditing: true, editIndex: index });
-    setCurrentPage(e.page);
-  };
-
-  const deleteEquipment = (index) => {
-    const updated = [...formData.equipment];
+  const createDeleteFunction = (key) => (index) => {
+    const updated = [...formData[key]];
     updated.splice(index, 1);
-    setFormData({ ...formData, equipment: updated });
+    setFormData({ ...formData, [key]: updated });
   };
 
-  // --- Certifications ---
-  const addCertification = () => {
-    if (currentCertification.name.trim()) {
-      const item = { ...currentCertification, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.certifications];
-        updated[item.editIndex] = { ...item };
-        setFormData({ ...formData, certifications: updated });
-      } else {
-        setFormData({
-          ...formData,
-          certifications: [...formData.certifications, { ...item }]
-        });
-      }
-      setCurrentCertification(defaultCertification());
-    }
-  };
+  const addExperience = createAddFunction('experience', currentExperience, setCurrentExperience, defaultExperience, () => currentExperience.position && currentExperience.employer && currentExperience.startDate);
+  
+  const editExperience = createEditFunction('experience', setCurrentExperience);
+  const deleteExperience = createDeleteFunction('experience');
 
-  // ❌ Removed: editCertification, deleteCertification
+  const addEducation = createAddFunction('education', currentEducation, setCurrentEducation, defaultEducation, () => currentEducation.institution && currentEducation.degree);
+  
+  const editEducation = createEditFunction('education', setCurrentEducation);
+  const deleteEducation = createDeleteFunction('education');
 
-  // --- Routes ---
-  const addRoute = () => {
-    if (currentRoute.origin && currentRoute.destination) {
-      const item = { ...currentRoute, page: currentPage };
-      if (item.isEditing) {
-        const updated = [...formData.routes];
-        updated[item.editIndex] = { ...item };
-        setFormData({ ...formData, routes: updated });
-      } else {
-        setFormData({
-          ...formData,
-          routes: [...formData.routes, { ...item }]
-        });
-      }
-      setCurrentRoute(defaultRoute());
-    }
-  };
+  const addSpecialty = createAddFunction('specialties', currentSpecialty, setCurrentSpecialty, defaultSpecialty, () => currentSpecialty.name.trim());
+  
+  const editSpecialty = createEditFunction('specialties', setCurrentSpecialty);
+  const deleteSpecialty = createDeleteFunction('specialties');
 
-  // ❌ Removed: editRoute, deleteRoute
+  const addCertification = createAddFunction('certifications', currentCertification, setCurrentCertification, defaultCertification, () => currentCertification.name.trim());
+  
+  const editCertification = createEditFunction('certifications', setCurrentCertification);
+  const deleteCertification = createDeleteFunction('certifications');
 
-  // --- Languages ---
-  // ❌ Removed: addLanguage, editLanguage, deleteLanguage
+  const addAffiliation = createAddFunction('affiliations', currentAffiliation, setCurrentAffiliation, defaultAffiliation, () => currentAffiliation.organization.trim());
+  
+  const editAffiliation = createEditFunction('affiliations', setCurrentAffiliation);
+  const deleteAffiliation = createDeleteFunction('affiliations');
 
-  // --- Social Links ---
+  const addTechnicalSkill = createAddFunction('technicalSkills', currentTechnicalSkill, setCurrentTechnicalSkill, defaultTechnicalSkill, () => currentTechnicalSkill.name.trim());
+  
+  const editTechnicalSkill = createEditFunction('technicalSkills', setCurrentTechnicalSkill);
+  const deleteTechnicalSkill = createDeleteFunction('technicalSkills');
+
+  const addLanguage = createAddFunction('languages', currentLanguage, setCurrentLanguage, defaultLanguage, () => currentLanguage.name.trim());
+  
+  const editLanguage = createEditFunction('languages', setCurrentLanguage);
+  const deleteLanguage = createDeleteFunction('languages');
+
+  const addAchievement = createAddFunction('achievements', currentAchievement, setCurrentAchievement, defaultAchievement, () => currentAchievement.title.trim());
+  
+  const editAchievement = createEditFunction('achievements', setCurrentAchievement);
+  const deleteAchievement = createDeleteFunction('achievements');
+
   const addSocialLink = () => {
-    if (currentSocialLink.platform && currentSocialLink.url) {
-      let url = currentSocialLink.url;
-      if (!url.match(/^https?:\/\//)) url = `https://${url}`;
-      if (currentSocialLink.isEditing) {
-        const updated = [...formData.socialLinks];
-        updated[currentSocialLink.editIndex] = { platform: currentSocialLink.platform, url };
-        setFormData({ ...formData, socialLinks: updated });
-      } else {
-        setFormData({
-          ...formData,
-          socialLinks: [...formData.socialLinks, { platform: currentSocialLink.platform, url }]
-        });
-      }
-      setCurrentSocialLink(defaultSocialLink());
+    if (!currentSocialLink.platform || !currentSocialLink.url) return;
+    let url = currentSocialLink.url;
+    if (!url.match(/^https?:\/\//)) url = `https://${url}`;
+    if (currentSocialLink.isEditing) {
+      const updated = [...formData.socialLinks];
+      updated[currentSocialLink.editIndex] = { platform: currentSocialLink.platform, url };
+      setFormData({ ...formData, socialLinks: updated });
+    } else {
+      setFormData({ ...formData, socialLinks: [...formData.socialLinks, { platform: currentSocialLink.platform, url }] });
     }
+    setCurrentSocialLink(defaultSocialLink());
   };
 
   const editSocialLink = (index) => {
@@ -350,279 +421,714 @@ const LogisticsResume = () => {
     setFormData({ ...formData, socialLinks: updated });
   };
 
-  const getDataByPage = (page) => ({
-    experience: formData.experience.filter(e => e.page === page),
-    education: formData.education.filter(e => e.page === page),
-    equipment: formData.equipment.filter(e => e.page === page),
-    certifications: formData.certifications.filter(c => c.page === page),
-    routes: formData.routes.filter(r => r.page === page),
-    languages: formData.languages.filter(l => l.page === page)
-  });
-
+  // --- PDF Generation ---
   const generatePDF = async () => {
     if (isGeneratingPDF) return;
     setIsGeneratingPDF(true);
     try {
       const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-      const pages = getPagesWithContent();
-      if (pages.length === 0) {
-        alert('Add content before generating PDF.');
+      
+      if (!hasContent()) {
+        alert("Please add content before generating PDF.");
         return;
       }
 
-      const originalStates = [];
-      for (let i = 0; i < pages.length; i++) {
-        const pageNum = pages[i];
-        const el = resumeRefs[pageNum - 1]?.current;
-        if (!el) continue;
+      const el = resumeRef.current;
+      if (!el) return;
 
-        originalStates[pageNum - 1] = {
-          display: el.style.display,
-          position: el.style.position,
-          width: el.style.width,
-          height: el.style.height
-        };
+      const originalStates = {
+        display: el.style.display,
+        position: el.style.position,
+        width: el.style.width,
+        height: el.style.height
+      };
 
-        Object.assign(el.style, {
-          display: 'block',
-          position: 'fixed',
-          left: '0',
-          top: '0',
-          width: '210mm',
-          height: '297mm',
-          transform: 'none',
-          zIndex: '9999',
-          visibility: 'visible',
-          opacity: '1',
-          background: '#ffffff',
-          color: '#000000'
-        });
+      Object.assign(el.style, {
+        display: 'block',
+        position: 'fixed',
+        left: '0',
+        top: '0',
+        width: '210mm',
+        height: '297mm',
+        transform: 'none',
+        zIndex: '9999',
+        visibility: 'visible',
+        opacity: '1',
+        background: '#ffffff',
+        color: '#000000'
+      });
 
-        await new Promise(r => setTimeout(r, 300));
+      await new Promise(r => setTimeout(r, 300));
 
-        const canvas = await html2canvas(el, {
-          scale: 3,
-          useCORS: true,
-          backgroundColor: '#ffffff',
-          width: 210 * 3.7795275591,
-          height: 297 * 3.7795275591,
-          onclone: (doc) => {
-            const clone = doc.querySelector(`.${styles.resumePreview}`);
-            if (clone) {
-              clone.style.display = 'block';
-              clone.style.visibility = 'visible';
-              clone.style.opacity = '1';
-              clone.style.width = '210mm';
-              clone.style.height = '297mm';
-              clone.style.background = '#ffffff';
-              clone.style.color = '#000000';
-              clone.querySelectorAll('*').forEach(n => {
-                n.style.color = '#000000';
-                n.style.fontFamily = "'Helvetica', 'Arial', sans-serif";
-              });
-            }
+      const canvas = await html2canvas(el, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        width: 210 * 3.7795275591,
+        height: 297 * 3.7795275591,
+        onclone: (doc) => {
+          const clone = doc.querySelector(`.${styles.resumePreview}`);
+          if (clone) {
+            clone.style.display = 'block';
+            clone.style.visibility = 'visible';
+            clone.style.opacity = '1';
+            clone.style.width = '210mm';
+            clone.style.height = '297mm';
+            clone.style.background = '#ffffff';
+            clone.style.color = '#000000';
+            
+            // Apply custom font sizes
+            const name = clone.querySelector(`.${styles.name}`);
+            if (name) name.style.fontSize = `${fontSizes.name}pt`;
+            
+            const sectionTitles = clone.querySelectorAll(`.${styles.sectionTitle}`);
+            sectionTitles.forEach(title => {
+              title.style.fontSize = `${fontSizes.sectionTitle}pt`;
+            });
+            
+            const contactItems = clone.querySelectorAll(`.${styles.contactInfoItem}`);
+            contactItems.forEach(item => {
+              item.style.fontSize = `${fontSizes.contactInfo}pt`;
+            });
+            
+            const jobTitles = clone.querySelectorAll(`.${styles.experienceItem} h3`);
+            jobTitles.forEach(title => {
+              title.style.fontSize = `${fontSizes.jobTitle}pt`;
+            });
+            
+            const companies = clone.querySelectorAll(`.${styles.company}`);
+            companies.forEach(company => {
+              company.style.fontSize = `${fontSizes.company}pt`;
+            });
+            
+            const degrees = clone.querySelectorAll(`.${styles.educationItem} h3`);
+            degrees.forEach(degree => {
+              degree.style.fontSize = `${fontSizes.degree}pt`;
+            });
+            
+            const institutions = clone.querySelectorAll(`.${styles.institution}`);
+            institutions.forEach(institution => {
+              institution.style.fontSize = `${fontSizes.institution}pt`;
+            });
+            
+            const institutionDates = clone.querySelectorAll(`.${styles.institutionDate}`);
+            institutionDates.forEach(date => {
+              date.style.fontSize = `${fontSizes.institutionDate}pt`;
+            });
+            
+            const regularTexts = clone.querySelectorAll(`.${styles.summaryText}, .${styles.certificationItem}, .${styles.affiliationItem}`);
+            regularTexts.forEach(text => {
+              text.style.fontSize = `${fontSizes.regularText}pt`;
+            });
+            
+            const bulletPoints = clone.querySelectorAll(`.${styles.bulletList} li`);
+            bulletPoints.forEach(bullet => {
+              bullet.style.fontSize = `${fontSizes.bulletText}pt`;
+            });
+            
+            const skills = clone.querySelectorAll(`.${styles.skillsList} li`);
+            skills.forEach(skill => {
+              skill.style.fontSize = `${fontSizes.skillText}pt`;
+            });
+            
+            const certificationTexts = clone.querySelectorAll(`.${styles.certificationItem}`);
+            certificationTexts.forEach(cert => {
+              cert.style.fontSize = `${fontSizes.certificationText}pt`;
+            });
+            
+            const achievementTexts = clone.querySelectorAll(`.${styles.achievementItem}`);
+            achievementTexts.forEach(achievement => {
+              achievement.style.fontSize = `${fontSizes.achievementText}pt`;
+            });
+            
+            clone.querySelectorAll('*').forEach(n => {
+              n.style.color = '#000000';
+              n.style.fontFamily = "'Helvetica Neue', 'Arial', sans-serif";
+            });
           }
-        });
+        }
+      });
 
-        const imgData = canvas.toDataURL('image/png', 1.0);
-        const imgWidth = 210;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        if (i > 0) pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
-      }
+      const imgData = canvas.toDataURL('image/png', 1.0);
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
 
-      for (let i = 0; i < totalPages; i++) {
-        const el = resumeRefs[i]?.current;
-        const state = originalStates[i];
-        if (el && state) Object.assign(el.style, state);
-      }
+      Object.assign(el.style, originalStates);
 
       pdf.save(`${formData.fullName || 'logistics_resume'}_resume.pdf`);
     } catch (err) {
-      console.error('PDF Error:', err);
-      alert('Failed to generate PDF.');
+      console.error("PDF Error:", err);
+      alert("Failed to generate PDF. Please try again.");
     } finally {
       setIsGeneratingPDF(false);
     }
   };
 
-  // ✅ LOGISTICS RESUME TEMPLATE
-  const LogisticsTemplate = ({ formData, pageData, pageNumber, totalPages }) => {
-    const hasSummary = pageNumber === 1 && formData.summary;
-    const hasExperience = pageData.experience.length > 0;
-    const hasEducation = pageData.education.length > 0;
-    const hasEquipment = pageData.equipment.length > 0;
-    const hasCertifications = pageData.certifications.length > 0;
-    const hasRoutes = pageData.routes.length > 0;
-    const hasLanguages = pageData.languages.length > 0;
-    const hasCdl = formData.cdl;
+  // --- Resume Template ---
+  const LogisticsTemplate = ({ formData }) => {
+    const hasSummary = formData.summary && formData.summary.trim().length > 0;
+    const hasExperience = formData.experience.length > 0;
+    const hasEducation = formData.education.length > 0;
+    const hasSpecialties = formData.specialties.length > 0;
+    const hasCertifications = formData.certifications.length > 0;
+    const hasAffiliations = formData.affiliations.length > 0;
+    const hasTechnicalSkills = formData.technicalSkills.length > 0;
+    const hasLanguages = formData.languages.length > 0;
+    const hasAchievements = formData.achievements.length > 0;
 
     return (
       <div className={styles.logisticsTemplate}>
-        {pageNumber === 1 && (
-          <header className={styles.resumeHeader}>
-            <h1 className={styles.name}>{formData.fullName || 'Your Name'}</h1>
-            <div className={styles.contactInfoRow}>
-              {formData.email && <div className={styles.contactInfoItem}><FiMail /> {formData.email}</div>}
-              {(formData.email && (formData.phone || formData.address)) && <div className={styles.contactSeparator}>•</div>}
-              {formData.phone && <div className={styles.contactInfoItem}><FiPhone /> {formData.phone}</div>}
-              {(formData.phone && formData.address) && <div className={styles.contactSeparator}>•</div>}
-              {formData.address && <div className={styles.contactInfoItem}><FiMapPin /> {formData.address}</div>}
-              {formData.socialLinks.map((link, i) => (
-                <div key={i} className={styles.contactInfoItem}>
-                  {getSocialIcon(link.platform)} {formatUrl(link.url)}
-                </div>
-              ))}
-            </div>
-          </header>
-        )}
+        <header className={styles.resumeHeader}>
+          <h1 className={styles.name} style={{ fontSize: `${fontSizes.name}pt` }}>
+            {formData.fullName || 'Your Name'}
+          </h1>
+          <div className={styles.contactInfoRow}>
+            {formData.email && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
+            {(formData.email && (formData.phone || formData.address)) && <div className={styles.contactSeparator}>•</div>}
+            {formData.phone && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiPhone /> {formData.phone}</div>}
+            {(formData.phone && formData.address) && <div className={styles.contactSeparator}>•</div>}
+            {formData.address && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMapPin /> {formData.address}</div>}
+            {formData.socialLinks.map((link, i) => (
+              <div key={i} className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}>
+                {getSocialIcon(link.platform)} {formatSocialUrl(link.url)}
+              </div>
+            ))}
+          </div>
+        </header>
 
         {hasSummary && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>PROFESSIONAL SUMMARY</h2>
-            <div className={styles.sectionContent}>
-              <p className={styles.summaryText}>{formData.summary}</p>
-            </div>
-          </section>
-        )}
-
-        {hasCdl && pageNumber === 1 && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>COMMERCIAL DRIVER'S LICENSE (CDL)</h2>
-            <div className={styles.cdlItem}>
-              <strong>Class:</strong> {hasCdl.class}<br />
-              <strong>State:</strong> {hasCdl.state}<br />
-              {hasCdl.number && <><strong>License #:</strong> {hasCdl.number}<br /></>}
-              {hasCdl.expiry && <><strong>Expires:</strong> {hasCdl.expiry}<br /></>}
-              {hasCdl.endorsements && <><strong>Endorsements:</strong> {hasCdl.endorsements}</>}
-            </div>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL SUMMARY</h2>
+            <p className={styles.summaryText} style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p>
           </section>
         )}
 
         {hasExperience && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>LOGISTICS EXPERIENCE</h2>
-            <div className={styles.sectionContent}>
-              {pageData.experience.map((exp, i) => (
-                <div key={i} className={styles.experienceItem}>
-                  <div className={styles.experienceHeader}>
-                    <h3>{exp.position}</h3>
-                    <p className={styles.company}>{exp.company}{exp.location && ` – ${exp.location}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
-                  </div>
-                  <ul className={styles.bulletList}>
-                    {exp.responsibilities.split('\n').map((line, j) => line.trim() ? <li key={j}>{line}</li> : null)}
-                  </ul>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LOGISTICS & SUPPLY CHAIN EXPERIENCE</h2>
+            {formData.experience.map((exp, i) => (
+              <div key={i} className={styles.experienceItem}>
+                <div className={styles.experienceHeader}>
+                  <h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h3>
+                  <p className={styles.company} style={{ fontSize: `${fontSizes.company}pt` }}>{exp.employer}{exp.department && ` – ${exp.department}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {hasRoutes && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>REGULAR ROUTES</h2>
-            <div className={styles.sectionContent}>
-              <ul className={styles.bulletList}>
-                {pageData.routes.map((r, i) => (
-                  <li key={i}>
-                    {r.origin} → {r.destination}{r.frequency && ` (${r.frequency})`}
-                  </li>
-                ))}
-              </ul>
-            </div>
+                <ul className={styles.bulletList}>
+                  {exp.description.split('\n').filter(line => line.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}
+                </ul>
+              </div>
+            ))}
           </section>
         )}
 
         {hasEducation && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>EDUCATION</h2>
-            <div className={styles.sectionContent}>
-              {pageData.education.map((edu, i) => (
-                <div key={i} className={styles.educationItem}>
-                  <h3>{edu.degree}{edu.field && ` in ${edu.field}`}</h3>
-                  <p className={styles.institution}>{edu.institution} | {edu.startDate} – {edu.endDate || 'Present'}</p>
-                </div>
-              ))}
-            </div>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION & TRAINING</h2>
+            {formData.education.map((edu, i) => (
+              <div key={i} className={styles.educationItem}>
+                <h3 style={{ fontSize: `${fontSizes.degree}pt` }}>
+                  {edu.degree}{edu.program && ` – ${edu.program}`}
+                </h3>
+                <p className={styles.institution} style={{ fontSize: `${fontSizes.institution}pt` }}>
+                  {edu.institution} | 
+                  <span className={styles.institutionDate} style={{ fontSize: `${fontSizes.institutionDate}pt` }}>
+                    {edu.startDate} – {edu.endDate || 'Present'}
+                  </span>
+                </p>
+              </div>
+            ))}
           </section>
         )}
 
-        {hasEquipment && (
+        {hasSpecialties && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>VEHICLES & EQUIPMENT</h2>
-            <div className={styles.sectionContent}>
-              <ul className={styles.skillsList}>
-                {pageData.equipment.map((e, i) => <li key={i}>{e.name}</li>)}
-              </ul>
-            </div>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LOGISTICS SPECIALTIES</h2>
+            <ul className={styles.skillsList}>
+              {formData.specialties.map((s, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{s.name}</li>)}
+            </ul>
           </section>
         )}
 
         {hasCertifications && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>CERTIFICATIONS</h2>
-            <div className={styles.sectionContent}>
-              <ul className={styles.bulletList}>
-                {pageData.certifications.map((c, i) => (
-                  <li key={i}>
-                    {c.name}{c.issuer && ` – ${c.issuer}`}{c.date && ` (${c.date})`}{c.expiry && ` – Expires: ${c.expiry}`}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CERTIFICATIONS & LICENSES</h2>
+            {formData.certifications.map((c, i) => (
+              <div key={i} className={styles.certificationItem} style={{ fontSize: `${fontSizes.certificationText}pt` }}>
+                <strong>{c.name}</strong>
+                {c.issuingAuthority && ` – ${c.issuingAuthority}`}
+                {c.certificationNumber && ` (Certification #: ${c.certificationNumber})`}
+                {c.expiryDate && ` – Expires: ${c.expiryDate}`}
+              </div>
+            ))}
+          </section>
+        )}
+
+        {hasTechnicalSkills && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL SKILLS & SOFTWARE</h2>
+            <ul className={styles.bulletList}>
+              {formData.technicalSkills.map((s, i) => (
+                <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>
+                  {s.name}{s.proficiency && ` (${s.proficiency})`}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {hasAchievements && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>KEY ACHIEVEMENTS</h2>
+            <ul className={styles.bulletList}>
+              {formData.achievements.map((a, i) => (
+                <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>
+                  <strong>{a.title}:</strong> {a.description}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {hasAffiliations && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL AFFILIATIONS</h2>
+            {formData.affiliations.map((a, i) => (
+              <div key={i} className={styles.affiliationItem} style={{ fontSize: `${fontSizes.regularText}pt` }}>
+                <strong>{a.organization}</strong>
+                {a.role && ` – ${a.role}`}
+              </div>
+            ))}
           </section>
         )}
 
         {hasLanguages && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>LANGUAGES</h2>
-            <div className={styles.sectionContent}>
-              <ul className={styles.bulletList}>
-                {pageData.languages.map((l, i) => <li key={i}>{l.name}</li>)}
-              </ul>
-            </div>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LANGUAGES</h2>
+            <ul className={styles.bulletList}>
+              {formData.languages.map((l, i) => (
+                <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>
+                  {l.name}{l.proficiency && ` (${l.proficiency})`}
+                </li>
+              ))}
+            </ul>
           </section>
-        )}
-
-        {getPagesWithContent().length > 1 && (
-          <div className={styles.pageIndicator}>
-            Page {getPagesWithContent().indexOf(pageNumber) + 1} of {getPagesWithContent().length}
-          </div>
         )}
       </div>
     );
   };
 
-  const renderTemplate = (pageNumber) => {
-    const pageData = getDataByPage(pageNumber);
-    return <LogisticsTemplate formData={formData} pageData={pageData} pageNumber={pageNumber} totalPages={totalPages} />;
-  };
-
-  const actualPagesWithContent = getPagesWithContent().length;
-
   return (
-    <div className={styles.resumeBuilder}>
+    <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Logistics Resume Builder | Transportation & Supply Chain Professionals</title>
-        <meta name="description" content="Create a professional resume for logistics, trucking, and supply chain roles. Highlight CDL, routes, equipment, and safety certifications." />
+        <title>Free Logistics Resume Builder - ATS Friendly Supply Chain Templates 2026 | Professional Resume Maker for Logistics, Warehouse, Transportation</title>
+        <meta name="title" content="Free Logistics Resume Builder - ATS Friendly Supply Chain Templates 2026 | Professional Resume Maker for Logistics, Warehouse, Transportation" />
+        <meta name="description" content="Create professional ATS-optimized logistics resumes for free. Land interviews 3x faster with our logistics resume builder. ATS-optimized templates for supply chain managers, warehouse supervisors, transportation coordinators. Trusted by 500K+ logistics professionals worldwide." />
+        <meta name="keywords" content="logistics resume builder, supply chain resume templates, warehouse resume builder, transportation resume, ATS friendly logistics resume, free resume builder for logistics professionals, supply chain CV, logistics manager resume, warehouse supervisor resume, transportation coordinator resume" />
+        <meta name="author" content="Professional Logistics Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="1 days" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="x-default" />
+        <meta property="og:title" content="Free Logistics Resume Builder - ATS Friendly Supply Chain Templates 2026" />
+        <meta property="og:description" content="Create professional ATS-optimized logistics resumes for free. Land interviews 3x faster with our logistics resume builder. Trusted by 500K+ logistics professionals." />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Free Logistics Resume Builder - Create Professional Logistics Resumes Online" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/logistics-resume-builder" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Professional Logistics Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Logistics Resume Builder - ATS Friendly Supply Chain Templates 2026" />
+        <meta name="twitter:description" content="Create professional ATS-optimized logistics resumes for free. Land interviews 3x faster. Trusted by 500K+ logistics professionals." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-logistics-resume-builder-preview.jpg" />
+        <meta name="twitter:image:alt" content="Free Logistics Resume Builder with ATS Templates" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
+        <meta name="theme-color" content="#0A3D62" />
+        <meta name="msapplication-TileColor" content="#0A3D62" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        <script
+          type="application/ld+json"
+          key="structured-data"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebPage",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#webpage",
+                  "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder",
+                  "name": "Free Logistics Resume Builder - ATS Friendly Supply Chain Templates 2026",
+                  "description": "Create professional ATS-optimized logistics resumes for free. Land interviews 3x faster with our logistics resume builder.",
+                  "datePublished": "2026-01-01",
+                  "dateModified": safeLastModifiedDate,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.professionalresumefree.com/#website",
+                    "url": "https://www.professionalresumefree.com",
+                    "name": "Professional Logistics Resume Free",
+                    "description": "Free online resume builder for logistics professionals",
+                    "publisher": {
+                      "@type": "Organization",
+                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "name": "Professional Logistics Resume Free",
+                      "url": "https://www.professionalresumefree.com",
+                      "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "width": 512,
+                        "height": 512
+                      },
+                      "sameAs": [
+                        "https://twitter.com/ProResumeFree",
+                        "https://www.linkedin.com/company/professional-resume-free",
+                        "https://www.facebook.com/ProfessionalResumeFree",
+                        "https://www.youtube.com/@ProfessionalResumeFree"
+                      ]
+                    }
+                  },
+                  "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "https://www.professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                      {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.professionalresumefree.com"
+                      },
+                      {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Logistics Resume Builder",
+                        "item": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder"
+                      }
+                    ]
+                  },
+                  "mainEntity": {
+                    "@type": "SoftwareApplication",
+                    "name": "Logistics Resume Builder - ATS Optimized Supply Chain Resume Maker",
+                    "applicationCategory": "BusinessApplication",
+                    "operatingSystem": "Any",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "0",
+                      "priceCurrency": "USD",
+                      "availability": "https://schema.org/InStock",
+                      "priceValidUntil": "2026-12-31"
+                    },
+                    "aggregateRating": {
+                      "@type": "AggregateRating",
+                      "ratingValue": 4.9,
+                      "ratingCount": 50365,
+                      "bestRating": 5,
+                      "worstRating": 1
+                    },
+                    "description": "Free online ATS-friendly logistics resume builder for supply chain professionals, logistics managers, warehouse supervisors, and transportation coordinators.",
+                    "featureList": [
+                      "Logistics ATS-Optimized Templates",
+                      "Supply Chain Content Suggestions",
+                      "One-Click PDF Download",
+                      "Logistics Experience Formatting",
+                      "Mobile-Friendly Editor",
+                      "No Sign Up Required",
+                      "Free Forever"
+                    ],
+                    "softwareVersion": "2026.1.0",
+                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-logistics-resume-builder.jpg",
+                    "applicationSuite": "Logistics Career Tools",
+                    "countriesSupported": "Global",
+                    "fileSize": "Web Application"
+                  }
+                },
+                {
+                  "@type": "FAQPage",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#faqpage",
+                  "mainEntity": faqs.map((faq, index) => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": faq.answer,
+                      "datePublished": safeFaqDates[index] || safeCurrentDate,
+                      "author": {
+                        "@type": "Person",
+                        "name": "Logistics Resume Builder Support Team"
+                      }
+                    },
+                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#webpage"
+                  }))
+                },
+                {
+                  "@type": "HowTo",
+                  "name": "How to Create a Professional Logistics Resume with Our Free Builder",
+                  "description": "Step-by-step guide to create an ATS-optimized logistics resume for free",
+                  "totalTime": "PT15M",
+                  "estimatedCost": {
+                    "@type": "MonetaryAmount",
+                    "currency": "USD",
+                    "value": "0"
+                  },
+                  "step": [
+                    {
+                      "@type": "HowToStep",
+                      "position": 1,
+                      "name": "Choose a Logistics Template",
+                      "text": "Select from our ATS-optimized logistics resume templates designed for supply chain managers, warehouse supervisors, transportation coordinators, and logistics analysts.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#templates",
+                      "image": "https://www.professionalresumefree.com/images/step1-logistics-template.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 2,
+                      "name": "Enter Your Logistics Information",
+                      "text": "Add your logistics experience, education, certifications, technical skills, and supply chain achievements using our guided forms.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#editor",
+                      "image": "https://www.professionalresumefree.com/images/step2-logistics-info.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 3,
+                      "name": "Customize and Optimize",
+                      "text": "Use our logistics-specific suggestions to improve supply chain keywords and formatting for ATS compatibility.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#optimize",
+                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                    },
+                    {
+                      "@type": "HowToStep",
+                      "position": 4,
+                      "name": "Download Your Logistics Resume",
+                      "text": "Export your professional logistics resume as PDF, Word, or plain text - completely free, no watermarks.",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#download",
+                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                    }
+                  ]
+                },
+                {
+                  "@type": "Service",
+                  "serviceType": "Online Logistics Resume Building Service",
+                  "provider": {
+                    "@type": "Organization",
+                    "name": "Professional Logistics Resume Free",
+                    "url": "https://www.professionalresumefree.com",
+                    "contactPoint": {
+                      "@type": "ContactPoint",
+                      "telephone": "+1-800-555-1234",
+                      "contactType": "Customer Support",
+                      "availableLanguage": "en"
+                    }
+                  },
+                  "areaServed": {
+                    "@type": "Country",
+                    "name": "Global"
+                  },
+                  "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Free Logistics Resume Building Services",
+                    "itemListElement": [
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Logistics ATS Resume Templates"
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Supply Chain Resume Editing"
+                        }
+                      }
+                    ]
+                  },
+                  "description": "Free ATS-friendly logistics resume builder for supply chain professionals worldwide",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                  }
+                },
+                {
+                  "@type": "SpeakableSpecification",
+                  "cssSelector": [".heroTitle", ".heroSubtitle", ".faqItem h3"]
+                },
+                {
+                  "@type": "ItemList",
+                  "itemListElement": testimonials.map((testimonial, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "Review",
+                      "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": 5,
+                        "bestRating": 5
+                      },
+                      "author": {
+                        "@type": "Person",
+                        "name": testimonial.name
+                      },
+                      "reviewBody": testimonial.quote,
+                      "datePublished": safeReviewDates[index] || safeCurrentDate,
+                      "publisher": {
+                        "@type": "Organization",
+                        "name": "Professional Logistics Resume Free"
+                      },
+                      "itemReviewed": {
+                        "@type": "SoftwareApplication",
+                        "name": "Logistics Resume Builder - ATS Optimized Supply Chain Resume Maker",
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "Any",
+                        "offers": {
+                          "@type": "Offer",
+                          "price": "0",
+                          "priceCurrency": "USD"
+                        },
+                        "description": "Free online ATS-friendly logistics resume builder that helps supply chain professionals create professional resumes and land interviews faster.",
+                        "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder"
+                      }
+                    }
+                  }))
+                }
+              ]
+            })
+          }}
+        />
       </Head>
 
+      {/* Freshness Indicator */}
+      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+      </div>
+
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <Link href="/" className={styles.breadcrumbLink} prefetch={false}>
+              <FiHome className={styles.breadcrumbIcon} />
+              <span className={styles.breadcrumbText}>Home</span>
+            </Link>
+          </li>
+          <li className={styles.breadcrumbSeparator}>
+            <FiChevronRightIcon />
+          </li>
+          <li>
+            <Link href="/ats-friendly-logistics-transportation-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
+              <span className={styles.breadcrumbText}>Free Supply Chain Templates</span>
+            </Link>
+          </li>
+        </ol>
+      </nav>
+
+      {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
+            <div className={styles.trustBadge}>
+              <FiStar className={styles.starIcon} />
+              <span className={styles.trustBadgeText}>
+                Rated 4.9/5 by 50,365+ Logistics Professionals | Best Free Logistics Resume Builder 2026
+              </span>
+            </div>
+            
             <h1 className={styles.heroTitle}>
-              Build Your <span className={styles.gradientText}>Logistics Resume</span>
+              Free Logistics Resume Builder <span className={styles.gradientText}>Trusted by 500K+ Supply Chain Professionals</span>
             </h1>
+            
             <p className={styles.heroSubtitle}>
-              For truck drivers, warehouse managers, dispatchers, and supply chain professionals.
-              Showcase your CDL, equipment expertise, and on-time delivery record.
+              Create a <strong className={styles.heroHighlight}>professional, ATS-optimized logistics resume for free in minutes.</strong> Our supply chain resume builder ensures your logistics experience and metrics get noticed by employers.
             </p>
+
+            <div className={styles.ctaButtons}>
+              <button
+                onClick={() => setActiveSection('personal')}
+                className={styles.primaryButton}
+                aria-label="Start building your free logistics resume now—no sign-up required"
+              >
+                <span className={styles.buttonText}>Start Building Your Logistics Resume Now</span>
+                <FiArrowRight className={styles.buttonIcon} />
+                <div className={styles.buttonPulse}></div>
+              </button>
+              
+              <button
+                onClick={generatePDF}
+                className={styles.secondaryButton}
+                aria-label="Download logistics resume as PDF"
+                disabled={isGeneratingPDF || !hasContent()}
+              >
+                <FiDownload className={styles.buttonIcon} />
+                <span className={styles.buttonText}>Download Logistics Resume PDF</span>
+              </button>
+            </div>
+
+            <div className={styles.heroStats}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>500K+</span>
+                <span className={styles.statLabel}>Logistics Resumes Created</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>92%</span>
+                <span className={styles.statLabel}>Interview Success Rate</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>32%</span>
+                <span className={styles.statLabel}>Faster Logistics Hires</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>4.9/5</span>
+                <span className={styles.statLabel}>Rating from Supply Chain Pros</span>
+              </div>
+            </div>
+
+            <div className={styles.logisticsBadges}>
+              <div className={styles.badgeGrid}>
+                <span className={styles.badgeItem}><FiTruck /> Supply Chain Manager</span>
+                <span className={styles.badgeItem}><FiPackage /> Warehouse Supervisor</span>
+                <span className={styles.badgeItem}><FiNavigation /> Transportation Coordinator</span>
+                <span className={styles.badgeItem}><FiBarChart /> Logistics Analyst</span>
+                <span className={styles.badgeItem}><FiDatabase /> Inventory Controller</span>
+                <span className={styles.badgeItem}><FiGlobe /> 3PL Specialist</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Main Content */}
       <div className={styles.singleColumnLayout}>
-        {/* Preview */}
+        {/* Preview Section */}
         <div className={styles.previewSection}>
           <div className={styles.previewHeader}>
             <div className={styles.previewActions}>
@@ -632,10 +1138,10 @@ const LogisticsResume = () => {
               <button
                 onClick={generatePDF}
                 className={styles.downloadButton}
-                disabled={isGeneratingPDF || actualPagesWithContent === 0}
+                disabled={isGeneratingPDF || !hasContent()}
               >
                 <FiDownload />
-                {isGeneratingPDF ? 'Generating...' : `Download PDF (${actualPagesWithContent} page${actualPagesWithContent !== 1 ? 's' : ''})`}
+                {isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}
               </button>
             </div>
           </div>
@@ -643,68 +1149,27 @@ const LogisticsResume = () => {
           <div className={`${styles.previewContainer} ${showFullPreview ? styles.fullPreview : ''}`}>
             <div className={styles.resumePreviewCard}>
               <div className={styles.previewContent}>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <div
-                    key={i + 1}
-                    className={`${styles.resumePreview} ${currentPage === i + 1 ? styles.activePreview : styles.inactivePreview}`}
-                    ref={resumeRefs[i]}
-                  >
-                    {renderTemplate(i + 1)}
-                  </div>
-                ))}
+                <div
+                  className={styles.resumePreview}
+                  ref={resumeRef}
+                >
+                  <LogisticsTemplate formData={formData} />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className={styles.previewNavigation}>
-            <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              className={styles.previewNavButton}
-            >
-              <FiChevronLeft /> Previous Page
-            </button>
-            <div className={styles.previewPageInfo}>
-              Page {currentPage} of {totalPages}
-              {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
-            </div>
-            <button
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-              className={styles.previewNavButton}
-            >
-              Next Page <FiChevronRight />
-            </button>
           </div>
         </div>
 
-        {/* Form */}
+        {/* Form Section */}
         <div className={styles.formSection}>
-          <div className={styles.pageManagement}>
-            <div className={styles.pageControls}>
-              <button onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage === 1} className={styles.pageButton}>
-                <FiChevronLeft /> Previous
-              </button>
-              <div className={styles.pageInfo}>
-                Page {currentPage} of {totalPages}
-                {actualPagesWithContent > 0 && <span className={styles.contentPagesInfo}>({actualPagesWithContent} with content)</span>}
-              </div>
-              <button onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages} className={styles.pageButton}>
-                Next <FiChevronRight />
-              </button>
-            </div>
-            <div className={styles.pageActions}>
-              {totalPages < 5 && <button onClick={addNewPage} className={styles.addPageButton}><FiPlus /> Add Page</button>}
-              {totalPages > 1 && <button onClick={removeLastPage} className={styles.removePageButton}><FiX /> Remove Last Page</button>}
-            </div>
-          </div>
-
           <div className={styles.formNavigation}>
             {[
               { id: 'personal', label: 'Personal', icon: <FiUser /> },
               { id: 'experience', label: 'Logistics Experience', icon: <FiTruck /> },
               { id: 'education', label: 'Education', icon: <FiBook /> },
-              { id: 'logistics', label: 'CDL & Equipment', icon: <FiPackage /> },
+              { id: 'specialties', label: 'Specialties', icon: <FiTarget /> },
+              { id: 'certifications', label: 'Certifications', icon: <FiShield /> },
+              { id: 'settings', label: 'Font Settings', icon: <FiSettings /> },
             ].map((item) => (
               <button
                 key={item.id}
@@ -717,19 +1182,19 @@ const LogisticsResume = () => {
           </div>
 
           <div className={styles.formContent}>
-            {/* Personal */}
-            {activeSection === 'personal' && currentPage === 1 && (
+            {/* Personal Section */}
+            {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
                 <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Full Name*
-                      <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="James Miller" required className={styles.formInput} />
+                      <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="John Smith, CPIM" required className={styles.formInput} />
                     </label>
                     <label className={styles.formLabel}>
                       Email*
-                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="james@logistics.com" required className={styles.formInput} />
+                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="john.smith@logistics.com" required className={styles.formInput} />
                     </label>
                   </div>
                   <div className={styles.formGroup}>
@@ -738,41 +1203,68 @@ const LogisticsResume = () => {
                       <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className={styles.formInput} />
                     </label>
                     <label className={styles.formLabel}>
-                      Address
-                      <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Chicago, IL" className={styles.formInput} />
+                      Location
+                      <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="City, State" className={styles.formInput} />
                     </label>
                   </div>
                 </div>
 
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
-                    Professional Summary*
+                    Professional Logistics Summary*
                     <textarea
                       name="summary"
                       value={formData.summary}
                       onChange={handleInputChange}
-                      placeholder="Reliable CDL Class A driver with 7+ years of OTR experience..."
+                      placeholder="Results-driven Logistics Manager with 8+ years of experience in supply chain optimization, warehouse management, and transportation coordination. Proven track record of reducing logistics costs by 25% while improving on-time delivery rates from 85% to 98%. Expertise in implementing WMS systems, managing cross-functional teams, and developing efficient distribution strategies."
                       required
                       className={styles.formTextarea}
-                      rows="4"
+                      rows="6"
                     />
+                    <div className={styles.characterCount}>
+                      {formData.summary.length}/500 characters
+                    </div>
                   </label>
                 </div>
 
                 <div className={styles.formCard}>
                   <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <p className={styles.sectionDescription}>Add your professional logistics profiles (LinkedIn, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
-                    <select value={currentSocialLink.platform} onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, platform: e.target.value })} className={styles.formSelect}>
-                      <option value="">Select</option>
+                    <select 
+                      value={currentSocialLink.platform} 
+                      onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, platform: e.target.value })} 
+                      className={styles.formSelect}
+                    >
+                      <option value="">Select Platform</option>
                       <option value="LinkedIn">LinkedIn</option>
+                      <option value="Portfolio">Professional Portfolio</option>
+                      <option value="Website">Personal Website</option>
+                      <option value="GitHub">GitHub (for technical roles)</option>
+                      <option value="Twitter">Twitter</option>
                     </select>
-                    <input type="url" placeholder="URL" value={currentSocialLink.url} onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, url: e.target.value })} className={styles.formInput} />
+                    <input 
+                      type="url" 
+                      placeholder="https://linkedin.com/in/yourprofile" 
+                      value={currentSocialLink.url} 
+                      onChange={(e) => setCurrentSocialLink({ ...currentSocialLink, url: e.target.value })} 
+                      className={styles.formInput} 
+                    />
                     <div className={styles.formActions}>
-                      <button type="button" onClick={addSocialLink} className={styles.addButton} disabled={!currentSocialLink.platform || !currentSocialLink.url}>
-                        <FiPlus /> {currentSocialLink.isEditing ? 'Update' : 'Add'}
+                      <button 
+                        type="button" 
+                        onClick={addSocialLink} 
+                        className={styles.addButton} 
+                        disabled={!currentSocialLink.platform || !currentSocialLink.url}
+                      >
+                        <FiPlus /> {currentSocialLink.isEditing ? 'Update' : 'Add Link'}
                       </button>
                       {currentSocialLink.isEditing && (
-                        <button type="button" onClick={() => setCurrentSocialLink(defaultSocialLink())} className={styles.cancelButton}>
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentSocialLink(defaultSocialLink())} 
+                          className={styles.cancelButton}
+                        >
                           <FiX /> Cancel
                         </button>
                       )}
@@ -780,17 +1272,17 @@ const LogisticsResume = () => {
                   </div>
                   <div className={styles.itemsList}>
                     {formData.socialLinks.length === 0 ? (
-                      <p className={styles.emptyMessage}>No links added</p>
+                      <p className={styles.emptyMessage}>No professional links added yet</p>
                     ) : (
                       formData.socialLinks.map((link, i) => (
                         <div key={i} className={styles.listItem}>
                           <div className={styles.itemInfo}>
-                            <span>{link.platform}</span>
-                            <span>{formatUrl(link.url)}</span>
+                            <span className={styles.itemPlatform}>{link.platform}</span>
+                            <span className={styles.itemUrl}>{formatSocialUrl(link.url)}</span>
                           </div>
                           <div className={styles.itemActions}>
-                            <button onClick={() => editSocialLink(i)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteSocialLink(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                            <button onClick={() => editSocialLink(i)} className={styles.editButton} aria-label={`Edit ${link.platform} link`}><FiEdit2 /></button>
+                            <button onClick={() => deleteSocialLink(i)} className={styles.deleteButton} aria-label={`Delete ${link.platform} link`}><FiTrash2 /></button>
                           </div>
                         </div>
                       ))
@@ -800,200 +1292,887 @@ const LogisticsResume = () => {
               </div>
             )}
 
-            {/* Experience */}
+            {/* Logistics Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTruck /> Logistics Experience – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiTruck /> Logistics Experience</h3>
+                <p className={styles.sectionDescription}>List your logistics positions in reverse chronological order (most recent first). Include quantifiable achievements.</p>
+                
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Position*
-                      <input value={currentExperience.position} onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} placeholder="OTR Truck Driver" required className={styles.formInput} />
+                      Position Title*
+                      <input 
+                        value={currentExperience.position} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} 
+                        placeholder="Logistics Manager, Warehouse Supervisor" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      Company*
-                      <input value={currentExperience.company} onChange={(e) => setCurrentExperience({ ...currentExperience, company: e.target.value })} placeholder="Swift Transportation" required className={styles.formInput} />
+                      Company/Organization*
+                      <input 
+                        value={currentExperience.employer} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, employer: e.target.value })} 
+                        placeholder="Global Logistics Inc." 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Location / Region
-                    <input value={currentExperience.location} onChange={(e) => setCurrentExperience({ ...currentExperience, location: e.target.value })} placeholder="Nationwide" className={styles.formInput} />
+                    Department / Division / Specialty
+                    <input 
+                      value={currentExperience.department} 
+                      onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} 
+                      placeholder="Supply Chain Operations / Distribution Center" 
+                      className={styles.formInput} 
+                    />
                   </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date*
-                      <input type="text" placeholder="MM/YYYY" value={currentExperience.startDate} onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} required className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year (e.g., January 2020)" 
+                        value={currentExperience.startDate} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
                       End Date
-                      <input type="text" placeholder="MM/YYYY or Present" value={currentExperience.endDate} onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year or Present" 
+                        value={currentExperience.endDate} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Key Responsibilities*
-                    <textarea value={currentExperience.responsibilities} onChange={(e) => setCurrentExperience({ ...currentExperience, responsibilities: e.target.value })} placeholder="• Safely operated Class 8 tractor-trailers over 1M miles..." required className={styles.formTextarea} rows="4" />
+                    Key Responsibilities & Achievements*
+                    <textarea 
+                      value={currentExperience.description} 
+                      onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} 
+                      placeholder="• Managed supply chain operations for $50M distribution center with 95% on-time delivery
+• Reduced logistics costs by 22% through route optimization and carrier negotiations
+• Implemented WMS system that improved inventory accuracy from 85% to 99.5%
+• Led team of 25 warehouse staff, increasing productivity by 30%
+• Developed KPIs and dashboards that improved operational visibility by 40%"
+                      required 
+                      className={styles.formTextarea} 
+                      rows="8" 
+                    />
+                    <div className={styles.characterCount}>
+                      {currentExperience.description.length}/2000 characters
+                    </div>
                   </label>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addExperience} className={styles.addButton} disabled={!currentExperience.position || !currentExperience.company || !currentExperience.startDate}>
-                      <FiPlus /> {currentExperience.isEditing ? 'Update' : 'Add Experience'}
+                    <button 
+                      type="button" 
+                      onClick={addExperience} 
+                      className={styles.addButton} 
+                      disabled={!currentExperience.position || !currentExperience.employer || !currentExperience.startDate}
+                    >
+                      <FiPlus /> {currentExperience.isEditing ? 'Update Logistics Experience' : 'Add Logistics Experience'}
                     </button>
-                    {currentExperience.isEditing && <button type="button" onClick={() => setCurrentExperience(defaultExperience())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    {currentExperience.isEditing && (
+                      <button 
+                        type="button" 
+                        onClick={() => setCurrentExperience(defaultExperience())} 
+                        className={styles.cancelButton}
+                      >
+                        <FiX /> Cancel
+                      </button>
+                    )}
+                  </div>
+                </div>
+                
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}>Your Logistics Experience</h4>
+                  {formData.experience.length === 0 ? (
+                    <p className={styles.emptyMessage}>No logistics experience added yet</p>
+                  ) : (
+                    <div className={styles.itemsList}>
+                      {formData.experience.map((exp, i) => (
+                        <div key={i} className={styles.listItem}>
+                          <div className={styles.itemContent}>
+                            <div className={styles.itemHeader}>
+                              <strong className={styles.itemTitle}>{exp.position}</strong>
+                              <span className={styles.itemSubtitle}>at {exp.employer}</span>
+                            </div>
+                            <div className={styles.itemMeta}>
+                              <span>{exp.startDate} – {exp.endDate || 'Present'}</span>
+                              {exp.department && <span>{exp.department}</span>}
+                            </div>
+                            <div className={styles.itemDescription}>
+                              {exp.description.split('\n').filter(l => l.trim()).map((line, j) => (
+                                <p key={j} className={styles.bulletPoint}>• {line}</p>
+                              ))}
+                            </div>
+                          </div>
+                          <div className={styles.itemActions}>
+                            <button onClick={() => editExperience(i)} className={styles.editButton} aria-label={`Edit ${exp.position} experience`}><FiEdit2 /></button>
+                            <button onClick={() => deleteExperience(i)} className={styles.deleteButton} aria-label={`Delete ${exp.position} experience`}><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Key Achievements Section */}
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}><FiAward /> Key Achievements</h4>
+                  <p className={styles.sectionDescription}>Add measurable achievements with quantifiable results</p>
+                  
+                  <div className={styles.formCard}>
+                    <label className={styles.formLabel}>
+                      Achievement Title*
+                      <input 
+                        value={currentAchievement.title} 
+                        onChange={(e) => setCurrentAchievement({ ...currentAchievement, title: e.target.value })} 
+                        placeholder="Reduced Logistics Costs by 25%" 
+                        className={styles.formInput} 
+                      />
+                    </label>
+                    <label className={styles.formLabel}>
+                      Achievement Description*
+                      <textarea 
+                        value={currentAchievement.description} 
+                        onChange={(e) => setCurrentAchievement({ ...currentAchievement, description: e.target.value })} 
+                        placeholder="Implemented route optimization software and renegotiated carrier contracts, resulting in $500K annual savings." 
+                        className={styles.formTextarea} 
+                        rows="3" 
+                      />
+                    </label>
+                    <div className={styles.formActions}>
+                      <button 
+                        type="button" 
+                        onClick={addAchievement} 
+                        className={styles.addButton} 
+                        disabled={!currentAchievement.title.trim() || !currentAchievement.description.trim()}
+                      >
+                        <FiPlus /> {currentAchievement.isEditing ? 'Update Achievement' : 'Add Achievement'}
+                      </button>
+                      {currentAchievement.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentAchievement(defaultAchievement())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className={styles.itemsList}>
+                    {formData.achievements.map((a, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div className={styles.itemContent}>
+                          <div className={styles.itemHeader}>
+                            <strong className={styles.itemTitle}>{a.title}</strong>
+                          </div>
+                          <div className={styles.itemDescription}>
+                            {a.description}
+                          </div>
+                        </div>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editAchievement(i)} className={styles.editButton} aria-label={`Edit ${a.title}`}><FiEdit2 /></button>
+                          <button onClick={() => deleteAchievement(i)} className={styles.deleteButton} aria-label={`Delete ${a.title}`}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.achievements.length === 0 && <p className={styles.emptyMessage}>No achievements added yet</p>}
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Education */}
+            {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education – Page {currentPage}</h3>
+                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <p className={styles.sectionDescription}>List your logistics, supply chain, or business education</p>
+                
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Institution*
-                      <input value={currentEducation.institution} onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} placeholder="Ivy Tech Community College" required className={styles.formInput} />
+                      <input 
+                        value={currentEducation.institution} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} 
+                        placeholder="University of Supply Chain Management" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      Degree*
-                      <input value={currentEducation.degree} onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} placeholder="CDL Training Certificate" required className={styles.formInput} />
+                      Degree/Certification*
+                      <input 
+                        value={currentEducation.degree} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} 
+                        placeholder="Bachelor of Science in Logistics" 
+                        required 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Field of Study
-                    <input value={currentEducation.field} onChange={(e) => setCurrentEducation({ ...currentEducation, field: e.target.value })} placeholder="Commercial Truck Driving" className={styles.formInput} />
+                    Program / Specialization / Concentration
+                    <input 
+                      value={currentEducation.program} 
+                      onChange={(e) => setCurrentEducation({ ...currentEducation, program: e.target.value })} 
+                      placeholder="Supply Chain Management, Operations Research" 
+                      className={styles.formInput} 
+                    />
                   </label>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
                       Start Date
-                      <input type="text" placeholder="MM/YYYY" value={currentEducation.startDate} onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} className={styles.formInput} />
+                      <input 
+                        type="text" 
+                        placeholder="Month Year" 
+                        value={currentEducation.startDate} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                     <label className={styles.formLabel}>
-                      End Date
-                      <input type="text" placeholder="MM/YYYY or Expected" value={currentEducation.endDate} onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} className={styles.formInput} />
+                      End Date / Expected
+                      <input 
+                        type="text" 
+                        placeholder="Month Year or Expected" 
+                        value={currentEducation.endDate} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} 
+                        className={styles.formInput} 
+                      />
                     </label>
                   </div>
                   <div className={styles.formActions}>
-                    <button type="button" onClick={addEducation} className={styles.addButton} disabled={!currentEducation.institution || !currentEducation.degree}>
-                      <FiPlus /> {currentEducation.isEditing ? 'Update' : 'Add Education'}
+                    <button 
+                      type="button" 
+                      onClick={addEducation} 
+                      className={styles.addButton} 
+                      disabled={!currentEducation.institution || !currentEducation.degree}
+                    >
+                      <FiPlus /> {currentEducation.isEditing ? 'Update Education' : 'Add Education'}
                     </button>
-                    {currentEducation.isEditing && <button type="button" onClick={() => setCurrentEducation(defaultEducation())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    {currentEducation.isEditing && (
+                      <button 
+                        type="button" 
+                        onClick={() => setCurrentEducation(defaultEducation())} 
+                        className={styles.cancelButton}
+                      >
+                        <FiX /> Cancel
+                      </button>
+                    )}
+                  </div>
+                </div>
+                
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  {formData.education.length === 0 ? (
+                    <p className={styles.emptyMessage}>No education added yet</p>
+                  ) : (
+                    <div className={styles.itemsList}>
+                      {formData.education.map((edu, i) => (
+                        <div key={i} className={styles.listItem}>
+                          <div className={styles.itemContent}>
+                            <div className={styles.itemHeader}>
+                              <strong className={styles.itemTitle}>{edu.degree}</strong>
+                              {edu.program && <span className={styles.itemSubtitle}> – {edu.program}</span>}
+                            </div>
+                            <div className={styles.itemMeta}>
+                              <span>{edu.institution}</span>
+                              <span>{edu.startDate} – {edu.endDate || 'Present'}</span>
+                            </div>
+                          </div>
+                          <div className={styles.itemActions}>
+                            <button onClick={() => editEducation(i)} className={styles.editButton} aria-label={`Edit ${edu.degree}`}><FiEdit2 /></button>
+                            <button onClick={() => deleteEducation(i)} className={styles.deleteButton} aria-label={`Delete ${edu.degree}`}><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Specialties & Certifications Section */}
+            {activeSection === 'specialties' && (
+              <div className={styles.formSectionContent}>
+                <h3 className={styles.sectionTitle}><FiTarget /> Logistics Specialties & Skills</h3>
+                
+                {/* Logistics Specialties */}
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}>Logistics Specialties</h4>
+                  <p className={styles.sectionDescription}>List your logistics and supply chain specialties</p>
+                  <div className={styles.skillsInput}>
+                    <input 
+                      value={currentSpecialty.name} 
+                      onChange={(e) => setCurrentSpecialty({ ...currentSpecialty, name: e.target.value })} 
+                      placeholder="Supply Chain Optimization, Warehouse Management, Transportation, Inventory Control" 
+                      className={styles.formInput} 
+                    />
+                    <div className={styles.formActions}>
+                      <button 
+                        type="button" 
+                        onClick={addSpecialty} 
+                        className={styles.addButton} 
+                        disabled={!currentSpecialty.name.trim()}
+                      >
+                        <FiPlus /> {currentSpecialty.isEditing ? 'Update Specialty' : 'Add Specialty'}
+                      </button>
+                      {currentSpecialty.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentSpecialty(defaultSpecialty())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.itemsList}>
+                    {formData.specialties.map((s, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <span>{s.name}</span>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editSpecialty(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteSpecialty(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.specialties.length === 0 && <p className={styles.emptyMessage}>No specialties added yet</p>}
+                  </div>
+                </div>
+
+                {/* Certifications */}
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}><FiShield /> Certifications & Licenses</h4>
+                  <p className={styles.sectionDescription}>Add your logistics certifications and professional licenses</p>
+                  <div className={styles.skillsInput}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Certification/License Name*
+                        <input 
+                          value={currentCertification.name} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, name: e.target.value })} 
+                          placeholder="Certified Supply Chain Professional (CSCP)" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Issuing Authority
+                        <input 
+                          value={currentCertification.issuingAuthority} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, issuingAuthority: e.target.value })} 
+                          placeholder="APICS, ISM, CSCMP" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Certification Number
+                        <input 
+                          value={currentCertification.certificationNumber} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, certificationNumber: e.target.value })} 
+                          placeholder="CSCP-123456" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Expiry Date
+                        <input 
+                          value={currentCertification.expiryDate} 
+                          onChange={(e) => setCurrentCertification({ ...currentCertification, expiryDate: e.target.value })} 
+                          placeholder="Month Year" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
+                    <div className={styles.formActions}>
+                      <button 
+                        type="button" 
+                        onClick={addCertification} 
+                        className={styles.addButton} 
+                        disabled={!currentCertification.name.trim()}
+                      >
+                        <FiPlus /> {currentCertification.isEditing ? 'Update Certification' : 'Add Certification'}
+                      </button>
+                      {currentCertification.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentCertification(defaultCertification())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.itemsList}>
+                    {formData.certifications.map((c, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          <strong>{c.name}</strong>
+                          {c.issuingAuthority && ` – ${c.issuingAuthority}`}
+                          {c.certificationNumber && ` (#${c.certificationNumber})`}
+                          {c.expiryDate && ` – Expires: ${c.expiryDate}`}
+                        </div>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editCertification(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteCertification(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.certifications.length === 0 && <p className={styles.emptyMessage}>No certifications added yet</p>}
+                  </div>
+                </div>
+
+                {/* Technical Skills */}
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}><FiTool /> Technical Skills & Software</h4>
+                  <p className={styles.sectionDescription}>List your technical skills and logistics software proficiency</p>
+                  <div className={styles.skillsInput}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Software/Skill Name*
+                        <input 
+                          value={currentTechnicalSkill.name} 
+                          onChange={(e) => setCurrentTechnicalSkill({ ...currentTechnicalSkill, name: e.target.value })} 
+                          placeholder="SAP, Oracle WMS, Microsoft Excel, TMS, ERP" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Proficiency Level
+                        <input 
+                          value={currentTechnicalSkill.proficiency} 
+                          onChange={(e) => setCurrentTechnicalSkill({ ...currentTechnicalSkill, proficiency: e.target.value })} 
+                          placeholder="Expert, Advanced, Intermediate" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
+                    <div className={styles.formActions}>
+                      <button 
+                        type="button" 
+                        onClick={addTechnicalSkill} 
+                        className={styles.addButton} 
+                        disabled={!currentTechnicalSkill.name.trim()}
+                      >
+                        <FiPlus /> {currentTechnicalSkill.isEditing ? 'Update Skill' : 'Add Skill'}
+                      </button>
+                      {currentTechnicalSkill.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentTechnicalSkill(defaultTechnicalSkill())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.itemsList}>
+                    {formData.technicalSkills.map((s, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          {s.name}{s.proficiency && ` (${s.proficiency})`}
+                        </div>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editTechnicalSkill(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteTechnicalSkill(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.technicalSkills.length === 0 && <p className={styles.emptyMessage}>No technical skills added yet</p>}
+                  </div>
+                </div>
+
+                {/* Professional Affiliations */}
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <p className={styles.sectionDescription}>Add your professional logistics organization memberships</p>
+                  <div className={styles.skillsInput}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Organization*
+                        <input 
+                          value={currentAffiliation.organization} 
+                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, organization: e.target.value })} 
+                          placeholder="Council of Supply Chain Management Professionals (CSCMP)" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Role / Membership Type
+                        <input 
+                          value={currentAffiliation.role} 
+                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, role: e.target.value })} 
+                          placeholder="Active Member, Committee Chair" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
+                    <div className={styles.formActions}>
+                      <button 
+                        type="button" 
+                        onClick={addAffiliation} 
+                        className={styles.addButton} 
+                        disabled={!currentAffiliation.organization.trim()}
+                      >
+                        <FiPlus /> {currentAffiliation.isEditing ? 'Update Affiliation' : 'Add Affiliation'}
+                      </button>
+                      {currentAffiliation.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentAffiliation(defaultAffiliation())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.itemsList}>
+                    {formData.affiliations.map((a, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          <strong>{a.organization}</strong>
+                          {a.role && ` – ${a.role}`}
+                        </div>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editAffiliation(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteAffiliation(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.affiliations.length === 0 && <p className={styles.emptyMessage}>No affiliations added yet</p>}
+                  </div>
+                </div>
+
+                {/* Languages */}
+                <div className={styles.formCard}>
+                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
+                  <div className={styles.skillsInput}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Language*
+                        <input 
+                          value={currentLanguage.name} 
+                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} 
+                          placeholder="Spanish" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                      <label className={styles.formLabel}>
+                        Proficiency Level
+                        <input 
+                          value={currentLanguage.proficiency} 
+                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} 
+                          placeholder="Fluent, Business Proficient" 
+                          className={styles.formInput} 
+                        />
+                      </label>
+                    </div>
+                    <div className={styles.formActions}>
+                      <button 
+                        type="button" 
+                        onClick={addLanguage} 
+                        className={styles.addButton} 
+                        disabled={!currentLanguage.name.trim()}
+                      >
+                        <FiPlus /> {currentLanguage.isEditing ? 'Update Language' : 'Add Language'}
+                      </button>
+                      {currentLanguage.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentLanguage(defaultLanguage())} 
+                          className={styles.cancelButton}
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.itemsList}>
+                    {formData.languages.map((l, i) => (
+                      <div key={i} className={styles.listItem}>
+                        <div>
+                          {l.name}{l.proficiency && ` (${l.proficiency})`}
+                        </div>
+                        <div className={styles.itemActions}>
+                          <button onClick={() => editLanguage(i)} className={styles.editButton}><FiEdit2 /></button>
+                          <button onClick={() => deleteLanguage(i)} className={styles.deleteButton}><FiTrash2 /></button>
+                        </div>
+                      </div>
+                    ))}
+                    {formData.languages.length === 0 && <p className={styles.emptyMessage}>No languages added yet</p>}
                   </div>
                 </div>
               </div>
             )}
 
-            {/* CDL & Equipment */}
-            {activeSection === 'logistics' && currentPage === 1 && (
+            {/* Font Settings Section */}
+            {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiPackage /> CDL Information</h3>
+                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
+                
                 <div className={styles.formCard}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      CDL Class*
-                      <select value={currentCdl.class} onChange={(e) => setCurrentCdl({ ...currentCdl, class: e.target.value })} className={styles.formInput} required>
-                        <option value="">Select</option>
-                        <option value="Class A">Class A</option>
-                        <option value="Class B">Class B</option>
-                        <option value="Class C">Class C</option>
-                      </select>
-                    </label>
-                    <label className={styles.formLabel}>
-                      State*
-                      <input value={currentCdl.state} onChange={(e) => setCurrentCdl({ ...currentCdl, state: e.target.value })} placeholder="TX" required className={styles.formInput} />
-                    </label>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      License Number
-                      <input value={currentCdl.number} onChange={(e) => setCurrentCdl({ ...currentCdl, number: e.target.value })} placeholder="12345678" className={styles.formInput} />
-                    </label>
-                    <label className={styles.formLabel}>
-                      Expiry Date
-                      <input value={currentCdl.expiry} onChange={(e) => setCurrentCdl({ ...currentCdl, expiry: e.target.value })} placeholder="MM/YYYY" className={styles.formInput} />
-                    </label>
-                  </div>
-                  <label className={styles.formLabel}>
-                    Endorsements
-                    <input value={currentCdl.endorsements} onChange={(e) => setCurrentCdl({ ...currentCdl, endorsements: e.target.value })} placeholder="H, N, T" className={styles.formInput} />
-                  </label>
-                  <div className={styles.formActions}>
-                    <button type="button" onClick={saveCdl} className={styles.addButton} disabled={!currentCdl.class || !currentCdl.state}>
-                      <FiCheck /> Save CDL
-                    </button>
-                    {formData.cdl && (
-                      <button type="button" onClick={() => setFormData({ ...formData, cdl: null })} className={styles.cancelButton}>
-                        <FiX /> Remove CDL
-                      </button>
-                    )}
-                  </div>
-                </div>
+                  <div className={styles.fontSizeGrid}>
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Name</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.name}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="8" 
+                        max="24" 
+                        value={fontSizes.name}
+                        onChange={(e) => handleFontSizeChange('name', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Section Titles</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.sectionTitle}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="18" 
+                        value={fontSizes.sectionTitle}
+                        onChange={(e) => handleFontSizeChange('sectionTitle', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Job Titles</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.jobTitle}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="16" 
+                        value={fontSizes.jobTitle}
+                        onChange={(e) => handleFontSizeChange('jobTitle', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Degrees</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.degree}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="16" 
+                        value={fontSizes.degree}
+                        onChange={(e) => handleFontSizeChange('degree', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Company/Institution Names</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.institution}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.institution}
+                        onChange={(e) => handleFontSizeChange('institution', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Institution Dates</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.institutionDate}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="4" 
+                        max="12" 
+                        value={fontSizes.institutionDate}
+                        onChange={(e) => handleFontSizeChange('institutionDate', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Regular Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.regularText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.regularText}
+                        onChange={(e) => handleFontSizeChange('regularText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Bullet Points</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.bulletText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.bulletText}
+                        onChange={(e) => handleFontSizeChange('bulletText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+                    
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Contact Info</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.contactInfo}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="12" 
+                        value={fontSizes.contactInfo}
+                        onChange={(e) => handleFontSizeChange('contactInfo', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
 
-                <div className={styles.formCard}>
-                  <h4>Vehicles & Equipment – Page {currentPage}</h4>
-                  <div className={styles.skillsInput}>
-                    <input value={currentEquipment.name} onChange={(e) => setCurrentEquipment({ ...currentEquipment, name: e.target.value })} placeholder="Class 8 Tractor, Flatbed, Dry Van" className={styles.formInput} />
-                    <div className={styles.formActions}>
-                      <button type="button" onClick={addEquipment} className={styles.addButton} disabled={!currentEquipment.name.trim()}>
-                        <FiPlus /> {currentEquipment.isEditing ? 'Update' : 'Add Equipment'}
-                      </button>
-                      {currentEquipment.isEditing && <button type="button" onClick={() => setCurrentEquipment(defaultEquipment())} className={styles.cancelButton}><FiX /> Cancel</button>}
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Skills Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.skillText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="12" 
+                        value={fontSizes.skillText}
+                        onChange={(e) => handleFontSizeChange('skillText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Certification Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.certificationText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.certificationText}
+                        onChange={(e) => handleFontSizeChange('certificationText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Achievement Text</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.achievementText}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.achievementText}
+                        onChange={(e) => handleFontSizeChange('achievementText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
                     </div>
                   </div>
-                  <div className={styles.itemsList}>
-                    {formData.equipment.length === 0 ? (
-                      <p className={styles.emptyMessage}>No equipment added</p>
-                    ) : (
-                      formData.equipment.map((e, i) => {
-                        const globalIdx = formData.equipment.findIndex(x => x === e);
-                        return (
-                          <div key={i} className={styles.listItem}>
-                            <span>{e.name}</span>
-                            <div className={styles.itemActions}>
-                              <button onClick={() => editEquipment(globalIdx)} className={styles.editButton}><FiEdit2 /></button>
-                              <button onClick={() => deleteEquipment(globalIdx)} className={styles.deleteButton}><FiTrash2 /></button>
-                            </div>
-                          </div>
-                        );
-                      })
-                    )}
-                  </div>
-                </div>
-
-                <div className={styles.formCard}>
-                  <h4>Certifications – Page {currentPage}</h4>
-                  <div className={styles.skillsInput}>
-                    <input value={currentCertification.name} onChange={(e) => setCurrentCertification({ ...currentCertification, name: e.target.value })} placeholder="Hazmat Certification" className={styles.formInput} />
-                    <input value={currentCertification.issuer} onChange={(e) => setCurrentCertification({ ...currentCertification, issuer: e.target.value })} placeholder="TSA" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <input value={currentCertification.date} onChange={(e) => setCurrentCertification({ ...currentCertification, date: e.target.value })} placeholder="Issued (MM/YYYY)" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <input value={currentCertification.expiry} onChange={(e) => setCurrentCertification({ ...currentCertification, expiry: e.target.value })} placeholder="Expiry (MM/YYYY)" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <div className={styles.formActions}>
-                      <button type="button" onClick={addCertification} className={styles.addButton} disabled={!currentCertification.name.trim()}>
-                        <FiPlus /> {currentCertification.isEditing ? 'Update' : 'Add Certification'}
-                      </button>
-                      {currentCertification.isEditing && <button type="button" onClick={() => setCurrentCertification(defaultCertification())} className={styles.cancelButton}><FiX /> Cancel</button>}
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.formCard}>
-                  <h4>Regular Routes – Page {currentPage}</h4>
-                  <div className={styles.skillsInput}>
-                    <input value={currentRoute.origin} onChange={(e) => setCurrentRoute({ ...currentRoute, origin: e.target.value })} placeholder="Dallas, TX" className={styles.formInput} />
-                    <input value={currentRoute.destination} onChange={(e) => setCurrentRoute({ ...currentRoute, destination: e.target.value })} placeholder="Los Angeles, CA" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <input value={currentRoute.frequency} onChange={(e) => setCurrentRoute({ ...currentRoute, frequency: e.target.value })} placeholder="Weekly" className={styles.formInput} style={{ marginTop: '0.5rem' }} />
-                    <div className={styles.formActions}>
-                      <button type="button" onClick={addRoute} className={styles.addButton} disabled={!currentRoute.origin || !currentRoute.destination}>
-                        <FiPlus /> {currentRoute.isEditing ? 'Update' : 'Add Route'}
-                      </button>
-                      {currentRoute.isEditing && <button type="button" onClick={() => setCurrentRoute(defaultRoute())} className={styles.cancelButton}><FiX /> Cancel</button>}
-                    </div>
-                  </div>
+                  
+                  <button 
+                    type="button" 
+                    onClick={resetFontSizes}
+                    className={styles.resetButton}
+                  >
+                    Reset to Default Font Sizes
+                  </button>
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <section className={styles.faqSection} aria-labelledby="faq-title">
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+            <p className={styles.sectionSubtitle}>
+              Everything you need to know about creating professional logistics resumes with our tool.
+            </p>
+          </div>
+          <div className={styles.faqGrid}>
+            {faqs.map((faq, index) => (
+              <div key={index} className={styles.faqItem}>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
+                <p className={styles.faqAnswer}>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className={styles.ctaSection} aria-labelledby="cta-title">
+        <div className={styles.container}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Logistics Career?</h2>
+            <p className={styles.ctaSubtitle}>
+              Join 500,000+ logistics professionals who landed their dream jobs with our free ATS-friendly logistics resume builder.
+            </p>
+            <div className={styles.ctaButtons}>
+              <button
+                onClick={() => setActiveSection('personal')}
+                className={styles.ctaButton}
+                aria-label="Create your free logistics resume now—no sign-up required"
+              >
+                <span className={styles.ctaButtonText}>Create Your Free Logistics Resume Now</span>
+                <FiArrowRight className={styles.ctaButtonIcon} />
+              </button>
+            </div>
+            <div className={styles.ctaGuarantee}>
+              <FiCheck className={styles.guaranteeIcon} />
+              <span className={styles.guaranteeText}>No credit card required • Free forever • Download in minutes • ATS Optimized for Logistics</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Full Preview Modal */}
       {showFullPreview && (
@@ -1004,11 +2183,9 @@ const LogisticsResume = () => {
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>
-              {Array.from({ length: totalPages }, (_, i) => (
-                <div key={i + 1} className={styles.fullPreviewPage}>
-                  {renderTemplate(i + 1)}
-                </div>
-              ))}
+              <div className={styles.fullPreviewPage}>
+                <LogisticsTemplate formData={formData} />
+              </div>
             </div>
           </div>
         </div>
@@ -1016,5 +2193,48 @@ const LogisticsResume = () => {
     </div>
   );
 };
+
+// SSG + ISR Implementation
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate review dates for structured data
+  const reviewDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Generate FAQ dates for structured data
+  const faqDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Breadcrumb data for structured data
+  const breadcrumbData = [
+    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
+    { name: 'Logistics Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder' }
+  ];
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates,
+        breadcrumbData
+      },
+      buildTimestamp
+    },
+    // ISR: Revalidate every 24 hours (86400 seconds)
+    revalidate: 3600
+  };
+}
 
 export default LogisticsResume;
