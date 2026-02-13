@@ -253,10 +253,10 @@ const CertificateResumeSection = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap-certificates.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/certificate-resume-section" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/certificate-resume-section" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/certificate-resume-section" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/certificate-resume-section" hreflang="x-default" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/certification-resume-section" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/certification-resume-section" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/certification-resume-section" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/certification-resume-section" hreflang="x-default" />
         
         <meta property="og:title" content="Professional Certificate Resume Section | Free ATS-Optimized Templates 2026" />
         <meta property="og:description" content="Create professional certificate sections for your resume. ATS-optimized templates to showcase certifications. Free download." />
@@ -264,7 +264,7 @@ const CertificateResumeSection = ({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Professional Certificate Resume Section Builder" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/certificate-resume-section" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/certification-resume-section" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -294,8 +294,8 @@ const CertificateResumeSection = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/certificate-resume-section/#webpage",
-                  "url": "https://www.professionalresumefree.com/certificate-resume-section",
+                  "@id": "https://www.professionalresumefree.com/certification-resume-section/#webpage",
+                  "url": "https://www.professionalresumefree.com/certification-resume-section",
                   "name": "Professional Certificate Resume Section | Free ATS-Optimized Templates 2026",
                   "description": "Create professional certificate sections for your resume. ATS-optimized templates to showcase certifications.",
                   "datePublished": "2024-01-01",
@@ -320,21 +320,21 @@ const CertificateResumeSection = ({
                       {
                         "@type": "ListItem",
                         "position": 2,
-                        "name": "Resume Sections",
-                        "item": "https://www.professionalresumefree.com/resume-sections"
+                        "name": "Certification Resume Sections",
+                        "item": "https://www.professionalresumefree.com/certification-resume-section"
                       },
                       {
                         "@type": "ListItem",
                         "position": 3,
                         "name": "Certificate Section",
-                        "item": "https://www.professionalresumefree.com/certificate-resume-section"
+                        "item": "https://www.professionalresumefree.com/certification-resume-section"
                       }
                     ]
                   }
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/certificate-resume-section/#faqpage",
+                  "@id": "https://www.professionalresumefree.com/certification-resume-section/#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -390,8 +390,8 @@ const CertificateResumeSection = ({
             <FiChevronRight />
           </li>
           <li>
-            <Link href="/resume-sections" className={styles.breadcrumbLink}>
-              <span className={styles.breadcrumbText}>Resume Sections</span>
+            <Link href="/certification-resume-section" className={styles.breadcrumbLink}>
+              <span className={styles.breadcrumbText}>Certification Resume Sections</span>
             </Link>
           </li>
           <li className={styles.breadcrumbSeparator}>
@@ -425,9 +425,9 @@ const CertificateResumeSection = ({
 
             <div className={styles.ctaButtons}>
               <Link
-                href="/resume-builder"
+                href="/resume-templates"
                 className={styles.primaryButton}
-                aria-label="Build your certificate section now - free and no sign up required"
+                aria-label="Build your certificate section now"
                 prefetch={false}
               >
                 <span className={styles.buttonText}>Build Certificate Section Now</span>
@@ -435,13 +435,13 @@ const CertificateResumeSection = ({
               </Link>
               
               <Link
-                href="/certificate-templates"
+                href="/free-resume-tools"
                 className={styles.secondaryButton}
-                aria-label="View all certificate templates"
+                aria-label="View all certificate tools"
                 prefetch={false}
               >
                 <FiEye className={styles.buttonIcon} />
-                <span className={styles.buttonText}>View Templates</span>
+                <span className={styles.buttonText}>View Tools</span>
               </Link>
             </div>
 
