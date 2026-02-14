@@ -70,11 +70,11 @@ const nextConfig = {
     ];
   },
   
-  // Optional: Enable React strict mode
+  // Enable React strict mode
   reactStrictMode: true,
   
-  // Optional: Enable SWC minification (faster than Terser)
-  swcMinify: true,
+  // SWC minification is now enabled by default in modern Next.js versions
+  // The swcMinify option has been removed - it's no longer needed
 };
 
 module.exports = nextConfig;
