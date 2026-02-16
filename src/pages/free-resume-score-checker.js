@@ -566,7 +566,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
   // Current year for dynamic content
   const currentYear = new Date().getFullYear();
 
-  // Schema data
+  // Schema data - FIXED: Added itemReviewed property to Review objects
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -712,6 +712,12 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
             },
             "datePublished": reviewDates[index] || currentDate,
             "reviewBody": review.review,
+            // FIX: Added required itemReviewed property
+            "itemReviewed": {
+              "@type": "WebApplication",
+              "@id": "https://www.professionalresumefree.com/free-resume-score-checker#webapp",
+              "name": "Free Resume Score Checker"
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Professional Resume Free"
@@ -1070,6 +1076,7 @@ Professional Example:
           <div className={styles.reviewsGrid}>
             {REVIEWS.map((review, index) => (
               <div key={index} className={styles.reviewCard} itemScope itemType="https://schema.org/Review">
+                <meta itemProp="itemReviewed" content="Free Resume Score Checker" />
                 <div className={styles.reviewHeader}>
                   <div className={styles.reviewerInfo}>
                     <span itemProp="author" itemScope itemType="https://schema.org/Person">
@@ -1127,7 +1134,21 @@ Professional Example:
         </section>
 
         {/* Footer */}
-        
+        <footer className={styles.footer}>
+          <div className={styles.footerContent}>
+            <p>
+              <Link href="/">Professional Resume Free</Link> - Helping job seekers create ATS-optimized 
+              resumes since 2020. Our free resume score checker tool processes all data locally in your 
+              browser for maximum privacy and security.
+            </p>
+            <div className={styles.footerLinks}>
+              <Link href="/privacy-policy">Privacy Policy</Link>
+              <Link href="/terms-of-service">Terms of Service</Link>
+              <Link href="/contact">Contact Us</Link>
+              <Link href="/sitemap">Sitemap</Link>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

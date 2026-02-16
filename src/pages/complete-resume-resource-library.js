@@ -272,6 +272,255 @@ export default function CompleteResumeResourceLibrary({
   const safeReviewDates = seoData?.reviewDates || Array(3).fill(safeCurrentDate);
   const safeFaqDates = seoData?.faqDates || Array(4).fill(safeCurrentDate);
 
+  // FIXED: Structured data with proper itemReviewed and fixed author types
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#webpage",
+        "url": "https://www.professionalresumefree.com/complete-resume-resource-library/",
+        "name": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
+        "description": "Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.",
+        "datePublished": "2026-01-15",
+        "dateModified": safeLastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://www.professionalresumefree.com/#website",
+          "url": "https://www.professionalresumefree.com",
+          "name": "Professional Resume Free",
+          "description": "Free online resume builder for job seekers",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://www.professionalresumefree.com/#organization",
+            "name": "Professional Resume Free",
+            "url": "https://www.professionalresumefree.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.professionalresumefree.com/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://twitter.com/ProResumeFree",
+              "https://www.linkedin.com/company/professional-resume-free",
+              "https://www.facebook.com/ProfessionalResumeFree",
+              "https://www.youtube.com/@ProfessionalResumeFree"
+            ]
+          }
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.professionalresumefree.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Resources",
+              "item": "https://www.professionalresumefree.com/complete-resume-resource-library/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Complete Resource Library 2026",
+              "item": "https://www.professionalresumefree.com/complete-resume-resource-library/"
+            }
+          ]
+        },
+        "mainEntity": {
+          "@type": "Article",
+          "headline": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
+          "description": "Master resume writing with expert strategies for the 2026 job market",
+          "image": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
+          "author": AUTHORS.map(author => ({
+            "@type": "Person",
+            "name": author.name,
+            "jobTitle": author.title,
+            "description": author.bio,
+            "affiliation": {
+              "@type": "Organization",
+              "name": "Professional Resume Free"
+            }
+          })),
+          "publisher": {
+            "@type": "Organization",
+            "name": "Professional Resume Free",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.professionalresumefree.com/logo.png"
+            }
+          },
+          "datePublished": "2026-01-15",
+          "dateModified": safeLastModifiedDate,
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/"
+          },
+          "articleBody": "This comprehensive guide covers modern resume requirements for 2026, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
+          "keywords": "resume writing 2026, ATS optimization, professional resume, job search 2026, career guide",
+          "mentions": internalLinks.slice(0, 20).map(link => ({
+            "@type": "WebPage",
+            "name": link.label,
+            "url": `https://www.professionalresumefree.com${link.href}`
+          }))
+        }
+      },
+      // FIXED: FAQPage with proper author objects (Person type)
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#faqpage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What's the most important resume change for 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The critical change for 2026 is AI-enhanced ATS systems. Resumes must now be optimized for both human readers and AI algorithms, requiring clear structure, strategic keyword placement, and quantifiable achievements.",
+              "datePublished": safeFaqDates[0],
+              "author": {
+                "@type": "Person",
+                "name": "Dr. Sarah Kamara"
+              }
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to see results from resume optimization?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Based on our client data, 78% see increased interview invitations within 2-3 weeks of implementing our ATS optimization strategies. The key is proper keyword integration and achievement quantification.",
+              "datePublished": safeFaqDates[1],
+              "author": {
+                "@type": "Person",
+                "name": "Marcus Johnson"
+              }
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are free resume builders effective for professional positions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, when they include ATS optimization features and industry-specific templates. Our free builders are designed with the same algorithms used by professional resume writers.",
+              "datePublished": safeFaqDates[2],
+              "author": {
+                "@type": "Person",
+                "name": "Resume Expert Team"
+              }
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I handle career gaps on my resume?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use functional resume templates or highlight relevant skills and professional development during gaps. Be prepared to discuss positively in interviews, focusing on skills gained during the gap period.",
+              "datePublished": safeFaqDates[3],
+              "author": {
+                "@type": "Person",
+                "name": "Career Advice Team"
+              }
+            }
+          }
+        ]
+      },
+      // FIXED: ItemList with proper itemReviewed in Review objects
+      {
+        "@type": "ItemList",
+        "itemListElement": SUCCESS_STORIES.map((story, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": 5,
+              "bestRating": 5
+            },
+            "author": {
+              "@type": "Person",
+              "name": story.name
+            },
+            "reviewBody": story.quote,
+            "datePublished": safeReviewDates[index] || safeCurrentDate,
+            "publisher": {
+              "@type": "Organization",
+              "name": "Professional Resume Free"
+            },
+            // FIXED: Added required itemReviewed property
+            "itemReviewed": {
+              "@type": "Service",
+              "name": "Professional Resume Writing Resources",
+              "serviceType": "Online Resume Building Service",
+              "provider": {
+                "@type": "Organization",
+                "name": "Professional Resume Free",
+                "url": "https://www.professionalresumefree.com"
+              }
+            }
+          }
+        }))
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Use This Resume Resource Library Effectively",
+        "description": "Step-by-step guide to maximize the value of our comprehensive resume resources",
+        "totalTime": "PT30M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Start with Core Guides",
+            "text": "Begin with our fundamental resume writing guides to understand the basics of professional resume creation.",
+            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#guides",
+            "image": "https://www.professionalresumefree.com/images/step1-guides.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Choose Industry-Specific Builder",
+            "text": "Select the resume builder template that matches your industry for optimized keyword placement.",
+            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#industry-builders",
+            "image": "https://www.professionalresumefree.com/images/step2-industry.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Apply ATS Optimization",
+            "text": "Use our ATS optimization guides to ensure your resume passes automated screening systems.",
+            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#ats",
+            "image": "https://www.professionalresumefree.com/images/step3-ats.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Download and Customize",
+            "text": "Download your optimized resume and customize it further based on specific job applications.",
+            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#download",
+            "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -280,7 +529,7 @@ export default function CompleteResumeResourceLibrary({
         <meta name="title" content="The Ultimate Resume Resource Library for 2026: Expert Guides & Tools | Professional Resume Free" />
         <meta name="description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, industry-specific templates, and proven career advice. Backed by 15+ years HR experience." />
         <meta name="keywords" content="resume writing guide 2026, ATS optimization, professional resume templates, career advice, job search strategies, resume keywords, industry-specific resumes, free resume builder 2026" />
-        <meta name="author" content="Dr. Sarah Chen, Marcus Johnson, Professional Resume Experts" />
+        <meta name="author" content="Dr. Sarah Kamara, Marcus Johnson, Professional Resume Experts" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
@@ -345,232 +594,7 @@ export default function CompleteResumeResourceLibrary({
           type="application/ld+json"
           key="structured-data-main"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#webpage",
-                  "url": "https://www.professionalresumefree.com/complete-resume-resource-library/",
-                  "name": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
-                  "description": "Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.",
-                  "datePublished": "2026-01-15",
-                  "dateModified": safeLastModifiedDate,
-                  "inLanguage": "en-US",
-                  "isPartOf": {
-                    "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
-                    "name": "Professional Resume Free",
-                    "description": "Free online resume builder for job seekers",
-                    "publisher": {
-                      "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
-                      "name": "Professional Resume Free",
-                      "url": "https://www.professionalresumefree.com",
-                      "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
-                        "width": 512,
-                        "height": 512
-                      },
-                      "sameAs": [
-                        "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
-                      ]
-                    }
-                  },
-                  "primaryImageOfPage": {
-                    "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
-                    "width": 1200,
-                    "height": 630
-                  },
-                  "breadcrumb": {
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
-                      {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
-                      },
-                      {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Resources",
-                        "item": "https://www.professionalresumefree.com/complete-resume-resource-library/"
-                      },
-                      {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": "Complete Resource Library 2026",
-                        "item": "https://www.professionalresumefree.com/complete-resume-resource-library/"
-                      }
-                    ]
-                  },
-                  "mainEntity": {
-                    "@type": "Article",
-                    "headline": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
-                    "description": "Master resume writing with expert strategies for the 2026 job market",
-                    "image": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
-                    "author": AUTHORS.map(author => ({
-                      "@type": "Person",
-                      "name": author.name,
-                      "jobTitle": author.title,
-                      "description": author.bio,
-                      "affiliation": {
-                        "@type": "Organization",
-                        "name": "Professional Resume Free"
-                      }
-                    })),
-                    "publisher": {
-                      "@type": "Organization",
-                      "name": "Professional Resume Free",
-                      "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png"
-                      }
-                    },
-                    "datePublished": "2026-01-15",
-                    "dateModified": safeLastModifiedDate,
-                    "mainEntityOfPage": {
-                      "@type": "WebPage",
-                      "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/"
-                    },
-                    "articleBody": "This comprehensive guide covers modern resume requirements for 2026, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
-                    "keywords": "resume writing 2026, ATS optimization, professional resume, job search 2026, career guide",
-                    "mentions": internalLinks.slice(0, 20).map(link => ({
-                      "@type": "WebPage",
-                      "name": link.label,
-                      "url": link.href
-                    }))
-                  }
-                },
-                {
-                  "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#faqpage",
-                  "mainEntity": [
-                    {
-                      "@type": "Question",
-                      "name": "What's the most important resume change for 2026?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "The critical change for 2026 is AI-enhanced ATS systems. Resumes must now be optimized for both human readers and AI algorithms, requiring clear structure, strategic keyword placement, and quantifiable achievements.",
-                        "datePublished": safeFaqDates[0],
-                        "author": {
-                          "@type": "Person",
-                          "name": "Dr. Sarah Kamara"
-                        }
-                      }
-                    },
-                    {
-                      "@type": "Question",
-                      "name": "How long does it take to see results from resume optimization?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Based on our client data, 78% see increased interview invitations within 2-3 weeks of implementing our ATS optimization strategies. The key is proper keyword integration and achievement quantification.",
-                        "datePublished": safeFaqDates[1],
-                        "author": {
-                          "@type": "Person",
-                          "name": "Marcus Johnson"
-                        }
-                      }
-                    },
-                    {
-                      "@type": "Question",
-                      "name": "Are free resume builders effective for professional positions?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes, when they include ATS optimization features and industry-specific templates. Our free builders are designed with the same algorithms used by professional resume writers.",
-                        "datePublished": safeFaqDates[2],
-                        "author": {
-                          "@type": "Person",
-                          "name": "Resume Expert Team"
-                        }
-                      }
-                    }
-                  ]
-                },
-                {
-                  "@type": "ItemList",
-                  "itemListElement": SUCCESS_STORIES.map((story, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": story.name
-                      },
-                      "reviewBody": story.quote,
-                      "datePublished": safeReviewDates[index] || safeCurrentDate,
-                      "publisher": {
-                        "@type": "Organization",
-                        "name": "Professional Resume Free"
-                      },
-                      "itemReviewed": {
-                        "@type": "Service",
-                        "name": "Professional Resume Writing Resources",
-                        "serviceType": "Online Resume Building Service"
-                      }
-                    }
-                  }))
-                },
-                {
-                  "@type": "HowTo",
-                  "name": "How to Use This Resume Resource Library Effectively",
-                  "description": "Step-by-step guide to maximize the value of our comprehensive resume resources",
-                  "totalTime": "PT30M",
-                  "estimatedCost": {
-                    "@type": "MonetaryAmount",
-                    "currency": "USD",
-                    "value": "0"
-                  },
-                  "step": [
-                    {
-                      "@type": "HowToStep",
-                      "position": 1,
-                      "name": "Start with Core Guides",
-                      "text": "Begin with our fundamental resume writing guides to understand the basics of professional resume creation.",
-                      "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#guides",
-                      "image": "https://www.professionalresumefree.com/images/step1-guides.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 2,
-                      "name": "Choose Industry-Specific Builder",
-                      "text": "Select the resume builder template that matches your industry for optimized keyword placement.",
-                      "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#industry-builders",
-                      "image": "https://www.professionalresumefree.com/images/step2-industry.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 3,
-                      "name": "Apply ATS Optimization",
-                      "text": "Use our ATS optimization guides to ensure your resume passes automated screening systems.",
-                      "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#ats",
-                      "image": "https://www.professionalresumefree.com/images/step3-ats.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 4,
-                      "name": "Download and Customize",
-                      "text": "Download your optimized resume and customize it further based on specific job applications.",
-                      "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
-                    }
-                  ]
-                }
-              ]
-            })
+            __html: JSON.stringify(structuredData)
           }}
         />
       </Head>
@@ -771,22 +795,20 @@ export default function CompleteResumeResourceLibrary({
           
           <div className={styles.successGrid}>
             {SUCCESS_STORIES.map((story, index) => (
-              <div key={index} className={styles.successCard} itemScope itemType="https://schema.org/Review">
+              <div key={index} className={styles.successCard}>
                 <div className={styles.successHeader}>
                   <div className={styles.successIndustry}>{story.industry}</div>
                   <div className={styles.successTime}>{story.beforeAfter}</div>
                 </div>
-                <h3 className={styles.successName} itemProp="author">{story.name}</h3>
+                <h3 className={styles.successName}>{story.name}</h3>
                 <p className={styles.successRole}>{story.role}</p>
                 <div className={styles.successMetrics}>
                   <span className={styles.metricValue}>{story.metrics}</span>
                 </div>
-                <blockquote className={styles.successQuote} itemProp="reviewBody">
+                <blockquote className={styles.successQuote}>
                   "{story.quote}"
                 </blockquote>
-                <div className={styles.successRating} itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                  <meta itemProp="ratingValue" content="5" />
-                  <meta itemProp="bestRating" content="5" />
+                <div className={styles.successRating}>
                   <span className={styles.ratingStars}>★★★★★</span>
                 </div>
               </div>
@@ -874,22 +896,17 @@ export default function CompleteResumeResourceLibrary({
                     <div 
                       key={linkIndex} 
                       className={styles.resourceCard}
-                      itemScope 
-                      itemType="https://schema.org/CreativeWork"
                     >
-                      <meta itemProp="datePublished" content="2026-01-01" />
-                      <meta itemProp="dateModified" content={lastBuildDate} />
-                      <h3 className={styles.resourceTitle} itemProp="name">
+                      <h3 className={styles.resourceTitle}>
                         {link.label}
                       </h3>
-                      <p className={styles.resourceDescription} itemProp="description">
+                      <p className={styles.resourceDescription}>
                         {link.description}
                       </p>
                       <Link 
                         href={link.href} 
                         className={styles.resourceButton}
                         aria-label={`Access ${link.label} resource`}
-                        itemProp="url"
                         rel="nofollow"
                       >
                         Access Resource
@@ -905,13 +922,13 @@ export default function CompleteResumeResourceLibrary({
           <section id="faqs" className={styles.faqSection}>
             <h2 className={styles.sectionTitle}>Frequently Asked Questions for {currentYear}</h2>
             
-            <div className={styles.faqGrid} itemScope itemType="https://schema.org/FAQPage">
-              <div className={styles.faqCard} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className={styles.faqQuestion} itemProp="name">
+            <div className={styles.faqGrid}>
+              <div className={styles.faqCard}>
+                <h3 className={styles.faqQuestion}>
                   What's the most important resume change for 2026?
                 </h3>
-                <div className={styles.faqAnswer} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">
+                <div className={styles.faqAnswer}>
+                  <p>
                     The critical change is <strong>AI-enhanced ATS systems</strong>. Resumes must now be optimized 
                     for both human readers and AI algorithms. This requires clear structure, strategic keyword placement, 
                     and quantifiable achievements that demonstrate value.
@@ -919,12 +936,12 @@ export default function CompleteResumeResourceLibrary({
                 </div>
               </div>
               
-              <div className={styles.faqCard} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className={styles.faqQuestion} itemProp="name">
+              <div className={styles.faqCard}>
+                <h3 className={styles.faqQuestion}>
                   How long does it take to see results from resume optimization?
                 </h3>
-                <div className={styles.faqAnswer} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">
+                <div className={styles.faqAnswer}>
+                  <p>
                     Based on our client data, <strong>78% see increased interview invitations within 2-3 weeks</strong> 
                     of implementing our ATS optimization strategies. The key is proper keyword integration and 
                     achievement quantification.
@@ -932,12 +949,12 @@ export default function CompleteResumeResourceLibrary({
                 </div>
               </div>
               
-              <div className={styles.faqCard} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className={styles.faqQuestion} itemProp="name">
+              <div className={styles.faqCard}>
+                <h3 className={styles.faqQuestion}>
                   Are free resume builders effective for professional positions?
                 </h3>
-                <div className={styles.faqAnswer} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">
+                <div className={styles.faqAnswer}>
+                  <p>
                     Yes, when they include <strong>ATS optimization features and industry-specific templates</strong>. 
                     Our free builders are designed with the same algorithms used by professional resume writers, 
                     making them effective for most positions below executive level.
@@ -945,12 +962,12 @@ export default function CompleteResumeResourceLibrary({
                 </div>
               </div>
 
-              <div className={styles.faqCard} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className={styles.faqQuestion} itemProp="name">
+              <div className={styles.faqCard}>
+                <h3 className={styles.faqQuestion}>
                   How do I handle career gaps on my resume?
                 </h3>
-                <div className={styles.faqAnswer} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">
+                <div className={styles.faqAnswer}>
+                  <p>
                     Use our <Link href="/functional-resume-templates" className={styles.inlineLink}>functional resume templates</Link> 
                     or highlight relevant skills and professional development during gaps. Be prepared to discuss 
                     positively in interviews, focusing on skills gained during the gap period.
@@ -976,7 +993,6 @@ export default function CompleteResumeResourceLibrary({
                   Read Beginner's Guide
                 </Link>
               </div>
-              
             </div>
           </section>
         </main>
