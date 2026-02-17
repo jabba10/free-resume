@@ -1,21 +1,17 @@
-// next.config.js - Combined ISR & GoatCounter Version
+// next.config.js - Optimized for ISR, Analytics, and AI GEO Discovery
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable trailing slashes for better SEO
   trailingSlash: true,
-  
-  // Enable compression for better performance
   compress: true,
-  
-  // Image optimization for ISR
+  reactStrictMode: true,
+
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
   },
-  
-  // GoatCounter rewrite rule
+
   async rewrites() {
     return [
       {
@@ -24,13 +20,20 @@ const nextConfig = {
       },
     ];
   },
-  
-  // Security headers - Updated to include GoatCounter domains
+
   async headers() {
     return [
       {
+        // Apply to all routes
         source: '/:path*',
         headers: [
+          // --- AI & LLM DISCOVERY HEADERS ---
+          {
+            key: 'Link',
+            // rel="help" points to the summary; rel="alternate" points to the full data dump
+            value: '<https://www.professionalresumefree.com/llms.txt>; rel="help"; type="text/plain", <https://www.professionalresumefree.com/llms-full.txt>; rel="alternate"; type="text/plain"',
+          },
+          // --- EXISTING SECURITY & PERFORMANCE HEADERS ---
           {
             key: 'Content-Security-Policy',
             value: "default-src 'self'; " +
@@ -49,32 +52,23 @@ const nextConfig = {
                    "base-uri 'self'; " +
                    "form-action 'self'"
           },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY'
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin'
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()'
-          }
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' }
         ]
+      },
+      // Ensure the text files are served with the correct mime-type for AI crawlers
+      {
+        source: '/llms.txt',
+        headers: [{ key: 'Content-Type', value: 'text/plain; charset=utf-8' }]
+      },
+      {
+        source: '/llms-full.txt',
+        headers: [{ key: 'Content-Type', value: 'text/plain; charset=utf-8' }]
       }
     ];
-  },
-  
-  // Enable React strict mode
-  reactStrictMode: true,
-  
-  // SWC minification is now enabled by default in modern Next.js versions
-  // The swcMinify option has been removed - it's no longer needed
+  }
 };
 
 module.exports = nextConfig;

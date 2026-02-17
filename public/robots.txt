@@ -1,9 +1,45 @@
-# *
-User-agent: *
+# ********************************************************
+# Robots.txt for ProfessionalResumeFree.com
+# Purpose: Maximize AI Citations (GEO) and Search Authority
+# Updated: February 2026
+# ********************************************************
+
+# GROUP 1: SURFACING BOTS (THE CITATION MAGNETS)
+# We want these bots to have full access so they can cite us in 
+# live chat answers (ChatGPT Search, Perplexity, etc.)
+User-agent: OAI-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: Bingbot
+User-agent: Googlebot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# GROUP 2: TRAINING BOTS (THE DATA HARVESTERS)
+# You can choose to 'Allow' these to ensure your brand is part of 
+# the LLM's core knowledge base, or 'Disallow' if you want to 
+# prevent them from training on your proprietary 4M+ dataset.
+# RECOMMENDATION: Allow for 'ProfessionalResumeFree' to build brand authority.
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: anthropic-ai
+User-agent: Applebot-Extended
 Allow: /
 
-# Host
-Host: https://www.professionalresumefree.com
+# GROUP 3: GENERAL CRAWLERS
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
-# Sitemaps
+# Sitemaps & Identity
+Host: https://www.professionalresumefree.com
 Sitemap: https://www.professionalresumefree.com/sitemap.xml
+
+# AI Handshake - Helping AI agents find the structured data 
+# (Note: Most advanced 2026 bots look for this in robots.txt now)
+Sitemap: https://www.professionalresumefree.com/llms.txt
