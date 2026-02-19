@@ -302,6 +302,20 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
               "publisher": {
                 "@type": "Organization",
                 "name": "Professional Resume Free"
+              },
+              // FIXED: Added missing itemReviewed field
+              "itemReviewed": {
+                "@type": "SoftwareApplication",
+                "name": "Chronological Resume Example Guide",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Any",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                },
+                "description": "Free comprehensive guide to chronological resume format with examples and templates.",
+                "url": "https://www.professionalresumefree.com/chronological-resume-example"
               }
             }
           },
@@ -324,6 +338,20 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
               "publisher": {
                 "@type": "Organization",
                 "name": "Professional Resume Free"
+              },
+              // FIXED: Added missing itemReviewed field
+              "itemReviewed": {
+                "@type": "SoftwareApplication",
+                "name": "Chronological Resume Example Guide",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Any",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                },
+                "description": "Free comprehensive guide to chronological resume format with examples and templates.",
+                "url": "https://www.professionalresumefree.com/chronological-resume-example"
               }
             }
           },
@@ -346,6 +374,20 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
               "publisher": {
                 "@type": "Organization",
                 "name": "Professional Resume Free"
+              },
+              // FIXED: Added missing itemReviewed field
+              "itemReviewed": {
+                "@type": "SoftwareApplication",
+                "name": "Chronological Resume Example Guide",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Any",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                },
+                "description": "Free comprehensive guide to chronological resume format with examples and templates.",
+                "url": "https://www.professionalresumefree.com/chronological-resume-example"
               }
             }
           }

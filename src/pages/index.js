@@ -937,7 +937,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
             <h2 className="section-title">Specialized Resume Guides</h2>
             <div className="specialized-grid">
               {longTailKeywords.map((keyword, i) => (
-                <Link key={i} href={`/guide/${i+1}`} className="specialized-card">
+                <Link key={i} href="/complete-resume-resource-library" className="specialized-card">
                   <h4>{keyword}</h4>
                   <p style={{color: '#4b5563', marginBottom: '12px', flex: 1}}>Complete guide for {keyword.substring(0, 40)}...</p>
                   <span style={{color: '#000000', borderBottom: '1px solid #000000'}}>Read Guide →</span>
