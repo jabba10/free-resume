@@ -12,38 +12,36 @@ export default function App({ Component, pageProps }) {
   const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`;
   const GA_MEASUREMENT_ID = 'G-ZKH84N99Z2';
 
-  // Google Analytics route tracking
+  // Combined analytics tracking for both GA and GoatCounter
   useEffect(() => {
     const handleRouteChange = (url) => {
-      window.gtag?.('config', GA_MEASUREMENT_ID, {
-        page_path: url,
-        anonymize_ip: true,
-      });
+      // Google Analytics
+      if (typeof window.gtag !== 'undefined') {
+        window.gtag('config', GA_MEASUREMENT_ID, {
+          page_path: url,
+          anonymize_ip: true,
+        });
+      }
+      
+      // GoatCounter
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({
+          path: url,
+        });
+      }
     };
 
-    // Track initial load
+    // Track initial page load
     handleRouteChange(router.asPath);
 
     // Track route changes
     router.events.on('routeChangeComplete', handleRouteChange);
+    
+    // Cleanup
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events, router.asPath]);
-
-  // GoatCounter route tracking
-  useEffect(() => {
-    const handleRouteChange = () => {
-      if (window.goatcounter && window.goatcounter.count) {
-        window.goatcounter.count();
-      }
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
+  }, [router.events, router.asPath, GA_MEASUREMENT_ID]);
 
   return (
     <>

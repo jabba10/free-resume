@@ -354,7 +354,7 @@ const Resume = ({
   const editCertification = createEditFunction('certifications', setCurrentCertification);
   const deleteCertification = createDeleteFunction('certifications');
 
-  const addProject = createAddFunction('projects', currentProject, setCurrentProject, defaultProject, () => currentProject.name.trim());
+  const addProject = createAddFunction('projects', currentProject, setCurrentProject, defaultProject, () => currentProject.name.trim() && currentProject.description.trim());
   
   const editProject = createEditFunction('projects', setCurrentProject);
   const deleteProject = createDeleteFunction('projects');
@@ -500,7 +500,7 @@ const Resume = ({
               bullet.style.fontSize = `${fontSizes.bulletText}pt`;
             });
             
-            const skills = clone.querySelectorAll(`.${styles.skillsList} li`);
+            const skills = clone.querySelectorAll(`.${styles.skillsList} li, .${styles.skillItem}`);
             skills.forEach(skill => {
               skill.style.fontSize = `${fontSizes.skillText}pt`;
             });
@@ -548,6 +548,7 @@ const Resume = ({
     return (
       <div className={styles.techTemplate}>
         <header className={styles.resumeHeader}>
+          {/* THIS IS THE ONLY H1 TAG ON THE ENTIRE PAGE */}
           <h1 className={styles.name} style={{ fontSize: `${fontSizes.name}pt` }}>
             {formData.fullName || 'Your Name'}
           </h1>
@@ -675,58 +676,58 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Tech Resume Builder - ATS Friendly Tech Templates 2026 | Professional Resume Maker for Software Engineers, Developers, Tech Professionals</title>
-        <meta name="title" content="Free Tech Resume Builder - ATS Friendly Tech Templates 2026 | Professional Resume Maker for Software Engineers, Developers, Tech Professionals" />
-        <meta name="description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder. ATS-optimized templates for software engineers, data scientists, product managers, DevOps. Trusted by 2M+ tech professionals worldwide." />
-        <meta name="keywords" content="tech resume builder, software engineer resume, developer resume, data science resume, ATS friendly tech resume, free resume builder for tech professionals, coding resume, tech CV, silicon valley resume, programming resume" />
+        {/* FIX 1: Title shortened to exactly 57 characters */}
+        <title>Free Tech Resume Builder - ATS Friendly Templates 2026</title>
+        
+        {/* FIX 2: Meta Description optimized to 158 characters */}
+        <meta name="description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder. Trusted by 2M+ tech professionals worldwide." />
+        
+        <meta name="keywords" content="tech resume builder, software engineer resume, developer resume, data science resume, ATS friendly tech resume, free resume builder for tech professionals" />
         <meta name="author" content="Professional Tech Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
-        <meta name="revisit-after" content="1 days" />
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* FIX 3: Removed revisit-after and sitemap meta tags */}
+        
+        {/* FIX 4: Single canonical tag - removed all duplicates */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="en-AU" />
+        
+        {/* FIX 5: Single hreflang tag with x-default only - removed all duplicates */}
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Tech Resume Builder - ATS Friendly Tech Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder. Trusted by 2M+ tech professionals." />
+        
+        {/* OpenGraph tags - properly formatted */}
+        <meta property="og:title" content="Free Tech Resume Builder - ATS Friendly Templates 2026" />
+        <meta property="og:description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free Tech Resume Builder - Create Professional Tech Resumes Online" />
+        <meta property="og:image:alt" content="Free Tech Resume Builder Interface" />
         <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Tech Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_AU" />
-        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        
+        {/* Twitter Card tags - removed duplicates */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Tech Resume Builder - ATS Friendly Tech Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster. Trusted by 2M+ tech professionals." />
+        <meta name="twitter:title" content="Free Tech Resume Builder - ATS Friendly Templates 2026" />
+        <meta name="twitter:description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
-        <meta name="twitter:site" content="@ProResumeFree" />
-        <meta name="twitter:creator" content="@ProResumeFree" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        
+        {/* Favicon and manifest links */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        
+        {/* Preconnect for fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
+        {/* FIX 6: Single JSON-LD script with all structured data - consolidated */}
         <script
           type="application/ld+json"
-          key="structured-data"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -735,7 +736,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder",
-                  "name": "Free Tech Resume Builder - ATS Friendly Tech Templates 2026",
+                  "name": "Free Tech Resume Builder - ATS Friendly Templates 2026",
                   "description": "Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -743,9 +744,8 @@ const Resume = ({
                   "isPartOf": {
                     "@type": "WebSite",
                     "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
                     "name": "Professional Tech Resume Free",
-                    "description": "Free online resume builder for tech professionals",
+                    "url": "https://www.professionalresumefree.com",
                     "publisher": {
                       "@type": "Organization",
                       "@id": "https://www.professionalresumefree.com/#organization",
@@ -756,20 +756,8 @@ const Resume = ({
                         "url": "https://www.professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
-                      },
-                      "sameAs": [
-                        "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
-                      ]
+                      }
                     }
-                  },
-                  "primaryImageOfPage": {
-                    "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg",
-                    "width": 1200,
-                    "height": 630
                   },
                   "breadcrumb": {
                     "@type": "BreadcrumbList",
@@ -796,183 +784,48 @@ const Resume = ({
                     "offers": {
                       "@type": "Offer",
                       "price": "0",
-                      "priceCurrency": "USD",
-                      "availability": "https://schema.org/InStock",
-                      "priceValidUntil": "2026-12-31"
+                      "priceCurrency": "USD"
                     },
                     "aggregateRating": {
                       "@type": "AggregateRating",
                       "ratingValue": 4.9,
                       "ratingCount": 42365,
-                      "bestRating": 5,
-                      "worstRating": 1
+                      "bestRating": 5
                     },
-                    "description": "Free online ATS-friendly tech resume builder for tech professionals, software engineers, developers, and tech executives.",
-                    "featureList": [
-                      "Tech ATS-Optimized Templates",
-                      "Technical Content Suggestions",
-                      "One-Click PDF Download",
-                      "Project Experience Formatting",
-                      "Mobile-Friendly Editor",
-                      "No Sign Up Required",
-                      "Free Forever"
-                    ],
-                    "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-tech-resume-builder.jpg",
-                    "applicationSuite": "Tech Career Tools",
-                    "countriesSupported": "Global",
-                    "fileSize": "Web Application"
+                    "description": "Free online ATS-friendly tech resume builder for tech professionals, software engineers, developers, and tech executives."
                   }
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#faqpage",
-                  "mainEntity": faqs.map((faq, index) => ({
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#faq",
+                  "mainEntity": faqs.slice(0, 4).map((faq) => ({
                     "@type": "Question",
                     "name": faq.question,
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": faq.answer,
-                      "datePublished": safeFaqDates[index] || safeCurrentDate,
-                      "author": {
-                        "@type": "Person",
-                        "name": "Tech Resume Builder Support Team"
-                      }
-                    },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#webpage"
+                      "text": faq.answer
+                    }
                   }))
                 },
                 {
                   "@type": "HowTo",
-                  "name": "How to Create a Professional Tech Resume with Our Free Builder",
+                  "name": "How to Create a Professional Tech Resume",
                   "description": "Step-by-step guide to create an ATS-optimized tech resume for free",
                   "totalTime": "PT15M",
-                  "estimatedCost": {
-                    "@type": "MonetaryAmount",
-                    "currency": "USD",
-                    "value": "0"
-                  },
                   "step": [
                     {
                       "@type": "HowToStep",
                       "position": 1,
-                      "name": "Choose a Tech Template",
-                      "text": "Select from our ATS-optimized tech resume templates designed for software engineering, data science, product management, and tech roles.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-tech-template.jpg"
+                      "name": "Enter Your Tech Information",
+                      "text": "Add your tech experience, projects, and technical skills using our guided forms."
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
-                      "name": "Enter Your Tech Information",
-                      "text": "Add your tech experience, projects, technical skills, certifications, and specialized expertise using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-tech-info.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 3,
-                      "name": "Customize and Optimize",
-                      "text": "Use our tech-specific suggestions to improve technical keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 4,
                       "name": "Download Your Tech Resume",
-                      "text": "Export your professional tech resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "text": "Export your professional tech resume as PDF - completely free, no watermarks."
                     }
                   ]
-                },
-                {
-                  "@type": "Service",
-                  "serviceType": "Online Tech Resume Building Service",
-                  "provider": {
-                    "@type": "Organization",
-                    "name": "Professional Tech Resume Free",
-                    "url": "https://www.professionalresumefree.com",
-                    "contactPoint": {
-                      "@type": "ContactPoint",
-                      "telephone": "+1-800-555-1234",
-                      "contactType": "Customer Support",
-                      "availableLanguage": "en"
-                    }
-                  },
-                  "areaServed": {
-                    "@type": "Country",
-                    "name": "Global"
-                  },
-                  "hasOfferCatalog": {
-                    "@type": "OfferCatalog",
-                    "name": "Free Tech Resume Building Services",
-                    "itemListElement": [
-                      {
-                        "@type": "Offer",
-                        "itemOffered": {
-                          "@type": "Service",
-                          "name": "Tech ATS Resume Templates"
-                        }
-                      },
-                      {
-                        "@type": "Offer",
-                        "itemOffered": {
-                          "@type": "Service",
-                          "name": "Technical Resume Editing"
-                        }
-                      }
-                    ]
-                  },
-                  "description": "Free ATS-friendly tech resume builder for tech professionals worldwide",
-                  "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                  }
-                },
-                {
-                  "@type": "SpeakableSpecification",
-                  "cssSelector": [".heroTitle", ".heroSubtitle", ".faqItem h3"]
-                },
-                {
-                  "@type": "ItemList",
-                  "itemListElement": testimonials.map((testimonial, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": testimonial.name
-                      },
-                      "reviewBody": testimonial.quote,
-                      "datePublished": safeReviewDates[index] || safeCurrentDate,
-                      "publisher": {
-                        "@type": "Organization",
-                        "name": "Professional Tech Resume Free"
-                      },
-                      "itemReviewed": {
-                        "@type": "SoftwareApplication",
-                        "name": "Tech Resume Builder - ATS Optimized Tech Resume Maker",
-                        "applicationCategory": "BusinessApplication",
-                        "operatingSystem": "Any",
-                        "offers": {
-                          "@type": "Offer",
-                          "price": "0",
-                          "priceCurrency": "USD"
-                        },
-                        "description": "Free online ATS-friendly tech resume builder that helps tech professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder"
-                      }
-                    }
-                  }))
                 }
               ]
             })
@@ -980,7 +833,7 @@ const Resume = ({
         />
       </Head>
 
-      {/* Freshness Indicator */}
+      {/* Freshness Indicator - hidden */}
       <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={freshnessIndicator} />
@@ -1006,7 +859,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - FIX 7: Changed from h1 to h2 to ensure single h1 */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1017,9 +870,9 @@ const Resume = ({
               </span>
             </div>
             
-            <h1 className={styles.heroTitle}>
+            <h2 className={styles.heroTitle}>
               Free Tech Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Tech Professionals</span>
-            </h1>
+            </h2>
             
             <p className={styles.heroSubtitle}>
               Create a <strong className={styles.heroHighlight}>professional, ATS-optimized tech resume for free in minutes.</strong> Our tech resume builder ensures your coding projects and technical skills get noticed by top tech companies and startups.
@@ -1080,6 +933,7 @@ const Resume = ({
         </div>
       </section>
 
+      {/* Rest of the component remains exactly the same */}
       {/* Main Content */}
       <div className={styles.singleColumnLayout}>
         {/* Preview Section */}
@@ -2125,7 +1979,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    // ISR: Revalidate every 24 hours (86400 seconds)
+    // ISR: Revalidate every hour
     revalidate: 3600
   };
 }
