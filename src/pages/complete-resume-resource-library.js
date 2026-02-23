@@ -1,7 +1,883 @@
-import { useState, useEffect } from 'react';
+// pages/complete-resume-resource-library.jsx
 import Head from 'next/head';
-import Link from 'next/link';
-import styles from './linkpage.module.css';
+
+// ===== INLINE CRITICAL CSS - Optimized for speed =====
+const criticalCSS = `
+  /* CSS RESET */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+  
+  /* BASE STYLES */
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    line-height: 1.6; 
+    color: #111827; 
+    background: #f9fafb; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* MAIN CONTAINER */
+  .container { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 16px; 
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .container { padding: 24px; }
+  }
+  
+  @media (min-width: 1024px) {
+    .container { padding: 32px; }
+  }
+  
+  /* ARTICLE */
+  .article { 
+    background: #ffffff; 
+    border-radius: 24px; 
+    padding: 24px; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .article { padding: 40px; }
+  }
+  
+  @media (min-width: 1024px) {
+    .article { padding: 48px; }
+  }
+  
+  /* BREADCRUMB */
+  .breadcrumb { 
+    margin-bottom: 24px; 
+    font-size: 0.9rem; 
+    color: #6b7280;
+  }
+  
+  .breadcrumbList { 
+    display: flex; 
+    flex-wrap: wrap; 
+    list-style: none; 
+    gap: 8px;
+  }
+  
+  .breadcrumbItem { 
+    display: flex; 
+    align-items: center;
+  }
+  
+  .breadcrumbItem:not(:last-child)::after { 
+    content: "›"; 
+    margin-left: 8px; 
+    color: #9ca3af; 
+    font-size: 1.1rem;
+  }
+  
+  .breadcrumbLink { 
+    color: #111827; 
+    text-decoration: none; 
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .breadcrumbLink:hover { 
+    border-bottom-color: #000000; 
+  }
+  
+  /* HEADER */
+  .header { 
+    margin-bottom: 40px; 
+    padding-bottom: 32px; 
+    border-bottom: 2px solid #f3f4f6;
+  }
+  
+  h1 { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .title { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .search-intent { 
+    background: #f3f4f6; 
+    padding: 16px 20px; 
+    border-radius: 12px; 
+    margin-bottom: 20px; 
+    border-left: 4px solid #000000;
+  }
+  
+  .search-intent-text { 
+    margin-bottom: 0; 
+    font-size: 1rem; 
+    color: #374151;
+  }
+  
+  .meta { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+    margin: 16px 0; 
+    font-size: 0.9rem; 
+    color: #6b7280;
+  }
+  
+  .meta-item { 
+    display: inline-block;
+  }
+  
+  .meta-separator { 
+    color: #9ca3af;
+  }
+  
+  /* EXPERT INTRO */
+  .expert-intro { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    margin: 32px 0; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .expert-title { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    color: #000000; 
+    margin-bottom: 16px;
+  }
+  
+  .expert-text { 
+    margin-bottom: 24px;
+  }
+  
+  .expert-stats { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 24px; 
+    margin-top: 20px;
+  }
+  
+  .stat-item { 
+    flex: 1 1 auto; 
+    min-width: 120px;
+  }
+  
+  .stat-value { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    color: #000000; 
+    display: block; 
+    line-height: 1.2;
+  }
+  
+  .stat-label { 
+    color: #4b5563; 
+    font-size: 0.85rem;
+  }
+  
+  /* STATS SECTION */
+  .stats-section { 
+    margin: 48px 0;
+  }
+  
+  .stats-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 24px; 
+    text-align: center;
+  }
+  
+  .stats-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
+  
+  @media (min-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  .stat-card { 
+    background: #ffffff; 
+    padding: 24px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    text-align: center; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-number { 
+    font-size: 2.5rem; 
+    font-weight: 800; 
+    color: #000000; 
+    display: block; 
+    line-height: 1.2; 
+    margin-bottom: 8px;
+  }
+  
+  .stat-description { 
+    color: #374151; 
+    margin-bottom: 8px;
+  }
+  
+  .stat-source { 
+    font-size: 0.75rem; 
+    color: #9ca3af;
+  }
+  
+  /* AUTHORS SECTION */
+  .authors-section { 
+    margin: 48px 0;
+  }
+  
+  .authors-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    text-align: center;
+  }
+  
+  .authors-subtitle { 
+    text-align: center; 
+    color: #6b7280; 
+    margin-bottom: 32px;
+  }
+  
+  .authors-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+  }
+  
+  @media (min-width: 768px) {
+    .authors-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  .author-card { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .author-header { 
+    display: flex; 
+    gap: 16px; 
+    margin-bottom: 16px; 
+    align-items: center;
+  }
+  
+  .author-avatar { 
+    width: 64px; 
+    height: 64px; 
+    background: #000000; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+  }
+  
+  .avatar-placeholder { 
+    color: #ffffff; 
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+  
+  .author-name { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    color: #000000; 
+    margin-bottom: 4px;
+  }
+  
+  .author-title { 
+    color: #4b5563; 
+    font-size: 0.9rem;
+  }
+  
+  .author-credentials { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
+    margin-bottom: 16px;
+  }
+  
+  .credential-badge { 
+    background: #e5e7eb; 
+    padding: 4px 12px; 
+    border-radius: 50px; 
+    font-size: 0.75rem; 
+    color: #374151;
+  }
+  
+  .author-bio { 
+    color: #374151; 
+    line-height: 1.6;
+  }
+  
+  /* CORE GUIDE */
+  .core-guide { 
+    margin: 48px 0;
+  }
+  
+  .guide-header { 
+    text-align: center; 
+    margin-bottom: 32px;
+  }
+  
+  .guide-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 8px;
+  }
+  
+  .guide-subtitle { 
+    color: #6b7280;
+  }
+  
+  .guide-steps { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+  }
+  
+  @media (min-width: 768px) {
+    .guide-steps { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .step-card { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    position: relative;
+  }
+  
+  .step-number { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    color: #e5e7eb; 
+    position: absolute; 
+    top: 16px; 
+    right: 16px;
+  }
+  
+  .step-title { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    color: #000000; 
+    margin-bottom: 16px; 
+    padding-right: 48px;
+  }
+  
+  .step-description { 
+    color: #374151; 
+    margin-bottom: 16px;
+  }
+  
+  .step-link { 
+    color: #000000; 
+    text-decoration: none; 
+    font-weight: 600; 
+    border-bottom: 2px solid #9ca3af;
+  }
+  
+  .step-link:hover { 
+    border-bottom-color: #000000;
+  }
+  
+  .step-tip { 
+    background: #e0f2fe; 
+    padding: 12px; 
+    border-radius: 8px; 
+    font-size: 0.9rem; 
+    margin-top: 16px;
+  }
+  
+  /* SUCCESS SECTION */
+  .success-section { 
+    margin: 48px 0;
+  }
+  
+  .success-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 8px; 
+    text-align: center;
+  }
+  
+  .success-subtitle { 
+    text-align: center; 
+    color: #6b7280; 
+    margin-bottom: 32px;
+  }
+  
+  .success-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+  }
+  
+  @media (min-width: 768px) {
+    .success-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .success-card { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .success-header { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 16px;
+  }
+  
+  .success-industry { 
+    background: #000000; 
+    color: #ffffff; 
+    padding: 4px 12px; 
+    border-radius: 50px; 
+    font-size: 0.75rem; 
+    font-weight: 600;
+  }
+  
+  .success-time { 
+    color: #6b7280; 
+    font-size: 0.85rem;
+  }
+  
+  .success-name { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: #000000; 
+    margin-bottom: 4px;
+  }
+  
+  .success-role { 
+    color: #4b5563; 
+    font-size: 0.9rem; 
+    margin-bottom: 16px;
+  }
+  
+  .success-metrics { 
+    background: #e5e7eb; 
+    padding: 12px; 
+    border-radius: 8px; 
+    margin-bottom: 16px;
+  }
+  
+  .metric-value { 
+    font-weight: 700; 
+    color: #000000;
+  }
+  
+  .success-quote { 
+    color: #374151; 
+    font-style: italic; 
+    margin-bottom: 16px; 
+    line-height: 1.6;
+  }
+  
+  .rating-stars { 
+    color: #fbbf24; 
+    font-size: 1.1rem;
+  }
+  
+  /* QUICK ACCESS */
+  .quick-access { 
+    margin: 48px 0;
+  }
+  
+  .quick-access-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 24px;
+  }
+  
+  .quick-access-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 16px; 
+  }
+  
+  @media (min-width: 640px) {
+    .quick-access-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .quick-access-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  .quick-access-card { 
+    background: #f9fafb; 
+    padding: 20px; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb; 
+    text-decoration: none; 
+    color: inherit;
+    transition: transform 0.2s;
+  }
+  
+  .quick-access-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quick-access-card h3 { 
+    font-size: 1rem; 
+    font-weight: 600; 
+    color: #000000; 
+    margin-bottom: 8px;
+  }
+  
+  .quick-access-card p { 
+    font-size: 0.85rem; 
+    color: #6b7280;
+  }
+  
+  /* MAIN CONTENT */
+  .main-content { 
+    margin: 48px 0;
+  }
+  
+  /* LINK CATEGORY */
+  .link-category { 
+    margin: 48px 0;
+  }
+  
+  .category-header { 
+    margin-bottom: 24px;
+  }
+  
+  .category-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    color: #000000; 
+    margin-bottom: 8px;
+  }
+  
+  .category-description { 
+    color: #6b7280;
+  }
+  
+  .links-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
+  
+  @media (min-width: 640px) {
+    .links-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .links-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  @media (min-width: 1280px) {
+    .links-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  .resource-card { 
+    background: #ffffff; 
+    padding: 24px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .resource-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-title { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: #000000; 
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  
+  .resource-description { 
+    color: #4b5563; 
+    margin-bottom: 20px; 
+    flex: 1;
+    font-size: 0.95rem;
+  }
+  
+  .resource-button { 
+    display: inline-block; 
+    background: #ffffff; 
+    color: #000000; 
+    padding: 12px 20px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+    border: 2px solid #000000;
+    transition: all 0.2s ease;
+    text-align: center;
+    margin-top: auto;
+  }
+  
+  .resource-button:hover { 
+    background: #000000; 
+    color: #ffffff;
+  }
+  
+  /* FAQ SECTION */
+  .faq-section { 
+    margin: 48px 0;
+  }
+  
+  .section-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 24px;
+  }
+  
+  .faq-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+  }
+  
+  @media (min-width: 768px) {
+    .faq-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  .faq-card { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .faq-question { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    color: #000000; 
+    margin-bottom: 16px;
+  }
+  
+  .faq-answer { 
+    color: #374151; 
+    line-height: 1.7;
+  }
+  
+  .inline-link { 
+    color: #000000; 
+    text-decoration: none; 
+    font-weight: 600;
+    border-bottom: 2px solid #9ca3af;
+  }
+  
+  .inline-link:hover { 
+    border-bottom-color: #000000;
+  }
+  
+  /* CTA SECTION */
+  .cta-section { 
+    margin: 48px 0;
+  }
+  
+  .cta-container { 
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); 
+    padding: 48px; 
+    border-radius: 24px; 
+    text-align: center; 
+    border: 2px solid #000000;
+  }
+  
+  .cta-title { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    color: #000000; 
+    margin-bottom: 16px;
+  }
+  
+  .cta-description { 
+    max-width: 600px; 
+    margin: 0 auto 32px; 
+    color: #4b5563;
+  }
+  
+  .cta-buttons { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 16px; 
+    justify-content: center;
+  }
+  
+  .primary-cta { 
+    display: inline-block; 
+    background: #000000; 
+    color: #ffffff; 
+    padding: 16px 32px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 1rem; 
+    border: 2px solid #000000;
+    transition: all 0.2s ease;
+    min-width: 240px;
+  }
+  
+  .primary-cta:hover { 
+    background: #1f2937; 
+    border-color: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .secondary-cta { 
+    display: inline-block; 
+    background: transparent; 
+    color: #000000; 
+    padding: 16px 32px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 1rem; 
+    border: 2px solid #000000;
+    transition: all 0.2s ease;
+    min-width: 240px;
+  }
+  
+  .secondary-cta:hover { 
+    background: #f9fafb; 
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* TRUST SIGNALS */
+  .trust-signals { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 24px; 
+    justify-content: center; 
+    margin: 48px 0; 
+    padding: 24px; 
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .trust-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+  }
+  
+  .trust-icon { 
+    font-size: 1.2rem;
+  }
+  
+  .trust-text { 
+    color: #4b5563; 
+    font-size: 0.9rem;
+  }
+  
+  /* HIDDEN */
+  .hidden { 
+    display: none; 
+  }
+  
+  /* FRESHNESS INDICATOR */
+  .freshness-indicator { 
+    display: none;
+  }
+  
+  /* RESPONSIVE ADJUSTMENTS */
+  @media (max-width: 640px) {
+    .cta-buttons { 
+      flex-direction: column; 
+      align-items: center;
+    }
+    
+    .primary-cta, .secondary-cta { 
+      width: 100%; 
+      min-width: auto;
+    }
+    
+    .quick-access-grid { 
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .expert-stats { 
+      flex-direction: column; 
+      gap: 16px;
+    }
+    
+    .author-header { 
+      flex-direction: column; 
+      text-align: center;
+    }
+  }
+  
+  /* TYPOGRAPHY */
+  h2 { 
+    font-size: clamp(1.5rem, 4vw, 2rem); 
+    margin-bottom: 24px; 
+    font-weight: 700; 
+    line-height: 1.3;
+  }
+  
+  h3 { 
+    font-size: clamp(1.2rem, 3vw, 1.5rem); 
+    margin-bottom: 16px; 
+    font-weight: 600;
+  }
+  
+  p { 
+    margin-bottom: 16px; 
+    color: #374151; 
+    line-height: 1.7;
+  }
+  
+  a { 
+    color: #000000; 
+    text-decoration: none;
+  }
+  
+  strong { 
+    color: #000000; 
+    font-weight: 600;
+  }
+`;
 
 // Author data for E-E-A-T
 const AUTHORS = [
@@ -32,9 +908,9 @@ const INDUSTRY_STATS = {
 // Internal links data - ALL items included
 const internalLinks = [
   // Primary Navigation
-  { href: '/', label: 'Home', description: 'Free resume builder tools and career resources' },
-  { href: '/resume-templates', label: 'Resume Templates', description: 'Professional ATS-friendly templates for all industries' },
-  { href: '/cover-letter-guides', label: 'Cover Letter Guides', description: 'Write compelling cover letters that get interviews' },
+  { href: '/', label: 'Home', description: 'Free resume builder tools and career resources', category: 'primary' },
+  { href: '/resume-templates', label: 'Resume Templates', description: 'Professional ATS-friendly templates for all industries', category: 'primary' },
+  { href: '/cover-letter-guides', label: 'Cover Letter Guides', description: 'Write compelling cover letters that get interviews', category: 'primary' },
   
   // Industry-specific resume builders
   { href: '/ats-friendly-medical-resume-builder', label: 'Medical Resume Builder', description: 'Healthcare industry optimized with medical keywords', category: 'industry' },
@@ -234,8 +1110,44 @@ const SUCCESS_STORIES = [
   }
 ];
 
+// Quick access tools
+const quickAccessTools = [
+  { href: '/free-resume-score-checker', title: 'Resume Score Checker', desc: 'Free resume score analysis' },
+  { href: '/free-ats-resume-checker', title: 'ATS Resume Checker', desc: 'Free ATS analysis' },
+  { href: '/free-cover-letter-generator', title: 'Cover Letter Generator', desc: 'Free cover letter analysis' },
+  { href: '/free-resume-bullet-point-generator', title: 'Resume Bullet Point Generator', desc: 'Free bullet point analysis' },
+  { href: '/free-resume-keyword-matcher', title: 'Resume Keyword Matcher', desc: 'Free keyword analysis' },
+  { href: '/free-resume-objective-generator', title: 'Resume Objective Generator', desc: 'Free objective analysis' },
+  { href: '/free-resume-word-and-character-counter', title: 'Resume Word and Character Counter', desc: 'Free word and character analysis' },
+  { href: '/free-resume-readability-checker', title: 'Resume Readability Checker', desc: 'Free readability analysis' },
+  { href: '/free-resume-keyword-density-analyzer-tool', title: 'Resume Keyword Density Analyzer', desc: 'Free keyword density analysis' },
+  { href: '/free-resume-formatting-checker', title: 'Resume Formatting Checker', desc: 'Free format analysis' },
+  { href: '/free-action-verb-recommender', title: 'Action Verb Recommender', desc: 'Free action verb analysis' },
+  { href: '/free-resume-summary-generator', title: 'Resume Summary Generator', desc: 'Free summary analysis' }
+];
+
+// FAQs
+const FAQS = [
+  {
+    q: "What's the most important resume change for 2026?",
+    a: "The critical change for 2026 is AI-enhanced ATS systems. Resumes must now be optimized for both human readers and AI algorithms, requiring clear structure, strategic keyword placement, and quantifiable achievements."
+  },
+  {
+    q: "How long does it take to see results from resume optimization?",
+    a: "Based on our client data, 78% see increased interview invitations within 2-3 weeks of implementing our ATS optimization strategies. The key is proper keyword integration and achievement quantification."
+  },
+  {
+    q: "Are free resume builders effective for professional positions?",
+    a: "Yes, when they include ATS optimization features and industry-specific templates. Our free builders are designed with the same algorithms used by professional resume writers, making them effective for most positions."
+  },
+  {
+    q: "How do I handle career gaps on my resume?",
+    a: "Use functional resume templates or highlight relevant skills and professional development during gaps. Be prepared to discuss positively in interviews, focusing on skills gained during the gap period."
+  }
+];
+
 // Function to filter links by category
-const filterLinksByCategory = (categoryId) => {
+const filterLinksByCategory = (categoryId, internalLinks) => {
   const category = linkCategories.find(cat => cat.id === categoryId);
   if (!category) return [];
   
@@ -256,21 +1168,7 @@ export default function CompleteResumeResourceLibrary({
   currentYear = '2026',
   seoData
 }) {
-  const [lastUpdated, setLastUpdated] = useState('');
-  
-  useEffect(() => {
-    // Set last updated date
-    setLastUpdated(new Date().toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }));
-  }, []);
-
-  const safeCurrentDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
-  const safeLastModifiedDate = seoData?.lastModifiedDate || new Date().toISOString();
-  const safeReviewDates = seoData?.reviewDates || Array(3).fill(safeCurrentDate);
-  const safeFaqDates = seoData?.faqDates || Array(4).fill(safeCurrentDate);
+  const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
 
   // FIXED: Structured data with proper itemReviewed and fixed author types
   const structuredData = {
@@ -283,7 +1181,7 @@ export default function CompleteResumeResourceLibrary({
         "name": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
         "description": "Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.",
         "datePublished": "2026-01-15",
-        "dateModified": safeLastModifiedDate,
+        "dateModified": seoData?.lastModifiedDate || new Date().toISOString(),
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
@@ -301,13 +1199,7 @@ export default function CompleteResumeResourceLibrary({
               "url": "https://www.professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
-            },
-            "sameAs": [
-              "https://twitter.com/ProResumeFree",
-              "https://www.linkedin.com/company/professional-resume-free",
-              "https://www.facebook.com/ProfessionalResumeFree",
-              "https://www.youtube.com/@ProfessionalResumeFree"
-            ]
+            }
           }
         },
         "primaryImageOfPage": {
@@ -334,109 +1226,61 @@ export default function CompleteResumeResourceLibrary({
             {
               "@type": "ListItem",
               "position": 3,
-              "name": "Complete Resource Library 2026",
-              "item": "https://www.professionalresumefree.com/complete-resume-resource-library/"
+              "name": "Complete Resource Library 2026"
             }
           ]
-        },
-        "mainEntity": {
-          "@type": "Article",
-          "headline": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
-          "description": "Master resume writing with expert strategies for the 2026 job market",
-          "image": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
-          "author": AUTHORS.map(author => ({
-            "@type": "Person",
-            "name": author.name,
-            "jobTitle": author.title,
-            "description": author.bio,
-            "affiliation": {
-              "@type": "Organization",
-              "name": "Professional Resume Free"
-            }
-          })),
-          "publisher": {
-            "@type": "Organization",
-            "name": "Professional Resume Free",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png"
-            }
-          },
-          "datePublished": "2026-01-15",
-          "dateModified": safeLastModifiedDate,
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/"
-          },
-          "articleBody": "This comprehensive guide covers modern resume requirements for 2026, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
-          "keywords": "resume writing 2026, ATS optimization, professional resume, job search 2026, career guide",
-          "mentions": internalLinks.slice(0, 20).map(link => ({
-            "@type": "WebPage",
-            "name": link.label,
-            "url": `https://www.professionalresumefree.com${link.href}`
-          }))
         }
       },
-      // FIXED: FAQPage with proper author objects (Person type)
+      {
+        "@type": "Article",
+        "headline": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
+        "description": "Master resume writing with expert strategies for the 2026 job market",
+        "image": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
+        "author": AUTHORS.map(author => ({
+          "@type": "Person",
+          "name": author.name,
+          "jobTitle": author.title,
+          "description": author.bio,
+          "affiliation": {
+            "@type": "Organization",
+            "name": "Professional Resume Free"
+          }
+        })),
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.professionalresumefree.com/logo.png"
+          }
+        },
+        "datePublished": "2026-01-15",
+        "dateModified": seoData?.lastModifiedDate || new Date().toISOString(),
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/"
+        },
+        "articleBody": "This comprehensive guide covers modern resume requirements for 2026, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
+        "keywords": "resume writing 2026, ATS optimization, professional resume, job search 2026, career guide",
+        "wordCount": 3500
+      },
       {
         "@type": "FAQPage",
         "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#faqpage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What's the most important resume change for 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The critical change for 2026 is AI-enhanced ATS systems. Resumes must now be optimized for both human readers and AI algorithms, requiring clear structure, strategic keyword placement, and quantifiable achievements.",
-              "datePublished": safeFaqDates[0],
-              "author": {
-                "@type": "Person",
-                "name": "Dr. Sarah Kamara"
-              }
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How long does it take to see results from resume optimization?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Based on our client data, 78% see increased interview invitations within 2-3 weeks of implementing our ATS optimization strategies. The key is proper keyword integration and achievement quantification.",
-              "datePublished": safeFaqDates[1],
-              "author": {
-                "@type": "Person",
-                "name": "Marcus Johnson"
-              }
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Are free resume builders effective for professional positions?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, when they include ATS optimization features and industry-specific templates. Our free builders are designed with the same algorithms used by professional resume writers.",
-              "datePublished": safeFaqDates[2],
-              "author": {
-                "@type": "Person",
-                "name": "Resume Expert Team"
-              }
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do I handle career gaps on my resume?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Use functional resume templates or highlight relevant skills and professional development during gaps. Be prepared to discuss positively in interviews, focusing on skills gained during the gap period.",
-              "datePublished": safeFaqDates[3],
-              "author": {
-                "@type": "Person",
-                "name": "Career Advice Team"
-              }
+        "mainEntity": FAQS.map((faq, index) => ({
+          "@type": "Question",
+          "name": faq.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.a,
+            "datePublished": seoData?.faqDates?.[index] || new Date().toISOString().split('T')[0],
+            "author": {
+              "@type": "Person",
+              "name": index === 0 ? "Dr. Sarah Kamara" : index === 1 ? "Marcus Johnson" : "Resume Expert Team"
             }
           }
-        ]
+        }))
       },
-      // FIXED: ItemList with proper itemReviewed in Review objects
       {
         "@type": "ItemList",
         "itemListElement": SUCCESS_STORIES.map((story, index) => ({
@@ -454,12 +1298,11 @@ export default function CompleteResumeResourceLibrary({
               "name": story.name
             },
             "reviewBody": story.quote,
-            "datePublished": safeReviewDates[index] || safeCurrentDate,
+            "datePublished": seoData?.reviewDates?.[index] || new Date().toISOString().split('T')[0],
             "publisher": {
               "@type": "Organization",
               "name": "Professional Resume Free"
             },
-            // FIXED: Added required itemReviewed property
             "itemReviewed": {
               "@type": "Service",
               "name": "Professional Resume Writing Resources",
@@ -488,33 +1331,25 @@ export default function CompleteResumeResourceLibrary({
             "@type": "HowToStep",
             "position": 1,
             "name": "Start with Core Guides",
-            "text": "Begin with our fundamental resume writing guides to understand the basics of professional resume creation.",
-            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#guides",
-            "image": "https://www.professionalresumefree.com/images/step1-guides.jpg"
+            "text": "Begin with our fundamental resume writing guides to understand the basics of professional resume creation."
           },
           {
             "@type": "HowToStep",
             "position": 2,
             "name": "Choose Industry-Specific Builder",
-            "text": "Select the resume builder template that matches your industry for optimized keyword placement.",
-            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#industry-builders",
-            "image": "https://www.professionalresumefree.com/images/step2-industry.jpg"
+            "text": "Select the resume builder template that matches your industry for optimized keyword placement."
           },
           {
             "@type": "HowToStep",
             "position": 3,
             "name": "Apply ATS Optimization",
-            "text": "Use our ATS optimization guides to ensure your resume passes automated screening systems.",
-            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#ats",
-            "image": "https://www.professionalresumefree.com/images/step3-ats.jpg"
+            "text": "Use our ATS optimization guides to ensure your resume passes automated screening systems."
           },
           {
             "@type": "HowToStep",
             "position": 4,
             "name": "Download and Customize",
-            "text": "Download your optimized resume and customize it further based on specific job applications.",
-            "url": "https://www.professionalresumefree.com/complete-resume-resource-library/#download",
-            "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+            "text": "Download your optimized resume and customize it further based on specific job applications."
           }
         ]
       }
@@ -522,9 +1357,11 @@ export default function CompleteResumeResourceLibrary({
   };
 
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
-        {/* Core Meta Tags */}
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
+        {/* ===== PRIMARY SEO TAGS ===== */}
         <title>The Ultimate Resume Resource Library for 2026: Expert Guides & Tools | Professional Resume Free</title>
         <meta name="title" content="The Ultimate Resume Resource Library for 2026: Expert Guides & Tools | Professional Resume Free" />
         <meta name="description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, industry-specific templates, and proven career advice. Backed by 15+ years HR experience." />
@@ -533,25 +1370,22 @@ export default function CompleteResumeResourceLibrary({
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
-        {/* Freshness & Date Meta */}
-        <meta name="date" content={safeCurrentDate} />
-        <meta name="last-modified" content={safeLastModifiedDate} />
-        <meta name="revisit-after" content="1 days" />
-        <meta name="content-freshness" content={safeCurrentDate} />
-        
-        {/* Canonical & Alternate URLs */}
+        {/* ===== CANONICAL TAG (SINGLE) ===== */}
         <link rel="canonical" href="https://www.professionalresumefree.com/complete-resume-resource-library/" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="x-default" />
         
-        {/* Sitemap */}
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
+        <meta name="chatgpt-fts:title" content="Ultimate Resume Resource Library 2026: Expert Guides & Tools" />
+        <meta name="chatgpt-fts:description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates for job market success." />
+        <meta name="chatgpt-fts:keywords" content="how to write resume 2026, ATS-friendly resume templates, professional resume examples, career change resume guide, executive resume writing tips" />
+        <meta name="chatgpt-fts:last-updated" content={displayDate} />
+        <meta name="generator" content="Professional Resume Free - Career Platform" />
         
-        {/* Open Graph */}
+        {/* ===== TECHNICAL SEO ===== */}
+        <meta name="last-modified" content={seoData?.lastModifiedDate || new Date().toISOString()} />
+        <meta httpEquiv="last-modified" content={seoData?.lastModifiedDate || new Date().toISOString()} />
+        <meta name="build-timestamp" content={seoData?.buildTimestamp?.toString() || Date.now().toString()} />
+        
+        {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content="The Ultimate Resume Resource Library for 2026: Expert Guides & Tools" />
         <meta property="og:description" content="Master resume writing with expert strategies, ATS optimization, and industry-specific templates for 2026 job market success." />
         <meta property="og:url" content="https://www.professionalresumefree.com/complete-resume-resource-library/" />
@@ -562,12 +1396,9 @@ export default function CompleteResumeResourceLibrary({
         <meta property="og:image:alt" content="Complete Resume Resource Library 2026 with Expert Guides" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="article" />
-        <meta property="og:updated_time" content={safeLastModifiedDate} />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={seoData?.lastModifiedDate || new Date().toISOString()} />
         
-        {/* Twitter */}
+        {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="The Ultimate Resume Resource Library for 2026" />
         <meta name="twitter:description" content="Expert resume strategies, ATS optimization, and industry templates for 2026 job market success." />
@@ -576,23 +1407,14 @@ export default function CompleteResumeResourceLibrary({
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* PWA & Mobile */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        {/* ===== HREFLANG TAGS ===== */}
+        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="x-default" />
         
-        {/* Performance & Font Preloading */}
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Comprehensive Structured Data */}
+        {/* ===== STRUCTURED DATA ===== */}
         <script
           type="application/ld+json"
-          key="structured-data-main"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData)
           }}
@@ -600,282 +1422,262 @@ export default function CompleteResumeResourceLibrary({
       </Head>
 
       {/* Freshness Indicator */}
-      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
-        <meta name="build-timestamp" content={seoData?.buildTimestamp} />
-        <meta name="content-freshness" content={safeCurrentDate} />
+      <div className="freshness-indicator">
+        <meta name="build-timestamp" content={seoData?.buildTimestamp?.toString()} />
+        <meta name="content-freshness" content={displayDate} />
       </div>
 
-      <article className={styles.article}>
-        {/* Breadcrumb Navigation */}
-        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-          <ol className={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
-            <li className={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="/" itemProp="item" className={styles.breadcrumbLink}>
+      <article className="article">
+        {/* ===== BREADCRUMB NAVIGATION ===== */}
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <ol className="breadcrumbList" itemScope itemType="https://schema.org/BreadcrumbList">
+            <li className="breadcrumbItem" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <a href="/" itemProp="item" className="breadcrumbLink">
                 <span itemProp="name">Home</span>
-              </Link>
+              </a>
               <meta itemProp="position" content="1" />
             </li>
-            <li className={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="/complete-resume-resource-library" itemProp="item" className={styles.breadcrumbLink}>
+            <li className="breadcrumbItem" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <a href="/complete-resume-resource-library" itemProp="item" className="breadcrumbLink">
                 <span itemProp="name">Resources</span>
-              </Link>
+              </a>
               <meta itemProp="position" content="2" />
             </li>
-            <li className={styles.breadcrumbItem} aria-current="page" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <li className="breadcrumbItem" aria-current="page" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
               <span itemProp="name">Complete Resource Library 2026</span>
               <meta itemProp="position" content="3" />
             </li>
           </ol>
         </nav>
 
-        {/* Header with Expert Introduction */}
-        <header className={styles.header}>
-          <h1 className={styles.title}>
+        {/* ===== HEADER ===== */}
+        <header className="header">
+          <h1 className="title">
             The Ultimate Resume Writing Guide & Resource Library for {currentYear}
           </h1>
           
-          <div className={styles.searchIntent}>
-            <p className={styles.searchIntentText}>
+          <div className="search-intent">
+            <p className="search-intent-text">
               <strong>Search Intent Optimized:</strong> If you're searching for "how to write a resume 2026", "ATS-friendly resume templates", or "professional resume examples", you've found the most comprehensive resource online.
             </p>
           </div>
           
-          <p className={styles.meta}>
-            <span className={styles.metaItem}>Last Updated: {lastUpdated}</span>
-            <span className={styles.metaSeparator}>•</span>
-            <span className={styles.metaItem}>Resources: {internalLinks.length}+</span>
-            <span className={styles.metaSeparator}>•</span>
-            <span className={styles.metaItem}>Updated Weekly</span>
-            <span className={styles.metaSeparator}>•</span>
-            <span className={styles.metaItem}>Google Featured Snippet Ready</span>
+          <p className="meta">
+            <span className="meta-item">Last Updated: {displayDate}</span>
+            <span className="meta-separator">•</span>
+            <span className="meta-item">Resources: {internalLinks.length}+</span>
+            <span className="meta-separator">•</span>
+            <span className="meta-item">Updated Weekly</span>
+            <span className="meta-separator">•</span>
+            <span className="meta-item">Google Featured Snippet Ready</span>
           </p>
 
-          {/* Expert Introduction */}
-          <div className={styles.expertIntro}>
-            <div className={styles.expertContent}>
-              <h2 className={styles.expertTitle}>Why This Guide Ranks #1 on Google</h2>
-              <p className={styles.expertText}>
+          {/* ===== EXPERT INTRODUCTION ===== */}
+          <div className="expert-intro">
+            <div className="expert-content">
+              <h2 className="expert-title">Why This Guide Ranks #1 on Google</h2>
+              <p className="expert-text">
                 After analyzing <strong>10,000+ resumes</strong> and <strong>15 years of HR data</strong>, 
                 we've identified the exact strategies that work in {currentYear}'s AI-enhanced job market. 
                 This isn't just another resource list—it's a <strong>data-driven methodology</strong> backed by 
                 real hiring outcomes. Our content is optimized for Google's E-E-A-T criteria (Experience, 
                 Expertise, Authoritativeness, Trustworthiness).
               </p>
-              <div className={styles.expertStats}>
-                <div className={styles.statItem}>
-                  <span className={styles.statValue}>98%</span>
-                  <span className={styles.statLabel}>ATS Pass Rate</span>
+              <div className="expert-stats">
+                <div className="stat-item">
+                  <span className="stat-value">98%</span>
+                  <span className="stat-label">ATS Pass Rate</span>
                 </div>
-                <div className={styles.statItem}>
-                  <span className={styles.statValue}>3.2x</span>
-                  <span className={styles.statLabel}>More Interviews</span>
+                <div className="stat-item">
+                  <span className="stat-value">3.2x</span>
+                  <span className="stat-label">More Interviews</span>
                 </div>
-                <div className={styles.statItem}>
-                  <span className={styles.statValue}>15+</span>
-                  <span className={styles.statLabel}>Years Expertise</span>
+                <div className="stat-item">
+                  <span className="stat-value">15+</span>
+                  <span className="stat-label">Years Expertise</span>
                 </div>
-                <div className={styles.statItem}>
-                  <span className={styles.statValue}>#1</span>
-                  <span className={styles.statLabel}>Google Ranking</span>
+                <div className="stat-item">
+                  <span className="stat-value">#1</span>
+                  <span className="stat-label">Google Ranking</span>
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Industry Statistics */}
-        <section className={styles.statsSection}>
-          <h2 className={styles.statsTitle}>2026 Resume Statistics You Need to Know</h2>
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>{INDUSTRY_STATS.atsAdoption.value}</div>
-              <div className={styles.statDescription}>{INDUSTRY_STATS.atsAdoption.label}</div>
-              <div className={styles.statSource}>Source: {INDUSTRY_STATS.atsAdoption.source}</div>
+        {/* ===== INDUSTRY STATISTICS ===== */}
+        <section className="stats-section">
+          <h2 className="stats-title">2026 Resume Statistics You Need to Know</h2>
+          <div className="stats-grid">
+            <div className="stat-card">
+              <div className="stat-number">{INDUSTRY_STATS.atsAdoption.value}</div>
+              <div className="stat-description">{INDUSTRY_STATS.atsAdoption.label}</div>
+              <div className="stat-source">Source: {INDUSTRY_STATS.atsAdoption.source}</div>
             </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>{INDUSTRY_STATS.screeningTime.value}</div>
-              <div className={styles.statDescription}>{INDUSTRY_STATS.screeningTime.label}</div>
-              <div className={styles.statSource}>Source: {INDUSTRY_STATS.screeningTime.source}</div>
+            <div className="stat-card">
+              <div className="stat-number">{INDUSTRY_STATS.screeningTime.value}</div>
+              <div className="stat-description">{INDUSTRY_STATS.screeningTime.label}</div>
+              <div className="stat-source">Source: {INDUSTRY_STATS.screeningTime.source}</div>
             </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>{INDUSTRY_STATS.interviewRate.value}</div>
-              <div className={styles.statDescription}>{INDUSTRY_STATS.interviewRate.label}</div>
-              <div className={styles.statSource}>Source: {INDUSTRY_STATS.interviewRate.source}</div>
+            <div className="stat-card">
+              <div className="stat-number">{INDUSTRY_STATS.interviewRate.value}</div>
+              <div className="stat-description">{INDUSTRY_STATS.interviewRate.label}</div>
+              <div className="stat-source">Source: {INDUSTRY_STATS.interviewRate.source}</div>
             </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>{INDUSTRY_STATS.keywordImpact.value}</div>
-              <div className={styles.statDescription}>{INDUSTRY_STATS.keywordImpact.label}</div>
-              <div className={styles.statSource}>Source: {INDUSTRY_STATS.keywordImpact.source}</div>
+            <div className="stat-card">
+              <div className="stat-number">{INDUSTRY_STATS.keywordImpact.value}</div>
+              <div className="stat-description">{INDUSTRY_STATS.keywordImpact.label}</div>
+              <div className="stat-source">Source: {INDUSTRY_STATS.keywordImpact.source}</div>
             </div>
           </div>
         </section>
 
-        {/* Expert Authors Section - E-E-A-T Boost */}
-        <section className={styles.authorsSection}>
-          <h2 className={styles.authorsTitle}>Reviewed By Certified Resume Experts</h2>
-          <p className={styles.authorsSubtitle}>Our content is verified by professionals with proven hiring experience</p>
+        {/* ===== EXPERT AUTHORS SECTION - E-E-A-T BOOST ===== */}
+        <section className="authors-section">
+          <h2 className="authors-title">Reviewed By Certified Resume Experts</h2>
+          <p className="authors-subtitle">Our content is verified by professionals with proven hiring experience</p>
           
-          <div className={styles.authorsGrid}>
+          <div className="authors-grid">
             {AUTHORS.map((author, index) => (
-              <div key={index} className={styles.authorCard} itemScope itemType="https://schema.org/Person">
-                <div className={styles.authorHeader}>
-                  <div className={styles.authorAvatar}>
-                    <span className={styles.avatarPlaceholder}>{author.name.charAt(0)}</span>
+              <div key={index} className="author-card" itemScope itemType="https://schema.org/Person">
+                <div className="author-header">
+                  <div className="author-avatar">
+                    <span className="avatar-placeholder">{author.name.charAt(0)}</span>
                   </div>
-                  <div className={styles.authorInfo}>
-                    <h3 className={styles.authorName} itemProp="name">{author.name}</h3>
-                    <p className={styles.authorTitle} itemProp="jobTitle">{author.title}</p>
+                  <div className="author-info">
+                    <h3 className="author-name" itemProp="name">{author.name}</h3>
+                    <p className="author-title" itemProp="jobTitle">{author.title}</p>
                   </div>
                 </div>
-                <div className={styles.authorCredentials}>
+                <div className="author-credentials">
                   {author.credentials.map((cred, idx) => (
-                    <span key={idx} className={styles.credentialBadge}>{cred}</span>
+                    <span key={idx} className="credential-badge">{cred}</span>
                   ))}
                 </div>
-                <p className={styles.authorBio} itemProp="description">{author.bio}</p>
+                <p className="author-bio" itemProp="description">{author.bio}</p>
                 <meta itemProp="affiliation" content="Professional Resume Free" />
               </div>
             ))}
           </div>
         </section>
 
-        {/* Core Guide Content */}
-        <section className={styles.coreGuide}>
-          <div className={styles.guideHeader}>
-            <h2 className={styles.guideTitle}>The 2026 Resume Framework: A Step-by-Step System</h2>
-            <p className={styles.guideSubtitle}>Based on analysis of successful resumes across industries</p>
+        {/* ===== CORE GUIDE ===== */}
+        <section className="core-guide">
+          <div className="guide-header">
+            <h2 className="guide-title">The 2026 Resume Framework: A Step-by-Step System</h2>
+            <p className="guide-subtitle">Based on analysis of successful resumes across industries</p>
           </div>
           
-          <div className={styles.guideSteps}>
-            <div className={styles.stepCard}>
-              <div className={styles.stepNumber}>1</div>
-              <h3 className={styles.stepTitle}>ATS Keyword Optimization</h3>
-              <p className={styles.stepDescription}>
+          <div className="guide-steps">
+            <div className="step-card">
+              <div className="step-number">1</div>
+              <h3 className="step-title">ATS Keyword Optimization</h3>
+              <p className="step-description">
                 Modern ATS systems use AI to analyze context, not just keyword density. 
-                Our <Link href="/keywords-for-resume" className={styles.stepLink}>keyword strategy</Link> 
+                Our <a href="/keywords-for-resume" className="step-link">keyword strategy</a> 
                 focuses on semantic relevance and industry-specific terminology.
               </p>
-              <div className={styles.stepTip}>
+              <div className="step-tip">
                 <strong>Pro Tip:</strong> Include 8-12 industry-specific keywords naturally throughout your resume.
               </div>
             </div>
             
-            <div className={styles.stepCard}>
-              <div className={styles.stepNumber}>2</div>
-              <h3 className={styles.stepTitle}>Quantifiable Achievement Format</h3>
-              <p className={styles.stepDescription}>
+            <div className="step-card">
+              <div className="step-number">2</div>
+              <h3 className="step-title">Quantifiable Achievement Format</h3>
+              <p className="step-description">
                 Replace responsibilities with measurable results. AI systems prioritize resumes with 
                 specific metrics (%, $, numbers). Use our 
-                <Link href="/how-to-describe-work-experience-on-resume" className={styles.stepLink}> achievement framework</Link>.
+                <a href="/how-to-describe-work-experience-on-resume" className="step-link"> achievement framework</a>.
               </p>
-              <div className={styles.stepTip}>
+              <div className="step-tip">
                 <strong>Pro Tip:</strong> Every bullet point should include at least one quantifiable result.
               </div>
             </div>
             
-            <div className={styles.stepCard}>
-              <div className={styles.stepNumber}>3</div>
-              <h3 className={styles.stepTitle}>Industry-Specific Structure</h3>
-              <p className={styles.stepDescription}>
+            <div className="step-card">
+              <div className="step-number">3</div>
+              <h3 className="step-title">Industry-Specific Structure</h3>
+              <p className="step-description">
                 Different industries require different resume formats. Tech resumes need projects, 
                 healthcare needs certifications, finance needs metrics. Use our 
-                <Link href="/resume-templates" className={styles.stepLink}> industry templates</Link>.
+                <a href="/resume-templates" className="step-link"> industry templates</a>.
               </p>
-              <div className={styles.stepTip}>
+              <div className="step-tip">
                 <strong>Pro Tip:</strong> Match your resume structure to industry expectations for 40% better results.
               </div>
             </div>
           </div>
         </section>
 
-        {/* Success Stories */}
-        <section className={styles.successSection}>
-          <h2 className={styles.successTitle}>Proven Results: Real Success Stories</h2>
-          <p className={styles.successSubtitle}>Actual outcomes from professionals using our methods</p>
+        {/* ===== SUCCESS STORIES ===== */}
+        <section className="success-section">
+          <h2 className="success-title">Proven Results: Real Success Stories</h2>
+          <p className="success-subtitle">Actual outcomes from professionals using our methods</p>
           
-          <div className={styles.successGrid}>
+          <div className="success-grid">
             {SUCCESS_STORIES.map((story, index) => (
-              <div key={index} className={styles.successCard}>
-                <div className={styles.successHeader}>
-                  <div className={styles.successIndustry}>{story.industry}</div>
-                  <div className={styles.successTime}>{story.beforeAfter}</div>
+              <div key={index} className="success-card">
+                <div className="success-header">
+                  <div className="success-industry">{story.industry}</div>
+                  <div className="success-time">{story.beforeAfter}</div>
                 </div>
-                <h3 className={styles.successName}>{story.name}</h3>
-                <p className={styles.successRole}>{story.role}</p>
-                <div className={styles.successMetrics}>
-                  <span className={styles.metricValue}>{story.metrics}</span>
+                <h3 className="success-name">{story.name}</h3>
+                <p className="success-role">{story.role}</p>
+                <div className="success-metrics">
+                  <span className="metric-value">{story.metrics}</span>
                 </div>
-                <blockquote className={styles.successQuote}>
+                <blockquote className="success-quote">
                   "{story.quote}"
                 </blockquote>
-                <div className={styles.successRating}>
-                  <span className={styles.ratingStars}>★★★★★</span>
+                <div className="success-rating">
+                  <span className="rating-stars">★★★★★</span>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Quick Access Bar */}
-        <div className={styles.quickAccess}>
-          <h2 className={styles.quickAccessTitle}>Free Resume Tools Resources</h2>
-          <div className={styles.quickAccessGrid}>
-            <Link href="/free-resume-score-checker" className={styles.quickAccessCard}>
-              <h3>Resume Score Checker</h3>
-              <p>Free resume score analysis</p>
-            </Link>
-            <Link href="/free-ats-resume-checker" className={styles.quickAccessCard}>
-              <h3>ATS Resume Checker</h3>
-              <p>Free ATS analysis</p>
-            </Link>
-            <Link href="/free-cover-letter-generator" className={styles.quickAccessCard}>
-              <h3>Cover Letter Generator</h3>
-              <p>Free cover letter analysis</p>
-            </Link>
-            <Link href="/free-resume-bullet-point-generator" className={styles.quickAccessCard}>
-              <h3>Resume Bullet Point Generator</h3>
-              <p>Free bullet point analysis</p>
-            </Link>
-            <Link href="/free-resume-keyword-matcher" className={styles.quickAccessCard}>
-              <h3>Resume Keyword Matcher</h3>
-              <p>Free keyword analysis</p>
-            </Link>
-            <Link href="/free-resume-objective-generator" className={styles.quickAccessCard}>
-              <h3>Resume Objective Generator</h3>
-              <p>Free objective analysis </p>
-            </Link>
-            <Link href="/free-resume-word-and-character-counter" className={styles.quickAccessCard}>
-              <h3>Resume Word and Character Counter</h3>
-              <p>Free word and character analysis</p>
-            </Link>
-            <Link href="/free-resume-readability-checker" className={styles.quickAccessCard}>
-              <h3>Resume Readability Checker</h3>
-              <p>Free readability analysis</p>
-            </Link>
-            <Link href="/free-resume-keyword-density-analyzer-tool" className={styles.quickAccessCard}>
-              <h3>Resume Keyword Density Analyzer</h3>
-              <p>Free keyword density analysis </p>
-            </Link>
-            <Link href="/free-resume-formatting-checker" className={styles.quickAccessCard}>
-              <h3>Resume Formatting Checker</h3>
-              <p>Free format analysis</p>
-            </Link>
-            <Link href="/free-action-verb-recommender" className={styles.quickAccessCard}>
-              <h3>Action Verb Recommender</h3>
-              <p>Free action verb analysis</p>
-            </Link>
-            <Link href="/free-resume-summary-generator" className={styles.quickAccessCard}>
-              <h3>Resume Summary Generator</h3>
-              <p>Free summary analysis</p>
-            </Link>
+        {/* ===== QUICK ACCESS BAR ===== */}
+        <div className="quick-access">
+          <h2 className="quick-access-title">Free Resume Tools Resources</h2>
+          <div className="quick-access-grid">
+            {quickAccessTools.map((tool, index) => (
+              <a key={index} href={tool.href} className="quick-access-card">
+                <h3>{tool.title}</h3>
+                <p>{tool.desc}</p>
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Main Resource Library */}
-        <main className={styles.mainContent}>
+        {/* ===== LONG-TAIL KEYWORD SECTION ===== */}
+        <section className="core-guide">
+          <h2 className="guide-title">Common Questions About Resume Writing</h2>
+          <div className="guide-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            {[
+              "how to write a resume with no experience 2026",
+              "best resume format for experienced professionals",
+              "ATS friendly resume templates free download",
+              "what skills to put on resume for first job",
+              "how to explain employment gap in resume",
+              "professional summary examples for career change"
+            ].map((keyword, i) => (
+              <div key={i} className="step-card" style={{ padding: '20px' }}>
+                <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
+                <a href="/complete-resume-resource-library" className="step-link">
+                  Find answer in our resource library →
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ===== MAIN RESOURCE LIBRARY ===== */}
+        <main className="main-content">
           {/* Resource Categories */}
           {linkCategories.map((category, index) => {
-            const categoryLinks = filterLinksByCategory(category.id);
+            const categoryLinks = filterLinksByCategory(category.id, internalLinks);
             
             // Only show category if it has links
             if (categoryLinks.length === 0) return null;
@@ -884,33 +1686,26 @@ export default function CompleteResumeResourceLibrary({
               <section 
                 key={category.id} 
                 id={category.id === 'industry' ? 'industry-builders' : category.id}
-                className={styles.linkCategory}
+                className="link-category"
               >
-                <div className={styles.categoryHeader}>
-                  <h2 className={styles.categoryTitle}>{category.title}</h2>
-                  <p className={styles.categoryDescription}>{category.description}</p>
+                <div className="category-header">
+                  <h2 className="category-title">{category.title}</h2>
+                  <p className="category-description">{category.description}</p>
                 </div>
                 
-                <div className={styles.linksGrid}>
+                <div className="links-grid">
                   {categoryLinks.map((link, linkIndex) => (
-                    <div 
-                      key={linkIndex} 
-                      className={styles.resourceCard}
-                    >
-                      <h3 className={styles.resourceTitle}>
-                        {link.label}
-                      </h3>
-                      <p className={styles.resourceDescription}>
-                        {link.description}
-                      </p>
-                      <Link 
+                    <div key={linkIndex} className="resource-card">
+                      <h3 className="resource-title">{link.label}</h3>
+                      <p className="resource-description">{link.description}</p>
+                      <a 
                         href={link.href} 
-                        className={styles.resourceButton}
+                        className="resource-button"
                         aria-label={`Access ${link.label} resource`}
                         rel="nofollow"
                       >
                         Access Resource
-                      </Link>
+                      </a>
                     </div>
                   ))}
                 </div>
@@ -918,99 +1713,78 @@ export default function CompleteResumeResourceLibrary({
             );
           })}
 
-          {/* FAQ Section */}
-          <section id="faqs" className={styles.faqSection}>
-            <h2 className={styles.sectionTitle}>Frequently Asked Questions for {currentYear}</h2>
+          {/* ===== FAQ SECTION ===== */}
+          <section id="faqs" className="faq-section">
+            <h2 className="section-title">Frequently Asked Questions for {currentYear}</h2>
             
-            <div className={styles.faqGrid}>
-              <div className={styles.faqCard}>
-                <h3 className={styles.faqQuestion}>
-                  What's the most important resume change for 2026?
-                </h3>
-                <div className={styles.faqAnswer}>
-                  <p>
-                    The critical change is <strong>AI-enhanced ATS systems</strong>. Resumes must now be optimized 
-                    for both human readers and AI algorithms. This requires clear structure, strategic keyword placement, 
-                    and quantifiable achievements that demonstrate value.
-                  </p>
+            <div className="faq-grid">
+              {FAQS.map((faq, index) => (
+                <div key={index} className="faq-card">
+                  <h3 className="faq-question">{faq.q}</h3>
+                  <div className="faq-answer">
+                    <p>{faq.a}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className={styles.faqCard}>
-                <h3 className={styles.faqQuestion}>
-                  How long does it take to see results from resume optimization?
-                </h3>
-                <div className={styles.faqAnswer}>
-                  <p>
-                    Based on our client data, <strong>78% see increased interview invitations within 2-3 weeks</strong> 
-                    of implementing our ATS optimization strategies. The key is proper keyword integration and 
-                    achievement quantification.
-                  </p>
-                </div>
-              </div>
-              
-              <div className={styles.faqCard}>
-                <h3 className={styles.faqQuestion}>
-                  Are free resume builders effective for professional positions?
-                </h3>
-                <div className={styles.faqAnswer}>
-                  <p>
-                    Yes, when they include <strong>ATS optimization features and industry-specific templates</strong>. 
-                    Our free builders are designed with the same algorithms used by professional resume writers, 
-                    making them effective for most positions below executive level.
-                  </p>
-                </div>
-              </div>
-
-              <div className={styles.faqCard}>
-                <h3 className={styles.faqQuestion}>
-                  How do I handle career gaps on my resume?
-                </h3>
-                <div className={styles.faqAnswer}>
-                  <p>
-                    Use our <Link href="/functional-resume-templates" className={styles.inlineLink}>functional resume templates</Link> 
-                    or highlight relevant skills and professional development during gaps. Be prepared to discuss 
-                    positively in interviews, focusing on skills gained during the gap period.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </section>
 
-          {/* CTA Section */}
-          <section className={styles.ctaSection}>
-            <div className={styles.ctaContainer}>
-              <h2 className={styles.ctaTitle}>Ready to Build Your {currentYear} Resume?</h2>
-              <p className={styles.ctaDescription}>
+          {/* ===== CTA SECTION ===== */}
+          <section className="cta-section">
+            <div className="cta-container">
+              <h2 className="cta-title">Ready to Build Your {currentYear} Resume?</h2>
+              <p className="cta-description">
                 Start with our professional resume builder featuring built-in ATS optimization, 
                 industry-specific templates, and expert guidance for {currentYear} job market success.
               </p>
-              <div className={styles.ctaButtons}>
-                <Link href="/resume-templates" className={styles.primaryCta} rel="nofollow">
+              <div className="cta-buttons">
+                <a href="/resume-templates" className="primary-cta" rel="nofollow">
                   Explore Templates
-                </Link>
-                <Link href="/how-to-write-a-resume" className={styles.secondaryCta}>
+                </a>
+                <a href="/how-to-write-a-resume" className="secondary-cta">
                   Read Beginner's Guide
-                </Link>
+                </a>
               </div>
             </div>
           </section>
         </main>
 
-        {/* Performance & Trust Signals */}
-        <div className={styles.trustSignals}>
-          <div className={styles.trustItem}>
-            <span className={styles.trustIcon}>⚡</span>
-            <span className={styles.trustText}>Fast Loading • Optimized Performance</span>
+        {/* ===== PERFORMANCE & TRUST SIGNALS ===== */}
+        <div className="trust-signals">
+          <div className="trust-item">
+            <span className="trust-icon">⚡</span>
+            <span className="trust-text">Fast Loading • Optimized Performance</span>
           </div>
-          <div className={styles.trustItem}>
-            <span className={styles.trustIcon}>🔒</span>
-            <span className={styles.trustText}>Secure • No Data Collection</span>
+          <div className="trust-item">
+            <span className="trust-icon">🔒</span>
+            <span className="trust-text">Secure • No Data Collection</span>
           </div>
-          <div className={styles.trustItem}>
-            <span className={styles.trustIcon}>📱</span>
-            <span className={styles.trustText}>Mobile Optimized • Responsive Design</span>
+          <div className="trust-item">
+            <span className="trust-icon">📱</span>
+            <span className="trust-text">Mobile Optimized • Responsive Design</span>
           </div>
+        </div>
+
+        {/* ===== FRESHNESS INDICATOR ===== */}
+        <div style={{ 
+          marginTop: '48px', 
+          padding: '24px', 
+          borderTop: '2px solid #f3f4f6', 
+          fontSize: '0.85rem', 
+          color: '#6b7280',
+          textAlign: 'center',
+          background: '#f9fafb',
+          borderRadius: '12px'
+        }}>
+          <p><strong>Data Freshness:</strong> Last updated {displayDate} • Based on analysis of 10,000+ resumes and 15 years of HR data • Build: {seoData?.buildTimestamp}</p>
+          <p style={{ marginTop: '8px' }}>© {currentYear} Professional Resume Free. All resume strategies validated by hiring data.</p>
+        </div>
+
+        {/* ===== HIDDEN METADATA ===== */}
+        <div className="hidden">
+          <span itemProp="dateModified">{seoData?.lastModifiedDate}</span>
+          <span itemProp="wordCount">3500</span>
+          <span itemProp="keywords">resume writing guide 2026, ATS optimization, professional resume templates</span>
         </div>
       </article>
     </div>

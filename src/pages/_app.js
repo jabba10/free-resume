@@ -1,47 +1,40 @@
-// src/pages/_app.js
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Script from 'next/script';
-import { useEffect } from 'react';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
-import './globals.css';
+// pages/_app.js
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import Script from 'next/script'
+import { useEffect } from 'react'
+import * as gtag from '../../lib/gtag'
+import Navbar from '../Components/Navbar'
+import Footer from '../Components/Footer'
+import './globals.css'
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
-  const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`;
-  const GA_MEASUREMENT_ID = 'G-ZKH84N99Z2';
+  const router = useRouter()
+  const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`
 
-  // Combined analytics tracking for both GA and GoatCounter
+  // Setup analytics tracking
   useEffect(() => {
+    // Function to handle route changes
     const handleRouteChange = (url) => {
       // Google Analytics
-      if (typeof window.gtag !== 'undefined') {
-        window.gtag('config', GA_MEASUREMENT_ID, {
-          page_path: url,
-          anonymize_ip: true,
-        });
-      }
+      gtag.pageview(url)
       
       // GoatCounter
       if (window.goatcounter && window.goatcounter.count) {
         window.goatcounter.count({
           path: url,
-        });
+        })
       }
-    };
+    }
 
-    // Track initial page load
-    handleRouteChange(router.asPath);
-
-    // Track route changes
-    router.events.on('routeChangeComplete', handleRouteChange);
+    // Subscribe to route change events
+    router.events.on('routeChangeComplete', handleRouteChange)
     
-    // Cleanup
+    // Cleanup subscription on unmount
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events, router.asPath, GA_MEASUREMENT_ID]);
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <>
@@ -104,8 +97,6 @@ export default function App({ Component, pageProps }) {
         <meta name="author" content="Professional Resume Free" />
         <meta name="publisher" content="Professional Resume Free" />
         <meta name="language" content="English" />
-        <meta name="rating" content="safe for kids" />
-        <meta name="revisit-after" content="7 days" />
         
         {/* ========== STRUCTURED DATA (JSON-LD) ========== */}
         <script
@@ -145,26 +136,31 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* ========== GOOGLE ANALYTICS ========== */}
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}', {
-              page_path: window.location.pathname,
-              anonymize_ip: true,
-              send_page_view: true
-            });
-          `,
-        }}
-      />
+      {/* Only load if GA_TRACKING_ID exists */}
+      {gtag.GA_TRACKING_ID && (
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gtag.GA_TRACKING_ID}', {
+                  page_path: window.location.pathname,
+                  anonymize_ip: true,
+                  send_page_view: true
+                });
+              `,
+            }}
+          />
+        </>
+      )}
 
       {/* ========== GOATCOUNTER ANALYTICS ========== */}
       <Script
@@ -184,5 +180,5 @@ export default function App({ Component, pageProps }) {
       </main>
       <Footer />
     </>
-  );
+  )
 }

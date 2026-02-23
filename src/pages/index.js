@@ -597,6 +597,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock"
                   },
+                  "license": "https://www.professionalresumefree.com/terms",
                   "aggregateRating": { 
                     "@type": "AggregateRating", 
                     "ratingValue": 4.9, 
@@ -633,6 +634,11 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
                   "name": "Professional Resume Free Resume Analysis Dataset",
                   "description": "Comprehensive dataset of 4.2M+ resumes analyzed for ATS optimization patterns.",
                   "variableMeasured": ["ATS pass rates", "keyword frequency", "salary increases"],
+                  "creator": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free Research Lab",
+                    "url": "https://www.professionalresumefree.com"
+                  },
                   "citation": "Professional Resume Free Research Lab",
                   "dateModified": lastModified,
                   "version": "2026.1"
@@ -938,7 +944,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
             <div className="specialized-grid">
               {longTailKeywords.map((keyword, i) => (
                 <Link key={i} href="/complete-resume-resource-library" className="specialized-card">
-                  <h4>{keyword}</h4>
+                 <h4>{keyword}</h4>
                   <p style={{color: '#4b5563', marginBottom: '12px', flex: 1}}>Complete guide for {keyword.substring(0, 40)}...</p>
                   <span style={{color: '#000000', borderBottom: '1px solid #000000'}}>Read Guide →</span>
                 </Link>
