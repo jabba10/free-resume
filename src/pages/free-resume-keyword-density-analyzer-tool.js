@@ -1,11 +1,828 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+// pages/free-resume-keyword-density-analyzer-tool.jsx
 import Head from 'next/head';
-import Link from 'next/link';
-import styles from './free-resume-keyword-density-analyzer-tool.module.css';
+import { useState, useEffect, useCallback, useRef } from 'react';
+
+// ===== INLINE CRITICAL CSS - Optimized for speed =====
+const criticalCSS = `
+  /* CSS RESET */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+  
+  /* BASE STYLES */
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    line-height: 1.6; 
+    color: #111827; 
+    background: #f9fafb; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* CONTAINER */
+  .container { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 16px; 
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .container { padding: 24px; }
+  }
+  
+  @media (min-width: 1024px) {
+    .container { padding: 32px; }
+  }
+  
+  /* BREADCRUMB */
+  .breadcrumb { 
+    margin-bottom: 24px; 
+    font-size: 0.9rem; 
+    color: #6b7280;
+  }
+  
+  .breadcrumb ol { 
+    display: flex; 
+    flex-wrap: wrap; 
+    list-style: none; 
+    gap: 8px;
+  }
+  
+  .breadcrumb li { 
+    display: flex; 
+    align-items: center;
+  }
+  
+  .breadcrumb-separator { 
+    margin: 0 4px; 
+    color: #9ca3af;
+  }
+  
+  .breadcrumb-link { 
+    color: #111827; 
+    text-decoration: none; 
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .breadcrumb-link:hover { 
+    border-bottom-color: #000000; 
+  }
+  
+  /* HERO SECTION */
+  .hero-section { 
+    margin-bottom: 40px; 
+    padding-bottom: 32px; 
+    border-bottom: 2px solid #f3f4f6;
+  }
+  
+  .hero-content { 
+    width: 100%;
+  }
+  
+  .trust-badge { 
+    display: inline-block; 
+    background: #f3f4f6; 
+    padding: 8px 16px; 
+    border-radius: 50px; 
+    margin-bottom: 20px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .trust-badge-text { 
+    font-weight: 500; 
+    color: #111827;
+  }
+  
+  h1 { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .hero-title { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .gradient-text { 
+    background: linear-gradient(135deg, #000000 0%, #4b5563 100%); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text;
+  }
+  
+  .hero-subtitle { 
+    font-size: clamp(1rem, 2.5vw, 1.2rem); 
+    color: #4b5563; 
+    max-width: 900px; 
+    line-height: 1.7; 
+    margin-bottom: 24px;
+  }
+  
+  .hero-highlight { 
+    background: #f3f4f6; 
+    padding: 2px 6px; 
+    border-radius: 4px;
+  }
+  
+  /* CTA BUTTONS */
+  .cta-buttons { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 16px; 
+    margin: 24px 0;
+  }
+  
+  .primary-button, .secondary-button { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    padding: 14px 28px; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    font-size: 1rem; 
+    border: 2px solid #000000;
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+    text-decoration: none;
+  }
+  
+  .primary-button { 
+    background: #000000; 
+    color: #ffffff;
+  }
+  
+  .primary-button:hover { 
+    background: #1f2937; 
+    border-color: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .secondary-button { 
+    background: transparent; 
+    color: #000000;
+  }
+  
+  .secondary-button:hover { 
+    background: #f9fafb;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-arrow { 
+    transition: transform 0.2s;
+  }
+  
+  .primary-button:hover .button-arrow { 
+    transform: translateX(4px);
+  }
+  
+  @media (max-width: 480px) {
+    .primary-button, .secondary-button { 
+      width: 100%; 
+      justify-content: center;
+    }
+  }
+  
+  /* HERO STATS */
+  .hero-stats { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 24px; 
+    margin: 32px 0;
+  }
+  
+  .stat-item { 
+    flex: 1 1 auto; 
+    min-width: 100px; 
+    text-align: center;
+  }
+  
+  .stat-number { 
+    font-size: 1.8rem; 
+    font-weight: 800; 
+    color: #000000; 
+    display: block; 
+    line-height: 1.2;
+  }
+  
+  .stat-label { 
+    color: #4b5563; 
+    font-size: 0.85rem;
+  }
+  
+  /* MAIN */
+  .main { 
+    margin: 32px 0;
+  }
+  
+  /* ANALYZER SECTION */
+  .analyzer-section { 
+    margin-bottom: 48px;
+  }
+  
+  .analyzer-header { 
+    margin-bottom: 32px;
+  }
+  
+  .analyzer-header h2 { 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    margin-bottom: 12px;
+  }
+  
+  .analyzer-header p { 
+    color: #4b5563;
+  }
+  
+  .analyzer-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+    margin-bottom: 24px;
+  }
+  
+  @media (min-width: 768px) {
+    .analyzer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  
+  .resume-column, .keywords-column { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 24px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .column-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 16px; 
+    flex-wrap: wrap; 
+    gap: 12px;
+  }
+  
+  .column-header h3 { 
+    font-size: 1.2rem; 
+    font-weight: 600;
+  }
+  
+  .example-button { 
+    padding: 6px 12px; 
+    background: #f3f4f6; 
+    border: 1px solid #e5e7eb; 
+    border-radius: 6px; 
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .example-button:hover { 
+    background: #e5e7eb;
+  }
+  
+  .textarea, .keywords-textarea { 
+    width: 100%; 
+    padding: 16px; 
+    border: 2px solid #e5e7eb; 
+    border-radius: 12px; 
+    font-family: inherit; 
+    font-size: 1rem; 
+    line-height: 1.6; 
+    resize: vertical; 
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  
+  .textarea:focus, .keywords-textarea:focus { 
+    outline: none; 
+    border-color: #000000;
+  }
+  
+  .word-count, .keyword-count { 
+    text-align: right; 
+    font-size: 0.85rem; 
+    color: #6b7280;
+  }
+  
+  .industry-selector { 
+    min-width: 200px;
+  }
+  
+  .industry-select { 
+    width: 100%; 
+    padding: 8px; 
+    border: 2px solid #e5e7eb; 
+    border-radius: 6px; 
+    font-family: inherit;
+  }
+  
+  .analyzer-actions { 
+    display: flex; 
+    gap: 16px; 
+    justify-content: center; 
+    margin-top: 24px; 
+    flex-wrap: wrap;
+  }
+  
+  .analyze-button, .reset-button { 
+    padding: 12px 24px; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 200px;
+  }
+  
+  .analyze-button { 
+    background: #000000; 
+    color: #ffffff; 
+    border: 2px solid #000000;
+  }
+  
+  .analyze-button:hover { 
+    background: #1f2937; 
+    border-color: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reset-button { 
+    background: transparent; 
+    color: #000000; 
+    border: 2px solid #000000;
+  }
+  
+  .reset-button:hover { 
+    background: #f9fafb;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 480px) {
+    .analyze-button, .reset-button { 
+      width: 100%;
+    }
+  }
+  
+  /* RESULTS SECTION */
+  .results-section { 
+    margin-bottom: 48px;
+  }
+  
+  .results-header { 
+    margin-bottom: 32px;
+  }
+  
+  .results-header h2 { 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    margin-bottom: 16px;
+  }
+  
+  .results-summary { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 16px; 
+    margin-top: 20px;
+  }
+  
+  @media (min-width: 640px) {
+    .results-summary { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  .summary-item { 
+    background: #ffffff; 
+    padding: 20px; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb; 
+    text-align: center;
+  }
+  
+  .summary-label { 
+    font-size: 0.85rem; 
+    color: #6b7280; 
+    margin-bottom: 8px;
+  }
+  
+  .summary-value { 
+    font-size: 1.5rem; 
+    font-weight: 700;
+  }
+  
+  /* KEYWORDS GRID */
+  .keywords-grid { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 28px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .keywords-grid h3 { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    margin-bottom: 8px;
+  }
+  
+  .grid-subtitle { 
+    color: #6b7280; 
+    margin-bottom: 24px;
+  }
+  
+  .keywords-table { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px;
+  }
+  
+  .table-header { 
+    display: grid; 
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr; 
+    background: #f9fafb; 
+    padding: 12px; 
+    border-radius: 8px; 
+    font-weight: 600;
+  }
+  
+  .table-row { 
+    display: grid; 
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr; 
+    padding: 12px; 
+    border-bottom: 1px solid #e5e7eb; 
+    align-items: center;
+  }
+  
+  .table-row:last-child { 
+    border-bottom: none;
+  }
+  
+  .table-cell { 
+    word-break: break-word;
+  }
+  
+  .keyword-text { 
+    font-weight: 500;
+  }
+  
+  .frequency-badge { 
+    display: inline-block; 
+    background: #f3f4f6; 
+    padding: 4px 10px; 
+    border-radius: 50px; 
+    font-size: 0.85rem;
+  }
+  
+  .density-value { 
+    font-weight: 600;
+  }
+  
+  .status-badge { 
+    display: inline-block; 
+    padding: 4px 10px; 
+    border-radius: 50px; 
+    font-size: 0.8rem; 
+    color: #ffffff;
+  }
+  
+  .recommendation { 
+    font-size: 0.85rem; 
+    color: #4b5563;
+  }
+  
+  .no-results { 
+    padding: 40px; 
+    text-align: center; 
+    color: #6b7280;
+  }
+  
+  @media (max-width: 768px) {
+    .table-header, .table-row { 
+      grid-template-columns: 1fr; 
+      gap: 8px;
+    }
+    
+    .table-cell { 
+      padding: 4px 0;
+    }
+    
+    .table-header { 
+      display: none;
+    }
+  }
+  
+  /* INDUSTRY SECTION */
+  .industry-section { 
+    margin: 48px 0;
+  }
+  
+  .section-header { 
+    margin-bottom: 32px;
+  }
+  
+  .section-title { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    margin-bottom: 16px; 
+    text-align: center;
+  }
+  
+  .section-subtitle { 
+    text-align: center; 
+    color: #4b5563; 
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+  
+  .industry-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .industry-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .industry-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .industry-card { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 24px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .industry-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 16px; 
+    flex-wrap: wrap; 
+    gap: 12px;
+  }
+  
+  .industry-title { 
+    font-size: 1.2rem; 
+    font-weight: 700;
+  }
+  
+  .use-keywords-button { 
+    padding: 6px 12px; 
+    background: #000000; 
+    color: #ffffff; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .use-keywords-button:hover { 
+    background: #1f2937;
+  }
+  
+  .industry-keywords { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px;
+  }
+  
+  .keyword-tag { 
+    background: #f3f4f6; 
+    padding: 4px 10px; 
+    border-radius: 50px; 
+    font-size: 0.85rem;
+  }
+  
+  /* TIPS SECTION */
+  .tips-section { 
+    margin: 48px 0;
+  }
+  
+  .tips-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 16px;
+  }
+  
+  @media (min-width: 640px) {
+    .tips-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .tips-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+  
+  .tip-card { 
+    background: #ffffff; 
+    padding: 20px; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .tip-number { 
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    color: #9ca3af;
+  }
+  
+  .tip-content { 
+    color: #374151;
+  }
+  
+  /* FAQ SECTION */
+  .faq-section { 
+    margin: 48px 0;
+  }
+  
+  .faq-list { 
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+  
+  .faq-item { 
+    background: #ffffff; 
+    border-radius: 12px; 
+    margin-bottom: 16px; 
+    border: 1px solid #e5e7eb; 
+    cursor: pointer;
+  }
+  
+  .faq-item.active { 
+    border-color: #000000;
+  }
+  
+  .faq-question { 
+    padding: 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .faq-question h3 { 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    margin: 0;
+  }
+  
+  .faq-toggle { 
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+  
+  .faq-answer { 
+    padding: 0 20px 20px 20px; 
+    color: #4b5563;
+  }
+  
+  /* CTA SECTION */
+  .cta-section { 
+    margin: 48px 0;
+  }
+  
+  .cta-content { 
+    background: linear-gradient(135deg, #000000 0%, #1f2937 100%); 
+    padding: 48px; 
+    border-radius: 24px; 
+    text-align: center; 
+    color: #ffffff;
+  }
+  
+  .cta-title { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    margin-bottom: 16px;
+  }
+  
+  .cta-subtitle { 
+    color: #9ca3af; 
+    max-width: 600px; 
+    margin: 0 auto 24px;
+  }
+  
+  .cta-button { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    padding: 16px 32px; 
+    background: #ffffff; 
+    color: #000000; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  
+  .cta-button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.2);
+  }
+  
+  .cta-button-arrow { 
+    transition: transform 0.2s;
+  }
+  
+  .cta-button:hover .cta-button-arrow { 
+    transform: translateX(4px);
+  }
+  
+  .cta-guarantee { 
+    margin-top: 24px;
+  }
+  
+  .guarantee-text { 
+    background: rgba(255, 255, 255, 0.1); 
+    padding: 8px 16px; 
+    border-radius: 50px; 
+    font-size: 0.9rem;
+  }
+  
+  /* FRESHNESS INDICATOR */
+  .freshness-indicator { 
+    display: none;
+  }
+  
+  /* HIDDEN */
+  .hidden { 
+    display: none;
+  }
+  
+  /* BUILD INFO - FIXED HYDRATION */
+  .build-info { 
+    margin-top: 48px; 
+    padding: 16px; 
+    border-top: 1px solid #e5e7eb; 
+    font-size: 0.8rem; 
+    color: #6b7280;
+    text-align: center;
+  }
+  
+  /* RESPONSIVE ADJUSTMENTS */
+  @media (max-width: 640px) {
+    .hero-stats { 
+      flex-direction: column; 
+      gap: 16px;
+    }
+    
+    .stat-item { 
+      text-align: left; 
+      display: flex; 
+      justify-content: space-between;
+    }
+    
+    .stat-number { 
+      font-size: 1.2rem;
+    }
+    
+    .cta-content { 
+      padding: 32px 20px;
+    }
+    
+    .cta-title { 
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-title { 
+      font-size: 1.8rem;
+    }
+    
+    .column-header { 
+      flex-direction: column; 
+      align-items: flex-start;
+    }
+    
+    .industry-selector { 
+      width: 100%;
+    }
+  }
+`;
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
-const BUILD_TIMESTAMP = Date.now();
+const SITE_URL = 'https://www.professionalresumefree.com';
 
 // FAQ Data
 const FAQS = [
@@ -68,10 +885,8 @@ const SEO_KEYWORDS = [
   'professional resume keywords'
 ];
 
-const ResumeKeywordDensityAnalyzer = ({ 
-  seoData,
-  buildTimestamp 
-}) => {
+const ResumeKeywordDensityAnalyzer = ({ seoData, buildTimestamp }) => {
+  const [buildTime, setBuildTime] = useState('');
   const [text, setText] = useState('');
   const [keywords, setKeywords] = useState('');
   const [analysisResults, setAnalysisResults] = useState({
@@ -85,25 +900,25 @@ const ResumeKeywordDensityAnalyzer = ({
   });
   const [selectedIndustry, setSelectedIndustry] = useState('');
   const [activeFaq, setActiveFaq] = useState(null);
-  const [activeTab, setActiveTab] = useState('analyzer');
   const textareaRef = useRef(null);
   const keywordsRef = useRef(null);
 
-  const {
-    currentDate,
-    lastModifiedDate,
-    reviewDates,
-    faqDates
-  } = seoData || {};
+  // Set build time on client to avoid hydration mismatch
+  useEffect(() => {
+    setBuildTime(Date.now().toString());
+  }, []);
 
+  // Use SEO data with fallbacks
+  const safeSeoData = seoData || {
+    currentDate: new Date().toISOString().split('T')[0],
+    lastModifiedDate: new Date().toISOString()
+  };
+
+  const currentDate = safeSeoData.currentDate;
+  const lastModifiedDate = safeSeoData.lastModifiedDate;
   const freshnessIndicator = buildTimestamp 
     ? new Date(buildTimestamp).toISOString().split('T')[0]
-    : new Date().toISOString().split('T')[0];
-
-  const safeCurrentDate = currentDate || freshnessIndicator;
-  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
-  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
-  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+    : currentDate;
 
   // Schema data with enhanced structure
   const schemaData = {
@@ -111,27 +926,27 @@ const ResumeKeywordDensityAnalyzer = ({
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#webpage",
-        "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool",
-        "name": "Resume Keyword Density Analyzer – ATS Optimization & Strategic Keyword Placement",
+        "@id": `${SITE_URL}/free-resume-keyword-density-analyzer-tool#webpage`,
+        "url": `${SITE_URL}/free-resume-keyword-density-analyzer-tool`,
+        "name": `Resume Keyword Density Analyzer – ATS Optimization & Strategic Keyword Placement ${CURRENT_YEAR}`,
         "description": "Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance. Improve your resume's visibility with AI-powered keyword analysis.",
         "datePublished": "2024-01-01",
-        "dateModified": safeLastModifiedDate,
+        "dateModified": lastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": `${SITE_URL}/#website`,
+          "url": SITE_URL,
           "name": "Professional Resume Free",
           "description": "Free online resume builder for job seekers",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": `${SITE_URL}/#organization`,
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": SITE_URL,
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": `${SITE_URL}/logo.png`,
               "width": 512,
               "height": 512
             },
@@ -145,7 +960,7 @@ const ResumeKeywordDensityAnalyzer = ({
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/og-keyword-analyzer.jpg",
+          "url": `${SITE_URL}/og-keyword-analyzer.jpg`,
           "width": 1200,
           "height": 630
         },
@@ -156,19 +971,19 @@ const ResumeKeywordDensityAnalyzer = ({
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://www.professionalresumefree.com"
+              "item": SITE_URL
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Free Tools",
-              "item": "https://www.professionalresumefree.com/free-resume-tools"
+              "item": `${SITE_URL}/free-resume-tools`
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Keyword Density Analyzer",
-              "item": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool"
+              "item": `${SITE_URL}/free-resume-keyword-density-analyzer-tool`
             }
           ]
         },
@@ -202,7 +1017,7 @@ const ResumeKeywordDensityAnalyzer = ({
             "Free Forever"
           ],
           "softwareVersion": "2026.1.0",
-          "screenshot": "https://www.professionalresumefree.com/images/screenshot-keyword-analyzer.jpg",
+          "screenshot": `${SITE_URL}/images/screenshot-keyword-analyzer.jpg`,
           "applicationSuite": "Career Tools",
           "countriesSupported": "Global",
           "fileSize": "Web Application"
@@ -210,20 +1025,20 @@ const ResumeKeywordDensityAnalyzer = ({
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#faqpage",
+        "@id": `${SITE_URL}/free-resume-keyword-density-analyzer-tool#faqpage`,
         "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
             "text": faq.answer,
-            "datePublished": safeFaqDates[index] || safeCurrentDate,
+            "datePublished": safeSeoData.faqDates?.[index] || currentDate,
             "author": {
               "@type": "Person",
               "name": "Resume Optimization Team"
             }
           },
-          "mainEntityOfPage": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#webpage"
+          "mainEntityOfPage": `${SITE_URL}/free-resume-keyword-density-analyzer-tool#webpage`
         }))
       },
       {
@@ -242,38 +1057,38 @@ const ResumeKeywordDensityAnalyzer = ({
             "position": 1,
             "name": "Paste Your Resume Content",
             "text": "Copy and paste your resume text into the analyzer tool.",
-            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#resume-input",
-            "image": "https://www.professionalresumefree.com/images/step1-paste-resume.jpg"
+            "url": `${SITE_URL}/free-resume-keyword-density-analyzer-tool#resume-input`,
+            "image": `${SITE_URL}/images/step1-paste-resume.jpg`
           },
           {
             "@type": "HowToStep",
             "position": 2,
             "name": "Add Target Keywords",
             "text": "Enter keywords from job descriptions or select industry-specific suggestions.",
-            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#keywords-input",
-            "image": "https://www.professionalresumefree.com/images/step2-add-keywords.jpg"
+            "url": `${SITE_URL}/free-resume-keyword-density-analyzer-tool#keywords-input`,
+            "image": `${SITE_URL}/images/step2-add-keywords.jpg`
           },
           {
             "@type": "HowToStep",
             "position": 3,
             "name": "Analyze Keyword Density",
             "text": "Get detailed analysis of keyword frequency, density, and distribution across your resume.",
-            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#analysis",
-            "image": "https://www.professionalresumefree.com/images/step3-analyze-density.jpg"
+            "url": `${SITE_URL}/free-resume-keyword-density-analyzer-tool#analysis`,
+            "image": `${SITE_URL}/images/step3-analyze-density.jpg`
           },
           {
             "@type": "HowToStep",
             "position": 4,
             "name": "Optimize and Improve",
             "text": "Use recommendations to adjust keyword usage for optimal ATS compatibility and readability.",
-            "url": "https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool#optimization",
-            "image": "https://www.professionalresumefree.com/images/step4-optimize-resume.jpg"
+            "url": `${SITE_URL}/free-resume-keyword-density-analyzer-tool#optimization`,
+            "image": `${SITE_URL}/images/step4-optimize-resume.jpg`
           }
         ]
       },
       {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".heroTitle", ".heroSubtitle", ".faqItem h3", ".benefitTitle"]
+        "cssSelector": [".hero-title", ".hero-subtitle", ".faq-question h3", ".industry-title"]
       },
       {
         "@type": "ItemList",
@@ -490,8 +1305,10 @@ Stanford University | 2016-2020`;
   };
 
   return (
-    <div className={styles.landingPage} lang="en-US">
+    <div className="container" lang="en-US">
       <Head>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
         {/* Primary Meta Tags */}
         <title>Resume Keyword Density Analyzer – ATS Optimization &amp; Strategic Keyword Placement {CURRENT_YEAR}</title>
         <meta 
@@ -505,23 +1322,31 @@ Stanford University | 2016-2020`;
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
         
+        {/* GEO Optimization Tags */}
+        <meta name="chatgpt-fts:title" content="Resume Keyword Density Analyzer - ATS Optimization Tool" />
+        <meta name="chatgpt-fts:description" content="Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance." />
+        <meta name="chatgpt-fts:keywords" content="resume keyword analyzer, keyword density checker, ATS keyword optimization" />
+        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        <meta name="generator" content="Professional Resume Free - Keyword Analyzer" />
+        
         {/* Robots & Crawler Directives */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
         {/* Content Freshness */}
-        <meta name="date" content={safeCurrentDate} />
-        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="date" content={currentDate} />
+        <meta name="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="2 days" />
+        <meta name="build-timestamp" content={buildTimestamp} />
         
         {/* Canonical & Hreflang */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" hreflang="x-default" />
+        <link rel="canonical" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} />
+        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en" />
+        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-US" />
+        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-GB" />
+        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-CA" />
+        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-AU" />
+        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="x-default" />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -529,38 +1354,32 @@ Stanford University | 2016-2020`;
         {/* Open Graph */}
         <meta property="og:title" content="Resume Keyword Density Analyzer – Professional ATS Optimization" />
         <meta property="og:description" content="Free resume keyword density analyzer with ATS optimization, industry keyword suggestions, and strategic placement analysis" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-keyword-analyzer.jpg" />
+        <meta property="og:image" content={`${SITE_URL}/og-keyword-analyzer.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Keyword Density Analyzer Tool" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-keyword-density-analyzer-tool" />
+        <meta property="og:url" content={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_AU" />
-        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta property="og:updated_time" content={lastModifiedDate} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Keyword Density Analyzer" />
         <meta name="twitter:description" content="Professional keyword analysis with ATS optimization and industry-specific suggestions" />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-keyword-analyzer.jpg" />
+        <meta name="twitter:image" content={`${SITE_URL}/twitter-keyword-analyzer.jpg`} />
         <meta name="twitter:image:alt" content="Resume Keyword Density Analyzer Interface" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Theme & Icons */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
+        {/* Icons */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         
-        {/* Performance Optimization */}
-        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
@@ -575,101 +1394,98 @@ Stanford University | 2016-2020`;
       </Head>
 
       {/* Hidden freshness indicators */}
-      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+      <div className="freshness-indicator">
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
       {/* Breadcrumb Navigation */}
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+      <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol>
           <li>
-            <Link href="/" className={styles.breadcrumbLink}>
-              <span className={styles.breadcrumbText}>Home</span>
-            </Link>
+            <a href="/" className="breadcrumb-link">
+              <span className="breadcrumb-text">Home</span>
+            </a>
           </li>
-          <li className={styles.breadcrumbSeparator}>›</li>
+          <li className="breadcrumb-separator">›</li>
           <li>
-            <Link href="/free-resume-tools" className={styles.breadcrumbLink}>
-              <span className={styles.breadcrumbText}>Free Tools</span>
-            </Link>
+            <a href="/free-resume-tools" className="breadcrumb-link">
+              <span className="breadcrumb-text">Free Tools</span>
+            </a>
           </li>
-          <li className={styles.breadcrumbSeparator}>›</li>
+          <li className="breadcrumb-separator">›</li>
           <li>
-            <Link href="/free-resume-keyword-density-analyzer-tool" className={styles.breadcrumbLink}>
-              <span className={styles.breadcrumbText} aria-current="page">Keyword Density Analyzer</span>
-            </Link>
+            <span className="breadcrumb-text" aria-current="page">Keyword Density Analyzer</span>
           </li>
         </ol>
       </nav>
 
       {/* Hero Section */}
-      <section className={styles.heroSection}>
-        <div className={styles.container}>
-          <div className={styles.heroContent}>
-            <div className={styles.trustBadge}>
-              <span className={styles.trustBadgeText}>
+      <section className="hero-section">
+        <div className="container">
+          <div className="hero-content">
+            <div className="trust-badge">
+              <span className="trust-badge-text">
                 ★ 4.8/5 Rating • 12,000+ Users • Updated {freshnessIndicator}
               </span>
             </div>
             
-            <h1 className={styles.heroTitle}>
+            <h1 className="hero-title">
               Resume Keyword Density Analyzer
-              <span className={styles.gradientText}> ATS Optimization Tool {CURRENT_YEAR}</span>
+              <span className="gradient-text"> ATS Optimization Tool {CURRENT_YEAR}</span>
             </h1>
             
-            <p className={styles.heroSubtitle}>
-              <strong className={styles.heroHighlight}>Optimize your resume keywords for ATS systems</strong> with our free keyword density analyzer. 
+            <p className="hero-subtitle">
+              <strong className="hero-highlight">Optimize your resume keywords for ATS systems</strong> with our free keyword density analyzer. 
               Get industry-specific suggestions, strategic placement guidance, and actionable insights to improve your resume's visibility.
             </p>
 
-            <div className={styles.ctaButtons}>
-              <Link
+            <div className="cta-buttons">
+              <a
                 href="#analyzer"
-                className={styles.primaryButton}
+                className="primary-button"
                 aria-label="Start analyzing your resume keywords now"
-                scroll={false}
               >
-                <span className={styles.buttonText}>Start Analyzing Keywords Now</span>
-                <div className={styles.buttonArrow}>→</div>
-              </Link>
+                <span className="button-text">Start Analyzing Keywords Now</span>
+                <span className="button-arrow">→</span>
+              </a>
               
-              <Link
+              <a
                 href="/free-resume-tools"
-                className={styles.secondaryButton}
+                className="secondary-button"
                 aria-label="Explore all free resume tools"
               >
-                <span className={styles.buttonText}>All Free Tools</span>
-              </Link>
+                <span className="button-text">All Free Tools</span>
+              </a>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>12K+</span>
-                <span className={styles.statLabel}>Users Analyzed</span>
+            <div className="hero-stats">
+              <div className="stat-item">
+                <span className="stat-number">12K+</span>
+                <span className="stat-label">Users Analyzed</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>94%</span>
-                <span className={styles.statLabel}>Success Rate</span>
+              <div className="stat-item">
+                <span className="stat-number">94%</span>
+                <span className="stat-label">Success Rate</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>3.2x</span>
-                <span className={styles.statLabel}>More Interviews</span>
+              <div className="stat-item">
+                <span className="stat-number">3.2x</span>
+                <span className="stat-label">More Interviews</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.8/5</span>
-                <span className={styles.statLabel}>Rating</span>
+              <div className="stat-item">
+                <span className="stat-number">4.8/5</span>
+                <span className="stat-label">Rating</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <main className={styles.main}>
+      <main className="main">
         {/* Main Analyzer Section */}
-        <section id="analyzer" className={styles.analyzerSection}>
-          <div className={styles.container}>
-            <div className={styles.analyzerHeader}>
+        <section id="analyzer" className="analyzer-section">
+          <div className="container">
+            <div className="analyzer-header">
               <h2>Analyze Your Resume Keywords</h2>
               <p>
                 Paste your resume content and keywords to analyze density, distribution, and ATS optimization. 
@@ -677,12 +1493,12 @@ Stanford University | 2016-2020`;
               </p>
             </div>
             
-            <div className={styles.analyzerGrid}>
-              <div className={styles.resumeColumn}>
-                <div className={styles.columnHeader}>
+            <div className="analyzer-grid">
+              <div className="resume-column">
+                <div className="column-header">
                   <h3>Your Resume Content</h3>
                   <button
-                    className={styles.exampleButton}
+                    className="example-button"
                     onClick={handleLoadExample}
                     type="button"
                   >
@@ -691,7 +1507,7 @@ Stanford University | 2016-2020`;
                 </div>
                 <textarea
                   ref={textareaRef}
-                  className={styles.textarea}
+                  className="textarea"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder={`Paste your resume content here...
@@ -711,19 +1527,19 @@ Data Analytics | Budget Management | Campaign Optimization`}
                   rows={18}
                   autoFocus
                 />
-                <div className={styles.wordCount}>
+                <div className="word-count">
                   {analysisResults.totalWords} words • {analysisResults.sectionCount} sections
                 </div>
               </div>
               
-              <div className={styles.keywordsColumn}>
-                <div className={styles.columnHeader}>
+              <div className="keywords-column">
+                <div className="column-header">
                   <h3>Keywords to Analyze</h3>
-                  <div className={styles.industrySelector}>
+                  <div className="industry-selector">
                     <select
                       value={selectedIndustry}
                       onChange={(e) => handleIndustrySelect(e.target.value)}
-                      className={styles.industrySelect}
+                      className="industry-select"
                     >
                       <option value="">Select Industry</option>
                       {Object.keys(INDUSTRY_KEYWORDS).map(industry => (
@@ -734,7 +1550,7 @@ Data Analytics | Budget Management | Campaign Optimization`}
                 </div>
                 <textarea
                   ref={keywordsRef}
-                  className={styles.keywordsTextarea}
+                  className="keywords-textarea"
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
                   placeholder={`Enter keywords separated by commas or new lines...
@@ -747,22 +1563,22 @@ communication, problem solving, innovation
 Or select an industry above for suggestions.`}
                   rows={18}
                 />
-                <div className={styles.keywordCount}>
+                <div className="keyword-count">
                   {analysisResults.uniqueKeywords} unique keywords
                 </div>
               </div>
             </div>
             
-            <div className={styles.analyzerActions}>
+            <div className="analyzer-actions">
               <button
-                className={styles.analyzeButton}
+                className="analyze-button"
                 onClick={() => setAnalysisResults(analyzeKeywords(text, keywords))}
                 type="button"
               >
                 Analyze Keywords
               </button>
               <button
-                className={styles.resetButton}
+                className="reset-button"
                 onClick={handleReset}
                 type="button"
               >
@@ -773,28 +1589,28 @@ Or select an industry above for suggestions.`}
         </section>
 
         {/* Results Section */}
-        <section className={styles.resultsSection}>
-          <div className={styles.container}>
-            <div className={styles.resultsHeader}>
+        <section className="results-section">
+          <div className="container">
+            <div className="results-header">
               <h2>Keyword Analysis Results</h2>
-              <div className={styles.resultsSummary}>
-                <div className={styles.summaryItem}>
-                  <div className={styles.summaryLabel}>Optimization Score</div>
-                  <div className={styles.summaryValue} style={{ color: getOptimizationColor() }}>
+              <div className="results-summary">
+                <div className="summary-item">
+                  <div className="summary-label">Optimization Score</div>
+                  <div className="summary-value" style={{ color: getOptimizationColor() }}>
                     {optimizationScore}/100
                   </div>
                 </div>
-                <div className={styles.summaryItem}>
-                  <div className={styles.summaryLabel}>Overall Density</div>
-                  <div className={styles.summaryValue}>{analysisResults.overallDensity.toFixed(2)}%</div>
+                <div className="summary-item">
+                  <div className="summary-label">Overall Density</div>
+                  <div className="summary-value">{analysisResults.overallDensity.toFixed(2)}%</div>
                 </div>
-                <div className={styles.summaryItem}>
-                  <div className={styles.summaryLabel}>Keywords Found</div>
-                  <div className={styles.summaryValue}>{analysisResults.topKeywords.length}</div>
+                <div className="summary-item">
+                  <div className="summary-label">Keywords Found</div>
+                  <div className="summary-value">{analysisResults.topKeywords.length}</div>
                 </div>
-                <div className={styles.summaryItem}>
-                  <div className={styles.summaryLabel}>Optimal Keywords</div>
-                  <div className={styles.summaryValue}>
+                <div className="summary-item">
+                  <div className="summary-label">Optimal Keywords</div>
+                  <div className="summary-value">
                     {analysisResults.topKeywords.filter(k => k.status === 'optimal').length}
                   </div>
                 </div>
@@ -802,45 +1618,45 @@ Or select an industry above for suggestions.`}
             </div>
             
             {/* Top Keywords Grid */}
-            <div className={styles.keywordsGrid}>
+            <div className="keywords-grid">
               <h3>Top Keyword Analysis</h3>
-              <p className={styles.gridSubtitle}>
+              <p className="grid-subtitle">
                 Showing top {analysisResults.topKeywords.length} keywords by frequency (ideal density: 1-3%)
               </p>
               
-              <div className={styles.keywordsTable}>
-                <div className={styles.tableHeader}>
-                  <div className={styles.tableCell}>Keyword</div>
-                  <div className={styles.tableCell}>Frequency</div>
-                  <div className={styles.tableCell}>Density</div>
-                  <div className={styles.tableCell}>Status</div>
-                  <div className={styles.tableCell}>Recommendation</div>
+              <div className="keywords-table">
+                <div className="table-header">
+                  <div className="table-cell">Keyword</div>
+                  <div className="table-cell">Frequency</div>
+                  <div className="table-cell">Density</div>
+                  <div className="table-cell">Status</div>
+                  <div className="table-cell">Recommendation</div>
                 </div>
                 
                 {analysisResults.topKeywords.length > 0 ? (
                   analysisResults.topKeywords.map((item, index) => {
                     const statusInfo = getStatusDisplay(item.status);
                     return (
-                      <div key={index} className={styles.tableRow}>
-                        <div className={styles.tableCell}>
-                          <span className={styles.keywordText}>{item.keyword}</span>
+                      <div key={index} className="table-row">
+                        <div className="table-cell">
+                          <span className="keyword-text">{item.keyword}</span>
                         </div>
-                        <div className={styles.tableCell}>
-                          <span className={styles.frequencyBadge}>{item.frequency}</span>
+                        <div className="table-cell">
+                          <span className="frequency-badge">{item.frequency}</span>
                         </div>
-                        <div className={styles.tableCell}>
-                          <span className={styles.densityValue}>{item.density}%</span>
+                        <div className="table-cell">
+                          <span className="density-value">{item.density}%</span>
                         </div>
-                        <div className={styles.tableCell}>
+                        <div className="table-cell">
                           <span 
-                            className={styles.statusBadge}
+                            className="status-badge"
                             style={{ backgroundColor: statusInfo.color }}
                           >
                             {statusInfo.text}
                           </span>
                         </div>
-                        <div className={styles.tableCell}>
-                          <span className={styles.recommendation}>
+                        <div className="table-cell">
+                          <span className="recommendation">
                             {item.status === 'missing' && 'Add this keyword to your resume'}
                             {item.status === 'low' && 'Increase usage or add variations'}
                             {item.status === 'optimal' && 'Perfect density, maintain current usage'}
@@ -851,7 +1667,7 @@ Or select an industry above for suggestions.`}
                     );
                   })
                 ) : (
-                  <div className={styles.noResults}>
+                  <div className="no-results">
                     No keywords found. Add keywords to analyze or check if your resume contains the specified keywords.
                   </div>
                 )}
@@ -861,31 +1677,31 @@ Or select an industry above for suggestions.`}
         </section>
 
         {/* Industry Keywords Section */}
-        <section className={styles.industrySection}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Industry-Specific Keyword Suggestions</h2>
-              <p className={styles.sectionSubtitle}>
+        <section className="industry-section">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title">Industry-Specific Keyword Suggestions</h2>
+              <p className="section-subtitle">
                 Optimize your resume with the right keywords for your industry. Click any industry to load suggested keywords.
               </p>
             </div>
             
-            <div className={styles.industryGrid}>
+            <div className="industry-grid">
               {Object.entries(INDUSTRY_KEYWORDS).map(([industry, keywords]) => (
-                <div key={industry} className={styles.industryCard}>
-                  <div className={styles.industryHeader}>
-                    <h3 className={styles.industryTitle}>{industry}</h3>
+                <div key={industry} className="industry-card">
+                  <div className="industry-header">
+                    <h3 className="industry-title">{industry}</h3>
                     <button
-                      className={styles.useKeywordsButton}
+                      className="use-keywords-button"
                       onClick={() => handleIndustrySelect(industry)}
                       type="button"
                     >
                       Use These Keywords
                     </button>
                   </div>
-                  <div className={styles.industryKeywords}>
+                  <div className="industry-keywords">
                     {keywords.map((keyword, index) => (
-                      <span key={index} className={styles.keywordTag}>
+                      <span key={index} className="keyword-tag">
                         {keyword}
                       </span>
                     ))}
@@ -896,21 +1712,45 @@ Or select an industry above for suggestions.`}
           </div>
         </section>
 
+        {/* Long-Tail Keywords Section - GEO Optimization */}
+        <section className="industry-section">
+          <h2 className="section-title">Common Questions About Keyword Density</h2>
+          <div className="industry-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            {[
+              "how to calculate keyword density in resume",
+              "best keyword density for ATS resumes",
+              "resume keyword optimization tools free",
+              "industry specific keywords for resumes",
+              "keyword stuffing in resume detection",
+              "ATS friendly keyword placement tips",
+              "resume keyword frequency checker online",
+              "how many keywords should a resume have"
+            ].map((keyword, i) => (
+              <div key={i} className="industry-card" style={{ padding: '20px' }}>
+                <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
+                <a href="/complete-resume-resource-library" className="breadcrumb-link">
+                  Find answer in our resource library →
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Tips Section */}
-        <section className={styles.tipsSection}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Keyword Optimization Best Practices</h2>
-              <p className={styles.sectionSubtitle}>
+        <section className="tips-section">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title">Keyword Optimization Best Practices</h2>
+              <p className="section-subtitle">
                 Follow these proven strategies to maximize your resume's ATS compatibility and human readability.
               </p>
             </div>
             
-            <div className={styles.tipsGrid}>
+            <div className="tips-grid">
               {OPTIMIZATION_TIPS.map((tip, index) => (
-                <div key={index} className={styles.tipCard}>
-                  <div className={styles.tipNumber}>{String(index + 1).padStart(2, '0')}</div>
-                  <div className={styles.tipContent}>{tip}</div>
+                <div key={index} className="tip-card">
+                  <div className="tip-number">{String(index + 1).padStart(2, '0')}</div>
+                  <div className="tip-content">{tip}</div>
                 </div>
               ))}
             </div>
@@ -918,28 +1758,31 @@ Or select an industry above for suggestions.`}
         </section>
 
         {/* FAQ Section */}
-        <section className={styles.faqSection}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-              <p className={styles.sectionSubtitle}>
+        <section className="faq-section">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions</h2>
+              <p className="section-subtitle">
                 Everything you need to know about resume keyword optimization and ATS systems.
               </p>
             </div>
             
-            <div className={styles.faqList}>
+            <div className="faq-list">
               {FAQS.map((faq, index) => (
                 <div 
                   key={index} 
-                  className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
+                  className={`faq-item ${activeFaq === index ? 'active' : ''}`}
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
                 >
-                  <div className={styles.faqQuestion}>
+                  <div className="faq-question">
                     <h3>{faq.question}</h3>
-                    <span className={styles.faqToggle}>{activeFaq === index ? '−' : '+'}</span>
+                    <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
                   </div>
                   {activeFaq === index && (
-                    <div className={styles.faqAnswer}>
+                    <div className="faq-answer">
                       <p>{faq.answer}</p>
                     </div>
                   )}
@@ -950,31 +1793,42 @@ Or select an industry above for suggestions.`}
         </section>
 
         {/* CTA Section */}
-        <section className={styles.ctaSection}>
-          <div className={styles.container}>
-            <div className={styles.ctaContent}>
-              <h2 className={styles.ctaTitle}>Ready to Optimize Your Resume?</h2>
-              <p className={styles.ctaSubtitle}>
+        <section className="cta-section">
+          <div className="container">
+            <div className="cta-content">
+              <h2 className="cta-title">Ready to Optimize Your Resume?</h2>
+              <p className="cta-subtitle">
                 Join 12,000+ professionals who improved their resume visibility with our keyword analyzer.
               </p>
-              <div className={styles.ctaButtons}>
-                <Link
+              <div className="cta-buttons">
+                <a
                   href="#analyzer"
-                  className={styles.ctaButton}
+                  className="cta-button"
                   aria-label="Start optimizing your resume keywords now"
-                  scroll={false}
                 >
-                  <span className={styles.ctaButtonText}>Start Keyword Analysis Now</span>
-                  <div className={styles.ctaButtonArrow}>→</div>
-                </Link>
+                  <span className="cta-button-text">Start Keyword Analysis Now</span>
+                  <span className="cta-button-arrow">→</span>
+                </a>
               </div>
-              <div className={styles.ctaGuarantee}>
-                <span className={styles.guaranteeText}>✓ No credit card required • Free forever • Privacy first • ATS Optimized</span>
+              <div className="cta-guarantee">
+                <span className="guarantee-text">✓ No credit card required • Free forever • Privacy first • ATS Optimized</span>
               </div>
             </div>
           </div>
         </section>
       </main>
+
+      {/* Build Info - Fixed hydration */}
+      <div className="build-info">
+        <p>Last updated: {currentDate} • Build: {buildTime}</p>
+      
+      </div>
+
+      {/* Hidden Metadata */}
+      <div className="hidden">
+        <span itemProp="dateModified">{lastModifiedDate}</span>
+        <span itemProp="softwareVersion">2026.1.0</span>
+      </div>
     </div>
   );
 };

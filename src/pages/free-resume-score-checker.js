@@ -1,7 +1,741 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
+// pages/free-resume-score-checker.jsx
 import Head from 'next/head';
-import Link from 'next/link';
-import styles from './free-resume-score-checker.module.css';
+import { useState, useCallback, useMemo, useEffect } from 'react';
+
+// ===== INLINE CRITICAL CSS - Optimized for speed =====
+const criticalCSS = `
+  /* CSS RESET */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+  
+  /* BASE STYLES */
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    line-height: 1.6; 
+    color: #111827; 
+    background: #f9fafb; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* PAGE CONTAINER */
+  .page-container { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 16px; 
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .page-container { padding: 24px; }
+  }
+  
+  @media (min-width: 1024px) {
+    .page-container { padding: 32px; }
+  }
+  
+  /* BREADCRUMB */
+  .breadcrumb { 
+    margin-bottom: 24px; 
+    font-size: 0.9rem; 
+    color: #6b7280;
+  }
+  
+  .breadcrumb ol { 
+    display: flex; 
+    flex-wrap: wrap; 
+    list-style: none; 
+    gap: 8px;
+  }
+  
+  .breadcrumb li { 
+    display: flex; 
+    align-items: center;
+  }
+  
+  .breadcrumb-separator { 
+    margin: 0 4px; 
+    color: #9ca3af;
+  }
+  
+  .breadcrumb-link { 
+    color: #111827; 
+    text-decoration: none; 
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .breadcrumb-link:hover { 
+    border-bottom-color: #000000; 
+  }
+  
+  .breadcrumb-current { 
+    color: #4b5563;
+  }
+  
+  /* CONTAINER */
+  .container { 
+    width: 100%;
+  }
+  
+  /* HEADER */
+  .header { 
+    margin-bottom: 32px;
+  }
+  
+  h1 { 
+    font-size: clamp(2rem, 5vw, 2.8rem); 
+    line-height: 1.2; 
+    margin-bottom: 16px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .title { 
+    font-size: clamp(2rem, 5vw, 2.8rem); 
+    line-height: 1.2; 
+    margin-bottom: 16px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .subtitle { 
+    font-size: clamp(1rem, 2.5vw, 1.2rem); 
+    color: #4b5563; 
+    max-width: 900px; 
+    line-height: 1.7;
+  }
+  
+  /* AGGREGATE RATING */
+  .aggregate-rating { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+    margin: 24px 0; 
+    padding: 16px; 
+    background: #f3f4f6; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb;
+    flex-wrap: wrap;
+  }
+  
+  .rating-stars { 
+    color: #fbbf24; 
+    font-size: 1.3rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+  }
+  
+  .rating-value { 
+    color: #111827; 
+    font-weight: 700; 
+    font-size: 1rem;
+  }
+  
+  .rating-text { 
+    color: #4b5563; 
+    font-size: 0.9rem;
+  }
+  
+  /* MAIN */
+  .main { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+    margin: 32px 0; 
+  }
+  
+  @media (min-width: 1024px) {
+    .main { grid-template-columns: 1fr 1fr; }
+  }
+  
+  /* EDITOR SECTION */
+  .editor-section { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 24px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .editor-header h2 { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    color: #000000;
+  }
+  
+  .editor-header p { 
+    color: #4b5563; 
+    margin-bottom: 20px;
+  }
+  
+  .textarea { 
+    width: 100%; 
+    padding: 20px; 
+    border: 2px solid #e5e7eb; 
+    border-radius: 12px; 
+    font-family: inherit; 
+    font-size: 1rem; 
+    line-height: 1.6; 
+    resize: vertical; 
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  
+  .textarea:focus { 
+    outline: none; 
+    border-color: #000000;
+  }
+  
+  .sample-tip { 
+    background: #e0f2fe; 
+    padding: 16px; 
+    border-radius: 8px; 
+    font-size: 0.95rem; 
+    border-left: 4px solid #0284c7;
+  }
+  
+  /* RESULTS SECTION */
+  .results-section { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 24px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .score-display { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 24px; 
+    margin-bottom: 32px;
+  }
+  
+  @media (min-width: 640px) {
+    .score-display { flex-direction: row; align-items: center; }
+  }
+  
+  .score-circle { 
+    text-align: center; 
+    min-width: 200px;
+  }
+  
+  .score-number { 
+    font-size: 5rem; 
+    font-weight: 800; 
+    line-height: 1;
+  }
+  
+  .score-label { 
+    color: #4b5563; 
+    font-size: 0.9rem; 
+    margin: 8px 0 4px;
+  }
+  
+  .score-tier { 
+    font-weight: 600; 
+    font-size: 1rem;
+  }
+  
+  .score-breakdown { 
+    flex: 1;
+  }
+  
+  .score-row { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 10px 0; 
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .score-row:last-child { 
+    border-bottom: none;
+  }
+  
+  .score-value { 
+    font-weight: 700;
+  }
+  
+  /* ANALYZING */
+  .analyzing { 
+    text-align: center; 
+    padding: 40px;
+  }
+  
+  .spinner { 
+    border: 4px solid #f3f4f6; 
+    border-top: 4px solid #000000; 
+    border-radius: 50%; 
+    width: 40px; 
+    height: 40px; 
+    animation: spin 1s linear infinite; 
+    margin: 0 auto 20px;
+  }
+  
+  @keyframes spin { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+  }
+  
+  /* FEEDBACK SECTION */
+  .feedback-section { 
+    margin-top: 32px;
+  }
+  
+  .feedback-section h3 { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    margin-bottom: 20px;
+  }
+  
+  .feedback-card { 
+    background: #f9fafb; 
+    padding: 24px; 
+    border-radius: 12px; 
+    margin-bottom: 20px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .feedback-card h4 { 
+    font-size: 1.2rem; 
+    font-weight: 600; 
+    margin-bottom: 16px;
+  }
+  
+  .issue-row, .improvement-row { 
+    display: flex; 
+    gap: 12px; 
+    margin-bottom: 12px;
+  }
+  
+  .issue-icon, .improvement-icon { 
+    font-size: 1.2rem;
+  }
+  
+  .issue-text { 
+    color: #b91c1c;
+  }
+  
+  .improvement-text { 
+    color: #059669;
+  }
+  
+  .example-box { 
+    background: #ffffff; 
+    padding: 16px; 
+    border-radius: 8px; 
+    margin-top: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .example-bad { 
+    color: #b91c1c; 
+    margin-bottom: 8px;
+  }
+  
+  .example-good { 
+    color: #059669;
+  }
+  
+  /* EXCELLENT SCORE */
+  .excellent-score { 
+    text-align: center; 
+    padding: 40px;
+  }
+  
+  .excellent-icon { 
+    font-size: 4rem; 
+    margin-bottom: 20px;
+  }
+  
+  .excellent-score h3 { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 16px;
+  }
+  
+  .excellent-score p { 
+    color: #4b5563; 
+    max-width: 500px; 
+    margin: 0 auto;
+  }
+  
+  /* ACTION SECTION */
+  .action-section { 
+    margin-top: 32px;
+  }
+  
+  .export-button { 
+    background: #ffffff; 
+    color: #000000; 
+    padding: 16px 32px; 
+    border: 2px solid #000000; 
+    border-radius: 8px; 
+    font-size: 1rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    width: 100%; 
+    transition: all 0.2s;
+  }
+  
+  .export-button:hover { 
+    background: #000000; 
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cta { 
+    margin-top: 24px; 
+    padding: 24px; 
+    background: #f9fafb; 
+    border-radius: 12px; 
+    text-align: center;
+  }
+  
+  .cta p { 
+    margin-bottom: 16px; 
+    font-weight: 500;
+  }
+  
+  .cta-button { 
+    display: inline-block; 
+    background: #000000; 
+    color: #ffffff; 
+    padding: 14px 28px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    border: 2px solid #000000;
+    transition: all 0.2s;
+  }
+  
+  .cta-button:hover { 
+    background: #1f2937; 
+    border-color: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* EMPTY STATE */
+  .empty-state { 
+    text-align: center; 
+    padding: 40px 20px;
+  }
+  
+  .empty-icon { 
+    font-size: 4rem; 
+    margin-bottom: 20px;
+  }
+  
+  .empty-state h3 { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 16px;
+  }
+  
+  .empty-state p { 
+    color: #4b5563; 
+    margin-bottom: 20px;
+  }
+  
+  .feature-list { 
+    list-style: none; 
+    text-align: left; 
+    max-width: 400px; 
+    margin: 20px auto;
+  }
+  
+  .feature-list li { 
+    margin-bottom: 10px; 
+    color: #374151;
+  }
+  
+  .privacy-note { 
+    background: #f3f4f6; 
+    padding: 16px; 
+    border-radius: 8px; 
+    font-size: 0.95rem;
+  }
+  
+  /* HOW TO SECTION */
+  .how-to-section { 
+    margin: 48px 0;
+  }
+  
+  .section-title { 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    margin-bottom: 32px; 
+    text-align: center;
+  }
+  
+  .how-to-steps { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+  }
+  
+  @media (min-width: 640px) {
+    .how-to-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .how-to-steps { grid-template-columns: repeat(5, 1fr); }
+  }
+  
+  .how-to-step { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    text-align: center;
+    position: relative;
+  }
+  
+  .step-number { 
+    background: #000000; 
+    color: #ffffff; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    margin: 0 auto 16px;
+  }
+  
+  .step-title { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    margin-bottom: 12px;
+  }
+  
+  .step-description { 
+    color: #4b5563; 
+    font-size: 0.95rem;
+  }
+  
+  /* FAQ SECTION */
+  .faq-section { 
+    margin: 48px 0;
+  }
+  
+  .faq-list { 
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+  
+  .faq-item { 
+    background: #f9fafb; 
+    border-radius: 12px; 
+    margin-bottom: 16px; 
+    border: 1px solid #e5e7eb; 
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .faq-item:hover { 
+    border-color: #000000;
+  }
+  
+  .faq-question { 
+    padding: 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .faq-question h3 { 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    margin: 0;
+  }
+  
+  .faq-toggle { 
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+  
+  .faq-answer { 
+    padding: 0 20px 20px 20px; 
+    color: #4b5563;
+  }
+  
+  /* REVIEWS SECTION */
+  .reviews-section { 
+    margin: 48px 0;
+  }
+  
+  .reviews-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+  }
+  
+  @media (min-width: 768px) {
+    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .review-card { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .review-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 16px;
+  }
+  
+  .reviewer-name { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    display: block;
+  }
+  
+  .reviewer-position { 
+    color: #4b5563; 
+    font-size: 0.85rem;
+  }
+  
+  .stars { 
+    color: #fbbf24; 
+    font-size: 1rem;
+  }
+  
+  .review-content { 
+    margin-bottom: 16px; 
+    font-style: italic;
+  }
+  
+  .review-date { 
+    color: #6b7280; 
+    font-size: 0.85rem;
+  }
+  
+  /* RESOURCES SECTION */
+  .resources-section { 
+    margin: 48px 0;
+  }
+  
+  .resources-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
+  
+  @media (min-width: 640px) {
+    .resources-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .resources-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .resource-card { 
+    background: #f9fafb; 
+    padding: 24px; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb; 
+    text-decoration: none; 
+    color: inherit;
+    transition: transform 0.2s;
+  }
+  
+  .resource-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-card h3 { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    margin-bottom: 8px; 
+    color: #000000;
+  }
+  
+  .resource-card p { 
+    color: #4b5563; 
+    margin: 0;
+  }
+  
+  /* FOOTER */
+  .footer { 
+    margin-top: 48px; 
+    padding: 32px; 
+    background: #f9fafb; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .footer-content { 
+    text-align: center;
+  }
+  
+  .footer p { 
+    margin-bottom: 20px; 
+    color: #4b5563;
+  }
+  
+  .footer-links { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center;
+  }
+  
+  .footer-links a { 
+    color: #000000; 
+    text-decoration: none; 
+    font-weight: 500;
+    border-bottom: 1px solid #9ca3af;
+  }
+  
+  .footer-links a:hover { 
+    border-bottom-color: #000000;
+  }
+  
+  /* FRESHNESS INDICATOR */
+  .freshness-indicator { 
+    display: none;
+  }
+  
+  /* HIDDEN */
+  .hidden { 
+    display: none;
+  }
+  
+  /* RESPONSIVE ADJUSTMENTS */
+  @media (max-width: 480px) {
+    .score-number { 
+      font-size: 4rem;
+    }
+    
+    .export-button { 
+      padding: 14px 20px;
+    }
+    
+    .footer-links { 
+      flex-direction: column; 
+      gap: 12px;
+    }
+  }
+`;
 
 // Core scoring utilities
 const SCORE_WEIGHTS = {
@@ -48,21 +782,21 @@ const FLUFF_WORDS = [
 // Sample reviews data
 const REVIEWS = [
   {
-    name: "Sarah Johnson",
+    name: "Sarah D. George",
     position: "HR Director",
     rating: 5,
     date: "2026-01-30",
     review: "This tool helped our candidates improve their resume success rate by 40%. The ATS compatibility check is spot on."
   },
   {
-    name: "Michael Chen",
+    name: "Ansumana Kamara",
     position: "Software Engineer",
     rating: 5,
     date: "2026-01-25",
     review: "Landed 3 interviews after using the suggestions. The quantified achievements analysis was game-changing."
   },
   {
-    name: "Jessica Williams",
+    name: "Jessica W Fabba",
     position: "Career Coach",
     rating: 4,
     date: "2026-01-20",
@@ -733,8 +1467,10 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
   };
 
   return (
-    <div className={styles.pageContainer} lang="en-US">
+    <div className="page-container" lang="en-US">
       <Head>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
         {/* Primary Meta Tags */}
         <title>Free Resume Score Checker - Instant ATS Analysis & Professional Review 2026 | Resume Scanner</title>
         <meta 
@@ -747,19 +1483,15 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="date" content={currentDate} />
         <meta name="last-modified" content={lastModifiedDate} />
-        <meta name="revisit-after" content="1 days" />
+        <meta name="build-timestamp" content={buildTimestamp.toString()} />
         
         {/* Canonical & Sitemap */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-score-checker" />
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* Hreflang for International SEO */}
         <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="x-default" />
         
         {/* Open Graph */}
@@ -773,8 +1505,6 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta property="og:image:alt" content="Resume Score Checker - ATS Compatibility Analysis Tool" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
         <meta property="og:updated_time" content={lastModifiedDate} />
         
         {/* Twitter Cards */}
@@ -786,15 +1516,12 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* PWA & Browser */}
-        <meta name="theme-color" content="#111111" />
-        <meta name="msapplication-TileColor" content="#111111" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* GEO Optimization Tags */}
+        <meta name="chatgpt-fts:title" content="Free Resume Score Checker - Instant ATS Compatibility Analysis" />
+        <meta name="chatgpt-fts:description" content="Free resume score checker with 5-dimensional ATS analysis. Get instant feedback on your resume's performance. No signup required, privacy-first browser tool." />
+        <meta name="chatgpt-fts:keywords" content="resume score checker, ATS analysis, free resume scanner, resume optimization tool" />
+        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        <meta name="generator" content="Professional Resume Free - Resume Analysis Tool" />
         
         {/* Structured Data */}
         <script
@@ -805,52 +1532,52 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
       </Head>
 
       {/* Hidden Freshness Indicators */}
-      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
+      <div className="freshness-indicator">
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
       {/* Breadcrumb Navigation */}
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+      <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol>
           <li>
-            <Link href="/" className={styles.breadcrumbLink}>
+            <a href="/" className="breadcrumb-link">
               <span>Home</span>
-            </Link>
+            </a>
           </li>
-          <li className={styles.breadcrumbSeparator}>›</li>
+          <li className="breadcrumb-separator">›</li>
           <li>
-            <span className={styles.breadcrumbCurrent}>Resume Score Checker</span>
+            <span className="breadcrumb-current">Resume Score Checker</span>
           </li>
         </ol>
       </nav>
 
-      <div className={styles.container}>
-        <header className={styles.header} role="banner">
-          <h1 className={styles.title}>Professional Resume Score Checker - Free ATS Analysis {currentYear}</h1>
-          <p className={styles.subtitle}>
+      <div className="container">
+        <header className="header" role="banner">
+          <h1 className="title">Professional Resume Score Checker - Free ATS Analysis {currentYear}</h1>
+          <p className="subtitle">
             Get an instant, professional resume analysis with ATS compatibility scoring. 
             100% free, privacy-first tool that analyzes your resume locally in the browser. 
             No data leaves your computer.
           </p>
           
           {/* Aggregate Rating Display */}
-          <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
+          <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="50365" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
-            <div className={styles.ratingStars}>
-              {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.8/5</span>
+            <div className="rating-stars">
+              ★★★★★
+              <span className="rating-value">4.8/5</span>
             </div>
-            <div className={styles.ratingText}>Based on 50,365+ user reviews</div>
+            <div className="rating-text">Based on 50,365+ user reviews</div>
           </div>
         </header>
 
-        <main className={styles.main}>
-          <div className={styles.editorSection}>
-            <div className={styles.editorHeader}>
+        <main className="main">
+          <div className="editor-section">
+            <div className="editor-header">
               <h2>Paste Your Resume Text for Free Analysis</h2>
               <p>
                 Remove personal information before pasting for privacy. 
@@ -860,7 +1587,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
             </div>
             
             <textarea
-              className={styles.textarea}
+              className="textarea"
               value={resumeText}
               onChange={(e) => setResumeText(e.target.value)}
               placeholder="Paste your resume text here... (300-800 words recommended for best results)
@@ -876,61 +1603,61 @@ Professional Example:
             />
             
             {!hasContent && (
-              <div className={styles.sampleTip}>
+              <div className="sample-tip">
                 💡 <strong>Pro Tip:</strong> Start typing or paste your resume above. 
                 Real-time analysis updates as you type. We analyze 5 key resume success factors.
               </div>
             )}
           </div>
 
-          <div className={styles.resultsSection}>
+          <div className="results-section">
             {hasContent ? (
               <>
-                <div className={styles.scoreDisplay}>
-                  <div className={styles.scoreCircle}>
+                <div className="score-display">
+                  <div className="score-circle">
                     <div 
-                      className={styles.scoreNumber}
+                      className="score-number"
                       style={{ color: getScoreColor(scores.total) }}
                     >
                       {scores.total}
                     </div>
-                    <div className={styles.scoreLabel}>Overall Resume Score</div>
+                    <div className="score-label">Overall Resume Score</div>
                     <div 
-                      className={styles.scoreTier}
+                      className="score-tier"
                       style={{ color: getScoreColor(scores.total) }}
                     >
                       {getPerformanceTier(scores.total)}
                     </div>
                   </div>
                   
-                  <div className={styles.scoreBreakdown}>
-                    <div className={styles.scoreRow}>
+                  <div className="score-breakdown">
+                    <div className="score-row">
                       <span>ATS Compatibility Score</span>
-                      <span className={styles.scoreValue} style={{ color: getScoreColor(scores.ats) }}>
+                      <span className="score-value" style={{ color: getScoreColor(scores.ats) }}>
                         {scores.ats}
                       </span>
                     </div>
-                    <div className={styles.scoreRow}>
+                    <div className="score-row">
                       <span>Impact & Achievements</span>
-                      <span className={styles.scoreValue} style={{ color: getScoreColor(scores.impact) }}>
+                      <span className="score-value" style={{ color: getScoreColor(scores.impact) }}>
                         {scores.impact}
                       </span>
                     </div>
-                    <div className={styles.scoreRow}>
+                    <div className="score-row">
                       <span>Structure & Readability</span>
-                      <span className={styles.scoreValue} style={{ color: getScoreColor(scores.structure) }}>
+                      <span className="score-value" style={{ color: getScoreColor(scores.structure) }}>
                         {scores.structure}
                       </span>
                     </div>
-                    <div className={styles.scoreRow}>
+                    <div className="score-row">
                       <span>Keyword Relevance</span>
-                      <span className={styles.scoreValue} style={{ color: getScoreColor(scores.keywords) }}>
+                      <span className="score-value" style={{ color: getScoreColor(scores.keywords) }}>
                         {scores.keywords}
                       </span>
                     </div>
-                    <div className={styles.scoreRow}>
+                    <div className="score-row">
                       <span>Professional Polish</span>
-                      <span className={styles.scoreValue} style={{ color: getScoreColor(scores.polish) }}>
+                      <span className="score-value" style={{ color: getScoreColor(scores.polish) }}>
                         {scores.polish}
                       </span>
                     </div>
@@ -938,45 +1665,45 @@ Professional Example:
                 </div>
 
                 {isAnalyzing ? (
-                  <div className={styles.analyzing}>
-                    <div className={styles.spinner}></div>
+                  <div className="analyzing">
+                    <div className="spinner"></div>
                     <p>Analyzing your resume for ATS compatibility and professional standards...</p>
                   </div>
                 ) : (
                   <>
                     {feedback.length > 0 ? (
-                      <div className={styles.feedbackSection}>
+                      <div className="feedback-section">
                         <h3>Resume Improvement Opportunities</h3>
                         {feedback.map((item, index) => (
-                          <div key={index} className={styles.feedbackCard}>
+                          <div key={index} className="feedback-card">
                             <h4>{item.category} <span style={{ color: getScoreColor(item.score) }}>({item.score}/100)</span></h4>
                             
                             {item.issues.map((issue, i) => (
-                              <div key={i} className={styles.issueRow}>
-                                <div className={styles.issueIcon}>❌</div>
-                                <div className={styles.issueText}>{issue}</div>
+                              <div key={i} className="issue-row">
+                                <div className="issue-icon">❌</div>
+                                <div className="issue-text">{issue}</div>
                               </div>
                             ))}
                             
                             {item.improvements.map((improvement, i) => (
-                              <div key={i} className={styles.improvementRow}>
-                                <div className={styles.improvementIcon}>✅</div>
-                                <div className={styles.improvementText}>{improvement}</div>
+                              <div key={i} className="improvement-row">
+                                <div className="improvement-icon">✅</div>
+                                <div className="improvement-text">{improvement}</div>
                               </div>
                             ))}
                             
                             {item.examples && (
-                              <div className={styles.exampleBox}>
-                                <div className={styles.exampleBad}>📝 Before: {item.examples.before}</div>
-                                <div className={styles.exampleGood}>✨ After: {item.examples.after}</div>
+                              <div className="example-box">
+                                <div className="example-bad">📝 Before: {item.examples.before}</div>
+                                <div className="example-good">✨ After: {item.examples.after}</div>
                               </div>
                             )}
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <div className={styles.excellentScore}>
-                        <div className={styles.excellentIcon}>🎉</div>
+                      <div className="excellent-score">
+                        <div className="excellent-icon">🎉</div>
                         <h3>Excellent Professional Resume!</h3>
                         <p>
                           Your resume scores highly across all ATS compatibility and professional standards categories. 
@@ -985,42 +1712,42 @@ Professional Example:
                       </div>
                     )}
 
-                    <div className={styles.actionSection}>
+                    <div className="action-section">
                       <button 
-                        className={styles.exportButton}
+                        className="export-button"
                         onClick={copyReport}
                         aria-label="Copy comprehensive resume health report"
                       >
                         {showReport ? '✓ Report Copied!' : '📋 Copy Full Health Report'}
                       </button>
                       
-                      <div className={styles.cta}>
+                      <div className="cta">
                         <p>Need a professionally written, ATS-optimized resume?</p>
-                        <Link 
+                        <a 
                           href="/resume-templates" 
-                          className={styles.ctaButton}
+                          className="cta-button"
                           aria-label="Build a professional resume at ProfessionalResumeFree.com"
                         >
                           Build Your Professional Resume Free
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   </>
                 )}
               </>
             ) : (
-              <div className={styles.emptyState}>
-                <div className={styles.emptyIcon}>📄</div>
+              <div className="empty-state">
+                <div className="empty-icon">📄</div>
                 <h3>Your Professional Resume Score Awaits</h3>
                 <p>Paste your resume text to get an instant professional analysis of:</p>
-                <ul className={styles.featureList}>
+                <ul className="feature-list">
                   <li>✅ ATS Compatibility & Parse Score</li>
                   <li>✅ Impact & Achievement Metrics Analysis</li>
                   <li>✅ Structure & Readability Professional Review</li>
                   <li>✅ Keyword Optimization for Applicant Tracking Systems</li>
                   <li>✅ Professional Polish & Formatting Standards</li>
                 </ul>
-                <p className={styles.privacyNote}>
+                <p className="privacy-note">
                   🔒 <strong>Privacy First Guarantee:</strong> All analysis happens locally in your browser. 
                   No resume data is sent to servers. Your information stays private.
                 </p>
@@ -1030,38 +1757,38 @@ Professional Example:
         </main>
 
         {/* How-to Section */}
-        <section className={styles.howToSection} aria-labelledby="how-to-title">
-          <h2 className={styles.sectionTitle} id="how-to-title">How It Works: 5-Step Resume Optimization</h2>
-          <div className={styles.howToSteps}>
+        <section className="how-to-section" aria-labelledby="how-to-title">
+          <h2 className="section-title" id="how-to-title">How It Works: 5-Step Resume Optimization</h2>
+          <div className="how-to-steps">
             {HOW_TO_STEPS.map((step, index) => (
-              <div key={index} className={styles.howToStep} id={`step-${index + 1}`}>
-                <div className={styles.stepNumber}>{index + 1}</div>
-                <h3 className={styles.stepTitle}>{step.name}</h3>
-                <p className={styles.stepDescription}>{step.text}</p>
+              <div key={index} className="how-to-step" id={`step-${index + 1}`}>
+                <div className="step-number">{index + 1}</div>
+                <h3 className="step-title">{step.name}</h3>
+                <p className="step-description">{step.text}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className={styles.faqSection} aria-labelledby="faq-title">
-          <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
-          <div className={styles.faqList}>
+        <section className="faq-section" aria-labelledby="faq-title">
+          <h2 className="section-title" id="faq-title">Frequently Asked Questions</h2>
+          <div className="faq-list">
             {FAQS.map((faq, index) => (
               <div 
                 key={index} 
-                className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
+                className={`faq-item ${activeFaq === index ? 'active' : ''}`}
                 onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
               >
-                <div className={styles.faqQuestion}>
+                <div className="faq-question">
                   <h3>{faq.question}</h3>
-                  <span className={styles.faqToggle}>{activeFaq === index ? '−' : '+'}</span>
+                  <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
                 </div>
                 {activeFaq === index && (
-                  <div className={styles.faqAnswer}>
+                  <div className="faq-answer">
                     <p>{faq.answer}</p>
                   </div>
                 )}
@@ -1071,33 +1798,33 @@ Professional Example:
         </section>
 
         {/* Reviews Section */}
-        <section className={styles.reviewsSection} aria-labelledby="reviews-title">
-          <h2 className={styles.sectionTitle} id="reviews-title">What Users Say About Our Tool</h2>
-          <div className={styles.reviewsGrid}>
+        <section className="reviews-section" aria-labelledby="reviews-title">
+          <h2 className="section-title" id="reviews-title">What Users Say About Our Tool</h2>
+          <div className="reviews-grid">
             {REVIEWS.map((review, index) => (
-              <div key={index} className={styles.reviewCard} itemScope itemType="https://schema.org/Review">
+              <div key={index} className="review-card" itemScope itemType="https://schema.org/Review">
                 <meta itemProp="itemReviewed" content="Free Resume Score Checker" />
-                <div className={styles.reviewHeader}>
-                  <div className={styles.reviewerInfo}>
+                <div className="review-header">
+                  <div className="reviewer-info">
                     <span itemProp="author" itemScope itemType="https://schema.org/Person">
                       <meta itemProp="name" content={review.name} />
-                      <strong className={styles.reviewerName}>{review.name}</strong>
+                      <strong className="reviewer-name">{review.name}</strong>
                     </span>
-                    <span className={styles.reviewerPosition}>{review.position}</span>
+                    <span className="reviewer-position">{review.position}</span>
                   </div>
-                  <div className={styles.reviewRating} itemScope itemType="https://schema.org/Rating">
+                  <div className="review-rating" itemScope itemType="https://schema.org/Rating">
                     <meta itemProp="ratingValue" content={review.rating} />
                     <meta itemProp="bestRating" content="5" />
-                    <div className={styles.stars}>
+                    <div className="stars">
                       {'★'.repeat(review.rating)}
                       {'☆'.repeat(5 - review.rating)}
                     </div>
                   </div>
                 </div>
-                <div className={styles.reviewContent} itemProp="reviewBody">
+                <div className="review-content" itemProp="reviewBody">
                   <p>"{review.review}"</p>
                 </div>
-                <div className={styles.reviewDate} itemProp="datePublished">
+                <div className="review-date" itemProp="datePublished">
                   {review.date}
                 </div>
               </div>
@@ -1105,50 +1832,78 @@ Professional Example:
           </div>
         </section>
 
-        {/* Resources Section */}
-        <section className={styles.resourcesSection} aria-labelledby="resources-title">
-          <h2 className={styles.sectionTitle} id="resources-title">Resume Optimization Resources</h2>
-          <div className={styles.resourcesGrid}>
-            <Link 
-              href="/resume-for-abroad-job" 
-              className={styles.resourceCard}
-            >
-              <h3>Resume for Abroad Job {currentYear}</h3>
-              <p>The Ultimate Resume for Abroad Job {currentYear}</p>
-            </Link>
-            <Link 
-              href="/resume-for-government-job" 
-              className={styles.resourceCard}
-            >
-              <h3>Resume for Government Job</h3>
-              <p>The Ultimate Resume for Government Job</p>
-            </Link>
-            <Link 
-              href="/resume-for-private-job" 
-              className={styles.resourceCard}
-            >
-              <h3>Resume for Private Job</h3>
-              <p>The Ultimate Resume for Private Job</p>
-            </Link>
+        {/* Long-Tail Keywords Section - GEO Optimization */}
+        <section className="how-to-section">
+          <h2 className="section-title">Common Questions About Resume Scoring</h2>
+          <div className="how-to-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            {[
+              "how to check if resume is ATS friendly",
+              "free resume score checker no signup",
+              "best resume analyzer for job applications",
+              "resume compatibility test with keywords",
+              "professional resume review online free",
+              "ATS resume scanner instant results",
+              "resume grader with improvement tips",
+              "privacy safe resume analysis tool"
+            ].map((keyword, i) => (
+              <div key={i} className="how-to-step" style={{ padding: '20px' }}>
+                <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
+                <a href="/complete-resume-resource-library" className="breadcrumb-link">
+                  Find answer in our resource library →
+                </a>
+              </div>
+            ))}
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className={styles.footer}>
-          <div className={styles.footerContent}>
-            <p>
-              <Link href="/">Professional Resume Free</Link> - Helping job seekers create ATS-optimized 
-              resumes since 2020. Our free resume score checker tool processes all data locally in your 
-              browser for maximum privacy and security.
-            </p>
-            <div className={styles.footerLinks}>
-              <Link href="/privacy-policy">Privacy Policy</Link>
-              <Link href="/terms-of-service">Terms of Service</Link>
-              <Link href="/contact">Contact Us</Link>
-              <Link href="/sitemap">Sitemap</Link>
-            </div>
+        {/* Resources Section */}
+        <section className="resources-section" aria-labelledby="resources-title">
+          <h2 className="section-title" id="resources-title">Resume Optimization Resources</h2>
+          <div className="resources-grid">
+            <a 
+              href="/resume-for-abroad-job" 
+              className="resource-card"
+            >
+              <h3>Resume for Abroad Job {currentYear}</h3>
+              <p>The Ultimate Resume for Abroad Job {currentYear}</p>
+            </a>
+            <a 
+              href="/resume-for-government-job" 
+              className="resource-card"
+            >
+              <h3>Resume for Government Job</h3>
+              <p>The Ultimate Resume for Government Job</p>
+            </a>
+            <a 
+              href="/resume-for-private-job" 
+              className="resource-card"
+            >
+              <h3>Resume for Private Job</h3>
+              <p>The Ultimate Resume for Private Job</p>
+            </a>
           </div>
-        </footer>
+        </section>
+
+        
+
+        {/* Freshness Indicator */}
+        <div style={{ 
+          marginTop: '48px', 
+          padding: '16px', 
+          borderTop: '1px solid #e5e7eb', 
+          fontSize: '0.8rem', 
+          color: '#6b7280',
+          textAlign: 'center'
+        }}>
+          
+          
+        </div>
+
+        {/* Hidden Metadata */}
+        <div className="hidden">
+          <span itemProp="dateModified">{lastModifiedDate}</span>
+          <span itemProp="softwareVersion">2026.1.0</span>
+        </div>
       </div>
     </div>
   );
@@ -1183,7 +1938,7 @@ export async function getStaticProps() {
         buildTimestamp
       }
     },
-    // Revalidate every 2 hours for fresh content
-    revalidate: 3600, // 2 hours in seconds
+    // Revalidate every hour for fresh content
+    revalidate: 3600,
   };
 }

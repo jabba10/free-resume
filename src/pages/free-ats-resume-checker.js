@@ -1,9 +1,1049 @@
-import { useState, useCallback } from 'react';
+// pages/free-ats-resume-checker.jsx
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from './free-ats-resume-checker.module.css';
+import { useState, useCallback, useEffect } from 'react';
 
-// Current year for dynamic content
+// ===== INLINE CRITICAL CSS - Optimized for speed =====
+const criticalCSS = `
+  /* CSS RESET */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+  
+  /* BASE STYLES */
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    line-height: 1.6; 
+    color: #111827; 
+    background: #f9fafb; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* PAGE CONTAINER */
+  .landing-page { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 16px; 
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .landing-page { padding: 24px; }
+  }
+  
+  @media (min-width: 1024px) {
+    .landing-page { padding: 32px; }
+  }
+  
+  /* CONTAINER */
+  .container { 
+    width: 100%;
+  }
+  
+  /* BREADCRUMB */
+  .breadcrumb { 
+    margin-bottom: 24px; 
+    font-size: 0.9rem; 
+    color: #6b7280;
+  }
+  
+  .breadcrumb ol { 
+    display: flex; 
+    flex-wrap: wrap; 
+    list-style: none; 
+    gap: 8px;
+  }
+  
+  .breadcrumb li { 
+    display: flex; 
+    align-items: center;
+  }
+  
+  .breadcrumb-separator { 
+    margin: 0 4px; 
+    color: #9ca3af;
+  }
+  
+  .breadcrumb-link { 
+    color: #111827; 
+    text-decoration: none; 
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .breadcrumb-link:hover { 
+    border-bottom-color: #000000; 
+  }
+  
+  /* HEADER */
+  .header { 
+    margin-bottom: 40px; 
+    padding-bottom: 32px; 
+    border-bottom: 2px solid #f3f4f6;
+  }
+  
+  .trust-badge { 
+    display: inline-block; 
+    background: #f3f4f6; 
+    padding: 8px 20px; 
+    border-radius: 50px; 
+    margin-bottom: 20px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .trust-badge-text { 
+    font-weight: 500; 
+    color: #111827;
+  }
+  
+  h1 { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .title { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .gradient-text { 
+    background: linear-gradient(135deg, #000000 0%, #4b5563 100%); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text;
+  }
+  
+  .subtitle { 
+    font-size: clamp(1rem, 2.5vw, 1.2rem); 
+    color: #4b5563; 
+    max-width: 900px; 
+    line-height: 1.7;
+  }
+  
+  .hero-highlight { 
+    background: #f3f4f6; 
+    padding: 4px 8px; 
+    border-radius: 4px;
+  }
+  
+  /* AGGREGATE RATING */
+  .aggregate-rating { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+    margin: 24px 0; 
+    padding: 16px; 
+    background: #f3f4f6; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb;
+    flex-wrap: wrap;
+  }
+  
+  .rating-stars { 
+    color: #fbbf24; 
+    font-size: 1.3rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+  }
+  
+  .rating-value { 
+    color: #111827; 
+    font-weight: 700; 
+    font-size: 1rem;
+  }
+  
+  .rating-text { 
+    color: #4b5563; 
+    font-size: 0.9rem;
+  }
+  
+  /* HERO STATS */
+  .hero-stats { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 24px; 
+    margin: 32px 0; 
+    padding: 20px; 
+    background: #f9fafb; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .stat-item { 
+    flex: 1 1 auto; 
+    min-width: 120px; 
+    text-align: center;
+  }
+  
+  .stat-number { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    color: #000000; 
+    display: block; 
+    line-height: 1.2;
+  }
+  
+  .stat-label { 
+    color: #4b5563; 
+    font-size: 0.9rem;
+  }
+  
+  /* MAIN CONTENT */
+  .main-content { 
+    margin: 32px 0;
+  }
+  
+  /* ANALYSIS SECTION */
+  .analysis-section { 
+    margin-bottom: 32px;
+  }
+  
+  /* CARD */
+  .card { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 24px; 
+    border: 1px solid #e5e7eb; 
+    margin-bottom: 24px;
+  }
+  
+  @media (min-width: 768px) {
+    .card { padding: 32px; }
+  }
+  
+  .card-header { 
+    margin-bottom: 24px;
+  }
+  
+  .card-title { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    color: #000000;
+  }
+  
+  .card-subtitle { 
+    color: #4b5563; 
+    margin-bottom: 16px;
+  }
+  
+  /* BUTTONS */
+  .button-group { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+    margin: 16px 0;
+  }
+  
+  .button { 
+    display: inline-block; 
+    padding: 12px 24px; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    font-size: 1rem; 
+    border: 2px solid #000000;
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+    text-decoration: none; 
+    text-align: center;
+    background: transparent;
+    color: #000000;
+  }
+  
+  .button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .primary-button { 
+    background: #000000; 
+    color: #ffffff; 
+    border: 2px solid #000000;
+    min-width: 240px;
+  }
+  
+  .primary-button:hover { 
+    background: #1f2937; 
+    border-color: #1f2937;
+  }
+  
+  .secondary-button { 
+    background: transparent; 
+    color: #000000;
+  }
+  
+  .secondary-button:hover { 
+    background: #f9fafb;
+  }
+  
+  .cta-button { 
+    background: #000000; 
+    color: #ffffff; 
+    border: 2px solid #000000;
+    min-width: 240px;
+  }
+  
+  .cta-button:hover { 
+    background: #1f2937; 
+    border-color: #1f2937;
+  }
+  
+  @media (max-width: 480px) {
+    .button { 
+      width: 100%;
+    }
+  }
+  
+  /* TEXTAREA */
+  .textarea { 
+    width: 100%; 
+    padding: 20px; 
+    border: 2px solid #e5e7eb; 
+    border-radius: 12px; 
+    font-family: inherit; 
+    font-size: 1rem; 
+    line-height: 1.6; 
+    resize: vertical; 
+    margin: 20px 0;
+    transition: border-color 0.2s;
+  }
+  
+  .textarea:focus { 
+    outline: none; 
+    border-color: #000000;
+  }
+  
+  /* ANALYZE BUTTON CONTAINER */
+  .analyze-button-container { 
+    text-align: center; 
+    margin: 24px 0;
+  }
+  
+  /* SPINNER */
+  .spinner { 
+    display: inline-block; 
+    margin-left: 8px; 
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+  }
+  
+  /* LOADING */
+  .loading { 
+    text-align: center; 
+    padding: 40px;
+  }
+  
+  .loading-bar { 
+    width: 100%; 
+    height: 8px; 
+    background: #e5e7eb; 
+    border-radius: 4px; 
+    margin-top: 20px; 
+    overflow: hidden;
+  }
+  
+  .loading-progress { 
+    width: 50%; 
+    height: 100%; 
+    background: #000000; 
+    animation: progress 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes progress { 
+    0% { transform: translateX(-100%); } 
+    100% { transform: translateX(200%); } 
+  }
+  
+  /* GRID */
+  .grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+    margin: 32px 0;
+  }
+  
+  @media (min-width: 768px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  /* SCORE DISPLAY */
+  .score-container { 
+    text-align: center; 
+    margin: 24px 0;
+  }
+  
+  .score-number { 
+    font-size: 5rem; 
+    font-weight: 800; 
+    line-height: 1; 
+    margin-bottom: 16px;
+  }
+  
+  .score-badge { 
+    display: inline-block; 
+    padding: 8px 24px; 
+    border-radius: 50px; 
+    font-weight: 600; 
+    margin-bottom: 16px;
+  }
+  
+  .score-high { 
+    background: #10b981; 
+    color: #ffffff;
+  }
+  
+  .score-medium { 
+    background: #f59e0b; 
+    color: #ffffff;
+  }
+  
+  .score-low { 
+    background: #ef4444; 
+    color: #ffffff;
+  }
+  
+  .score-message { 
+    font-size: 1.1rem; 
+    margin-bottom: 24px;
+  }
+  
+  .severity-container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    padding: 16px; 
+    background: #f9fafb; 
+    border-radius: 8px;
+  }
+  
+  .severity-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+  }
+  
+  .severity-dot { 
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%;
+  }
+  
+  .severity-high { 
+    background: #ef4444;
+  }
+  
+  .severity-medium { 
+    background: #f59e0b;
+  }
+  
+  .severity-low { 
+    background: #10b981;
+  }
+  
+  /* ISSUE LIST */
+  .issues-container { 
+    margin-top: 20px;
+  }
+  
+  .issue-item { 
+    padding: 20px; 
+    margin-bottom: 16px; 
+    border-radius: 12px; 
+    border-left: 4px solid;
+  }
+  
+  .issue-high { 
+    background: #fef2f2; 
+    border-left-color: #ef4444;
+  }
+  
+  .issue-medium { 
+    background: #fffbeb; 
+    border-left-color: #f59e0b;
+  }
+  
+  .issue-low { 
+    background: #f0fdf4; 
+    border-left-color: #10b981;
+  }
+  
+  .issue-content { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 16px;
+  }
+  
+  .issue-text { 
+    flex: 1;
+  }
+  
+  .issue-message { 
+    font-weight: 600; 
+    margin-bottom: 8px;
+  }
+  
+  .issue-fix { 
+    color: #4b5563;
+  }
+  
+  .issue-severity { 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    padding: 4px 8px; 
+    border-radius: 4px;
+  }
+  
+  .issue-high .issue-severity { 
+    background: #ef4444; 
+    color: #ffffff;
+  }
+  
+  .issue-medium .issue-severity { 
+    background: #f59e0b; 
+    color: #ffffff;
+  }
+  
+  .issue-low .issue-severity { 
+    background: #10b981; 
+    color: #ffffff;
+  }
+  
+  /* SUCCESS MESSAGE */
+  .success-message { 
+    color: #10b981; 
+    font-size: 1.2rem; 
+    text-align: center; 
+    margin: 24px 0;
+  }
+  
+  /* BEST PRACTICES */
+  .best-practices { 
+    background: #f9fafb; 
+    padding: 24px; 
+    border-radius: 12px; 
+    margin-top: 24px;
+  }
+  
+  .best-practices-title { 
+    font-weight: 700; 
+    margin-bottom: 16px;
+  }
+  
+  .best-practices ul { 
+    padding-left: 20px;
+  }
+  
+  .best-practices li { 
+    margin-bottom: 8px;
+  }
+  
+  /* FIXES GRID */
+  .fixes-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+    margin: 24px 0;
+  }
+  
+  @media (min-width: 640px) {
+    .fixes-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .fixes-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .fix-card { 
+    background: #f9fafb; 
+    padding: 24px; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .fix-title { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    color: #000000;
+  }
+  
+  .fix-description { 
+    color: #4b5563; 
+    margin-bottom: 16px;
+  }
+  
+  .fix-examples { 
+    list-style: none;
+  }
+  
+  .fix-examples li { 
+    margin-bottom: 8px; 
+    padding-left: 20px; 
+    position: relative;
+  }
+  
+  .fix-examples li::before { 
+    content: "•"; 
+    position: absolute; 
+    left: 4px; 
+    color: #000000;
+  }
+  
+  /* PRO TIP */
+  .pro-tip { 
+    background: #e0f2fe; 
+    padding: 24px; 
+    border-radius: 12px; 
+    margin-top: 32px; 
+    border-left: 4px solid #0284c7;
+  }
+  
+  .pro-tip-title { 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    color: #0369a1;
+  }
+  
+  .pro-tip-text { 
+    color: #374151; 
+    margin-bottom: 12px;
+  }
+  
+  .pro-tip-text:last-child { 
+    margin-bottom: 0;
+  }
+  
+  /* CENTER TEXT */
+  .center-text { 
+    text-align: center;
+  }
+  
+  /* READY TEXT */
+  .ready-text { 
+    color: #4b5563; 
+    margin: 24px 0;
+  }
+  
+  /* CHECKLIST */
+  .checklist { 
+    background: #f9fafb; 
+    padding: 24px; 
+    border-radius: 12px; 
+    margin-top: 24px;
+  }
+  
+  .checklist-title { 
+    font-weight: 700; 
+    margin-bottom: 16px;
+  }
+  
+  .checklist ul { 
+    padding-left: 20px;
+  }
+  
+  .checklist li { 
+    margin-bottom: 8px;
+  }
+  
+  /* HOW TO SECTION */
+  .how-to-section { 
+    margin: 48px 0;
+  }
+  
+  .section-title { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    margin-bottom: 16px; 
+    text-align: center;
+  }
+  
+  .section-subtitle { 
+    text-align: center; 
+    color: #4b5563; 
+    max-width: 800px; 
+    margin: 0 auto 32px;
+  }
+  
+  .how-to-steps { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .how-to-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .how-to-steps { grid-template-columns: repeat(5, 1fr); }
+  }
+  
+  .how-to-step { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .how-to-step:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .step-number { 
+    background: #000000; 
+    color: #ffffff; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    margin: 0 auto 16px;
+  }
+  
+  .step-title { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    margin-bottom: 12px;
+  }
+  
+  .step-description { 
+    color: #4b5563;
+  }
+  
+  /* FAQ SECTION */
+  .faq-section { 
+    margin: 48px 0;
+  }
+  
+  .faq-list { 
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+  
+  .faq-item { 
+    background: #f9fafb; 
+    border-radius: 12px; 
+    margin-bottom: 16px; 
+    border: 1px solid #e5e7eb; 
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .faq-item:hover { 
+    border-color: #000000;
+  }
+  
+  .faq-item.active { 
+    border-color: #000000;
+  }
+  
+  .faq-question { 
+    padding: 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .faq-question h3 { 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    margin: 0;
+  }
+  
+  .faq-toggle { 
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+  
+  .faq-answer { 
+    padding: 0 20px 20px 20px; 
+    color: #4b5563;
+  }
+  
+  /* REVIEWS SECTION */
+  .reviews-section { 
+    margin: 48px 0;
+  }
+  
+  .reviews-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .review-card { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s;
+  }
+  
+  .review-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 16px;
+  }
+  
+  .reviewer-name { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    display: block;
+  }
+  
+  .reviewer-position { 
+    color: #4b5563; 
+    font-size: 0.85rem; 
+    display: block;
+  }
+  
+  .reviewer-company { 
+    color: #6b7280; 
+    font-size: 0.8rem; 
+    display: block;
+  }
+  
+  .stars { 
+    color: #fbbf24; 
+    font-size: 1rem;
+  }
+  
+  .review-content { 
+    margin-bottom: 16px; 
+    font-style: italic;
+  }
+  
+  .review-date { 
+    color: #6b7280; 
+    font-size: 0.85rem;
+  }
+  
+  /* RESOURCES SECTION */
+  .resources-section { 
+    margin: 48px 0;
+  }
+  
+  .resources-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .resources-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .resources-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .resource-card { 
+    background: #f9fafb; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    text-decoration: none; 
+    color: inherit;
+    display: block;
+    transition: transform 0.2s;
+  }
+  
+  .resource-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-card h3 { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    color: #000000;
+  }
+  
+  .resource-card p { 
+    color: #4b5563; 
+    margin: 0;
+  }
+  
+  /* CTA SECTION */
+  .cta-section { 
+    margin: 48px 0; 
+    padding: 48px; 
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); 
+    border-radius: 24px; 
+    border: 2px solid #000000;
+  }
+  
+  .cta-content { 
+    text-align: center;
+  }
+  
+  .cta-title { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    margin-bottom: 16px; 
+    color: #000000;
+  }
+  
+  .cta-subtitle { 
+    color: #4b5563; 
+    max-width: 600px; 
+    margin: 0 auto 32px;
+  }
+  
+  .cta-buttons { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 16px; 
+    justify-content: center; 
+    margin-bottom: 24px;
+  }
+  
+  .cta-guarantee { 
+    color: #6b7280; 
+    font-size: 0.9rem;
+  }
+  
+  .guarantee-text { 
+    display: inline-block; 
+    padding: 8px 16px; 
+    background: #ffffff; 
+    border-radius: 50px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  /* FOOTER */
+  .footer { 
+    margin-top: 48px; 
+    padding: 32px; 
+    background: #f9fafb; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .footer-content { 
+    text-align: center;
+  }
+  
+  .footer p { 
+    margin-bottom: 20px; 
+    color: #4b5563;
+  }
+  
+  .footer-links { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center;
+  }
+  
+  .footer-links a { 
+    color: #000000; 
+    text-decoration: none; 
+    font-weight: 500;
+    border-bottom: 1px solid #9ca3af;
+  }
+  
+  .footer-links a:hover { 
+    border-bottom-color: #000000;
+  }
+  
+  /* FRESHNESS INDICATOR */
+  .freshness-indicator { 
+    display: none;
+  }
+  
+  /* HIDDEN */
+  .hidden { 
+    display: none;
+  }
+  
+  /* BUILD INFO - FIXED HYDRATION */
+  .build-info { 
+    margin-top: 48px; 
+    padding: 16px; 
+    border-top: 1px solid #e5e7eb; 
+    font-size: 0.8rem; 
+    color: #6b7280;
+    text-align: center;
+  }
+  
+  /* RESPONSIVE ADJUSTMENTS */
+  @media (max-width: 640px) {
+    .issue-content { 
+      flex-direction: column;
+    }
+    
+    .score-number { 
+      font-size: 4rem;
+    }
+    
+    .cta-section { 
+      padding: 32px 20px;
+    }
+    
+    .cta-title { 
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .breadcrumb ol { 
+      font-size: 0.85rem;
+    }
+    
+    .stat-number { 
+      font-size: 1.5rem;
+    }
+    
+    .section-title { 
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+// Current year for dynamic content - use static value from build time
 const CURRENT_YEAR = new Date().getFullYear();
 const BUILD_TIMESTAMP = new Date().toISOString();
 const FRESHNESS_INDICATOR = new Date().toISOString().split('T')[0];
@@ -163,9 +1203,9 @@ const ATS_RULES = {
 // ScoreDisplay Component
 function ScoreDisplay({ score, severityCount }) {
   const getScoreClass = (score) => {
-    if (score >= 80) return styles.scoreHigh;
-    if (score >= 60) return styles.scoreMedium;
-    return styles.scoreLow;
+    if (score >= 80) return 'score-high';
+    if (score >= 60) return 'score-medium';
+    return 'score-low';
   };
 
   const getScoreMessage = (score) => {
@@ -177,32 +1217,32 @@ function ScoreDisplay({ score, severityCount }) {
   };
 
   return (
-    <div className={styles.card}>
-      <h2 className={styles.cardTitle}>ATS Compatibility Score</h2>
-      <div className={styles.scoreContainer}>
-        <div className={styles.scoreNumber}>{score}</div>
-        <div className={`${styles.scoreBadge} ${getScoreClass(score)}`}>
+    <div className="card">
+      <h2 className="card-title">ATS Compatibility Score</h2>
+      <div className="score-container">
+        <div className="score-number" style={{ color: score >= 80 ? '#10b981' : score >= 60 ? '#f59e0b' : '#ef4444' }}>{score}</div>
+        <div className={`score-badge ${getScoreClass(score)}`}>
           {score >= 80 ? 'Low Risk' : score >= 60 ? 'Medium Risk' : 'High Risk'}
         </div>
       </div>
-      <p className={styles.scoreMessage}>{getScoreMessage(score)}</p>
+      <p className="score-message">{getScoreMessage(score)}</p>
       
-      <div className={styles.severityContainer}>
+      <div className="severity-container">
         {severityCount.high > 0 && (
-          <div className={styles.severityItem}>
-            <div className={`${styles.severityDot} ${styles.severityHigh}`}></div>
+          <div className="severity-item">
+            <div className="severity-dot severity-high"></div>
             <span>{severityCount.high} High Risk Issue{severityCount.high !== 1 ? 's' : ''}</span>
           </div>
         )}
         {severityCount.medium > 0 && (
-          <div className={styles.severityItem}>
-            <div className={`${styles.severityDot} ${styles.severityMedium}`}></div>
+          <div className="severity-item">
+            <div className="severity-dot severity-medium"></div>
             <span>{severityCount.medium} Medium Risk Issue{severityCount.medium !== 1 ? 's' : ''}</span>
           </div>
         )}
         {severityCount.low > 0 && (
-          <div className={styles.severityItem}>
-            <div className={`${styles.severityDot} ${styles.severityLow}`}></div>
+          <div className="severity-item">
+            <div className="severity-dot severity-low"></div>
             <span>{severityCount.low} Low Risk Issue{severityCount.low !== 1 ? 's' : ''}</span>
           </div>
         )}
@@ -215,11 +1255,11 @@ function ScoreDisplay({ score, severityCount }) {
 function IssueList({ issues }) {
   if (!issues || issues.length === 0) {
     return (
-      <div className={styles.card}>
-        <h2 className={styles.cardTitle}>No Issues Found</h2>
-        <p className={styles.successMessage}>✓ Your resume text appears to be ATS-friendly!</p>
-        <div className={styles.bestPractices}>
-          <p className={styles.bestPracticesTitle}>Best Practices to Maintain ATS Compatibility:</p>
+      <div className="card">
+        <h2 className="card-title">No Issues Found</h2>
+        <p className="success-message">✓ Your resume text appears to be ATS-friendly!</p>
+        <div className="best-practices">
+          <p className="best-practices-title">Best Practices to Maintain ATS Compatibility:</p>
           <ul>
             <li>Use standard section headers (Work Experience, Education, Skills)</li>
             <li>Stick to common fonts like Arial, Calibri, or Times New Roman</li>
@@ -236,25 +1276,25 @@ function IssueList({ issues }) {
 
   const getSeverityClass = (severity) => {
     switch (severity) {
-      case 'high': return styles.issueHigh;
-      case 'medium': return styles.issueMedium;
-      case 'low': return styles.issueLow;
+      case 'high': return 'issue-high';
+      case 'medium': return 'issue-medium';
+      case 'low': return 'issue-low';
       default: return '';
     }
   };
 
   return (
-    <div className={styles.card}>
-      <h2 className={styles.cardTitle}>Issues Found ({issues.length})</h2>
-      <div className={styles.issuesContainer}>
+    <div className="card">
+      <h2 className="card-title">Issues Found ({issues.length})</h2>
+      <div className="issues-container">
         {issues.map((issue, index) => (
-          <div key={index} className={`${styles.issueItem} ${getSeverityClass(issue.severity)}`}>
-            <div className={styles.issueContent}>
-              <div className={styles.issueText}>
-                <p className={styles.issueMessage}>{issue.message}</p>
-                <p className={styles.issueFix}><strong>Fix:</strong> {issue.fix}</p>
+          <div key={index} className={`issue-item ${getSeverityClass(issue.severity)}`}>
+            <div className="issue-content">
+              <div className="issue-text">
+                <p className="issue-message">{issue.message}</p>
+                <p className="issue-fix"><strong>Fix:</strong> {issue.fix}</p>
               </div>
-              <span className={`${styles.issueSeverity} ${getSeverityClass(issue.severity)}`}>
+              <span className={`issue-severity ${getSeverityClass(issue.severity)}`}>
                 {issue.severity.toUpperCase()}
               </span>
             </div>
@@ -329,15 +1369,15 @@ function FixSuggestions() {
   ];
 
   return (
-    <div className={styles.card}>
-      <h2 className={styles.cardTitle}>ATS Optimization Guide</h2>
-      <p className={styles.cardSubtitle}>Follow these recommendations to improve your resume's ATS compatibility</p>
-      <div className={styles.fixesGrid}>
+    <div className="card">
+      <h2 className="card-title">ATS Optimization Guide</h2>
+      <p className="card-subtitle">Follow these recommendations to improve your resume's ATS compatibility</p>
+      <div className="fixes-grid">
         {fixes.map((fix, index) => (
-          <div key={index} className={styles.fixCard}>
-            <h4 className={styles.fixTitle}>{fix.title}</h4>
-            <p className={styles.fixDescription}>{fix.description}</p>
-            <ul className={styles.fixExamples}>
+          <div key={index} className="fix-card">
+            <h4 className="fix-title">{fix.title}</h4>
+            <p className="fix-description">{fix.description}</p>
+            <ul className="fix-examples">
               {fix.examples.map((example, idx) => (
                 <li key={idx}>{example}</li>
               ))}
@@ -346,15 +1386,15 @@ function FixSuggestions() {
         ))}
       </div>
       
-      <div className={styles.proTip}>
-        <p className={styles.proTipTitle}>💡 Pro Tip for Maximum ATS Compatibility:</p>
-        <p className={styles.proTipText}>
+      <div className="pro-tip">
+        <p className="pro-tip-title">💡 Pro Tip for Maximum ATS Compatibility:</p>
+        <p className="pro-tip-text">
           Always save your resume as a <strong>.docx</strong> file for best ATS parsing. 
           If using PDF, ensure it's created from a text-based source, not scanned. 
           Test your resume by copying and pasting the text into Notepad - if it looks clean and readable there, 
           it will likely pass through most ATS systems successfully.
         </p>
-        <p className={styles.proTipText}>
+        <p className="pro-tip-text">
           <strong>Remember:</strong> 99% of Fortune 500 companies use ATS. Optimizing for these systems 
           is essential for getting your resume seen by human recruiters.
         </p>
@@ -566,11 +1606,25 @@ function analyzeResume(text) {
   };
 }
 
-export default function ATSResumeChecker() {
+export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, reviews, faqs, howToSteps, breadcrumbData }) {
   const [resumeText, setResumeText] = useState('');
   const [analysis, setAnalysis] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
+  const [buildTime, setBuildTime] = useState('');
+
+  // Use effect to set client-side timestamp to avoid hydration mismatch
+  useEffect(() => {
+    setBuildTime(Date.now().toString());
+  }, []);
+
+  // Use props if provided, otherwise fallback to constants
+  const safeLastUpdated = lastUpdated || BUILD_TIMESTAMP;
+  const safeFreshnessIndicator = freshnessIndicator || FRESHNESS_INDICATOR;
+  const safeReviews = reviews || REVIEWS;
+  const safeFaqs = faqs || FAQS;
+  const safeHowToSteps = howToSteps || HOW_TO_STEPS;
+  const safeBreadcrumbData = breadcrumbData || BREADCRUMB_DATA;
 
   // Schema data with comprehensive structured data
   const schemaData = {
@@ -583,7 +1637,7 @@ export default function ATSResumeChecker() {
         "name": "Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2025",
         "description": "Professional ATS resume checker that analyzes 50+ parsing factors. Get instant feedback on ATS compatibility, formatting issues, and actionable fixes. 2025 Edition",
         "datePublished": "2024-01-01",
-        "dateModified": BUILD_TIMESTAMP,
+        "dateModified": safeLastUpdated,
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
@@ -618,7 +1672,7 @@ export default function ATSResumeChecker() {
         },
         "breadcrumb": {
           "@type": "BreadcrumbList",
-          "itemListElement": BREADCRUMB_DATA.map((item, index) => ({
+          "itemListElement": safeBreadcrumbData.map((item, index) => ({
             "@type": "ListItem",
             "position": index + 1,
             "name": item.name,
@@ -666,7 +1720,7 @@ export default function ATSResumeChecker() {
       {
         "@type": "FAQPage",
         "@id": "https://www.professionalresumefree.com/free-ats-resume-checker/#faqpage",
-        "mainEntity": FAQS.map((faq, index) => ({
+        "mainEntity": safeFaqs.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
@@ -690,7 +1744,7 @@ export default function ATSResumeChecker() {
           "currency": "USD",
           "value": "0"
         },
-        "step": HOW_TO_STEPS.map((step, index) => ({
+        "step": safeHowToSteps.map((step, index) => ({
           "@type": "HowToStep",
           "position": index + 1,
           "name": step.name,
@@ -702,7 +1756,7 @@ export default function ATSResumeChecker() {
       {
         "@type": "ItemList",
         "name": "User Reviews for Free ATS Resume Checker",
-        "itemListElement": REVIEWS.map((review, index) => ({
+        "itemListElement": safeReviews.map((review, index) => ({
           "@type": "ListItem",
           "position": index + 1,
           "item": {
@@ -776,7 +1830,7 @@ export default function ATSResumeChecker() {
       },
       {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".title", ".subtitle", ".cardTitle", ".sectionTitle"]
+        "cssSelector": [".title", ".subtitle", ".card-title", ".section-title"]
       }
     ]
   };
@@ -856,6 +1910,8 @@ SKILLS
   return (
     <>
       <Head>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
         {/* Primary Meta Tags */}
         <title>Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis {CURRENT_YEAR} | Professional Resume Free</title>
         <meta 
@@ -868,9 +1924,16 @@ SKILLS
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
         {/* Date and Freshness Meta Tags */}
-        <meta name="date" content={FRESHNESS_INDICATOR} />
-        <meta name="last-modified" content={BUILD_TIMESTAMP} />
+        <meta name="date" content={safeFreshnessIndicator} />
+        <meta name="last-modified" content={safeLastUpdated} />
         <meta name="revisit-after" content="1 days" />
+        
+        {/* GEO Optimization Tags for AI Crawlers */}
+        <meta name="chatgpt-fts:title" content="Free ATS Resume Checker - Instant ATS Compatibility Analysis" />
+        <meta name="chatgpt-fts:description" content="Free ATS resume checker that analyzes 50+ parsing factors instantly. Get detailed feedback on formatting issues, keywords, and ATS compatibility. Privacy-first browser tool." />
+        <meta name="chatgpt-fts:keywords" content="ATS resume checker, resume compatibility test, free ATS scanner, resume parsing analysis" />
+        <meta name="chatgpt-fts:last-updated" content={safeFreshnessIndicator} />
+        <meta name="generator" content="Professional Resume Free - ATS Analysis Tool" />
         
         {/* Canonical and Sitemap */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-ats-resume-checker" />
@@ -898,7 +1961,7 @@ SKILLS
         <meta property="og:locale:alternate" content="en_GB" />
         <meta property="og:locale:alternate" content="en_CA" />
         <meta property="og:locale:alternate" content="en_AU" />
-        <meta property="og:updated_time" content={BUILD_TIMESTAMP} />
+        <meta property="og:updated_time" content={safeLastUpdated} />
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -918,7 +1981,6 @@ SKILLS
         <link rel="manifest" href="/site.webmanifest" />
         
         {/* Performance Optimization */}
-        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
@@ -930,28 +1992,28 @@ SKILLS
         />
       </Head>
 
-      <div className={styles.landingPage} lang="en-US">
-        {/* Freshness Indicator */}
-        <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
-          <meta name="build-timestamp" content={Date.now()} />
-          <meta name="content-freshness" content={FRESHNESS_INDICATOR} />
+      <div className="landing-page" lang="en-US">
+        {/* Freshness Indicator - Hidden */}
+        <div className="freshness-indicator">
+          <meta name="build-timestamp" content={buildTime} />
+          <meta name="content-freshness" content={safeFreshnessIndicator} />
         </div>
 
         {/* Breadcrumb Navigation */}
-        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <nav className="breadcrumb" aria-label="Breadcrumb">
           <ol itemScope itemType="https://schema.org/BreadcrumbList">
-            {BREADCRUMB_DATA.map((item, index) => (
+            {safeBreadcrumbData.map((item, index) => (
               <li 
                 key={index}
                 itemProp="itemListElement"
                 itemScope
                 itemType="https://schema.org/ListItem"
               >
-                {index > 0 && <span className={styles.breadcrumbSeparator}>›</span>}
+                {index > 0 && <span className="breadcrumb-separator">›</span>}
                 <Link
                   href={item.item}
                   itemProp="item"
-                  className={styles.breadcrumbLink}
+                  className="breadcrumb-link"
                 >
                   <span itemProp="name">{item.name}</span>
                 </Link>
@@ -961,73 +2023,73 @@ SKILLS
           </ol>
         </nav>
 
-        <div className={styles.container}>
-          <header className={styles.header} role="banner">
-            <div className={styles.trustBadge}>
-              <span className={styles.trustBadgeText}>
+        <div className="container">
+          <header className="header" role="banner">
+            <div className="trust-badge">
+              <span className="trust-badge-text">
                 Rated 4.8/5 by 58766+ Users | Best Free ATS Checker {CURRENT_YEAR}
               </span>
             </div>
             
-            <h1 className={styles.title}>
-              Free ATS Resume Checker - <span className={styles.gradientText}>Analyze 50+ Parsing Factors Instantly</span>
+            <h1 className="title">
+              Free ATS Resume Checker - <span className="gradient-text">Analyze 50+ Parsing Factors Instantly</span>
             </h1>
             
-            <p className={styles.subtitle}>
-              Professional <strong className={styles.heroHighlight}>Applicant Tracking System compatibility analyzer</strong> that works entirely in your browser. No data leaves your computer - 100% privacy guaranteed.
+            <p className="subtitle">
+              Professional <strong className="hero-highlight">Applicant Tracking System compatibility analyzer</strong> that works entirely in your browser. No data leaves your computer - 100% privacy guaranteed.
             </p>
 
             {/* Aggregate Rating Display */}
-            <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
+            <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
               <meta itemProp="ratingValue" content="4.8" />
               <meta itemProp="ratingCount" content="156" />
               <meta itemProp="bestRating" content="5" />
               <meta itemProp="worstRating" content="1" />
-              <div className={styles.ratingStars}>
-                {'★'.repeat(5)}
-                <span className={styles.ratingValue}>4.8/5</span>
+              <div className="rating-stars">
+                ★★★★★
+                <span className="rating-value">4.8/5</span>
               </div>
-              <div className={styles.ratingText}>Based on 156+ professional reviews</div>
+              <div className="rating-text">Based on 156+ professional reviews</div>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>50+</span>
-                <span className={styles.statLabel}>ATS Factors Analyzed</span>
+            <div className="hero-stats">
+              <div className="stat-item">
+                <span className="stat-number">50+</span>
+                <span className="stat-label">ATS Factors Analyzed</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>100%</span>
-                <span className={styles.statLabel}>Privacy Guaranteed</span>
+              <div className="stat-item">
+                <span className="stat-number">100%</span>
+                <span className="stat-label">Privacy Guaranteed</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>75%</span>
-                <span className={styles.statLabel}>ATS Adoption Rate</span>
+              <div className="stat-item">
+                <span className="stat-number">75%</span>
+                <span className="stat-label">ATS Adoption Rate</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>3x</span>
-                <span className={styles.statLabel}>Better Results</span>
+              <div className="stat-item">
+                <span className="stat-number">3x</span>
+                <span className="stat-label">Better Results</span>
               </div>
             </div>
           </header>
 
-          <main className={styles.mainContent}>
-            <section className={styles.analysisSection}>
-              <div className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <h2 className={styles.cardTitle}>Paste Your Resume Text for ATS Analysis</h2>
-                  <p className={styles.cardSubtitle}>Completely private - all processing happens in your browser</p>
-                  <div className={styles.buttonGroup}>
-                    <button onClick={handleUseSample} className={`${styles.button} ${styles.secondaryButton}`}>
+          <main className="main-content">
+            <section className="analysis-section">
+              <div className="card">
+                <div className="card-header">
+                  <h2 className="card-title">Paste Your Resume Text for ATS Analysis</h2>
+                  <p className="card-subtitle">Completely private - all processing happens in your browser</p>
+                  <div className="button-group">
+                    <button onClick={handleUseSample} className="button secondary-button">
                       Use Sample Resume
                     </button>
-                    <button onClick={handleClear} className={`${styles.button} ${styles.secondaryButton}`}>
+                    <button onClick={handleClear} className="button secondary-button">
                       Clear Text
                     </button>
                   </div>
                 </div>
                 
                 <textarea
-                  className={styles.textarea}
+                  className="textarea"
                   value={resumeText}
                   onChange={(e) => setResumeText(e.target.value)}
                   placeholder="Paste your resume text here (plain text only)...
@@ -1054,16 +2116,16 @@ WORK EXPERIENCE
                   aria-label="Resume text input for ATS analysis"
                 />
                 
-                <div className={styles.analyzeButtonContainer}>
+                <div className="analyze-button-container">
                   <button 
                     onClick={handleAnalyze} 
-                    className={`${styles.button} ${styles.primaryButton}`}
+                    className="button primary-button"
                     disabled={isAnalyzing}
                   >
                     {isAnalyzing ? (
                       <>
                         <span>Analyzing ATS Compatibility...</span>
-                        <span className={styles.spinner}>⟳</span>
+                        <span className="spinner">⟳</span>
                       </>
                     ) : (
                       'Analyze ATS Compatibility Now'
@@ -1074,28 +2136,28 @@ WORK EXPERIENCE
             </section>
 
             {isAnalyzing ? (
-              <div className={styles.loading}>
+              <div className="loading">
                 <p>Analyzing your resume for ATS compatibility...</p>
-                <div className={styles.loadingBar}>
-                  <div className={styles.loadingProgress}></div>
+                <div className="loading-bar">
+                  <div className="loading-progress"></div>
                 </div>
               </div>
             ) : analysis ? (
               <>
-                <div className={styles.grid}>
+                <div className="grid">
                   <ScoreDisplay score={analysis.score} severityCount={analysis.severityCount} />
                   <IssueList issues={analysis.issues} />
                 </div>
                 <FixSuggestions />
               </>
             ) : (
-              <div className={styles.card}>
-                <h2 className={`${styles.cardTitle} ${styles.centerText}`}>Ready to Analyze Your Resume's ATS Compatibility</h2>
-                <p className={`${styles.readyText} ${styles.centerText}`}>
+              <div className="card">
+                <h2 className="card-title center-text">Ready to Analyze Your Resume's ATS Compatibility</h2>
+                <p className="ready-text center-text">
                   Paste your resume text above and click "Analyze ATS Compatibility Now" to begin.
                 </p>
-                <div className={styles.checklist}>
-                  <p className={styles.checklistTitle}>What this ATS checker analyzes:</p>
+                <div className="checklist">
+                  <p className="checklist-title">What this ATS checker analyzes:</p>
                   <ul>
                     <li>Headers, footers, and page numbers (ATS cannot read these)</li>
                     <li>Tables, columns, and complex formatting</li>
@@ -1112,45 +2174,69 @@ WORK EXPERIENCE
             )}
 
             {/* How-to Section */}
-            <section className={styles.howToSection} aria-labelledby="how-to-title">
-              <h2 className={styles.sectionTitle} id="how-to-title">How It Works: 5-Step ATS Optimization</h2>
-              <p className={styles.sectionSubtitle}>
+            <section className="how-to-section" aria-labelledby="how-to-title">
+              <h2 className="section-title" id="how-to-title">How It Works: 5-Step ATS Optimization</h2>
+              <p className="section-subtitle">
                 Follow these steps to ensure your resume passes through any Applicant Tracking System
               </p>
-              <div className={styles.howToSteps}>
-                {HOW_TO_STEPS.map((step, index) => (
-                  <div key={index} className={styles.howToStep} id={`step-${index + 1}`}>
-                    <div className={styles.stepNumber}>{index + 1}</div>
-                    <h3 className={styles.stepTitle}>{step.name}</h3>
-                    <p className={styles.stepDescription}>{step.text}</p>
+              <div className="how-to-steps">
+                {safeHowToSteps.map((step, index) => (
+                  <div key={index} className="how-to-step" id={`step-${index + 1}`}>
+                    <div className="step-number">{index + 1}</div>
+                    <h3 className="step-title">{step.name}</h3>
+                    <p className="step-description">{step.text}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Long-Tail Keywords Section - GEO Optimization */}
+            <section className="how-to-section">
+              <h2 className="section-title">Common Questions About ATS Resume Checking</h2>
+              <div className="how-to-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+                {[
+                  "how to check if resume is ATS friendly",
+                  "free ATS resume checker online",
+                  "best resume format for ATS systems",
+                  "ATS parsing issues in resumes",
+                  "resume keywords for applicant tracking systems",
+                  "ATS compatible resume template free",
+                  "how to beat ATS screening 2026",
+                  "privacy safe resume analysis tool"
+                ].map((keyword, i) => (
+                  <div key={i} className="how-to-step" style={{ padding: '20px' }}>
+                    <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
+                    <Link href="/complete-resume-resource-library" className="breadcrumb-link">
+                      Find answer in our resource library →
+                    </Link>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* FAQ Section */}
-            <section className={styles.faqSection} aria-labelledby="faq-title">
-              <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions About ATS</h2>
-              <p className={styles.sectionSubtitle}>
+            <section className="faq-section" aria-labelledby="faq-title">
+              <h2 className="section-title" id="faq-title">Frequently Asked Questions About ATS</h2>
+              <p className="section-subtitle">
                 Everything you need to know about optimizing your resume for Applicant Tracking Systems
               </p>
-              <div className={styles.faqList}>
-                {FAQS.map((faq, index) => (
+              <div className="faq-list">
+                {safeFaqs.map((faq, index) => (
                   <div 
                     key={index} 
-                    className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
+                    className={`faq-item ${activeFaq === index ? 'active' : ''}`}
                     onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                     itemScope
                     itemProp="mainEntity"
                     itemType="https://schema.org/Question"
                   >
-                    <div className={styles.faqQuestion}>
+                    <div className="faq-question">
                       <h3 itemProp="name">{faq.question}</h3>
-                      <span className={styles.faqToggle}>{activeFaq === index ? '−' : '+'}</span>
+                      <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
                     </div>
                     {activeFaq === index && (
                       <div 
-                        className={styles.faqAnswer}
+                        className="faq-answer"
                         itemScope
                         itemProp="acceptedAnswer"
                         itemType="https://schema.org/Answer"
@@ -1165,36 +2251,36 @@ WORK EXPERIENCE
             </section>
 
             {/* Reviews Section */}
-            <section className={styles.reviewsSection} aria-labelledby="reviews-title">
-              <h2 className={styles.sectionTitle} id="reviews-title">What Professionals Say About Our ATS Checker</h2>
-              <p className={styles.sectionSubtitle}>
+            <section className="reviews-section" aria-labelledby="reviews-title">
+              <h2 className="section-title" id="reviews-title">What Professionals Say About Our ATS Checker</h2>
+              <p className="section-subtitle">
                 Trusted by HR professionals, recruiters, and job seekers worldwide
               </p>
-              <div className={styles.reviewsGrid}>
-                {REVIEWS.map((review, index) => (
-                  <div key={index} className={styles.reviewCard} itemScope itemType="https://schema.org/Review">
-                    <div className={styles.reviewHeader}>
-                      <div className={styles.reviewerInfo}>
+              <div className="reviews-grid">
+                {safeReviews.map((review, index) => (
+                  <div key={index} className="review-card" itemScope itemType="https://schema.org/Review">
+                    <div className="review-header">
+                      <div className="reviewer-info">
                         <span itemProp="author" itemScope itemType="https://schema.org/Person">
                           <meta itemProp="name" content={review.name} />
-                          <strong className={styles.reviewerName}>{review.name}</strong>
+                          <strong className="reviewer-name">{review.name}</strong>
                         </span>
-                        <span className={styles.reviewerPosition}>{review.position}</span>
-                        <span className={styles.reviewerCompany}>{review.company}</span>
+                        <span className="reviewer-position">{review.position}</span>
+                        <span className="reviewer-company">{review.company}</span>
                       </div>
-                      <div className={styles.reviewRating} itemScope itemType="https://schema.org/Rating">
+                      <div className="review-rating" itemScope itemType="https://schema.org/Rating">
                         <meta itemProp="ratingValue" content={review.rating} />
                         <meta itemProp="bestRating" content="5" />
-                        <div className={styles.stars}>
+                        <div className="stars">
                           {'★'.repeat(review.rating)}
                           {'☆'.repeat(5 - review.rating)}
                         </div>
                       </div>
                     </div>
-                    <div className={styles.reviewContent} itemProp="reviewBody">
+                    <div className="review-content" itemProp="reviewBody">
                       <p>"{review.review}"</p>
                     </div>
-                    <div className={styles.reviewDate} itemProp="datePublished">
+                    <div className="review-date" itemProp="datePublished">
                       {review.date}
                     </div>
                   </div>
@@ -1203,15 +2289,15 @@ WORK EXPERIENCE
             </section>
 
             {/* Resources Section */}
-            <section className={styles.resourcesSection} aria-labelledby="resources-title">
-              <h2 className={styles.sectionTitle} id="resources-title">ATS Optimization Resume Resources</h2>
-              <p className={styles.sectionSubtitle}>
+            <section className="resources-section" aria-labelledby="resources-title">
+              <h2 className="section-title" id="resources-title">ATS Optimization Resume Resources</h2>
+              <p className="section-subtitle">
                 Explore our comprehensive resume optimization tools and guides
               </p>
-              <div className={styles.resourcesGrid}>
+              <div className="resources-grid">
                 <Link 
                   href="/free-resume-builder"
-                  className={styles.resourceCard}
+                  className="resource-card"
                   prefetch={false}
                 >
                   <h3>Free Resume Builder</h3>
@@ -1219,7 +2305,7 @@ WORK EXPERIENCE
                 </Link>
                 <Link 
                   href="/resume-templates"
-                  className={styles.resourceCard}
+                  className="resource-card"
                   prefetch={false}
                 >
                   <h3>ATS Resume Templates</h3>
@@ -1227,7 +2313,7 @@ WORK EXPERIENCE
                 </Link>
                 <Link 
                   href="/resume-writing-guide"
-                  className={styles.resourceCard}
+                  className="resource-card"
                   prefetch={false}
                 >
                   <h3>Resume Writing Guide</h3>
@@ -1237,35 +2323,47 @@ WORK EXPERIENCE
             </section>
 
             {/* CTA Section */}
-            <section className={styles.ctaSection}>
-              <div className={styles.ctaContent}>
-                <h2 className={styles.ctaTitle}>Ready to Optimize Your Resume for ATS?</h2>
-                <p className={styles.ctaSubtitle}>
+            <section className="cta-section">
+              <div className="cta-content">
+                <h2 className="cta-title">Ready to Optimize Your Resume for ATS?</h2>
+                <p className="cta-subtitle">
                   Join thousands of successful job seekers who have improved their ATS compatibility scores
                 </p>
-                <div className={styles.ctaButtons}>
+                <div className="cta-buttons">
                   <button 
                     onClick={handleUseSample} 
-                    className={`${styles.button} ${styles.ctaButton}`}
+                    className="button cta-button"
                   >
                     Try with Sample Resume
                   </button>
                   <Link 
                     href="/resume-templates"
-                    className={`${styles.button} ${styles.secondaryButton}`}
+                    className="button secondary-button"
                     prefetch={false}
                   >
                     Browse Resume Templates
                   </Link>
                 </div>
-                <div className={styles.ctaGuarantee}>
-                  <span className={styles.guaranteeText}>✓ 100% Free • No Sign Up • Privacy Guaranteed • Instant Results</span>
+                <div className="cta-guarantee">
+                  <span className="guarantee-text">✓ 100% Free • No Sign Up • Privacy Guaranteed • Instant Results</span>
                 </div>
               </div>
             </section>
           </main>
 
-          
+         
+
+          {/* Build Info - Fixed hydration issue by using client-side state */}
+          <div className="build-info">
+            <p>Last updated: {safeFreshnessIndicator} • Build: {buildTime}</p>
+        
+          </div>
+
+          {/* Hidden Metadata */}
+          <div className="hidden">
+            <span itemProp="dateModified">{safeLastUpdated}</span>
+            <span itemProp="softwareVersion">2026.1.0</span>
+          </div>
         </div>
       </div>
     </>
@@ -1273,10 +2371,15 @@ WORK EXPERIENCE
 }
 
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
   return {
     props: {
-      lastUpdated: BUILD_TIMESTAMP,
-      freshnessIndicator: FRESHNESS_INDICATOR,
+      lastUpdated: lastModifiedDate,
+      freshnessIndicator: currentDate,
       reviews: REVIEWS,
       faqs: FAQS,
       howToSteps: HOW_TO_STEPS,

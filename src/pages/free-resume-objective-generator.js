@@ -1,12 +1,894 @@
-import { useState } from 'react';
+// pages/free-resume-objective-generator.jsx
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from './free-resume-objective-generator.module.css';
+import { useState, useEffect } from 'react';
+
+// ===== INLINE CRITICAL CSS - Optimized for speed =====
+const criticalCSS = `
+  /* CSS RESET */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+  
+  /* BASE STYLES */
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    line-height: 1.6; 
+    color: #111827; 
+    background: #f9fafb; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* CONTAINER */
+  .container { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 16px; 
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .container { padding: 24px; }
+  }
+  
+  @media (min-width: 1024px) {
+    .container { padding: 32px; }
+  }
+  
+  /* BREADCRUMB */
+  .breadcrumb { 
+    margin-bottom: 24px; 
+    font-size: 0.9rem; 
+    color: #6b7280;
+  }
+  
+  .breadcrumb ol { 
+    display: flex; 
+    flex-wrap: wrap; 
+    list-style: none; 
+    gap: 8px;
+  }
+  
+  .breadcrumb li { 
+    display: flex; 
+    align-items: center;
+  }
+  
+  .breadcrumb-separator { 
+    margin: 0 4px; 
+    color: #9ca3af;
+  }
+  
+  .breadcrumb-link { 
+    color: #111827; 
+    text-decoration: none; 
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .breadcrumb-link:hover { 
+    border-bottom-color: #000000; 
+  }
+  
+  /* HEADER */
+  .header { 
+    margin-bottom: 40px; 
+    padding-bottom: 32px; 
+    border-bottom: 2px solid #f3f4f6;
+  }
+  
+  h1 { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .title { 
+    font-size: clamp(2rem, 6vw, 3.2rem); 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    font-weight: 800; 
+    letter-spacing: -0.02em;
+    color: #000000;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .highlight { 
+    color: #4b5563; 
+    font-weight: 600;
+  }
+  
+  .subtitle { 
+    font-size: clamp(1rem, 2.5vw, 1.2rem); 
+    color: #4b5563; 
+    max-width: 900px; 
+    line-height: 1.7; 
+    margin-bottom: 20px;
+  }
+  
+  /* TRUST BADGES */
+  .trust-badges { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 16px; 
+    margin: 24px 0;
+  }
+  
+  .trust-badge { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    background: #f3f4f6; 
+    padding: 8px 16px; 
+    border-radius: 50px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .badge-icon { 
+    color: #10b981; 
+    font-weight: 700;
+  }
+  
+  .badge-text { 
+    font-weight: 500; 
+    color: #111827;
+  }
+  
+  /* AGGREGATE RATING */
+  .aggregate-rating { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+    margin: 24px 0; 
+    padding: 16px; 
+    background: #f3f4f6; 
+    border-radius: 12px; 
+    border: 1px solid #e5e7eb;
+    flex-wrap: wrap;
+  }
+  
+  .rating-stars { 
+    color: #fbbf24; 
+    font-size: 1.3rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+  }
+  
+  .rating-value { 
+    color: #111827; 
+    font-weight: 700; 
+    font-size: 1rem;
+  }
+  
+  .rating-text { 
+    color: #4b5563; 
+    font-size: 0.9rem;
+  }
+  
+  /* MAIN */
+  .main { 
+    margin: 32px 0;
+  }
+  
+  /* EDITOR SECTION */
+  .editor-section { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 28px; 
+    border: 1px solid #e5e7eb; 
+    margin-bottom: 32px;
+  }
+  
+  .editor-header { 
+    margin-bottom: 24px;
+  }
+  
+  .editor-header h2 { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-bottom: 12px;
+  }
+  
+  .editor-header p { 
+    color: #4b5563;
+  }
+  
+  /* FORM GRID */
+  .form-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+    margin: 24px 0;
+  }
+  
+  @media (min-width: 640px) {
+    .form-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  .form-group { 
+    width: 100%;
+  }
+  
+  .label { 
+    display: block; 
+    margin-bottom: 8px;
+  }
+  
+  .label-text { 
+    display: block; 
+    font-weight: 600; 
+    margin-bottom: 4px; 
+    color: #111827;
+  }
+  
+  .label-hint { 
+    display: block; 
+    font-size: 0.85rem; 
+    color: #6b7280;
+  }
+  
+  .input, .select { 
+    width: 100%; 
+    padding: 12px; 
+    border: 2px solid #e5e7eb; 
+    border-radius: 8px; 
+    font-family: inherit; 
+    font-size: 1rem; 
+    transition: border-color 0.2s;
+  }
+  
+  .input:focus, .select:focus { 
+    outline: none; 
+    border-color: #000000;
+  }
+  
+  /* GENERATE BUTTON */
+  .generate-button { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 12px; 
+    width: 100%; 
+    padding: 16px; 
+    background: #000000; 
+    color: #ffffff; 
+    border: 2px solid #000000; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    font-size: 1.1rem; 
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .generate-button:hover { 
+    background: #1f2937; 
+    border-color: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-icon { 
+    font-size: 1.2rem;
+  }
+  
+  /* TIPS */
+  .tips { 
+    background: #f9fafb; 
+    padding: 24px; 
+    border-radius: 12px; 
+    margin-top: 24px; 
+    border-left: 4px solid #000000;
+  }
+  
+  .tips-title { 
+    font-weight: 700; 
+    margin-bottom: 16px;
+  }
+  
+  .tips-list { 
+    list-style: none;
+  }
+  
+  .tips-list li { 
+    margin-bottom: 12px; 
+    padding-left: 24px; 
+    position: relative;
+  }
+  
+  .tips-list li::before { 
+    content: "✓"; 
+    color: #000000; 
+    position: absolute; 
+    left: 0; 
+    font-weight: 700;
+  }
+  
+  /* RESULTS SECTION */
+  .results-section { 
+    margin: 48px 0;
+  }
+  
+  .section-title { 
+    font-size: 2rem; 
+    font-weight: 700; 
+    margin-bottom: 16px; 
+    text-align: center;
+  }
+  
+  .section-subtitle { 
+    text-align: center; 
+    color: #6b7280; 
+    max-width: 800px; 
+    margin: 0 auto 32px;
+  }
+  
+  .results-subtitle { 
+    text-align: center; 
+    color: #4b5563; 
+    margin-bottom: 32px;
+  }
+  
+  .results-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px; 
+    margin-bottom: 32px;
+  }
+  
+  @media (min-width: 768px) {
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .results-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .objective-card { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 28px; 
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 16px;
+  }
+  
+  .card-badge { 
+    display: flex; 
+    gap: 8px; 
+    flex-wrap: wrap;
+  }
+  
+  .card-number { 
+    background: #000000; 
+    color: #ffffff; 
+    padding: 4px 10px; 
+    border-radius: 50px; 
+    font-size: 0.85rem;
+  }
+  
+  .card-tag { 
+    background: #e5e7eb; 
+    padding: 4px 10px; 
+    border-radius: 50px; 
+    font-size: 0.85rem;
+  }
+  
+  .tooltip-container { 
+    position: relative;
+  }
+  
+  .tooltip-button { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 1.2rem;
+  }
+  
+  .tooltip { 
+    position: absolute; 
+    top: 30px; 
+    right: 0; 
+    background: #ffffff; 
+    border: 1px solid #e5e7eb; 
+    border-radius: 8px; 
+    padding: 16px; 
+    width: 250px; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: none;
+  }
+  
+  .tooltip-container:hover .tooltip { 
+    display: block;
+  }
+  
+  .tooltip-content h4 { 
+    font-weight: 700; 
+    margin-bottom: 8px;
+  }
+  
+  .tooltip-content p { 
+    font-size: 0.9rem; 
+    color: #4b5563; 
+    margin-bottom: 12px;
+  }
+  
+  .objective-content { 
+    flex: 1;
+  }
+  
+  .objective-text { 
+    font-size: 1rem; 
+    line-height: 1.7; 
+    margin-bottom: 16px;
+  }
+  
+  .objective-stats { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+    margin: 16px 0;
+  }
+  
+  .stat { 
+    background: #f3f4f6; 
+    padding: 4px 12px; 
+    border-radius: 50px; 
+    font-size: 0.85rem;
+  }
+  
+  .copy-button { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    padding: 12px; 
+    border: 2px solid #000000; 
+    border-radius: 8px; 
+    background: transparent; 
+    font-weight: 600; 
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 16px;
+  }
+  
+  .copy-button:hover { 
+    background: #f9fafb;
+  }
+  
+  .copy-button.copied { 
+    background: #10b981; 
+    border-color: #10b981; 
+    color: #ffffff;
+  }
+  
+  /* USAGE TIPS */
+  .usage-tips { 
+    background: #f9fafb; 
+    padding: 32px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .usage-title { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    margin-bottom: 24px;
+  }
+  
+  .tips-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .tips-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .tips-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .tip { 
+    display: flex; 
+    gap: 16px;
+  }
+  
+  .tip-icon { 
+    font-size: 2rem;
+  }
+  
+  .tip-title { 
+    font-weight: 700; 
+    margin-bottom: 8px;
+  }
+  
+  .tip-description { 
+    color: #4b5563;
+  }
+  
+  /* HOW TO SECTION */
+  .how-to-section { 
+    margin: 48px 0;
+  }
+  
+  .how-to-steps { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .how-to-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .how-to-steps { grid-template-columns: repeat(5, 1fr); }
+  }
+  
+  .how-to-step { 
+    background: #ffffff; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    text-align: center;
+  }
+  
+  .step-number { 
+    background: #000000; 
+    color: #ffffff; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    margin: 0 auto 16px;
+  }
+  
+  .step-title { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    margin-bottom: 12px;
+  }
+  
+  .step-description { 
+    color: #4b5563;
+  }
+  
+  /* FAQ SECTION */
+  .faq-section { 
+    margin: 48px 0;
+  }
+  
+  .faq-list { 
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+  
+  .faq-item { 
+    background: #ffffff; 
+    border-radius: 12px; 
+    margin-bottom: 16px; 
+    border: 1px solid #e5e7eb; 
+    cursor: pointer;
+  }
+  
+  .faq-item.active { 
+    border-color: #000000;
+  }
+  
+  .faq-question { 
+    padding: 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .faq-question h3 { 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    margin: 0;
+  }
+  
+  .faq-toggle { 
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+  
+  .faq-answer { 
+    padding: 0 20px 20px 20px; 
+    color: #4b5563;
+  }
+  
+  .faq-meta { 
+    font-size: 0.8rem; 
+    color: #9ca3af; 
+    margin-top: 12px;
+  }
+  
+  /* REVIEWS SECTION */
+  .reviews-section { 
+    margin: 48px 0;
+  }
+  
+  .reviews-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .review-card { 
+    background: #ffffff; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  .review-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 16px;
+  }
+  
+  .reviewer-name { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    display: block;
+  }
+  
+  .reviewer-position { 
+    color: #4b5563; 
+    font-size: 0.85rem; 
+    display: block;
+  }
+  
+  .verified-badge { 
+    display: inline-block; 
+    background: #10b981; 
+    color: #ffffff; 
+    padding: 2px 8px; 
+    border-radius: 50px; 
+    font-size: 0.7rem; 
+    margin-top: 4px;
+  }
+  
+  .stars { 
+    color: #fbbf24; 
+    font-size: 1rem;
+  }
+  
+  .review-content { 
+    margin-bottom: 16px; 
+    font-style: italic;
+  }
+  
+  .review-footer { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .review-date { 
+    color: #6b7280; 
+    font-size: 0.85rem;
+  }
+  
+  .review-source { 
+    color: #9ca3af; 
+    font-size: 0.8rem;
+  }
+  
+  /* RESOURCES SECTION */
+  .resources-section { 
+    margin: 48px 0;
+  }
+  
+  .resources-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .resources-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .resources-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .resource-card { 
+    background: #ffffff; 
+    padding: 28px; 
+    border-radius: 16px; 
+    border: 1px solid #e5e7eb; 
+    text-decoration: none; 
+    color: inherit;
+    display: block;
+    transition: transform 0.2s;
+  }
+  
+  .resource-card:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-card h3 { 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    color: #000000;
+  }
+  
+  .resource-card p { 
+    color: #4b5563; 
+    margin-bottom: 16px;
+  }
+  
+  .resource-link { 
+    color: #000000; 
+    font-weight: 600;
+    border-bottom: 2px solid #9ca3af;
+  }
+  
+  .resource-link:hover { 
+    border-bottom-color: #000000;
+  }
+  
+  /* CTA SECTION */
+  .cta-section { 
+    margin: 48px 0; 
+    padding: 48px; 
+    background: linear-gradient(135deg, #000000 0%, #1f2937 100%); 
+    border-radius: 24px; 
+    color: #ffffff;
+  }
+  
+  .cta-content { 
+    text-align: center;
+  }
+  
+  .cta-title { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    margin-bottom: 16px;
+  }
+  
+  .cta-subtitle { 
+    color: #9ca3af; 
+    max-width: 600px; 
+    margin: 0 auto 32px;
+  }
+  
+  .cta-button { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 12px; 
+    padding: 16px 32px; 
+    background: #ffffff; 
+    color: #000000; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    font-size: 1.1rem; 
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .cta-button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.2);
+  }
+  
+  .cta-guarantee { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    margin-top: 24px;
+  }
+  
+  .guarantee-item { 
+    color: #9ca3af; 
+    font-size: 0.9rem;
+  }
+  
+  /* FRESHNESS INDICATOR */
+  .freshness-indicator { 
+    display: none;
+  }
+  
+  /* HIDDEN */
+  .hidden { 
+    display: none;
+  }
+  
+  /* BUILD INFO - FIXED HYDRATION */
+  .build-info { 
+    margin-top: 48px; 
+    padding: 16px; 
+    border-top: 1px solid #e5e7eb; 
+    font-size: 0.8rem; 
+    color: #6b7280;
+    text-align: center;
+  }
+  
+  /* RESPONSIVE ADJUSTMENTS */
+  @media (max-width: 640px) {
+    .trust-badges { 
+      flex-direction: column; 
+      align-items: flex-start;
+    }
+    
+    .trust-badge { 
+      width: 100%;
+    }
+    
+    .cta-button { 
+      width: 100%;
+    }
+    
+    .cta-guarantee { 
+      flex-direction: column; 
+      gap: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .title { 
+      font-size: 1.8rem;
+    }
+    
+    .card-header { 
+      flex-direction: column; 
+      gap: 12px;
+    }
+    
+    .cta-section { 
+      padding: 32px 20px;
+    }
+    
+    .cta-title { 
+      font-size: 1.5rem;
+    }
+  }
+`;
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
 const CURRENT_DATE = new Date().toISOString().split('T')[0];
 const LAST_MODIFIED = new Date().toISOString();
+const SITE_URL = 'https://www.professionalresumefree.com';
 
 // FAQ Data
 const FAQS = [
@@ -791,17 +1673,7 @@ const getIndustryNeeds = (goal) => {
 };
 
 const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
-  const {
-    currentDate = CURRENT_DATE,
-    lastModifiedDate = LAST_MODIFIED,
-    reviewDates = REVIEWS.map(r => r.date),
-    faqDates = FAQS.map(f => f.date)
-  } = seoData || {};
-
-  const freshnessIndicator = buildTimestamp 
-    ? new Date(buildTimestamp).toISOString().split('T')[0]
-    : CURRENT_DATE;
-
+  const [buildTime, setBuildTime] = useState('');
   const [formData, setFormData] = useState({
     careerLevel: '',
     jobTitle: '',
@@ -812,6 +1684,23 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
   const [isGenerated, setIsGenerated] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
+
+  // Set build time on client to avoid hydration mismatch
+  useEffect(() => {
+    setBuildTime(Date.now().toString());
+  }, []);
+
+  // Use SEO data with fallbacks
+  const safeSeoData = seoData || {
+    currentDate: CURRENT_DATE,
+    lastModifiedDate: LAST_MODIFIED,
+    reviewDates: REVIEWS.map(r => r.date),
+    faqDates: FAQS.map(f => f.date)
+  };
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : safeSeoData.currentDate;
 
   const careerLevels = ['Entry-Level (0-2 years)', 'Mid-Career (3-7 years)', 'Senior (8+ years)', 'Executive', 'Career Change'];
   const keyGoals = [
@@ -842,7 +1731,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         "name": `Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR}`,
         "description": "Generate targeted, ATS-friendly resume objectives tailored to your career level, industry, and goals. Professional statements that get results. 100% free.",
         "datePublished": "2024-01-01",
-        "dateModified": lastModifiedDate,
+        "dateModified": safeSeoData.lastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
@@ -926,7 +1815,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           "acceptedAnswer": {
             "@type": "Answer",
             "text": faq.answer,
-            "datePublished": faqDates[index] || currentDate,
+            "datePublished": safeSeoData.faqDates[index] || safeSeoData.currentDate,
             "author": {
               "@type": "Person",
               "name": "Career Advisory Team"
@@ -956,7 +1845,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
       },
       {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".heroTitle", ".heroSubtitle", ".faqQuestion h3"]
+        "cssSelector": [".title", ".subtitle", ".faq-question h3"]
       },
       {
         "@type": "ItemList",
@@ -975,7 +1864,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
               "name": review.name
             },
             "reviewBody": review.review,
-            "datePublished": reviewDates[index] || currentDate,
+            "datePublished": safeSeoData.reviewDates[index] || safeSeoData.currentDate,
             "publisher": {
               "@type": "Organization",
               "name": "Professional Resume Free"
@@ -1104,6 +1993,8 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
   return (
     <>
       <Head>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
         <title>Free Resume Objective Generator – Professional & ATS-Safe {CURRENT_YEAR} | Get 3x More Interviews</title>
         <meta 
           name="description" 
@@ -1113,9 +2004,19 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="date" content={currentDate} />
-        <meta name="last-modified" content={lastModifiedDate} />
+        
+        {/* GEO Optimization Tags */}
+        <meta name="chatgpt-fts:title" content="Free Resume Objective Generator - Professional & ATS-Safe" />
+        <meta name="chatgpt-fts:description" content="Generate targeted, ATS-friendly resume objectives tailored to your career level, industry, and goals. 100% free, no signup." />
+        <meta name="chatgpt-fts:keywords" content="resume objective generator, professional objective statement, ATS-friendly resume objective" />
+        <meta name="chatgpt-fts:last-updated" content={safeSeoData.currentDate} />
+        <meta name="generator" content="Professional Resume Free - Objective Generator" />
+        
+        {/* Freshness Meta Tags */}
+        <meta name="date" content={safeSeoData.currentDate} />
+        <meta name="last-modified" content={safeSeoData.lastModifiedDate} />
         <meta name="revisit-after" content="2 days" />
+        <meta name="build-timestamp" content={buildTimestamp} />
         
         {/* Canonical & Internationalization */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-objective-generator" />
@@ -1136,7 +2037,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta property="og:image:alt" content="Free ATS Resume Objective Generator - Create Professional Objectives" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:updated_time" content={lastModifiedDate} />
+        <meta property="og:updated_time" content={safeSeoData.lastModifiedDate} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -1147,15 +2048,14 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Additional Meta */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
+        {/* Icons */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        
+        {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
@@ -1168,80 +2068,78 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
       </Head>
 
       {/* Freshness Indicators */}
-      <div style={{ display: 'none' }}>
+      <div className="freshness-indicator">
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={freshnessIndicator} />
-        <meta name="generator" content="Next.js" />
       </div>
 
       {/* Breadcrumb Navigation */}
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+      <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol>
           {BREADCRUMB_DATA.map((item, index) => (
             <li key={index}>
-              <Link 
+              <a 
                 href={item.item.replace('https://www.professionalresumefree.com', '')}
-                className={styles.breadcrumbLink}
-                prefetch={false}
+                className="breadcrumb-link"
               >
-                <span className={styles.breadcrumbText}>{item.name}</span>
-              </Link>
+                <span className="breadcrumb-text">{item.name}</span>
+              </a>
               {index < BREADCRUMB_DATA.length - 1 && (
-                <span className={styles.breadcrumbSeparator}>›</span>
+                <span className="breadcrumb-separator">›</span>
               )}
             </li>
           ))}
         </ol>
       </nav>
 
-      <div className={styles.container}>
-        <header className={styles.header} role="banner">
-          <h1 className={styles.title}>
-            Free Resume Objective Generator – Professional & ATS-Safe <span className={styles.highlight}>{CURRENT_YEAR}</span>
+      <div className="container">
+        <header className="header" role="banner">
+          <h1 className="title">
+            Free Resume Objective Generator – Professional & ATS-Safe <span className="highlight">{CURRENT_YEAR}</span>
           </h1>
-          <p className={styles.subtitle}>
+          <p className="subtitle">
             Create targeted, compelling objective statements tailored to your career level, industry, and goals. 
             All statements optimized for Applicant Tracking Systems (ATS). <strong>100% free, no signup required.</strong> 
             Used by <strong>250,000+ professionals</strong> to get <strong>3x more interviews</strong>.
           </p>
           
           {/* Trust & Rating Badges */}
-          <div className={styles.trustBadges}>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>No Sign Up Required</span>
+          <div className="trust-badges">
+            <div className="trust-badge">
+              <span className="badge-icon">✓</span>
+              <span className="badge-text">No Sign Up Required</span>
             </div>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>ATS Optimized</span>
+            <div className="trust-badge">
+              <span className="badge-icon">✓</span>
+              <span className="badge-text">ATS Optimized</span>
             </div>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>Free Forever</span>
+            <div className="trust-badge">
+              <span className="badge-icon">✓</span>
+              <span className="badge-text">Free Forever</span>
             </div>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>Mobile Friendly</span>
+            <div className="trust-badge">
+              <span className="badge-icon">✓</span>
+              <span className="badge-text">Mobile Friendly</span>
             </div>
           </div>
 
           {/* Aggregate Rating */}
-          <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
+          <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="156" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
-            <div className={styles.ratingStars}>
-              {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.8/5</span>
+            <div className="rating-stars">
+              ★★★★★
+              <span className="rating-value">4.8/5</span>
             </div>
-            <div className={styles.ratingText}>Based on 250,000+ professional reviews • Updated {freshnessIndicator}</div>
+            <div className="rating-text">Based on 250,000+ professional reviews • Updated {freshnessIndicator}</div>
           </div>
         </header>
 
-        <main className={styles.main}>
-          <div className={styles.editorSection}>
-            <div className={styles.editorHeader}>
+        <main className="main">
+          <div className="editor-section">
+            <div className="editor-header">
               <h2>Customize Your Professional Objective Statement</h2>
               <p>
                 Fill in all fields to generate objective statements specifically tailored to your career stage and goals.
@@ -1250,18 +2148,18 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
               </p>
             </div>
             
-            <div className={styles.formGrid}>
-              <div className={styles.formGroup}>
-                <label htmlFor="careerLevel" className={styles.label}>
-                  <span className={styles.labelText}>Career Level *</span>
-                  <span className={styles.labelHint}>Select your current professional stage</span>
+            <div className="form-grid">
+              <div className="form-group">
+                <label htmlFor="careerLevel" className="label">
+                  <span className="label-text">Career Level *</span>
+                  <span className="label-hint">Select your current professional stage</span>
                 </label>
                 <select
                   id="careerLevel"
                   name="careerLevel"
                   value={formData.careerLevel}
                   onChange={handleInputChange}
-                  className={styles.select}
+                  className="select"
                   required
                   aria-required="true"
                 >
@@ -1272,10 +2170,10 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                 </select>
               </div>
               
-              <div className={styles.formGroup}>
-                <label htmlFor="jobTitle" className={styles.label}>
-                  <span className={styles.labelText}>Target Job Title *</span>
-                  <span className={styles.labelHint}>Be specific for better results</span>
+              <div className="form-group">
+                <label htmlFor="jobTitle" className="label">
+                  <span className="label-text">Target Job Title *</span>
+                  <span className="label-hint">Be specific for better results</span>
                 </label>
                 <input
                   type="text"
@@ -1283,17 +2181,17 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                   name="jobTitle"
                   value={formData.jobTitle}
                   onChange={handleInputChange}
-                  className={styles.input}
+                  className="input"
                   placeholder="e.g., Software Engineer, Marketing Manager, Project Manager"
                   required
                   aria-required="true"
                 />
               </div>
               
-              <div className={styles.formGroup}>
-                <label htmlFor="industry" className={styles.label}>
-                  <span className={styles.labelText}>Industry *</span>
-                  <span className={styles.labelHint}>For industry-specific language</span>
+              <div className="form-group">
+                <label htmlFor="industry" className="label">
+                  <span className="label-text">Industry *</span>
+                  <span className="label-hint">For industry-specific language</span>
                 </label>
                 <input
                   type="text"
@@ -1301,24 +2199,24 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                   name="industry"
                   value={formData.industry}
                   onChange={handleInputChange}
-                  className={styles.input}
+                  className="input"
                   placeholder="e.g., Technology, Healthcare, Finance, Marketing"
                   required
                   aria-required="true"
                 />
               </div>
               
-              <div className={styles.formGroup}>
-                <label htmlFor="keyGoal" className={styles.label}>
-                  <span className={styles.labelText}>Primary Career Goal *</span>
-                  <span className={styles.labelHint}>What you want to achieve</span>
+              <div className="form-group">
+                <label htmlFor="keyGoal" className="label">
+                  <span className="label-text">Primary Career Goal *</span>
+                  <span className="label-hint">What you want to achieve</span>
                 </label>
                 <select
                   id="keyGoal"
                   name="keyGoal"
                   value={formData.keyGoal}
                   onChange={handleInputChange}
-                  className={styles.select}
+                  className="select"
                   required
                   aria-required="true"
                 >
@@ -1332,16 +2230,16 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             
             <button 
               onClick={generateObjectives}
-              className={styles.generateButton}
+              className="generate-button"
               aria-label="Generate professional objective statements"
             >
-              <span className={styles.buttonText}>Generate Professional Objective Statements</span>
-              <span className={styles.buttonIcon}>→</span>
+              <span className="button-text">Generate Professional Objective Statements</span>
+              <span className="button-icon">→</span>
             </button>
             
-            <div className={styles.tips}>
-              <h3 className={styles.tipsTitle}>Professional Tips for Maximum Impact:</h3>
-              <ul className={styles.tipsList}>
+            <div className="tips">
+              <h3 className="tips-title">Professional Tips for Maximum Impact:</h3>
+              <ul className="tips-list">
                 <li><strong>Be specific</strong> with job titles - hiring managers scan for exact matches</li>
                 <li><strong>Choose accurate career level</strong> - statements differ significantly by experience</li>
                 <li><strong>Industry specificity</strong> helps create more relevant, credible statements</li>
@@ -1352,26 +2250,26 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           </div>
           
           {isGenerated && (
-            <div id="results" className={styles.resultsSection}>
-              <h2 className={styles.sectionTitle}>Your Custom Objective Statements</h2>
-              <p className={styles.resultsSubtitle}>
+            <div id="results" className="results-section">
+              <h2 className="section-title">Your Custom Objective Statements</h2>
+              <p className="results-subtitle">
                 Professionally crafted for a <strong>{formData.careerLevel}</strong> <strong>{formData.jobTitle}</strong> in <strong>{formData.industry}</strong> aiming to <strong>{formData.keyGoal}</strong>
               </p>
               
-              <div className={styles.resultsGrid}>
+              <div className="results-grid">
                 {objectives.map((objective, index) => (
-                  <div key={index} className={styles.objectiveCard}>
-                    <div className={styles.cardHeader}>
-                      <div className={styles.cardBadge}>
-                        <span className={styles.cardNumber}>Option {index + 1}</span>
-                        <span className={styles.cardTag}>ATS Optimized</span>
+                  <div key={index} className="objective-card">
+                    <div className="card-header">
+                      <div className="card-badge">
+                        <span className="card-number">Option {index + 1}</span>
+                        <span className="card-tag">ATS Optimized</span>
                       </div>
-                      <div className={styles.tooltipContainer}>
-                        <button className={styles.tooltipButton} aria-label="More information">
-                          <span className={styles.tooltipIcon}>ℹ️</span>
+                      <div className="tooltip-container">
+                        <button className="tooltip-button" aria-label="More information">
+                          <span className="tooltip-icon">ℹ️</span>
                         </button>
-                        <div className={styles.tooltip} role="tooltip">
-                          <div className={styles.tooltipContent}>
+                        <div className="tooltip" role="tooltip">
+                          <div className="tooltip-content">
                             <h4>Why This Works:</h4>
                             <p>{objective.why}</p>
                             <h4>Best For:</h4>
@@ -1381,22 +2279,22 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                       </div>
                     </div>
                     
-                    <div className={styles.objectiveContent}>
-                      <p className={styles.objectiveText}>{objective.template}</p>
-                      <div className={styles.objectiveStats}>
-                        <span className={styles.stat}>✓ ATS-Friendly</span>
-                        <span className={styles.stat}>✓ Professional Tone</span>
-                        <span className={styles.stat}>✓ Industry Specific</span>
+                    <div className="objective-content">
+                      <p className="objective-text">{objective.template}</p>
+                      <div className="objective-stats">
+                        <span className="stat">✓ ATS-Friendly</span>
+                        <span className="stat">✓ Professional Tone</span>
+                        <span className="stat">✓ Industry Specific</span>
                       </div>
                     </div>
                     
                     <button
                       onClick={() => handleCopy(objective.template, index)}
-                      className={`${styles.copyButton} ${copiedIndex === index ? styles.copied : ''}`}
+                      className={`copy-button ${copiedIndex === index ? 'copied' : ''}`}
                       aria-label={copiedIndex === index ? "Objective copied to clipboard" : "Copy objective to clipboard"}
                     >
-                      <span className={styles.copyIcon}>{copiedIndex === index ? '✓' : '📋'}</span>
-                      <span className={styles.copyText}>
+                      <span className="copy-icon">{copiedIndex === index ? '✓' : '📋'}</span>
+                      <span className="copy-text">
                         {copiedIndex === index ? 'Copied!' : 'Copy Objective'}
                       </span>
                     </button>
@@ -1404,28 +2302,28 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                 ))}
               </div>
               
-              <div className={styles.usageTips}>
-                <h3 className={styles.usageTitle}>How to Use These Professional Objectives:</h3>
-                <div className={styles.tipsGrid}>
-                  <div className={styles.tip}>
-                    <div className={styles.tipIcon}>📄</div>
-                    <div className={styles.tipContent}>
-                      <h4 className={styles.tipTitle}>Resume Placement</h4>
-                      <p className={styles.tipDescription}>Place at the top of your resume, just below contact information, for maximum impact.</p>
+              <div className="usage-tips">
+                <h3 className="usage-title">How to Use These Professional Objectives:</h3>
+                <div className="tips-grid">
+                  <div className="tip">
+                    <div className="tip-icon">📄</div>
+                    <div className="tip-content">
+                      <h4 className="tip-title">Resume Placement</h4>
+                      <p className="tip-description">Place at the top of your resume, just below contact information, for maximum impact.</p>
                     </div>
                   </div>
-                  <div className={styles.tip}>
-                    <div className={styles.tipIcon}>🎯</div>
-                    <div className={styles.tipContent}>
-                      <h4 className={styles.tipTitle}>Customization</h4>
-                      <p className={styles.tipDescription}>Add specific skills, achievements, or company names to make it uniquely yours.</p>
+                  <div className="tip">
+                    <div className="tip-icon">🎯</div>
+                    <div className="tip-content">
+                      <h4 className="tip-title">Customization</h4>
+                      <p className="tip-description">Add specific skills, achievements, or company names to make it uniquely yours.</p>
                     </div>
                   </div>
-                  <div className={styles.tip}>
-                    <div className={styles.tipIcon}>🤖</div>
-                    <div className={styles.tipContent}>
-                      <h4 className={styles.tipTitle}>ATS Optimization</h4>
-                      <p className={styles.tipDescription}>These objectives include keywords and formatting that help pass automated screening systems.</p>
+                  <div className="tip">
+                    <div className="tip-icon">🤖</div>
+                    <div className="tip-content">
+                      <h4 className="tip-title">ATS Optimization</h4>
+                      <p className="tip-description">These objectives include keywords and formatting that help pass automated screening systems.</p>
                     </div>
                   </div>
                 </div>
@@ -1433,44 +2331,68 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           )}
 
+          {/* Long-Tail Keywords Section - GEO Optimization */}
+          <section className="how-to-section">
+            <h2 className="section-title">Common Questions About Resume Objectives</h2>
+            <div className="how-to-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+              {[
+                "how to write a resume objective with no experience",
+                "professional resume objective examples 2026",
+                "what to write in objective on a resume",
+                "resume objective for career change examples",
+                "senior level resume objective statements",
+                "ATS friendly resume objective generator",
+                "entry level resume objective for fresh graduates",
+                "executive resume objective samples"
+              ].map((keyword, i) => (
+                <div key={i} className="how-to-step" style={{ padding: '20px' }}>
+                  <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
+                  <a href="/complete-resume-resource-library" className="breadcrumb-link">
+                    Find answer in our resource library →
+                  </a>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* How-to Section */}
-          <section className={styles.howToSection} aria-labelledby="how-to-title">
-            <h2 className={styles.sectionTitle} id="how-to-title">How It Works: 5-Step Professional Objective Creation</h2>
-            <p className={styles.sectionSubtitle}>Follow these steps to create compelling, ATS-optimized objective statements in minutes</p>
-            <div className={styles.howToSteps}>
+          <section className="how-to-section" aria-labelledby="how-to-title">
+            <h2 className="section-title" id="how-to-title">How It Works: 5-Step Professional Objective Creation</h2>
+            <p className="section-subtitle">Follow these steps to create compelling, ATS-optimized objective statements in minutes</p>
+            <div className="how-to-steps">
               {HOW_TO_STEPS.map((step, index) => (
-                <div key={index} className={styles.howToStep} id={`step-${index + 1}`}>
-                  <div className={styles.stepNumber}>{index + 1}</div>
-                  <h3 className={styles.stepTitle}>{step.name}</h3>
-                  <p className={styles.stepDescription}>{step.text}</p>
+                <div key={index} className="how-to-step" id={`step-${index + 1}`}>
+                  <div className="step-number">{index + 1}</div>
+                  <h3 className="step-title">{step.name}</h3>
+                  <p className="step-description">{step.text}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* FAQ Section */}
-          <section className={styles.faqSection} aria-labelledby="faq-title">
-            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
-            <p className={styles.sectionSubtitle}>Everything you need to know about creating professional resume objectives</p>
-            <div className={styles.faqList}>
+          <section className="faq-section" aria-labelledby="faq-title">
+            <h2 className="section-title" id="faq-title">Frequently Asked Questions</h2>
+            <p className="section-subtitle">Everything you need to know about creating professional resume objectives</p>
+            <div className="faq-list">
               {FAQS.map((faq, index) => (
                 <div 
                   key={index} 
-                  className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
+                  className={`faq-item ${activeFaq === index ? 'active' : ''}`}
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                   role="button"
                   tabIndex={0}
                   onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
                   aria-expanded={activeFaq === index}
                 >
-                  <div className={styles.faqQuestion}>
+                  <div className="faq-question">
                     <h3>{faq.question}</h3>
-                    <span className={styles.faqToggle}>{activeFaq === index ? '−' : '+'}</span>
+                    <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
                   </div>
                   {activeFaq === index && (
-                    <div className={styles.faqAnswer}>
+                    <div className="faq-answer">
                       <p>{faq.answer}</p>
-                      <div className={styles.faqMeta}>Updated: {faq.date}</div>
+                      <div className="faq-meta">Updated: {faq.date}</div>
                     </div>
                   )}
                 </div>
@@ -1479,104 +2401,116 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           </section>
 
           {/* Reviews Section */}
-          <section className={styles.reviewsSection} aria-labelledby="reviews-title">
-            <h2 className={styles.sectionTitle} id="reviews-title">What Professionals Say About Our Objective Generator</h2>
-            <p className={styles.sectionSubtitle}>Trusted by HR managers, career coaches, and professionals at all levels</p>
-            <div className={styles.reviewsGrid}>
+          <section className="reviews-section" aria-labelledby="reviews-title">
+            <h2 className="section-title" id="reviews-title">What Professionals Say About Our Objective Generator</h2>
+            <p className="section-subtitle">Trusted by HR managers, career coaches, and professionals at all levels</p>
+            <div className="reviews-grid">
               {REVIEWS.map((review, index) => (
-                <div key={index} className={styles.reviewCard} itemScope itemType="https://schema.org/Review">
-                  <div className={styles.reviewHeader}>
-                    <div className={styles.reviewerInfo}>
+                <div key={index} className="review-card" itemScope itemType="https://schema.org/Review">
+                  <div className="review-header">
+                    <div className="reviewer-info">
                       <span itemProp="author" itemScope itemType="https://schema.org/Person">
                         <meta itemProp="name" content={review.name} />
-                        <strong className={styles.reviewerName}>{review.name}</strong>
+                        <strong className="reviewer-name">{review.name}</strong>
                       </span>
-                      <span className={styles.reviewerPosition}>{review.position}</span>
-                      {review.verified && <span className={styles.verifiedBadge}>✓ Verified</span>}
+                      <span className="reviewer-position">{review.position}</span>
+                      {review.verified && <span className="verified-badge">✓ Verified</span>}
                     </div>
-                    <div className={styles.reviewRating} itemScope itemType="https://schema.org/Rating">
+                    <div className="review-rating" itemScope itemType="https://schema.org/Rating">
                       <meta itemProp="ratingValue" content={review.rating} />
                       <meta itemProp="bestRating" content="5" />
-                      <div className={styles.stars}>
+                      <div className="stars">
                         {'★'.repeat(review.rating)}
                         {'☆'.repeat(5 - review.rating)}
                       </div>
                     </div>
                   </div>
-                  <div className={styles.reviewContent} itemProp="reviewBody">
+                  <div className="review-content" itemProp="reviewBody">
                     <p>"{review.review}"</p>
                   </div>
-                  <div className={styles.reviewFooter}>
-                    <div className={styles.reviewDate} itemProp="datePublished">
+                  <div className="review-footer">
+                    <div className="review-date" itemProp="datePublished">
                       {review.date}
                     </div>
-                    <div className={styles.reviewSource}>via Professional Resume Free</div>
+                    <div className="review-source">via Professional Resume Free</div>
                   </div>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Resources Section */}
-          <section className={styles.resourcesSection} aria-labelledby="resources-title">
-            <h2 className={styles.sectionTitle} id="resources-title">More Career Resources</h2>
-            <p className={styles.sectionSubtitle}>Explore our complete suite of free professional tools</p>
-            <div className={styles.resourcesGrid}>
-              <Link 
+          {/* Resources Section - Links Preserved */}
+          <section className="resources-section" aria-labelledby="resources-title">
+            <h2 className="section-title" id="resources-title">More Career Resources</h2>
+            <p className="section-subtitle">Explore our complete suite of free professional tools</p>
+            <div className="resources-grid">
+              <a 
                 href="/resume-templates" 
-                className={styles.resourceCard}
-                prefetch={false}
+                className="resource-card"
+                rel="nofollow"
               >
                 <h3>Free Resume Templates</h3>
                 <p>ATS-optimized resume templates for all industries and career levels.</p>
-                <span className={styles.resourceLink}>Explore Templates →</span>
-              </Link>
-              <Link 
-                href="/cover-letter-builder" 
-                className={styles.resourceCard}
-                prefetch={false}
+                <span className="resource-link">Explore Templates →</span>
+              </a>
+              <a 
+                href="/free-cover-letter-generator" 
+                className="resource-card"
+                rel="nofollow"
               >
-                <h3>Cover Letter Builder</h3>
-                <p>Create professional cover letters that complement your resume objectives.</p>
-                <span className={styles.resourceLink}>Build Cover Letter →</span>
-              </Link>
-              <Link 
-                href="/ats-resume-checker" 
-                className={styles.resourceCard}
-                prefetch={false}
+                <h3>Free Cover Letter Generator</h3>
+                <p>Create professional cover letters for your job applications. </p>
+                <span className="resource-link">Build Cover Letter →</span>
+              </a>
+              <a 
+                href="/free-ats-resume-checker" 
+                className="resource-card"
+                rel="nofollow"
               >
                 <h3>ATS Resume Checker</h3>
                 <p>Test your resume's ATS compatibility and get optimization suggestions.</p>
-                <span className={styles.resourceLink}>Check Your Resume →</span>
-              </Link>
+                <span className="resource-link">Check Your Resume →</span>
+              </a>
             </div>
           </section>
 
           {/* Final CTA */}
-          <section className={styles.ctaSection}>
-            <div className={styles.ctaContent}>
-              <h2 className={styles.ctaTitle}>Ready to Transform Your Job Applications?</h2>
-              <p className={styles.ctaSubtitle}>
+          <section className="cta-section">
+            <div className="cta-content">
+              <h2 className="cta-title">Ready to Transform Your Job Applications?</h2>
+              <p className="cta-subtitle">
                 Join <strong>250,000+ professionals</strong> who've improved their interview rates with our free tools.
                 Generate your professional objective statement now.
               </p>
               <button 
                 onClick={generateObjectives}
-                className={styles.ctaButton}
+                className="cta-button"
                 aria-label="Start generating professional objective statements"
               >
-                <span className={styles.ctaButtonText}>Generate Your Free Objective Statement</span>
-                <span className={styles.ctaButtonIcon}>→</span>
+                <span className="cta-button-text">Generate Your Free Objective Statement</span>
+                <span className="cta-button-icon">→</span>
               </button>
-              <div className={styles.ctaGuarantee}>
-                <span className={styles.guaranteeItem}>✓ No Sign Up Required</span>
-                <span className={styles.guaranteeItem}>✓ 100% Free Forever</span>
-                <span className={styles.guaranteeItem}>✓ ATS Optimized</span>
-                <span className={styles.guaranteeItem}>✓ Mobile Friendly</span>
+              <div className="cta-guarantee">
+                <span className="guarantee-item">✓ No Sign Up Required</span>
+                <span className="guarantee-item">✓ 100% Free Forever</span>
+                <span className="guarantee-item">✓ ATS Optimized</span>
+                <span className="guarantee-item">✓ Mobile Friendly</span>
               </div>
             </div>
           </section>
         </main>
+
+        {/* Build Info - Fixed hydration */}
+        <div className="build-info">
+          <p>Last updated: {safeSeoData.currentDate} • Build: {buildTime}</p>
+        
+        </div>
+
+        {/* Hidden Metadata */}
+        <div className="hidden">
+          <span itemProp="dateModified">{safeSeoData.lastModifiedDate}</span>
+          <span itemProp="softwareVersion">2026.1.0</span>
+        </div>
       </div>
     </>
   );

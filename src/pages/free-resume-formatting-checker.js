@@ -1,14 +1,747 @@
+// pages/free-resume-formatting-checker.js
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
-import { 
-  FiCheck, FiAlertCircle, FiDownload, FiRefreshCw, 
-  FiEye, FiFileText, FiSearch, FiEdit, FiTarget,
-  FiAward, FiTrendingUp, FiBarChart, FiHelpCircle,
-  FiChevronDown, FiChevronUp, FiClock, FiStar,
-  FiUsers, FiPercent, FiThumbsUp, FiArrowRight,
-  FiExternalLink
-} from 'react-icons/fi';
-import styles from './free-resume-formatting-checker.module.css';
+import Link from 'next/link';
+
+// Critical inline CSS for maximum speed
+const criticalCSS = `
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow-x: hidden; width: 100%; }
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    line-height: 1.5; 
+    color: #000000; 
+    background: #ffffff; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+  .container { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 0 16px; 
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .container { padding: 0 24px; }
+  }
+  .header { 
+    background: #ffffff; 
+    padding: 30px 0 20px; 
+    text-align: center; 
+    border-bottom: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .header { padding: 40px 0 30px; }
+  }
+  .header h1 { 
+    font-size: clamp(1.5rem, 5vw, 2.5rem); 
+    margin-bottom: 16px; 
+    line-height: 1.2;
+    word-wrap: break-word;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+  .header p { 
+    font-size: clamp(0.9rem, 3vw, 1.1rem); 
+    max-width: 800px; 
+    margin: 0 auto 24px; 
+    padding: 0 16px;
+    color: #4b5563;
+    word-wrap: break-word;
+  }
+  .grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 16px; 
+    margin: 30px 0; 
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .card { 
+    background: #f9fafb; 
+    border-radius: 8px; 
+    padding: 20px; 
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+  }
+  .card:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+  }
+  .btn-primary { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #000000; 
+    color: #ffffff; 
+    padding: 12px 24px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-weight: 500; 
+    border: 1px solid #000000;
+    transition: background 0.2s;
+    width: auto;
+    min-width: 200px;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    border: none;
+  }
+  @media (max-width: 480px) {
+    .btn-primary { 
+      width: 100%; 
+      min-width: auto;
+    }
+  }
+  .btn-primary:hover { 
+    background: #333333; 
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .btn-secondary { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent; 
+    color: #000000; 
+    padding: 12px 24px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-weight: 500; 
+    border: 2px solid #000000; 
+    transition: background 0.2s;
+    width: auto;
+    min-width: 200px;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  @media (max-width: 480px) {
+    .btn-secondary { 
+      width: 100%; 
+      min-width: auto;
+    }
+  }
+  .btn-secondary:hover { 
+    background: #f5f5f5; 
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    color: #000000;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover {
+    background: #f3f4f6;
+  }
+  .stats-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px; 
+    margin: 30px 0; 
+  }
+  @media (min-width: 480px) {
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .stat-item { 
+    text-align: center; 
+    background: #f9fafb;
+    padding: 12px 8px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    overflow: hidden;
+  }
+  .stat-number { 
+    font-size: clamp(1.2rem, 4vw, 1.8rem); 
+    font-weight: bold; 
+    display: block; 
+    line-height: 1.2;
+    word-wrap: break-word;
+  }
+  .stat-label { 
+    font-size: clamp(0.7rem, 2vw, 0.85rem); 
+    color: #4b5563;
+    word-wrap: break-word;
+  }
+  .section { 
+    padding: 40px 0; 
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .section { padding: 60px 0; }
+  }
+  .section-title { 
+    text-align: center; 
+    font-size: clamp(1.3rem, 4vw, 2rem); 
+    margin-bottom: 16px; 
+    padding: 0 16px;
+    word-wrap: break-word;
+    line-height: 1.3;
+  }
+  .section-subtitle { 
+    text-align: center; 
+    color: #4b5563; 
+    max-width: 700px; 
+    margin: 0 auto 32px; 
+    padding: 0 16px;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    word-wrap: break-word;
+  }
+  .rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f3f4f6;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    margin-left: 8px;
+    border: 1px solid #e5e7eb;
+  }
+  @media (max-width: 640px) {
+    .rating-badge {
+      display: block;
+      margin: 12px auto 0;
+      width: fit-content;
+    }
+  }
+  .breadcrumb { 
+    padding: 12px 0; 
+    background: #f9fafb; 
+    border-bottom: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  .breadcrumb ol { 
+    display: flex; 
+    list-style: none; 
+    gap: 8px; 
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+  .breadcrumb a { 
+    color: #000000; 
+    text-decoration: none; 
+    border-bottom: 1px solid transparent;
+  }
+  .breadcrumb a:hover { 
+    border-bottom-color: #000000; 
+  }
+  .breadcrumb-current {
+    color: #4b5563;
+  }
+  .analysis-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .analysis-section {
+      padding: 30px;
+    }
+  }
+  .analysis-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  @media (min-width: 1024px) {
+    .analysis-container {
+      flex-direction: row;
+    }
+  }
+  .input-panel, .results-panel {
+    flex: 1;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    overflow: hidden;
+  }
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .panel-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    word-wrap: break-word;
+  }
+  .textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    resize: vertical;
+    background: #ffffff;
+    margin-bottom: 12px;
+  }
+  .textarea:focus {
+    outline: none;
+    border-color: #000000;
+  }
+  .input-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 12px 0;
+    padding: 12px 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #4b5563;
+  }
+  .input-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .score-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .score-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .score-inner {
+    width: 80px;
+    height: 80px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .score-value {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .score-label {
+    font-size: 0.8rem;
+    color: #4b5563;
+  }
+  .score-info {
+    flex: 1;
+  }
+  .score-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .score-description {
+    font-size: 0.9rem;
+    color: #4b5563;
+  }
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 640px) {
+    .metrics-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .metric-card {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+  }
+  .metric-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #4b5563;
+    flex-wrap: wrap;
+  }
+  .metric-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  .issues-details {
+    margin-top: 20px;
+  }
+  .issues-details h4 {
+    margin-bottom: 16px;
+  }
+  .issue-category {
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    flex-wrap: wrap;
+  }
+  .category-title {
+    font-weight: 600;
+    flex: 1;
+  }
+  .issue-count {
+    background: #ef4444;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+  }
+  .issue-items {
+    list-style: none;
+    padding: 12px;
+  }
+  .issue-item {
+    display: flex;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+    word-wrap: break-word;
+  }
+  .issue-item:last-child {
+    border-bottom: none;
+  }
+  .issue-icon {
+    color: #ef4444;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .recommendations {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    margin-top: 20px;
+  }
+  .recommendations h4 {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .recommendation-list {
+    list-style: none;
+  }
+  .recommendation-list li {
+    padding: 6px 0;
+    padding-left: 24px;
+    position: relative;
+    word-wrap: break-word;
+  }
+  .recommendation-list li::before {
+    content: "✓";
+    color: #10b981;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  .guidelines-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .guidelines-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .guidelines-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .guideline-card {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .guideline-list {
+    list-style: none;
+  }
+  .guideline-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+    word-wrap: break-word;
+  }
+  .guideline-item:last-child {
+    border-bottom: none;
+  }
+  .check-icon {
+    color: #10b981;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .issues-table {
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    width: 100%;
+  }
+  .table-header {
+    display: none;
+    background: #000000;
+    color: #ffffff;
+    padding: 12px;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    .table-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 2fr;
+    }
+  }
+  .table-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  @media (min-width: 768px) {
+    .table-row {
+      grid-template-columns: 2fr 1fr 2fr;
+      gap: 16px;
+      padding: 12px;
+    }
+  }
+  .table-cell {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    word-wrap: break-word;
+  }
+  @media (min-width: 768px) {
+    .table-cell {
+      align-items: center;
+    }
+  }
+  .issue-number {
+    width: 30px;
+    height: 30px;
+    background: #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .impact-badge {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .faq-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .faq-item {
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    width: 100%;
+  }
+  .faq-question {
+    width: 100%;
+    padding: 16px;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+    word-wrap: break-word;
+  }
+  .faq-question:hover {
+    background: #f3f4f6;
+  }
+  .faq-icon {
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-item.active .faq-icon {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    padding: 0 16px 16px;
+    color: #4b5563;
+    word-wrap: break-word;
+  }
+  .cta-section {
+    background: #ffffff;
+    color: #000000;
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .cta-section { padding: 60px 0; }
+  }
+  .cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .cta-content h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 16px;
+    word-wrap: break-word;
+  }
+  .cta-content p {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    margin-bottom: 24px;
+    color: #4b5563;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .cta-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #4b5563;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+  }
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .seo-hidden {
+    display: none;
+  }
+  hr { border: none; border-top: 1px solid #e5e7eb; margin: 40px 0; }
+  .text-small { font-size: 0.85rem; color: #4b5563; }
+  .text-success { color: #10b981; font-weight: 600; }
+  .text-danger { color: #ef4444; font-weight: 600; }
+`;
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
@@ -54,7 +787,7 @@ const FAQS = [
 const FORMATTING_GUIDELINES = [
   {
     category: "ATS-Optimized Typography",
-    icon: <FiFileText />,
+    icon: "📄",
     rules: [
       "Use 1 professional font family maximum (2 variants allowed)",
       "Body text: 11-12pt, Headers: 14-16pt, Name: 18-22pt",
@@ -65,7 +798,7 @@ const FORMATTING_GUIDELINES = [
   },
   {
     category: "Professional Spacing & Layout",
-    icon: <FiTarget />,
+    icon: "🎯",
     rules: [
       "Margins: 0.75 inch standard, 0.5 inch for dense content",
       "Line spacing: 1.15 for readability, 1.5 for dense sections",
@@ -76,7 +809,7 @@ const FORMATTING_GUIDELINES = [
   },
   {
     category: "2024 Resume Structure",
-    icon: <FiTrendingUp />,
+    icon: "📈",
     rules: [
       "Contact header: Name, phone, email, LinkedIn, location",
       "Professional summary: 3-4 lines highlighting key achievements",
@@ -87,7 +820,7 @@ const FORMATTING_GUIDELINES = [
   },
   {
     category: "ATS Compatibility Standards",
-    icon: <FiCheck />,
+    icon: "✅",
     rules: [
       "No tables, columns, or text boxes (100% ATS rejection)",
       "No headers/footers (invisible to ATS parsing)",
@@ -98,7 +831,7 @@ const FORMATTING_GUIDELINES = [
   },
   {
     category: "Content Optimization",
-    icon: <FiEdit />,
+    icon: "✏️",
     rules: [
       "Use action verbs: Led, Managed, Increased, Reduced, Developed",
       "Quantify achievements: percentages, dollar amounts, time periods",
@@ -109,7 +842,7 @@ const FORMATTING_GUIDELINES = [
   },
   {
     category: "Industry-Specific Formatting",
-    icon: <FiAward />,
+    icon: "🏆",
     rules: [
       "Tech roles: Include GitHub, technical skills section first",
       "Creative roles: Portfolio link, can use minimal color",
@@ -269,13 +1002,7 @@ const ResumeFormattingChecker = () => {
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com",
-          "logo": "https://www.professionalresumefree.com/logo.png",
-          "sameAs": [
-            "https://twitter.com/ProResumeFree",
-            "https://www.linkedin.com/company/professional-resume-free",
-            "https://www.facebook.com/ProfessionalResumeFree"
-          ]
+          "url": "https://www.professionalresumefree.com"
         },
         "featureList": [
           "ATS Compatibility Analysis",
@@ -287,10 +1014,7 @@ const ResumeFormattingChecker = () => {
           "Detailed Recommendations",
           "Free Forever"
         ],
-        "screenshot": "https://www.professionalresumefree.com/images/resume-formatting-checker-screenshot.jpg",
         "softwareVersion": "2024.2.0",
-        "countriesSupported": "Global",
-        "datePublished": "2023-01-01",
         "dateModified": new Date().toISOString().split('T')[0]
       },
       {
@@ -300,13 +1024,7 @@ const ResumeFormattingChecker = () => {
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer,
-            "upvoteCount": 150,
-            "dateCreated": new Date().toISOString(),
-            "author": {
-              "@type": "Person",
-              "name": "Resume Formatting Expert"
-            }
+            "text": faq.answer
           }
         }))
       },
@@ -315,46 +1033,36 @@ const ResumeFormattingChecker = () => {
         "name": "How to Format Your Resume for ATS in 2024",
         "description": "Step-by-step guide to professional resume formatting that passes ATS systems",
         "totalTime": "PT15M",
-        "estimatedCost": {
-          "@type": "MonetaryAmount",
-          "currency": "USD",
-          "value": "0"
-        },
         "step": [
           {
             "@type": "HowToStep",
             "position": 1,
             "name": "Choose ATS-Friendly Font",
-            "text": "Select Arial, Calibri, or Times New Roman font at 11-12pt size",
-            "image": "https://www.professionalresumefree.com/images/step1-fonts.jpg"
+            "text": "Select Arial, Calibri, or Times New Roman font at 11-12pt size"
           },
           {
             "@type": "HowToStep",
             "position": 2,
             "name": "Set Proper Margins and Spacing",
-            "text": "Use 0.75 inch margins and 1.15 line spacing for optimal readability",
-            "image": "https://www.professionalresumefree.com/images/step2-spacing.jpg"
+            "text": "Use 0.75 inch margins and 1.15 line spacing for optimal readability"
           },
           {
             "@type": "HowToStep",
             "position": 3,
             "name": "Structure Your Content",
-            "text": "Organize in reverse chronological order with clear section headers",
-            "image": "https://www.professionalresumefree.com/images/step3-structure.jpg"
+            "text": "Organize in reverse chronological order with clear section headers"
           },
           {
             "@type": "HowToStep",
             "position": 4,
             "name": "Check ATS Compatibility",
-            "text": "Remove tables, images, headers/footers that confuse ATS systems",
-            "image": "https://www.professionalresumefree.com/images/step4-ats.jpg"
+            "text": "Remove tables, images, headers/footers that confuse ATS systems"
           },
           {
             "@type": "HowToStep",
             "position": 5,
             "name": "Analyze with Our Free Tool",
-            "text": "Paste your resume into our formatting checker for instant analysis",
-            "image": "https://www.professionalresumefree.com/images/step5-analysis.jpg"
+            "text": "Paste your resume into our formatting checker for instant analysis"
           }
         ]
       },
@@ -380,17 +1088,6 @@ const ResumeFormattingChecker = () => {
             "item": "https://www.professionalresumefree.com/free-resume-formatting-checker"
           }
         ]
-      },
-      {
-        "@type": "ItemList",
-        "name": "Common Resume Formatting Issues",
-        "numberOfItems": COMMON_ISSUES.length,
-        "itemListElement": COMMON_ISSUES.map((issue, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "name": issue.issue,
-          "description": `Impact: ${issue.impact}. Fix: ${issue.fix}`
-        }))
       }
     ]
   };
@@ -682,62 +1379,41 @@ AWARDS & RECOGNITIONS
   return (
     <>
       <Head>
-        {/* Primary Meta Tags */}
-        <title>Free Resume Formatting Checker 2024 - ATS Compatibility Analyzer & Professional Layout Verification</title>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
+        {/* Primary Meta Tags - Optimized Length */}
+        <title>Free Resume Formatting Checker 2026 - ATS Compatibility Analyzer</title>
         <meta 
           name="description" 
-          content={`Free professional resume formatting analyzer tool for 2024. Check ATS compatibility, spacing, structure, and formatting standards instantly. Get detailed recommendations to optimize your resume for both ATS systems and human recruiters.`}
+          content="Free professional resume formatting analyzer. Check ATS compatibility, spacing, structure instantly. 75% of resumes fail ATS due to formatting. Fix yours now with detailed recommendations."
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
-        
-        {/* SEO Meta Tags */}
         <meta name="author" content="Professional Resume Free" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="date" content={new Date().toISOString().split('T')[0]} />
         <meta name="last-modified" content={new Date().toISOString()} />
-        <meta name="revisit-after" content="7 days" />
         
-        {/* Canonical and Alternate URLs */}
+        {/* GEO Optimization Tags */}
+        <meta name="chatgpt-fts:title" content="Free Resume Formatting Checker - ATS Compatibility Analysis Tool" />
+        <meta name="chatgpt-fts:description" content="Analyze your resume formatting instantly. Check ATS compatibility, spacing, structure, and professional standards. Free tool with detailed recommendations." />
+        <meta name="chatgpt-fts:keywords" content="resume formatting, ATS checker, resume analysis, formatting tool 2024" />
+        <meta name="chatgpt-fts:last-updated" content={new Date().toISOString().split('T')[0]} />
+        
+        {/* Canonical URL - Single Tag */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-formatting-checker" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-formatting-checker" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-formatting-checker" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-formatting-checker" hreflang="x-default" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Free Resume Formatting Checker 2024 - ATS Compatibility Analyzer" />
-        <meta property="og:description" content="Professional resume formatting analysis tool that checks ATS compatibility, spacing, structure, and formatting standards. Free instant analysis with detailed recommendations." />
-        <meta property="og:type" content="website" />
+        <meta property="og:description" content="Professional resume formatting analysis tool. Check ATS compatibility, spacing, structure instantly. Free tool with detailed recommendations." />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-formatting-checker" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-formatting-checker-2024.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Resume Formatting Checker Analysis Dashboard" />
+        <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
-        <meta property="og:locale" content="en_US" />
+        <meta property="og:updated_time" content={new Date().toISOString()} />
         
-        {/* Twitter */}
+        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Formatting Checker 2024" />
-        <meta name="twitter:description" content="Professional ATS compatibility analysis with instant formatting recommendations" />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-resume-formatting-checker.jpg" />
-        <meta name="twitter:image:alt" content="Resume Formatting Analysis Tool" />
-        <meta name="twitter:site" content="@ProResumeFree" />
-        <meta name="twitter:creator" content="@ProResumeFree" />
-        
-        {/* Additional SEO */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        
-        {/* Preloads and Preconnects */}
-        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="twitter:description" content="Free ATS formatting analysis tool. Check your resume now." />
         
         {/* Structured Data */}
         <script
@@ -747,99 +1423,86 @@ AWARDS & RECOGNITIONS
       </Head>
 
       {/* Hidden SEO Elements */}
-      <div className={styles.seoHidden} aria-hidden="true">
-        <meta name="build-timestamp" content={new Date().toISOString()} />
-        <meta name="content-freshness" content={new Date().toISOString().split('T')[0]} />
-        <span>Free resume formatting checker tool for 2024 job applications. Analyze ATS compatibility, professional formatting standards, spacing verification, structure optimization. Used by 50,000+ professionals worldwide.</span>
+      <div style={{display: 'none'}} aria-hidden="true">
+        <span itemProp="tool-type">Resume Formatting Checker</span>
+        <span itemProp="year">{CURRENT_YEAR}</span>
+        <span itemProp="last-updated">{new Date().toISOString().split('T')[0]}</span>
       </div>
 
-      <div className={styles.container}>
+      <div className="container">
         {/* Breadcrumb Navigation */}
-        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-          <ol>
-            <li>
-              <a href="/" className={styles.breadcrumbLink}>Home</a>
-            </li>
-            <li className={styles.breadcrumbSeparator}>/</li>
-            <li>
-              <a href="/free-tools" className={styles.breadcrumbLink}>Free Tools</a>
-            </li>
-            <li className={styles.breadcrumbSeparator}>/</li>
-            <li>
-              <span className={styles.breadcrumbCurrent}>Resume Formatting Checker</span>
-            </li>
-          </ol>
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <div className="container">
+            <ol>
+              <li><Link href="/">Home</Link></li>
+              <li>/</li>
+              <li><Link href="/free-resume-tools">Free Tools</Link></li>
+              <li>/</li>
+              <li className="breadcrumb-current">Resume Formatting Checker</li>
+            </ol>
+          </div>
         </nav>
 
-        <header className={styles.header}>
-          <h1 className={styles.title}>
-            Free Resume Formatting Checker & ATS Compatibility Analyzer <span className={styles.highlight}>2024</span>
+        {/* Header Section */}
+        <header className="header">
+          <h1>
+            Free Resume Formatting Checker & ATS Compatibility Analyzer <span className="rating-badge"><span>⭐</span> 4.9/5 (2,847+ reviews)</span>
           </h1>
-          <p className={styles.subtitle}>
-            Professional formatting analysis tool that checks ATS compatibility, spacing, structure, and formatting standards
-            <span className={styles.ratingBadge}>
-              <FiStar /> 4.9/5 Rating • 2,847+ Reviews
-            </span>
+          <p>
+            Professional formatting analysis tool that checks ATS compatibility, spacing, structure, and formatting standards. 
+            Based on analysis of 50,000+ resumes. Free forever.
           </p>
           
-          <div className={styles.statsGrid}>
+          {/* Stats Grid */}
+          <div className="stats-grid">
             {INDUSTRY_STATS.map((stat, index) => (
-              <div key={index} className={styles.statItem}>
-                <div className={styles.statNumber}>{stat.stat}</div>
-                <div className={styles.statLabel}>{stat.label}</div>
+              <div key={index} className="stat-item">
+                <span className="stat-number">{stat.stat}</span>
+                <span className="stat-label">{stat.label}</span>
               </div>
             ))}
           </div>
         </header>
 
-        <main className={styles.main}>
+        <main>
           {/* Main Analysis Section */}
-          <section className={styles.analysisSection} aria-labelledby="analysis-title">
-            <div className={styles.sectionHeader}>
-              <h2 id="analysis-title">Analyze Your Resume Formatting Instantly</h2>
-              <p>Paste your resume content below for comprehensive 2024 formatting analysis. Our tool checks ATS compatibility, spacing consistency, structure, and professional standards.</p>
-            </div>
-            
-            <div className={styles.analysisContainer}>
-              <div className={styles.inputPanel}>
-                <div className={styles.panelHeader}>
-                  <h3><FiEdit /> Your Resume Content</h3>
-                  <button
-                    className={styles.exampleButton}
-                    onClick={handleLoadExample}
-                    type="button"
-                    aria-label="Load example resume for formatting analysis"
-                  >
-                    <FiEye /> Load Example Resume
-                  </button>
-                </div>
-                <textarea
-                  ref={textareaRef}
-                  className={styles.textarea}
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  placeholder={`Paste your resume content here for free formatting analysis...
+          <section className="section">
+            <div className="analysis-section">
+              <div className="section-header" style={{textAlign: 'center', marginBottom: '30px'}}>
+                <h2 className="section-title">Analyze Your Resume Formatting Instantly</h2>
+                <p className="section-subtitle">
+                  Paste your resume content below for comprehensive 2026 formatting analysis. 
+                  Our tool checks ATS compatibility, spacing consistency, structure, and professional standards.
+                </p>
+              </div>
+              
+              <div className="analysis-container">
+                <div className="input-panel">
+                  <div className="panel-header">
+                    <h3>📝 Your Resume Content</h3>
+                    <button
+                      className="btn-outline"
+                      onClick={handleLoadExample}
+                      type="button"
+                    >
+                      📋 Load Example Resume
+                    </button>
+                  </div>
+                  <textarea
+                    ref={textareaRef}
+                    className="textarea"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder={`Paste your resume content here for free formatting analysis...
 
 Example format:
 JOHN SMITH
 Software Engineer | Full Stack Developer
 (123) 456-7890 • john@email.com
-linkedin.com/in/johnsmith • San Francisco, CA
+linkedin.com/in/johnsmith
 
 PROFESSIONAL SUMMARY
-Experienced software developer with 8+ years building scalable web applications...
-
-WORK EXPERIENCE
-Senior Developer | Tech Company Inc. | 2020-Present
-• Led development of microservices architecture serving 1M+ users
-• Implemented CI/CD pipelines reducing deployment time by 40%
-• Mentored 5 junior developers improving team velocity by 25%
-
-EDUCATION
-Computer Science Degree | University Name | 2012-2016
-
-SKILLS
-JavaScript, React, Node.js, AWS, Docker, Kubernetes, Agile
+Experienced developer with 8+ years building scalable applications...
 
 Our tool analyzes:
 ✓ ATS Compatibility
@@ -848,358 +1511,342 @@ Our tool analyzes:
 ✓ Font & Typography
 ✓ Professional Standards
 ✓ Content Readability`}
-                  rows={22}
-                  autoFocus
-                  aria-label="Paste your resume content for formatting analysis"
-                />
-                <div className={styles.inputStats}>
-                  <div className={styles.stat}>
-                    <FiFileText />
-                    <span>{formattingIssues.lineCount} lines</span>
-                  </div>
-                  <div className={styles.stat}>
-                    <FiEdit />
-                    <span>{formattingIssues.wordCount} words</span>
-                  </div>
-                  <div className={styles.stat}>
-                    <FiTarget />
-                    <span>{formattingIssues.sectionCount} sections</span>
-                  </div>
-                  <div className={styles.stat}>
-                    <FiCheck />
-                    <span>{formattingIssues.bulletPointCount} bullet points</span>
-                  </div>
-                </div>
-                <div className={styles.inputActions}>
-                  <button
-                    className={styles.analyzeButton}
-                    onClick={() => setFormattingIssues(analyzeFormatting(text))}
-                    type="button"
-                    disabled={isAnalyzing || !text.trim()}
-                    aria-label="Analyze resume formatting"
-                  >
-                    {isAnalyzing ? (
-                      <>
-                        <FiRefreshCw className={styles.spin} />
-                        Analyzing...
-                      </>
-                    ) : (
-                      <>
-                        <FiSearch />
-                        Analyze Formatting
-                      </>
-                    )}
-                  </button>
-                  <button
-                    className={styles.resetButton}
-                    onClick={handleReset}
-                    type="button"
-                    aria-label="Clear resume content"
-                  >
-                    <FiRefreshCw />
-                    Clear All
-                  </button>
-                </div>
-              </div>
-              
-              <div className={styles.resultsPanel}>
-                <div className={styles.panelHeader}>
-                  <h3><FiBarChart /> Formatting Analysis Results</h3>
-                  <button
-                    className={styles.toggleButton}
-                    onClick={() => setShowDetails(!showDetails)}
-                    type="button"
-                    aria-label={showDetails ? "Hide detailed results" : "Show detailed results"}
-                  >
-                    {showDetails ? <FiChevronUp /> : <FiChevronDown />}
-                    {showDetails ? 'Hide Details' : 'Show Details'}
-                  </button>
-                </div>
-                
-                <div className={styles.scoreSection}>
-                  <div 
-                    className={styles.scoreCircle}
-                    style={{ 
-                      background: `conic-gradient(${getScoreColor()} ${formattingIssues.formattingScore * 3.6}deg, #f3f4f6 0deg)`
-                    }}
-                  >
-                    <div className={styles.scoreInner}>
-                      <div className={styles.scoreValue}>{formattingIssues.formattingScore}</div>
-                      <div className={styles.scoreLabel}>/100</div>
+                    rows={20}
+                  />
+                  <div className="input-stats">
+                    <div className="stat">
+                      <span>📄</span>
+                      <span>{formattingIssues.lineCount} lines</span>
+                    </div>
+                    <div className="stat">
+                      <span>✏️</span>
+                      <span>{formattingIssues.wordCount} words</span>
+                    </div>
+                    <div className="stat">
+                      <span>🎯</span>
+                      <span>{formattingIssues.sectionCount} sections</span>
+                    </div>
+                    <div className="stat">
+                      <span>✓</span>
+                      <span>{formattingIssues.bulletPointCount} bullet points</span>
                     </div>
                   </div>
-                  <div className={styles.scoreInfo}>
-                    <div className={styles.scoreTitle}>Overall Formatting Score</div>
-                    <div className={styles.scoreDescription}>{getScoreDescription()}</div>
-                    {analysisTimestamp && (
-                      <div className={styles.analysisTime}>
-                        <FiClock />
-                        Analyzed: {new Date(analysisTimestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                  <div className="input-actions">
+                    <button
+                      className="btn-primary"
+                      onClick={() => setFormattingIssues(analyzeFormatting(text))}
+                      type="button"
+                      disabled={isAnalyzing || !text.trim()}
+                    >
+                      {isAnalyzing ? (
+                        <>
+                          <span className="spin">⟳</span>
+                          Analyzing...
+                        </>
+                      ) : (
+                        <>
+                          🔍 Analyze Formatting
+                        </>
+                      )}
+                    </button>
+                    <button
+                      className="btn-outline"
+                      onClick={handleReset}
+                      type="button"
+                    >
+                      ⟳ Clear All
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="results-panel">
+                  <div className="panel-header">
+                    <h3>📊 Formatting Analysis Results</h3>
+                    <button
+                      className="btn-outline"
+                      onClick={() => setShowDetails(!showDetails)}
+                      type="button"
+                    >
+                      {showDetails ? '▲ Hide Details' : '▼ Show Details'}
+                    </button>
+                  </div>
+                  
+                  <div className="score-section">
+                    <div 
+                      className="score-circle"
+                      style={{ 
+                        background: `conic-gradient(${getScoreColor()} ${formattingIssues.formattingScore * 3.6}deg, #f3f4f6 0deg)`
+                      }}
+                    >
+                      <div className="score-inner">
+                        <div className="score-value">{formattingIssues.formattingScore}</div>
+                        <div className="score-label">/100</div>
                       </div>
-                    )}
-                  </div>
-                </div>
-                
-                <div className={styles.metricsGrid}>
-                  <div className={styles.metricCard}>
-                    <div className={styles.metricHeader}>
-                      <FiAlertCircle className={styles.metricIcon} />
-                      <span className={styles.metricTitle}>Total Issues</span>
                     </div>
-                    <div className={styles.metricValue}>{formattingIssues.totalIssues}</div>
-                    <div className={styles.metricDescription}>Formatting problems found</div>
-                  </div>
-                  
-                  <div className={styles.metricCard}>
-                    <div className={styles.metricHeader}>
-                      <FiCheck className={styles.metricIcon} />
-                      <span className={styles.metricTitle}>ATS Issues</span>
-                    </div>
-                    <div className={styles.metricValue}>{formattingIssues.atsIssues.length}</div>
-                    <div className={styles.metricDescription}>Compatibility problems</div>
-                  </div>
-                  
-                  <div className={styles.metricCard}>
-                    <div className={styles.metricHeader}>
-                      <FiTarget className={styles.metricIcon} />
-                      <span className={styles.metricTitle}>Readability</span>
-                    </div>
-                    <div className={styles.metricValue}>{formattingIssues.readabilityScore}%</div>
-                    <div className={styles.metricDescription}>Content clarity score</div>
-                  </div>
-                  
-                  <div className={styles.metricCard}>
-                    <div className={styles.metricHeader}>
-                      <FiTrendingUp className={styles.metricIcon} />
-                      <span className={styles.metricTitle}>Keywords</span>
-                    </div>
-                    <div className={styles.metricValue}>{formattingIssues.keywordDensity}%</div>
-                    <div className={styles.metricDescription}>Action verb density</div>
-                  </div>
-                </div>
-                
-                {showDetails && formattingIssues.totalIssues > 0 && (
-                  <div className={styles.issuesDetails}>
-                    <h4>Detailed Issues Found</h4>
-                    <div className={styles.issuesList}>
-                      {formattingIssues.atsIssues.length > 0 && (
-                        <div className={styles.issueCategory}>
-                          <div className={styles.categoryHeader}>
-                            <FiAlertCircle className={styles.categoryIcon} />
-                            <span className={styles.categoryTitle}>ATS Compatibility</span>
-                            <span className={styles.issueCount}>{formattingIssues.atsIssues.length}</span>
-                          </div>
-                          <ul className={styles.issueItems}>
-                            {formattingIssues.atsIssues.map((issue, index) => (
-                              <li key={index} className={styles.issueItem}>
-                                <FiAlertCircle className={styles.issueIcon} />
-                                <span>{issue}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                      
-                      {formattingIssues.spacingIssues.length > 0 && (
-                        <div className={styles.issueCategory}>
-                          <div className={styles.categoryHeader}>
-                            <FiTarget className={styles.categoryIcon} />
-                            <span className={styles.categoryTitle}>Spacing & Layout</span>
-                            <span className={styles.issueCount}>{formattingIssues.spacingIssues.length}</span>
-                          </div>
-                          <ul className={styles.issueItems}>
-                            {formattingIssues.spacingIssues.map((issue, index) => (
-                              <li key={index} className={styles.issueItem}>
-                                <FiAlertCircle className={styles.issueIcon} />
-                                <span>{issue}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                      
-                      {formattingIssues.structureIssues.length > 0 && (
-                        <div className={styles.issueCategory}>
-                          <div className={styles.categoryHeader}>
-                            <FiTrendingUp className={styles.categoryIcon} />
-                            <span className={styles.categoryTitle}>Structure</span>
-                            <span className={styles.issueCount}>{formattingIssues.structureIssues.length}</span>
-                          </div>
-                          <ul className={styles.issueItems}>
-                            {formattingIssues.structureIssues.map((issue, index) => (
-                              <li key={index} className={styles.issueItem}>
-                                <FiAlertCircle className={styles.issueIcon} />
-                                <span>{issue}</span>
-                              </li>
-                            ))}
-                          </ul>
+                    <div className="score-info">
+                      <div className="score-title">Overall Formatting Score</div>
+                      <div className="score-description">{getScoreDescription()}</div>
+                      {analysisTimestamp && (
+                        <div className="text-small" style={{marginTop: '8px'}}>
+                          ⏱️ Analyzed: {new Date(analysisTimestamp).toLocaleTimeString()}
                         </div>
                       )}
                     </div>
                   </div>
-                )}
-                
-                <div className={styles.recommendations}>
-                  <h4><FiCheck /> Quick Recommendations</h4>
-                  <ul className={styles.recommendationList}>
-                    {formattingIssues.formattingScore >= 90 && (
-                      <li>Your formatting looks excellent! Ensure you use PDF format for submission.</li>
-                    )}
-                    {formattingIssues.formattingScore < 90 && (
-                      <li>Remove any tables, columns, or text boxes for better ATS compatibility.</li>
-                    )}
-                    {formattingIssues.formattingScore < 70 && (
-                      <li>Check spacing consistency and ensure proper section headers.</li>
-                    )}
-                    <li>Use standard bullet points (•) consistently throughout your resume.</li>
-                    <li>Maintain 30-40% white space for optimal readability.</li>
-                    <li>Save as PDF to preserve formatting across all devices.</li>
-                  </ul>
+                  
+                  <div className="metrics-grid">
+                    <div className="metric-card">
+                      <div className="metric-header">
+                        <span>⚠️</span>
+                        <span>Total Issues</span>
+                      </div>
+                      <div className="metric-value">{formattingIssues.totalIssues}</div>
+                    </div>
+                    
+                    <div className="metric-card">
+                      <div className="metric-header">
+                        <span>🤖</span>
+                        <span>ATS Issues</span>
+                      </div>
+                      <div className="metric-value">{formattingIssues.atsIssues.length}</div>
+                    </div>
+                    
+                    <div className="metric-card">
+                      <div className="metric-header">
+                        <span>📖</span>
+                        <span>Readability</span>
+                      </div>
+                      <div className="metric-value">{formattingIssues.readabilityScore}%</div>
+                    </div>
+                    
+                    <div className="metric-card">
+                      <div className="metric-header">
+                        <span>⚡</span>
+                        <span>Keywords</span>
+                      </div>
+                      <div className="metric-value">{formattingIssues.keywordDensity}%</div>
+                    </div>
+                  </div>
+                  
+                  {showDetails && formattingIssues.totalIssues > 0 && (
+                    <div className="issues-details">
+                      <h4>Detailed Issues Found</h4>
+                      <div className="issues-list">
+                        {formattingIssues.atsIssues.length > 0 && (
+                          <div className="issue-category">
+                            <div className="category-header">
+                              <span>🤖</span>
+                              <span className="category-title">ATS Compatibility</span>
+                              <span className="issue-count">{formattingIssues.atsIssues.length}</span>
+                            </div>
+                            <ul className="issue-items">
+                              {formattingIssues.atsIssues.map((issue, index) => (
+                                <li key={index} className="issue-item">
+                                  <span className="issue-icon">⚠️</span>
+                                  <span>{issue}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {formattingIssues.spacingIssues.length > 0 && (
+                          <div className="issue-category">
+                            <div className="category-header">
+                              <span>📏</span>
+                              <span className="category-title">Spacing & Layout</span>
+                              <span className="issue-count">{formattingIssues.spacingIssues.length}</span>
+                            </div>
+                            <ul className="issue-items">
+                              {formattingIssues.spacingIssues.map((issue, index) => (
+                                <li key={index} className="issue-item">
+                                  <span className="issue-icon">⚠️</span>
+                                  <span>{issue}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {formattingIssues.structureIssues.length > 0 && (
+                          <div className="issue-category">
+                            <div className="category-header">
+                              <span>🏗️</span>
+                              <span className="category-title">Structure</span>
+                              <span className="issue-count">{formattingIssues.structureIssues.length}</span>
+                            </div>
+                            <ul className="issue-items">
+                              {formattingIssues.structureIssues.map((issue, index) => (
+                                <li key={index} className="issue-item">
+                                  <span className="issue-icon">⚠️</span>
+                                  <span>{issue}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="recommendations">
+                    <h4>✅ Quick Recommendations</h4>
+                    <ul className="recommendation-list">
+                      {formattingIssues.formattingScore >= 90 && (
+                        <li>Your formatting looks excellent! Ensure you use PDF format for submission.</li>
+                      )}
+                      {formattingIssues.formattingScore < 90 && (
+                        <li>Remove any tables, columns, or text boxes for better ATS compatibility.</li>
+                      )}
+                      {formattingIssues.formattingScore < 70 && (
+                        <li>Check spacing consistency and ensure proper section headers.</li>
+                      )}
+                      <li>Use standard bullet points (•) consistently throughout your resume.</li>
+                      <li>Maintain 30-40% white space for optimal readability.</li>
+                      <li>Save as PDF to preserve formatting across all devices.</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </section>
 
           {/* Formatting Guidelines Section */}
-          <section className={styles.guidelinesSection} aria-labelledby="guidelines-title">
-            <div className={styles.sectionHeader}>
-              <h2 id="guidelines-title">2024 Professional Resume Formatting Guidelines</h2>
-              <p>Industry standards for optimal resume formatting and ATS compatibility based on current hiring data.</p>
-            </div>
-            
-            <div className={styles.guidelinesGrid}>
-              {FORMATTING_GUIDELINES.map((guideline, index) => (
-                <div key={index} className={styles.guidelineCard}>
-                  <div className={styles.cardHeader}>
-                    <div className={styles.cardIcon}>{guideline.icon}</div>
-                    <h3>{guideline.category}</h3>
+          <section className="section" style={{background: '#f9fafb'}}>
+            <div className="container">
+              <h2 className="section-title">2026 Professional Resume Formatting Guidelines</h2>
+              <p className="section-subtitle">
+                Industry standards for optimal resume formatting and ATS compatibility based on current hiring data.
+              </p>
+              
+              <div className="guidelines-grid">
+                {FORMATTING_GUIDELINES.map((guideline, index) => (
+                  <div key={index} className="guideline-card">
+                    <div className="card-header">
+                      <div className="card-icon">{guideline.icon}</div>
+                      <h3>{guideline.category}</h3>
+                    </div>
+                    <ul className="guideline-list">
+                      {guideline.rules.map((rule, ruleIndex) => (
+                        <li key={ruleIndex} className="guideline-item">
+                          <span className="check-icon">✓</span>
+                          <span>{rule}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className={styles.guidelineList}>
-                    {guideline.rules.map((rule, ruleIndex) => (
-                      <li key={ruleIndex} className={styles.guidelineItem}>
-                        <FiCheck className={styles.checkIcon} />
-                        <span>{rule}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
 
           {/* Common Issues Section */}
-          <section className={styles.commonIssuesSection} aria-labelledby="issues-title">
-            <div className={styles.sectionHeader}>
-              <h2 id="issues-title">Common Resume Formatting Issues & Solutions</h2>
-              <p>Top formatting mistakes that cause ATS rejection and how to fix them.</p>
-            </div>
-            
-            <div className={styles.issuesTable}>
-              <div className={styles.tableHeader}>
-                <div className={styles.tableColumn}>Issue</div>
-                <div className={styles.tableColumn}>Impact</div>
-                <div className={styles.tableColumn}>Solution</div>
-              </div>
-              {COMMON_ISSUES.map((item, index) => (
-                <div key={index} className={styles.tableRow}>
-                  <div className={styles.tableCell}>
-                    <div className={styles.issueNumber}>{String(index + 1).padStart(2, '0')}</div>
-                    <div className={styles.issueText}>{item.issue}</div>
-                  </div>
-                  <div className={styles.tableCell}>
-                    <div className={styles.impactBadge}>{item.impact}</div>
-                  </div>
-                  <div className={styles.tableCell}>
-                    <div className={styles.solutionText}>{item.fix}</div>
-                  </div>
+          <section className="section">
+            <div className="container">
+              <h2 className="section-title">Common Resume Formatting Issues & Solutions</h2>
+              <p className="section-subtitle">
+                Top formatting mistakes that cause ATS rejection and how to fix them.
+              </p>
+              
+              <div className="issues-table">
+                <div className="table-header">
+                  <div>Issue</div>
+                  <div>Impact</div>
+                  <div>Solution</div>
                 </div>
-              ))}
+                {COMMON_ISSUES.map((item, index) => (
+                  <div key={index} className="table-row">
+                    <div className="table-cell">
+                      <span className="issue-number">{String(index + 1).padStart(2, '0')}</span>
+                      <span>{item.issue}</span>
+                    </div>
+                    <div className="table-cell">
+                      <span className="impact-badge">{item.impact}</span>
+                    </div>
+                    <div className="table-cell">
+                      <span>{item.fix}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
           {/* FAQ Section */}
-          <section className={styles.faqSection} aria-labelledby="faq-title">
-            <div className={styles.sectionHeader}>
-              <h2 id="faq-title">Frequently Asked Questions</h2>
-              <p>Everything you need to know about professional resume formatting in 2024.</p>
-            </div>
-            
-            <div className={styles.faqGrid}>
-              {FAQS.map((faq, index) => (
-                <div 
-                  key={index} 
-                  className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
-                >
-                  <button
-                    className={styles.faqQuestion}
-                    onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                    aria-expanded={activeFaq === index}
-                    aria-controls={`faq-answer-${index}`}
+          <section className="section" style={{background: '#f9fafb'}}>
+            <div className="container">
+              <h2 className="section-title">Frequently Asked Questions</h2>
+              <p className="section-subtitle">
+                Everything you need to know about professional resume formatting in 2024.
+              </p>
+              
+              <div className="faq-grid">
+                {FAQS.map((faq, index) => (
+                  <div 
+                    key={index} 
+                    className={`faq-item ${activeFaq === index ? 'active' : ''}`}
                   >
-                    <span>{faq.question}</span>
-                    <FiChevronDown className={styles.faqIcon} />
-                  </button>
-                  {activeFaq === index && (
-                    <div 
-                      id={`faq-answer-${index}`}
-                      className={styles.faqAnswer}
-                      role="region"
+                    <button
+                      className="faq-question"
+                      onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                      aria-expanded={activeFaq === index}
                     >
-                      <p>{faq.answer}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
+                      <span>{faq.question}</span>
+                      <span className="faq-icon">{activeFaq === index ? '▲' : '▼'}</span>
+                    </button>
+                    {activeFaq === index && (
+                      <div className="faq-answer">
+                        <p>{faq.answer}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
           {/* CTA Section */}
-          <section className={styles.ctaSection}>
-            <div className={styles.ctaContent}>
+          <section className="cta-section">
+            <div className="cta-content">
               <h2>Ready to Perfect Your Resume Formatting?</h2>
-              <p>Join 50,000+ professionals who improved their resume formatting with our free analysis tool.</p>
-              <div className={styles.ctaButtons}>
+              <p>
+                Join 50,000+ professionals who improved their resume formatting with our free analysis tool.
+              </p>
+              <div className="cta-buttons">
                 <button
-                  className={styles.primaryCta}
+                  className="btn-primary"
                   onClick={() => textareaRef.current?.focus()}
-                  aria-label="Start analyzing your resume formatting"
                 >
-                  <FiSearch />
-                  Analyze Your Resume Now
+                  🔍 Analyze Your Resume Now
                 </button>
-                <a
-                  href="/resume-templates"
-                  className={styles.secondaryCta}
-                  aria-label="Browse professional resume templates"
-                >
-                  <FiDownload />
-                  Browse ATS Templates
-                </a>
+                <Link href="/resume-templates" className="btn-secondary">
+                  📄 Browse ATS Templates
+                </Link>
               </div>
-              <div className={styles.ctaFeatures}>
-                <div className={styles.feature}>
-                  <FiCheck />
+              <div className="cta-features">
+                <div className="feature">
+                  <span>✓</span>
                   <span>Free Forever</span>
                 </div>
-                <div className={styles.feature}>
-                  <FiCheck />
+                <div className="feature">
+                  <span>✓</span>
                   <span>No Sign Up Required</span>
                 </div>
-                <div className={styles.feature}>
-                  <FiCheck />
+                <div className="feature">
+                  <span>✓</span>
                   <span>Instant Analysis</span>
                 </div>
-                <div className={styles.feature}>
-                  <FiCheck />
+                <div className="feature">
+                  <span>✓</span>
                   <span>Detailed Recommendations</span>
                 </div>
               </div>
+              <p className="text-small" style={{marginTop: '30px'}}>
+                Based on analysis of 50,000+ resumes • Updated for 2024 hiring standards
+              </p>
             </div>
           </section>
         </main>
-
-        
-           
       </div>
     </>
   );
@@ -1208,19 +1855,21 @@ Our tool analyzes:
 // SSG with ISR
 export async function getStaticProps() {
   const buildTimestamp = new Date().toISOString();
+  const lastModified = new Date().toISOString();
   
   return {
     props: {
+      lastModified,
+      buildTimestamp,
       seoData: {
         lastUpdated: buildTimestamp,
         buildYear: CURRENT_YEAR,
         pageType: 'tool',
         contentType: 'formatting_checker'
-      },
-      buildTimestamp
+      }
     },
     // Revalidate every 2 hours
-    revalidate: 3600,
+    revalidate: 7200,
   };
 }
 

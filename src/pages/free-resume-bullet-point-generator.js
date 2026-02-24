@@ -1,7 +1,860 @@
+// pages/free-resume-bullet-point-generator.js
 import { useState, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from './free-resume-bullet-point-generator.module.css';
+
+// Critical inline CSS for maximum speed
+const criticalCSS = `
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow-x: hidden; width: 100%; }
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    line-height: 1.5; 
+    color: #000000; 
+    background: #ffffff; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+  .container { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 0 16px; 
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .container { padding: 0 24px; }
+  }
+  .header { 
+    background: #ffffff; 
+    padding: 30px 0 20px; 
+    text-align: center; 
+    border-bottom: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .header { padding: 40px 0 30px; }
+  }
+  .header h1 { 
+    font-size: clamp(1.5rem, 5vw, 2.5rem); 
+    margin-bottom: 16px; 
+    line-height: 1.2;
+    word-wrap: break-word;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+  .header p { 
+    font-size: clamp(0.9rem, 3vw, 1.1rem); 
+    max-width: 800px; 
+    margin: 0 auto 24px; 
+    padding: 0 16px;
+    color: #4b5563;
+    word-wrap: break-word;
+  }
+  .trust-badge {
+    display: inline-block;
+    background: #f3f4f6;
+    color: #000000;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+  }
+  .trust-signals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin: 30px 0;
+    width: 100%;
+  }
+  .trust-signal {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f9fafb;
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid #e5e7eb;
+    font-size: 0.85rem;
+  }
+  .signal-icon {
+    color: #10b981;
+    font-weight: bold;
+  }
+  .grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 16px; 
+    margin: 30px 0; 
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .card { 
+    background: #f9fafb; 
+    border-radius: 8px; 
+    padding: 20px; 
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+  }
+  .card:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+  }
+  .btn-primary { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #000000; 
+    color: #ffffff; 
+    padding: 12px 24px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-weight: 500; 
+    border: 1px solid #000000;
+    transition: background 0.2s;
+    width: auto;
+    min-width: 200px;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    border: none;
+  }
+  @media (max-width: 480px) {
+    .btn-primary { 
+      width: 100%; 
+      min-width: auto;
+    }
+  }
+  .btn-primary:hover { 
+    background: #333333; 
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .btn-secondary { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent; 
+    color: #000000; 
+    padding: 12px 24px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-weight: 500; 
+    border: 2px solid #000000; 
+    transition: background 0.2s;
+    width: auto;
+    min-width: 200px;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  @media (max-width: 480px) {
+    .btn-secondary { 
+      width: 100%; 
+      min-width: auto;
+    }
+  }
+  .btn-secondary:hover { 
+    background: #f5f5f5; 
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    color: #000000;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover {
+    background: #f3f4f6;
+  }
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .step.active .step-number {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+  .step-label {
+    font-size: 0.8rem;
+    color: #4b5563;
+  }
+  .step-line {
+    width: 40px;
+    height: 2px;
+    background: #e5e7eb;
+    margin: 0 5px;
+  }
+  @media (max-width: 480px) {
+    .step-line { width: 20px; }
+  }
+  .form-section {
+    margin: 30px 0;
+    width: 100%;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 20px 0;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .form-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .form-group-full {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+  .label {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .required {
+    color: #ef4444;
+    margin-left: 2px;
+  }
+  .input, .select, .textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    background: #ffffff;
+  }
+  .input:focus, .select:focus, .textarea:focus {
+    outline: none;
+    border-color: #000000;
+  }
+  .textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .helper-text {
+    font-size: 0.8rem;
+    color: #4b5563;
+  }
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .step-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .button {
+    padding: 10px 20px;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .button:hover {
+    background: #333333;
+  }
+  .button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .secondary-button {
+    background: transparent;
+    color: #000000;
+    border: 1px solid #d1d5db;
+  }
+  .secondary-button:hover {
+    background: #f3f4f6;
+  }
+  .industry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .industry-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .industry-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .industry-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .industry-card:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  .industry-card.selected {
+    border: 2px solid #000000;
+    background: #f9fafb;
+  }
+  .industry-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    word-wrap: break-word;
+  }
+  .industry-verbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .verb-tag {
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    color: #4b5563;
+  }
+  .industry-hint {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    margin-top: auto;
+  }
+  .bullet-points-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 20px 0;
+    width: 100%;
+  }
+  .bullet-point-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .bullet-point-card:hover {
+    border-color: #000000;
+  }
+  .bullet-point-card.selected {
+    border: 2px solid #000000;
+    background: #f9fafb;
+  }
+  .bullet-point-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .bullet-point-strength {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .strength-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .strength-dot.strong { background: #10b981; }
+  .strength-dot.good { background: #f59e0b; }
+  .strength-dot.basic { background: #ef4444; }
+  .strength-label {
+    font-size: 0.8rem;
+    color: #4b5563;
+  }
+  .copy-button {
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .copy-button:hover {
+    background: #333333;
+  }
+  .bullet-point-text {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    word-wrap: break-word;
+  }
+  .bullet-point-source {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .source-badge {
+    background: #e5e7eb;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: #4b5563;
+  }
+  .achievement-badge {
+    background: #10b981;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+  }
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  .recommendations {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+  }
+  .recommendations-title {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .recommendations-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .recommendation-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .recommendation-card h4 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+  .recommendation-card p {
+    font-size: 0.85rem;
+    color: #4b5563;
+  }
+  .loading {
+    text-align: center;
+    padding: 40px;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin: 30px 0;
+  }
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f4f6;
+    border-top-color: #000000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .loading-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .loading-subtext {
+    color: #4b5563;
+    font-size: 0.9rem;
+  }
+  .checklist {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  .checklist-title {
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .checklist ul {
+    list-style: none;
+  }
+  .checklist li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    word-wrap: break-word;
+  }
+  .checklist li::before {
+    content: "✓";
+    color: #10b981;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  .how-to-section, .car-section, .faq-section, .reviews-section, .resources-section {
+    padding: 40px 0;
+    border-top: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  .section-title {
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 0 16px;
+    word-wrap: break-word;
+  }
+  .how-to-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .how-to-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .how-to-steps { grid-template-columns: repeat(5, 1fr); }
+  }
+  .how-to-step {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    height: 100%;
+  }
+  .how-to-step .step-number {
+    width: 30px;
+    height: 30px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .step-description {
+    font-size: 0.85rem;
+    color: #4b5563;
+  }
+  .car-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .car-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .car-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .car-letter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #e5e7eb;
+    opacity: 0.5;
+  }
+  .car-title {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .car-description {
+    color: #4b5563;
+    margin-bottom: 16px;
+  }
+  .car-example {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    border-left: 3px solid #000000;
+  }
+  .car-tip {
+    font-size: 0.8rem;
+    color: #4b5563;
+    font-style: italic;
+  }
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .faq-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .faq-item:hover {
+    border-color: #000000;
+  }
+  .faq-question {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .faq-question h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+    word-wrap: break-word;
+  }
+  .faq-toggle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #4b5563;
+  }
+  .faq-answer {
+    padding: 0 16px 16px;
+    color: #4b5563;
+    border-top: 1px solid #e5e7eb;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .review-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .reviewer-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .reviewer-name {
+    font-weight: 600;
+  }
+  .reviewer-position {
+    font-size: 0.8rem;
+    color: #4b5563;
+  }
+  .stars {
+    color: #fbbf24;
+  }
+  .review-content {
+    flex: 1;
+    margin-bottom: 12px;
+  }
+  .review-content p {
+    color: #4b5563;
+    font-style: italic;
+  }
+  .review-date {
+    font-size: 0.75rem;
+    color: #9ca3af;
+  }
+  .resources-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .resources-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .resource-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .resource-card:hover {
+    transform: translateY(-2px);
+    border-color: #000000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  .resource-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .resource-card p {
+    color: #4b5563;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .resource-link {
+    color: #000000;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 2px;
+    align-self: flex-start;
+  }
+  .breadcrumb { 
+    padding: 12px 0; 
+    background: #f9fafb; 
+    border-bottom: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  .breadcrumb ol { 
+    display: flex; 
+    list-style: none; 
+    gap: 8px; 
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+  .breadcrumb a { 
+    color: #000000; 
+    text-decoration: none; 
+    border-bottom: 1px solid transparent;
+  }
+  .breadcrumb a:hover { 
+    border-bottom-color: #000000; 
+  }
+  .breadcrumb-current {
+    color: #4b5563;
+  }
+  .breadcrumb-separator {
+    color: #9ca3af;
+  }
+  .seo-hidden {
+    display: none;
+  }
+  .text-small { font-size: 0.85rem; color: #4b5563; }
+  .text-success { color: #10b981; font-weight: 600; }
+  .text-danger { color: #ef4444; font-weight: 600; }
+  .center-text { text-align: center; }
+`;
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
@@ -160,178 +1013,6 @@ const IMPACT_METRICS = [
   'contributing to', 'supporting', 'enabling', 'facilitating'
 ];
 
-// Schema data with comprehensive SEO optimization
-const SCHEMA_DATA = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://www.professionalresumefree.com/free-resume-bullet-point-generator/#webpage",
-      "url": "https://www.professionalresumefree.com/free-resume-bullet-point-generator",
-      "name": "Free Resume Bullet Point Generator - CAR Format & Impact-Focused Templates 2026",
-      "description": "AI-powered resume bullet point generator with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates.",
-      "datePublished": "2024-01-01",
-      "dateModified": new Date().toISOString(),
-      "inLanguage": "en-US",
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://www.professionalresumefree.com/#website",
-        "url": "https://www.professionalresumefree.com",
-        "name": "Professional Resume Free",
-        "description": "Free online resume tools for job seekers",
-        "publisher": {
-          "@type": "Organization",
-          "@id": "https://www.professionalresumefree.com/#organization",
-          "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png",
-            "width": 512,
-            "height": 512
-          },
-          "sameAs": [
-            "https://twitter.com/ProResumeFree",
-            "https://www.linkedin.com/company/professional-resume-free",
-            "https://www.facebook.com/ProfessionalResumeFree"
-          ]
-        }
-      },
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.professionalresumefree.com"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Resume Tools",
-            "item": "https://www.professionalresumefree.com/resume-tools"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Bullet Point Generator",
-            "item": "https://www.professionalresumefree.com/free-resume-bullet-point-generator"
-          }
-        ]
-      },
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://www.professionalresumefree.com/images/bullet-point-generator-og.jpg",
-        "width": 1200,
-        "height": 630
-      },
-      "mainEntity": {
-        "@type": "SoftwareApplication",
-        "name": "Free Resume Bullet Point Generator - CAR Format & Impact-Focused",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": 4.8,
-          "ratingCount": 4231,
-          "bestRating": 5,
-          "worstRating": 1
-        },
-        "featureList": [
-          "CAR Methodology Templates",
-          "Industry-Specific Content",
-          "Quantifiable Achievement Generator",
-          "ATS-Optimized Output",
-          "Privacy-First Processing",
-          "One-Click Export",
-          "Real-Time Customization"
-        ],
-        "softwareVersion": "2026.1.0",
-        "applicationSuite": "Career Development Tools",
-        "countriesSupported": "Global"
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": FAQS.map((faq, index) => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer,
-          "datePublished": new Date(Date.now() - (index * 7 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0],
-          "author": {
-            "@type": "Person",
-            "name": "Career Development Team"
-          }
-        }
-      }))
-    },
-    {
-      "@type": "HowTo",
-      "name": "How to Generate Powerful Resume Bullet Points Using CAR Methodology",
-      "description": "Step-by-step guide to create impact-focused bullet points with quantifiable achievements",
-      "totalTime": "PT5M",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "USD",
-        "value": "0"
-      },
-      "step": HOW_TO_STEPS.map((step, index) => ({
-        "@type": "HowToStep",
-        "position": index + 1,
-        "name": step.name,
-        "text": step.text,
-        "url": `https://www.professionalresumefree.com/free-resume-bullet-point-generator#step-${index + 1}`
-      }))
-    },
-    {
-      "@type": "ItemList",
-      "itemListElement": REVIEWS.map((review, index) => ({
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": review.rating,
-          "bestRating": 5
-        },
-        "author": {
-          "@type": "Person",
-          "name": review.name
-        },
-        "reviewBody": review.review,
-        "datePublished": review.date,
-        "publisher": {
-          "@type": "Organization",
-          "name": "Professional Resume Free"
-        },
-        "itemReviewed": {
-          "@type": "SoftwareApplication",
-          "name": "Free Resume Bullet Point Generator",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "Any",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        }
-      }))
-    },
-    {
-      "@type": "SpeakableSpecification",
-      "cssSelector": [".heroTitle", ".heroDescription", ".faqItem h3"]
-    }
-  ]
-};
-
 function generateBulletPoints(formData) {
   const {
     jobTitle,
@@ -484,26 +1165,29 @@ function BulletPointDisplay({ bulletPoints, recommendations, industry }) {
   }, [bulletPoints]);
 
   return (
-    <div className={styles.card}>
-      <div className={styles.cardHeader}>
-        <h2 className={styles.cardTitle}>Generated Professional Resume Bullet Points</h2>
-        <div className={styles.stats}>
-          <span className={styles.statItem}><strong>{bulletPoints.length}</strong> points</span>
-          <span className={styles.statItem}><strong>{industry}</strong></span>
-          <span className={styles.statItem}><strong>{recommendations.strengthScore}%</strong> strong impact</span>
+    <div className="card">
+      <div className="card-header">
+        <h2 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>Generated Professional Resume Bullet Points</h2>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '16px' }}>
+          <span className="text-small"><strong>{bulletPoints.length}</strong> points</span>
+          <span className="text-small"><strong>{industry}</strong></span>
+          <span className="text-small"><strong>{recommendations.strengthScore}%</strong> strong impact</span>
         </div>
       </div>
-      <div className={styles.bulletPointsContainer}>
+      <div className="bullet-points-container">
         {bulletPoints.map((point, index) => (
           <div
             key={index}
-            className={`${styles.bulletPointCard} ${selectedPoints.includes(index) ? styles.selected : ''}`}
+            className={`bullet-point-card ${selectedPoints.includes(index) ? 'selected' : ''}`}
             onClick={() => handleSelectPoint(index)}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => e.key === 'Enter' && handleSelectPoint(index)}
           >
-            <div className={styles.bulletPointHeader}>
-              <div className={styles.bulletPointStrength}>
-                <div className={`${styles.strengthDot} ${styles[point.strength]}`}></div>
-                <span className={styles.strengthLabel}>
+            <div className="bullet-point-header">
+              <div className="bullet-point-strength">
+                <div className={`strength-dot ${point.strength}`}></div>
+                <span className="strength-label">
                   {point.strength === 'strong' ? 'Strong Impact (Quantified)' :
                    point.strength === 'good' ? 'Good (Needs Numbers)' : 'Basic (Add Metrics)'}
                 </span>
@@ -513,56 +1197,56 @@ function BulletPointDisplay({ bulletPoints, recommendations, industry }) {
                   e.stopPropagation();
                   handleCopyPoint(point.text, index);
                 }}
-                className={styles.copyButton}
+                className="copy-button"
                 aria-label={`Copy bullet point: ${point.text}`}
               >
                 {copiedIndex === index ? '✓ Copied' : 'Copy'}
               </button>
             </div>
-            <p className={styles.bulletPointText}>• {point.text}</p>
-            <div className={styles.bulletPointSource}>
-              <span className={styles.sourceBadge}>{point.source}</span>
-              {point.source === 'achievement' && <span className={styles.achievementBadge}>Key Achievement</span>}
+            <p className="bullet-point-text">• {point.text}</p>
+            <div className="bullet-point-source">
+              <span className="source-badge">{point.source}</span>
+              {point.source === 'achievement' && <span className="achievement-badge">Key Achievement</span>}
             </div>
           </div>
         ))}
       </div>
-      <div className={styles.actionButtons}>
+      <div className="action-buttons">
         <button
           onClick={handleCopySelected}
           disabled={selectedPoints.length === 0}
-          className={`${styles.button} ${styles.secondaryButton}`}
+          className="btn-outline"
           aria-label={`Copy ${selectedPoints.length} selected bullet points`}
         >
           Copy Selected ({selectedPoints.length})
         </button>
         <button 
           onClick={handleDownloadAll} 
-          className={`${styles.button} ${styles.secondaryButton}`}
+          className="btn-outline"
           aria-label="Download all bullet points as text file"
         >
           Download All Points
         </button>
         <button 
           onClick={() => window.print()} 
-          className={`${styles.button} ${styles.secondaryButton}`}
+          className="btn-outline"
           aria-label="Print bullet points"
         >
           Print
         </button>
       </div>
-      <div className={styles.recommendations}>
-        <h3 className={styles.recommendationsTitle}>Optimization Recommendations for ATS Success</h3>
-        <div className={styles.recommendationsGrid}>
-          <div className={styles.recommendationCard}>
+      <div className="recommendations">
+        <h3 className="recommendations-title">Optimization Recommendations for ATS Success</h3>
+        <div className="recommendations-grid">
+          <div className="recommendation-card">
             <h4>Add Quantifiable Metrics</h4>
             <p>{recommendations.addNumbers} bullet points need specific numbers or percentages. ATS systems prioritize quantifiable achievements.</p>
           </div>
-          <div className={styles.recommendationCard}>
+          <div className="recommendation-card">
             <h4>Include Industry-Specific Skills</h4>
             <p>Add {Math.max(0, 4 - recommendations.addSkills)} more technical skills or tools relevant to your target industry.</p>
           </div>
-          <div className={styles.recommendationCard}>
+          <div className="recommendation-card">
             <h4>Use Stronger Action Verbs</h4>
             <p>Current strength score: {recommendations.strengthScore}% (aim for 80%+). Strong verbs increase ATS matching scores.</p>
           </div>
@@ -574,27 +1258,27 @@ function BulletPointDisplay({ bulletPoints, recommendations, industry }) {
 
 function IndustrySelector({ selectedIndustry, onIndustryChange }) {
   return (
-    <div className={styles.card}>
-      <h3 className={styles.cardSubtitle}>Select Your Industry for Targeted Content</h3>
-      <p className={styles.industryDescription}>Choose your industry to generate relevant bullet points with appropriate metrics and terminology.</p>
-      <div className={styles.industryGrid}>
+    <div className="card">
+      <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>Select Your Industry for Targeted Content</h3>
+      <p className="helper-text" style={{ marginBottom: '20px' }}>Choose your industry to generate relevant bullet points with appropriate metrics and terminology.</p>
+      <div className="industry-grid">
         {INDUSTRY_TEMPLATES.map(industry => (
           <div
             key={industry.id}
-            className={`${styles.industryCard} ${selectedIndustry === industry.id ? styles.selected : ''}`}
+            className={`industry-card ${selectedIndustry === industry.id ? 'selected' : ''}`}
             onClick={() => onIndustryChange(industry.id)}
             role="button"
             tabIndex={0}
             onKeyPress={(e) => e.key === 'Enter' && onIndustryChange(industry.id)}
             aria-label={`Select ${industry.name} industry template`}
           >
-            <h4 className={styles.industryName}>{industry.name}</h4>
-            <div className={styles.industryVerbs}>
+            <h4 className="industry-name">{industry.name}</h4>
+            <div className="industry-verbs">
               {industry.verbs.slice(0, 3).map((verb, idx) => (
-                <span key={idx} className={styles.verbTag}>{verb}</span>
+                <span key={idx} className="verb-tag">{verb}</span>
               ))}
             </div>
-            <p className={styles.industryHint}>Click to select</p>
+            <p className="industry-hint">Click to select</p>
           </div>
         ))}
       </div>
@@ -604,11 +1288,7 @@ function IndustrySelector({ selectedIndustry, onIndustryChange }) {
 
 export default function ResumeBulletPointGenerator({ 
   seoData,
-  buildTimestamp,
-  lastUpdated,
-  reviews,
-  faqs,
-  howToSteps 
+  buildTimestamp
 }) {
   const [formData, setFormData] = useState({
     jobTitle: '',
@@ -726,210 +1406,180 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
   const metaDescription = `Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${CURRENT_YEAR}.`;
   const pageTitle = `Free Resume Bullet Point Generator - CAR Format & Impact-Focused Templates ${CURRENT_YEAR}`;
 
+  // Schema data
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/free-resume-bullet-point-generator",
+        "url": "https://www.professionalresumefree.com/free-resume-bullet-point-generator",
+        "name": pageTitle,
+        "description": metaDescription,
+        "datePublished": "2024-01-01",
+        "dateModified": seoData?.lastModifiedDate || new Date().toISOString(),
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Free Resume Bullet Point Generator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": 4.8,
+          "ratingCount": 4231
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": FAQS.map(faq => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      }
+    ]
+  };
+
   return (
     <>
       <Head>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
         {/* Primary Meta Tags */}
         <title>{pageTitle}</title>
-        <meta name="title" content={pageTitle} />
         <meta name="description" content={metaDescription} />
         <meta name="keywords" content="resume bullet point generator, CAR method resume, resume achievements, quantifiable bullet points, resume writing, career tools, free resume builder, ATS resume, professional resume, job search tools 2026" />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        
-        {/* Content Freshness Signals */}
-        <meta name="date" content={seoData?.currentDate || new Date().toISOString().split('T')[0]} />
         <meta name="last-modified" content={seoData?.lastModifiedDate || new Date().toISOString()} />
-        <meta name="revisit-after" content="2 days" />
         
-        {/* Canonical & Sitemap */}
+        {/* GEO Optimization Tags */}
+        <meta name="chatgpt-fts:title" content={pageTitle} />
+        <meta name="chatgpt-fts:description" content="Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free." />
+        <meta name="chatgpt-fts:keywords" content="resume bullet points, CAR method, ATS resume, achievement statements" />
+        <meta name="chatgpt-fts:last-updated" content={seoData?.currentDate || new Date().toISOString().split('T')[0]} />
+        
+        {/* Canonical URL - Single Tag */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" />
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        
-        {/* Internationalization */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" hreflang="x-default" />
         
         {/* Open Graph */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
-        <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-bullet-point-generator" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/bullet-point-generator-og.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free Resume Bullet Point Generator - CAR Format Templates" />
+        <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={seoData?.lastModifiedDate || new Date().toISOString()} />
         
-        {/* Twitter */}
+        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-bullet-point-generator.jpg" />
-        <meta name="twitter:image:alt" content="Resume Bullet Point Generator with CAR Methodology" />
-        <meta name="twitter:site" content="@ProResumeFree" />
-        <meta name="twitter:creator" content="@ProResumeFree" />
-        
-        {/* Technical SEO */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* Performance Optimization */}
-        <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          key="structured-data-bullet-generator"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(SCHEMA_DATA)
-          }}
-        />
-        
-        {/* Additional Schema for Page */}
-        <script
-          type="application/ld+json"
-          key="additional-structured-data"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://www.professionalresumefree.com"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Resume Tools",
-                  "item": "https://www.professionalresumefree.com/resume-tools"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": "Bullet Point Generator",
-                  "item": "https://www.professionalresumefree.com/free-resume-bullet-point-generator"
-                }
-              ]
-            })
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </Head>
 
-      {/* Hidden SEO elements */}
-      <div className={styles.seoHidden} aria-hidden="true">
-        <meta name="build-timestamp" content={buildTimestamp} />
-        <meta name="content-freshness" content={seoData?.currentDate || new Date().toISOString().split('T')[0]} />
-        <meta name="generator-usage-count" content={viewCount} />
+      {/* Hidden SEO Elements */}
+      <div style={{display: 'none'}} aria-hidden="true">
+        <span itemProp="tool-type">Bullet Point Generator</span>
+        <span itemProp="year">{CURRENT_YEAR}</span>
+        <span itemProp="last-updated">{seoData?.currentDate || new Date().toISOString().split('T')[0]}</span>
+        <span itemProp="build-timestamp">{buildTimestamp}</span>
       </div>
 
-      {/* Breadcrumb Navigation */}
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-        <ol>
-          <li>
-            <Link href="/" className={styles.breadcrumbLink}>
-              <span className={styles.breadcrumbText}>Home</span>
-            </Link>
-          </li>
-          <li className={styles.breadcrumbSeparator}>›</li>
-          <li>
-            <Link href="/resume-tools" className={styles.breadcrumbLink}>
-              <span className={styles.breadcrumbText}>Resume Tools</span>
-            </Link>
-          </li>
-          <li className={styles.breadcrumbSeparator}>›</li>
-          <li>
-            <span className={styles.breadcrumbCurrent}>Bullet Point Generator</span>
-          </li>
-        </ol>
-      </nav>
+      <div className="container">
+        {/* Breadcrumb Navigation */}
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><Link href="/">Home</Link></li>
+            <li className="breadcrumb-separator">›</li>
+            <li><Link href="/resume-tools">Resume Tools</Link></li>
+            <li className="breadcrumb-separator">›</li>
+            <li className="breadcrumb-current">Bullet Point Generator</li>
+          </ol>
+        </nav>
 
-      <div className={styles.container} lang="en-US">
-        <header className={styles.header} role="banner">
-          <h1 className={styles.heroTitle}>{pageTitle}</h1>
-          <p className={styles.heroDescription}>
+        {/* Header Section */}
+        <header className="header">
+          <h1>{pageTitle}</h1>
+          <p>
             Transform vague responsibilities into powerful, quantifiable achievements that pass ATS screening. Our AI-powered generator uses CAR methodology (Context-Action-Result) with industry-specific templates for maximum impact in {CURRENT_YEAR}.
           </p>
 
           {/* Trust Signals */}
-          <div className={styles.trustSignals}>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>4.8/5 Rating (4231+ Reviews)</span>
+          <div className="trust-signals">
+            <div className="trust-signal">
+              <span className="signal-icon">✓</span>
+              <span>4.8/5 Rating (4,231+ Reviews)</span>
             </div>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>100% Free • No Sign Up</span>
+            <div className="trust-signal">
+              <span className="signal-icon">✓</span>
+              <span>100% Free • No Sign Up</span>
             </div>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>Privacy-First • Browser-Based</span>
+            <div className="trust-signal">
+              <span className="signal-icon">✓</span>
+              <span>Privacy-First • Browser-Based</span>
             </div>
-            <div className={styles.trustBadge}>
-              <span className={styles.badgeIcon}>✓</span>
-              <span className={styles.badgeText}>ATS-Optimized Output</span>
+            <div className="trust-signal">
+              <span className="signal-icon">✓</span>
+              <span>ATS-Optimized Output</span>
             </div>
           </div>
 
           {/* Progress Steps */}
-          <div className={styles.progressSteps}>
-            <div className={`${styles.step} ${currentStep >= 1 ? styles.stepActive : ''}`}>
-              <div className={styles.stepNumber}>1</div>
-              <div className={styles.stepLabel}>Role Details</div>
+          <div className="progress-steps">
+            <div className={`step ${currentStep >= 1 ? 'active' : ''}`}>
+              <div className="step-number">1</div>
+              <div className="step-label">Role Details</div>
             </div>
-            <div className={styles.stepLine}></div>
-            <div className={`${styles.step} ${currentStep >= 2 ? styles.stepActive : ''}`}>
-              <div className={styles.stepNumber}>2</div>
-              <div className={styles.stepLabel}>Skills & Achievements</div>
+            <div className="step-line"></div>
+            <div className={`step ${currentStep >= 2 ? 'active' : ''}`}>
+              <div className="step-number">2</div>
+              <div className="step-label">Skills & Achievements</div>
             </div>
-            <div className={styles.stepLine}></div>
-            <div className={`${styles.step} ${currentStep >= 3 ? styles.stepActive : ''}`}>
-              <div className={styles.stepNumber}>3</div>
-              <div className={styles.stepLabel}>Generate & Customize</div>
+            <div className="step-line"></div>
+            <div className={`step ${currentStep >= 3 ? 'active' : ''}`}>
+              <div className="step-number">3</div>
+              <div className="step-label">Generate & Customize</div>
             </div>
           </div>
         </header>
 
-        <main className={styles.mainContent} role="main">
+        <main>
           {!generatedPoints && (
-            <div className={styles.formSection}>
+            <div className="form-section">
               {/* Step 1: Role Details */}
               {(currentStep === 1 || currentStep === 2) && (
-                <div className={styles.card}>
-                  <div className={styles.cardHeader}>
-                    <h2 className={styles.cardTitle}>
+                <div className="card">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '20px' }}>
+                    <h2 style={{ fontSize: '1.2rem' }}>
                       Step {currentStep}: {currentStep === 1 ? 'Role & Industry Information' : 'Skills, Achievements & Customization'}
                     </h2>
-                    <div className={styles.buttonGroup}>
+                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                       <button 
                         onClick={handleUseSample} 
-                        className={`${styles.button} ${styles.secondaryButton}`}
+                        className="btn-outline"
                         aria-label="Load sample data to see how the generator works"
                       >
                         Load Sample Data
                       </button>
                       <button 
                         onClick={handleClear} 
-                        className={`${styles.button} ${styles.secondaryButton}`}
+                        className="btn-outline"
                         aria-label="Clear all form fields"
                       >
                         Clear All Fields
@@ -937,32 +1587,32 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
                     </div>
                   </div>
                   
-                  <div className={styles.formGrid}>
+                  <div className="form-grid">
                     {currentStep === 1 ? (
                       <>
-                        <div className={styles.formGroup}>
-                          <label htmlFor="jobTitle" className={styles.label}>
-                            Job Title <span className={styles.required}>*</span>
+                        <div className="form-group">
+                          <label htmlFor="jobTitle" className="label">
+                            Job Title <span className="required">*</span>
                           </label>
                           <input
                             id="jobTitle"
                             type="text"
-                            className={styles.input}
+                            className="input"
                             value={formData.jobTitle}
                             onChange={(e) => handleInputChange('jobTitle', e.target.value)}
-                            placeholder="e.g., Senior Marketing Manager, Software Engineer, Project Coordinator"
+                            placeholder="e.g., Senior Marketing Manager, Software Engineer"
                             aria-required="true"
                           />
-                          <p className={styles.helperText}>Enter your current or target job title</p>
+                          <p className="helper-text">Enter your current or target job title</p>
                         </div>
                         
-                        <div className={styles.formGroup}>
-                          <label htmlFor="companySize" className={styles.label}>
+                        <div className="form-group">
+                          <label htmlFor="companySize" className="label">
                             Company Size
                           </label>
                           <select
                             id="companySize"
-                            className={styles.select}
+                            className="select"
                             value={formData.companySize}
                             onChange={(e) => handleInputChange('companySize', e.target.value)}
                             aria-label="Select company size"
@@ -974,77 +1624,73 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
                           </select>
                         </div>
                         
-                        <div className={styles.formGroupFull}>
-                          <label htmlFor="responsibilities" className={styles.label}>
-                            Key Responsibilities <span className={styles.required}>*</span>
+                        <div className="form-group-full">
+                          <label htmlFor="responsibilities" className="label">
+                            Key Responsibilities <span className="required">*</span>
                           </label>
                           <textarea
                             id="responsibilities"
-                            className={styles.textarea}
+                            className="textarea"
                             value={formData.responsibilities}
                             onChange={(e) => handleInputChange('responsibilities', e.target.value)}
-                            placeholder="Describe what you did in this role. Enter one responsibility per line:
+                            placeholder={`Describe what you did in this role. Enter one responsibility per line:
 
 - Manage social media accounts and engagement
 - Analyze campaign performance using Google Analytics
 - Lead team meetings and coordinate projects
-- Create marketing materials and content
-- Report on KPIs and ROI metrics
-- Develop strategic marketing plans"
-                            rows={8}
+- Create marketing materials and content`}
+                            rows={6}
                             aria-required="true"
                           />
-                          <p className={styles.helperText}>Enter 3-5 main responsibilities (one per line)</p>
+                          <p className="helper-text">Enter 3-5 main responsibilities (one per line)</p>
                         </div>
                       </>
                     ) : (
                       <>
-                        <div className={styles.formGroupFull}>
-                          <label htmlFor="skillsTools" className={styles.label}>
+                        <div className="form-group-full">
+                          <label htmlFor="skillsTools" className="label">
                             Skills & Tools Used (comma separated)
                           </label>
                           <textarea
                             id="skillsTools"
-                            className={styles.textarea}
+                            className="textarea"
                             value={formData.skillsTools}
                             onChange={(e) => handleInputChange('skillsTools', e.target.value)}
-                            placeholder="e.g., Google Analytics, SEO, Content Strategy, Social Media Marketing, Data Analysis, Project Management, CRM Software, Python, JavaScript, Agile Methodologies"
+                            placeholder="e.g., Google Analytics, SEO, Content Strategy, Social Media Marketing, Data Analysis, Python, JavaScript"
                             rows={3}
                             aria-label="List your skills and tools"
                           />
-                          <p className={styles.helperText}>Include technical skills, software, and methodologies</p>
+                          <p className="helper-text">Include technical skills, software, and methodologies</p>
                         </div>
                         
-                        <div className={styles.formGroupFull}>
-                          <label htmlFor="achievements" className={styles.label}>
+                        <div className="form-group-full">
+                          <label htmlFor="achievements" className="label">
                             Achievements & Results (one per line)
                           </label>
                           <textarea
                             id="achievements"
-                            className={styles.textarea}
+                            className="textarea"
                             value={formData.achievements}
                             onChange={(e) => handleInputChange('achievements', e.target.value)}
-                            placeholder="List your accomplishments, even without specific numbers yet:
+                            placeholder={`List your accomplishments, even without specific numbers yet:
 
 - Increased website traffic and user engagement
 - Improved conversion rates through optimization
 - Reduced operational costs and improved efficiency
-- Launched successful new product campaigns
-- Grew social media following and brand awareness
-- Implemented processes saving time and resources"
-                            rows={6}
+- Launched successful new product campaigns`}
+                            rows={5}
                             aria-label="List your achievements and results"
                           />
-                          <p className={styles.helperText}>We'll help add quantifiable metrics and impact statements</p>
+                          <p className="helper-text">We'll help add quantifiable metrics and impact statements</p>
                         </div>
                         
-                        <div className={styles.formGroup}>
-                          <label htmlFor="verbStyle" className={styles.label}>
-                            Action Verb Style Preference
+                        <div className="form-group">
+                          <label htmlFor="verbStyle" className="label">
+                            Action Verb Style
                           </label>
                           <select
                             id="verbStyle"
-                            className={styles.select}
+                            className="select"
                             value={formData.verbStyle}
                             onChange={(e) => handleInputChange('verbStyle', e.target.value)}
                             aria-label="Select action verb style"
@@ -1058,23 +1704,23 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
                           </select>
                         </div>
                         
-                        <div className={styles.checkboxGroup}>
-                          <label className={styles.checkboxLabel}>
+                        <div className="checkbox-group">
+                          <label className="checkbox-label">
                             <input
                               type="checkbox"
                               checked={formData.includeNumbers}
                               onChange={(e) => handleInputChange('includeNumbers', e.target.checked)}
-                              className={styles.checkbox}
+                              className="checkbox"
                               aria-label="Include quantifiable numbers in bullet points"
                             />
                             Include quantifiable numbers & percentages
                           </label>
-                          <label className={styles.checkboxLabel}>
+                          <label className="checkbox-label">
                             <input
                               type="checkbox"
                               checked={formData.includeMetrics}
                               onChange={(e) => handleInputChange('includeMetrics', e.target.checked)}
-                              className={styles.checkbox}
+                              className="checkbox"
                               aria-label="Add impact metrics to bullet points"
                             />
                             Add impact metrics & measurable results
@@ -1084,11 +1730,11 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
                     )}
                   </div>
                   
-                  <div className={styles.stepNavigation}>
+                  <div className="step-navigation">
                     {currentStep === 2 && (
                       <button 
                         onClick={prevStep} 
-                        className={`${styles.button} ${styles.secondaryButton}`}
+                        className="btn-outline"
                         aria-label="Go back to previous step"
                       >
                         ← Back to Role Details
@@ -1097,7 +1743,7 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
                     {currentStep === 1 ? (
                       <button 
                         onClick={nextStep} 
-                        className={styles.button}
+                        className="button"
                         disabled={!formData.jobTitle.trim()}
                         aria-label="Continue to skills and achievements step"
                       >
@@ -1106,14 +1752,14 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
                     ) : (
                       <button 
                         onClick={handleGenerate} 
-                        className={styles.button} 
+                        className="button" 
                         disabled={isGenerating}
                         aria-label="Generate professional bullet points"
                       >
                         {isGenerating ? (
                           <>
-                            <span>Generating Professional Bullet Points...</span>
-                            <span className={styles.spinner}>⟳</span>
+                            <span>Generating...</span>
+                            <span className="loading-spinner" style={{ width: '20px', height: '20px', margin: 0 }}></span>
                           </>
                         ) : (
                           'Generate Professional Bullet Points'
@@ -1135,46 +1781,42 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
           )}
 
           {isGenerating ? (
-            <div className={styles.loading}>
-              <div className={styles.loadingSpinner}></div>
-              <p className={styles.loadingText}>Generating powerful, ATS-optimized bullet points...</p>
-              <p className={styles.loadingSubtext}>Using CAR methodology and industry-specific templates</p>
+            <div className="loading">
+              <div className="loading-spinner"></div>
+              <p className="loading-text">Generating powerful, ATS-optimized bullet points...</p>
+              <p className="loading-subtext">Using CAR methodology and industry-specific templates</p>
             </div>
           ) : generatedPoints ? (
             <>
               <BulletPointDisplay {...generatedPoints} />
               
-              <div className={styles.card}>
-                <h2 className={styles.cardTitle}>How to Use These Professional Bullet Points</h2>
-                <div className={styles.usageTips}>
-                  <div className={styles.usageTip}>
-                    <h3 className={styles.usageTipTitle}>1. Customize with Your Real Numbers</h3>
-                    <p>Replace generic metrics with your actual achievements. Instead of "increased by 30%", use specific numbers like "increased conversion rate from 2.1% to 3.4%" or "generated $250,000 in additional revenue."</p>
+              <div className="card">
+                <h2 style={{ fontSize: '1.2rem', marginBottom: '20px' }}>How to Use These Professional Bullet Points</h2>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                  <div>
+                    <h3 style={{ fontSize: '1rem', marginBottom: '8px' }}>1. Customize with Your Real Numbers</h3>
+                    <p className="helper-text">Replace generic metrics with your actual achievements. Instead of "increased by 30%", use specific numbers like "increased conversion rate from 2.1% to 3.4%".</p>
                   </div>
-                  <div className={styles.usageTip}>
-                    <h3 className={styles.usageTipTitle}>2. Prioritize by Relevance to Job Description</h3>
-                    <p>Place the most relevant points first for each job application. Match bullet points to keywords in the job description to improve ATS matching scores. Tailor language to the specific company and role.</p>
+                  <div>
+                    <h3 style={{ fontSize: '1rem', marginBottom: '8px' }}>2. Prioritize by Relevance</h3>
+                    <p className="helper-text">Place the most relevant points first for each job application. Match bullet points to keywords in the job description.</p>
                   </div>
-                  <div className={styles.usageTip}>
-                    <h3 className={styles.usageTipTitle}>3. Apply CAR Format Consistently</h3>
-                    <p>Ensure each point has Context (the situation), Action (what you specifically did), and Result (quantifiable outcome). This format is proven to be most effective for both ATS systems and human readers.</p>
-                  </div>
-                  <div className={styles.usageTip}>
-                    <h3 className={styles.usageTipTitle}>4. Optimize for ATS Systems</h3>
-                    <p>Use industry-specific keywords, include numbers and percentages, start with strong action verbs, and keep bullet points concise (1-2 lines maximum). Avoid graphics, tables, or unusual formatting.</p>
+                  <div>
+                    <h3 style={{ fontSize: '1rem', marginBottom: '8px' }}>3. Apply CAR Format</h3>
+                    <p className="helper-text">Ensure each point has Context, Action, and Result. This format is proven most effective for both ATS and human readers.</p>
                   </div>
                 </div>
-                <div className={styles.buttonGroup}>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
                   <button 
                     onClick={handleClear} 
-                    className={`${styles.button} ${styles.secondaryButton}`}
+                    className="btn-outline"
                     aria-label="Generate another set of bullet points"
                   >
                     Generate Another Set
                   </button>
                   <Link 
                     href="/resume-templates" 
-                    className={`${styles.button} ${styles.secondaryButton}`}
+                    className="btn-outline"
                     aria-label="Browse professional resume templates"
                   >
                     Browse Resume Templates
@@ -1183,19 +1825,19 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
               </div>
             </>
           ) : currentStep === 1 ? (
-            <div className={styles.card}>
-              <h2 className={`${styles.cardTitle} ${styles.centerText}`}>Transform Your Resume with Powerful, Quantifiable Bullet Points</h2>
-              <p className={`${styles.readyText} ${styles.centerText}`}>
+            <div className="card">
+              <h2 className="center-text" style={{ fontSize: '1.2rem', marginBottom: '16px' }}>Transform Your Resume with Powerful, Quantifiable Bullet Points</h2>
+              <p className="center-text helper-text" style={{ marginBottom: '20px' }}>
                 Fill in your role details above and click "Continue" to generate professional, ATS-optimized bullet points.
               </p>
-              <div className={styles.checklist}>
-                <p className={styles.checklistTitle}>What makes our bullet point generator effective:</p>
+              <div className="checklist">
+                <p className="checklist-title">What makes our bullet point generator effective:</p>
                 <ul>
                   <li><strong>CAR Methodology:</strong> Context, Action, Result structure proven for impact</li>
                   <li><strong>Quantifiable Results:</strong> Automatic inclusion of numbers, percentages, and metrics</li>
                   <li><strong>Industry-Specific Templates:</strong> Relevant content for your field</li>
                   <li><strong>ATS Optimization:</strong> Formatting and keywords that pass automated screening</li>
-                  <li><strong>Strong Action Verbs:</strong> Power words like "Led," "Increased," "Developed," "Optimized"</li>
+                  <li><strong>Strong Action Verbs:</strong> Power words like "Led," "Increased," "Developed"</li>
                   <li><strong>Privacy-First:</strong> All processing happens in your browser—no data stored</li>
                   <li><strong>Free Forever:</strong> No watermarks, no sign-ups, no hidden costs</li>
                 </ul>
@@ -1204,53 +1846,53 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
           ) : null}
 
           {/* How-to Section */}
-          <section className={styles.howToSection} aria-labelledby="how-to-title">
-            <h2 className={styles.sectionTitle} id="how-to-title">How It Works: 5-Step Professional Bullet Point Creation</h2>
-            <div className={styles.howToSteps}>
+          <section className="how-to-section">
+            <h2 className="section-title">How It Works: 5-Step Professional Bullet Point Creation</h2>
+            <div className="how-to-steps">
               {HOW_TO_STEPS.map((step, index) => (
-                <div key={index} className={styles.howToStep} id={`step-${index + 1}`}>
-                  <div className={styles.stepNumber}>{index + 1}</div>
-                  <h3 className={styles.stepTitle}>{step.name}</h3>
-                  <p className={styles.stepDescription}>{step.text}</p>
+                <div key={index} className="how-to-step">
+                  <div className="step-number">{index + 1}</div>
+                  <h3 className="step-title">{step.name}</h3>
+                  <p className="step-description">{step.text}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* CAR Methodology Explanation */}
-          <section className={styles.carSection} aria-labelledby="car-title">
-            <h2 className={styles.sectionTitle} id="car-title">The CAR Methodology: Proven Framework for Impactful Bullet Points</h2>
-            <div className={styles.carGrid}>
-              <div className={styles.carCard}>
-                <div className={styles.carLetter}>C</div>
-                <h3 className={styles.carTitle}>Context</h3>
-                <p className={styles.carDescription}>Describe the situation, challenge, or scope you faced. This sets the stage and shows the significance of your action.</p>
-                <div className={styles.carExample}>
+          <section className="car-section">
+            <h2 className="section-title">The CAR Methodology: Proven Framework for Impactful Bullet Points</h2>
+            <div className="car-grid">
+              <div className="car-card">
+                <div className="car-letter">C</div>
+                <h3 className="car-title">Context</h3>
+                <p className="car-description">Describe the situation, challenge, or scope you faced. This sets the stage and shows the significance of your action.</p>
+                <div className="car-example">
                   <strong>Example Context:</strong> "During company expansion into new markets..."
                 </div>
-                <div className={styles.carTip}>
+                <div className="car-tip">
                   <strong>Tip:</strong> Start with timeframes, situations, or challenges
                 </div>
               </div>
-              <div className={styles.carCard}>
-                <div className={styles.carLetter}>A</div>
-                <h3 className={styles.carTitle}>Action</h3>
-                <p className={styles.carDescription}>Explain what you specifically did, using strong action verbs and mentioning specific skills, tools, or methodologies.</p>
-                <div className={styles.carExample}>
+              <div className="car-card">
+                <div className="car-letter">A</div>
+                <h3 className="car-title">Action</h3>
+                <p className="car-description">Explain what you specifically did, using strong action verbs and mentioning specific skills, tools, or methodologies.</p>
+                <div className="car-example">
                   <strong>Example Action:</strong> "Led a cross-functional team of 8 to implement..."
                 </div>
-                <div className={styles.carTip}>
+                <div className="car-tip">
                   <strong>Tip:</strong> Use industry-specific verbs and mention tools used
                 </div>
               </div>
-              <div className={styles.carCard}>
-                <div className={styles.carLetter}>R</div>
-                <h3 className={styles.carTitle}>Result</h3>
-                <p className={styles.carDescription}>Quantify the outcome with specific numbers, percentages, timeframes, or measurable business impact.</p>
-                <div className={styles.carExample}>
+              <div className="car-card">
+                <div className="car-letter">R</div>
+                <h3 className="car-title">Result</h3>
+                <p className="car-description">Quantify the outcome with specific numbers, percentages, timeframes, or measurable business impact.</p>
+                <div className="car-example">
                   <strong>Example Result:</strong> "...resulting in 25% increase in efficiency and $150K annual savings"
                 </div>
-                <div className={styles.carTip}>
+                <div className="car-tip">
                   <strong>Tip:</strong> Always include numbers—they're 3x more memorable
                 </div>
               </div>
@@ -1258,32 +1900,27 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
           </section>
 
           {/* FAQ Section */}
-          <section className={styles.faqSection} aria-labelledby="faq-title">
-            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions About Resume Bullet Points</h2>
-            <div className={styles.faqList}>
+          <section className="faq-section">
+            <h2 className="section-title">Frequently Asked Questions About Resume Bullet Points</h2>
+            <div className="faq-list">
               {FAQS.map((faq, index) => (
                 <div
                   key={index}
-                  className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
+                  className={`faq-item ${activeFaq === index ? 'active' : ''}`}
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                   role="button"
                   tabIndex={0}
                   onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
                   aria-expanded={activeFaq === index}
-                  aria-controls={`faq-answer-${index}`}
                 >
-                  <div className={styles.faqQuestion}>
+                  <div className="faq-question">
                     <h3>{faq.question}</h3>
-                    <span className={styles.faqToggle} aria-hidden="true">
+                    <span className="faq-toggle" aria-hidden="true">
                       {activeFaq === index ? '−' : '+'}
                     </span>
                   </div>
                   {activeFaq === index && (
-                    <div 
-                      className={styles.faqAnswer} 
-                      id={`faq-answer-${index}`}
-                      role="region"
-                    >
+                    <div className="faq-answer">
                       <p>{faq.answer}</p>
                     </div>
                   )}
@@ -1293,27 +1930,25 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
           </section>
 
           {/* Reviews Section */}
-          <section className={styles.reviewsSection} aria-labelledby="reviews-title">
-            <h2 className={styles.sectionTitle} id="reviews-title">What Professionals Say About Our Bullet Point Generator</h2>
-            <div className={styles.reviewsGrid}>
+          <section className="reviews-section">
+            <h2 className="section-title">What Professionals Say About Our Bullet Point Generator</h2>
+            <div className="reviews-grid">
               {REVIEWS.map((review, index) => (
-                <div key={index} className={styles.reviewCard}>
-                  <div className={styles.reviewHeader}>
-                    <div className={styles.reviewerInfo}>
-                      <strong className={styles.reviewerName}>{review.name}</strong>
-                      <span className={styles.reviewerPosition}>{review.position}</span>
+                <div key={index} className="review-card">
+                  <div className="review-header">
+                    <div className="reviewer-info">
+                      <strong className="reviewer-name">{review.name}</strong>
+                      <span className="reviewer-position">{review.position}</span>
                     </div>
-                    <div className={styles.reviewRating}>
-                      <div className={styles.stars}>
-                        {'★'.repeat(review.rating)}
-                        {'☆'.repeat(5 - review.rating)}
-                      </div>
+                    <div className="stars">
+                      {'★'.repeat(review.rating)}
+                      {'☆'.repeat(5 - review.rating)}
                     </div>
                   </div>
-                  <div className={styles.reviewContent}>
+                  <div className="review-content">
                     <p>"{review.review}"</p>
                   </div>
-                  <div className={styles.reviewDate}>
+                  <div className="review-date">
                     {review.date}
                   </div>
                 </div>
@@ -1322,44 +1957,39 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
           </section>
 
           {/* Resources Section */}
-          <section className={styles.resourcesSection} aria-labelledby="resources-title">
-            <h2 className={styles.sectionTitle} id="resources-title">Additional Career Resources & Tools</h2>
-            <div className={styles.resourcesGrid}>
+          <section className="resources-section">
+            <h2 className="section-title">Additional Career Resources & Tools</h2>
+            <div className="resources-grid">
               <Link
                 href="/free-ats-resume-checker"
-                className={styles.resourceCard}
+                className="resource-card"
                 aria-label="Free ATS Resume Checker tool"
               >
                 <h3>Free ATS Resume Checker</h3>
                 <p>Analyze your resume for ATS compatibility and get optimization tips to improve your score.</p>
-                <span className={styles.resourceLink}>Try ATS Checker →</span>
+                <span className="resource-link">Try ATS Checker →</span>
               </Link>
               <Link
-                href="/cover-letter-generator"
-                className={styles.resourceCard}
+                href="/free-cover-letter-generator"
+                className="resource-card"
                 aria-label="Professional Cover Letter Generator"
               >
                 <h3>Cover Letter Generator</h3>
                 <p>Create professional, tailored cover letters for any job application in minutes.</p>
-                <span className={styles.resourceLink}>Generate Cover Letter →</span>
+                <span className="resource-link">Generate Cover Letter →</span>
               </Link>
               <Link
                 href="/resume-templates"
-                className={styles.resourceCard}
+                className="resource-card"
                 aria-label="Professional Resume Templates"
               >
                 <h3>ATS Resume Templates</h3>
                 <p>Browse professionally designed resume templates optimized for ATS systems.</p>
-                <span className={styles.resourceLink}>View Templates →</span>
+                <span className="resource-link">View Templates →</span>
               </Link>
             </div>
           </section>
-
-          
-              
         </main>
-
-        
       </div>
     </>
   );
@@ -1388,13 +2018,9 @@ export async function getStaticProps() {
   return {
     props: {
       seoData,
-      buildTimestamp,
-      lastUpdated: new Date().toISOString(),
-      reviews: REVIEWS,
-      faqs: FAQS,
-      howToSteps: HOW_TO_STEPS
+      buildTimestamp
     },
-    // Revalidate every 4 hours for fresh content
-    revalidate: 3600,
+    // Revalidate every 2 hours
+    revalidate: 7200
   };
 }
