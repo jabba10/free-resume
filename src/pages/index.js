@@ -571,7 +571,7 @@ return (
 <Head>
 <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
 {/* ===== OPTIMIZED HIGH-CTR TITLE ===== */}
-<title>{templateCount} Free ATS Resume Templates + {toolCount} Tools | No Sign-Up, Instant PDF</title>
+<title>{templateCount} Free ATS Resume Templates | No Sign-Up, Instant PDF</title>
 {/* ===== OPTIMIZED META DESCRIPTION ===== */}
 <meta name="description" content={`Bypass paywalls. Get ${templateCount} industry-specific ATS templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly—no account, no credit card. Built for job seekers tired of "free" traps.`} />
 <meta name="author" content="Professional Resume Free" />
