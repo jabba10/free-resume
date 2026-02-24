@@ -527,12 +527,12 @@ const metadata = {
   title: 'Resume for Abroad Job: Complete Expert Guide (2026) | Professional Resume Free',
   description: 'Learn how to write a resume for abroad jobs that passes ATS & impresses global recruiters. 46+ templates, visa-ready strategies, country-specific tips. Free builder included.',
   keywords: 'resume for abroad job, international resume, CV for overseas jobs, work abroad resume, global job application, ATS friendly resume international, expat resume template, visa application resume, international job search, resume for working overseas',
-  canonical: 'https://www.professionalresumefree.com/cluster-articles/resume-for-abroad-job',
+  canonical: 'https://www.professionalresumefree.com/resume-for-abroad-job',
   
   openGraph: {
     title: 'Resume for Abroad Job: Complete Expert Guide (2026)',
     description: 'Expert-backed guide to creating a resume for abroad jobs that meets international hiring standards. Includes country-specific tips, ATS strategies, and free templates.',
-    url: 'https://www.professionalresumefree.com/cluster-articles/resume-for-abroad-job',
+    url: 'https://www.professionalresumefree.com/resume-for-abroad-job',
     type: 'article',
     siteName: 'Professional Resume Free',
     locale: 'en_US',
@@ -720,7 +720,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         '@type': 'ListItem',
         position: 3,
         name: 'International Jobs',
-        item: 'https://www.professionalresumefree.com/cluster-articles/international-careers'
+        item: 'https://www.professionalresumefree.com/international-careers'
       },
       {
         '@type': 'ListItem',
@@ -825,7 +825,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
     creator: {
       '@type': 'Organization',
       name: 'Professional Resume Free Research Lab',
-      url: 'https://www.professionalresumefree.com/research'
+      url: 'https://www.professionalresumefree.com/resume-for-abroad-job'
     }
   };
 
@@ -918,9 +918,9 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <a href="https://www.professionalresumefree.com">Home</a>
           <span>/</span>
-          <a href="https://www.professionalresumefree.com/resources">Resources</a>
+          <a href="https://www.professionalresumefree.com/resume-for-abroad-job">Resume for Abroad Job</a>
           <span>/</span>
-          <a href="https://www.professionalresumefree.com/cluster-articles/international-careers">International Careers</a>
+          <a href="https://www.professionalresumefree.com/resume-for-abroad-job">International Careers</a>
           <span>/</span>
           <span>Resume for Abroad Job</span>
         </nav>
@@ -1445,7 +1445,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
               <div className="info-card">
                 <h3 className="card-title">Step 3: Download & Apply</h3>
                 <p className="paragraph-small">
-                  Export as PDF or DOCX and start applying to international positions with confidence.
+                  Export as PDF and start applying to international positions with confidence.
                 </p>
               </div>
             </div>

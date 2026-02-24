@@ -782,12 +782,12 @@ export const metadata = {
   description: 'Master government job resume creation for UPSC, SSC, State PSCs in 2026. Get official biodata formats, templates & proven strategies. Complete guide to government employment applications.',
   keywords: 'government job resume, government job biodata, UPSC resume format, SSC application form, state PSC resume, government employment application, official resume format, government job application 2026, civil services biodata, public sector resume',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://www.professionalresumefree.com/cluster-articles/resume-for-government-job',
+  canonical: 'https://www.professionalresumefree.com/resume-for-government-job',
   
   openGraph: {
     title: 'Resume for Government Job 2026: Complete Guide',
     description: 'Master government job applications with 2026 biodata formats, official templates, and proven strategies for UPSC, SSC, PSC exams. Complete guide with examples.',
-    url: 'https://www.professionalresumefree.com/cluster-articles/resume-for-government-job',
+    url: 'https://www.professionalresumefree.com/resume-for-government-job',
     siteName: 'Professional Resume Free',
     images: [
       {
@@ -878,7 +878,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         author: {
           '@type': 'Person',
           name: 'Government Recruitment Experts',
-          url: 'https://www.professionalresumefree.com/about/government-experts',
+          url: 'https://www.professionalresumefree.com/',
           jobTitle: 'Former Government Officers & Recruitment Consultants'
         },
         publisher: {
@@ -908,7 +908,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
             '@type': 'ListItem',
             position: 2,
             name: 'Guides',
-            item: 'https://www.professionalresumefree.com/guides'
+            item: 'https://www.professionalresumefree.com/resume-for-government-job'
           },
           {
             '@type': 'ListItem',
@@ -1304,7 +1304,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         <nav className="toc" style={{ marginBottom: '24px', padding: '16px' }}>
           <ol className="toc-list" style={{ gridTemplateColumns: '1fr', gap: '8px' }}>
             <li><a href="https://www.professionalresumefree.com" className="toc-link">Home</a> ›</li>
-            <li><a href="https://www.professionalresumefree.com/guides" className="toc-link">Guides</a> ›</li>
+            <li><a href="https://www.professionalresumefree.com/resume-for-government-job" className="toc-link">Guides</a> ›</li>
             <li>Government Job Resume Guide</li>
           </ol>
         </nav>
@@ -1514,7 +1514,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
                 <div className="step-number">03</div>
                 <div className="step-content">
                   <h3>Choose Correct Format</h3>
-                  <p>Select the appropriate format based on the recruiting agency. Use our <a href="https://www.professionalresumefree.com/templates/government" className="link">government-specific templates</a> or follow the prescribed format exactly. Never modify official formats.</p>
+                  <p>Select the appropriate format based on the recruiting agency. Use our <a href="/resume-templates" className="link">government-specific templates</a> or follow the prescribed format exactly. Never modify official formats.</p>
                 </div>
               </div>
               
@@ -1730,7 +1730,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         <section id="templates" className="section">
           <div className="card">
             <h2>7. Official Templates & Formats for Government Jobs</h2>
-            <p>Access our collection of <a href="https://www.professionalresumefree.com/templates/government" className="link">officially approved government resume templates</a> specifically designed for various government examinations and departments.</p>
+            <p>Access our collection of <a href="/resume-templates" className="link">officially approved government resume templates</a> specifically designed for various government examinations and departments.</p>
             
             <div className="template-grid">
               {data.templates.map((template, index) => (
@@ -1757,7 +1757,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
               {data.longTailKeywords.slice(0, 4).map((keyword, i) => (
                 <div key={i} className="format-card">
                   <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                  <a href="https://www.professionalresumefree.com/government-resource-library" className="link">
+                  <a href="/complete-resume-resource-library" className="link">
                     Find answer in our resource library →
                   </a>
                 </div>
@@ -1767,7 +1767,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
               {data.longTailKeywords.slice(4, 8).map((keyword, i) => (
                 <div key={i + 4} className="format-card">
                   <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                  <a href="https://www.professionalresumefree.com/government-resource-library" className="link">
+                  <a href="/complete-resume-resource-library" className="link">
                     Find answer in our resource library →
                   </a>
                 </div>
@@ -1811,8 +1811,8 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         <section className="section">
           <div className="cta-card">
             <h2>Ready to Create Your Government Job Resume?</h2>
-            <p>Visit <a href="https://www.professionalresumefree.com" className="cta-link">Professional Resume Free</a> for our free government resume builder with {currentYear} approved templates, official format compliance, and guidance from former government recruitment officials.</p>
-            <a href="https://www.professionalresumefree.com/build/government" className="button-primary">
+            <p>Visit <a href="/" className="cta-link">Professional Resume Free</a> for our free government resume builder with {currentYear} approved templates, official format compliance, and guidance from former government recruitment officials.</p>
+            <a href="https://www.professionalresumefree.com/resume-templates" className="button-primary">
               Build Your {currentYear} Government Resume Now
             </a>
             <p className="note">Officially approved templates • Format compliance guaranteed • Expert guidance • Free to use</p>

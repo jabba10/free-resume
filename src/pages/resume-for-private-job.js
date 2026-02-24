@@ -789,13 +789,13 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         '@type': 'ListItem',
         position: 2,
         name: 'Career Resources',
-        item: 'https://www.professionalresumefree.com/resources'
+        item: 'https://www.professionalresumefree.com/resume-for-private-job'
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: 'Resume Guides',
-        item: 'https://www.professionalresumefree.com/cluster-articles/resume-guides'
+        item: 'https://www.professionalresumefree.com/resume-for-private-job'
       },
       {
         '@type': 'ListItem',
@@ -900,7 +900,7 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
     creator: {
       '@type': 'Organization',
       name: 'Professional Resume Free Research Lab',
-      url: 'https://www.professionalresumefree.com/research'
+      url: 'https://www.professionalresumefree.com/resume-for-private-job'
     }
   };
 
@@ -986,9 +986,9 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <a href="https://www.professionalresumefree.com">Home</a>
           <span>/</span>
-          <a href="https://www.professionalresumefree.com/resources">Resources</a>
+          <a href="https://www.professionalresumefree.com/resume-for-private-job">Resources</a>
           <span>/</span>
-          <a href="https://www.professionalresumefree.com/cluster-articles/resume-guides">Resume Guides</a>
+          <a href="https://www.professionalresumefree.com/resume-for-private-job">Resume Guides</a>
           <span>/</span>
           <span>Resume for Private Job</span>
         </nav>
@@ -1015,7 +1015,7 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
 
             <div className="cta-row">
               <a 
-                href="https://www.professionalresumefree.com" 
+                href="/resume-templates" 
                 className="primary-button"
                 aria-label="Create your private sector resume now"
               >
@@ -1472,7 +1472,7 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
                 <div key={i} className="info-card">
                   <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
                   <a 
-                    href="https://www.professionalresumefree.com/complete-resume-resource-library" 
+                    href="/complete-resume-resource-library" 
                     className="inline-link"
                   >
                     Find answer in our resource library →
@@ -1485,7 +1485,7 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
                 <div key={i + 4} className="info-card">
                   <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
                   <a 
-                    href="https://www.professionalresumefree.com/complete-resume-resource-library" 
+                    href="/complete-resume-resource-library" 
                     className="inline-link"
                   >
                     Find answer in our resource library →
@@ -1529,7 +1529,7 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
             
             <div className="text-center mt-4">
               <a 
-                href="https://www.professionalresumefree.com" 
+                href="/resume-templates" 
                 className="primary-button"
                 style={{ minWidth: '300px' }}
               >

@@ -659,12 +659,12 @@ export const metadata = {
   keywords: 'software resume example, software engineer resume, resume writing guide, ATS optimization, tech resume, software developer resume, coding resume, programmer resume, software engineering cv, tech job application',
   authors: [{ name: 'Professional Resume Experts Team' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://www.professionalresumefree.com/cluster-articles/software-resume-example-writing-guide',
+  canonical: 'https://www.professionalresumefree.com/software-resume-example-and-writing-guide',
   
   openGraph: {
     title: 'Software Resume Example & Writing Guide 2026 | Professional Resume Free',
     description: 'Complete guide with ATS-optimized software resume examples, templates, and expert writing tips for 2026. Based on analysis of 10,000+ successful tech resumes.',
-    url: 'https://www.professionalresumefree.com/cluster-articles/software-resume-example-writing-guide',
+    url: 'https://www.professionalresumefree.com/software-resume-example-and-writing-guide',
     siteName: 'Professional Resume Free',
     images: [
       {
@@ -790,25 +790,25 @@ const data = {
     {
       title: 'ATS-Friendly Software Engineer Resume Templates',
       description: 'Download professionally designed, ATS-optimized templates specifically for software roles with proper technical section layouts.',
-      href: 'https://www.professionalresumefree.com/ats-friendly-software-engineer-resume-templates',
+      href: '/ats-friendly-software-developer-and-software-engineer-resume-builder',
       cta: 'View Templates'
     },
     {
-      title: 'How to Beat the ATS: Optimization Guide for Tech Roles',
-      description: 'Advanced strategies to ensure your software resume passes through automated screening systems used by 98% of Fortune 500 companies.',
-      href: 'https://www.professionalresumefree.com/how-to-beat-ats-optimization-tech-guide',
-      cta: 'Read Guide'
+      title: 'ATS-Friendly Project Manager Resume Writing Guide',
+      description: 'Learn how to write a project manager resume that stands out and impresses recruiters.',
+      href: '/ats-friendly-project-manager-resume-builder',
+      cta: 'View Guide'
     },
     {
-      title: 'Software Developer Portfolio Building Guide',
+      title: 'ATS-Friendly Sustainability and Green Industries Resume Writing Guide',
       description: 'Complement your resume with a powerful portfolio website that showcases your projects, code samples, and technical capabilities.',
-      href: 'https://www.professionalresumefree.com/software-developer-portfolio-guide',
+      href: '/ats-friendly-sustainability-and-green-industries-resume-builder',
       cta: 'Build Portfolio'
     },
     {
-      title: 'Technical Interview Preparation Kit 2026',
+      title: 'ATS-Friendly Technology and Machine Learning Resume Writing Guide',
       description: 'Once your resume lands interviews, prepare with our comprehensive guide to coding challenges, system design, and behavioral questions.',
-      href: 'https://www.professionalresumefree.com/technical-interview-preparation-kit-2026',
+      href: '/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder',
       cta: 'Prepare Now'
     }
   ],
@@ -891,13 +891,13 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
         '@type': 'ListItem',
         position: 2,
         name: 'Career Resources',
-        item: 'https://www.professionalresumefree.com/resources'
+        item: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide'
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: 'Tech Resume Guides',
-        item: 'https://www.professionalresumefree.com/cluster-articles/tech-careers'
+        item: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide'
       },
       {
         '@type': 'ListItem',
@@ -983,7 +983,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
     creator: {
       '@type': 'Organization',
       name: 'Professional Resume Free Research Lab',
-      url: 'https://www.professionalresumefree.com/research'
+      url: 'https://www.professionalresumefree.com/'
     }
   };
 
@@ -1074,10 +1074,10 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
                 <a href="https://www.professionalresumefree.com" className="breadcrumb-link">Home</a>
               </li>
               <li className="breadcrumb-item">
-                <a href="https://www.professionalresumefree.com/resources" className="breadcrumb-link">Resources</a>
+                <a href="https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide" className="breadcrumb-link">Resources</a>
               </li>
               <li className="breadcrumb-item">
-                <a href="https://www.professionalresumefree.com/cluster-articles/tech-careers" className="breadcrumb-link">Tech Careers</a>
+                <a href="https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide" className="breadcrumb-link">Tech Careers</a>
               </li>
               <li className="breadcrumb-item" aria-current="page">
                 Software Resume Guide
@@ -1104,14 +1104,14 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
               
               <div className="cta-buttons">
                 <a 
-                  href="https://www.professionalresumefree.com/software-engineer-resume-builder" 
+                  href="/ats-friendly-software-developer-and-software-engineer-resume-builder" 
                   className="primary-cta"
                   aria-label="Build your software resume with our free builder"
                 >
                   Build Your Software Resume →
                 </a>
                 <a 
-                  href="https://www.professionalresumefree.com/resume-templates/software" 
+                  href="/resume-templates" 
                   className="secondary-cta"
                   aria-label="Browse software resume templates"
                 >
@@ -1425,7 +1425,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
                   <div key={i} className="anatomy-card">
                     <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
                     <a 
-                      href="https://www.professionalresumefree.com/software-resource-library" 
+                      href="/complete-resume-resource-library" 
                       className="breadcrumb-link"
                     >
                       Find answer in our resource library →
@@ -1438,7 +1438,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
                   <div key={i + 4} className="anatomy-card">
                     <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
                     <a 
-                      href="https://www.professionalresumefree.com/software-resource-library" 
+                      href="/complete-resume-resource-library" 
                       className="breadcrumb-link"
                     >
                       Find answer in our resource library →
@@ -1472,7 +1472,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
                 <h3 className="action-title">Ready to Implement These {currentYear} Strategies?</h3>
                 <p style={{ marginBottom: '24px' }}>Use our free resume builder with built-in ATS optimization checks, software-specific templates, and expert-guided writing assistance:</p>
                 <a 
-                  href="https://www.professionalresumefree.com/software-engineer-resume-builder" 
+                  href="/ats-friendly-software-developer-and-software-engineer-resume-builder" 
                   className="primary-cta"
                   style={{ display: 'inline-block', minWidth: '300px' }}
                   aria-label="Start building your software resume with our free tool"
@@ -1487,19 +1487,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
             </section>
 
             {/* ===== FRESHNESS INDICATOR ===== */}
-            <div style={{ 
-              marginTop: '48px', 
-              padding: '24px', 
-              borderTop: '2px solid #f3f4f6', 
-              fontSize: '0.85rem', 
-              color: '#6b7280',
-              textAlign: 'center',
-              background: '#f9fafb',
-              borderRadius: '12px'
-            }}>
-              <p><strong>Data Freshness:</strong> Last updated {displayDate} • Based on analysis of {data.stats.resumesAnalyzed} software resumes • Build: {buildTimestamp}</p>
-              <p style={{ marginTop: '8px' }}>© {currentYear} Professional Resume Free. All software resume strategies validated by tech hiring data.</p>
-            </div>
+            
 
             {/* ===== HIDDEN METADATA FOR CRAWLERS ===== */}
             <div className="hidden">

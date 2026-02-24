@@ -667,13 +667,13 @@ export const metadata = {
   title: 'Ultimate Canada PR Resume Guide 2026 | Professional Resume Free',
   description: 'Comprehensive guide to creating a winning resume for Canada Permanent Residency applications. Expert tips, formatting guidelines, and CRS score optimization strategies for Express Entry.',
   keywords: 'Canada PR resume, Express Entry resume, Canadian immigration resume, CRS score optimization, NOC code resume, professional resume Canada, permanent residency application, Canadian work experience documentation, IRCC resume requirements, Canada PR application guide 2026',
-  canonical: 'https://www.professionalresumefree.com/cluster-articles/canada-pr-resume-guide',
+  canonical: 'https://www.professionalresumefree.com/resume-for-canada-pr-guide',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   
   openGraph: {
     title: 'Ultimate Canada PR Resume Guide 2026 | Professional Resume Free',
     description: 'Master Canada PR resume writing with our comprehensive guide. Boost your CRS score with expert-approved strategies for Express Entry success.',
-    url: 'https://www.professionalresumefree.com/cluster-articles/canada-pr-resume-guide',
+    url: 'https://www.professionalresumefree.com/resume-for-canada-pr-guide',
     siteName: 'Professional Resume Free',
     images: [
       {
@@ -824,10 +824,10 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
     ],
     
     relatedLinks: [
-      { title: 'Express Entry Profile Optimization', url: '/cluster-articles/express-entry-profile-optimization' },
-      { title: 'Understanding Canadian Employment Standards', url: '/cluster-articles/canadian-employment-standards' },
-      { title: 'NOC Code Selection Strategies', url: '/cluster-articles/noc-code-selection-guide' },
-      { title: 'CRS Score Calculation Guide', url: '/cluster-articles/crs-score-calculator-guide' }
+      { title: 'Project Manager Resume Guide', url: '/project-manager-resume' },
+      { title: 'Resume for Diploma Students', url: '/resume-for-diploma-students' },
+      { title: 'Resume for Government Jobs', url: '/resume-for-government-job' },
+      { title: 'Resume for Gulf Jobs', url: '/resume-for-gulf-job' }
     ],
     
     longTailKeywords: [
@@ -885,7 +885,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
             "@type": "ListItem",
             "position": 2,
             "name": "Cluster Articles",
-            "item": "https://www.professionalresumefree.com/cluster-articles"
+            "item": "https://www.professionalresumefree.com/resume-for-canada-pr-guide"
           },
           {
             "@type": "ListItem",
@@ -1249,12 +1249,12 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
             </p>
             
             <div className="cta-box">
-              <h3 className="cta-title">Need Help with CRS Optimization?</h3>
+              <h3 className="cta-title">Need Help with our Resume Optimization?</h3>
               <p className="cta-text">
-                Our resume builder includes CRS optimization prompts and NOC code alignment tools specifically designed for Canadian immigration.
+                Our resume builder tool can help you optimize your resume.
               </p>
               <a 
-                href="https://www.professionalresumefree.com" 
+                href="/resume-templates" 
                 className="primary-button"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1344,7 +1344,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
               {data.longTailKeywords.slice(0, 4).map((keyword, i) => (
                 <div key={i} className="toc-item" style={{ marginBottom: '16px' }}>
                   <p style={{ fontWeight: '600', marginBottom: '8px', fontSize: '1rem' }}>❓ {keyword}</p>
-                  <a href="https://www.professionalresumefree.com/canada-immigration-resource-library" className="inline-link">
+                  <a href="/complete-resume-resource-library" className="inline-link">
                     Find answer in our resource library →
                   </a>
                 </div>
@@ -1354,7 +1354,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
               {data.longTailKeywords.slice(4, 8).map((keyword, i) => (
                 <div key={i + 4} className="toc-item" style={{ marginBottom: '16px' }}>
                   <p style={{ fontWeight: '600', marginBottom: '8px', fontSize: '1rem' }}>❓ {keyword}</p>
-                  <a href="https://www.professionalresumefree.com/canada-immigration-resource-library" className="inline-link">
+                  <a href="/complete-resume-resource-library" className="inline-link">
                     Find answer in our resource library →
                   </a>
                 </div>
@@ -1397,7 +1397,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
             <div className="next-steps">
               <h3 className="next-steps-title">Recommended Next Steps:</h3>
               <ol className="next-steps-list">
-                <li>Create your resume using our <a href="https://www.professionalresumefree.com" className="inline-link">free Canada-optimized resume builder</a></li>
+                <li>Create your resume using our <a href="/resume-templates" className="inline-link">free Canada-optimized resume builder</a></li>
                 {data.relatedLinks.map((link, index) => (
                   <li key={index}>Review our guide on <a href={link.url} className="inline-link">{link.title}</a></li>
                 ))}
@@ -1411,19 +1411,14 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
               </p>
               <div className="button-group">
                 <a 
-                  href="https://www.professionalresumefree.com" 
+                  href="/resume-templates" 
                   className="primary-button"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Create Your Free Canada PR Resume
                 </a>
-                <a 
-                  href="/cluster-articles" 
-                  className="secondary-button"
-                >
-                  Explore More Immigration Guides
-                </a>
+                
               </div>
             </div>
           </div>
@@ -1463,8 +1458,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
           background: '#f9fafb',
           borderRadius: '12px'
         }}>
-          <p><strong>Data Freshness:</strong> Last updated {displayDate} • Based on analysis of {data.stats.successfulApps}+ successful Canada PR applications • Build: {buildTimestamp}</p>
-          <p style={{ marginTop: '8px' }}>© {currentYear} Professional Resume Free. All Canada PR resume strategies validated by immigration data.</p>
+          
         </div>
 
         {/* ===== HIDDEN METADATA ===== */}

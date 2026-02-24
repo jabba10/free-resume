@@ -1776,8 +1776,7 @@ export default function CompleteResumeResourceLibrary({
           background: '#f9fafb',
           borderRadius: '12px'
         }}>
-          <p><strong>Data Freshness:</strong> Last updated {displayDate} • Based on analysis of 10,000+ resumes and 15 years of HR data • Build: {seoData?.buildTimestamp}</p>
-          <p style={{ marginTop: '8px' }}>© {currentYear} Professional Resume Free. All resume strategies validated by hiring data.</p>
+        
         </div>
 
         {/* ===== HIDDEN METADATA ===== */}
