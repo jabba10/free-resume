@@ -700,9 +700,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free AI & Technical Resume Builder - ATS Friendly Templates 2026 | Resume Maker for AI Engineers, Creative Technologists, ML Researchers</title>
-        <meta name="title" content="Free AI & Technical Resume Builder - ATS Friendly Templates 2026 | Resume Maker for AI Engineers, Creative Technologists, ML Researchers" />
-        <meta name="description" content="Create professional ATS-optimized AI/technical resumes for free. Land interviews 3x faster with our technical resume builder. ATS-optimized templates for AI engineers, ML researchers, data scientists, creative technologists. Trusted by 3M+ technical professionals worldwide." />
+        <title>Free AI Resume Builder 2026 | ATS Technical Templates</title>
+        <meta name="title" content="Free AI Resume Builder 2026 | ATS Technical Templates" />
+        <meta name="description" content="Create your professional AI/technical resume for free in 2026. ATS-optimized templates for AI engineers, ML researchers & data scientists. Start now—no sign-up." />
         <meta name="keywords" content="AI resume builder, technical resume templates, machine learning resume, data science resume, creative technologist resume, ATS friendly technical resume, free resume builder for AI professionals, ML engineer resume, tech portfolio, GitHub resume" />
         <meta name="author" content="Professional Technical Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -715,11 +715,11 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-US" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builde" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free AI & Technical Resume Builder - ATS Friendly Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized AI/technical resumes for free. Land interviews 3x faster with our technical resume builder. Trusted by 3M+ technical professionals." />
+        <meta property="og:title" content="Free AI Resume Builder 2026 | ATS Technical Templates" />
+        <meta property="og:description" content="Create your professional AI/technical resume for free in 2026. ATS-optimized templates for AI engineers, ML researchers & data scientists. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-ai-technical-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -733,8 +733,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free AI & Technical Resume Builder - ATS Friendly Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized AI/technical resumes for free. Land interviews 3x faster. Trusted by 3M+ technical professionals." />
+        <meta name="twitter:title" content="Free AI Resume Builder 2026 | ATS Technical Templates" />
+        <meta name="twitter:description" content="Create your professional AI/technical resume for free in 2026. ATS-optimized templates for AI engineers, ML researchers & data scientists. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-ai-technical-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free AI & Technical Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@TechResumeFree" />
@@ -760,7 +760,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder",
-                  "name": "Free AI & Technical Resume Builder - ATS Friendly Templates 2026",
+                  "name": "Free AI Resume Builder 2026 - ATS Technical Templates",
                   "description": "Create professional ATS-optimized AI/technical resumes for free. Land interviews 3x faster with our technical resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1043,7 +1043,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free AI & Technical Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Technical Professionals</span>
+              Free AI Resume Builder 2026: Create Your ATS Technical CV & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>

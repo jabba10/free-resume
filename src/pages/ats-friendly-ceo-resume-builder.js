@@ -746,9 +746,9 @@ const CeoResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Executive Resume Builder - CEO/C-Suite Templates 2026 | Professional Resume Maker for Business Leaders</title>
-        <meta name="title" content="Free Executive Resume Builder - CEO/C-Suite Templates 2026 | Professional Resume Maker for Business Leaders" />
-        <meta name="description" content="Create professional executive resumes for free. Land board-level interviews with our CEO resume builder. Executive-optimized templates for C-suite, managing directors, board members. Trusted by 25K+ senior executives worldwide." />
+        <title>Free Executive Resume Builder 2026 | CEO/C-Suite Templates</title>
+        <meta name="title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
+        <meta name="description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="executive resume builder, CEO resume templates, C-suite resume builder, board resume, executive CV, free resume builder for business leaders, senior executive resume, managing director CV, board director resume, leadership resume" />
         <meta name="author" content="Professional Executive Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -764,8 +764,8 @@ const CeoResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Executive Resume Builder - CEO/C-Suite Templates 2026" />
-        <meta property="og:description" content="Create professional executive resumes for free. Land board-level interviews with our CEO resume builder. Trusted by 25K+ senior executives." />
+        <meta property="og:title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
+        <meta property="og:description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-executive-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -779,8 +779,8 @@ const CeoResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Executive Resume Builder - CEO/C-Suite Templates 2026" />
-        <meta name="twitter:description" content="Create professional executive resumes for free. Land board-level interviews. Trusted by 25K+ senior executives." />
+        <meta name="twitter:title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
+        <meta name="twitter:description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-executive-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Executive Resume Builder with Board-Level Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -806,7 +806,7 @@ const CeoResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder",
-                  "name": "Free Executive Resume Builder - CEO/C-Suite Templates 2026",
+                  "name": "Free Executive Resume Builder 2026 | CEO/C-Suite Templates",
                   "description": "Create professional executive resumes for free. Land board-level interviews with our CEO resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1089,7 +1089,7 @@ const CeoResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Executive Resume Builder <span className={styles.gradientText}>Trusted by 25K+ Business Leaders</span>
+              Free Executive Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

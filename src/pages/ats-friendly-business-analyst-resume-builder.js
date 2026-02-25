@@ -678,9 +678,9 @@ const BusinessAnalystResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Business Analyst Resume Builder 2026 | ATS-Friendly BA Templates for USA Job Market</title>
-        <meta name="title" content="Free Business Analyst Resume Builder 2026 | ATS-Friendly BA Templates for USA Job Market" />
-        <meta name="description" content="Create professional ATS-optimized Business Analyst resumes for free. Land interviews 3x faster with our BA resume builder. Templates for IT, Finance, Agile, and Technical Business Analysts. Trusted by 2M+ BA professionals in the USA." />
+        <title>Free Business Analyst Resume Builder: ATS Templates 2026</title>
+        <meta name="title" content="Free Business Analyst Resume Builder: ATS Templates 2026" />
+        <meta name="description" content="Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles. Download PDF instantly." />
         <meta name="keywords" content="business analyst resume builder, business analyst resume templates, ba resume, business analyst cv, ATS friendly business analyst resume, free resume builder for business analysts, technical business analyst, financial business analyst, agile business analyst, USA job market" />
         <meta name="author" content="Professional Business Analyst Resume Builder" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -696,8 +696,8 @@ const BusinessAnalystResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="x-default" />
-        <meta property="og:title" content="Free Business Analyst Resume Builder - ATS Friendly BA Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized Business Analyst resumes for free. Land interviews 3x faster. Trusted by 2M+ BA professionals in the USA." />
+        <meta property="og:title" content="Free Business Analyst Resume Builder: ATS Templates 2026" />
+        <meta property="og:description" content="Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-business-analyst-resume-builder.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -711,8 +711,8 @@ const BusinessAnalystResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Business Analyst Resume Builder - ATS Friendly BA Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized Business Analyst resumes for free. Land interviews 3x faster in the USA job market." />
+        <meta name="twitter:title" content="Free Business Analyst Resume Builder: ATS Templates 2026" />
+        <meta name="twitter:description" content="Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-business-analyst-resume-builder.jpg" />
         <meta name="twitter:image:alt" content="Free Business Analyst Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@BABuilder" />
@@ -738,8 +738,8 @@ const BusinessAnalystResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/#webpage",
                   "url": "https://www.professionalresumefree.com/",
-                  "name": "Free Business Analyst Resume Builder - ATS Friendly BA Templates 2026",
-                  "description": "Create professional ATS-optimized Business Analyst resumes for free. Land interviews 3x faster with our BA resume builder for the USA job market.",
+                  "name": "Free Business Analyst Resume Builder: ATS Templates 2026",
+                  "description": "Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1020,7 +1020,7 @@ const BusinessAnalystResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Business Analyst Resume Builder <span className={styles.gradientText}>Optimized for USA Job Market</span>
+              Free Business Analyst Resume Builder: Create Yours in 5 Minutes
             </h1>
             
             <p className={styles.heroSubtitle}>

@@ -686,9 +686,9 @@ const AccountantResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Accounting Resume Builder - ATS Friendly CPA & Finance Templates 2026 | Professional Resume Maker for Accountants Globally</title>
-        <meta name="title" content="Free Accounting Resume Builder - ATS Friendly CPA & Finance Templates 2026 | Professional Resume Maker for Accountants Globally" />
-        <meta name="description" content="Create professional ATS-optimized accounting resumes for free. Land interviews 3x faster with our accounting resume builder. ATS-optimized templates for CPAs, auditors, tax specialists, financial analysts worldwide." />
+        <title>Free Accounting Resume Builder 2026 | Create ATS CPA Resume</title>
+        <meta name="title" content="Free Accounting Resume Builder 2026 | ATS CPA Resume Maker" />
+        <meta name="description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="accounting resume builder, CPA resume templates, finance resume builder, accountant CV, ATS friendly accounting resume, free resume builder for accountants, financial analyst resume, audit resume, tax accountant CV, Big 4 resume templates" />
         <meta name="author" content="Professional Accounting Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -704,8 +704,8 @@ const AccountantResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Accounting Resume Builder - ATS Friendly CPA Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized accounting resumes for free. Land interviews 3x faster with our accounting resume builder. Trusted by 3M+ finance professionals globally." />
+        <meta property="og:title" content="Free Accounting Resume Builder 2026 | Create ATS CPA Resume" />
+        <meta property="og:description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up required." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-accounting-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -719,8 +719,8 @@ const AccountantResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Accounting Resume Builder - ATS Friendly CPA Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized accounting resumes for free. Land interviews 3x faster. Trusted by 3M+ finance professionals." />
+        <meta name="twitter:title" content="Free Accounting Resume Builder 2026 | Create ATS CPA Resume" />
+        <meta name="twitter:description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-accounting-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Accounting Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -745,7 +745,7 @@ const AccountantResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder",
-                  "name": "Free Accounting Resume Builder - ATS Friendly CPA & Finance Templates 2026",
+                  "name": "Free Accounting Resume Builder 2026 - ATS Friendly CPA Templates",
                   "description": "Create professional ATS-optimized accounting resumes for free. Land interviews 3x faster with our accounting resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1028,7 +1028,7 @@ const AccountantResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Accounting Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Finance Professionals Globally</span>
+              Free Accounting Resume Builder 2026: Create Your ATS CPA Resume & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>

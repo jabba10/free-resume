@@ -710,9 +710,9 @@ const HealthcareAssistantResume = ({
       }}
     >
       <Head>
-        <title>Free Healthcare Assistant CV Builder UK | NHS-Compliant Templates 2026</title>
-        <meta name="title" content="Free Healthcare Assistant CV Builder UK | NHS-Compliant Templates 2026" />
-        <meta name="description" content="Create professional NHS-compliant healthcare assistant CVs for free. UK-specific templates for NHS, care homes, and private healthcare. ATS-optimized for UK job applications." />
+        <title>Free Healthcare Assistant CV Builder UK | NHS Templates 2026</title>
+        <meta name="title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
+        <meta name="description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare. Download PDF instantly." />
         <meta name="keywords" content="healthcare assistant CV UK, NHS CV builder, care assistant resume, UK healthcare CV, NHS jobs, healthcare assistant template, free CV builder UK, healthcare CV download" />
         <meta name="author" content="UK Healthcare Assistant CV Builder" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -724,8 +724,8 @@ const HealthcareAssistantResume = ({
         <link rel="canonical" href="https://www.professionalresumefree.com/" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-GB" />
-        <meta property="og:title" content="Free Healthcare Assistant CV Builder UK | NHS-Compliant Templates 2026" />
-        <meta property="og:description" content="Create professional NHS-compliant healthcare assistant CVs for free. UK-specific templates for NHS, care homes, and private healthcare." />
+        <meta property="og:title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
+        <meta property="og:description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-healthcare-assistant-cv-builder.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -736,8 +736,8 @@ const HealthcareAssistantResume = ({
         <meta property="og:locale" content="en_GB" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Healthcare Assistant CV Builder UK | NHS-Compliant Templates 2026" />
-        <meta name="twitter:description" content="Create professional NHS-compliant healthcare assistant CVs for free. UK-specific templates for NHS, care homes, and private healthcare." />
+        <meta name="twitter:title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
+        <meta name="twitter:description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-healthcare-assistant-cv-builder.jpg" />
         <meta name="twitter:image:alt" content="Free Healthcare Assistant CV Builder for UK Job Seekers" />
         <meta name="theme-color" content="#005EB8" />
@@ -922,7 +922,7 @@ const HealthcareAssistantResume = ({
             </div>
             
             <h1 className={styles.heroTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-              Free Healthcare Assistant CV Builder <span className={styles.gradientText} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>for UK Job Seekers</span>
+              Create Your <span className={styles.gradientText} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Healthcare Assistant CV 2026</span>
             </h1>
             
             <p className={styles.heroSubtitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>

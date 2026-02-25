@@ -681,9 +681,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-AU">
       <Head>
-        <title>Free Aged Care Resume Builder Australia - ATS Friendly Templates 2026 | Professional Resume Maker for Aged Care Workers, PCA, Support Workers</title>
-        <meta name="title" content="Free Aged Care Resume Builder Australia - ATS Friendly Templates 2026 | Professional Resume Maker for Aged Care Workers, PCA, Support Workers" />
-        <meta name="description" content="Create professional ATS-optimized aged care resumes for free. Land interviews with Australian aged care providers 3x faster. ATS-optimized templates for Personal Care Assistants, Support Workers, Aged Care Workers. Trusted by 100,000+ Australian care professionals." />
+        <title>Free Aged Care Resume Builder Australia 2026 | ATS-Friendly Templates</title>
+        <meta name="title" content="Free Aged Care Resume Builder Australia 2026 | ATS-Friendly Templates" />
+        <meta name="description" content="Create a professional ATS-friendly aged care resume in minutes. Trusted by 100K+ Australian care professionals. Download PDF free. Updated for 2026." />
         <meta name="keywords" content="aged care resume builder, aged care resume Australia, PCA resume, support worker resume, Australian aged care jobs, aged care resume template, personal care assistant resume, disability support worker resume, free resume builder Australia, aged care CV Australia" />
         <meta name="author" content="Professional Aged Care Resume Australia" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -696,8 +696,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Aged Care Resume Builder Australia - ATS Friendly Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized aged care resumes for free. Land interviews 3x faster with Australian aged care providers. Trusted by 100,000+ Australian care professionals." />
+        <meta property="og:title" content="Free Aged Care Resume Builder Australia 2026 | ATS-Friendly Templates" />
+        <meta property="og:description" content="Create a professional ATS-friendly aged care resume in minutes. Trusted by 100K+ Australian care professionals. Download PDF free. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-aged-care-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -708,8 +708,8 @@ const Resume = ({
         <meta property="og:locale" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Aged Care Resume Builder Australia - ATS Friendly Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized aged care resumes for free. Land interviews 3x faster. Trusted by 100,000+ Australian care professionals." />
+        <meta name="twitter:title" content="Free Aged Care Resume Builder Australia 2026 | ATS-Friendly Templates" />
+        <meta name="twitter:description" content="Create a professional ATS-friendly aged care resume in minutes. Trusted by 100K+ Australian care professionals. Download PDF free. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-aged-care-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Aged Care Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@AgedCareResumeAU" />
@@ -735,7 +735,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder",
-                  "name": "Free Aged Care Resume Builder Australia - ATS Friendly Templates 2026",
+                  "name": "Free Aged Care Resume Builder Australia 2026 - ATS Friendly Templates",
                   "description": "Create professional ATS-optimized aged care resumes for free. Land interviews 3x faster with Australian aged care providers.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1017,7 +1017,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Aged Care Resume Builder Australia <span className={styles.gradientText}>Trusted by 100,000+ Australian Care Professionals</span>
+              Free Aged Care Resume Builder Australia 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

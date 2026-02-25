@@ -705,9 +705,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Tech Resume Builder - ATS Friendly AI & ML Templates 2026 | Professional Resume Maker for Software Engineers, Data Scientists</title>
-        <meta name="title" content="Free Tech Resume Builder - ATS Friendly AI & ML Templates 2026 | Professional Resume Maker for Software Engineers, Data Scientists" />
-        <meta name="description" content="Create professional ATS-optimized tech resumes for free. Land FAANG interviews 3x faster with our tech resume builder. ATS-optimized templates for Software Engineers, Data Scientists, ML Engineers, AI Researchers. Trusted by 5M+ tech professionals worldwide." />
+        <title>Free Tech Resume Builder 2026 | AI/ML Templates</title>
+        <meta name="title" content="Free Tech Resume Builder 2026 | AI/ML Templates" />
+        <meta name="description" content="Create a professional tech resume for free. ATS-friendly AI/ML templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="tech resume builder, software engineer resume, data scientist resume, machine learning resume, AI resume builder, free resume builder for tech, developer resume, programming resume, tech CV, FAANG resume" />
         <meta name="author" content="Professional Tech Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -723,8 +723,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Tech Resume Builder - ATS Friendly AI & ML Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized tech resumes for free. Land FAANG interviews 3x faster with our tech resume builder. Trusted by 5M+ tech professionals." />
+        <meta property="og:title" content="Free Tech Resume Builder 2026 | AI/ML Templates" />
+        <meta property="og:description" content="Create a professional tech resume for free. ATS-friendly AI/ML templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -738,8 +738,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Tech Resume Builder - ATS Friendly AI & ML Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized tech resumes for free. Land FAANG interviews 3x faster. Trusted by 5M+ tech professionals." />
+        <meta name="twitter:title" content="Free Tech Resume Builder 2026 | AI/ML Templates" />
+        <meta name="twitter:description" content="Create a professional tech resume for free. ATS-friendly AI/ML templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@TechResumeFree" />
@@ -766,7 +766,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
-                  "name": "Free Tech Resume Builder - ATS Friendly AI & ML Templates 2026",
+                  "name": "Free Tech Resume Builder 2026 | AI/ML Templates",
                   "description": "Create professional ATS-optimized tech resumes for free. Land FAANG interviews 3x faster with our tech resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1049,7 +1049,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Tech Resume Builder <span className={styles.gradientText}>Trusted by 5M+ Engineers & Data Scientists</span>
+              Free Tech Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

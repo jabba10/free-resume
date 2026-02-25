@@ -1,4 +1,3 @@
-
 // pages/index.js
 import Head from 'next/head';
 import Link from 'next/link';
@@ -571,10 +570,12 @@ return (
 <Head>
 <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
 {/* ===== OPTIMIZED HIGH-CTR TITLE ===== */}
-<title>{templateCount} Free ATS Resume Templates | No Sign-Up, Instant PDF</title>
-{/* ===== OPTIMIZED META DESCRIPTION ===== */}
-<meta name="description" content={`Bypass paywalls. Get ${templateCount} industry-specific ATS templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly—no account, no credit card. Built for job seekers tired of "free" traps.`} />
+<title>{templateCount} Free ATS Resume Templates 2026 | No Sign-Up, Instant PDF</title>
+{/* ===== OPTIMIZED META DESCRIPTION - FIXED LENGTH (157 chars) ===== */}
+<meta name="description" content={`Get ${templateCount} industry-specific ATS resume templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly. No account or credit card needed.`} />
 <meta name="author" content="Professional Resume Free" />
+{/* ===== ADDED KEYWORDS META TAG ===== */}
+<meta name="keywords" content="ATS resume templates, free resume builder, resume optimization, ATS-friendly resume, professional resume templates, resume templates 2026, free resume maker" />
 {/* GEO Optimization Tags */}
 <meta name="chatgpt-fts:title" content="Free ATS Resume Templates & Optimization Tools" />
 <meta name="chatgpt-fts:description" content="Create an ATS-optimized resume quickly. Multiple templates, free tools, and instant PDF download. No sign-up required." />
@@ -586,18 +587,20 @@ return (
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="last-modified" content={lastModified} />
 <meta httpEquiv="last-modified" content={lastModified} />
-<link rel="canonical" href="https://www.professionalresumefree.com/" />
-{/* ===== OPEN GRAPH ===== */}
+{/* CANONICAL TAG REMOVED - Next.js handles this automatically */}
+{/* ===== OPEN GRAPH - FIXED URL WITHOUT TRAILING SLASH ===== */}
 <meta property="og:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools | No Sign-Up, Instant PDF`} />
-<meta property="og:description" content={`Bypass paywalls. Get ${templateCount} industry-specific ATS templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly—no account, no credit card.`} />
-<meta property="og:url" content="https://www.professionalresumefree.com/" />
+<meta property="og:description" content={`Get ${templateCount} industry-specific ATS templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly. No account or credit card needed.`} />
+<meta property="og:url" content="https://www.professionalresumefree.com" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Professional Resume Free" />
 <meta property="og:updated_time" content={lastModified} />
 {/* ===== TWITTER CARD ===== */}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools | No Sign-Up`} />
-<meta name="twitter:description" content={`Bypass paywalls. Get ${templateCount} industry-specific ATS templates + ${toolCount} free tools. Download PDF instantly—no account, no credit card.`} />
+<meta name="twitter:description" content={`Get ${templateCount} industry-specific ATS templates + ${toolCount} free tools. Download PDF instantly. No account or credit card needed.`} />
+{/* ===== TWITTER SITE HANDLE - ADD IF YOU HAVE ONE ===== */}
+{/* <meta name="twitter:site" content="@yourhandle" /> */}
 {/* ===== ENHANCED SCHEMA.ORG JSON-LD with HowTo and Article ===== */}
 <script
 type="application/ld+json"

@@ -765,9 +765,9 @@ const GovernmentResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Government & Non-Profit Resume Builder - ATS Friendly Public Sector Templates 2026</title>
-        <meta name="title" content="Free Government & Non-Profit Resume Builder - ATS Friendly Public Sector Templates 2026" />
-        <meta name="description" content="Create professional ATS-optimized resumes for government, non-profit, and public sector jobs. USAJobs compatible, federal formatting, non-profit specific templates. Free download." />
+        <title>Free Government Resume Builder 2026 | USAJobs Templates</title>
+        <meta name="title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
+        <meta name="description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
         <meta name="keywords" content="government resume builder, non-profit resume, USAJobs resume, federal resume, public sector resume, NGO resume, grant writer resume, policy analyst resume, government job resume, ATS friendly government resume" />
         <meta name="author" content="Professional Government Resume Builder" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -783,8 +783,8 @@ const GovernmentResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Government & Non-Profit Resume Builder - ATS Friendly Public Sector Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized resumes for government, non-profit, and public sector jobs. USAJobs compatible, federal formatting." />
+        <meta property="og:title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
+        <meta property="og:description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-government-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -798,8 +798,8 @@ const GovernmentResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Government & Non-Profit Resume Builder - ATS Friendly Public Sector Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized resumes for government, non-profit, and public sector jobs. USAJobs compatible." />
+        <meta name="twitter:title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
+        <meta name="twitter:description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-government-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Government Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@GovResumeFree" />
@@ -825,8 +825,8 @@ const GovernmentResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder",
-                  "name": "Free Government & Non-Profit Resume Builder - ATS Friendly Public Sector Templates 2026",
-                  "description": "Create professional ATS-optimized resumes for government, non-profit, and public sector jobs. USAJobs compatible, federal formatting.",
+                  "name": "Free Government Resume Builder 2026 | USAJobs Templates",
+                  "description": "Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1019,7 +1019,7 @@ const GovernmentResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Government & Non-Profit Resume Builder <span className={styles.gradientText}>USAJobs Ready • Federal Formatting</span>
+              Free Government Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

@@ -715,9 +715,9 @@ const DisabilitySupportResume = ({
   return (
     <div className={styles.disabilitySupportResumeBuilder} lang="en-AU" style={{ fontFamily: FONT_FAMILY }}>
       <Head>
-        <title>Free Disability Support Worker Resume Builder Australia - NDIS Resume Templates 2026</title>
-        <meta name="title" content="Free Disability Support Worker Resume Builder Australia - NDIS Resume Templates 2026" />
-        <meta name="description" content="Create professional ATS-optimized disability support resumes for free. Australian NDIS-specific templates for Support Workers, Coordinators, Team Leaders. Land interviews faster with NDIS-focused resume builder." />
+        <title>Free NDIS Resume Builder 2026 | Disability Support Worker Australia</title>
+        <meta name="title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
+        <meta name="description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="disability support resume builder, NDIS resume templates, support worker resume Australia, disability care resume, ATS friendly disability resume, free resume builder for support workers, NDIS worker screening, Australian disability sector jobs, support worker CV, disability services resume" />
         <meta name="author" content="Australian Disability Support Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -730,22 +730,22 @@ const DisabilitySupportResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Disability Support Worker Resume Builder Australia - NDIS Resume Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized disability support resumes for free. Australian NDIS-specific templates for Support Workers. Land interviews faster." />
+        <meta property="og:title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
+        <meta property="og:description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-disability-support-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free Disability Support Worker Resume Builder Australia - Create Professional NDIS Resumes Online" />
+        <meta property="og:image:alt" content="Free NDIS Resume Builder - Create Professional Disability Support Resumes Online" />
         <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Australian Disability Support Resume Free" />
         <meta property="og:locale" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Disability Support Worker Resume Builder Australia - NDIS Resume Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized disability support resumes for free. Australian NDIS-specific templates. Land interviews faster." />
+        <meta name="twitter:title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
+        <meta name="twitter:description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-disability-support-resume-builder-preview.jpg" />
-        <meta name="twitter:image:alt" content="Free Disability Support Resume Builder with NDIS Templates" />
+        <meta name="twitter:image:alt" content="Free NDIS Resume Builder with Australian Templates" />
         <meta name="twitter:site" content="@DisabilityResumeAU" />
         <meta name="twitter:creator" content="@DisabilityResumeAU" />
         <meta name="theme-color" content="#4CAF50" />
@@ -769,8 +769,8 @@ const DisabilitySupportResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder",
-                  "name": "Free Disability Support Worker Resume Builder Australia - NDIS Resume Templates 2026",
-                  "description": "Create professional ATS-optimized disability support resumes for free. Australian NDIS-specific templates for Support Workers, Coordinators, Team Leaders.",
+                  "name": "Free NDIS Resume Builder 2026 - Disability Support Worker Australia",
+                  "description": "Create professional ATS-optimized disability support resumes for free. Australian NDIS-specific templates for Support Workers.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-AU",
@@ -823,7 +823,7 @@ const DisabilitySupportResume = ({
                   },
                   "mainEntity": {
                     "@type": "SoftwareApplication",
-                    "name": "Disability Support Resume Builder - NDIS Optimized Resume Maker Australia",
+                    "name": "NDIS Resume Builder - Disability Support Resume Maker Australia",
                     "applicationCategory": "BusinessApplication",
                     "operatingSystem": "Any",
                     "offers": {
@@ -993,7 +993,7 @@ const DisabilitySupportResume = ({
                       },
                       "itemReviewed": {
                         "@type": "SoftwareApplication",
-                        "name": "Disability Support Resume Builder - NDIS Optimized Resume Maker Australia",
+                        "name": "NDIS Resume Builder - Disability Support Resume Maker Australia",
                         "applicationCategory": "BusinessApplication",
                         "operatingSystem": "Any",
                         "offers": {
@@ -1051,7 +1051,7 @@ const DisabilitySupportResume = ({
             </div>
             
             <h1 className={styles.heroTitle} style={{ fontFamily: FONT_FAMILY }}>
-              Free Disability Support Worker Resume Builder <span className={styles.gradientText}>Trusted by Australian NDIS Professionals</span>
+              Free NDIS Resume Builder 2026: Create Your Australian Support Worker CV & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle} style={{ fontFamily: FONT_FAMILY }}>

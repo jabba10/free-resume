@@ -697,9 +697,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Engineering Resume Builder - ATS Friendly Technical Templates 2026 | Professional Resume Maker for Engineers</title>
-        <meta name="title" content="Free Engineering Resume Builder - ATS Friendly Technical Templates 2026 | Professional Resume Maker for Engineers" />
-        <meta name="description" content="Create professional ATS-optimized engineering resumes for free. Land technical interviews 3x faster with our engineering resume builder. ATS-optimized templates for software, mechanical, electrical, civil engineers. Trusted by 5M+ engineering professionals worldwide." />
+        <title>Free Engineering Resume Builder 2026 | Technical Templates</title>
+        <meta name="title" content="Free Engineering Resume Builder 2026 | Technical Templates" />
+        <meta name="description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="engineering resume builder, technical resume templates, software engineer resume, mechanical engineer resume, electrical engineer resume, civil engineer resume, ATS friendly engineering resume, free resume builder for engineers, technical resume, engineering CV, engineering career" />
         <meta name="author" content="Professional Engineering Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -715,8 +715,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Engineering Resume Builder - ATS Friendly Technical Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized engineering resumes for free. Land interviews 3x faster with our engineering resume builder. Trusted by 5M+ engineering professionals." />
+        <meta property="og:title" content="Free Engineering Resume Builder 2026 | Technical Templates" />
+        <meta property="og:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-engineering-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -730,8 +730,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Engineering Resume Builder - ATS Friendly Technical Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized engineering resumes for free. Land interviews 3x faster. Trusted by 5M+ engineering professionals." />
+        <meta name="twitter:title" content="Free Engineering Resume Builder 2026 | Technical Templates" />
+        <meta name="twitter:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-engineering-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Engineering Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -757,7 +757,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder",
-                  "name": "Free Engineering Resume Builder - ATS Friendly Technical Templates 2026",
+                  "name": "Free Engineering Resume Builder 2026 | Technical Templates",
                   "description": "Create professional ATS-optimized engineering resumes for free. Land interviews 3x faster with our engineering resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1040,7 +1040,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Engineering Resume Builder <span className={styles.gradientText}>Trusted by 5M+ Technical Professionals</span>
+              Free Engineering Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

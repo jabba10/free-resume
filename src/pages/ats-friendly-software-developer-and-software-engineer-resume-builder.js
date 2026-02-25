@@ -44,7 +44,7 @@ import {
   FiGitPullRequest
 } from 'react-icons/fi';
 import Link from 'next/link';
-import styles from './Resume.module.css';
+import styles from './SResume.module.css';
 
 const Resume = ({ 
   seoData,
@@ -159,7 +159,8 @@ const Resume = ({
     regularText: 9,
     bulletText: 9,
     skillText: 8,
-    technologyText: 8
+    technologyText: 8,
+    skillCategory: 9  // New font size for skill categories
   });
 
   const [currentExperience, setCurrentExperience] = useState(defaultExperience());
@@ -270,7 +271,8 @@ const Resume = ({
       regularText: 9,
       bulletText: 9,
       skillText: 8,
-      technologyText: 8
+      technologyText: 8,
+      skillCategory: 9
     });
   };
 
@@ -512,10 +514,15 @@ const Resume = ({
             technologyTexts.forEach(tech => {
               tech.style.fontSize = `${fontSizes.technologyText}pt`;
             });
+
+            const skillCategories = clone.querySelectorAll(`.${styles.skillCategoryTitle}`);
+            skillCategories.forEach(category => {
+              category.style.fontSize = `${fontSizes.skillCategory}pt`;
+            });
             
             clone.querySelectorAll('*').forEach(n => {
               n.style.color = '#000000';
-              n.style.fontFamily = "'Roboto Mono', 'Consolas', 'Monaco', 'Courier New', monospace";
+              n.style.fontFamily = "'Inter', 'Helvetica Neue', Arial, sans-serif";
             });
           }
         }
@@ -584,7 +591,9 @@ const Resume = ({
             <div className={styles.technicalSkillsGrid}>
               {formData.technicalSkills.map((skill, i) => (
                 <div key={i} className={styles.skillCategory}>
-                  <h3 className={styles.skillCategoryTitle}>{skill.category}</h3>
+                  <h3 className={styles.skillCategoryTitle} style={{ fontSize: `${fontSizes.skillCategory}pt` }}>
+                    {skill.category}
+                  </h3>
                   <div className={styles.skillTags}>
                     {skill.skills.split(',').map((s, idx) => (
                       <span key={idx} className={styles.technologyBadge} style={{ fontSize: `${fontSizes.technologyText}pt` }}>
@@ -700,9 +709,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Software Developer/Engineer Resume Builder - ATS Friendly Tech Templates 2026 | Professional Resume Maker for Developers, Engineers, Programmers</title>
-        <meta name="title" content="Free Software Developer/Engineer Resume Builder - ATS Friendly Tech Templates 2026 | Professional Resume Maker for Developers, Engineers, Programmers" />
-        <meta name="description" content="Create professional ATS-optimized developer resumes for free. Land interviews 3x faster with our tech resume builder. ATS-optimized templates for software engineers, full-stack developers, frontend/backend specialists. Trusted by 5M+ developers worldwide." />
+        <title>Free Developer Resume Builder: ATS Tech Templates 2026</title>
+        <meta name="title" content="Free Developer Resume Builder: ATS Tech Templates 2026" />
+        <meta name="description" content="Create your ATS-optimized developer resume for free in 2026. Professional tech templates for software engineers. No sign-up required. Download PDF instantly." />
         <meta name="keywords" content="developer resume builder, software engineer resume, tech resume templates, programmer resume, ATS friendly developer resume, free resume builder for developers, coding resume, tech CV, software developer resume, GitHub portfolio resume" />
         <meta name="author" content="Professional Software Developer/Engineer Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -718,8 +727,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-software-developer-and-software-engineer-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-software-developer-and-software-engineer-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-software-developer-and-software-engineer-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Software Developer Resume Builder - ATS Friendly Tech Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized developer resumes for free. Land interviews 3x faster with our tech resume builder. Trusted by 5M+ developers worldwide." />
+        <meta property="og:title" content="Free Developer Resume Builder: ATS Tech Templates 2026" />
+        <meta property="og:description" content="Create your ATS-optimized developer resume for free in 2026. Professional tech templates trusted by 5M+ software engineers." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-developer-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -733,8 +742,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Software Developer Resume Builder - ATS Friendly Tech Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized developer resumes for free. Land interviews 3x faster. Trusted by 5M+ developers." />
+        <meta name="twitter:title" content="Free Developer Resume Builder: ATS Tech Templates 2026" />
+        <meta name="twitter:description" content="Create your ATS-optimized developer resume for free in 2026. Professional tech templates trusted by 5M+ software engineers." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-developer-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Developer Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@DevResumeFree" />
@@ -745,7 +754,7 @@ const Resume = ({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="preload" href="/fonts/RobotoMono.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
@@ -1043,7 +1052,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Software Developer Resume Builder <span className={styles.gradientText}>Trusted by 5M+ Tech Professionals</span>
+              Create Your <span className={styles.gradientText}>Developer Resume 2026</span>
             </h1>
             
             <p className={styles.heroSubtitle}>
@@ -2030,6 +2039,21 @@ const Resume = ({
                         max="12" 
                         value={fontSizes.technologyText}
                         onChange={(e) => handleFontSizeChange('technologyText', e.target.value)}
+                        className={styles.fontSizeSlider}
+                      />
+                    </div>
+
+                    <div className={styles.fontSizeControl}>
+                      <label className={styles.fontSizeLabel}>
+                        <span>Skill Categories</span>
+                        <span className={styles.fontSizeValue}>{fontSizes.skillCategory}pt</span>
+                      </label>
+                      <input 
+                        type="range" 
+                        min="6" 
+                        max="14" 
+                        value={fontSizes.skillCategory}
+                        onChange={(e) => handleFontSizeChange('skillCategory', e.target.value)}
                         className={styles.fontSizeSlider}
                       />
                     </div>

@@ -680,9 +680,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Warehouse Resume Builder - ATS Friendly Logistics Templates 2026 | Professional Resume Maker for Forklift Operators, Warehouse Workers</title>
-        <meta name="title" content="Free Warehouse Resume Builder - ATS Friendly Logistics Templates 2026 | Professional Resume Maker for Forklift Operators, Warehouse Workers" />
-        <meta name="description" content="Create professional ATS-optimized warehouse resumes for free. Land interviews 3x faster with our logistics resume builder. ATS-optimized templates for forklift operators, warehouse associates, order pickers, inventory specialists. Trusted by 2M+ warehouse professionals worldwide." />
+        <title>Free Warehouse Resume Builder 2026 | ATS Logistics Templates</title>
+        <meta name="title" content="Free Warehouse Resume Builder 2026 | ATS Logistics Templates" />
+        <meta name="description" content="Create a professional warehouse resume for free in 2026. ATS-optimized templates for forklift operators, warehouse workers. Download PDF instantly." />
         <meta name="keywords" content="warehouse resume builder, forklift operator resume, logistics resume templates, warehouse worker resume, ATS friendly warehouse resume, free resume builder for warehouse jobs, distribution center resume, warehouse CV, logistics worker resume, warehouse staff resume" />
         <meta name="author" content="Professional Warehouse Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -698,8 +698,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Warehouse Resume Builder - ATS Friendly Logistics Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized warehouse resumes for free. Land interviews 3x faster with our logistics resume builder. Trusted by 2M+ warehouse professionals." />
+        <meta property="og:title" content="Free Warehouse Resume Builder 2026 | ATS Logistics Templates" />
+        <meta property="og:description" content="Create a professional warehouse resume for free in 2026. ATS-optimized templates for forklift operators, warehouse workers. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-warehouse-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -713,8 +713,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Warehouse Resume Builder - ATS Friendly Logistics Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized warehouse resumes for free. Land interviews 3x faster. Trusted by 2M+ warehouse professionals." />
+        <meta name="twitter:title" content="Free Warehouse Resume Builder 2026 | ATS Logistics Templates" />
+        <meta name="twitter:description" content="Create a professional warehouse resume for free in 2026. ATS-optimized templates for forklift operators, warehouse workers. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-warehouse-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Warehouse Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -740,8 +740,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder",
-                  "name": "Free Warehouse Resume Builder - ATS Friendly Logistics Templates 2026",
-                  "description": "Create professional ATS-optimized warehouse resumes for free. Land interviews 3x faster with our logistics resume builder.",
+                  "name": "Free Warehouse Resume Builder 2026 | ATS Logistics Templates",
+                  "description": "Create a professional warehouse resume for free in 2026. ATS-optimized templates for forklift operators, warehouse workers. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1023,7 +1023,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Warehouse Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Logistics Professionals</span>
+              Free Warehouse Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

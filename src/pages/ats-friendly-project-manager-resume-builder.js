@@ -717,9 +717,9 @@ const ProjectManagerResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Project Manager Resume Builder - ATS Friendly Global Templates 2026 | Professional Resume Maker for PMs Worldwide</title>
-        <meta name="title" content="Free Project Manager Resume Builder - ATS Friendly Global Templates 2026 | Professional Resume Maker for PMs Worldwide" />
-        <meta name="description" content="Create professional ATS-optimized project management resumes for free. Land global interviews 3x faster. ATS-optimized templates for IT, Construction, Agile PMs worldwide. Trusted by 2M+ project managers globally." />
+        <title>Free PM Resume Builder 2026 | ATS Project Manager Templates</title>
+        <meta name="title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
+        <meta name="description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
         <meta name="keywords" content="project manager resume builder, PM resume templates, project management CV, ATS friendly PM resume, free resume builder for project managers, construction project manager, IT project manager, agile PM resume, global project manager, PMP resume" />
         <meta name="author" content="Professional Project Manager Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -735,8 +735,8 @@ const ProjectManagerResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Project Manager Resume Builder - ATS Friendly Global Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized project management resumes for free. Land global interviews 3x faster. Trusted by 2M+ project managers worldwide." />
+        <meta property="og:title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
+        <meta property="og:description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-pm-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -750,8 +750,8 @@ const ProjectManagerResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Project Manager Resume Builder - ATS Friendly Global Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized project management resumes for free. Land global interviews 3x faster." />
+        <meta name="twitter:title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
+        <meta name="twitter:description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-pm-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Project Manager Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@PMResumeFree" />
@@ -776,8 +776,8 @@ const ProjectManagerResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder",
-                  "name": "Free Project Manager Resume Builder - ATS Friendly Global Templates 2026",
-                  "description": "Create professional ATS-optimized project management resumes for free. Land global interviews 3x faster.",
+                  "name": "Free PM Resume Builder 2026 | ATS Project Manager Templates",
+                  "description": "Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1059,7 +1059,7 @@ const ProjectManagerResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Project Manager Resume Builder <span className={styles.gradientText}>Trusted by 2M+ PMs Worldwide</span>
+              Free PM Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

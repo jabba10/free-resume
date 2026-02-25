@@ -722,9 +722,9 @@ const TeacherResume = ({
   return (
     <div className={styles.teacherResumeBuilder} lang="en-US" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
       <Head>
-        <title>Free Teacher Resume Builder - ATS Friendly Education Templates 2026 | Professional Resume Maker for Teachers Worldwide</title>
-        <meta name="title" content="Free Teacher Resume Builder - ATS Friendly Education Templates 2026 | Professional Resume Maker for Teachers Worldwide" />
-        <meta name="description" content="Create professional ATS-optimized teacher resumes for free. Land interviews 3x faster with our education resume builder. ATS-optimized templates for teachers, professors, educators worldwide. Trusted by 3M+ education professionals globally." />
+        <title>Free Teacher Resume Builder 2026 | ATS Education Templates</title>
+        <meta name="title" content="Free Teacher Resume Builder 2026 | ATS Education Templates" />
+        <meta name="description" content="Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly." />
         <meta name="keywords" content="teacher resume builder, education resume templates, teacher resume builder free, educator resume, ATS friendly teacher resume, free resume builder for teachers, teaching resume, education CV, school teacher resume, international teacher resume" />
         <meta name="author" content="Professional Teacher Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -742,8 +742,8 @@ const TeacherResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-NZ" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-IN" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Teacher Resume Builder - ATS Friendly Education Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized teacher resumes for free. Land interviews 3x faster with our education resume builder. Trusted by 3M+ teachers worldwide." />
+        <meta property="og:title" content="Free Teacher Resume Builder 2026 | ATS Education Templates" />
+        <meta property="og:description" content="Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-teacher-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -759,8 +759,8 @@ const TeacherResume = ({
         <meta property="og:locale:alternate" content="en_IN" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Teacher Resume Builder - ATS Friendly Education Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized teacher resumes for free. Land interviews 3x faster. Trusted by 3M+ teachers worldwide." />
+        <meta name="twitter:title" content="Free Teacher Resume Builder 2026 | ATS Education Templates" />
+        <meta name="twitter:description" content="Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-teacher-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Teacher Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProTeacherResume" />
@@ -786,8 +786,8 @@ const TeacherResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder",
-                  "name": "Free Teacher Resume Builder - ATS Friendly Education Templates 2026",
-                  "description": "Create professional ATS-optimized teacher resumes for free. Land interviews 3x faster with our education resume builder.",
+                  "name": "Free Teacher Resume Builder 2026 | ATS Education Templates",
+                  "description": "Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1069,7 +1069,7 @@ const TeacherResume = ({
             </div>
             
             <h1 className={styles.heroTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
-              Free Teacher Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Educators Worldwide</span>
+              Free Teacher Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>

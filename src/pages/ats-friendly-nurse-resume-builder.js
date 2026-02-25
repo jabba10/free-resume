@@ -710,9 +710,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Nurse Resume Builder 2026 | ATS-Optimized Nursing Resume Templates | Global Nurses</title>
-        <meta name="title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Nursing Resume Templates | Global Nurses" />
-        <meta name="description" content="Create professional ATS-optimized nursing resumes for free. Land interviews 3x faster with our nurse resume builder. Templates for RNs, LPNs, NPs, ICU, ER, Travel Nurses & international nursing careers. Trusted by 2M+ nurses worldwide." />
+        <title>Free Nurse Resume Builder 2026 | ATS-Optimized Templates</title>
+        <meta name="title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Templates" />
+        <meta name="description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="nurse resume builder, nursing resume templates, RN resume, ATS friendly nurse resume, free resume builder for nurses, nursing CV, healthcare resume, ICU nurse resume, travel nurse resume, international nurse resume, new grad nurse resume" />
         <meta name="author" content="Professional Nurse Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -728,8 +728,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="x-default" />
-        <meta property="og:title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Nursing Resume Templates" />
-        <meta property="og:description" content="Create professional ATS-optimized nursing resumes for free. Land interviews 3x faster with our nurse resume builder. Trusted by 2M+ nurses worldwide." />
+        <meta property="og:title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Templates" />
+        <meta property="og:description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-nurse-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -743,8 +743,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Nursing Resume Templates" />
-        <meta name="twitter:description" content="Create professional ATS-optimized nursing resumes for free. Land interviews 3x faster. Trusted by 2M+ nurses worldwide." />
+        <meta name="twitter:title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Templates" />
+        <meta name="twitter:description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-nurse-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Nurse Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@NurseResumeFree" />
@@ -770,7 +770,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/#webpage",
                   "url": "https://www.professionalresumefree.com/",
-                  "name": "Free Nurse Resume Builder 2026 | ATS-Optimized Nursing Resume Templates",
+                  "name": "Free Nurse Resume Builder 2026 | ATS-Optimized Templates",
                   "description": "Create professional ATS-optimized nursing resumes for free. Land interviews 3x faster with our nurse resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1053,7 +1053,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Nurse Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Nurses Worldwide</span>
+              Free Nurse Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

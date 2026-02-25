@@ -718,9 +718,9 @@ const SecurityGuardResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Security Guard Resume Builder - ATS Friendly Security Templates 2026 | Professional Resume Maker for Security Officers, Guards, Surveillance</title>
-        <meta name="title" content="Free Security Guard Resume Builder - ATS Friendly Security Templates 2026 | Professional Resume Maker for Security Officers, Guards, Surveillance" />
-        <meta name="description" content="Create professional ATS-optimized security guard resumes for free. Land security jobs 3x faster with our security resume builder. ATS-optimized templates for armed guards, unarmed guards, surveillance, executive protection. Trusted by 2M+ security professionals worldwide." />
+        <title>Free Security Guard Resume Builder 2026 | ATS Templates</title>
+        <meta name="title" content="Free Security Guard Resume Builder 2026 | ATS Templates" />
+        <meta name="description" content="Create a professional security guard resume for free in 2026. ATS-optimized templates for armed guards, officers. Download PDF instantly." />
         <meta name="keywords" content="security guard resume builder, security resume templates, security officer resume, armed guard resume, ATS friendly security resume, free resume builder for security professionals, surveillance operator resume, security guard CV, corporate security resume, executive protection resume" />
         <meta name="author" content="Professional Security Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -736,8 +736,8 @@ const SecurityGuardResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Security Guard Resume Builder - ATS Friendly Security Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized security guard resumes for free. Land security jobs 3x faster with our security resume builder. Trusted by 2M+ security professionals." />
+        <meta property="og:title" content="Free Security Guard Resume Builder 2026 | ATS Templates" />
+        <meta property="og:description" content="Create a professional security guard resume for free in 2026. ATS-optimized templates for armed guards, officers. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-security-guard-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -751,8 +751,8 @@ const SecurityGuardResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Security Guard Resume Builder - ATS Friendly Security Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized security guard resumes for free. Land security jobs 3x faster. Trusted by 2M+ security professionals." />
+        <meta name="twitter:title" content="Free Security Guard Resume Builder 2026 | ATS Templates" />
+        <meta name="twitter:description" content="Create a professional security guard resume for free in 2026. ATS-optimized templates for armed guards, officers. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-security-guard-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Security Guard Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -779,8 +779,8 @@ const SecurityGuardResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder",
-                  "name": "Free Security Guard Resume Builder - ATS Friendly Security Templates 2026",
-                  "description": "Create professional ATS-optimized security guard resumes for free. Land security jobs 3x faster with our security resume builder.",
+                  "name": "Free Security Guard Resume Builder 2026 | ATS Templates",
+                  "description": "Create a professional security guard resume for free in 2026. ATS-optimized templates for armed guards, officers. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1062,7 +1062,7 @@ const SecurityGuardResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Security Guard Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Security Professionals</span>
+              Free Security Guard Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

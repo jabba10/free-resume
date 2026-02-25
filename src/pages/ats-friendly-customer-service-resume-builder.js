@@ -655,9 +655,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Customer Service Resume Builder - ATS Friendly Global Templates 2026 | Professional Resume Maker for CSR, Support, Call Center</title>
-        <meta name="title" content="Free Customer Service Resume Builder - ATS Friendly Global Templates 2026 | Professional Resume Maker for CSR, Support, Call Center" />
-        <meta name="description" content="Create professional ATS-optimized customer service resumes for free. Land interviews 3x faster with our global customer service resume builder. ATS-optimized templates for CSR, support agents, call center reps. Trusted by 5M+ customer service professionals worldwide." />
+        <title>Free Customer Service Resume Builder 2026 | ATS Global Templates</title>
+        <meta name="title" content="Free Customer Service Resume Builder 2026 | ATS Global Templates" />
+        <meta name="description" content="Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly." />
         <meta name="keywords" content="customer service resume builder, customer service resume templates, call center resume builder, CSR resume, ATS friendly customer service resume, free resume builder for customer service, support agent resume, customer experience resume, global customer service, multilingual resume" />
         <meta name="author" content="Professional Customer Service Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -673,8 +673,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Customer Service Resume Builder - ATS Friendly Global Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized customer service resumes for free. Land interviews 3x faster with our global customer service resume builder. Trusted by 5M+ customer service professionals." />
+        <meta property="og:title" content="Free Customer Service Resume Builder 2026 | ATS Global Templates" />
+        <meta property="og:description" content="Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-customer-service-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -688,8 +688,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Customer Service Resume Builder - ATS Friendly Global Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized customer service resumes for free. Land interviews 3x faster. Trusted by 5M+ customer service professionals worldwide." />
+        <meta name="twitter:title" content="Free Customer Service Resume Builder 2026 | ATS Global Templates" />
+        <meta name="twitter:description" content="Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-customer-service-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Customer Service Resume Builder with Global ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -715,8 +715,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder",
-                  "name": "Free Customer Service Resume Builder - ATS Friendly Global Templates 2026",
-                  "description": "Create professional ATS-optimized customer service resumes for free. Land interviews 3x faster with our global customer service resume builder.",
+                  "name": "Free Customer Service Resume Builder 2026 | ATS Global Templates",
+                  "description": "Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -998,7 +998,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Customer Service Resume Builder <span className={styles.gradientText}>Trusted by 5M+ Professionals Worldwide</span>
+              Free Customer Service Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

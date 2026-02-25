@@ -660,9 +660,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-GB">
       <Head>
-        <title>Free Care Assistant CV Builder - UK-Specific Templates 2026 | Professional CV Maker for Care Workers in UK</title>
-        <meta name="title" content="Free Care Assistant CV Builder - UK-Specific Templates 2026 | Professional CV Maker for Care Workers in UK" />
-        <meta name="description" content="Create professional ATS-optimized care assistant CVs for free. Land UK care jobs faster with our UK-specific CV builder. DBS-check ready, CQC-compliant templates for care assistants, healthcare assistants, and support workers in the UK." />
+        <title>Free Care Assistant CV Builder 2026 | UK-Specific Templates</title>
+        <meta name="title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
+        <meta name="description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
         <meta name="keywords" content="care assistant CV builder, UK care CV templates, healthcare assistant CV builder, care worker CV, DBS-check CV, CQC-compliant CV, free CV builder for care workers UK, NHS care CV, domiciliary care CV, elderly care CV" />
         <meta name="author" content="Professional Care Assistant CV Free UK" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -676,8 +676,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" hreflang="en-GB" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" hreflang="en-IE" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Care Assistant CV Builder - UK-Specific Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized care assistant CVs for free. Land UK care jobs faster with our UK-specific CV builder. DBS-check ready, CQC-compliant templates." />
+        <meta property="og:title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
+        <meta property="og:description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-care-assistant-cv-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -690,8 +690,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Care Assistant CV Builder - UK-Specific Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized care assistant CVs for free. Land UK care jobs faster. DBS-check ready, CQC-compliant templates." />
+        <meta name="twitter:title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
+        <meta name="twitter:description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-care-assistant-cv-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Care Assistant CV Builder with UK Templates" />
         <meta name="twitter:site" content="@CareCVFreeUK" />
@@ -717,8 +717,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder",
-                  "name": "Free Care Assistant CV Builder - UK-Specific Templates 2026",
-                  "description": "Create professional ATS-optimized care assistant CVs for free. Land UK care jobs faster with our UK-specific CV builder.",
+                  "name": "Free Care Assistant CV Builder 2026 | UK-Specific Templates",
+                  "description": "Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-GB",
@@ -1001,7 +1001,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Care Assistant CV Builder <span className={styles.gradientText}>Trusted by 250K+ UK Care Workers</span>
+              Free Care Assistant CV Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

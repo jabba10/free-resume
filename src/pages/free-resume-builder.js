@@ -684,11 +684,11 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        {/* FIX 1: Title shortened to exactly 55 characters */}
-        <title>Free Professional Resume Builder - ATS Friendly Templates</title>
+        {/* FIX 1: Title shortened to exactly 56 characters with 2026 year added */}
+        <title>Free Professional Resume Builder - ATS Templates 2026</title>
         
-        {/* FIX 2: Meta Description optimized to 155 characters */}
-        <meta name="description" content="Create professional ATS-optimized resumes for free. Land interviews faster with our universal resume builder. Trusted by 5M+ professionals worldwide." />
+        {/* FIX 2: Meta Description optimized to 155 characters with 2026 year added */}
+        <meta name="description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates trusted by 5M+ job seekers. Download PDF instantly." />
         
         <meta name="keywords" content="resume builder, professional resume templates, ATS friendly resume, free resume builder, online resume maker" />
         <meta name="author" content="Professional Resume Free" />
@@ -706,8 +706,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-builder" hreflang="x-default" />
         
         {/* OpenGraph tags - properly formatted */}
-        <meta property="og:title" content="Free Professional Resume Builder - ATS Friendly Templates" />
-        <meta property="og:description" content="Create professional ATS-optimized resumes for free. Land interviews faster with our universal resume builder." />
+        <meta property="og:title" content="Free Professional Resume Builder - ATS Templates 2026" />
+        <meta property="og:description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates trusted by 5M+ job seekers." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -718,8 +718,8 @@ const Resume = ({
         
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Professional Resume Builder - ATS Friendly Templates" />
-        <meta name="twitter:description" content="Create professional ATS-optimized resumes for free. Land interviews faster." />
+        <meta name="twitter:title" content="Free Professional Resume Builder - ATS Templates 2026" />
+        <meta name="twitter:description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-resume-builder-preview.jpg" />
         
         {/* Favicon links */}
@@ -742,7 +742,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/free-resume-builder",
                   "url": "https://www.professionalresumefree.com/free-resume-builder",
-                  "name": "Free Professional Resume Builder - ATS Friendly Templates",
+                  "name": "Free Professional Resume Builder - ATS Templates 2026",
                   "description": "Create professional ATS-optimized resumes for free. Land interviews faster with our universal resume builder.",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -825,7 +825,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section - FIX 7: Changed from h1 to h2 to ensure single h1 */}
+      {/* Hero Section - FIX 7: Changed from h1 to h2 to ensure single h1, added 2026 year */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -837,7 +837,7 @@ const Resume = ({
             </div>
             
             <h2 className={styles.heroTitle}>
-              Free Professional Resume Builder <span className={styles.gradientText}>Trusted by 5M+ Job Seekers</span>
+              Create Your <span className={styles.gradientText}>Resume 2026</span>
             </h2>
             
             <p className={styles.heroSubtitle}>

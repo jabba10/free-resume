@@ -700,9 +700,9 @@ const RetailResume = ({
   return (
     <div className={styles.retailResumeBuilder} lang="en-US" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
       <Head>
-        <title>Free Retail Resume Builder - ATS Friendly Retail Templates 2026 | Professional Resume Maker for Retail Professionals</title>
-        <meta name="title" content="Free Retail Resume Builder - ATS Friendly Retail Templates 2026 | Professional Resume Maker for Retail Professionals" />
-        <meta name="description" content="Create professional ATS-optimized retail resumes for free. Land interviews 3x faster with our retail resume builder. ATS-optimized templates for store managers, sales associates, visual merchandisers. Trusted by 3M+ retail professionals worldwide." />
+        <title>Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates</title>
+        <meta name="title" content="Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates" />
+        <meta name="description" content="Create your professional retail resume for free in 2026. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="retail resume builder, retail resume templates, store manager resume, sales associate resume, ATS friendly retail resume, free resume builder for retail professionals, retail CV, retail sales resume, visual merchandiser resume, retail management resume" />
         <meta name="author" content="Professional Retail Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -718,8 +718,8 @@ const RetailResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Retail Resume Builder - ATS Friendly Retail Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized retail resumes for free. Land interviews 3x faster with our retail resume builder. Trusted by 3M+ retail professionals." />
+        <meta property="og:title" content="Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates" />
+        <meta property="og:description" content="Create your professional retail resume for free in 2026. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-retail-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -733,8 +733,8 @@ const RetailResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Retail Resume Builder - ATS Friendly Retail Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized retail resumes for free. Land interviews 3x faster. Trusted by 3M+ retail professionals." />
+        <meta name="twitter:title" content="Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates" />
+        <meta name="twitter:description" content="Create your professional retail resume for free in 2026. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-retail-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Retail Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -767,7 +767,7 @@ const RetailResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder",
-                  "name": "Free Retail Resume Builder - ATS Friendly Retail Templates 2026",
+                  "name": "Free Retail Resume Builder 2026 - ATS Friendly Retail Templates",
                   "description": "Create professional ATS-optimized retail resumes for free. Land interviews 3x faster with our retail resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1050,7 +1050,7 @@ const RetailResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Retail Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Retail Professionals</span>
+              Free Retail Resume Builder 2026: Create Your ATS Store Manager Resume & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>

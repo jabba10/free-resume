@@ -711,9 +711,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Data Analyst Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Data Analysts Worldwide</title>
-        <meta name="title" content="Free Data Analyst Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Data Analysts Worldwide" />
-        <meta name="description" content="Create professional ATS-optimized data analyst resumes for free. Land interviews 3x faster with our resume builder. ATS-optimized templates for data analysts, BI analysts, data scientists. Trusted by 2M+ data professionals globally." />
+        <title>Free Data Analyst Resume Builder: ATS Templates 2026</title>
+        <meta name="title" content="Free Data Analyst Resume Builder: ATS Templates 2026" />
+        <meta name="description" content="Create your professional ATS-ready resume in 5 minutes. Free data analyst resume builder with templates for SQL, Python & visualization roles. Download PDF instantly." />
         <meta name="keywords" content="data analyst resume builder, data analyst resume templates, data analyst CV, ATS friendly data analyst resume, free resume builder for data analysts, data science resume, business intelligence resume, SQL resume, Python resume, Tableau resume, data visualization resume" />
         <meta name="author" content="Professional Data Analyst Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -729,8 +729,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Data Analyst Resume Builder - ATS Friendly Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized data analyst resumes for free. Land interviews 3x faster with our resume builder. Trusted by 2M+ data professionals globally." />
+        <meta property="og:title" content="Free Data Analyst Resume Builder: ATS Templates 2026" />
+        <meta property="og:description" content="Create your professional ATS-ready resume in 5 minutes. Free data analyst resume builder with templates for SQL, Python & visualization roles. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-data-analyst-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -744,8 +744,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Data Analyst Resume Builder - ATS Friendly Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized data analyst resumes for free. Land interviews 3x faster. Trusted by 2M+ data professionals." />
+        <meta name="twitter:title" content="Free Data Analyst Resume Builder: ATS Templates 2026" />
+        <meta name="twitter:description" content="Create your professional ATS-ready resume in 5 minutes. Free data analyst resume builder with templates for SQL, Python & visualization roles." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-data-analyst-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Data Analyst Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@DataAnalystResume" />
@@ -771,8 +771,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder",
-                  "name": "Free Data Analyst Resume Builder - ATS Friendly Templates 2026",
-                  "description": "Create professional ATS-optimized data analyst resumes for free. Land interviews 3x faster with our resume builder.",
+                  "name": "Free Data Analyst Resume Builder: ATS Templates 2026",
+                  "description": "Create your professional ATS-ready resume in 5 minutes. Free data analyst resume builder with templates for SQL, Python & visualization roles. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1053,7 +1053,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Data Analyst Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Data Professionals Worldwide</span>
+              Free Data Analyst Resume Builder: Create Yours in 5 Minutes
             </h1>
             
             <p className={styles.heroSubtitle}>
@@ -1066,7 +1066,7 @@ const Resume = ({
                 className={styles.primaryButton}
                 aria-label="Start building your free data analyst resume now—no sign-up required"
               >
-                <span className={styles.buttonText}>Start Building Your Data Analyst Resume Now</span>
+                <span className={styles.buttonText}>Build Your Data Analyst Resume Now</span>
                 <FiArrowRight className={styles.buttonIcon} />
                 <div className={styles.buttonPulse}></div>
               </button>

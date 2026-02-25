@@ -716,9 +716,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Delivery Driver Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Drivers Worldwide</title>
-        <meta name="title" content="Free Delivery Driver Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Drivers Worldwide" />
-        <meta name="description" content="Create professional ATS-optimized delivery driver resumes for free. Land driving jobs 3x faster with our driver resume builder. ATS-optimized templates for delivery drivers, truck drivers, couriers, and transportation professionals. Trusted by 2M+ drivers worldwide." />
+        <title>Free Driver Resume Builder 2026 | ATS Delivery Templates</title>
+        <meta name="title" content="Free Driver Resume Builder 2026 | ATS Delivery Templates" />
+        <meta name="description" content="Create a professional driver resume for free in 2026. ATS-optimized templates for delivery drivers, truckers. Download PDF instantly." />
         <meta name="keywords" content="delivery driver resume builder, truck driver resume, driver resume templates, ATS friendly driver resume, free resume builder for delivery drivers, courier resume, logistics resume, CDL resume, food delivery resume, package delivery resume" />
         <meta name="author" content="Professional Driver Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -734,8 +734,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Delivery Driver Resume Builder - ATS Friendly Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized delivery driver resumes for free. Land driving jobs 3x faster with our driver resume builder. Trusted by 2M+ drivers worldwide." />
+        <meta property="og:title" content="Free Driver Resume Builder 2026 | ATS Delivery Templates" />
+        <meta property="og:description" content="Create a professional driver resume for free in 2026. ATS-optimized templates for delivery drivers, truckers. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-driver-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -749,8 +749,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Delivery Driver Resume Builder - ATS Friendly Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized delivery driver resumes for free. Land driving jobs 3x faster. Trusted by 2M+ drivers." />
+        <meta name="twitter:title" content="Free Driver Resume Builder 2026 | ATS Delivery Templates" />
+        <meta name="twitter:description" content="Create a professional driver resume for free in 2026. ATS-optimized templates for delivery drivers, truckers. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-driver-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Delivery Driver Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -776,8 +776,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-driver-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-driver-resume-builder",
-                  "name": "Free Delivery Driver Resume Builder - ATS Friendly Templates 2026",
-                  "description": "Create professional ATS-optimized delivery driver resumes for free. Land driving jobs 3x faster with our driver resume builder.",
+                  "name": "Free Driver Resume Builder 2026 | ATS Delivery Templates",
+                  "description": "Create a professional driver resume for free in 2026. ATS-optimized templates for delivery drivers, truckers. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1059,7 +1059,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Delivery Driver Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Drivers Worldwide</span>
+              Free Driver Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

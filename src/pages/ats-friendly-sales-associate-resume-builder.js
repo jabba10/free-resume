@@ -699,9 +699,9 @@ const SalesResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Sales Resume Builder - ATS Friendly Sales Templates 2026 | Professional Resume Maker for Sales Associates, Executives, Managers</title>
-        <meta name="title" content="Free Sales Resume Builder - ATS Friendly Sales Templates 2026 | Professional Resume Maker for Sales Associates, Executives, Managers" />
-        <meta name="description" content="Create professional ATS-optimized sales resumes for free. Land interviews 3x faster with our sales resume builder. Highlight revenue, quotas, and achievements. Trusted by 3M+ sales professionals worldwide." />
+        <title>Free Sales Resume Builder 2026 | ATS Sales Templates</title>
+        <meta name="title" content="Free Sales Resume Builder 2026 | ATS Sales Templates" />
+        <meta name="description" content="Create your professional sales resume for free in 2026. ATS-optimized templates help sales professionals highlight revenue, quotas & achievements. Start now—no sign-up." />
         <meta name="keywords" content="sales resume builder, sales associate resume, sales executive resume, sales manager resume, ATS friendly sales resume, free resume builder for sales professionals, commission resume, sales CV, BDR resume, SDR resume, account executive resume" />
         <meta name="author" content="Professional Sales Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -717,8 +717,8 @@ const SalesResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sales-associate-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sales-associate-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sales-associate-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Sales Resume Builder - ATS Friendly Sales Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized sales resumes for free. Land interviews 3x faster with our sales resume builder. Trusted by 3M+ sales professionals." />
+        <meta property="og:title" content="Free Sales Resume Builder 2026 | ATS Sales Templates" />
+        <meta property="og:description" content="Create your professional sales resume for free in 2026. ATS-optimized templates help sales professionals highlight revenue, quotas & achievements. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-sales-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -732,8 +732,8 @@ const SalesResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Sales Resume Builder - ATS Friendly Sales Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized sales resumes for free. Land interviews 3x faster. Trusted by 3M+ sales professionals." />
+        <meta name="twitter:title" content="Free Sales Resume Builder 2026 | ATS Sales Templates" />
+        <meta name="twitter:description" content="Create your professional sales resume for free in 2026. ATS-optimized templates help sales professionals highlight revenue, quotas & achievements. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-sales-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Sales Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -759,7 +759,7 @@ const SalesResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-sales-associate-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-sales-associate-resume-builder",
-                  "name": "Free Sales Resume Builder - ATS Friendly Sales Templates 2026",
+                  "name": "Free Sales Resume Builder 2026 - ATS Sales Templates",
                   "description": "Create professional ATS-optimized sales resumes for free. Land interviews 3x faster with our sales resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1042,7 +1042,7 @@ const SalesResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Sales Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Sales Professionals</span>
+              Free Sales Resume Builder 2026: Create Your ATS Sales CV & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>
@@ -1082,7 +1082,7 @@ const SalesResume = ({
               </div>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Feeper Salary Offers</span>
+                <span className={styles.statLabel}>Higher Salary Offers</span>
               </div>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>4.9/5</span>

@@ -724,9 +724,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Nurse Practitioner Resume Builder - ATS Friendly NP Templates 2026 | Professional Resume Maker for FNPs, AGNPs, PNPs</title>
-        <meta name="title" content="Free Nurse Practitioner Resume Builder - ATS Friendly NP Templates 2026 | Professional Resume Maker for FNPs, AGNPs, PNPs" />
-        <meta name="description" content="Create professional ATS-optimized nurse practitioner resumes for free. Land interviews 3x faster with our NP resume builder. ATS-optimized templates for FNPs, AGACNPs, PNPs, WHNPs, PMHNPs. Trusted by 50,000+ nurse practitioners nationwide." />
+        <title>Free Nurse Practitioner Resume Builder: NP Templates 2026</title>
+        <meta name="title" content="Free Nurse Practitioner Resume Builder: NP Templates 2026" />
+        <meta name="description" content="Create your ATS-optimized nurse practitioner resume for free in 2026. Professional NP templates trusted by 50,000+ FNPs, AGNPs & PNPs. Download PDF instantly." />
         <meta name="keywords" content="nurse practitioner resume builder, NP resume templates, FNP resume, AGACNP resume, pediatric NP resume, psychiatric NP resume, ATS friendly NP resume, free nurse practitioner resume builder, advanced practice nurse resume, NP CV, nurse practitioner curriculum vitae" />
         <meta name="author" content="Professional Nurse Practitioner Resume Builder" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -742,8 +742,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Nurse Practitioner Resume Builder - ATS Friendly NP Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized nurse practitioner resumes for free. Land interviews 3x faster with our NP resume builder. Trusted by 50,000+ nurse practitioners." />
+        <meta property="og:title" content="Free Nurse Practitioner Resume Builder: NP Templates 2026" />
+        <meta property="og:description" content="Create your ATS-optimized nurse practitioner resume for free in 2026. Professional NP templates trusted by 50,000+ FNPs, AGNPs & PNPs." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-np-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -757,8 +757,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Nurse Practitioner Resume Builder - ATS Friendly NP Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized nurse practitioner resumes for free. Land interviews 3x faster. Trusted by 50,000+ nurse practitioners." />
+        <meta name="twitter:title" content="Free Nurse Practitioner Resume Builder: NP Templates 2026" />
+        <meta name="twitter:description" content="Create your ATS-optimized nurse practitioner resume for free in 2026. Professional NP templates trusted by 50,000+ FNPs, AGNPs & PNPs." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-np-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Nurse Practitioner Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@NPResumeBuilder" />
@@ -1068,7 +1068,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Nurse Practitioner Resume Builder <span className={styles.gradientText}>Trusted by 50,000+ NPs Nationwide</span>
+              Create Your <span className={styles.gradientText}>NP Resume 2026</span>
             </h1>
             
             <p className={styles.heroSubtitle}>

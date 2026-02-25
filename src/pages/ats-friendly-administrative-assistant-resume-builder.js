@@ -678,9 +678,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Administrative Assistant Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Administrative Professionals Worldwide</title>
-        <meta name="title" content="Free Administrative Assistant Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Administrative Professionals Worldwide" />
-        <meta name="description" content="Create professional ATS-optimized administrative resumes for free. Land interviews 3x faster with our administrative resume builder. ATS-optimized templates for executive assistants, office administrators, virtual assistants. Trusted by 3M+ administrative professionals globally." />
+        <title>Free Administrative Resume Builder: ATS Templates 2026</title>
+        <meta name="title" content="Free Administrative Resume Builder: ATS Templates 2026" />
+        <meta name="description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
         <meta name="keywords" content="administrative resume builder, administrative assistant resume templates, executive assistant resume, office administrator CV, ATS friendly administrative resume, free resume builder for administrative professionals, virtual assistant resume, administrative coordinator CV, global administrative jobs" />
         <meta name="author" content="Professional Administrative Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -696,8 +696,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Administrative Assistant Resume Builder - ATS Friendly Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized administrative resumes for free. Land interviews 3x faster with our administrative resume builder. Trusted by 3M+ administrative professionals globally." />
+        <meta property="og:title" content="Free Administrative Resume Builder: ATS Templates 2026" />
+        <meta property="og:description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-administrative-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -711,8 +711,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Administrative Assistant Resume Builder - ATS Friendly Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized administrative resumes for free. Land interviews 3x faster. Trusted by 3M+ administrative professionals globally." />
+        <meta name="twitter:title" content="Free Administrative Resume Builder: ATS Templates 2026" />
+        <meta name="twitter:description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-administrative-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Administrative Assistant Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -738,8 +738,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder",
-                  "name": "Free Administrative Assistant Resume Builder - ATS Friendly Templates 2026",
-                  "description": "Create professional ATS-optimized administrative resumes for free. Land interviews 3x faster with our administrative resume builder.",
+                  "name": "Free Administrative Resume Builder: ATS Templates 2026",
+                  "description": "Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1021,7 +1021,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Administrative Assistant Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Administrative Professionals Worldwide</span>
+              Free Administrative Resume Builder: Create Yours in 5 Minutes
             </h1>
             
             <p className={styles.heroSubtitle}>
@@ -1034,7 +1034,7 @@ const Resume = ({
                 className={styles.primaryButton}
                 aria-label="Start building your free administrative resume now—no sign-up required"
               >
-                <span className={styles.buttonText}>Start Building Your Administrative Resume Now</span>
+                <span className={styles.buttonText}>Build Your Administrative Resume Now</span>
                 <FiArrowRight className={styles.buttonIcon} />
                 <div className={styles.buttonPulse}></div>
               </button>

@@ -737,9 +737,9 @@ const VeterinaryResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Veterinary Resume Builder - ATS Friendly Animal Healthcare Templates 2026 | Professional CV Maker for Veterinarians, Vet Techs, Animal Specialists</title>
-        <meta name="title" content="Free Veterinary Resume Builder - ATS Friendly Animal Healthcare Templates 2026 | Professional CV Maker for Veterinarians, Vet Techs, Animal Specialists" />
-        <meta name="description" content="Create professional ATS-optimized veterinary resumes for free. Land interviews faster with our animal healthcare resume builder. Templates for veterinarians, vet techs, surgeons, and animal specialists. Trusted by veterinary professionals worldwide." />
+        <title>Free Veterinary Resume Builder 2026 | ATS Vet Templates</title>
+        <meta name="title" content="Free Veterinary Resume Builder 2026 | ATS Vet Templates" />
+        <meta name="description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates for vets, technicians & animal healthcare specialists. Start now—no sign-up." />
         <meta name="keywords" content="veterinary resume builder, vet resume templates, veterinarian CV, vet technician resume, animal healthcare resume, ATS friendly veterinary resume, free resume builder for veterinarians, veterinary surgeon CV, exotic animal specialist resume, veterinary practice manager resume" />
         <meta name="author" content="Professional Veterinary Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -755,8 +755,8 @@ const VeterinaryResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Veterinary Resume Builder - ATS Friendly Animal Healthcare Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized veterinary resumes for free. Land interviews faster. Templates for veterinarians, vet techs, surgeons, and animal specialists." />
+        <meta property="og:title" content="Free Veterinary Resume Builder 2026 | ATS Vet Templates" />
+        <meta property="og:description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates for vets, technicians & animal healthcare specialists. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-veterinary-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -770,8 +770,8 @@ const VeterinaryResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Veterinary Resume Builder - ATS Friendly Animal Healthcare Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized veterinary resumes for free. Land interviews faster. Trusted by veterinary professionals worldwide." />
+        <meta name="twitter:title" content="Free Veterinary Resume Builder 2026 | ATS Vet Templates" />
+        <meta name="twitter:description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates for vets, technicians & animal healthcare specialists. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-veterinary-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Veterinary Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@VetResumeFree" />
@@ -797,7 +797,7 @@ const VeterinaryResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder",
-                  "name": "Free Veterinary Resume Builder - ATS Friendly Animal Healthcare Templates 2026",
+                  "name": "Free Veterinary Resume Builder 2026 - ATS Vet Templates",
                   "description": "Create professional ATS-optimized veterinary resumes for free. Land interviews faster with our animal healthcare resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1080,7 +1080,7 @@ const VeterinaryResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Veterinary Resume Builder <span className={styles.gradientText}>Trusted by Animal Healthcare Professionals</span>
+              Free Veterinary Resume Builder 2026: Create Your ATS Vet CV & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>

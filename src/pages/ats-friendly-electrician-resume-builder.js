@@ -724,9 +724,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Electrician Resume Builder - ATS Friendly Electrical Templates 2026 | Professional Resume Maker for Electricians Worldwide</title>
-        <meta name="title" content="Free Electrician Resume Builder - ATS Friendly Electrical Templates 2026 | Professional Resume Maker for Electricians Worldwide" />
-        <meta name="description" content="Create professional ATS-optimized electrician resumes for free. Land interviews 3x faster with our electrical resume builder. ATS-optimized templates for industrial, commercial, residential electricians. Trusted by 2M+ electricians worldwide." />
+        <title>Free Electrician Resume Builder: ATS Electrical Templates 2026</title>
+        <meta name="title" content="Free Electrician Resume Builder: ATS Electrical Templates 2026" />
+        <meta name="description" content="Create your ATS-friendly electrician resume for free in 2026. Professional electrical templates trusted by 2M+ electricians. Download PDF instantly." />
         <meta name="keywords" content="electrician resume builder, electrical resume templates, industrial electrician resume, commercial electrician, ATS friendly electrician resume, free resume builder for electricians, electrical CV, electrician resume, electrical contractor resume, international electrician" />
         <meta name="author" content="Professional Electrician Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -742,7 +742,7 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Electrician Resume Builder - ATS Friendly Electrical Templates 2026" />
+        <meta property="og:title" content="Free Electrician Resume Builder: ATS Electrical Templates 2026" />
         <meta property="og:description" content="Create professional ATS-optimized electrician resumes for free. Land interviews 3x faster with our electrical resume builder. Trusted by 2M+ electricians worldwide." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-electrician-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -757,7 +757,7 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Electrician Resume Builder - ATS Friendly Electrical Templates 2026" />
+        <meta name="twitter:title" content="Free Electrician Resume Builder: ATS Electrical Templates 2026" />
         <meta name="twitter:description" content="Create professional ATS-optimized electrician resumes for free. Land interviews 3x faster. Trusted by 2M+ electricians worldwide." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-electrician-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Electrician Resume Builder with ATS Templates" />
@@ -1067,7 +1067,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Electrician Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Electricians Worldwide</span>
+              Create Your <span className={styles.gradientText}>Electrician Resume 2026</span>
             </h1>
             
             <p className={styles.heroSubtitle}>

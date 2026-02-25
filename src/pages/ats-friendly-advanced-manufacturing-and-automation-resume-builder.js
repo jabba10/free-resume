@@ -715,9 +715,9 @@ const AdvancedManufacturingResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Advanced Manufacturing Resume Builder - ATS Friendly Industry Templates 2026 | Professional Resume Maker for Engineers, Technicians, Automation Specialists</title>
-        <meta name="title" content="Free Advanced Manufacturing Resume Builder - ATS Friendly Industry Templates 2026 | Professional Resume Maker for Engineers, Technicians, Automation Specialists" />
-        <meta name="description" content="Create professional ATS-optimized manufacturing resumes for free. Land interviews 3x faster with our industry resume builder. ATS-optimized templates for engineers, technicians, automation specialists, quality control. Trusted by 500K+ manufacturing professionals worldwide." />
+        <title>Free Manufacturing Resume Builder 2026 | ATS-Friendly Industry Templates</title>
+        <meta name="title" content="Free Manufacturing Resume Builder 2026 | ATS-Friendly Industry Templates" />
+        <meta name="description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
         <meta name="keywords" content="manufacturing resume builder, industrial resume templates, engineer resume builder, automation resume, ATS friendly manufacturing resume, free resume builder for engineers, technical resume, manufacturing CV, industrial automation resume, factory resume" />
         <meta name="author" content="Professional Manufacturing Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -733,8 +733,8 @@ const AdvancedManufacturingResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Advanced Manufacturing Resume Builder - ATS Friendly Industry Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized manufacturing resumes for free. Land interviews 3x faster with our industry resume builder. Trusted by 500K+ manufacturing professionals." />
+        <meta property="og:title" content="Free Manufacturing Resume Builder 2026 | ATS-Friendly Industry Templates" />
+        <meta property="og:description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-manufacturing-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -748,8 +748,8 @@ const AdvancedManufacturingResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Advanced Manufacturing Resume Builder - ATS Friendly Industry Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized manufacturing resumes for free. Land interviews 3x faster. Trusted by 500K+ manufacturing professionals." />
+        <meta name="twitter:title" content="Free Manufacturing Resume Builder 2026 | ATS-Friendly Industry Templates" />
+        <meta name="twitter:description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-manufacturing-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Manufacturing Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -776,8 +776,8 @@ const AdvancedManufacturingResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder",
-                  "name": "Free Advanced Manufacturing Resume Builder - ATS Friendly Industry Templates 2026",
-                  "description": "Create professional ATS-optimized manufacturing resumes for free. Land interviews 3x faster with our industry resume builder.",
+                  "name": "Free Manufacturing Resume Builder 2026 | ATS-Friendly Industry Templates",
+                  "description": "Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1059,7 +1059,7 @@ const AdvancedManufacturingResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Advanced Manufacturing Resume Builder <span className={styles.gradientText}>Trusted by 500K+ Industrial Professionals</span>
+              Free Manufacturing Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

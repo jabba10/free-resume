@@ -676,11 +676,11 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        {/* FIX 1: Title shortened to exactly 57 characters */}
-        <title>Free Tech Resume Builder - ATS Friendly Templates 2026</title>
+        {/* FIX 1: Title shortened to exactly 50 characters */}
+        <title>Free Tech Resume Builder: ATS Templates 2026</title>
         
-        {/* FIX 2: Meta Description optimized to 158 characters */}
-        <meta name="description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder. Trusted by 2M+ tech professionals worldwide." />
+        {/* FIX 2: Meta Description optimized to 156 characters */}
+        <meta name="description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros. Download PDF instantly." />
         
         <meta name="keywords" content="tech resume builder, software engineer resume, developer resume, data science resume, ATS friendly tech resume, free resume builder for tech professionals" />
         <meta name="author" content="Professional Tech Resume Free" />
@@ -698,8 +698,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="x-default" />
         
         {/* OpenGraph tags - properly formatted */}
-        <meta property="og:title" content="Free Tech Resume Builder - ATS Friendly Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder." />
+        <meta property="og:title" content="Free Tech Resume Builder: ATS Templates 2026" />
+        <meta property="og:description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -711,8 +711,8 @@ const Resume = ({
         
         {/* Twitter Card tags - removed duplicates */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Tech Resume Builder - ATS Friendly Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized tech resumes for free. Land interviews 3x faster." />
+        <meta name="twitter:title" content="Free Tech Resume Builder: ATS Templates 2026" />
+        <meta name="twitter:description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
         
@@ -871,7 +871,7 @@ const Resume = ({
             </div>
             
             <h2 className={styles.heroTitle}>
-              Free Tech Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Tech Professionals</span>
+              Create Your <span className={styles.gradientText}>Tech Resume 2026</span>
             </h2>
             
             <p className={styles.heroSubtitle}>

@@ -639,9 +639,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Medical Assistant Resume Builder - ATS Friendly CMA/RMA Templates 2026 | Professional Medical Assistant Resume Maker</title>
-        <meta name="title" content="Free Medical Assistant Resume Builder - ATS Friendly CMA/RMA Templates 2026 | Professional Medical Assistant Resume Maker" />
-        <meta name="description" content="Create professional ATS-optimized Medical Assistant resumes for free. Land interviews 3x faster with our CMA/RMA resume builder. ATS-optimized templates for Clinical Medical Assistants, Certified Medical Assistants, and Registered Medical Assistants. Trusted by 500K+ Medical Assistants in the USA." />
+        <title>Free Medical Assistant Resume Builder 2026 | ATS CMA/RMA Templates</title>
+        <meta name="title" content="Free Medical Assistant Resume Builder 2026 | ATS CMA/RMA Templates" />
+        <meta name="description" content="Create your professional Medical Assistant resume for free in 2026. ATS-optimized CMA/RMA templates help you land healthcare interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="medical assistant resume builder, CMA resume, RMA resume, medical assistant resume templates, clinical medical assistant resume, certified medical assistant resume, free resume builder for medical assistants, ATS friendly medical assistant resume, entry level medical assistant resume, healthcare resume USA" />
         <meta name="author" content="Professional Medical Assistant Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -653,8 +653,8 @@ const Resume = ({
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" hreflang="en-US" />
-        <meta property="og:title" content="Free Medical Assistant Resume Builder - ATS Friendly CMA/RMA Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized Medical Assistant resumes for free. Land interviews 3x faster with our CMA/RMA resume builder. Trusted by 500K+ Medical Assistants." />
+        <meta property="og:title" content="Free Medical Assistant Resume Builder 2026 | ATS CMA/RMA Templates" />
+        <meta property="og:description" content="Create your professional Medical Assistant resume for free in 2026. ATS-optimized CMA/RMA templates help you land healthcare interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-medical-assistant-resume-builder.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -665,8 +665,8 @@ const Resume = ({
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Medical Assistant Resume Builder - ATS Friendly CMA/RMA Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized Medical Assistant resumes for free. Land interviews 3x faster. Trusted by 500K+ Medical Assistants." />
+        <meta name="twitter:title" content="Free Medical Assistant Resume Builder 2026 | ATS CMA/RMA Templates" />
+        <meta name="twitter:description" content="Create your professional Medical Assistant resume for free in 2026. ATS-optimized CMA/RMA templates help you land healthcare interviews faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-medical-assistant-resume-builder.jpg" />
         <meta name="twitter:image:alt" content="Free Medical Assistant Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@MA_ResumeFree" />
@@ -692,7 +692,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder",
-                  "name": "Free Medical Assistant Resume Builder - ATS Friendly CMA/RMA Templates 2026",
+                  "name": "Free Medical Assistant Resume Builder 2026 - ATS CMA/RMA Templates",
                   "description": "Create professional ATS-optimized Medical Assistant resumes for free. Land interviews 3x faster with our CMA/RMA resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -886,7 +886,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Medical Assistant Resume Builder <span className={styles.gradientText}>Trusted by 500K+ Medical Assistants in the USA</span>
+              Free Medical Assistant Resume Builder 2026: Create Your ATS CMA/RMA Resume & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>

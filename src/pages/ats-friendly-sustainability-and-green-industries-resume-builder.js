@@ -692,9 +692,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Sustainability Resume Builder - ATS Friendly Green Industry Templates 2026 | Professional Resume Maker for ESG, Renewable Energy, Environmental Careers</title>
-        <meta name="title" content="Free Sustainability Resume Builder - ATS Friendly Green Industry Templates 2026 | Professional Resume Maker for ESG, Renewable Energy, Environmental Careers" />
-        <meta name="description" content="Create professional ATS-optimized sustainability resumes for free. Land green industry interviews 3x faster with our ESG resume builder. ATS-optimized templates for sustainability managers, renewable energy specialists, environmental consultants. Trusted by 500K+ sustainability professionals worldwide." />
+        <title>Free Sustainability Resume Builder 2026 | ATS Green Industry Templates</title>
+        <meta name="title" content="Free Sustainability Resume Builder 2026 | ATS Green Industry Templates" />
+        <meta name="description" content="Create your professional sustainability resume for free in 2026. ATS-optimized templates for ESG, renewable energy & environmental careers. Start now—no sign-up." />
         <meta name="keywords" content="sustainability resume builder, green industry resume templates, ESG resume builder, renewable energy resume, ATS friendly sustainability resume, free resume builder for environmental professionals, climate resume, sustainability CV, green jobs resume, environmental careers" />
         <meta name="author" content="Professional Sustainability Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -710,8 +710,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Sustainability Resume Builder - ATS Friendly Green Industry Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized sustainability resumes for free. Land interviews 3x faster with our ESG resume builder. Trusted by 500K+ sustainability professionals." />
+        <meta property="og:title" content="Free Sustainability Resume Builder 2026 | ATS Green Industry Templates" />
+        <meta property="og:description" content="Create your professional sustainability resume for free in 2026. ATS-optimized templates for ESG, renewable energy & environmental careers. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-sustainability-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -725,8 +725,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Sustainability Resume Builder - ATS Friendly Green Industry Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized sustainability resumes for free. Land interviews 3x faster. Trusted by 500K+ sustainability professionals." />
+        <meta name="twitter:title" content="Free Sustainability Resume Builder 2026 | ATS Green Industry Templates" />
+        <meta name="twitter:description" content="Create your professional sustainability resume for free in 2026. ATS-optimized templates for ESG, renewable energy & environmental careers. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-sustainability-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Sustainability Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@GreenResumeFree" />
@@ -753,7 +753,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder",
-                  "name": "Free Sustainability Resume Builder - ATS Friendly Green Industry Templates 2026",
+                  "name": "Free Sustainability Resume Builder 2026 - ATS Green Industry Templates",
                   "description": "Create professional ATS-optimized sustainability resumes for free. Land interviews 3x faster with our ESG resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1036,7 +1036,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Sustainability Resume Builder <span className={styles.gradientText}>Trusted by 500K+ Green Industry Professionals</span>
+              Free Sustainability Resume Builder 2026: Create Your ATS Green CV & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>
@@ -2153,4 +2153,3 @@ export async function getStaticProps() {
 }
 
 export default Resume;
-  

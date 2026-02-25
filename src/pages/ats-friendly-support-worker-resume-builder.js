@@ -646,9 +646,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-GB">
       <Head>
-        <title>Free UK Support Worker CV Builder - DBS Ready Templates 2026 | Professional CV Maker for Care Workers</title>
-        <meta name="title" content="Free UK Support Worker CV Builder - DBS Ready Templates 2026 | Professional CV Maker for Care Workers" />
-        <meta name="description" content="Create professional DBS-ready support worker CVs for free. Land interviews 3x faster with our UK care sector CV builder. CQC-optimized templates for support workers, carers, healthcare assistants. Trusted by 200K+ UK care professionals." />
+        <title>Free UK Support Worker CV Builder 2026 | DBS-Ready Templates</title>
+        <meta name="title" content="Free UK Support Worker CV Builder 2026 | DBS-Ready Templates" />
+        <meta name="description" content="Create a professional support worker CV for free. DBS-ready templates trusted by 200K+ UK care pros. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="support worker CV builder, care worker CV templates, UK care sector CV, DBS ready CV, CQC compliant CV, free CV builder for support workers, healthcare assistant CV, domiciliary care CV, learning disabilities support CV, mental health support CV" />
         <meta name="author" content="Professional UK Support Worker CV Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -661,8 +661,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" hreflang="en-GB" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free UK Support Worker CV Builder - DBS Ready Templates 2026" />
-        <meta property="og:description" content="Create professional DBS-ready support worker CVs for free. Land interviews 3x faster with our UK care sector CV builder. Trusted by 200K+ UK care professionals." />
+        <meta property="og:title" content="Free UK Support Worker CV Builder 2026 | DBS-Ready Templates" />
+        <meta property="og:description" content="Create a professional support worker CV for free. DBS-ready templates trusted by 200K+ UK care pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -673,8 +673,8 @@ const Resume = ({
         <meta property="og:locale" content="en_GB" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free UK Support Worker CV Builder - DBS Ready Templates 2026" />
-        <meta name="twitter:description" content="Create professional DBS-ready support worker CVs for free. Land interviews 3x faster. Trusted by 200K+ UK care professionals." />
+        <meta name="twitter:title" content="Free UK Support Worker CV Builder 2026 | DBS-Ready Templates" />
+        <meta name="twitter:description" content="Create a professional support worker CV for free. DBS-ready templates trusted by 200K+ UK care pros. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-support-worker-cv-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free UK Support Worker CV Builder with DBS Ready Templates" />
         <meta name="twitter:site" content="@UKSupportWorkerCV" />
@@ -700,7 +700,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder",
-                  "name": "Free UK Support Worker CV Builder - DBS Ready Templates 2026",
+                  "name": "Free UK Support Worker CV Builder 2026 | DBS-Ready Templates",
                   "description": "Create professional DBS-ready support worker CVs for free. Land interviews 3x faster with our UK care sector CV builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -983,7 +983,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free UK Support Worker CV Builder <span className={styles.gradientText}>Trusted by 200K+ Care Professionals</span>
+              Free UK Support Worker CV Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

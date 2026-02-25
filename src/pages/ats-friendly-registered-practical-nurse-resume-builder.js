@@ -803,9 +803,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-CA">
       <Head>
-        <title>Free Registered Practical Nurse (RPN) Resume Builder - Canadian Healthcare Templates 2026 | ATS-Friendly RPN Resume Maker</title>
-        <meta name="title" content="Free Registered Practical Nurse (RPN) Resume Builder - Canadian Healthcare Templates 2026 | ATS-Friendly RPN Resume Maker" />
-        <meta name="description" content="Create professional ATS-optimized Registered Practical Nurse resumes for Canadian healthcare jobs. Free RPN resume builder with Canadian terminology, provincial licensing, and CNO standards. Trusted by RPNs across Canada." />
+        <title>Free RPN Resume Builder Canada | Canadian Nursing Templates 2026</title>
+        <meta name="title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
+        <meta name="description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology. Trusted by 2M+ Canadian RPNs." />
         <meta name="keywords" content="RPN resume builder, Registered Practical Nurse resume Canada, Canadian RPN resume, healthcare resume builder Canada, RPN resume template Ontario, BC RPN resume, Alberta RPN resume, nursing resume Canada, CNO resume format, ATS friendly RPN resume" />
         <meta name="author" content="Professional RPN Resume Free - Canada" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -819,8 +819,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" hreflang="en-US" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Registered Practical Nurse (RPN) Resume Builder - Canadian Healthcare Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized RPN resumes for Canadian healthcare jobs. Free builder with Canadian terminology and provincial licensing standards." />
+        <meta property="og:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
+        <meta property="og:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -832,8 +832,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_US" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Registered Practical Nurse (RPN) Resume Builder - Canadian Healthcare Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized RPN resumes for Canadian healthcare jobs. Free builder with Canadian terminology." />
+        <meta name="twitter:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
+        <meta name="twitter:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-rpn-resume-builder-canada-preview.jpg" />
         <meta name="twitter:image:alt" content="Free RPN Resume Builder for Canada" />
         <meta name="twitter:site" content="@RPNResumeCanada" />
@@ -1142,7 +1142,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Registered Practical Nurse (RPN) Resume Builder <span className={styles.gradientText}>Made for Canadian Healthcare</span>
+              Create Your <span className={styles.gradientText}>Canadian RPN Resume 2026</span>
             </h1>
             
             <p className={styles.heroSubtitle}>

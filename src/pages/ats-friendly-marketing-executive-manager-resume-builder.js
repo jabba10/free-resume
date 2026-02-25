@@ -735,9 +735,9 @@ const MarketingResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Marketing Executive Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Marketing Managers, Digital Marketers</title>
-        <meta name="title" content="Free Marketing Executive Resume Builder - ATS Friendly Templates 2026 | Professional Resume Maker for Marketing Managers, Digital Marketers" />
-        <meta name="description" content="Create professional ATS-optimized marketing resumes for free. Land interviews 3x faster with our marketing resume builder. ATS-optimized templates for Marketing Executives, Digital Marketers, Brand Managers, Marketing Directors. Trusted by 3M+ marketing professionals worldwide." />
+        <title>Free Marketing Resume Builder 2026 | Executive Templates</title>
+        <meta name="title" content="Free Marketing Resume Builder 2026 | Executive Templates" />
+        <meta name="description" content="Create a professional marketing resume for free. ATS-friendly executive templates trusted by 3M+ marketing pros. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="marketing resume builder, marketing executive resume, marketing manager resume, digital marketing resume, ATS friendly marketing resume, free resume builder for marketing professionals, brand manager resume, marketing director resume, social media manager resume, content marketing resume" />
         <meta name="author" content="Professional Marketing Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -753,8 +753,8 @@ const MarketingResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Marketing Executive Resume Builder - ATS Friendly Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized marketing resumes for free. Land interviews 3x faster with our marketing resume builder. Trusted by 3M+ marketing professionals." />
+        <meta property="og:title" content="Free Marketing Resume Builder 2026 | Executive Templates" />
+        <meta property="og:description" content="Create a professional marketing resume for free. ATS-friendly executive templates trusted by 3M+ marketing pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-marketing-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -768,8 +768,8 @@ const MarketingResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Marketing Executive Resume Builder - ATS Friendly Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized marketing resumes for free. Land interviews 3x faster. Trusted by 3M+ marketing professionals." />
+        <meta name="twitter:title" content="Free Marketing Resume Builder 2026 | Executive Templates" />
+        <meta name="twitter:description" content="Create a professional marketing resume for free. ATS-friendly executive templates trusted by 3M+ marketing pros. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-marketing-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Marketing Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -795,7 +795,7 @@ const MarketingResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder",
-                  "name": "Free Marketing Executive Resume Builder - ATS Friendly Templates 2026",
+                  "name": "Free Marketing Resume Builder 2026 | Executive Templates",
                   "description": "Create professional ATS-optimized marketing resumes for free. Land interviews 3x faster with our marketing resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1078,7 +1078,7 @@ const MarketingResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Marketing Executive Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Marketing Professionals</span>
+              Free Marketing Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

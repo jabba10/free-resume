@@ -680,9 +680,9 @@ const RetailResume = ({
   return (
     <div className={styles.retailResumeBuilder} lang="en-US" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
       <Head>
-        <title>Free Retail Associate Resume Builder - ATS Friendly Retail Templates 2026 | Professional Resume Maker for Sales Associates, Cashiers, Store Staff</title>
-        <meta name="title" content="Free Retail Associate Resume Builder - ATS Friendly Retail Templates 2026 | Professional Resume Maker for Sales Associates, Cashiers, Store Staff" />
-        <meta name="description" content="Create professional ATS-optimized retail resumes for free. Land retail jobs 3x faster with our retail resume builder. ATS-optimized templates for sales associates, cashiers, supervisors, store managers. Trusted by 2M+ retail professionals worldwide." />
+        <title>Free Retail Resume Builder 2026 | Associate Templates</title>
+        <meta name="title" content="Free Retail Resume Builder 2026 | Associate Templates" />
+        <meta name="description" content="Create a professional retail resume for free. ATS-friendly associate templates trusted by 2M+ retail pros. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="retail resume builder, retail associate resume, sales associate resume, cashier resume, store manager resume, retail CV, ATS friendly retail resume, free resume builder for retail, retail job resume, customer service resume" />
         <meta name="author" content="Professional Retail Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -698,8 +698,8 @@ const RetailResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Retail Associate Resume Builder - ATS Friendly Retail Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized retail resumes for free. Land jobs 3x faster with our retail resume builder. Trusted by 2M+ retail professionals worldwide." />
+        <meta property="og:title" content="Free Retail Resume Builder 2026 | Associate Templates" />
+        <meta property="og:description" content="Create a professional retail resume for free. ATS-friendly associate templates trusted by 2M+ retail pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-retail-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -713,8 +713,8 @@ const RetailResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Retail Associate Resume Builder - ATS Friendly Retail Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized retail resumes for free. Land jobs 3x faster. Trusted by 2M+ retail professionals." />
+        <meta name="twitter:title" content="Free Retail Resume Builder 2026 | Associate Templates" />
+        <meta name="twitter:description" content="Create a professional retail resume for free. ATS-friendly associate templates trusted by 2M+ retail pros. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-retail-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Retail Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -740,7 +740,7 @@ const RetailResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder",
-                  "name": "Free Retail Associate Resume Builder - ATS Friendly Retail Templates 2026",
+                  "name": "Free Retail Resume Builder 2026 | Associate Templates",
                   "description": "Create professional ATS-optimized retail resumes for free. Land jobs 3x faster with our retail resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1023,7 +1023,7 @@ const RetailResume = ({
             </div>
             
             <h1 className={styles.heroTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
-              Free Retail Associate Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Retail Professionals Worldwide</span>
+              Free Retail Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>

@@ -679,9 +679,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026 | Professional Resume Maker for Investment Banking, Private Equity, Hedge Funds</title>
-        <meta name="title" content="Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026 | Professional Resume Maker for Investment Banking, Private Equity, Hedge Funds" />
-        <meta name="description" content="Create professional ATS-optimized finance resumes for free. Land interviews 3x faster with our finance resume builder. ATS-optimized templates for investment banking, private equity, hedge funds, corporate finance. Trusted by 500K+ finance professionals worldwide." />
+        <title>Free Finance Resume Builder 2026 | ATS Investment Banking Templates</title>
+        <meta name="title" content="Free Finance Resume Builder 2026 | ATS Investment Banking Templates" />
+        <meta name="description" content="Create your professional finance resume for free in 2026. ATS-optimized templates help investment bankers, analysts & finance professionals land interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="finance resume builder, investment banking resume, private equity resume, hedge fund resume, ATS friendly finance resume, free resume builder for finance professionals, financial analyst resume, corporate finance resume, Wall Street resume, finance CV" />
         <meta name="author" content="Professional Finance Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -697,8 +697,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized finance resumes for free. Land interviews 3x faster with our finance resume builder. Trusted by 500K+ finance professionals." />
+        <meta property="og:title" content="Free Finance Resume Builder 2026 | ATS Investment Banking Templates" />
+        <meta property="og:description" content="Create your professional finance resume for free in 2026. ATS-optimized templates help investment bankers, analysts & finance professionals land interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-finance-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -712,8 +712,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized finance resumes for free. Land interviews 3x faster. Trusted by 500K+ finance professionals." />
+        <meta name="twitter:title" content="Free Finance Resume Builder 2026 | ATS Investment Banking Templates" />
+        <meta name="twitter:description" content="Create your professional finance resume for free in 2026. ATS-optimized templates help investment bankers, analysts & finance professionals land interviews faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-finance-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Finance Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -739,7 +739,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder",
-                  "name": "Free Finance Resume Builder - ATS Friendly Wall Street Templates 2026",
+                  "name": "Free Finance Resume Builder 2026 - ATS Investment Banking Templates",
                   "description": "Create professional ATS-optimized finance resumes for free. Land interviews 3x faster with our finance resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1022,7 +1022,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Finance Resume Builder <span className={styles.gradientText}>Trusted by 500K+ Finance Professionals</span>
+              Free Finance Resume Builder 2026: Create Your ATS Investment Banking CV & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>

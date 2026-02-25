@@ -744,9 +744,9 @@ const LegalResume = ({
       }}
     >
       <Head>
-        <title>Free Legal Resume Builder - ATS Friendly Attorney Templates 2026 | Professional Resume Maker for Lawyers Worldwide</title>
-        <meta name="title" content="Free Legal Resume Builder - ATS Friendly Attorney Templates 2026 | Professional Resume Maker for Lawyers Worldwide" />
-        <meta name="description" content="Create professional ATS-optimized legal resumes for free. Land interviews at top law firms worldwide with our legal resume builder. ATS-optimized templates for attorneys, paralegals, legal professionals across global jurisdictions." />
+        <title>Free Legal Resume Builder 2026 | ATS Attorney Templates</title>
+        <meta name="title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
+        <meta name="description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
         <meta name="keywords" content="legal resume builder, attorney resume templates, lawyer resume builder, law firm resume, ATS friendly legal resume, free resume builder for attorneys, legal CV, lawyer CV, international law resume, bar admission resume" />
         <meta name="author" content="Professional Legal Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -762,8 +762,8 @@ const LegalResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Legal Resume Builder - ATS Friendly Attorney Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized legal resumes for free. Land interviews at top law firms worldwide. Trusted by 500K+ legal professionals globally." />
+        <meta property="og:title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
+        <meta property="og:description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-legal-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -777,8 +777,8 @@ const LegalResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Legal Resume Builder - ATS Friendly Attorney Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized legal resumes for free. Land interviews at top law firms worldwide." />
+        <meta name="twitter:title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
+        <meta name="twitter:description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-legal-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Legal Resume Builder with ATS Templates for Global Jurisdictions" />
         <meta name="twitter:site" content="@LegalResumeFree" />
@@ -803,8 +803,8 @@ const LegalResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#webpage",
                   "url": "https://www.professionallegalresumefree.com/ats-friendly-legal-resume-builder",
-                  "name": "Free Legal Resume Builder - ATS Friendly Attorney Templates 2026",
-                  "description": "Create professional ATS-optimized legal resumes for free. Land interviews at top law firms worldwide with our legal resume builder.",
+                  "name": "Free Legal Resume Builder 2026 | ATS Attorney Templates",
+                  "description": "Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -1086,7 +1086,7 @@ const LegalResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Legal Resume Builder <span className={styles.gradientText}>Trusted by 500K+ Attorneys Worldwide</span>
+              Free Legal Resume Builder 2026: Start Now
             </h1>
             
             <p className={styles.heroSubtitle}>

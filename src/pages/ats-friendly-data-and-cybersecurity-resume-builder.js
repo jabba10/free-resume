@@ -704,9 +704,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Cybersecurity Resume Builder - ATS Friendly Technical Templates 2026 | Professional Resume Maker for Security Analysts, Data Scientists</title>
-        <meta name="title" content="Free Cybersecurity Resume Builder - ATS Friendly Technical Templates 2026 | Professional Resume Maker for Security Analysts, Data Scientists" />
-        <meta name="description" content="Create professional ATS-optimized cybersecurity & data resumes for free. Land interviews 3x faster with our technical resume builder. ATS-optimized templates for security analysts, data scientists, engineers. Trusted by 2M+ tech professionals worldwide." />
+        <title>Free Cybersecurity Resume Builder 2026 | Technical Templates</title>
+        <meta name="title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates" />
+        <meta name="description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="cybersecurity resume builder, data science resume builder, security analyst resume, penetration tester resume, ATS friendly technical resume, free resume builder for tech professionals, security engineer resume, data scientist CV, IT security resume, network security resume" />
         <meta name="author" content="Professional Cybersecurity Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -722,8 +722,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Cybersecurity Resume Builder - ATS Friendly Technical Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized cybersecurity resumes for free. Land interviews 3x faster with our technical resume builder. Trusted by 2M+ tech professionals." />
+        <meta property="og:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates" />
+        <meta property="og:description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-cybersecurity-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -737,8 +737,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Cybersecurity Resume Builder - ATS Friendly Technical Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized cybersecurity resumes for free. Land interviews 3x faster. Trusted by 2M+ tech professionals." />
+        <meta name="twitter:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates" />
+        <meta name="twitter:description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-cybersecurity-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Cybersecurity Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@TechResumeFree" />
@@ -764,7 +764,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder",
-                  "name": "Free Cybersecurity Resume Builder - ATS Friendly Technical Templates 2026",
+                  "name": "Free Cybersecurity Resume Builder 2026 | Technical Templates",
                   "description": "Create professional ATS-optimized cybersecurity resumes for free. Land interviews 3x faster with our technical resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1046,7 +1046,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Cybersecurity Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Tech Professionals</span>
+              Free Cybersecurity Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

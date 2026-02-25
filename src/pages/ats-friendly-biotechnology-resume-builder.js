@@ -696,9 +696,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Biotech Resume Builder - ATS Friendly Biotechnology Templates 2026 | Professional Resume Maker for Scientists, Researchers</title>
-        <meta name="title" content="Free Biotech Resume Builder - ATS Friendly Biotechnology Templates 2026 | Professional Resume Maker for Scientists, Researchers" />
-        <meta name="description" content="Create professional ATS-optimized biotechnology resumes for free. Land pharma and biotech interviews faster with our specialized resume builder. ATS-optimized templates for scientists, researchers, biotech engineers. Trusted by 3M+ biotech professionals worldwide." />
+        <title>Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates</title>
+        <meta name="title" content="Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates" />
+        <meta name="description" content="Create your professional biotech resume for free in 2026. ATS-optimized templates help scientists & researchers land pharma interviews. Start now—no sign-up." />
         <meta name="keywords" content="biotech resume builder, biotechnology resume, scientist resume, research resume, pharmaceutical resume, ATS friendly biotech resume, free resume builder for scientists, biotech CV, biotech engineer resume, pharma resume" />
         <meta name="author" content="Professional Biotech Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -714,8 +714,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Biotech Resume Builder - ATS Friendly Biotechnology Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized biotech resumes for free. Land pharma interviews faster with our specialized resume builder. Trusted by 3M+ biotech professionals." />
+        <meta property="og:title" content="Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates" />
+        <meta property="og:description" content="Create your professional biotech resume for free in 2026. ATS-optimized templates help scientists & researchers land pharma interviews. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-biotech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -729,8 +729,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Biotech Resume Builder - ATS Friendly Biotechnology Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized biotech resumes for free. Land pharma interviews faster. Trusted by 3M+ biotech professionals." />
+        <meta name="twitter:title" content="Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates" />
+        <meta name="twitter:description" content="Create your professional biotech resume for free in 2026. ATS-optimized templates help scientists & researchers land pharma interviews. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-biotech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Biotech Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@BiotechResumeFree" />
@@ -757,7 +757,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder",
-                  "name": "Free Biotech Resume Builder - ATS Friendly Biotechnology Templates 2026",
+                  "name": "Free Biotech Resume Builder 2026 - ATS Friendly Biotechnology Templates",
                   "description": "Create professional ATS-optimized biotech resumes for free. Land pharma interviews faster with our specialized resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1039,7 +1039,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Biotech Resume Builder <span className={styles.gradientText}>Trusted by 3M+ Scientists & Researchers</span>
+              Free Biotech Resume Builder 2026: Create Your ATS Scientist Resume & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>

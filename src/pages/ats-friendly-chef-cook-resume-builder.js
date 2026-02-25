@@ -681,9 +681,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Chef Resume Builder - ATS Friendly Culinary Templates 2026 | Professional Resume Maker for Chefs, Cooks, Kitchen Staff</title>
-        <meta name="title" content="Free Chef Resume Builder - ATS Friendly Culinary Templates 2026 | Professional Resume Maker for Chefs, Cooks, Kitchen Staff" />
-        <meta name="description" content="Create professional ATS-optimized chef resumes for free. Land interviews 3x faster with our culinary resume builder. ATS-optimized templates for executive chefs, sous chefs, pastry chefs, line cooks. Trusted by 2M+ culinary professionals worldwide." />
+        <title>Free Chef Resume Builder 2026 | ATS-Friendly Culinary Templates</title>
+        <meta name="title" content="Free Chef Resume Builder 2026 | ATS-Friendly Culinary Templates" />
+        <meta name="description" content="Create your professional chef resume for free in 2026. ATS-optimized culinary templates help chefs & cooks land kitchen interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="chef resume builder, culinary resume templates, cook resume builder, executive chef resume, ATS friendly chef resume, free resume builder for chefs, culinary CV, kitchen resume, restaurant resume, pastry chef resume" />
         <meta name="author" content="Professional Chef Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -699,8 +699,8 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Chef Resume Builder - ATS Friendly Culinary Templates 2026" />
-        <meta property="og:description" content="Create professional ATS-optimized chef resumes for free. Land interviews 3x faster with our culinary resume builder. Trusted by 2M+ culinary professionals." />
+        <meta property="og:title" content="Free Chef Resume Builder 2026 | ATS-Friendly Culinary Templates" />
+        <meta property="og:description" content="Create your professional chef resume for free in 2026. ATS-optimized culinary templates help chefs & cooks land kitchen interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-chef-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -714,8 +714,8 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Chef Resume Builder - ATS Friendly Culinary Templates 2026" />
-        <meta name="twitter:description" content="Create professional ATS-optimized chef resumes for free. Land interviews 3x faster. Trusted by 2M+ culinary professionals." />
+        <meta name="twitter:title" content="Free Chef Resume Builder 2026 | ATS-Friendly Culinary Templates" />
+        <meta name="twitter:description" content="Create your professional chef resume for free in 2026. ATS-optimized culinary templates help chefs & cooks land kitchen interviews faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-chef-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Chef Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ChefResumeFree" />
@@ -741,7 +741,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder",
-                  "name": "Free Chef Resume Builder - ATS Friendly Culinary Templates 2026",
+                  "name": "Free Chef Resume Builder 2026 - ATS Friendly Culinary Templates",
                   "description": "Create professional ATS-optimized chef resumes for free. Land interviews 3x faster with our culinary resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1024,7 +1024,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Chef Resume Builder <span className={styles.gradientText}>Trusted by 2M+ Culinary Professionals</span>
+              Free Chef Resume Builder 2026: Create Your ATS Culinary Resume & Get Hired
             </h1>
             
             <p className={styles.heroSubtitle}>
@@ -1125,7 +1125,7 @@ const Resume = ({
           <div className={styles.formNavigation}>
             {[
               { id: 'personal', label: 'Personal', icon: <FiUser /> },
-              { id: 'experience', label: 'Culinary Experience', icon: <FiBriefcase /> }, // Changed from FiChefHat to FiBriefcase
+              { id: 'experience', label: 'Culinary Experience', icon: <FiBriefcase /> },
               { id: 'education', label: 'Education', icon: <FiBook /> },
               { id: 'cuisines', label: 'Specialties', icon: <FiUsers /> },
               { id: 'certifications', label: 'Certifications', icon: <FiAward /> },
