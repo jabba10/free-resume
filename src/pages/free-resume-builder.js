@@ -1987,11 +1987,12 @@ const Resume = ({
         </div>
       </div>
 
-      {/* FAQ Section */}
+      {/* FAQ Section - FIX 8: Updated heading hierarchy */}
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+            {/* CHANGED: From h2 to h3 to maintain proper hierarchy (h1 → h2 → h3) */}
+            <h3 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h3>
             <p className={styles.sectionSubtitle}>
               Everything you need to know about creating professional resumes with our tool.
             </p>
@@ -1999,7 +2000,8 @@ const Resume = ({
           <div className={styles.faqGrid}>
             {faqs.map((faq, index) => (
               <div key={index} className={styles.faqItem}>
-                <h3 className={styles.faqQuestion}>{faq.question}</h3>
+                {/* CHANGED: From h3 to h4 to maintain proper hierarchy */}
+                <h4 className={styles.faqQuestion}>{faq.question}</h4>
                 <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
             ))}
@@ -2007,11 +2009,12 @@ const Resume = ({
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - FIX 9: Updated heading hierarchy */}
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Career?</h2>
+            {/* CHANGED: From h2 to h3 to maintain proper hierarchy (h1 → h2 → h3) */}
+            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Career?</h3>
             <p className={styles.ctaSubtitle}>
               Join 5 million+ professionals who landed their dream jobs with our free ATS-friendly resume builder.
             </p>
@@ -2033,12 +2036,13 @@ const Resume = ({
         </div>
       </section>
 
-      {/* Full Preview Modal */}
+      {/* Full Preview Modal - FIX 10: Updated heading hierarchy */}
       {showFullPreview && (
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Resume Preview</h3>
+              {/* CHANGED: From h3 to h4 to maintain proper hierarchy */}
+              <h4>Full Resume Preview</h4>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

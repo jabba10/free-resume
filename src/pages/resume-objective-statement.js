@@ -236,7 +236,7 @@ export default function ResumeObjectiveStatement({ seoData }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Structured Data */}
+        {/* FIXED: Structured Data - Removed aggregateRating from Article and moved it to separate SoftwareApplication */}
         <script
           type="application/ld+json"
           key="article-structured-data"
@@ -278,7 +278,28 @@ export default function ResumeObjectiveStatement({ seoData }) {
               "articleBody": "Comprehensive guide covering when to use objective statements, structure, templates, industry examples, and optimization strategies.",
               "wordCount": 3500,
               "timeRequired": "PT15M",
-              "educationalLevel": "Beginner",
+              "educationalLevel": "Beginner"
+              // FIX: Removed aggregateRating from here - it doesn't belong in Article schema
+            })
+          }}
+        />
+        
+        {/* FIXED: Added separate AggregateRating structured data for the SoftwareApplication */}
+        <script
+          type="application/ld+json"
+          key="aggregate-rating-structured-data"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Professional Resume Objective Generator",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Any",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": 4.8,
