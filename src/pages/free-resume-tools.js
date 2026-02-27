@@ -1,6 +1,7 @@
 // pages/free-resume-tools.js
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   FiCheck,
   FiFileText,
@@ -237,14 +238,69 @@ const criticalCSS = `
   .pageSubtitle strong {
     color: #111111;
   }
+
+  /* Hero Image Container - Exactly like homepage */
+  .hero-image-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    padding: 0 16px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
   
-  /* Hero Stats */
+  @media (min-width: 1024px) {
+    .hero-image-container {
+      max-width: 650px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .hero-image-container {
+      max-width: 600px;
+    }
+  }
+  
+  .hero-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  @media (min-width: 768px) {
+    .hero-image-container {
+      margin: 0 auto 48px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-image-container {
+      margin: 0 auto 32px;
+    }
+  }
+  
+  /* Hero Stats - Updated (removed 500K+ card) */
   .heroStats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: clamp(16px, 3vw, 24px);
-    margin: 40px 0;
+    margin: 0 0 40px 0;
     width: 100%;
+  }
+  
+  @media (max-width: 640px) {
+    .heroStats {
+      gap: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .heroStats {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
   
   .statItem {
@@ -662,11 +718,10 @@ const ResumeToolsPage = ({
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
 
-  // Stats data
+  // Stats data - Removed 500K+ Happy Users
   const stats = [
     { number: '12+', label: 'Free Resume Tools', icon: <FiTool /> },
     { number: '100%', label: 'Free Forever', icon: <FiStar /> },
-    { number: '500K+', label: 'Happy Users', icon: <FiUsers /> },
     { number: '24/7', label: 'Instant Access', icon: <FiClock /> }
   ];
 
@@ -975,7 +1030,7 @@ const ResumeToolsPage = ({
         {/* Open Graph */}
         <meta property="og:title" content="Free Resume Tools 2026 | 12+ Professional Resume Analyzers & Generators" />
         <meta property="og:description" content="Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-tools-preview.jpg" />
+        <meta property="og:image" content="https://www.professionalresumefree.com/free-12-resume-tools.jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-tools" />
@@ -988,7 +1043,7 @@ const ResumeToolsPage = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Tools 2026 | 12+ Professional Resume Analyzers" />
         <meta name="twitter:description" content="12+ free resume tools to optimize your job application. ATS checker, keyword matcher, summary generator, and more. No signup." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-resume-tools-preview.jpg" />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/free-12-resume-tools.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* Theme */}
@@ -1037,14 +1092,6 @@ const ResumeToolsPage = ({
         <section className="heroSection" aria-labelledby="hero-title">
           <div className="container">
             <div className="heroContent">
-              {/* Trust Badge */}
-              <div className="trustBadge" itemScope itemType="https://schema.org/AggregateRating">
-                <FiStar className="starIcon" aria-hidden="true" />
-                <span className="trustBadgeText">
-                  <span itemProp="ratingValue">4.9/5</span> • <span itemProp="ratingCount">50,000+</span> Reviews • All Tools Free
-                </span>
-              </div>
-              
               {/* Page Title */}
               <h1 className="pageTitle" id="hero-title">
                 Free Resume Tools <span className="highlight">2026</span>
@@ -1056,7 +1103,24 @@ const ResumeToolsPage = ({
                 Check ATS compatibility, analyze keywords, generate powerful summaries, and improve your chances of landing interviews.
               </p>
 
-              {/* Hero Stats */}
+              {/* Hero Image - Exactly like homepage layout */}
+              <div className="hero-image-container">
+                <Image
+                  src="/free-12-resume-tools.jpeg"
+                  alt="Free Resume Tools Preview - Collection of 12+ professional resume optimization tools including ATS checker, keyword matcher, summary generator, and more"
+                  width={1200}
+                  height={675}
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 700px"
+                  quality={90}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                  }}
+                />
+              </div>
+
+              {/* Hero Stats - Now with only 3 items */}
               <div className="heroStats">
                 {stats.map((stat, index) => (
                   <div key={index} className="statItem">
@@ -1150,42 +1214,42 @@ const ResumeToolsPage = ({
               <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <h3 className="faqQuestion" itemProp="name">Are these resume tools really free to use?</h3>
                 <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Fully free access applies to each resume feature - no secret fees, no marks on your files. Using any tool requires neither sign-up nor card details.</p>
+                  <p itemProp="text">Every part of the resume tools opens without cost - no hidden charges, nothing stamped on your documents. Accessing a feature? No registration needed. No credit information asked either. Each function works straight away if you choose it.</p>
                 </div>
               </div>
               
               <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <h3 className="faqQuestion" itemProp="name">Do I need to sign up or create an account?</h3>
                 <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">ust open the site - no need to register at all. Every tool waits ready, free to use from the first second. Tap one and go, nothing holding you back.</p>
+                  <p itemProp="text">Just open the site - no need to register at all. Every tool waits ready, free to use from the first second. Tap one and go, nothing holding you back.</p>
                 </div>
               </div>
               
               <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <h3 className="faqQuestion" itemProp="name">How accurate are the resume analysis tools?</h3>
                 <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Starting fresh each time, our tools follow common algorithms trusted across fields. Updated often, they stay in step with how companies hire today plus what applicant systems need. Accuracy hits 94 percent, measured by real responses from people who’ve used them.</p>
+                  <p itemProp="text">Every new try begins clean, using routines borrowed from proven methods in many areas. Refreshed regularly, these match current hiring habits as well as the needs of digital job platforms. Real feedback from actual users shows results land near 94 out of 100 correct.</p>
                 </div>
               </div>
               
               <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <h3 className="faqQuestion" itemProp="name">Can I use these tools on mobile devices?</h3>
                 <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Yep, every tool adjusts smoothly to any device - phones, tablets, even laptops handle them just fine. Tweak your resume anytime, anywhere.</p>
+                  <p itemProp="text">Right now, each gadget shifts perfectly between devices - phones glide through it, tablets keep up, laptops manage without a hitch. Change your resume whenever you want, wherever you are.</p>
                 </div>
               </div>
               
               <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <h3 className="faqQuestion" itemProp="name">Is my resume data secure when using these tools?</h3>
                 <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Your privacy matters. Right inside your browser, resume details get handled safely - never saved long-term. Processing happens locally, staying within your own window. Nothing gets kept beyond that moment.</p>
+                  <p itemProp="text">Your privacy counts. Inside the browser, just for now, resume data moves carefully - no storage later on. It works right where you see it, confined to one tab only. Afterward, everything vanishes without a trace.</p>
                 </div>
               </div>
               
               <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <h3 className="faqQuestion" itemProp="name">How often are the tools updated?</h3>
                 <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Every month brings changes shaped by what users tell us. Staying ahead means matching today’s job systems, hiring shifts, and smart resume moves past 2025.</p>
+                  <p itemProp="text">A fresh shift arrives each month, guided by user feedback. Moving forward ties closely to modern work setups, evolving hire trends, plus smarter ways people shape resumes beyond 2025.</p>
                 </div>
               </div>
             </div>

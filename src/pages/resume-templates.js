@@ -1,6 +1,7 @@
 // pages/resume-templates.js
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   FiFileText, 
   FiHeart, 
@@ -191,28 +192,6 @@ const criticalCSS = `
     width: 100%;
   }
   
-  .trustBadge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #f3f4f6;
-    color: #111111;
-    padding: clamp(8px, 2vw, 8px) clamp(12px, 3vw, 16px);
-    border-radius: 50px;
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-    border: 1px solid #e5e7eb;
-    width: fit-content;
-    max-width: 100%;
-    flex-wrap: wrap;
-  }
-  
-  .starIcon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
-  
   .heroTitle {
     margin-bottom: 20px;
   }
@@ -245,14 +224,69 @@ const criticalCSS = `
   .heroSubtitle strong {
     color: #111111;
   }
+
+  /* Hero Image Container - Exactly like homepage */
+  .hero-image-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    padding: 0 16px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
   
-  /* Hero Stats */
+  @media (min-width: 1024px) {
+    .hero-image-container {
+      max-width: 650px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .hero-image-container {
+      max-width: 600px;
+    }
+  }
+  
+  .hero-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  @media (min-width: 768px) {
+    .hero-image-container {
+      margin: 0 auto 48px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-image-container {
+      margin: 0 auto 32px;
+    }
+  }
+  
+  /* Hero Stats - Updated (removed 4.9/5 card) */
   .heroStats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: clamp(16px, 3vw, 24px);
-    margin: 40px 0;
+    margin: 0 0 40px 0;
     width: 100%;
+  }
+  
+  @media (max-width: 640px) {
+    .heroStats {
+      gap: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .heroStats {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
   
   .statItem {
@@ -1378,8 +1412,11 @@ const ResumeTemplates = ({
         {/* Open Graph */}
         <meta property="og:title" content="ATS-Friendly Resume Templates 2026 | 45+ Industry-Specific Professional Templates" />
         <meta property="og:description" content="Browse 45+ ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
-        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.professionalresumefree.com/46-free-resume-templates.jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://www.professionalresumefree.com/resume-templates" />
+        <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -1388,6 +1425,7 @@ const ResumeTemplates = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ATS-Friendly Resume Templates 2026 | Free Downloads" />
         <meta name="twitter:description" content="Browse 45+ ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/46-free-resume-templates.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* Structured Data */}
@@ -1434,11 +1472,6 @@ const ResumeTemplates = ({
         <header className="heroSection" role="banner">
           <div className="container">
             <div className="heroContent">
-              <div className="trustBadge">
-                <FiStar className="starIcon" aria-hidden="true" />
-                <span>Trusted by 4M+ Job Seekers | Rated 4.9/5 | Free Forever</span>
-              </div>
-              
               <h1 className="heroTitle">
                 Professional ATS-Friendly Resume Templates{' '}
                 <span className="highlightText">for Every Industry</span>
@@ -1449,6 +1482,24 @@ const ResumeTemplates = ({
                 Each template is tested to pass Applicant Tracking Systems including Workday, Taleo, and iCIMS.
               </p>
 
+              {/* Hero Image - Exactly like homepage layout */}
+              <div className="hero-image-container">
+                <Image
+                  src="/46-free-resume-templates.jpeg"
+                  alt="ATS-Friendly Resume Templates Preview - Collection of 46+ professional resume templates optimized for applicant tracking systems across healthcare, technology, finance, and more industries"
+                  width={1200}
+                  height={675}
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 700px"
+                  quality={90}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                  }}
+                />
+              </div>
+
+              {/* Hero Stats - Now with only 3 items */}
               <div className="heroStats">
                 <div className="statItem">
                   <span className="statNumber">{templateCategories.length}+</span>
@@ -1457,10 +1508,6 @@ const ResumeTemplates = ({
                 <div className="statItem">
                   <span className="statNumber">100%</span>
                   <span className="statLabel">ATS Optimized</span>
-                </div>
-                <div className="statItem">
-                  <span className="statNumber">4.9/5</span>
-                  <span className="statLabel">User Rating</span>
                 </div>
                 <div className="statItem">
                   <span className="statNumber">$0</span>
@@ -1639,7 +1686,7 @@ const ResumeTemplates = ({
               </div>
               
               <p className="textSmall" style={{ marginTop: '20px', color: '#e5e7eb' }}>
-                Updated: {safeCurrentDate} • 100% Free • 45+ Templates
+                Updated: {safeCurrentDate} • 100% Free • {templateCategories.length}+ Templates
               </p>
             </div>
           </div>
