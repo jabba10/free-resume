@@ -833,7 +833,7 @@ const ResumeToolsPage = ({
         "@type": "WebPage",
         "@id": "https://www.professionalresumefree.com/free-resume-tools/#webpage",
         "url": "https://www.professionalresumefree.com/free-resume-tools",
-        "name": "Free Resume Tools & Resources - Professional Resume Analyzers 2026",
+        "name": "Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers",
         "description": "Access our complete suite of free resume tools. Check your resume score, optimize for ATS, generate summaries, match keywords, and more. All tools are completely free.",
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
@@ -1006,8 +1006,8 @@ const ResumeToolsPage = ({
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
         {/* Primary SEO Tags */}
-        <title>Free Resume Tools 2026 | 12+ Professional Resume Analyzers & Generators</title>
-        <meta name="title" content="Free Resume Tools 2026 | 12+ Professional Resume Analyzers & Generators" />
+        <title>Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers</title>
+        <meta name="title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
         <meta name="description" content="Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly. 100% free, no signup." />
         <meta name="keywords" content={seoKeywords.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
@@ -1028,7 +1028,7 @@ const ResumeToolsPage = ({
         <meta name="generator" content="Professional Resume Free - Resume Tools 2026" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Free Resume Tools 2026 | 12+ Professional Resume Analyzers & Generators" />
+        <meta property="og:title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
         <meta property="og:description" content="Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/free-12-resume-tools.jpeg" />
         <meta property="og:image:width" content="1200" />
@@ -1041,7 +1041,7 @@ const ResumeToolsPage = ({
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Tools 2026 | 12+ Professional Resume Analyzers" />
+        <meta name="twitter:title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
         <meta name="twitter:description" content="12+ free resume tools to optimize your job application. ATS checker, keyword matcher, summary generator, and more. No signup." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/free-12-resume-tools.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />

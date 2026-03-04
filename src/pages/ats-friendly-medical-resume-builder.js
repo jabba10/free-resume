@@ -1082,7 +1082,6 @@ const Resume = ({
               </span>
             </div>
             
-            {/* CHANGED: Changed from h1 to h2 since we already have an h1 in the template */}
             <h2 className={styles.heroTitle}>
               Free Healthcare Resume Builder 2026: Start Now
             </h2>
@@ -2087,7 +2086,6 @@ const Resume = ({
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            {/* CHANGED: Changed from h2 to h3 since we already have an h1 in the template */}
             <h3 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h3>
             <p className={styles.sectionSubtitle}>
               Everything you need to know about creating professional healthcare resumes with our tool.
@@ -2096,7 +2094,6 @@ const Resume = ({
           <div className={styles.faqGrid}>
             {faqs.map((faq, index) => (
               <div key={index} className={styles.faqItem}>
-                {/* CHANGED: Changed from h3 to h4 to maintain proper heading hierarchy */}
                 <h4 className={styles.faqQuestion}>{faq.question}</h4>
                 <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
@@ -2109,7 +2106,6 @@ const Resume = ({
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            {/* CHANGED: Changed from h2 to h3 since we already have an h1 in the template */}
             <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Healthcare Career?</h3>
             <p className={styles.ctaSubtitle}>
               Join 4 million+ healthcare professionals who landed their dream jobs with our free ATS-friendly healthcare resume builder.
@@ -2137,7 +2133,6 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              {/* CHANGED: Changed from h3 to h4 */}
               <h4>Full Healthcare Resume Preview</h4>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>

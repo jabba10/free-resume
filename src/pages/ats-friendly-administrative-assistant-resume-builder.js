@@ -678,8 +678,8 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Administrative Resume Builder: ATS Templates 2026</title>
-        <meta name="title" content="Free Administrative Resume Builder: ATS Templates 2026" />
+        <title>Free Administrative Resume Builder: ATS Templates 2026 - Professional Free Resume Builder</title>
+        <meta name="title" content="Free Administrative Resume Builder: ATS Templates 2026 - Professional Free Resume Builder" />
         <meta name="description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
         <meta name="keywords" content="administrative resume builder, administrative assistant resume templates, executive assistant resume, office administrator CV, ATS friendly administrative resume, free resume builder for administrative professionals, virtual assistant resume, administrative coordinator CV, global administrative jobs" />
         <meta name="author" content="Professional Administrative Resume Free" />
@@ -1002,9 +1002,7 @@ const Resume = ({
             <FiChevronRightIcon />
           </li>
           <li>
-            <Link href="/ats-friendly-administrative-assistant-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Free Administrative Assistant Resume Template</span>
-            </Link>
+            <span className={styles.breadcrumbText}>Free Administrative Assistant Resume Template</span>
           </li>
         </ol>
       </nav>

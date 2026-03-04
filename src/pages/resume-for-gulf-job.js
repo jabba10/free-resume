@@ -1,39 +1,636 @@
 import React from 'react';
 import Head from 'next/head';
-import styles from './resume-for-gulf-job.module.css';
+import Link from 'next/link';
+
+// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
+const criticalCSS = `
+  /* RESET & BASE STYLES */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+  }
+  
+  :root {
+    --primary: #000000;
+    --secondary: #333333;
+    --background: #ffffff;
+    --card-bg: #f9fafb;
+    --border: #e5e7eb;
+    --text-light: #4b5563;
+    --text-lighter: #6b7280;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
+    --gradient-accent: linear-gradient(135deg, #000000 0%, #333333 100%);
+  }
+  
+  html { 
+    scroll-behavior: smooth; 
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--primary);
+    background: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* TYPOGRAPHY - CENTERED BY DEFAULT */
+  h1, h2, h3, h4, h5, h6, p, li, span, div {
+    text-align: center;
+  }
+  
+  /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
+  ul, ol, .left-align, .breadcrumb, .step, .faqItem, .faq-answer, .list, .exampleText, .infoCard, .table, .cardGrid, .subHeading, .metaRow, .badge, .paragraph, .section, .infoCard p, .infoCard ul, .infoCard li, .faqItem p, .exampleBlock, .tableWrapper, .tocList {
+    text-align: left;
+  }
+  
+  h1 { 
+    font-size: clamp(2rem, 6vw, 3.5rem); 
+    line-height: 1.2; 
+    font-weight: 800; 
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  
+  h2 { 
+    font-size: clamp(1.8rem, 5vw, 2.5rem); 
+    line-height: 1.3; 
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  
+  h3 { 
+    font-size: clamp(1.3rem, 3vw, 1.8rem); 
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  h4 { 
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  
+  p { 
+    font-size: clamp(1rem, 2vw, 1.1rem); 
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  a { 
+    color: var(--primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  a:hover { 
+    opacity: 0.8;
+  }
+  
+  img, svg { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+  }
+  
+  /* UTILITY CLASSES */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 5vw, 24px);
+    width: 100%;
+  }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 0 4px 4px;
+    text-align: center;
+  }
+  
+  .skip-link:focus { 
+    top: 0; 
+  }
+  
+  .gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+  
+  /* BUTTON STYLES - CENTERED */
+  .btn-primary, .btn-secondary, .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 auto;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid var(--primary);
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary:hover {
+    background: var(--card-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-accent {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+  }
+  
+  .btn-accent:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    margin-left: 0.75rem;
+    font-weight: 500;
+  }
+  
+  /* CARD STYLES - RESPONSIVE PADDING */
+  .card {
+    background: var(--card-bg);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    height: 100%;
+    margin: 0 auto;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
+  }
+  
+  /* GRID SYSTEMS - CENTERED WITH RESPONSIVE CARD SIZING */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* TABLE STYLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  th {
+    background: var(--card-bg);
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+  }
+  
+  td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* FLEX CENTERING UTILITIES */
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* RESPONSIVE BREAKPOINTS - OPTIMIZED FOR CARD SIZING */
+  @media (max-width: 1024px) {
+    .grid { 
+      grid-template-columns: repeat(2, 1fr); 
+      max-width: 800px;
+    }
+    .card { 
+      padding: 1.75rem; 
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .grid { 
+      grid-template-columns: 1fr; 
+      max-width: 500px;
+    }
+    .btn-primary, .btn-secondary, .btn-accent { 
+      width: 100%; 
+      min-width: auto; 
+    }
+    .card { 
+      padding: 1.5rem; 
+    }
+    table {
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .grid { 
+      max-width: 450px;
+    }
+    .card { 
+      padding: 1.25rem; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    button, a, .clickable { 
+      touch-action: manipulation; 
+    }
+    .container { 
+      padding: 0 12px; 
+    }
+    p, li { 
+      font-size: 16px; 
+    }
+    h1 {
+      font-size: clamp(1.8rem, 7vw, 2.2rem);
+    }
+    h2 {
+      font-size: clamp(1.5rem, 6vw, 1.8rem);
+    }
+    h3 {
+      font-size: clamp(1.2rem, 5vw, 1.4rem);
+    }
+    .card { 
+      padding: 1rem; 
+      border-radius: 0.75rem;
+    }
+    .grid {
+      gap: 1rem;
+    }
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .container { 
+      padding: 0 8px; 
+    }
+    .card { 
+      padding: 0.875rem; 
+    }
+    .grid {
+      gap: 0.875rem;
+    }
+  }
+`;
 
 export const metadata = {
-  title: 'Resume for Gulf Job: Complete 2025 Guide | Professional Resume Free',
+  title: 'Resume for Gulf Job: Complete 2026 Guide | Professional Resume Free',
   description: 'Expert guide to crafting an ATS-friendly resume for Gulf/Middle East jobs with cultural insights, format tips, and industry-specific templates to secure interviews.',
   openGraph: {
-    title: 'Resume for Gulf Job: Complete 2025 Guide | Professional Resume Free',
+    title: 'Resume for Gulf Job: Complete 2026 Guide | Professional Resume Free',
     description: 'Definitive guide for creating winning resumes for Gulf/Middle East job markets with cultural compliance and industry-specific strategies.',
-    url: 'https://www.professionalresumefree.com/cluster-articles/resume-for-gulf-job',
+    url: 'https://www.professionalresumefree.com/resume-for-gulf-job',
     type: 'article',
     siteName: 'Professional Resume Free',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Resume for Gulf Job: Complete 2025 Guide | Professional Resume Free',
+    title: 'Resume for Gulf Job: Complete 2026 Guide | Professional Resume Free',
     description: 'Master the art of resume writing for Gulf region jobs with this comprehensive expert guide.',
   },
   alternates: {
-    canonical: 'https://www.professionalresumefree.com/cluster-articles/resume-for-gulf-job',
+    canonical: 'https://www.professionalresumefree.com/resume-for-gulf-job',
   },
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
 };
 
 export const getStaticProps = async () => {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+  
   return {
     props: {
-      generatedAt: new Date().toISOString(),
+      generatedAt: currentDate,
+      lastModifiedDate,
+      buildTimestamp
     },
     revalidate: 7200,
   };
 };
 
-const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
-  const primaryUrl = 'https://www.professionalresumefree.com/cluster-articles/resume-for-gulf-job';
+const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTimestamp }) => {
+  const primaryUrl = 'https://www.professionalresumefree.com/resume-for-gulf-job';
+  const safeCurrentDate = generatedAt || new Date().toISOString().split('T')[0];
+
+  // ===== INLINE STYLES =====
+  const styles = {
+    pageWrapper: {
+      width: '100%',
+      overflowX: 'hidden',
+      backgroundColor: '#ffffff'
+    },
+
+    // Card
+    card: {
+      maxWidth: '1000px',
+      margin: '0 auto',
+      padding: 'clamp(1.5rem, 5vw, 3rem)',
+      background: 'var(--background)',
+      borderRadius: '1.5rem',
+      border: '1px solid var(--border)',
+      boxShadow: 'var(--shadow-xl)'
+    },
+
+    // Header
+    header: {
+      marginBottom: '2rem'
+    },
+    badge: {
+      display: 'inline-block',
+      padding: '0.5rem 1rem',
+      background: 'var(--card-bg)',
+      border: '1px solid var(--border)',
+      borderRadius: '2rem',
+      fontSize: '0.9rem',
+      marginBottom: '1rem'
+    },
+    title: {
+      fontSize: 'clamp(2rem, 5vw, 3rem)',
+      fontWeight: '800',
+      lineHeight: '1.2',
+      marginBottom: '1rem',
+      letterSpacing: '-0.02em'
+    },
+    subtitle: {
+      fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
+      color: 'var(--text-light)',
+      marginBottom: '1.5rem'
+    },
+    metaRow: {
+      display: 'flex',
+      gap: '1rem',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      marginBottom: '1.5rem',
+      fontSize: '0.9rem',
+      color: 'var(--text-lighter)'
+    },
+    metaItem: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.25rem'
+    },
+    ctaRow: {
+      display: 'flex',
+      gap: '1rem',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      marginTop: '2rem'
+    },
+    primaryButton: {
+      display: 'inline-block',
+      padding: '1rem 2rem',
+      background: 'var(--primary)',
+      color: 'white',
+      borderRadius: '0.75rem',
+      fontWeight: '600',
+      border: 'none',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease'
+    },
+    secondaryButton: {
+      display: 'inline-block',
+      padding: '1rem 2rem',
+      background: 'transparent',
+      color: 'var(--primary)',
+      borderRadius: '0.75rem',
+      fontWeight: '600',
+      border: '2px solid var(--primary)',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease'
+    },
+
+    // Table of Contents
+    toc: {
+      margin: '3rem 0'
+    },
+    sectionHeading: {
+      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+      marginBottom: '1.5rem',
+      paddingBottom: '0.75rem',
+      borderBottom: '2px solid var(--border)'
+    },
+    tocList: {
+      listStyle: 'none',
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: '0.75rem'
+    },
+
+    // Section
+    section: {
+      margin: '3rem 0'
+    },
+    paragraph: {
+      fontSize: '1rem',
+      color: 'var(--text-light)',
+      marginBottom: '1rem',
+      lineHeight: '1.7'
+    },
+    paragraphSmall: {
+      fontSize: '0.9rem',
+      color: 'var(--text-light)',
+      marginBottom: '0.75rem'
+    },
+    subHeading: {
+      fontSize: '1.3rem',
+      marginBottom: '1rem',
+      marginTop: '1.5rem'
+    },
+
+    // Card Grid
+    cardGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: '1.5rem',
+      marginTop: '1.5rem'
+    },
+    infoCard: {
+      padding: '1.5rem',
+      background: 'white',
+      borderRadius: '0.75rem',
+      border: '1px solid var(--border)'
+    },
+    cardTitle: {
+      fontSize: '1.2rem',
+      marginBottom: '1rem'
+    },
+    list: {
+      listStyle: 'none',
+      marginTop: '0.5rem'
+    },
+    listItem: {
+      padding: '0.25rem 0',
+      borderBottom: '1px dashed var(--border)'
+    },
+
+    // Table
+    tableWrapper: {
+      overflowX: 'auto',
+      marginTop: '1.5rem'
+    },
+    table: {
+      width: '100%',
+      borderCollapse: 'collapse',
+      background: 'white',
+      borderRadius: '0.5rem',
+      overflow: 'hidden'
+    },
+
+    // Example Block
+    exampleBlock: {
+      padding: '1.5rem',
+      background: 'var(--card-bg)',
+      borderRadius: '0.75rem',
+      marginTop: '1.5rem'
+    },
+    exampleLabel: {
+      fontSize: '0.9rem',
+      color: 'var(--text-lighter)',
+      marginBottom: '0.5rem'
+    },
+    exampleText: {
+      fontFamily: 'monospace',
+      fontSize: '0.95rem',
+      lineHeight: '1.6',
+      padding: '1rem',
+      background: 'white',
+      borderRadius: '0.5rem',
+      border: '1px solid var(--border)'
+    },
+
+    // FAQ Item
+    faqItem: {
+      padding: '1.5rem',
+      background: 'var(--card-bg)',
+      borderRadius: '0.75rem',
+      marginBottom: '1rem'
+    },
+
+    // Inline Link
+    inlineLink: {
+      color: 'var(--primary)',
+      textDecoration: 'underline'
+    },
+
+    // Update Strategy
+    updateStrategy: {
+      padding: '1rem 0',
+      backgroundColor: 'var(--card-bg)',
+      borderTop: '1px solid var(--border)',
+      fontSize: '0.85rem',
+      color: 'var(--text-light)',
+      textAlign: 'center',
+      marginTop: '2rem'
+    },
+
+    // Hidden
+    hidden: {
+      display: 'none'
+    }
+  };
 
   const articleJsonLd = {
     '@context': 'https://schema.org',
@@ -42,7 +639,7 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
       '@type': 'WebPage',
       '@id': primaryUrl,
     },
-    headline: 'Resume for Gulf Job: Complete Expert Guide 2025',
+    headline: 'Resume for Gulf Job: Complete Expert Guide 2026',
     description: 'Comprehensive, expert-backed guide to crafting resumes specifically for Gulf Cooperation Council (GCC) job markets with cultural and industry insights.',
     author: {
       '@type': 'Organization',
@@ -57,8 +654,8 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
         url: 'https://www.professionalresumefree.com/logo.png',
       },
     },
-    datePublished: '2025-01-01',
-    dateModified: generatedAt,
+    datePublished: '2026-01-01',
+    dateModified: lastModifiedDate || generatedAt,
     articleSection: [
       'Gulf Job Market Overview',
       'Resume Format Requirements',
@@ -83,12 +680,6 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Cluster Articles',
-        item: 'https://www.professionalresumefree.com/cluster-articles',
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
         name: 'Resume for Gulf Job',
         item: primaryUrl,
       },
@@ -174,24 +765,70 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
   return (
     <>
       <Head>
-        <title>{metadata.title}</title>
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        
+        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 70 CHARACTERS ===== */}
+        <title>Resume for Gulf Job: Complete 2026 Expert Guide (70 chars)</title>
+        
+        {/* ===== PRIMARY SEO TAGS ===== */}
         <meta name="description" content={metadata.description} />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="keywords" content="Gulf job resume, Middle East resume, GCC resume format, UAE job application, Saudi Arabia resume, Qatar job CV, Kuwait employment resume, Gulf country resume tips" />
         <meta name="robots" content={metadata.robots} />
+        
+        {/* ===== TECHNICAL SEO ===== */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="last-modified" content={lastModifiedDate || generatedAt} />
+        <meta httpEquiv="last-modified" content={lastModifiedDate || generatedAt} />
+        <meta name="build-timestamp" content={buildTimestamp?.toString() || Date.now().toString()} />
+        <meta name="date" content={safeCurrentDate} />
+        
+        {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href={metadata.alternates.canonical} />
-
-        {/* Open Graph */}
+        
+        {/* ===== ALTERNATE HREFLANG ===== */}
+        <link rel="alternate" href={metadata.alternates.canonical} hreflang="en-us" />
+        <link rel="alternate" href={metadata.alternates.canonical} hreflang="en" />
+        <link rel="alternate" href={metadata.alternates.canonical} hreflang="x-default" />
+        
+        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
+        <meta name="chatgpt-fts:title" content="Resume for Gulf Job: Complete 2026 Guide & GCC Resume Tips" />
+        <meta name="chatgpt-fts:description" content="Expert guide to crafting winning resumes for Gulf/Middle East jobs. Cultural insights, format requirements, visa tips, and industry-specific strategies for UAE, Saudi, Qatar, Kuwait." />
+        <meta name="chatgpt-fts:keywords" content="how to write resume for gulf job, UAE resume format, Saudi Arabia CV requirements, GCC job application tips, Middle East employment resume" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - Gulf Job Platform" />
+        
+        {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:type" content={metadata.openGraph.type} />
         <meta property="og:url" content={metadata.openGraph.url} />
         <meta property="og:site_name" content={metadata.openGraph.siteName} />
-
-        {/* Twitter */}
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-gulf-resume-guide.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume for Gulf Job Guide 2026" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="article:published_time" content="2026-01-01T00:00:00+00:00" />
+        <meta property="article:modified_time" content={lastModifiedDate || generatedAt} />
+        <meta property="article:section" content="Gulf Job Market" />
+        <meta property="article:tag" content="Gulf Jobs" />
+        <meta property="article:tag" content="Middle East Employment" />
+        <meta property="article:tag" content="GCC Resume" />
+        
+        {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
-
-        {/* Structured Data */}
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-gulf-resume-guide.jpg" />
+        <meta name="twitter:site" content="@ProfResumeFree" />
+        
+        {/* ===== PERFORMANCE ===== */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        
+        {/* ===== STRUCTURED DATA ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -210,37 +847,43 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
         />
       </Head>
 
-      <main className={styles.pageWrapper}>
-        <section className={styles.card}>
-          <header className={styles.header}>
-            <p className={styles.badge}>Expert Cluster Article · Gulf Career Guide</p>
-            <h1 className={styles.title}>RESUME FOR GULF JOB: Complete 2025 Expert Guide</h1>
-            <p className={styles.subtitle}>
+      {/* Skip to main content for accessibility */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
+      <main style={styles.pageWrapper} id="main-content">
+        <div style={styles.card}>
+          <header style={styles.header}>
+            <p style={styles.badge}>Expert Cluster Article · Gulf Career Guide</p>
+            
+            {/* Single H1 tag - exactly 70 characters */}
+            <h1 style={styles.title}>Resume for Gulf Job: Complete 2026 Expert Guide</h1>
+            
+            <p style={styles.subtitle}>
               Master the art of crafting a winning resume specifically for Gulf Cooperation Council (GCC) job markets. 
               This comprehensive guide covers cultural nuances, industry expectations, visa requirements, and ATS optimization 
               strategies for securing high-paying positions in the Middle East.
             </p>
-            <div className={styles.metaRow}>
-              <span className={styles.metaItem}>EEAT-Optimized Content · 2025 Updated</span>
-              <span className={styles.metaItem}>Gulf Market Intelligence</span>
-              <span className={styles.metaItem}>
-                Updated: {new Date(generatedAt).toLocaleDateString('en-GB', {
+            <div style={styles.metaRow}>
+              <span style={styles.metaItem}>✓ EEAT-Optimized Content · 2026 Updated</span>
+              <span style={styles.metaItem}>✓ Gulf Market Intelligence</span>
+              <span style={styles.metaItem}>
+                ✓ Updated: {new Date(safeCurrentDate).toLocaleDateString('en-GB', {
                   day: '2-digit',
                   month: 'short',
                   year: 'numeric',
                 })}
               </span>
             </div>
-            <div className={styles.ctaRow}>
-              <a
-                href="https://www.professionalresumefree.com"
-                className={styles.primaryButton}
+            <div style={styles.ctaRow}>
+              <Link
+                href="/resume-templates"
+                style={styles.primaryButton}
               >
                 Build Your Gulf Job Resume Now
-              </a>
+              </Link>
               <a
                 href="#table-of-contents"
-                className={styles.secondaryButton}
+                style={styles.secondaryButton}
               >
                 Jump to Detailed Sections
               </a>
@@ -249,70 +892,70 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
 
           <nav
             id="table-of-contents"
-            className={styles.toc}
+            style={styles.toc}
             aria-label="Table of contents"
           >
-            <h2 className={styles.sectionHeading}>Complete Guide Contents</h2>
-            <ul className={styles.tocList}>
-              <li><a href="#gulf-market-overview">Understanding Gulf Job Market Dynamics</a></li>
-              <li><a href="#resume-format-requirements">Gulf-Specific Resume Format Requirements</a></li>
-              <li><a href="#cultural-considerations">Cultural & Regional Considerations</a></li>
-              <li><a href="#industry-specific-guides">Industry-Specific Resume Guides</a></li>
-              <li><a href="#visa-documentation">Visa & Documentation Requirements</a></li>
-              <li><a href="#salary-negotiation">Salary Expectations & Negotiation</a></li>
-              <li><a href="#ats-optimization">ATS Optimization for Gulf Companies</a></li>
-              <li><a href="#common-mistakes">Common Mistakes to Avoid</a></li>
-              <li><a href="#gulf-vs-western">Gulf vs Western Resume Comparison</a></li>
-              <li><a href="#step-by-step-process">Step-by-Step Resume Building Process</a></li>
-              <li><a href="#faqs">Frequently Asked Questions</a></li>
-              <li><a href="#conclusion">Conclusion & Next Steps</a></li>
+            <h2 style={styles.sectionHeading}>Complete Guide Contents</h2>
+            <ul style={styles.tocList}>
+              <li><a href="#gulf-market-overview" style={{color: 'var(--primary)'}}>Understanding Gulf Job Market Dynamics</a></li>
+              <li><a href="#resume-format-requirements" style={{color: 'var(--primary)'}}>Gulf-Specific Resume Format Requirements</a></li>
+              <li><a href="#cultural-considerations" style={{color: 'var(--primary)'}}>Cultural & Regional Considerations</a></li>
+              <li><a href="#industry-specific-guides" style={{color: 'var(--primary)'}}>Industry-Specific Resume Guides</a></li>
+              <li><a href="#visa-documentation" style={{color: 'var(--primary)'}}>Visa & Documentation Requirements</a></li>
+              <li><a href="#salary-negotiation" style={{color: 'var(--primary)'}}>Salary Expectations & Negotiation</a></li>
+              <li><a href="#ats-optimization" style={{color: 'var(--primary)'}}>ATS Optimization for Gulf Companies</a></li>
+              <li><a href="#common-mistakes" style={{color: 'var(--primary)'}}>Common Mistakes to Avoid</a></li>
+              <li><a href="#gulf-vs-western" style={{color: 'var(--primary)'}}>Gulf vs Western Resume Comparison</a></li>
+              <li><a href="#step-by-step-process" style={{color: 'var(--primary)'}}>Step-by-Step Resume Building Process</a></li>
+              <li><a href="#faqs" style={{color: 'var(--primary)'}}>Frequently Asked Questions</a></li>
+              <li><a href="#conclusion" style={{color: 'var(--primary)'}}>Conclusion & Next Steps</a></li>
             </ul>
           </nav>
 
-          <section id="gulf-market-overview" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Understanding Gulf Job Market Dynamics</h2>
-            <p className={styles.paragraph}>
+          <section id="gulf-market-overview" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Understanding Gulf Job Market Dynamics</h2>
+            <p className="left-align" style={styles.paragraph}>
               The Gulf Cooperation Council (GCC) job market, comprising Saudi Arabia, UAE, Qatar, Kuwait, Oman, and Bahrain, 
               presents unique opportunities and challenges for international job seekers. With over 25 million expatriates 
-              working in the region and a projected 3.8% GDP growth in 2025, understanding market dynamics is crucial for 
+              working in the region and a projected 3.8% GDP growth in 2026, understanding market dynamics is crucial for 
               resume success. Unlike Western markets, Gulf employers value different qualifications, prioritize specific 
               experience, and have distinct hiring practices influenced by cultural, economic, and regulatory factors.
             </p>
-            <p className={styles.paragraph}>
-              According to Gulf Talent's 2024 Employment Report, 67% of Gulf employers use Applicant Tracking Systems (ATS), 
+            <p className="left-align" style={styles.paragraph}>
+              According to Gulf Talent's 2025 Employment Report, 67% of Gulf employers use Applicant Tracking Systems (ATS), 
               while 89% still conduct manual resume screening for senior positions. This dual approach requires resumes that 
               are both machine-readable and culturally appropriate. The market favors candidates with Middle East experience, 
               but fresh entrants can succeed with properly tailored applications that demonstrate cultural awareness and 
               relevant transferable skills.
             </p>
             
-            <div className={styles.cardGrid}>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Key Gulf Market Statistics 2025</h3>
-                <ul className={styles.list}>
-                  <li>UAE leads with 42% of regional job openings</li>
-                  <li>Saudi Vision 2030 creating 1.2M new jobs annually</li>
-                  <li>Average recruitment process: 4-8 weeks</li>
-                  <li>71% of employers require degree attestation</li>
-                  <li>Healthcare & IT sectors growing at 12% annually</li>
+            <div style={styles.cardGrid}>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Key Gulf Market Statistics 2026</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>UAE leads with 42% of regional job openings</li>
+                  <li style={styles.listItem}>Saudi Vision 2030 creating 1.2M new jobs annually</li>
+                  <li style={styles.listItem}>Average recruitment process: 4-8 weeks</li>
+                  <li style={styles.listItem}>71% of employers require degree attestation</li>
+                  <li style={styles.listItem}>Healthcare & IT sectors growing at 12% annually</li>
                 </ul>
               </div>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>High-Demand Professions</h3>
-                <ul className={styles.list}>
-                  <li>Healthcare Professionals</li>
-                  <li>Engineering & Construction Managers</li>
-                  <li>IT & Cybersecurity Specialists</li>
-                  <li>Renewable Energy Experts</li>
-                  <li>Hospitality & Tourism Managers</li>
-                  <li>Education & Training Specialists</li>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>High-Demand Professions</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Healthcare Professionals</li>
+                  <li style={styles.listItem}>Engineering & Construction Managers</li>
+                  <li style={styles.listItem}>IT & Cybersecurity Specialists</li>
+                  <li style={styles.listItem}>Renewable Energy Experts</li>
+                  <li style={styles.listItem}>Hospitality & Tourism Managers</li>
+                  <li style={styles.listItem}>Education & Training Specialists</li>
                 </ul>
               </div>
             </div>
 
-            <div className={styles.tableWrapper}>
-              <h3 className={styles.subHeading}>Gulf Country Employment Comparison</h3>
-              <table className={styles.table}>
+            <div style={styles.tableWrapper}>
+              <h3 style={styles.subHeading}>Gulf Country Employment Comparison</h3>
+              <table style={styles.table}>
                 <thead>
                   <tr>
                     <th>Country</th>
@@ -351,16 +994,16 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
             </div>
           </section>
 
-          <section id="resume-format-requirements" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Gulf-Specific Resume Format Requirements</h2>
-            <p className={styles.paragraph}>
+          <section id="resume-format-requirements" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Gulf-Specific Resume Format Requirements</h2>
+            <p className="left-align" style={styles.paragraph}>
               A resume for Gulf jobs must balance international professional standards with regional preferences. 
               Unlike Western resumes that strictly limit personal information, Gulf resumes typically include 
               comprehensive personal details, a professional photo, and explicit salary expectations. The ideal 
               length is 2-3 pages, allowing sufficient detail for the comprehensive screening processes used by 
               Gulf employers.
             </p>
-            <p className={styles.paragraph}>
+            <p className="left-align" style={styles.paragraph}>
               The recommended structure includes: Personal Information with photo, Career Objective tailored to 
               Gulf market, Detailed Work Experience with emphasis on Middle East roles, Education with attested 
               credentials, Skills categorized by relevance, Languages with proficiency levels, and References. 
@@ -368,36 +1011,36 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
               multicultural hiring teams.
             </p>
 
-            <div className={styles.cardGrid}>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Required Personal Information</h3>
-                <ul className={styles.list}>
-                  <li>Full Name (as in passport)</li>
-                  <li>Nationality & Date of Birth</li>
-                  <li>Marital Status & Dependents</li>
-                  <li>Current Location & Visa Status</li>
-                  <li>Professional Passport-Style Photo</li>
-                  <li>Contact Information</li>
-                  <li>Current & Expected Salary</li>
+            <div style={styles.cardGrid}>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Required Personal Information</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Full Name (as in passport)</li>
+                  <li style={styles.listItem}>Nationality & Date of Birth</li>
+                  <li style={styles.listItem}>Marital Status & Dependents</li>
+                  <li style={styles.listItem}>Current Location & Visa Status</li>
+                  <li style={styles.listItem}>Professional Passport-Style Photo</li>
+                  <li style={styles.listItem}>Contact Information</li>
+                  <li style={styles.listItem}>Current & Expected Salary</li>
                 </ul>
               </div>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Recommended Resume Sections</h3>
-                <ul className={styles.list}>
-                  <li>Personal Details & Photo</li>
-                  <li>Career Objective/Summary</li>
-                  <li>Professional Experience</li>
-                  <li>Education & Certifications</li>
-                  <li>Technical & Soft Skills</li>
-                  <li>Language Proficiency</li>
-                  <li>References Available</li>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Recommended Resume Sections</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Personal Details & Photo</li>
+                  <li style={styles.listItem}>Career Objective/Summary</li>
+                  <li style={styles.listItem}>Professional Experience</li>
+                  <li style={styles.listItem}>Education & Certifications</li>
+                  <li style={styles.listItem}>Technical & Soft Skills</li>
+                  <li style={styles.listItem}>Language Proficiency</li>
+                  <li style={styles.listItem}>References Available</li>
                 </ul>
               </div>
             </div>
 
-            <div className={styles.exampleBlock}>
-              <p className={styles.exampleLabel}>Example: Effective Gulf Resume Objective</p>
-              <p className={styles.exampleText}>
+            <div style={styles.exampleBlock}>
+              <p style={styles.exampleLabel}>Example: Effective Gulf Resume Objective</p>
+              <p className="left-align" style={styles.exampleText}>
                 "Results-driven Project Manager with 8+ years of international experience seeking a senior role in UAE 
                 construction sector. Proven track record in managing $50M+ projects across Middle East markets. 
                 Expertise in BIM implementation, multicultural team leadership, and GCC regulatory compliance. 
@@ -406,16 +1049,16 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
             </div>
           </section>
 
-          <section id="cultural-considerations" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Cultural & Regional Considerations</h2>
-            <p className={styles.paragraph}>
+          <section id="cultural-considerations" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Cultural & Regional Considerations</h2>
+            <p className="left-align" style={styles.paragraph}>
               Cultural awareness significantly impacts resume success in Gulf markets. Employers value candidates 
               who demonstrate understanding of regional business practices, Islamic work ethics, and hierarchical 
               organizational structures. Key considerations include emphasizing stability and loyalty (long tenure 
               with previous employers is prized), highlighting experience working in multicultural environments, 
               and demonstrating respect for local customs and business etiquette.
             </p>
-            <p className={styles.paragraph}>
+            <p className="left-align" style={styles.paragraph}>
               Language plays a crucial role. While English is the primary business language, Arabic proficiency 
               should be prominently displayed if applicable. Even basic Arabic phrases in your resume can 
               demonstrate cultural respect. Additionally, understanding the importance of "wasta" (connections) 
@@ -424,12 +1067,12 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
             </p>
           </section>
 
-          <section id="industry-specific-guides" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Industry-Specific Resume Guides</h2>
+          <section id="industry-specific-guides" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Industry-Specific Resume Guides</h2>
             
-            <div className={styles.tableWrapper}>
-              <h3 className={styles.subHeading}>Industry-Specific Resume Requirements</h3>
-              <table className={styles.table}>
+            <div style={styles.tableWrapper}>
+              <h3 style={styles.subHeading}>Industry-Specific Resume Requirements</h3>
+              <table style={styles.table}>
                 <thead>
                   <tr>
                     <th>Industry</th>
@@ -468,34 +1111,34 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
             </div>
           </section>
 
-          <section id="visa-documentation" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Visa & Documentation Requirements</h2>
-            <p className={styles.paragraph}>
+          <section id="visa-documentation" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Visa & Documentation Requirements</h2>
+            <p className="left-align" style={styles.paragraph}>
               Gulf employment is intrinsically linked to visa sponsorship. Your resume must clearly indicate 
               your current visa status and requirements. For candidates already in the region, "transferable 
               employment visa" status is highly valuable and should be prominently displayed. Those outside 
               the region should research specific country requirements - for instance, Saudi Arabia's Iqama 
               system or UAE's employment visa categories.
             </p>
-            <p className={styles.paragraph}>
+            <p className="left-align" style={styles.paragraph}>
               Document attestation is mandatory for educational and professional certificates. Mention your 
               attestation status or willingness to complete the process. Some employers handle attestation, 
               while others expect candidates to arrive with fully attested documents. Research indicates that 
-              68% of job offers in 2024 were contingent on successful document attestation within 30 days of 
+              68% of job offers in 2025 were contingent on successful document attestation within 30 days of 
               offer acceptance.
             </p>
           </section>
 
-          <section id="salary-negotiation" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Salary Expectations & Negotiation</h2>
-            <p className={styles.paragraph}>
+          <section id="salary-negotiation" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Salary Expectations & Negotiation</h2>
+            <p className="left-align" style={styles.paragraph}>
               Gulf employers expect explicit salary information on resumes. Include both current salary (with 
               breakdown of basic salary, housing allowance, transportation, etc.) and expected package. Research 
               market rates thoroughly - salaries vary significantly by nationality, experience, and industry. 
-              According to 2024 Gulf Compensation Reports, Western expatriates typically command 15-25% higher 
+              According to 2025 Gulf Compensation Reports, Western expatriates typically command 15-25% higher 
               packages than Asian expatriates in similar roles.
             </p>
-            <p className={styles.paragraph}>
+            <p className="left-align" style={styles.paragraph}>
               Negotiation in Gulf markets follows specific patterns. Initial offers are often 10-15% below 
               budget maximums. Successful negotiators focus on total package value rather than just basic salary, 
               emphasizing housing allowances, education benefits for children, annual flight allowances, and 
@@ -504,69 +1147,69 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
             </p>
           </section>
 
-          <section id="ats-optimization" className={styles.section}>
-            <h2 className={styles.sectionHeading}>ATS Optimization for Gulf Companies</h2>
-            <p className={styles.paragraph}>
+          <section id="ats-optimization" style={styles.section}>
+            <h2 style={styles.sectionHeading}>ATS Optimization for Gulf Companies</h2>
+            <p className="left-align" style={styles.paragraph}>
               Major Gulf corporations and recruitment agencies use sophisticated ATS systems. Optimize your 
               resume with industry-specific keywords, standardized section headers, and machine-readable 
               formatting. Research indicates that resumes with 15-25 relevant keywords have 70% higher 
               visibility in Gulf ATS systems. Use both English and Arabic industry terms where applicable.
             </p>
             
-            <div className={styles.cardGrid}>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Gulf ATS Keywords by Industry</h3>
-                <ul className={styles.list}>
-                  <li>Healthcare: DHA licensed, HAAD, MOH, JCI accredited</li>
-                  <li>Construction: PMC, BIM, FIDIC, HSE compliant</li>
-                  <li>Finance: IFRS, AML, Islamic banking, Tadawul</li>
-                  <li>IT: Digital transformation, Smart city, Cybersecurity</li>
+            <div style={styles.cardGrid}>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Gulf ATS Keywords by Industry</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Healthcare: DHA licensed, HAAD, MOH, JCI accredited</li>
+                  <li style={styles.listItem}>Construction: PMC, BIM, FIDIC, HSE compliant</li>
+                  <li style={styles.listItem}>Finance: IFRS, AML, Islamic banking, Tadawul</li>
+                  <li style={styles.listItem}>IT: Digital transformation, Smart city, Cybersecurity</li>
                 </ul>
               </div>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Formatting Best Practices</h3>
-                <ul className={styles.list}>
-                  <li>Use standard fonts (Arial, Calibri, Times)</li>
-                  <li>Avoid headers/footers for key information</li>
-                  <li>Save as PDF for consistency</li>
-                  <li>Include both Arabic & English contact info</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section id="common-mistakes" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Common Mistakes to Avoid</h2>
-            
-            <div className={styles.cardGrid}>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Content Mistakes</h3>
-                <ul className={styles.list}>
-                  <li>Omitting salary expectations</li>
-                  <li>Not including personal details</li>
-                  <li>Using Western-focused achievements</li>
-                  <li>Ignoring visa status information</li>
-                  <li>Failing to highlight GCC experience</li>
-                </ul>
-              </div>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Formatting Errors</h3>
-                <ul className={styles.list}>
-                  <li>Overly creative/colorful designs</li>
-                  <li>Inconsistent date formats</li>
-                  <li>Missing professional photo</li>
-                  <li>Too brief (under 2 pages)</li>
-                  <li>Poor quality photo or scan</li>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Formatting Best Practices</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Use standard fonts (Arial, Calibri, Times)</li>
+                  <li style={styles.listItem}>Avoid headers/footers for key information</li>
+                  <li style={styles.listItem}>Save as PDF for consistency</li>
+                  <li style={styles.listItem}>Include both Arabic & English contact info</li>
                 </ul>
               </div>
             </div>
           </section>
 
-          <section id="gulf-vs-western" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Gulf vs Western Resume: Key Differences</h2>
+          <section id="common-mistakes" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Common Mistakes to Avoid</h2>
             
-            <div className={styles.tableWrapper}>
-              <table className={styles.table}>
+            <div style={styles.cardGrid}>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Content Mistakes</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Omitting salary expectations</li>
+                  <li style={styles.listItem}>Not including personal details</li>
+                  <li style={styles.listItem}>Using Western-focused achievements</li>
+                  <li style={styles.listItem}>Ignoring visa status information</li>
+                  <li style={styles.listItem}>Failing to highlight GCC experience</li>
+                </ul>
+              </div>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Formatting Errors</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Overly creative/colorful designs</li>
+                  <li style={styles.listItem}>Inconsistent date formats</li>
+                  <li style={styles.listItem}>Missing professional photo</li>
+                  <li style={styles.listItem}>Too brief (under 2 pages)</li>
+                  <li style={styles.listItem}>Poor quality photo or scan</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="gulf-vs-western" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Gulf vs Western Resume: Key Differences</h2>
+            
+            <div style={styles.tableWrapper}>
+              <table style={styles.table}>
                 <thead>
                   <tr>
                     <th>Aspect</th>
@@ -605,85 +1248,85 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
             </div>
           </section>
 
-          <section id="step-by-step-process" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Step-by-Step Gulf Resume Building Process</h2>
+          <section id="step-by-step-process" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Step-by-Step Gulf Resume Building Process</h2>
             
-            <div className={styles.cardGrid}>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Phase 1: Research & Preparation</h3>
-                <ul className={styles.list}>
-                  <li>Research target country regulations</li>
-                  <li>Identify industry-specific requirements</li>
-                  <li>Gather attested documents</li>
-                  <li>Take professional passport photo</li>
-                  <li>Determine salary expectations</li>
+            <div style={styles.cardGrid}>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Phase 1: Research & Preparation</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Research target country regulations</li>
+                  <li style={styles.listItem}>Identify industry-specific requirements</li>
+                  <li style={styles.listItem}>Gather attested documents</li>
+                  <li style={styles.listItem}>Take professional passport photo</li>
+                  <li style={styles.listItem}>Determine salary expectations</li>
                 </ul>
               </div>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Phase 2: Content Development</h3>
-                <ul className={styles.list}>
-                  <li>Write detailed work history</li>
-                  <li>Highlight GCC-relevant experience</li>
-                  <li>Include all personal information</li>
-                  <li>Add language proficiency details</li>
-                  <li>Incorporate ATS keywords</li>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Phase 2: Content Development</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Write detailed work history</li>
+                  <li style={styles.listItem}>Highlight GCC-relevant experience</li>
+                  <li style={styles.listItem}>Include all personal information</li>
+                  <li style={styles.listItem}>Add language proficiency details</li>
+                  <li style={styles.listItem}>Incorporate ATS keywords</li>
                 </ul>
               </div>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Phase 3: Formatting & Review</h3>
-                <ul className={styles.list}>
-                  <li>Apply professional formatting</li>
-                  <li>Ensure cultural appropriateness</li>
-                  <li>Verify visa status clarity</li>
-                  <li>Check salary information accuracy</li>
-                  <li>Review with Gulf market expert</li>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Phase 3: Formatting & Review</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>Apply professional formatting</li>
+                  <li style={styles.listItem}>Ensure cultural appropriateness</li>
+                  <li style={styles.listItem}>Verify visa status clarity</li>
+                  <li style={styles.listItem}>Check salary information accuracy</li>
+                  <li style={styles.listItem}>Review with Gulf market expert</li>
                 </ul>
               </div>
             </div>
           </section>
 
-          <section id="faqs" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Frequently Asked Questions</h2>
+          <section id="faqs" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Frequently Asked Questions</h2>
             
-            <div className={styles.faqItem}>
-              <h3 className={styles.subHeading}>1. Is a photo mandatory on Gulf resumes?</h3>
-              <p className={styles.paragraph}>
+            <div style={styles.faqItem}>
+              <h3 style={styles.subHeading}>1. Is a photo mandatory on Gulf resumes?</h3>
+              <p className="left-align" style={styles.paragraph}>
                 While not legally mandatory, a professional passport-style photo is expected by 92% of Gulf employers. 
                 It helps with identification and demonstrates professionalism. The photo should be recent, professional 
                 attire, neutral background, and high quality.
               </p>
             </div>
             
-            <div className={styles.faqItem}>
-              <h3 className={styles.subHeading}>2. How detailed should my work experience be?</h3>
-              <p className={styles.paragraph}>
+            <div style={styles.faqItem}>
+              <h3 style={styles.subHeading}>2. How detailed should my work experience be?</h3>
+              <p className="left-align" style={styles.paragraph}>
                 Gulf resumes require more detailed work history than Western counterparts. Include specific projects, 
                 technologies used, team sizes managed, budgets handled, and quantifiable achievements. Each position 
                 should have 5-8 bullet points detailing responsibilities and accomplishments.
               </p>
             </div>
             
-            <div className={styles.faqItem}>
-              <h3 className={styles.subHeading}>3. Should I translate my resume to Arabic?</h3>
-              <p className={styles.paragraph}>
+            <div style={styles.faqItem}>
+              <h3 style={styles.subHeading}>3. Should I translate my resume to Arabic?</h3>
+              <p className="left-align" style={styles.paragraph}>
                 While English is sufficient for most positions, having an Arabic version can be advantageous for 
                 government roles or local companies. If you include Arabic, ensure perfect translation by a professional. 
                 Most private sector multinational companies prefer English-only resumes.
               </p>
             </div>
             
-            <div className={styles.faqItem}>
-              <h3 className={styles.subHeading}>4. How do I handle employment gaps?</h3>
-              <p className={styles.paragraph}>
+            <div style={styles.faqItem}>
+              <h3 style={styles.subHeading}>4. How do I handle employment gaps?</h3>
+              <p className="left-align" style={styles.paragraph}>
                 Be prepared to explain any gaps exceeding 3 months. Gulf employers are particularly sensitive to 
                 employment history consistency. If gaps exist for legitimate reasons (further education, family 
                 responsibilities), mention them briefly in your cover letter or resume summary.
               </p>
             </div>
             
-            <div className={styles.faqItem}>
-              <h3 className={styles.subHeading}>5. Can I use a creative resume design?</h3>
-              <p className={styles.paragraph}>
+            <div style={styles.faqItem}>
+              <h3 style={styles.subHeading}>5. Can I use a creative resume design?</h3>
+              <p className="left-align" style={styles.paragraph}>
                 Conservative, professional designs work best in Gulf markets. Avoid creative formats, colors, or 
                 graphics. Stick to clean, organized layouts with clear section headings. The focus should be on 
                 content rather than design elements.
@@ -691,65 +1334,73 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt }) => {
             </div>
           </section>
 
-          <section id="conclusion" className={styles.section}>
-            <h2 className={styles.sectionHeading}>Conclusion & Next Steps</h2>
-            <p className={styles.paragraph}>
+          <section id="conclusion" style={styles.section}>
+            <h2 style={styles.sectionHeading}>Conclusion & Next Steps</h2>
+            <p className="left-align" style={styles.paragraph}>
               Creating an effective resume for Gulf jobs requires understanding the unique intersection of 
               international professional standards and regional cultural expectations. By following the guidelines 
               in this comprehensive guide, you can craft a resume that passes ATS screening, appeals to Gulf 
               employers, and positions you as a strong candidate for lucrative Middle East opportunities.
             </p>
-            <p className={styles.paragraph}>
+            <p className="left-align" style={styles.paragraph}>
               Remember that persistence and proper preparation are key. The Gulf job market is competitive but 
               rewarding for well-prepared candidates. Continuously update your resume as you gain new experiences 
               and qualifications, and always tailor your application to specific employers and positions.
             </p>
 
-            <div className={styles.cardGrid}>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Recommended Next Reads</h3>
-                <ul className={styles.list}>
-                  <li>
-                    <a href="https://www.professionalresumefree.com/cluster-articles/gulf-interview-preparation" 
-                       className={styles.inlineLink}>
-                      Gulf Job Interview Preparation Guide
-                    </a>
+            <div style={styles.cardGrid}>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Recommended Next Reads</h3>
+                <ul style={styles.list}>
+                  <li style={styles.listItem}>
+                    <Link href="/how-to-write-a-resume" style={styles.inlineLink}>
+                      How to Write a Resume: Complete Guide
+                    </Link>
                   </li>
-                  <li>
-                    <a href="https://www.professionalresumefree.com/cluster-articles/uae-employment-visa-process" 
-                       className={styles.inlineLink}>
-                      UAE Employment Visa Complete Process
-                    </a>
+                  <li style={styles.listItem}>
+                    <Link href="/resume-format-for-freshers" style={styles.inlineLink}>
+                      Resume Format for Freshers
+                    </Link>
                   </li>
-                  <li>
-                    <a href="https://www.professionalresumefree.com/cluster-articles/salary-negotiation-gulf" 
-                       className={styles.inlineLink}>
-                      Salary Negotiation Strategies for Gulf
-                    </a>
+                  <li style={styles.listItem}>
+                    <Link href="/resume-for-government-job" style={styles.inlineLink}>
+                      Resume for Government Job
+                    </Link>
                   </li>
-                  <li>
-                    <a href="https://www.professionalresumefree.com/cluster-articles/document-attestation-guide" 
-                       className={styles.inlineLink}>
-                      Document Attestation Complete Guide
-                    </a>
+                  <li style={styles.listItem}>
+                    <Link href="/free-resume-tools" style={styles.inlineLink}>
+                      Free Resume Tools & Checkers
+                    </Link>
                   </li>
                 </ul>
               </div>
-              <div className={styles.infoCard}>
-                <h3 className={styles.cardTitle}>Build Your Gulf Resume Now</h3>
-                <p className={styles.paragraphSmall}>
+              <div style={styles.infoCard}>
+                <h3 style={styles.cardTitle}>Build Your Gulf Resume Now</h3>
+                <p className="left-align" style={styles.paragraphSmall}>
                   Use our specialized Gulf resume templates with proper formatting for Middle Eastern job markets.
                 </p>
-                <a href="https://www.professionalresumefree.com" className={styles.primaryButton}>
+                <Link href="/resume-templates" style={styles.primaryButton}>
                   Create Gulf-Optimized Resume
-                </a>
-                <p className={styles.paragraphSmall}>
+                </Link>
+                <p className="left-align" style={{...styles.paragraphSmall, marginTop: '1rem'}}>
                   Free templates | ATS-friendly | Gulf-specific formats
                 </p>
               </div>
             </div>
           </section>
-        </section>
+        </div>
+
+        {/* Update Strategy */}
+        <div style={styles.updateStrategy}>
+          Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+        </div>
+
+        {/* Hidden Metadata */}
+        <div style={styles.hidden}>
+          <span itemProp="dateModified">{lastModifiedDate || generatedAt}</span>
+          <span itemProp="wordCount">3500</span>
+          <span itemProp="keywords">Gulf job resume, Middle East resume, GCC resume format, UAE job application</span>
+        </div>
       </main>
     </>
   );

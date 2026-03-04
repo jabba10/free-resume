@@ -721,8 +721,8 @@ const LogisticsResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Logistics Resume Builder: ATS Supply Chain Templates 2026</title>
-        <meta name="title" content="Free Logistics Resume Builder: ATS Supply Chain Templates 2026" />
+        <title>Free Logistics Resume Builder 2026 | ATS Supply Chain Templates</title>
+        <meta name="title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
         <meta name="description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals. Download PDF instantly." />
         <meta name="keywords" content="logistics resume builder, supply chain resume templates, warehouse resume builder, transportation resume, ATS friendly logistics resume, free resume builder for logistics professionals, supply chain CV, logistics manager resume, warehouse supervisor resume, transportation coordinator resume" />
         <meta name="author" content="Professional Logistics Resume Free" />
@@ -739,7 +739,7 @@ const LogisticsResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Logistics Resume Builder: ATS Supply Chain Templates 2026" />
+        <meta property="og:title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
         <meta property="og:description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -754,7 +754,7 @@ const LogisticsResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Logistics Resume Builder: ATS Supply Chain Templates 2026" />
+        <meta name="twitter:title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
         <meta name="twitter:description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-logistics-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Logistics Resume Builder with ATS Templates" />
@@ -1064,7 +1064,7 @@ const LogisticsResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Create Your <span className={styles.gradientText}>Logistics Resume 2026</span>
+              Create Your Logistics Resume 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

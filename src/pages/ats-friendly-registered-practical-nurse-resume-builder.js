@@ -1142,7 +1142,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Create Your <span className={styles.gradientText}>Canadian RPN Resume 2026</span>
+              Create Your Canadian RPN Resume 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

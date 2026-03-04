@@ -686,7 +686,7 @@ const AccountantResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Accounting Resume Builder 2026 | Create ATS CPA Resume</title>
+        <title>Free Accounting Resume Builder 2026: Create Your ATS CPA Resume & Get Hired</title>
         <meta name="title" content="Free Accounting Resume Builder 2026 | ATS CPA Resume Maker" />
         <meta name="description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="accounting resume builder, CPA resume templates, finance resume builder, accountant CV, ATS friendly accounting resume, free resume builder for accountants, financial analyst resume, audit resume, tax accountant CV, Big 4 resume templates" />

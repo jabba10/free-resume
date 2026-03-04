@@ -40,12 +40,6 @@ import {
   FiAnchor,
   FiTruck
 } from 'react-icons/fi';
-
-// Note: Some icons like FiHardHat don't exist in react-icons/fi
-// We'll use available alternatives:
-// FiHardHat → FiActivity or FiShield (for safety/construction)
-// The other icons exist in the fi package as shown above
-
 import Link from 'next/link';
 import styles from './Resume.module.css';
 
@@ -715,8 +709,8 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Construction Resume Builder 2026 | Trade Templates</title>
-        <meta name="title" content="Free Construction Resume Builder 2026 | Trade Templates" />
+        <title>Free Construction Resume Builder 2026 | Trade Templates for Pros</title>
+        <meta name="title" content="Free Construction Resume Builder 2026 | Trade Templates for Pros" />
         <meta name="description" content="Create a professional construction resume for free. ATS-friendly trade templates trusted by 3M+ construction pros. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="construction resume builder, construction resume templates, carpenter resume, electrician resume, plumber resume, heavy equipment operator resume, construction worker CV, trade resume, ATS friendly construction resume, free resume builder for construction workers" />
         <meta name="author" content="Professional Construction Resume Free" />
@@ -733,7 +727,7 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Construction Resume Builder 2026 | Trade Templates" />
+        <meta property="og:title" content="Free Construction Resume Builder 2026 | Trade Templates for Pros" />
         <meta property="og:description" content="Create a professional construction resume for free. ATS-friendly trade templates trusted by 3M+ construction pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-construction-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -748,7 +742,7 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Construction Resume Builder 2026 | Trade Templates" />
+        <meta name="twitter:title" content="Free Construction Resume Builder 2026 | Trade Templates for Pros" />
         <meta name="twitter:description" content="Create a professional construction resume for free. ATS-friendly trade templates trusted by 3M+ construction pros. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-construction-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Construction Resume Builder with ATS Templates" />
@@ -775,7 +769,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder",
-                  "name": "Free Construction Resume Builder 2026 | Trade Templates",
+                  "name": "Free Construction Resume Builder 2026 | Trade Templates for Pros",
                   "description": "Create professional ATS-optimized construction resumes for free. Land jobs 3x faster with our construction resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1039,9 +1033,7 @@ const Resume = ({
             <FiChevronRightIcon />
           </li>
           <li>
-            <Link href="/ats-friendly-construction-worker-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Free Trade Templates</span>
-            </Link>
+            <span className={styles.breadcrumbText}>Free Trade Templates</span>
           </li>
         </ol>
       </nav>

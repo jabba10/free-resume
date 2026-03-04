@@ -700,7 +700,7 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free AI Resume Builder 2026 | ATS Technical Templates</title>
+        <title>Free AI Resume Builder 2026: Create Your ATS Technical CV & Get Hired</title>
         <meta name="title" content="Free AI Resume Builder 2026 | ATS Technical Templates" />
         <meta name="description" content="Create your professional AI/technical resume for free in 2026. ATS-optimized templates for AI engineers, ML researchers & data scientists. Start now—no sign-up." />
         <meta name="keywords" content="AI resume builder, technical resume templates, machine learning resume, data science resume, creative technologist resume, ATS friendly technical resume, free resume builder for AI professionals, ML engineer resume, tech portfolio, GitHub resume" />

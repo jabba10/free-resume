@@ -691,8 +691,8 @@ const HRResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free HR Resume Builder 2026 | Assistant/Coordinator Templates</title>
-        <meta name="title" content="Free HR Resume Builder 2026 | Assistant/Coordinator Templates" />
+        <title>Free HR Resume Builder 2026: Assistant & Coordinator Templates</title>
+        <meta name="title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
         <meta name="description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="hr resume builder, hr assistant resume, hr coordinator resume, human resources resume, ATS friendly hr resume, free resume builder for hr professionals, global hr resume, hr recruitment resume, hr generalist resume, hr specialist resume" />
         <meta name="author" content="Professional HR Resume Free" />
@@ -709,7 +709,7 @@ const HRResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free HR Resume Builder 2026 | Assistant/Coordinator Templates" />
+        <meta property="og:title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
         <meta property="og:description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-hr-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -724,7 +724,7 @@ const HRResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free HR Resume Builder 2026 | Assistant/Coordinator Templates" />
+        <meta name="twitter:title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
         <meta name="twitter:description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-hr-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free HR Resume Builder with ATS Templates" />
@@ -751,7 +751,7 @@ const HRResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder",
-                  "name": "Free HR Resume Builder 2026 | Assistant/Coordinator Templates",
+                  "name": "Free HR Resume Builder 2026: Assistant & Coordinator Templates",
                   "description": "Create professional ATS-optimized HR resumes for free. Land HR Assistant/Coordinator roles 3x faster with our HR resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1015,9 +1015,7 @@ const HRResume = ({
             <FiChevronRightIcon />
           </li>
           <li>
-            <Link href="/ats-friendly-hr-assistant-coordinator-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Free HR Template</span>
-            </Link>
+            <span className={styles.breadcrumbText}>Free HR Template</span>
           </li>
         </ol>
       </nav>

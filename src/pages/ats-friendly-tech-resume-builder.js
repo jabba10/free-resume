@@ -676,29 +676,17 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        {/* FIX 1: Title shortened to exactly 50 characters */}
-        <title>Free Tech Resume Builder: ATS Templates 2026</title>
-        
-        {/* FIX 2: Meta Description optimized to 156 characters */}
+        <title>Free Tech Resume Builder 2026 | ATS Software Engineer Templates</title>
         <meta name="description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros. Download PDF instantly." />
-        
         <meta name="keywords" content="tech resume builder, software engineer resume, developer resume, data science resume, ATS friendly tech resume, free resume builder for tech professionals" />
         <meta name="author" content="Professional Tech Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
-        
-        {/* FIX 3: Removed revisit-after and sitemap meta tags */}
-        
-        {/* FIX 4: Single canonical tag - removed all duplicates */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" />
-        
-        {/* FIX 5: Single hreflang tag with x-default only - removed all duplicates */}
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="x-default" />
-        
-        {/* OpenGraph tags - properly formatted */}
-        <meta property="og:title" content="Free Tech Resume Builder: ATS Templates 2026" />
+        <meta property="og:title" content="Free Tech Resume Builder 2026 | ATS Software Engineer Templates" />
         <meta property="og:description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -708,24 +696,17 @@ const Resume = ({
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Tech Resume Free" />
         <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter Card tags - removed duplicates */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Tech Resume Builder: ATS Templates 2026" />
+        <meta name="twitter:title" content="Free Tech Resume Builder 2026 | ATS Software Engineer Templates" />
         <meta name="twitter:description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
-        
-        {/* Favicon and manifest links */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* Preconnect for fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* FIX 6: Single JSON-LD script with all structured data - consolidated */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -736,7 +717,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder",
-                  "name": "Free Tech Resume Builder - ATS Friendly Templates 2026",
+                  "name": "Free Tech Resume Builder 2026 | ATS Software Engineer Templates",
                   "description": "Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -859,7 +840,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section - FIX 7: Changed from h1 to h2 to ensure single h1 */}
+      {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -870,7 +851,6 @@ const Resume = ({
               </span>
             </div>
             
-            {/* CHANGED: From h1 to h2 to fix multiple H1 tags issue */}
             <h2 className={styles.heroTitle}>
               Create Your <span className={styles.gradientText}>Tech Resume 2026</span>
             </h2>
@@ -1876,12 +1856,11 @@ const Resume = ({
         </div>
       </div>
 
-      {/* FAQ Section - FIX 8: Updated heading hierarchy */}
+      {/* FAQ Section */}
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            {/* CHANGED: From h2 to h3 to maintain proper hierarchy (h1 → h2 → h3) */}
-            <h3 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h3>
+            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
             <p className={styles.sectionSubtitle}>
               Everything you need to know about creating professional tech resumes with our tool.
             </p>
@@ -1889,8 +1868,7 @@ const Resume = ({
           <div className={styles.faqGrid}>
             {faqs.map((faq, index) => (
               <div key={index} className={styles.faqItem}>
-                {/* CHANGED: From h3 to h4 to maintain proper hierarchy */}
-                <h4 className={styles.faqQuestion}>{faq.question}</h4>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
                 <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
             ))}
@@ -1898,12 +1876,11 @@ const Resume = ({
         </div>
       </section>
 
-      {/* CTA Section - FIX 9: Updated heading hierarchy */}
+      {/* CTA Section */}
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            {/* CHANGED: From h2 to h3 to maintain proper hierarchy (h1 → h2 → h3) */}
-            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Tech Career?</h3>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Tech Career?</h2>
             <p className={styles.ctaSubtitle}>
               Join 2 million+ tech professionals who landed their dream jobs at top companies with our free ATS-friendly tech resume builder.
             </p>
@@ -1925,13 +1902,12 @@ const Resume = ({
         </div>
       </section>
 
-      {/* Full Preview Modal - FIX 10: Updated heading hierarchy */}
+      {/* Full Preview Modal */}
       {showFullPreview && (
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              {/* CHANGED: From h3 to h4 to maintain proper hierarchy */}
-              <h4>Full Tech Resume Preview</h4>
+              <h3>Full Tech Resume Preview</h3>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

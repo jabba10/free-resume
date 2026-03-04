@@ -1067,7 +1067,7 @@ const LegalResume = ({
             <FiChevronRightIcon />
           </li>
           <li>
-            <Link href="/legal-resume-templates" className={styles.breadcrumbLink} prefetch={false}>
+            <Link href="/ats-friendly-legal-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
               <span className={styles.breadcrumbText}>Free Legal Templates</span>
             </Link>
           </li>

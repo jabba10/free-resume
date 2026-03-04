@@ -862,7 +862,7 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Finance Template",
                       "text": "Select from our ATS-optimized finance resume templates designed for investment banking, private equity, hedge funds, and corporate finance.",
-                      "url": "https://www.professionalresumefree.com/finance-resume-builder#templates",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#templates",
                       "image": "https://www.professionalresumefree.com/images/step1-finance-template.jpg"
                     },
                     {

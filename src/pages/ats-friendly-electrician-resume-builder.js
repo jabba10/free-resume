@@ -1067,7 +1067,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Create Your <span className={styles.gradientText}>Electrician Resume 2026</span>
+              Free Electrician Resume Builder: Create Yours in 5 Minutes
             </h1>
             
             <p className={styles.heroSubtitle}>

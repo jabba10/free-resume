@@ -787,8 +787,8 @@ const IndustrialResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Industrial Resume Builder 2026 | ATS Manufacturing & Engineering Templates</title>
-        <meta name="title" content="Free Industrial Resume Builder 2026 | ATS Manufacturing & Engineering Templates" />
+        <title>Free Industrial Resume Builder 2026 | Manufacturing & Engineering Templates</title>
+        <meta name="title" content="Free Industrial Resume Builder 2026 | Manufacturing & Engineering Templates" />
         <meta name="description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
         <meta name="keywords" content="industrial resume builder, manufacturing resume, engineering resume, technical resume, mechanical resume, electrical resume, plant manager resume, maintenance supervisor resume, industrial engineer resume, ATS friendly industrial resume" />
         <meta name="author" content="Professional Industrial Resume Builder" />
@@ -805,7 +805,7 @@ const IndustrialResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Industrial Resume Builder 2026 | ATS Manufacturing & Engineering Templates" />
+        <meta property="og:title" content="Free Industrial Resume Builder 2026 | Manufacturing & Engineering Templates" />
         <meta property="og:description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-industrial-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -820,7 +820,7 @@ const IndustrialResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Industrial Resume Builder 2026 | ATS Manufacturing & Engineering Templates" />
+        <meta name="twitter:title" content="Free Industrial Resume Builder 2026 | Manufacturing & Engineering Templates" />
         <meta name="twitter:description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-industrial-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Industrial Resume Builder with ATS Templates" />
@@ -847,7 +847,7 @@ const IndustrialResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder",
-                  "name": "Free Industrial Resume Builder 2026 - ATS Manufacturing & Engineering Templates",
+                  "name": "Free Industrial Resume Builder 2026 | Manufacturing & Engineering Templates",
                   "description": "Create professional ATS-optimized resumes for industrial, manufacturing, engineering, and technical jobs. Industry-specific templates with technical skill formatting.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1022,9 +1022,7 @@ const IndustrialResume = ({
             <FiChevronRightIcon />
           </li>
           <li>
-            <Link href="/ats-friendly-industrial-manufacturing-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Free Industrial Template</span>
-            </Link>
+            <span className={styles.breadcrumbText}>Free Industrial Template</span>
           </li>
         </ol>
       </nav>
@@ -1041,7 +1039,7 @@ const IndustrialResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Industrial Resume Builder 2026: Create Your ATS Manufacturing CV & Get Hired
+              Free Industrial Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

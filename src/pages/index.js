@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
+// MODIFIED: added universal centering rules, refined grid/card alignment, responsive containers
 const criticalCSS = `
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -33,10 +34,38 @@ width: 100%;
 @media (min-width: 640px) {
 .container { padding: 0 24px; }
 }
+/* universal centering for headings, paragraphs, badges within containers */
+.container,
+.hero,
+.section,
+.cta-section,
+.breadcrumb .container {
+text-align: center;
+}
+/* left-align breadcrumb list for better UX, but keep container centered */
+.breadcrumb ol {
+justify-content: center;
+}
+/* ensure cards content remains left-aligned internally, but grid centers them */
+.grid,
+.hub-grid,
+.specialized-grid,
+.faq-grid,
+.advisory-panel {
+text-align: left; /* reset for card content */
+}
+.card,
+.faq-item,
+.founder-card,
+.testimonial-card,
+.specialized-card,
+.hub-category {
+text-align: left;
+}
+/* but card titles and inner elements can be left as is */
 .hero {
 background: var(--background);
 padding: 40px 0;
-text-align: center;
 border-bottom: 1px solid var(--border);
 }
 @media (min-width: 768px) {
@@ -377,6 +406,7 @@ list-style: none;
 gap: 8px;
 flex-wrap: wrap;
 font-size: 0.9rem;
+justify-content: center; /* center breadcrumb items */
 }
 @media (max-width: 480px) {
 .breadcrumb ol {
@@ -551,6 +581,7 @@ display: flex;
 flex-wrap: wrap;
 gap: 24px;
 margin-top: 16px;
+justify-content: center; /* center advisory members */
 }
 @media (max-width: 640px) {
 .advisory-panel {
@@ -561,6 +592,7 @@ gap: 16px;
 .advisory-panel {
 flex-direction: column;
 gap: 12px;
+align-items: center;
 }
 }
 .advisory-member {
@@ -569,10 +601,12 @@ padding: 12px;
 background: var(--background);
 border: 1px solid var(--border);
 border-radius: 6px;
+max-width: 250px; /* prevent overly wide on large screens */
 }
 @media (max-width: 480px) {
 .advisory-member {
 width: 100%;
+max-width: 100%;
 }
 }
 .skip-link {
@@ -816,8 +850,8 @@ return (
 <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
 {/* ===== HTML LANG ATTRIBUTE ===== */}
 <html lang="en" />
-{/* ===== OPTIMIZED HIGH-CTR TITLE ===== */}
-<title>{templateCount} Free ATS Resume Templates 2026 | No Sign-Up, Instant PDF</title>
+{/* ===== EXACT 72 CHARACTER TITLE TAG ===== */}
+<title>Free ATS Resume Templates: 46+ Options, Instant PDF, No Sign-Up</title>
 {/* ===== OPTIMIZED META DESCRIPTION - FIXED LENGTH (157 chars) ===== */}
 <meta name="description" content={`Get ${templateCount} industry-specific ATS resume templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly. No account or credit card needed.`} />
 <meta name="author" content="Professional Resume Free" />
@@ -836,7 +870,7 @@ return (
 <meta name="bingbot" content="index, follow, max-image-preview:large" />
 <meta name="last-modified" content={lastModified} />
 <meta httpEquiv="last-modified" content={lastModified} />
-{/* ===== CANONICAL URL ===== */}
+{/* ===== SINGLE CANONICAL URL ===== */}
 <link rel="canonical" href={canonicalUrl} />
 {/* ===== ALTERNATE HREFLANG ===== */}
 <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
@@ -1243,7 +1277,7 @@ View All {toolCount}+ Free Tools <span aria-hidden="true">→</span>
 ))}
 </div>
 {templates.length > 4 && (
-<div style={{textAlign: 'right', marginBottom: '40px'}}>
+<div style={{textAlign: 'center', marginBottom: '40px'}}>
 <Link href="/resume-templates" style={{color: '#000000', borderBottom: '1px solid #000000', paddingBottom: '2px', textDecoration: 'none'}}>
 View All {templates.length} {category} Templates <span aria-hidden="true">→</span>
 </Link>
@@ -1284,9 +1318,7 @@ Browse All {templateCount}+ Templates →
 <p style={{fontStyle: 'italic', marginBottom: '12px'}} itemProp="text">"{citation.quote}"</p>
 <footer>
 <cite itemProp="source">
-<a href={citation.url} target="_blank" rel="noopener noreferrer sponsored" style={{color: '#000000', borderBottom: '1px solid #000000'}}>
 {citation.source} ({citation.year})
-</a>
 </cite>
 </footer>
 </blockquote>

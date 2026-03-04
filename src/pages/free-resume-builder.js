@@ -684,29 +684,17 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        {/* FIX 1: Title shortened to exactly 56 characters with 2026 year added */}
-        <title>Free Professional Resume Builder - ATS Templates 2026</title>
-        
-        {/* FIX 2: Meta Description optimized to 155 characters with 2026 year added */}
+        <title>Free Professional Resume Builder 2026 | ATS-Friendly Templates</title>
         <meta name="description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates trusted by 5M+ job seekers. Download PDF instantly." />
-        
         <meta name="keywords" content="resume builder, professional resume templates, ATS friendly resume, free resume builder, online resume maker" />
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
-        
-        {/* FIX 3: Removed revisit-after and sitemap meta tags */}
-        
-        {/* FIX 4: Single canonical tag - removed all duplicates */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-builder" />
-        
-        {/* FIX 5: Single hreflang tag with x-default only - removed all duplicates */}
         <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-builder" hreflang="x-default" />
-        
-        {/* OpenGraph tags - properly formatted */}
-        <meta property="og:title" content="Free Professional Resume Builder - ATS Templates 2026" />
+        <meta property="og:title" content="Free Professional Resume Builder 2026 | ATS-Friendly Templates" />
         <meta property="og:description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates trusted by 5M+ job seekers." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -715,23 +703,16 @@ const Resume = ({
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Professional Resume Builder - ATS Templates 2026" />
+        <meta name="twitter:title" content="Free Professional Resume Builder 2026 | ATS-Friendly Templates" />
         <meta name="twitter:description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-resume-builder-preview.jpg" />
-        
-        {/* Favicon links */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* Preconnect for fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* FIX 6: Single JSON-LD script with all structured data - consolidated and simplified */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -742,7 +723,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/free-resume-builder",
                   "url": "https://www.professionalresumefree.com/free-resume-builder",
-                  "name": "Free Professional Resume Builder - ATS Templates 2026",
+                  "name": "Free Professional Resume Builder 2026 | ATS-Friendly Templates",
                   "description": "Create professional ATS-optimized resumes for free. Land interviews faster with our universal resume builder.",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -825,7 +806,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section - FIX 7: Changed from h1 to h2 to ensure single h1, added 2026 year */}
+      {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1987,12 +1968,11 @@ const Resume = ({
         </div>
       </div>
 
-      {/* FAQ Section - FIX 8: Updated heading hierarchy */}
+      {/* FAQ Section */}
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            {/* CHANGED: From h2 to h3 to maintain proper hierarchy (h1 → h2 → h3) */}
-            <h3 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h3>
+            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
             <p className={styles.sectionSubtitle}>
               Everything you need to know about creating professional resumes with our tool.
             </p>
@@ -2000,8 +1980,7 @@ const Resume = ({
           <div className={styles.faqGrid}>
             {faqs.map((faq, index) => (
               <div key={index} className={styles.faqItem}>
-                {/* CHANGED: From h3 to h4 to maintain proper hierarchy */}
-                <h4 className={styles.faqQuestion}>{faq.question}</h4>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
                 <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
             ))}
@@ -2009,12 +1988,11 @@ const Resume = ({
         </div>
       </section>
 
-      {/* CTA Section - FIX 9: Updated heading hierarchy */}
+      {/* CTA Section */}
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            {/* CHANGED: From h2 to h3 to maintain proper hierarchy (h1 → h2 → h3) */}
-            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Career?</h3>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Career?</h2>
             <p className={styles.ctaSubtitle}>
               Join 5 million+ professionals who landed their dream jobs with our free ATS-friendly resume builder.
             </p>
@@ -2036,13 +2014,12 @@ const Resume = ({
         </div>
       </section>
 
-      {/* Full Preview Modal - FIX 10: Updated heading hierarchy */}
+      {/* Full Preview Modal */}
       {showFullPreview && (
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              {/* CHANGED: From h3 to h4 to maintain proper hierarchy */}
-              <h4>Full Resume Preview</h4>
+              <h3>Full Resume Preview</h3>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

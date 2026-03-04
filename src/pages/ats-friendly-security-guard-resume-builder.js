@@ -1061,9 +1061,9 @@ const SecurityGuardResume = ({
               </span>
             </div>
             
-            <h1 className={styles.heroTitle}>
+            <h2 className={styles.heroTitle}>
               Free Security Guard Resume Builder 2026: Start Now
-            </h1>
+            </h2>
             
             <p className={styles.heroSubtitle}>
               Create a <strong className={styles.heroHighlight}>professional, ATS-optimized security guard resume for free in minutes.</strong> Our security resume builder ensures your security experience, licenses, and certifications get noticed by security companies and employers.
@@ -2151,7 +2151,7 @@ const SecurityGuardResume = ({
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+            <h3 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h3>
             <p className={styles.sectionSubtitle}>
               Everything you need to know about creating professional security guard resumes with our tool.
             </p>
@@ -2159,7 +2159,7 @@ const SecurityGuardResume = ({
           <div className={styles.faqGrid}>
             {faqs.map((faq, index) => (
               <div key={index} className={styles.faqItem}>
-                <h3 className={styles.faqQuestion}>{faq.question}</h3>
+                <h4 className={styles.faqQuestion}>{faq.question}</h4>
                 <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
             ))}
@@ -2171,7 +2171,7 @@ const SecurityGuardResume = ({
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Security Career?</h2>
+            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Security Career?</h3>
             <p className={styles.ctaSubtitle}>
               Join 2 million+ security professionals who landed their dream jobs with our free ATS-friendly security guard resume builder.
             </p>
@@ -2198,7 +2198,7 @@ const SecurityGuardResume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Security Guard Resume Preview</h3>
+              <h4>Full Security Guard Resume Preview</h4>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

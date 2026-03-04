@@ -88,7 +88,7 @@ const PrivacyPolicy = () => {
     <div className={styles.privacyPolicy}>
       {/* SEO Meta Tags */}
       <Head>
-        <title>Privacy Policy | Your Data, Your Control | ProfessionalResumeFree</title>
+        <title>Privacy Policy: Your Data, Your Control | ProfessionalResumeFree</title>
         <meta name="description" content="We don't store your resume or personal data. Learn how our resume builder protects your privacy with zero data retention and client-side processing." />
         <meta name="keywords" content="privacy policy, resume builder privacy, no data storage, secure resume, GDPR compliant, data protection, resume privacy" />
         <meta name="author" content="ProfessionalResumeFree" />
@@ -98,7 +98,7 @@ const PrivacyPolicy = () => {
         <link rel="canonical" href="https://www.professionalresumefree.com/privacy-policy/" />
 
         {/* Open Graph / Social Media */}
-        <meta property="og:title" content="Privacy Policy | Your Data, Your Control | ProfessionalResumeFree" />
+        <meta property="og:title" content="Privacy Policy: Your Data, Your Control | ProfessionalResumeFree" />
         <meta property="og:description" content="We never store your resume or personal information. Built for privacy from the ground up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/privacy-preview.jpg" />
         <meta property="og:url" content="https://www.professionalresumefree.com/privacy-policy" />
@@ -107,7 +107,7 @@ const PrivacyPolicy = () => {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Privacy Policy | Your Data, Your Control | ProfessionalResumeFree" />
+        <meta name="twitter:title" content="Privacy Policy: Your Data, Your Control | ProfessionalResumeFree" />
         <meta name="twitter:description" content="We never store your resume or personal information. Built for privacy from the ground up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/privacy-preview.jpg" />
         <meta name="twitter:site" content="@professionalresumefree" />
@@ -119,7 +119,7 @@ const PrivacyPolicy = () => {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebPage",
-              "name": "Privacy Policy - ProfessionalResumeFree",
+              "name": "Privacy Policy: Your Data, Your Control - ProfessionalResumeFree",
               "description": "Our commitment to your privacy: we do not store any personal data or resume content.",
               "url": "https://www.professionalresumefree.com/privacy-policy",
               "breadcrumb": {

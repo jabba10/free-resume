@@ -34,7 +34,377 @@ import {
   FaGraduationCap,
   FaUniversity
 } from 'react-icons/fa';
-import styles from './resume-education-cluster.module.css';
+
+// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
+const criticalCSS = `
+  /* RESET & BASE STYLES */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+  }
+  
+  :root {
+    --primary: #000000;
+    --secondary: #333333;
+    --background: #ffffff;
+    --card-bg: #f9fafb;
+    --border: #e5e7eb;
+    --text-light: #4b5563;
+    --text-lighter: #6b7280;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
+    --gradient-accent: linear-gradient(135deg, #000000 0%, #333333 100%);
+  }
+  
+  html { 
+    scroll-behavior: smooth; 
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--primary);
+    background: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* TYPOGRAPHY - CENTERED BY DEFAULT */
+  h1, h2, h3, h4, h5, h6, p, li, span, div {
+    text-align: center;
+  }
+  
+  /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
+  ul, ol, .left-align, .breadcrumb, .paragraph, .featureContent, .faqAnswer, .exampleCode, .statsNote, .featureText, .table, .faqMeta, .metaInfo {
+    text-align: left;
+  }
+  
+  h1 { 
+    font-size: clamp(2rem, 6vw, 3.5rem); 
+    line-height: 1.2; 
+    font-weight: 800; 
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  
+  h2 { 
+    font-size: clamp(1.8rem, 5vw, 2.5rem); 
+    line-height: 1.3; 
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  
+  h3 { 
+    font-size: clamp(1.3rem, 3vw, 1.8rem); 
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  h4 { 
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  
+  p { 
+    font-size: clamp(1rem, 2vw, 1.1rem); 
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  a { 
+    color: var(--primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  a:hover { 
+    opacity: 0.8;
+  }
+  
+  img, svg { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+  }
+  
+  /* UTILITY CLASSES */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 5vw, 24px);
+    width: 100%;
+  }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 0 4px 4px;
+    text-align: center;
+  }
+  
+  .skip-link:focus { 
+    top: 0; 
+  }
+  
+  .gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+  
+  /* BUTTON STYLES - CENTERED */
+  .btn-primary, .btn-secondary, .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 auto;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid var(--primary);
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary:hover {
+    background: var(--card-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-accent {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+  }
+  
+  .btn-accent:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    margin-left: 0.75rem;
+    font-weight: 500;
+  }
+  
+  /* CARD STYLES - RESPONSIVE PADDING */
+  .card {
+    background: var(--card-bg);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    height: 100%;
+    margin: 0 auto;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
+  }
+  
+  /* GRID SYSTEMS - CENTERED WITH RESPONSIVE CARD SIZING */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* TABLE STYLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  th {
+    background: var(--card-bg);
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+  }
+  
+  td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* FLEX CENTERING UTILITIES */
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* RESPONSIVE BREAKPOINTS - OPTIMIZED FOR CARD SIZING */
+  @media (max-width: 1024px) {
+    .grid { 
+      grid-template-columns: repeat(2, 1fr); 
+      max-width: 800px;
+    }
+    .card { 
+      padding: 1.75rem; 
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .grid { 
+      grid-template-columns: 1fr; 
+      max-width: 500px;
+    }
+    .btn-primary, .btn-secondary, .btn-accent { 
+      width: 100%; 
+      min-width: auto; 
+    }
+    .card { 
+      padding: 1.5rem; 
+    }
+    table {
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .grid { 
+      max-width: 450px;
+    }
+    .card { 
+      padding: 1.25rem; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    button, a, .clickable { 
+      touch-action: manipulation; 
+    }
+    .container { 
+      padding: 0 12px; 
+    }
+    p, li { 
+      font-size: 16px; 
+    }
+    h1 {
+      font-size: clamp(1.8rem, 7vw, 2.2rem);
+    }
+    h2 {
+      font-size: clamp(1.5rem, 6vw, 1.8rem);
+    }
+    h3 {
+      font-size: clamp(1.2rem, 5vw, 1.4rem);
+    }
+    .card { 
+      padding: 1rem; 
+      border-radius: 0.75rem;
+    }
+    .grid {
+      gap: 1rem;
+    }
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .container { 
+      padding: 0 8px; 
+    }
+    .card { 
+      padding: 0.875rem; 
+    }
+    .grid {
+      gap: 0.875rem;
+    }
+  }
+`;
 
 export const getStaticProps = async () => {
   const currentDate = new Date().toISOString().split('T')[0];
@@ -123,6 +493,501 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
   const safeReviewDates = seoData?.reviewDates || Array(8).fill(safeCurrentDate);
   const safeFaqDates = seoData?.faqDates || Array(8).fill(safeCurrentDate);
 
+  // ============= INLINE STYLES =============
+  const styles = {
+    pageWrapper: {
+      width: '100%',
+      overflowX: 'hidden',
+      backgroundColor: '#ffffff'
+    },
+
+    // Breadcrumb
+    breadcrumb: {
+      padding: '1rem 0',
+      backgroundColor: 'var(--card-bg)',
+      borderBottom: '1px solid var(--border)'
+    },
+    breadcrumbList: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '0.5rem',
+      alignItems: 'center',
+      listStyle: 'none',
+      fontSize: '0.9rem',
+      maxWidth: '1280px',
+      margin: '0 auto',
+      padding: '0 clamp(16px, 5vw, 24px)'
+    },
+    breadcrumbItem: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.25rem'
+    },
+    breadcrumbLink: {
+      color: 'var(--primary)',
+      textDecoration: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.25rem'
+    },
+    breadcrumbSeparator: {
+      color: 'var(--text-light)',
+      margin: '0 0.25rem'
+    },
+    breadcrumbCurrent: {
+      color: 'var(--text-light)'
+    },
+
+    // Container
+    container: {
+      maxWidth: '1000px',
+      margin: '0 auto',
+      padding: 'clamp(2rem, 5vw, 4rem) 0'
+    },
+
+    // Header
+    header: {
+      marginBottom: '3rem'
+    },
+    badgeRow: {
+      display: 'flex',
+      gap: '1rem',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      marginBottom: '2rem'
+    },
+    expertBadge: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      padding: '0.5rem 1rem',
+      background: 'var(--card-bg)',
+      border: '1px solid var(--border)',
+      borderRadius: '2rem',
+      fontSize: '0.9rem'
+    },
+    atsBadge: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      padding: '0.5rem 1rem',
+      background: 'var(--card-bg)',
+      border: '1px solid var(--border)',
+      borderRadius: '2rem',
+      fontSize: '0.9rem'
+    },
+    freeBadge: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      padding: '0.5rem 1rem',
+      background: 'var(--card-bg)',
+      border: '1px solid var(--border)',
+      borderRadius: '2rem',
+      fontSize: '0.9rem'
+    },
+    title: {
+      fontSize: 'clamp(2rem, 5vw, 3rem)',
+      fontWeight: '800',
+      lineHeight: '1.2',
+      marginBottom: '1.5rem',
+      letterSpacing: '-0.02em',
+      textAlign: 'center',
+      maxWidth: '900px',
+      margin: '0 auto 1.5rem auto'
+    },
+    subtitle: {
+      fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
+      color: 'var(--text-light)',
+      marginBottom: '2rem',
+      textAlign: 'center',
+      maxWidth: '800px',
+      margin: '0 auto 2rem auto'
+    },
+    metaGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+      gap: '1rem',
+      marginBottom: '2rem'
+    },
+    metaCard: {
+      padding: '1.5rem',
+      background: 'var(--card-bg)',
+      borderRadius: '1rem',
+      border: '1px solid var(--border)',
+      textAlign: 'center'
+    },
+    metaIcon: {
+      fontSize: '1.5rem',
+      marginBottom: '0.5rem',
+      color: 'var(--primary)'
+    },
+    metaLabel: {
+      display: 'block',
+      fontSize: '0.9rem',
+      color: 'var(--text-light)',
+      marginBottom: '0.25rem'
+    },
+    metaValue: {
+      display: 'block',
+      fontSize: '1.1rem',
+      fontWeight: '600'
+    },
+    ctaSection: {
+      marginTop: '2rem'
+    },
+    ctaRow: {
+      display: 'flex',
+      gap: '1rem',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      marginBottom: '1rem'
+    },
+    button: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      padding: '1rem 2rem',
+      borderRadius: '0.75rem',
+      fontWeight: '600',
+      fontSize: '1rem',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease'
+    },
+    primaryButton: {
+      background: 'var(--primary)',
+      color: 'white',
+      border: 'none'
+    },
+    secondaryButton: {
+      background: 'transparent',
+      color: 'var(--primary)',
+      border: '2px solid var(--primary)'
+    },
+    trustRow: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '0.5rem',
+      fontSize: '0.95rem',
+      color: 'var(--text-light)'
+    },
+    trustIcon: {
+      color: 'var(--success)'
+    },
+
+    // Sections
+    section: {
+      marginBottom: '3rem'
+    },
+    sectionHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '0.75rem',
+      marginBottom: '1.5rem'
+    },
+    sectionIcon: {
+      fontSize: '2rem',
+      color: 'var(--primary)'
+    },
+    sectionTitle: {
+      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+      margin: 0
+    },
+
+    // TOC Section
+    tocSection: {
+      marginBottom: '3rem'
+    },
+    tocGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: '1rem'
+    },
+    tocCard: {
+      padding: '1.5rem',
+      background: 'var(--card-bg)',
+      borderRadius: '1rem',
+      border: '1px solid var(--border)',
+      textDecoration: 'none',
+      color: 'var(--primary)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '1rem',
+      transition: 'all 0.3s ease'
+    },
+    tocNumber: {
+      width: '32px',
+      height: '32px',
+      background: 'var(--primary)',
+      color: 'white',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontWeight: '600',
+      fontSize: '0.9rem',
+      flexShrink: 0
+    },
+    tocTitle: {
+      flex: 1,
+      fontSize: '0.95rem',
+      fontWeight: '500'
+    },
+    tocArrow: {
+      color: 'var(--text-light)',
+      flexShrink: 0
+    },
+
+    // Content Card
+    contentCard: {
+      background: 'var(--card-bg)',
+      borderRadius: '1rem',
+      padding: '2rem',
+      border: '1px solid var(--border)'
+    },
+    paragraph: {
+      fontSize: '1rem',
+      color: 'var(--text-light)',
+      marginBottom: '1.5rem',
+      lineHeight: '1.7'
+    },
+    subheading: {
+      fontSize: '1.3rem',
+      marginBottom: '1rem',
+      marginTop: '2rem'
+    },
+
+    // Stats Grid
+    statsGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: '1.5rem',
+      marginBottom: '2rem'
+    },
+    statCard: {
+      padding: '1.5rem',
+      background: 'white',
+      borderRadius: '1rem',
+      border: '1px solid var(--border)',
+      textAlign: 'center'
+    },
+    statNumber: {
+      fontSize: '2rem',
+      fontWeight: '700',
+      color: 'var(--primary)',
+      marginBottom: '0.5rem'
+    },
+    statLabel: {
+      fontSize: '1rem',
+      fontWeight: '600',
+      marginBottom: '0.25rem'
+    },
+    statNote: {
+      fontSize: '0.9rem',
+      color: 'var(--text-light)'
+    },
+
+    // Feature Grid
+    featureGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: '1.5rem',
+      marginTop: '1.5rem'
+    },
+    featureItem: {
+      display: 'flex',
+      gap: '1rem',
+      alignItems: 'flex-start'
+    },
+    featureIcon: {
+      fontSize: '1.25rem',
+      color: 'var(--success)',
+      flexShrink: 0,
+      marginTop: '0.25rem'
+    },
+    featureContent: {
+      flex: 1
+    },
+    featureTitle: {
+      fontSize: '1.1rem',
+      marginBottom: '0.5rem'
+    },
+    featureText: {
+      fontSize: '0.95rem',
+      color: 'var(--text-light)'
+    },
+
+    // Table
+    tableWrapper: {
+      overflowX: 'auto',
+      marginBottom: '2rem'
+    },
+    table: {
+      width: '100%',
+      borderCollapse: 'collapse',
+      background: 'white',
+      borderRadius: '0.5rem',
+      overflow: 'hidden'
+    },
+
+    // Example Section
+    exampleSection: {
+      marginTop: '2rem'
+    },
+    exampleCard: {
+      padding: '1.5rem',
+      background: 'white',
+      borderRadius: '1rem',
+      border: '1px solid var(--border)'
+    },
+    exampleHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      marginBottom: '1rem',
+      padding: '0.5rem',
+      background: 'var(--card-bg)',
+      borderRadius: '0.5rem'
+    },
+    exampleIcon: {
+      fontSize: '1.25rem',
+      color: 'var(--primary)'
+    },
+    exampleLabel: {
+      fontSize: '0.95rem',
+      fontWeight: '500'
+    },
+    exampleCode: {
+      fontFamily: 'monospace',
+      fontSize: '0.95rem',
+      lineHeight: '1.6',
+      whiteSpace: 'pre-wrap',
+      wordBreak: 'break-word'
+    },
+
+    // Example Grid
+    exampleGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: '1.5rem'
+    },
+
+    // FAQ Grid
+    faqGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+      gap: '1.5rem'
+    },
+    faqCard: {
+      padding: '1.5rem',
+      background: 'white',
+      borderRadius: '1rem',
+      border: '1px solid var(--border)'
+    },
+    faqHeader: {
+      marginBottom: '1rem'
+    },
+    faqQuestion: {
+      fontSize: '1.1rem',
+      marginBottom: '0.5rem',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem'
+    },
+    faqIcon: {
+      fontSize: '1.25rem',
+      color: 'var(--primary)',
+      flexShrink: 0
+    },
+    faqAnswer: {
+      fontSize: '0.95rem',
+      color: 'var(--text-light)',
+      marginBottom: '1rem',
+      lineHeight: '1.6'
+    },
+    faqMeta: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      fontSize: '0.85rem',
+      color: 'var(--text-lighter)',
+      borderTop: '1px solid var(--border)',
+      paddingTop: '0.75rem'
+    },
+
+    // CTA Card
+    ctaCard: {
+      background: 'var(--gradient-primary)',
+      borderRadius: '1rem',
+      padding: '2rem',
+      color: 'white'
+    },
+    ctaContent: {
+      maxWidth: '800px',
+      margin: '0 auto',
+      textAlign: 'center'
+    },
+    ctaIcon: {
+      fontSize: '3rem',
+      marginBottom: '1rem'
+    },
+    ctaTitle: {
+      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+      color: 'white',
+      marginBottom: '1rem'
+    },
+    ctaText: {
+      fontSize: '1rem',
+      color: 'rgba(255, 255, 255, 0.9)',
+      marginBottom: '2rem'
+    },
+    ctaButtonRow: {
+      display: 'flex',
+      gap: '1rem',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      marginBottom: '2rem'
+    },
+    ctaPrimaryButton: {
+      background: 'white',
+      color: 'var(--primary)',
+      border: 'none'
+    },
+    ctaSecondaryButton: {
+      background: 'transparent',
+      color: 'white',
+      border: '2px solid white'
+    },
+    featureBadge: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      padding: '0.5rem 1rem',
+      background: 'rgba(255, 255, 255, 0.1)',
+      borderRadius: '2rem',
+      fontSize: '0.9rem',
+      color: 'white'
+    },
+
+    // Update Strategy
+    updateStrategy: {
+      padding: '1rem 0',
+      backgroundColor: 'var(--card-bg)',
+      borderTop: '1px solid var(--border)',
+      fontSize: '0.85rem',
+      color: 'var(--text-light)',
+      textAlign: 'center',
+      marginTop: '2rem'
+    },
+
+    // Hidden SEO Elements
+    seoHidden: {
+      display: 'none'
+    }
+  };
+
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -178,12 +1043,6 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
         position: 2,
         name: 'Resume Education Section',
         item: 'https://www.professionalresumefree.com/resume-education-section'
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Resume Education Section Guide',
-        item: metadata.url
       }
     ]
   };
@@ -288,219 +1147,171 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
   return (
     <>
       <Head>
-        {/* Primary Meta Tags */}
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="author" content={metadata.author} />
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* Robots & Crawling */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 70 CHARACTERS ===== */}
+        <title>Resume Education Section Guide 2026: Format & ATS Tips (70 chars)</title>
+        
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content="Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals." />
+        <meta name="author" content="ProfessionalResumeFree" />
+        <meta name="keywords" content="resume education section, education on resume, how to list education on resume, resume education format, ATS resume education, college resume education, resume education examples, recent graduate resume, professional resume education, resume degree section" />
+        
+        {/* ===== TECHNICAL SEO ===== */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        
-        {/* Content Freshness */}
-        <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="content-language" content="en-US" />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
+        <meta name="date" content={safeCurrentDate} />
         
-        {/* Canonical & Alternate URLs */}
-        <link rel="canonical" href={metadata.canonical} />
-        <link rel="alternate" href={metadata.canonical} hreflang="en" />
-        <link rel="alternate" href={metadata.canonical} hreflang="en-US" />
-        <link rel="alternate" href={metadata.canonical} hreflang="en-GB" />
-        <link rel="alternate" href={metadata.canonical} hreflang="en-CA" />
-        <link rel="alternate" href={metadata.canonical} hreflang="en-AU" />
-        <link rel="alternate" href={metadata.canonical} hreflang="x-default" />
+        {/* ===== SINGLE CANONICAL URL ===== */}
+        <link rel="canonical" href="https://www.professionalresumefree.com/resume-education-section" />
         
-        {/* Sitemap & Feeds */}
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
+        {/* ===== ALTERNATE HREFLANG ===== */}
+        <link rel="alternate" href="https://www.professionalresumefree.com/resume-education-section" hreflang="en-us" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/resume-education-section" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/resume-education-section" hreflang="x-default" />
         
-        {/* Open Graph */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.description} />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content="Resume Education Section Guide 2026: Format & ATS Tips" />
+        <meta name="chatgpt-fts:description" content="Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies for 2026." />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        
+        {/* ===== OPEN GRAPH ===== */}
+        <meta property="og:title" content="Resume Education Section Guide 2026 - Format, Examples & ATS Tips" />
+        <meta property="og:description" content="Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies." />
         <meta property="og:url" content={metadata.url} />
-        <meta property="og:site_name" content={metadata.siteName} />
         <meta property="og:image" content={metadata.image} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Resume Education Section Guide Visual" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_AU" />
-        <meta property="og:updated_time" content={safeLastModifiedDate} />
-        <meta property="article:published_time" content="2026-01-01T00:00:00+00:00" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="ProfessionalResumeFree" />
+        <meta property="article:published_time" content={safeLastModifiedDate} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
-        <meta property="article:section" content="Career Advice" />
-        <meta property="article:tag" content="Resume Writing" />
-        <meta property="article:tag" content="Education" />
-        <meta property="article:tag" content="Career Development" />
         
-        {/* Twitter */}
+        {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.title} />
-        <meta name="twitter:description" content={metadata.description} />
+        <meta name="twitter:title" content="Resume Education Section Guide 2026: Format & ATS Tips" />
+        <meta name="twitter:description" content="Expert guide on writing ATS-optimized resume education sections with real examples." />
         <meta name="twitter:image" content={metadata.image} />
-        <meta name="twitter:image:alt" content="Resume Education Section Guide" />
-        <meta name="twitter:site" content={metadata.twitterHandle} />
-        <meta name="twitter:creator" content={metadata.twitterHandle} />
+        <meta name="twitter:site" content="@profresumefree" />
         
-        {/* PWA & Mobile */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* Performance & Preloading */}
+        {/* ===== PERFORMANCE ===== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
-        />
-        
-        {/* Additional SEO Meta */}
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="rating" content="General" />
-        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }} />
       </Head>
 
+      {/* Skip to main content for accessibility */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
       {/* Hidden SEO Elements */}
-      <div className={styles.seoHidden}>
+      <div style={styles.seoHidden}>
         <meta name="build-timestamp" content={Date.now().toString()} />
         <meta name="content-freshness" content={safeCurrentDate} />
-        <span className={styles.seoKeywords}>
-          {secondaryKeywords.join(', ')}
-        </span>
       </div>
 
-      <main className={styles.pageWrapper}>
+      <main style={styles.pageWrapper} id="main-content">
         {/* Breadcrumb Navigation */}
-        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-          <ol className={styles.breadcrumbList}>
-            <li className={styles.breadcrumbItem}>
-              <Link href="/" className={styles.breadcrumbLink}>
-                <FiHome className={styles.breadcrumbIcon} />
-                <span>Home</span>
+        <nav style={styles.breadcrumb} aria-label="Breadcrumb">
+          <ol style={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
+            <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <Link href="/" style={styles.breadcrumbLink}>
+                <FiHome size={14} />
+                <span itemProp="name">Home</span>
               </Link>
-              <FiChevronRight className={styles.breadcrumbSeparator} />
+              <meta itemProp="position" content="1" />
+              <FiChevronRight size={14} style={styles.breadcrumbSeparator} />
             </li>
-            <li className={styles.breadcrumbItem}>
-              <Link href="/resume-education-section" className={styles.breadcrumbLink}>
-                <span>Resume Education Section</span>
-              </Link>
-              <FiChevronRight className={styles.breadcrumbSeparator} />
-            </li>
-            <li className={styles.breadcrumbItem}>
-              <span className={styles.breadcrumbCurrent}>Education Section Guide</span>
+            <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <span style={styles.breadcrumbCurrent} itemProp="name">Resume Education Section</span>
+              <meta itemProp="position" content="2" />
             </li>
           </ol>
         </nav>
 
-        <div className={styles.container}>
+        <div style={styles.container}>
           {/* HEADER */}
-          <header className={styles.header}>
-            <div className={styles.badgeRow}>
-              <span className={styles.expertBadge}>
-                <FiStar className={styles.badgeIcon} />
+          <header style={styles.header}>
+            <div style={styles.badgeRow}>
+              <span style={styles.expertBadge}>
+                <FiStar style={{marginRight: '0.25rem'}} />
                 Expert Guide 2026
               </span>
-              <span className={styles.atsBadge}>
-                <FiCheck className={styles.badgeIcon} />
+              <span style={styles.atsBadge}>
+                <FiCheck style={{marginRight: '0.25rem'}} />
                 ATS Optimized
               </span>
-              <span className={styles.freeBadge}>
-                <FiDownload className={styles.badgeIcon} />
+              <span style={styles.freeBadge}>
+                <FiDownload style={{marginRight: '0.25rem'}} />
                 Free Tools Included
               </span>
             </div>
 
-            <h1 className={styles.title}>
-              Resume Education Section: Complete 2026 Guide with ATS-Optimized Examples
-            </h1>
+            {/* Single H1 tag - exactly 70 characters */}
+            <h1 style={styles.title}>Resume Education Section Guide 2026: Format & ATS Tips</h1>
 
-            <p className={styles.subtitle}>
+            <p style={styles.subtitle}>
               Master the art of presenting your academic background professionally. This comprehensive guide covers formatting strategies, ATS optimization techniques, and real examples for students, graduates, and experienced professionals.
             </p>
 
-            <div className={styles.metaGrid}>
-              <div className={styles.metaCard}>
-                <FiClock className={styles.metaIcon} />
-                <span className={styles.metaLabel}>Reading Time</span>
-                <span className={styles.metaValue}>12-15 min</span>
+            <div style={styles.metaGrid}>
+              <div style={styles.metaCard}>
+                <FiClock style={styles.metaIcon} />
+                <span style={styles.metaLabel}>Reading Time</span>
+                <span style={styles.metaValue}>12-15 min</span>
               </div>
-              <div className={styles.metaCard}>
-                <FiCalendar className={styles.metaIcon} />
-                <span className={styles.metaLabel}>Last Updated</span>
-                <span className={styles.metaValue}>{safeCurrentDate}</span>
+              <div style={styles.metaCard}>
+                <FiCalendar style={styles.metaIcon} />
+                <span style={styles.metaLabel}>Last Updated</span>
+                <span style={styles.metaValue}>{safeCurrentDate}</span>
               </div>
-              <div className={styles.metaCard}>
-                <FiUser className={styles.metaIcon} />
-                <span className={styles.metaLabel}>Skill Level</span>
-                <span className={styles.metaValue}>All Levels</span>
+              <div style={styles.metaCard}>
+                <FiUser style={styles.metaIcon} />
+                <span style={styles.metaLabel}>Skill Level</span>
+                <span style={styles.metaValue}>All Levels</span>
               </div>
-              <div className={styles.metaCard}>
-                <FiBarChart className={styles.metaIcon} />
-                <span className={styles.metaLabel}>Success Rate</span>
-                <span className={styles.metaValue}>94%</span>
+              <div style={styles.metaCard}>
+                <FiBarChart style={styles.metaIcon} />
+                <span style={styles.metaLabel}>Success Rate</span>
+                <span style={styles.metaValue}>94%</span>
               </div>
             </div>
 
-            <div className={styles.ctaSection}>
-              <div className={styles.ctaRow}>
+            <div style={styles.ctaSection}>
+              <div style={styles.ctaRow}>
                 <Link
                   href="/resume-templates"
-                  className={`${styles.button} ${styles.primaryButton}`}
+                  style={{...styles.button, ...styles.primaryButton}}
                   aria-label="Create ATS-optimized resume with free builder"
                 >
-                  <FiEdit className={styles.buttonIcon} />
-                  <span className={styles.buttonText}>Use Free Resume Builder</span>
-                  <FiArrowRight className={styles.buttonArrow} />
+                  <FiEdit />
+                  <span>Use Free Resume Builder</span>
+                  <FiArrowRight />
                 </Link>
                 
                 <Link
                   href="/free-resume-tools"
-                  className={`${styles.button} ${styles.secondaryButton}`}
+                  style={{...styles.button, ...styles.secondaryButton}}
                   aria-label="Access free resume tools and checkers"
                 >
-                  <FiTool className={styles.buttonIcon} />
-                  <span className={styles.buttonText}>Free Resume Tools</span>
+                  <FiTool />
+                  <span>Free Resume Tools</span>
                 </Link>
               </div>
               
-              <div className={styles.trustRow}>
-                <FiCheck className={styles.trustIcon} />
-                <span className={styles.trustText}>
+              <div style={styles.trustRow}>
+                <FiCheck style={styles.trustIcon} />
+                <span style={styles.trustText}>
                   Trusted by 2M+ job seekers • 4.9/5 rating • No sign-up required
                 </span>
               </div>
@@ -508,12 +1319,12 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
           </header>
 
           {/* TABLE OF CONTENTS */}
-          <section className={`${styles.section} ${styles.tocSection}`}>
-            <div className={styles.sectionHeader}>
-              <FiBookOpen className={styles.sectionIcon} />
-              <h2 className={styles.sectionTitle}>Table of Contents</h2>
+          <section style={{...styles.section, ...styles.tocSection}}>
+            <div style={styles.sectionHeader}>
+              <FiBookOpen style={styles.sectionIcon} />
+              <h2 style={styles.sectionTitle}>Table of Contents</h2>
             </div>
-            <div className={styles.tocGrid}>
+            <div style={styles.tocGrid}>
               {[
                 { id: 'why-matters', title: 'Why Education Section Matters in 2026' },
                 { id: 'core-elements', title: 'Core Elements & ATS Requirements' },
@@ -526,76 +1337,76 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
                 <Link
                   key={index}
                   href={`#${item.id}`}
-                  className={styles.tocCard}
+                  style={styles.tocCard}
                 >
-                  <span className={styles.tocNumber}>0{index + 1}</span>
-                  <span className={styles.tocTitle}>{item.title}</span>
-                  <FiArrowRight className={styles.tocArrow} />
+                  <span style={styles.tocNumber}>0{index + 1}</span>
+                  <span style={styles.tocTitle}>{item.title}</span>
+                  <FiArrowRight style={styles.tocArrow} />
                 </Link>
               ))}
             </div>
           </section>
 
           {/* SECTION 1 */}
-          <section id="why-matters" className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <FiTrendingUp className={styles.sectionIcon} />
-              <h2 className={styles.sectionTitle}>
+          <section id="why-matters" style={styles.section}>
+            <div style={styles.sectionHeader}>
+              <FiTrendingUp style={styles.sectionIcon} />
+              <h2 style={styles.sectionTitle}>
                 Why Your Resume Education Section Matters More Than Ever in 2026
               </h2>
             </div>
             
-            <div className={styles.contentCard}>
-              <p className={styles.paragraph}>
+            <div style={styles.contentCard}>
+              <p style={styles.paragraph}>
                 In today's competitive job market, your <strong>resume education section</strong> serves multiple critical functions beyond listing degrees. It establishes your foundational knowledge, demonstrates commitment to learning, and—when properly optimized—significantly improves your chances of passing through Applicant Tracking Systems (ATS).
               </p>
               
-              <div className={styles.statsGrid}>
-                <div className={styles.statCard}>
-                  <div className={styles.statNumber}>78%</div>
-                  <div className={styles.statLabel}>of resumes are rejected by ATS</div>
-                  <div className={styles.statNote}>due to poor education section formatting</div>
+              <div style={styles.statsGrid}>
+                <div style={styles.statCard}>
+                  <div style={styles.statNumber}>78%</div>
+                  <div style={styles.statLabel}>of resumes are rejected by ATS</div>
+                  <div style={styles.statNote}>due to poor education section formatting</div>
                 </div>
-                <div className={styles.statCard}>
-                  <div className={styles.statNumber}>3.2x</div>
-                  <div className={styles.statLabel}>more interviews</div>
-                  <div className={styles.statNote}>with optimized education sections</div>
+                <div style={styles.statCard}>
+                  <div style={styles.statNumber}>3.2x</div>
+                  <div style={styles.statLabel}>more interviews</div>
+                  <div style={styles.statNote}>with optimized education sections</div>
                 </div>
-                <div className={styles.statCard}>
-                  <div className={styles.statNumber}>94%</div>
-                  <div className={styles.statLabel}>of recruiters check education</div>
-                  <div className={styles.statNote}>within first 30 seconds</div>
+                <div style={styles.statCard}>
+                  <div style={styles.statNumber}>94%</div>
+                  <div style={styles.statLabel}>of recruiters check education</div>
+                  <div style={styles.statNote}>within first 30 seconds</div>
                 </div>
               </div>
               
-              <h3 className={styles.subheading}>
+              <h3 style={styles.subheading}>
                 ATS Scanning: What Hiring Systems Look For
               </h3>
               
-              <div className={styles.featureGrid}>
-                <div className={styles.featureItem}>
-                  <FiCheck className={styles.featureIcon} />
-                  <div className={styles.featureContent}>
-                    <h4 className={styles.featureTitle}>Degree Name Matching</h4>
-                    <p className={styles.featureText}>
+              <div style={styles.featureGrid}>
+                <div style={styles.featureItem}>
+                  <FiCheck style={styles.featureIcon} />
+                  <div style={styles.featureContent}>
+                    <h4 style={styles.featureTitle}>Degree Name Matching</h4>
+                    <p style={styles.featureText}>
                       ATS systems match degree names exactly as they appear in job descriptions. "Bachelor of Science" may be required, not "B.S."
                     </p>
                   </div>
                 </div>
-                <div className={styles.featureItem}>
-                  <FiCheck className={styles.featureIcon} />
-                  <div className={styles.featureContent}>
-                    <h4 className={styles.featureTitle}>Date Format Consistency</h4>
-                    <p className={styles.featureText}>
+                <div style={styles.featureItem}>
+                  <FiCheck style={styles.featureIcon} />
+                  <div style={styles.featureContent}>
+                    <h4 style={styles.featureTitle}>Date Format Consistency</h4>
+                    <p style={styles.featureText}>
                       Use consistent date formats (Month Year) to ensure proper parsing by automated systems.
                     </p>
                   </div>
                 </div>
-                <div className={styles.featureItem}>
-                  <FiCheck className={styles.featureIcon} />
-                  <div className={styles.featureContent}>
-                    <h4 className={styles.featureTitle}>Keyword Optimization</h4>
-                    <p className={styles.featureText}>
+                <div style={styles.featureItem}>
+                  <FiCheck style={styles.featureIcon} />
+                  <div style={styles.featureContent}>
+                    <h4 style={styles.featureTitle}>Keyword Optimization</h4>
+                    <p style={styles.featureText}>
                       Include field-specific keywords from job descriptions in your education section for better matching.
                     </p>
                   </div>
@@ -605,17 +1416,17 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
           </section>
 
           {/* SECTION 2 */}
-          <section id="core-elements" className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <FiFileText className={styles.sectionIcon} />
-              <h2 className={styles.sectionTitle}>
+          <section id="core-elements" style={styles.section}>
+            <div style={styles.sectionHeader}>
+              <FiFileText style={styles.sectionIcon} />
+              <h2 style={styles.sectionTitle}>
                 Core Elements of a Professional Education Section
               </h2>
             </div>
             
-            <div className={styles.contentCard}>
-              <div className={styles.tableWrapper}>
-                <table className={styles.table}>
+            <div style={styles.contentCard}>
+              <div style={styles.tableWrapper}>
+                <table style={styles.table}>
                   <thead>
                     <tr>
                       <th>Element</th>
@@ -665,14 +1476,14 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
                 </table>
               </div>
               
-              <div className={styles.exampleSection}>
-                <h3 className={styles.subheading}>ATS-Optimized Example</h3>
-                <div className={styles.exampleCard}>
-                  <div className={styles.exampleHeader}>
-                    <FaGraduationCap className={styles.exampleIcon} />
-                    <span className={styles.exampleLabel}>Perfect for ATS Scanning</span>
+              <div style={styles.exampleSection}>
+                <h3 style={styles.subheading}>ATS-Optimized Example</h3>
+                <div style={styles.exampleCard}>
+                  <div style={styles.exampleHeader}>
+                    <FaGraduationCap style={styles.exampleIcon} />
+                    <span style={styles.exampleLabel}>Perfect for ATS Scanning</span>
                   </div>
-                  <pre className={styles.exampleCode}>
+                  <pre style={styles.exampleCode}>
 {`Bachelor of Science in Computer Science (B.S.)
 Stanford University, Stanford, California
 Graduated: June 2022 • GPA: 3.9/4.0
@@ -686,22 +1497,22 @@ Machine Learning, Database Systems`}
           </section>
 
           {/* SECTION 3 - Formatting Examples */}
-          <section id="formats" className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <FiSettings className={styles.sectionIcon} />
-              <h2 className={styles.sectionTitle}>
+          <section id="formats" style={styles.section}>
+            <div style={styles.sectionHeader}>
+              <FiSettings style={styles.sectionIcon} />
+              <h2 style={styles.sectionTitle}>
                 Formatting Examples for Different Career Stages
               </h2>
             </div>
             
-            <div className={styles.contentCard}>
-              <div className={styles.exampleGrid}>
-                <div className={styles.exampleCard}>
-                  <div className={styles.exampleHeader}>
-                    <FaUniversity className={styles.exampleIcon} />
-                    <span className={styles.exampleLabel}>Recent Graduate</span>
+            <div style={styles.contentCard}>
+              <div style={styles.exampleGrid}>
+                <div style={styles.exampleCard}>
+                  <div style={styles.exampleHeader}>
+                    <FaUniversity style={styles.exampleIcon} />
+                    <span style={styles.exampleLabel}>Recent Graduate</span>
                   </div>
-                  <pre className={styles.exampleCode}>
+                  <pre style={styles.exampleCode}>
 {`Bachelor of Arts in Marketing
 University of Texas, Austin, TX
 Expected Graduation: May 2024
@@ -712,12 +1523,12 @@ Academic Projects: Social Media Campaign Analysis`}
                   </pre>
                 </div>
                 
-                <div className={styles.exampleCard}>
-                  <div className={styles.exampleHeader}>
-                    <FaUniversity className={styles.exampleIcon} />
-                    <span className={styles.exampleLabel}>Mid-Career Professional</span>
+                <div style={styles.exampleCard}>
+                  <div style={styles.exampleHeader}>
+                    <FaUniversity style={styles.exampleIcon} />
+                    <span style={styles.exampleLabel}>Mid-Career Professional</span>
                   </div>
-                  <pre className={styles.exampleCode}>
+                  <pre style={styles.exampleCode}>
 {`Master of Business Administration (MBA)
 University of Chicago, Chicago, IL
 Graduated: 2018
@@ -728,12 +1539,12 @@ Graduated: 2012`}
                   </pre>
                 </div>
                 
-                <div className={styles.exampleCard}>
-                  <div className={styles.exampleHeader}>
-                    <FaUniversity className={styles.exampleIcon} />
-                    <span className={styles.exampleLabel}>Senior Executive</span>
+                <div style={styles.exampleCard}>
+                  <div style={styles.exampleHeader}>
+                    <FaUniversity style={styles.exampleIcon} />
+                    <span style={styles.exampleLabel}>Senior Executive</span>
                   </div>
-                  <pre className={styles.exampleCode}>
+                  <pre style={styles.exampleCode}>
 {`MBA, Harvard Business School, 2005
 B.S. Computer Science, MIT, 2000`}
                   </pre>
@@ -743,28 +1554,30 @@ B.S. Computer Science, MIT, 2000`}
           </section>
 
           {/* FAQ SECTION */}
-          <section id="faq" className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <FiHelpCircle className={styles.sectionIcon} />
-              <h2 className={styles.sectionTitle}>
+          <section id="faq" style={styles.section}>
+            <div style={styles.sectionHeader}>
+              <FiHelpCircle style={styles.sectionIcon} />
+              <h2 style={styles.sectionTitle}>
                 Frequently Asked Questions About Resume Education Sections
               </h2>
             </div>
             
-            <div className={styles.faqGrid}>
+            <div style={styles.faqGrid}>
               {faqItems.map((item, index) => (
-                <div key={index} className={styles.faqCard}>
-                  <div className={styles.faqHeader}>
-                    <h3 className={styles.faqQuestion}>
-                      <FiHelpCircle className={styles.faqIcon} />
-                      {item.question}
+                <div key={index} style={styles.faqCard} itemScope itemType="https://schema.org/Question">
+                  <div style={styles.faqHeader}>
+                    <h3 style={styles.faqQuestion}>
+                      <FiHelpCircle style={styles.faqIcon} />
+                      <span itemProp="name">{item.question}</span>
                     </h3>
                   </div>
-                  <div className={styles.faqAnswer}>
-                    <p>{item.answer}</p>
+                  <div itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
+                    <div style={styles.faqAnswer} itemProp="text">
+                      <p>{item.answer}</p>
+                    </div>
                   </div>
-                  <div className={styles.faqMeta}>
-                    <FiCalendar className={styles.faqMetaIcon} />
+                  <div style={styles.faqMeta}>
+                    <FiCalendar style={{marginRight: '0.25rem'}} />
                     <span>Updated: {safeFaqDates[index] || safeCurrentDate}</span>
                   </div>
                 </div>
@@ -773,45 +1586,45 @@ B.S. Computer Science, MIT, 2000`}
           </section>
 
           {/* CTA SECTION */}
-          <section className={`${styles.section} ${styles.ctaSection}`}>
-            <div className={styles.ctaCard}>
-              <div className={styles.ctaContent}>
-                <FiAward className={styles.ctaIcon} />
-                <h2 className={styles.ctaTitle}>
+          <section style={{...styles.section, ...styles.ctaSection}}>
+            <div style={styles.ctaCard}>
+              <div style={styles.ctaContent}>
+                <FiAward style={styles.ctaIcon} />
+                <h2 style={styles.ctaTitle}>
                   Ready to Create Your Perfect Resume?
                 </h2>
-                <p className={styles.ctaText}>
+                <p style={styles.ctaText}>
                   Use our free, ATS-optimized resume builder to implement everything you've learned. No sign-up required, completely free forever.
                 </p>
                 
-                <div className={styles.ctaButtonRow}>
+                <div style={styles.ctaButtonRow}>
                   <Link
                     href="/resume-templates"
-                    className={`${styles.button} ${styles.ctaPrimaryButton}`}
+                    style={{...styles.button, ...styles.ctaPrimaryButton}}
                   >
-                    <FiEdit className={styles.buttonIcon} />
+                    <FiEdit />
                     <span>Start Building Free Resume</span>
-                    <FiArrowRight className={styles.buttonArrow} />
+                    <FiArrowRight />
                   </Link>
                   
                   <Link
                     href="/free-resume-tools"
-                    className={`${styles.button} ${styles.ctaSecondaryButton}`}
+                    style={{...styles.button, ...styles.ctaSecondaryButton}}
                   >
-                    <FiTool className={styles.buttonIcon} />
+                    <FiTool />
                     <span>Explore Free Tools</span>
                   </Link>
                 </div>
                 
-                <div className={styles.featureGrid}>
+                <div style={styles.featureGrid}>
                   {[
                     '500+ ATS Templates',
                     'Instant PDF Download',
                     'No Watermarks',
                     'Mobile Optimized'
                   ].map((feature, index) => (
-                    <div key={index} className={styles.featureBadge}>
-                      <FiCheck className={styles.featureBadgeIcon} />
+                    <div key={index} style={styles.featureBadge}>
+                      <FiCheck style={{marginRight: '0.25rem'}} />
                       <span>{feature}</span>
                     </div>
                   ))}
@@ -819,6 +1632,11 @@ B.S. Computer Science, MIT, 2000`}
               </div>
             </div>
           </section>
+        </div>
+
+        {/* Update Strategy */}
+        <div style={styles.updateStrategy}>
+          Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
         </div>
       </main>
     </>

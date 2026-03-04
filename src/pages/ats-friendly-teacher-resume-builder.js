@@ -1068,9 +1068,9 @@ const TeacherResume = ({
               </span>
             </div>
             
-            <h1 className={styles.heroTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
+            <h2 className={styles.heroTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               Free Teacher Resume Builder 2026: Start Now
-            </h1>
+            </h2>
             
             <p className={styles.heroSubtitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               Create a <strong className={styles.heroHighlight}>professional, ATS-optimized teacher resume for free in minutes.</strong> Our education resume builder ensures your teaching experience and credentials get noticed by schools and educational institutions globally.
@@ -2157,7 +2157,7 @@ const TeacherResume = ({
       <section className={styles.faqSection} aria-labelledby="faq-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle} id="faq-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Frequently Asked Questions</h2>
+            <h3 className={styles.sectionTitle} id="faq-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Frequently Asked Questions</h3>
             <p className={styles.sectionSubtitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               Everything you need to know about creating professional teacher resumes with our tool.
             </p>
@@ -2165,7 +2165,7 @@ const TeacherResume = ({
           <div className={styles.faqGrid}>
             {faqs.map((faq, index) => (
               <div key={index} className={styles.faqItem}>
-                <h3 className={styles.faqQuestion} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>{faq.question}</h3>
+                <h4 className={styles.faqQuestion} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>{faq.question}</h4>
                 <p className={styles.faqAnswer} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>{faq.answer}</p>
               </div>
             ))}
@@ -2177,7 +2177,7 @@ const TeacherResume = ({
       <section className={styles.ctaSection} aria-labelledby="cta-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Ready to Advance Your Teaching Career?</h2>
+            <h3 className={styles.ctaTitle} id="cta-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Ready to Advance Your Teaching Career?</h3>
             <p className={styles.ctaSubtitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               Join 3 million+ education professionals worldwide who landed their dream teaching jobs with our free ATS-friendly teacher resume builder.
             </p>
@@ -2205,7 +2205,7 @@ const TeacherResume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Teacher Resume Preview</h3>
+              <h4>Full Teacher Resume Preview</h4>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

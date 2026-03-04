@@ -356,7 +356,7 @@ const PlumberResume = ({
   const editLicense = createEditFunction('licenses', setCurrentLicense);
   const deleteLicense = createDeleteFunction('licenses');
 
-  const addCertification = createAddFunction('certifications', currentCertification, setCurrentCertification, defaultCertification, () => currentCertification.organization.trim());
+  const addCertification = createAddFunction('certifications', currentCertification, setCurrentCertification, defaultCertification, () => currentCertification.certification.trim());
   
   const editCertification = createEditFunction('certifications', setCurrentCertification);
   const deleteCertification = createDeleteFunction('certifications');
@@ -673,8 +673,8 @@ const PlumberResume = ({
   return (
     <div className={styles.plumberResumeBuilder} lang="en-US" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
       <Head>
-        <title>Free Plumber Resume Builder 2026 | ATS Plumbing Templates</title>
-        <meta name="title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates" />
+        <title>Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros</title>
+        <meta name="title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
         <meta name="description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
         <meta name="keywords" content="plumber resume builder, plumbing resume templates, pipefitter resume, apprentice plumber resume, ATS friendly plumbing resume, free resume builder for plumbers, construction resume, plumbing CV, plumbing technician resume, master plumber resume" />
         <meta name="author" content="Professional Plumber Resume Free" />
@@ -691,7 +691,7 @@ const PlumberResume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates" />
+        <meta property="og:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
         <meta property="og:description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-plumber-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -706,7 +706,7 @@ const PlumberResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates" />
+        <meta name="twitter:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
         <meta name="twitter:description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-plumber-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Plumber Resume Builder with ATS Templates" />
@@ -733,7 +733,7 @@ const PlumberResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder",
-                  "name": "Free Plumber Resume Builder 2026 - ATS Plumbing Templates",
+                  "name": "Free Plumber Resume Builder 2026 - ATS Plumbing Templates for Pros",
                   "description": "Create professional ATS-optimized plumbing resumes for free. Land jobs 3x faster with our plumber resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -997,9 +997,7 @@ const PlumberResume = ({
             <FiChevronRightIcon />
           </li>
           <li>
-            <Link href="/ats-friendly-plumber-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Free Plumbing Template</span>
-            </Link>
+            <span className={styles.breadcrumbText}>Free Plumbing Template</span>
           </li>
         </ol>
       </nav>
@@ -1016,7 +1014,7 @@ const PlumberResume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Plumber Resume Builder 2026: Create Your ATS Plumbing CV & Get Hired
+              Free Plumber Resume Builder 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

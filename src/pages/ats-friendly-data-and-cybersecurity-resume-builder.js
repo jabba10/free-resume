@@ -704,8 +704,8 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Cybersecurity Resume Builder 2026 | Technical Templates</title>
-        <meta name="title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates" />
+        <title>Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros</title>
+        <meta name="title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros" />
         <meta name="description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="cybersecurity resume builder, data science resume builder, security analyst resume, penetration tester resume, ATS friendly technical resume, free resume builder for tech professionals, security engineer resume, data scientist CV, IT security resume, network security resume" />
         <meta name="author" content="Professional Cybersecurity Resume Free" />
@@ -722,7 +722,7 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates" />
+        <meta property="og:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros" />
         <meta property="og:description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-cybersecurity-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -737,7 +737,7 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates" />
+        <meta name="twitter:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros" />
         <meta name="twitter:description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-cybersecurity-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Cybersecurity Resume Builder with ATS Templates" />
@@ -764,7 +764,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder",
-                  "name": "Free Cybersecurity Resume Builder 2026 | Technical Templates",
+                  "name": "Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros",
                   "description": "Create professional ATS-optimized cybersecurity resumes for free. Land interviews 3x faster with our technical resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1020,16 +1020,14 @@ const Resume = ({
           <li>
             <Link href="/" className={styles.breadcrumbLink} prefetch={false}>
               <FiHome className={styles.breadcrumbIcon} />
-              <span className={styles.breadcrumbText}>Cybersecurity Resume Builder</span>
+              <span className={styles.breadcrumbText}>Home</span>
             </Link>
           </li>
           <li className={styles.breadcrumbSeparator}>
             <FiChevronRightIcon />
           </li>
           <li>
-            <Link href="/ats-friendly-data-and-cybersecurity-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Free Technical Template</span>
-            </Link>
+            <span className={styles.breadcrumbText}>Free Technical Template</span>
           </li>
         </ol>
       </nav>

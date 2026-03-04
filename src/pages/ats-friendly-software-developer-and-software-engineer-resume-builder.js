@@ -709,8 +709,8 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Developer Resume Builder: ATS Tech Templates 2026</title>
-        <meta name="title" content="Free Developer Resume Builder: ATS Tech Templates 2026" />
+        <title>Free Developer Resume Builder: ATS Software Engineer Templates 2026</title>
+        <meta name="title" content="Free Developer Resume Builder: ATS Software Engineer Templates 2026" />
         <meta name="description" content="Create your ATS-optimized developer resume for free in 2026. Professional tech templates for software engineers. No sign-up required. Download PDF instantly." />
         <meta name="keywords" content="developer resume builder, software engineer resume, tech resume templates, programmer resume, ATS friendly developer resume, free resume builder for developers, coding resume, tech CV, software developer resume, GitHub portfolio resume" />
         <meta name="author" content="Professional Software Developer/Engineer Resume Free" />
@@ -727,7 +727,7 @@ const Resume = ({
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-software-developer-and-software-engineer-resume-builder" hreflang="en-CA" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-software-developer-and-software-engineer-resume-builder" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-software-developer-and-software-engineer-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Developer Resume Builder: ATS Tech Templates 2026" />
+        <meta property="og:title" content="Free Developer Resume Builder: ATS Software Engineer Templates 2026" />
         <meta property="og:description" content="Create your ATS-optimized developer resume for free in 2026. Professional tech templates trusted by 5M+ software engineers." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-developer-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -742,7 +742,7 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Developer Resume Builder: ATS Tech Templates 2026" />
+        <meta name="twitter:title" content="Free Developer Resume Builder: ATS Software Engineer Templates 2026" />
         <meta name="twitter:description" content="Create your ATS-optimized developer resume for free in 2026. Professional tech templates trusted by 5M+ software engineers." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-developer-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Developer Resume Builder with ATS Templates" />
@@ -1052,7 +1052,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Create Your <span className={styles.gradientText}>Developer Resume 2026</span>
+              Create Your Developer Resume 2026
             </h1>
             
             <p className={styles.heroSubtitle}>

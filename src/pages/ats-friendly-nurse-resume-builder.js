@@ -710,8 +710,8 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Nurse Resume Builder 2026 | ATS-Optimized Templates</title>
-        <meta name="title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Templates" />
+        <title>Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates</title>
+        <meta name="title" content="Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates" />
         <meta name="description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="nurse resume builder, nursing resume templates, RN resume, ATS friendly nurse resume, free resume builder for nurses, nursing CV, healthcare resume, ICU nurse resume, travel nurse resume, international nurse resume, new grad nurse resume" />
         <meta name="author" content="Professional Nurse Resume Free" />
@@ -721,20 +721,20 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="x-default" />
-        <meta property="og:title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Templates" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en-US" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en-GB" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en-CA" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en-AU" />
+        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="x-default" />
+        <meta property="og:title" content="Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates" />
         <meta property="og:description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-nurse-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Nurse Resume Builder - Create Professional Nursing Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Nurse Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -743,7 +743,7 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Nurse Resume Builder 2026 | ATS-Optimized Templates" />
+        <meta name="twitter:title" content="Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates" />
         <meta name="twitter:description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-nurse-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Nurse Resume Builder with ATS Templates" />
@@ -768,8 +768,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/#webpage",
-                  "url": "https://www.professionalresumefree.com/",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder#webpage",
+                  "url": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder",
                   "name": "Free Nurse Resume Builder 2026 | ATS-Optimized Templates",
                   "description": "Create professional ATS-optimized nursing resumes for free. Land interviews 3x faster with our nurse resume builder.",
                   "datePublished": "2026-01-01",
@@ -819,7 +819,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Nurse Resume Builder",
-                        "item": "https://www.professionalresumefree.com/"
+                        "item": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder"
                       }
                     ]
                   },
@@ -861,7 +861,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/#faqpage",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -874,7 +874,7 @@ const Resume = ({
                         "name": "Nurse Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/#webpage"
+                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder#webpage"
                   }))
                 },
                 {
@@ -893,7 +893,7 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Nursing Specialty Template",
                       "text": "Select from our ATS-optimized nursing resume templates designed for ICU, ER, Pediatrics, Travel Nursing, and all specialties.",
-                      "url": "https://www.professionalresumefree.com/#templates",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder#templates",
                       "image": "https://www.professionalresumefree.com/images/step1-nursing-template.jpg"
                     },
                     {
@@ -901,7 +901,7 @@ const Resume = ({
                       "position": 2,
                       "name": "Enter Your Nursing Experience",
                       "text": "Add your clinical experience, education, nursing licenses, certifications, and specialized nursing skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/#editor",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder#editor",
                       "image": "https://www.professionalresumefree.com/images/step2-nursing-info.jpg"
                     },
                     {
@@ -909,7 +909,7 @@ const Resume = ({
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our nursing-specific suggestions to improve clinical keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/#optimize",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder#optimize",
                       "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
@@ -917,7 +917,7 @@ const Resume = ({
                       "position": 4,
                       "name": "Download Your Nursing Resume",
                       "text": "Export your professional nursing resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/#download",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder#download",
                       "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
@@ -1004,7 +1004,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly nurse resume builder that helps nursing professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/"
+                        "url": "https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder"
                       }
                     }
                   }))
@@ -1053,7 +1053,7 @@ const Resume = ({
             </div>
             
             <h1 className={styles.heroTitle}>
-              Free Nurse Resume Builder 2026
+              Free Nurse Resume Builder: Create Yours in 5 Minutes
             </h1>
             
             <p className={styles.heroSubtitle}>

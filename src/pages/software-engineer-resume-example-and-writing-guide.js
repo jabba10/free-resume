@@ -1,677 +1,397 @@
-// pages/cluster-articles/software-resume-example-writing-guide.jsx
 import Head from 'next/head';
+import Link from 'next/link';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed =====
+// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
 const criticalCSS = `
-  /* CSS RESET */
+  /* RESET & BASE STYLES */
   * { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
   }
   
-  /* BASE STYLES */
-  body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    line-height: 1.6; 
-    color: #111827; 
-    background: #f3f4f6; 
+  :root {
+    --primary: #000000;
+    --secondary: #333333;
+    --background: #ffffff;
+    --card-bg: #f9fafb;
+    --border: #e5e7eb;
+    --text-light: #4b5563;
+    --text-lighter: #6b7280;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
+    --gradient-accent: linear-gradient(135deg, #000000 0%, #333333 100%);
+  }
+  
+  html { 
+    scroll-behavior: smooth; 
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--primary);
+    background: var(--background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-  
-  /* PAGE CONTAINER */
-  .page-container { 
-    max-width: 1280px; 
-    margin: 0 auto; 
-    padding: 16px; 
+    overflow-x: hidden;
     width: 100%;
   }
   
-  @media (min-width: 640px) {
-    .page-container { padding: 24px; }
+  /* TYPOGRAPHY - CENTERED BY DEFAULT */
+  h1, h2, h3, h4, h5, h6, p, li, span, div {
+    text-align: center;
   }
   
-  @media (min-width: 1024px) {
-    .page-container { padding: 32px; }
+  /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
+  ul, ol, .left-align, .breadcrumb-nav, .publication-meta, .hero-description, .data-card, .anatomy-card, .step-card, .faq-card, .resource-card, .final-note, .comparison-table, .data-table, .faq-answer, .resource-description, .resource-card p, .anatomy-card p, .step-card p, .faq-card p, .conclusion-section p, .resources-description {
+    text-align: left;
   }
   
-  /* MAIN ARTICLE CARD */
-  .main-article { 
-    background: #ffffff; 
-    border-radius: 24px; 
-    padding: 24px; 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
-    width: 100%;
-  }
-  
-  @media (min-width: 768px) {
-    .main-article { padding: 40px; }
-  }
-  
-  @media (min-width: 1024px) {
-    .main-article { padding: 48px; }
-  }
-  
-  /* BREADCRUMB NAVIGATION */
-  .breadcrumb-nav { 
-    margin-bottom: 24px; 
-    font-size: 0.9rem; 
-    color: #6b7280;
-  }
-  
-  .breadcrumb-list { 
-    display: flex; 
-    flex-wrap: wrap; 
-    list-style: none; 
-    gap: 8px;
-  }
-  
-  .breadcrumb-item { 
-    display: flex; 
-    align-items: center;
-  }
-  
-  .breadcrumb-item:not(:last-child)::after { 
-    content: "›"; 
-    margin-left: 8px; 
-    color: #9ca3af; 
-    font-size: 1.1rem;
-  }
-  
-  .breadcrumb-link { 
-    color: #111827; 
-    text-decoration: none; 
-    border-bottom: 1px solid #d1d5db;
-  }
-  
-  .breadcrumb-link:hover { 
-    border-bottom-color: #000000; 
-  }
-  
-  /* HERO SECTION */
-  .hero-section { 
-    margin-bottom: 40px; 
-    padding-bottom: 32px; 
-    border-bottom: 2px solid #f3f4f6;
-  }
-  
-  .hero-content { 
-    max-width: 900px;
-  }
-  
-  .topic-badge { 
-    display: inline-block; 
-    background: #f3f4f6; 
-    color: #111827; 
-    padding: 6px 16px; 
-    border-radius: 50px; 
-    font-size: clamp(0.7rem, 2vw, 0.85rem); 
-    font-weight: 600; 
-    margin-bottom: 20px; 
-    border: 1px solid #e5e7eb;
-    letter-spacing: 0.025em;
-  }
-  
-  /* HEADINGS - Fluid Typography with Clamp */
   h1 { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
+    font-size: clamp(2rem, 6vw, 3.5rem); 
     line-height: 1.2; 
-    margin-bottom: 16px; 
     font-weight: 800; 
+    margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
   }
   
   h2 { 
-    font-size: clamp(1.5rem, 5vw, 2.2rem); 
-    margin: 40px 0 24px; 
-    font-weight: 700; 
-    line-height: 1.3;
-    color: #000000;
-    letter-spacing: -0.01em;
-    word-wrap: break-word;
-  }
-  
-  h3 { 
-    font-size: clamp(1.2rem, 3.5vw, 1.5rem); 
-    margin: 24px 0 16px; 
-    font-weight: 600; 
-    line-height: 1.4;
-    color: #111827;
-    word-wrap: break-word;
-  }
-  
-  h4 { 
-    font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    margin: 16px 0 12px; 
-    font-weight: 600; 
-    color: #111827;
-  }
-  
-  .section-title { 
-    font-size: clamp(1.3rem, 4vw, 1.8rem); 
-    margin: 32px 0 20px; 
-    font-weight: 700; 
-    color: #000000;
-    border-bottom: 2px solid #f3f4f6;
-    padding-bottom: 12px;
-  }
-  
-  .subsection-title { 
-    font-size: clamp(1.1rem, 3vw, 1.3rem); 
-    margin: 24px 0 16px; 
-    font-weight: 600; 
-    color: #111827;
-  }
-  
-  /* TEXT ELEMENTS */
-  .publication-meta { 
-    color: #6b7280; 
-    font-size: 0.95rem; 
-    margin-bottom: 20px;
-  }
-  
-  .hero-description { 
-    font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    color: #4b5563; 
-    margin-bottom: 28px; 
-    max-width: 800px; 
-    line-height: 1.7;
-  }
-  
-  p { 
-    margin-bottom: 20px; 
-    color: #374151; 
-    font-size: clamp(1rem, 2.5vw, 1.1rem); 
-    line-height: 1.7;
-    word-wrap: break-word;
-  }
-  
-  strong { 
-    color: #000000; 
-    font-weight: 600;
-  }
-  
-  /* BUTTONS */
-  .cta-buttons { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 16px; 
-    margin: 24px 0; 
-  }
-  
-  .primary-cta { 
-    display: inline-block; 
-    background: #000000; 
-    color: #ffffff; 
-    padding: 14px 32px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: clamp(0.9rem, 2.5vw, 1rem); 
-    border: 2px solid #000000;
-    transition: all 0.2s ease;
-    text-align: center;
-    flex: 1 1 auto;
-    min-width: 240px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-  
-  .primary-cta:hover { 
-    background: #1f2937; 
-    border-color: #1f2937;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-  }
-  
-  .secondary-cta { 
-    display: inline-block; 
-    background: transparent; 
-    color: #000000; 
-    padding: 14px 32px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: clamp(0.9rem, 2.5vw, 1rem); 
-    border: 2px solid #000000;
-    transition: all 0.2s ease;
-    text-align: center;
-    flex: 1 1 auto;
-    min-width: 240px;
-  }
-  
-  .secondary-cta:hover { 
-    background: #f9fafb; 
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  @media (max-width: 480px) {
-    .primary-cta, .secondary-cta { 
-      width: 100%; 
-      min-width: auto;
-    }
-  }
-  
-  /* TABLE OF CONTENTS */
-  .toc-section { 
-    margin: 32px 0 40px; 
-  }
-  
-  .toc-card { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .toc-card h2 { 
-    margin-top: 0; 
-    margin-bottom: 20px; 
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  
-  .toc-list { 
-    list-style: none; 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 12px;
-  }
-  
-  @media (min-width: 640px) {
-    .toc-list { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .toc-list { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .toc-link { 
-    color: #111827; 
-    text-decoration: none; 
-    border-bottom: 1px solid #9ca3af; 
-    padding-bottom: 2px; 
-    font-size: clamp(0.9rem, 2.2vw, 1rem);
-    transition: border-color 0.2s;
-    display: inline-block;
-  }
-  
-  .toc-link:hover { 
-    border-bottom-color: #000000; 
-    color: #000000;
-  }
-  
-  /* CONTENT SECTIONS */
-  .content-main { 
-    margin-top: 40px;
-  }
-  
-  .content-section { 
-    margin: 48px 0; 
-    scroll-margin-top: 30px;
-  }
-  
-  /* DATA CARDS */
-  .data-card { 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border-left: 4px solid #000000; 
-    margin: 24px 0;
-  }
-  
-  .data-title { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    margin-bottom: 16px; 
-    color: #000000;
-  }
-  
-  .data-list { 
-    list-style: none; 
-  }
-  
-  .data-list li { 
-    margin-bottom: 12px; 
-    padding-left: 28px; 
-    position: relative; 
-    color: #374151;
-    font-size: clamp(0.95rem, 2.2vw, 1.05rem);
-  }
-  
-  .data-list li::before { 
-    content: "✓"; 
-    color: #000000; 
-    font-weight: bold; 
-    position: absolute; 
-    left: 0; 
-    font-size: 1.2rem;
-  }
-  
-  /* ANATOMY GRID */
-  .anatomy-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 20px; 
-    margin: 32px 0; 
-  }
-  
-  @media (min-width: 640px) {
-    .anatomy-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .anatomy-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .anatomy-card { 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    padding: 24px; 
-    border: 1px solid #e5e7eb; 
-    height: 100%;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .anatomy-card:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-title { 
-    font-size: clamp(1.1rem, 2.8vw, 1.3rem); 
-    margin-bottom: 12px; 
-    color: #000000; 
+    font-size: clamp(1.8rem, 5vw, 2.5rem); 
+    line-height: 1.3; 
+    margin-bottom: 1.5rem;
     font-weight: 700;
   }
   
-  .anatomy-card p { 
-    font-size: 0.95rem; 
-    margin-bottom: 12px;
+  h3 { 
+    font-size: clamp(1.3rem, 3vw, 1.8rem); 
+    margin-bottom: 1rem;
+    font-weight: 600;
   }
   
-  /* STEP CARDS */
-  .step-card { 
-    background: #ffffff; 
-    border-radius: 12px; 
-    padding: 20px; 
-    margin-bottom: 16px; 
-    border: 1px solid #e5e7eb; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  h4 { 
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
+    margin-bottom: 0.75rem;
+    font-weight: 600;
   }
   
-  .step-title { 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 8px;
-  }
-  
-  /* TABLES */
-  .comparison-table { 
-    overflow-x: auto; 
-    margin: 32px 0; 
-    background: #ffffff; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .data-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    min-width: 600px;
-  }
-  
-  .data-table th { 
-    background: #f9fafb; 
-    padding: 16px 12px; 
-    text-align: left; 
-    font-weight: 700; 
-    border-bottom: 2px solid #e5e7eb; 
-    color: #111827;
-    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
-  }
-  
-  .data-table td { 
-    padding: 14px 12px; 
-    border-bottom: 1px solid #e5e7eb; 
-    color: #374151;
-    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
-  }
-  
-  .data-table tr:last-child td { 
-    border-bottom: none; 
-  }
-  
-  .data-table td:first-child, .data-table th:first-child { 
-    padding-left: 16px; 
-  }
-  
-  .data-table td:last-child, .data-table th:last-child { 
-    padding-right: 16px; 
-  }
-  
-  @media (max-width: 640px) {
-    .data-table th, .data-table td { 
-      padding: 12px 8px; 
-    }
-  }
-  
-  /* RESOURCES SECTION */
-  .resources-section { 
-    margin: 60px 0 40px; 
-    padding: 32px 0; 
-    border-top: 2px solid #f3f4f6; 
-    border-bottom: 2px solid #f3f4f6;
-  }
-  
-  .resources-description { 
-    font-size: 1.1rem; 
-    max-width: 700px; 
-    margin-bottom: 32px;
-  }
-  
-  .resources-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px; 
-  }
-  
-  @media (min-width: 640px) {
-    .resources-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .resources-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  
-  .resource-card { 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    padding: 24px; 
-    border: 1px solid #e5e7eb;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  
-  .resource-title { 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 12px;
-    line-height: 1.4;
-  }
-  
-  .resource-description { 
-    font-size: 0.95rem; 
-    color: #4b5563; 
-    margin-bottom: 20px;
-    flex: 1;
-  }
-  
-  .resource-button { 
-    display: inline-block; 
-    background: #ffffff; 
-    color: #000000; 
-    padding: 10px 20px; 
-    border-radius: 6px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: 0.9rem; 
-    border: 2px solid #000000;
-    transition: all 0.2s ease;
-    text-align: center;
-    margin-top: auto;
-  }
-  
-  .resource-button:hover { 
-    background: #000000; 
-    color: #ffffff;
-  }
-  
-  /* FAQ SECTION */
-  .faq-section { 
-    margin: 48px 0;
-  }
-  
-  .faq-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px; 
-    margin: 32px 0; 
-  }
-  
-  @media (min-width: 768px) {
-    .faq-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  .faq-card { 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border: 1px solid #e5e7eb;
-    height: 100%;
-  }
-  
-  .faq-question { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 16px;
-    line-height: 1.4;
-  }
-  
-  .faq-answer { 
-    color: #374151; 
+  p { 
+    font-size: clamp(1rem, 2vw, 1.1rem); 
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
     line-height: 1.7;
   }
   
-  /* CONCLUSION SECTION */
-  .conclusion-section { 
-    margin: 48px 0 32px;
-  }
-  
-  .action-card { 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    padding: 32px; 
-    text-align: center; 
-    margin: 32px 0; 
-    border: 2px solid #e5e7eb;
-  }
-  
-  .action-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 16px;
-  }
-  
-  .final-note { 
-    font-size: 1.1rem; 
-    padding: 20px; 
-    background: #f3f4f6; 
-    border-radius: 12px; 
-    border-left: 4px solid #000000;
-  }
-  
-  /* LINKS */
   a { 
-    color: #000000; 
-    text-decoration: none; 
-    font-weight: 500;
+    color: var(--primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  a:hover { 
+    opacity: 0.8;
+  }
+  
+  img, svg { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
   }
   
   /* UTILITY CLASSES */
-  .hidden { 
-    display: none; 
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 5vw, 24px);
+    width: 100%;
   }
   
-  .text-center { 
-    text-align: center; 
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 0 4px 4px;
+    text-align: center;
   }
   
-  .mt-4 { 
-    margin-top: 32px; 
+  .skip-link:focus { 
+    top: 0; 
   }
   
-  .mb-4 { 
-    margin-bottom: 32px; 
+  .gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
   }
   
-  /* Ensure no overflow on any element */
-  img, svg, iframe, video, embed { 
-    max-width: 100%; 
-    height: auto; 
+  /* BUTTON STYLES - CENTERED */
+  .btn-primary, .btn-secondary, .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 auto;
   }
   
-  pre, code { 
-    white-space: pre-wrap; 
-    word-wrap: break-word; 
-    max-width: 100%; 
-    overflow-x: auto; 
-    background: #f1f5f9;
-    padding: 12px;
-    border-radius: 8px;
-    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-  }
-  
-  /* HORIZONTAL RULE */
-  hr {
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
     border: none;
-    border-top: 2px solid #e5e7eb;
-    margin: 48px 0;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid var(--primary);
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary:hover {
+    background: var(--card-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-accent {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    cursor: pointer;
+  }
+  
+  .btn-accent:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    margin-left: 0.75rem;
+    font-weight: 500;
+  }
+  
+  /* CARD STYLES - RESPONSIVE PADDING */
+  .card {
+    background: var(--card-bg);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    height: 100%;
+    margin: 0 auto;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
+  }
+  
+  /* GRID SYSTEMS - CENTERED WITH RESPONSIVE CARD SIZING */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* TABLE STYLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  th {
+    background: var(--card-bg);
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+  }
+  
+  td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* FLEX CENTERING UTILITIES */
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* RESPONSIVE BREAKPOINTS - OPTIMIZED FOR CARD SIZING */
+  @media (max-width: 1024px) {
+    .grid { 
+      grid-template-columns: repeat(2, 1fr); 
+      max-width: 800px;
+    }
+    .card { 
+      padding: 1.75rem; 
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .grid { 
+      grid-template-columns: 1fr; 
+      max-width: 500px;
+    }
+    .btn-primary, .btn-secondary, .btn-accent { 
+      width: 100%; 
+      min-width: auto; 
+    }
+    .card { 
+      padding: 1.5rem; 
+    }
+    table {
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .grid { 
+      max-width: 450px;
+    }
+    .card { 
+      padding: 1.25rem; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    button, a, .clickable { 
+      touch-action: manipulation; 
+    }
+    .container { 
+      padding: 0 12px; 
+    }
+    p, li { 
+      font-size: 16px; 
+    }
+    h1 {
+      font-size: clamp(1.8rem, 7vw, 2.2rem);
+    }
+    h2 {
+      font-size: clamp(1.5rem, 6vw, 1.8rem);
+    }
+    h3 {
+      font-size: clamp(1.2rem, 5vw, 1.4rem);
+    }
+    .card { 
+      padding: 1rem; 
+      border-radius: 0.75rem;
+    }
+    .grid {
+      gap: 1rem;
+    }
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .container { 
+      padding: 0 8px; 
+    }
+    .card { 
+      padding: 0.875rem; 
+    }
+    .grid {
+      gap: 0.875rem;
+    }
   }
 `;
 
 // ===== METADATA CONFIGURATION =====
 export const metadata = {
-  title: 'Software Resume Example & Writing Guide 2026 | Professional Resume Free',
-  description: 'Master software resume writing with our 2000+ word definitive guide. Includes ATS-optimized examples, templates, and expert tips to land interviews fast. Updated for 2026 hiring trends.',
-  keywords: 'software resume example, software engineer resume, resume writing guide, ATS optimization, tech resume, software developer resume, coding resume, programmer resume, software engineering cv, tech job application',
+  title: 'Software Engineer Resume Example & Writing Guide 2026 | Professional Resume Free',
+  description: 'Master software engineer resume writing with our 2000+ word definitive guide. Includes ATS-optimized examples, templates, and expert tips to land interviews fast. Updated for 2026 hiring trends.',
+  keywords: 'software engineer resume example, software developer resume, resume writing guide, ATS optimization, tech resume, coding resume, programmer resume, software engineering cv, tech job application',
   authors: [{ name: 'Professional Resume Experts Team' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://www.professionalresumefree.com/software-resume-example-and-writing-guide',
+  canonical: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
   
   openGraph: {
-    title: 'Software Resume Example & Writing Guide 2026 | Professional Resume Free',
-    description: 'Complete guide with ATS-optimized software resume examples, templates, and expert writing tips for 2026. Based on analysis of 10,000+ successful tech resumes.',
-    url: 'https://www.professionalresumefree.com/software-resume-example-and-writing-guide',
+    title: 'Software Engineer Resume Example & Writing Guide 2026 | Professional Resume Free',
+    description: 'Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips for 2026. Based on analysis of 10,000+ successful tech resumes.',
+    url: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
     siteName: 'Professional Resume Free',
     images: [
       {
         url: 'https://www.professionalresumefree.com/og-software-resume-guide.jpg',
         width: 1200,
         height: 630,
-        alt: 'Software Resume Example & Writing Guide 2026'
+        alt: 'Software Engineer Resume Example & Writing Guide 2026'
       },
     ],
     locale: 'en_US',
@@ -679,13 +399,13 @@ export const metadata = {
     publishedTime: '2026-01-23',
     modifiedTime: new Date().toISOString().split('T')[0],
     section: 'Tech Careers',
-    tags: ['software resume', 'tech resume', 'software engineer', 'ATS optimization']
+    tags: ['software engineer resume', 'tech resume', 'software developer', 'ATS optimization']
   },
   
   twitter: {
     card: 'summary_large_image',
-    title: 'Software Resume Example & Writing Guide 2026',
-    description: 'Complete guide with ATS-optimized software resume examples, templates, and expert writing tips.',
+    title: 'Software Engineer Resume Example & Writing Guide 2026',
+    description: 'Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips.',
     images: ['https://www.professionalresumefree.com/og-software-resume-guide.jpg'],
     creator: '@ProfResumeFree',
     site: '@ProfResumeFree'
@@ -693,9 +413,9 @@ export const metadata = {
   
   // GEO-specific meta tags for ChatGPT and AI crawlers
   geo: {
-    'chatgpt-fts:title': 'Software Resume Example & Writing Guide 2026 - ATS-Optimized Templates',
-    'chatgpt-fts:description': 'Definitive 2000+ word guide to writing software resumes that pass ATS and impress tech hiring managers. Includes examples, templates, and expert strategies.',
-    'chatgpt-fts:keywords': 'software resume example, how to write software engineer resume, tech resume template, ATS optimization for developers',
+    'chatgpt-fts:title': 'Software Engineer Resume Example & Writing Guide 2026 - ATS-Optimized Templates',
+    'chatgpt-fts:description': 'Definitive 2000+ word guide to writing software engineer resumes that pass ATS and impress tech hiring managers. Includes examples, templates, and expert strategies.',
+    'chatgpt-fts:keywords': 'software engineer resume example, how to write software developer resume, tech resume template, ATS optimization for programmers',
     'chatgpt-fts:last-updated': new Date().toISOString().split('T')[0],
     'generator': 'Professional Resume Free - Tech Career Platform'
   }
@@ -785,31 +505,31 @@ const data = {
     }
   ],
 
-  // Internal links
+  // Internal links - ALL VALID LINKS INCLUDED
   internalLinks: [
     {
       title: 'ATS-Friendly Software Engineer Resume Templates',
       description: 'Download professionally designed, ATS-optimized templates specifically for software roles with proper technical section layouts.',
-      href: '/ats-friendly-software-developer-and-software-engineer-resume-builder',
+      href: '/resume-templates',
       cta: 'View Templates'
     },
     {
-      title: 'ATS-Friendly Project Manager Resume Writing Guide',
-      description: 'Learn how to write a project manager resume that stands out and impresses recruiters.',
+      title: 'ATS-Friendly Project Manager Resume Builder',
+      description: 'Specialized resume templates and writing guide for project management professionals with PMP, Agile, and Scrum expertise.',
       href: '/ats-friendly-project-manager-resume-builder',
-      cta: 'View Guide'
+      cta: 'Build PM Resume'
     },
     {
-      title: 'ATS-Friendly Sustainability and Green Industries Resume Writing Guide',
-      description: 'Complement your resume with a powerful portfolio website that showcases your projects, code samples, and technical capabilities.',
+      title: 'ATS-Friendly Sustainability & Green Industries Resume Builder',
+      description: 'Tailored resume templates for environmental, renewable energy, and sustainability roles with industry-specific keywords.',
       href: '/ats-friendly-sustainability-and-green-industries-resume-builder',
-      cta: 'Build Portfolio'
+      cta: 'Build Green Resume'
     },
     {
-      title: 'ATS-Friendly Technology and Machine Learning Resume Writing Guide',
-      description: 'Once your resume lands interviews, prepare with our comprehensive guide to coding challenges, system design, and behavioral questions.',
+      title: 'ATS-Friendly AI & Machine Learning Resume Builder',
+      description: 'Advanced resume templates for AI/ML engineers, data scientists, and technical specialists with cutting-edge technology focus.',
       href: '/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder',
-      cta: 'Prepare Now'
+      cta: 'Build AI Resume'
     }
   ],
 
@@ -826,6 +546,347 @@ const data = {
   ]
 };
 
+// ===== INLINE STYLES =====
+const styles = {
+  pageContainer: {
+    maxWidth: '1280px',
+    margin: '0 auto',
+    padding: 'clamp(16px, 3vw, 32px)',
+    width: '100%'
+  },
+  mainArticle: {
+    background: '#ffffff',
+    borderRadius: '1.5rem',
+    padding: 'clamp(1.5rem, 4vw, 3rem)',
+    boxShadow: 'var(--shadow-xl)',
+    border: '1px solid var(--border)',
+    width: '100%'
+  },
+  breadcrumbNav: {
+    marginBottom: '2rem',
+    fontSize: '0.9rem',
+    color: 'var(--text-light)'
+  },
+  breadcrumbList: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    listStyle: 'none',
+    gap: '0.5rem'
+  },
+  breadcrumbItem: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  breadcrumbLink: {
+    color: 'var(--primary)',
+    textDecoration: 'none',
+    borderBottom: '1px solid var(--border)'
+  },
+  heroSection: {
+    marginBottom: '2.5rem',
+    paddingBottom: '2rem',
+    borderBottom: '2px solid var(--border)'
+  },
+  heroContent: {
+    maxWidth: '900px'
+  },
+  topicBadge: {
+    display: 'inline-block',
+    background: 'var(--card-bg)',
+    color: 'var(--primary)',
+    padding: '0.4rem 1rem',
+    borderRadius: '50px',
+    fontSize: 'clamp(0.7rem, 2vw, 0.85rem)',
+    fontWeight: '600',
+    marginBottom: '1.25rem',
+    border: '1px solid var(--border)',
+    letterSpacing: '0.025em'
+  },
+  publicationMeta: {
+    color: 'var(--text-light)',
+    fontSize: '0.95rem',
+    marginBottom: '1.25rem'
+  },
+  heroDescription: {
+    fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+    color: 'var(--text-light)',
+    marginBottom: '1.75rem',
+    maxWidth: '800px',
+    lineHeight: '1.7'
+  },
+  ctaButtons: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '1rem',
+    margin: '1.5rem 0'
+  },
+  primaryCta: {
+    display: 'inline-block',
+    background: 'var(--primary)',
+    color: 'white',
+    padding: '0.875rem 2rem',
+    borderRadius: '0.5rem',
+    textDecoration: 'none',
+    fontWeight: '600',
+    fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
+    border: '2px solid var(--primary)',
+    transition: 'all 0.3s ease',
+    textAlign: 'center',
+    flex: '1 1 auto',
+    minWidth: '240px',
+    boxShadow: 'var(--shadow-md)'
+  },
+  secondaryCta: {
+    display: 'inline-block',
+    background: 'transparent',
+    color: 'var(--primary)',
+    padding: '0.875rem 2rem',
+    borderRadius: '0.5rem',
+    textDecoration: 'none',
+    fontWeight: '600',
+    fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
+    border: '2px solid var(--primary)',
+    transition: 'all 0.3s ease',
+    textAlign: 'center',
+    flex: '1 1 auto',
+    minWidth: '240px'
+  },
+  tocSection: {
+    margin: '2rem 0 2.5rem'
+  },
+  tocCard: {
+    background: 'var(--card-bg)',
+    padding: '1.75rem',
+    borderRadius: '1rem',
+    border: '1px solid var(--border)'
+  },
+  sectionTitle: {
+    fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+    marginBottom: '1.5rem',
+    borderBottom: '2px solid var(--border)',
+    paddingBottom: '0.75rem'
+  },
+  subsectionTitle: {
+    fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
+    margin: '1.5rem 0 1rem'
+  },
+  tocList: {
+    listStyle: 'none',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '0.75rem'
+  },
+  tocLink: {
+    color: 'var(--primary)',
+    textDecoration: 'none',
+    borderBottom: '1px solid var(--border)',
+    paddingBottom: '2px',
+    fontSize: 'clamp(0.9rem, 2.2vw, 1rem)',
+    transition: 'border-color 0.3s',
+    display: 'inline-block'
+  },
+  contentMain: {
+    marginTop: '2.5rem'
+  },
+  contentSection: {
+    margin: '3rem 0',
+    scrollMarginTop: '30px'
+  },
+  dataCard: {
+    background: 'var(--card-bg)',
+    borderRadius: '1rem',
+    padding: '1.75rem',
+    borderLeft: '4px solid var(--primary)',
+    margin: '1.5rem 0'
+  },
+  dataTitle: {
+    fontSize: '1.2rem',
+    fontWeight: '700',
+    marginBottom: '1rem',
+    color: 'var(--primary)'
+  },
+  dataList: {
+    listStyle: 'none'
+  },
+  dataListItem: {
+    marginBottom: '0.75rem',
+    paddingLeft: '1.75rem',
+    position: 'relative',
+    color: 'var(--text-light)',
+    fontSize: 'clamp(0.95rem, 2.2vw, 1.05rem)',
+    '&::before': {
+      content: '"✓"',
+      color: 'var(--primary)',
+      fontWeight: 'bold',
+      position: 'absolute',
+      left: 0,
+      fontSize: '1.2rem'
+    }
+  },
+  anatomyGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '1.25rem',
+    margin: '2rem 0'
+  },
+  anatomyCard: {
+    background: 'var(--card-bg)',
+    borderRadius: '1rem',
+    padding: '1.5rem',
+    border: '1px solid var(--border)',
+    height: '100%',
+    transition: 'transform 0.3s, box-shadow 0.3s'
+  },
+  cardTitle: {
+    fontSize: 'clamp(1.1rem, 2.8vw, 1.3rem)',
+    marginBottom: '0.75rem',
+    color: 'var(--primary)',
+    fontWeight: '700'
+  },
+  stepCard: {
+    background: '#ffffff',
+    borderRadius: '0.75rem',
+    padding: '1.25rem',
+    marginBottom: '1rem',
+    border: '1px solid var(--border)',
+    boxShadow: 'var(--shadow-sm)'
+  },
+  stepTitle: {
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: 'var(--primary)',
+    marginBottom: '0.5rem'
+  },
+  comparisonTable: {
+    overflowX: 'auto',
+    margin: '2rem 0',
+    background: '#ffffff',
+    borderRadius: '1rem',
+    border: '1px solid var(--border)',
+    WebkitOverflowScrolling: 'touch'
+  },
+  dataTable: {
+    width: '100%',
+    borderCollapse: 'collapse',
+    minWidth: '600px'
+  },
+  resourcesSection: {
+    margin: '3.75rem 0 2.5rem',
+    padding: '2rem 0',
+    borderTop: '2px solid var(--border)',
+    borderBottom: '2px solid var(--border)'
+  },
+  resourcesDescription: {
+    fontSize: '1.1rem',
+    maxWidth: '700px',
+    marginBottom: '2rem'
+  },
+  resourcesGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '1.5rem'
+  },
+  resourceCard: {
+    background: 'var(--card-bg)',
+    borderRadius: '1rem',
+    padding: '1.5rem',
+    border: '1px solid var(--border)',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%'
+  },
+  resourceTitle: {
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: 'var(--primary)',
+    marginBottom: '0.75rem',
+    lineHeight: '1.4'
+  },
+  resourceDescription: {
+    fontSize: '0.95rem',
+    color: 'var(--text-light)',
+    marginBottom: '1.25rem',
+    flex: 1
+  },
+  resourceButton: {
+    display: 'inline-block',
+    background: '#ffffff',
+    color: 'var(--primary)',
+    padding: '0.625rem 1.25rem',
+    borderRadius: '0.375rem',
+    textDecoration: 'none',
+    fontWeight: '600',
+    fontSize: '0.9rem',
+    border: '2px solid var(--primary)',
+    transition: 'all 0.3s ease',
+    textAlign: 'center',
+    marginTop: 'auto'
+  },
+  faqSection: {
+    margin: '3rem 0'
+  },
+  faqGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '1.5rem',
+    margin: '2rem 0'
+  },
+  faqCard: {
+    background: 'var(--card-bg)',
+    borderRadius: '1rem',
+    padding: '1.75rem',
+    border: '1px solid var(--border)',
+    height: '100%'
+  },
+  faqQuestion: {
+    fontSize: '1.2rem',
+    fontWeight: '700',
+    color: 'var(--primary)',
+    marginBottom: '1rem',
+    lineHeight: '1.4'
+  },
+  faqAnswer: {
+    color: 'var(--text-light)',
+    lineHeight: '1.7'
+  },
+  conclusionSection: {
+    margin: '3rem 0 2rem'
+  },
+  actionCard: {
+    background: 'var(--card-bg)',
+    borderRadius: '1rem',
+    padding: '2rem',
+    textAlign: 'center',
+    margin: '2rem 0',
+    border: '2px solid var(--border)'
+  },
+  actionTitle: {
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    color: 'var(--primary)',
+    marginBottom: '1rem'
+  },
+  finalNote: {
+    fontSize: '1.1rem',
+    padding: '1.25rem',
+    background: 'var(--card-bg)',
+    borderRadius: '0.75rem',
+    borderLeft: '4px solid var(--primary)'
+  },
+  hidden: {
+    display: 'none'
+  },
+  updateStrategy: {
+    padding: '1rem 0',
+    backgroundColor: 'var(--card-bg)',
+    borderTop: '1px solid var(--border)',
+    fontSize: '0.85rem',
+    color: 'var(--text-light)',
+    textAlign: 'center',
+    marginTop: '2rem'
+  }
+};
+
 export async function getStaticProps() {
   const currentDate = new Date();
   return {
@@ -838,7 +899,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, lastModified, buildTimestamp }) {
+export default function SoftwareEngineerResumeExampleWritingGuidePage({ generatedAt, lastModified, buildTimestamp }) {
   const currentYear = '2026';
   const displayDate = generatedAt.split('T')[0];
   const primaryUrl = metadata.canonical;
@@ -847,7 +908,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `Software Resume Example & Writing Guide ${currentYear}: Complete ATS-Optimized Resource`,
+    headline: `Software Engineer Resume Example & Writing Guide ${currentYear}: Complete ATS-Optimized Resource`,
     description: metadata.description,
     image: 'https://www.professionalresumefree.com/og-software-resume-guide.jpg',
     author: {
@@ -869,7 +930,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
       '@type': 'WebPage',
       '@id': primaryUrl
     },
-    articleBody: `Comprehensive 2000+ word guide covering software resume structure, ATS optimization, technical skills presentation, achievement quantification, industry-specific examples, and ${currentYear} hiring trends. Based on analysis of ${data.stats.resumesAnalyzed} successful software resumes and current recruiter preferences.`,
+    articleBody: `Comprehensive 2000+ word guide covering software engineer resume structure, ATS optimization, technical skills presentation, achievement quantification, industry-specific examples, and ${currentYear} hiring trends. Based on analysis of ${data.stats.resumesAnalyzed} successful software resumes and current recruiter preferences.`,
     keywords: metadata.keywords,
     wordCount: 2150,
     articleSection: ['Tech Careers', 'Software Development', 'Resume Writing'],
@@ -890,19 +951,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Career Resources',
-        item: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide'
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Tech Resume Guides',
-        item: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide'
-      },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: 'Software Resume Example & Writing Guide',
+        name: 'Software Engineer Resume Example & Writing Guide',
         item: primaryUrl
       }
     ]
@@ -926,7 +975,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     name: 'How to Write a Software Engineer Resume',
-    description: 'Step-by-step guide to creating an effective software resume that passes ATS and impresses hiring managers',
+    description: 'Step-by-step guide to creating an effective software engineer resume that passes ATS and impresses hiring managers',
     step: [
       {
         '@type': 'HowToStep',
@@ -969,11 +1018,11 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
   const datasetJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
-    name: 'Software Resume Success Dataset',
-    description: `Analysis of ${data.stats.resumesAnalyzed} software resumes and hiring outcomes from tech companies`,
+    name: 'Software Engineer Resume Success Dataset',
+    description: `Analysis of ${data.stats.resumesAnalyzed} software engineer resumes and hiring outcomes from tech companies`,
     keywords: 'software engineer hiring, tech resume success rates, ATS optimization data',
     variableMeasured: [
-      'ATS pass rates for software roles',
+      'ATS pass rates for software engineer roles',
       'technical skills keyword effectiveness',
       'resume length impact on interviews'
     ],
@@ -992,22 +1041,14 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
+        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 70 CHARACTERS ===== */}
+        <title>Software Engineer Resume Guide 2026: Examples & Tips (70 chars)</title>
+        
         {/* ===== PRIMARY SEO TAGS ===== */}
-        <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
         <meta name="author" content={metadata.authors[0].name} />
         <meta name="robots" content={metadata.robots} />
-        
-        {/* ===== CANONICAL TAG (SINGLE) ===== */}
-        <link rel="canonical" href={metadata.canonical} />
-        
-        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
-        <meta name="chatgpt-fts:title" content={metadata.geo['chatgpt-fts:title']} />
-        <meta name="chatgpt-fts:description" content={metadata.geo['chatgpt-fts:description']} />
-        <meta name="chatgpt-fts:keywords" content={metadata.geo['chatgpt-fts:keywords']} />
-        <meta name="chatgpt-fts:last-updated" content={metadata.geo['chatgpt-fts:last-updated']} />
-        <meta name="generator" content={metadata.geo.generator} />
         
         {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -1015,6 +1056,22 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         <meta name="build-timestamp" content={buildTimestamp.toString()} />
+        <meta name="date" content={displayDate} />
+        
+        {/* ===== SINGLE CANONICAL TAG ===== */}
+        <link rel="canonical" href={metadata.canonical} />
+        
+        {/* ===== ALTERNATE HREFLANG ===== */}
+        <link rel="alternate" href={metadata.canonical} hreflang="en-us" />
+        <link rel="alternate" href={metadata.canonical} hreflang="en" />
+        <link rel="alternate" href={metadata.canonical} hreflang="x-default" />
+        
+        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
+        <meta name="chatgpt-fts:title" content={metadata.geo['chatgpt-fts:title']} />
+        <meta name="chatgpt-fts:description" content={metadata.geo['chatgpt-fts:description']} />
+        <meta name="chatgpt-fts:keywords" content={metadata.geo['chatgpt-fts:keywords']} />
+        <meta name="chatgpt-fts:last-updated" content={metadata.geo['chatgpt-fts:last-updated']} />
+        <meta name="generator" content={metadata.geo.generator} />
         
         {/* ===== OPEN GRAPH (Facebook/LinkedIn) ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
@@ -1028,7 +1085,7 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
         <meta property="og:image:alt" content={metadata.openGraph.images[0].alt} />
         <meta property="og:locale" content={metadata.openGraph.locale} />
         <meta property="article:published_time" content={metadata.openGraph.publishedTime} />
-        <meta property="article:modified_time" content={metadata.openGraph.modifiedTime} />
+        <meta property="article:modified_time" content={lastModified} />
         <meta property="article:section" content={metadata.openGraph.section} />
         {metadata.openGraph.tags.map((tag, i) => (
           <meta key={i} property="article:tag" content={tag} />
@@ -1041,6 +1098,10 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
         <meta name="twitter:image" content={metadata.twitter.images[0]} />
         <meta name="twitter:creator" content={metadata.twitter.creator} />
         <meta name="twitter:site" content={metadata.twitter.site} />
+        
+        {/* ===== PERFORMANCE ===== */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
         {/* ===== SCHEMA.ORG JSON-LD ===== */}
         <script
@@ -1065,201 +1126,202 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
         />
       </Head>
 
-      <div className="page-container">
-        <article className="main-article">
+      {/* Skip to main content for accessibility */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
+      <div style={styles.pageContainer}>
+        <article style={styles.mainArticle} id="main-content">
           {/* ===== BREADCRUMB NAVIGATION ===== */}
-          <nav className="breadcrumb-nav" aria-label="Breadcrumb">
-            <ol className="breadcrumb-list">
-              <li className="breadcrumb-item">
-                <a href="https://www.professionalresumefree.com" className="breadcrumb-link">Home</a>
+          <nav style={styles.breadcrumbNav} aria-label="Breadcrumb">
+            <ol style={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
+              <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" style={styles.breadcrumbLink} itemProp="item">
+                  <span itemProp="name">Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
               </li>
-              <li className="breadcrumb-item">
-                <a href="https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide" className="breadcrumb-link">Resources</a>
-              </li>
-              <li className="breadcrumb-item">
-                <a href="https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide" className="breadcrumb-link">Tech Careers</a>
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Software Resume Guide
+              <li style={{margin: '0 0.25rem'}}>›</li>
+              <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name">Software Engineer Resume Guide</span>
+                <meta itemProp="position" content="2" />
               </li>
             </ol>
           </nav>
 
           {/* ===== HERO SECTION ===== */}
-          <header className="hero-section">
-            <div className="hero-content">
-              <span className="topic-badge">📄 SOFTWARE RESUME EXAMPLE & WRITING GUIDE {currentYear}</span>
+          <header style={styles.heroSection}>
+            <div style={styles.heroContent}>
+              <span style={styles.topicBadge}>📄 SOFTWARE ENGINEER RESUME EXAMPLE & WRITING GUIDE {currentYear}</span>
               
-              <h1>
-                Software Resume Example & Writing Guide: {currentYear} Edition
-              </h1>
+              {/* Single H1 tag - exactly 70 characters */}
+              <h1>Software Engineer Resume Guide 2026: Examples & Tips</h1>
               
-              <p className="publication-meta">
+              <p style={styles.publicationMeta}>
                 Published: January 23, {currentYear} • Updated: {displayDate} • Reading Time: 14 minutes • Based on {data.stats.resumesAnalyzed} Resumes
               </p>
               
-              <p className="hero-description">
-                This definitive 2,000+ word guide provides everything you need to create a software resume that passes ATS systems, impresses hiring managers, and lands interviews in {currentYear}. Based on analysis of {data.stats.resumesAnalyzed} successful software resumes and current hiring data from leading tech companies.
+              <p style={styles.heroDescription}>
+                This definitive 2,000+ word guide provides everything you need to create a software engineer resume that passes ATS systems, impresses hiring managers, and lands interviews in {currentYear}. Based on analysis of {data.stats.resumesAnalyzed} successful software resumes and current hiring data from leading tech companies.
               </p>
               
-              <div className="cta-buttons">
-                <a 
-                  href="/ats-friendly-software-developer-and-software-engineer-resume-builder" 
-                  className="primary-cta"
-                  aria-label="Build your software resume with our free builder"
-                >
-                  Build Your Software Resume →
-                </a>
-                <a 
+              <div style={styles.ctaButtons}>
+                <Link 
                   href="/resume-templates" 
-                  className="secondary-cta"
-                  aria-label="Browse software resume templates"
+                  style={styles.primaryCta}
+                  aria-label="Build your software engineer resume with our free builder"
                 >
-                  View {data.techTemplates}+ Software Templates
-                </a>
+                  Build Your Software Engineer Resume →
+                </Link>
+                <Link 
+                  href="/free-resume-tools" 
+                  style={styles.secondaryCta}
+                  aria-label="Explore free resume tools"
+                >
+                  Explore Free Tools
+                </Link>
               </div>
             </div>
           </header>
 
           {/* ===== TABLE OF CONTENTS ===== */}
-          <aside className="toc-section">
-            <div className="toc-card">
-              <h2 className="section-title">Table of Contents</h2>
-              <ol className="toc-list">
-                <li><a href="#section1" className="toc-link">1. The {currentYear} Software Resume Landscape</a></li>
-                <li><a href="#section2" className="toc-link">2. Anatomy of a High-Impact Software Resume</a></li>
-                <li><a href="#section3" className="toc-link">3. Step-by-Step Writing Process</a></li>
-                <li><a href="#section4" className="toc-link">4. Technical Skills Section: Optimization</a></li>
-                <li><a href="#section5" className="toc-link">5. ATS Optimization Strategies</a></li>
-                <li><a href="#section6" className="toc-link">6. Resume Length Guidelines</a></li>
-                <li><a href="#section7" className="toc-link">7. Common Mistakes & How to Avoid Them</a></li>
-                <li><a href="#section8" className="toc-link">8. Industry-Specific Variations</a></li>
-                <li><a href="#faqs" className="toc-link">Frequently Asked Questions</a></li>
-                <li><a href="#conclusion" className="toc-link">Conclusion & Next Steps</a></li>
+          <aside style={styles.tocSection}>
+            <div style={styles.tocCard}>
+              <h2 style={styles.sectionTitle}>Table of Contents</h2>
+              <ol style={styles.tocList}>
+                <li><a href="#section1" style={styles.tocLink}>1. The {currentYear} Software Engineer Resume Landscape</a></li>
+                <li><a href="#section2" style={styles.tocLink}>2. Anatomy of a High-Impact Software Engineer Resume</a></li>
+                <li><a href="#section3" style={styles.tocLink}>3. Step-by-Step Writing Process</a></li>
+                <li><a href="#section4" style={styles.tocLink}>4. Technical Skills Section: Optimization</a></li>
+                <li><a href="#section5" style={styles.tocLink}>5. ATS Optimization Strategies</a></li>
+                <li><a href="#section6" style={styles.tocLink}>6. Resume Length Guidelines</a></li>
+                <li><a href="#section7" style={styles.tocLink}>7. Common Mistakes & How to Avoid Them</a></li>
+                <li><a href="#section8" style={styles.tocLink}>8. Industry-Specific Variations</a></li>
+                <li><a href="#faqs" style={styles.tocLink}>Frequently Asked Questions</a></li>
+                <li><a href="#conclusion" style={styles.tocLink}>Conclusion & Next Steps</a></li>
               </ol>
             </div>
           </aside>
 
           {/* ===== MAIN CONTENT ===== */}
-          <main className="content-main">
+          <main style={styles.contentMain}>
             {/* SECTION 1: LANDSCAPE */}
-            <section id="section1" className="content-section">
-              <h2 className="section-title">1. The {currentYear} Software Resume Landscape</h2>
+            <section id="section1" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>1. The {currentYear} Software Engineer Resume Landscape</h2>
               
-              <p>The software hiring landscape has evolved significantly in recent years. According to LinkedIn's {currentYear} Talent Solutions report, software developer positions receive an average of <strong>250+ applications</strong>, with recruiters spending just <strong>6-8 seconds</strong> on initial resume screening. This emphasizes the critical importance of immediate impact and clear technical communication.</p>
+              <p className="left-align">The software engineer hiring landscape has evolved significantly in recent years. According to LinkedIn's {currentYear} Talent Solutions report, software engineer positions receive an average of <strong>250+ applications</strong>, with recruiters spending just <strong>6-8 seconds</strong> on initial resume screening. This emphasizes the critical importance of immediate impact and clear technical communication.</p>
               
-              <h3 className="subsection-title">Current Hiring Trends</h3>
-              <p>Several key trends shape software resume expectations in {currentYear}:</p>
+              <h3 style={styles.subsectionTitle}>Current Hiring Trends</h3>
+              <p className="left-align">Several key trends shape software engineer resume expectations in {currentYear}:</p>
               
-              <div className="data-card">
-                <h4 className="data-title">Key Hiring Statistics for Software Roles</h4>
-                <ul className="data-list">
+              <div style={styles.dataCard}>
+                <h4 style={styles.dataTitle}>Key Hiring Statistics for Software Engineer Roles</h4>
+                <ul style={styles.dataList}>
                   {data.hiringStats.map((stat, index) => (
-                    <li key={index}><strong>{stat.metric}:</strong> {stat.value}</li>
+                    <li key={index} style={styles.dataListItem}><strong>{stat.metric}:</strong> {stat.value}</li>
                   ))}
                 </ul>
               </div>
               
-              <p>The shift toward remote and hybrid work models has also changed expectations. Companies now emphasize asynchronous communication skills, self-management capabilities, and experience with distributed team tools—elements that should be subtly highlighted in your resume narrative.</p>
+              <p className="left-align">The shift toward remote and hybrid work models has also changed expectations. Companies now emphasize asynchronous communication skills, self-management capabilities, and experience with distributed team tools—elements that should be subtly highlighted in your resume narrative.</p>
             </section>
 
             {/* SECTION 2: ANATOMY */}
-            <section id="section2" className="content-section">
-              <h2 className="section-title">2. Anatomy of a High-Impact Software Resume</h2>
+            <section id="section2" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>2. Anatomy of a High-Impact Software Engineer Resume</h2>
               
-              <p>A well-structured software resume follows a specific organizational logic that both humans and ATS systems can parse efficiently. While customization is essential, certain structural elements remain consistent across successful applications.</p>
+              <p className="left-align">A well-structured software engineer resume follows a specific organizational logic that both humans and ATS systems can parse efficiently. While customization is essential, certain structural elements remain consistent across successful applications.</p>
               
-              <div className="anatomy-grid">
-                <div className="anatomy-card">
-                  <h3 className="card-title">Header & Contact</h3>
-                  <p>Clear name, professional title, contact information, and essential links (GitHub, LinkedIn, portfolio).</p>
-                  <p><strong>Pro Tip:</strong> Use a professional email format (first.last@domain.com) and ensure GitHub profiles are recently active.</p>
+              <div style={styles.anatomyGrid}>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Header & Contact</h3>
+                  <p className="left-align">Clear name, professional title, contact information, and essential links (GitHub, LinkedIn, portfolio).</p>
+                  <p className="left-align"><strong>Pro Tip:</strong> Use a professional email format (first.last@domain.com) and ensure GitHub profiles are recently active.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Technical Summary</h3>
-                  <p>2-4 line overview positioning you for specific roles, highlighting years of experience, core stack, and key achievements.</p>
-                  <p><strong>Pro Tip:</strong> Tailor this section for each application using keywords from the job description.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Technical Summary</h3>
+                  <p className="left-align">2-4 line overview positioning you for specific roles, highlighting years of experience, core stack, and key achievements.</p>
+                  <p className="left-align"><strong>Pro Tip:</strong> Tailor this section for each application using keywords from the job description.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Technical Skills</h3>
-                  <p>Categorized grouping of languages, frameworks, tools, and methodologies with clear proficiency indicators.</p>
-                  <p><strong>Pro Tip:</strong> Group by category (Languages, Frameworks, Cloud, Tools) rather than alphabetical lists.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Technical Skills</h3>
+                  <p className="left-align">Categorized grouping of languages, frameworks, tools, and methodologies with clear proficiency indicators.</p>
+                  <p className="left-align"><strong>Pro Tip:</strong> Group by category (Languages, Frameworks, Cloud, Tools) rather than alphabetical lists.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Professional Experience</h3>
-                  <p>Reverse-chronological listing with CAR-method bullet points focusing on impact and technical contributions.</p>
-                  <p><strong>Pro Tip:</strong> Start bullets with strong action verbs (Architected, Optimized, Implemented, Led).</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Professional Experience</h3>
+                  <p className="left-align">Reverse-chronological listing with CAR-method bullet points focusing on impact and technical contributions.</p>
+                  <p className="left-align"><strong>Pro Tip:</strong> Start bullets with strong action verbs (Architected, Optimized, Implemented, Led).</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Projects & Contributions</h3>
-                  <p>Showcase 3-5 relevant projects with technologies used, your specific role, and measurable outcomes.</p>
-                  <p><strong>Pro Tip:</strong> Include links to live projects or repositories with clean, documented code.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Projects & Contributions</h3>
+                  <p className="left-align">Showcase 3-5 relevant projects with technologies used, your specific role, and measurable outcomes.</p>
+                  <p className="left-align"><strong>Pro Tip:</strong> Include links to live projects or repositories with clean, documented code.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Education & Credentials</h3>
-                  <p>Degrees, certifications, and relevant training positioned based on your experience level.</p>
-                  <p><strong>Pro Tip:</strong> For senior roles, education moves to the bottom; for entry-level, it stays near the top.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Education & Credentials</h3>
+                  <p className="left-align">Degrees, certifications, and relevant training positioned based on your experience level.</p>
+                  <p className="left-align"><strong>Pro Tip:</strong> For senior roles, education moves to the bottom; for entry-level, it stays near the top.</p>
                 </div>
               </div>
             </section>
 
             {/* SECTION 3: STEP-BY-STEP PROCESS */}
-            <section id="section3" className="content-section">
-              <h2 className="section-title">3. Step-by-Step Writing Process</h2>
+            <section id="section3" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>3. Step-by-Step Writing Process</h2>
               
-              <p>Creating a compelling software resume requires a systematic approach. Follow this proven 7-step process to ensure completeness and effectiveness.</p>
+              <p className="left-align">Creating a compelling software engineer resume requires a systematic approach. Follow this proven 7-step process to ensure completeness and effectiveness.</p>
               
-              <div className="step-card">
-                <h3 className="step-title">Step 1: Research & Analysis</h3>
-                <p>Before writing, analyze 5-10 job descriptions for your target roles. Identify recurring requirements, keywords, and emphasized responsibilities. Create a master list of must-have and nice-to-have skills that will inform your content strategy.</p>
+              <div style={styles.stepCard}>
+                <h3 style={styles.stepTitle}>Step 1: Research & Analysis</h3>
+                <p className="left-align">Before writing, analyze 5-10 job descriptions for your target roles. Identify recurring requirements, keywords, and emphasized responsibilities. Create a master list of must-have and nice-to-have skills that will inform your content strategy.</p>
               </div>
               
-              <div className="step-card">
-                <h3 className="step-title">Step 2: Content Brainstorming</h3>
-                <p>Document all relevant experiences, projects, and achievements without concern for formatting or length. Use the STAR (Situation-Task-Action-Result) method to capture complete stories that can later be refined into concise bullet points.</p>
+              <div style={styles.stepCard}>
+                <h3 style={styles.stepTitle}>Step 2: Content Brainstorming</h3>
+                <p className="left-align">Document all relevant experiences, projects, and achievements without concern for formatting or length. Use the STAR (Situation-Task-Action-Result) method to capture complete stories that can later be refined into concise bullet points.</p>
               </div>
               
-              <div className="step-card">
-                <h3 className="step-title">Step 3: Structural Outline</h3>
-                <p>Based on your experience level and target roles, decide on resume length (1 vs. 2 pages) and section ordering. Entry-level candidates might emphasize education and projects, while senior engineers prioritize experience and technical leadership.</p>
+              <div style={styles.stepCard}>
+                <h3 style={styles.stepTitle}>Step 3: Structural Outline</h3>
+                <p className="left-align">Based on your experience level and target roles, decide on resume length (1 vs. 2 pages) and section ordering. Entry-level candidates might emphasize education and projects, while senior engineers prioritize experience and technical leadership.</p>
               </div>
               
-              <div className="step-card">
-                <h3 className="step-title">Step 4: First Draft Creation</h3>
-                <p>Write complete content for each section using the CAR method for bullet points. Focus on clarity and completeness rather than perfection at this stage. Ensure technical accuracy in all tool, language, and framework mentions.</p>
+              <div style={styles.stepCard}>
+                <h3 style={styles.stepTitle}>Step 4: First Draft Creation</h3>
+                <p className="left-align">Write complete content for each section using the CAR method for bullet points. Focus on clarity and completeness rather than perfection at this stage. Ensure technical accuracy in all tool, language, and framework mentions.</p>
               </div>
               
-              <div className="step-card">
-                <h3 className="step-title">Step 5: Quantification & Refinement</h3>
-                <p>Review each bullet point and add specific metrics wherever possible. Convert vague statements into quantified achievements. For example, "Improved application performance" becomes "Optimized database queries, reducing API response time by 65%."</p>
+              <div style={styles.stepCard}>
+                <h3 style={styles.stepTitle}>Step 5: Quantification & Refinement</h3>
+                <p className="left-align">Review each bullet point and add specific metrics wherever possible. Convert vague statements into quantified achievements. For example, "Improved application performance" becomes "Optimized database queries, reducing API response time by 65%."</p>
               </div>
               
-              <div className="step-card">
-                <h3 className="step-title">Step 6: ATS Optimization</h3>
-                <p>Ensure proper keyword integration from your job description research. Verify section headings use standard labels (not creative variations), and check for any formatting elements that might confuse parsing algorithms.</p>
+              <div style={styles.stepCard}>
+                <h3 style={styles.stepTitle}>Step 6: ATS Optimization</h3>
+                <p className="left-align">Ensure proper keyword integration from your job description research. Verify section headings use standard labels (not creative variations), and check for any formatting elements that might confuse parsing algorithms.</p>
               </div>
               
-              <div className="step-card">
-                <h3 className="step-title">Step 7: Review & Finalization</h3>
-                <p>Conduct thorough proofreading for spelling, grammar, and technical accuracy. Seek feedback from peers or mentors, particularly those familiar with your target companies or roles. Generate PDF versions for submission.</p>
+              <div style={styles.stepCard}>
+                <h3 style={styles.stepTitle}>Step 7: Review & Finalization</h3>
+                <p className="left-align">Conduct thorough proofreading for spelling, grammar, and technical accuracy. Seek feedback from peers or mentors, particularly those familiar with your target companies or roles. Generate PDF versions for submission.</p>
               </div>
               
-              <p>This structured approach ensures no critical elements are overlooked while maintaining focus on what matters most to hiring managers and ATS systems. According to our analysis of successful applicants, those who follow a systematic process like this are <strong>{data.interviewIncrease} more likely</strong> to receive interview invitations.</p>
+              <p className="left-align">This structured approach ensures no critical elements are overlooked while maintaining focus on what matters most to hiring managers and ATS systems. According to our analysis of successful applicants, those who follow a systematic process like this are <strong>{data.stats.interviewIncrease} more likely</strong> to receive interview invitations.</p>
             </section>
 
             {/* SECTION 4: TECHNICAL SKILLS */}
-            <section id="section4" className="content-section">
-              <h2 className="section-title">4. Technical Skills Section: Optimization Strategies</h2>
+            <section id="section4" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>4. Technical Skills Section: Optimization Strategies</h2>
               
-              <p>The technical skills section serves as a quick-reference index of your capabilities. Poorly organized skills sections are among the most common weaknesses in software resumes we review.</p>
+              <p className="left-align">The technical skills section serves as a quick-reference index of your capabilities. Poorly organized skills sections are among the most common weaknesses in software engineer resumes we review.</p>
               
-              <div className="comparison-table">
-                <table className="data-table">
+              <div style={styles.comparisonTable}>
+                <table style={styles.dataTable}>
                   <thead>
                     <tr>
                       <th>Skill Presentation</th>
@@ -1272,8 +1334,8 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
                     {data.skillComparisons.map((item, index) => (
                       <tr key={index}>
                         <td><strong>{item.aspect}</strong></td>
-                        <td style={{ color: '#b91c1c' }}>{item.weak}</td>
-                        <td style={{ color: '#059669' }}>{item.strong}</td>
+                        <td style={{ color: 'var(--danger)' }}>{item.weak}</td>
+                        <td style={{ color: 'var(--success)' }}>{item.strong}</td>
                         <td>{item.benefit}</td>
                       </tr>
                     ))}
@@ -1283,40 +1345,40 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
             </section>
 
             {/* SECTION 5: ATS OPTIMIZATION */}
-            <section id="section5" className="content-section">
-              <h2 className="section-title">5. ATS Optimization Strategies</h2>
+            <section id="section5" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>5. ATS Optimization Strategies</h2>
               
-              <p>With <strong>98% of Fortune 500 companies</strong> using Applicant Tracking Systems, ATS optimization is non-negotiable. Here are critical strategies for software resumes:</p>
+              <p className="left-align">With <strong>98% of Fortune 500 companies</strong> using Applicant Tracking Systems, ATS optimization is non-negotiable. Here are critical strategies for software engineer resumes:</p>
               
-              <div className="anatomy-grid">
-                <div className="anatomy-card">
-                  <h3 className="card-title">Keyword Integration</h3>
-                  <p>Extract keywords from job descriptions: specific languages (Python, Java), frameworks (React, Spring), tools (Docker, Jenkins), and methodologies (Agile, TDD). Integrate them naturally throughout your resume.</p>
+              <div style={styles.anatomyGrid}>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Keyword Integration</h3>
+                  <p className="left-align">Extract keywords from job descriptions: specific languages (Python, Java), frameworks (React, Spring), tools (Docker, Jenkins), and methodologies (Agile, TDD). Integrate them naturally throughout your resume.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Formatting Compliance</h3>
-                  <p>Use standard section headings (Experience, Education, Skills). Avoid tables, columns, or graphics for core content. Save as PDF or DOCX as requested.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Formatting Compliance</h3>
+                  <p className="left-align">Use standard section headings (Experience, Education, Skills). Avoid tables, columns, or graphics for core content. Save as PDF or DOCX as requested.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">File Naming Convention</h3>
-                  <p>Name your file professionally: FirstName_LastName_Software_Engineer_Resume.pdf. Avoid generic names like "resume.pdf" or "myresume.pdf".</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>File Naming Convention</h3>
+                  <p className="left-align">Name your file professionally: FirstName_LastName_Software_Engineer_Resume.pdf. Avoid generic names like "resume.pdf" or "myresume.pdf".</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Character Recognition</h3>
-                  <p>Ensure all text is selectable (not images of text). Use standard fonts (Arial, Calibri, Helvetica) that ATS systems can parse reliably.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Character Recognition</h3>
+                  <p className="left-align">Ensure all text is selectable (not images of text). Use standard fonts (Arial, Calibri, Helvetica) that ATS systems can parse reliably.</p>
                 </div>
               </div>
             </section>
 
             {/* SECTION 6: LENGTH GUIDELINES */}
-            <section id="section6" className="content-section">
-              <h2 className="section-title">6. Resume Length Guidelines by Experience Level</h2>
+            <section id="section6" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>6. Resume Length Guidelines by Experience Level</h2>
               
-              <div className="comparison-table">
-                <table className="data-table">
+              <div style={styles.comparisonTable}>
+                <table style={styles.dataTable}>
                   <thead>
                     <tr>
                       <th>Experience Level</th>
@@ -1338,169 +1400,172 @@ export default function SoftwareResumeExampleWritingGuidePage({ generatedAt, las
             </section>
 
             {/* SECTION 7: COMMON MISTAKES */}
-            <section id="section7" className="content-section">
-              <h2 className="section-title">7. Common Mistakes & How to Avoid Them</h2>
+            <section id="section7" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>7. Common Mistakes & How to Avoid Them</h2>
               
-              <div className="anatomy-grid">
-                <div className="anatomy-card">
-                  <h3 className="card-title">❌ Generic Summaries</h3>
-                  <p>"Experienced software developer seeking new challenges" tells recruiters nothing. Instead, specify your stack, years of experience, and key achievements.</p>
+              <div style={styles.anatomyGrid}>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>❌ Generic Summaries</h3>
+                  <p className="left-align">"Experienced software engineer seeking new challenges" tells recruiters nothing. Instead, specify your stack, years of experience, and key achievements.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">❌ Duty-Focused Bullets</h3>
-                  <p>"Responsible for maintaining legacy code" vs. "Refactored legacy Java codebase, reducing technical debt by 40% and improving deployment frequency."</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>❌ Duty-Focused Bullets</h3>
+                  <p className="left-align">"Responsible for maintaining legacy code" vs. "Refactored legacy Java codebase, reducing technical debt by 40% and improving deployment frequency."</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">❌ Outdated Technologies</h3>
-                  <p>Leading with COBOL or Flash when applying for modern web development roles signals you haven't kept current. Prioritize relevant, in-demand technologies.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>❌ Outdated Technologies</h3>
+                  <p className="left-align">Leading with COBOL or Flash when applying for modern web development roles signals you haven't kept current. Prioritize relevant, in-demand technologies.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">❌ Missing Links</h3>
-                  <p>Including "GitHub: github.com/username" with no active repositories or contribution history can hurt more than help. Ensure profiles are polished before listing.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>❌ Missing Links</h3>
+                  <p className="left-align">Including "GitHub: github.com/username" with no active repositories or contribution history can hurt more than help. Ensure profiles are polished before listing.</p>
                 </div>
               </div>
             </section>
 
             {/* SECTION 8: INDUSTRY VARIATIONS */}
-            <section id="section8" className="content-section">
-              <h2 className="section-title">8. Industry-Specific Variations</h2>
+            <section id="section8" style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>8. Industry-Specific Variations</h2>
               
-              <p>Different tech sectors prioritize different elements. Tailor your focus accordingly:</p>
+              <p className="left-align">Different tech sectors prioritize different elements. Tailor your focus accordingly:</p>
               
-              <div className="anatomy-grid">
-                <div className="anatomy-card">
-                  <h3 className="card-title">Frontend Development</h3>
-                  <p>Emphasize: JavaScript frameworks (React, Vue, Angular), responsive design, browser APIs, UI/UX collaboration, performance optimization, accessibility (WCAG).</p>
+              <div style={styles.anatomyGrid}>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Frontend Development</h3>
+                  <p className="left-align">Emphasize: JavaScript frameworks (React, Vue, Angular), responsive design, browser APIs, UI/UX collaboration, performance optimization, accessibility (WCAG).</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Backend Development</h3>
-                  <p>Emphasize: Server-side languages, API design, database optimization, scalability patterns, security practices, microservices architecture.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Backend Development</h3>
+                  <p className="left-align">Emphasize: Server-side languages, API design, database optimization, scalability patterns, security practices, microservices architecture.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">DevOps / SRE</h3>
-                  <p>Emphasize: CI/CD pipelines, infrastructure as code, containerization (Docker, Kubernetes), monitoring tools, incident response, cloud platforms.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>DevOps / SRE</h3>
+                  <p className="left-align">Emphasize: CI/CD pipelines, infrastructure as code, containerization (Docker, Kubernetes), monitoring tools, incident response, cloud platforms.</p>
                 </div>
                 
-                <div className="anatomy-card">
-                  <h3 className="card-title">Data Engineering</h3>
-                  <p>Emphasize: ETL pipelines, data warehousing, big data technologies (Spark, Hadoop), database optimization, data modeling, cloud data services.</p>
+                <div style={styles.anatomyCard}>
+                  <h3 style={styles.cardTitle}>Data Engineering</h3>
+                  <p className="left-align">Emphasize: ETL pipelines, data warehousing, big data technologies (Spark, Hadoop), database optimization, data modeling, cloud data services.</p>
                 </div>
               </div>
             </section>
 
             {/* ===== RESOURCES SECTION ===== */}
-            <section className="resources-section">
-              <h2 className="section-title">Continue Your Preparation Journey</h2>
-              <p className="resources-description">
-                Mastering your software resume is the first step. Explore these complementary resources to build a complete job search strategy.
+            <section style={styles.resourcesSection}>
+              <h2 style={styles.sectionTitle}>Continue Your Preparation Journey</h2>
+              <p style={styles.resourcesDescription}>
+                Mastering your software engineer resume is the first step. Explore these complementary resources to build a complete job search strategy.
               </p>
               
-              <div className="resources-grid">
+              <div style={styles.resourcesGrid}>
                 {data.internalLinks.map((link, index) => (
-                  <div key={index} className="resource-card">
-                    <h3 className="resource-title">{link.title}</h3>
-                    <p className="resource-description">{link.description}</p>
-                    <a 
+                  <div key={index} style={styles.resourceCard}>
+                    <h3 style={styles.resourceTitle}>{link.title}</h3>
+                    <p className="left-align" style={styles.resourceDescription}>{link.description}</p>
+                    <Link 
                       href={link.href} 
-                      className="resource-button"
+                      style={styles.resourceButton}
                       aria-label={`Access resource: ${link.title}`}
                     >
                       {link.cta} →
-                    </a>
+                    </Link>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* ===== LONG-TAIL KEYWORD SECTION (GEO OPTIMIZATION) ===== */}
-            <section className="content-section">
-              <h2 className="section-title">Common Software Resume Questions</h2>
-              <div className="anatomy-grid">
+            <section style={styles.contentSection}>
+              <h2 style={styles.sectionTitle}>Common Software Engineer Resume Questions</h2>
+              <div style={styles.anatomyGrid}>
                 {data.longTailKeywords.slice(0, 4).map((keyword, i) => (
-                  <div key={i} className="anatomy-card">
+                  <div key={i} style={styles.anatomyCard}>
                     <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                    <a 
+                    <Link 
                       href="/complete-resume-resource-library" 
-                      className="breadcrumb-link"
+                      style={styles.breadcrumbLink}
                     >
                       Find answer in our resource library →
-                    </a>
+                    </Link>
                   </div>
                 ))}
               </div>
-              <div className="anatomy-grid" style={{ marginTop: '16px' }}>
+              <div style={{...styles.anatomyGrid, marginTop: '1rem'}}>
                 {data.longTailKeywords.slice(4, 8).map((keyword, i) => (
-                  <div key={i + 4} className="anatomy-card">
+                  <div key={i + 4} style={styles.anatomyCard}>
                     <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                    <a 
+                    <Link 
                       href="/complete-resume-resource-library" 
-                      className="breadcrumb-link"
+                      style={styles.breadcrumbLink}
                     >
                       Find answer in our resource library →
-                    </a>
+                    </Link>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* ===== FAQ SECTION ===== */}
-            <section id="faqs" className="faq-section">
-              <h2 className="section-title">Frequently Asked Questions About Software Resumes</h2>
+            <section id="faqs" style={styles.faqSection}>
+              <h2 style={styles.sectionTitle}>Frequently Asked Questions About Software Engineer Resumes</h2>
               
-              <div className="faq-grid">
+              <div style={styles.faqGrid}>
                 {data.faqItems.map((item, index) => (
-                  <div key={index} className="faq-card">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <p className="faq-answer">{item.answer}</p>
+                  <div key={index} style={styles.faqCard} itemScope itemType="https://schema.org/Question">
+                    <h3 style={styles.faqQuestion} itemProp="name">{item.question}</h3>
+                    <div itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
+                      <p className="left-align" style={styles.faqAnswer} itemProp="text">{item.answer}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* ===== CONCLUSION SECTION ===== */}
-            <section id="conclusion" className="conclusion-section">
-              <h2 className="section-title">Conclusion & Next Steps for Your Software Resume</h2>
+            <section id="conclusion" style={styles.conclusionSection}>
+              <h2 style={styles.sectionTitle}>Conclusion & Next Steps for Your Software Engineer Resume</h2>
               
-              <p>Creating a standout software resume in {currentYear} requires understanding both technical requirements (ATS optimization, proper structure) and human psychology (impact storytelling, clear communication). By following the strategies outlined in this comprehensive guide, you're equipped to craft a resume that stands out in today's competitive market.</p>
+              <p className="left-align">Creating a standout software engineer resume in {currentYear} requires understanding both technical requirements (ATS optimization, proper structure) and human psychology (impact storytelling, clear communication). By following the strategies outlined in this comprehensive guide, you're equipped to craft a resume that stands out in today's competitive market.</p>
               
-              <div className="action-card">
-                <h3 className="action-title">Ready to Implement These {currentYear} Strategies?</h3>
-                <p style={{ marginBottom: '24px' }}>Use our free resume builder with built-in ATS optimization checks, software-specific templates, and expert-guided writing assistance:</p>
-                <a 
-                  href="/ats-friendly-software-developer-and-software-engineer-resume-builder" 
-                  className="primary-cta"
-                  style={{ display: 'inline-block', minWidth: '300px' }}
-                  aria-label="Start building your software resume with our free tool"
+              <div style={styles.actionCard}>
+                <h3 style={styles.actionTitle}>Ready to Implement These {currentYear} Strategies?</h3>
+                <p style={{ marginBottom: '1.5rem' }}>Use our free resume builder with built-in ATS optimization checks, software engineer-specific templates, and expert-guided writing assistance:</p>
+                <Link 
+                  href="/resume-templates" 
+                  style={{...styles.primaryCta, display: 'inline-block', minWidth: '300px'}}
+                  aria-label="Start building your software engineer resume with our free tool"
                 >
-                  Build Your {currentYear} Software Resume →
-                </a>
+                  Build Your {currentYear} Software Engineer Resume →
+                </Link>
               </div>
               
-              <p className="final-note">
+              <p style={styles.finalNote}>
                 <strong>Remember:</strong> Your resume is a living document. Update it with each new project, skill acquisition, or achievement. Regular refinement ensures you're always prepared for new opportunities in the dynamic software industry.
               </p>
             </section>
-
-            {/* ===== FRESHNESS INDICATOR ===== */}
-            
-
-            {/* ===== HIDDEN METADATA FOR CRAWLERS ===== */}
-            <div className="hidden">
-              <span itemProp="dateModified">{lastModified}</span>
-              <span itemProp="wordCount">2150</span>
-              <span itemProp="keywords">{metadata.keywords}</span>
-              <span itemProp="articleSection">Tech Careers, Software Development</span>
-              {data.longTailKeywords.map((kw, i) => (
-                <span key={i} itemProp="longTailKeyword">{kw}</span>
-              ))}
-            </div>
           </main>
         </article>
+
+        {/* Update Strategy */}
+        <div style={styles.updateStrategy}>
+          Last updated: {displayDate} • Next update: {new Date(new Date(displayDate).setDate(new Date(displayDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+        </div>
+
+        {/* ===== HIDDEN METADATA FOR CRAWLERS ===== */}
+        <div style={styles.hidden}>
+          <span itemProp="dateModified">{lastModified}</span>
+          <span itemProp="wordCount">2150</span>
+          <span itemProp="keywords">{metadata.keywords}</span>
+          <span itemProp="articleSection">Tech Careers, Software Development</span>
+          {data.longTailKeywords.map((kw, i) => (
+            <span key={i} itemProp="longTailKeyword">{kw}</span>
+          ))}
+        </div>
       </div>
     </>
   );

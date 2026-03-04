@@ -1762,8 +1762,8 @@ const InterviewTips = ({
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
         {/* Primary SEO Tags */}
-        <title>Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder | Professional Resume Free</title>
-        <meta name="title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder | Professional Resume Free" />
+        <title>Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder</title>
+        <meta name="title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta name="description" content="Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates. Get hired faster with proven strategies." />
         <meta name="keywords" content={seoKeywords.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
@@ -1975,7 +1975,7 @@ const InterviewTips = ({
               <div className="introText">
                 <h3>Complete Career Success System</h3>
                 <p>
-                  This guide holds what it takes to move through today’s job hunt terrain. Starting with resumes built to clear computer filters, moving into handling interview questions that probe past behavior, then building solid plans tailored for the hiring scene ahead. Each part fits together without relying on shortcuts or worn-out phrases. Tools here adjust naturally to shifts in how companies hire. What works now stays practical, not flashy. Methods stay grounded in real steps people can follow. The focus remains steady on clarity, not noise.
+                  This guide holds what it takes to move through today’s job hunt terrain. Starting with resumes built to beat computer filters, moving into handling interview questions that probe past behavior, then building solid plans tailored for the hiring scene ahead. Each part fits together without relying on shortcuts or worn-out phrases. Tools here adjust naturally to shifts in how companies hire. What works now stays practical, not flashy. Methods stay grounded in real steps people can follow. The focus remains steady on clarity, not noise.
                 </p>
                 <p>
                   One step follows another, forming a full plan to move your work life forward. If you just finished school, have years behind you, or are switching paths, these methods can make you noticeable now when things feel crowded.

@@ -44,7 +44,7 @@ import {
   FaHospitalAlt
 } from 'react-icons/fa';
 
-// ===== INLINE CRITICAL CSS FOR MAXIMUM SPEED =====
+// ===== INLINE CRITICAL CSS FOR MAXIMUM SPEED & CENTERED LAYOUT =====
 const criticalCSS = `
   /* Reset & Base Styles */
   * { 
@@ -69,6 +69,16 @@ const criticalCSS = `
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #__next, main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   img, svg { 
@@ -77,15 +87,25 @@ const criticalCSS = `
     display: block;
   }
   
-  /* Container System - Fluid & Responsive */
+  /* Container System - Fluid & Responsive - CENTERED */
   .container { 
     width: 100%;
     max-width: 1280px; 
     margin: 0 auto; 
     padding: 0 clamp(16px, 4vw, 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  /* Typography - Fluid & Overflow Protected */
+  /* Typography - Fluid & Overflow Protected - CENTERED */
+  h1, h2, h3, h4, p {
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
   h1 { 
     font-size: clamp(2rem, 6vw, 3.5rem); 
     line-height: 1.2; 
@@ -120,20 +140,25 @@ const criticalCSS = `
     line-height: 1.6;
   }
   
-  /* Breadcrumb Navigation */
+  /* Breadcrumb Navigation - CENTERED */
   .breadcrumb {
     background: #f9fafb;
     border-bottom: 1px solid #e5e7eb;
     padding: 12px 0;
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .breadcrumb .container {
+    align-items: flex-start;
   }
   
   .breadcrumb ol {
     list-style: none;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 0;
     margin: 0;
@@ -178,22 +203,28 @@ const criticalCSS = `
     height: 16px;
   }
   
-  /* Hero Section */
+  /* Hero Section - CENTERED */
   .heroSection {
     background: #ffffff;
     padding: clamp(40px, 8vw, 60px) 0;
     border-bottom: 1px solid #e5e7eb;
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   .heroContent {
     max-width: 900px;
     margin: 0 auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .heroTitle {
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .highlightText {
@@ -219,13 +250,14 @@ const criticalCSS = `
     max-width: 800px;
     margin-bottom: 32px;
     color: #4b5563;
+    text-align: center;
   }
   
   .heroSubtitle strong {
     color: #111111;
   }
 
-  /* Hero Image Container - Exactly like homepage */
+  /* Hero Image Container - CENTERED */
   .hero-image-container {
     width: 100%;
     max-width: 700px;
@@ -235,6 +267,8 @@ const criticalCSS = `
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
   }
   
   @media (min-width: 1024px) {
@@ -255,25 +289,14 @@ const criticalCSS = `
     display: block;
   }
   
-  @media (min-width: 768px) {
-    .hero-image-container {
-      margin: 0 auto 48px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-image-container {
-      margin: 0 auto 32px;
-    }
-  }
-  
-  /* Hero Stats - Updated (removed 4.9/5 card) */
+  /* Hero Stats - CENTERED */
   .heroStats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(16px, 3vw, 24px);
     margin: 0 0 40px 0;
     width: 100%;
+    max-width: 800px;
   }
   
   @media (max-width: 640px) {
@@ -315,10 +338,11 @@ const criticalCSS = `
     font-weight: 500;
   }
   
-  /* Button System */
+  /* Button System - CENTERED */
   .ctaButtons {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: clamp(12px, 2vw, 16px);
     margin: 32px 0;
     width: 100%;
@@ -361,39 +385,49 @@ const criticalCSS = `
   @media (max-width: 640px) {
     .ctaButtons {
       flex-direction: column;
+      align-items: center;
     }
     
     .sectionButton {
       width: 100%;
+      max-width: 350px;
     }
   }
   
-  /* Section Styles */
+  /* Section Styles - CENTERED */
+  .templatesSection, .featuresSection, .howItWorksSection, .faqSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(40px, 8vw, 60px) 0;
+  }
+  
   .sectionHeader {
     text-align: center;
     margin-bottom: clamp(32px, 6vw, 48px);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .sectionTitle {
     margin-bottom: 16px;
     max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center;
   }
   
   .sectionSubtitle {
     font-size: clamp(1rem, 2.5vw, 1.125rem);
     color: #6b7280;
     max-width: 700px;
-    margin: 0 auto;
+    text-align: center;
   }
   
-  /* Templates Grid - Fully Responsive */
+  /* Templates Grid - CENTERED */
   .templatesSection {
-    padding: clamp(40px, 8vw, 60px) 0;
     background: #ffffff;
-    width: 100%;
   }
   
   .templatesGrid {
@@ -416,6 +450,7 @@ const criticalCSS = `
     position: relative;
     overflow: hidden;
     width: 100%;
+    text-align: left;
   }
   
   .templateCard:hover {
@@ -468,6 +503,7 @@ const criticalCSS = `
     color: #111111;
     flex: 1;
     line-height: 1.4;
+    text-align: left;
   }
   
   .templateDescription {
@@ -476,6 +512,7 @@ const criticalCSS = `
     font-size: 0.95rem;
     line-height: 1.5;
     flex: 1;
+    text-align: left;
   }
   
   .templateFeatures {
@@ -483,6 +520,7 @@ const criticalCSS = `
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 20px;
+    justify-content: flex-start;
   }
   
   .featureTag {
@@ -514,6 +552,7 @@ const criticalCSS = `
     padding: 8px 0;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s;
+    align-self: flex-start;
   }
   
   .templateLink:hover {
@@ -530,11 +569,9 @@ const criticalCSS = `
     transform: translateX(4px);
   }
   
-  /* Features Section */
+  /* Features Section - CENTERED */
   .featuresSection {
-    padding: clamp(40px, 8vw, 60px) 0;
     background: #f9fafb;
-    width: 100%;
   }
   
   .featuresGrid {
@@ -551,6 +588,9 @@ const criticalCSS = `
     padding: clamp(20px, 4vw, 24px);
     height: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .featureIconContainer {
@@ -574,19 +614,19 @@ const criticalCSS = `
     font-size: 1.1rem;
     margin-bottom: 12px;
     color: #111111;
+    text-align: center;
   }
   
   .featureDescription {
     color: #6b7280;
     font-size: 0.95rem;
     line-height: 1.5;
+    text-align: center;
   }
   
-  /* How It Works Section */
+  /* How It Works Section - CENTERED */
   .howItWorksSection {
-    padding: clamp(40px, 8vw, 60px) 0;
     background: #ffffff;
-    width: 100%;
   }
   
   .stepsGrid {
@@ -604,6 +644,9 @@ const criticalCSS = `
     text-align: center;
     height: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .stepNumber {
@@ -624,19 +667,19 @@ const criticalCSS = `
     font-size: 1.2rem;
     margin-bottom: 12px;
     color: #111111;
+    text-align: center;
   }
   
   .stepDescription {
     color: #6b7280;
     font-size: 0.95rem;
     line-height: 1.5;
+    text-align: center;
   }
   
-  /* FAQ Section */
+  /* FAQ Section - CENTERED */
   .faqSection {
-    padding: clamp(40px, 8vw, 60px) 0;
     background: #f9fafb;
-    width: 100%;
   }
   
   .faqGrid {
@@ -665,37 +708,46 @@ const criticalCSS = `
     margin-bottom: 12px;
     color: #111111;
     line-height: 1.4;
+    text-align: left;
   }
   
   .faqAnswer {
     color: #6b7280;
     font-size: 0.95rem;
     line-height: 1.6;
+    text-align: left;
   }
   
-  /* CTA Section */
+  /* CTA Section - CENTERED */
   .ctaSection {
     padding: clamp(40px, 8vw, 60px) 0;
     background: #111111;
     color: #ffffff;
     text-align: center;
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   .ctaContent {
     max-width: 700px;
     margin: 0 auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .ctaTitle {
     color: #ffffff;
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .ctaSubtitle {
     color: #e5e7eb;
     margin-bottom: 32px;
+    text-align: center;
   }
   
   .ctaSection .sectionButton {
@@ -727,12 +779,16 @@ const criticalCSS = `
   .guaranteeText {
     color: #e5e7eb;
     font-size: 0.9rem;
+    text-align: center;
   }
   
-  /* Section CTA */
+  /* Section CTA - CENTERED */
   .sectionCta {
     text-align: center;
     margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   /* Freshness Indicator (Hidden) */
@@ -752,16 +808,19 @@ const criticalCSS = `
     border: 0;
   }
   
-  /* Utility Classes */
+  /* Utility Classes - CENTERED */
   .textSmall {
     font-size: 0.85rem;
     color: #9ca3af;
+    text-align: center;
   }
   
   hr {
     border: none;
     border-top: 1px solid #e5e7eb;
-    margin: 40px 0;
+    margin: 40px auto;
+    width: 100%;
+    max-width: 1280px;
   }
 `;
 
@@ -1217,7 +1276,7 @@ const ResumeTemplates = ({
     },
     {
       question: "Which industries are covered by your ATS resume templates?",
-      answer: `Picking the right look matters when machines scan your job application. Different fields need different wording - healthcare uses terms tech jobs do not. 46+ industries are areas covered, from shipping goods to fixing them, plus office roles too. One size never fits all, especially if software reads first. These layouts match what hiring systems search for in each line of work. Words matter, placement counts, timing changes nothing about being seen. `
+      answer: "Picking the right look matters when machines scan your job application. Different fields need different wording - healthcare uses terms tech jobs do not. 46+ industries are areas covered, from shipping goods to fixing them, plus office roles too. One size never fits all, especially if software reads first. These layouts match what hiring systems search for in each line of work. Words matter, placement counts, timing changes nothing about being seen."
     },
     {
       question: "How do I customize the resume templates?",
@@ -1281,8 +1340,8 @@ const ResumeTemplates = ({
         "@type": "CollectionPage",
         "@id": "https://www.professionalresumefree.com/resume-templates",
         "url": "https://www.professionalresumefree.com/resume-templates",
-        "name": "ATS-Friendly Resume Templates 2026 | 45+ Industry-Specific Professional Templates",
-        "description": "Browse 45+ ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles. Free downloads, no registration required.",
+        "name": "ATS-Friendly Resume Templates 2026 | Professional Templates",
+        "description": "Browse ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles. Free downloads, no registration required.",
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
@@ -1388,9 +1447,9 @@ const ResumeTemplates = ({
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
         {/* Primary SEO Tags */}
-        <title>ATS-Friendly Resume Templates 2026 | 45+ Industry-Specific Professional Templates</title>
-        <meta name="title" content="ATS-Friendly Resume Templates 2026 | 45+ Industry-Specific Professional Templates" />
-        <meta name="description" content="Browse 45+ ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles. Free downloads, no registration required. 94% ATS pass rate." />
+        <title>ATS-Friendly Resume Templates 2026: Professional Templates</title>
+        <meta name="title" content="ATS-Friendly Resume Templates 2026: Professional Templates" />
+        <meta name="description" content="Browse ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles. Free downloads, no registration required." />
         <meta name="keywords" content={seoKeywords.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
         
@@ -1403,15 +1462,15 @@ const ResumeTemplates = ({
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-templates" />
         
         {/* GEO Optimization Tags */}
-        <meta name="chatgpt-fts:title" content="ATS-Friendly Resume Templates 2026 - 45+ Industry Templates" />
-        <meta name="chatgpt-fts:description" content="Free ATS-optimized resume templates for medical, tech, finance, and more. 94% pass rate. No signup required. Download instantly." />
+        <meta name="chatgpt-fts:title" content="ATS-Friendly Resume Templates 2026 - Professional Templates" />
+        <meta name="chatgpt-fts:description" content="Free ATS-optimized resume templates for medical, tech, finance, and more. No signup required. Download instantly." />
         <meta name="chatgpt-fts:keywords" content="ATS resume templates, free resume templates 2026, industry-specific resume templates, ATS optimized" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - ATS Resume Templates" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="ATS-Friendly Resume Templates 2026 | 45+ Industry-Specific Professional Templates" />
-        <meta property="og:description" content="Browse 45+ ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
+        <meta property="og:title" content="ATS-Friendly Resume Templates 2026: Professional Templates" />
+        <meta property="og:description" content="Browse ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
         <meta property="og:image" content="https://www.professionalresumefree.com/46-free-resume-templates.jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -1424,7 +1483,7 @@ const ResumeTemplates = ({
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ATS-Friendly Resume Templates 2026 | Free Downloads" />
-        <meta name="twitter:description" content="Browse 45+ ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
+        <meta name="twitter:description" content="Browse ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/46-free-resume-templates.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
@@ -1459,10 +1518,9 @@ const ResumeTemplates = ({
                 <FiChevronRight />
               </li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/resume-templates" className="breadcrumbLink" itemProp="item">
-                  <span itemProp="name">ATS Resume Templates 2026</span>
-                </Link>
+                <span className="breadcrumbText" itemProp="name">ATS Resume Templates 2026</span>
                 <meta itemProp="position" content="2" />
+                <meta itemProp="item" content="https://www.professionalresumefree.com/resume-templates" />
               </li>
             </ol>
           </div>
@@ -1486,7 +1544,7 @@ const ResumeTemplates = ({
               <div className="hero-image-container">
                 <Image
                   src="/46-free-resume-templates.jpeg"
-                  alt="ATS-Friendly Resume Templates Preview - Collection of 46+ professional resume templates optimized for applicant tracking systems across healthcare, technology, finance, and more industries"
+                  alt="ATS-Friendly Resume Templates Preview - Collection of professional resume templates optimized for applicant tracking systems across healthcare, technology, finance, and more industries"
                   width={1200}
                   height={675}
                   priority
@@ -1575,7 +1633,7 @@ const ResumeTemplates = ({
               </Link>
             </div>
             
-            <p className="textSmall" style={{ textAlign: 'center', marginTop: '20px' }}>
+            <p className="textSmall" style={{ marginTop: '20px' }}>
               Last updated: {safeCurrentDate} • All templates ATS-validated
             </p>
           </div>
