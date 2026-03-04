@@ -974,12 +974,17 @@ __html: JSON.stringify({
 "bestRating": "5",
 "worstRating": "1"
 },
-"review": caseStudies.slice(0, 3).map(cs => ({
+"review": caseStudies.map(cs => ({
 "@type": "Review",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+},
 "reviewRating": {
 "@type": "Rating",
 "ratingValue": "5",
-"bestRating": "5"
+"bestRating": "5",
+"worstRating": "1"
 },
 "author": {
 "@type": "Person",
@@ -1357,6 +1362,7 @@ Browse All {templateCount}+ Templates →
 <p style={{marginBottom: '8px'}}><strong>After:</strong> <span className="text-success">{study.after}</span></p>
 <p style={{marginBottom: '8px'}}><strong>Template used:</strong> {study.template}</p>
 <p><strong>Time to result:</strong> {study.timeToResult}</p>
+<meta itemProp="itemReviewed" content="Professional Resume Free Builder" />
 <meta itemProp="reviewRating" content="5" />
 </article>
 ))}

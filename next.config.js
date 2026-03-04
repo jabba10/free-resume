@@ -12,6 +12,57 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
 
+  async redirects() {
+    return [
+      // Redirect http://professionalresumefree.com and http://www.professionalresumefree.com to https://www.professionalresumefree.com
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'professionalresumefree.com',
+          },
+        ],
+        destination: 'https://www.professionalresumefree.com/:path*',
+        permanent: true, // 301 redirect
+      },
+      // Redirect https://professionalresumefree.com (non-www HTTPS) to https://www.professionalresumefree.com
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'professionalresumefree.com',
+          },
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'https',
+          },
+        ],
+        destination: 'https://www.professionalresumefree.com/:path*',
+        permanent: true, // 301 redirect
+      },
+      // Redirect http://www.professionalresumefree.com to https://www.professionalresumefree.com
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.professionalresumefree.com',
+          },
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'http',
+          },
+        ],
+        destination: 'https://www.professionalresumefree.com/:path*',
+        permanent: true, // 301 redirect
+      },
+    ];
+  },
+
   async rewrites() {
     return [
       {
