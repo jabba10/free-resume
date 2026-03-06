@@ -1855,7 +1855,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
           borderRadius: '12px'
         }}>
           <p><strong>Data Freshness:</strong> Last updated {displayDate} • Based on 2026 recruitment data • Build: {buildTimestamp}</p>
-          <p style={{ marginTop: '8px' }}>© {currentYear} Professional Resume Free. All template strategies validated by hiring research.</p>
+          
         </div>
       </main>
     </>
