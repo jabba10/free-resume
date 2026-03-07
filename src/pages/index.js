@@ -1199,7 +1199,7 @@ return (
 <meta name="format-detection" content="telephone=no, address=no, email=no" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) ===== */}
+{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) - FIXED ERRORS ===== */}
 <script
 type="application/ld+json"
 dangerouslySetInnerHTML={{
@@ -1274,7 +1274,7 @@ __html: JSON.stringify({
 "bestRating": "5",
 "worstRating": "1"
 },
-// GEO FIX: Align reviews with visible testimonials to avoid penalty
+// FIXED: Corrected review structure with proper types and required fields
 "review": testimonials.map(t => ({
 "@type": "Review",
 "itemReviewed": {
