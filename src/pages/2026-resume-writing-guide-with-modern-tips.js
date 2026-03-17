@@ -1248,8 +1248,8 @@ Specialization: Artificial Intelligence
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 72 CHARACTERS ===== */}
-        <title>2026 Resume Writing Guide: Expert Tips for ATS & CAR Format Examples</title>
+        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 58 CHARACTERS ===== */}
+        <title>2026 Resume Guide: ATS Tips, CAR Method & Format Examples</title>
         
         {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content="Expert 2026 resume guide: Compare chronological (87%), functional (63%), and hybrid (94% ATS pass) formats. CAR method examples, ATS keywords, emerging trends. Updated weekly." />
@@ -1374,8 +1374,8 @@ Specialization: Artificial Intelligence
         <header style={styles.header} id="main-content">
           <div className="container">
             <div style={styles.heroContent}>
-              {/* Single H1 tag - matches title tag exactly */}
-              <h1 style={styles.heroTitle}>2026 Resume Writing Guide: Expert Tips for ATS & CAR Format Examples</h1>
+              {/* ===== OPTIMIZED H1 TAG - 58 CHARACTERS (IDEAL SEO LENGTH) ===== */}
+              <h1 style={styles.heroTitle}>2026 Resume Guide: ATS Tips, CAR Method & Format Examples</h1>
               
               <p style={styles.heroSubtitle}>
                 <strong>By Isata Kamara (10+ years, 8,500+ resumes reviewed)</strong> — Compare <strong>chronological (87% success), functional (63% success), and hybrid (94% ATS pass) formats</strong> with verified statistics. Master the <strong>CAR method</strong> for achievement bullets and optimize for AI screening.

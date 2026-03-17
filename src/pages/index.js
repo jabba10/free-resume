@@ -1107,7 +1107,9 @@ title: "International Job Resources",
 links: [
 { name: "Resume for Canada PR Guide", url: "/resume-for-canada-pr-guide" },
 { name: "Resume for Abroad Job", url: "/resume-for-aboard-job" },
-{ name: "Resume for Gulf Job", url: "/resume-for-gulf-job" }
+{ name: "Resume for Gulf Job", url: "/resume-for-gulf-job" },
+{ name: "Resume Guides for USA Job", url: "/usa-jobs-resume-directory" }
+
 ]
 }
 ];

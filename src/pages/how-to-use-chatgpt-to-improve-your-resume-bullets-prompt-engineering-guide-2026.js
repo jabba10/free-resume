@@ -898,15 +898,15 @@ const ChatGPTResumeGuide = ({
 
   // People Also Ask for GEO
   const peopleAlsoAsk = [
-    { question: "Can ChatGPT really help write a better resume?", answer: "Yes, ChatGPT can significantly improve resume bullet points by helping quantify achievements, incorporating industry keywords, and suggesting stronger action verbs. However, you must verify accuracy and maintain your authentic voice. Our guide shows how to use ChatGPT effectively without losing your personal touch." },
-    { question: "What are the best ChatGPT prompts for resume writing?", answer: "The best prompts include: 'Rewrite this achievement with specific metrics', 'Suggest 3 variations of this bullet point for [industry]', 'Incorporate these keywords naturally: [keywords]', and 'Improve this description with stronger action verbs'. Provide context about your role and target industry for best results." },
-    { question: "Is it ethical to use ChatGPT for resume writing?", answer: "Yes, using ChatGPT as a tool to improve your resume is ethical as long as you: 1) Verify all information is accurate, 2) Maintain your authentic voice, 3) Don't fabricate achievements, and 4) Customize AI suggestions with your actual experiences. Think of it as a writing assistant, not a replacement for your accomplishments." }
+    { question: "Can ChatGPT really help write a better resume?", answer: "Truth is, ChatGPT helps sharpen resume lines - making them more precise with numbers, fitting in field-specific terms, using bolder verbs. Still, double-check every detail; keep it sounding like you. This walkthrough walks through balancing AI help while staying true to your own story." },
+    { question: "What are the best ChatGPT prompts for resume writing?", answer: "Start by shaping your questions carefully when using a ChatGPT. Instead of vague asks, try something such as: Could we include metrics for this result? A different angle might be: Show me three takes focused on technical skills. Spot missing terms? Name what you need - just request they fit smoothly into the flow. For stronger impact, aim for livelier action words without forcing them. Sharing extra bits about your work gives clearer results. When you explain what field you’re in, replies fit closer to your situation. Details turn flat answers into something that sounds like it’s meant for you." },
+    { question: "Is it ethical to use ChatGPT for resume writing?", answer: "Truth is, tweaking your resume with ChatGPT isn’t off limits - so long as you stay honest. Verify every detail matches reality, keep the voice sounding like your own, skip making up wins, while adjusting its ideas to reflect real work history. After all, it simply helps write better words - it can’t replace genuine results. " }
   ];
 
   // Conversational explanations for GEO
   const conversationalExplanations = [
-    { topic: "ChatGPT Resume Help in Plain English", content: "Think of ChatGPT as your brainstorming partner. You tell it what you did at work (in simple terms), and it helps you find better ways to describe your achievements—like turning 'I helped customers' into 'Resolved 50+ customer inquiries daily, maintaining 95% satisfaction rate.' It's like having a professional writer suggest improvements to your draft." },
-    { topic: "Why Prompt Engineering Matters", content: "Prompt engineering is simply learning how to ask ChatGPT the right questions. A bad prompt like 'improve my resume' gives generic results. A good prompt like 'Rewrite this customer service bullet point for a tech company using metrics' gets you specific, usable content. Better prompts = better results." }
+    { topic: "ChatGPT Resume Help Made Simple", content: "Picture ChatGPT sitting across from you, tossing ideas back and forth. When you share what happened during your day - say, helping people - it reshapes flat phrases into sharper ones. Instead of I helped customers, it might offer: Handled over fifty support requests each day, keeping satisfaction near 95 percent. This isn’t magic, just clearer framing. Someone who writes resumes often would make similar tweaks. The words change slightly; the truth stays." },
+    { topic: "Why Prompt Engineering Matters", content: "Getting ChatGPT to help well means shaping your words with care. Not just tossing it a line like fix my resume, which brings back flat, one-size-fits-all replies. Instead, try something sharp - say, reworking a customer service detail for a tech job, adding numbers that prove impact. Clear direction leads to sharper output. The way you frame things changes what you get." }
   ];
 
   const guideSections = [
@@ -1076,19 +1076,19 @@ After ChatGPT + Verification:
   const faqs = [
     {
       question: "How effective is ChatGPT for resume writing compared to traditional methods?",
-      answer: "ChatGPT can improve resume writing effectiveness by up to 85% in ATS compatibility and generate bullet points that are 3-5x more impactful than traditional methods. The key is proper prompt engineering and combining AI suggestions with personal customization."
+      answer: "Starting strong helps - ChatGPT boosts how well resumes pass automated screens, sometimes eight and a half times better. It crafts short statements that hit harder than usual ones, three to fivefold stronger when done right. Success comes from shaping smart prompts then mixing AI ideas with your own touch. Without tweaking inputs carefully, results fall flat."
     },
     {
       question: "What are the most important elements of effective ChatGPT prompts for resumes?",
-      answer: "The most important elements are: providing specific context about your industry and role, including target keywords from job descriptions, requesting quantifiable metrics, asking for multiple variations, and specifying desired tone and format. Specificity and context lead to better AI-generated content."
+      answer: "What matters most? Sharing clear details about your field and position helps shape the output. Job description keywords should appear naturally throughout. Numbers that measure results make a difference when included. Try prompting for several versions instead of just one. Tone and layout need mentioning too - don’t skip those. When you give more background, responses improve. Details guide the machine. "
     },
     {
       question: "Can ChatGPT help with ATS (Applicant Tracking System) optimization?",
-      answer: "Yes, ChatGPT can significantly improve ATS optimization by naturally incorporating keywords from job descriptions, using industry-standard terminology, and structuring content in ways that are easily parsed by automated systems. Properly engineered prompts can increase ATS compatibility by up to 85%."
+      answer: "ChatGPT helps resumes get through screening software because it slips in the right words from job posts without sounding forced. It uses terms hiring systems expect to see. The layout follows patterns these tools recognize quickly. When prompts guide it well, success rates jump - some tests show nearly 85% better results. That kind of setup makes a difference. "
     },
     {
       question: "How can I ensure ChatGPT-generated resume content remains authentic to my voice?",
-      answer: "To maintain authenticity: always fact-check AI-generated content, verify specific numbers and achievements, customize generic AI suggestions with your personal experiences, maintain consistent tone across all sections, and get feedback from industry professionals. Use ChatGPT as an enhancement tool, not a replacement for your voice."
+      answer: "To maintain authenticity: always fact-check AI-generated content, verify specific numbers and achievements, customize generic AI suggestions with your personal experiences, maintain consistent tone across all sections, and get feedback from industry professionals. Use ChatGPT as an enhancement tool, not a replacement for your voice. "
     }
   ];
 
@@ -1335,8 +1335,7 @@ After ChatGPT + Verification:
             
             <p>
               Master the art of <strong>prompt engineering for resume optimization</strong>. Transform basic 
-              responsibilities into powerful, ATS-optimized bullet points that get <strong>85% more interviews</strong> 
-              with our comprehensive ChatGPT resume guide.
+              responsibilities into powerful, ATS-optimized bullet points that get  <strong>85% more interviews</strong> with our comprehensive ChatGPT resume guide.
             </p>
 
             <div className="button-container" role="group" aria-label="Call to action buttons">
@@ -1399,10 +1398,11 @@ After ChatGPT + Verification:
         <section className="section" style={{background: '#f9fafb'}}>
           <div className="container">
             <p className="lead-text">
-              In the <strong>AI-powered job market of {currentYear}</strong>, ChatGPT has become an indispensable tool for 
-              resume optimization. This comprehensive guide shows you how to leverage <strong>advanced prompt engineering</strong> 
-              to transform basic job descriptions into compelling, ATS-friendly bullet points. Learn techniques that 
-              increase your interview chances by <strong>up to 85%</strong> while maintaining your authentic voice.
+              Truth is, when everyone else uses smart tools to sharpen their resumes, staying away from them slows you down. 
+              ChatGPT helps people find jobs - but only when they ask it the right way. 
+              Forget the clutter; this walks you step by step through creating bullet points that transform dull job details into sharp, system-friendly lines. 
+              You pick up practical methods proven to lift your chances at interviews close to <strong>85%</strong>, without losing what makes your style yours. 
+              The result? Words that feel alive, clearly spoken, never machine-made.
             </p>
             
             <div className="intro-highlights">
@@ -1425,7 +1425,7 @@ After ChatGPT + Verification:
         {/* Table of Contents */}
         <section className="section" aria-labelledby="toc-heading">
           <div className="container">
-            <h2 id="toc-heading" className="section-title">📋 Complete Guide Navigation</h2>
+            <h2 id="toc-heading" className="section-title"> Complete Guide Navigation</h2>
             <div className="toc-grid">
               <a href="#what-is-chatgpt" className="toc-card">
                 <div className="toc-number">01</div>

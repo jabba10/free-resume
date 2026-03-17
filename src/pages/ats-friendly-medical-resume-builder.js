@@ -1078,13 +1078,14 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 42,365+ Healthcare Professionals | Best Free Healthcare Resume Builder 2026
+                Best Free Healthcare Resume Builder 2026
               </span>
             </div>
             
-            <h2 className={styles.heroTitle}>
+            {/* H1 TAG ADDED - Main page heading for SEO */}
+            <h1 className={styles.heroTitle}>
               Free Healthcare Resume Builder 2026: Start Now
-            </h2>
+            </h1>
             
             <p className={styles.heroSubtitle}>
               Create a <strong className={styles.heroHighlight}>professional, ATS-optimized healthcare resume for free in minutes.</strong> Our medical resume builder ensures your clinical experience and credentials get noticed by hospitals and healthcare employers.
@@ -1204,7 +1205,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1247,7 +1248,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles (LinkedIn, Doximity, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1313,7 +1314,7 @@ const Resume = ({
             {/* Clinical Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeart /> Clinical Experience</h3>
+                <h2 className={styles.sectionTitle}><FiHeart /> Clinical Experience</h2>
                 <p className={styles.sectionDescription}>List your clinical positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1436,7 +1437,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Clinical Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Clinical Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No clinical experience added yet</p>
                   ) : (
@@ -1473,7 +1474,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Training</h2>
                 <p className={styles.sectionDescription}>List your nursing/medical education, degrees, and relevant clinical training</p>
                 
                 <div className={styles.formCard}>
@@ -1552,7 +1553,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1584,11 +1585,11 @@ const Resume = ({
             {/* Licenses & Certifications Section */}
             {activeSection === 'licenses' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> Licenses & Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiShield /> Licenses & Certifications</h2>
                 
                 {/* Licenses */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Licenses</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Licenses</h3>
                   <p className={styles.sectionDescription}>Add your nursing/medical licenses with numbers and expiry dates</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1674,7 +1675,7 @@ const Resume = ({
 
                 {/* Medical Specialties */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Medical Specialties</h4>
+                  <h3 className={styles.subSectionTitle}>Medical Specialties</h3>
                   <p className={styles.sectionDescription}>List your clinical specialties and areas of expertise</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1719,7 +1720,7 @@ const Resume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional medical organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1784,11 +1785,11 @@ const Resume = ({
             {/* Skills & Procedures Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiActivity /> Clinical Skills & Procedures</h3>
+                <h2 className={styles.sectionTitle}><FiActivity /> Clinical Skills & Procedures</h2>
                 
                 {/* Procedures */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Clinical Procedures & Technical Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Clinical Procedures & Technical Skills</h3>
                   <p className={styles.sectionDescription}>List your clinical procedures, equipment, and technical skills</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1833,7 +1834,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1897,7 +1898,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your healthcare resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2086,7 +2087,7 @@ const Resume = ({
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h3>
+            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
             <p className={styles.sectionSubtitle}>
               Everything you need to know about creating professional healthcare resumes with our tool.
             </p>
@@ -2094,7 +2095,7 @@ const Resume = ({
           <div className={styles.faqGrid}>
             {faqs.map((faq, index) => (
               <div key={index} className={styles.faqItem}>
-                <h4 className={styles.faqQuestion}>{faq.question}</h4>
+                <h3 className={styles.faqQuestion}>{faq.question}</h3>
                 <p className={styles.faqAnswer}>{faq.answer}</p>
               </div>
             ))}
@@ -2106,7 +2107,7 @@ const Resume = ({
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Healthcare Career?</h3>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Healthcare Career?</h2>
             <p className={styles.ctaSubtitle}>
               Join 4 million+ healthcare professionals who landed their dream jobs with our free ATS-friendly healthcare resume builder.
             </p>
