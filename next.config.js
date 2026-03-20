@@ -18,17 +18,17 @@ const nextConfig = {
   experimental: {
     optimizeCss: true, // Requires critters to be installed
     scrollRestoration: true,
+    middlewarePrefetch: "flexible", // ✅ ADDED from new code
     // optimisticClientCache was renamed/removed in 16.1.1
   },
 
-  // Configure image optimization
+  // ✅ Configure image optimization (enhanced)
   images: {
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000, // 1 year cache for images
-    // Add the quality setting that matches your usage
-    qualities: [75, 85], // Add both quality values used in your code
+    qualities: [75, 85],
     dangerouslyAllowSVG: false,
     contentDispositionType: 'attachment',
     remotePatterns: [
@@ -47,6 +47,10 @@ const nextConfig = {
         destination: 'https://professionalresumefree.goatcounter.com',
       },
     ];
+  },
+
+  async redirects() {
+    return []; // ✅ ADDED from new code - placeholder for future redirects
   },
 
   async headers() {
@@ -121,7 +125,17 @@ const nextConfig = {
               ? 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400'
               : 'no-cache, no-store, must-revalidate',
           },
-          // --- AI & LLM DISCOVERY HEADERS ---
+          // ✅ ADDED from new code - X-Robots-Tag (redundant but safe to keep)
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+          },
+          // ✅ ADDED from new code - X-Content-Type-Options (already present but keeping both)
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          // --- AI & LLM DISCOVERY HEADERS (GEO - Generative Engine Optimization) ---
           {
             key: 'Link',
             value: '<https://www.professionalresumefree.com/llms.txt>; rel="help"; type="text/plain", <https://www.professionalresumefree.com/llms-full.txt>; rel="alternate"; type="text/plain"',
@@ -147,7 +161,7 @@ const nextConfig = {
                    "manifest-src 'self'"
           },
           { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          // ✅ X-Content-Type-Options already added above, keeping for completeness
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()' },
           { key: 'X-DNS-Prefetch-Control', value: 'on' },
@@ -203,7 +217,7 @@ const nextConfig = {
   },
 
   // Output configuration
-  output: 'standalone',
+  output: 'standalone', // ✅ Already present, keeping
 };
 
 module.exports = nextConfig;

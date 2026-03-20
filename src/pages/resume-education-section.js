@@ -1028,6 +1028,7 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     educationalLevel: 'Beginner, Intermediate'
   };
 
+  // ✅ FIXED: Added missing 'item' field to each breadcrumb item
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -1230,11 +1231,13 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
                 <span itemProp="name">Home</span>
               </Link>
               <meta itemProp="position" content="1" />
+              <meta itemProp="item" content="https://www.professionalresumefree.com" />
               <FiChevronRight size={14} style={styles.breadcrumbSeparator} />
             </li>
             <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
               <span style={styles.breadcrumbCurrent} itemProp="name">Resume Education Section</span>
               <meta itemProp="position" content="2" />
+              <meta itemProp="item" content="https://www.professionalresumefree.com/resume-education-section" />
             </li>
           </ol>
         </nav>

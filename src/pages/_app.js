@@ -1,40 +1,46 @@
-// pages/_app.js
-import { useRouter } from 'next/router'
-import Head from 'next/head'
-import Script from 'next/script'
-import { useEffect } from 'react'
-import * as gtag from '../../lib/gtag'
-import Navbar from '../Components/Navbar'
-import Footer from '../Components/Footer'
-import './globals.css'
+// src/pages/_app.js
+import { useRouter } from "next/router";
+import Head from "next/head";
+import Script from "next/script";
+import { useEffect } from "react";
+import * as gtag from "../../lib/gtag";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
+import "./globals.css";
 
-export default function App({ Component, pageProps }) {
-  const router = useRouter()
-  const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`
+/**
+ * Optional: Client-side tracker for custom events only
+ * Pageviews are tracked automatically via middleware (bot-filtered)
+ */
+function NextlyticsCustomEvents() {
+  const router = useRouter();
 
-  // Setup analytics tracking
   useEffect(() => {
-    // Function to handle route changes
     const handleRouteChange = (url) => {
-      // Google Analytics
-      gtag.pageview(url)
-      
-      // GoatCounter
-      if (window.goatcounter && window.goatcounter.count) {
-        window.goatcounter.count({
-          path: url,
-        })
-      }
-    }
+      // Google Analytics (keep if you want dual tracking)
+      gtag.pageview(url);
 
-    // Subscribe to route change events
-    router.events.on('routeChangeComplete', handleRouteChange)
-    
-    // Cleanup subscription on unmount
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+      // GoatCounter (keep if you want)
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({ path: url });
+      }
+      // ✅ Nextlytics pageviews are auto-tracked via middleware (no client call needed)
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => router.events.off("routeChangeComplete", handleRouteChange);
+  }, [router.events]);
+
+  return null;
+}
+
+/**
+ * Main App component - NO NextlyticsClient wrapper to avoid ctx error
+ * Middleware handles ALL pageview tracking server-side
+ */
+function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`;
 
   return (
     <>
@@ -105,25 +111,14 @@ export default function App({ Component, pageProps }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebApplication",
-              "name": "Professional Resume Free",
-              "description": "Free online resume builder for creating professional resumes",
-              "url": "https://www.professionalresumefree.com",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Any",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "ratingCount": "1250"
-              },
-              "author": {
-                "@type": "Organization",
-                "name": "Professional Resume Free"
-              }
+              name: "Professional Resume Free",
+              description: "Free online resume builder for creating professional resumes",
+              url: "https://www.professionalresumefree.com",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Any",
+              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "1250" },
+              author: { "@type": "Organization", name: "Professional Resume Free" }
             })
           }}
         />
@@ -136,42 +131,23 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* ========== GOOGLE ANALYTICS ========== */}
-      {/* Only load if GA_TRACKING_ID exists */}
       {gtag.GA_TRACKING_ID && (
         <>
-          <Script
-            strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-          />
-          <Script
-            id="gtag-init"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gtag.GA_TRACKING_ID}', {
-                  page_path: window.location.pathname,
-                  anonymize_ip: true,
-                  send_page_view: true
-                });
-              `,
-            }}
-          />
+          <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
+          <Script id="gtag-init" strategy="afterInteractive" dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gtag.GA_TRACKING_ID}',{page_path:window.location.pathname,anonymize_ip:true,send_page_view:false});`
+          }} />
         </>
       )}
 
       {/* ========== GOATCOUNTER ANALYTICS ========== */}
-      <Script
-        data-goatcounter="https://professionalresumefree.goatcounter.com/count"
-        src="https://gc.zgo.at/count.js"
-        strategy="afterInteractive"
-        async
-      />
+      <Script data-goatcounter="https://professionalresumefree.goatcounter.com/count" src="https://gc.zgo.at/count.js" strategy="afterInteractive" async />
 
       {/* ========== BROWSERCONFIG.XML FOR MICROSOFT APPS ========== */}
       <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+
+      {/* ========== NEXTLYTICS CLIENT-SIDE TRACKER (for custom events) ========== */}
+      <NextlyticsCustomEvents />
 
       {/* ========== MAIN APP CONTENT ========== */}
       <Navbar />
@@ -180,5 +156,8 @@ export default function App({ Component, pageProps }) {
       </main>
       <Footer />
     </>
-  )
+  );
 }
+
+// ✅ Export directly - NO getInitialProps needed (middleware handles tracking)
+export default MyApp;

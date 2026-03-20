@@ -1133,7 +1133,6 @@ return (
 <>
 <Head>
 <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
-{/* NOTE: <html> tag should be in _document.js, removed here to prevent hydration errors */}
 
 {/* ===== EXACT 72 CHARACTER TITLE TAG (High CTR) ===== */}
 <title>Free ATS Resume Builder: Get Hired Fast! 46+ Templates, PDF, No Sign-Up!</title>
@@ -1201,7 +1200,7 @@ return (
 <meta name="format-detection" content="telephone=no, address=no, email=no" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) - FIXED ERRORS ===== */}
+{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) - FIXED ERROR: Removed nested itemReviewed ===== */}
 <script
 type="application/ld+json"
 dangerouslySetInnerHTML={{
@@ -1276,13 +1275,8 @@ __html: JSON.stringify({
 "bestRating": "5",
 "worstRating": "1"
 },
-// FIXED: Corrected review structure with proper types and required fields
 "review": testimonials.map(t => ({
 "@type": "Review",
-"itemReviewed": {
-"@type": "SoftwareApplication",
-"name": "Professional Resume Free Builder"
-},
 "reviewRating": {
 "@type": "Rating",
 "ratingValue": "5",
