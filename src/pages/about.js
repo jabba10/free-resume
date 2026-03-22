@@ -337,6 +337,13 @@ const criticalCSS = `
 `;
 
 const AboutPage = ({ currentDate, lastModifiedDate }) => {
+  // Calculate price valid until date (e.g., 1 year from now)
+  const getPriceValidUntil = () => {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
+    return date.toISOString();
+  };
+
   // ============= ENHANCED FEATURES WITH ICONS =============
   const features = [
     {
@@ -1151,6 +1158,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
                   "@type": "Offer",
                   "price": "0",
                   "priceCurrency": "USD",
+                  "priceValidUntil": getPriceValidUntil(),
                   "availability": "https://schema.org/InStock"
                 }
               },
