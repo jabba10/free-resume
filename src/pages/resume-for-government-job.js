@@ -1,4 +1,3 @@
-// pages/cluster-articles/resume-for-government-job.jsx
 import React from 'react';
 import Head from 'next/head';
 
@@ -778,14 +777,14 @@ const criticalCSS = `
 
 // ===== METADATA CONFIGURATION =====
 export const metadata = {
-  title: 'Resume for Government Job 2026: Complete Guide | Professional Resume Free',
+  title: 'Government Job Resume Guide 2026: Complete Official Format & Tips',
   description: 'Master government job resume creation for UPSC, SSC, State PSCs in 2026. Get official biodata formats, templates & proven strategies. Complete guide to government employment applications.',
   keywords: 'government job resume, government job biodata, UPSC resume format, SSC application form, state PSC resume, government employment application, official resume format, government job application 2026, civil services biodata, public sector resume',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   canonical: 'https://www.professionalresumefree.com/resume-for-government-job',
   
   openGraph: {
-    title: 'Resume for Government Job 2026: Complete Guide',
+    title: 'Government Job Resume Guide 2026: Complete Official Format',
     description: 'Master government job applications with 2026 biodata formats, official templates, and proven strategies for UPSC, SSC, PSC exams. Complete guide with examples.',
     url: 'https://www.professionalresumefree.com/resume-for-government-job',
     siteName: 'Professional Resume Free',
@@ -807,7 +806,7 @@ export const metadata = {
   
   twitter: {
     card: 'summary_large_image',
-    title: 'Government Job Resume Guide 2026',
+    title: 'Government Job Resume Guide 2026: Official Format',
     description: 'Official resume formats and strategies for government job applications in 2026. Complete guide with templates.',
     images: ['https://www.professionalresumefree.com/images/government-job-resume-twitter.jpg'],
     creator: '@ProfResumeFree',
@@ -816,7 +815,7 @@ export const metadata = {
   
   // GEO-specific meta tags for AI crawlers
   geo: {
-    'chatgpt-fts:title': 'Resume for Government Job 2026: Complete Official Guide',
+    'chatgpt-fts:title': 'Government Job Resume Guide 2026: Complete Official Format',
     'chatgpt-fts:description': 'Complete guide to creating government job resumes and biodata for UPSC, SSC, State PSCs. Includes official formats, templates, and verification strategies.',
     'chatgpt-fts:keywords': 'how to write resume for government job, government biodata format, UPSC application form, SSC CGL resume, government job documents',
     'chatgpt-fts:last-updated': new Date().toISOString().split('T')[0],
@@ -852,7 +851,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         '@type': 'WebPage',
         '@id': primaryUrl,
         url: primaryUrl,
-        name: `Resume for Government Job ${currentYear}: Complete Guide | Professional Resume Free`,
+        name: `Government Job Resume Guide ${currentYear}: Complete Official Format & Tips`,
         description: `Master government job resume creation with ${currentYear} guidelines for UPSC, SSC, State PSCs. Complete guide with templates, formats, and official requirements.`,
         datePublished: `${currentYear}-01-15`,
         dateModified: formattedDate,
@@ -870,7 +869,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
       {
         '@type': 'Article',
         '@id': `${primaryUrl}#article`,
-        headline: `Resume for Government Job ${currentYear}: Complete Guide to Government Employment`,
+        headline: `Government Job Resume Guide ${currentYear}: Complete Official Format & Tips`,
         description: `Comprehensive ${currentYear} guide to creating winning resumes for government jobs with official formats, biodata templates, and proven strategies for UPSC, SSC, PSC applications.`,
         image: 'https://www.professionalresumefree.com/images/government-job-resume-guide.jpg',
         datePublished: `${currentYear}-01-15`,
@@ -1243,17 +1242,17 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== PRIMARY SEO TAGS ===== */}
-        <title>{metadata.title}</title>
+        {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS ===== */}
+        <title>Government Job Resume Guide 2026: Complete Official Format & Tips</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
         <meta name="robots" content={metadata.robots} />
         
-        {/* ===== CANONICAL TAG (SINGLE) ===== */}
+        {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href={metadata.canonical} />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
-        <meta name="chatgpt-fts:title" content={metadata.geo['chatgpt-fts:title']} />
+        <meta name="chatgpt-fts:title" content="Government Job Resume Guide 2026: Complete Official Format" />
         <meta name="chatgpt-fts:description" content={metadata.geo['chatgpt-fts:description']} />
         <meta name="chatgpt-fts:keywords" content={metadata.geo['chatgpt-fts:keywords']} />
         <meta name="chatgpt-fts:last-updated" content={metadata.geo['chatgpt-fts:last-updated']} />
@@ -1267,7 +1266,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         <meta name="build-timestamp" content={buildTimestamp.toString()} />
         
         {/* ===== OPEN GRAPH ===== */}
-        <meta property="og:title" content={metadata.openGraph.title} />
+        <meta property="og:title" content="Government Job Resume Guide 2026: Complete Official Format" />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
         <meta property="og:type" content={metadata.openGraph.type} />
@@ -1286,7 +1285,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         
         {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content={metadata.twitter.card} />
-        <meta name="twitter:title" content={metadata.twitter.title} />
+        <meta name="twitter:title" content="Government Job Resume Guide 2026: Official Format" />
         <meta name="twitter:description" content={metadata.twitter.description} />
         <meta name="twitter:image" content={metadata.twitter.images[0]} />
         <meta name="twitter:creator" content={metadata.twitter.creator} />
@@ -1311,7 +1310,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
 
         {/* ===== HEADER SECTION ===== */}
         <header className="header">
-          <h1>Resume for Government Job {currentYear}: Complete Guide to Government Employment Applications</h1>
+          <h1>Government Job Resume Guide {currentYear}: Complete Official Format & Tips</h1>
           <p className="intro">
             Welcome to the definitive guide for creating winning resumes (biodata) for government jobs. Based on analysis of 5,000+ successful government applications and insights from former UPSC/SSC officials, this comprehensive {currentYear} guide covers everything from UPSC civil services to state PSC examinations. Learn the official formats, requirements, and strategies that separate successful candidates from the competition.
           </p>

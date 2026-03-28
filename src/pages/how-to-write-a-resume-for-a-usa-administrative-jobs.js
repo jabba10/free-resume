@@ -1073,11 +1073,6 @@ function AdministrativeResumeGuide({
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="How to Write a Resume for USA Administrative Jobs (2026 Guide)" />
         <meta property="og:description" content="Learn how to write a compelling resume for USA administrative jobs. Step-by-step guide with examples." />
@@ -1498,27 +1493,27 @@ function AdministrativeResumeGuide({
                     <tr>
                       <th>Before (Weak)</th>
                       <th>After (Strong)</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>"Responsible for answering phones and greeting visitors."</td>
+                       <td>"Responsible for answering phones and greeting visitors."</td>
                       <td className="text-success">"Managed high-volume phone lines (50+ calls daily) and welcomed 100+ weekly visitors, creating a positive first impression."</td>
-                    </tr>
-                    <tr>
-                      <td>"Scheduled meetings and managed calendars."</td>
+                     </tr>
+                     <tr>
+                       <td>"Scheduled meetings and managed calendars."</td>
                       <td className="text-success">"Coordinated complex calendars for 3 executives, scheduling 30+ meetings weekly and reducing conflicts by 25% through proactive management."</td>
-                    </tr>
-                    <tr>
-                      <td>"Assisted with office supplies and inventory."</td>
+                     </tr>
+                     <tr>
+                       <td>"Assisted with office supplies and inventory."</td>
                       <td className="text-success">"Streamlined office supply inventory system, reducing costs by 15% annually and ensuring 99% availability of essential items."</td>
-                    </tr>
-                    <tr>
-                      <td>"Planned company events."</td>
+                     </tr>
+                     <tr>
+                       <td>"Planned company events."</td>
                       <td className="text-success">"Organized 10+ company events (50-200 attendees), managing budgets up to $10,000 and receiving 95% positive feedback from employees."</td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
             </div>
           </div>

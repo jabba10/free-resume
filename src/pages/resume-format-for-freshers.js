@@ -889,6 +889,9 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
     "resume for fresh graduates"
   ];
 
+  // Updated title: Shortened to under 70 characters for optimal SEO
+  const pageTitle = `Fresher Resume Format ${currentYear}: Complete Guide to First Job`;
+
   // Structured data
   const structuredData = {
     '@context': 'https://schema.org',
@@ -897,7 +900,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         '@type': 'WebPage',
         '@id': 'https://www.professionalresumefree.com/resume-format-for-freshers',
         url: 'https://www.professionalresumefree.com/resume-format-for-freshers',
-        name: `Resume Format for Freshers ${currentYear}: Complete Guide to Landing Your First Job`,
+        name: pageTitle,
         description: `Complete ${currentYear} guide to creating winning resume formats for freshers with templates, examples, and proven strategies. Includes ATS optimization, step-by-step instructions, and expert tips.`,
         datePublished: '2024-01-15',
         dateModified: formattedDate,
@@ -911,7 +914,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
       },
       {
         '@type': 'Article',
-        headline: `Ultimate Resume Format Guide for Freshers: Get Your First Job in ${currentYear}`,
+        headline: pageTitle,
         description: `Complete guide to creating ATS-friendly resumes for freshers with templates, examples, and interview-winning strategies for ${currentYear}. Based on analysis of 2,500+ successful fresher resumes.`,
         image: 'https://www.professionalresumefree.com/images/fresher-resume-guide.jpg',
         datePublished: '2024-01-15',
@@ -953,7 +956,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
           {
             '@type': 'ListItem',
             position: 3,
-            name: `Fresher Resume Format Guide ${currentYear}`,
+            name: pageTitle,
             item: 'https://www.professionalresumefree.com/resume-format-for-freshers'
           }
         ]
@@ -1021,7 +1024,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
         {/* Primary SEO Tags */}
-        <title>{`Resume Format for Freshers ${currentYear}: Complete Guide to Landing Your First Job`}</title>
+        <title>{pageTitle}</title>
         <meta 
           name="description" 
           content={`Master resume format for freshers in ${currentYear}. Get ATS-friendly templates, examples & proven strategies to land your first job. Based on analysis of 2,500+ successful fresher resumes.`} 
@@ -1035,17 +1038,19 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         <meta name="date" content={formattedDate} />
         <meta name="last-modified" content={formattedDate} />
         <meta name="revisit-after" content="7 days" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-format-for-freshers" />
         
         {/* GEO Optimization Tags */}
-        <meta name="chatgpt-fts:title" content={`Resume Format for Freshers ${currentYear} - Complete Guide with Templates`} />
+        <meta name="chatgpt-fts:title" content={pageTitle} />
         <meta name="chatgpt-fts:description" content={`Complete guide to resume formats for freshers in ${currentYear}. Includes step-by-step instructions, ATS optimization tips, and free templates. Based on 2,500+ successful resumes.`} />
         <meta name="chatgpt-fts:keywords" content="fresher resume format, entry level resume, first job resume, graduate resume template, no experience resume" />
         <meta name="chatgpt-fts:last-updated" content={formattedDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources 2026" />
         
         {/* Open Graph */}
-        <meta property="og:title" content={`Resume Format for Freshers ${currentYear}: Complete Guide to Landing Your First Job`} />
+        <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={`Complete ${currentYear} guide to creating winning resumes for freshers with proven templates and strategies. Based on 2,500+ successful examples.`} />
         <meta property="og:url" content="https://www.professionalresumefree.com/resume-format-for-freshers" />
         <meta property="og:type" content="article" />
@@ -1060,7 +1065,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Resume Format Guide for Freshers ${currentYear}`} />
+        <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={`Professional resume formats tailored for freshers entering the job market. Step-by-step guide with templates.`} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
@@ -1189,7 +1194,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
           {/* Section 1: Why Format Matters */}
           <section id="why-format-matters" className="card">
             <h2 className="cardTitle">1. Why Resume Format Matters for Freshers: The {currentYear} Perspective</h2>
-            <p>A recent graduate’s resume is more than just a list of jobs. It reveals who you are before you say a word. It’s the handshake that Dowd says opens doors. For each professional position you apply for, there may be <strong>300</strong> applicants. This happens often in 2026. Their eyes move quickly to scan each page — usually, a mere <strong>6 or 7 seconds.</strong> First looks decide next steps.</p>
+            <p>A recent graduate's resume is more than just a list of jobs. It reveals who you are before you say a word. It's the handshake that Dowd says opens doors. For each professional position you apply for, there may be <strong>300</strong> applicants. This happens often in 2026. Their eyes move quickly to scan each page — usually, a mere <strong>6 or 7 seconds.</strong> First looks decide next steps.</p>
             
             <div className="statsGrid">
               <div className="statCard">
@@ -1211,7 +1216,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
             </div>
             
             <h3>The Psychology Behind Format Choices</h3>
-            <p>Folks who hire notice certain details right away when they scan a page. When your resume is laid out clearly, it pulls attention straight to what you’re best at. Because people tend to read in an F shape, key facts need to sit where the eye lands first - start high with your summary and core abilities. After that, school history and hands-on work fit just below, keeping strength visible.</p>
+            <p>Folks who hire notice certain details right away when they scan a page. When your resume is laid out clearly, it pulls attention straight to what you're best at. Because people tend to read in an F shape, key facts need to sit where the eye lands first - start high with your summary and core abilities. After that, school history and hands-on work fit just below, keeping strength visible.</p>
             
             <div className="exampleBox">
               <h4>F-Shaped Reading Pattern Analysis</h4>
@@ -1294,7 +1299,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
             </div>
             
             <h3>Why Combination Format Wins for Freshers</h3>
-            <p>The combination format is an answer to the greatly hyped fresher’s dilemma: how do you show skills and strengths when no experience to showcase at all? It opens with a strong skills section <strong>(which comprises 30-40% of the page),</strong> and continues with education, followed by minimal work experience or projects. This format is found <strong>85%</strong> more effective than traditional formats among freshers to get call from employers.</p>
+            <p>The combination format is an answer to the greatly hyped fresher's dilemma: how do you show skills and strengths when no experience to showcase at all? It opens with a strong skills section <strong>(which comprises 30-40% of the page),</strong> and continues with education, followed by minimal work experience or projects. This format is found <strong>85%</strong> more effective than traditional formats among freshers to get call from employers.</p>
           </section>
 
           {/* Section 3: Step-by-Step Guide */}

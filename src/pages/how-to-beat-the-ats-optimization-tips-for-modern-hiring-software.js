@@ -491,7 +491,7 @@ const ATSGuide = ({
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
   const currentYear = new Date().getFullYear();
 
-  // Updated canonical URL - full descriptive URL
+  // Single canonical URL
   const canonicalUrl = "https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software";
 
   const atsSections = [
@@ -749,7 +749,7 @@ const ATSGuide = ({
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         
-        {/* Single Canonical URL - Updated */}
+        {/* SINGLE CANONICAL URL - Updated */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Hreflang Tags - Updated */}

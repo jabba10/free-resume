@@ -231,7 +231,7 @@ const Resume = ({
     },
     {
       question: "What Australian aged care qualifications should I include?",
-      answer: "Include Certificate III in Individual Support (Ageing), Certificate IV in Ageing Support, First Aid Certificate, Manual Handling Certificate, and any other Australian-specific qualifications. Our builder guides you through all required Australian certifications."
+      answer: "Include Certificate III in Individual Support (Ageing), Certificate IV in Ageing Support, First Aid Certificate, Manual Handling Certificate, and any other Australian-specific certifications. Our builder guides you through all required Australian certifications."
     },
     {
       question: "Will my resume work with Australian recruitment agencies and aged care facilities?",
@@ -693,9 +693,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Aged Care Resume Builder Australia 2026 | ATS-Friendly Templates" />
         <meta property="og:description" content="Create a professional ATS-friendly aged care resume in minutes. Trusted by 100K+ Australian care professionals. Download PDF free. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-aged-care-resume-builder-preview.jpg" />

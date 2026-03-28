@@ -802,11 +802,6 @@ const CertificateResumeSection = ({
         {/* Single Canonical URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* Open Graph Tags */}
         <meta property="og:title" content="Certification Resume Section: 120+ ATS Templates (2026)" />
         <meta property="og:description" content="Create a professional certification section for your resume. 120+ ATS-optimized templates to showcase certificates. Free download." />

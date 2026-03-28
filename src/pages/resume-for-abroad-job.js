@@ -950,11 +950,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         <meta httpEquiv="last-modified" content={generatedAt} />
         
         {/* CANONICAL URL - Only one canonical tag */}
-        <link rel="canonical" href={metadata.canonical} />
-        
-        {/* HREFLANG */}
-        <link rel="alternate" href={metadata.canonical} hreflang="en" />
-        <link rel="alternate" href={metadata.canonical} hreflang="x-default" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/resume-for-abroad-job" />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content={metadata.openGraph.title} />

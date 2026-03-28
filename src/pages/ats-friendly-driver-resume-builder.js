@@ -728,12 +728,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-driver-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Driver Resume Builder 2026 | ATS Delivery Templates" />
         <meta property="og:description" content="Create a professional driver resume for free in 2026. ATS-optimized templates for delivery drivers, truckers. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-driver-resume-builder-preview.jpg" />
@@ -744,9 +738,6 @@ const Resume = ({
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Driver Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Driver Resume Builder 2026 | ATS Delivery Templates" />
@@ -1058,6 +1049,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG IN THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Driver Resume Builder 2026: Start Now
             </h1>

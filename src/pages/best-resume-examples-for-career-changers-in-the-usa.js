@@ -1085,10 +1085,6 @@ function CareerChangersResumePage({
         
         <link rel="canonical" href={canonicalUrl} />
         
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         <meta property="og:title" content="Best Resume Examples for Career Changers in the USA: 2026 Expert Guide" />
         <meta property="og:description" content="Research-backed resume examples for career changers. Expert analysis of transferable skills, ATS strategies, and real success stories." />
         <meta property="og:url" content={canonicalUrl} />
@@ -1365,7 +1361,7 @@ function CareerChangersResumePage({
                       <th>Best Use Case</th>
                       <th>Statistical Significance</th>
                     </tr>
-                  </thead>
+                    </thead>
                   <tbody>
                     <tr>
                       <td><strong>Chronological (Traditional)</strong></td>

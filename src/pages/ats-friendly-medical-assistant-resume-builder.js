@@ -651,8 +651,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" hreflang="en-US" />
         <meta property="og:title" content="Free Medical Assistant Resume Builder 2026: CMA & RMA Templates" />
         <meta property="og:description" content="Create your professional Medical Assistant resume for free in 2026. ATS-optimized CMA/RMA templates help you land healthcare interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-medical-assistant-resume-builder.jpg" />
@@ -872,7 +870,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -883,6 +881,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Medical Assistant Resume Builder 2026
             </h1>
@@ -1005,7 +1004,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1056,7 +1055,7 @@ const Resume = ({
             {/* Clinical Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeart /> Clinical Experience</h3>
+                <h2 className={styles.sectionTitle}><FiHeart /> Clinical Experience</h2>
                 <p className={styles.sectionDescription}>List your Medical Assistant positions in reverse chronological order</p>
                 
                 <div className={styles.formCard}>
@@ -1157,7 +1156,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Clinical Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Clinical Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No clinical experience added yet</p>
                   ) : (
@@ -1194,7 +1193,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Training</h2>
                 <p className={styles.sectionDescription}>List your Medical Assistant education, training programs, and certifications</p>
                 
                 <div className={styles.formCard}>
@@ -1274,7 +1273,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education & Training</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education & Training</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1306,11 +1305,11 @@ const Resume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiActivity /> Clinical Skills & Procedures</h3>
+                <h2 className={styles.sectionTitle}><FiActivity /> Clinical Skills & Procedures</h2>
                 
                 {/* Clinical Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiActivity /> Clinical Skills</h4>
+                  <h3 className={styles.subSectionTitle}><FiActivity /> Clinical Skills</h3>
                   <p className={styles.sectionDescription}>List your clinical skills and proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1375,7 +1374,7 @@ const Resume = ({
 
                 {/* Medical Procedures */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiProcedure /> Medical Procedures</h4>
+                  <h3 className={styles.subSectionTitle}><FiProcedure /> Medical Procedures</h3>
                   <p className={styles.sectionDescription}>List specific medical procedures you perform</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1436,7 +1435,7 @@ const Resume = ({
 
                 {/* EHR/EMR Software */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiMonitor /> EHR/EMR Software Proficiency</h4>
+                  <h3 className={styles.subSectionTitle}><FiMonitor /> EHR/EMR Software Proficiency</h3>
                   <p className={styles.sectionDescription}>List electronic health record systems you're familiar with</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1501,7 +1500,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1565,7 +1564,7 @@ const Resume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> Certifications & Licenses</h3>
+                <h2 className={styles.sectionTitle}><FiShield /> Certifications & Licenses</h2>
                 <p className={styles.sectionDescription}>Add your Medical Assistant certifications and professional licenses</p>
                 
                 <div className={styles.formCard}>
@@ -1631,7 +1630,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Certifications & Licenses</h4>
+                  <h3 className={styles.subSectionTitle}>Your Certifications & Licenses</h3>
                   {formData.certifications.length === 0 ? (
                     <p className={styles.emptyMessage}>No certifications added yet</p>
                   ) : (
@@ -1655,7 +1654,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Common Medical Assistant Certifications</h4>
+                  <h3 className={styles.subSectionTitle}>Common Medical Assistant Certifications</h3>
                   <ul className={styles.suggestedList}>
                     <li><strong>CMA (AAMA)</strong> - Certified Medical Assistant from American Association of Medical Assistants</li>
                     <li><strong>RMA (AMT)</strong> - Registered Medical Assistant from American Medical Technologists</li>
@@ -1672,7 +1671,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your Medical Assistant resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -1908,7 +1907,7 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Medical Assistant Resume Preview</h3>
+              <h2>Full Medical Assistant Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

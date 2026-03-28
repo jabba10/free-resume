@@ -1168,11 +1168,6 @@ After ChatGPT + Verification:
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="ChatGPT Resume Guide 2026: Prompt Engineering for Better Bullets" />
         <meta property="og:description" content="Master ChatGPT prompt engineering for resume optimization. Transform basic duties into powerful bullet points. Free guide." />

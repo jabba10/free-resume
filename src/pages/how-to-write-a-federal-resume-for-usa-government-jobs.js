@@ -1151,11 +1151,8 @@ function FederalResumeGuidePage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         <meta property="og:title" content="How to Write a Federal Resume for USA Government Jobs: 2026 Guide" />
         <meta property="og:description" content="Complete guide to writing federal resumes for USA government jobs. USAJOBS format, KSA examples, and expert tips for federal hiring process success." />

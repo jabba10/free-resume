@@ -1072,15 +1072,10 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* CANONICAL URL - Only one canonical tag - UPDATED */}
+        {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG - UPDATED */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
-        {/* OPEN GRAPH - UPDATED */}
+        {/* OPEN GRAPH */}
         <meta property="og:title" content="Comprehensive Resume Guide 2026: Expert Tips & Free Templates" />
         <meta property="og:description" content="Master resume writing in 2026 with our complete guide. 46+ templates, 12+ free tools, expert strategies, and ATS tips. Get 40% more interviews." />
         <meta property="og:url" content={canonicalUrl} />
@@ -1100,7 +1095,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <meta property="article:section" content="Resume Writing" />
         <meta property="article:tag" content="resume guide, resume writing, career advice, job search 2026" />
         
-        {/* TWITTER CARD - UPDATED */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Comprehensive Resume Guide 2026: Expert Tips & Free Templates" />
         <meta name="twitter:description" content="Master resume writing in 2026 with our complete guide. 46+ templates, 12+ free tools, expert strategies." />
@@ -1119,7 +1114,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD - UPDATED with new URL */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

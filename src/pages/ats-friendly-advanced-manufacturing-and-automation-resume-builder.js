@@ -715,8 +715,10 @@ const AdvancedManufacturingResume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Manufacturing Resume Builder 2026: ATS-Friendly Industry Templates</title>
-        <meta name="title" content="Free Manufacturing Resume Builder 2026: ATS-Friendly Industry Templates" />
+        {/* OPTIMIZED TITLE - Under 70 characters (63 chars) */}
+        <title>Free Manufacturing Resume Builder | ATS-Friendly 2026</title>
+        
+        <meta name="title" content="Free Manufacturing Resume Builder | ATS-Friendly 2026" />
         <meta name="description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
         <meta name="keywords" content="manufacturing resume builder, industrial resume templates, engineer resume builder, automation resume, ATS friendly manufacturing resume, free resume builder for engineers, technical resume, manufacturing CV, industrial automation resume, factory resume" />
         <meta name="author" content="Professional Manufacturing Resume Free" />
@@ -727,13 +729,9 @@ const AdvancedManufacturingResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Manufacturing Resume Builder 2026: ATS-Friendly Industry Templates" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Free Manufacturing Resume Builder | ATS-Friendly 2026" />
         <meta property="og:description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-manufacturing-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -747,13 +745,16 @@ const AdvancedManufacturingResume = ({
         <meta property="og:locale:alternate" content="en_CA" />
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
+        
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Manufacturing Resume Builder 2026: ATS-Friendly Industry Templates" />
+        <meta name="twitter:title" content="Free Manufacturing Resume Builder | ATS-Friendly 2026" />
         <meta name="twitter:description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-manufacturing-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Manufacturing Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
+        
         <meta name="theme-color" content="#1a365d" />
         <meta name="msapplication-TileColor" content="#1a365d" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -776,7 +777,7 @@ const AdvancedManufacturingResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder",
-                  "name": "Free Manufacturing Resume Builder 2026: ATS-Friendly Industry Templates",
+                  "name": "Free Manufacturing Resume Builder | ATS-Friendly 2026",
                   "description": "Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1047,7 +1048,7 @@ const AdvancedManufacturingResume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag on the page */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1058,6 +1059,7 @@ const AdvancedManufacturingResume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Manufacturing Resume Builder 2026: Start Now
             </h1>
@@ -1180,7 +1182,7 @@ const AdvancedManufacturingResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1223,7 +1225,7 @@ const AdvancedManufacturingResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles (LinkedIn, GitHub, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1291,7 +1293,7 @@ const AdvancedManufacturingResume = ({
             {/* Industry Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTool /> Industry Experience</h3>
+                <h2 className={styles.sectionTitle}><FiTool /> Industry Experience</h2>
                 <p className={styles.sectionDescription}>List your manufacturing positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1389,7 +1391,7 @@ const AdvancedManufacturingResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Industry Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Industry Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No industry experience added yet</p>
                   ) : (
@@ -1426,7 +1428,7 @@ const AdvancedManufacturingResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Training</h2>
                 <p className={styles.sectionDescription}>List your engineering education, degrees, and relevant technical training</p>
                 
                 <div className={styles.formCard}>
@@ -1505,7 +1507,7 @@ const AdvancedManufacturingResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1537,11 +1539,11 @@ const AdvancedManufacturingResume = ({
             {/* Technical Skills Section */}
             {activeSection === 'technical' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiCpu /> Technical Skills & Expertise</h3>
+                <h2 className={styles.sectionTitle}><FiCpu /> Technical Skills & Expertise</h2>
                 
                 {/* Technical Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Technical Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Technical Skills</h3>
                   <p className={styles.sectionDescription}>List your technical skills, grouped by category</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1624,7 +1626,7 @@ const AdvancedManufacturingResume = ({
 
                 {/* Software Proficiency */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiMonitor /> Software Proficiency</h4>
+                  <h3 className={styles.subSectionTitle}><FiMonitor /> Software Proficiency</h3>
                   <p className={styles.sectionDescription}>List industrial software, CAD/CAM, and programming tools</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1704,7 +1706,7 @@ const AdvancedManufacturingResume = ({
 
                 {/* Key Projects */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Key Industrial Projects</h4>
+                  <h3 className={styles.subSectionTitle}>Key Industrial Projects</h3>
                   <p className={styles.sectionDescription}>Add significant manufacturing or automation projects</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1801,7 +1803,7 @@ const AdvancedManufacturingResume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1865,7 +1867,7 @@ const AdvancedManufacturingResume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> Certifications & Licenses</h3>
+                <h2 className={styles.sectionTitle}><FiShield /> Certifications & Licenses</h2>
                 <p className={styles.sectionDescription}>Add your professional certifications and industry licenses</p>
                 
                 <div className={styles.formCard}>
@@ -1931,7 +1933,7 @@ const AdvancedManufacturingResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Certifications</h4>
+                  <h3 className={styles.subSectionTitle}>Your Certifications</h3>
                   {formData.certifications.length === 0 ? (
                     <p className={styles.emptyMessage}>No certifications added yet</p>
                   ) : (
@@ -1959,7 +1961,7 @@ const AdvancedManufacturingResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

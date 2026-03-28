@@ -173,11 +173,11 @@ const GovernmentResume = ({
 
   // Font size state - Government style fonts (more conservative)
   const [fontSizes, setFontSizes] = useState({
-    name: 12, // Smaller, more professional
+    name: 12,
     sectionTitle: 9,
     contactInfo: 7,
     jobTitle: 9,
-    organization: 8, // Changed from company
+    organization: 8,
     degree: 9,
     institution: 7,
     institutionDate: 6,
@@ -776,13 +776,10 @@ const GovernmentResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
         <meta property="og:description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-government-resume-builder-preview.jpg" />
@@ -1018,6 +1015,7 @@ const GovernmentResume = ({
               </span>
             </div>
             
+            {/* SINGLE H1 TAG */}
             <h1 className={styles.heroTitle}>
               Free Government Resume Builder 2026: Start Now
             </h1>
@@ -1140,7 +1138,7 @@ const GovernmentResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1190,7 +1188,7 @@ const GovernmentResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles (LinkedIn, USAJobs profile, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <div className={styles.socialInputRow}>
@@ -1264,7 +1262,7 @@ const GovernmentResume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h2>
                 <p className={styles.sectionDescription}>List your public sector positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1374,7 +1372,7 @@ const GovernmentResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Professional Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Professional Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No experience added yet</p>
                   ) : (
@@ -1409,7 +1407,7 @@ const GovernmentResume = ({
 
                 {/* Publications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiBookOpen /> Publications & Presentations</h4>
+                  <h3 className={styles.subSectionTitle}><FiBookOpen /> Publications & Presentations</h3>
                   <p className={styles.sectionDescription}>Add publications, white papers, conference presentations, or reports</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1493,7 +1491,7 @@ const GovernmentResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Training</h2>
                 <p className={styles.sectionDescription}>List your degrees, certifications, and relevant training</p>
                 
                 <div className={styles.formCard}>
@@ -1592,7 +1590,7 @@ const GovernmentResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1623,7 +1621,7 @@ const GovernmentResume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Certifications & Clearances</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Certifications & Clearances</h3>
                   <p className={styles.sectionDescription}>Add professional certifications, security clearances, and specialized training</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1710,11 +1708,11 @@ const GovernmentResume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTool /> Core Competencies</h3>
+                <h2 className={styles.sectionTitle}><FiTool /> Core Competencies</h2>
                 
                 {/* Skills by Category */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Skills</h3>
                   <p className={styles.sectionDescription}>Categorize your skills for better organization</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1782,7 +1780,7 @@ const GovernmentResume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Languages</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1849,7 +1847,7 @@ const GovernmentResume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiUsers /> Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}><FiUsers /> Professional Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1926,7 +1924,7 @@ const GovernmentResume = ({
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTarget /> Projects & Initiatives</h3>
+                <h2 className={styles.sectionTitle}><FiTarget /> Projects & Initiatives</h2>
                 <p className={styles.sectionDescription}>List significant projects, grants, or initiatives you've led or contributed to</p>
                 
                 <div className={styles.formCard}>
@@ -2034,7 +2032,7 @@ const GovernmentResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Projects & Initiatives</h4>
+                  <h3 className={styles.subSectionTitle}>Your Projects & Initiatives</h3>
                   {formData.projects.length === 0 ? (
                     <p className={styles.emptyMessage}>No projects added yet</p>
                   ) : (
@@ -2072,7 +2070,7 @@ const GovernmentResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your government resume PDF. Traditional serif fonts recommended for formal applications.</p>
                 
                 <div className={styles.formCard}>
@@ -2338,7 +2336,7 @@ const GovernmentResume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Government Resume Preview</h3>
+              <h2>Full Government Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

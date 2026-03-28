@@ -676,18 +676,21 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Tech Resume Builder 2026 | ATS Software Engineer Templates</title>
-        <meta name="description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros. Download PDF instantly." />
+        {/* HIGH CTR TITLE - Optimized for clicks */}
+        <title>🔥 Free Tech Resume Builder 2026 | ATS Software Engineer CV Template</title>
+        <meta name="description" content="Free ATS-optimized tech resume builder. Trusted by software engineers worldwide. Download PDF instantly. No sign-up." />
         <meta name="keywords" content="tech resume builder, software engineer resume, developer resume, data science resume, ATS friendly tech resume, free resume builder for tech professionals" />
         <meta name="author" content="Professional Tech Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Tech Resume Builder 2026 | ATS Software Engineer Templates" />
-        <meta property="og:description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros." />
+        
+        <meta property="og:title" content="🔥 Free Tech Resume Builder 2026 | ATS Software Engineer CV Template" />
+        <meta property="og:description" content="Free ATS-optimized tech resume builder. Trusted by 2M+ software engineers. Download PDF instantly. No sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -697,8 +700,8 @@ const Resume = ({
         <meta property="og:site_name" content="Professional Tech Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Tech Resume Builder 2026 | ATS Software Engineer Templates" />
-        <meta name="twitter:description" content="Create your ATS-optimized tech resume for free in 2026. Professional templates trusted by 2M+ software engineers, developers & tech pros." />
+        <meta name="twitter:title" content="🔥 Free Tech Resume Builder 2026 | ATS Software Engineer CV Template" />
+        <meta name="twitter:description" content="Free ATS-optimized tech resume builder. Trusted by 2M+ software engineers. Download PDF instantly. No sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
         <link rel="icon" href="/favicon.ico" />
@@ -717,8 +720,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder",
-                  "name": "Free Tech Resume Builder 2026 | ATS Software Engineer Templates",
-                  "description": "Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder.",
+                  "name": "🔥 Free Tech Resume Builder 2026 | ATS Software Engineer CV Template",
+                  "description": "Free ATS-optimized tech resume builder. Trusted by 2M+ software engineers. Download PDF instantly. No sign-up.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",

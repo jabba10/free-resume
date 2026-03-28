@@ -1187,7 +1187,7 @@ const ATS_RULES = {
   ],
   ATS_RED_FLAGS: {
     HEADER_FOOTER: ['page \\d+ of \\d+', 'confidential', 'draft', '©', '™', '®', '•{3,}', '-{3,}', '={3,}', '_{3,}'],
-    TABLE_INDICATORS: ['\\|.*\\|', '\\+[-]+\\+', 'border:', 'cellpadding', 'cellspacing', '<table', '<tr>', '<td>'],
+    TABLE_INDICATORS: ['\\|.*\\|', '\\+[-]+\\+', 'border:', 'cellpadding', 'cellspacing', '<table', '\\xe4\\xbb\\xac', '\\xe7\\x94\\xa8'],
     COLUMN_INDICATORS: ['column', 'multicolumn', '\\s{10,}\\w', '\\t{2,}\\w'],
     GRAPHICS_REFERENCES: ['\\[figure', '\\[image', '\\[graphic', 'jpeg', 'png', 'gif', 'photoshop', 'illustrator', 'see figure'],
     UNCOMMON_FONTS: ['comic sans', 'papyrus', 'curlz', 'jokerman', 'chiller', 'wingdings', 'webdings'],
@@ -1626,14 +1626,17 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   const safeHowToSteps = howToSteps || HOW_TO_STEPS;
   const safeBreadcrumbData = breadcrumbData || BREADCRUMB_DATA;
 
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/free-ats-resume-checker";
+
   // Schema data with comprehensive structured data
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/free-ats-resume-checker/#webpage",
-        "url": "https://www.professionalresumefree.com/free-ats-resume-checker",
+        "@id": `${canonicalUrl}#webpage`,
+        "url": canonicalUrl,
         "name": "Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2025",
         "description": "Professional ATS resume checker that analyzes 50+ parsing factors. Get instant feedback on ATS compatibility, formatting issues, and actionable fixes. 2025 Edition",
         "datePublished": "2024-01-01",
@@ -1684,7 +1687,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         "@type": "WebApplication",
         "name": "Free ATS Resume Checker",
         "description": "Professional Applicant Tracking System compatibility analyzer with 50+ parsing factor checks",
-        "url": "https://www.professionalresumefree.com/free-ats-resume-checker",
+        "url": canonicalUrl,
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -1719,7 +1722,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/free-ats-resume-checker/#faqpage",
+        "@id": `${canonicalUrl}#faqpage`,
         "mainEntity": safeFaqs.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
@@ -1749,7 +1752,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "position": index + 1,
           "name": step.name,
           "text": step.text,
-          "url": `https://www.professionalresumefree.com/free-ats-resume-checker#step-${index + 1}`,
+          "url": `${canonicalUrl}#step-${index + 1}`,
           "image": step.image
         }))
       },
@@ -1935,17 +1938,18 @@ SKILLS
         <meta name="chatgpt-fts:last-updated" content={safeFreshnessIndicator} />
         <meta name="generator" content="Professional Resume Free - ATS Analysis Tool" />
         
-        {/* Canonical and Sitemap */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-ats-resume-checker" />
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* Internationalization */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-ats-resume-checker" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-ats-resume-checker" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-ats-resume-checker" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-ats-resume-checker" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-ats-resume-checker" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-ats-resume-checker" hreflang="x-default" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2025" />
@@ -1954,7 +1958,7 @@ SKILLS
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free ATS Resume Checker Tool Interface" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-ats-resume-checker" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />

@@ -711,13 +711,10 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free AI Resume Builder 2026 | ATS Technical Templates" />
         <meta property="og:description" content="Create your professional AI/technical resume for free in 2026. ATS-optimized templates for AI engineers, ML researchers & data scientists. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-ai-technical-resume-builder-preview.jpg" />
@@ -1042,6 +1039,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free AI Resume Builder 2026: Create Your ATS Technical CV & Get Hired
             </h1>
@@ -1164,7 +1162,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1217,7 +1215,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Technical Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Technical Links</h3>
                   <p className={styles.sectionDescription}>Add your technical profiles (GitHub, LinkedIn, Kaggle, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1286,7 +1284,7 @@ const Resume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Technical Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Technical Experience</h2>
                 <p className={styles.sectionDescription}>List your technical positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1384,7 +1382,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Technical Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Technical Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No technical experience added yet</p>
                   ) : (
@@ -1421,12 +1419,12 @@ const Resume = ({
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiCode /> Technical Projects</h3>
+                <h2 className={styles.sectionTitle}><FiCode /> Technical Projects</h2>
                 <p className={styles.sectionDescription}>Showcase your AI/ML projects, open-source contributions, and technical side projects</p>
                 
                 {/* Technical Projects */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Technical Projects</h4>
+                  <h3 className={styles.subSectionTitle}>Technical Projects</h3>
                   <p className={styles.sectionDescription}>Add your AI/ML projects, research, or open-source contributions</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1499,7 +1497,7 @@ const Resume = ({
 
                 {/* AI/ML Specialties */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiActivity /> AI/ML Specialties</h4>
+                  <h3 className={styles.subSectionTitle}><FiActivity /> AI/ML Specialties</h3>
                   <p className={styles.sectionDescription}>List your areas of AI/ML expertise and research focus</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1544,7 +1542,7 @@ const Resume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiAward /> Technical Certifications</h4>
+                  <h3 className={styles.subSectionTitle}><FiAward /> Technical Certifications</h3>
                   <p className={styles.sectionDescription}>Add your technical certifications and credentials</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1631,7 +1629,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your technical education, degrees, and relevant coursework</p>
                 
                 <div className={styles.formCard}>
@@ -1710,7 +1708,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1742,11 +1740,11 @@ const Resume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTool /> Technical Skills</h3>
+                <h2 className={styles.sectionTitle}><FiTool /> Technical Skills</h2>
                 
                 {/* Technical Tools & Technologies */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Technical Tools & Technologies</h4>
+                  <h3 className={styles.subSectionTitle}>Technical Tools & Technologies</h3>
                   <p className={styles.sectionDescription}>List your programming languages, frameworks, libraries, and tools</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1807,7 +1805,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1871,7 +1869,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

@@ -845,7 +845,7 @@ function HowToPassAIResumeScreen({
         {/* SITEMAP LINK */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE CANONICAL REFERENCE */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

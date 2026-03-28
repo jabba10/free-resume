@@ -155,7 +155,7 @@ p { font-size: clamp(1rem, 2vw, 1.1rem); }
 .btn-secondary:active {
   transform: translateY(0);
 }
-.grid {
+.responsive-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(16px, 3vw, 24px);
@@ -163,10 +163,7 @@ p { font-size: clamp(1rem, 2vw, 1.1rem); }
   width: 100%;
 }
 @media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .responsive-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .card {
   background: var(--card-bg);
@@ -281,12 +278,12 @@ p { font-size: clamp(1rem, 2vw, 1.1rem); }
   background: var(--text-light);
   border-radius: 4px;
 }
-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
   min-width: min(600px, 100%);
 }
-th, td {
+.data-table th, .data-table td {
   padding: clamp(12px, 2vw, 20px);
   text-align: left;
   border-bottom: 1px solid var(--border);
@@ -294,7 +291,7 @@ th, td {
   word-wrap: break-word;
   max-width: 300px;
 }
-th {
+.data-table th {
   background: var(--card-bg);
   font-weight: 600;
   color: var(--text-light);
@@ -741,10 +738,10 @@ function HowToTailorResume({
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 71 characters exactly */}
+        {/* OPTIMIZED TITLE */}
         <title>How to Tailor Your Resume for Any USA Job Posting 2026</title>
         
-        {/* META DESCRIPTION - 155 characters optimized */}
+        {/* META DESCRIPTION */}
         <meta name="description" content="Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application and increase interview callbacks by up to 3x." />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="resume tailoring, customize resume, job application tips, USA job search, resume optimization, ATS optimization, interview callbacks" />
@@ -766,11 +763,6 @@ function HowToTailorResume({
         
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content="How to Tailor Your Resume for Any USA Job Posting 2026" />
@@ -978,7 +970,7 @@ function HowToTailorResume({
           <div className="container">
             <div className="badge">RESUME TAILORING GUIDE 2026 • USA JOB MARKET</div>
             
-            {/* SINGLE H1 TAG - Exact match to URL */}
+            {/* SINGLE H1 TAG */}
             <h1 id="hero-heading">How to Tailor Your Resume for Any USA Job Posting 2026</h1>
             
             <p>
@@ -1050,7 +1042,7 @@ function HowToTailorResume({
             <p className="section-subtitle">
               Industry research on the impact of resume tailoring on interview success rates.
             </p>
-            <div className="grid">
+            <div className="responsive-grid">
               {aiCitations.map((citation, index) => (
                 <div key={index} className="card">
                   <FiAward size={24} style={{marginBottom: '16px', color: '#000'}} />
@@ -1148,7 +1140,7 @@ function HowToTailorResume({
             <div className="card">
               <h2 className="section-title">Advanced Keyword Strategy for Tailoring</h2>
               
-              <div className="grid" style={{gap: '24px'}}>
+              <div className="responsive-grid" style={{gap: '24px'}}>
                 <div className="card" style={{background: '#ffffff'}}>
                   <FiZap size={24} style={{marginBottom: '16px'}} />
                   <h3 style={{marginBottom: '12px'}}>Primary Keywords</h3>
@@ -1173,7 +1165,6 @@ function HowToTailorResume({
 
               <div className="insight-box" style={{marginTop: '32px'}}>
                 <h4 style={{marginBottom: '12px'}}>Keyword Density Sweet Spot</h4>
-                {/* FIXED: Replaced > with &gt; HTML entity */}
                 <p>Aim for 3-5 mentions of each priority keyword across your resume. Single mentions may be overlooked by ATS; excessive repetition (&gt;8 mentions) can trigger spam detection. Keywords should appear naturally in context within your summary, skills section, and experience bullets—never just listed without context.</p>
                 <div className="citation-source" style={{marginTop: '16px'}}>Source: iCIMS 2025 Parsing Guidelines</div>
               </div>
@@ -1188,13 +1179,13 @@ function HowToTailorResume({
               <h2 className="section-title">Common Tailoring Mistakes to Avoid</h2>
               
               <div className="table-wrap">
-                <table className="table">
+                <table className="data-table">
                   <thead>
                     <tr>
                       <th>Mistake</th>
                       <th>Why It Hurts</th>
                       <th>Better Approach</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
                     {tailoringMistakes.map((item, index) => (
@@ -1221,7 +1212,7 @@ function HowToTailorResume({
             <div className="card">
               <h2 className="section-title">Industry-Specific Tailoring Examples</h2>
               
-              <div className="grid" style={{gap: '24px'}}>
+              <div className="responsive-grid" style={{gap: '24px'}}>
                 <div className="card" style={{background: '#ffffff'}}>
                   <FiBriefcase size={24} style={{marginBottom: '16px'}} />
                   <h3 style={{marginBottom: '12px'}}>Technology Role</h3>
@@ -1283,14 +1274,14 @@ function HowToTailorResume({
           </div>
         </section>
 
-        {/* Internal Links - Only verified working links */}
+        {/* Internal Links */}
         <section className="section" style={{background: '#f9fafb'}}>
           <div className="container">
             <h2 className="section-title">🔗 Free Resume Tools & Resources</h2>
             <p className="section-subtitle">
               Put your tailoring knowledge into practice with our free, ATS-optimized tools.
             </p>
-            <div className="grid">
+            <div className="responsive-grid">
               <Link href="/resume-templates" className="card" style={{textAlign: 'center'}}>
                 <FiFileText size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
                 <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>ATS-Optimized Resume Templates</h3>

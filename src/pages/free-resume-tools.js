@@ -1018,6 +1018,8 @@ const ResumeToolsPage = ({
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-tools" />
         
         {/* GEO Optimization Tags */}

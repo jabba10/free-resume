@@ -736,12 +736,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Electrician Resume Builder: ATS Electrical Templates 2026" />
         <meta property="og:description" content="Create professional ATS-optimized electrician resumes for free. Land interviews 3x faster with our electrical resume builder. Trusted by 2M+ electricians worldwide." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-electrician-resume-builder-preview.jpg" />

@@ -692,8 +692,10 @@ const Resume = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free Professional Resume Builder 2026 | ATS-Friendly Templates" />
         <meta property="og:description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates trusted by 5M+ job seekers." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-builder-preview.jpg" />

@@ -1,4 +1,4 @@
-import Head from 'next/head';
+ import Head from 'next/head';
 import Link from 'next/link';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -1035,7 +1035,7 @@ export default function ResumeObjectiveStatement({ seoData }) {
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Hreflang Tags */}

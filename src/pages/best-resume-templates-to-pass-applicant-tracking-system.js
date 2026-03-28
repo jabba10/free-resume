@@ -717,11 +717,6 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         {/* Single Canonical URL - Updated */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags - Updated */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* Open Graph Tags - Updated */}
         <meta property="og:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
         <meta property="og:description" content="Discover the best resume templates to pass applicant tracking systems. Proven ATS-friendly formats with keyword optimization. Free instant download." />

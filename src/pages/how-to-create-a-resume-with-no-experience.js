@@ -1145,11 +1145,6 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
         {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="No Experience Resume 2026: Complete Guide & Free Templates" />
         <meta property="og:description" content="Learn how to create a resume with no experience in 2026. Step-by-step guide with templates, strategies, and expert tips." />

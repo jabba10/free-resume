@@ -1254,14 +1254,8 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
         <meta name="revisit-after" content="2 days" />
         <meta name="build-timestamp" content={buildTimestamp} />
         
-        {/* Canonical & Internationalization */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={`${SITE_URL}/free-resume-word-character-counter`} />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-word-character-counter`} hreflang="en" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-word-character-counter`} hreflang="en-US" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-word-character-counter`} hreflang="en-GB" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-word-character-counter`} hreflang="en-CA" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-word-character-counter`} hreflang="en-AU" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-word-character-counter`} hreflang="x-default" />
         
         {/* Open Graph */}
         <meta property="og:title" content={`Resume Word & Character Counter – Professional Length Checker ${CURRENT_YEAR}`} />

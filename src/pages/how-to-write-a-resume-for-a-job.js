@@ -1,4 +1,4 @@
-// pages/how-to-write-a-resume-for-a-job.js
+
 import Head from 'next/head';
 import Link from 'next/link';
 import { 
@@ -957,14 +957,6 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
         
         {/* Single Canonical URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* Hreflang Tags */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-gb" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-ca" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-au" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap-resume-guides.xml" />

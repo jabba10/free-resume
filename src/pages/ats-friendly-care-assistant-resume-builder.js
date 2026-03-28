@@ -657,6 +657,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-GB">
       <Head>
@@ -671,18 +674,21 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" hreflang="en-IE" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" hreflang="x-default" />
+        
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-IE" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
         <meta property="og:description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-care-assistant-cv-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Care Assistant CV Builder - Create Professional UK Care CVs Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Care Assistant CV Free UK" />
         <meta property="og:locale" content="en_GB" />
@@ -715,8 +721,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Care Assistant CV Builder 2026 | UK-Specific Templates",
                   "description": "Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -766,7 +772,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Care Assistant CV Builder UK",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -809,7 +815,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -822,7 +828,7 @@ const Resume = ({
                         "name": "Care Assistant CV Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -841,7 +847,7 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a UK Care Template",
                       "text": "Select from our UK-specific care assistant CV templates designed for NHS applications, care homes, domiciliary care, and UK healthcare agencies.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#templates",
+                      "url": `${canonicalUrl}#templates`,
                       "image": "https://www.professionalresumefree.com/images/step1-uk-care-template.jpg"
                     },
                     {
@@ -849,7 +855,7 @@ const Resume = ({
                       "position": 2,
                       "name": "Enter Your Care Experience",
                       "text": "Add your UK care experience, NVQ/SVQ qualifications, DBS status, Care Certificate, and UK-specific training using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#editor",
+                      "url": `${canonicalUrl}#editor`,
                       "image": "https://www.professionalresumefree.com/images/step2-care-info.jpg"
                     },
                     {
@@ -857,7 +863,7 @@ const Resume = ({
                       "position": 3,
                       "name": "Customize for UK Standards",
                       "text": "Use our UK care-specific suggestions to improve care terminology and formatting for CQC compliance and NHS applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#optimize",
+                      "url": `${canonicalUrl}#optimize`,
                       "image": "https://www.professionalresumefree.com/images/step3-optimize-uk.jpg"
                     },
                     {
@@ -865,7 +871,7 @@ const Resume = ({
                       "position": 4,
                       "name": "Download Your Care CV",
                       "text": "Export your professional care assistant CV as PDF - completely free, no watermarks, ready for UK job applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder#download",
+                      "url": `${canonicalUrl}#download`,
                       "image": "https://www.professionalresumefree.com/images/step4-download-uk.jpg"
                     }
                   ]
@@ -952,7 +958,7 @@ const Resume = ({
                           "priceCurrency": "GBP"
                         },
                         "description": "Free online ATS-friendly care assistant CV builder that helps UK care professionals create professional CVs and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -989,7 +995,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1000,6 +1006,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Care Assistant CV Builder 2026: Start Now
             </h1>
@@ -1122,7 +1129,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1169,7 +1176,7 @@ const Resume = ({
             {/* Care Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeart /> Care Experience</h3>
+                <h2 className={styles.sectionTitle}><FiHeart /> Care Experience</h2>
                 <p className={styles.sectionDescription}>List your care positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1268,7 +1275,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Care Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Care Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No care experience added yet</p>
                   ) : (
@@ -1302,7 +1309,7 @@ const Resume = ({
 
                 {/* Areas of Specialism */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Areas of Specialism</h4>
+                  <h3 className={styles.subSectionTitle}>Areas of Specialism</h3>
                   <p className={styles.sectionDescription}>List your care specialisms and areas of expertise</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1350,7 +1357,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Qualifications & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Qualifications & Training</h2>
                 <p className={styles.sectionDescription}>List your care qualifications, NVQ/SVQ certifications, and relevant training</p>
                 
                 <div className={styles.formCard}>
@@ -1429,7 +1436,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Qualifications</h4>
+                  <h3 className={styles.subSectionTitle}>Your Qualifications</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No qualifications added yet</p>
                   ) : (
@@ -1461,11 +1468,11 @@ const Resume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> Certifications & Compliance</h3>
+                <h2 className={styles.sectionTitle}><FiShield /> Certifications & Compliance</h2>
                 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Certifications & Training</h4>
+                  <h3 className={styles.subSectionTitle}>Certifications & Training</h3>
                   <p className={styles.sectionDescription}>Add your care certifications, DBS status, and mandatory training</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1549,7 +1556,7 @@ const Resume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional care organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1611,7 +1618,7 @@ const Resume = ({
 
                 {/* References */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional References</h4>
+                  <h3 className={styles.subSectionTitle}>Professional References</h3>
                   <p className={styles.sectionDescription}>Add your professional references (usually 2 required for care positions)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1697,11 +1704,11 @@ const Resume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiActivity /> Care Skills & Competencies</h3>
+                <h2 className={styles.sectionTitle}><FiActivity /> Care Skills & Competencies</h2>
                 
                 {/* Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Care Skills & Competencies</h4>
+                  <h3 className={styles.subSectionTitle}>Care Skills & Competencies</h3>
                   <p className={styles.sectionDescription}>List your care skills, competencies, and areas of expertise</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1762,7 +1769,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1826,7 +1833,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your CV PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2062,7 +2069,7 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Care Assistant CV Preview</h3>
+              <h2>Full Care Assistant CV Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

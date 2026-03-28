@@ -839,14 +839,15 @@ const criticalCSS = `
 
 // ===== METADATA CONFIGURATION =====
 export const metadata = {
-  title: 'Project Manager Resume: Comprehensive Guide 2026 | Professional Resume Free',
+  // TITLE OPTIMIZED - 68 characters (BELOW 70 LIMIT)
+  title: 'Project Manager Resume: Complete 2026 Guide with Templates & Examples',
   description: 'Complete 2026 guide to creating a winning project manager resume with templates, examples, and expert tips. Learn what hiring managers really want in PMP, Agile, and IT project manager resumes. Based on analysis of 2,000+ successful PM resumes.',
   keywords: 'project manager resume, project management resume, PMP resume, resume for project managers, project coordinator resume, senior project manager resume, technical project manager resume, agile project manager resume, scrum master resume, IT project manager resume, construction project manager resume, PMP certified resume, project management CV',
   canonical: 'https://www.professionalresumefree.com/project-manager-resume',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   
   openGraph: {
-    title: 'Project Manager Resume: Comprehensive Guide 2026 | Professional Resume Free',
+    title: 'Project Manager Resume: Complete 2026 Guide with Templates & Examples',
     description: 'Expert guide to creating a project manager resume that gets interviews in 2026. Includes templates, examples, and proven strategies based on 2,000+ successful PM resumes.',
     url: 'https://www.professionalresumefree.com/project-manager-resume',
     siteName: 'Professional Resume Free',
@@ -868,7 +869,7 @@ export const metadata = {
   
   twitter: {
     card: 'summary_large_image',
-    title: 'Project Manager Resume: Comprehensive Guide 2026',
+    title: 'Project Manager Resume: Complete 2026 Guide',
     description: 'Complete guide to creating a winning project manager resume with templates, examples, and expert tips.',
     images: ['https://www.professionalresumefree.com/images/project-manager-resume-guide-twitter.jpg'],
     creator: '@ProfResumeFree',
@@ -1217,11 +1218,6 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
         <meta name="twitter:image" content={metadata.twitter.images[0]} />
         <meta name="twitter:creator" content={metadata.twitter.creator} />
         <meta name="twitter:site" content={metadata.twitter.site} />
-        
-        {/* ===== HREFLANG TAGS ===== */}
-        <link rel="alternate" href={metadata.canonical} hreflang="en" />
-        <link rel="alternate" href={metadata.canonical} hreflang="en-US" />
-        <link rel="alternate" href={metadata.canonical} hreflang="x-default" />
         
         {/* ===== STRUCTURED DATA ===== */}
         <script

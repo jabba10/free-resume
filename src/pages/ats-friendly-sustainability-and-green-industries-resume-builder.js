@@ -704,12 +704,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-sustainability-and-green-industries-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Sustainability Resume Builder 2026: ATS Green Industry Templates" />
         <meta property="og:description" content="Create your professional sustainability resume for free in 2026. ATS-optimized templates for ESG, renewable energy & environmental careers. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-sustainability-resume-builder-preview.jpg" />
@@ -1022,7 +1016,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - SINGLE H1 TAG */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1155,7 +1149,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1198,7 +1192,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional sustainability profiles (LinkedIn, portfolio, research publications, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1266,7 +1260,7 @@ const Resume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h2>
                 <p className={styles.sectionDescription}>List your sustainability roles in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1364,7 +1358,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Professional Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Professional Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No experience added yet</p>
                   ) : (
@@ -1401,7 +1395,7 @@ const Resume = ({
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTarget /> Sustainability Projects</h3>
+                <h2 className={styles.sectionTitle}><FiTarget /> Sustainability Projects</h2>
                 <p className={styles.sectionDescription}>Highlight key sustainability projects with measurable impact</p>
                 
                 <div className={styles.formCard}>
@@ -1457,7 +1451,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Sustainability Projects</h4>
+                  <h3 className={styles.subSectionTitle}>Your Sustainability Projects</h3>
                   {formData.projects.length === 0 ? (
                     <p className={styles.emptyMessage}>No projects added yet</p>
                   ) : (
@@ -1486,7 +1480,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Training</h2>
                 <p className={styles.sectionDescription}>List your environmental education, degrees, and relevant training</p>
                 
                 <div className={styles.formCard}>
@@ -1565,7 +1559,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1597,11 +1591,11 @@ const Resume = ({
             {/* Expertise Section */}
             {activeSection === 'expertise' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiActivity /> Sustainability Expertise & Credentials</h3>
+                <h2 className={styles.sectionTitle}><FiActivity /> Sustainability Expertise & Credentials</h2>
                 
                 {/* Areas of Expertise */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Areas of Sustainability Expertise</h4>
+                  <h3 className={styles.subSectionTitle}>Areas of Sustainability Expertise</h3>
                   <p className={styles.sectionDescription}>List your sustainability specialties and areas of expertise</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1646,7 +1640,7 @@ const Resume = ({
 
                 {/* Certifications & Credentials */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Sustainability Certifications & Credentials</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Sustainability Certifications & Credentials</h3>
                   <p className={styles.sectionDescription}>Add your professional sustainability certifications and credentials</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1730,7 +1724,7 @@ const Resume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional sustainability organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1792,7 +1786,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1856,7 +1850,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

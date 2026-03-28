@@ -1104,7 +1104,7 @@ function HighTrafficResumeTemplates({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT WITH SINGLE CANONICAL REFERENCE */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1833,39 +1833,39 @@ function HighTrafficResumeTemplates({
                       <th>Annual Search Volume</th>
                       <th>Primary Users</th>
                       <th>Success Rate</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><strong>Free (Microsoft Word)</strong></td>
-                      <td>4.5M+</td>
-                      <td>All job seekers, especially entry-level and mid-career</td>
-                      <td>High (proven templates)</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Free (Google Docs)</strong></td>
-                      <td>3.7M+</td>
-                      <td>Students, tech workers, collaborative teams</td>
-                      <td>High</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Free Resume Builders</strong></td>
-                      <td>2.8M+</td>
-                      <td>Job seekers wanting guided process</td>
-                      <td>Medium-High</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Paid (Etsy, Creative Market)</strong></td>
-                      <td>850k+</td>
-                      <td>Creative professionals, executives wanting unique designs</td>
-                      <td>Variable (depends on ATS compatibility)</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Premium Resume Sites</strong></td>
-                      <td>350k+</td>
-                      <td>Executives, career changers seeking professional help</td>
-                      <td>Medium-High</td>
-                    </tr>
+                     <tr>
+                       <td><strong>Free (Microsoft Word)</strong></td>
+                       <td>4.5M+</td>
+                       <td>All job seekers, especially entry-level and mid-career</td>
+                       <td>High (proven templates)</td>
+                     </tr>
+                     <tr>
+                       <td><strong>Free (Google Docs)</strong></td>
+                       <td>3.7M+</td>
+                       <td>Students, tech workers, collaborative teams</td>
+                       <td>High</td>
+                     </tr>
+                     <tr>
+                       <td><strong>Free Resume Builders</strong></td>
+                       <td>2.8M+</td>
+                       <td>Job seekers wanting guided process</td>
+                       <td>Medium-High</td>
+                     </tr>
+                     <tr>
+                       <td><strong>Paid (Etsy, Creative Market)</strong></td>
+                       <td>850k+</td>
+                       <td>Creative professionals, executives wanting unique designs</td>
+                       <td>Variable (depends on ATS compatibility)</td>
+                     </tr>
+                     <tr>
+                       <td><strong>Premium Resume Sites</strong></td>
+                       <td>350k+</td>
+                       <td>Executives, career changers seeking professional help</td>
+                       <td>Medium-High</td>
+                     </tr>
                   </tbody>
                 </table>
               </div>

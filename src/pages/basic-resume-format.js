@@ -897,11 +897,6 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Basic Resume Format 2026: Free ATS Guide & Templates" />
         <meta property="og:description" content="Master ATS-friendly resume formatting. Free templates, expert tips, instant PDF download. No sign-up required." />

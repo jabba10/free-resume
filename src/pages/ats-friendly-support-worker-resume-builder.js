@@ -593,7 +593,7 @@ const Resume = ({
                 if (categorySkills.length === 0) return null;
                 return (
                   <div key={category} className={styles.skillCategory}>
-                    <h4 style={{ fontSize: `${fontSizes.sectionTitle - 1}pt` }}>{category}</h4>
+                    <h3 style={{ fontSize: `${fontSizes.sectionTitle - 1}pt` }}>{category}</h3>
                     <ul className={styles.skillsList}>
                       {categorySkills.map((s, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{s.name}</li>)}
                     </ul>
@@ -643,6 +643,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-GB">
       <Head>
@@ -657,17 +660,20 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" hreflang="x-default" />
+        
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free UK Support Worker CV Builder: DBS-Ready Templates 2026" />
         <meta property="og:description" content="Create a professional support worker CV for free. DBS-ready templates trusted by 200K+ UK care pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free UK Support Worker CV Builder - Create Professional Care Sector CVs Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional UK Support Worker CV Free" />
         <meta property="og:locale" content="en_GB" />
@@ -698,8 +704,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free UK Support Worker CV Builder: DBS-Ready Templates 2026",
                   "description": "Create professional DBS-ready support worker CVs for free. Land interviews 3x faster with our UK care sector CV builder.",
                   "datePublished": "2026-01-01",
@@ -748,7 +754,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Free Support Worker CV Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -791,7 +797,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -804,7 +810,7 @@ const Resume = ({
                         "name": "UK Support Worker CV Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -823,7 +829,7 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a UK Support Worker Template",
                       "text": "Select from our DBS-ready UK support worker CV templates designed for care homes, domiciliary care, learning disabilities, and mental health support.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder#templates",
+                      "url": `${canonicalUrl}#templates`,
                       "image": "https://www.professionalresumefree.com/images/step1-uk-template.jpg"
                     },
                     {
@@ -831,7 +837,7 @@ const Resume = ({
                       "position": 2,
                       "name": "Enter Your Care Experience Information",
                       "text": "Add your support work experience, NVQ qualifications, DBS status, and care skills using our UK-specific forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder#editor",
+                      "url": `${canonicalUrl}#editor`,
                       "image": "https://www.professionalresumefree.com/images/step2-care-info.jpg"
                     },
                     {
@@ -839,7 +845,7 @@ const Resume = ({
                       "position": 3,
                       "name": "Customize and Optimize for UK Employers",
                       "text": "Use our UK care sector suggestions to improve keywords and formatting for CQC compliance and DBS requirements.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder#optimize",
+                      "url": `${canonicalUrl}#optimize`,
                       "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
@@ -847,7 +853,7 @@ const Resume = ({
                       "position": 4,
                       "name": "Download Your Support Worker CV",
                       "text": "Export your professional support worker CV as PDF - completely free, no watermarks, ready for UK care sector applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder#download",
+                      "url": `${canonicalUrl}#download`,
                       "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
@@ -934,7 +940,7 @@ const Resume = ({
                           "priceCurrency": "GBP"
                         },
                         "description": "Free online DBS-ready support worker CV builder that helps UK care professionals create professional CVs and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -982,6 +988,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free UK Support Worker CV Builder: Create Yours in 5 Minutes
             </h1>
@@ -1104,7 +1111,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1177,7 +1184,7 @@ const Resume = ({
 
                 {/* Education */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiBook /> Education & Training</h4>
+                  <h3 className={styles.subSectionTitle}><FiBook /> Education & Training</h3>
                   <p className={styles.sectionDescription}>List your relevant education, NVQs, and care training</p>
                   
                   <div className={styles.formGroup}>
@@ -1279,7 +1286,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Languages</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1343,7 +1350,7 @@ const Resume = ({
             {/* Care Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUsers /> Care Experience</h3>
+                <h2 className={styles.sectionTitle}><FiUsers /> Care Experience</h2>
                 <p className={styles.sectionDescription}>List your support worker positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1453,7 +1460,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Care Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Care Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No experience added yet</p>
                   ) : (
@@ -1488,7 +1495,7 @@ const Resume = ({
 
                 {/* Areas of Specialism */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Areas of Specialism</h4>
+                  <h3 className={styles.subSectionTitle}>Areas of Specialism</h3>
                   <p className={styles.sectionDescription}>List your care specialisms and areas of expertise</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1536,11 +1543,11 @@ const Resume = ({
             {/* Qualifications Section */}
             {activeSection === 'qualifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiAward /> Professional Qualifications</h3>
+                <h2 className={styles.sectionTitle}><FiAward /> Professional Qualifications</h2>
                 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Certifications & Training</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Certifications & Training</h3>
                   <p className={styles.sectionDescription}>Add your professional care qualifications and mandatory training</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1627,11 +1634,11 @@ const Resume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTool /> Care & Support Skills</h3>
+                <h2 className={styles.sectionTitle}><FiTool /> Care & Support Skills</h2>
                 
                 {/* Care Skills by Category */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Personal Care Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Personal Care Skills</h3>
                   <p className={styles.sectionDescription}>Add your personal care and support skills (select category)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1685,7 +1692,7 @@ const Resume = ({
                     if (categorySkills.length === 0) return null;
                     return (
                       <div key={category} className={styles.skillCategorySection}>
-                        <h5 className={styles.skillCategoryTitle}>{category} Skills</h5>
+                        <h4 className={styles.skillCategoryTitle}>{category} Skills</h4>
                         <div className={styles.itemsList}>
                           {categorySkills.map((skill, i) => {
                             const index = formData.skills.findIndex(s => s === skill);
@@ -1712,7 +1719,7 @@ const Resume = ({
             {/* References Section */}
             {activeSection === 'references' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiFileText /> Professional References</h3>
+                <h2 className={styles.sectionTitle}><FiFileText /> Professional References</h2>
                 <p className={styles.sectionDescription}>Add your professional references (minimum 2 recommended for UK care sector)</p>
                 
                 <div className={styles.formCard}>
@@ -1802,7 +1809,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your References</h4>
+                  <h3 className={styles.subSectionTitle}>Your References</h3>
                   {formData.references.length === 0 ? (
                     <p className={styles.emptyMessage}>No references added yet</p>
                   ) : (
@@ -1838,7 +1845,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your CV PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

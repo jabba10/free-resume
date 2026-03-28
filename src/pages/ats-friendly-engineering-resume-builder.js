@@ -697,8 +697,8 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Engineering Resume Builder 2026 | Technical Templates for Engineers</title>
-        <meta name="title" content="Free Engineering Resume Builder 2026 | Technical Templates for Engineers" />
+        <title>Free Engineering Resume Builder 2026 | ATS Technical Templates</title>
+        <meta name="title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
         <meta name="description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta name="keywords" content="engineering resume builder, technical resume templates, software engineer resume, mechanical engineer resume, electrical engineer resume, civil engineer resume, ATS friendly engineering resume, free resume builder for engineers, technical resume, engineering CV, engineering career" />
         <meta name="author" content="Professional Engineering Resume Free" />
@@ -709,13 +709,7 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Engineering Resume Builder 2026 | Technical Templates for Engineers" />
+        <meta property="og:title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
         <meta property="og:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-engineering-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -730,7 +724,7 @@ const Resume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Engineering Resume Builder 2026 | Technical Templates for Engineers" />
+        <meta name="twitter:title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
         <meta name="twitter:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-engineering-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Engineering Resume Builder with ATS Templates" />
@@ -757,7 +751,7 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder",
-                  "name": "Free Engineering Resume Builder 2026 | Technical Templates for Engineers",
+                  "name": "Free Engineering Resume Builder 2026 | ATS Technical Templates",
                   "description": "Create professional ATS-optimized engineering resumes for free. Land interviews 3x faster with our engineering resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1026,7 +1020,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - SINGLE H1 TAG ONLY */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1159,7 +1153,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1208,7 +1202,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles (LinkedIn, GitHub, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1276,7 +1270,7 @@ const Resume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h2>
                 <p className={styles.sectionDescription}>List your engineering positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1374,7 +1368,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Engineering Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Engineering Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No experience added yet</p>
                   ) : (
@@ -1411,11 +1405,11 @@ const Resume = ({
             {/* Technical Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiCode /> Technical Skills</h3>
+                <h2 className={styles.sectionTitle}><FiCode /> Technical Skills</h2>
                 
                 {/* Technical Skills Categories */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Technical Skills by Category</h4>
+                  <h3 className={styles.subSectionTitle}>Technical Skills by Category</h3>
                   <p className={styles.sectionDescription}>Organize your technical skills by categories (Programming Languages, Frameworks, Tools, etc.)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1476,7 +1470,7 @@ const Resume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiAward /> Certifications</h4>
+                  <h3 className={styles.subSectionTitle}><FiAward /> Certifications</h3>
                   <p className={styles.sectionDescription}>Add your professional engineering certifications</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1560,7 +1554,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1624,11 +1618,11 @@ const Resume = ({
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTool /> Engineering Projects</h3>
+                <h2 className={styles.sectionTitle}><FiTool /> Engineering Projects</h2>
                 
                 {/* Engineering Projects */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Engineering Projects</h4>
+                  <h3 className={styles.subSectionTitle}>Engineering Projects</h3>
                   <p className={styles.sectionDescription}>List your significant engineering projects, including personal, academic, or professional projects</p>
                   <div className={styles.skillsInput}>
                     <label className={styles.formLabel}>
@@ -1712,7 +1706,7 @@ const Resume = ({
 
                 {/* Publications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Publications & Research</h4>
+                  <h3 className={styles.subSectionTitle}>Publications & Research</h3>
                   <p className={styles.sectionDescription}>Add your engineering publications, research papers, or conference presentations</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1785,7 +1779,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your engineering education, degrees, and relevant coursework</p>
                 
                 <div className={styles.formCard}>
@@ -1875,7 +1869,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1907,7 +1901,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

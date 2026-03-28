@@ -1273,11 +1273,6 @@ function MostGoogledResumeQuestions({
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />

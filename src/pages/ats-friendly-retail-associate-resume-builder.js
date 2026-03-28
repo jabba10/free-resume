@@ -691,7 +691,10 @@ const RetailResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" />
+        
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-US" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-GB" />
@@ -1022,6 +1025,7 @@ const RetailResume = ({
               </span>
             </div>
             
+            {/* SINGLE H1 TAG */}
             <h1 className={styles.heroTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               Free Retail Resume Builder: Create Yours in 5 Minutes
             </h1>
@@ -2039,11 +2043,11 @@ const RetailResume = ({
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Changed to h3 for single H1 compliance */}
       <section className={styles.ctaSection} aria-labelledby="cta-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Ready to Advance Your Retail Career?</h2>
+            <h3 className={styles.ctaTitle} id="cta-title" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Ready to Advance Your Retail Career?</h3>
             <p className={styles.ctaSubtitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               Join 2 million+ retail professionals who landed their dream jobs with our free ATS-friendly retail resume builder.
             </p>

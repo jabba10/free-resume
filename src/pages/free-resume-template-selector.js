@@ -833,7 +833,7 @@ export default function ResumeTemplateSelector() {
         <meta name="twitter:description" content="Browse and download professional resume templates with ATS compatibility ratings." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-template-selector.jpg" />
         
-        {/* Canonical */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-template-selector" />
         
         {/* Structured Data */}

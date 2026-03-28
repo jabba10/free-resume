@@ -947,16 +947,6 @@ export default function CreativeResumeTemplates({ seoData }) {
         {/* ===== SINGLE CANONICAL URL ===== */}
         <link rel="canonical" href="https://www.professionalresumefree.com/creative-resume-templates" />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/creative-resume-templates" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/creative-resume-templates" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/creative-resume-templates" hreflang="x-default" />
-        
-        {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content="Creative Resume Templates 2026: Professional Designs & Guide" />
-        <meta name="chatgpt-fts:description" content="Discover 2026's best creative resume templates. Expert-selected designs, ATS-compatible formats, and industry-specific templates to land your dream job." />
-        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
-        
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />

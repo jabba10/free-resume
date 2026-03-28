@@ -1471,8 +1471,8 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* Primary Meta Tags */}
-        <title>Free Resume Score Checker - Instant ATS Analysis & Professional Review 2026 | Resume Scanner</title>
+        {/* OPTIMIZED TITLE - UNDER 70 CHARACTERS */}
+        <title>Free Resume Score Checker - ATS Analysis & Professional Review 2026</title>
         <meta 
           name="description" 
           content="Get an instant, professional resume score with ATS compatibility analysis. Our free resume checker analyzes 5 key dimensions in real-time. 100% free, no signup, privacy-first tool trusted by 50,000+ users."
@@ -1486,16 +1486,11 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta name="last-modified" content={lastModifiedDate} />
         <meta name="build-timestamp" content={buildTimestamp.toString()} />
         
-        {/* Canonical & Sitemap */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-score-checker" />
         
-        {/* Hreflang for International SEO */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-score-checker" hreflang="x-default" />
-        
         {/* Open Graph */}
-        <meta property="og:title" content="Free Resume Score Checker - Instant ATS Analysis & Professional Review 2026" />
+        <meta property="og:title" content="Free Resume Score Checker - ATS Analysis & Professional Review 2026" />
         <meta property="og:description" content="Get your resume score in 60 seconds. No signup required. Privacy-first ATS compatibility analysis for job applications." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-score-checker" />
@@ -1509,7 +1504,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Score Checker - ATS & Professional Analysis 2026" />
+        <meta name="twitter:title" content="Free Resume Score Checker - ATS Analysis & Review 2026" />
         <meta name="twitter:description" content="Instantly check your resume's ATS compatibility and get actionable improvements. Free, privacy-first tool." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-resume-score-checker.jpg" />
         <meta name="twitter:image:alt" content="Resume Score Checker Tool Preview" />
@@ -1517,7 +1512,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta name="twitter:creator" content="@ProResumeFree" />
         
         {/* GEO Optimization Tags */}
-        <meta name="chatgpt-fts:title" content="Free Resume Score Checker - Instant ATS Compatibility Analysis" />
+        <meta name="chatgpt-fts:title" content="Free Resume Score Checker - ATS Compatibility Analysis" />
         <meta name="chatgpt-fts:description" content="Free resume score checker with 5-dimensional ATS analysis. Get instant feedback on your resume's performance. No signup required, privacy-first browser tool." />
         <meta name="chatgpt-fts:keywords" content="resume score checker, ATS analysis, free resume scanner, resume optimization tool" />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
@@ -1554,7 +1549,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
 
       <div className="container">
         <header className="header" role="banner">
-          <h1 className="title">Professional Resume Score Checker - Free ATS Analysis {currentYear}</h1>
+          <h1 className="title">Free Resume Score Checker - ATS Analysis & Professional Review {currentYear}</h1>
           <p className="subtitle">
             Get an instant, professional resume analysis with ATS compatibility scoring. 
             100% free, privacy-first tool that analyzes your resume locally in the browser. 

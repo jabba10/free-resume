@@ -1083,11 +1083,8 @@ function TopSkillsPage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
+        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         <meta property="og:title" content="Top Skills Employers in the USA Want on Resumes: 2026 Research" />
         <meta property="og:description" content="Data-driven analysis of the most in-demand skills by US employers. Based on labor market research, job posting analytics, and hiring manager surveys." />

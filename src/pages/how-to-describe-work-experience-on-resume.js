@@ -1012,11 +1012,6 @@ export default function DescribeWorkExperience({ seoData }) {
         {/* ===== SINGLE CANONICAL URL ===== */}
         <link rel="canonical" href="https://www.professionalresumefree.com/how-to-describe-work-experience-on-resume" />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-describe-work-experience-on-resume" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-describe-work-experience-on-resume" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/how-to-describe-work-experience-on-resume" hreflang="x-default" />
-        
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="How to Describe Work Experience on Resume: Complete 2026 Guide" />
         <meta name="chatgpt-fts:description" content="Master work experience description with achievement-focused formulas, industry examples, and ATS optimization strategies to transform duties into measurable results." />

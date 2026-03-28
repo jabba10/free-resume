@@ -1151,11 +1151,8 @@ function CustomerServiceResumeGuidePage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         <meta property="og:title" content="How to Write a Resume for USA Customer Service Jobs: 2026 Guide" />
         <meta property="og:description" content="Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles." />
@@ -1381,25 +1378,25 @@ function CustomerServiceResumeGuidePage({
                       <th>Best For</th>
                       <th>Success Rate vs. Average</th>
                     </tr>
-                  </thead>
+                    </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td><strong>Reverse-Chronological</strong></td>
                       <td>Experienced candidates with clear career progression</td>
                       <td className="text-success">+15% for experienced</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Hybrid (Skills + Chronology)</strong></td>
                       <td>Entry-level, career changers, candidates with gaps</td>
                       <td className="text-success">+28% for entry-level</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Functional (Skills-Only)</strong></td>
                       <td>Major career pivots or significant gaps</td>
                       <td>-8% overall (use with caution)</td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
               
               <p className="paragraph">
@@ -1417,26 +1414,26 @@ function CustomerServiceResumeGuidePage({
               <div className="table-wrapper">
                 <table className="table">
                   <thead>
-                    <tr>
+                     <tr>
                       <th>Rank</th>
                       <th>Skill</th>
                       <th>Frequency in Job Postings</th>
                       <th>How to Demonstrate</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>1</td><td><strong>Communication</strong></td><td>89%</td><td>Clear, professional writing; active listening examples</td></tr>
-                    <tr><td>2</td><td><strong>Empathy</strong></td><td>84%</td><td>Customer feedback, conflict resolution stories</td></tr>
-                    <tr><td>3</td><td><strong>Problem-Solving</strong></td><td>81%</td><td>Complex issue resolution, creative solutions</td></tr>
-                    <tr><td>4</td><td><strong>Patience</strong></td><td>76%</td><td>Difficult customer interactions, long-term issue handling</td></tr>
-                    <tr><td>5</td><td><strong>Active Listening</strong></td><td>72%</td><td>Understanding customer needs, accurate documentation</td></tr>
-                    <tr><td>6</td><td><strong>Conflict Resolution</strong></td><td>68%</td><td>De-escalation examples, win-win outcomes</td></tr>
-                    <tr><td>7</td><td><strong>Product Knowledge</strong></td><td>65%</td><td>Training others, reducing escalation rates</td></tr>
-                    <tr><td>8</td><td><strong>Time Management</strong></td><td>61%</td><td>Handling high volumes, meeting SLAs</td></tr>
-                    <tr><td>9</td><td><strong>CRM Software</strong></td><td>57%</td><td>Salesforce, Zendesk, Freshdesk certifications</td></tr>
-                    <tr><td>10</td><td><strong>Adaptability</strong></td><td>53%</td><td>Handling multiple channels, process changes</td></tr>
+                     <tr><td>1</td><td><strong>Communication</strong></td><td>89%</td><td>Clear, professional writing; active listening examples</td></tr>
+                     <tr><td>2</td><td><strong>Empathy</strong></td><td>84%</td><td>Customer feedback, conflict resolution stories</td></tr>
+                     <tr><td>3</td><td><strong>Problem-Solving</strong></td><td>81%</td><td>Complex issue resolution, creative solutions</td></tr>
+                     <tr><td>4</td><td><strong>Patience</strong></td><td>76%</td><td>Difficult customer interactions, long-term issue handling</td></tr>
+                     <tr><td>5</td><td><strong>Active Listening</strong></td><td>72%</td><td>Understanding customer needs, accurate documentation</td></tr>
+                     <tr><td>6</td><td><strong>Conflict Resolution</strong></td><td>68%</td><td>De-escalation examples, win-win outcomes</td></tr>
+                     <tr><td>7</td><td><strong>Product Knowledge</strong></td><td>65%</td><td>Training others, reducing escalation rates</td></tr>
+                     <tr><td>8</td><td><strong>Time Management</strong></td><td>61%</td><td>Handling high volumes, meeting SLAs</td></tr>
+                     <tr><td>9</td><td><strong>CRM Software</strong></td><td>57%</td><td>Salesforce, Zendesk, Freshdesk certifications</td></tr>
+                     <tr><td>10</td><td><strong>Adaptability</strong></td><td>53%</td><td>Handling multiple channels, process changes</td></tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
             </div>
           </div>
@@ -1479,36 +1476,36 @@ function CustomerServiceResumeGuidePage({
               <div className="table-wrapper">
                 <table className="table">
                   <thead>
-                    <tr>
+                     <tr>
                       <th>Before</th>
                       <th>After (Optimized)</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td>Answered customer calls<br/>Helped with billing issues<br/>Met performance goals</td>
                       <td className="text-success">• Handled 60+ inbound calls daily, resolving 85% of issues on first contact<br/>• Achieved 98% customer satisfaction score for 6 consecutive months<br/>• Reduced average handle time by 15% while maintaining quality scores<br/>• Trained 5 new hires on call procedures and CRM system</td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
 
               <h3 className="subheading">Example 2: Retail Customer Service</h3>
               <div className="table-wrapper">
                 <table className="table">
                   <thead>
-                    <tr>
+                     <tr>
                       <th>Before</th>
                       <th>After (Optimized)</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td>Helped customers find products<br/>Processed returns<br/>Kept store organized</td>
                       <td className="text-success">• Assisted 100+ customers daily, consistently receiving positive feedback<br/>• Resolved returns and exchanges efficiently, maintaining 100% accuracy<br/>• Recognized as 'Employee of the Month' twice for exceptional service<br/>• Increased repeat business by 15% through personalized follow-up</td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
             </div>
           </div>

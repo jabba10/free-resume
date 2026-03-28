@@ -716,12 +716,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros" />
         <meta property="og:description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-cybersecurity-resume-builder-preview.jpg" />

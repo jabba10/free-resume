@@ -1132,11 +1132,6 @@ export default function Resume10thPassPage({ seoData, buildTimestamp }) {
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Resume for 10th Pass 2026: Free Guide & Templates" />
         <meta property="og:description" content="Step-by-step guide with free templates for creating a professional resume after 10th pass. 68% employment rate. No experience needed." />

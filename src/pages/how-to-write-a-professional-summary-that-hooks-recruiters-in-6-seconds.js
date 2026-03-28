@@ -1271,14 +1271,16 @@ const ProfessionalSummaryGuide = ({
     "career change summary examples"
   ];
 
-  // Enhanced structured data
+  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds";
+
+  // Enhanced structured data - removed duplicate canonical reference
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds/#webpage",
-        "url": "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds",
+        "@id": `${canonicalUrl}#webpage`,
+        "url": canonicalUrl,
         "name": "How to Write a Professional Summary That Hooks Recruiters in 6 Seconds - 2026 Guide",
         "description": "Comprehensive guide to writing professional summaries that capture attention in 6 seconds. Get examples for every career level, industry templates, ATS optimization tips, and proven formulas that work. 2026 Edition",
         "datePublished": "2024-01-01",
@@ -1349,7 +1351,7 @@ const ProfessionalSummaryGuide = ({
         "dateModified": lastModifiedDate.split('T')[0],
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds/#webpage"
+          "@id": `${canonicalUrl}#webpage`
         },
         "articleSection": "Career Resources",
         "keywords": "professional summary, resume writing, career advice, job search, resume tips, ATS optimization, summary examples, career level summaries, industry templates",
@@ -1362,7 +1364,7 @@ const ProfessionalSummaryGuide = ({
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/how-to-write-a-professional-summary/#faqpage",
+        "@id": `${canonicalUrl}#faqpage`,
         "mainEntity": faqs.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
@@ -1392,7 +1394,7 @@ const ProfessionalSummaryGuide = ({
           "position": index + 1,
           "name": section.title,
           "text": section.content,
-          "url": `https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds#step-${index + 1}`,
+          "url": `${canonicalUrl}#step-${index + 1}`,
         }))
       },
       {
@@ -1462,7 +1464,7 @@ const ProfessionalSummaryGuide = ({
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
         {/* ===== PRIMARY SEO TAGS ===== */}
-        <title>How to Write a Professional Summary That Hooks Recruiters in 6 Seconds - 2026 Guide | Professional Resume Free</title>
+        <title>Professional Summary Guide: Hook Recruiters in 6 Seconds | 2026</title>
         <meta 
           name="description" 
           content="Learn to write professional summaries that capture attention in 6 seconds. Get examples for every career level and industry with proven formulas that work. 2026 Edition - 25+ examples included."
@@ -1477,23 +1479,25 @@ const ProfessionalSummaryGuide = ({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         <meta name="format-detection" content="telephone=no" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" />
+        
+        {/* ===== SINGLE CANONICAL URL ===== */}
+        <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content="Professional Summary Writing Guide 2026: Examples That Work" />
+        <meta name="chatgpt-fts:title" content="Professional Summary Guide: Hook Recruiters in 6 Seconds | 2026" />
         <meta name="chatgpt-fts:description" content="Complete guide to writing professional summaries that hook recruiters. Includes 25+ examples for all career levels and industries." />
         <meta name="chatgpt-fts:keywords" content="professional summary, resume summary, career summary, 6-second hook, ATS optimization, resume writing guide 2026" />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources 2026" />
         
         {/* ===== OPEN GRAPH (Facebook/LinkedIn) ===== */}
-        <meta property="og:title" content="How to Write a Professional Summary That Hooks Recruiters in 6 Seconds - 2026 Guide" />
+        <meta property="og:title" content="Professional Summary Guide: Hook Recruiters in 6 Seconds | 2026" />
         <meta property="og:description" content="Learn to write professional summaries that capture attention in 6 seconds. Get examples for every career level and industry with proven formulas that work." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-professional-summary-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Professional Summary Writing Guide - Examples and Templates" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -1506,7 +1510,7 @@ const ProfessionalSummaryGuide = ({
         
         {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Professional Summary Guide: Hook Recruiters in 6 Seconds - 2026" />
+        <meta name="twitter:title" content="Professional Summary Guide: Hook Recruiters in 6 Seconds | 2026" />
         <meta name="twitter:description" content="Learn to write professional summaries that capture attention in 6 seconds. Get examples for every career level and industry with proven formulas." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-professional-summary-guide.jpg" />
         <meta name="twitter:image:alt" content="Professional Summary Writing Guide with Examples" />

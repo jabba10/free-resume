@@ -1178,7 +1178,7 @@ export default function CompleteResumeResourceLibrary({
         "@type": "WebPage",
         "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#webpage",
         "url": "https://www.professionalresumefree.com/complete-resume-resource-library/",
-        "name": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
+        "name": "Complete Resume Resource Library: Expert Guides & Tools 2026",
         "description": "Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.",
         "datePublished": "2026-01-15",
         "dateModified": seoData?.lastModifiedDate || new Date().toISOString(),
@@ -1233,7 +1233,7 @@ export default function CompleteResumeResourceLibrary({
       },
       {
         "@type": "Article",
-        "headline": "The Ultimate Resume Resource Library for 2026: Expert Guides & Tools",
+        "headline": "Complete Resume Resource Library: Expert Guides & Tools 2026",
         "description": "Master resume writing with expert strategies for the 2026 job market",
         "image": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
         "author": AUTHORS.map(author => ({
@@ -1361,20 +1361,20 @@ export default function CompleteResumeResourceLibrary({
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== PRIMARY SEO TAGS ===== */}
-        <title>The Ultimate Resume Resource Library for 2026: Expert Guides & Tools | Professional Resume Free</title>
-        <meta name="title" content="The Ultimate Resume Resource Library for 2026: Expert Guides & Tools | Professional Resume Free" />
+        {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS ===== */}
+        <title>Complete Resume Resource Library: Expert Guides & Tools 2026</title>
+        <meta name="title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, industry-specific templates, and proven career advice. Backed by 15+ years HR experience." />
         <meta name="keywords" content="resume writing guide 2026, ATS optimization, professional resume templates, career advice, job search strategies, resume keywords, industry-specific resumes, free resume builder 2026" />
         <meta name="author" content="Dr. Sarah Kamara, Marcus Johnson, Professional Resume Experts" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
-        {/* ===== CANONICAL TAG (SINGLE) ===== */}
+        {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href="https://www.professionalresumefree.com/complete-resume-resource-library/" />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
-        <meta name="chatgpt-fts:title" content="Ultimate Resume Resource Library 2026: Expert Guides & Tools" />
+        <meta name="chatgpt-fts:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="chatgpt-fts:description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates for job market success." />
         <meta name="chatgpt-fts:keywords" content="how to write resume 2026, ATS-friendly resume templates, professional resume examples, career change resume guide, executive resume writing tips" />
         <meta name="chatgpt-fts:last-updated" content={displayDate} />
@@ -1386,7 +1386,7 @@ export default function CompleteResumeResourceLibrary({
         <meta name="build-timestamp" content={seoData?.buildTimestamp?.toString() || Date.now().toString()} />
         
         {/* ===== OPEN GRAPH ===== */}
-        <meta property="og:title" content="The Ultimate Resume Resource Library for 2026: Expert Guides & Tools" />
+        <meta property="og:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta property="og:description" content="Master resume writing with expert strategies, ATS optimization, and industry-specific templates for 2026 job market success." />
         <meta property="og:url" content="https://www.professionalresumefree.com/complete-resume-resource-library/" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1400,17 +1400,12 @@ export default function CompleteResumeResourceLibrary({
         
         {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Ultimate Resume Resource Library for 2026" />
+        <meta name="twitter:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="twitter:description" content="Expert resume strategies, ATS optimization, and industry templates for 2026 job market success." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/og-resume-library-2026.jpg" />
         <meta name="twitter:image:alt" content="Resume Resource Library 2026" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
-        
-        {/* ===== HREFLANG TAGS ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/complete-resume-resource-library/" hreflang="x-default" />
         
         {/* ===== STRUCTURED DATA ===== */}
         <script
@@ -1453,7 +1448,7 @@ export default function CompleteResumeResourceLibrary({
         {/* ===== HEADER ===== */}
         <header className="header">
           <h1 className="title">
-            The Ultimate Resume Writing Guide & Resource Library for {currentYear}
+            Complete Resume Resource Library: Expert Guides & Tools {currentYear}
           </h1>
           
           <div className="search-intent">

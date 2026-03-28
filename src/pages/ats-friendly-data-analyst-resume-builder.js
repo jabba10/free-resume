@@ -722,13 +722,10 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-data-analyst-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free Data Analyst Resume Builder: ATS Templates for 2026" />
         <meta property="og:description" content="Create your professional ATS-ready resume in 5 minutes. Free data analyst resume builder with templates for SQL, Python & visualization roles. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-data-analyst-resume-builder-preview.jpg" />
@@ -1041,7 +1038,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1052,6 +1049,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Data Analyst Resume Builder: Create Yours in 5 Minutes
             </h1>
@@ -1176,7 +1174,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1219,7 +1217,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles (LinkedIn, GitHub, Kaggle, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1288,7 +1286,7 @@ const Resume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h2>
                 <p className={styles.sectionDescription}>List your data analyst positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1387,7 +1385,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Professional Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Professional Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No experience added yet</p>
                   ) : (
@@ -1424,11 +1422,11 @@ const Resume = ({
             {/* Technical Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiCode /> Technical Skills & Tools</h3>
+                <h2 className={styles.sectionTitle}><FiCode /> Technical Skills & Tools</h2>
                 
                 {/* Technical Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiCode /> Technical Skills</h4>
+                  <h3 className={styles.subSectionTitle}><FiCode /> Technical Skills</h3>
                   <p className={styles.sectionDescription}>Add your technical skills grouped by category (Programming, Databases, etc.)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1511,7 +1509,7 @@ const Resume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiAward /> Certifications</h4>
+                  <h3 className={styles.subSectionTitle}><FiAward /> Certifications</h3>
                   <p className={styles.sectionDescription}>Add your data analytics certifications and credentials</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1607,7 +1605,7 @@ const Resume = ({
 
                 {/* Tools & Technologies */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiTool /> Tools & Technologies</h4>
+                  <h3 className={styles.subSectionTitle}><FiTool /> Tools & Technologies</h3>
                   <p className={styles.sectionDescription}>List specific tools, software, and technologies you're proficient with</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1674,7 +1672,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Languages</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level (important for global roles)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1743,7 +1741,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your degrees and relevant education (global formats supported)</p>
                 
                 <div className={styles.formCard}>
@@ -1834,7 +1832,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1867,7 +1865,7 @@ const Resume = ({
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiLayers /> Data Projects</h3>
+                <h2 className={styles.sectionTitle}><FiLayers /> Data Projects</h2>
                 <p className={styles.sectionDescription}>Showcase your data analysis projects, portfolio work, or academic projects</p>
                 
                 <div className={styles.formCard}>
@@ -1941,7 +1939,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Data Projects</h4>
+                  <h3 className={styles.subSectionTitle}>Your Data Projects</h3>
                   {formData.projects.length === 0 ? (
                     <p className={styles.emptyMessage}>No projects added yet</p>
                   ) : (
@@ -1977,7 +1975,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2228,7 +2226,7 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Data Analyst Resume Preview</h3>
+              <h2>Full Data Analyst Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

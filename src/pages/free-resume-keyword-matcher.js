@@ -1540,7 +1540,7 @@ CERTIFICATIONS
         <meta name="revisit-after" content="7 days" />
         <meta name="build-timestamp" content={buildTimestamp} />
         
-        {/* Canonical & Hreflang */}
+        {/* Canonical & Hreflang - Only one canonical tag */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" />
         <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-US" />

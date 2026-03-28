@@ -1073,18 +1073,6 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href={metadata.canonical} />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href={metadata.canonical} hreflang="en-us" />
-        <link rel="alternate" href={metadata.canonical} hreflang="en" />
-        <link rel="alternate" href={metadata.canonical} hreflang="x-default" />
-        
-        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
-        <meta name="chatgpt-fts:title" content={metadata.geo['chatgpt-fts:title']} />
-        <meta name="chatgpt-fts:description" content={metadata.geo['chatgpt-fts:description']} />
-        <meta name="chatgpt-fts:keywords" content={metadata.geo['chatgpt-fts:keywords']} />
-        <meta name="chatgpt-fts:last-updated" content={metadata.geo['chatgpt-fts:last-updated']} />
-        <meta name="generator" content={metadata.geo.generator} />
-        
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />

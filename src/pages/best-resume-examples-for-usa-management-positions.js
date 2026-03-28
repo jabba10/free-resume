@@ -1166,11 +1166,6 @@ function ManagementResumeExamples({
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Best Resume Examples for USA Management Positions (2026 Edition)" />
         <meta property="og:description" content="Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies." />
@@ -1595,33 +1590,33 @@ function ManagementResumeExamples({
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td><strong>Team Size & Development</strong></td>
                       <td>Led team of 15; promoted 4 direct reports; reduced turnover from 22% to 9%</td>
                       <td>Shows you can build, lead, and retain talent</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Financial Impact</strong></td>
                       <td>Managed $8.5M budget; grew revenue by 34%; reduced costs by $1.2M</td>
                       <td>Demonstrates business acumen and accountability</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Operational Efficiency</strong></td>
                       <td>Increased productivity by 27%; reduced cycle time by 40%; improved quality scores from 92% to 98%</td>
                       <td>Shows you can optimize processes and systems</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Strategic Initiatives</strong></td>
                       <td>Led 3 successful product launches; opened 2 new markets; executed merger integration</td>
                       <td>Proves you can execute strategic vision</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Scope & Scale</strong></td>
                       <td>Responsible for 4 facilities; managed 50+ vendors; oversaw operations in 12 countries</td>
                       <td>Shows the size and complexity you can handle</td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
             </div>
           </div>
@@ -1678,40 +1673,40 @@ function ManagementResumeExamples({
               <div className="table-wrapper">
                 <table className="table">
                   <thead>
-                    <tr>
+                     <tr>
                       <th>Element</th>
                       <th>Middle Management (Manager, Sr. Manager)</th>
                       <th>Executive (Director, VP, C-Suite)</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td><strong>Focus</strong></td>
                       <td>Team leadership, project execution, operational metrics</td>
                       <td>Organizational strategy, P&L ownership, vision setting</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Scope</strong></td>
                       <td>Single department or function, 5-20 direct reports</td>
                       <td>Multiple departments, 50+ employees, enterprise-wide impact</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Metrics</strong></td>
                       <td>Team productivity, project timelines, quality metrics</td>
                       <td>Revenue growth, market share, EBITDA, shareholder value</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Summary</strong></td>
                       <td>2-3 lines on functional expertise and team leadership</td>
                       <td>4-5 lines on strategic vision, career narrative, board-level presence</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td><strong>Length</strong></td>
                       <td>2 pages maximum</td>
                       <td>2 pages (rarely 3, with extensive board experience)</td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
             </div>
           </div>

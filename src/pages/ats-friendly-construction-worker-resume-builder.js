@@ -721,12 +721,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Construction Resume Builder 2026 | Trade Templates for Pros" />
         <meta property="og:description" content="Create a professional construction resume for free. ATS-friendly trade templates trusted by 3M+ construction pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-construction-resume-builder-preview.jpg" />
@@ -1038,7 +1032,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - SINGLE H1 TAG */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1049,6 +1043,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Construction Resume Builder 2026
             </h1>
@@ -1170,7 +1165,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1227,7 +1222,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles (LinkedIn, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1293,7 +1288,7 @@ const Resume = ({
             {/* Construction Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Construction Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Construction Experience</h2>
                 <p className={styles.sectionDescription}>List your construction positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1391,7 +1386,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Construction Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Construction Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No construction experience added yet</p>
                   ) : (
@@ -1425,7 +1420,7 @@ const Resume = ({
 
                 {/* Education Section */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiBook /> Education & Training</h4>
+                  <h3 className={styles.subSectionTitle}><FiBook /> Education & Training</h3>
                   <p className={styles.sectionDescription}>List your trade education, apprenticeships, and relevant training</p>
                   
                   <div className={styles.formGroup}>
@@ -1503,7 +1498,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education & Training</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education & Training</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1535,11 +1530,11 @@ const Resume = ({
             {/* Skills & Certifications Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTool /> Trade Skills & Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiTool /> Trade Skills & Certifications</h2>
                 
                 {/* Trade Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Trade Skills & Expertise</h4>
+                  <h3 className={styles.subSectionTitle}>Trade Skills & Expertise</h3>
                   <p className={styles.sectionDescription}>List your construction skills and areas of expertise</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1611,7 +1606,7 @@ const Resume = ({
 
                 {/* Safety Training */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Safety Training & Qualifications</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Safety Training & Qualifications</h3>
                   <p className={styles.sectionDescription}>Add your construction safety certifications and training</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1673,7 +1668,7 @@ const Resume = ({
 
                 {/* Equipment Operation */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiTruck /> Equipment Operation</h4>
+                  <h3 className={styles.subSectionTitle}><FiTruck /> Equipment Operation</h3>
                   <p className={styles.sectionDescription}>List construction equipment you can operate</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1735,7 +1730,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak (important for international work)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1799,10 +1794,10 @@ const Resume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> Certifications & Licenses</h3>
+                <h2 className={styles.sectionTitle}><FiShield /> Certifications & Licenses</h2>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Certifications & Licenses</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Certifications & Licenses</h3>
                   <p className={styles.sectionDescription}>Add your professional construction licenses and trade certifications</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1889,7 +1884,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

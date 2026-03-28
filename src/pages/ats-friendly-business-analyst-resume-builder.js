@@ -145,7 +145,8 @@ const BusinessAnalystResume = ({
     skills: [],
     projects: [],
     methodologies: [],
-    tools: []
+    tools: [],
+    socialLinks: []
   });
 
   // Font size state optimized for Business Analyst resume
@@ -689,20 +690,14 @@ const BusinessAnalystResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/" hreflang="x-default" />
+        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder" />
         <meta property="og:title" content="Free Business Analyst Resume Builder: ATS Templates 2026" />
         <meta property="og:description" content="Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-business-analyst-resume-builder.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Business Analyst Resume Builder - Create Professional BA Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/" />
+        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Business Analyst Resume Builder" />
         <meta property="og:locale" content="en_US" />
@@ -736,8 +731,8 @@ const BusinessAnalystResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/#webpage",
-                  "url": "https://www.professionalresumefree.com/",
+                  "@id": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#webpage",
+                  "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder",
                   "name": "Free Business Analyst Resume Builder: ATS Templates 2026",
                   "description": "Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -786,7 +781,7 @@ const BusinessAnalystResume = ({
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Business Analyst Resume Builder",
-                        "item": "https://www.professionalresumefree.com/"
+                        "item": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder"
                       }
                     ]
                   },
@@ -860,7 +855,7 @@ const BusinessAnalystResume = ({
                       "position": 1,
                       "name": "Choose a Business Analyst Template",
                       "text": "Select from our ATS-optimized Business Analyst resume templates designed for IT, Finance, Agile, and Technical BA roles in the USA.",
-                      "url": "https://www.professionalresumefree.com/#templates",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#templates",
                       "image": "https://www.professionalresumefree.com/images/step1-business-analyst-template.jpg"
                     },
                     {
@@ -868,7 +863,7 @@ const BusinessAnalystResume = ({
                       "position": 2,
                       "name": "Enter Your Professional Information",
                       "text": "Add your BA experience, projects, certifications, and analytical skills using our guided forms with USA industry terminology.",
-                      "url": "https://www.professionalresumefree.com/#editor",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#editor",
                       "image": "https://www.professionalresumefree.com/images/step2-ba-info.jpg"
                     },
                     {
@@ -876,7 +871,7 @@ const BusinessAnalystResume = ({
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our business analyst-specific suggestions to improve industry keywords and formatting for ATS compatibility in the US market.",
-                      "url": "https://www.professionalresumefree.com/#optimize",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#optimize",
                       "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
@@ -884,7 +879,7 @@ const BusinessAnalystResume = ({
                       "position": 4,
                       "name": "Download Your Business Analyst Resume",
                       "text": "Export your professional Business Analyst resume as PDF - completely free, no watermarks, optimized for US employers.",
-                      "url": "https://www.professionalresumefree.com/#download",
+                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#download",
                       "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
@@ -971,7 +966,7 @@ const BusinessAnalystResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly business analyst resume builder that helps BA professionals in the USA create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/"
+                        "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder"
                       }
                     }
                   }))
@@ -1008,7 +1003,7 @@ const BusinessAnalystResume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1019,6 +1014,7 @@ const BusinessAnalystResume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Business Analyst Resume Builder: Create Yours in 5 Minutes
             </h1>
@@ -1142,7 +1138,7 @@ const BusinessAnalystResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1199,7 +1195,7 @@ const BusinessAnalystResume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h2>
                 <p className={styles.sectionDescription}>List your BA roles in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1297,7 +1293,7 @@ const BusinessAnalystResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Professional Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Professional Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No experience added yet</p>
                   ) : (
@@ -1334,7 +1330,7 @@ const BusinessAnalystResume = ({
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTarget /> Key Projects</h3>
+                <h2 className={styles.sectionTitle}><FiTarget /> Key Projects</h2>
                 <p className={styles.sectionDescription}>Highlight significant BA projects with measurable outcomes</p>
                 
                 <div className={styles.formCard}>
@@ -1415,7 +1411,7 @@ const BusinessAnalystResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Key Projects</h4>
+                  <h3 className={styles.subSectionTitle}>Your Key Projects</h3>
                   {formData.projects.length === 0 ? (
                     <p className={styles.emptyMessage}>No projects added yet</p>
                   ) : (
@@ -1447,7 +1443,7 @@ const BusinessAnalystResume = ({
 
                 {/* Methodologies */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiTarget /> Methodologies & Frameworks</h4>
+                  <h3 className={styles.subSectionTitle}><FiTarget /> Methodologies & Frameworks</h3>
                   <p className={styles.sectionDescription}>Add methodologies you're experienced with (Agile, Waterfall, etc.)</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1492,7 +1488,7 @@ const BusinessAnalystResume = ({
 
                 {/* Tools */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiTool /> Technical Tools & Software</h4>
+                  <h3 className={styles.subSectionTitle}><FiTool /> Technical Tools & Software</h3>
                   <p className={styles.sectionDescription}>Add tools and software you're proficient with</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1557,7 +1553,7 @@ const BusinessAnalystResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your degrees and relevant education</p>
                 
                 <div className={styles.formCard}>
@@ -1645,7 +1641,7 @@ const BusinessAnalystResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1678,7 +1674,7 @@ const BusinessAnalystResume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiAward /> Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiAward /> Certifications</h2>
                 <p className={styles.sectionDescription}>Add professional certifications relevant to Business Analysis</p>
                 
                 <div className={styles.formCard}>
@@ -1744,7 +1740,7 @@ const BusinessAnalystResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Certifications</h4>
+                  <h3 className={styles.subSectionTitle}>Your Certifications</h3>
                   {formData.certifications.length === 0 ? (
                     <p className={styles.emptyMessage}>No certifications added yet</p>
                   ) : (
@@ -1772,7 +1768,7 @@ const BusinessAnalystResume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBarChart /> Skills & Competencies</h3>
+                <h2 className={styles.sectionTitle}><FiBarChart /> Skills & Competencies</h2>
                 <p className={styles.sectionDescription}>Organize your skills by category</p>
                 
                 <div className={styles.formCard}>
@@ -1818,7 +1814,7 @@ const BusinessAnalystResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Your Skills</h3>
                   {formData.skills.length === 0 ? (
                     <p className={styles.emptyMessage}>No skills added yet</p>
                   ) : (
@@ -1843,7 +1839,7 @@ const BusinessAnalystResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your Business Analyst resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2094,7 +2090,7 @@ const BusinessAnalystResume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Business Analyst Resume Preview</h3>
+              <h2>Full Business Analyst Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

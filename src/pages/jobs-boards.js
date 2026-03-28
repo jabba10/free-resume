@@ -781,7 +781,7 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   
   const currentYear = new Date().getFullYear();
-  const canonicalUrl = "https://www.professionalresumefree.com/job-boards-guide";
+  const canonicalUrl = "https://www.professionalresumefree.com/jobs-boards";
 
   // Optimized title - exactly 70 characters
   const optimizedTitle = "Best Job Boards 2026: Remote, Hybrid & International Jobs Guide";
@@ -1095,11 +1095,6 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Best Job Boards 2026: Remote, Hybrid & International Jobs Guide" />
         <meta property="og:description" content="Discover 50+ best job search sites for remote work, hybrid jobs & international positions with visa sponsorship. Expert reviews." />
@@ -1249,7 +1244,7 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
               </li>
               <li aria-hidden="true"><FiChevronRight /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/job-boards-guide" itemProp="item">
+                <Link href="/jobs-boards" itemProp="item">
                   <span itemProp="name">Job Boards</span>
                 </Link>
                 <meta itemProp="position" content="2" />
@@ -1514,7 +1509,7 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
             </p>
 
             <div className="table-wrap">
-              <table>
+               <table>
                 <thead>
                   <tr>
                     <th>Platform Type</th>

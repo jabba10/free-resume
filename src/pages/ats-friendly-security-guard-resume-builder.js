@@ -730,12 +730,6 @@ const SecurityGuardResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-security-guard-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Security Guard Resume Builder 2026 | ATS Templates" />
         <meta property="og:description" content="Create a professional security guard resume for free in 2026. ATS-optimized templates for armed guards, officers. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-security-guard-resume-builder-preview.jpg" />

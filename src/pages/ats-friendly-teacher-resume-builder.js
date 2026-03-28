@@ -734,14 +734,6 @@ const TeacherResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-NZ" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="en-IN" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Teacher Resume Builder 2026 | ATS Education Templates" />
         <meta property="og:description" content="Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-teacher-resume-builder-preview.jpg" />

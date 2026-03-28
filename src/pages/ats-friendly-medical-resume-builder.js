@@ -757,13 +757,10 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free Healthcare Resume Builder 2026 | ATS Medical Templates" />
         <meta property="og:description" content="Create a professional healthcare resume for free in 2026. ATS-optimized medical templates for nurses, doctors. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-healthcare-resume-builder-preview.jpg" />

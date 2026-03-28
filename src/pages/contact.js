@@ -576,6 +576,52 @@ align-items: center;
     font-size: 16px;
   }
 }
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 30px 0 20px;
+}
+.stat-card {
+  text-align: center;
+  padding: 16px 24px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  min-width: 100px;
+}
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-item {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+.faq-question {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+.faq-answer {
+  color: var(--text-light);
+}
 `;
 
 export async function getStaticProps() {
@@ -708,11 +754,6 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         
         {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* HREFLANG */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Contact Us: Email Support for Resume Builder (24h Response) 2026" />

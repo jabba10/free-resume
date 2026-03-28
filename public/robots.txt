@@ -1,69 +1,6 @@
-# public/robots.txt
-
-# ===========================================
-# ✅ ALLOW ALL SEARCH ENGINES (SEO)
-# ===========================================
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 0
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-# ===========================================
-# ✅ ALLOW AI CRAWLERS (GEO - Generative Engine Optimization)
-# ===========================================
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: Diffbot
-Allow: /
-
-# ===========================================
-# ✅ ALLOW ALL OTHER CRAWLERS
-# ===========================================
+# *
 User-agent: *
 Allow: /
-Crawl-delay: 0
-
-# ===========================================
-# ✅ SITEMAP LOCATION
-# ===========================================
-Sitemap: https://www.professionalresumefree.com/sitemap.xml
-
-# ===========================================
-# ✅ DISALLOW ONLY PRIVATE/SENSITIVE PATHS
-# (Do NOT disallow public pages)
-# ===========================================
-Disallow: /api/
-Disallow: /admin/
-Disallow: /private/
-Disallow: /_next/
 Disallow: /veterinary-resume-templates
 Disallow: /veterinary-resume-templates/
 Disallow: /resume-tools
@@ -90,3 +27,9 @@ Disallow: /blog/best-job-boards
 Disallow: /blog/best-job-boards/
 Disallow: /job-search-tips
 Disallow: /job-search-tips/
+
+# Host
+Host: https://www.professionalresumefree.com
+
+# Sitemaps
+Sitemap: https://www.professionalresumefree.com/sitemap.xml

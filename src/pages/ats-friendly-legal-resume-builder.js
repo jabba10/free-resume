@@ -496,7 +496,7 @@ const LegalResume = ({
             clone.style.background = '#ffffff';
             clone.style.color = '#000000';
             
-            // Apply custom font sizes - Keep Times New Roman for PDF but use system font for preview
+            // Apply custom font sizes
             const name = clone.querySelector(`.${styles.name}`);
             if (name) name.style.fontSize = `${fontSizes.name}pt`;
             
@@ -555,7 +555,6 @@ const LegalResume = ({
               license.style.fontSize = `${fontSizes.licenseText}pt`;
             });
             
-            // For PDF generation, use Times New Roman but keep system font for web preview
             clone.querySelectorAll('*').forEach(n => {
               n.style.color = '#000000';
               n.style.fontFamily = "'Times New Roman', 'Georgia', serif";
@@ -756,12 +755,6 @@ const LegalResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
         <meta property="og:description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-legal-resume-builder-preview.jpg" />
@@ -802,7 +795,7 @@ const LegalResume = ({
                 {
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#webpage",
-                  "url": "https://www.professionallegalresumefree.com/ats-friendly-legal-resume-builder",
+                  "url": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder",
                   "name": "Free Legal Resume Builder 2026 | ATS Attorney Templates",
                   "description": "Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -1074,7 +1067,7 @@ const LegalResume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - SINGLE H1 TAG */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1209,7 +1202,7 @@ const LegalResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
@@ -1287,7 +1280,7 @@ const LegalResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Add your professional legal profiles (LinkedIn, Avvo, Martindale-Hubbell, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1359,7 +1352,7 @@ const LegalResume = ({
             {/* Legal Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiBriefcase /> Legal Experience</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiBriefcase /> Legal Experience</h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>List your legal positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1465,7 +1458,7 @@ const LegalResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Your Legal Experience</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Your Legal Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>No legal experience added yet</p>
                   ) : (
@@ -1502,7 +1495,7 @@ const LegalResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiBook /> Legal Education</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiBook /> Legal Education</h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>List your law degrees, certifications, and relevant legal training</p>
                 
                 <div className={styles.formCard}>
@@ -1588,7 +1581,7 @@ const LegalResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>No education added yet</p>
                   ) : (
@@ -1620,11 +1613,11 @@ const LegalResume = ({
             {/* Credentials Section */}
             {activeSection === 'credentials' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiShield /> Bar Admissions & Credentials</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiShield /> Bar Admissions & Credentials</h2>
                 
                 {/* Bar Admissions */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Bar Admissions</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Bar Admissions</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Add your bar admissions by jurisdiction</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1718,7 +1711,7 @@ const LegalResume = ({
 
                 {/* Court Admissions */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Court Admissions</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Court Admissions</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Add court admissions and tribunal memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1783,7 +1776,7 @@ const LegalResume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Languages</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Languages</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>List languages you speak and your proficiency level (important for international law)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1857,11 +1850,11 @@ const LegalResume = ({
             {/* Specialties & Publications Section */}
             {activeSection === 'specialties' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiGitlab /> Practice Areas & Publications</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiGitlab /> Practice Areas & Publications</h2>
                 
                 {/* Practice Areas */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Practice Areas & Specializations</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Practice Areas & Specializations</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>List your legal practice areas and specializations</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1909,7 +1902,7 @@ const LegalResume = ({
 
                 {/* Publications & Speaking Engagements */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiBookOpen /> Publications & Speaking Engagements</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiBookOpen /> Publications & Speaking Engagements</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Add your legal publications, articles, and speaking engagements</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1988,7 +1981,7 @@ const LegalResume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Professional Affiliations</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Add your legal professional organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -2057,7 +2050,7 @@ const LegalResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>Customize font sizes for your legal resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

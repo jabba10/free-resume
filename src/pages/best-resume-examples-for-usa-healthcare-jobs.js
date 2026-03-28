@@ -743,11 +743,6 @@ function HealthcareResumeExamples({
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
         <meta property="og:description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals." />

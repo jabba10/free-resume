@@ -1243,13 +1243,19 @@ Specialization: Artificial Intelligence
     }
   };
 
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips";
+
+  // OPTIMIZED TITLE - UNDER 70 CHARACTERS
+  const pageTitle = "2026 Resume Guide: ATS Tips & CAR Method Examples";
+
   return (
     <>
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 58 CHARACTERS ===== */}
-        <title>2026 Resume Guide: ATS Tips, CAR Method & Format Examples</title>
+        {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS (58 chars) ===== */}
+        <title>{pageTitle}</title>
         
         {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content="Expert 2026 resume guide: Compare chronological (87%), functional (63%), and hybrid (94% ATS pass) formats. CAR method examples, ATS keywords, emerging trends. Updated weekly." />
@@ -1265,12 +1271,12 @@ Specialization: Artificial Intelligence
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
         {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips" />
+        <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips" hreflang="x-default" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="2026 Resume Guide: Formats, CAR Method & ATS Optimization" />
@@ -1278,9 +1284,9 @@ Specialization: Artificial Intelligence
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         
         {/* ===== OPEN GRAPH ===== */}
-        <meta property="og:title" content="2026 Resume Guide: Expert Strategies for ATS & AI Screening" />
+        <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content="Expert 2026 resume guide by Isata Kamara (10+ years, 8,500+ reviews). Format comparison, CAR method, ATS keywords, emerging trends. Updated weekly." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://www.professionalresumefree.com/resume-guide-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -1292,7 +1298,7 @@ Specialization: Artificial Intelligence
         
         {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="2026 Resume Guide: Formats, CAR Method & ATS Tips" />
+        <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content="Expert 2026 resume guide: Compare formats with success rates, CAR method examples, ATS keywords. Updated weekly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/resume-guide-2026.jpg" />
         
@@ -1329,17 +1335,17 @@ Specialization: Artificial Intelligence
               },
               {
                 "@type": "Article",
-                "@id": "https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips/#article",
-                "headline": "2026 Resume Writing Guide: Formats, CAR Method & ATS Optimization",
+                "@id": `${canonicalUrl}#article`,
+                "headline": pageTitle,
                 "description": "Complete guide to writing effective resumes for the 2026 job market. Covers chronological, functional, and hybrid formats with success rates.",
                 "author": { "@id": "https://www.professionalresumefree.com/#isatakamara" },
                 "datePublished": lastModifiedDate,
                 "dateModified": lastModifiedDate,
-                "mainEntityOfPage": "https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips"
+                "mainEntityOfPage": canonicalUrl
               },
               {
                 "@type": "FAQPage",
-                "@id": "https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips/#faq",
+                "@id": `${canonicalUrl}#faq`,
                 "mainEntity": faqData.map(faq => ({
                   "@type": "Question",
                   "name": faq.question,
@@ -1374,8 +1380,8 @@ Specialization: Artificial Intelligence
         <header style={styles.header} id="main-content">
           <div className="container">
             <div style={styles.heroContent}>
-              {/* ===== OPTIMIZED H1 TAG - 58 CHARACTERS (IDEAL SEO LENGTH) ===== */}
-              <h1 style={styles.heroTitle}>2026 Resume Guide: ATS Tips, CAR Method & Format Examples</h1>
+              {/* ===== OPTIMIZED H1 TAG - ONLY ONE H1 ON THE PAGE ===== */}
+              <h1 style={styles.heroTitle}>2026 Resume Guide: ATS Tips & CAR Method Examples</h1>
               
               <p style={styles.heroSubtitle}>
                 <strong>By Isata Kamara (10+ years, 8,500+ resumes reviewed)</strong> — Compare <strong>chronological (87% success), functional (63% success), and hybrid (94% ATS pass) formats</strong> with verified statistics. Master the <strong>CAR method</strong> for achievement bullets and optimize for AI screening.

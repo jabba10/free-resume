@@ -1216,17 +1216,6 @@ const ResumeGuide = ({
         {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-guide" />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-guide" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-guide" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-guide" hreflang="x-default" />
-        
-        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
-        <meta name="chatgpt-fts:title" content="ATS Resume Guide 2026: Beat Applicant Tracking Systems & Get 5× More Interviews" />
-        <meta name="chatgpt-fts:description" content="Complete guide to ATS resume optimization for 2026. Learn keyword strategies, CAR method, formatting rules, and free tools to pass automated screening." />
-        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
-        <meta name="generator" content="ProfessionalResumeFree - Career Platform" />
-        
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content="ATS Resume Guide 2026: Get 5× More Interviews with Optimization" />
         <meta property="og:description" content="Comprehensive ATS resume optimization guide with proven strategies, real examples, and free tools to land more interviews in 2026. Downloadable checklist included." />

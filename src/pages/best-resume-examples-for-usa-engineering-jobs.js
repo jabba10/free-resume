@@ -394,6 +394,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
+  // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/best-resume-examples-for-usa-engineering-jobs";
 
   const breadcrumbData = [

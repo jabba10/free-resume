@@ -707,13 +707,10 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates" />
         <meta property="og:description" content="Create your professional biotech resume for free in 2026. ATS-optimized templates help scientists & researchers land pharma interviews. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-biotech-resume-builder-preview.jpg" />
@@ -1038,6 +1035,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* SINGLE H1 TAG */}
             <h1 className={styles.heroTitle}>
               Free Biotech Resume Builder 2026: Create Your ATS Scientist Resume & Get Hired
             </h1>
@@ -2154,11 +2152,11 @@ const Resume = ({
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Changed to h3 for single H1 compliance */}
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Biotech Career?</h2>
+            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your Biotech Career?</h3>
             <p className={styles.ctaSubtitle}>
               Join 3 million+ biotech professionals who landed positions at top pharmaceutical and biotech companies with our free ATS-friendly resume builder.
             </p>

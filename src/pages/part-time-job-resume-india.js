@@ -815,16 +815,16 @@ export default function PartTimeJobResumeIndiaPage() {
 
   // Article data - optimized for 2026
   const articleData = {
-    title: "Part-Time Job Resume Guide India 2026 | Comprehensive Template & Tips",
+    title: "Part-Time Job Resume India 2026 | Comprehensive Template & Tips",
     description: "Complete 2026 guide for creating winning part-time job resumes in India. Get ATS-friendly templates, formatting tips, and industry-specific examples to land your ideal part-time position.",
-    slug: "part-time-job-resume-guide-india-2026",
+    slug: "part-time-job-resume-india",
     lastUpdated: currentDate,
     readTime: "18 min",
     wordCount: "3,200+ words"
   };
 
-  // Updated canonical URL
-  const canonicalUrl = `https://www.professionalresumefree.com/part-time-job-resume-guide-india-2026`;
+  // SINGLE CANONICAL URL - Real URL
+  const canonicalUrl = `https://www.professionalresumefree.com/part-time-job-resume-india`;
 
   // Internal links to cornerstone content (updated with valid paths)
   const internalLinks = [
@@ -924,7 +924,7 @@ export default function PartTimeJobResumeIndiaPage() {
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Part-Time Job Resume Guide",
+            "name": "Part-Time Job Resume India",
             "item": canonicalUrl
           }
         ]
@@ -958,7 +958,7 @@ export default function PartTimeJobResumeIndiaPage() {
         },
         "image": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/part-time-resume-guide-india-2026.jpg",
+          "url": "https://www.professionalresumefree.com/images/part-time-resume-guide-india.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1023,18 +1023,13 @@ export default function PartTimeJobResumeIndiaPage() {
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
+        {/* SINGLE CANONICAL URL - Real URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* Hreflang Tags */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-in" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - Real URL */}
         <meta property="og:title" content="Part-Time Job Resume India 2026: Complete Guide & Templates" />
         <meta property="og:description" content={articleData.description} />
         <meta property="og:type" content="article" />
@@ -1104,7 +1099,7 @@ export default function PartTimeJobResumeIndiaPage() {
               </li>
               <li aria-hidden="true">/</li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Part-Time Job Resume Guide India 2026</span>
+                <span itemProp="name" aria-current="page">Part-Time Job Resume India</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>

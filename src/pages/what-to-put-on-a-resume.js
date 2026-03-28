@@ -966,7 +966,7 @@ export default function WhatToPutOnResume({ seoData }) {
     : new Date().toISOString().split('T')[0];
   const currentYear = new Date().getFullYear();
 
-  // Updated canonical URL
+  // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/what-to-put-on-a-resume";
 
   // FAQ data for structured data
@@ -1166,7 +1166,7 @@ export default function WhatToPutOnResume({ seoData }) {
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Hreflang Tags */}

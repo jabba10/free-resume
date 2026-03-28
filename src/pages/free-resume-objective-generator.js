@@ -2018,13 +2018,8 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="revisit-after" content="2 days" />
         <meta name="build-timestamp" content={buildTimestamp} />
         
-        {/* Canonical & Internationalization */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-objective-generator" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-objective-generator" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-objective-generator" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-objective-generator" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-objective-generator" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-objective-generator" hreflang="x-default" />
         
         {/* Open Graph */}
         <meta property="og:title" content={`Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR}`} />

@@ -749,12 +749,6 @@ const VeterinaryResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Veterinary Resume Builder 2026: ATS Vet Templates" />
         <meta property="og:description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates for vets, technicians & animal healthcare specialists. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-veterinary-resume-builder-preview.jpg" />

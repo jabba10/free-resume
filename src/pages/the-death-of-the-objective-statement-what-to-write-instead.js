@@ -919,11 +919,6 @@ function DeathOfObjectiveStatement({
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="The Death of the Objective Statement: What to Write Instead (2026)" />
         <meta property="og:description" content="Objective statements are obsolete. Learn what to write instead to grab recruiter attention. Free guide with modern alternatives." />

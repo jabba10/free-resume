@@ -689,7 +689,7 @@ td {
 }
 `;
 
-const WhatShouldResumeLookLike = ({ seoData }) => {
+const ResumeFormattingGuide = ({ seoData }) => {
   const [activeSection, setActiveSection] = useState(0);
   const { currentDate, lastModifiedDate, buildTimestamp } = seoData || {};
   const freshnessIndicator = buildTimestamp 
@@ -697,8 +697,8 @@ const WhatShouldResumeLookLike = ({ seoData }) => {
     : new Date().toISOString().split('T')[0];
   const currentYear = new Date().getFullYear();
 
-  // Single canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/what-should-a-resume-look-like";
+  // Updated canonical URL
+  const canonicalUrl = "https://www.professionalresumefree.com/resume-formatting-guide";
 
   const formattingSections = [
     {
@@ -1263,7 +1263,7 @@ SKILLS
           <meta name="content-freshness" content={freshnessIndicator} />
         </div>
 
-        {/* Breadcrumb Navigation */}
+        {/* Breadcrumb Navigation - Updated with valid links only */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -1569,4 +1569,4 @@ export async function getStaticProps() {
   };
 }
 
-export default WhatShouldResumeLookLike;
+export default ResumeFormattingGuide;

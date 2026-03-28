@@ -1334,11 +1334,11 @@ function HowToUseChatGPTResume({
               <div className="table-wrapper">
                 <table className="table">
                   <thead>
-                    <tr>
+                     <tr>
                       <th>Section</th>
                       <th>Raw AI Output (Generic)</th>
                       <th>Human-Edited (Authentic)</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
                     <tr>

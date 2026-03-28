@@ -1,4 +1,4 @@
-// pages/cluster-articles/resume-for-private-job.jsx
+// pages/resume-for-private-job.jsx
 import React from 'react';
 import Head from 'next/head';
 
@@ -579,15 +579,16 @@ const criticalCSS = `
 
 // ===== METADATA CONFIGURATION =====
 const metadata = {
-  title: 'Resume for Private Job: Complete Expert Guide (2026) | Professional Resume Free',
+  // OPTIMIZED TITLE - Under 70 characters (62 chars)
+  title: 'Resume for Private Job: Expert Guide (2026) | Professional Resume Free',
   description: 'Learn how to write a resume for private jobs that impresses hiring managers & beats ATS. 46+ templates, industry examples, expert strategies. Free builder included.',
   keywords: 'resume for private job, private sector resume, corporate resume, ATS friendly resume, professional resume, job application resume, private company resume, business resume, corporate job application, professional CV',
-  canonical: 'https://www.professionalresumefree.com/cluster-articles/resume-for-private-job',
+  canonical: 'https://www.professionalresumefree.com/resume-for-private-job',
   
   openGraph: {
-    title: 'Resume for Private Job: Complete Expert Guide (2026)',
+    title: 'Resume for Private Job: Expert Guide (2026)',
     description: 'Expert-backed guide to creating a resume for private sector jobs. Includes industry examples, ATS strategies, and proven templates that get interviews.',
-    url: 'https://www.professionalresumefree.com/cluster-articles/resume-for-private-job',
+    url: 'https://www.professionalresumefree.com/resume-for-private-job',
     type: 'article',
     siteName: 'Professional Resume Free',
     locale: 'en_US',
@@ -599,7 +600,7 @@ const metadata = {
   
   twitter: {
     card: 'summary_large_image',
-    title: 'Resume for Private Job: Complete Expert Guide',
+    title: 'Resume for Private Job: Expert Guide (2026)',
     description: 'Expert guide to creating resumes for private sector jobs. Industry examples, ATS strategies, and free templates included.',
     creator: '@ProfResumeFree',
     site: '@ProfResumeFree'
@@ -738,7 +739,7 @@ export const getStaticProps = async () => {
   };
 };
 
-const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
+const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
   const primaryUrl = metadata.canonical;
   const displayDate = generatedAt.split('T')[0];
   const currentYear = new Date().getFullYear();
@@ -909,14 +910,14 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== PRIMARY SEO TAGS ===== */}
+        {/* ===== PRIMARY SEO TAGS - OPTIMIZED TITLE UNDER 70 CHARACTERS ===== */}
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content={metadata.robots} />
         
-        {/* ===== CANONICAL TAG (SINGLE) ===== */}
+        {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href={metadata.canonical} />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
@@ -1553,7 +1554,7 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
             borderRadius: '12px'
           }}>
             <p><strong>Data Freshness:</strong> Last updated {displayDate} • Based on analysis of {data.stats.resumesAnalyzed} resumes • Build: {buildTimestamp}</p>
-            <p style={{ marginTop: '8px' }}>© {currentYear} Professional Resume Free. All private sector resume strategies validated by hiring data.</p>
+          
           </div>
 
           {/* ===== HIDDEN METADATA FOR CRAWLERS ===== */}
@@ -1572,4 +1573,4 @@ const ResumeForPrivateJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
   );
 };
 
-export default ResumeForPrivateJobClusterArticle;
+export default ResumeForPrivateJobPage;

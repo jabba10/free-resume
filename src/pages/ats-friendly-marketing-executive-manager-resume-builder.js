@@ -86,7 +86,7 @@ const MarketingResume = ({
   
   const defaultSkill = () => ({
     name: '',
-    category: 'Digital',
+    category: 'Digital Marketing',
     isEditing: false,
     editIndex: null
   });
@@ -587,9 +587,9 @@ const MarketingResume = ({
             {formData.fullName || 'Your Name'}
           </h1>
           {formData.title && (
-            <h2 className={styles.title} style={{ fontSize: `${fontSizes.jobTitle}pt` }}>
+            <p className={styles.title} style={{ fontSize: `${fontSizes.jobTitle}pt` }}>
               {formData.title}
-            </h2>
+            </p>
           )}
           <div className={styles.contactInfoRow}>
             {formData.email && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
@@ -747,12 +747,6 @@ const MarketingResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Marketing Resume Builder: Executive Templates for 2026" />
         <meta property="og:description" content="Create a professional marketing resume for free. ATS-friendly executive templates trusted by 3M+ marketing pros. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-marketing-resume-builder-preview.jpg" />
@@ -1066,7 +1060,7 @@ const MarketingResume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - SINGLE H1 TAG */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1199,7 +1193,7 @@ const MarketingResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1246,7 +1240,7 @@ const MarketingResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links & Portfolio</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links & Portfolio</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles, portfolio, and social media</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1317,7 +1311,7 @@ const MarketingResume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h2>
                 <p className={styles.sectionDescription}>List your marketing positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1416,7 +1410,7 @@ const MarketingResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Professional Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Professional Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No professional experience added yet</p>
                   ) : (
@@ -1453,11 +1447,11 @@ const MarketingResume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTrendingUp /> Marketing Skills & Expertise</h3>
+                <h2 className={styles.sectionTitle}><FiTrendingUp /> Marketing Skills & Expertise</h2>
                 
                 {/* Marketing Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Marketing Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Marketing Skills</h3>
                   <p className={styles.sectionDescription}>Add your marketing skills categorized by specialty</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1522,7 +1516,7 @@ const MarketingResume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiAward /> Certifications</h4>
+                  <h3 className={styles.subSectionTitle}><FiAward /> Certifications</h3>
                   <p className={styles.sectionDescription}>Add your marketing certifications and professional qualifications</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1616,7 +1610,7 @@ const MarketingResume = ({
 
                 {/* Awards & Recognition */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Awards & Recognition</h4>
+                  <h3 className={styles.subSectionTitle}>Awards & Recognition</h3>
                   <p className={styles.sectionDescription}>Add your professional awards, honors, and recognition</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1700,7 +1694,7 @@ const MarketingResume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1764,7 +1758,7 @@ const MarketingResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your degrees, diplomas, and relevant education</p>
                 
                 <div className={styles.formCard}>
@@ -1843,7 +1837,7 @@ const MarketingResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1875,7 +1869,7 @@ const MarketingResume = ({
             {/* Projects Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTarget /> Key Marketing Projects</h3>
+                <h2 className={styles.sectionTitle}><FiTarget /> Key Marketing Projects</h2>
                 <p className={styles.sectionDescription}>Showcase your most impactful marketing campaigns and projects</p>
                 
                 <div className={styles.formCard}>
@@ -1962,7 +1956,7 @@ const MarketingResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Marketing Projects</h4>
+                  <h3 className={styles.subSectionTitle}>Your Marketing Projects</h3>
                   {formData.projects.length === 0 ? (
                     <p className={styles.emptyMessage}>No projects added yet</p>
                   ) : (
@@ -1999,7 +1993,7 @@ const MarketingResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

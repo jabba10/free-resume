@@ -1,4 +1,3 @@
-// pages/free-resume-keyword-density-analyzer-tool.jsx
 import Head from 'next/head';
 import { useState, useEffect, useCallback, useRef } from 'react';
 
@@ -1339,14 +1338,8 @@ Stanford University | 2016-2020`;
         <meta name="revisit-after" content="2 days" />
         <meta name="build-timestamp" content={buildTimestamp} />
         
-        {/* Canonical & Hreflang */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-US" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-GB" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-CA" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="en-AU" />
-        <link rel="alternate" href={`${SITE_URL}/free-resume-keyword-density-analyzer-tool`} hreflang="x-default" />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />

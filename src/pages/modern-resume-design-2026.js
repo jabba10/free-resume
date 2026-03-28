@@ -1026,8 +1026,8 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 70 CHARACTERS ===== */}
-        <title>Modern Resume Design 2026: Future-Proof Guide & AI Strategies (70 chars)</title>
+        {/* ===== OPTIMIZED SHORT TITLE - UNDER 70 CHARACTERS ===== */}
+        <title>Modern Resume Design 2026: Future-Proof Guide & AI Strategies</title>
         
         {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content="Master 2026 resume design with AI integration, interactive elements & future-proof templates. Get 3x more interviews with our cutting-edge strategies. Expert insights + free tools." />
@@ -1235,7 +1235,7 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
             </ol>
           </nav>
           
-          {/* Single H1 tag - exactly 70 characters */}
+          {/* Single H1 tag - exactly 62 characters */}
           <h1 style={styles.mainTitle}>Modern Resume Design 2026: Future-Proof Guide & AI Strategies</h1>
           
           <div style={styles.metaInfo}>

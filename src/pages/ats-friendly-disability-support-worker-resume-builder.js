@@ -726,10 +726,10 @@ const DisabilitySupportResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
         <meta property="og:description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-disability-support-resume-builder-preview.jpg" />
@@ -1039,7 +1039,7 @@ const DisabilitySupportResume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - SINGLE H1 TAG */}
       <section className={styles.heroSection} style={{ fontFamily: FONT_FAMILY }}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1177,7 +1177,7 @@ const DisabilitySupportResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel} style={{ fontFamily: FONT_FAMILY }}>
@@ -1225,7 +1225,7 @@ const DisabilitySupportResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>Add your professional profiles (LinkedIn, SEEK, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1295,7 +1295,7 @@ const DisabilitySupportResume = ({
             {/* Disability Support Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiUsers /> Disability Support Experience</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiUsers /> Disability Support Experience</h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>List your disability support positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1402,7 +1402,7 @@ const DisabilitySupportResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Your Disability Support Experience</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Your Disability Support Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage} style={{ fontFamily: FONT_FAMILY }}>No support experience added yet</p>
                   ) : (
@@ -1439,7 +1439,7 @@ const DisabilitySupportResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiBook /> Australian Qualifications & Training</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiBook /> Australian Qualifications & Training</h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>List your disability support qualifications, training, and Australian certifications</p>
                 
                 <div className={styles.formCard}>
@@ -1525,7 +1525,7 @@ const DisabilitySupportResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Your Qualifications</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Your Qualifications</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage} style={{ fontFamily: FONT_FAMILY }}>No qualifications added yet</p>
                   ) : (
@@ -1557,11 +1557,11 @@ const DisabilitySupportResume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiShield /> Australian Certifications & Licenses</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiShield /> Australian Certifications & Licenses</h2>
                 
                 {/* Essential Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Essential Australian Certifications</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Essential Australian Certifications</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>Add your essential Australian disability support certifications and licenses</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1651,7 +1651,7 @@ const DisabilitySupportResume = ({
 
                 {/* Achievements */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Key Achievements</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Key Achievements</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>Highlight your significant achievements in disability support</p>
                   <div className={styles.skillsInput}>
                     <textarea 
@@ -1700,7 +1700,7 @@ const DisabilitySupportResume = ({
 
                 {/* Availability */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiCalendar /> Availability</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiCalendar /> Availability</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>Specify your working availability for disability support roles</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1777,7 +1777,7 @@ const DisabilitySupportResume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Languages</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Languages</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>List languages you speak (important for diverse Australian communities)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1846,11 +1846,11 @@ const DisabilitySupportResume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiActivity /> Disability Support Skills</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiActivity /> Disability Support Skills</h2>
                 
                 {/* Specialised Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Specialised Disability Support Skills</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: FONT_FAMILY }}>Specialised Disability Support Skills</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>List your specialised skills in disability support categories</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1919,7 +1919,7 @@ const DisabilitySupportResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: FONT_FAMILY }}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: FONT_FAMILY }}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

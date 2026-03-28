@@ -921,11 +921,6 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
         {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG - India specific */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-in" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content={`Indian Resume Format ${currentYear}: Complete Guide (82% Preference)`} />
         <meta property="og:description" content={`Master Indian resume formats with professional ${currentYear} templates and ATS optimization tips for the Indian job market.`} />
@@ -1379,7 +1374,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
           borderRadius: '12px'
         }}>
           <p><strong>Data Freshness:</strong> Last updated {formattedDate} • Based on analysis of 3,200+ successful resumes • Build: {buildTimestamp}</p>
-          <p style={{ marginTop: '8px' }}>© {currentYear} Professional Resume Free. All Indian resume strategies validated by recruitment data.</p>
+          
         </div>
       </main>
     </>

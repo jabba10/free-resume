@@ -708,6 +708,8 @@ function RetailResumeGuide({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow" />
         <meta name="last-modified" content={lastModifiedDate} />
+        
+        {/* SINGLE CANONICAL TAG */}
         <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content={meta.title} />

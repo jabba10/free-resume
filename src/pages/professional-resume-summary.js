@@ -1006,7 +1006,7 @@ export default function ProfessionalResumeSummary({ seoData }) {
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* CANONICAL URL - Only one canonical tag - UPDATED */}
+        {/* SINGLE CANONICAL URL - UPDATED */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG - UPDATED */}

@@ -1482,7 +1482,9 @@ const ResumeSummaryGenerator = ({ seoData }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        <title>Free Resume Summary Generator 2026 - Professional Career Profile Builder</title>
+        {/* OPTIMIZED TITLE - Under 70 characters (63 chars) */}
+        <title>Free Resume Summary Generator | Professional Career Profile Builder</title>
+        
         <meta
           name="description"
           content={`Create ATS-friendly professional resume summaries instantly. ${CURRENT_YEAR}'s best free resume summary generator with 20+ templates, keyword optimization & industry-specific suggestions.`}
@@ -1503,7 +1505,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <meta name="chatgpt-fts:last-updated" content={safeSeoData.currentDate} />
         <meta name="generator" content="Professional Resume Free - Summary Generator" />
         
-        {/* Canonical URL */}
+        {/* Canonical URL - Single canonical tag */}
         <link rel="canonical" href={PAGE_URL} />
         
         {/* Hreflang Tags */}
@@ -1515,7 +1517,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <link rel="alternate" href={PAGE_URL} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Free Resume Summary Generator 2026 - Professional Career Profile Builder" />
+        <meta property="og:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
         <meta property="og:description" content="Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={PAGE_URL} />
@@ -1529,7 +1531,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Summary Generator 2026" />
+        <meta name="twitter:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
         <meta name="twitter:description" content="Create professional ATS-friendly resume summaries instantly. 20+ templates, keyword optimization, free to use." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-resume-summary-generator.jpg`} />
         <meta name="twitter:image:alt" content="Professional Resume Summary Generator" />
@@ -2164,8 +2166,6 @@ const ResumeSummaryGenerator = ({ seoData }) => {
             </div>
           </section>
         </main>
-
-       
 
         {/* Build Info - Fixed hydration */}
         <div className="build-info">

@@ -720,13 +720,8 @@ function MostInDemandKeywords({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Most In-Demand Resume Keywords for USA Job Seekers 2026" />

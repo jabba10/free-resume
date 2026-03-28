@@ -1,4 +1,3 @@
-
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -1081,11 +1080,6 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
         
         {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* HREFLANG */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Simple Resume Template 2026: Complete Guide (47% More Interviews)" />

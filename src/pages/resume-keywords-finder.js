@@ -1211,11 +1211,8 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         <meta property="og:title" content="Resume Keywords Finder 2026: Ultimate ATS Optimization Guide" />
         <meta property="og:description" content="Master resume keyword optimization. Learn to find and implement keywords that beat ATS. 40% more interviews. Free guide." />

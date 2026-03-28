@@ -1031,11 +1031,8 @@ function SkillsFirstResumePage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
+        {/* SINGLE CANONICAL TAG - Only one canonical link */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         <meta property="og:title" content="Why Skills-First Resumes Are Replacing Chronological Layouts in 2026" />
         <meta property="og:description" content="Data-driven analysis of the skills-first resume revolution. Includes academic research, ATS compatibility studies, and expert implementation guide." />

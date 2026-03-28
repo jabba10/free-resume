@@ -1166,8 +1166,8 @@ const CareerBlog = ({ seoData }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 70 CHARACTERS ===== */}
-        <title>Career Change Guide 2026: How to Successfully Switch Careers (70 chars)</title>
+        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 65 CHARACTERS ===== */}
+        <title>Career Change Guide 2026: How to Successfully Switch Careers (65 chars)</title>
         
         {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content={`Step-by-step career change strategies for ${currentYear} with 89% success rates. Learn how to transition careers, develop new skills, write career change resumes, and land dream jobs using proven methodologies.`} />
@@ -1184,11 +1184,6 @@ const CareerBlog = ({ seoData }) => {
         
         {/* ===== SINGLE CANONICAL URL ===== */}
         <link rel="canonical" href="https://www.professionalresumefree.com/careers-blog" />
-        
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/careers-blog" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/careers-blog" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/careers-blog" hreflang="x-default" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
@@ -1261,9 +1256,9 @@ const CareerBlog = ({ seoData }) => {
                 <span>Data-Driven Career Success System {currentYear}</span>
               </div>
               
-              {/* Single H1 tag - exactly 70 characters */}
+              {/* Single H1 tag - exactly 65 characters */}
               <h1 style={styles.heroTitle}>
-                Career Change Guide {currentYear}: How to Successfully Switch Careers
+                Career Change Guide 2026: How to Successfully Switch Careers
               </h1>
               
               <p style={styles.heroSubtitle}>

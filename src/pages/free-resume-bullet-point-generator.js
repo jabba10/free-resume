@@ -1402,9 +1402,10 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  // Dynamic meta data
+  // Dynamic meta data - Shortened title to under 70 characters
   const metaDescription = `Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${CURRENT_YEAR}.`;
-  const pageTitle = `Free Resume Bullet Point Generator - CAR Format & Impact-Focused Templates ${CURRENT_YEAR}`;
+  const pageTitle = `Free Resume Bullet Point Generator: CAR Method & ATS Optimized`;
+  const canonicalUrl = "https://www.professionalresumefree.com/free-resume-bullet-point-generator";
 
   // Schema data
   const schemaData = {
@@ -1412,8 +1413,8 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-bullet-point-generator",
-        "url": "https://www.professionalresumefree.com/free-resume-bullet-point-generator",
+        "@id": canonicalUrl,
+        "url": canonicalUrl,
         "name": pageTitle,
         "description": metaDescription,
         "datePublished": "2024-01-01",
@@ -1471,12 +1472,12 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
         <meta name="chatgpt-fts:last-updated" content={seoData?.currentDate || new Date().toISOString().split('T')[0]} />
         
         {/* Canonical URL - Single Tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-bullet-point-generator" />
+        <link rel="canonical" href={canonicalUrl} />
         
         {/* Open Graph */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-bullet-point-generator" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={seoData?.lastModifiedDate || new Date().toISOString()} />

@@ -648,11 +648,6 @@ function BestFontsAndDesignsPage({
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
@@ -969,15 +964,15 @@ function BestFontsAndDesignsPage({
                 This table compares the top fonts based on ATS compatibility, readability, and best use cases. Use it to select the perfect font for your industry and experience level.
               </p>
               <div className="table-wrap">
-                <table>
+                 <table>
                   <thead>
-                    <tr>
+                     <tr>
                       <th>Font</th>
                       <th>Category</th>
                       <th>ATS Score</th>
                       <th>Readability</th>
                       <th>Best For</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
                     {fontComparisonData.map((item, index) => (
@@ -990,7 +985,7 @@ function BestFontsAndDesignsPage({
                       </tr>
                     ))}
                   </tbody>
-                </table>
+                 </table>
               </div>
               <p className="helper-text">ATS scores based on testing with 8 major ATS platforms in 2026.</p>
             </div>
@@ -1047,47 +1042,47 @@ function BestFontsAndDesignsPage({
               </div>
 
               <div className="table-wrap" style={{marginTop: '30px'}}>
-                <table>
+                 <table>
                   <thead>
-                    <tr>
+                     <tr>
                       <th>Element</th>
                       <th>Weak design</th>
                       <th>Strong design</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td>Font</td>
                       <td>Brush Script or Comic Sans</td>
                       <td className="text-success">Arial, Calibri, or Garamond</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>Layout</td>
                       <td>2 columns with sidebar</td>
                       <td className="text-success">Single column, clear hierarchy</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>Contact</td>
                       <td>In footer (often missed by ATS)</td>
                       <td className="text-success">Top of page, one line</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>File format</td>
                       <td>Word file (.docx) may shift formatting</td>
                       <td className="text-success">PDF preserves formatting</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>Headings</td>
                       <td>Creative titles like "Where I've Worked"</td>
                       <td className="text-success">Standard: "Work Experience"</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>Margins</td>
                       <td>0.2 inches or inconsistent</td>
                       <td className="text-success">0.5 to 1 inch, consistent</td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
               <p className="helper-text">Based on 2026 ATS compatibility tests with major platforms.</p>
             </div>

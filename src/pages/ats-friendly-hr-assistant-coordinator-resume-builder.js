@@ -702,13 +702,10 @@ const HRResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
         <meta property="og:description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-hr-resume-builder-preview.jpg" />
@@ -1031,6 +1028,7 @@ const HRResume = ({
               </span>
             </div>
             
+            {/* SINGLE H1 TAG */}
             <h1 className={styles.heroTitle}>
               Free HR Resume Builder 2026
             </h1>
@@ -2193,11 +2191,11 @@ const HRResume = ({
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Changed to h3 for single H1 compliance */}
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your HR Career?</h2>
+            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your HR Career?</h3>
             <p className={styles.ctaSubtitle}>
               Join 3 million+ HR professionals who landed their dream jobs with our free ATS-friendly HR resume builder.
             </p>

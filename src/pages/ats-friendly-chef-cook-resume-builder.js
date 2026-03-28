@@ -692,7 +692,10 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" />
+        
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-US" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-GB" />

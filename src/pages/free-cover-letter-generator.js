@@ -1534,17 +1534,9 @@ export default function CoverLetterGenerator({ seoData, buildTimestamp }) {
         <meta name="chatgpt-fts:last-updated" content={safeSeoData.currentDate} />
         <meta name="generator" content="Professional Resume Free - Cover Letter Generator" />
         
-        {/* Canonical & Sitemap */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={`${SITE_URL}/free-cover-letter-generator`} />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        
-        {/* Hreflang for International SEO */}
-        <link rel="alternate" href={`${SITE_URL}/free-cover-letter-generator`} hreflang="en" />
-        <link rel="alternate" href={`${SITE_URL}/free-cover-letter-generator`} hreflang="en-US" />
-        <link rel="alternate" href={`${SITE_URL}/free-cover-letter-generator`} hreflang="en-GB" />
-        <link rel="alternate" href={`${SITE_URL}/free-cover-letter-generator`} hreflang="en-CA" />
-        <link rel="alternate" href={`${SITE_URL}/free-cover-letter-generator`} hreflang="en-AU" />
-        <link rel="alternate" href={`${SITE_URL}/free-cover-letter-generator`} hreflang="x-default" />
         
         {/* Open Graph Protocol */}
         <meta property="og:title" content="Free Cover Letter Generator - Professional Templates & AI Customization 2026" />

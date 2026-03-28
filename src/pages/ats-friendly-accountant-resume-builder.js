@@ -683,11 +683,14 @@ const AccountantResume = ({
     );
   };
 
+  // Updated title: Shortened to under 70 characters for optimal SEO
+  const pageTitle = "Free Accounting Resume Builder 2026 | ATS CPA Resume Maker";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Accounting Resume Builder 2026: Create Your ATS CPA Resume & Get Hired</title>
-        <meta name="title" content="Free Accounting Resume Builder 2026 | ATS CPA Resume Maker" />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
         <meta name="description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up." />
         <meta name="keywords" content="accounting resume builder, CPA resume templates, finance resume builder, accountant CV, ATS friendly accounting resume, free resume builder for accountants, financial analyst resume, audit resume, tax accountant CV, Big 4 resume templates" />
         <meta name="author" content="Professional Accounting Resume Free" />
@@ -698,13 +701,7 @@ const AccountantResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Accounting Resume Builder 2026 | Create ATS CPA Resume" />
+        <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up required." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-accounting-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -719,7 +716,7 @@ const AccountantResume = ({
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Accounting Resume Builder 2026 | Create ATS CPA Resume" />
+        <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-accounting-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Accounting Resume Builder with ATS Templates" />
@@ -745,7 +742,7 @@ const AccountantResume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder/#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-accountant-resume-builder",
-                  "name": "Free Accounting Resume Builder 2026 - ATS Friendly CPA Templates",
+                  "name": pageTitle,
                   "description": "Create professional ATS-optimized accounting resumes for free. Land interviews 3x faster with our accounting resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
@@ -1027,6 +1024,7 @@ const AccountantResume = ({
               </span>
             </div>
             
+            {/* SINGLE H1 TAG - ONLY ONE H1 ON THE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Accounting Resume Builder 2026: Create Your ATS CPA Resume & Get Hired
             </h1>
@@ -1149,7 +1147,7 @@ const AccountantResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1192,7 +1190,7 @@ const AccountantResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional accounting profiles (LinkedIn, Xing, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1258,7 +1256,7 @@ const AccountantResume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Professional Experience</h2>
                 <p className={styles.sectionDescription}>List your accounting positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1357,7 +1355,7 @@ const AccountantResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Professional Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Professional Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No experience added yet</p>
                   ) : (
@@ -1394,7 +1392,7 @@ const AccountantResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your accounting education, degrees, and relevant qualifications</p>
                 
                 <div className={styles.formCard}>
@@ -1473,7 +1471,7 @@ const AccountantResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1505,11 +1503,11 @@ const AccountantResume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiAward /> Professional Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiAward /> Professional Certifications</h2>
                 
                 {/* Accounting Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Accounting & Finance Certifications</h4>
+                  <h3 className={styles.subSectionTitle}>Accounting & Finance Certifications</h3>
                   <p className={styles.sectionDescription}>Add your professional accounting certifications (CPA, CMA, CFA, ACCA, etc.)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1593,7 +1591,7 @@ const AccountantResume = ({
 
                 {/* Professional Licenses */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Professional Licenses</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Professional Licenses</h3>
                   <p className={styles.sectionDescription}>Add your professional accounting licenses</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1677,7 +1675,7 @@ const AccountantResume = ({
 
                 {/* Industry Expertise */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Industry Expertise</h4>
+                  <h3 className={styles.subSectionTitle}>Industry Expertise</h3>
                   <p className={styles.sectionDescription}>List industries you have specialized experience in</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1725,11 +1723,11 @@ const AccountantResume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTool /> Skills & Technical Proficiency</h3>
+                <h2 className={styles.sectionTitle}><FiTool /> Skills & Technical Proficiency</h2>
                 
                 {/* Accounting Software Proficiency */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiDatabase /> Accounting Software & Tools</h4>
+                  <h3 className={styles.subSectionTitle}><FiDatabase /> Accounting Software & Tools</h3>
                   <p className={styles.sectionDescription}>List your proficiency with accounting software and financial tools</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1795,7 +1793,7 @@ const AccountantResume = ({
 
                 {/* Core Accounting Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Core Accounting Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Core Accounting Skills</h3>
                   <p className={styles.sectionDescription}>List your core accounting competencies and technical skills</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1864,7 +1862,7 @@ const AccountantResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your professional accounting resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

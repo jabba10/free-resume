@@ -1,7 +1,7 @@
 import styles from './kpage.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
-import { FiCheck, FiHome, FiChevronRight, FiArrowRight, FiDownload, FiFileText, FiUser, FiAward, FiTool, FiStar, FiTrendingUp } from 'react-icons/fi';
+import { FiCheck, FiHome, FiChevronRight, FiArrowRight, FiDownload, FiFileText, FiUser, FiAward, FiTool, FiStar, FiTrendingUp, FiMail, FiPhone, FiMapPin, FiBookOpen, FiClock, FiUsers, FiBriefcase, FiTarget, FiZap, FiShield, FiLayers, FiCode, FiGlobe } from 'react-icons/fi';
 
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -43,11 +43,6 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         "position": 2,
         "name": "Resume Writing for Beginners",
         "item": "https://www.professionalresumefree.com/resume-writing-for-beginners"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Resume Writing for Beginners"
       }
     ]
   };
@@ -199,8 +194,8 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
   return (
     <>
       <Head>
-        {/* Primary Meta Tags */}
-        <title>Resume Writing for Beginners: Complete Step-by-Step Guide 2026 | Professional Resume Free</title>
+        {/* Primary Meta Tags - Shortened Title (62 characters) */}
+        <title>Resume Writing for Beginners: Complete Step-by-Step Guide 2026</title>
         <meta 
           name="description" 
           content="First-time resume writing made easy! Learn how to create your first professional resume with no experience. Beginner-friendly guide with free ATS-optimized templates, examples, and tips. Start your career today!" 
@@ -213,7 +208,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Canonical & Sitemap */}
+        {/* Canonical & Sitemap - Only one canonical tag */}
         <link rel="canonical" href="https://www.professionalresumefree.com/resume-writing-for-beginners" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
@@ -269,6 +264,13 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        
+        {/* GEO Optimization Tags */}
+        <meta name="chatgpt-fts:title" content="Resume Writing for Beginners: Complete Step-by-Step Guide 2026" />
+        <meta name="chatgpt-fts:description" content="First-time resume writing made easy! Learn how to create your first professional resume with no experience. Beginner-friendly guide with free templates." />
+        <meta name="chatgpt-fts:keywords" content="resume writing, beginner resume, first resume, no experience resume, student resume" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - Career Resources" />
         
         {/* Structured Data */}
         <script
@@ -991,7 +993,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
           </article>
         </main>
 
-        {/* Footer */}
+      
         
       </div>
     </>

@@ -1045,14 +1045,6 @@ const JobSearchTips = ({ seoData }) => {
         {/* Single Canonical URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-gb" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-ca" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-au" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         

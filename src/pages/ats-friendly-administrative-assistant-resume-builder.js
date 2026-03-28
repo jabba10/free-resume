@@ -678,8 +678,9 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Administrative Resume Builder: ATS Templates 2026 - Professional Free Resume Builder</title>
-        <meta name="title" content="Free Administrative Resume Builder: ATS Templates 2026 - Professional Free Resume Builder" />
+        {/* OPTIMIZED TITLE - UNDER 70 CHARACTERS */}
+        <title>Free Administrative Resume Builder: ATS Templates 2026</title>
+        <meta name="title" content="Free Administrative Resume Builder: ATS Templates 2026" />
         <meta name="description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
         <meta name="keywords" content="administrative resume builder, administrative assistant resume templates, executive assistant resume, office administrator CV, ATS friendly administrative resume, free resume builder for administrative professionals, virtual assistant resume, administrative coordinator CV, global administrative jobs" />
         <meta name="author" content="Professional Administrative Resume Free" />
@@ -690,12 +691,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Administrative Resume Builder: ATS Templates 2026" />
         <meta property="og:description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-administrative-resume-builder-preview.jpg" />

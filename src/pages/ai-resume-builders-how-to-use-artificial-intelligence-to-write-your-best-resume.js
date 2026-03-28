@@ -901,13 +901,8 @@ Human-Enhanced:
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* HREFLANG */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content="AI Resume Builders 2026: Create Better Resumes 3x Faster (Free)" />

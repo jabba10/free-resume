@@ -1139,13 +1139,8 @@ function ResumeTipsForCollegeStudents({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content="Resume Tips for USA College Students and Graduates (2026)" />
@@ -1549,22 +1544,22 @@ function ResumeTipsForCollegeStudents({
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td>"Education: XYZ University, expected 2026" (no GPA, no coursework)</td>
                       <td className="text-success">"XYZ University, Bachelor of Arts in Marketing, expected May 2026. GPA: 3.6. Relevant coursework: Consumer Behavior, Digital Marketing, Data Analytics."</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>"Worked at campus bookstore. Helped customers and stocked shelves."</td>
                       <td className="text-success">"Campus Bookstore Associate (2024-2025). Assisted 100+ customers daily, resolved complaints, and trained 3 new hires. Recognized as Employee of the Month."</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>"Member of Marketing Club."</td>
                       <td className="text-success">"Marketing Club, Vice President (2025). Led a team of 10 to organize a networking event with 50+ attendees. Increased club membership by 30%."</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>"Skills: Microsoft Office, social media, communication."</td>
                       <td className="text-success">"Technical Skills: Excel (pivot tables, VLOOKUP), Meta Business Suite, Google Analytics, Canva. Soft Skills: Public speaking, team leadership, project management."</td>
-                    </tr>
+                     </tr>
                   </tbody>
                 </table>
               </div>

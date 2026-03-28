@@ -646,7 +646,7 @@ const Resume = ({
             
             {clinicalSkills.length > 0 && (
               <div className={styles.skillsGroup}>
-                <h4 className={styles.skillsSubtitle}>Clinical Nursing Skills</h4>
+                <h3 className={styles.skillsSubtitle} style={{ fontSize: `${fontSizes.regularText}pt` }}>Clinical Nursing Skills</h3>
                 <ul className={styles.skillsList}>
                   {clinicalSkills.map((skill, i) => (
                     <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{skill.name}</li>
@@ -657,7 +657,7 @@ const Resume = ({
 
             {technicalSkills.length > 0 && (
               <div className={styles.skillsGroup}>
-                <h4 className={styles.skillsSubtitle}>Technical Proficiency</h4>
+                <h3 className={styles.skillsSubtitle} style={{ fontSize: `${fontSizes.regularText}pt` }}>Technical Proficiency</h3>
                 <ul className={styles.skillsList}>
                   {technicalSkills.map((skill, i) => (
                     <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{skill.name}</li>
@@ -668,7 +668,7 @@ const Resume = ({
 
             {softSkills.length > 0 && (
               <div className={styles.skillsGroup}>
-                <h4 className={styles.skillsSubtitle}>Professional Attributes</h4>
+                <h3 className={styles.skillsSubtitle} style={{ fontSize: `${fontSizes.regularText}pt` }}>Professional Attributes</h3>
                 <ul className={styles.skillsList}>
                   {softSkills.map((skill, i) => (
                     <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{skill.name}</li>
@@ -721,7 +721,10 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" />
+        
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en-US" />
         <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-resume-builder" hreflang="en-GB" />
@@ -1041,7 +1044,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1052,6 +1055,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Nurse Resume Builder: Create Yours in 5 Minutes
             </h1>
@@ -1176,7 +1180,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Nurse Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Nurse Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1223,7 +1227,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Nursing Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Nursing Links</h3>
                   <p className={styles.sectionDescription}>Add your professional nursing profiles</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1290,7 +1294,7 @@ const Resume = ({
             {/* Nursing Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeart /> Nursing Experience</h3>
+                <h2 className={styles.sectionTitle}><FiHeart /> Nursing Experience</h2>
                 <p className={styles.sectionDescription}>List your nursing positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1389,7 +1393,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Nursing Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Nursing Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No nursing experience added yet</p>
                   ) : (
@@ -1426,7 +1430,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Nursing Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Nursing Education</h2>
                 <p className={styles.sectionDescription}>List your nursing education, degrees, and relevant training</p>
                 
                 <div className={styles.formCard}>
@@ -1495,7 +1499,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Nursing Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Nursing Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1527,10 +1531,10 @@ const Resume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> Nursing Licenses & Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiShield /> Nursing Licenses & Certifications</h2>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Nursing Licenses</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Nursing Licenses</h3>
                   <p className={styles.sectionDescription}>Add your nursing licenses and specialty certifications</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1614,7 +1618,7 @@ const Resume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Nursing Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Nursing Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional nursing organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1676,7 +1680,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1740,11 +1744,11 @@ const Resume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiActivity /> Nursing Skills & Competencies</h3>
+                <h2 className={styles.sectionTitle}><FiActivity /> Nursing Skills & Competencies</h2>
                 
                 {/* Clinical Nursing Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Clinical Nursing Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Clinical Nursing Skills</h3>
                   <p className={styles.sectionDescription}>List your clinical nursing procedures and competencies</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1804,7 +1808,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your nursing resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2040,7 +2044,7 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Nursing Resume Preview</h3>
+              <h2>Full Nursing Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

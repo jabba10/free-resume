@@ -11,6 +11,7 @@ const Footer = () => {
     { href: '/jobs-boards', label: 'Job Boards' },
     { href: '/jobs-search-tips', label: 'Job Search Tips' },
     { href: '/careers-blog', label: 'Careers Blog' },
+    { href: '/resume-formatting-guide', label: 'Resume Formatting Guide' },
   ];
 
   const resourceLinks = [

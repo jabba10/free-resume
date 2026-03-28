@@ -232,28 +232,28 @@ const Resume = ({
   // FAQ Data for Structured Data
   const faqs = [
     {
-      question: "Is this tech resume builder really free with no hidden costs?",
-      answer: "Yes, our technology resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional tech resume in PDF format without any payment required."
+      question: "Is this ML engineer resume builder really free with no hidden costs?",
+      answer: "Yes, our machine learning engineer resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional ML resume in PDF format without any payment required."
     },
     {
-      question: "What does ATS-friendly mean for tech resumes?",
-      answer: "ATS-friendly means our tech resume templates are optimized to pass through Applicant Tracking Systems used by 95% of tech companies. This ensures your technical skills, programming languages, and experience are properly scanned and recognized."
+      question: "What does ATS-friendly mean for ML engineer resumes?",
+      answer: "ATS-friendly means our ML resume templates are optimized to pass through Applicant Tracking Systems used by 95% of tech companies. This ensures your machine learning skills, frameworks, and experience are properly scanned and recognized."
     },
     {
-      question: "Can I download my tech resume as PDF without creating an account?",
-      answer: "Absolutely! Download your professional technology resume in PDF format without creating an account. Everything is completely free and accessible immediately for engineers, data scientists, and AI professionals."
+      question: "Can I download my ML engineer resume as PDF without creating an account?",
+      answer: "Absolutely! Download your professional machine learning engineer resume in PDF format without creating an account. Everything is completely free and accessible immediately for ML engineers, data scientists, and AI professionals."
     },
     {
-      question: "How many tech resume templates are available for free?",
-      answer: "We offer professionally designed ATS-friendly templates for software engineers, data scientists, ML engineers, AI researchers, DevOps, and all tech specialties. All templates are completely free and optimized for tech hiring."
+      question: "How many ML engineer resume templates are available for free?",
+      answer: "We offer professionally designed ATS-friendly templates for ML engineers, data scientists, AI researchers, and all machine learning roles. All templates are completely free and optimized for ML hiring."
     },
     {
-      question: "How does your tech resume builder work?",
-      answer: "Our builder uses ATS-optimized tech templates with proper technical terminology formatting. We guide you to highlight programming languages, frameworks, projects, and achievements that tech employers look for."
+      question: "How does your ML engineer resume builder work?",
+      answer: "Our builder uses ATS-optimized ML templates with proper machine learning terminology formatting. We guide you to highlight ML frameworks, AI projects, and achievements that tech employers look for."
     },
     {
-      question: "Can I showcase my GitHub and tech portfolio with this builder?",
-      answer: "Yes! We have dedicated sections for GitHub projects, portfolio links, tech publications, and certifications. Your tech profile gets presented professionally to recruiters."
+      question: "Can I showcase my GitHub and ML projects with this builder?",
+      answer: "Yes! We have dedicated sections for GitHub repositories, ML projects, research publications, and certifications. Your machine learning profile gets presented professionally to recruiters."
     }
   ];
 
@@ -549,7 +549,7 @@ const Resume = ({
 
       Object.assign(el.style, originalStates);
 
-      pdf.save(`${formData.fullName || 'tech_resume'}_resume.pdf`);
+      pdf.save(`${formData.fullName || 'ml_engineer_resume'}_resume.pdf`);
     } catch (err) {
       console.error("PDF Error:", err);
       alert("Failed to generate PDF. Please try again.");
@@ -558,8 +558,8 @@ const Resume = ({
     }
   };
 
-  // --- Tech Resume Template ---
-  const TechTemplate = ({ formData }) => {
+  // --- ML Engineer Resume Template ---
+  const MLTemplate = ({ formData }) => {
     const hasSummary = formData.summary && formData.summary.trim().length > 0;
     const hasExperience = formData.experience.length > 0;
     const hasEducation = formData.education.length > 0;
@@ -591,14 +591,14 @@ const Resume = ({
 
         {hasSummary && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL SUMMARY</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL SUMMARY</h2>
             <p className={styles.summaryText} style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p>
           </section>
         )}
 
         {hasExperience && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL EXPERIENCE</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>MACHINE LEARNING EXPERIENCE</h2>
             {formData.experience.map((exp, i) => (
               <div key={i} className={styles.experienceItem}>
                 <div className={styles.experienceHeader}>
@@ -635,7 +635,7 @@ const Resume = ({
 
         {hasSkills && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL SKILLS</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>ML & TECHNICAL SKILLS</h2>
             <ul className={styles.skillsList}>
               {formData.skills.map((s, i) => (
                 <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>
@@ -662,7 +662,7 @@ const Resume = ({
 
         {hasProjects && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL PROJECTS</h2>
+            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>ML PROJECTS</h2>
             {formData.projects.map((p, i) => (
               <div key={i} className={styles.projectItem}>
                 <h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{p.name}</h3>
@@ -705,11 +705,11 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Tech Resume Builder: AI/ML Engineering Templates 2026</title>
-        <meta name="title" content="Free Tech Resume Builder: AI/ML Engineering Templates 2026" />
-        <meta name="description" content="Create a professional tech resume for free. ATS-friendly AI/ML templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
-        <meta name="keywords" content="tech resume builder, software engineer resume, data scientist resume, machine learning resume, AI resume builder, free resume builder for tech, developer resume, programming resume, tech CV, FAANG resume" />
-        <meta name="author" content="Professional Tech Resume Free" />
+        <title>Free ML Engineer Resume Builder: Create Yours in 5 Minutes</title>
+        <meta name="title" content="Free ML Engineer Resume Builder: Create Yours in 5 Minutes" />
+        <meta name="description" content="Create a professional machine learning engineer resume for free. ATS-friendly ML templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
+        <meta name="keywords" content="ML engineer resume builder, machine learning resume, data scientist resume, AI resume builder, free resume builder for ML engineers, ML engineer CV, AI researcher resume, deep learning resume, FAANG resume" />
+        <meta name="author" content="Professional ML Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="date" content={safeCurrentDate} />
@@ -717,33 +717,27 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" hreflang="x-default" />
-        <meta property="og:title" content="Free Tech Resume Builder: AI/ML Engineering Templates 2026" />
-        <meta property="og:description" content="Create a professional tech resume for free. ATS-friendly AI/ML templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
+        <meta property="og:title" content="Free ML Engineer Resume Builder: Create Yours in 5 Minutes" />
+        <meta property="og:description" content="Create a professional machine learning engineer resume for free. ATS-friendly ML templates trusted by 5M+ engineers. Download PDF in minutes." />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-ml-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free Tech Resume Builder - Create Professional AI/ML Resumes Online" />
+        <meta property="og:image:alt" content="Free ML Engineer Resume Builder - Create Professional Machine Learning Resumes Online" />
         <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Professional Tech Resume Free" />
+        <meta property="og:site_name" content="Professional ML Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:locale:alternate" content="en_GB" />
         <meta property="og:locale:alternate" content="en_CA" />
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Tech Resume Builder: AI/ML Engineering Templates 2026" />
-        <meta name="twitter:description" content="Create a professional tech resume for free. ATS-friendly AI/ML templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
-        <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
-        <meta name="twitter:site" content="@TechResumeFree" />
-        <meta name="twitter:creator" content="@TechResumeFree" />
+        <meta name="twitter:title" content="Free ML Engineer Resume Builder: Create Yours in 5 Minutes" />
+        <meta name="twitter:description" content="Create a professional machine learning engineer resume for free. ATS-friendly ML templates trusted by 5M+ engineers. Download PDF in minutes." />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-ml-resume-builder-preview.jpg" />
+        <meta name="twitter:image:alt" content="Free ML Engineer Resume Builder with ATS Templates" />
+        <meta name="twitter:site" content="@MLResumeFree" />
+        <meta name="twitter:creator" content="@MLResumeFree" />
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -766,8 +760,8 @@ const Resume = ({
                   "@type": "WebPage",
                   "@id": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder#webpage",
                   "url": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
-                  "name": "Free Tech Resume Builder: AI/ML Engineering Templates 2026",
-                  "description": "Create professional ATS-optimized tech resumes for free. Land FAANG interviews 3x faster with our tech resume builder.",
+                  "name": "Free ML Engineer Resume Builder: Create Yours in 5 Minutes",
+                  "description": "Create professional ATS-optimized ML engineer resumes for free. Land FAANG interviews 3x faster with our ML resume builder.",
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -775,12 +769,12 @@ const Resume = ({
                     "@type": "WebSite",
                     "@id": "https://www.professionalresumefree.com/#website",
                     "url": "https://www.professionalresumefree.com",
-                    "name": "Professional Tech Resume Free",
-                    "description": "Free online resume builder for tech professionals",
+                    "name": "Professional ML Resume Free",
+                    "description": "Free online resume builder for machine learning professionals",
                     "publisher": {
                       "@type": "Organization",
                       "@id": "https://www.professionalresumefree.com/#organization",
-                      "name": "Professional Tech Resume Free",
+                      "name": "Professional ML Resume Free",
                       "url": "https://www.professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
@@ -789,16 +783,16 @@ const Resume = ({
                         "height": 512
                       },
                       "sameAs": [
-                        "https://twitter.com/TechResumeFree",
-                        "https://www.linkedin.com/company/tech-resume-free",
-                        "https://github.com/TechResumeFree",
-                        "https://www.youtube.com/@TechResumeFree"
+                        "https://twitter.com/MLResumeFree",
+                        "https://www.linkedin.com/company/ml-resume-free",
+                        "https://github.com/MLResumeFree",
+                        "https://www.youtube.com/@MLResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg",
+                    "url": "https://www.professionalresumefree.com/images/og-ml-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -814,14 +808,14 @@ const Resume = ({
                       {
                         "@type": "ListItem",
                         "position": 2,
-                        "name": "Tech Resume Builder",
+                        "name": "ML Engineer Resume Builder",
                         "item": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder"
                       }
                     ]
                   },
                   "mainEntity": {
                     "@type": "SoftwareApplication",
-                    "name": "Tech Resume Builder - ATS Optimized AI/ML Resume Maker",
+                    "name": "ML Engineer Resume Builder - ATS Optimized Machine Learning Resume Maker",
                     "applicationCategory": "BusinessApplication",
                     "operatingSystem": "Any",
                     "offers": {
@@ -838,19 +832,19 @@ const Resume = ({
                       "bestRating": 5,
                       "worstRating": 1
                     },
-                    "description": "Free online ATS-friendly tech resume builder for software engineers, data scientists, ML engineers, and AI researchers.",
+                    "description": "Free online ATS-friendly ML engineer resume builder for machine learning engineers, data scientists, and AI researchers.",
                     "featureList": [
-                      "Tech ATS-Optimized Templates",
+                      "ML ATS-Optimized Templates",
                       "GitHub Project Integration",
-                      "Tech Stack Formatting",
+                      "ML Framework Formatting",
                       "AI/ML Project Showcase",
                       "One-Click PDF Download",
                       "No Sign Up Required",
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-tech-resume-builder.jpg",
-                    "applicationSuite": "Tech Career Tools",
+                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-ml-resume-builder.jpg",
+                    "applicationSuite": "ML Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
                   }
@@ -867,7 +861,7 @@ const Resume = ({
                       "datePublished": safeFaqDates[index] || safeCurrentDate,
                       "author": {
                         "@type": "Person",
-                        "name": "Tech Resume Builder Support Team"
+                        "name": "ML Engineer Resume Builder Support Team"
                       }
                     },
                     "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder#webpage"
@@ -875,8 +869,8 @@ const Resume = ({
                 },
                 {
                   "@type": "HowTo",
-                  "name": "How to Create a Professional Tech Resume with Our Free Builder",
-                  "description": "Step-by-step guide to create an ATS-optimized tech resume for free",
+                  "name": "How to Create a Professional ML Engineer Resume with Our Free Builder",
+                  "description": "Step-by-step guide to create an ATS-optimized machine learning engineer resume for free",
                   "totalTime": "PT15M",
                   "estimatedCost": {
                     "@type": "MonetaryAmount",
@@ -887,32 +881,32 @@ const Resume = ({
                     {
                       "@type": "HowToStep",
                       "position": 1,
-                      "name": "Choose a Tech Template",
-                      "text": "Select from our ATS-optimized tech resume templates designed for software engineers, data scientists, ML engineers, and AI researchers.",
+                      "name": "Choose an ML Template",
+                      "text": "Select from our ATS-optimized ML resume templates designed for machine learning engineers, data scientists, and AI researchers.",
                       "url": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-tech-template.jpg"
+                      "image": "https://www.professionalresumefree.com/images/step1-ml-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
-                      "name": "Enter Your Technical Information",
-                      "text": "Add your programming experience, technical skills, projects, certifications, and GitHub repositories using our guided forms.",
+                      "name": "Enter Your ML Information",
+                      "text": "Add your ML experience, frameworks, projects, certifications, and GitHub repositories using our guided forms.",
                       "url": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-tech-info.jpg"
+                      "image": "https://www.professionalresumefree.com/images/step2-ml-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
-                      "text": "Use our tech-specific suggestions to improve technical keywords, programming languages, and formatting for ATS compatibility.",
+                      "text": "Use our ML-specific suggestions to improve machine learning keywords and formatting for ATS compatibility.",
                       "url": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder#optimize",
                       "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
-                      "name": "Download Your Tech Resume",
-                      "text": "Export your professional tech resume as PDF - completely free, no watermarks, optimized for tech recruiters.",
+                      "name": "Download Your ML Resume",
+                      "text": "Export your professional ML engineer resume as PDF - completely free, no watermarks, optimized for tech recruiters.",
                       "url": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder#download",
                       "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
                     }
@@ -920,10 +914,10 @@ const Resume = ({
                 },
                 {
                   "@type": "Service",
-                  "serviceType": "Online Tech Resume Building Service",
+                  "serviceType": "Online ML Engineer Resume Building Service",
                   "provider": {
                     "@type": "Organization",
-                    "name": "Professional Tech Resume Free",
+                    "name": "Professional ML Resume Free",
                     "url": "https://www.professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
@@ -938,13 +932,13 @@ const Resume = ({
                   },
                   "hasOfferCatalog": {
                     "@type": "OfferCatalog",
-                    "name": "Free Tech Resume Building Services",
+                    "name": "Free ML Engineer Resume Building Services",
                     "itemListElement": [
                       {
                         "@type": "Offer",
                         "itemOffered": {
                           "@type": "Service",
-                          "name": "Tech ATS Resume Templates"
+                          "name": "ML ATS Resume Templates"
                         }
                       },
                       {
@@ -956,7 +950,7 @@ const Resume = ({
                       }
                     ]
                   },
-                  "description": "Free ATS-friendly tech resume builder for software engineers, data scientists, and AI professionals worldwide",
+                  "description": "Free ATS-friendly ML engineer resume builder for machine learning professionals worldwide",
                   "offers": {
                     "@type": "Offer",
                     "price": "0",
@@ -987,11 +981,11 @@ const Resume = ({
                       "datePublished": safeReviewDates[index] || safeCurrentDate,
                       "publisher": {
                         "@type": "Organization",
-                        "name": "Professional Tech Resume Free"
+                        "name": "Professional ML Resume Free"
                       },
                       "itemReviewed": {
                         "@type": "SoftwareApplication",
-                        "name": "Tech Resume Builder - ATS Optimized AI/ML Resume Maker",
+                        "name": "ML Engineer Resume Builder - ATS Optimized Machine Learning Resume Maker",
                         "applicationCategory": "BusinessApplication",
                         "operatingSystem": "Any",
                         "offers": {
@@ -999,7 +993,7 @@ const Resume = ({
                           "price": "0",
                           "priceCurrency": "USD"
                         },
-                        "description": "Free online ATS-friendly tech resume builder that helps tech professionals create professional resumes and land FAANG interviews faster.",
+                        "description": "Free online ATS-friendly ML engineer resume builder that helps machine learning professionals create professional resumes and land FAANG interviews faster.",
                         "url": "https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder"
                       }
                     }
@@ -1031,7 +1025,7 @@ const Resume = ({
           </li>
           <li>
             <Link href="/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Free Tech Templates</span>
+              <span className={styles.breadcrumbText}>Free ML Templates</span>
             </Link>
           </li>
         </ol>
@@ -1044,25 +1038,26 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 65,000+ Tech Professionals | Best Free Tech Resume Builder 2026
+                Rated 4.9/5 by 65,000+ ML Professionals | Best Free ML Engineer Resume Builder 2026
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
-              Free Tech Resume Builder: Create Yours in 5 Minutes
+              Free ML Engineer Resume Builder: Create Yours in 5 Minutes
             </h1>
             
             <p className={styles.heroSubtitle}>
-              Create a <strong className={styles.heroHighlight}>professional, ATS-optimized tech resume for free in minutes.</strong> Our tech resume builder ensures your coding skills, AI projects, and technical expertise get noticed by FAANG companies and tech startups.
+              Create a <strong className={styles.heroHighlight}>professional, ATS-optimized machine learning engineer resume for free in minutes.</strong> Our ML resume builder ensures your ML frameworks, AI projects, and technical expertise get noticed by FAANG companies and AI startups.
             </p>
 
             <div className={styles.ctaButtons}>
               <button
                 onClick={() => setActiveSection('personal')}
                 className={styles.primaryButton}
-                aria-label="Start building your free tech resume now—no sign-up required"
+                aria-label="Start building your free ML engineer resume now—no sign-up required"
               >
-                <span className={styles.buttonText}>Start Building Your Tech Resume Now</span>
+                <span className={styles.buttonText}>Start Building Your ML Resume Now</span>
                 <FiArrowRight className={styles.buttonIcon} />
                 <div className={styles.buttonPulse}></div>
               </button>
@@ -1070,18 +1065,18 @@ const Resume = ({
               <button
                 onClick={generatePDF}
                 className={styles.secondaryButton}
-                aria-label="Download tech resume as PDF"
+                aria-label="Download ML engineer resume as PDF"
                 disabled={isGeneratingPDF || !hasContent()}
               >
                 <FiDownload className={styles.buttonIcon} />
-                <span className={styles.buttonText}>Download Tech Resume PDF</span>
+                <span className={styles.buttonText}>Download ML Resume PDF</span>
               </button>
             </div>
 
             <div className={styles.heroStats}>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>5M+</span>
-                <span className={styles.statLabel}>Tech Resumes Created</span>
+                <span className={styles.statLabel}>ML Resumes Created</span>
               </div>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>92%</span>
@@ -1093,18 +1088,18 @@ const Resume = ({
               </div>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Tech Professionals</span>
+                <span className={styles.statLabel}>Rating from ML Professionals</span>
               </div>
             </div>
 
             <div className={styles.techBadges}>
               <div className={styles.badgeGrid}>
-                <span className={styles.badgeItem}><FiCode /> Software Engineer</span>
-                <span className={styles.badgeItem}><FiCpu /> Machine Learning</span>
-                <span className={styles.badgeItem}><FiDatabase /> Data Science</span>
-                <span className={styles.badgeItem}><FiCloud /> DevOps</span>
-                <span className={styles.badgeItem}><FiTarget /> AI Research</span>
-                <span className={styles.badgeItem}><FiTerminal /> Backend/Frontend</span>
+                <span className={styles.badgeItem}><FiCpu /> ML Engineer</span>
+                <span className={styles.badgeItem}><FiDatabase /> Data Scientist</span>
+                <span className={styles.badgeItem}><FiTrendingUp /> AI Researcher</span>
+                <span className={styles.badgeItem}><FiCode /> MLOps</span>
+                <span className={styles.badgeItem}><FiCloud /> Deep Learning</span>
+                <span className={styles.badgeItem}><FiTarget /> NLP/CV</span>
               </div>
             </div>
           </div>
@@ -1138,7 +1133,7 @@ const Resume = ({
                   className={styles.resumePreview}
                   ref={resumeRef}
                 >
-                  <TechTemplate formData={formData} />
+                  <MLTemplate formData={formData} />
                 </div>
               </div>
             </div>
@@ -1150,10 +1145,10 @@ const Resume = ({
           <div className={styles.formNavigation}>
             {[
               { id: 'personal', label: 'Personal', icon: <FiUser /> },
-              { id: 'experience', label: 'Tech Experience', icon: <FiCode /> },
+              { id: 'experience', label: 'ML Experience', icon: <FiCode /> },
               { id: 'education', label: 'Education', icon: <FiBook /> },
-              { id: 'skills', label: 'Technical Skills', icon: <FiCpu /> },
-              { id: 'projects', label: 'Projects', icon: <FiGitBranch /> },
+              { id: 'skills', label: 'ML Skills', icon: <FiCpu /> },
+              { id: 'projects', label: 'ML Projects', icon: <FiGitBranch /> },
               { id: 'settings', label: 'Font Settings', icon: <FiSettings /> },
             ].map((item) => (
               <button
@@ -1170,7 +1165,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1196,7 +1191,7 @@ const Resume = ({
 
                 <div className={styles.formCard}>
                   <label className={styles.formLabel}>
-                    Technical Summary*
+                    ML Professional Summary*
                     <textarea
                       name="summary"
                       value={formData.summary}
@@ -1213,8 +1208,8 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Tech Profiles & Links</h4>
-                  <p className={styles.sectionDescription}>Add your professional tech profiles (GitHub, LinkedIn, portfolio, etc.)</p>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> ML Profiles & Links</h3>
+                  <p className={styles.sectionDescription}>Add your professional ML profiles (GitHub, LinkedIn, Kaggle, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
                       value={currentSocialLink.platform} 
@@ -1224,7 +1219,7 @@ const Resume = ({
                       <option value="">Select Platform</option>
                       <option value="GitHub">GitHub</option>
                       <option value="LinkedIn">LinkedIn</option>
-                      <option value="Portfolio">Technical Portfolio</option>
+                      <option value="Portfolio">ML Portfolio</option>
                       <option value="Kaggle">Kaggle</option>
                       <option value="Medium">Medium/Blog</option>
                       <option value="ResearchGate">ResearchGate</option>
@@ -1259,7 +1254,7 @@ const Resume = ({
                   </div>
                   <div className={styles.itemsList}>
                     {formData.socialLinks.length === 0 ? (
-                      <p className={styles.emptyMessage}>No tech profiles added yet</p>
+                      <p className={styles.emptyMessage}>No ML profiles added yet</p>
                     ) : (
                       formData.socialLinks.map((link, i) => (
                         <div key={i} className={styles.listItem}>
@@ -1279,11 +1274,11 @@ const Resume = ({
               </div>
             )}
 
-            {/* Tech Experience Section */}
+            {/* ML Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiCode /> Technical Experience</h3>
-                <p className={styles.sectionDescription}>List your technical positions in reverse chronological order (most recent first)</p>
+                <h2 className={styles.sectionTitle}><FiCode /> Machine Learning Experience</h2>
+                <p className={styles.sectionDescription}>List your ML positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
@@ -1309,7 +1304,7 @@ const Resume = ({
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Tech Stack / Technologies Used
+                    Tech Stack / ML Frameworks Used
                     <input 
                       value={currentExperience.techStack} 
                       onChange={(e) => setCurrentExperience({ ...currentExperience, techStack: e.target.value })} 
@@ -1341,14 +1336,14 @@ const Resume = ({
                     </label>
                   </div>
                   <label className={styles.formLabel}>
-                    Technical Achievements & Responsibilities*
+                    ML Achievements & Responsibilities*
                     <textarea 
                       value={currentExperience.description} 
                       onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} 
                       placeholder="• Built and deployed a recommendation system serving 10M+ users, improving CTR by 35%
 • Led a team of 4 ML engineers to develop computer vision models for autonomous vehicles
 • Optimized model inference time by 60% through quantization and model pruning techniques
-• Implemented CI/CD pipelines for ML models using Docker, Kubernetes, and AWS SageMaker
+• Implemented MLOps pipeline using Docker, Kubernetes, and AWS SageMaker
 • Published research on transformer architectures at NeurIPS 2023"
                       required 
                       className={styles.formTextarea} 
@@ -1365,7 +1360,7 @@ const Resume = ({
                       className={styles.addButton} 
                       disabled={!currentExperience.position || !currentExperience.company || !currentExperience.startDate}
                     >
-                      <FiPlus /> {currentExperience.isEditing ? 'Update Tech Experience' : 'Add Tech Experience'}
+                      <FiPlus /> {currentExperience.isEditing ? 'Update ML Experience' : 'Add ML Experience'}
                     </button>
                     {currentExperience.isEditing && (
                       <button 
@@ -1380,9 +1375,9 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Technical Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your ML Experience</h3>
                   {formData.experience.length === 0 ? (
-                    <p className={styles.emptyMessage}>No technical experience added yet</p>
+                    <p className={styles.emptyMessage}>No ML experience added yet</p>
                   ) : (
                     <div className={styles.itemsList}>
                       {formData.experience.map((exp, i) => (
@@ -1417,7 +1412,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your technical education, degrees, and relevant coursework</p>
                 
                 <div className={styles.formCard}>
@@ -1496,7 +1491,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1528,12 +1523,12 @@ const Resume = ({
             {/* Technical Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiCpu /> Technical Skills & Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiCpu /> ML & Technical Skills</h2>
                 
                 {/* Technical Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Technical Skills</h4>
-                  <p className={styles.sectionDescription}>List your programming languages, frameworks, tools, and technologies</p>
+                  <h3 className={styles.subSectionTitle}>ML Skills</h3>
+                  <p className={styles.sectionDescription}>List your ML frameworks, programming languages, and technologies</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
                       <label className={styles.formLabel}>
@@ -1541,7 +1536,7 @@ const Resume = ({
                         <input 
                           value={currentSkill.name} 
                           onChange={(e) => setCurrentSkill({ ...currentSkill, name: e.target.value })} 
-                          placeholder="Python, TensorFlow, React, AWS" 
+                          placeholder="Python, TensorFlow, PyTorch, AWS" 
                           className={styles.formInput} 
                         />
                       </label>
@@ -1553,14 +1548,13 @@ const Resume = ({
                           className={styles.formSelect}
                         >
                           <option value="">Select Category</option>
+                          <option value="ML Frameworks">ML Frameworks</option>
                           <option value="Programming Languages">Programming Languages</option>
-                          <option value="ML/AI Frameworks">ML/AI Frameworks</option>
-                          <option value="Frontend">Frontend Technologies</option>
-                          <option value="Backend">Backend Technologies</option>
-                          <option value="Databases">Databases</option>
-                          <option value="Cloud & DevOps">Cloud & DevOps</option>
-                          <option value="Tools">Development Tools</option>
-                          <option value="Libraries">Libraries</option>
+                          <option value="Deep Learning">Deep Learning</option>
+                          <option value="NLP">Natural Language Processing</option>
+                          <option value="Computer Vision">Computer Vision</option>
+                          <option value="Cloud & MLOps">Cloud & MLOps</option>
+                          <option value="Data Science">Data Science</option>
                         </select>
                       </label>
                     </div>
@@ -1618,8 +1612,8 @@ const Resume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Certifications</h4>
-                  <p className={styles.sectionDescription}>Add your technical certifications and credentials</p>
+                  <h3 className={styles.subSectionTitle}><FiShield /> ML Certifications</h3>
+                  <p className={styles.sectionDescription}>Add your ML certifications and credentials</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
                       <label className={styles.formLabel}>
@@ -1702,7 +1696,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1766,12 +1760,12 @@ const Resume = ({
             {/* Projects & Publications Section */}
             {activeSection === 'projects' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiGitBranch /> Projects & Publications</h3>
+                <h2 className={styles.sectionTitle}><FiGitBranch /> ML Projects & Publications</h2>
                 
                 {/* Technical Projects */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Technical Projects</h4>
-                  <p className={styles.sectionDescription}>Showcase your GitHub projects, personal projects, or open-source contributions</p>
+                  <h3 className={styles.subSectionTitle}>ML Projects</h3>
+                  <p className={styles.sectionDescription}>Showcase your ML projects, Kaggle competitions, or open-source contributions</p>
                   
                   <div className={styles.formCard}>
                     <div className={styles.formGroup}>
@@ -1786,7 +1780,7 @@ const Resume = ({
                         />
                       </label>
                       <label className={styles.formLabel}>
-                        Technologies Used
+                        ML Technologies Used
                         <input 
                           value={currentProject.techUsed} 
                           onChange={(e) => setCurrentProject({ ...currentProject, techUsed: e.target.value })} 
@@ -1862,7 +1856,7 @@ const Resume = ({
 
                 {/* Publications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Publications & Research</h4>
+                  <h3 className={styles.subSectionTitle}>Publications & Research</h3>
                   <p className={styles.sectionDescription}>Add your research papers, conference publications, or technical blog posts</p>
                   
                   <div className={styles.formCard}>
@@ -1954,8 +1948,8 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
-                <p className={styles.sectionDescription}>Customize font sizes for your tech resume PDF. All sizes are in points (pt).</p>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
+                <p className={styles.sectionDescription}>Customize font sizes for your ML resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
                   <div className={styles.fontSizeGrid}>
@@ -2160,7 +2154,7 @@ const Resume = ({
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
             <p className={styles.sectionSubtitle}>
-              Everything you need to know about creating professional tech resumes with our tool.
+              Everything you need to know about creating professional ML engineer resumes with our tool.
             </p>
           </div>
           <div className={styles.faqGrid}>
@@ -2178,23 +2172,23 @@ const Resume = ({
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title">Ready to Land Your Dream Tech Job?</h2>
+            <h2 className={styles.ctaTitle} id="cta-title">Ready to Land Your Dream ML Job?</h2>
             <p className={styles.ctaSubtitle}>
-              Join 5 million+ tech professionals who landed FAANG roles with our free ATS-friendly tech resume builder.
+              Join 5 million+ ML professionals who landed FAANG roles with our free ATS-friendly ML engineer resume builder.
             </p>
             <div className={styles.ctaButtons}>
               <button
                 onClick={() => setActiveSection('personal')}
                 className={styles.ctaButton}
-                aria-label="Create your free tech resume now—no sign-up required"
+                aria-label="Create your free ML engineer resume now—no sign-up required"
               >
-                <span className={styles.ctaButtonText}>Create Your Free Tech Resume Now</span>
+                <span className={styles.ctaButtonText}>Create Your Free ML Resume Now</span>
                 <FiArrowRight className={styles.ctaButtonIcon} />
               </button>
             </div>
             <div className={styles.ctaGuarantee}>
               <FiCheck className={styles.guaranteeIcon} />
-              <span className={styles.guaranteeText}>No credit card required • Free forever • Download in minutes • ATS Optimized for Tech • GitHub Integration</span>
+              <span className={styles.guaranteeText}>No credit card required • Free forever • Download in minutes • ATS Optimized for ML • GitHub Integration</span>
             </div>
           </div>
         </div>
@@ -2205,12 +2199,12 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Tech Resume Preview</h3>
+              <h3>Full ML Engineer Resume Preview</h3>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>
               <div className={styles.fullPreviewPage}>
-                <TechTemplate formData={formData} />
+                <MLTemplate formData={formData} />
               </div>
             </div>
           </div>
@@ -2244,7 +2238,7 @@ export async function getStaticProps() {
   // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Tech Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder' }
+    { name: 'ML Engineer Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder' }
   ];
 
   return {

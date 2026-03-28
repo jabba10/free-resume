@@ -643,7 +643,7 @@ function FinanceAccountingResumeGuide({
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="last-modified" content={lastModifiedDate} />
         
-        {/* CANONICAL URL */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG */}
@@ -665,7 +665,7 @@ function FinanceAccountingResumeGuide({
         <meta name="twitter:description" content="Free guide: how to write a USA finance resume that gets interviews." />
         <meta name="twitter:image" content={meta.image} />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE CANONICAL REFERENCE */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -895,7 +895,7 @@ function FinanceAccountingResumeGuide({
 
             <div className="table-wrap" style={{marginTop:'40px'}}>
               <table>
-                <thead><tr><th>Category</th><th>Keywords (use in context)</th></tr></thead>
+                <thead> <tr><th>Category</th><th>Keywords (use in context)</th></tr> </thead>
                 <tbody>
                   <tr><td><strong>Technical Skills</strong></td><td>{financeKeywords.technical.join(', ')}</td></tr>
                   <tr><td><strong>Software & ERP</strong></td><td>{financeKeywords.software.join(', ')}</td></tr>

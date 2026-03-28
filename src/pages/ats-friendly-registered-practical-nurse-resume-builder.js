@@ -815,10 +815,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
         <meta property="og:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg" />
@@ -1141,6 +1137,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* SINGLE H1 TAG */}
             <h1 className={styles.heroTitle}>
               Create Your Canadian RPN Resume 2026
             </h1>
@@ -2343,11 +2340,11 @@ const Resume = ({
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Changed to h3 for single H1 compliance */}
       <section className={styles.ctaSection} aria-labelledby="cta-title">
         <div className={styles.container}>
           <div className={styles.ctaContent}>
-            <h2 className={styles.ctaTitle} id="cta-title">Ready to Advance Your RPN Career in Canada?</h2>
+            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your RPN Career in Canada?</h3>
             <p className={styles.ctaSubtitle}>
               Join 2 million+ Canadian RPNs who landed their dream jobs with our free ATS-friendly RPN resume builder designed specifically for Canadian healthcare.
             </p>

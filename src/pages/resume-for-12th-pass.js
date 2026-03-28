@@ -830,13 +830,8 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
         <meta httpEquiv="last-modified" content={lastUpdatedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* Hreflang Tags */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -998,42 +993,42 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
               <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>The Psychology Behind Hiring Freshers:</h3>
               
               <div className="table-wrap" style={{ margin: '20px 0' }}>
-                <table>
+                 <table>
                   <thead>
-                    <tr>
+                     <tr>
                       <th>What Employers Look For</th>
                       <th>Percentage</th>
                       <th>How to Showcase It</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Willingness to Learn</td>
-                      <td>92%</td>
-                      <td>Highlight quick learning in projects</td>
-                    </tr>
-                    <tr>
-                      <td>Adaptability</td>
-                      <td>87%</td>
-                      <td>Show diverse academic performance</td>
-                    </tr>
-                    <tr>
-                      <td>Basic Technical Skills</td>
-                      <td>81%</td>
-                      <td>List computer and software proficiency</td>
-                    </tr>
-                    <tr>
-                      <td>Communication Ability</td>
-                      <td>76%</td>
-                      <td>Demonstrate through group projects</td>
-                    </tr>
-                    <tr>
-                      <td>Academic Performance</td>
-                      <td>68%</td>
-                      <td>Include marks and achievements</td>
-                    </tr>
+                     <tr>
+                       <td>Willingness to Learn</td>
+                       <td>92%</td>
+                       <td>Highlight quick learning in projects</td>
+                     </tr>
+                     <tr>
+                       <td>Adaptability</td>
+                       <td>87%</td>
+                       <td>Show diverse academic performance</td>
+                     </tr>
+                     <tr>
+                       <td>Basic Technical Skills</td>
+                       <td>81%</td>
+                       <td>List computer and software proficiency</td>
+                     </tr>
+                     <tr>
+                       <td>Communication Ability</td>
+                       <td>76%</td>
+                       <td>Demonstrate through group projects</td>
+                     </tr>
+                     <tr>
+                       <td>Academic Performance</td>
+                       <td>68%</td>
+                       <td>Include marks and achievements</td>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
             </div>
           </section>

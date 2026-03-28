@@ -758,12 +758,6 @@ const CeoResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
         <meta property="og:description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-executive-resume-builder-preview.jpg" />

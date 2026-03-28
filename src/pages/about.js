@@ -1010,6 +1010,9 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     }
   };
 
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/about";
+
   return (
     <div style={styles.aboutPage}>
       <Head>
@@ -1032,12 +1035,12 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
         {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/about" />
+        <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/about" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/about" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/about" hreflang="x-default" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="About ProfessionalResumeFree: Free ATS Resume Builder" />
@@ -1047,7 +1050,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content="About Us: Free ATS Resume Builder Trusted by 500K+ Users 2026" />
         <meta property="og:description" content="Learn how our free resume builder helps job seekers in 100+ countries land interviews. 500K+ resumes created, 95% callback rate, 50+ ATS-optimized templates." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/about" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://www.professionalresumefree.com/about-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -1099,8 +1102,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
               },
               {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/about/#webpage",
-                "url": "https://www.professionalresumefree.com/about",
+                "@id": `${canonicalUrl}#webpage`,
+                "url": canonicalUrl,
                 "name": "About ProfessionalResumeFree",
                 "description": "Learn about our mission to help job seekers succeed with professionally designed, ATS-optimized resumes",
                 "isPartOf": {
@@ -1121,14 +1124,14 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
                       "@type": "ListItem",
                       "position": 2,
                       "name": "About Us",
-                      "item": "https://www.professionalresumefree.com/about"
+                      "item": canonicalUrl
                     }
                   ]
                 }
               },
               {
                 "@type": "FAQPage",
-                "@id": "https://www.professionalresumefree.com/about/#faq",
+                "@id": `${canonicalUrl}#faq`,
                 "mainEntity": faqData.map(faq => ({
                   "@type": "Question",
                   "name": faq.question,

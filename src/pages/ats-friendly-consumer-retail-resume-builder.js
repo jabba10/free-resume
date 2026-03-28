@@ -712,12 +712,6 @@ const RetailResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-consumer-retail-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates" />
         <meta property="og:description" content="Create your professional retail resume for free in 2026. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-retail-resume-builder-preview.jpg" />
@@ -1038,7 +1032,7 @@ const RetailResume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the single H1 */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1049,6 +1043,7 @@ const RetailResume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG */}
             <h1 className={styles.heroTitle}>
               Free Retail Resume Builder 2026: Create Your ATS Store Manager Resume & Get Hired
             </h1>
@@ -1171,7 +1166,7 @@ const RetailResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1214,7 +1209,7 @@ const RetailResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiUsers /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiUsers /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional retail profiles (LinkedIn, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1279,7 +1274,7 @@ const RetailResume = ({
             {/* Retail Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShoppingBag /> Retail Experience</h3>
+                <h2 className={styles.sectionTitle}><FiShoppingBag /> Retail Experience</h2>
                 <p className={styles.sectionDescription}>List your retail positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1377,7 +1372,7 @@ const RetailResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Retail Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Retail Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No retail experience added yet</p>
                   ) : (
@@ -1414,7 +1409,7 @@ const RetailResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education</h2>
                 <p className={styles.sectionDescription}>List your education and relevant retail training</p>
                 
                 <div className={styles.formCard}>
@@ -1493,7 +1488,7 @@ const RetailResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1525,11 +1520,11 @@ const RetailResume = ({
             {/* Skills & Certifications Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTrendingUp /> Retail Skills & Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiTrendingUp /> Retail Skills & Certifications</h2>
                 
                 {/* Key Retail Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Key Retail Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Key Retail Skills</h3>
                   <p className={styles.sectionDescription}>List your retail skills and areas of expertise</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1598,7 +1593,7 @@ const RetailResume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiAward /> Professional Certifications</h4>
+                  <h3 className={styles.subSectionTitle}><FiAward /> Professional Certifications</h3>
                   <p className={styles.sectionDescription}>Add your retail professional certifications</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1682,7 +1677,7 @@ const RetailResume = ({
 
                 {/* Key Achievements */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Key Retail Achievements</h4>
+                  <h3 className={styles.subSectionTitle}>Key Retail Achievements</h3>
                   <p className={styles.sectionDescription}>Highlight your most significant retail achievements</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1745,7 +1740,7 @@ const RetailResume = ({
 
                 {/* Retail Software & Systems */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Retail Software & Systems</h4>
+                  <h3 className={styles.subSectionTitle}>Retail Software & Systems</h3>
                   <p className={styles.sectionDescription}>List your proficiency with retail software and point-of-sale systems</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1811,7 +1806,7 @@ const RetailResume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1880,7 +1875,7 @@ const RetailResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2116,7 +2111,7 @@ const RetailResume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Retail Resume Preview</h3>
+              <h2>Full Retail Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

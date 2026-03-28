@@ -736,12 +736,6 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Nurse Practitioner Resume Builder: NP CV Templates 2026" />
         <meta property="og:description" content="Create your ATS-optimized nurse practitioner resume for free in 2026. Professional NP templates trusted by 50,000+ FNPs, AGNPs & PNPs." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-np-resume-builder-preview.jpg" />
@@ -1056,7 +1050,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag on the page */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1067,6 +1061,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Create Your NP Resume 2026
             </h1>
@@ -1189,7 +1184,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1236,7 +1231,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional NP profiles (LinkedIn, Doximity, AANP, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1305,7 +1300,7 @@ const Resume = ({
             {/* NP Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeart /> Nurse Practitioner Experience</h3>
+                <h2 className={styles.sectionTitle}><FiHeart /> Nurse Practitioner Experience</h2>
                 <p className={styles.sectionDescription}>List your NP positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1435,7 +1430,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your NP Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your NP Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No NP experience added yet</p>
                   ) : (
@@ -1475,7 +1470,7 @@ const Resume = ({
 
                 {/* Clinical Skills Section */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiActivity /> Clinical Skills & Expertise</h4>
+                  <h3 className={styles.subSectionTitle}><FiActivity /> Clinical Skills & Expertise</h3>
                   <p className={styles.sectionDescription}>Add your clinical skills by category</p>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1543,7 +1538,7 @@ const Resume = ({
 
                 {/* Procedures Section */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Procedures & Clinical Competencies</h4>
+                  <h3 className={styles.subSectionTitle}>Procedures & Clinical Competencies</h3>
                   <p className={styles.sectionDescription}>List procedures you're competent to perform</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1591,7 +1586,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> NP Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> NP Education & Training</h2>
                 <p className={styles.sectionDescription}>List your NP education, degrees, and relevant training</p>
                 
                 <div className={styles.formCard}>
@@ -1707,7 +1702,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your NP Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your NP Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1741,11 +1736,11 @@ const Resume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiAward /> NP Certifications & Licensure</h3>
+                <h2 className={styles.sectionTitle}><FiAward /> NP Certifications & Licensure</h2>
                 
                 {/* Board Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Board Certifications</h4>
+                  <h3 className={styles.subSectionTitle}>Board Certifications</h3>
                   <p className={styles.sectionDescription}>Add your NP board certifications</p>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1853,58 +1848,9 @@ const Resume = ({
                   </div>
                 </div>
 
-                {/* State Licenses */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>State Licenses</h4>
-                  <p className={styles.sectionDescription}>Add your state NP licenses</p>
-                  <div className={styles.skillsInput}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        State*
-                        <select 
-                          value={currentCertification.name} 
-                          onChange={(e) => setCurrentCertification({ ...currentCertification, name: e.target.value })} 
-                          className={styles.formSelect}
-                        >
-                          <option value="">Select State</option>
-                          <option value="California NP License">California NP License</option>
-                          <option value="Texas NP License">Texas NP License</option>
-                          <option value="New York NP License">New York NP License</option>
-                          <option value="Florida NP License">Florida NP License</option>
-                          <option value="Illinois NP License">Illinois NP License</option>
-                          <option value="Pennsylvania NP License">Pennsylvania NP License</option>
-                          <option value="Ohio NP License">Ohio NP License</option>
-                          <option value="Georgia NP License">Georgia NP License</option>
-                          <option value="North Carolina NP License">North Carolina NP License</option>
-                          <option value="Michigan NP License">Michigan NP License</option>
-                        </select>
-                      </label>
-                      <label className={styles.formLabel}>
-                        License Number
-                        <input 
-                          value={currentCertification.credentialNumber} 
-                          onChange={(e) => setCurrentCertification({ ...currentCertification, credentialNumber: e.target.value })} 
-                          placeholder="RN1234567" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                    </div>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addCertification} 
-                        className={styles.addButton} 
-                        disabled={!currentCertification.name.trim()}
-                      >
-                        <FiPlus /> {currentCertification.isEditing ? 'Update License' : 'Add License'}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional NP organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1966,7 +1912,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -2036,7 +1982,7 @@ const Resume = ({
             {/* Prescriptive Authority Section */}
             {activeSection === 'authority' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> Prescriptive Authority</h3>
+                <h2 className={styles.sectionTitle}><FiShield /> Prescriptive Authority</h2>
                 <p className={styles.sectionDescription}>Add your prescriptive authority information (required for most NP positions)</p>
                 
                 <div className={styles.formCard}>
@@ -2142,7 +2088,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Prescriptive Authority</h4>
+                  <h3 className={styles.subSectionTitle}>Your Prescriptive Authority</h3>
                   {formData.prescriptiveAuthorities.length === 0 ? (
                     <p className={styles.emptyMessage}>No prescriptive authority added yet</p>
                   ) : (
@@ -2173,7 +2119,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your NP resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>

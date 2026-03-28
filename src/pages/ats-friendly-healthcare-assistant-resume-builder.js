@@ -721,9 +721,10 @@ const HealthcareAssistantResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder" hreflang="en-GB" />
+        
         <meta property="og:title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
         <meta property="og:description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-healthcare-assistant-cv-builder.jpg" />
@@ -910,7 +911,7 @@ const HealthcareAssistantResume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - SINGLE H1 TAG */}
       <section className={styles.heroSection} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1056,9 +1057,9 @@ const HealthcareAssistantResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   <FiUser /> Personal Information
-                </h3>
+                </h2>
                 <div className={styles.formCard} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
@@ -1176,9 +1177,9 @@ const HealthcareAssistantResume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   <FiHeart /> Healthcare Experience
-                </h3>
+                </h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   List your healthcare positions in reverse chronological order
                 </p>
@@ -1288,7 +1289,7 @@ const HealthcareAssistantResume = ({
                 </div>
                 
                 <div className={styles.formCard} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Your Healthcare Experience</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Your Healthcare Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>No healthcare experience added yet</p>
                   ) : (
@@ -1325,9 +1326,9 @@ const HealthcareAssistantResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   <FiBook /> Education & Qualifications
-                </h3>
+                </h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   List your UK qualifications and training
                 </p>
@@ -1415,7 +1416,7 @@ const HealthcareAssistantResume = ({
                 </div>
                 
                 <div className={styles.formCard} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Your Qualifications</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Your Qualifications</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>No qualifications added yet</p>
                   ) : (
@@ -1447,13 +1448,13 @@ const HealthcareAssistantResume = ({
             {/* Skills Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   <FiActivity /> Clinical Skills & Competencies
-                </h3>
+                </h2>
                 
                 {/* Clinical Skills */}
                 <div className={styles.formCard} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Clinical Skills</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Clinical Skills</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Add your healthcare skills and competencies</p>
                   <div className={styles.skillsInput}>
                     <select 
@@ -1536,13 +1537,13 @@ const HealthcareAssistantResume = ({
             {/* Certifications Section */}
             {activeSection === 'certifications' && (
               <div className={styles.formSectionContent} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   <FiShield /> Certifications & Training
-                </h3>
+                </h2>
                 
                 {/* Certifications */}
                 <div className={styles.formCard} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Certifications</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Certifications</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Add your healthcare certifications and mandatory training</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1632,7 +1633,7 @@ const HealthcareAssistantResume = ({
 
                 {/* Additional Training */}
                 <div className={styles.formCard} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Additional Training</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Additional Training</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Add recent training courses and workshops</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1707,7 +1708,7 @@ const HealthcareAssistantResume = ({
 
                 {/* References */}
                 <div className={styles.formCard} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                  <h4 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>References</h4>
+                  <h3 className={styles.subSectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>References</h3>
                   <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Add professional references (usually 2 required)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1809,9 +1810,9 @@ const HealthcareAssistantResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                <h3 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
+                <h2 className={styles.sectionTitle} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   <FiSettings /> Font Size Settings
-                </h3>
+                </h2>
                 <p className={styles.sectionDescription} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
                   Customize font sizes for your CV PDF. All sizes are in points (pt).
                 </p>

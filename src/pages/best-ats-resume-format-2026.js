@@ -969,11 +969,6 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         {/* ===== SINGLE CANONICAL URL ===== */}
         <link rel="canonical" href="https://www.professionalresumefree.com/best-ats-resume-format-2026" />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/best-ats-resume-format-2026" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/best-ats-resume-format-2026" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/best-ats-resume-format-2026" hreflang="x-default" />
-        
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="Best ATS Resume Format 2026: Complete Optimization Guide" />
         <meta name="chatgpt-fts:description" content="Complete guide to ATS-friendly resume formats for 2026. Compare chronological, functional, and hybrid formats with success rates and ATS compatibility scores." />

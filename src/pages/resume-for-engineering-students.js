@@ -533,7 +533,7 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
   const currentDate = lastUpdated ? lastUpdated.split('T')[0] : new Date().toISOString().split('T')[0];
   
   // Updated canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/engineering-student-resume-guide";
+  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-engineering-students";
 
   // FAQ data for structured data
   const faqs = [
@@ -718,13 +718,8 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
         <meta httpEquiv="last-modified" content={lastUpdated} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
+        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE */}
         <link rel="canonical" href={canonicalUrl} />
-        
-        {/* Hreflang Tags */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />

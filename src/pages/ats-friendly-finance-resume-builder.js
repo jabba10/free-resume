@@ -676,6 +676,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -690,20 +693,23 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" hreflang="x-default" />
+        
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Finance Resume Builder 2026 | ATS Investment Banking Templates" />
         <meta property="og:description" content="Create your professional finance resume for free in 2026. ATS-optimized templates help investment bankers, analysts & finance professionals land interviews faster. Start now—no sign-up." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-finance-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Finance Resume Builder - Create Professional Finance Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-finance-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Finance Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -737,8 +743,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Finance Resume Builder 2026 - ATS Investment Banking Templates",
                   "description": "Create professional ATS-optimized finance resumes for free. Land interviews 3x faster with our finance resume builder.",
                   "datePublished": "2026-01-01",
@@ -788,7 +794,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Finance Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -830,7 +836,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -843,7 +849,7 @@ const Resume = ({
                         "name": "Finance Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -862,7 +868,7 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Finance Template",
                       "text": "Select from our ATS-optimized finance resume templates designed for investment banking, private equity, hedge funds, and corporate finance.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#templates",
+                      "url": `${canonicalUrl}#templates`,
                       "image": "https://www.professionalresumefree.com/images/step1-finance-template.jpg"
                     },
                     {
@@ -870,7 +876,7 @@ const Resume = ({
                       "position": 2,
                       "name": "Enter Your Finance Information",
                       "text": "Add your finance experience, deal history, technical skills, certifications, and specialized financial expertise using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#editor",
+                      "url": `${canonicalUrl}#editor`,
                       "image": "https://www.professionalresumefree.com/images/step2-finance-info.jpg"
                     },
                     {
@@ -878,7 +884,7 @@ const Resume = ({
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our finance-specific suggestions to improve financial keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#optimize",
+                      "url": `${canonicalUrl}#optimize`,
                       "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
@@ -886,7 +892,7 @@ const Resume = ({
                       "position": 4,
                       "name": "Download Your Finance Resume",
                       "text": "Export your professional finance resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder#download",
+                      "url": `${canonicalUrl}#download`,
                       "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
@@ -973,7 +979,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly finance resume builder that helps finance professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -1010,7 +1016,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -1021,6 +1027,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Finance Resume Builder 2026: Create Your ATS Investment Banking CV & Get Hired
             </h1>
@@ -1143,7 +1150,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1186,7 +1193,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional finance profiles (LinkedIn, Bloomberg, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1254,7 +1261,7 @@ const Resume = ({
             {/* Finance Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBriefcase /> Finance Experience</h3>
+                <h2 className={styles.sectionTitle}><FiBriefcase /> Finance Experience</h2>
                 <p className={styles.sectionDescription}>List your finance positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1352,7 +1359,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Finance Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Finance Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No finance experience added yet</p>
                   ) : (
@@ -1386,7 +1393,7 @@ const Resume = ({
 
                 {/* Industry Expertise */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiTarget /> Industry Expertise</h4>
+                  <h3 className={styles.subSectionTitle}><FiTarget /> Industry Expertise</h3>
                   <p className={styles.sectionDescription}>Add industries you have experience in</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1434,7 +1441,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Qualifications</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Qualifications</h2>
                 <p className={styles.sectionDescription}>List your education, degrees, and relevant finance qualifications</p>
                 
                 <div className={styles.formCard}>
@@ -1522,7 +1529,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1555,11 +1562,11 @@ const Resume = ({
             {/* Technical Skills & Certifications Section */}
             {activeSection === 'technical' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTrendingUp /> Technical Skills & Certifications</h3>
+                <h2 className={styles.sectionTitle}><FiTrendingUp /> Technical Skills & Certifications</h2>
                 
                 {/* Technical Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Technical Finance Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Technical Finance Skills</h3>
                   <p className={styles.sectionDescription}>List your technical skills and financial software proficiency</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1604,7 +1611,7 @@ const Resume = ({
 
                 {/* Certifications & Licenses */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Finance Certifications & Licenses</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Finance Certifications & Licenses</h3>
                   <p className={styles.sectionDescription}>Add your professional finance certifications and licenses</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1688,7 +1695,7 @@ const Resume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional finance organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1750,7 +1757,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1814,7 +1821,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2050,7 +2057,7 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Finance Resume Preview</h3>
+              <h2>Full Finance Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

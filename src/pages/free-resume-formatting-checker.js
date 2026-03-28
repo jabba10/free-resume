@@ -1399,7 +1399,7 @@ AWARDS & RECOGNITIONS
         <meta name="chatgpt-fts:keywords" content="resume formatting, ATS checker, resume analysis, formatting tool 2024" />
         <meta name="chatgpt-fts:last-updated" content={new Date().toISOString().split('T')[0]} />
         
-        {/* Canonical URL - Single Tag */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-formatting-checker" />
         
         {/* Open Graph */}

@@ -931,11 +931,6 @@ function ResumeLengthGuide({
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-        
         {/* OPEN GRAPH */}
         <meta property="og:title" content="How Long Should a Resume Be? USA Recruiter Insights (2026 Data)" />
         <meta property="og:description" content="Get the definitive answer to 'how long should a resume be?' based on 2026 USA recruiter insights, ATS data, and hiring manager preferences." />

@@ -666,13 +666,10 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" hreflang="x-default" />
+        
         <meta property="og:title" content="Free Customer Service Resume Builder 2026 | ATS Global Templates" />
         <meta property="og:description" content="Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-customer-service-resume-builder-preview.jpg" />
@@ -986,7 +983,7 @@ const Resume = ({
         </ol>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Contains the ONLY H1 tag */}
       <section className={styles.heroSection}>
         <div className={styles.container}>
           <div className={styles.heroContent}>
@@ -997,6 +994,7 @@ const Resume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Free Customer Service Resume Builder 2026: Start Now
             </h1>
@@ -1119,7 +1117,7 @@ const Resume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1162,7 +1160,7 @@ const Resume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional profiles (LinkedIn, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1229,7 +1227,7 @@ const Resume = ({
             {/* Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeadphones /> Customer Service Experience</h3>
+                <h2 className={styles.sectionTitle}><FiHeadphones /> Customer Service Experience</h2>
                 <p className={styles.sectionDescription}>List your customer service positions in reverse chronological order (most recent first)</p>
                 
                 <div className={styles.formCard}>
@@ -1328,7 +1326,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Customer Service Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Customer Service Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No customer service experience added yet</p>
                   ) : (
@@ -1365,7 +1363,7 @@ const Resume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Training</h2>
                 <p className={styles.sectionDescription}>List your education and customer service training</p>
                 
                 <div className={styles.formCard}>
@@ -1444,7 +1442,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1476,11 +1474,11 @@ const Resume = ({
             {/* Skills & Languages Section */}
             {activeSection === 'skills' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiGlobe /> Core Competencies & Languages</h3>
+                <h2 className={styles.sectionTitle}><FiGlobe /> Core Competencies & Languages</h2>
                 
                 {/* Core Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Core Customer Service Skills</h4>
+                  <h3 className={styles.subSectionTitle}>Core Customer Service Skills</h3>
                   <p className={styles.sectionDescription}>List your customer service skills and categorize them</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1549,7 +1547,7 @@ const Resume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Professional Certifications</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Professional Certifications</h3>
                   <p className={styles.sectionDescription}>Add your customer service and support certifications</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1633,7 +1631,7 @@ const Resume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Languages</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level (crucial for global customer service roles)</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1704,7 +1702,7 @@ const Resume = ({
             {/* Achievements Section */}
             {activeSection === 'achievements' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiAward /> Key Achievements</h3>
+                <h2 className={styles.sectionTitle}><FiAward /> Key Achievements</h2>
                 <p className={styles.sectionDescription}>Highlight your customer service achievements with measurable results</p>
                 
                 <div className={styles.formCard}>
@@ -1756,7 +1754,7 @@ const Resume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Achievements</h4>
+                  <h3 className={styles.subSectionTitle}>Your Achievements</h3>
                   {formData.achievements.length === 0 ? (
                     <p className={styles.emptyMessage}>No achievements added yet</p>
                   ) : (
@@ -1786,7 +1784,7 @@ const Resume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
@@ -2022,7 +2020,7 @@ const Resume = ({
         <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
           <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.fullPreviewHeader}>
-              <h3>Full Customer Service Resume Preview</h3>
+              <h2>Full Customer Service Resume Preview</h2>
               <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
             </div>
             <div className={styles.fullPreviewPages}>

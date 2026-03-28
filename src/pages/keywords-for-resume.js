@@ -785,6 +785,8 @@ export default function KeywordsForResume({ seoData }) {
   } = seoData;
   
   const displayDate = currentDate;
+  
+  // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/keywords-for-resume";
 
   // FAQ Schema Data
@@ -939,7 +941,7 @@ export default function KeywordsForResume({ seoData }) {
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
+        {/* SINGLE CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG */}
@@ -995,7 +997,7 @@ export default function KeywordsForResume({ seoData }) {
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": canonicalUrl,
+                  "@id": `${canonicalUrl}#webpage`,
                   "url": canonicalUrl,
                   "name": "Resume Keywords 2026: Complete ATS Guide",
                   "description": "Complete guide to resume keywords and ATS optimization strategies for 2026.",

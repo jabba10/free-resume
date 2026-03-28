@@ -43,8 +43,8 @@ body {
 .hero { background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%); padding: 40px 0; border-bottom: 1px solid var(--border); }
 @media (min-width: 768px) { .hero { padding: 80px 0; } }
 .hero h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); margin-bottom: 16px; line-height: 1.2; word-wrap: break-word; color: #000000; font-weight: 800; }
-.hero h2 { color: #000000; font-weight: 600; }
-.hero p { font-size: clamp(1.1rem, 3vw, 1.35rem); max-width: 800px; margin: 0 auto 24px; padding: 0 16px; color: #000000; }
+.hero h2 { color: #000000; font-weight: 600; font-size: clamp(1.1rem, 3vw, 1.35rem); margin-bottom: 16px; }
+.hero p { font-size: clamp(1rem, 2.5vw, 1.2rem); max-width: 800px; margin: 0 auto 24px; padding: 0 16px; color: #000000; }
 .usa-directory-statement { background: #e8f0fe; border: 1px solid #c0d4f0; border-radius: 8px; padding: 20px; margin: 24px auto; max-width: 900px; font-size: 1rem; color: #000000; text-align: left; }
 .usa-directory-statement p { color: #000000; }
 .button-container { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
@@ -363,7 +363,7 @@ const LazySection = ({ children, threshold = 0.1 }) => {
 
 const TableOfContents = ({ categories }) => (
   <nav className="toc-container" aria-label="Table of Contents">
-    <h3 style={{ marginBottom: '16px', fontSize: '1.1rem', color: '#000000' }}>📑 On This Page</h3>
+    <h2 style={{ marginBottom: '16px', fontSize: '1.1rem', color: '#000000' }}>📑 On This Page</h2>
     <ul className="toc-list">
       {categories.slice(0, 8).map((cat) => (
         <li key={cat.id}>
@@ -456,7 +456,7 @@ const IndustryGuidanceSection = ({ guidance }) => (
       <div className="grid">
         {guidance.map((item, idx) => (
           <div key={idx} className="card">
-            <h4 style={{ marginBottom: '8px', fontSize: '1.1rem', color: '#000000' }}>{item.title}</h4>
+            <h3 style={{ marginBottom: '8px', fontSize: '1.1rem', color: '#000000' }}>{item.title}</h3>
             <p style={{ marginBottom: '12px', flex: 1 }}>{item.description}</p>
           </div>
         ))}
@@ -473,7 +473,7 @@ const CorePrinciplesSection = ({ principles }) => (
       <div className="grid">
         {principles.map((principle, idx) => (
           <div key={idx} className="card">
-            <h4 style={{ marginBottom: '8px', fontSize: '1.1rem', color: '#000000' }}>{principle.title}</h4>
+            <h3 style={{ marginBottom: '8px', fontSize: '1.1rem', color: '#000000' }}>{principle.title}</h3>
             <p style={{ marginBottom: '12px', flex: 1 }}>{principle.description}</p>
           </div>
         ))}
@@ -520,7 +520,7 @@ const ResourceLinksSection = () => {
               {trendingLinks.map((link, idx) => (
                 <div key={`trending-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <h3 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>{link.name}</h3>
+                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -535,7 +535,7 @@ const ResourceLinksSection = () => {
               {exampleLinks.map((link, idx) => (
                 <div key={`examples-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <h3 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>{link.name}</h3>
+                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -550,7 +550,7 @@ const ResourceLinksSection = () => {
               {howtoLinks.map((link, idx) => (
                 <div key={`howto-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <h3 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>{link.name}</h3>
+                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -565,7 +565,7 @@ const ResourceLinksSection = () => {
               {strategyLinks.map((link, idx) => (
                 <div key={`strategy-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <h3 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>{link.name}</h3>
+                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -672,7 +672,7 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         <html lang="en-US" />
-        <title>USA Resume Directory: Federal USAJOBS & ATS-Optimized Resume Templates 2026</title>
+        <title>USA Resume Directory | Federal USAJOBS & ATS-Optimized</title>
         <meta name="description" content="Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides. Free resources for American job seekers." />
         <meta name="author" content="Professional Resume Free - USA Resume Resource Directory" />
         <meta name="keywords" content="USA resume, federal resume USAJOBS, ATS resume templates, American job search, resume examples USA, state resume guides, military to civilian resume, entry-level resume USA, USAJOBS format, federal resume KSA, GS grade resume, US tech resume, Wall Street resume" />
@@ -692,9 +692,11 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="googlebot" content="index, follow" />
         <meta name="last-modified" content={lastModified} />
+        
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/usa-jobs-resume-directory" />
         
-        <meta property="og:title" content="USA Resume Directory: Federal USAJOBS & ATS-Optimized Resume Templates 2026" />
+        <meta property="og:title" content="USA Resume Directory | Federal USAJOBS & ATS-Optimized" />
         <meta property="og:description" content="Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides." />
         <meta property="og:url" content="https://www.professionalresumefree.com/usa-jobs-resume-directory" />
         <meta property="og:type" content="website" />
@@ -702,7 +704,7 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
         <meta property="og:locale" content="en_US" />
         
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="USA Resume Directory: Federal USAJOBS & ATS-Optimized Resume Templates" />
+        <meta name="twitter:title" content="USA Resume Directory | Federal USAJOBS & ATS-Optimized" />
         <meta name="twitter:description" content="Complete USA resume directory with federal USAJOBS formats and state-specific resume guides." />
         
         <meta name="theme-color" content="#000000" />
@@ -745,6 +747,7 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
             <div className="directory-badge" aria-label="Directory type">
               🇺🇸 USA Jobs Resume Directory | Federal USAJOBS & ATS-Optimized | 2026
             </div>
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 id="hero-heading">USA Jobs Resume Directory</h1>
             <h2>Federal USAJOBS Formats • ATS-Optimized Templates • All 50 States</h2>
             <div className="info-box">

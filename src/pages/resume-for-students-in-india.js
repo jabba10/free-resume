@@ -635,6 +635,9 @@ export const getStaticProps = async () => {
 
 const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentDate, lastModifiedDate, buildTimestamp }) => {
   const currentYear = new Date().getFullYear();
+  
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-students-in-india";
 
   return (
     <>
@@ -676,13 +679,13 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
-        <link rel="canonical" href={meta.url} />
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
         
         {/* Hreflang Tags */}
-        <link rel="alternate" href={meta.url} hreflang="en-in" />
-        <link rel="alternate" href={meta.url} hreflang="en" />
-        <link rel="alternate" href={meta.url} hreflang="x-default" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-in" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -691,7 +694,7 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
         <meta property="og:type" content="article" />
         <meta property="og:title" content="Resume for Students in India: Complete 2026 Guide" />
         <meta property="og:description" content={meta.description} />
-        <meta property="og:url" content={meta.url} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content={meta.siteName} />
         <meta property="og:locale" content="en_IN" />
         <meta property="og:image" content={meta.image} />
@@ -1074,10 +1077,10 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
                       <th>Aspect</th>
                       <th>Student Resume</th>
                       <th>Experienced Resume</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                     <tr>
                       <td>Focus</td>
                       <td>
                         Education, projects, internships, skills, and potential
@@ -1085,13 +1088,13 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
                       <td>
                         Work history, achievements, leadership, and business impact
                       </td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>Length</td>
                       <td>Usually 1 page</td>
                       <td>1–2 pages depending on experience</td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>Key Sections</td>
                       <td>
                         Summary, Education, Skills, Projects, Internships, Activities
@@ -1099,8 +1102,8 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
                       <td>
                         Summary, Experience, Key Achievements, Skills, Education
                       </td>
-                    </tr>
-                    <tr>
+                     </tr>
+                     <tr>
                       <td>Recruiter Expectation</td>
                       <td>
                         Evidence of learning ability, initiative, and alignment with role
@@ -1108,9 +1111,9 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
                       <td>
                         Proven track record of delivering results and solving business problems
                       </td>
-                    </tr>
+                     </tr>
                   </tbody>
-                </table>
+                 </table>
               </div>
               <p className="paragraph" style={{ color: '#4b5563', marginBottom: '16px' }}>
                 Understanding this difference helps you stop comparing yourself to experienced candidates and instead focus on presenting the best version of your current profile. Your goal is not to look like a senior professional—it is to look like the most promising student or fresher in the applicant pool.

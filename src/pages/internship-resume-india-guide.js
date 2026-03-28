@@ -813,7 +813,10 @@ margin-bottom: 12px;
 const InternshipResumeIndia = () => {
   const currentYear = new Date().getFullYear();
   const displayDate = new Date().toISOString().split('T')[0];
+  
+  // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/internship-resume-india-guide";
+  
   const siteBrand = "Professional Resume Free";
   const primaryKeyword = "Internship Resume India - Complete 2026 Guide";
 
@@ -915,7 +918,7 @@ const InternshipResumeIndia = () => {
         <meta name="last-modified" content={displayDate} />
         <meta httpEquiv="last-modified" content={displayDate} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
+        {/* SINGLE CANONICAL URL - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG - India specific */}

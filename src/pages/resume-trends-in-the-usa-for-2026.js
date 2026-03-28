@@ -558,7 +558,7 @@ function ResumeTrends2026({
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
         <meta name="last-modified" content={lastModifiedDate} />
         
-        {/* CANONICAL URL */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG */}
@@ -833,7 +833,7 @@ function ResumeTrends2026({
             </p>
             
             <div className="table-wrap">
-              <table>
+               <table>
                 <thead>
                   <tr>
                     <th>Resume Format</th>
@@ -841,32 +841,32 @@ function ResumeTrends2026({
                     <th>2026 Preference</th>
                     <th>Change</th>
                     <th>Best For</th>
-                  </tr>
+                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                   <tr>
                     <td><strong>Reverse-Chronological</strong></td>
                     <td>68%</td>
                     <td>41%</td>
                     <td className="text-small">-27%</td>
                     <td>Senior roles, stable careers</td>
-                  </tr>
-                  <tr>
+                   </tr>
+                   <tr>
                     <td><strong>Skills-Based (Functional)</strong></td>
                     <td>12%</td>
                     <td>19%</td>
                     <td className="text-small">+7%</td>
                     <td>Career changers, gaps</td>
-                  </tr>
-                  <tr>
+                   </tr>
+                   <tr>
                     <td><strong>Hybrid (Skills First + Timeline)</strong></td>
                     <td>20%</td>
                     <td>40%</td>
                     <td className="text-small">+20%</td>
                     <td>Tech, marketing, general</td>
-                  </tr>
+                   </tr>
                 </tbody>
-              </table>
+               </table>
             </div>
             
             <div className="flex-center" style={{marginTop:'30px'}}>

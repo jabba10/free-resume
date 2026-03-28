@@ -787,11 +787,6 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
         {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href={metadata.alternates.canonical} />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href={metadata.alternates.canonical} hreflang="en-us" />
-        <link rel="alternate" href={metadata.alternates.canonical} hreflang="en" />
-        <link rel="alternate" href={metadata.alternates.canonical} hreflang="x-default" />
-        
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
         <meta name="chatgpt-fts:title" content="Resume for Gulf Job: Complete 2026 Guide & GCC Resume Tips" />
         <meta name="chatgpt-fts:description" content="Expert guide to crafting winning resumes for Gulf/Middle East jobs. Cultural insights, format requirements, visa tips, and industry-specific strategies for UAE, Saudi, Qatar, Kuwait." />

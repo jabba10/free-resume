@@ -718,6 +718,9 @@ const LogisticsResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL
+  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -732,20 +735,23 @@ const LogisticsResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder" hreflang="x-default" />
+        
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
         <meta property="og:description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals." />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Logistics Resume Builder - Create Professional Logistics Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/logistics-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Logistics Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -779,8 +785,8 @@ const LogisticsResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Logistics Resume Builder - ATS Friendly Supply Chain Templates 2026",
                   "description": "Create professional ATS-optimized logistics resumes for free. Land interviews 3x faster with our logistics resume builder.",
                   "datePublished": "2026-01-01",
@@ -830,7 +836,7 @@ const LogisticsResume = ({
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Logistics Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -872,7 +878,7 @@ const LogisticsResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -885,7 +891,7 @@ const LogisticsResume = ({
                         "name": "Logistics Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -904,7 +910,7 @@ const LogisticsResume = ({
                       "position": 1,
                       "name": "Choose a Logistics Template",
                       "text": "Select from our ATS-optimized logistics resume templates designed for supply chain managers, warehouse supervisors, transportation coordinators, and logistics analysts.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#templates",
+                      "url": `${canonicalUrl}#templates`,
                       "image": "https://www.professionalresumefree.com/images/step1-logistics-template.jpg"
                     },
                     {
@@ -912,7 +918,7 @@ const LogisticsResume = ({
                       "position": 2,
                       "name": "Enter Your Logistics Information",
                       "text": "Add your logistics experience, education, certifications, technical skills, and supply chain achievements using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#editor",
+                      "url": `${canonicalUrl}#editor`,
                       "image": "https://www.professionalresumefree.com/images/step2-logistics-info.jpg"
                     },
                     {
@@ -920,7 +926,7 @@ const LogisticsResume = ({
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our logistics-specific suggestions to improve supply chain keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#optimize",
+                      "url": `${canonicalUrl}#optimize`,
                       "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
@@ -928,7 +934,7 @@ const LogisticsResume = ({
                       "position": 4,
                       "name": "Download Your Logistics Resume",
                       "text": "Export your professional logistics resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder#download",
+                      "url": `${canonicalUrl}#download`,
                       "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
@@ -1015,7 +1021,7 @@ const LogisticsResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly logistics resume builder that helps supply chain professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -1063,6 +1069,7 @@ const LogisticsResume = ({
               </span>
             </div>
             
+            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
             <h1 className={styles.heroTitle}>
               Create Your Logistics Resume 2026
             </h1>
@@ -1185,7 +1192,7 @@ const LogisticsResume = ({
             {/* Personal Section */}
             {activeSection === 'personal' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiUser /> Personal Information</h3>
+                <h2 className={styles.sectionTitle}><FiUser /> Personal Information</h2>
                 <div className={styles.formCard}>
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
@@ -1228,7 +1235,7 @@ const LogisticsResume = ({
                 </div>
 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h4>
+                  <h3 className={styles.subSectionTitle}><FiGlobe /> Professional Links</h3>
                   <p className={styles.sectionDescription}>Add your professional logistics profiles (LinkedIn, portfolio, etc.)</p>
                   <div className={styles.socialInput}>
                     <select 
@@ -1295,7 +1302,7 @@ const LogisticsResume = ({
             {/* Logistics Experience Section */}
             {activeSection === 'experience' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTruck /> Logistics Experience</h3>
+                <h2 className={styles.sectionTitle}><FiTruck /> Logistics Experience</h2>
                 <p className={styles.sectionDescription}>List your logistics positions in reverse chronological order (most recent first). Include quantifiable achievements.</p>
                 
                 <div className={styles.formCard}>
@@ -1393,7 +1400,7 @@ const LogisticsResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Logistics Experience</h4>
+                  <h3 className={styles.subSectionTitle}>Your Logistics Experience</h3>
                   {formData.experience.length === 0 ? (
                     <p className={styles.emptyMessage}>No logistics experience added yet</p>
                   ) : (
@@ -1427,7 +1434,7 @@ const LogisticsResume = ({
 
                 {/* Key Achievements Section */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiAward /> Key Achievements</h4>
+                  <h3 className={styles.subSectionTitle}><FiAward /> Key Achievements</h3>
                   <p className={styles.sectionDescription}>Add measurable achievements with quantifiable results</p>
                   
                   <div className={styles.formCard}>
@@ -1497,7 +1504,7 @@ const LogisticsResume = ({
             {/* Education Section */}
             {activeSection === 'education' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Education & Training</h3>
+                <h2 className={styles.sectionTitle}><FiBook /> Education & Training</h2>
                 <p className={styles.sectionDescription}>List your logistics, supply chain, or business education</p>
                 
                 <div className={styles.formCard}>
@@ -1576,7 +1583,7 @@ const LogisticsResume = ({
                 </div>
                 
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Education</h4>
+                  <h3 className={styles.subSectionTitle}>Your Education</h3>
                   {formData.education.length === 0 ? (
                     <p className={styles.emptyMessage}>No education added yet</p>
                   ) : (
@@ -1608,11 +1615,11 @@ const LogisticsResume = ({
             {/* Specialties & Certifications Section */}
             {activeSection === 'specialties' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiTarget /> Logistics Specialties & Skills</h3>
+                <h2 className={styles.sectionTitle}><FiTarget /> Logistics Specialties & Skills</h2>
                 
                 {/* Logistics Specialties */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Logistics Specialties</h4>
+                  <h3 className={styles.subSectionTitle}>Logistics Specialties</h3>
                   <p className={styles.sectionDescription}>List your logistics and supply chain specialties</p>
                   <div className={styles.skillsInput}>
                     <input 
@@ -1657,7 +1664,7 @@ const LogisticsResume = ({
 
                 {/* Certifications */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Certifications & Licenses</h4>
+                  <h3 className={styles.subSectionTitle}><FiShield /> Certifications & Licenses</h3>
                   <p className={styles.sectionDescription}>Add your logistics certifications and professional licenses</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1741,7 +1748,7 @@ const LogisticsResume = ({
 
                 {/* Technical Skills */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiTool /> Technical Skills & Software</h4>
+                  <h3 className={styles.subSectionTitle}><FiTool /> Technical Skills & Software</h3>
                   <p className={styles.sectionDescription}>List your technical skills and logistics software proficiency</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1802,7 +1809,7 @@ const LogisticsResume = ({
 
                 {/* Professional Affiliations */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
+                  <h3 className={styles.subSectionTitle}>Professional Affiliations</h3>
                   <p className={styles.sectionDescription}>Add your professional logistics organization memberships</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1864,7 +1871,7 @@ const LogisticsResume = ({
 
                 {/* Languages */}
                 <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
+                  <h3 className={styles.subSectionTitle}>Languages</h3>
                   <p className={styles.sectionDescription}>List languages you speak and your proficiency level</p>
                   <div className={styles.skillsInput}>
                     <div className={styles.formGroup}>
@@ -1928,7 +1935,7 @@ const LogisticsResume = ({
             {/* Font Settings Section */}
             {activeSection === 'settings' && (
               <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
+                <h2 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h2>
                 <p className={styles.sectionDescription}>Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                 
                 <div className={styles.formCard}>
