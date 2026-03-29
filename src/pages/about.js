@@ -58,10 +58,14 @@ import {
   FiGlobe as FiGlobe2,
   FiHelpCircle,
   FiEye,
-  FiUserCheck
+  FiUserCheck,
+  FiLock,
+  FiTrash2,
+  FiMonitor as FiBrowser,
+  FiAlertCircle
 } from 'react-icons/fi';
 
-// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
+// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED & RESPONSIVENESS =============
 const criticalCSS = `
   /* RESET & BASE STYLES */
   * { 
@@ -79,15 +83,17 @@ const criticalCSS = `
     --border: #e5e7eb;
     --text-light: #4b5563;
     --text-lighter: #6b7280;
-    --success: #059669;
-    --warning: #d97706;
-    --danger: #dc2626;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
     --gradient-accent: linear-gradient(135deg, #000000 0%, #333333 100%);
+    
+    /* Privacy Section Colors (Black/White/Gray) */
+    --privacy-bg: #f3f4f6;
+    --privacy-border: #000000;
+    --privacy-text: #000000;
   }
   
   html { 
@@ -97,35 +103,39 @@ const criticalCSS = `
   
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--primary);
     background: var(--background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     width: 100%;
+    word-wrap: break-word;
   }
   
-  /* TYPOGRAPHY */
+  /* TYPOGRAPHY - FLUID SIZES */
   h1 { 
-    font-size: clamp(2rem, 6vw, 3.5rem); 
+    font-size: clamp(2rem, 5vw, 3.5rem); 
     line-height: 1.2; 
     font-weight: 800; 
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
+    word-break: break-word;
   }
   
   h2 { 
-    font-size: clamp(1.8rem, 5vw, 2.5rem); 
+    font-size: clamp(1.75rem, 4.5vw, 2.5rem); 
     line-height: 1.3; 
     margin-bottom: 1.5rem;
     font-weight: 700;
+    word-break: break-word;
   }
   
   h3 { 
-    font-size: clamp(1.3rem, 3vw, 1.8rem); 
+    font-size: clamp(1.25rem, 3vw, 1.75rem); 
     margin-bottom: 1rem;
     font-weight: 600;
+    word-break: break-word;
   }
   
   h4 { 
@@ -135,12 +145,18 @@ const criticalCSS = `
   }
   
   p { 
-    font-size: clamp(1rem, 2vw, 1.1rem); 
+    font-size: clamp(1rem, 2vw, 1.125rem); 
     color: var(--text-light);
     margin-bottom: 1.5rem;
     line-height: 1.7;
+    word-break: break-word;
   }
   
+  strong {
+    color: var(--primary);
+    font-weight: 700;
+  }
+
   a { 
     color: var(--primary);
     text-decoration: none;
@@ -161,7 +177,7 @@ const criticalCSS = `
   .container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 clamp(20px, 5vw, 40px);
+    padding: 0 clamp(1.25rem, 5vw, 2.5rem);
     width: 100%;
   }
   
@@ -187,25 +203,36 @@ const criticalCSS = `
     background-clip: text;
   }
   
-  /* BUTTON STYLES */
-  .btn-primary {
+  /* BUTTON STYLES - RESPONSIVE */
+  .btn-primary, .btn-secondary, .btn-accent {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    background: var(--primary);
-    color: white;
     padding: 1rem 2rem;
     border-radius: 0.75rem;
     font-weight: 600;
     font-size: 1rem;
-    border: none;
     transition: all 0.3s ease;
     min-width: 200px;
     text-align: center;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    touch-action: manipulation;
+  }
+
+  @media (max-width: 640px) {
+    .btn-primary, .btn-secondary, .btn-accent {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
   }
   
   .btn-primary:hover {
@@ -219,21 +246,9 @@ const criticalCSS = `
   }
   
   .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
     background: transparent;
     color: var(--primary);
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
     border: 2px solid var(--primary);
-    transition: all 0.3s ease;
-    min-width: 200px;
-    text-align: center;
-    cursor: pointer;
   }
   
   .btn-secondary:hover {
@@ -243,21 +258,9 @@ const criticalCSS = `
   }
   
   .btn-accent {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
     background: var(--primary);
     color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
     border: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    text-align: center;
-    cursor: pointer;
   }
   
   .btn-accent:hover {
@@ -274,6 +277,7 @@ const criticalCSS = `
     font-size: 0.75rem;
     margin-left: 0.75rem;
     font-weight: 500;
+    white-space: nowrap;
   }
   
   /* CARD STYLES */
@@ -284,6 +288,8 @@ const criticalCSS = `
     border: 1px solid var(--border);
     transition: all 0.3s ease;
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   .card:hover {
@@ -292,12 +298,13 @@ const criticalCSS = `
     border-color: var(--primary);
   }
   
-  /* GRID SYSTEMS */
+  /* GRID SYSTEMS - AUTO RESPONSIVE */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
+    width: 100%;
   }
   
   /* ANIMATIONS */
@@ -319,24 +326,34 @@ const criticalCSS = `
   }
   
   /* RESPONSIVE BREAKPOINTS */
-  @media (max-width: 1024px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
   @media (max-width: 768px) {
-    .grid { grid-template-columns: 1fr; }
-    .btn-primary, .btn-secondary, .btn-accent { width: 100%; min-width: auto; }
+    .grid { 
+      grid-template-columns: 1fr; 
+      gap: 1.5rem;
+    }
+    h1 { line-height: 1.3; }
+    .heroContent { gap: 2rem; }
   }
   
   @media (max-width: 480px) {
-    button, a, .clickable { touch-action: manipulation; }
-    .container { padding: 0 20px; }
-    p, li { font-size: 16px; }
-    .card { padding: 1.5rem; }
+    button, a, .clickable { 
+      touch-action: manipulation; 
+      -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    }
+    .container { 
+      padding: 0 1.25rem; 
+    }
+    p, li { 
+      font-size: 1rem; 
+      line-height: 1.6;
+    }
+    .card { 
+      padding: 1.5rem; 
+    }
   }
 `;
 
-const AboutPage = ({ currentDate, lastModifiedDate }) => {
+const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
   // Calculate price valid until date (e.g., 1 year from now)
   const getPriceValidUntil = () => {
     const date = new Date();
@@ -344,106 +361,39 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     return date.toISOString();
   };
 
-  // ============= ENHANCED FEATURES WITH ICONS =============
+  // ============= ENHANCED FEATURES WITH ICONS (UPDATED: Removed Privacy First Card) =============
   const features = [
     {
       icon: <FiAward size={32} />,
-      title: 'Award-Winning Designs',
-      description: 'Professionally crafted templates that impress recruiters and have won multiple design awards for their clean, modern aesthetic.',
-      stat: '50+ Templates'
+      title: 'Professional Designs',
+      description: 'Professionally crafted templates that impress recruiters with their clean, modern aesthetic.',
+      stat: ''
     },
     {
       icon: <FiTrendingUp size={32} />,
-      title: 'Lightning Fast Results',
-      description: 'Create a polished, interview-ready resume in under 15 minutes with our intuitive drag-and-drop editor and smart templates.',
-      stat: '< 15 min'
+      title: 'Fast Results',
+      description: 'Create a polished, interview-ready resume quickly with our intuitive drag-and-drop editor.',
+      stat: ''
     },
     {
       icon: <FiCheckCircle size={32} />,
       title: 'ATS Optimized',
-      description: 'Every template is rigorously tested against major ATS platforms including Workday, Taleo, and Greenhouse for 98% parse rate.',
-      stat: '98% Pass Rate'
+      description: 'Every template is rigorously tested against major ATS platforms including Workday, Taleo, and Greenhouse.',
+      stat: ''
     },
     {
       icon: <FiGlobe size={32} />,
       title: 'Global Reach',
-      description: 'Trusted by job seekers in 100+ countries with region-specific formatting, date standards, and international resume requirements.',
-      stat: '100+ Countries'
+      description: 'Trusted by job seekers worldwide with region-specific formatting and international resume requirements.',
+      stat: ''
     },
     {
       icon: <FiHeart size={32} />,
       title: 'User-Centered Design',
-      description: 'Built with feedback from thousands of users to create the most intuitive, frustration-free resume building experience.',
-      stat: '4.9/5 Rating'
-    },
-    {
-      icon: <FiShield size={32} />,
-      title: 'Privacy First',
-      description: 'Your data never leaves your device. No tracking, no data mining, no hidden agendas - just secure resume building.',
-      stat: '100% Private'
+      description: 'Built with feedback from users to create the most intuitive, frustration-free resume building experience.',
+      stat: ''
     }
-  ];
-
-  // ============= COMPANY STATISTICS =============
-  const stats = [
-    {
-      number: "500K+",
-      label: "Resumes Created",
-      icon: <FiUsers size={28} />,
-      description: "And counting every day"
-    },
-    {
-      number: "95%",
-      label: "Interview Success Rate",
-      icon: <FiTrendingUp size={28} />,
-      description: "Users report more callbacks"
-    },
-    {
-      number: "50+",
-      label: "Professional Templates",
-      icon: <FiAward size={28} />,
-      description: "For every industry"
-    },
-    {
-      number: "24/7",
-      label: "Free Forever Access",
-      icon: <FiClock size={28} />,
-      description: "No hidden costs ever"
-    },
-    {
-      number: "4.9/5",
-      label: "User Satisfaction",
-      icon: <FiStar size={28} />,
-      description: "From 10K+ reviews"
-    },
-    {
-      number: "100M+",
-      label: "Resume Views",
-      icon: <FiEye size={28} />,
-      description: "By recruiters worldwide"
-    }
-  ];
-
-  // ============= TEAM MEMBERS =============
-  const teamMembers = [
-    {
-      name: "Alex Chen",
-      role: "Founder & CEO",
-      bio: "Former HR director with 15 years experience in talent acquisition. Created ProfessionalResumeFree to democratize access to professional resume tools.",
-      icon: <FiUserCheck size={24} />
-    },
-    {
-      name: "Sarah Johnson",
-      role: "Head of Design",
-      bio: "Award-winning UI/UX designer who has created templates used by over 1 million job seekers. Passionate about accessible design.",
-      icon: <FiPenTool size={24} />
-    },
-    {
-      name: "Michael Okonkwo",
-      role: "ATS Optimization Lead",
-      bio: "Data scientist specializing in NLP and ATS algorithms. Ensures every template passes the strictest automated screening systems.",
-      icon: <FiCpu size={24} />
-    }
+    // "Privacy First" card removed as requested
   ];
 
   // ============= COMPANY VALUES =============
@@ -460,84 +410,49 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     },
     {
       title: "Continuous Innovation",
-      description: "We update our platform weekly based on changing hiring trends and user feedback.",
+      description: "We update our platform regularly based on changing hiring trends and user feedback.",
       icon: <FiZap size={24} />
-    },
-    {
-      title: "User Privacy",
-      description: "Your data stays yours. We never sell or share personal information with third parties.",
-      icon: <FiShield size={24} />
     }
   ];
 
-  // ============= TIMELINE DATA =============
-  const timeline = [
-    {
-      year: "2020",
-      title: "Company Founded",
-      description: "Launched with a mission to make professional resume tools accessible to all"
-    },
-    {
-      year: "2021",
-      title: "100K Resumes Milestone",
-      description: "Reached 100,000 resumes created by users in 50+ countries"
-    },
-    {
-      year: "2022",
-      title: "ATS Optimization Launch",
-      description: "Introduced ATS-friendly templates with 94% pass rate"
-    },
-    {
-      year: "2023",
-      title: "500K Resumes Created",
-      description: "Half a million resumes and counting, with users in 100+ countries"
-    },
-    {
-      year: "2024",
-      title: "Global Expansion",
-      description: "Added region-specific formats for 20+ countries"
-    },
-    {
-      year: "2025",
-      title: "AI-Powered Tools",
-      description: "Launched AI resume optimization features with 98% accuracy"
-    }
-  ];
-
-  // ============= FAQ DATA =============
+  // ============= FAQ DATA (NUMBERS REMOVED) =============
   const faqData = [
     {
       question: "What makes ProfessionalResumeFree different from other resume builders?",
-      answer: "We combine beautiful, modern designs with rigorous ATS (Applicant Tracking System) optimization. Unlike other builders, every template is tested against 15+ major ATS platforms to ensure 98% parse rate. Plus, we're completely free with no hidden costs ever."
+      answer: "We combine beautiful, modern designs with rigorous ATS (Applicant Tracking System) optimization. Unlike other builders, every template is tested against major ATS platforms to ensure high compatibility. Plus, we're completely free with no hidden costs ever."
     },
     {
-      question: "Is ProfessionalResumeFree really free?",
+      question: "Is ProfessionalResumeFree really 100% free?",
       answer: "Yes, absolutely! We offer a completely free resume builder with access to all templates and features. No credit card required, no time limits, no watermarks. We believe everyone deserves access to professional resume tools."
     },
     {
+      question: "Do I need to sign up to use the builder?",
+      answer: "No sign-up is required. You can start building your resume immediately. There are no hidden paywalls, and you can download your resume PDF instantly without creating an account."
+    },
+    {
       question: "How does ATS optimization work?",
-      answer: "All our templates are designed with proper heading hierarchy, standard fonts, clean layouts, and machine-readable formatting. We test each template against Workday, Taleo, iCIMS, Lever, Greenhouse, and 10+ other major ATS platforms to ensure maximum compatibility."
+      answer: "All our templates are designed with proper heading hierarchy, standard fonts, clean layouts, and machine-readable formatting. We test each template against Workday, Taleo, iCIMS, Lever, Greenhouse, and other major ATS platforms to ensure maximum compatibility."
     },
     {
       question: "In which countries is ProfessionalResumeFree available?",
-      answer: "Our platform is available worldwide and supports job seekers in over 100 countries. We offer region-specific formatting including date formats, address styles, phone number formats, and resume conventions for North America, Europe, Asia, Australia, and more."
+      answer: "Our platform is available worldwide and supports job seekers globally. We offer region-specific formatting including date formats, address styles, phone number formats, and resume conventions for North America, Europe, Asia, Australia, and more."
     },
     {
-      question: "How do you protect user privacy?",
-      answer: "We take privacy seriously. All resume data stays on your device - we never store or have access to your personal information. No tracking, no analytics, no data sharing. Your career journey is your business alone."
+      question: "Do you store my personal data?",
+      answer: "No. We do not store your data. Everything runs directly in your browser. The moment you leave the site or close the tab, your personal details disappear completely from our system. Your privacy is guaranteed."
     },
     {
-      question: "What's your success rate?",
-      answer: "Based on user surveys, 95% of users report receiving more interview callbacks after using our templates. We've helped users land jobs at Fortune 500 companies, startups, non-profits, and everything in between."
+      question: "Can I download my resume instantly?",
+      answer: "Yes. Once you finish editing, you can download your resume as a PDF instantly. There are no waiting periods, approval processes, or hidden steps."
     }
   ];
 
-  // ============= TESTIMONIALS =============
+  // ============= TESTIMONIALS (NUMBERS REMOVED) =============
   const testimonials = [
     {
       name: "Jennifer L.",
       role: "Marketing Director",
-      quote: "I was job searching for 3 months with no luck. Used ProfessionalResumeFree and had 4 interviews within 2 weeks. Landed my dream job!",
+      quote: "I was job searching for months with no luck. Used ProfessionalResumeFree and had interviews within weeks. Landed my dream job!",
       rating: 5,
       company: "Tech Startup"
     },
@@ -583,16 +498,19 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       overflow: 'hidden'
     },
     heroContent: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '3rem',
-      alignItems: 'center'
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign: 'center',
+      gap: '2rem',
+      maxWidth: '800px',
+      margin: '0 auto'
     },
     heroText: {
-      maxWidth: '600px'
+      width: '100%'
     },
     heroTitle: {
-      fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+      fontSize: 'clamp(2rem, 5vw, 3.5rem)',
       fontWeight: '800',
       lineHeight: '1.2',
       marginBottom: '1.5rem',
@@ -607,29 +525,51 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     heroButtons: {
       display: 'flex',
       gap: '1rem',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      width: '100%'
     },
-    heroVisual: {
-      position: 'relative',
-      height: '400px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
+
+    // PRIVACY ALERT SECTION
+    privacySection: {
+      padding: 'clamp(2rem, 5vw, 4rem) 0',
+      backgroundColor: 'var(--privacy-bg)',
+      borderTop: '2px solid var(--privacy-border)',
+      borderBottom: '2px solid var(--privacy-border)'
     },
-    floatingCard: {
-      position: 'absolute',
-      padding: '1.5rem',
+    privacyBox: {
       background: 'white',
       borderRadius: '1rem',
-      boxShadow: 'var(--shadow-xl)',
-      border: '1px solid var(--border)',
-      animation: 'float 6s ease-in-out infinite',
-      minWidth: '200px',
-      textAlign: 'center'
+      padding: 'clamp(1.5rem, 4vw, 2.5rem)',
+      border: '2px solid var(--privacy-border)',
+      textAlign: 'center',
+      boxShadow: 'var(--shadow-lg)',
+      width: '100%'
     },
-    cardIcon: {
-      fontSize: '2rem',
-      marginBottom: '0.5rem'
+    privacyIcon: {
+      color: 'var(--privacy-text)',
+      marginBottom: '1rem',
+      display: 'inline-block'
+    },
+    privacyTitle: {
+      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+      color: 'var(--privacy-text)',
+      fontWeight: '800',
+      marginBottom: '1rem',
+      lineHeight: '1.3'
+    },
+    privacyText: {
+      fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)',
+      color: 'var(--text-light)',
+      fontWeight: '500',
+      marginBottom: '0',
+      lineHeight: '1.6'
+    },
+    privacyHighlight: {
+      fontWeight: '800',
+      textDecoration: 'underline',
+      textDecorationColor: 'var(--privacy-border)',
+      textUnderlineOffset: '4px'
     },
 
     // Mission Section
@@ -644,21 +584,10 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       alignItems: 'center'
     },
     missionText: {
-      maxWidth: '600px'
+      maxWidth: '600px',
+      width: '100%'
     },
-    missionStats: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3, 1fr)',
-      gap: '1.5rem'
-    },
-    missionStat: {
-      textAlign: 'center',
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)'
-    },
-
+    
     // Features Section
     featuresSection: {
       padding: 'clamp(3rem, 8vw, 5rem) 0',
@@ -667,7 +596,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     sectionHeader: {
       textAlign: 'center',
       maxWidth: '800px',
-      margin: '0 auto 3rem'
+      margin: '0 auto 3rem',
+      padding: '0 1rem'
     },
     sectionTitle: {
       fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
@@ -679,7 +609,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     },
     featuresGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
       gap: '2rem'
     },
     featureCard: {
@@ -687,7 +617,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       background: 'var(--card-bg)',
       borderRadius: '1rem',
       border: '1px solid var(--border)',
-      transition: 'all 0.3s ease'
+      transition: 'all 0.3s ease',
+      height: '100%'
     },
     featureIconContainer: {
       width: '64px',
@@ -699,7 +630,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       justifyContent: 'center',
       marginBottom: '1.5rem',
       border: '1px solid var(--border)',
-      color: 'var(--primary)'
+      color: 'var(--primary)',
+      flexShrink: 0
     },
     featureTitle: {
       fontSize: '1.3rem',
@@ -709,7 +641,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     featureDescription: {
       color: 'var(--text-light)',
       marginBottom: '1rem',
-      lineHeight: '1.6'
+      lineHeight: '1.6',
+      flex: 1
     },
     featureStat: {
       display: 'inline-block',
@@ -719,46 +652,6 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       fontSize: '0.85rem',
       fontWeight: '500',
       border: '1px solid var(--border)'
-    },
-
-    // Stats Section
-    statsSection: {
-      padding: 'clamp(3rem, 8vw, 5rem) 0',
-      background: 'var(--gradient-primary)',
-      color: 'white'
-    },
-    statsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '2rem'
-    },
-    statCard: {
-      textAlign: 'center',
-      padding: '2rem',
-      background: 'rgba(255, 255, 255, 0.1)',
-      borderRadius: '1rem',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255, 255, 255, 0.2)'
-    },
-    statIconContainer: {
-      fontSize: '2rem',
-      marginBottom: '1rem',
-      color: 'white'
-    },
-    statNumber: {
-      fontSize: 'clamp(2rem, 4vw, 2.5rem)',
-      fontWeight: '700',
-      marginBottom: '0.5rem',
-      color: 'white'
-    },
-    statLabel: {
-      fontSize: '1rem',
-      color: 'rgba(255, 255, 255, 0.9)',
-      marginBottom: '0.5rem'
-    },
-    statDescription: {
-      fontSize: '0.9rem',
-      color: 'rgba(255, 255, 255, 0.7)'
     },
 
     // Values Section
@@ -776,7 +669,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       background: 'white',
       borderRadius: '1rem',
       border: '1px solid var(--border)',
-      textAlign: 'center'
+      textAlign: 'center',
+      height: '100%'
     },
     valueIcon: {
       width: '56px',
@@ -787,84 +681,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       alignItems: 'center',
       justifyContent: 'center',
       margin: '0 auto 1rem',
-      color: 'white'
-    },
-
-    // Team Section
-    teamSection: {
-      padding: 'clamp(3rem, 8vw, 5rem) 0',
-      backgroundColor: '#ffffff'
-    },
-    teamGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-      gap: '2rem'
-    },
-    teamCard: {
-      padding: '2rem',
-      background: 'var(--card-bg)',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)',
-      textAlign: 'center'
-    },
-    teamIcon: {
-      width: '80px',
-      height: '80px',
-      background: 'white',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: '0 auto 1rem',
-      border: '1px solid var(--border)',
-      color: 'var(--primary)'
-    },
-    teamRole: {
-      color: 'var(--primary)',
-      fontWeight: '500',
-      marginBottom: '0.5rem'
-    },
-    teamBio: {
-      fontSize: '0.95rem',
-      color: 'var(--text-light)',
-      marginTop: '1rem'
-    },
-
-    // Timeline Section
-    timelineSection: {
-      padding: 'clamp(3rem, 8vw, 5rem) 0',
-      backgroundColor: 'var(--card-bg)'
-    },
-    timeline: {
-      maxWidth: '800px',
-      margin: '0 auto'
-    },
-    timelineItem: {
-      display: 'flex',
-      gap: '2rem',
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '1rem',
-      marginBottom: '1rem',
-      border: '1px solid var(--border)'
-    },
-    timelineYear: {
-      fontSize: '1.5rem',
-      fontWeight: '700',
-      color: 'var(--primary)',
-      minWidth: '100px'
-    },
-    timelineContent: {
-      flex: 1
-    },
-    timelineTitle: {
-      fontSize: '1.2rem',
-      fontWeight: '600',
-      marginBottom: '0.5rem'
-    },
-    timelineDescription: {
-      color: 'var(--text-light)',
-      fontSize: '0.95rem'
+      color: 'white',
+      flexShrink: 0
     },
 
     // Testimonials Section
@@ -874,7 +692,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     },
     testimonialsGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
       gap: '2rem'
     },
     testimonialCard: {
@@ -882,7 +700,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       background: 'var(--card-bg)',
       borderRadius: '1rem',
       border: '1px solid var(--border)',
-      position: 'relative'
+      position: 'relative',
+      height: '100%'
     },
     testimonialQuote: {
       fontSize: '1.1rem',
@@ -894,18 +713,26 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     testimonialAuthor: {
       display: 'flex',
       alignItems: 'center',
-      gap: '1rem'
+      gap: '1rem',
+      marginTop: 'auto'
     },
     testimonialAuthorInfo: {
-      flex: 1
+      flex: 1,
+      minWidth: 0
     },
     testimonialName: {
       fontWeight: '600',
-      marginBottom: '0.25rem'
+      marginBottom: '0.25rem',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     },
     testimonialRole: {
       fontSize: '0.9rem',
-      color: 'var(--text-light)'
+      color: 'var(--text-light)',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     },
     testimonialRating: {
       display: 'flex',
@@ -924,7 +751,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     partnersGrid: {
       display: 'flex',
       flexWrap: 'wrap',
-      gap: '2rem',
+      gap: '1.5rem',
       justifyContent: 'center',
       alignItems: 'center'
     },
@@ -936,7 +763,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       background: 'white',
       borderRadius: '2rem',
       border: '1px solid var(--border)',
-      fontSize: '0.95rem'
+      fontSize: '0.95rem',
+      whiteSpace: 'nowrap'
     },
 
     // FAQ Section
@@ -946,23 +774,25 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     },
     faqGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
       gap: '1.5rem',
       maxWidth: '1000px',
-      margin: '0 auto'
+      margin: '0 auto',
+      width: '100%'
     },
     faqCard: {
       padding: '1.5rem',
       background: 'var(--card-bg)',
       borderRadius: '1rem',
-      border: '1px solid var(--border)'
+      border: '1px solid var(--border)',
+      height: '100%'
     },
     faqQuestion: {
       fontSize: '1.1rem',
       fontWeight: '600',
       marginBottom: '0.75rem',
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       gap: '0.5rem'
     },
     faqAnswer: {
@@ -980,7 +810,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
     ctaContent: {
       textAlign: 'center',
       maxWidth: '700px',
-      margin: '0 auto'
+      margin: '0 auto',
+      padding: '0 1rem'
     },
     ctaTitle: {
       fontSize: 'clamp(2rem, 5vw, 3rem)',
@@ -996,7 +827,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       display: 'flex',
       gap: '1rem',
       justifyContent: 'center',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      width: '100%'
     },
 
     // Update Strategy
@@ -1018,13 +850,13 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 72 CHARACTERS ===== */}
-        <title>About Us: Free ATS Resume Builder Trusted by 500K+ Users 2026</title>
+        {/* ===== OPTIMIZED HIGH-CTR TITLE ===== */}
+        <title>About Us: 100% Free Resume Builder | No Sign Up | Private</title>
         
         {/* ===== META DESCRIPTION ===== */}
-        <meta name="description" content="Learn how our free resume builder helps job seekers in 100+ countries land interviews. 500K+ resumes created, 95% callback rate, 50+ ATS-optimized templates." />
+        <meta name="description" content="Build your resume 100% free with no sign-up. Runs entirely in your browser—your data is never stored. Download PDF instantly. ATS optimized templates." />
         <meta name="author" content="ProfessionalResumeFree" />
-        <meta name="keywords" content="about us, resume builder company, ATS resume, job search tools, career success, professional resume service, resume design, free resume builder, ATS optimization, interview success" />
+        <meta name="keywords" content="about us, free resume builder, no sign up resume, private resume builder, browser based resume, ATS resume, instant PDF download" />
         
         {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -1043,13 +875,13 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content="About ProfessionalResumeFree: Free ATS Resume Builder" />
-        <meta name="chatgpt-fts:description" content="Free resume builder trusted by 500K+ users in 100+ countries. 95% interview callback rate, 50+ ATS-optimized templates. Learn about our mission." />
+        <meta name="chatgpt-fts:title" content="About ProfessionalResumeFree: 100% Free & Private" />
+        <meta name="chatgpt-fts:description" content="Free resume builder with no sign-up. Runs in your browser; data is never stored. Instant PDF downloads. Learn about our privacy-first mission." />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         
         {/* ===== OPEN GRAPH ===== */}
-        <meta property="og:title" content="About Us: Free ATS Resume Builder Trusted by 500K+ Users 2026" />
-        <meta property="og:description" content="Learn how our free resume builder helps job seekers in 100+ countries land interviews. 500K+ resumes created, 95% callback rate, 50+ ATS-optimized templates." />
+        <meta property="og:title" content="About Us: 100% Free Resume Builder | No Sign Up | Private" />
+        <meta property="og:description" content="Build your resume 100% free with no sign-up. Runs entirely in your browser—your data is never stored. Download PDF instantly." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://www.professionalresumefree.com/about-preview.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -1061,8 +893,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
         
         {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Us: Free ATS Resume Builder Trusted by 500K+ Users 2026" />
-        <meta name="twitter:description" content="Free resume builder trusted by 500K+ users in 100+ countries. 95% interview callback rate, 50+ ATS-optimized templates." />
+        <meta name="twitter:title" content="About Us: 100% Free Resume Builder | No Sign Up | Private" />
+        <meta name="twitter:description" content="Build your resume 100% free with no sign-up. Runs entirely in your browser—your data is never stored. Download PDF instantly." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/about-preview.jpg" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         <meta name="twitter:creator" content="@ProfResumeFree" />
@@ -1071,7 +903,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA (CLEANED) ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -1082,30 +914,19 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
                 "name": "ProfessionalResumeFree",
                 "url": "https://www.professionalresumefree.com",
                 "logo": "https://www.professionalresumefree.com/logo.png",
-                "description": "Free ATS-optimized resume builder trusted by 500,000+ job seekers worldwide",
-                "foundingDate": "2020",
-                "founders": [
-                  {
-                    "@type": "Person",
-                    "name": "Alex Chen"
-                  }
-                ],
+                "description": "Free ATS-optimized resume builder that runs entirely in your browser with no data storage.",
                 "sameAs": [
                   "https://www.linkedin.com/company/professionalresumefree",
                   "https://twitter.com/ProfResumeFree",
                   "https://www.facebook.com/professionalresumefree"
-                ],
-                "numberOfEmployees": {
-                  "@type": "QuantitativeValue",
-                  "value": "25"
-                }
+                ]
               },
               {
                 "@type": "WebPage",
                 "@id": `${canonicalUrl}#webpage`,
                 "url": canonicalUrl,
                 "name": "About ProfessionalResumeFree",
-                "description": "Learn about our mission to help job seekers succeed with professionally designed, ATS-optimized resumes",
+                "description": "Learn about our mission to provide free, private, and ATS-optimized resume tools.",
                 "isPartOf": {
                   "@id": "https://www.professionalresumefree.com/#website"
                 },
@@ -1145,7 +966,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
               {
                 "@type": "Product",
                 "name": "ProfessionalResumeFree Resume Builder",
-                "description": "Free ATS-optimized resume builder with 50+ professional templates",
+                "description": "Free ATS-optimized resume builder with professional templates. No sign-up required.",
                 "brand": {
                   "@type": "Brand",
                   "name": "ProfessionalResumeFree"
@@ -1164,24 +985,6 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
                   "priceValidUntil": getPriceValidUntil(),
                   "availability": "https://schema.org/InStock"
                 }
-              },
-              {
-                "@type": "LocalBusiness",
-                "name": "ProfessionalResumeFree",
-                "description": "Free online resume builder with ATS optimization",
-                "url": "https://www.professionalresumefree.com",
-                "telephone": "+1-555-123-4567",
-                "email": "support@professionalresumefree.com",
-                "priceRange": "Free",
-                "openingHours": "Mo-Su 00:00-23:59",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "123 Career Lane",
-                  "addressLocality": "San Francisco",
-                  "addressRegion": "CA",
-                  "postalCode": "94107",
-                  "addressCountry": "US"
-                }
               }
             ]
           })
@@ -1191,7 +994,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       {/* Skip to main content for accessibility */}
       <a href="#main-content" className="skip-link">Skip to main content</a>
 
-      {/* ============= HERO SECTION ============= */}
+      {/* ============= HERO SECTION (CLEANED) ============= */}
       <section id="main-content" style={styles.heroSection}>
         <div className="container">
           <div style={styles.heroContent}>
@@ -1203,6 +1006,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
               <p style={styles.heroSubtitle}>
                 Our mission is to help you present your best self and unlock career opportunities
                 through beautifully designed, effective resumes that get you noticed by top employers.
+                <strong> 100% Free. No Sign-Up. Instant Download.</strong>
               </p>
               <div style={styles.heroButtons}>
                 <Link href="/resume-templates" className="btn-primary">
@@ -1216,25 +1020,23 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
                 </Link>
               </div>
             </div>
-            <div style={styles.heroVisual}>
-              <div style={{...styles.floatingCard, top: '20%', left: '10%', animationDelay: '0s'}}>
-                <div style={styles.cardIcon}>✨</div>
-                <h4>Modern Design</h4>
-                <p style={{fontSize: '0.9rem'}}>Clean, contemporary layouts</p>
-              </div>
-              
-              <div style={{...styles.floatingCard, top: '40%', right: '10%', animationDelay: '2s'}}>
-                <div style={styles.cardIcon}>⚡</div>
-                <h4>ATS Optimized</h4>
-                <p style={{fontSize: '0.9rem'}}>98% pass rate</p>
-              </div>
-              
-              <div style={{...styles.floatingCard, bottom: '20%', left: '30%', animationDelay: '4s'}}>
-                <div style={styles.cardIcon}>💫</div>
-                <h4>Free Forever</h4>
-                <p style={{fontSize: '0.9rem'}}>No hidden costs</p>
-              </div>
-            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============= PRIVACY FIRST SECTION ============= */}
+      <section style={styles.privacySection}>
+        <div className="container">
+          <div style={styles.privacyBox}>
+            <FiLock size={48} style={styles.privacyIcon} />
+            <h2 style={styles.privacyTitle}>
+              Your Data Never Leaves Your Browser
+            </h2>
+            <p style={styles.privacyText}>
+              <strong>We do not store your data.</strong> Everything runs <span style={styles.privacyHighlight}>100% locally in your browser</span>. 
+              The moment you leave the site or close the tab, <span style={styles.privacyHighlight}>your personal details disappear completely</span>. 
+              No servers, no databases, no tracking. Just you and your resume.
+            </p>
           </div>
         </div>
       </section>
@@ -1254,47 +1056,22 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
               <p>
                 Our platform combines <strong>cutting-edge design with rigorous ATS optimization</strong> to ensure 
                 your resume not only looks beautiful but also gets past automated screening 
-                systems and into the hands of hiring managers. Since 2020, we've helped over
-                <strong> 500,000 job seekers</strong> create professional resumes that land interviews.
+                systems and into the hands of hiring managers. We help job seekers globally 
+                create professional resumes that land interviews, <strong>completely free of charge</strong>.
               </p>
             </div>
-            <div style={styles.missionStats}>
-              <div style={styles.missionStat}>
+            <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1.5rem', width: '100%'}}>
+              <div style={{textAlign: 'center', padding: '1.5rem', background: 'white', borderRadius: '1rem', border: '1px solid var(--border)'}}>
                 <FiGlobe size={32} style={{margin: '0 auto 0.5rem', color: 'var(--primary)'}} />
-                <span style={{fontSize: '1.5rem', fontWeight: '700', display: 'block'}}>100+</span>
-                <span style={{color: 'var(--text-light)'}}>Countries</span>
+                <span style={{fontSize: '1.5rem', fontWeight: '700', display: 'block'}}>Global</span>
+                <span style={{color: 'var(--text-light)'}}>Reach</span>
               </div>
-              <div style={styles.missionStat}>
+              <div style={{textAlign: 'center', padding: '1.5rem', background: 'white', borderRadius: '1rem', border: '1px solid var(--border)'}}>
                 <FiZap size={32} style={{margin: '0 auto 0.5rem', color: 'var(--primary)'}} />
-                <span style={{fontSize: '1.5rem', fontWeight: '700', display: 'block'}}>3x</span>
-                <span style={{color: 'var(--text-light)'}}>Faster Interviews</span>
-              </div>
-              <div style={styles.missionStat}>
-                <FiShield size={32} style={{margin: '0 auto 0.5rem', color: 'var(--primary)'}} />
-                <span style={{fontSize: '1.5rem', fontWeight: '700', display: 'block'}}>99.9%</span>
-                <span style={{color: 'var(--text-light)'}}>Uptime</span>
+                <span style={{fontSize: '1.5rem', fontWeight: '700', display: 'block'}}>Fast</span>
+                <span style={{color: 'var(--text-light)'}}>Results</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============= STATS SECTION ============= */}
-      <section style={styles.statsSection}>
-        <div className="container">
-          <div style={{textAlign: 'center', marginBottom: '2rem'}}>
-            <h2 style={{color: 'white'}}>Our Impact by the Numbers</h2>
-            <p style={{color: 'rgba(255, 255, 255, 0.8)'}}>Real results from real users</p>
-          </div>
-          <div style={styles.statsGrid}>
-            {stats.map((stat, index) => (
-              <div key={index} style={styles.statCard}>
-                <div style={styles.statIconContainer}>{stat.icon}</div>
-                <h3 style={styles.statNumber}>{stat.number}</h3>
-                <p style={styles.statLabel}>{stat.label}</p>
-                <p style={styles.statDescription}>{stat.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -1314,7 +1091,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
                 <div style={styles.featureIconContainer}>{feature.icon}</div>
                 <h3 style={styles.featureTitle}>{feature.title}</h3>
                 <p style={styles.featureDescription}>{feature.description}</p>
-                <span style={styles.featureStat}>{feature.stat}</span>
+                {feature.stat && <span style={styles.featureStat}>{feature.stat}</span>}
               </div>
             ))}
           </div>
@@ -1334,47 +1111,6 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
                 <div style={styles.valueIcon}>{value.icon}</div>
                 <h3 style={{marginBottom: '0.5rem'}}>{value.title}</h3>
                 <p style={{color: 'var(--text-light)'}}>{value.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============= TEAM SECTION ============= */}
-      <section style={styles.teamSection}>
-        <div className="container">
-          <div style={styles.sectionHeader}>
-            <h2 style={styles.sectionTitle}>Meet the Team</h2>
-            <p style={styles.sectionSubtitle}>Passionate experts dedicated to your career success</p>
-          </div>
-          <div style={styles.teamGrid}>
-            {teamMembers.map((member, index) => (
-              <div key={index} style={styles.teamCard}>
-                <div style={styles.teamIcon}>{member.icon}</div>
-                <h3 style={{marginBottom: '0.25rem'}}>{member.name}</h3>
-                <p style={styles.teamRole}>{member.role}</p>
-                <p style={styles.teamBio}>{member.bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============= TIMELINE SECTION ============= */}
-      <section style={styles.timelineSection}>
-        <div className="container">
-          <div style={styles.sectionHeader}>
-            <h2 style={styles.sectionTitle}>Our Journey</h2>
-            <p style={styles.sectionSubtitle}>How we grew from an idea to helping 500K+ job seekers</p>
-          </div>
-          <div style={styles.timeline}>
-            {timeline.map((item, index) => (
-              <div key={index} style={styles.timelineItem}>
-                <div style={styles.timelineYear}>{item.year}</div>
-                <div style={styles.timelineContent}>
-                  <h4 style={styles.timelineTitle}>{item.title}</h4>
-                  <p style={styles.timelineDescription}>{item.description}</p>
-                </div>
               </div>
             ))}
           </div>
@@ -1413,7 +1149,7 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       <section style={styles.partnersSection}>
         <div className="container">
           <div style={styles.partnersGrid}>
-            <span style={{color: 'var(--text-light)'}}>Trusted by:</span>
+            <span style={{color: 'var(--text-light)', fontSize: '0.9rem'}}>Trusted by users of:</span>
             {partners.map((partner, index) => (
               <div key={index} style={styles.partnerItem}>
                 {partner.icon}
@@ -1435,8 +1171,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
             {faqData.map((faq, index) => (
               <div key={index} style={styles.faqCard}>
                 <h3 style={styles.faqQuestion}>
-                  <FiHelpCircle size={20} color="var(--primary)" />
-                  {faq.question}
+                  <FiHelpCircle size={20} color="var(--primary)" style={{marginTop: '0.2rem', flexShrink: 0}} />
+                  <span>{faq.question}</span>
                 </h3>
                 <p style={styles.faqAnswer}>{faq.answer}</p>
               </div>
@@ -1451,7 +1187,11 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
           <div style={styles.ctaContent}>
             <h2 style={styles.ctaTitle}>Ready to Build Your Dream Career?</h2>
             <p style={styles.ctaSubtitle}>
-              Join 500,000+ job seekers who've landed better jobs with our professionally designed resumes
+              Join thousands of job seekers who've landed better jobs with our professionally designed resumes. 
+              <br/>
+              <strong style={{ color: 'white', fontWeight: '700' }}>
+                100% Free. No Sign-Up. No Paywalls. Instant PDF Download.
+              </strong>
             </p>
             <div style={styles.ctaButtons}>
               <Link href="/resume-templates" className="btn-primary" style={{background: 'white', color: 'var(--primary)'}}>
@@ -1471,8 +1211,8 @@ const AboutPage = ({ currentDate, lastModifiedDate }) => {
       {/* Update Strategy */}
       <div style={styles.updateStrategy}>
         <div className="container">
-          <FiCalendar style={{marginRight: '0.5rem', display: 'inline'}} />
-          Last updated: {currentDate} • Next update: {new Date(new Date(currentDate).setDate(new Date(currentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+          <FiCalendar style={{marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle'}} />
+          <span>Last updated: {currentDate} • Next update: {nextUpdateDate}</span>
         </div>
       </div>
     </div>
@@ -1484,10 +1224,16 @@ export async function getStaticProps() {
   const currentDate = now.toISOString().split('T')[0];
   const lastModifiedDate = now.toISOString();
   
+  // Calculate next update date safely here where 'now' is a valid Date object
+  const nextDate = new Date(now);
+  nextDate.setDate(nextDate.getDate() + 7);
+  const nextUpdateDate = nextDate.toISOString().split('T')[0];
+  
   return {
     props: {
       currentDate,
-      lastModifiedDate
+      lastModifiedDate,
+      nextUpdateDate
     },
     revalidate: 3600 // 24 hours
   };
