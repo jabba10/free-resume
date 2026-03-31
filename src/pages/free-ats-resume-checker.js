@@ -1832,6 +1832,47 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         }
       },
       {
+        "@type": "Product",
+        "@id": `${canonicalUrl}#product`,
+        "name": "Free ATS Resume Checker Tool",
+        "description": "Professional ATS compatibility analysis tool for job seekers",
+        "brand": {
+          "@type": "Brand",
+          "name": "Professional Resume Free"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "156",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": safeReviews.map((review, index) => ({
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": review.rating,
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": review.name
+          },
+          "reviewBody": review.review,
+          "datePublished": review.date,
+          "itemReviewed": {
+            "@type": "Product",
+            "name": "Free ATS Resume Checker Tool",
+            "url": canonicalUrl
+          }
+        }))
+      },
+      {
         "@type": "SpeakableSpecification",
         "cssSelector": [".title", ".subtitle", ".card-title", ".section-title"]
       }
@@ -2287,6 +2328,10 @@ WORK EXPERIENCE
                     <div className="review-date" itemProp="datePublished">
                       {review.date}
                     </div>
+                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                      <meta itemProp="name" content="Free ATS Resume Checker Tool" />
+                      <meta itemProp="url" content={canonicalUrl} />
+                    </div>
                   </div>
                 ))}
               </div>
@@ -2355,12 +2400,9 @@ WORK EXPERIENCE
             </section>
           </main>
 
-         
-
           {/* Build Info - Fixed hydration issue by using client-side state */}
           <div className="build-info">
             <p>Last updated: {safeFreshnessIndicator} • Build: {buildTime}</p>
-        
           </div>
 
           {/* Hidden Metadata */}

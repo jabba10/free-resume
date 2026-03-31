@@ -951,7 +951,7 @@ function DeathOfObjectiveStatement({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed now proper object type */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

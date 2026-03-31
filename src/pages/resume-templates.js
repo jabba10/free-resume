@@ -1332,7 +1332,7 @@ const ResumeTemplates = ({
     "professional resume download"
   ];
 
-  // Structured data
+  // Structured data - REMOVED duplicate FAQPage (only one FAQPage in @graph)
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1695,8 +1695,8 @@ const ResumeTemplates = ({
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="faqSection" aria-labelledby="faq-title" itemScope itemType="https://schema.org/FAQPage">
+        {/* FAQ Section - REMOVED duplicate FAQPage itemScope */}
+        <section className="faqSection" aria-labelledby="faq-title">
           <div className="container">
             <div className="sectionHeader">
               <h2 className="sectionTitle" id="faq-title">Frequently Asked Questions</h2>
@@ -1707,10 +1707,10 @@ const ResumeTemplates = ({
             
             <div className="faqGrid">
               {faqs.map((faq, index) => (
-                <div key={index} className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                  <h3 className="faqQuestion" itemProp="name">{faq.question}</h3>
-                  <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                    <p itemProp="text">{faq.answer}</p>
+                <div key={index} className="faqItem">
+                  <h3 className="faqQuestion">{faq.question}</h3>
+                  <div className="faqAnswer">
+                    <p>{faq.answer}</p>
                   </div>
                 </div>
               ))}

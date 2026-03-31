@@ -1123,7 +1123,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
     buildTimestamp: Date.now()
   };
 
-  // Schema data for JSON-LD
+  // Schema data for JSON-LD - FIXED: Added itemReviewed to aggregateRating
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1199,7 +1199,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           "bestRating": "5",
           "worstRating": "1",
           "itemReviewed": {
-            "@type": "SoftwareApplication",
+            "@type": "WebApplication",
             "name": "Resume Summary Generator"
           }
         },

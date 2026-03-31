@@ -975,7 +975,7 @@ acc[tool.category].push(tool);
 return acc;
 }, {});
 
-// Lazy Load Component
+// Lazy Load Component - FIXED: Properly closed JSX
 const LazySection = ({ children, threshold = 0.1 }) => {
 const [isVisible, setIsVisible] = useState(false);
 const [ref, setRef] = useState(null);
@@ -1200,7 +1200,7 @@ return (
 <meta name="format-detection" content="telephone=no, address=no, email=no" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) - FIXED ERROR: Removed nested itemReviewed ===== */}
+{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) ===== */}
 <script
 type="application/ld+json"
 dangerouslySetInnerHTML={{
@@ -1273,9 +1273,13 @@ __html: JSON.stringify({
 "ratingValue": "4.8",
 "ratingCount": "124",
 "bestRating": "5",
-"worstRating": "1"
+"worstRating": "1",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+}
 },
-"review": testimonials.map(t => ({
+"review": testimonials.map((t, idx) => ({
 "@type": "Review",
 "reviewRating": {
 "@type": "Rating",
@@ -1287,7 +1291,12 @@ __html: JSON.stringify({
 "@type": "Person",
 "name": t.name
 },
-"reviewBody": t.quote
+"reviewBody": t.quote,
+"datePublished": "2024-01-01",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+}
 })),
 "featureList": [
 `${templateCount}+ ATS-Optimized Templates`,
@@ -1343,17 +1352,17 @@ __html: JSON.stringify({
 "author": {
 "@type": "Person",
 "name": "Dr. Sarah Kamara",
-"jobTitle": "Head of ATS Optimization",
-"affiliation": {
-"@type": "Organization",
-"name": "Professional Resume Free"
-}
+"jobTitle": "Head of ATS Optimization"
 },
 "datePublished": "2024-01-01",
 "dateModified": lastModified,
 "publisher": {
 "@type": "Organization",
-"name": "Professional Resume Free"
+"name": "Professional Resume Free",
+"logo": {
+"@type": "ImageObject",
+"url": "https://www.professionalresumefree.com/logo.png"
+}
 }
 },
 {

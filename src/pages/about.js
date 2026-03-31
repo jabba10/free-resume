@@ -903,7 +903,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA (CLEANED) ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA (FIXED: Added image, hasMerchantReturnPolicy, shippingDetails) ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -914,6 +914,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                 "name": "ProfessionalResumeFree",
                 "url": "https://www.professionalresumefree.com",
                 "logo": "https://www.professionalresumefree.com/logo.png",
+                "image": "https://www.professionalresumefree.com/og-image.jpg",
                 "description": "Free ATS-optimized resume builder that runs entirely in your browser with no data storage.",
                 "sameAs": [
                   "https://www.linkedin.com/company/professionalresumefree",
@@ -967,6 +968,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                 "@type": "Product",
                 "name": "ProfessionalResumeFree Resume Builder",
                 "description": "Free ATS-optimized resume builder with professional templates. No sign-up required.",
+                "image": "https://www.professionalresumefree.com/product-image.jpg",
                 "brand": {
                   "@type": "Brand",
                   "name": "ProfessionalResumeFree"
@@ -983,7 +985,40 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                   "price": "0",
                   "priceCurrency": "USD",
                   "priceValidUntil": getPriceValidUntil(),
-                  "availability": "https://schema.org/InStock"
+                  "availability": "https://schema.org/InStock",
+                  "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": "US",
+                    "returnPolicyCategory": "https://schema.org/NoReturnPolicy",
+                    "returnFees": "https://schema.org/NoReturnFees"
+                  },
+                  "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      "value": "0",
+                      "currency": "USD"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      "addressCountry": "US"
+                    },
+                    "deliveryTime": {
+                      "@type": "ShippingDeliveryTime",
+                      "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                      },
+                      "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                      }
+                    }
+                  }
                 }
               }
             ]

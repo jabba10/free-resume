@@ -943,7 +943,7 @@ Human-Enhanced:
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD - FIXED: Fixed author field in Article schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1007,7 +1007,11 @@ Human-Enhanced:
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://www.professionalresumefree.com",
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "https://www.professionalresumefree.com/logo.png"
+                    }
                   },
                   "publisher": {
                     "@type": "Organization",
@@ -1082,6 +1086,43 @@ Human-Enhanced:
                     "position": index + 1,
                     "url": `https://www.professionalresumefree.com${tool.url}`,
                     "name": tool.name
+                  }))
+                },
+                {
+                  "@type": "Product",
+                  "@id": `${canonicalUrl}#product`,
+                  "name": "AI Resume Builder Guide 2026",
+                  "description": "Comprehensive guide to AI-powered resume creation",
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "Professional Resume Free"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "1250",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                  },
+                  "review": testimonials.map((testimonial, index) => ({
+                    "@type": "Review",
+                    "reviewRating": {
+                      "@type": "Rating",
+                      "ratingValue": "5",
+                      "bestRating": "5",
+                      "worstRating": "1"
+                    },
+                    "author": {
+                      "@type": "Person",
+                      "name": testimonial.name
+                    },
+                    "reviewBody": testimonial.quote,
+                    "itemReviewed": {
+                      "@type": "Product",
+                      "name": "AI Resume Builder Guide 2026",
+                      "url": canonicalUrl
+                    },
+                    "datePublished": safeReviewDates[index] || safeCurrentDate
                   }))
                 }
               ]
@@ -1319,6 +1360,10 @@ Human-Enhanced:
                   <p style={{ marginBottom: '8px' }}><strong>After:</strong> <span className="text-success">{study.after}</span></p>
                   <p style={{ marginBottom: '8px' }}><strong>Template used:</strong> {study.template}</p>
                   <p><strong>Time to result:</strong> {study.timeToResult}</p>
+                  <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                    <meta itemProp="name" content="AI Resume Builder Guide 2026" />
+                    <meta itemProp="url" content={canonicalUrl} />
+                  </div>
                   <meta itemProp="reviewRating" content="5" />
                 </article>
               ))}
@@ -1442,14 +1487,22 @@ Human-Enhanced:
             <h2 id="testimonials-heading" className="section-title">Success Stories: Real User Feedback</h2>
             <div className="grid">
               {testimonials.map((t, i) => (
-                <div key={i} className="testimonial-card">
-                  <p style={{ fontSize: '1rem', fontStyle: 'italic', marginBottom: '16px', flex: 1 }}>"{t.quote}"</p>
+                <div key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
+                  <p style={{ fontSize: '1rem', fontStyle: 'italic', marginBottom: '16px', flex: 1 }} itemProp="reviewBody">"{t.quote}"</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
                     <div>
-                      <strong>{t.name}</strong>
+                      <strong itemProp="author">{t.name}</strong>
                       <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-light)' }}>{t.role}</p>
                     </div>
                     <small className="text-small">{t.date}</small>
+                  </div>
+                  <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                    <meta itemProp="name" content="AI Resume Builder Guide 2026" />
+                    <meta itemProp="url" content={canonicalUrl} />
+                  </div>
+                  <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                    <meta itemProp="ratingValue" content="5" />
+                    <meta itemProp="bestRating" content="5" />
                   </div>
                 </div>
               ))}

@@ -1174,7 +1174,7 @@ function ResumeTipsForCollegeStudents({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - FIXED ITEMREVIEWED ISSUE */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1269,37 +1269,6 @@ function ResumeTipsForCollegeStudents({
                     }
                   ],
                   "totalTime": "PT30M"
-                },
-                {
-                  "@type": "ItemList",
-                  "itemListElement": testimonials.map((testimonial, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": testimonial.name
-                      },
-                      "reviewBody": testimonial.quote,
-                      "datePublished": testimonial.date,
-                      "publisher": {
-                        "@type": "Organization",
-                        "name": "Professional Resume Free"
-                      },
-                      "itemReviewed": {
-                        "@type": "CreativeWork",
-                        "name": "College Student Resume Tips Guide",
-                        "description": "Free guide to resume tips for college students and graduates.",
-                        "url": canonicalUrl
-                      }
-                    }
-                  }))
                 }
               ]
             })
@@ -1544,22 +1513,22 @@ function ResumeTipsForCollegeStudents({
                     </tr>
                   </thead>
                   <tbody>
-                     <tr>
+                    <tr>
                       <td>"Education: XYZ University, expected 2026" (no GPA, no coursework)</td>
                       <td className="text-success">"XYZ University, Bachelor of Arts in Marketing, expected May 2026. GPA: 3.6. Relevant coursework: Consumer Behavior, Digital Marketing, Data Analytics."</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>"Worked at campus bookstore. Helped customers and stocked shelves."</td>
                       <td className="text-success">"Campus Bookstore Associate (2024-2025). Assisted 100+ customers daily, resolved complaints, and trained 3 new hires. Recognized as Employee of the Month."</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>"Member of Marketing Club."</td>
                       <td className="text-success">"Marketing Club, Vice President (2025). Led a team of 10 to organize a networking event with 50+ attendees. Increased club membership by 30%."</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>"Skills: Microsoft Office, social media, communication."</td>
                       <td className="text-success">"Technical Skills: Excel (pivot tables, VLOOKUP), Meta Business Suite, Google Analytics, Canva. Soft Skills: Public speaking, team leadership, project management."</td>
-                     </tr>
+                    </tr>
                   </tbody>
                 </table>
               </div>

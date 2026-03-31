@@ -892,7 +892,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
   // Updated title: Shortened to under 70 characters for optimal SEO
   const pageTitle = `Fresher Resume Format ${currentYear}: Complete Guide to First Job`;
 
-  // Structured data
+  // Structured data - REMOVED DUPLICATE FAQPage
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -961,17 +961,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
           }
         ]
       },
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqData.map(faq => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.answer
-          }
-        }))
-      },
+      // FAQPage REMOVED from here - now only in HTML
       {
         '@type': 'HowTo',
         name: `How to Create a Fresher Resume in ${currentYear}`,

@@ -1872,7 +1872,8 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             "itemReviewed": {
               "@type": "SoftwareApplication",
               "name": "Free Resume Objective Generator",
-              "applicationCategory": "BusinessApplication"
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Any"
             }
           }
         }))

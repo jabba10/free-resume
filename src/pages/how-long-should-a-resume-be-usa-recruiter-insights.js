@@ -963,7 +963,7 @@ function ResumeLengthGuide({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - FIXED ITEMREVIEWED ISSUE */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1058,37 +1058,6 @@ function ResumeLengthGuide({
                     }
                   ],
                   "totalTime": "PT20M"
-                },
-                {
-                  "@type": "ItemList",
-                  "itemListElement": testimonials.map((testimonial, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": testimonial.name
-                      },
-                      "reviewBody": testimonial.quote,
-                      "datePublished": testimonial.date,
-                      "publisher": {
-                        "@type": "Organization",
-                        "name": "Professional Resume Free"
-                      },
-                      "itemReviewed": {
-                        "@type": "Service",
-                        "name": "Resume Length Guide",
-                        "description": "Free comprehensive guide to resume length best practices.",
-                        "url": canonicalUrl
-                      }
-                    }
-                  }))
                 }
               ]
             })

@@ -801,6 +801,34 @@ const ResumeToolsPage = ({
     }
   ];
 
+  // FAQ Data for structured schema
+  const faqItems = [
+    {
+      question: "Are these resume tools really free to use?",
+      answer: "Every part of the resume tools opens without cost - no hidden charges, nothing stamped on your documents. Accessing a feature? No registration needed. No credit information asked either. Each function works straight away if you choose it."
+    },
+    {
+      question: "Do I need to sign up or create an account?",
+      answer: "Just open the site - no need to register at all. Every tool waits ready, free to use from the first second. Tap one and go, nothing holding you back."
+    },
+    {
+      question: "How accurate are the resume analysis tools?",
+      answer: "Every new try begins clean, using routines borrowed from proven methods in many areas. Refreshed regularly, these match current hiring habits as well as the needs of digital job platforms. Real feedback from actual users shows results land near 94 out of 100 correct."
+    },
+    {
+      question: "Can I use these tools on mobile devices?",
+      answer: "Right now, each gadget shifts perfectly between devices - phones glide through it, tablets keep up, laptops manage without a hitch. Change your resume whenever you want, wherever you are."
+    },
+    {
+      question: "Is my resume data secure when using these tools?",
+      answer: "Your privacy counts. Inside the browser, just for now, resume data moves carefully - no storage later on. It works right where you see it, confined to one tab only. Afterward, everything vanishes without a trace."
+    },
+    {
+      question: "How often are the tools updated?",
+      answer: "A fresh shift arrives each month, guided by user feedback. Moving forward ties closely to modern work setups, evolving hire trends, plus smarter ways people shape resumes beyond 2025."
+    }
+  ];
+
   // SEO Keywords array
   const seoKeywords = [
     "free resume tools",
@@ -825,7 +853,7 @@ const ResumeToolsPage = ({
     "job search tools"
   ];
 
-  // Structured data
+  // Structured data - FIXED: Removed duplicate FAQPage, now only one FAQPage in @graph
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -913,56 +941,14 @@ const ResumeToolsPage = ({
       {
         "@type": "FAQPage",
         "@id": "https://www.professionalresumefree.com/free-resume-tools#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Are these resume tools really free to use?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, all our resume tools are completely free with no hidden costs or watermarks. You can use every tool without creating an account or providing payment information."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do I need to sign up or create an account?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No sign-up required! All tools are accessible immediately without any registration. Simply click on any tool and start using it right away."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How accurate are the resume analysis tools?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Our tools use industry-standard algorithms and best practices for resume optimization. They're regularly updated to reflect current hiring trends and ATS requirements, with a 94% accuracy rate based on user feedback."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I use these tools on mobile devices?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Absolutely! All our tools are fully responsive and work perfectly on smartphones, tablets, and desktop computers."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is my resume data secure when using these tools?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we prioritize your privacy. Resume content is processed securely and not stored permanently unless you choose to save it for later use. All data is encrypted in transit."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How often are the tools updated?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Our tools are regularly updated to reflect the latest ATS requirements, hiring trends, and resume best practices for 2026 and beyond. We release updates monthly based on user feedback."
-            }
+        "mainEntity": faqItems.map(item => ({
+          "@type": "Question",
+          "name": item.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.answer
           }
-        ]
+        }))
       },
       {
         "@type": "SpeakableSpecification",
@@ -1213,47 +1199,14 @@ const ResumeToolsPage = ({
             </div>
             
             <div className="faqGrid">
-              <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className="faqQuestion" itemProp="name">Are these resume tools really free to use?</h3>
-                <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Every part of the resume tools opens without cost - no hidden charges, nothing stamped on your documents. Accessing a feature? No registration needed. No credit information asked either. Each function works straight away if you choose it.</p>
+              {faqItems.map((item, index) => (
+                <div key={index} className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <h3 className="faqQuestion" itemProp="name">{item.question}</h3>
+                  <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                    <p itemProp="text">{item.answer}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className="faqQuestion" itemProp="name">Do I need to sign up or create an account?</h3>
-                <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Just open the site - no need to register at all. Every tool waits ready, free to use from the first second. Tap one and go, nothing holding you back.</p>
-                </div>
-              </div>
-              
-              <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className="faqQuestion" itemProp="name">How accurate are the resume analysis tools?</h3>
-                <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Every new try begins clean, using routines borrowed from proven methods in many areas. Refreshed regularly, these match current hiring habits as well as the needs of digital job platforms. Real feedback from actual users shows results land near 94 out of 100 correct.</p>
-                </div>
-              </div>
-              
-              <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className="faqQuestion" itemProp="name">Can I use these tools on mobile devices?</h3>
-                <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Right now, each gadget shifts perfectly between devices - phones glide through it, tablets keep up, laptops manage without a hitch. Change your resume whenever you want, wherever you are.</p>
-                </div>
-              </div>
-              
-              <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className="faqQuestion" itemProp="name">Is my resume data secure when using these tools?</h3>
-                <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">Your privacy counts. Inside the browser, just for now, resume data moves carefully - no storage later on. It works right where you see it, confined to one tab only. Afterward, everything vanishes without a trace.</p>
-                </div>
-              </div>
-              
-              <div className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <h3 className="faqQuestion" itemProp="name">How often are the tools updated?</h3>
-                <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text">A fresh shift arrives each month, guided by user feedback. Moving forward ties closely to modern work setups, evolving hire trends, plus smarter ways people shape resumes beyond 2025.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>

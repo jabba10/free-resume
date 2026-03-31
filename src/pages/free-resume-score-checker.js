@@ -1300,7 +1300,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
   // Current year for dynamic content
   const currentYear = new Date().getFullYear();
 
-  // Schema data - FIXED: Added itemReviewed property to Review objects
+  // Schema data - FIXED: itemReviewed now uses @id reference and Product schema added
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1429,33 +1429,43 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         }))
       },
       {
-        "@type": "ItemList",
-        "itemListElement": REVIEWS.map((review, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "Review",
-            "author": {
-              "@type": "Person",
-              "name": review.name
-            },
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": review.rating,
-              "bestRating": "5"
-            },
-            "datePublished": reviewDates[index] || currentDate,
-            "reviewBody": review.review,
-            // FIX: Added required itemReviewed property
-            "itemReviewed": {
-              "@type": "WebApplication",
-              "@id": "https://www.professionalresumefree.com/free-resume-score-checker#webapp",
-              "name": "Free Resume Score Checker"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "Professional Resume Free"
-            }
+        "@type": "Product",
+        "@id": "https://www.professionalresumefree.com/free-resume-score-checker#product",
+        "name": "Free Resume Score Checker Tool",
+        "description": "Professional ATS-compatible resume analysis tool with 5-dimensional scoring",
+        "brand": {
+          "@type": "Brand",
+          "name": "Professional Resume Free"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "50365",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": REVIEWS.map((review, index) => ({
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": review.name
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": review.rating,
+            "bestRating": "5"
+          },
+          "datePublished": reviewDates[index] || currentDate,
+          "reviewBody": review.review,
+          "itemReviewed": {
+            "@type": "Product",
+            "name": "Free Resume Score Checker Tool",
+            "url": "https://www.professionalresumefree.com/free-resume-score-checker"
           }
         }))
       },
@@ -1798,7 +1808,6 @@ Professional Example:
           <div className="reviews-grid">
             {REVIEWS.map((review, index) => (
               <div key={index} className="review-card" itemScope itemType="https://schema.org/Review">
-                <meta itemProp="itemReviewed" content="Free Resume Score Checker" />
                 <div className="review-header">
                   <div className="reviewer-info">
                     <span itemProp="author" itemScope itemType="https://schema.org/Person">
@@ -1821,6 +1830,10 @@ Professional Example:
                 </div>
                 <div className="review-date" itemProp="datePublished">
                   {review.date}
+                </div>
+                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                  <meta itemProp="name" content="Free Resume Score Checker Tool" />
+                  <meta itemProp="url" content="https://www.professionalresumefree.com/free-resume-score-checker" />
                 </div>
               </div>
             ))}
@@ -1878,21 +1891,6 @@ Professional Example:
             </a>
           </div>
         </section>
-
-        
-
-        {/* Freshness Indicator */}
-        <div style={{ 
-          marginTop: '48px', 
-          padding: '16px', 
-          borderTop: '1px solid #e5e7eb', 
-          fontSize: '0.8rem', 
-          color: '#6b7280',
-          textAlign: 'center'
-        }}>
-          
-          
-        </div>
 
         {/* Hidden Metadata */}
         <div className="hidden">

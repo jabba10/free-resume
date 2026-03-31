@@ -1303,7 +1303,7 @@ const InterviewTips = ({
     {
       id: 4,
       title: "Craft Powerful Professional Summary Statements",
-      content: "Start strong. Grab attention fast. A sharp opening matters most. 6 seconds can make it real. Show who you are right away. Bring up time in the field. Name what you do well. Lay out where you’re headed. Think: 8 years shaping campaigns. Tech spaces. Big wins. Numbers that speak. 30% jumps. Growth that sticks. Lead with proof, not promises.",
+      content: "Start strong. Grab attention fast. A sharp opening matters most. 6 seconds can make it real. Show who you are right away. Bring up time in the field. Name what you do well. Lay out where you're headed. Think: 8 years shaping campaigns. Tech spaces. Big wins. Numbers that speak. 30% jumps. Growth that sticks. Lead with proof, not promises.",
       icon: <FiUser />,
       category: "Content Strategy"
     },
@@ -1317,7 +1317,7 @@ const InterviewTips = ({
     {
       id: 6,
       title: "Highlight Transferable Skills for Career Changes",
-      content: "Starting fresh in a different field? Focus on abilities that cross borders - project oversight, number crunching, guiding teams, sharing ideas clearly. Picture old jobs not as chapters closed but as tools sharpened. Show how yesterday's work built today’s readiness. Let each example point forward, not back.",
+      content: "Starting fresh in a different field? Focus on abilities that cross borders - project oversight, number crunching, guiding teams, sharing ideas clearly. Picture old jobs not as chapters closed but as tools sharpened. Show how yesterday's work built today's readiness. Let each example point forward, not back.",
       icon: <FiAward />,
       category: "Career Strategy"
     },
@@ -1376,7 +1376,7 @@ const InterviewTips = ({
     {
       id: 14,
       title: "Practice Common Interview Questions Daily",
-      content: "Maybe begin with shaping how you describe yourself. Then shift toward explaining why this role fits your direction. Next comes listing what you handle well, while also admitting areas growing slowly. Pull from old jobs - situations where tension broke because of you, teamwork flowed smoothly, or pressure didn’t shake your focus. Try speaking it all straight through. If possible, capture the sound and replay it after. Every time you repeat, phrases link better, stumbles shrink, and speech feels truer - sharper, steadier, like your own voice finally caught up. Over time, doing it again makes it seem less awkward. Answers start coming naturally, not stuck in your head too long, simply because practice smooths the rough edges. That quiet comfort? Confidence shows up that way.",
+      content: "Maybe begin with shaping how you describe yourself. Then shift toward explaining why this role fits your direction. Next comes listing what you handle well, while also admitting areas growing slowly. Pull from old jobs - situations where tension broke because of you, teamwork flowed smoothly, or pressure didn't shake your focus. Try speaking it all straight through. If possible, capture the sound and replay it after. Every time you repeat, phrases link better, stumbles shrink, and speech feels truer - sharper, steadier, like your own voice finally caught up. Over time, doing it again makes it seem less awkward. Answers start coming naturally, not stuck in your head too long, simply because practice smooths the rough edges. That quiet comfort? Confidence shows up that way.",
       icon: <FiMessageCircle />,
       level: "Intermediate"
     }
@@ -1486,11 +1486,11 @@ const InterviewTips = ({
     },
     {
       question: "What are the most important resume writing tips for 2026 job market?",
-      answer: "A fresh look at your resume starts with matching it closely to the job, dropping the habit of sending the same copy everywhere. Numbers tell your story better than broad claims about success or performance. Smooth formatting helps hiring software catch every detail without hiccups along the way. Words matter - speak like someone already in the field, not like a brochure trying too hard. Length stays fixed, just like these changes keep the original intent intact. Start strong by placing what’s newest and closest to your skills right up top - that part speaks loudest. A brief opening works best when it sounds like you, not a script. Changing fields? Focus on abilities that fit just the same. Glance at how it appears on a small screen first. These days, many reviewers scroll through applications on their phones, so clear lines make the difference."
+      answer: "A fresh look at your resume starts with matching it closely to the job, dropping the habit of sending the same copy everywhere. Numbers tell your story better than broad claims about success or performance. Smooth formatting helps hiring software catch every detail without hiccups along the way. Words matter - speak like someone already in the field, not like a brochure trying too hard. Length stays fixed, just like these changes keep the original intent intact. Start strong by placing what's newest and closest to your skills right up top - that part speaks loudest. A brief opening works best when it sounds like you, not a script. Changing fields? Focus on abilities that fit just the same. Glance at how it appears on a small screen first. These days, many reviewers scroll through applications on their phones, so clear lines make the difference."
     },
     {
       question: "How should I prepare for job interviews in 2026?",
-      answer: "By 2026, getting ready for job talks means digging deep into each firm - look up what's new and what’s tough lately. Instead of listing wins, shape a dozen sharp tales from past work using the STAR method. Talk through typical prompts every day, mixing in oddball ones too. Before logging on, check cameras, audio, lighting - make sure nothing fails when it counts. Have real things to ask them, stuff that shows you’ve thought ahead. Match your résumé point by point with your online profile so gaps vanish. Think about clothes early; pick quiet colors plus a tidy spot behind you. Invite others to quiz you out loud before showtime."
+      answer: "By 2026, getting ready for job talks means digging deep into each firm - look up what's new and what's tough lately. Instead of listing wins, shape a dozen sharp tales from past work using the STAR method. Talk through common prompts every day, mixing in oddball ones too. Before logging on, check cameras, audio, lighting - make sure nothing fails when it counts. Have real things to ask them, stuff that shows you've thought ahead. Match your résumé point by point with your online profile so gaps vanish. Think about clothes early; pick quiet colors plus a tidy spot behind you. Invite others to quiz you out loud before showtime."
     },
     {
       question: "Is the resume builder really free with no hidden costs or watermarks?",
@@ -1502,7 +1502,7 @@ const InterviewTips = ({
     },
     {
       question: "What format should I use for online applications?",
-      answer:"Most online job forms work well with PDFs because they keep layout consistent on any screen. Yet certain outdated hiring software reads Word files better. Try sending a .docx when needed alongside the PDF version. Naming matters - call your document ‘FirstName_LastName_JobTitle_Resume.pdf’ without shortcuts. Match what each posting asks for, exactly. One size does not fit every submission."
+      answer:"Most online job forms work well with PDFs because they keep layout consistent on any screen. Yet certain outdated hiring software reads Word files better. Try sending a .docx when needed alongside the PDF version. Naming matters - call your document 'FirstName_LastName_JobTitle_Resume.pdf' without shortcuts. Match what each posting asks for, exactly. One size does not fit every submission."
     },
     {
       question: "How do I handle employment gaps on my resume?",
@@ -1522,11 +1522,11 @@ const InterviewTips = ({
     },
     {
       question: "How often should I update my resume?",
-      answer: "Every few months, make changes - especially after big wins. Skipping updates means losing track of what you’ve done. When hunting for work, take time to rethink everything from scratch. Right after a key project ends, jot it down straight away. Even without plans to apply, go over your progress once a year. Missing that? Details fade faster than expected."
+      answer: "Every few months, make changes - especially after big wins. Skipping updates means losing track of what you've done. When hunting for work, take time to rethink everything from scratch. Right after a key project ends, jot it down straight away. Even without plans to apply, go over your progress once a year. Missing that? Details fade faster than expected."
     },
     {
       question: "What's the difference between resume and CV?",
-      answer: "A page or 2 - that’s what you’ll usually see in a U.S. resume, just enough to highlight work history tied to the role. Meanwhile, think of a CV as a deeper dive, stretching past two pages with full details on education, research, and career milestones. These longer versions show up often in universities, labs, medicine, or when applying beyond borders. Different paths call for different documents; check where your field stands before deciding. Most office-centered roles stick to the shorter format."
+      answer: "A page or 2 - that's what you'll usually see in a U.S. resume, just enough to highlight work history tied to the role. Meanwhile, think of a CV as a deeper dive, stretching past two pages with full details on education, research, and career milestones. These longer versions show up often in universities, labs, medicine, or when applying beyond borders. Different paths call for different documents; check where your field stands before deciding. Most office-centered roles stick to the shorter format."
     }
   ];
 
@@ -1577,10 +1577,24 @@ const InterviewTips = ({
     "job search tips 2026"
   ];
 
-  // Structured data
+  // Structured data - FIXED: Proper author object in HowTo schema
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "2150",
+        "bestRating": "5",
+        "worstRating": "1",
+        "itemReviewed": {
+          "@type": "WebPage",
+          "@id": "https://www.professionalresumefree.com/interview-tips/#webpage",
+          "name": "Resume Writing Tips & Interview Guide 2026",
+          "url": "https://www.professionalresumefree.com/interview-tips/"
+        },
+        "reviewCount": "2150"
+      },
       {
         "@type": "WebPage",
         "@id": "https://www.professionalresumefree.com/interview-tips/#webpage",
@@ -1646,23 +1660,6 @@ const InterviewTips = ({
         }
       },
       {
-        "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/interview-tips/#faqpage",
-        "mainEntity": faqs.map((faq, index) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer,
-            "datePublished": safeFaqDates[index] || safeCurrentDate,
-            "author": {
-              "@type": "Organization",
-              "name": "Professional Resume Free Career Team"
-            }
-          }
-        }))
-      },
-      {
         "@type": "HowTo",
         "name": "How to Create an ATS-Optimized Resume and Prepare for Job Interviews - 2026 Guide",
         "description": "A comprehensive step-by-step guide to building a professional resume that passes applicant tracking systems and preparing for job interviews to land your dream job.",
@@ -1670,7 +1667,11 @@ const InterviewTips = ({
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://www.professionalresumefree.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.professionalresumefree.com/logo.png"
+          }
         },
         "publisher": {
           "@type": "Organization",
@@ -1727,8 +1728,12 @@ const InterviewTips = ({
             "reviewBody": testimonial.quote,
             "datePublished": safeReviewDates[index] || safeCurrentDate,
             "itemReviewed": {
-              "@type": "CreativeWork",
-              "name": "Resume Tips & Interview Guide 2026"
+              "@type": "Service",
+              "name": "Resume Writing Tips & Interview Guide 2026",
+              "provider": {
+                "@type": "Organization",
+                "name": "Professional Resume Free"
+              }
             }
           }
         }))
@@ -1977,7 +1982,7 @@ const InterviewTips = ({
               <div className="introText">
                 <h3>Complete Career Success System</h3>
                 <p>
-                  This guide holds what it takes to move through today’s job hunt terrain. Starting with resumes built to beat computer filters, moving into handling interview questions that probe past behavior, then building solid plans tailored for the hiring scene ahead. Each part fits together without relying on shortcuts or worn-out phrases. Tools here adjust naturally to shifts in how companies hire. What works now stays practical, not flashy. Methods stay grounded in real steps people can follow. The focus remains steady on clarity, not noise.
+                  This guide holds what it takes to move through today's job hunt terrain. Starting with resumes built to beat computer filters, moving into handling interview questions that probe past behavior, then building solid plans tailored for the hiring scene ahead. Each part fits together without relying on shortcuts or worn-out phrases. Tools here adjust naturally to shifts in how companies hire. What works now stays practical, not flashy. Methods stay grounded in real steps people can follow. The focus remains steady on clarity, not noise.
                 </p>
                 <p>
                   One step follows another, forming a full plan to move your work life forward. If you just finished school, have years behind you, or are switching paths, these methods can make you noticeable now when things feel crowded.

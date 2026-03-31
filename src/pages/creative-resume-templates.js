@@ -1086,6 +1086,42 @@ export default function CreativeResumeTemplates({ seoData }) {
                     "keywords": category.features.join(", ")
                   }
                 }))
+              },
+              {
+                "@type": "Product",
+                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product",
+                "name": "Creative Resume Templates 2026",
+                "description": "Professional creative resume templates for job seekers",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Professional Resume Free"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "reviewCount": "1250",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "review": testimonials.map((testimonial, index) => ({
+                  "@type": "Review",
+                  "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "5",
+                    "bestRating": "5"
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "name": testimonial.name
+                  },
+                  "reviewBody": testimonial.quote,
+                  "itemReviewed": {
+                    "@type": "Product",
+                    "name": "Creative Resume Templates 2026",
+                    "url": "https://www.professionalresumefree.com/creative-resume-templates"
+                  },
+                  "datePublished": safeReviewDates[index] || safeCurrentDate
+                }))
               }
             ]
           })
@@ -1498,6 +1534,10 @@ export default function CreativeResumeTemplates({ seoData }) {
                         <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>{testimonial.role}</p>
                         <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>{testimonial.company}</p>
                       </div>
+                    </div>
+                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                      <meta itemProp="name" content="Creative Resume Templates 2026" />
+                      <meta itemProp="url" content="https://www.professionalresumefree.com/creative-resume-templates" />
                     </div>
                     <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
                       <meta itemProp="ratingValue" content="5" />

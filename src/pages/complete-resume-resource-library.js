@@ -1170,7 +1170,7 @@ export default function CompleteResumeResourceLibrary({
 }) {
   const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
 
-  // FIXED: Structured data with proper itemReviewed and fixed author types
+  // FIXED: Structured data with proper itemReviewed object type
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1771,7 +1771,7 @@ export default function CompleteResumeResourceLibrary({
           background: '#f9fafb',
           borderRadius: '12px'
         }}>
-        
+          
         </div>
 
         {/* ===== HIDDEN METADATA ===== */}
