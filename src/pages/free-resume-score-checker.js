@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import { useState, useCallback, useMemo, useEffect } from 'react';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed =====
+// ===== INLINE CRITICAL CSS - Optimized for speed & Centered Layout =====
 const criticalCSS = `
   /* CSS RESET */
   * { 
@@ -19,14 +19,20 @@ const criticalCSS = `
     background: #f9fafb; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
   }
   
-  /* PAGE CONTAINER */
+  /* PAGE CONTAINER - CENTERED FLEX LAYOUT */
   .page-container { 
+    width: 100%;
     max-width: 1280px; 
     margin: 0 auto; 
     padding: 16px; 
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all children horizontally */
   }
   
   @media (min-width: 640px) {
@@ -42,6 +48,9 @@ const criticalCSS = `
     margin-bottom: 24px; 
     font-size: 0.9rem; 
     color: #6b7280;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   .breadcrumb ol { 
@@ -49,6 +58,7 @@ const criticalCSS = `
     flex-wrap: wrap; 
     list-style: none; 
     gap: 8px;
+    justify-content: center;
   }
   
   .breadcrumb li { 
@@ -75,14 +85,23 @@ const criticalCSS = `
     color: #4b5563;
   }
   
-  /* CONTAINER */
+  /* CONTAINER - CENTERED CONTENT */
   .container { 
     width: 100%;
+    max-width: 1000px; /* Constrain width for better readability on large screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Center text by default */
   }
   
   /* HEADER */
   .header { 
     margin-bottom: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   h1 { 
@@ -112,48 +131,24 @@ const criticalCSS = `
   .subtitle { 
     font-size: clamp(1rem, 2.5vw, 1.2rem); 
     color: #4b5563; 
-    max-width: 900px; 
+    max-width: 800px; 
     line-height: 1.7;
+    margin: 0 auto;
   }
   
-  /* AGGREGATE RATING */
+  /* AGGREGATE RATING - REMOVED FROM VIEW BUT KEPT IN CSS IF NEEDED LATER */
   .aggregate-rating { 
-    display: flex; 
-    align-items: center; 
-    gap: 16px; 
-    margin: 24px 0; 
-    padding: 16px; 
-    background: #f3f4f6; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-    flex-wrap: wrap;
+    display: none; 
   }
   
-  .rating-stars { 
-    color: #fbbf24; 
-    font-size: 1.3rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-  }
-  
-  .rating-value { 
-    color: #111827; 
-    font-weight: 700; 
-    font-size: 1rem;
-  }
-  
-  .rating-text { 
-    color: #4b5563; 
-    font-size: 0.9rem;
-  }
-  
-  /* MAIN */
+  /* MAIN - CENTERED GRID */
   .main { 
     display: grid; 
     grid-template-columns: 1fr; 
     gap: 24px; 
     margin: 32px 0; 
+    width: 100%;
+    justify-content: center;
   }
   
   @media (min-width: 1024px) {
@@ -166,8 +161,15 @@ const criticalCSS = `
     border-radius: 16px; 
     padding: 24px; 
     border: 1px solid #e5e7eb;
+    width: 100%;
+    text-align: left; /* Keep form text left aligned for readability */
   }
   
+  .editor-header {
+    text-align: center; /* Center the header inside the editor */
+    margin-bottom: 20px;
+  }
+
   .editor-header h2 { 
     font-size: 1.5rem; 
     font-weight: 700; 
@@ -177,7 +179,7 @@ const criticalCSS = `
   
   .editor-header p { 
     color: #4b5563; 
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
   
   .textarea { 
@@ -204,6 +206,7 @@ const criticalCSS = `
     border-radius: 8px; 
     font-size: 0.95rem; 
     border-left: 4px solid #0284c7;
+    text-align: left;
   }
   
   /* RESULTS SECTION */
@@ -212,6 +215,7 @@ const criticalCSS = `
     border-radius: 16px; 
     padding: 24px; 
     border: 1px solid #e5e7eb;
+    width: 100%;
   }
   
   .score-display { 
@@ -219,10 +223,11 @@ const criticalCSS = `
     flex-direction: column; 
     gap: 24px; 
     margin-bottom: 32px;
+    align-items: center;
   }
   
   @media (min-width: 640px) {
-    .score-display { flex-direction: row; align-items: center; }
+    .score-display { flex-direction: row; align-items: center; justify-content: center; }
   }
   
   .score-circle { 
@@ -249,6 +254,8 @@ const criticalCSS = `
   
   .score-breakdown { 
     flex: 1;
+    width: 100%;
+    max-width: 400px;
   }
   
   .score-row { 
@@ -290,12 +297,14 @@ const criticalCSS = `
   /* FEEDBACK SECTION */
   .feedback-section { 
     margin-top: 32px;
+    width: 100%;
   }
   
   .feedback-section h3 { 
     font-size: 1.3rem; 
     font-weight: 700; 
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .feedback-card { 
@@ -304,22 +313,26 @@ const criticalCSS = `
     border-radius: 12px; 
     margin-bottom: 20px; 
     border: 1px solid #e5e7eb;
+    text-align: left;
   }
   
   .feedback-card h4 { 
     font-size: 1.2rem; 
     font-weight: 600; 
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .issue-row, .improvement-row { 
     display: flex; 
     gap: 12px; 
     margin-bottom: 12px;
+    align-items: flex-start;
   }
   
   .issue-icon, .improvement-icon { 
     font-size: 1.2rem;
+    flex-shrink: 0;
   }
   
   .issue-text { 
@@ -373,6 +386,10 @@ const criticalCSS = `
   /* ACTION SECTION */
   .action-section { 
     margin-top: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .export-button { 
@@ -385,6 +402,7 @@ const criticalCSS = `
     font-weight: 600; 
     cursor: pointer; 
     width: 100%; 
+    max-width: 400px;
     transition: all 0.2s;
   }
   
@@ -401,6 +419,7 @@ const criticalCSS = `
     background: #f9fafb; 
     border-radius: 12px; 
     text-align: center;
+    width: 100%;
   }
   
   .cta p { 
@@ -471,6 +490,7 @@ const criticalCSS = `
   /* HOW TO SECTION */
   .how-to-section { 
     margin: 48px 0;
+    width: 100%;
   }
   
   .section-title { 
@@ -484,6 +504,7 @@ const criticalCSS = `
     display: grid; 
     grid-template-columns: 1fr; 
     gap: 24px; 
+    width: 100%;
   }
   
   @media (min-width: 640px) {
@@ -530,11 +551,13 @@ const criticalCSS = `
   /* FAQ SECTION */
   .faq-section { 
     margin: 48px 0;
+    width: 100%;
   }
   
   .faq-list { 
     max-width: 800px; 
     margin: 0 auto;
+    width: 100%;
   }
   
   .faq-item { 
@@ -561,6 +584,7 @@ const criticalCSS = `
     font-size: 1.1rem; 
     font-weight: 600; 
     margin: 0;
+    text-align: left;
   }
   
   .faq-toggle { 
@@ -571,17 +595,20 @@ const criticalCSS = `
   .faq-answer { 
     padding: 0 20px 20px 20px; 
     color: #4b5563;
+    text-align: left;
   }
   
   /* REVIEWS SECTION */
   .reviews-section { 
     margin: 48px 0;
+    width: 100%;
   }
   
   .reviews-grid { 
     display: grid; 
     grid-template-columns: 1fr; 
     gap: 24px; 
+    width: 100%;
   }
   
   @media (min-width: 768px) {
@@ -593,6 +620,7 @@ const criticalCSS = `
     padding: 28px; 
     border-radius: 16px; 
     border: 1px solid #e5e7eb;
+    text-align: left;
   }
   
   .review-header { 
@@ -631,12 +659,14 @@ const criticalCSS = `
   /* RESOURCES SECTION */
   .resources-section { 
     margin: 48px 0;
+    width: 100%;
   }
   
   .resources-grid { 
     display: grid; 
     grid-template-columns: 1fr; 
     gap: 20px; 
+    width: 100%;
   }
   
   @media (min-width: 640px) {
@@ -655,6 +685,7 @@ const criticalCSS = `
     text-decoration: none; 
     color: inherit;
     transition: transform 0.2s;
+    text-align: center;
   }
   
   .resource-card:hover { 
@@ -681,6 +712,7 @@ const criticalCSS = `
     background: #f9fafb; 
     border-radius: 16px; 
     border: 1px solid #e5e7eb;
+    width: 100%;
   }
   
   .footer-content { 
@@ -1440,7 +1472,8 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -1566,18 +1599,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
             No data leaves your computer.
           </p>
           
-          {/* Aggregate Rating Display */}
-          <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
-            <meta itemProp="ratingValue" content="4.8" />
-            <meta itemProp="ratingCount" content="50365" />
-            <meta itemProp="bestRating" content="5" />
-            <meta itemProp="worstRating" content="1" />
-            <div className="rating-stars">
-              ★★★★★
-              <span className="rating-value">4.8/5</span>
-            </div>
-            <div className="rating-text">Based on 50,365+ user reviews</div>
-          </div>
+          {/* Aggregate Rating Display - REMOVED AS REQUESTED */}
         </header>
 
         <main className="main">
