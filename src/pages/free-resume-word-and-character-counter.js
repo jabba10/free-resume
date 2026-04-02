@@ -1041,6 +1041,7 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
         },
         "mainEntity": {
           "@type": "SoftwareApplication",
+          "@id": `${SITE_URL}/free-resume-word-character-counter#software`,
           "name": "Resume Word & Character Counter - ATS Optimized Resume Length Checker",
           "applicationCategory": "BusinessApplication",
           "operatingSystem": "Any",
@@ -1049,14 +1050,19 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": "2025-12-31"
+            "priceValidUntil": "2026-12-31"
           },
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": 4.8,
             "ratingCount": 142,
             "bestRating": 5,
-            "worstRating": 1
+            "worstRating": 1,
+            "itemReviewed": {
+              "@type": "SoftwareApplication",
+              "name": "Resume Word & Character Counter",
+              "applicationCategory": "BusinessApplication"
+            }
           },
           "description": "Free online ATS-friendly resume word and character counter that helps job seekers optimize resume length for better ATS performance.",
           "featureList": [
@@ -1069,7 +1075,7 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
             "No Sign Up Required",
             "Free Forever"
           ],
-          "softwareVersion": "2024.1.0",
+          "softwareVersion": "2026.1.0",
           "applicationSuite": "Resume Optimization Tools",
           "countriesSupported": "Global"
         }
@@ -1088,8 +1094,7 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
               "@type": "Person",
               "name": "Resume Expert Team"
             }
-          },
-          "mainEntityOfPage": `${SITE_URL}/free-resume-word-character-counter#webpage`
+          }
         }))
       },
       {
@@ -1306,24 +1311,21 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
 
       {/* Breadcrumb Navigation */}
       <nav className="breadcrumb" aria-label="Breadcrumb">
-        <ol itemScope itemType="https://schema.org/BreadcrumbList">
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <a itemProp="item" href="https://www.professionalresumefree.com" className="breadcrumb-link">
-              <span itemProp="name">Home</span>
+        <ol>
+          <li>
+            <a href="https://www.professionalresumefree.com" className="breadcrumb-link">
+              Home
             </a>
-            <meta itemProp="position" content="1" />
           </li>
           <li className="breadcrumb-separator">›</li>
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <a itemProp="item" href="https://www.professionalresumefree.com/resume-tools" className="breadcrumb-link">
-              <span itemProp="name">Resume Tools</span>
+          <li>
+            <a href="https://www.professionalresumefree.com/resume-tools" className="breadcrumb-link">
+              Resume Tools
             </a>
-            <meta itemProp="position" content="2" />
           </li>
           <li className="breadcrumb-separator">›</li>
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <span itemProp="name">Word & Character Counter</span>
-            <meta itemProp="position" content="3" />
+          <li>
+            <span>Word & Character Counter</span>
           </li>
         </ol>
       </nav>
@@ -1340,16 +1342,12 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
           </span>
         </p>
         
-        <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
-          <meta itemProp="ratingValue" content="4.8" />
-          <meta itemProp="ratingCount" content="142" />
-          <meta itemProp="bestRating" content="5" />
-          <meta itemProp="worstRating" content="1" />
+        <div className="aggregate-rating">
           <div className="rating-stars">
             ★★★★★
-            <span className="rating-value" itemProp="ratingValue">4.8/5</span>
+            <span className="rating-value">4.8/5</span>
           </div>
-          <div className="rating-text" itemProp="ratingCount">Trusted by 10,000+ professionals</div>
+          <div className="rating-text">Trusted by 10,000+ professionals</div>
         </div>
       </header>
 
@@ -1421,9 +1419,9 @@ Senior Developer | Tech Company | 2020-Present
           </div>
           
           <div className="stats-grid">
-            <div className="stat-card" itemScope itemType="https://schema.org/QuantitativeValue">
+            <div className="stat-card">
               <div className="stat-label">Word Count</div>
-              <div className={`stat-value ${isUnderLimit ? 'under-limit' : ''} ${isOverLimit ? 'over-limit' : ''}`} itemProp="value">
+              <div className={`stat-value ${isUnderLimit ? 'under-limit' : ''} ${isOverLimit ? 'over-limit' : ''}`}>
                 {stats.words.toLocaleString()}
                 <div className="stat-subtext">
                   {isWithinRange ? 'Ideal range: 300-800' : isUnderLimit ? 'Below minimum: 300' : 'Above maximum: 800'}
@@ -1431,41 +1429,41 @@ Senior Developer | Tech Company | 2020-Present
               </div>
             </div>
 
-            <div className="stat-card" itemScope itemType="https://schema.org/QuantitativeValue">
+            <div className="stat-card">
               <div className="stat-label">Characters</div>
-              <div className="stat-value" itemProp="value">
+              <div className="stat-value">
                 {stats.charactersWithSpaces.toLocaleString()}
                 <div className="stat-subtext">including spaces</div>
               </div>
             </div>
 
-            <div className="stat-card" itemScope itemType="https://schema.org/QuantitativeValue">
+            <div className="stat-card">
               <div className="stat-label">Characters</div>
-              <div className="stat-value" itemProp="value">
+              <div className="stat-value">
                 {stats.charactersWithoutSpaces.toLocaleString()}
                 <div className="stat-subtext">excluding spaces</div>
               </div>
             </div>
 
-            <div className="stat-card" itemScope itemType="https://schema.org/QuantitativeValue">
+            <div className="stat-card">
               <div className="stat-label">Lines</div>
-              <div className="stat-value" itemProp="value">
+              <div className="stat-value">
                 {stats.lines}
                 <div className="stat-subtext">non-empty lines</div>
               </div>
             </div>
 
-            <div className="stat-card" itemScope itemType="https://schema.org/QuantitativeValue">
+            <div className="stat-card">
               <div className="stat-label">Paragraphs</div>
-              <div className="stat-value" itemProp="value">
+              <div className="stat-value">
                 {stats.paragraphs}
                 <div className="stat-subtext">content sections</div>
               </div>
             </div>
 
-            <div className="stat-card" itemScope itemType="https://schema.org/QuantitativeValue">
+            <div className="stat-card">
               <div className="stat-label">Estimated Pages</div>
-              <div className="stat-value" itemProp="value">
+              <div className="stat-value">
                 {stats.estimatedPages}
                 <div className="stat-subtext">based on 475 words/page</div>
               </div>
@@ -1551,9 +1549,9 @@ Senior Developer | Tech Company | 2020-Present
           
           <div className="guidelines-grid">
             {LENGTH_GUIDELINES.map((guideline, index) => (
-              <div key={index} className="guideline-card" itemScope itemType="https://schema.org/ListItem">
+              <div key={index} className="guideline-card">
                 <div className="guideline-header">
-                  <div className="guideline-level" itemProp="name">{guideline.level}</div>
+                  <div className="guideline-level">{guideline.level}</div>
                   <div className="guideline-words">{guideline.words}</div>
                 </div>
                 <div className="guideline-body">
@@ -1566,7 +1564,6 @@ Senior Developer | Tech Company | 2020-Present
                     <span className="guideline-value">{guideline.focus}</span>
                   </div>
                 </div>
-                <meta itemProp="position" content={index + 1} />
               </div>
             ))}
           </div>
@@ -1609,17 +1606,14 @@ Senior Developer | Tech Company | 2020-Present
           </div>
         </section>
 
-        {/* FAQ Section */}
+        {/* FAQ Section - REMOVED MICRODATA TO PREVENT DUPLICATES WITH JSON-LD */}
         <section className="faq-section" aria-labelledby="faq-title">
           <h2 className="section-title" id="faq-title">Frequently Asked Questions</h2>
-          <div className="faq-list" itemScope itemType="https://schema.org/FAQPage">
+          <div className="faq-list">
             {FAQS.map((faq, index) => (
               <div 
                 key={index} 
                 className={`faq-item ${activeFaq === index ? 'active' : ''}`}
-                itemScope 
-                itemProp="mainEntity" 
-                itemType="https://schema.org/Question"
                 onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                 onKeyDown={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
                 tabIndex={0}
@@ -1628,20 +1622,14 @@ Senior Developer | Tech Company | 2020-Present
                 aria-controls={`faq-answer-${index}`}
               >
                 <div className="faq-question">
-                  <h3 itemProp="name">{faq.question}</h3>
+                  <h3>{faq.question}</h3>
                   <span className="faq-toggle" aria-hidden="true">
                     {activeFaq === index ? '−' : '+'}
                   </span>
                 </div>
                 {activeFaq === index && (
-                  <div 
-                    className="faq-answer" 
-                    id={`faq-answer-${index}`}
-                    itemScope 
-                    itemProp="acceptedAnswer" 
-                    itemType="https://schema.org/Answer"
-                  >
-                    <p itemProp="text">{faq.answer}</p>
+                  <div className="faq-answer" id={`faq-answer-${index}`}>
+                    <p>{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -1688,9 +1676,6 @@ Senior Developer | Tech Company | 2020-Present
         </section>
       </main>
 
-      
-             
-
       {/* Build Info - Fixed hydration */}
       <div className="build-info">
         <p>Last updated: {currentDate} • Build: {buildTime}</p>
@@ -1698,8 +1683,8 @@ Senior Developer | Tech Company | 2020-Present
 
       {/* Hidden Metadata */}
       <div className="hidden">
-        <span itemProp="dateModified">{lastModifiedDate}</span>
-        <span itemProp="softwareVersion">2026.1.0</span>
+        <span>{lastModifiedDate}</span>
+        <span>2026.1.0</span>
       </div>
     </div>
   );

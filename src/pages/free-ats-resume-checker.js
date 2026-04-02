@@ -1637,8 +1637,8 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         "@type": "WebPage",
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
-        "name": "Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2025",
-        "description": "Professional ATS resume checker that analyzes 50+ parsing factors. Get instant feedback on ATS compatibility, formatting issues, and actionable fixes. 2025 Edition",
+        "name": "Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2026",
+        "description": "Professional ATS resume checker that analyzes 50+ parsing factors. Get instant feedback on ATS compatibility, formatting issues, and actionable fixes. 2026 Edition",
         "datePublished": "2024-01-01",
         "dateModified": safeLastUpdated,
         "inLanguage": "en-US",
@@ -1716,7 +1716,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "No Sign Up Required",
           "Mobile-Friendly Interface"
         ],
-        "softwareVersion": "2025.1.0",
+        "softwareVersion": "2026.1.0",
         "screenshot": "https://www.professionalresumefree.com/images/screenshot-ats-checker.jpg",
         "countriesSupported": "Global"
       },
@@ -1836,6 +1836,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         "@id": `${canonicalUrl}#product`,
         "name": "Free ATS Resume Checker Tool",
         "description": "Professional ATS compatibility analysis tool for job seekers",
+        "image": "https://www.professionalresumefree.com/images/og-ats-resume-checker.jpg",
         "brand": {
           "@type": "Brand",
           "name": "Professional Resume Free"
@@ -1843,14 +1844,20 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.8",
           "reviewCount": "156",
           "bestRating": "5",
-          "worstRating": "1"
+          "worstRating": "1",
+          "itemReviewed": {
+            "@type": "Product",
+            "name": "Free ATS Resume Checker Tool",
+            "url": canonicalUrl
+          }
         },
         "review": safeReviews.map((review, index) => ({
           "@type": "Review",
@@ -1993,7 +2000,7 @@ SKILLS
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2025" />
+        <meta property="og:title" content="Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2026" />
         <meta property="og:description" content={`Analyze 50+ ATS parsing factors instantly. Privacy-first tool that works entirely in your browser. ${CURRENT_YEAR}`} />
         <meta property="og:image" content="https://www.professionalresumefree.com/images/og-ats-resume-checker.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -2010,7 +2017,7 @@ SKILLS
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free ATS Resume Checker - Instant Compatibility Analysis 2025" />
+        <meta name="twitter:title" content="Free ATS Resume Checker - Instant Compatibility Analysis 2026" />
         <meta name="twitter:description" content="Analyze your resume for 50+ ATS parsing issues. Privacy-first, browser-based tool. No signup required." />
         <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-ats-resume-checker.jpg" />
         <meta name="twitter:image:alt" content="ATS Resume Checker Tool Preview" />

@@ -1652,6 +1652,7 @@ CERTIFICATIONS
                   },
                   "mainEntity": {
                     "@type": "SoftwareApplication",
+                    "@id": "https://www.professionalresumefree.com/free-resume-keyword-matcher#software",
                     "name": "Resume Keyword Matcher",
                     "applicationCategory": "BusinessApplication",
                     "operatingSystem": "Any",
@@ -1667,7 +1668,13 @@ CERTIFICATIONS
                       "ratingValue": 4.7,
                       "ratingCount": 89,
                       "bestRating": 5,
-                      "worstRating": 1
+                      "worstRating": 1,
+                      "itemReviewed": {
+                        "@type": "SoftwareApplication",
+                        "name": "Resume Keyword Matcher",
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "Any"
+                      }
                     },
                     "description": "Free ATS keyword matching tool that analyzes resumes against job descriptions",
                     "featureList": [

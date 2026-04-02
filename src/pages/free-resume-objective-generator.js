@@ -1774,6 +1774,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         },
         "mainEntity": {
           "@type": "SoftwareApplication",
+          "@id": "https://www.professionalresumefree.com/free-resume-objective-generator/#software",
           "name": "Free Resume Objective Generator - ATS Optimized",
           "description": "Professional resume objective generator with ATS-friendly templates for all career levels",
           "url": "https://www.professionalresumefree.com/free-resume-objective-generator",
@@ -1784,14 +1785,20 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": "2025-12-31"
+            "priceValidUntil": "2026-12-31"
           },
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": 4.8,
             "ratingCount": 156,
             "bestRating": 5,
-            "worstRating": 1
+            "worstRating": 1,
+            "itemReviewed": {
+              "@type": "SoftwareApplication",
+              "name": "Free Resume Objective Generator",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Any"
+            }
           },
           "featureList": [
             "ATS-Optimized Templates",
@@ -1801,7 +1808,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             "No Sign Up Required",
             "Free Forever"
           ],
-          "softwareVersion": "2024.1.0",
+          "softwareVersion": "2026.1.0",
           "applicationSuite": "Career Tools",
           "countriesSupported": "Global"
         }
