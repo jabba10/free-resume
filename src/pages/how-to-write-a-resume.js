@@ -141,29 +141,77 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
     "Include links to portfolio or GitHub for technical roles"
   ];
 
+  // Updated testimonials with new names as requested
   const testimonials = [
     {
       quote: "Followed this guide and landed interviews at 3 top tech companies within 2 weeks. The CAR method for achievements was a game-changer!",
-      author: "Michael Chen",
+      author: "Catherine Bouma",
       role: "Software Engineer",
-      date: reviewDates[0] || safeCurrentDate
+      date: reviewDates[0] || safeCurrentDate,
+      hiddenAuthor: "Ansu Kamara",
+      hiddenRole: "Content Director"
     },
     {
       quote: "As a career changer, the functional format advice helped me highlight transferable skills effectively. Got my dream job in project management!",
-      author: "Sarah Johnson",
+      author: "Jame Anderson",
       role: "Project Manager",
-      date: reviewDates[1] || safeCurrentDate
+      date: reviewDates[1] || safeCurrentDate,
+      hiddenAuthor: "Ansu Kamara",
+      hiddenRole: "Content Director"
     },
     {
       quote: "The ATS optimization tips doubled my callback rate. Finally understanding how to properly format for automated systems made all the difference.",
-      author: "David Williams",
+      author: "David Morrison",
       role: "Marketing Director",
-      date: reviewDates[2] || safeCurrentDate
+      date: reviewDates[2] || safeCurrentDate,
+      hiddenAuthor: "Ansu Kamara",
+      hiddenRole: "Content Director"
     }
   ];
 
   return (
-    <div className={styles.container} lang="en-US">
+    <div className={styles.container} lang="en-US" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+      {/* Inline styles to ensure horizontal layouts and centering */}
+      <style jsx global>{`
+        body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+        }
+        /* Ensure the main article content doesn't stretch too wide on large screens */
+        main {
+          width: 100%;
+          max-width: 1200px; /* Limits width for readability */
+          margin: 0 auto; /* Centers the block */
+        }
+        
+        /* Force Horizontal Layouts for Grids */
+        .statsGrid, .mistakesGrid, .tipsGrid, .testimonialsGrid {
+          display: flex !important;
+          flex-direction: row !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
+          gap: 20px !important;
+        }
+        
+        /* Adjust card widths for horizontal flow */
+        .statCard, .mistakeCard, .tipCard, .testimonialCard {
+          flex: 1 1 300px !important; /* Grow, shrink, base width 300px */
+          max-width: 350px !important;
+          min-width: 280px !important;
+        }
+
+        /* Center text in hero and conclusion */
+        .heroSection, .conclusionCard {
+          text-align: center;
+        }
+        
+        /* Ensure grids center their items */
+        .statsGrid, .mistakesGrid, .tipsGrid, .testimonialsGrid, .faqGrid {
+          justify-content: center;
+        }
+      `}</style>
+
       <Head>
         {/* OPTIMIZED TITLE - 68 characters (BELOW 70 LIMIT) */}
         <title>How to Write a Resume: Complete 2026 Guide with Expert Examples</title>
@@ -235,7 +283,11 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Structured Data - Enhanced */}
+        {/* Hidden SEO metadata for invisible author */}
+        <meta name="document-author" content="Ansu Kamara" />
+        <meta name="content-strategist" content="Ansu Kamara" />
+        
+        {/* Structured Data - Enhanced with fixed review schema */}
         <script
           type="application/ld+json"
           key="structured-data"
@@ -349,9 +401,8 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                   "description": "Expert guide on writing professional resumes that pass ATS systems and impress hiring managers in 2026.",
                   "image": "https://www.professionalresumefree.com/images/resume-writing-guide-og.jpg",
                   "author": {
-                    "@type": "Organization",
-                    "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "@type": "Person",
+                    "name": "Ansu Kamara"
                   },
                   "publisher": {
                     "@type": "Organization",
@@ -384,7 +435,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                       "datePublished": safeFaqDates[index] || safeCurrentDate,
                       "author": {
                         "@type": "Person",
-                        "name": "Resume Writing Expert"
+                        "name": "Ansu Kamara"
                       }
                     }
                   }))
@@ -403,12 +454,12 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                       },
                       "author": {
                         "@type": "Person",
-                        "name": testimonial.author
+                        "name": testimonial.hiddenAuthor
                       },
                       "reviewBody": testimonial.quote,
                       "datePublished": testimonial.date,
                       "itemReviewed": {
-                        "@type": "CreativeWork",
+                        "@type": "Product",
                         "name": "Resume Writing Guide",
                         "description": "Complete guide on how to write a professional resume"
                       }
@@ -424,9 +475,10 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
       <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={freshnessIndicator} />
+        <meta name="author-metadata" content="Ansu Kamara" />
       </div>
 
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
         <ol className={styles.breadcrumbList}>
           <li className={styles.breadcrumbItem}>
             <Link href="/" className={styles.breadcrumbLink}>
@@ -456,9 +508,10 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
             in today's competitive job market and passes through modern ATS systems.
           </p>
           
-          <div className={styles.statsGrid}>
+          {/* HORIZONTAL STATS GRID 1 */}
+          <div className={styles.statsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '2rem' }}>
             {keyStatistics.slice(0, 3).map((stat, index) => (
-              <div key={index} className={styles.statCard}>
+              <div key={index} className={styles.statCard} style={{ flex: '1 1 300px', maxWidth: '350px' }}>
                 <div className={styles.statValue}>{stat.value}</div>
                 <div className={styles.statLabel}>{stat.label}</div>
                 <div className={styles.statSource}>{stat.source}</div>
@@ -466,9 +519,10 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
             ))}
           </div>
           
-          <div className={styles.statsGrid}>
+          {/* HORIZONTAL STATS GRID 2 */}
+          <div className={styles.statsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '1rem' }}>
             {keyStatistics.slice(3, 6).map((stat, index) => (
-              <div key={index} className={styles.statCard}>
+              <div key={index} className={styles.statCard} style={{ flex: '1 1 300px', maxWidth: '350px' }}>
                 <div className={styles.statValue}>{stat.value}</div>
                 <div className={styles.statLabel}>{stat.label}</div>
                 <div className={styles.statSource}>{stat.source}</div>
@@ -806,7 +860,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
             </div>
           </section>
 
-          {/* Section 7 - Common Mistakes */}
+          {/* Section 7 - Common Mistakes (HORIZONTAL) */}
           <section className={styles.section} id="common-mistakes">
             <h2 className={styles.h2}>7. Common Resume Mistakes to Avoid</h2>
             
@@ -814,10 +868,10 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
               <h3 className={styles.h3}>Top Resume Errors That Cost Interviews</h3>
               <p>Based on analysis of 10,000+ resumes, avoid these critical mistakes:</p>
               
-              <div className={styles.mistakesGrid}>
+              <div className={styles.mistakesGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '15px', marginTop: '1.5rem' }}>
                 {commonMistakes.map((mistake, index) => (
-                  <div key={index} className={styles.mistakeCard}>
-                    <FiAlertCircle className={styles.mistakeIcon} />
+                  <div key={index} className={styles.mistakeCard} style={{ flex: '1 1 250px', maxWidth: '300px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <FiAlertCircle className={styles.mistakeIcon} style={{ color: '#e74c3c', flexShrink: 0 }} />
                     <span className={styles.mistakeText}>{mistake}</span>
                   </div>
                 ))}
@@ -825,7 +879,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
             </div>
           </section>
 
-          {/* Section 8 - Expert Tips */}
+          {/* Section 8 - Expert Tips (HORIZONTAL) */}
           <section className={styles.section} id="expert-tips">
             <h2 className={styles.h2}>8. Expert Tips for Resume Success</h2>
             
@@ -833,10 +887,10 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
               <h3 className={styles.h3}>Proven Strategies from Hiring Experts</h3>
               <p>Implement these expert-approved techniques to make your resume stand out:</p>
               
-              <div className={styles.tipsGrid}>
+              <div className={styles.tipsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '15px', marginTop: '1.5rem' }}>
                 {expertTips.map((tip, index) => (
-                  <div key={index} className={styles.tipCard}>
-                    <FiStar className={styles.tipIcon} />
+                  <div key={index} className={styles.tipCard} style={{ flex: '1 1 250px', maxWidth: '300px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <FiStar className={styles.tipIcon} style={{ color: '#f1c40f', flexShrink: 0 }} />
                     <span className={styles.tipText}>{tip}</span>
                   </div>
                 ))}
@@ -844,19 +898,23 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
             </div>
           </section>
 
-          {/* Testimonials Section */}
+          {/* Testimonials Section - Display visible authors (HORIZONTAL) */}
           <section className={styles.section} id="testimonials">
             <h2 className={styles.h2}>Success Stories: Real Results from Job Seekers</h2>
             
-            <div className={styles.testimonialsGrid}>
+            <div className={styles.testimonialsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '1.5rem' }}>
               {testimonials.map((testimonial, index) => (
-                <div key={index} className={styles.testimonialCard}>
+                <div key={index} className={styles.testimonialCard} style={{ flex: '1 1 300px', maxWidth: '350px' }}>
                   <div className={styles.quoteIcon}>"</div>
                   <p className={styles.testimonialQuote}>{testimonial.quote}</p>
                   <div className={styles.testimonialAuthor}>
                     <strong>{testimonial.author}</strong>
                     <span>{testimonial.role}</span>
                     <small>{testimonial.date}</small>
+                  </div>
+                  {/* Hidden metadata for invisible author */}
+                  <div style={{ display: 'none' }} data-hidden-author={testimonial.hiddenAuthor}>
+                    {/* This contains the invisible author name Ansu Kamara for SEO */}
                   </div>
                 </div>
               ))}
