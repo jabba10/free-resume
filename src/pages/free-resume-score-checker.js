@@ -32,7 +32,7 @@ const criticalCSS = `
     padding: 16px; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers all children horizontally */
+    align-items: center;
   }
   
   @media (min-width: 640px) {
@@ -88,11 +88,11 @@ const criticalCSS = `
   /* CONTAINER - CENTERED CONTENT */
   .container { 
     width: 100%;
-    max-width: 1000px; /* Constrain width for better readability on large screens */
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Center text by default */
+    text-align: center;
   }
   
   /* HEADER */
@@ -162,11 +162,11 @@ const criticalCSS = `
     padding: 24px; 
     border: 1px solid #e5e7eb;
     width: 100%;
-    text-align: left; /* Keep form text left aligned for readability */
+    text-align: left;
   }
   
   .editor-header {
-    text-align: center; /* Center the header inside the editor */
+    text-align: center;
     margin-bottom: 20px;
   }
 
@@ -1313,9 +1313,9 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
 
   // Get score color
   const getScoreColor = useCallback((score) => {
-    if (score >= 80) return '#10b981'; // green
-    if (score >= 60) return '#f59e0b'; // yellow
-    return '#ef4444'; // red
+    if (score >= 80) return '#10b981';
+    if (score >= 60) return '#f59e0b';
+    return '#ef4444';
   }, []);
 
   // Get performance tier
@@ -1332,7 +1332,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
   // Current year for dynamic content
   const currentYear = new Date().getFullYear();
 
-  // Schema data - FIXED: itemReviewed now uses @id reference and Product schema added
+  // FIXED Schema data - Properly structured with no itemReviewed conflicts
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1360,17 +1360,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png",
-            "width": 512,
-            "height": 512
-          },
-          "sameAs": [
-            "https://twitter.com/ProResumeFree",
-            "https://www.linkedin.com/company/professional-resume-free"
-          ]
+          "url": "https://www.professionalresumefree.com"
         },
         "datePublished": "2024-01-01",
         "dateModified": lastModifiedDate,
@@ -1460,6 +1450,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
           "url": `https://www.professionalresumefree.com/free-resume-score-checker#step-${index + 1}`
         }))
       },
+      // FIXED PRODUCT SCHEMA - No itemReviewed inside reviews, aggregateRating includes itemReviewed
       {
         "@type": "Product",
         "@id": "https://www.professionalresumefree.com/free-resume-score-checker#product",
@@ -1480,7 +1471,12 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
           "ratingValue": "4.8",
           "ratingCount": "50365",
           "bestRating": "5",
-          "worstRating": "1"
+          "worstRating": "1",
+          "itemReviewed": {
+            "@type": "Product",
+            "name": "Free Resume Score Checker Tool",
+            "url": "https://www.professionalresumefree.com/free-resume-score-checker"
+          }
         },
         "review": REVIEWS.map((review, index) => ({
           "@type": "Review",
@@ -1494,17 +1490,13 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
             "bestRating": "5"
           },
           "datePublished": reviewDates[index] || currentDate,
-          "reviewBody": review.review,
-          "itemReviewed": {
-            "@type": "Product",
-            "name": "Free Resume Score Checker Tool",
-            "url": "https://www.professionalresumefree.com/free-resume-score-checker"
-          }
+          "reviewBody": review.review
+          // itemReviewed removed to avoid directional conflict - it's inherited from parent Product
         }))
       },
       {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".title", ".editorHeader h2", ".faqQuestion h3"]
+        "cssSelector": [".title", ".editor-header h2", ".faq-question h3"]
       }
     ]
   };
@@ -1537,10 +1529,6 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta property="og:description" content="Get your resume score in 60 seconds. No signup required. Privacy-first ATS compatibility analysis for job applications." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-score-checker" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-resume-score-checker.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Resume Score Checker - ATS Compatibility Analysis Tool" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={lastModifiedDate} />
@@ -1549,8 +1537,6 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Score Checker - ATS Analysis & Review 2026" />
         <meta name="twitter:description" content="Instantly check your resume's ATS compatibility and get actionable improvements. Free, privacy-first tool." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-resume-score-checker.jpg" />
-        <meta name="twitter:image:alt" content="Resume Score Checker Tool Preview" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -1598,8 +1584,6 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
             100% free, privacy-first tool that analyzes your resume locally in the browser. 
             No data leaves your computer.
           </p>
-          
-          {/* Aggregate Rating Display - REMOVED AS REQUESTED */}
         </header>
 
         <main className="main">
@@ -1829,33 +1813,22 @@ Professional Example:
           <h2 className="section-title" id="reviews-title">What Users Say About Our Tool</h2>
           <div className="reviews-grid">
             {REVIEWS.map((review, index) => (
-              <div key={index} className="review-card" itemScope itemType="https://schema.org/Review">
+              <div key={index} className="review-card">
                 <div className="review-header">
                   <div className="reviewer-info">
-                    <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                      <meta itemProp="name" content={review.name} />
-                      <strong className="reviewer-name">{review.name}</strong>
-                    </span>
+                    <strong className="reviewer-name">{review.name}</strong>
                     <span className="reviewer-position">{review.position}</span>
                   </div>
-                  <div className="review-rating" itemScope itemType="https://schema.org/Rating">
-                    <meta itemProp="ratingValue" content={review.rating} />
-                    <meta itemProp="bestRating" content="5" />
-                    <div className="stars">
-                      {'★'.repeat(review.rating)}
-                      {'☆'.repeat(5 - review.rating)}
-                    </div>
+                  <div className="stars">
+                    {'★'.repeat(review.rating)}
+                    {'☆'.repeat(5 - review.rating)}
                   </div>
                 </div>
-                <div className="review-content" itemProp="reviewBody">
+                <div className="review-content">
                   <p>"{review.review}"</p>
                 </div>
-                <div className="review-date" itemProp="datePublished">
+                <div className="review-date">
                   {review.date}
-                </div>
-                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
-                  <meta itemProp="name" content="Free Resume Score Checker Tool" />
-                  <meta itemProp="url" content="https://www.professionalresumefree.com/free-resume-score-checker" />
                 </div>
               </div>
             ))}

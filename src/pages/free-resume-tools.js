@@ -853,7 +853,8 @@ const ResumeToolsPage = ({
     "job search tools"
   ];
 
-  // Structured data - FIXED: Removed duplicate FAQPage, now only one FAQPage in @graph
+  // ===== FIXED STRUCTURED DATA - SINGLE FAQPage (NO DUPLICATES) =====
+  // IMPORTANT: Only ONE FAQPage exists in the entire @graph array
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -916,6 +917,7 @@ const ResumeToolsPage = ({
         "itemListElement": resumeTools.map((tool, index) => ({
           "@type": "ListItem",
           "position": index + 1,
+          "name": tool.label,
           "item": {
             "@type": "WebApplication",
             "name": tool.label,
@@ -938,10 +940,11 @@ const ResumeToolsPage = ({
           }
         }))
       },
+      // ===== SINGLE FAQPage - NO DUPLICATE! Only one instance =====
       {
         "@type": "FAQPage",
         "@id": "https://www.professionalresumefree.com/free-resume-tools#faq",
-        "mainEntity": faqItems.map(item => ({
+        "mainEntity": faqItems.map((item) => ({
           "@type": "Question",
           "name": item.question,
           "acceptedAnswer": {
@@ -1038,7 +1041,7 @@ const ResumeToolsPage = ({
         <meta name="theme-color" content="#111111" />
         <meta name="msapplication-TileColor" content="#111111" />
         
-        {/* Structured Data */}
+        {/* Structured Data - SINGLE script tag with NO duplicate FAQPage */}
         <script
           type="application/ld+json"
           key="structured-data"

@@ -1389,7 +1389,7 @@ const InterviewTips = ({
         "Test technology beforehand",
         "Choose professional, quiet location",
         "Maintain eye contact with camera",
-         "Have notes and resume visible"
+        "Have notes and resume visible"
       ],
       icon: <FiSmartphone />
     },
@@ -1452,28 +1452,28 @@ const InterviewTips = ({
     {
       quote: "Followed these tips and landed 5 interviews in 2 weeks! The ATS optimization guide helped my resume actually get seen by humans.",
       metric: "5 Interviews in 2 Weeks",
-      name: "Lisa Brown.",
+      name: "Lisa Brown",
       role: "Software Engineer",
       company: "Tech Startup"
     },
     {
       quote: "As a career changer, the transferable skills advice was invaluable. Landed a 40% salary increase in a new industry.",
-      metric: "Career Change Success",
-      name: "Jessica Morrison.",
+      metric: "40% Salary Increase",
+      name: "Jessica Morrison",
       role: "Product Manager",
       company: "Fintech Company"
     },
     {
       quote: "The interview preparation section helped me ace 3 final rounds. Got offers from all companies I interviewed with!",
       metric: "100% Offer Rate",
-      name: "John Kallon.",
+      name: "John Kallon",
       role: "Marketing Director",
       company: "Banking"
     },
     {
       quote: "Free resume builder combined with these tips transformed my job search. Went from 0 responses to 3 offers in a month.",
       metric: "3 Job Offers in 1 Month",
-      name: "Alvin Turton.",
+      name: "Alvin Turton",
       role: "HR Specialist",
       company: "Healthcare"
     }
@@ -1577,24 +1577,15 @@ const InterviewTips = ({
     "job search tips 2026"
   ];
 
-  // Structured data - FIXED: Proper author object in HowTo schema
+  // ===== FIXED STRUCTURED DATA - All errors resolved =====
+  // Key fixes:
+  // 1. Changed itemReviewed from "Service" to "CreativeWork" (valid type for Review)
+  // 2. Removed "provider" from itemReviewed (not needed for CreativeWork)
+  // 3. Fixed AggregateRating itemReviewed to point to WebPage with proper @id
+  // 4. Each Review now has valid itemReviewed with @type: "CreativeWork"
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "2150",
-        "bestRating": "5",
-        "worstRating": "1",
-        "itemReviewed": {
-          "@type": "WebPage",
-          "@id": "https://www.professionalresumefree.com/interview-tips/#webpage",
-          "name": "Resume Writing Tips & Interview Guide 2026",
-          "url": "https://www.professionalresumefree.com/interview-tips/"
-        },
-        "reviewCount": "2150"
-      },
       {
         "@type": "WebPage",
         "@id": "https://www.professionalresumefree.com/interview-tips/#webpage",
@@ -1649,14 +1640,95 @@ const InterviewTips = ({
               "position": 2,
               "name": "Interview Tips",
               "item": "https://www.professionalresumefree.com/interview-tips"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Resume Tips & Interview Guide 2026",
-              "item": "https://www.professionalresumefree.com/interview-tips"
             }
           ]
+        }
+      },
+      // ===== FIXED: AggregateRating with proper itemReviewed =====
+      {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "2150",
+        "bestRating": "5",
+        "worstRating": "1",
+        "itemReviewed": {
+          "@type": "WebPage",
+          "@id": "https://www.professionalresumefree.com/interview-tips/#webpage",
+          "url": "https://www.professionalresumefree.com/interview-tips/",
+          "name": "Resume Writing Tips & Interview Guide 2026"
+        }
+      },
+      // ===== FIXED: Individual Reviews with correct itemReviewed type =====
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": 5,
+          "bestRating": 5
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Lisa Brown"
+        },
+        "reviewBody": "Followed these tips and landed 5 interviews in 2 weeks! The ATS optimization guide helped my resume actually get seen by humans.",
+        "datePublished": safeReviewDates[0] || safeCurrentDate,
+        "itemReviewed": {
+          "@type": "CreativeWork",
+          "name": "Resume Writing Tips & Interview Guide 2026"
+        }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": 5,
+          "bestRating": 5
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Jessica Morrison"
+        },
+        "reviewBody": "As a career changer, the transferable skills advice was invaluable. Landed a 40% salary increase in a new industry.",
+        "datePublished": safeReviewDates[1] || safeCurrentDate,
+        "itemReviewed": {
+          "@type": "CreativeWork",
+          "name": "Resume Writing Tips & Interview Guide 2026"
+        }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": 5,
+          "bestRating": 5
+        },
+        "author": {
+          "@type": "Person",
+          "name": "John Kallon"
+        },
+        "reviewBody": "The interview preparation section helped me ace 3 final rounds. Got offers from all companies I interviewed with!",
+        "datePublished": safeReviewDates[2] || safeCurrentDate,
+        "itemReviewed": {
+          "@type": "CreativeWork",
+          "name": "Resume Writing Tips & Interview Guide 2026"
+        }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": 5,
+          "bestRating": 5
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Alvin Turton"
+        },
+        "reviewBody": "Free resume builder combined with these tips transformed my job search. Went from 0 responses to 3 offers in a month.",
+        "datePublished": safeReviewDates[3] || safeCurrentDate,
+        "itemReviewed": {
+          "@type": "CreativeWork",
+          "name": "Resume Writing Tips & Interview Guide 2026"
         }
       },
       {
@@ -1667,19 +1739,7 @@ const InterviewTips = ({
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
-          }
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Professional Resume Free",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
-          }
+          "url": "https://www.professionalresumefree.com"
         },
         "datePublished": "2026-01-01",
         "dateModified": safeLastModifiedDate,
@@ -1687,8 +1747,7 @@ const InterviewTips = ({
           "@type": "HowToStep",
           "position": index + 1,
           "name": tip.title,
-          "text": tip.content,
-          "url": "https://www.professionalresumefree.com/interview-tips#main-tips"
+          "text": tip.content
         })),
         "totalTime": "PT90M",
         "estimatedCost": {
@@ -1702,39 +1761,11 @@ const InterviewTips = ({
         "itemListElement": mainTips.map((tip, index) => ({
           "@type": "ListItem",
           "position": index + 1,
+          "name": tip.title,
           "item": {
             "@type": "HowToTip",
             "name": tip.title,
             "text": tip.content
-          }
-        }))
-      },
-      {
-        "@type": "ItemList",
-        "itemListElement": testimonials.map((testimonial, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": 5,
-              "bestRating": 5
-            },
-            "author": {
-              "@type": "Person",
-              "name": testimonial.name
-            },
-            "reviewBody": testimonial.quote,
-            "datePublished": safeReviewDates[index] || safeCurrentDate,
-            "itemReviewed": {
-              "@type": "Service",
-              "name": "Resume Writing Tips & Interview Guide 2026",
-              "provider": {
-                "@type": "Organization",
-                "name": "Professional Resume Free"
-              }
-            }
           }
         }))
       },
@@ -1756,6 +1787,18 @@ const InterviewTips = ({
         },
         "areaServed": "Global",
         "description": "Free ATS-optimized resume builder with professional templates and interview tips"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.professionalresumefree.com/interview-tips#faq",
+        "mainEntity": faqs.map((faq, index) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
       }
     ]
   };
@@ -1840,17 +1883,8 @@ const InterviewTips = ({
                 <FiChevronRight />
               </li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/interview-tips" className="breadcrumbLink" itemProp="item">
-                  <span itemProp="name" className="breadcrumbText">Interview Tips</span>
-                </Link>
-                <meta itemProp="position" content="2" />
-              </li>
-              <li className="breadcrumbSeparator" aria-hidden="true">
-                <FiChevronRight />
-              </li>
-              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <span itemProp="name" className="breadcrumbCurrent">Resume Tips & Interview Guide 2026</span>
-                <meta itemProp="position" content="3" />
+                <meta itemProp="position" content="2" />
               </li>
             </ol>
           </div>
@@ -1870,7 +1904,7 @@ const InterviewTips = ({
               </h1>
               
               <p className="heroSubtitle">
-             Start strong with a resume built to beat screening software. Then learn how hiring managers really decide - step by step. This guide shows what works, minus guesswork. A free tool helps shape your resume right the first time. Interview prep fits tight around real employer habits.
+                Start strong with a resume built to beat screening software. Then learn how hiring managers really decide - step by step. This guide shows what works, minus guesswork. A free tool helps shape your resume right the first time. Interview prep fits tight around real employer habits.
               </p>
 
               <div className="ctaButtons">
@@ -1975,7 +2009,7 @@ const InterviewTips = ({
             <div className="sectionHeader">
               <h2 className="sectionTitle" id="intro-title">Expert Resume Writing & Interview Preparation Guide for 2026</h2>
               <p className="sectionSubtitle">
-                 Right now, getting hired means more than just listing your jobs. Many firms run applications through software that blocks most people right away. This book mixes old school tips with smart moves for tough interviews. Standing out happens when preparation meets opportunity - quietly but firmly. Tools inside turn small advantages into real results. The system favors those who know how it works.
+                Right now, getting hired means more than just listing your jobs. Many firms run applications through software that blocks most people right away. This book mixes old school tips with smart moves for tough interviews. Standing out happens when preparation meets opportunity - quietly but firmly. Tools inside turn small advantages into real results. The system favors those who know how it works.
               </p>
             </div>
             <div className="introContent">
@@ -2138,18 +2172,14 @@ const InterviewTips = ({
                     </div>
                   </div>
                   <p className="advancedContent">{tip.content}</p>
-                  <div className="advancedActions">
-                    
-                  </div>
                 </div>
               ))}
             </div>
-            
           </div>
         </section>
 
         {/* Testimonials Section */}
-        <section className="testimonialsSection" aria-labelledby="testimonials-title" itemScope itemType="https://schema.org/ItemList">
+        <section className="testimonialsSection" aria-labelledby="testimonials-title">
           <div className="container">
             <div className="sectionHeader">
               <h2 className="sectionTitle" id="testimonials-title">Success Stories: Job Seekers Who Applied These Tips</h2>
@@ -2159,27 +2189,22 @@ const InterviewTips = ({
             </div>
             <div className="testimonialsGrid">
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="testimonialCard" itemProp="itemListElement" itemScope itemType="https://schema.org/Review">
-                  <meta itemProp="position" content={index + 1} />
+                <div key={index} className="testimonialCard">
                   <div className="quoteMark" aria-hidden="true">"</div>
-                  <p className="quote" itemProp="reviewBody">"{testimonial.quote}"</p>
+                  <p className="quote">"{testimonial.quote}"</p>
                   <div className="testimonialMetric">
                     <FiCheck className="metricIcon" aria-hidden="true" />
                     <span className="metricText">{testimonial.metric}</span>
                   </div>
                   <div className="userInfo">
                     <div className="userDetails">
-                      <h4 className="userName" itemProp="author">{testimonial.name}</h4>
+                      <h4 className="userName">{testimonial.name}</h4>
                       <p className="userRole">{testimonial.role}</p>
                       <p className="userCompany">{testimonial.company}</p>
                     </div>
                   </div>
-                  <meta itemProp="reviewRating" content="5" />
                 </div>
               ))}
-            </div>
-            <div className="sectionCta">
-              
             </div>
           </div>
         </section>
@@ -2194,7 +2219,7 @@ const InterviewTips = ({
               </p>
             </div>
             <div className="faqGrid">
-              {faqs.map((faq, index) => (
+              {faqs.slice(0, 8).map((faq, index) => (
                 <div key={index} className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                   <h3 className="faqQuestion" itemProp="name">{faq.question}</h3>
                   <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
@@ -2298,31 +2323,11 @@ export async function getStaticProps() {
         currentDate,
         lastModifiedDate,
         reviewDates,
-        faqDates,
-        breadcrumbData: [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.professionalresumefree.com"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Interview Tips",
-            "item": "https://www.professionalresumefree.com/interview-tips"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Resume Tips & Interview Guide 2026",
-            "item": "https://www.professionalresumefree.com/interview-tips"
-          }
-        ]
+        faqDates
       },
       buildTimestamp
     },
-    revalidate: 3600 // Regenerate every hour for fresh content
+    revalidate: 3600
   };
 }
 

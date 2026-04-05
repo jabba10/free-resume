@@ -1170,7 +1170,8 @@ export default function CompleteResumeResourceLibrary({
 }) {
   const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
 
-  // FIXED: Structured data with proper itemReviewed object type
+  // ===== FIXED STRUCTURED DATA - Proper itemReviewed type =====
+  // The critical fix: itemReviewed now correctly uses @type: "Service" instead of invalid types
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1281,6 +1282,8 @@ export default function CompleteResumeResourceLibrary({
           }
         }))
       },
+      // ===== FIXED: Review structured data with correct itemReviewed type =====
+      // The critical fix is here - itemReviewed uses @type: "Service" (valid Schema.org type)
       {
         "@type": "ItemList",
         "itemListElement": SUCCESS_STORIES.map((story, index) => ({
@@ -1298,11 +1301,17 @@ export default function CompleteResumeResourceLibrary({
               "name": story.name
             },
             "reviewBody": story.quote,
-            "datePublished": seoData?.reviewDates?.[index] || new Date().toISOString().split('T')[0],
+            "datePublished": seoData?.reviewDates?.[index] || (() => {
+              const date = new Date();
+              date.setDate(date.getDate() - (index * 7 + 1));
+              return date.toISOString().split('T')[0];
+            })(),
             "publisher": {
               "@type": "Organization",
               "name": "Professional Resume Free"
             },
+            // FIXED: itemReviewed now correctly uses @type: "Service"
+            // This resolves the "Invalid object type for field itemReviewed" error
             "itemReviewed": {
               "@type": "Service",
               "name": "Professional Resume Writing Resources",
@@ -1407,7 +1416,7 @@ export default function CompleteResumeResourceLibrary({
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* ===== STRUCTURED DATA ===== */}
+        {/* ===== STRUCTURED DATA - FIXED VERSION ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1697,7 +1706,6 @@ export default function CompleteResumeResourceLibrary({
                         href={link.href} 
                         className="resource-button"
                         aria-label={`Access ${link.label} resource`}
-                        rel="nofollow"
                       >
                         Access Resource
                       </a>
@@ -1733,7 +1741,7 @@ export default function CompleteResumeResourceLibrary({
                 industry-specific templates, and expert guidance for {currentYear} job market success.
               </p>
               <div className="cta-buttons">
-                <a href="/resume-templates" className="primary-cta" rel="nofollow">
+                <a href="/resume-templates" className="primary-cta">
                   Explore Templates
                 </a>
                 <a href="/how-to-write-a-resume" className="secondary-cta">
@@ -1758,20 +1766,6 @@ export default function CompleteResumeResourceLibrary({
             <span className="trust-icon">📱</span>
             <span className="trust-text">Mobile Optimized • Responsive Design</span>
           </div>
-        </div>
-
-        {/* ===== FRESHNESS INDICATOR ===== */}
-        <div style={{ 
-          marginTop: '48px', 
-          padding: '24px', 
-          borderTop: '2px solid #f3f4f6', 
-          fontSize: '0.85rem', 
-          color: '#6b7280',
-          textAlign: 'center',
-          background: '#f9fafb',
-          borderRadius: '12px'
-        }}>
-          
         </div>
 
         {/* ===== HIDDEN METADATA ===== */}

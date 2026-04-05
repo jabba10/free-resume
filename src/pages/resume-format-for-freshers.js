@@ -401,12 +401,6 @@ const criticalCSS = `
     margin-bottom: 8px;
   }
   
-  .highlight {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #059669;
-  }
-  
   /* Steps Container */
   .stepsContainer {
     margin: 30px 0;
@@ -498,7 +492,7 @@ const criticalCSS = `
     padding-bottom: 8px;
   }
   
-  .skillList {
+  .featureList {
     list-style: none;
   }
   
@@ -599,19 +593,6 @@ const criticalCSS = `
     margin-bottom: 16px;
   }
   
-  .featureList {
-    list-style: none;
-    margin: 16px 0;
-  }
-  
-  .featureList li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-  }
-  
   .button {
     display: inline-block;
     background: #111111;
@@ -658,7 +639,7 @@ const criticalCSS = `
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   }
   
-  .faqItem h4 {
+  .faqItem h3 {
     margin-bottom: 12px;
     font-size: 1.1rem;
   }
@@ -841,7 +822,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
     },
     {
       question: `What skills should freshers include in their resume for ${currentYear}?`,
-      answer: `Picture this: knowing what AI can do sits high on the list of needed talents right now. Working smoothly with numbers and information follows close behind. Strong ways of sharing thoughts out loud or on paper hold steady too. Should your role need them, skills such as writing code or using certain programs come into play. Flexibility when things shift shows through clearly. Figuring out tough spots without clear answers remains key. Grasping how your line of work runs day to day helps stand apart. Using online meeting spaces or shared documents feels routine now. Come 2026, getting AI basics won’t lift you above others - it’ll simply keep you in step.`
+      answer: `Picture this: knowing what AI can do sits high on the list of needed talents right now. Working smoothly with numbers and information follows close behind. Strong ways of sharing thoughts out loud or on paper hold steady too. Should your role need them, skills such as writing code or using certain programs come into play. Flexibility when things shift shows through clearly. Figuring out tough spots without clear answers remains key. Grasping how your line of work runs day to day helps stand apart. Using online meeting spaces or shared documents feels routine now. Come 2026, getting AI basics won't lift you above others - it'll simply keep you in step.`
     },
     {
       question: `Should I include a photo on my fresher resume in ${currentYear}?`,
@@ -853,7 +834,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
     },
     {
       question: `How do I handle low GPA on my fresher resume?`,
-      answer: `Okay, skip listing a GPA below 3.0. What grabs attention instead? Courses linked to the role tend to show up better. Skills used in practice might weigh just as heavily. Work done outside class usually tells a clearer story. A higher score within your specialty might count more than the overall mark. What matters most is how well you’ve done, not just the number at the end.`
+      answer: `Okay, skip listing a GPA below 3.0. What grabs attention instead? Courses linked to the role tend to show up better. Skills used in practice might weigh just as heavily. Work done outside class usually tells a clearer story. A higher score within your specialty might count more than the overall mark. What matters most is how well you've done, not just the number at the end.`
     },
     {
       question: `Should freshers use a resume builder or create from scratch?`,
@@ -892,7 +873,8 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
   // Updated title: Shortened to under 70 characters for optimal SEO
   const pageTitle = `Fresher Resume Format ${currentYear}: Complete Guide to First Job`;
 
-  // Structured data - REMOVED DUPLICATE FAQPage
+  // ===== FIXED STRUCTURED DATA - SINGLE FAQPage (NO DUPLICATES) =====
+  // Main structured data WITH the FAQPage included (ONLY ONCE)
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -961,7 +943,6 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
           }
         ]
       },
-      // FAQPage REMOVED from here - now only in HTML
       {
         '@type': 'HowTo',
         name: `How to Create a Fresher Resume in ${currentYear}`,
@@ -1002,7 +983,20 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
       },
       {
         '@type': 'SpeakableSpecification',
-        cssSelector: ['.title', '.card h2', '.faqItem h4']
+        cssSelector: ['.title', '.card h2', '.faqItem h3']
+      },
+      // ===== SINGLE FAQPage - ONLY ONE instance! =====
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://www.professionalresumefree.com/resume-format-for-freshers#faq',
+        'mainEntity': faqData.map(faq => ({
+          '@type': 'Question',
+          'name': faq.question,
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': faq.answer
+          }
+        }))
       }
     ]
   };
@@ -1059,9 +1053,10 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         <meta name="twitter:description" content={`Professional resume formats tailored for freshers entering the job market. Step-by-step guide with templates.`} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* Structured Data */}
+        {/* Main Structured Data - SINGLE script tag with FAQPage included (ONLY ONCE) */}
         <script
           type="application/ld+json"
+          key="structured-data"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
@@ -1232,18 +1227,18 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
                   <strong>Combination/Hybrid</strong>
                 </div>
                 <div className="tableCell">
-                  <span className="highlight">85%</span>
+                  <span className="statNumber" style={{color: '#059669', fontSize: '1.5rem'}}>85%</span>
                 </div>
                 <div className="tableCell">
-                  <ul className="featureList">
-                    <li><FiCheck className="skillIcon" /> Most freshers</li>
-                    <li><FiCheck className="skillIcon" /> Career changers</li>
-                    <li><FiCheck className="skillIcon" /> Skill-focused candidates</li>
+                  <ul className="featureList" style={{margin: 0}}>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Most freshers</li>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Career changers</li>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Skill-focused candidates</li>
                   </ul>
                 </div>
                 <div className="tableCell">
                   <span className="badge">Highly Recommended</span>
-                  <p>Emphasizes skills while showing chronology</p>
+                  <p style={{marginTop: '8px', marginBottom: 0}}>Emphasizes skills while showing chronology</p>
                 </div>
               </div>
               
@@ -1252,18 +1247,18 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
                   <strong>Chronological</strong>
                 </div>
                 <div className="tableCell">
-                  <span className="statNumber" style={{color: '#2563eb'}}>60%</span>
+                  <span className="statNumber" style={{color: '#2563eb', fontSize: '1.5rem'}}>60%</span>
                 </div>
                 <div className="tableCell">
-                  <ul className="featureList">
-                    <li><FiCheck className="skillIcon" /> Internship experience</li>
-                    <li><FiCheck className="skillIcon" /> Consistent academic record</li>
-                    <li><FiCheck className="skillIcon" /> Traditional industries</li>
+                  <ul className="featureList" style={{margin: 0}}>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Internship experience</li>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Consistent academic record</li>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Traditional industries</li>
                   </ul>
                 </div>
                 <div className="tableCell">
                   <span className="badge" style={{background: '#e5e7eb', color: '#111'}}>Moderate</span>
-                  <p>Works if you have relevant experience</p>
+                  <p style={{marginTop: '8px', marginBottom: 0}}>Works if you have relevant experience</p>
                 </div>
               </div>
               
@@ -1272,18 +1267,18 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
                   <strong>Functional/Skills-based</strong>
                 </div>
                 <div className="tableCell">
-                  <span className="statNumber" style={{color: '#dc2626'}}>45%</span>
+                  <span className="statNumber" style={{color: '#dc2626', fontSize: '1.5rem'}}>45%</span>
                 </div>
                 <div className="tableCell">
-                  <ul className="featureList">
-                    <li><FiCheck className="skillIcon" /> No work experience</li>
-                    <li><FiCheck className="skillIcon" /> Academic projects only</li>
-                    <li><FiCheck className="skillIcon" /> Creative fields</li>
+                  <ul className="featureList" style={{margin: 0}}>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> No work experience</li>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Academic projects only</li>
+                    <li className="skillItem"><FiCheck className="skillIcon" /> Creative fields</li>
                   </ul>
                 </div>
                 <div className="tableCell">
                   <span className="badge" style={{background: '#fee2e2', color: '#991b1b'}}>Limited</span>
-                  <p>ATS systems may struggle with this format</p>
+                  <p style={{marginTop: '8px', marginBottom: 0}}>ATS systems may struggle with this format</p>
                 </div>
               </div>
             </div>
@@ -1527,8 +1522,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
               <div className="mistakeCard">
                 <div className="mistakeIcon">❌</div>
                 <h4>Generic Objective Statements</h4>
-                <p>Generic Objective Statements
-                    A stale goal description takes up room you could use better. Swap it out for a brief overview showing bosses your strengths instead.</p>
+                <p>A stale goal description takes up room you could use better. Swap it out for a brief overview showing bosses your strengths instead.</p>
               </div>
               
               <div className="mistakeCard">
@@ -1566,9 +1560,9 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
                 <h4>Modern Minimalist</h4>
                 <p>Clean, ATS-friendly design perfect for corporate roles</p>
                 <ul className="featureList">
-                  <li><FiCheck /> ATS optimized</li>
-                  <li><FiCheck /> Skills-focused layout</li>
-                  <li><FiCheck /> One-page guarantee</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> ATS optimized</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Skills-focused layout</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> One-page guarantee</li>
                 </ul>
                 <Link href="/resume-templates" className="button">Download Template</Link>
               </div>
@@ -1577,9 +1571,9 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
                 <h4>Tech Fresher Pro</h4>
                 <p>Designed for engineering and IT freshers</p>
                 <ul className="featureList">
-                  <li><FiCheck /> Project showcase section</li>
-                  <li><FiCheck /> Technical skills hierarchy</li>
-                  <li><FiCheck /> GitHub integration</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Project showcase section</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Technical skills hierarchy</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> GitHub integration</li>
                 </ul>
                 <Link href="/resume-templates" className="button">Download Template</Link>
               </div>
@@ -1588,9 +1582,9 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
                 <h4>Business Graduate</h4>
                 <p>Optimized for MBA and business graduates</p>
                 <ul className="featureList">
-                  <li><FiCheck /> Leadership emphasis</li>
-                  <li><FiCheck /> Analytical skills highlight</li>
-                  <li><FiCheck /> Internship focused</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Leadership emphasis</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Analytical skills highlight</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Internship focused</li>
                 </ul>
                 <Link href="/resume-templates" className="button">Download Template</Link>
               </div>
@@ -1599,26 +1593,25 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
                 <h4>Creative Portfolio</h4>
                 <p>For design, media, and creative fields</p>
                 <ul className="featureList">
-                  <li><FiCheck /> Visual appeal balanced</li>
-                  <li><FiCheck /> Portfolio link emphasis</li>
-                  <li><FiCheck /> Project visualization</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Visual appeal balanced</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Portfolio link emphasis</li>
+                  <li className="skillItem"><FiCheck className="skillIcon" /> Project visualization</li>
                 </ul>
                 <Link href="/resume-templates" className="button">Download Template</Link>
               </div>
             </div>
           </section>
 
-          {/* Section 8: FAQ */}
+          {/* Section 8: FAQ - NO itemScope here to avoid duplicate FAQPage */}
           <section id="faq" className="card">
             <h2 className="cardTitle">8. Frequently Asked Questions</h2>
             
-            <div className="faqGrid" itemScope itemType="https://schema.org/FAQPage">
+            {/* FAQPage is ONLY in JSON-LD, not in HTML markup */}
+            <div className="faqGrid">
               {faqData.map((faq, index) => (
-                <div key={index} className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                  <h3 className="faqQuestion" itemProp="name">{faq.question}</h3>
-                  <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                    <p itemProp="text">{faq.answer}</p>
-                  </div>
+                <div key={index} className="faqItem">
+                  <h3>{faq.question}</h3>
+                  <p>{faq.answer}</p>
                 </div>
               ))}
             </div>
@@ -1663,9 +1656,6 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
             <p className="ctaNote">Free templates • ATS optimized • Professional designs • No signup required</p>
           </section>
         </div>
-
-        
-
       </main>
     </>
   );

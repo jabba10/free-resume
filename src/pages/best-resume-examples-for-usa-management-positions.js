@@ -1317,7 +1317,7 @@ function ManagementResumeExamples({
                         "name": "Professional Resume Free"
                       },
                       "itemReviewed": {
-                        "@type": "Service",
+                        "@type": "CreativeWork",
                         "name": "Management Resume Examples",
                         "description": "Free comprehensive guide to management resume examples and templates.",
                         "url": canonicalUrl
@@ -1616,7 +1616,7 @@ function ManagementResumeExamples({
                       <td>Shows the size and complexity you can handle</td>
                     </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
             </div>
           </div>
@@ -1706,7 +1706,7 @@ function ManagementResumeExamples({
                       <td>2 pages (rarely 3, with extensive board experience)</td>
                     </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
             </div>
           </div>

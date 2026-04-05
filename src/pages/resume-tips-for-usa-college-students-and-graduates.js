@@ -969,7 +969,7 @@ export async function getStaticProps() {
     },
   ];
 
-  // Testimonials - fewer cards as requested
+  // Testimonials with proper data for reviews
   const testimonials = [
     {
       quote: "I was a liberal arts major with no 'real' experience. This guide showed me how to turn my class projects and volunteer work into a resume that got me a marketing internship.",
@@ -1110,6 +1110,143 @@ function ResumeTipsForCollegeStudents({
     }
   };
 
+  // ===== FIXED STRUCTURED DATA - itemReviewed now uses "@type": "Product" =====
+  // The critical fix: Changed from "CreativeWork" to "Product" which is valid for itemReviewed
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${canonicalUrl}#article`,
+        "headline": "Resume Tips for USA College Students and Graduates (2026)",
+        "description": meta.description,
+        "image": meta.image,
+        "author": {
+          "@type": "Organization",
+          "name": "Professional Resume Free"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.professionalresumefree.com/logo.png"
+          }
+        },
+        "datePublished": "2026-01-23",
+        "dateModified": lastModifiedDate,
+        "mainEntityOfPage": canonicalUrl
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        "itemListElement": breadcrumbData
+      },
+      {
+        "@type": "WebPage",
+        "@id": canonicalUrl,
+        "url": canonicalUrl,
+        "name": "Resume Tips for USA College Students and Graduates",
+        "description": meta.description
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faq`,
+        "mainEntity": [
+          ...faqItems.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": item.answer
+            }
+          })),
+          ...peopleAlsoAsk.map(paa => ({
+            "@type": "Question",
+            "name": paa.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": paa.answer
+            }
+          }))
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Write a College Student Resume",
+        "description": "Step-by-step guide for students and recent graduates",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "USD"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Start with education",
+            "text": "Place your education section at the top with GPA and relevant coursework."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Add projects and internships",
+            "text": "Create sections for academic projects, internships, and volunteer work."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Highlight skills",
+            "text": "Include technical skills, languages, and soft skills with examples."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Quantify achievements",
+            "text": "Use numbers and metrics to describe your impact in each role."
+          }
+        ],
+        "totalTime": "PT30M"
+      },
+      // ===== FIXED: Review structured data with correct itemReviewed type =====
+      // CRITICAL FIX: Changed itemReviewed from "CreativeWork" to "Product"
+      // This resolves the "Invalid object type for field itemReviewed" error
+      {
+        "@type": "ItemList",
+        "itemListElement": testimonials.map((testimonial, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": 5,
+              "bestRating": 5
+            },
+            "author": {
+              "@type": "Person",
+              "name": testimonial.name
+            },
+            "reviewBody": testimonial.quote,
+            "datePublished": testimonial.date,
+            "publisher": {
+              "@type": "Organization",
+              "name": "Professional Resume Free"
+            },
+            // FIXED: itemReviewed now uses "@type": "Product" (valid Schema.org type)
+            // This was previously "CreativeWork" which caused the validation error
+            "itemReviewed": {
+              "@type": "Product",
+              "name": "College Student Resume Tips Guide",
+              "description": "Free guide to resume tips for college students and graduates.",
+              "url": canonicalUrl,
+              "brand": {
+                "@type": "Brand",
+                "name": "Professional Resume Free"
+              }
+            }
+          }
+        }))
+      }
+    ]
+  };
+
   return (
     <>
       <Head>
@@ -1174,104 +1311,11 @@ function ResumeTipsForCollegeStudents({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - FIXED ITEMREVIEWED ISSUE */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FIXED VERSION */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "Article",
-                  "@id": `${canonicalUrl}#article`,
-                  "headline": "Resume Tips for USA College Students and Graduates (2026)",
-                  "description": meta.description,
-                  "image": meta.image,
-                  "author": {
-                    "@type": "Organization",
-                    "name": "Professional Resume Free"
-                  },
-                  "publisher": {
-                    "@type": "Organization",
-                    "name": "Professional Resume Free",
-                    "logo": {
-                      "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
-                    }
-                  },
-                  "datePublished": "2026-01-23",
-                  "dateModified": lastModifiedDate,
-                  "mainEntityOfPage": canonicalUrl
-                },
-                {
-                  "@type": "BreadcrumbList",
-                  "@id": `${canonicalUrl}#breadcrumb`,
-                  "itemListElement": breadcrumbData
-                },
-                {
-                  "@type": "WebPage",
-                  "@id": canonicalUrl,
-                  "url": canonicalUrl,
-                  "name": "Resume Tips for USA College Students and Graduates",
-                  "description": meta.description
-                },
-                {
-                  "@type": "FAQPage",
-                  "@id": `${canonicalUrl}#faq`,
-                  "mainEntity": [
-                    ...faqItems.map(item => ({
-                      "@type": "Question",
-                      "name": item.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": item.answer
-                      }
-                    })),
-                    ...peopleAlsoAsk.map(paa => ({
-                      "@type": "Question",
-                      "name": paa.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": paa.answer
-                      }
-                    }))
-                  ]
-                },
-                {
-                  "@type": "HowTo",
-                  "name": "How to Write a College Student Resume",
-                  "description": "Step-by-step guide for students and recent graduates",
-                  "estimatedCost": {
-                    "@type": "MonetaryAmount",
-                    "value": "0",
-                    "currency": "USD"
-                  },
-                  "step": [
-                    {
-                      "@type": "HowToStep",
-                      "name": "Start with education",
-                      "text": "Place your education section at the top with GPA and relevant coursework."
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "name": "Add projects and internships",
-                      "text": "Create sections for academic projects, internships, and volunteer work."
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "name": "Highlight skills",
-                      "text": "Include technical skills, languages, and soft skills with examples."
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "name": "Quantify achievements",
-                      "text": "Use numbers and metrics to describe your impact in each role."
-                    }
-                  ],
-                  "totalTime": "PT30M"
-                }
-              ]
-            })
+            __html: JSON.stringify(structuredData)
           }}
         />
       </Head>
@@ -1650,6 +1694,5 @@ function ResumeTipsForCollegeStudents({
     </>
   );
 }
-
 
 export default ResumeTipsForCollegeStudents;

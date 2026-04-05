@@ -1629,7 +1629,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/free-ats-resume-checker";
 
-  // Schema data with comprehensive structured data
+  // Schema data with comprehensive structured data - FIXED
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1702,7 +1702,12 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "ratingValue": "4.8",
           "reviewCount": "156",
           "bestRating": "5",
-          "worstRating": "1"
+          "worstRating": "1",
+          "itemReviewed": {
+            "@type": "WebApplication",
+            "name": "Free ATS Resume Checker",
+            "applicationCategory": "BusinessApplication"
+          }
         },
         "author": {
           "@type": "Organization",
@@ -1780,15 +1785,9 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
               "name": "Professional Resume Free"
             },
             "itemReviewed": {
-              "@type": "SoftwareApplication",
+              "@type": "WebApplication",
               "name": "Free ATS Resume Checker",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Any",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              }
+              "applicationCategory": "BusinessApplication"
             }
           }
         }))
@@ -1828,15 +1827,23 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
         }
       },
+      // ===== FIXED: Product schema with proper aggregateRating (no nested itemReviewed in reviews) =====
       {
         "@type": "Product",
         "@id": `${canonicalUrl}#product`,
         "name": "Free ATS Resume Checker Tool",
         "description": "Professional ATS compatibility analysis tool for job seekers",
-        "image": "https://www.professionalresumefree.com/images/og-ats-resume-checker.jpg",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://www.professionalresumefree.com/images/og-ats-resume-checker.jpg",
+          "width": 1200,
+          "height": 630,
+          "caption": "Free ATS Resume Checker Tool Interface"
+        },
         "brand": {
           "@type": "Brand",
           "name": "Professional Resume Free"
@@ -1845,7 +1852,8 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-12-31"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -1855,8 +1863,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "worstRating": "1",
           "itemReviewed": {
             "@type": "Product",
-            "name": "Free ATS Resume Checker Tool",
-            "url": canonicalUrl
+            "name": "Free ATS Resume Checker Tool"
           }
         },
         "review": safeReviews.map((review, index) => ({
@@ -1871,12 +1878,8 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
             "name": review.name
           },
           "reviewBody": review.review,
-          "datePublished": review.date,
-          "itemReviewed": {
-            "@type": "Product",
-            "name": "Free ATS Resume Checker Tool",
-            "url": canonicalUrl
-          }
+          "datePublished": review.date
+          // NOTE: itemReviewed is REMOVED here because it's redundant when review is nested inside a Product
         }))
       },
       {
@@ -2091,12 +2094,15 @@ SKILLS
               Professional <strong className="hero-highlight">Applicant Tracking System compatibility analyzer</strong> that works entirely in your browser. No data leaves your computer - 100% privacy guaranteed.
             </p>
 
-            {/* Aggregate Rating Display */}
+            {/* Aggregate Rating Display - FIXED with itemReviewed */}
             <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
               <meta itemProp="ratingValue" content="4.8" />
               <meta itemProp="ratingCount" content="156" />
               <meta itemProp="bestRating" content="5" />
               <meta itemProp="worstRating" content="1" />
+              <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                <meta itemProp="name" content="Free ATS Resume Checker Tool" />
+              </div>
               <div className="rating-stars">
                 ★★★★★
                 <span className="rating-value">4.8/5</span>
@@ -2410,6 +2416,7 @@ WORK EXPERIENCE
           {/* Build Info - Fixed hydration issue by using client-side state */}
           <div className="build-info">
             <p>Last updated: {safeFreshnessIndicator} • Build: {buildTime}</p>
+            <p>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
           </div>
 
           {/* Hidden Metadata */}

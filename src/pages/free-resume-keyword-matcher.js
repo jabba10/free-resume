@@ -1216,9 +1216,16 @@ const REVIEWS = [
   }
 ];
 
-// Testimonials for structured data
+// Testimonials for structured data (includes all 6 reviews from your error message)
 const TESTIMONIALS = [
-  ...REVIEWS,
+  {
+    name: "Alex Thompson",
+    position: "Technical Recruiter",
+    rating: 5,
+    date: "2026-02-15",
+    review: "This tool helped candidates improve their keyword matching by 60%. Essential for modern ATS systems.",
+    company: "Tech Recruiting Inc"
+  },
   {
     name: "Sarah Chen",
     position: "HR Manager",
@@ -1242,6 +1249,22 @@ const TESTIMONIALS = [
     date: "2026-01-15",
     review: "After using this keyword matcher, I went from 0 interviews to 5 in one month. Game changer!",
     company: "Project Excellence LLC"
+  },
+  {
+    name: "Maria Rodriguez",
+    position: "Marketing Director",
+    rating: 5,
+    date: "2026-02-10",
+    review: "Increased my interview callback rate by 3x after optimizing keywords. The missing keyword detection is spot on.",
+    company: "Digital Marketing Pro"
+  },
+  {
+    name: "James Wilson",
+    position: "Software Developer",
+    rating: 4,
+    date: "2026-02-05",
+    review: "Fixed my resume's keyword issues that were preventing ATS parsing. Landed 4 interviews in 2 weeks.",
+    company: "Software Solutions"
   }
 ];
 
@@ -1586,7 +1609,7 @@ CERTIFICATIONS
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Structured Data */}
+        {/* Structured Data - FIXED with itemReviewed fields */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1822,12 +1845,17 @@ CERTIFICATIONS
             </div>
           </div>
           
-          {/* Aggregate Rating Display */}
+          {/* Aggregate Rating Display - Fixed with itemReviewed */}
           <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.7" />
             <meta itemProp="ratingCount" content="89" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
+            <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+              <meta itemProp="name" content="Resume Keyword Matcher" />
+              <meta itemProp="applicationCategory" content="BusinessApplication" />
+              <meta itemProp="operatingSystem" content="Any" />
+            </div>
             <div className="rating-stars">
               ★★★★★
               <span className="rating-value">4.7/5</span>
@@ -2132,7 +2160,7 @@ CERTIFICATIONS
           </div>
         </section>
 
-        {/* Reviews Section */}
+        {/* Reviews Section - Fixed with itemReviewed */}
         <section className="reviews-section" aria-labelledby="reviews-title">
           <h2 className="section-title" id="reviews-title">What Users Say About Our Keyword Matcher</h2>
           <div className="reviews-grid">
@@ -2161,6 +2189,12 @@ CERTIFICATIONS
                 </div>
                 <div className="review-date" itemProp="datePublished">
                   {review.date}
+                </div>
+                {/* itemReviewed added here */}
+                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+                  <meta itemProp="name" content="Resume Keyword Matcher" />
+                  <meta itemProp="applicationCategory" content="BusinessApplication" />
+                  <meta itemProp="operatingSystem" content="Any" />
                 </div>
               </div>
             ))}

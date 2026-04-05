@@ -953,7 +953,7 @@ const HOW_TO_STEPS = [
   }
 ];
 
-// Reviews Data with dates for freshness
+// Reviews Data with dates for freshness - UPDATED with all 7 reviews
 const REVIEWS = [
   {
     name: "Jennifer Carter",
@@ -961,22 +961,6 @@ const REVIEWS = [
     rating: 5,
     date: "2024-02-20",
     review: "The objective statements generated are professional and ATS-friendly. Much better than generic templates found online. Our recruiting team sees immediate improvement in candidate quality.",
-    verified: true
-  },
-  {
-    name: "Robert Kim",
-    position: "Career Coach | CareerSuccess Inc.",
-    rating: 5,
-    date: "2024-02-15",
-    review: "I recommend this tool to all my clients. The career-level specific objectives make a huge difference in application success rates. The ATS optimization is spot-on.",
-    verified: true
-  },
-  {
-    name: "Amanda Patel",
-    position: "Marketing Director | Global Brands",
-    rating: 5,
-    date: "2024-02-10",
-    review: "Helped me create a compelling executive summary that got me noticed. The customization options are excellent and saved me hours of work.",
     verified: true
   },
   {
@@ -1001,6 +985,22 @@ const REVIEWS = [
     rating: 5,
     date: "2024-01-20",
     review: "Executive-level objectives that actually sound professional. The strategic language helped me negotiate a 25% higher salary in my new role.",
+    verified: true
+  },
+  {
+    name: "Robert Kim",
+    position: "Career Coach | CareerSuccess Inc.",
+    rating: 5,
+    date: "2024-02-15",
+    review: "I recommend this tool to all my clients. The career-level specific objectives make a huge difference in application success rates. The ATS optimization is spot-on.",
+    verified: true
+  },
+  {
+    name: "Amanda Patel",
+    position: "Marketing Director | Global Brands",
+    rating: 5,
+    date: "2024-02-10",
+    review: "Helped me create a compelling executive summary that got me noticed. The customization options are excellent and saved me hours of work.",
     verified: true
   }
 ];
@@ -1720,7 +1720,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
     'achieve executive leadership'
   ];
 
-  // Comprehensive Schema.org structured data
+  // Comprehensive Schema.org structured data - FIXED with itemReviewed
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -2126,12 +2126,17 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </div>
 
-          {/* Aggregate Rating */}
+          {/* Aggregate Rating - FIXED with itemReviewed */}
           <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="156" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
+            <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+              <meta itemProp="name" content="Free Resume Objective Generator" />
+              <meta itemProp="applicationCategory" content="BusinessApplication" />
+              <meta itemProp="operatingSystem" content="Any" />
+            </div>
             <div className="rating-stars">
               ★★★★★
               <span className="rating-value">4.8/5</span>
@@ -2403,7 +2408,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* Reviews Section */}
+          {/* Reviews Section - FIXED with itemReviewed */}
           <section className="reviews-section" aria-labelledby="reviews-title">
             <h2 className="section-title" id="reviews-title">What Professionals Say About Our Objective Generator</h2>
             <p className="section-subtitle">Trusted by HR managers, career coaches, and professionals at all levels</p>
@@ -2436,6 +2441,12 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                       {review.date}
                     </div>
                     <div className="review-source">via Professional Resume Free</div>
+                  </div>
+                  {/* itemReviewed added here */}
+                  <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+                    <meta itemProp="name" content="Free Resume Objective Generator" />
+                    <meta itemProp="applicationCategory" content="BusinessApplication" />
+                    <meta itemProp="operatingSystem" content="Any" />
                   </div>
                 </div>
               ))}
@@ -2506,7 +2517,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         {/* Build Info - Fixed hydration */}
         <div className="build-info">
           <p>Last updated: {safeSeoData.currentDate} • Build: {buildTime}</p>
-        
+          <p>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
         </div>
 
         {/* Hidden Metadata */}

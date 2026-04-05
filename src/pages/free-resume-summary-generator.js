@@ -1123,7 +1123,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
     buildTimestamp: Date.now()
   };
 
-  // Schema data for JSON-LD - FIXED: Added itemReviewed to aggregateRating
+  // FIXED Schema data - Properly structured with no itemReviewed conflicts
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1178,6 +1178,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           ]
         }
       },
+      // FIXED WebApplication - Removed itemReviewed from aggregateRating (no longer needed when nested)
       {
         "@type": "WebApplication",
         "name": "Resume Summary Generator",
@@ -1197,11 +1198,8 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           "ratingValue": "4.8",
           "ratingCount": "215",
           "bestRating": "5",
-          "worstRating": "1",
-          "itemReviewed": {
-            "@type": "WebApplication",
-            "name": "Resume Summary Generator"
-          }
+          "worstRating": "1"
+          // itemReviewed removed - it's nested under WebApplication which defines the context
         },
         "featureList": [
           "20+ Professional Templates",
@@ -1217,6 +1215,20 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         "applicationSuite": "Career Tools",
         "countriesSupported": "Global",
         "fileSize": "Web Application"
+      },
+      // FIXED Standalone AggregateRating - Added required itemReviewed
+      {
+        "@type": "AggregateRating",
+        "@id": `${PAGE_URL}#rating`,
+        "ratingValue": "4.8",
+        "ratingCount": "215",
+        "bestRating": "5",
+        "worstRating": "1",
+        "itemReviewed": {
+          "@type": "WebApplication",
+          "name": "Resume Summary Generator",
+          "url": PAGE_URL
+        }
       },
       {
         "@type": "FAQPage",
@@ -1585,6 +1597,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="215" />
+            <meta itemProp="itemReviewed" itemType="https://schema.org/WebApplication" content="Resume Summary Generator" />
             <div className="rating-stars">
               ★★★★★
               <span className="rating-value">4.8/5 Rating</span>
@@ -2170,7 +2183,6 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         {/* Build Info - Fixed hydration */}
         <div className="build-info">
           <p>Last updated: {safeSeoData.currentDate} • Build: {buildTime}</p>
-          
         </div>
 
         {/* Hidden Metadata */}

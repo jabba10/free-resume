@@ -922,6 +922,28 @@ export default function CreativeResumeTemplates({ seoData }) {
     }
   ];
 
+  // FIXED: Properly structured reviews with itemReviewed field
+  const structuredReviews = testimonials.map((testimonial, index) => ({
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": testimonial.name
+    },
+    "reviewBody": testimonial.quote,
+    "itemReviewed": {
+      "@type": "Product",
+      "name": "Creative Resume Templates 2026",
+      "url": "https://www.professionalresumefree.com/creative-resume-templates",
+      "description": "Professional creative resume templates for job seekers"
+    },
+    "datePublished": safeReviewDates[index] || safeCurrentDate
+  }));
+
   return (
     <>
       <Head>
@@ -970,7 +992,7 @@ export default function CreativeResumeTemplates({ seoData }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA - FIXED ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -1103,25 +1125,7 @@ export default function CreativeResumeTemplates({ seoData }) {
                   "bestRating": "5",
                   "worstRating": "1"
                 },
-                "review": testimonials.map((testimonial, index) => ({
-                  "@type": "Review",
-                  "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5",
-                    "bestRating": "5"
-                  },
-                  "author": {
-                    "@type": "Person",
-                    "name": testimonial.name
-                  },
-                  "reviewBody": testimonial.quote,
-                  "itemReviewed": {
-                    "@type": "Product",
-                    "name": "Creative Resume Templates 2026",
-                    "url": "https://www.professionalresumefree.com/creative-resume-templates"
-                  },
-                  "datePublished": safeReviewDates[index] || safeCurrentDate
-                }))
+                "review": structuredReviews
               }
             ]
           })

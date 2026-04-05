@@ -951,7 +951,7 @@ function DeathOfObjectiveStatement({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed now proper object type */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed now proper Article type */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1070,7 +1070,7 @@ function DeathOfObjectiveStatement({
                         "name": "Professional Resume Free"
                       },
                       "itemReviewed": {
-                        "@type": "CreativeWork",
+                        "@type": "Article",
                         "name": "Resume Objective Alternatives Guide",
                         "description": "Free comprehensive guide to replacing resume objective statements.",
                         "url": canonicalUrl

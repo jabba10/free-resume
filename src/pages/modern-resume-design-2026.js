@@ -1021,6 +1021,131 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
     }
   ];
 
+  // ===== FIXED JSON-LD SCHEMA WITH PROPER BreadcrumbList STRUCTURE =====
+  // Each ListItem now has BOTH "name" AND "item" properties
+  const jsonLdSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#article",
+        "headline": "Modern Resume Design 2026: The Complete Future-Proof Guide",
+        "description": "Expert analysis of 2026 resume design trends including AI integration, interactive elements, blockchain verification, and emerging technologies for career success",
+        "author": {
+          "@type": "Organization",
+          "name": "Future Resume Strategy Experts",
+          "url": "https://www.professionalresumefree.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.professionalresumefree.com/logo.png",
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://twitter.com/ProResumeFree",
+            "https://www.linkedin.com/company/professional-resume-free"
+          ]
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": lastModifiedDate,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.professionalresumefree.com/modern-resume-design-2026"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "articleSection": "Career Development",
+        "keywords": "2026 resume design, AI integration, interactive resume, future trends, blockchain credentials, AR/VR resume",
+        "wordCount": "4500",
+        "timeRequired": "PT22M",
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.professionalresumefree.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Modern Resume Design 2026",
+            "item": "https://www.professionalresumefree.com/modern-resume-design-2026"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#faqpage",
+        "mainEntity": faqs.map((faq, index) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer,
+            "datePublished": faqDates[index] || currentDate,
+            "author": {
+              "@type": "Person",
+              "name": "Future Resume Expert"
+            }
+          }
+        }))
+      },
+      {
+        "@type": "ItemList",
+        "itemListElement": designTrends.map((trend, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": trend.trend,
+          "item": {
+            "@type": "CreativeWork",
+            "name": trend.trend,
+            "description": `Adoption rate: ${trend.adoption}. Key features: ${trend.keyFeatures.join(', ')}. Impact: ${trend.impact}`,
+            "datePublished": currentDate
+          }
+        }))
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#webpage",
+        "url": "https://www.professionalresumefree.com/modern-resume-design-2026",
+        "name": "Modern Resume Design 2026: Future-Proof Guide",
+        "description": "Complete guide to future-proof resume design with AI integration and emerging technologies",
+        "datePublished": "2024-01-01",
+        "dateModified": lastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://www.professionalresumefree.com/#website",
+          "url": "https://www.professionalresumefree.com",
+          "name": "Professional Resume Free",
+          "description": "Free online resume builder and career resources"
+        },
+        "breadcrumb": {
+          "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#breadcrumb"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg",
+          "width": 1200,
+          "height": 630
+        }
+      }
+    ]
+  };
+
   return (
     <div style={styles.container} lang="en-US">
       <Head>
@@ -1079,130 +1204,11 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "Article",
-                "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#article",
-                "headline": "Modern Resume Design 2026: The Complete Future-Proof Guide",
-                "description": "Expert analysis of 2026 resume design trends including AI integration, interactive elements, blockchain verification, and emerging technologies for career success",
-                "author": {
-                  "@type": "Organization",
-                  "name": "Future Resume Strategy Experts",
-                  "url": "https://www.professionalresumefree.com"
-                },
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "Professional Resume Free",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/logo.png",
-                    "width": 512,
-                    "height": 512
-                  },
-                  "sameAs": [
-                    "https://twitter.com/ProResumeFree",
-                    "https://www.linkedin.com/company/professional-resume-free"
-                  ]
-                },
-                "datePublished": "2024-01-01",
-                "dateModified": lastModifiedDate,
-                "mainEntityOfPage": {
-                  "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/modern-resume-design-2026"
-                },
-                "image": {
-                  "@type": "ImageObject",
-                  "url": "https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg",
-                  "width": 1200,
-                  "height": 630
-                },
-                "articleSection": "Career Development",
-                "keywords": "2026 resume design, AI integration, interactive resume, future trends, blockchain credentials, AR/VR resume",
-                "wordCount": "4500",
-                "timeRequired": "PT22M",
-                "inLanguage": "en-US"
-              },
-              {
-                "@type": "BreadcrumbList",
-                "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#breadcrumb",
-                "itemListElement": [
-                  {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://www.professionalresumefree.com"
-                  },
-                  {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Modern Resume Design 2026",
-                    "item": "https://www.professionalresumefree.com/modern-resume-design-2026"
-                  }
-                ]
-              },
-              {
-                "@type": "FAQPage",
-                "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#faqpage",
-                "mainEntity": faqs.map((faq, index) => ({
-                  "@type": "Question",
-                  "name": faq.question,
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": faq.answer,
-                    "datePublished": faqDates[index] || currentDate,
-                    "author": {
-                      "@type": "Person",
-                      "name": "Future Resume Expert"
-                    }
-                  }
-                }))
-              },
-              {
-                "@type": "ItemList",
-                "itemListElement": designTrends.map((trend, index) => ({
-                  "@type": "ListItem",
-                  "position": index + 1,
-                  "item": {
-                    "@type": "CreativeWork",
-                    "name": trend.trend,
-                    "description": `Adoption rate: ${trend.adoption}. Key features: ${trend.keyFeatures.join(', ')}. Impact: ${trend.impact}`,
-                    "datePublished": currentDate
-                  }
-                }))
-              },
-              {
-                "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#webpage",
-                "url": "https://www.professionalresumefree.com/modern-resume-design-2026",
-                "name": "Modern Resume Design 2026: Future-Proof Guide",
-                "description": "Complete guide to future-proof resume design with AI integration and emerging technologies",
-                "datePublished": "2024-01-01",
-                "dateModified": lastModifiedDate,
-                "inLanguage": "en-US",
-                "isPartOf": {
-                  "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
-                  "name": "Professional Resume Free",
-                  "description": "Free online resume builder and career resources"
-                },
-                "breadcrumb": {
-                  "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#breadcrumb"
-                },
-                "primaryImageOfPage": {
-                  "@type": "ImageObject",
-                  "url": "https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg",
-                  "width": 1200,
-                  "height": 630
-                }
-              }
-            ]
-          })
-        }} />
+        {/* ===== FIXED COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+        />
       </Head>
 
       <div style={styles.container}>
@@ -1220,17 +1226,18 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
           <nav style={styles.breadcrumb} aria-label="Breadcrumb">
             <ol style={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" style={styles.breadcrumbLink}>
+                <Link href="/" style={styles.breadcrumbLink} itemProp="item">
                   <span itemProp="name">Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
               <li style={styles.breadcrumbSeparator}>›</li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span style={styles.breadcrumbCurrent}>
+                <span style={styles.breadcrumbCurrent} itemProp="name">
                   Modern Resume Design 2026
                 </span>
                 <meta itemProp="position" content="2" />
+                <meta itemProp="item" content="https://www.professionalresumefree.com/modern-resume-design-2026" />
               </li>
             </ol>
           </nav>

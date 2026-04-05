@@ -870,7 +870,7 @@ export async function getStaticProps() {
     },
   ];
 
-  // Testimonials (fewer cards)
+  // Testimonials with proper structure for structured data
   const testimonials = [
     {
       quote: "These resume examples showed me exactly how to structure my experience. I updated my resume following the software engineer sample and landed interviews at three top tech companies within weeks.",
@@ -993,7 +993,7 @@ function ITResumeExamples({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - FIXED ITEMREVIEWED ISSUE */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed uses Article type */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1088,6 +1088,37 @@ function ITResumeExamples({
                     }
                   ],
                   "totalTime": "PT35M"
+                },
+                {
+                  "@type": "ItemList",
+                  "itemListElement": testimonials.map((testimonial, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "Review",
+                      "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": 5,
+                        "bestRating": 5
+                      },
+                      "author": {
+                        "@type": "Person",
+                        "name": testimonial.name
+                      },
+                      "reviewBody": testimonial.quote,
+                      "datePublished": testimonial.date,
+                      "publisher": {
+                        "@type": "Organization",
+                        "name": "Professional Resume Free"
+                      },
+                      "itemReviewed": {
+                        "@type": "Article",
+                        "name": "IT Resume Examples Guide",
+                        "description": "Free comprehensive guide to the best resume examples for USA IT and software jobs.",
+                        "url": canonicalUrl
+                      }
+                    }
+                  }))
                 }
               ]
             })
