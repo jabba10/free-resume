@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed =====
+// ===== INLINE CRITICAL CSS - Optimized for speed with CENTERING =====
 const criticalCSS = `
   /* CSS RESET */
   * { 
@@ -22,7 +22,7 @@ const criticalCSS = `
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* PAGE CONTAINER */
+  /* PAGE CONTAINER - CENTERED */
   .landing-page { 
     max-width: 1280px; 
     margin: 0 auto; 
@@ -43,11 +43,12 @@ const criticalCSS = `
     width: 100%;
   }
   
-  /* BREADCRUMB */
+  /* BREADCRUMB - CENTERED */
   .breadcrumb { 
     margin-bottom: 24px; 
     font-size: 0.9rem; 
     color: #6b7280;
+    text-align: center;
   }
   
   .breadcrumb ol { 
@@ -55,6 +56,7 @@ const criticalCSS = `
     flex-wrap: wrap; 
     list-style: none; 
     gap: 8px;
+    justify-content: center;
   }
   
   .breadcrumb li { 
@@ -77,11 +79,12 @@ const criticalCSS = `
     border-bottom-color: #000000; 
   }
   
-  /* HEADER */
+  /* HEADER - CENTERED */
   .header { 
     margin-bottom: 40px; 
     padding-bottom: 32px; 
     border-bottom: 2px solid #f3f4f6;
+    text-align: center;
   }
   
   .trust-badge { 
@@ -108,6 +111,7 @@ const criticalCSS = `
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    text-align: center;
   }
   
   .title { 
@@ -120,6 +124,7 @@ const criticalCSS = `
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    text-align: center;
   }
   
   .gradient-text { 
@@ -134,6 +139,9 @@ const criticalCSS = `
     color: #4b5563; 
     max-width: 900px; 
     line-height: 1.7;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
   
   .hero-highlight { 
@@ -142,17 +150,19 @@ const criticalCSS = `
     border-radius: 4px;
   }
   
-  /* AGGREGATE RATING */
+  /* AGGREGATE RATING - CENTERED */
   .aggregate-rating { 
     display: flex; 
     align-items: center; 
+    justify-content: center;
     gap: 16px; 
-    margin: 24px 0; 
+    margin: 24px auto; 
     padding: 16px; 
     background: #f3f4f6; 
     border-radius: 12px; 
     border: 1px solid #e5e7eb;
     flex-wrap: wrap;
+    max-width: 500px;
   }
   
   .rating-stars { 
@@ -174,7 +184,7 @@ const criticalCSS = `
     font-size: 0.9rem;
   }
   
-  /* HERO STATS */
+  /* HERO STATS - CENTERED */
   .hero-stats { 
     display: flex; 
     flex-wrap: wrap; 
@@ -184,6 +194,7 @@ const criticalCSS = `
     background: #f9fafb; 
     border-radius: 16px; 
     border: 1px solid #e5e7eb;
+    justify-content: center;
   }
   
   .stat-item { 
@@ -215,13 +226,14 @@ const criticalCSS = `
     margin-bottom: 32px;
   }
   
-  /* CARD */
+  /* CARD - CENTERED CONTENT */
   .card { 
     background: #ffffff; 
     border-radius: 16px; 
     padding: 24px; 
     border: 1px solid #e5e7eb; 
     margin-bottom: 24px;
+    text-align: center;
   }
   
   @media (min-width: 768px) {
@@ -237,19 +249,22 @@ const criticalCSS = `
     font-weight: 700; 
     margin-bottom: 12px; 
     color: #000000;
+    text-align: center;
   }
   
   .card-subtitle { 
     color: #4b5563; 
     margin-bottom: 16px;
+    text-align: center;
   }
   
-  /* BUTTONS */
+  /* BUTTONS - CENTERED */
   .button-group { 
     display: flex; 
     flex-wrap: wrap; 
     gap: 12px; 
     margin: 16px 0;
+    justify-content: center;
   }
   
   .button { 
@@ -314,6 +329,8 @@ const criticalCSS = `
   /* TEXTAREA */
   .textarea { 
     width: 100%; 
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px; 
     border: 2px solid #e5e7eb; 
     border-radius: 12px; 
@@ -321,8 +338,8 @@ const criticalCSS = `
     font-size: 1rem; 
     line-height: 1.6; 
     resize: vertical; 
-    margin: 20px 0;
     transition: border-color 0.2s;
+    display: block;
   }
   
   .textarea:focus { 
@@ -330,7 +347,7 @@ const criticalCSS = `
     border-color: #000000;
   }
   
-  /* ANALYZE BUTTON CONTAINER */
+  /* ANALYZE BUTTON CONTAINER - CENTERED */
   .analyze-button-container { 
     text-align: center; 
     margin: 24px 0;
@@ -348,7 +365,7 @@ const criticalCSS = `
     100% { transform: rotate(360deg); } 
   }
   
-  /* LOADING */
+  /* LOADING - CENTERED */
   .loading { 
     text-align: center; 
     padding: 40px;
@@ -356,11 +373,14 @@ const criticalCSS = `
   
   .loading-bar { 
     width: 100%; 
+    max-width: 400px;
     height: 8px; 
     background: #e5e7eb; 
     border-radius: 4px; 
     margin-top: 20px; 
     overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .loading-progress { 
@@ -387,7 +407,7 @@ const criticalCSS = `
     .grid { grid-template-columns: repeat(2, 1fr); }
   }
   
-  /* SCORE DISPLAY */
+  /* SCORE DISPLAY - CENTERED */
   .score-container { 
     text-align: center; 
     margin: 24px 0;
@@ -398,6 +418,7 @@ const criticalCSS = `
     font-weight: 800; 
     line-height: 1; 
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .score-badge { 
@@ -426,6 +447,7 @@ const criticalCSS = `
   .score-message { 
     font-size: 1.1rem; 
     margin-bottom: 24px;
+    text-align: center;
   }
   
   .severity-container { 
@@ -435,6 +457,7 @@ const criticalCSS = `
     padding: 16px; 
     background: #f9fafb; 
     border-radius: 8px;
+    align-items: center;
   }
   
   .severity-item { 
@@ -471,6 +494,7 @@ const criticalCSS = `
     margin-bottom: 16px; 
     border-radius: 12px; 
     border-left: 4px solid;
+    text-align: left;
   }
   
   .issue-high { 
@@ -544,11 +568,13 @@ const criticalCSS = `
     padding: 24px; 
     border-radius: 12px; 
     margin-top: 24px;
+    text-align: left;
   }
   
   .best-practices-title { 
     font-weight: 700; 
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .best-practices ul { 
@@ -580,6 +606,7 @@ const criticalCSS = `
     padding: 24px; 
     border-radius: 12px; 
     border: 1px solid #e5e7eb;
+    text-align: left;
   }
   
   .fix-title { 
@@ -587,11 +614,13 @@ const criticalCSS = `
     font-weight: 700; 
     margin-bottom: 12px; 
     color: #000000;
+    text-align: center;
   }
   
   .fix-description { 
     color: #4b5563; 
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .fix-examples { 
@@ -618,12 +647,14 @@ const criticalCSS = `
     border-radius: 12px; 
     margin-top: 32px; 
     border-left: 4px solid #0284c7;
+    text-align: left;
   }
   
   .pro-tip-title { 
     font-weight: 700; 
     margin-bottom: 12px; 
     color: #0369a1;
+    text-align: center;
   }
   
   .pro-tip-text { 
@@ -644,6 +675,7 @@ const criticalCSS = `
   .ready-text { 
     color: #4b5563; 
     margin: 24px 0;
+    text-align: center;
   }
   
   /* CHECKLIST */
@@ -652,11 +684,13 @@ const criticalCSS = `
     padding: 24px; 
     border-radius: 12px; 
     margin-top: 24px;
+    text-align: left;
   }
   
   .checklist-title { 
     font-weight: 700; 
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .checklist ul { 
@@ -785,6 +819,7 @@ const criticalCSS = `
   .faq-answer { 
     padding: 0 20px 20px 20px; 
     color: #4b5563;
+    text-align: left;
   }
   
   /* REVIEWS SECTION */
@@ -812,6 +847,7 @@ const criticalCSS = `
     border-radius: 16px; 
     border: 1px solid #e5e7eb;
     transition: transform 0.2s;
+    text-align: left;
   }
   
   .review-card:hover { 
@@ -824,6 +860,8 @@ const criticalCSS = `
     justify-content: space-between; 
     align-items: flex-start; 
     margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   
   .reviewer-name { 
@@ -887,6 +925,7 @@ const criticalCSS = `
     color: inherit;
     display: block;
     transition: transform 0.2s;
+    text-align: center;
   }
   
   .resource-card:hover { 
@@ -906,7 +945,7 @@ const criticalCSS = `
     margin: 0;
   }
   
-  /* CTA SECTION */
+  /* CTA SECTION - CENTERED */
   .cta-section { 
     margin: 48px 0; 
     padding: 48px; 
@@ -924,12 +963,14 @@ const criticalCSS = `
     font-weight: 800; 
     margin-bottom: 16px; 
     color: #000000;
+    text-align: center;
   }
   
   .cta-subtitle { 
     color: #4b5563; 
     max-width: 600px; 
     margin: 0 auto 32px;
+    text-align: center;
   }
   
   .cta-buttons { 
@@ -943,6 +984,7 @@ const criticalCSS = `
   .cta-guarantee { 
     color: #6b7280; 
     font-size: 0.9rem;
+    text-align: center;
   }
   
   .guarantee-text { 
@@ -953,7 +995,7 @@ const criticalCSS = `
     border: 1px solid #e5e7eb;
   }
   
-  /* FOOTER */
+  /* FOOTER - CENTERED */
   .footer { 
     margin-top: 48px; 
     padding: 32px; 
@@ -999,7 +1041,7 @@ const criticalCSS = `
     display: none;
   }
   
-  /* BUILD INFO - FIXED HYDRATION */
+  /* BUILD INFO - CENTERED */
   .build-info { 
     margin-top: 48px; 
     padding: 16px; 
@@ -1025,6 +1067,10 @@ const criticalCSS = `
     
     .cta-title { 
       font-size: 1.5rem;
+    }
+    
+    .aggregate-rating {
+      flex-direction: column;
     }
   }
   
@@ -1629,7 +1675,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/free-ats-resume-checker";
 
-  // Schema data with comprehensive structured data - FIXED
+  // FIXED SCHEMA DATA - Product now has offers + aggregateRating
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1702,12 +1748,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "ratingValue": "4.8",
           "reviewCount": "156",
           "bestRating": "5",
-          "worstRating": "1",
-          "itemReviewed": {
-            "@type": "WebApplication",
-            "name": "Free ATS Resume Checker",
-            "applicationCategory": "BusinessApplication"
-          }
+          "worstRating": "1"
         },
         "author": {
           "@type": "Organization",
@@ -1831,7 +1872,6 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "availability": "https://schema.org/InStock"
         }
       },
-      // ===== FIXED: Product schema with proper aggregateRating (no nested itemReviewed in reviews) =====
       {
         "@type": "Product",
         "@id": `${canonicalUrl}#product`,
@@ -1860,13 +1900,9 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "ratingValue": "4.8",
           "reviewCount": "156",
           "bestRating": "5",
-          "worstRating": "1",
-          "itemReviewed": {
-            "@type": "Product",
-            "name": "Free ATS Resume Checker Tool"
-          }
+          "worstRating": "1"
         },
-        "review": safeReviews.map((review, index) => ({
+        "review": safeReviews.map((review) => ({
           "@type": "Review",
           "reviewRating": {
             "@type": "Rating",
@@ -1879,7 +1915,6 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           },
           "reviewBody": review.review,
           "datePublished": review.date
-          // NOTE: itemReviewed is REMOVED here because it's redundant when review is nested inside a Product
         }))
       },
       {
@@ -2094,15 +2129,12 @@ SKILLS
               Professional <strong className="hero-highlight">Applicant Tracking System compatibility analyzer</strong> that works entirely in your browser. No data leaves your computer - 100% privacy guaranteed.
             </p>
 
-            {/* Aggregate Rating Display - FIXED with itemReviewed */}
+            {/* Aggregate Rating Display */}
             <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
               <meta itemProp="ratingValue" content="4.8" />
               <meta itemProp="ratingCount" content="156" />
               <meta itemProp="bestRating" content="5" />
               <meta itemProp="worstRating" content="1" />
-              <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
-                <meta itemProp="name" content="Free ATS Resume Checker Tool" />
-              </div>
               <div className="rating-stars">
                 ★★★★★
                 <span className="rating-value">4.8/5</span>
@@ -2210,8 +2242,8 @@ WORK EXPERIENCE
               </>
             ) : (
               <div className="card">
-                <h2 className="card-title center-text">Ready to Analyze Your Resume's ATS Compatibility</h2>
-                <p className="ready-text center-text">
+                <h2 className="card-title">Ready to Analyze Your Resume's ATS Compatibility</h2>
+                <p className="ready-text">
                   Paste your resume text above and click "Analyze ATS Compatibility Now" to begin.
                 </p>
                 <div className="checklist">
@@ -2341,10 +2373,6 @@ WORK EXPERIENCE
                     <div className="review-date" itemProp="datePublished">
                       {review.date}
                     </div>
-                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
-                      <meta itemProp="name" content="Free ATS Resume Checker Tool" />
-                      <meta itemProp="url" content={canonicalUrl} />
-                    </div>
                   </div>
                 ))}
               </div>
@@ -2416,7 +2444,7 @@ WORK EXPERIENCE
           {/* Build Info - Fixed hydration issue by using client-side state */}
           <div className="build-info">
             <p>Last updated: {safeFreshnessIndicator} • Build: {buildTime}</p>
-            <p>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+   
           </div>
 
           {/* Hidden Metadata */}

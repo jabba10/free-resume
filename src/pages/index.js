@@ -1885,7 +1885,6 @@ const CaseStudiesSection = ({ studies }) => (
 <p style={{marginBottom: '8px'}}><strong>After:</strong> <span className="text-success">{study.after}</span></p>
 <p style={{marginBottom: '8px'}}><strong>Template used:</strong> {study.template}</p>
 <p><strong>Time to result:</strong> {study.timeToResult}</p>
-<meta itemProp="itemReviewed" content="Professional Resume Free Builder" />
 <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
 <meta itemProp="ratingValue" content={study.ratingValue} />
 <meta itemProp="bestRating" content="5" />

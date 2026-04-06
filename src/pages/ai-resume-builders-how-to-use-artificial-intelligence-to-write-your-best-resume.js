@@ -845,7 +845,7 @@ Human-Enhanced:
     }
   ];
 
-  // FIXED: Testimonials with proper Person type (not Thing) and correct date format
+  // Testimonials with proper Person type
   const testimonials = [
     {
       quote: "The AI resume builder helped me optimize my resume for ATS systems. I went from 0 callbacks to 3 interviews in one week!",
@@ -938,7 +938,8 @@ Human-Enhanced:
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
 
-  // FIXED: Create properly structured reviews with all required fields
+  // FIXED: Create properly structured reviews WITHOUT itemReviewed (removed to avoid conflict)
+  // When reviews are nested inside a Product, itemReviewed is not needed and causes errors
   const structuredReviews = testimonials.map((testimonial, index) => ({
     "@type": "Review",
     "reviewRating": {
@@ -952,14 +953,23 @@ Human-Enhanced:
       "name": testimonial.name
     },
     "reviewBody": testimonial.quote,
-    "itemReviewed": {
-      "@type": "Product",
-      "name": "AI Resume Builder Guide 2026",
-      "url": canonicalUrl,
-      "description": "Comprehensive guide to AI-powered resume creation"
-    },
     "datePublished": testimonial.date
   }));
+
+  // Single aggregateRating object
+  const aggregateRatingData = {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "1250",
+    "bestRating": "5",
+    "worstRating": "1"
+  };
+
+  // Single brand object
+  const brandData = {
+    "@type": "Brand",
+    "name": "Professional Resume Free"
+  };
 
   return (
     <>
@@ -1032,7 +1042,7 @@ Human-Enhanced:
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD - FULLY FIXED */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD - FULLY FIXED - NO DUPLICATES, NO itemReviewed IN NESTED REVIEWS */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1177,22 +1187,15 @@ Human-Enhanced:
                     "name": tool.name
                   }))
                 },
+                // FIXED: Single Product object with one brand, one aggregateRating, and reviews WITHOUT itemReviewed
                 {
                   "@type": "Product",
                   "@id": `${canonicalUrl}#product`,
                   "name": "AI Resume Builder Guide 2026",
                   "description": "Comprehensive guide to AI-powered resume creation",
-                  "brand": {
-                    "@type": "Brand",
-                    "name": "Professional Resume Free"
-                  },
-                  "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "1250",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                  },
+                  "url": canonicalUrl,
+                  "brand": brandData,
+                  "aggregateRating": aggregateRatingData,
                   "review": structuredReviews
                 }
               ]
@@ -1393,7 +1396,7 @@ Human-Enhanced:
           <div className="container">
             <h2 id="collaboration-heading" className="section-title">AI-Human Collaboration Framework</h2>
             <div className="table-wrap">
-              <table>
+             <table>
                 <thead>
                   <tr>
                     <th>AI Excellence Areas</th>

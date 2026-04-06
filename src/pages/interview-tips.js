@@ -1579,10 +1579,10 @@ const InterviewTips = ({
 
   // ===== FIXED STRUCTURED DATA - All errors resolved =====
   // Key fixes:
-  // 1. Changed itemReviewed from "Service" to "CreativeWork" (valid type for Review)
-  // 2. Removed "provider" from itemReviewed (not needed for CreativeWork)
-  // 3. Fixed AggregateRating itemReviewed to point to WebPage with proper @id
-  // 4. Each Review now has valid itemReviewed with @type: "CreativeWork"
+  // 1. Removed duplicate FAQPage - now only one FAQPage in the graph
+  // 2. Changed itemReviewed in AggregateRating from WebPage to CreativeWork (valid type)
+  // 3. Each Review now has valid itemReviewed with @type: "CreativeWork"
+  // 4. Added proper @ids for all entities
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1644,7 +1644,7 @@ const InterviewTips = ({
           ]
         }
       },
-      // ===== FIXED: AggregateRating with proper itemReviewed =====
+      // ===== FIXED: AggregateRating with CreativeWork as itemReviewed =====
       {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
@@ -1652,9 +1652,7 @@ const InterviewTips = ({
         "bestRating": "5",
         "worstRating": "1",
         "itemReviewed": {
-          "@type": "WebPage",
-          "@id": "https://www.professionalresumefree.com/interview-tips/#webpage",
-          "url": "https://www.professionalresumefree.com/interview-tips/",
+          "@type": "CreativeWork",
           "name": "Resume Writing Tips & Interview Guide 2026"
         }
       },
@@ -1788,10 +1786,11 @@ const InterviewTips = ({
         "areaServed": "Global",
         "description": "Free ATS-optimized resume builder with professional templates and interview tips"
       },
+      // ===== FIXED: Single FAQPage (removed duplicate) =====
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/interview-tips#faq",
-        "mainEntity": faqs.map((faq, index) => ({
+        "@id": "https://www.professionalresumefree.com/interview-tips/#faq",
+        "mainEntity": faqs.map((faq) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {

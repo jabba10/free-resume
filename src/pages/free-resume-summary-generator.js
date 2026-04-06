@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed =====
+// ===== INLINE CRITICAL CSS - Optimized for speed with centering =====
 const criticalCSS = `
   /* CSS RESET */
   * { 
@@ -21,7 +21,11 @@ const criticalCSS = `
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* CONTAINER */
+  /* CENTERING UTILITIES */
+  .text-center, h1, h2, h3, h4, p, .subtitle, .section-title, .section-subtitle {
+    text-align: center;
+  }
+  
   .container { 
     max-width: 1280px; 
     margin: 0 auto; 
@@ -37,11 +41,12 @@ const criticalCSS = `
     .container { padding: 32px; }
   }
   
-  /* BREADCRUMB */
+  /* BREADCRUMB - centered */
   .breadcrumb { 
     margin-bottom: 24px; 
     font-size: 0.9rem; 
     color: #6b7280;
+    text-align: center;
   }
   
   .breadcrumb ol { 
@@ -49,6 +54,7 @@ const criticalCSS = `
     flex-wrap: wrap; 
     list-style: none; 
     gap: 8px;
+    justify-content: center;
   }
   
   .breadcrumb li { 
@@ -71,11 +77,12 @@ const criticalCSS = `
     border-bottom-color: #000000; 
   }
   
-  /* HEADER */
+  /* HEADER - centered */
   .header { 
     margin-bottom: 40px; 
     padding-bottom: 32px; 
     border-bottom: 2px solid #f3f4f6;
+    text-align: center;
   }
   
   h1 { 
@@ -100,6 +107,7 @@ const criticalCSS = `
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    text-align: center;
   }
   
   .subtitle { 
@@ -108,6 +116,9 @@ const criticalCSS = `
     max-width: 900px; 
     line-height: 1.7; 
     margin-bottom: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .template-count { 
@@ -120,17 +131,19 @@ const criticalCSS = `
     margin-left: 12px;
   }
   
-  /* AGGREGATE RATING */
+  /* AGGREGATE RATING - centered */
   .aggregate-rating { 
     display: flex; 
     align-items: center; 
+    justify-content: center;
     gap: 16px; 
-    margin: 24px 0; 
+    margin: 24px auto; 
     padding: 16px; 
     background: #f3f4f6; 
     border-radius: 12px; 
     border: 1px solid #e5e7eb;
     flex-wrap: wrap;
+    max-width: 500px;
   }
   
   .rating-stars { 
@@ -164,17 +177,22 @@ const criticalCSS = `
   
   .generator-header { 
     margin-bottom: 32px;
+    text-align: center;
   }
   
   .generator-header h2 { 
     font-size: 1.8rem; 
     font-weight: 700; 
     margin-bottom: 12px;
+    text-align: center;
   }
   
   .generator-header p { 
     color: #4b5563; 
     max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
   
   .generator-container { 
@@ -254,6 +272,7 @@ const criticalCSS = `
     font-weight: 600; 
     margin-bottom: 8px; 
     color: #111827;
+    text-align: left;
   }
   
   .form-input, .form-textarea { 
@@ -275,6 +294,7 @@ const criticalCSS = `
     font-size: 0.85rem; 
     color: #6b7280; 
     margin-top: 6px;
+    text-align: left;
   }
   
   /* TEMPLATES SECTION */
@@ -374,7 +394,7 @@ const criticalCSS = `
     width: 100%;
   }
   
-  /* SUMMARY SECTION */
+  /* SUMMARY SECTION - centered text */
   .summary-section { 
     background: #ffffff; 
     border-radius: 16px; 
@@ -400,6 +420,7 @@ const criticalCSS = `
   .summary-text { 
     line-height: 1.7; 
     color: #111827;
+    text-align: center;
   }
   
   .empty-summary { 
@@ -413,6 +434,7 @@ const criticalCSS = `
     gap: 16px; 
     margin-top: 20px; 
     flex-wrap: wrap;
+    justify-content: center;
   }
   
   .copy-button, .regenerate-button { 
@@ -445,7 +467,7 @@ const criticalCSS = `
     background: #f9fafb;
   }
   
-  /* KEYWORDS SECTION */
+  /* KEYWORDS SECTION - centered */
   .keywords-section { 
     background: #ffffff; 
     border-radius: 16px; 
@@ -458,6 +480,7 @@ const criticalCSS = `
     flex-wrap: wrap; 
     gap: 10px; 
     margin: 20px 0;
+    justify-content: center;
   }
   
   .keyword-button { 
@@ -484,6 +507,7 @@ const criticalCSS = `
     flex-wrap: wrap; 
     gap: 10px; 
     margin-top: 12px;
+    justify-content: center;
   }
   
   .industry-button { 
@@ -499,7 +523,7 @@ const criticalCSS = `
     background: #e5e7eb;
   }
   
-  /* GENERATOR ACTIONS */
+  /* GENERATOR ACTIONS - centered */
   .generator-actions { 
     display: flex; 
     gap: 16px; 
@@ -543,7 +567,7 @@ const criticalCSS = `
     background: #f9fafb;
   }
   
-  /* SECTION TITLE */
+  /* SECTION TITLE - centered */
   .section-title { 
     font-size: 2rem; 
     font-weight: 700; 
@@ -559,7 +583,7 @@ const criticalCSS = `
   }
   
   /* TIPS GRID */
-  .tips-section, .examples-section, .mistakes-section, .faq-section, .benefits-section { 
+  .tips-section, .examples-section, .mistakes-section, .faq-section, .benefits-section, .resources-section { 
     margin: 48px 0;
   }
   
@@ -582,16 +606,19 @@ const criticalCSS = `
     padding: 28px; 
     border-radius: 16px; 
     border: 1px solid #e5e7eb;
+    text-align: center;
   }
   
   .tip-title { 
     font-size: 1.2rem; 
     font-weight: 700; 
     margin-bottom: 12px;
+    text-align: center;
   }
   
   .tip-description { 
     color: #4b5563;
+    text-align: center;
   }
   
   /* EXAMPLES GRID */
@@ -636,12 +663,14 @@ const criticalCSS = `
   .example-content p { 
     color: #4b5563; 
     margin-bottom: 16px;
+    text-align: left;
   }
   
   .example-keywords { 
     display: flex; 
     flex-wrap: wrap; 
     gap: 8px;
+    justify-content: center;
   }
   
   .example-keywords span { 
@@ -677,6 +706,7 @@ const criticalCSS = `
     display: flex; 
     gap: 16px; 
     margin-bottom: 16px;
+    justify-content: center;
   }
   
   .mistake-number { 
@@ -693,9 +723,10 @@ const criticalCSS = `
   
   .mistake-content p { 
     color: #4b5563;
+    text-align: center;
   }
   
-  /* FAQ */
+  /* FAQ - centered */
   .faq-list { 
     max-width: 800px; 
     margin: 0 auto;
@@ -724,6 +755,7 @@ const criticalCSS = `
     font-size: 1.1rem; 
     font-weight: 600; 
     margin: 0;
+    text-align: left;
   }
   
   .faq-toggle { 
@@ -734,6 +766,7 @@ const criticalCSS = `
   .faq-answer { 
     padding: 0 20px 20px 20px; 
     color: #4b5563;
+    text-align: left;
   }
   
   /* BENEFITS GRID */
@@ -752,25 +785,37 @@ const criticalCSS = `
     padding: 28px; 
     border-radius: 16px; 
     border: 1px solid #e5e7eb;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+  }
+  
+  .benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    border-color: #000000;
   }
   
   .benefit-title { 
     font-size: 1.2rem; 
     font-weight: 700; 
     margin-bottom: 12px;
+    color: #000000;
   }
   
   .benefit-description { 
     color: #4b5563;
   }
   
-  /* CTA SECTION */
+  /* CTA SECTION - centered */
   .cta-section { 
     margin: 48px 0; 
     padding: 48px; 
     background: linear-gradient(135deg, #000000 0%, #1f2937 100%); 
     border-radius: 24px; 
     color: #ffffff;
+    text-align: center;
   }
   
   .cta-content { 
@@ -781,6 +826,7 @@ const criticalCSS = `
     font-size: 2rem; 
     font-weight: 800; 
     margin-bottom: 16px;
+    color: #ffffff;
   }
   
   .cta-subtitle { 
@@ -845,40 +891,15 @@ const criticalCSS = `
     font-weight: 700;
   }
   
-  /* FOOTER */
-  .footer { 
-    margin-top: 48px; 
-    padding: 32px; 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
+  /* RESOURCES SECTION */
+  .resources-section .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
   
-  .footer-content { 
-    text-align: center;
-  }
-  
-  .footer p { 
-    margin-bottom: 20px; 
-    color: #4b5563;
-  }
-  
-  .footer-links { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 20px; 
-    justify-content: center;
-  }
-  
-  .footer-links a { 
-    color: #000000; 
-    text-decoration: none; 
-    font-weight: 500;
-    border-bottom: 1px solid #9ca3af;
-  }
-  
-  .footer-links a:hover { 
-    border-bottom-color: #000000;
+  @media (max-width: 768px) {
+    .resources-section .benefits-grid {
+      grid-template-columns: 1fr;
+    }
   }
   
   /* BUILD INFO - Fixed hydration */
@@ -941,6 +962,20 @@ const criticalCSS = `
       flex-direction: column; 
       align-items: flex-start;
     }
+    
+    .aggregate-rating {
+      flex-direction: column;
+    }
+  }
+  
+  /* Link styles */
+  a {
+    color: #000000;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -1123,7 +1158,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
     buildTimestamp: Date.now()
   };
 
-  // FIXED Schema data - Properly structured with no itemReviewed conflicts
+  // ===== FIXED Schema data - Properly structured with no itemReviewed errors =====
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1178,7 +1213,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           ]
         }
       },
-      // FIXED WebApplication - Removed itemReviewed from aggregateRating (no longer needed when nested)
+      // ===== FIXED: WebApplication with proper nested aggregateRating =====
       {
         "@type": "WebApplication",
         "name": "Resume Summary Generator",
@@ -1199,7 +1234,6 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           "ratingCount": "215",
           "bestRating": "5",
           "worstRating": "1"
-          // itemReviewed removed - it's nested under WebApplication which defines the context
         },
         "featureList": [
           "20+ Professional Templates",
@@ -1216,7 +1250,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         "countriesSupported": "Global",
         "fileSize": "Web Application"
       },
-      // FIXED Standalone AggregateRating - Added required itemReviewed
+      // ===== FIXED: Standalone AggregateRating with proper itemReviewed =====
       {
         "@type": "AggregateRating",
         "@id": `${PAGE_URL}#rating`,
@@ -1408,7 +1442,9 @@ const ResumeSummaryGenerator = ({ seoData }) => {
       let summary = selectedTemplate.summary;
       Object.entries(formData).forEach(([key, value]) => {
         if (value.trim()) {
-          const placeholder = `[${key.replace(/([A-Z])/g, ' $1').trim()}]`;
+          let placeholder = `[${key.replace(/([A-Z])/g, ' $1').trim()}]`;
+          if (key === 'targetRole') placeholder = '[Target Role]';
+          if (key === 'keySkills') placeholder = '[Key Skill 1]';
           summary = summary.replace(new RegExp(placeholder, 'gi'), value);
         }
       });
@@ -1420,6 +1456,8 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         const achievements = formData.achievements.split('.').filter(a => a.trim());
         return achievements.length > 0 ? achievements.shift().trim() : 'key achievements';
       });
+      summary = summary.replace(/\[Number\]/g, formData.yearsExperience || '5');
+      summary = summary.replace(/\[Industry\]/g, formData.industry || 'the industry');
       if (selectedKeywords.length > 0) {
         const keywordString = selectedKeywords.slice(0, 4).join(', ');
         summary += ` Proficient in ${keywordString} with a commitment to excellence and continuous improvement.`;
@@ -1594,10 +1632,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
               {SUMMARY_TEMPLATES.reduce((total, cat) => total + cat.templates.length, 0)}+ Professional Templates
             </span>
           </p>
-          <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
-            <meta itemProp="ratingValue" content="4.8" />
-            <meta itemProp="ratingCount" content="215" />
-            <meta itemProp="itemReviewed" itemType="https://schema.org/WebApplication" content="Resume Summary Generator" />
+          <div className="aggregate-rating">
             <div className="rating-stars">
               ★★★★★
               <span className="rating-value">4.8/5 Rating</span>
@@ -1840,7 +1875,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
                     ))}
                   </div>
                   <div className="industry-keywords">
-                    <h4>Quick Industry Select</h4>
+                    <h4 style={{ textAlign: 'center' }}>Quick Industry Select</h4>
                     <div className="industry-list">
                       {INDUSTRY_KEYWORDS.map((industry, index) => (
                         <button
@@ -1933,10 +1968,12 @@ const ResumeSummaryGenerator = ({ seoData }) => {
                 "executive summary examples for senior roles"
               ].map((keyword, i) => (
                 <div key={i} className="tip-card" style={{ padding: '20px' }}>
-                  <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
-                  <a href="/complete-resume-resource-library" className="breadcrumb-link">
-                    Find answer in our resource library →
-                  </a>
+                  <p style={{ fontWeight: '600', marginBottom: '12px', textAlign: 'center' }}>❓ {keyword}</p>
+                  <div style={{ textAlign: 'center' }}>
+                    <a href="/complete-resume-resource-library" style={{ color: '#000000', fontWeight: '500' }}>
+                      Find answer in our resource library →
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
