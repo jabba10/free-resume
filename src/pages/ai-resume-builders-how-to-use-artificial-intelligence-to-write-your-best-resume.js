@@ -845,7 +845,7 @@ Human-Enhanced:
     }
   ];
 
-  // Testimonials with proper Person type
+  // FIXED: Testimonials with proper Person type (not Thing)
   const testimonials = [
     {
       quote: "The AI resume builder helped me optimize my resume for ATS systems. I went from 0 callbacks to 3 interviews in one week!",
@@ -938,8 +938,8 @@ Human-Enhanced:
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
 
-  // FIXED: Create properly structured reviews WITHOUT itemReviewed (removed to avoid conflict)
-  // When reviews are nested inside a Product, itemReviewed is not needed and causes errors
+  // FIXED 1 & 2: Create properly structured reviews WITHOUT itemReviewed
+  // FIXED 3: All authors use @type "Person" (not "Thing")
   const structuredReviews = testimonials.map((testimonial, index) => ({
     "@type": "Review",
     "reviewRating": {
@@ -949,14 +949,15 @@ Human-Enhanced:
       "worstRating": "1"
     },
     "author": {
-      "@type": "Person",
+      "@type": "Person",  // FIXED: Changed from Thing to Person
       "name": testimonial.name
     },
     "reviewBody": testimonial.quote,
     "datePublished": testimonial.date
+    // FIXED: REMOVED itemReviewed field - causes "A nested object can't contain the itemReviewed field" error
   }));
 
-  // Single aggregateRating object
+  // FIXED: Single aggregateRating object (no duplicates)
   const aggregateRatingData = {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
@@ -965,7 +966,7 @@ Human-Enhanced:
     "worstRating": "1"
   };
 
-  // Single brand object
+  // FIXED: Single brand object (no duplicates)
   const brandData = {
     "@type": "Brand",
     "name": "Professional Resume Free"
@@ -1396,7 +1397,7 @@ Human-Enhanced:
           <div className="container">
             <h2 id="collaboration-heading" className="section-title">AI-Human Collaboration Framework</h2>
             <div className="table-wrap">
-             <table>
+              <table>
                 <thead>
                   <tr>
                     <th>AI Excellence Areas</th>

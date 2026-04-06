@@ -953,7 +953,7 @@ const HOW_TO_STEPS = [
   }
 ];
 
-// Reviews Data with dates for freshness - UPDATED with all 7 reviews
+// Reviews Data with dates for freshness
 const REVIEWS = [
   {
     name: "Jennifer Carter",
@@ -1031,7 +1031,7 @@ const BREADCRUMB_DATA = [
   { name: "Resume Objective Generator", item: "https://www.professionalresumefree.com/free-resume-objective-generator" }
 ];
 
-// Helper functions
+// Helper functions (kept as in your original code for brevity)
 const getEntryLevelSkills = (goal) => {
   const skills = {
     'gain professional experience': 'academic knowledge and practical skills',
@@ -1720,7 +1720,10 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
     'achieve executive leadership'
   ];
 
-  // Comprehensive Schema.org structured data - FIXED with itemReviewed
+  // ===== FIXED SCHEMA.ORG STRUCTURED DATA - All errors resolved =====
+  // Fix 1: Removed itemReviewed from AggregateRating (not allowed per schema)
+  // Fix 2: Added itemReviewed to each Review (required per schema)
+  // Fix 3: Properly structured SoftwareApplication aggregateRating without nested itemReviewed
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1792,13 +1795,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             "ratingValue": 4.8,
             "ratingCount": 156,
             "bestRating": 5,
-            "worstRating": 1,
-            "itemReviewed": {
-              "@type": "SoftwareApplication",
-              "name": "Free Resume Objective Generator",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Any"
-            }
+            "worstRating": 1
           },
           "featureList": [
             "ATS-Optimized Templates",
@@ -2126,17 +2123,12 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </div>
 
-          {/* Aggregate Rating - FIXED with itemReviewed */}
+          {/* Aggregate Rating - FIXED: No itemReviewed inside AggregateRating */}
           <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="156" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
-            <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
-              <meta itemProp="name" content="Free Resume Objective Generator" />
-              <meta itemProp="applicationCategory" content="BusinessApplication" />
-              <meta itemProp="operatingSystem" content="Any" />
-            </div>
             <div className="rating-stars">
               ★★★★★
               <span className="rating-value">4.8/5</span>
@@ -2408,7 +2400,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* Reviews Section - FIXED with itemReviewed */}
+          {/* Reviews Section - FIXED: Each Review now has itemReviewed */}
           <section className="reviews-section" aria-labelledby="reviews-title">
             <h2 className="section-title" id="reviews-title">What Professionals Say About Our Objective Generator</h2>
             <p className="section-subtitle">Trusted by HR managers, career coaches, and professionals at all levels</p>
@@ -2442,7 +2434,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                     </div>
                     <div className="review-source">via Professional Resume Free</div>
                   </div>
-                  {/* itemReviewed added here */}
+                  {/* FIXED: itemReviewed added to each Review - this resolves the "Missing field itemReviewed" error */}
                   <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
                     <meta itemProp="name" content="Free Resume Objective Generator" />
                     <meta itemProp="applicationCategory" content="BusinessApplication" />
@@ -2453,7 +2445,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* Resources Section - Links Preserved */}
+          {/* Resources Section */}
           <section className="resources-section" aria-labelledby="resources-title">
             <h2 className="section-title" id="resources-title">More Career Resources</h2>
             <p className="section-subtitle">Explore our complete suite of free professional tools</p>
@@ -2473,7 +2465,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                 rel="nofollow"
               >
                 <h3>Free Cover Letter Generator</h3>
-                <p>Create professional cover letters for your job applications. </p>
+                <p>Create professional cover letters for your job applications.</p>
                 <span className="resource-link">Build Cover Letter →</span>
               </a>
               <a 
@@ -2514,7 +2506,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           </section>
         </main>
 
-        {/* Build Info - Fixed hydration */}
+        {/* Build Info */}
         <div className="build-info">
           <p>Last updated: {safeSeoData.currentDate} • Build: {buildTime}</p>
           <p>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>

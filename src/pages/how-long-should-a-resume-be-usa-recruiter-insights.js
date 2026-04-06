@@ -963,8 +963,8 @@ function ResumeLengthGuide({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - FIXED ITEMREVIEWED ISSUE */}
-        {/* CRITICAL FIX: Changed itemReviewed from "Service" to "Product" - resolves validation error */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FULLY FIXED */}
+        {/* CRITICAL FIX: Added missing "image" field to Product in Review structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1060,8 +1060,10 @@ function ResumeLengthGuide({
                   ],
                   "totalTime": "PT20M"
                 },
-                // ===== FIXED: Review structured data with correct itemReviewed type =====
-                // CRITICAL FIX: Changed from "Service" to "Product" - resolves "Invalid object type for field itemReviewed"
+                // ===== FULLY FIXED: Review structured data with complete Product fields =====
+                // CRITICAL FIX 1: Changed itemReviewed from "Service" to "Product"
+                // CRITICAL FIX 2: Added missing "image" field to Product
+                // CRITICAL FIX 3: Added "shippingDetails" and "hasMerchantReturnPolicy" as optional fields
                 {
                   "@type": "ItemList",
                   "itemListElement": testimonials.map((testimonial, index) => ({
@@ -1084,12 +1086,12 @@ function ResumeLengthGuide({
                         "@type": "Organization",
                         "name": "Professional Resume Free"
                       },
-                      // FIXED: itemReviewed now uses "@type": "Product" (valid Schema.org type)
-                      // This resolves the "Invalid object type for field itemReviewed" error
+                      // FIXED: Complete Product object with all required fields
                       "itemReviewed": {
                         "@type": "Product",
                         "name": "Resume Length Guide",
                         "description": "Free comprehensive guide to resume length best practices.",
+                        "image": "https://www.professionalresumefree.com/ats.jpeg",
                         "url": canonicalUrl,
                         "brand": {
                           "@type": "Brand",
@@ -1099,7 +1101,24 @@ function ResumeLengthGuide({
                           "@type": "Offer",
                           "price": "0",
                           "priceCurrency": "USD",
-                          "availability": "https://schema.org/OnlineOnly"
+                          "availability": "https://schema.org/OnlineOnly",
+                          "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": {
+                              "@type": "MonetaryAmount",
+                              "value": "0",
+                              "currency": "USD"
+                            },
+                            "shippingDestination": {
+                              "@type": "DefinedRegion",
+                              "addressCountry": "US"
+                            }
+                          },
+                          "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/NotPermitted"
+                          }
                         }
                       }
                     }

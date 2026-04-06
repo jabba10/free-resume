@@ -1675,7 +1675,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/free-ats-resume-checker";
 
-  // FIXED SCHEMA DATA - Product now has offers + aggregateRating
+  // ===== FIXED SCHEMA DATA - Product now has offers AND aggregateRating (fixes the error) =====
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1872,6 +1872,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "availability": "https://schema.org/InStock"
         }
       },
+      // ===== FIXED PRODUCT SCHEMA - Now includes BOTH offers AND aggregateRating =====
       {
         "@type": "Product",
         "@id": `${canonicalUrl}#product`,
@@ -1893,7 +1894,8 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": "2026-12-31",
+          "url": canonicalUrl
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -2444,7 +2446,6 @@ WORK EXPERIENCE
           {/* Build Info - Fixed hydration issue by using client-side state */}
           <div className="build-info">
             <p>Last updated: {safeFreshnessIndicator} • Build: {buildTime}</p>
-   
           </div>
 
           {/* Hidden Metadata */}

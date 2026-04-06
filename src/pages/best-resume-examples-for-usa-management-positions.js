@@ -1198,7 +1198,7 @@ function ManagementResumeExamples({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed now proper object type */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed now uses valid Product type */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1317,10 +1317,15 @@ function ManagementResumeExamples({
                         "name": "Professional Resume Free"
                       },
                       "itemReviewed": {
-                        "@type": "CreativeWork",
-                        "name": "Management Resume Examples",
+                        "@type": "Product",
+                        "name": "Management Resume Examples Guide",
                         "description": "Free comprehensive guide to management resume examples and templates.",
-                        "url": canonicalUrl
+                        "url": canonicalUrl,
+                        "sku": "MGMT-RESUME-2026",
+                        "brand": {
+                          "@type": "Brand",
+                          "name": "Professional Resume Free"
+                        }
                       }
                     }
                   }))
@@ -1673,7 +1678,7 @@ function ManagementResumeExamples({
               <div className="table-wrapper">
                 <table className="table">
                   <thead>
-                     <tr>
+                    <tr>
                       <th>Element</th>
                       <th>Middle Management (Manager, Sr. Manager)</th>
                       <th>Executive (Director, VP, C-Suite)</th>
