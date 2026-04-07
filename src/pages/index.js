@@ -1276,6 +1276,7 @@ __html: JSON.stringify({
 },
 {
 "@type": "SoftwareApplication",
+"@id": "https://www.professionalresumefree.com/#software",
 "name": "Professional Resume Free Builder",
 "applicationCategory": "BusinessApplication",
 "operatingSystem": "Any",
@@ -1295,6 +1296,7 @@ __html: JSON.stringify({
 "review": [
 {
 "@type": "Review",
+"itemReviewed": { "@id": "https://www.professionalresumefree.com/#software" },
 "author": {
 "@type": "Person",
 "name": "Sarah M."
@@ -1309,6 +1311,7 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": { "@id": "https://www.professionalresumefree.com/#software" },
 "author": {
 "@type": "Person",
 "name": "James K."
@@ -1323,6 +1326,7 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": { "@id": "https://www.professionalresumefree.com/#software" },
 "author": {
 "@type": "Person",
 "name": "Alex P."
@@ -1337,6 +1341,7 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": { "@id": "https://www.professionalresumefree.com/#software" },
 "author": {
 "@type": "Person",
 "name": "Ansu Kamara"
@@ -1351,6 +1356,7 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": { "@id": "https://www.professionalresumefree.com/#software" },
 "author": {
 "@type": "Person",
 "name": "Sahr Jabba"
