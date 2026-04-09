@@ -513,7 +513,7 @@ export const getStaticProps = async () => {
     return date.toISOString().split('T')[0];
   });
 
-  const faqDates = Array(6).fill(null).map((_, i) => {
+  const faqDates = Array(7).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];
@@ -597,7 +597,7 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
   // Single canonical URL
   const canonicalUrl = "https://www.professionalresumefree.com/resume-skills-section";
 
-  // Comprehensive structured data
+  // FIXED: Removed duplicate FAQPage - now only ONE FAQPage in the @graph array
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -669,6 +669,7 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         "articleSection": "Resume Writing",
         "keywords": "resume skills, ATS skills, hard skills, soft skills, resume writing, job search"
       },
+      // FIXED: Only ONE FAQPage (removed the duplicate)
       {
         "@type": "FAQPage",
         "mainEntity": faqItems.map((item, index) => ({
@@ -802,7 +803,7 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Structured Data */}
+        {/* Structured Data - FIXED: Only one FAQPage */}
         <script
           type="application/ld+json"
           key="structured-data"
@@ -948,28 +949,28 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
             <div className="content-block">
               <h3 className="block-title">Key Hiring Insights (2026)</h3>
               <div className="table-wrap">
-                 <table>
+                <table>
                   <thead>
-                     <tr>
+                    <tr>
                       <th>Hiring Insight</th>
                       <th>What It Means</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
-                     <tr>
-                       <td>Recruiters scan resumes in <strong>under 7 seconds</strong></td>
-                       <td>Skills must be instantly visible and relevant.</td>
-                     </tr>
-                     <tr>
-                       <td>98% of Fortune 500 companies use ATS</td>
-                       <td>Precise keyword matching is non-negotiable in 2026.</td>
-                     </tr>
-                     <tr>
-                       <td>Skills validate your experience</td>
-                       <td>Every listed skill must be demonstrable in your work history.</td>
-                     </tr>
+                    <tr>
+                        <td>Recruiters scan resumes in <strong>under 7 seconds</strong></td>
+                        <td>Skills must be instantly visible and relevant.</td>
+                      </tr>
+                    <tr>
+                        <td>98% of Fortune 500 companies use ATS</td>
+                        <td>Precise keyword matching is non-negotiable in 2026.</td>
+                      </tr>
+                    <tr>
+                        <td>Skills validate your experience</td>
+                        <td>Every listed skill must be demonstrable in your work history.</td>
+                      </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
             </div>
           </section>
@@ -987,16 +988,16 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
             <div className="content-block">
               <h3 className="block-title">Skill Type Comparison (2026)</h3>
               <div className="table-wrap">
-                 <table>
+                <table>
                   <thead>
-                     <tr>
+                    <tr>
                       <th>Skill Type</th>
                       <th>Examples</th>
                       <th>Best Use</th>
-                      </tr>
+                    </tr>
                   </thead>
                   <tbody>
-                      <tr>
+                    <tr>
                         <td>Hard Skills</td>
                         <td>Python, Excel, SEO, SQL, AI Prompt Engineering</td>
                         <td>Highlight in skills section and experience bullets.</td>
@@ -1012,7 +1013,7 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
                         <td>Critical for career changers and leadership roles.</td>
                       </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
             </div>
           </section>
