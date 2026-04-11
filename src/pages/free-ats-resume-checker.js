@@ -1675,7 +1675,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/free-ats-resume-checker";
 
-  // ===== FIXED SCHEMA DATA - Product now has offers AND aggregateRating (fixes the error) =====
+  // ===== FIXED SCHEMA DATA - All Review items now include required "itemReviewed" field =====
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1802,37 +1802,30 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "image": step.image
         }))
       },
-      {
-        "@type": "ItemList",
-        "name": "User Reviews for Free ATS Resume Checker",
-        "itemListElement": safeReviews.map((review, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": review.rating,
-              "bestRating": "5"
-            },
-            "author": {
-              "@type": "Person",
-              "name": review.name
-            },
-            "reviewBody": review.review,
-            "datePublished": review.date,
-            "publisher": {
-              "@type": "Organization",
-              "name": "Professional Resume Free"
-            },
-            "itemReviewed": {
-              "@type": "WebApplication",
-              "name": "Free ATS Resume Checker",
-              "applicationCategory": "BusinessApplication"
-            }
-          }
-        }))
-      },
+      // ===== FIXED: Individual Reviews with REQUIRED itemReviewed field =====
+      ...safeReviews.map((review, index) => ({
+        "@type": "Review",
+        "@id": `${canonicalUrl}#review-${index + 1}`,
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": review.rating,
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": review.name
+        },
+        "reviewBody": review.review,
+        "datePublished": review.date,
+        // CRITICAL FIX: Added the required itemReviewed field
+        "itemReviewed": {
+          "@type": "WebApplication",
+          "name": "Free ATS Resume Checker",
+          "applicationCategory": "BusinessApplication",
+          "url": canonicalUrl,
+          "description": "Professional ATS compatibility analysis tool for job seekers"
+        }
+      })),
       {
         "@type": "Service",
         "serviceType": "ATS Resume Analysis Service",
@@ -1872,7 +1865,6 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "availability": "https://schema.org/InStock"
         }
       },
-      // ===== FIXED PRODUCT SCHEMA - Now includes BOTH offers AND aggregateRating =====
       {
         "@type": "Product",
         "@id": `${canonicalUrl}#product`,
@@ -1916,7 +1908,12 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
             "name": review.name
           },
           "reviewBody": review.review,
-          "datePublished": review.date
+          "datePublished": review.date,
+          // CRITICAL FIX: Added itemReviewed to Product reviews too
+          "itemReviewed": {
+            "@type": "Product",
+            "name": "Free ATS Resume Checker Tool"
+          }
         }))
       },
       {
@@ -2351,6 +2348,7 @@ WORK EXPERIENCE
               <div className="reviews-grid">
                 {safeReviews.map((review, index) => (
                   <div key={index} className="review-card" itemScope itemType="https://schema.org/Review">
+                    <meta itemProp="datePublished" content={review.date} />
                     <div className="review-header">
                       <div className="reviewer-info">
                         <span itemProp="author" itemScope itemType="https://schema.org/Person">
@@ -2372,8 +2370,10 @@ WORK EXPERIENCE
                     <div className="review-content" itemProp="reviewBody">
                       <p>"{review.review}"</p>
                     </div>
-                    <div className="review-date" itemProp="datePublished">
-                      {review.date}
+                    {/* CRITICAL FIX: Added itemReviewed to the HTML review display */}
+                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/WebApplication">
+                      <meta itemProp="name" content="Free ATS Resume Checker" />
+                      <meta itemProp="applicationCategory" content="BusinessApplication" />
                     </div>
                   </div>
                 ))}

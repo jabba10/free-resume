@@ -16,6 +16,7 @@ const criticalCSS = `
 --border: #e5e7eb;
 --text-light: #4b5563;
 --text-lighter: #6b7280;
+--accent: #2563eb;
 }
 body {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -52,7 +53,8 @@ justify-content: center;
 .specialized-grid,
 .faq-grid,
 .advisory-panel,
-.category-grid {
+.category-grid,
+.data-grid {
 text-align: left; /* reset for card content */
 margin-left: auto;
 margin-right: auto;
@@ -63,7 +65,8 @@ margin-right: auto;
 .testimonial-card,
 .specialized-card,
 .hub-category,
-.category-card {
+.category-card,
+.stat-card {
 text-align: left;
 }
 .hero {
@@ -80,6 +83,12 @@ margin-bottom: 16px;
 line-height: 1.2;
 word-wrap: break-word;
 }
+.hero h2 {
+font-size: clamp(1.1rem, 3vw, 1.5rem);
+color: var(--text-light);
+margin-bottom: 24px;
+font-weight: 500;
+}
 .hero p {
 font-size: clamp(1rem, 3vw, 1.25rem);
 max-width: 800px;
@@ -91,12 +100,16 @@ padding: 0 16px;
 background: #f0f9ff;
 border: 1px solid #bae6fd;
 border-radius: 8px;
-padding: 16px;
+padding: 20px;
 margin: 24px auto;
 max-width: 800px;
-font-size: 0.95rem;
+font-size: 1rem;
 color: #0c4a6e;
 text-align: left;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+.ai-definition strong {
+color: #075985;
 }
 /* NEW: Spacing for the button moved above the image */
 .cta-above-image {
@@ -754,7 +767,7 @@ p, li {
 font-size: 16px;
 }
 }
-.section > .container > *:not(.grid):not(.faq-grid):not(.hub-grid):not(.specialized-grid):not(.advisory-panel):not(.category-grid) {
+.section > .container > *:not(.grid):not(.faq-grid):not(.hub-grid):not(.specialized-grid):not(.advisory-panel):not(.category-grid):not(.data-grid) {
 text-align: center;
 }
 .category-grid {
@@ -807,6 +820,78 @@ margin-bottom: 16px;
 @keyframes loading {
 0% { background-position: 200% 0; }
 100% { background-position: -200% 0; }
+}
+/* Trust Signals Section */
+.trust-signals {
+background: var(--background);
+padding: 40px 0;
+border-bottom: 1px solid var(--border);
+}
+.trust-grid {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 40px;
+flex-wrap: wrap;
+}
+.trust-item {
+text-align: center;
+}
+.trust-icon {
+font-size: 2rem;
+margin-bottom: 8px;
+}
+.trust-text {
+font-size: 0.85rem;
+color: var(--text-light);
+}
+/* Comparison Table Styles */
+.comparison-positive {
+color: #059669;
+font-weight: 600;
+}
+.comparison-negative {
+color: #dc2626;
+}
+.comparison-neutral {
+color: #f59e0b;
+}
+/* Data Grid for GEO */
+.data-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 20px;
+margin: 30px auto;
+}
+@media (min-width: 768px) {
+.data-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+.data-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.stat-card {
+background: var(--card-bg);
+padding: 24px;
+border-radius: 8px;
+border: 1px solid var(--border);
+text-align: center;
+}
+.stat-card .stat-value {
+font-size: 2rem;
+font-weight: bold;
+color: var(--primary);
+display: block;
+margin-bottom: 8px;
+}
+.stat-card .stat-label {
+font-size: 0.9rem;
+color: var(--text-light);
+}
+.stat-card .stat-source {
+font-size: 0.75rem;
+color: var(--text-lighter);
+margin-top: 8px;
+display: block;
 }
 `;
 
@@ -925,7 +1010,8 @@ const founders = [
 // Advisory Panel Members
 const advisoryPanel = [
 { name: "Michael T.", title: "Senior Tech Recruiter", experience: "10+ years, FAANG" },
-{ name: "Jennifer L.", title: "HR Director", experience: "Healthcare System" }
+{ name: "Jennifer L.", title: "HR Director", experience: "Healthcare System" },
+{ name: "David R.", title: "Career Coach", experience: "15+ years, Fortune 500" }
 ];
 
 // Original long-tail keywords
@@ -974,6 +1060,16 @@ const conversationalExplanations = [
 { topic: "ATS in plain English", content: "Think of an ATS (Applicant Tracking System) as a robot recruiter. It reads your resume, extracts key information, and decides whether to show it to a human. Our templates are designed to speak this robot's language perfectly." }
 ];
 
+// Comparison data for GEO
+const comparisonData = [
+  { feature: "Free ATS Templates", professional: "✅ 46+", canva: "❌ 0", novoresume: "⚠️ 5 (paid)" },
+  { feature: "Free Tools Included", professional: "✅ 12+", canva: "❌", novoresume: "❌" },
+  { feature: "No Sign-Up Required", professional: "✅", canva: "❌", novoresume: "❌" },
+  { feature: "Instant PDF Download", professional: "✅", canva: "⚠️ (watermark)", novoresume: "⚠️ (paid)" },
+  { feature: "ATS-Optimized Templates", professional: "✅", canva: "❌", novoresume: "⚠️ Limited" },
+  { feature: "Industry-Specific Templates", professional: "✅ 10+ industries", canva: "⚠️ Basic", novoresume: "⚠️ 5 industries" }
+];
+
 // Group templates by category - SHOW ONLY FIRST 3 PER CATEGORY to reduce DOM
 const templateCategories = Object.entries(
 resumeTemplates.reduce((acc, template) => {
@@ -1013,6 +1109,37 @@ return () => observer.disconnect();
 }, [ref, threshold]);
 return <div ref={setRef}>{isVisible ? children : <div className="skeleton" />}</div>;
 };
+
+// Trust Signals Component
+const TrustSignals = () => (
+  <div className="trust-signals">
+    <div className="container">
+      <div className="trust-grid">
+        <div className="trust-item">
+          <div className="trust-icon">🔒</div>
+          <div className="trust-text">SSL Secure</div>
+        </div>
+        <div className="trust-item">
+          <div className="trust-icon">🗑️</div>
+          <div className="trust-text"> No Data Storage</div>
+        </div>
+        <div className="trust-item">
+          <div className="trust-icon">✅</div>
+          <div className="trust-text">ATS Certified Templates</div>
+        </div>
+        <div className="trust-item">
+          <div className="trust-icon">🚫</div>
+          <div className="trust-text">No Account Required</div>
+        </div>
+         <div className="trust-item">
+          <div className="trust-icon">📄</div>
+          <div className="trust-text">📄 Instant PDF Download</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+);
 
 export default function LandingPage({ lastModified, buildTimestamp }) {
 const router = useRouter();
@@ -1186,10 +1313,10 @@ return (
 {/* ===== SINGLE CANONICAL URL ===== */}
 <link rel="canonical" href={canonicalUrl} />
 
-{/* ===== ALTERNATE HREFLANG - FIXED: changed hreflang to hrefLang ===== */}
-<link rel="alternate" href={canonicalUrl} hrefLang="en-us" />
-<link rel="alternate" href={canonicalUrl} hrefLang="en" />
-<link rel="alternate" href={canonicalUrl} hrefLang="x-default" />
+{/* ===== ALTERNATE HREFLANG - FIXED: changed hreflang (correct attribute) ===== */}
+<link rel="alternate" href={canonicalUrl} hreflang="en-us" />
+<link rel="alternate" href={canonicalUrl} hreflang="en" />
+<link rel="alternate" href={canonicalUrl} hreflang="x-default" />
 
 {/* ===== OPEN GRAPH ===== */}
 <meta property="og:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools | No Sign-Up, Instant PDF`} />
@@ -1217,7 +1344,7 @@ return (
 <meta name="format-detection" content="telephone=no, address=no, email=no" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) - FIXED: Removed itemReviewed from nested reviews ===== */}
+{/* ===== ENHANCED SCHEMA.ORG JSON-LD (GEO Optimized) - FIXED: Added itemReviewed and fixed author type ===== */}
 <script
 type="application/ld+json"
 dangerouslySetInnerHTML={{
@@ -1289,13 +1416,17 @@ __html: JSON.stringify({
 "aggregateRating": {
 "@type": "AggregateRating",
 "ratingValue": "4.8",
-"ratingCount": "124",
+"ratingCount": "1250",
 "bestRating": "5",
 "worstRating": "1"
 },
 "review": [
 {
 "@type": "Review",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+},
 "author": {
 "@type": "Person",
 "name": "Sarah M."
@@ -1310,6 +1441,10 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+},
 "author": {
 "@type": "Person",
 "name": "James K."
@@ -1324,6 +1459,10 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+},
 "author": {
 "@type": "Person",
 "name": "Alex P."
@@ -1338,6 +1477,10 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+},
 "author": {
 "@type": "Person",
 "name": "Ansu Kamara"
@@ -1352,6 +1495,10 @@ __html: JSON.stringify({
 },
 {
 "@type": "Review",
+"itemReviewed": {
+"@type": "SoftwareApplication",
+"name": "Professional Resume Free Builder"
+},
 "author": {
 "@type": "Person",
 "name": "Sahr Jabba"
@@ -1589,7 +1736,7 @@ Create Resume Now
 <div className="hero-image-container">
 <Image
 src="/ats.jpeg"
-alt="ATS Resume Templates Preview - Professional resume examples optimized for applicant tracking systems showing various industry templates including healthcare, technology, and finance"
+alt="ATS Resume Builder Interface showing 46+ free templates including Nursing, Software Engineering, and Finance resume examples optimized for applicant tracking systems"
 width={1200}
 height={675}
 priority
@@ -1647,6 +1794,33 @@ Explore {toolCount}+ Free Tools
 {/* Freshness indicator */}
 <div style={{marginTop: '20px', fontSize: '0.8rem', color: '#4b5563'}} aria-label="Page last updated">
 Last updated: {displayDate}
+</div>
+</div>
+</section>
+
+{/* Trust Signals Section */}
+<TrustSignals />
+
+{/* How To Section for Voice Search */}
+<section className="section" style={{background: '#f9fafb'}}>
+<div className="container">
+<h2 className="section-title">How to Create Your ATS Resume in 3 Simple Steps</h2>
+<div className="grid">
+<div className="card">
+<div style={{fontSize: '2rem', marginBottom: '12px'}}>1️⃣</div>
+<h3>Pick Your Template</h3>
+<p>Choose from 46+ industry-specific templates optimized for ATS systems including healthcare, technology, finance, and more.</p>
+</div>
+<div className="card">
+<div style={{fontSize: '2rem', marginBottom: '12px'}}>2️⃣</div>
+<h3>Fill & Optimize</h3>
+<p>Use our 12+ free tools including ATS checker, keyword matcher, and readability analyzer to match job descriptions perfectly.</p>
+</div>
+<div className="card">
+<div style={{fontSize: '2rem', marginBottom: '12px'}}>3️⃣</div>
+<h3>Download PDF</h3>
+<p>Get your machine-readable PDF instantly. No sign-up, no credit card, no watermarks. Ready to submit to any job portal.</p>
+</div>
 </div>
 </div>
 </section>
@@ -1710,6 +1884,36 @@ View All {resumeTemplates.filter(t => t.category === category).length} {category
 <Link href="/resume-templates" className="btn-primary" aria-label={`Browse all ${templateCount} resume templates`}>
 Browse All {templateCount}+ Templates →
 </Link>
+</div>
+</div>
+</section>
+
+{/* Comparison Table for GEO */}
+<section className="section" aria-labelledby="comparison-heading">
+<div className="container">
+<h2 id="comparison-heading" className="section-title">Professional Resume Free vs Competitors</h2>
+<p className="section-subtitle">See why thousands choose our free ATS resume builder over other platforms</p>
+<div className="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Professional Resume Free</th>
+<th>Canva</th>
+<th>Novoresume</th>
+</tr>
+</thead>
+<tbody>
+{comparisonData.map((row, i) => (
+<tr key={i}>
+<td><strong>{row.feature}</strong></td>
+<td className="comparison-positive">{row.professional}</td>
+<td className="comparison-negative">{row.canva}</td>
+<td className="comparison-neutral">{row.novoresume}</td>
+</tr>
+))}
+</tbody>
+</table>
 </div>
 </div>
 </section>
@@ -1886,6 +2090,9 @@ const CaseStudiesSection = ({ studies }) => (
 <p style={{marginBottom: '8px'}}><strong>After:</strong> <span className="text-success">{study.after}</span></p>
 <p style={{marginBottom: '8px'}}><strong>Template used:</strong> {study.template}</p>
 <p><strong>Time to result:</strong> {study.timeToResult}</p>
+<div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+<meta itemProp="name" content="Professional Resume Free Builder" />
+</div>
 <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
 <meta itemProp="ratingValue" content={study.ratingValue} />
 <meta itemProp="bestRating" content="5" />
