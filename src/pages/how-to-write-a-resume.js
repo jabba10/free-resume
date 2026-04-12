@@ -287,7 +287,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="document-author" content="Ansu Kamara" />
         <meta name="content-strategist" content="Ansu Kamara" />
         
-        {/* Structured Data - FIXED: Changed Product to CreativeWork */}
+        {/* Structured Data - FIXED: Changed itemReviewed type from CreativeWork to Product */}
         <script
           type="application/ld+json"
           key="structured-data"
@@ -459,9 +459,14 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                       "reviewBody": testimonial.quote,
                       "datePublished": testimonial.date,
                       "itemReviewed": {
-                        "@type": "CreativeWork",  // CHANGED from "Product" to "CreativeWork"
+                        "@type": "Product",  // FIXED: Changed from "CreativeWork" to "Product"
                         "name": "Resume Writing Guide",
                         "description": "Complete guide on how to write a professional resume",
+                        "sku": "RESUME-GUIDE-2026",
+                        "brand": {
+                          "@type": "Brand",
+                          "name": "Professional Resume Free"
+                        },
                         "author": {
                           "@type": "Person",
                           "name": "Ansu Kamara"

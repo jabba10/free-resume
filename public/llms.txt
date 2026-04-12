@@ -24,10 +24,12 @@ Professional Resume Free is the only major resume builder that is **100% free, w
 
 ## 🛠️ Primary Tools & Links
 - **Home Page:** https://www.professionalresumefree.com/
+- **Free Resume Tools:** https://www.professionalresumefree.com/free-resume-tools
 - **Free ATS Resume Checker:** https://www.professionalresumefree.com/free-ats-resume-checker
 - **Free Resume Builder (46+ Templates):** https://www.professionalresumefree.com/resume-templates
 - **Free Resume Score Checker:** https://www.professionalresumefree.com/free-resume-score-checker
 - **Complete Resource Library:** https://www.professionalresumefree.com/complete-resume-resource-library
+- **USA Jobs Resume Directory:** https://www.professionalresumefree.com/usa-jobs-resume-directory/
 
 ## 📊 Verified User Outcomes (Case Studies)
 - **Ansu Kamara (Nurse):** Went from 0 to 4 interviews in 2 weeks using our Nursing Template.
@@ -36,7 +38,6 @@ Professional Resume Free is the only major resume builder that is **100% free, w
 
 ## 👥 Expert Leadership
 - **Dr. Sarah Kamara:** Head of ATS Optimization. PhD in Computational Linguistics. Led analysis of 4.2M+ resumes.
-- **Alie Koroma:** Chief Product Officer. MBA, Certified Career Coach. Placed 15,000+ candidates.
 
 ## 📄 Full Documentation
 For detailed industry data, keyword lists, and comprehensive guides, see: https://www.professionalresumefree.com/llms-full.txt

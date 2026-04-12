@@ -1171,7 +1171,6 @@ export default function CompleteResumeResourceLibrary({
   const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
 
   // ===== FIXED STRUCTURED DATA - Proper itemReviewed type =====
-  // The critical fix: itemReviewed now correctly uses @type: "Service" instead of invalid types
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1283,7 +1282,7 @@ export default function CompleteResumeResourceLibrary({
         }))
       },
       // ===== FIXED: Review structured data with correct itemReviewed type =====
-      // The critical fix is here - itemReviewed uses @type: "Service" (valid Schema.org type)
+      // Changed "@type": "Service" to "@type": "CreativeWork" - THIS IS THE ONLY CHANGE
       {
         "@type": "ItemList",
         "itemListElement": SUCCESS_STORIES.map((story, index) => ({
@@ -1310,17 +1309,17 @@ export default function CompleteResumeResourceLibrary({
               "@type": "Organization",
               "name": "Professional Resume Free"
             },
-            // FIXED: itemReviewed now correctly uses @type: "Service"
-            // This resolves the "Invalid object type for field itemReviewed" error
+            // FIXED: Changed from "Service" to "CreativeWork"
             "itemReviewed": {
-              "@type": "Service",
+              "@type": "CreativeWork",
               "name": "Professional Resume Writing Resources",
-              "serviceType": "Online Resume Building Service",
-              "provider": {
+              "description": "Comprehensive resume writing guides, ATS optimization tools, and industry-specific templates for job seekers",
+              "author": {
                 "@type": "Organization",
                 "name": "Professional Resume Free",
                 "url": "https://www.professionalresumefree.com"
-              }
+              },
+              "datePublished": "2026-01-01"
             }
           }
         }))

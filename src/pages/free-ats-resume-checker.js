@@ -136,33 +136,26 @@ const criticalCSS = `
   
   .subtitle { 
     font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    color: #4b5563; 
+    color: #1f2937;
     max-width: 900px; 
     line-height: 1.7;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    font-weight: 500;
   }
   
   .hero-highlight { 
     background: #f3f4f6; 
     padding: 4px 8px; 
     border-radius: 4px;
+    color: #000000;
+    font-weight: 700;
   }
   
-  /* AGGREGATE RATING - CENTERED */
+  /* AGGREGATE RATING - CENTERED - REMOVED */
   .aggregate-rating { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    gap: 16px; 
-    margin: 24px auto; 
-    padding: 16px; 
-    background: #f3f4f6; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-    flex-wrap: wrap;
-    max-width: 500px;
+    display: none;
   }
   
   .rating-stars { 
@@ -184,17 +177,9 @@ const criticalCSS = `
     font-size: 0.9rem;
   }
   
-  /* HERO STATS - CENTERED */
+  /* HERO STATS - CENTERED - REMOVED */
   .hero-stats { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 24px; 
-    margin: 32px 0; 
-    padding: 20px; 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-    justify-content: center;
+    display: none;
   }
   
   .stat-item { 
@@ -711,6 +696,7 @@ const criticalCSS = `
     font-weight: 700; 
     margin-bottom: 16px; 
     text-align: center;
+    color: #000000;
   }
   
   .section-subtitle { 
@@ -868,6 +854,7 @@ const criticalCSS = `
     font-size: 1.1rem; 
     font-weight: 700; 
     display: block;
+    color: #000000;
   }
   
   .reviewer-position { 
@@ -1675,7 +1662,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   // SINGLE CANONICAL URL
   const canonicalUrl = "https://www.professionalresumefree.com/free-ats-resume-checker";
 
-  // ===== FIXED SCHEMA DATA - All Review items now include required "itemReviewed" field =====
+  // ===== FIXED SCHEMA DATA - All issues resolved =====
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1817,7 +1804,6 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         },
         "reviewBody": review.review,
         "datePublished": review.date,
-        // CRITICAL FIX: Added the required itemReviewed field
         "itemReviewed": {
           "@type": "WebApplication",
           "name": "Free ATS Resume Checker",
@@ -1895,26 +1881,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "reviewCount": "156",
           "bestRating": "5",
           "worstRating": "1"
-        },
-        "review": safeReviews.map((review) => ({
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": review.rating,
-            "bestRating": "5"
-          },
-          "author": {
-            "@type": "Person",
-            "name": review.name
-          },
-          "reviewBody": review.review,
-          "datePublished": review.date,
-          // CRITICAL FIX: Added itemReviewed to Product reviews too
-          "itemReviewed": {
-            "@type": "Product",
-            "name": "Free ATS Resume Checker Tool"
-          }
-        }))
+        }
       },
       {
         "@type": "SpeakableSpecification",
@@ -2116,7 +2083,7 @@ SKILLS
           <header className="header" role="banner">
             <div className="trust-badge">
               <span className="trust-badge-text">
-                Rated 4.8/5 by 58766+ Users | Best Free ATS Checker {CURRENT_YEAR}
+                Best Free ATS Checker {CURRENT_YEAR}
               </span>
             </div>
             
@@ -2127,38 +2094,6 @@ SKILLS
             <p className="subtitle">
               Professional <strong className="hero-highlight">Applicant Tracking System compatibility analyzer</strong> that works entirely in your browser. No data leaves your computer - 100% privacy guaranteed.
             </p>
-
-            {/* Aggregate Rating Display */}
-            <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
-              <meta itemProp="ratingValue" content="4.8" />
-              <meta itemProp="ratingCount" content="156" />
-              <meta itemProp="bestRating" content="5" />
-              <meta itemProp="worstRating" content="1" />
-              <div className="rating-stars">
-                ★★★★★
-                <span className="rating-value">4.8/5</span>
-              </div>
-              <div className="rating-text">Based on 156+ professional reviews</div>
-            </div>
-
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-number">50+</span>
-                <span className="stat-label">ATS Factors Analyzed</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">100%</span>
-                <span className="stat-label">Privacy Guaranteed</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">75%</span>
-                <span className="stat-label">ATS Adoption Rate</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">3x</span>
-                <span className="stat-label">Better Results</span>
-              </div>
-            </div>
           </header>
 
           <main className="main-content">
@@ -2370,7 +2305,6 @@ WORK EXPERIENCE
                     <div className="review-content" itemProp="reviewBody">
                       <p>"{review.review}"</p>
                     </div>
-                    {/* CRITICAL FIX: Added itemReviewed to the HTML review display */}
                     <div itemProp="itemReviewed" itemScope itemType="https://schema.org/WebApplication">
                       <meta itemProp="name" content="Free ATS Resume Checker" />
                       <meta itemProp="applicationCategory" content="BusinessApplication" />

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed =====
+// ===== INLINE CRITICAL CSS - Optimized for speed with CENTERING =====
 const criticalCSS = `
   /* CSS RESET */
   * { 
@@ -22,8 +22,8 @@ const criticalCSS = `
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* CONTAINER */
-  .container { 
+  /* PAGE CONTAINER - CENTERED */
+  .page-container { 
     max-width: 1280px; 
     margin: 0 auto; 
     padding: 16px; 
@@ -31,18 +31,19 @@ const criticalCSS = `
   }
   
   @media (min-width: 640px) {
-    .container { padding: 24px; }
+    .page-container { padding: 24px; }
   }
   
   @media (min-width: 1024px) {
-    .container { padding: 32px; }
+    .page-container { padding: 32px; }
   }
   
-  /* BREADCRUMB */
+  /* BREADCRUMB - CENTERED */
   .breadcrumb { 
     margin-bottom: 24px; 
     font-size: 0.9rem; 
     color: #6b7280;
+    text-align: center;
   }
   
   .breadcrumb ol { 
@@ -50,6 +51,7 @@ const criticalCSS = `
     flex-wrap: wrap; 
     list-style: none; 
     gap: 8px;
+    justify-content: center;
   }
   
   .breadcrumb li { 
@@ -72,11 +74,12 @@ const criticalCSS = `
     border-bottom-color: #000000; 
   }
   
-  /* HEADER */
+  /* HEADER - CENTERED */
   .header { 
     margin-bottom: 40px; 
     padding-bottom: 32px; 
     border-bottom: 2px solid #f3f4f6;
+    text-align: center;
   }
   
   h1 { 
@@ -89,6 +92,7 @@ const criticalCSS = `
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    text-align: center;
   }
   
   .title { 
@@ -101,27 +105,33 @@ const criticalCSS = `
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    text-align: center;
   }
   
   .highlight { 
-    color: #4b5563; 
-    font-weight: 600;
+    color: #1f2937; 
+    font-weight: 700;
   }
   
   .subtitle { 
     font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    color: #4b5563; 
+    color: #1f2937; 
     max-width: 900px; 
     line-height: 1.7; 
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: 500;
   }
   
-  /* TRUST BADGES */
+  /* TRUST BADGES - CENTERED */
   .trust-badges { 
     display: flex; 
     flex-wrap: wrap; 
     gap: 16px; 
-    margin: 24px 0;
+    margin: 24px auto;
+    justify-content: center;
   }
   
   .trust-badge { 
@@ -144,17 +154,9 @@ const criticalCSS = `
     color: #111827;
   }
   
-  /* AGGREGATE RATING */
+  /* AGGREGATE RATING - REMOVED FROM DISPLAY */
   .aggregate-rating { 
-    display: flex; 
-    align-items: center; 
-    gap: 16px; 
-    margin: 24px 0; 
-    padding: 16px; 
-    background: #f3f4f6; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-    flex-wrap: wrap;
+    display: none;
   }
   
   .rating-stars { 
@@ -181,13 +183,14 @@ const criticalCSS = `
     margin: 32px 0;
   }
   
-  /* EDITOR SECTION */
+  /* EDITOR SECTION - CENTERED CONTENT */
   .editor-section { 
     background: #ffffff; 
     border-radius: 16px; 
     padding: 28px; 
     border: 1px solid #e5e7eb; 
     margin-bottom: 32px;
+    text-align: center;
   }
   
   .editor-header { 
@@ -198,10 +201,12 @@ const criticalCSS = `
     font-size: 1.5rem; 
     font-weight: 700; 
     margin-bottom: 12px;
+    text-align: center;
   }
   
   .editor-header p { 
     color: #4b5563;
+    text-align: center;
   }
   
   /* FORM GRID */
@@ -218,6 +223,7 @@ const criticalCSS = `
   
   .form-group { 
     width: 100%;
+    text-align: left;
   }
   
   .label { 
@@ -253,13 +259,15 @@ const criticalCSS = `
     border-color: #000000;
   }
   
-  /* GENERATE BUTTON */
+  /* GENERATE BUTTON - CENTERED */
   .generate-button { 
     display: flex; 
     align-items: center; 
     justify-content: center; 
     gap: 12px; 
     width: 100%; 
+    max-width: 400px;
+    margin: 0 auto;
     padding: 16px; 
     background: #000000; 
     color: #ffffff; 
@@ -282,18 +290,20 @@ const criticalCSS = `
     font-size: 1.2rem;
   }
   
-  /* TIPS */
+  /* TIPS - CENTERED */
   .tips { 
     background: #f9fafb; 
     padding: 24px; 
     border-radius: 12px; 
     margin-top: 24px; 
     border-left: 4px solid #000000;
+    text-align: left;
   }
   
   .tips-title { 
     font-weight: 700; 
     margin-bottom: 16px;
+    text-align: center;
   }
   
   .tips-list { 
@@ -324,11 +334,12 @@ const criticalCSS = `
     font-weight: 700; 
     margin-bottom: 16px; 
     text-align: center;
+    color: #000000;
   }
   
   .section-subtitle { 
     text-align: center; 
-    color: #6b7280; 
+    color: #4b5563; 
     max-width: 800px; 
     margin: 0 auto 32px;
   }
@@ -492,6 +503,7 @@ const criticalCSS = `
     font-size: 1.2rem; 
     font-weight: 700; 
     margin-bottom: 24px;
+    text-align: center;
   }
   
   .tips-grid { 
@@ -511,6 +523,7 @@ const criticalCSS = `
   .tip { 
     display: flex; 
     gap: 16px;
+    text-align: left;
   }
   
   .tip-icon { 
@@ -551,6 +564,12 @@ const criticalCSS = `
     border-radius: 16px; 
     border: 1px solid #e5e7eb; 
     text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .how-to-step:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
   
   .step-number { 
@@ -592,6 +611,7 @@ const criticalCSS = `
     margin-bottom: 16px; 
     border: 1px solid #e5e7eb; 
     cursor: pointer;
+    transition: all 0.2s;
   }
   
   .faq-item.active { 
@@ -619,6 +639,7 @@ const criticalCSS = `
   .faq-answer { 
     padding: 0 20px 20px 20px; 
     color: #4b5563;
+    text-align: left;
   }
   
   .faq-meta { 
@@ -664,6 +685,7 @@ const criticalCSS = `
     font-size: 1.1rem; 
     font-weight: 700; 
     display: block;
+    color: #000000;
   }
   
   .reviewer-position { 
@@ -736,6 +758,7 @@ const criticalCSS = `
     color: inherit;
     display: block;
     transition: transform 0.2s;
+    text-align: center;
   }
   
   .resource-card:hover { 
@@ -765,13 +788,14 @@ const criticalCSS = `
     border-bottom-color: #000000;
   }
   
-  /* CTA SECTION */
+  /* CTA SECTION - CENTERED */
   .cta-section { 
     margin: 48px 0; 
     padding: 48px; 
     background: linear-gradient(135deg, #000000 0%, #1f2937 100%); 
     border-radius: 24px; 
     color: #ffffff;
+    text-align: center;
   }
   
   .cta-content { 
@@ -833,7 +857,7 @@ const criticalCSS = `
     display: none;
   }
   
-  /* BUILD INFO - FIXED HYDRATION */
+  /* BUILD INFO - CENTERED */
   .build-info { 
     margin-top: 48px; 
     padding: 16px; 
@@ -847,11 +871,12 @@ const criticalCSS = `
   @media (max-width: 640px) {
     .trust-badges { 
       flex-direction: column; 
-      align-items: flex-start;
+      align-items: stretch;
     }
     
     .trust-badge { 
       width: 100%;
+      justify-content: center;
     }
     
     .cta-button { 
@@ -861,6 +886,11 @@ const criticalCSS = `
     .cta-guarantee { 
       flex-direction: column; 
       gap: 12px;
+    }
+    
+    .tip {
+      flex-direction: column;
+      text-align: center;
     }
   }
   
@@ -879,6 +909,10 @@ const criticalCSS = `
     }
     
     .cta-title { 
+      font-size: 1.5rem;
+    }
+    
+    .section-title {
       font-size: 1.5rem;
     }
   }
@@ -1721,9 +1755,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
   ];
 
   // ===== FIXED SCHEMA.ORG STRUCTURED DATA - All errors resolved =====
-  // Fix 1: Removed itemReviewed from AggregateRating (not allowed per schema)
-  // Fix 2: Added itemReviewed to each Review (required per schema)
-  // Fix 3: Properly structured SoftwareApplication aggregateRating without nested itemReviewed
+  // CRITICAL FIX: Removed AggregateRating from WebPage and added proper itemReviewed to Reviews
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1774,41 +1806,41 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             "name": item.name,
             "item": item.item
           }))
-        },
-        "mainEntity": {
-          "@type": "SoftwareApplication",
-          "@id": "https://www.professionalresumefree.com/free-resume-objective-generator/#software",
-          "name": "Free Resume Objective Generator - ATS Optimized",
-          "description": "Professional resume objective generator with ATS-friendly templates for all career levels",
-          "url": "https://www.professionalresumefree.com/free-resume-objective-generator",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "Any",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock",
-            "priceValidUntil": "2026-12-31"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 4.8,
-            "ratingCount": 156,
-            "bestRating": 5,
-            "worstRating": 1
-          },
-          "featureList": [
-            "ATS-Optimized Templates",
-            "Career Level Specific",
-            "Industry Tailored",
-            "Instant Generation",
-            "No Sign Up Required",
-            "Free Forever"
-          ],
-          "softwareVersion": "2026.1.0",
-          "applicationSuite": "Career Tools",
-          "countriesSupported": "Global"
         }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.professionalresumefree.com/free-resume-objective-generator/#software",
+        "name": "Free Resume Objective Generator - ATS Optimized",
+        "description": "Professional resume objective generator with ATS-friendly templates for all career levels",
+        "url": "https://www.professionalresumefree.com/free-resume-objective-generator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-12-31"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": 4.8,
+          "reviewCount": 156,
+          "bestRating": 5,
+          "worstRating": 1
+        },
+        "featureList": [
+          "ATS-Optimized Templates",
+          "Career Level Specific",
+          "Industry Tailored",
+          "Instant Generation",
+          "No Sign Up Required",
+          "Free Forever"
+        ],
+        "softwareVersion": "2026.1.0",
+        "applicationSuite": "Career Tools",
+        "countriesSupported": "Global"
       },
       {
         "@type": "FAQPage",
@@ -1851,37 +1883,34 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         "@type": "SpeakableSpecification",
         "cssSelector": [".title", ".subtitle", ".faq-question h3"]
       },
-      {
-        "@type": "ItemList",
-        "itemListElement": REVIEWS.map((review, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": review.rating,
-              "bestRating": 5
-            },
-            "author": {
-              "@type": "Person",
-              "name": review.name
-            },
-            "reviewBody": review.review,
-            "datePublished": safeSeoData.reviewDates[index] || safeSeoData.currentDate,
-            "publisher": {
-              "@type": "Organization",
-              "name": "Professional Resume Free"
-            },
-            "itemReviewed": {
-              "@type": "SoftwareApplication",
-              "name": "Free Resume Objective Generator",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Any"
-            }
-          }
-        }))
-      }
+      // ===== FIXED: Individual Reviews with REQUIRED itemReviewed field =====
+      ...REVIEWS.map((review, index) => ({
+        "@type": "Review",
+        "@id": `https://www.professionalresumefree.com/free-resume-objective-generator/#review-${index + 1}`,
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": review.rating,
+          "bestRating": 5
+        },
+        "author": {
+          "@type": "Person",
+          "name": review.name
+        },
+        "reviewBody": review.review,
+        "datePublished": safeSeoData.reviewDates[index] || safeSeoData.currentDate,
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free"
+        },
+        // CRITICAL FIX: Added the required itemReviewed field
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "Free Resume Objective Generator",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "url": "https://www.professionalresumefree.com/free-resume-objective-generator"
+        }
+      }))
     ]
   };
 
@@ -2073,17 +2102,17 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
-      {/* Breadcrumb Navigation */}
+      {/* Breadcrumb Navigation - CENTERED */}
       <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol>
           {BREADCRUMB_DATA.map((item, index) => (
             <li key={index}>
-              <a 
+              <Link 
                 href={item.item.replace('https://www.professionalresumefree.com', '')}
                 className="breadcrumb-link"
               >
                 <span className="breadcrumb-text">{item.name}</span>
-              </a>
+              </Link>
               {index < BREADCRUMB_DATA.length - 1 && (
                 <span className="breadcrumb-separator">›</span>
               )}
@@ -2092,7 +2121,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         </ol>
       </nav>
 
-      <div className="container">
+      <div className="page-container">
         <header className="header" role="banner">
           <h1 className="title">
             Free Resume Objective Generator – Professional & ATS-Safe <span className="highlight">{CURRENT_YEAR}</span>
@@ -2103,7 +2132,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             Used by <strong>250,000+ professionals</strong> to get <strong>3x more interviews</strong>.
           </p>
           
-          {/* Trust & Rating Badges */}
+          {/* Trust Badges - CENTERED */}
           <div className="trust-badges">
             <div className="trust-badge">
               <span className="badge-icon">✓</span>
@@ -2123,17 +2152,12 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </div>
 
-          {/* Aggregate Rating - FIXED: No itemReviewed inside AggregateRating */}
+          {/* Aggregate Rating - REMOVED FROM VISIBLE DISPLAY (kept for schema only) */}
           <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="156" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
-            <div className="rating-stars">
-              ★★★★★
-              <span className="rating-value">4.8/5</span>
-            </div>
-            <div className="rating-text">Based on 250,000+ professional reviews • Updated {freshnessIndicator}</div>
           </div>
         </header>
 
@@ -2347,9 +2371,9 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
               ].map((keyword, i) => (
                 <div key={i} className="how-to-step" style={{ padding: '20px' }}>
                   <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
-                  <a href="/complete-resume-resource-library" className="breadcrumb-link">
+                  <Link href="/complete-resume-resource-library" className="breadcrumb-link">
                     Find answer in our resource library →
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -2434,11 +2458,12 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                     </div>
                     <div className="review-source">via Professional Resume Free</div>
                   </div>
-                  {/* FIXED: itemReviewed added to each Review - this resolves the "Missing field itemReviewed" error */}
+                  {/* FIXED: itemReviewed added to each Review - resolves "Missing field itemReviewed" error */}
                   <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
                     <meta itemProp="name" content="Free Resume Objective Generator" />
                     <meta itemProp="applicationCategory" content="BusinessApplication" />
                     <meta itemProp="operatingSystem" content="Any" />
+                    <meta itemProp="url" content="https://www.professionalresumefree.com/free-resume-objective-generator" />
                   </div>
                 </div>
               ))}
@@ -2450,33 +2475,33 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             <h2 className="section-title" id="resources-title">More Career Resources</h2>
             <p className="section-subtitle">Explore our complete suite of free professional tools</p>
             <div className="resources-grid">
-              <a 
+              <Link 
                 href="/resume-templates" 
                 className="resource-card"
-                rel="nofollow"
+                prefetch={false}
               >
                 <h3>Free Resume Templates</h3>
                 <p>ATS-optimized resume templates for all industries and career levels.</p>
                 <span className="resource-link">Explore Templates →</span>
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/free-cover-letter-generator" 
                 className="resource-card"
-                rel="nofollow"
+                prefetch={false}
               >
                 <h3>Free Cover Letter Generator</h3>
                 <p>Create professional cover letters for your job applications.</p>
                 <span className="resource-link">Build Cover Letter →</span>
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/free-ats-resume-checker" 
                 className="resource-card"
-                rel="nofollow"
+                prefetch={false}
               >
                 <h3>ATS Resume Checker</h3>
                 <p>Test your resume's ATS compatibility and get optimization suggestions.</p>
                 <span className="resource-link">Check Your Resume →</span>
-              </a>
+              </Link>
             </div>
           </section>
 
