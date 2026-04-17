@@ -658,6 +658,80 @@ const criticalCSS = `
     color: #ffffff;
   }
   
+  /* USA LINKS SECTION (NEW) */
+  .usa-links-section {
+    margin: 48px 0;
+    background: #f0f4f8;
+    border-radius: 24px;
+    padding: 32px;
+    border: 1px solid #c0d4f0;
+  }
+  
+  .usa-links-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #000000;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .usa-links-subtitle {
+    text-align: center;
+    color: #4b5563;
+    margin-bottom: 32px;
+    font-size: 1rem;
+  }
+  
+  .usa-links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  @media (min-width: 640px) {
+    .usa-links-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .usa-links-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  @media (min-width: 1280px) {
+    .usa-links-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  .usa-link-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .usa-link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #000000;
+  }
+  
+  .usa-link-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000000;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  
+  .usa-link-url {
+    font-size: 0.75rem;
+    color: #6b7280;
+    word-break: break-all;
+  }
+  
   /* FAQ SECTION */
   .faq-section { 
     margin: 48px 0;
@@ -878,6 +952,43 @@ const criticalCSS = `
     font-weight: 600;
   }
 `;
+
+// ===== USA JOBS RESUME LINKS (33 LINKS) =====
+const usaJobResumeLinks = [
+  { url: "/most-googled-resume-questions-in-the-usa", text: "Most Googled Resume Questions in the USA" },
+  { url: "/most-in-demand-resume-keywords-for-usa-job-seekers", text: "Most In-Demand Resume Keywords for USA Job Seekers" },
+  { url: "/most-popular-resume-layouts-for-usa-tech-jobs", text: "Most Popular Resume Layouts for USA Tech Jobs" },
+  { url: "/high-traffic-resume-templates-americans-search-for", text: "High Traffic Resume Templates Americans Search For" },
+  { url: "/how-long-should-a-resume-be-usa-recruiter-insights", text: "How Long Should a Resume Be? USA Recruiter Insights" },
+  { url: "/best-fonts-and-designs-for-usa-resumes", text: "Best Fonts and Designs for USA Resumes" },
+  { url: "/best-resume-examples-for-career-changers-in-the-usa", text: "Best Resume Examples for Career Changers in the USA" },
+  { url: "/best-resume-examples-for-usa-engineering-jobs", text: "Best Resume Examples for USA Engineering Jobs" },
+  { url: "/best-resume-examples-for-usa-healthcare-jobs", text: "Best Resume Examples for USA Healthcare Jobs" },
+  { url: "/best-resume-examples-for-usa-it-and-software-jobs", text: "Best Resume Examples for USA IT and Software Jobs" },
+  { url: "/best-resume-examples-for-usa-management-positions", text: "Best Resume Examples for USA Management Positions" },
+  { url: "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume", text: "How to List Prompt Engineering as a Skill on Your Professional Resume" },
+  { url: "/how-to-optimize-your-resume-for-linkedin-recruiters", text: "How to Optimize Your Resume for LinkedIn Recruiters" },
+  { url: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "How to Pass the AI Resume Screen 2026: ATS Algorithms Explained" },
+  { url: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "How to Tailor Your Resume for Any USA Job Posting" },
+  { url: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026" },
+  { url: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "How to Use ChatGPT to Write a Resume That Does Not Sound Like a Robot" },
+  { url: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "How to Write a Federal Resume for USA Government Jobs" },
+  { url: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "How to Write a Resume for USA Administrative Jobs" },
+  { url: "/how-to-write-a-resume-for-usa-sales-and-marketing-roles", text: "How to Write a Resume for USA Sales and Marketing Roles" },
+  { url: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "How to Write a Resume for USA Customer Service Jobs" },
+  { url: "/how-to-write-a-resume-for-usa-finance-and-accounting-roles", text: "How to Write a Resume for USA Finance and Accounting Roles" },
+  { url: "/how-to-write-a-resume-for-usa-hospitality-jobs", text: "How to Write a Resume for USA Hospitality Jobs" },
+  { url: "/how-to-write-a-resume-for-usa-retail-jobs", text: "How to Write a Resume for USA Retail Jobs" },
+  { url: "/how-to-write-a-resume-for-usa-teaching-and-education-jobs", text: "How to Write a Resume for USA Teaching and Education Jobs" },
+  { url: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "How to Write Bullet Points That Impress USA Recruiters" },
+  { url: "/the-death-of-the-objective-statement-what-to-write-instead", text: "The Death of the Objective Statement: What to Write Instead" },
+  { url: "/top-skills-employers-in-the-usa-want-on-resumes", text: "Top Skills Employers in the USA Want on Resumes" },
+  { url: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026", text: "Why Skills-First Resumes Are Replacing Chronological Layouts in 2026" },
+  { url: "/resume-mistakes-americans-make-and-how-to-fix-them", text: "Resume Mistakes Americans Make and How to Fix Them" },
+  { url: "/resume-tips-for-remote-jobs-in-the-usa", text: "Resume Tips for Remote Jobs in the USA" },
+  { url: "/resume-tips-for-usa-college-students-and-graduates", text: "Resume Tips for USA College Students and Graduates" },
+  { url: "/resume-trends-in-the-usa-for-2026", text: "Resume Trends in the USA for 2026" }
+];
 
 // Author data for E-E-A-T
 const AUTHORS = [
@@ -1281,8 +1392,6 @@ export default function CompleteResumeResourceLibrary({
           }
         }))
       },
-      // ===== FIXED: Review structured data with correct itemReviewed type =====
-      // Changed "@type": "Service" to "@type": "CreativeWork" - THIS IS THE ONLY CHANGE
       {
         "@type": "ItemList",
         "itemListElement": SUCCESS_STORIES.map((story, index) => ({
@@ -1309,7 +1418,6 @@ export default function CompleteResumeResourceLibrary({
               "@type": "Organization",
               "name": "Professional Resume Free"
             },
-            // FIXED: Changed from "Service" to "CreativeWork"
             "itemReviewed": {
               "@type": "CreativeWork",
               "name": "Professional Resume Writing Resources",
@@ -1714,6 +1822,32 @@ export default function CompleteResumeResourceLibrary({
               </section>
             );
           })}
+
+          {/* ===== USA JOBS RESUME LINKS SECTION (ADDED AT THE BOTTOM) ===== */}
+          <section className="usa-links-section">
+            <h2 className="usa-links-title">🇺🇸 USA Jobs Resume Directory</h2>
+            <p className="usa-links-subtitle">
+              Complete guide to federal USAJOBS formats, ATS-optimized templates, and state-specific resume strategies for American job seekers.
+            </p>
+            
+            <div className="usa-links-grid">
+              {usaJobResumeLinks.map((link, index) => (
+                <a 
+                  key={index} 
+                  href={link.url} 
+                  className="usa-link-card"
+                  aria-label={`Access ${link.text}`}
+                >
+                  <span className="usa-link-title">{link.text}</span>
+                  <span className="usa-link-url">{link.url}</span>
+                </a>
+              ))}
+            </div>
+            
+            <p style={{ marginTop: '24px', fontSize: '0.85rem', color: '#6b7280', textAlign: 'center' }}>
+              ✓ {usaJobResumeLinks.length} USA resume resources • Updated for 2026 • Federal & ATS optimized
+            </p>
+          </section>
 
           {/* ===== FAQ SECTION ===== */}
           <section id="faqs" className="faq-section">
