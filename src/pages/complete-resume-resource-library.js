@@ -658,7 +658,7 @@ const criticalCSS = `
     color: #ffffff;
   }
   
-  /* USA LINKS SECTION (NEW) */
+  /* USA LINKS SECTION - Links completely invisible to users, visible to crawlers */
   .usa-links-section {
     margin: 48px 0;
     background: #f0f4f8;
@@ -700,16 +700,15 @@ const criticalCSS = `
     .usa-links-grid { grid-template-columns: repeat(4, 1fr); }
   }
   
+  /* Clickable card styling */
   .usa-link-card {
     background: #ffffff;
     padding: 20px;
     border-radius: 12px;
     border: 1px solid #e5e7eb;
     transition: transform 0.2s, box-shadow 0.2s;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    cursor: pointer;
+    position: relative;
   }
   
   .usa-link-card:hover {
@@ -718,18 +717,37 @@ const criticalCSS = `
     border-color: #000000;
   }
   
+  /* Human-visible title only - clean and link-free */
   .usa-link-title {
     font-size: 1rem;
     font-weight: 600;
     color: #000000;
     line-height: 1.4;
-    margin-bottom: 8px;
+    margin-bottom: 0;
+    display: block;
   }
   
-  .usa-link-url {
-    font-size: 0.75rem;
-    color: #6b7280;
-    word-break: break-all;
+  /* 
+    CRITICAL SEO FIX: 
+    The actual <a> tag and URL are completely invisible to human users
+    but remain fully accessible to search engine crawlers.
+    - Hidden using clip-path technique (screen readers skip, crawlers see)
+    - Maintains internal link equity for SEO
+    - No visual clutter for users
+  */
+  .invisible-link-for-crawlers {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+    /* Ensures crawlers can still "see" and follow the link */
+    visibility: visible;
+    opacity: 0;
   }
   
   /* FAQ SECTION */
@@ -1823,7 +1841,16 @@ export default function CompleteResumeResourceLibrary({
             );
           })}
 
-          {/* ===== USA JOBS RESUME LINKS SECTION (ADDED AT THE BOTTOM) ===== */}
+          {/* ===== USA JOBS RESUME LINKS SECTION - COMPLETELY INVISIBLE LINKS TO USERS ===== */}
+          {/* 
+            SEO STRATEGY FOR THIS SECTION:
+            - Cards are clickable via JavaScript for human users
+            - Each card contains an invisible <a> tag (visually hidden but DOM-visible)
+            - The invisible link is readable by crawlers/bots and passes link equity
+            - Human users see NO links - just clean card text
+            - Clicking anywhere on the card triggers navigation via JavaScript
+            - This gives full SEO value without any visual link clutter
+          */}
           <section className="usa-links-section">
             <h2 className="usa-links-title">🇺🇸 USA Jobs Resume Directory</h2>
             <p className="usa-links-subtitle">
@@ -1832,15 +1859,39 @@ export default function CompleteResumeResourceLibrary({
             
             <div className="usa-links-grid">
               {usaJobResumeLinks.map((link, index) => (
-                <a 
+                <div 
                   key={index} 
-                  href={link.url} 
                   className="usa-link-card"
-                  aria-label={`Access ${link.text}`}
+                  onClick={() => window.location.href = link.url}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      window.location.href = link.url;
+                    }
+                  }}
+                  role="link"
+                  tabIndex={0}
+                  aria-label={`Navigate to: ${link.text}`}
                 >
+                  {/* Only the title is visible to users - clean, no links visible */}
                   <span className="usa-link-title">{link.text}</span>
-                  <span className="usa-link-url">{link.url}</span>
-                </a>
+                  
+                  {/* 
+                    COMPLETELY INVISIBLE LINK FOR CRAWLERS ONLY
+                    - Visually hidden using standard accessibility hiding techniques
+                    - Remains in DOM for crawlers to discover and follow
+                    - Passes full link equity/PageRank to the target URLs
+                    - Human users never see this link - it's completely invisible
+                  */}
+                  <a 
+                    href={link.url} 
+                    className="invisible-link-for-crawlers"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                  >
+                    {link.text} - {link.url}
+                  </a>
+                </div>
               ))}
             </div>
             

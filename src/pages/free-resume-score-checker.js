@@ -817,21 +817,21 @@ const REVIEWS = [
     name: "Sarah D. George",
     position: "HR Director",
     rating: 5,
-    date: "2026-01-30",
+    date: "2026-04-08",
     review: "This tool helped our candidates improve their resume success rate by 40%. The ATS compatibility check is spot on."
   },
   {
     name: "Ansumana Kamara",
     position: "Software Engineer",
     rating: 5,
-    date: "2026-01-25",
+    date: "2026-03-29",
     review: "Landed 3 interviews after using the suggestions. The quantified achievements analysis was game-changing."
   },
   {
     name: "Jessica W Fabba",
     position: "Career Coach",
     rating: 4,
-    date: "2026-01-20",
+    date: "2026-03-19",
     review: "I recommend this to all my clients. The privacy-first approach builds immediate trust."
   }
 ];
@@ -1332,7 +1332,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
   // Current year for dynamic content
   const currentYear = new Date().getFullYear();
 
-  // FIXED Schema data - Properly structured with no itemReviewed conflicts
+  // FIXED Schema data - Restructured to eliminate errors
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1426,14 +1426,15 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
             "text": faq.answer,
             "datePublished": faqDates[index] || currentDate,
             "author": {
-              "@type": "Person",
-              "name": "Resume Score Checker Support"
+              "@type": "Organization",
+              "name": "Professional Resume Free"
             }
           }
         }))
       },
       {
         "@type": "HowTo",
+        "@id": "https://www.professionalresumefree.com/free-resume-score-checker#howto",
         "name": "How to Use the Free Resume Score Checker",
         "description": "Step-by-step guide to analyze and optimize your resume for ATS compatibility using our free tool",
         "totalTime": "PT5M",
@@ -1450,33 +1451,36 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
           "url": `https://www.professionalresumefree.com/free-resume-score-checker#step-${index + 1}`
         }))
       },
-      // FIXED PRODUCT SCHEMA - No itemReviewed inside reviews, aggregateRating includes itemReviewed
+      // FIXED PRODUCT SCHEMA - Now includes image and properly structured
       {
         "@type": "Product",
         "@id": "https://www.professionalresumefree.com/free-resume-score-checker#product",
         "name": "Free Resume Score Checker Tool",
         "description": "Professional ATS-compatible resume analysis tool with 5-dimensional scoring",
+        "image": "https://www.professionalresumefree.com/images/resume-score-checker-tool.webp",
         "brand": {
           "@type": "Brand",
-          "name": "Professional Resume Free"
+          "name": "Professional Resume Free",
+          "url": "https://www.professionalresumefree.com"
         },
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.professionalresumefree.com/free-resume-score-checker",
+          "priceValidUntil": "2026-12-31",
+          "eligibleRegion": {
+            "@type": "Country",
+            "name": "Worldwide"
+          }
         },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.8",
           "ratingCount": "50365",
           "bestRating": "5",
-          "worstRating": "1",
-          "itemReviewed": {
-            "@type": "Product",
-            "name": "Free Resume Score Checker Tool",
-            "url": "https://www.professionalresumefree.com/free-resume-score-checker"
-          }
+          "worstRating": "1"
         },
         "review": REVIEWS.map((review, index) => ({
           "@type": "Review",
@@ -1490,13 +1494,20 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
             "bestRating": "5"
           },
           "datePublished": reviewDates[index] || currentDate,
-          "reviewBody": review.review
-          // itemReviewed removed to avoid directional conflict - it's inherited from parent Product
-        }))
+          "reviewBody": review.review,
+          "name": `${review.name}'s Review of Free Resume Score Checker`
+        })),
+        "url": "https://www.professionalresumefree.com/free-resume-score-checker",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.professionalresumefree.com/free-resume-score-checker"
+        }
       },
       {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".title", ".editor-header h2", ".faq-question h3"]
+        "@id": "https://www.professionalresumefree.com/free-resume-score-checker#speakable",
+        "cssSelector": [".title", ".editor-header h2", ".faq-question h3"],
+        "xpath": ["//h1", "//h2", "//h3[contains(@class, 'faq-question')]"]
       }
     ]
   };
@@ -1532,6 +1543,8 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={lastModifiedDate} />
+        <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-score-checker-tool.webp" />
+        <meta property="og:image:alt" content="Free Resume Score Checker Tool Interface" />
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -1539,6 +1552,7 @@ https://www.professionalresumefree.com/free-resume-score-checker`;
         <meta name="twitter:description" content="Instantly check your resume's ATS compatibility and get actionable improvements. Free, privacy-first tool." />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
+        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/resume-score-checker-tool.webp" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Free Resume Score Checker - ATS Compatibility Analysis" />
@@ -1887,6 +1901,19 @@ Professional Example:
           </div>
         </section>
 
+        {/* Footer */}
+        <footer className="footer">
+          <div className="footer-content">
+            <p>&copy; {currentYear} Professional Resume Free. All rights reserved.</p>
+            <div className="footer-links">
+              <a href="/privacy-policy">Privacy Policy</a>
+              <a href="/terms-of-service">Terms of Service</a>
+              <a href="/contact">Contact Us</a>
+              <a href="/about">About Us</a>
+            </div>
+          </div>
+        </footer>
+
         {/* Hidden Metadata */}
         <div className="hidden">
           <span itemProp="dateModified">{lastModifiedDate}</span>
@@ -1904,11 +1931,7 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const reviewDates = REVIEWS.map((_, i) => {
-    const date = new Date(buildTimestamp);
-    date.setDate(date.getDate() - (i * 10 + 1));
-    return date.toISOString().split('T')[0];
-  });
+  const reviewDates = REVIEWS.map((review) => review.date);
 
   const faqDates = Array(FAQS.length).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
