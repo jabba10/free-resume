@@ -1602,5 +1602,5 @@ function SoftwareEngineerResumeTemplate({
   );
 }
 
-// ✅ FIX: Add default export at the end
+
 export default SoftwareEngineerResumeTemplate;

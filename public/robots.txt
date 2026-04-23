@@ -63,6 +63,61 @@ Disallow: /blog/best-job-boards/
 Disallow: /job-search-tips
 Disallow: /job-search-tips/
 
+# --- AI CRAWLER ACCESS FOR LLMS.TXT ---
+
+# 1. Microsoft Copilot & Bing
+User-agent: Copilot-Web
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: bingbot
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 2. OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 3. Anthropic (Claude)
+User-agent: Claude-Web
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 4. Perplexity AI
+User-agent: PerplexityBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 5. Google AI Overviews (SGE) & Bard
+User-agent: Google-Extended
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 6. Apple (Siri Suggestions & Apple Intelligence)
+User-agent: Applebot
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 7. Common Crawl (used by many smaller AI models)
+User-agent: CCBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 8. Amazon Alexa/AWS AI
+User-agent: Amazonbot
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# 9. Meta AI (Facebook/Instagram/WhatsApp AI)
+User-agent: FacebookBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# --- STANDARD SEARCH ENGINES (Keep these allowed for general SEO) ---
+User-agent: *
+Allow: /
+
 # Host
 Host: https://www.professionalresumefree.com
 
