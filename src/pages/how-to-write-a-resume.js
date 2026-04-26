@@ -21,7 +21,12 @@ import {
   FiBriefcase,
   FiCode,
   FiBarChart,
-  FiAlertCircle
+  FiAlertCircle,
+  FiShield,
+  FiZap,
+  FiCheckSquare,
+  FiPenTool,
+  FiGlobe
 } from 'react-icons/fi';
 
 export async function getStaticProps() {
@@ -30,6 +35,7 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
   
+  // Generate dynamic dates for freshness signals
   const faqDates = Array(8).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 15 + 30));
@@ -52,7 +58,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    revalidate: 3600,
+    revalidate: 3600, // Revalidate every hour to keep dates fresh,
   };
 }
 
@@ -73,50 +79,39 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
   const safeFaqDates = faqDates || Array(8).fill(freshnessIndicator);
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
 
-  // Expanded FAQ Data
+  // --- DATA SECTIONS ---
+
   const faqs = [
     {
       question: "How long should my resume be in 2026?",
-      answer: "For most professionals, one page remains ideal. Those with 10+ years of relevant experience or in academic/executive roles may extend to two pages. Never exceed two pages for standard job applications. Quality and relevance matter more than length. Focus on including only the most relevant information for the specific role you're targeting."
+      answer: "For most professionals, one page remains ideal. Those with 10+ years of relevant experience or in academic/executive roles may extend to two pages. Never exceed two pages for standard job applications."
     },
     {
       question: "What's the most important section of a resume?",
-      answer: "The work experience section is typically the most important, as it demonstrates your professional capabilities and achievements. However, all sections work together to create a complete picture. The professional summary is crucial for making a strong first impression, and the skills section helps you pass ATS screening."
+      answer: "The work experience section is typically the most important, as it demonstrates your professional capabilities. However, the professional summary is crucial for making a strong first impression."
     },
     {
       question: "Should I include a photo on my resume?",
-      answer: "In the United States, Canada, UK, and Australia: No. Photos can introduce unconscious bias and are generally discouraged. Exceptions include acting, modeling, or certain international positions where photos are expected. Focus on your qualifications and achievements instead. In European countries like Germany and France, photos may be expected."
+      answer: "In the US, Canada, UK, and Australia: No. Photos can introduce unconscious bias. In European countries like Germany and France, photos may be expected."
     },
     {
-      question: "How do I handle employment gaps on my resume?",
-      answer: "Be honest but strategic. If you were developing skills, mention relevant courses or certifications during that period. Use a functional or hybrid format to emphasize skills over chronology. Consider grouping contract or freelance work together. For significant gaps, address them briefly in your cover letter rather than creating awkward explanations on the resume."
+      question: "How do I handle employment gaps?",
+      answer: "Be honest but strategic. If you were developing skills, mention relevant courses. Use a functional format to emphasize skills over chronology if necessary."
     },
     {
-      question: "Can I use the same resume for every job application?",
-      answer: "No. While you can maintain a master resume, you should customize it for each application. Tailor your professional summary, emphasize relevant experience, and include keywords from each specific job description. Customized resumes have significantly higher success rates—up to 40% more interview invitations according to recent studies."
-    },
-    {
-      question: "What font should I use for my resume?",
-      answer: "Use standard, professional fonts that are ATS-friendly: Arial, Calibri, Helvetica, Georgia, or Times New Roman. Font size should be 10-12pt for body text and 14-16pt for headings. Avoid script fonts, narrow fonts, or any font under 10pt. Consistency in font usage signals professionalism."
-    },
-    {
-      question: "Should I include references on my resume?",
-      answer: "No. References should not be listed on your resume. Create a separate reference list with 3-5 professional contacts who have agreed to speak on your behalf. Include their name, title, company, phone number, and email. Only provide this list when specifically requested by the employer."
+      question: "Can I use the same resume for every job?",
+      answer: "No. You should customize it for each application. Tailor your professional summary and include keywords from each specific job description."
     },
     {
       question: "How do I optimize my resume for ATS?",
-      answer: "Use standard section headings (Experience, Education, Skills), include keywords from job descriptions naturally throughout your content, avoid tables, columns, and graphics, save as .docx format for best parsing, and include both acronyms and full terms (e.g., 'Search Engine Optimization (SEO)')."
+      answer: "Use standard headings, include keywords naturally, avoid tables/graphics, save as .docx, and include both acronyms and full terms."
     }
   ];
 
-  // Additional content data
   const keyStatistics = [
     { value: "75%", label: "of resumes rejected by ATS before human review", source: "JobScan 2026" },
     { value: "6.8 sec", label: "average time recruiters spend on initial screening", source: "TheLadders 2026" },
-    { value: "40%", label: "more interviews with customized resumes", source: "CareerBuilder 2026" },
-    { value: "94%", label: "of recruiters verify resume info on LinkedIn", source: "LinkedIn Research 2026" },
-    { value: "2.5x", label: "more likely to get interview with quantified achievements", source: "ResumeLab 2026" },
-    { value: "86%", label: "of hiring managers prefer reverse-chronological format", source: "SHRM 2026" }
+    { value: "40%", label: "more interviews with customized resumes", source: "CareerBuilder 2026" }
   ];
 
   const commonMistakes = [
@@ -125,26 +120,21 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
     "Failing to quantify results with numbers",
     "Using fancy formatting that confuses ATS",
     "Including irrelevant personal information",
-    "Having spelling or grammar errors",
-    "Using inconsistent date formatting",
-    "Creating overly long resumes (3+ pages)"
+    "Having spelling or grammar errors"
   ];
 
   const expertTips = [
-    "Use power verbs: 'led', 'managed', 'created', 'improved', 'increased'",
+    "Use power verbs: 'led', 'managed', 'created', 'improved'",
     "Include metrics: $ amounts, percentages, time frames",
     "Tailor your professional summary to each job",
     "Place most impressive achievements in top third of resume",
-    "Use numbers to demonstrate scale: 'managed $2M budget'",
     "Show career progression with increasing responsibility",
-    "Highlight technical skills relevant to the role",
     "Include links to portfolio or GitHub for technical roles"
   ];
 
-  // Updated testimonials with new names as requested
   const testimonials = [
     {
-      quote: "Followed this guide and landed interviews at 3 top tech companies within 2 weeks. The CAR method for achievements was a game-changer!",
+      quote: "Followed this guide and landed interviews at 3 top tech companies within 2 weeks. The CAR method was a game-changer!",
       author: "Catherine Bouma",
       role: "Software Engineer",
       date: reviewDates[0] || safeCurrentDate,
@@ -152,68 +142,95 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
       hiddenRole: "Content Director"
     },
     {
-      quote: "As a career changer, the functional format advice helped me highlight transferable skills effectively. Got my dream job in project management!",
+      quote: "As a career changer, the functional format advice helped me highlight transferable skills effectively. Got my dream job!",
       author: "Jame Anderson",
       role: "Project Manager",
       date: reviewDates[1] || safeCurrentDate,
       hiddenAuthor: "Ansu Kamara",
       hiddenRole: "Content Director"
-    },
-    {
-      quote: "The ATS optimization tips doubled my callback rate. Finally understanding how to properly format for automated systems made all the difference.",
-      author: "David Morrison",
-      role: "Marketing Director",
-      date: reviewDates[2] || safeCurrentDate,
-      hiddenAuthor: "Ansu Kamara",
-      hiddenRole: "Content Director"
     }
   ];
 
+  const industryExamples = [
+    {
+      industry: "Technology & Software",
+      focus: "Projects, GitHub, Tech Stack",
+      tip: "List specific languages (Python, Java) and frameworks (React, Node.js). Include a 'Projects' section if you lack direct experience."
+    },
+    {
+      industry: "Healthcare & Nursing",
+      focus: "Certifications, Patient Care, Compliance",
+      tip: "Highlight licenses (RN, BSN), specific units (ICU, ER), and patient volume metrics. Emphasize HIPAA compliance."
+    },
+    {
+      industry: "Finance & Accounting",
+      focus: "Accuracy, Tools, Regulatory Knowledge",
+      tip: "Quantify budget sizes managed. Mention tools like Excel (Pivot Tables, VLOOKUP), SAP, or QuickBooks. Highlight CPA/CFA status."
+    },
+    {
+      industry: "Creative & Marketing",
+      focus: "Portfolio, Campaigns, ROI",
+      tip: "Link to a digital portfolio. Focus on campaign results (e.g., 'Increased engagement by 20%'). Show versatility in tools (Adobe Suite)."
+    }
+  ];
+
+  const checklistItems = [
+    "Contact info is current and professional",
+    "Professional summary is tailored to the job",
+    "Work experience uses reverse-chronological order",
+    "Achievements are quantified with numbers/%",
+    "No spelling or grammar errors",
+    "File format is .docx or PDF (as requested)",
+    "Font is readable (10-12pt) and consistent",
+    "Margins are between 0.5\" and 1\""
+  ];
+
   return (
-    <div className={styles.container} lang="en-US" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-      {/* Inline styles to ensure horizontal layouts and centering */}
+    <div className={styles.container} lang="en-US" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', minHeight: '100vh', backgroundColor: '#fafafa' }}>
+      {/* Global Styles for Responsiveness and Box Sizing */}
       <style jsx global>{`
+        * {
+          box-sizing: border-box;
+        }
         body {
           margin: 0;
           padding: 0;
           overflow-x: hidden;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        /* Ensure the main article content doesn't stretch too wide on large screens */
         main {
           width: 100%;
-          max-width: 1200px; /* Limits width for readability */
-          margin: 0 auto; /* Centers the block */
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
         }
         
-        /* Force Horizontal Layouts for Grids */
-        .statsGrid, .mistakesGrid, .tipsGrid, .testimonialsGrid {
-          display: flex !important;
-          flex-direction: row !important;
-          flex-wrap: wrap !important;
-          justify-content: center !important;
-          gap: 20px !important;
+        /* Responsive Typography Utilities */
+        .text-responsive {
+          font-size: clamp(1rem, 2.5vw, 1.125rem);
+          line-height: 1.6;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
         }
         
-        /* Adjust card widths for horizontal flow */
-        .statCard, .mistakeCard, .tipCard, .testimonialCard {
-          flex: 1 1 300px !important; /* Grow, shrink, base width 300px */
-          max-width: 350px !important;
-          min-width: 280px !important;
+        /* Responsive Grid Utilities */
+        .responsiveGrid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
+          width: 100%;
         }
 
-        /* Center text in hero and conclusion */
-        .heroSection, .conclusionCard {
-          text-align: center;
+        .cardHover {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        
-        /* Ensure grids center their items */
-        .statsGrid, .mistakesGrid, .tipsGrid, .testimonialsGrid, .faqGrid {
-          justify-content: center;
+        .cardHover:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 16px rgba(0,0,0,0.08);
         }
       `}</style>
 
       <Head>
-        {/* OPTIMIZED TITLE - 68 characters (BELOW 70 LIMIT) */}
         <title>How to Write a Resume: Complete 2026 Guide with Expert Examples</title>
         <meta 
           name="description" 
@@ -228,7 +245,6 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="revisit-after" content="2 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://www.professionalresumefree.com/how-to-write-a-resume" />
         
         <link rel="alternate" href="https://www.professionalresumefree.com/how-to-write-a-resume" hreflang="en" />
@@ -238,7 +254,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <link rel="alternate" href="https://www.professionalresumefree.com/how-to-write-a-resume" hreflang="en-AU" />
         <link rel="alternate" href="https://www.professionalresumefree.com/how-to-write-a-resume" hreflang="x-default" />
         
-        {/* GEO Optimization Tags */}
+        {/* GEO & AI Optimization Tags */}
         <meta name="chatgpt-fts:title" content="How to Write a Resume: Complete 2026 Guide with Expert Examples" />
         <meta name="chatgpt-fts:description" content="Complete step-by-step guide on how to write a professional resume that passes ATS and impresses hiring managers. Includes templates, examples, and expert tips." />
         <meta name="chatgpt-fts:keywords" content="resume writing guide, how to write a resume, professional resume examples, ATS resume tips, resume format 2026" />
@@ -283,11 +299,11 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Hidden SEO metadata for invisible author */}
+        {/* Hidden SEO metadata */}
         <meta name="document-author" content="Ansu Kamara" />
         <meta name="content-strategist" content="Ansu Kamara" />
         
-        {/* Structured Data - FIXED: Changed itemReviewed type from CreativeWork to Product */}
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           key="structured-data"
@@ -459,7 +475,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                       "reviewBody": testimonial.quote,
                       "datePublished": testimonial.date,
                       "itemReviewed": {
-                        "@type": "Product",  // FIXED: Changed from "CreativeWork" to "Product"
+                        "@type": "Product",
                         "name": "Resume Writing Guide",
                         "description": "Complete guide on how to write a professional resume",
                         "sku": "RESUME-GUIDE-2026",
@@ -470,6 +486,13 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                         "author": {
                           "@type": "Person",
                           "name": "Ansu Kamara"
+                        },
+                        "offers": {
+                          "@type": "Offer",
+                          "price": "0",
+                          "priceCurrency": "USD",
+                          "availability": "https://schema.org/InStock",
+                          "url": "https://www.professionalresumefree.com/how-to-write-a-resume"
                         }
                       }
                     }
@@ -487,420 +510,244 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="author-metadata" content="Ansu Kamara" />
       </div>
 
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
-        <ol className={styles.breadcrumbList}>
+      {/* Breadcrumb Navigation */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb" style={{ width: '100%', maxWidth: '1200px', margin: '20px auto 0', padding: '0 20px' }}>
+        <ol className={styles.breadcrumbList} style={{ display: 'flex', alignItems: 'center', listStyle: 'none', padding: 0, fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', color: '#666', flexWrap: 'wrap' }}>
           <li className={styles.breadcrumbItem}>
-            <Link href="/" className={styles.breadcrumbLink}>
-              <FiHome className={styles.breadcrumbIcon} />
-              <span className={styles.breadcrumbText}>Home</span>
+            <Link href="/" className={styles.breadcrumbLink} style={{ textDecoration: 'none', color: '#000', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: '500' }}>
+              <FiHome size={16} />
+              <span>Home</span>
             </Link>
           </li>
-          <li className={styles.breadcrumbSeparator}>
-            <FiChevronRight />
+          <li className={styles.breadcrumbSeparator} style={{ margin: '0 10px' }}>
+            <FiChevronRight size={14} />
           </li>
           <li className={styles.breadcrumbItem}>
-            <span className={styles.breadcrumbCurrent}>How to Write a Resume</span>
+            <span className={styles.breadcrumbCurrent} style={{ color: '#666' }}>How to Write a Resume</span>
           </li>
         </ol>
       </nav>
 
       <main className={styles.main}>
         {/* Introduction - Enhanced Hero Section */}
-        <section className={styles.heroSection}>
-          <div className={styles.heroBadge}>
-            <FiStar /> 2026 Updated Guide
+        <section className={styles.heroSection} style={{ padding: '40px 0', borderBottom: '1px solid #eee' }}>
+          <div className={styles.heroBadge} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: '#f0f0f0', color: '#000', padding: '6px 14px', borderRadius: '20px', fontSize: 'clamp(0.75rem, 2vw, 0.85rem)', fontWeight: '600', marginBottom: '20px', border: '1px solid #ddd' }}>
+            <FiStar size={14} /> 2026 Updated Guide
           </div>
-          <h1 className={styles.h1}>How to Write a Resume: The Complete 2026 Guide</h1>
-          <p className={styles.leadParagraph}>
+          <h1 className={styles.h1} style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: '800', lineHeight: '1.2', marginBottom: '20px', color: '#000', letterSpacing: '-0.02em', wordWrap: 'break-word' }}>How to Write a Resume: The Complete 2026 Guide</h1>
+          <p className={styles.leadParagraph} style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', color: '#444', maxWidth: '800px', margin: '0 auto 40px', lineHeight: '1.6' }}>
             Writing an effective resume is both an art and a science. This comprehensive guide provides proven strategies, 
             real examples, and step-by-step instructions to help you create a professional resume that stands out 
             in today's competitive job market and passes through modern ATS systems.
           </p>
           
-          {/* HORIZONTAL STATS GRID 1 */}
-          <div className={styles.statsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '2rem' }}>
-            {keyStatistics.slice(0, 3).map((stat, index) => (
-              <div key={index} className={styles.statCard} style={{ flex: '1 1 300px', maxWidth: '350px' }}>
-                <div className={styles.statValue}>{stat.value}</div>
-                <div className={styles.statLabel}>{stat.label}</div>
-                <div className={styles.statSource}>{stat.source}</div>
-              </div>
-            ))}
-          </div>
-          
-          {/* HORIZONTAL STATS GRID 2 */}
-          <div className={styles.statsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '1rem' }}>
-            {keyStatistics.slice(3, 6).map((stat, index) => (
-              <div key={index} className={styles.statCard} style={{ flex: '1 1 300px', maxWidth: '350px' }}>
-                <div className={styles.statValue}>{stat.value}</div>
-                <div className={styles.statLabel}>{stat.label}</div>
-                <div className={styles.statSource}>{stat.source}</div>
+          {/* CONSOLIDATED STATS GRID - Only Top 3 */}
+          <div className="responsiveGrid" style={{ marginTop: '2rem' }}>
+            {keyStatistics.map((stat, index) => (
+              <div key={index} className={`statCard cardHover`} style={{ background: '#fff', padding: '25px', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', textAlign: 'center', border: '1px solid #eee' }}>
+                <div className={styles.statValue} style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)', fontWeight: '800', color: '#000', marginBottom: '10px', lineHeight: 1 }}>{stat.value}</div>
+                <div className={styles.statLabel} style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)', color: '#333', marginBottom: '8px', fontWeight: '500' }}>{stat.label}</div>
+                <div className={styles.statSource} style={{ fontSize: '0.75rem', color: '#888', fontStyle: 'italic' }}>{stat.source}</div>
               </div>
             ))}
           </div>
         </section>
 
         {/* Quick Navigation - Enhanced */}
-        <section className={styles.quickNavSection}>
-          <div className={styles.quickNavCard}>
-            <h2 className={styles.quickNavTitle}>Quick Navigation</h2>
-            <div className={styles.quickNavGrid}>
-              <a href="#resume-fundamentals" className={styles.quickNavLink}>1. Resume Fundamentals</a>
-              <a href="#choose-format" className={styles.quickNavLink}>2. Choose Format</a>
-              <a href="#essential-sections" className={styles.quickNavLink}>3. Essential Sections</a>
-              <a href="#writing-content" className={styles.quickNavLink}>4. Writing Content</a>
-              <a href="#ats-optimization" className={styles.quickNavLink}>5. ATS Optimization</a>
-              <a href="#design-tips" className={styles.quickNavLink}>6. Design Tips</a>
-              <a href="#common-mistakes" className={styles.quickNavLink}>7. Common Mistakes</a>
-              <a href="#expert-tips" className={styles.quickNavLink}>8. Expert Tips</a>
-              <a href="#testimonials" className={styles.quickNavLink}>Success Stories</a>
-              <a href="#faqs" className={styles.quickNavLink}>FAQs</a>
+        <section className={styles.quickNavSection} style={{ margin: '40px 0' }}>
+          <div className={styles.quickNavCard} style={{ background: '#fff', padding: '30px', borderRadius: '12px', border: '1px solid #eee', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+            <h2 className={styles.quickNavTitle} style={{ fontSize: 'clamp(1.1rem, 3vw, 1.2rem)', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: '#000' }}><FiBookOpen /> Quick Navigation</h2>
+            <div className={styles.quickNavGrid} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '12px' }}>
+              {[
+                { title: "1. Resume Fundamentals", href: "#resume-fundamentals" },
+                { title: "2. Choose Format", href: "#choose-format" },
+                { title: "3. Essential Sections", href: "#essential-sections" },
+                { title: "4. Writing Content", href: "#writing-content" },
+                { title: "5. Industry Examples", href: "#industry-examples" },
+                { title: "6. Final Checklist", href: "#checklist" }
+              ].map((item, idx) => (
+                <a key={idx} href={item.href} className={styles.quickNavLink} style={{ textDecoration: 'none', color: '#333', padding: '12px 16px', background: '#f8f9fa', borderRadius: '8px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', transition: 'all 0.2s', border: '1px solid transparent', fontWeight: '500' }}>
+                  {item.title}
+                </a>
+              ))}
             </div>
           </div>
         </section>
 
         <article className={styles.article}>
-          {/* Section 1 */}
-          <section className={styles.section} id="resume-fundamentals">
-            <h2 className={styles.h2}>1. Resume Writing Fundamentals</h2>
-            <p>Understand the core principles that make resumes effective in today's job market:</p>
+          {/* Section 1 - Consolidated Fundamentals */}
+          <section className={styles.section} id="resume-fundamentals" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>1. Resume Writing Fundamentals</h2>
             
-            <div className={styles.card}>
-              <h3 className={styles.h3}>The Purpose of Your Resume</h3>
-              <p>Your resume has one primary goal: <strong>to secure an interview</strong>. It's a marketing document that should:</p>
-              <ul className={styles.list}>
-                <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Demonstrate your value to potential employers</li>
-                <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Showcase your most relevant skills and achievements</li>
-                <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Pass through Applicant Tracking Systems (ATS)</li>
-                <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Make a strong first impression in 6-8 seconds</li>
-                <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Provide talking points for interviews</li>
-              </ul>
-              <p className={styles.quote}>Remember: Your resume is not your life story. It's a strategic document designed to get you to the next step.</p>
-            </div>
-
-            <div className={styles.card}>
-              <h3 className={styles.h3}>What Makes a Resume Effective?</h3>
-              <p>Effective resumes share these key characteristics:</p>
+            <div className={styles.card} style={{ background: '#fff', padding: '30px', borderRadius: '12px', border: '1px solid #eee', marginBottom: '25px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+              <h3 className={styles.h3} style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: '#000' }}><FiTarget /> The Purpose & Key Characteristics</h3>
+              <p className="text-responsive" style={{ marginBottom: '20px' }}>Your resume has one primary goal: <strong>to secure an interview</strong>. It's a marketing document that should demonstrate your value, showcase relevant skills, and pass through Applicant Tracking Systems (ATS).</p>
               
-              <div className={styles.comparisonTable}>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableHeader}>Characteristic</div>
-                  <div className={styles.tableHeader}>Why It Matters</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Clarity</strong></div>
-                  <div className={styles.tableCell}>Easy to read and understand quickly in 6-8 seconds</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Relevance</strong></div>
-                  <div className={styles.tableCell}>Tailored to the specific job and industry requirements</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Quantification</strong></div>
-                  <div className={styles.tableCell}>Uses numbers to demonstrate measurable impact</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Professionalism</strong></div>
-                  <div className={styles.tableCell}>Error-free with appropriate formatting and design</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>ATS-Friendly</strong></div>
-                  <div className={styles.tableCell}>Compatible with applicant tracking systems used by 98% of companies</div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 2 - Choose Format */}
-          <section className={styles.section} id="choose-format">
-            <h2 className={styles.h2}>2. Choosing the Right Resume Format</h2>
-            
-            <div className={styles.card}>
-              <h3 className={styles.h3}>2026 Resume Format Comparison</h3>
-              <p>Selecting the appropriate format is crucial for presenting your experience effectively:</p>
-              
-              <div className={styles.comparisonTable}>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableHeader}>Format</div>
-                  <div className={styles.tableHeader}>Best For</div>
-                  <div className={styles.tableHeader}>ATS Compatibility</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Reverse-Chronological</strong></div>
-                  <div className={styles.tableCell}>Most professionals, steady career progression</div>
-                  <div className={styles.tableCell}><span className={styles.atsGood}>✓ Excellent</span></div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Functional (Skills-Based)</strong></div>
-                  <div className={styles.tableCell}>Career changers, employment gaps</div>
-                  <div className={styles.tableCell}><span className={styles.atsPoor}>⚠ Poor</span></div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Hybrid/Combination</strong></div>
-                  <div className={styles.tableCell}>Technical roles, senior professionals</div>
-                  <div className={styles.tableCell}><span className={styles.atsGood}>✓ Good</span></div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Targeted/Customized</strong></div>
-                  <div className={styles.tableCell}>Specific job applications, competitive roles</div>
-                  <div className={styles.tableCell}><span className={styles.atsGood}>✓ Excellent</span></div>
-                </div>
-              </div>
-              
-              <div className={styles.exampleCard}>
-                <h4 className={styles.h4}>Quick Format Selection Guide:</h4>
-                <ul className={styles.list}>
-                  <li className={styles.listItem}><strong>Recent graduates:</strong> Reverse-chronological with education first</li>
-                  <li className={styles.listItem}><strong>Career advancement:</strong> Reverse-chronological with achievements focus</li>
-                  <li className={styles.listItem}><strong>Career change:</strong> Functional or hybrid format</li>
-                  <li className={styles.listItem}><strong>Technical professionals:</strong> Hybrid with projects section</li>
-                  <li className={styles.listItem}><strong>Executive level:</strong> Reverse-chronological with strategic achievements</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 3 - Essential Sections */}
-          <section className={styles.section} id="essential-sections">
-            <h2 className={styles.h2}>3. Essential Resume Sections</h2>
-            
-            <div className={styles.card}>
-              <h3 className={styles.h3}>Must-Have Resume Sections</h3>
-              
-              <div className={styles.twoColumn}>
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Contact Information</h4>
-                    <p><strong>Include:</strong></p>
-                    <ul className={styles.list}>
-                      <li className={styles.listItem}>Full name (professional)</li>
-                      <li className={styles.listItem}>Phone number (with area code)</li>
-                      <li className={styles.listItem}>Professional email address</li>
-                      <li className={styles.listItem}>LinkedIn profile URL</li>
-                      <li className={styles.listItem}>City, State (and country if applying abroad)</li>
-                      <li className={styles.listItem}>Portfolio/GitHub (for technical roles)</li>
-                    </ul>
-                    <div className={styles.exampleCard}>
-                      <p><strong>Professional Email Example:</strong> firstname.lastname@gmail.com</p>
-                      <p><strong>Avoid:</strong> nickname123@email.com, partylover@email.com</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Professional Summary</h4>
-                    <p><strong>2-3 sentences that:</strong></p>
-                    <ul className={styles.list}>
-                      <li className={styles.listItem}>State your professional identity</li>
-                      <li className={styles.listItem}>Highlight key achievements</li>
-                      <li className={styles.listItem}>Mention target role/industry</li>
-                      <li className={styles.listItem}>Include relevant keywords</li>
-                    </ul>
-                    <div className={styles.exampleCard}>
-                      <p><strong>Example:</strong> "Results-driven Marketing Manager with 8+ years of experience driving 150% revenue growth through data-driven campaigns. Proven track record of leading cross-functional teams and delivering measurable business results."</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.card}>
-              <h3 className={styles.h3}>Work Experience Section</h3>
-              <p>This is the most important section of your resume. Structure each position as follows:</p>
-              
-              <div className={styles.comparisonTable}>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableHeader}>Element</div>
-                  <div className={styles.tableHeader}>Format</div>
-                  <div className={styles.tableHeader}>Example</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Job Title</strong></div>
-                  <div className={styles.tableCell}>Bold, larger font</div>
-                  <div className={styles.tableCell}><strong>Senior Marketing Manager</strong></div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Company & Location</strong></div>
-                  <div className={styles.tableCell}>Regular font</div>
-                  <div className={styles.tableCell}>TechCorp Inc., San Francisco, CA</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Dates</strong></div>
-                  <div className={styles.tableCell}>Right-aligned</div>
-                  <div className={styles.tableCell}>March 2022 - Present</div>
-                </div>
-                <div className={styles.tableRow}>
-                  <div className={styles.tableCell}><strong>Bullet Points</strong></div>
-                  <div className={styles.tableCell}>3-5 per job, action verbs</div>
-                  <div className={styles.tableCell}>• Increased sales by 35% through strategic campaign optimization</div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 4 - Writing Content with CAR Method */}
-          <section className={styles.section} id="writing-content">
-            <h2 className={styles.h2}>4. Writing Powerful Resume Content</h2>
-            
-            <div className={styles.card}>
-              <h3 className={styles.h3}>The CAR Method for Achievement Statements</h3>
-              <p>Transform job duties into impressive achievements using the CAR framework:</p>
-              
-              <div className={styles.twoColumn}>
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Challenge</h4>
-                    <p>Describe the situation or problem you faced:</p>
-                    <div className={styles.exampleCard}>
-                      <p><strong>Example:</strong> "Sales were declining by 15% quarterly due to outdated marketing strategy."</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Action</h4>
-                    <p>Explain what specific actions you took:</p>
-                    <div className={styles.exampleCard}>
-                      <p><strong>Example:</strong> "Implemented new CRM system, created data-driven marketing campaigns, and trained team of 5 on analytics tools."</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Result</h4>
-                    <p>Quantify the outcome of your actions:</p>
-                    <div className={styles.exampleCard}>
-                      <p><strong>Example:</strong> "Achieved 25% sales increase within 6 months and improved team efficiency by 40%."</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className={styles.exampleCard}>
-                <h4 className={styles.h4}>Complete CAR Example:</h4>
-                <p><strong>Before (Duty):</strong> "Managed social media accounts"</p>
-                <p><strong>After (Achievement - CAR):</strong> "Increased social media engagement by 240% through strategic content calendar and audience segmentation, generating 150+ qualified leads monthly."</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 5 - ATS Optimization */}
-          <section className={styles.section} id="ats-optimization">
-            <h2 className={styles.h2}>5. ATS & Keyword Optimization</h2>
-            
-            <div className={styles.card}>
-              <h3 className={styles.h3}>2026 ATS Optimization Strategies</h3>
-              <p>Modern Applicant Tracking Systems scan for specific keywords and formatting:</p>
-              
-              <div className={styles.twoColumn}>
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Keyword Research</h4>
-                    <ul className={styles.list}>
-                      <li className={styles.listItem}>Analyze 5-10 target job descriptions</li>
-                      <li className={styles.listItem}>Identify frequently mentioned skills and requirements</li>
-                      <li className={styles.listItem}>Include industry-specific terminology</li>
-                      <li className={styles.listItem}>Use both acronyms and full terms (SEO / Search Engine Optimization)</li>
-                      <li className={styles.listItem}>Incorporate keywords naturally throughout content</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>ATS-Friendly Formatting</h4>
-                    <ul className={styles.list}>
-                      <li className={styles.listItem}>Use standard section headings (Experience, Education, Skills)</li>
-                      <li className={styles.listItem}>Avoid headers, footers, text boxes, and tables</li>
-                      <li className={styles.listItem}>Save as .docx for best parsing (PDF second choice)</li>
-                      <li className={styles.listItem}>No images, graphics, charts, or columns</li>
-                      <li className={styles.listItem}>Simple, clean fonts only (Arial, Calibri, Helvetica)</li>
-                      <li className={styles.listItem}>Use consistent date formatting (Month Year)</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              
-              <div className={styles.exampleCard}>
-                <h4 className={styles.h4}>Keyword Integration Example:</h4>
-                <p><strong>Job Description Keywords:</strong> Project Management, Agile, Scrum, Budget Management, Stakeholder Communication</p>
-                <p><strong>Resume Integration:</strong> "Led cross-functional teams in Agile/Scrum environment to manage $2M project budget, delivering all milestones on time and 15% under budget while maintaining 95% stakeholder satisfaction."</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 6 - Design Tips */}
-          <section className={styles.section} id="design-tips">
-            <h2 className={styles.h2}>6. Design & Formatting Tips</h2>
-            
-            <div className={styles.card}>
-              <h3 className={styles.h3}>Professional Resume Design Principles</h3>
-              
-              <div className={styles.twoColumn}>
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Typography</h4>
-                    <ul className={styles.list}>
-                      <li className={styles.listItem}><strong>Fonts:</strong> Arial, Calibri, Helvetica, Georgia, Times New Roman</li>
-                      <li className={styles.listItem}><strong>Size:</strong> 10-12pt for body, 14-16pt for headings</li>
-                      <li className={styles.listItem}><strong>Colors:</strong> Black text on white background only</li>
-                      <li className={styles.listItem}><strong>Alignment:</strong> Left-aligned for maximum readability</li>
-                      <li className={styles.listItem}><strong>Spacing:</strong> 1.0-1.15 line height, consistent margins</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <div className={styles.column}>
-                  <div className={styles.columnCard}>
-                    <h4 className={styles.h4}>Layout & Structure</h4>
-                    <ul className={styles.list}>
-                      <li className={styles.listItem}><strong>Margins:</strong> 0.5-1 inch on all sides (minimum 0.5")</li>
-                      <li className={styles.listItem}><strong>White Space:</strong> Generous spacing for readability</li>
-                      <li className={styles.listItem}><strong>Bullet Points:</strong> Consistent style and indentation</li>
-                      <li className={styles.listItem}><strong>Section Order:</strong> Most relevant information first</li>
-                      <li className={styles.listItem}><strong>Length:</strong> 1-2 pages maximum for most positions</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 7 - Common Mistakes (HORIZONTAL) */}
-          <section className={styles.section} id="common-mistakes">
-            <h2 className={styles.h2}>7. Common Resume Mistakes to Avoid</h2>
-            
-            <div className={styles.card}>
-              <h3 className={styles.h3}>Top Resume Errors That Cost Interviews</h3>
-              <p>Based on analysis of 10,000+ resumes, avoid these critical mistakes:</p>
-              
-              <div className={styles.mistakesGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '15px', marginTop: '1.5rem' }}>
-                {commonMistakes.map((mistake, index) => (
-                  <div key={index} className={styles.mistakeCard} style={{ flex: '1 1 250px', maxWidth: '300px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <FiAlertCircle className={styles.mistakeIcon} style={{ color: '#e74c3c', flexShrink: 0 }} />
-                    <span className={styles.mistakeText}>{mistake}</span>
+              <div className={styles.comparisonTable} style={{ width: '100%' }}>
+                {[
+                  { char: "Clarity", why: "Easy to read and understand quickly in 6-8 seconds" },
+                  { char: "Relevance", why: "Tailored to the specific job and industry requirements" },
+                  { char: "Quantification", why: "Uses numbers to demonstrate measurable impact" },
+                  { char: "Professionalism", why: "Error-free with appropriate formatting and design" },
+                  { char: "ATS-Friendly", why: "Compatible with applicant tracking systems used by 98% of companies" }
+                ].map((item, idx) => (
+                  <div key={idx} className={styles.tableRow} style={{ display: 'flex', borderBottom: '1px solid #f0f0f0', paddingBottom: '15px', marginBottom: '15px', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', maxWidth: '150px', fontWeight: '600', color: '#000', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.char}</div>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', color: '#444', lineHeight: '1.5', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.why}</div>
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Section 8 - Expert Tips (HORIZONTAL) */}
-          <section className={styles.section} id="expert-tips">
-            <h2 className={styles.h2}>8. Expert Tips for Resume Success</h2>
+          {/* Section 2 - Choose Format */}
+          <section className={styles.section} id="choose-format" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>2. Choosing the Right Resume Format</h2>
             
-            <div className={styles.card}>
-              <h3 className={styles.h3}>Proven Strategies from Hiring Experts</h3>
-              <p>Implement these expert-approved techniques to make your resume stand out:</p>
+            <div className={styles.card} style={{ background: '#fff', padding: '30px', borderRadius: '12px', border: '1px solid #eee', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+              <h3 className={styles.h3} style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', marginBottom: '20px', color: '#000' }}>2026 Resume Format Comparison</h3>
+              <p className="text-responsive" style={{ marginBottom: '25px' }}>Selecting the appropriate format is crucial for presenting your experience effectively:</p>
               
-              <div className={styles.tipsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '15px', marginTop: '1.5rem' }}>
-                {expertTips.map((tip, index) => (
-                  <div key={index} className={styles.tipCard} style={{ flex: '1 1 250px', maxWidth: '300px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <FiStar className={styles.tipIcon} style={{ color: '#f1c40f', flexShrink: 0 }} />
-                    <span className={styles.tipText}>{tip}</span>
+              <div className={styles.comparisonTable} style={{ width: '100%', overflowX: 'auto' }}>
+                <div className={styles.tableRow} style={{ display: 'flex', borderBottom: '2px solid #000', paddingBottom: '10px', marginBottom: '10px', fontWeight: '700', color: '#000', minWidth: '600px' }}>
+                  <div className={styles.tableHeader} style={{ flex: 1 }}>Format</div>
+                  <div className={styles.tableHeader} style={{ flex: 2 }}>Best For</div>
+                  <div className={styles.tableHeader} style={{ flex: 1 }}>ATS Compatibility</div>
+                </div>
+                {[
+                  { fmt: "Reverse-Chronological", best: "Most professionals, steady career progression", ats: "✓ Excellent", atsClass: "good" },
+                  { fmt: "Functional (Skills-Based)", best: "Career changers, employment gaps", ats: "⚠ Poor", atsClass: "poor" },
+                  { fmt: "Hybrid/Combination", best: "Technical roles, senior professionals", ats: "✓ Good", atsClass: "good" },
+                  { fmt: "Targeted/Customized", best: "Specific job applications, competitive roles", ats: "✓ Excellent", atsClass: "good" }
+                ].map((item, idx) => (
+                  <div key={idx} className={styles.tableRow} style={{ display: 'flex', borderBottom: '1px solid #f0f0f0', paddingBottom: '15px', marginBottom: '15px', minWidth: '600px', flexWrap: 'wrap', gap: '10px' }}>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', maxWidth: '150px', fontWeight: '600', color: '#000', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.fmt}</div>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', maxWidth: '300px', color: '#444', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.best}</div>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', maxWidth: '150px', color: item.atsClass === 'good' ? '#000' : '#666', fontWeight: '600', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.ats}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section 3 - Essential Sections - UPDATED (Removed Contact & Summary Cards) */}
+          <section className={styles.section} id="essential-sections" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>3. Essential Resume Sections</h2>
+            
+            <div className={styles.card} style={{ background: '#fff', padding: '30px', borderRadius: '12px', border: '1px solid #eee', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+              <h3 className={styles.h3} style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', marginBottom: '20px', color: '#000' }}>Work Experience Section</h3>
+              <p className="text-responsive" style={{ marginBottom: '20px' }}>This is the most important section of your resume. Structure each position as follows:</p>
+              
+              <div className={styles.comparisonTable} style={{ width: '100%' }}>
+                {[
+                  { el: "Job Title", fmt: "Bold, larger font", ex: "Senior Marketing Manager" },
+                  { el: "Company & Location", fmt: "Regular font", ex: "TechCorp Inc., San Francisco, CA" },
+                  { el: "Dates", fmt: "Right-aligned", ex: "March 2022 - Present" },
+                  { el: "Bullet Points", fmt: "3-5 per job, action verbs", ex: "• Increased sales by 35% through strategic campaign optimization" }
+                ].map((item, idx) => (
+                  <div key={idx} className={styles.tableRow} style={{ display: 'flex', borderBottom: '1px solid #f0f0f0', paddingBottom: '15px', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', maxWidth: '150px', fontWeight: '600', color: '#000', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.el}</div>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', maxWidth: '200px', color: '#555', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.fmt}</div>
+                    <div className={styles.tableCell} style={{ flex: '1 1 100%', color: '#333', fontStyle: 'italic', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{item.ex}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section 4 - Writing Content with CAR Method - Simplified */}
+          <section className={styles.section} id="writing-content" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>4. Writing Powerful Resume Content</h2>
+            
+            <div className={styles.card} style={{ background: '#fff', padding: '30px', borderRadius: '12px', border: '1px solid #eee', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+              <h3 className={styles.h3} style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', marginBottom: '20px', color: '#000' }}>The CAR Method for Achievement Statements</h3>
+              <p className="text-responsive" style={{ marginBottom: '25px' }}>Transform job duties into impressive achievements using the CAR framework:</p>
+              
+              <div className={styles.exampleCard} style={{ background: '#f8f9fa', padding: '25px', borderRadius: '10px', border: '1px solid #eee' }}>
+                <div style={{ marginBottom: '20px' }}>
+                  <h4 className={styles.h4} style={{ margin: '0 0 10px 0', color: '#000', fontWeight: '700', fontSize: 'clamp(1rem, 2.5vw, 1.1rem)' }}>1. Challenge</h4>
+                  <p className="text-responsive" style={{ margin: 0 }}><strong>Example:</strong> "Sales were declining by 15% quarterly due to outdated marketing strategy."</p>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <h4 className={styles.h4} style={{ margin: '0 0 10px 0', color: '#000', fontWeight: '700', fontSize: 'clamp(1rem, 2.5vw, 1.1rem)' }}>2. Action</h4>
+                  <p className="text-responsive" style={{ margin: 0 }}><strong>Example:</strong> "Implemented new CRM system, created data-driven marketing campaigns, and trained team of 5 on analytics tools."</p>
+                </div>
+                <div>
+                  <h4 className={styles.h4} style={{ margin: '0 0 10px 0', color: '#000', fontWeight: '700', fontSize: 'clamp(1rem, 2.5vw, 1.1rem)' }}>3. Result</h4>
+                  <p className="text-responsive" style={{ margin: 0 }}><strong>Example:</strong> "Achieved 25% sales increase within 6 months and improved team efficiency by 40%."</p>
+                </div>
+              </div>
+              
+              <div className={styles.exampleCard} style={{ background: '#000', color: '#fff', padding: '25px', borderRadius: '10px', marginTop: '30px' }}>
+                <h4 className={styles.h4} style={{ margin: '0 0 15px 0', color: '#fff', fontSize: 'clamp(1rem, 2.5vw, 1.1rem)' }}>Complete CAR Example:</h4>
+                <p style={{ marginBottom: '10px', opacity: 0.8, fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}><strong>Before (Duty):</strong> "Managed social media accounts"</p>
+                <p style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', fontWeight: '500' }}><strong>After (Achievement - CAR):</strong> "Increased social media engagement by 240% through strategic content calendar and audience segmentation, generating 150+ qualified leads monthly."</p>
+              </div>
+            </div>
+          </section>
+
+          {/* NEW SECTION: Industry Specific Examples */}
+          <section className={styles.section} id="industry-examples" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>5. Industry-Specific Resume Strategies</h2>
+            <p className="text-responsive" style={{ marginBottom: '25px', color: '#333' }}>Different industries prioritize different information. Tailor your approach based on your field:</p>
+            
+            <div className="responsiveGrid">
+              {industryExamples.map((ind, idx) => (
+                <div key={idx} className={styles.card} style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #eee', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                  <h3 className={styles.h3} style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.2rem)', marginBottom: '15px', color: '#000', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <FiGlobe /> {ind.industry}
+                  </h3>
+                  <p style={{ marginBottom: '10px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#555' }}><strong>Focus Areas:</strong> {ind.focus}</p>
+                  <p style={{ fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#333', lineHeight: '1.5' }}><strong>Pro Tip:</strong> {ind.tip}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* NEW SECTION: Soft vs Hard Skills */}
+          <section className={styles.section} id="skills-section" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>6. Soft Skills vs. Hard Skills</h2>
+            
+            <div className={styles.card} style={{ background: '#fff', padding: '30px', borderRadius: '12px', border: '1px solid #eee', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+              <div className={styles.twoColumn} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
+                <div className={styles.column} style={{ width: '100%' }}>
+                  <h3 className={styles.h3} style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', marginBottom: '15px', color: '#000' }}>Hard Skills (Teachable)</h3>
+                  <p style={{ marginBottom: '15px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#555' }}>Specific technical abilities required for the job. These are easy to quantify.</p>
+                  <ul className={styles.list} style={{ listStyle: 'none', padding: 0 }}>
+                    {["Programming Languages (Python, Java)", "Data Analysis (SQL, Excel)", "Foreign Languages", "Machine Operation", "Accounting Software"].map((item, i) => (
+                      <li key={i} style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}><FiCheck size={14} /> {item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className={styles.column} style={{ width: '100%' }}>
+                  <h3 className={styles.h3} style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', marginBottom: '15px', color: '#000' }}>Soft Skills (Interpersonal)</h3>
+                  <p style={{ marginBottom: '15px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#555' }}>Character traits and interpersonal skills. These show how you work.</p>
+                  <ul className={styles.list} style={{ listStyle: 'none', padding: 0 }}>
+                    {["Communication", "Leadership", "Problem Solving", "Adaptability", "Time Management"].map((item, i) => (
+                      <li key={i} style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}><FiCheck size={14} /> {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div style={{ marginTop: '20px', padding: '15px', background: '#f0f7ff', borderRadius: '8px', borderLeft: '4px solid #0066cc' }}>
+                <p style={{ margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#004085' }}><strong>Strategy:</strong> Don't just list soft skills. Demonstrate them in your work experience bullets. Instead of saying "Good communicator," say "Presented quarterly reports to stakeholders."</p>
+              </div>
+            </div>
+          </section>
+
+          {/* NEW SECTION: Checklist */}
+          <section className={styles.section} id="checklist" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>7. Final Resume Checklist 2026</h2>
+            
+            <div className={styles.card} style={{ background: '#fff', padding: '30px', borderRadius: '12px', border: '1px solid #eee', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+              <h3 className={styles.h3} style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', marginBottom: '20px', color: '#000', display: 'flex', alignItems: 'center', gap: '10px' }}><FiCheckSquare /> Pre-Submission Verification</h3>
+              <p className="text-responsive" style={{ marginBottom: '25px' }}>Before you hit send, verify every item on this list to ensure your resume is perfect:</p>
+              
+              <div className="denseGrid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px' }}>
+                {checklistItems.map((item, index) => (
+                  <div key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', background: '#fff', padding: '15px', borderRadius: '8px', border: '1px solid #eee' }}>
+                    <FiCheckSquare style={{ color: '#000', flexShrink: 0, marginTop: '2px' }} />
+                    <span style={{ fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#333', lineHeight: '1.4' }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -908,18 +755,18 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
           </section>
 
           {/* Testimonials Section - Display visible authors (HORIZONTAL) */}
-          <section className={styles.section} id="testimonials">
-            <h2 className={styles.h2}>Success Stories: Real Results from Job Seekers</h2>
+          <section className={styles.section} id="testimonials" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>Success Stories: Real Results from Job Seekers</h2>
             
-            <div className={styles.testimonialsGrid} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '1.5rem' }}>
+            <div className="responsiveGrid">
               {testimonials.map((testimonial, index) => (
-                <div key={index} className={styles.testimonialCard} style={{ flex: '1 1 300px', maxWidth: '350px' }}>
-                  <div className={styles.quoteIcon}>"</div>
-                  <p className={styles.testimonialQuote}>{testimonial.quote}</p>
-                  <div className={styles.testimonialAuthor}>
-                    <strong>{testimonial.author}</strong>
-                    <span>{testimonial.role}</span>
-                    <small>{testimonial.date}</small>
+                <div key={index} className={styles.testimonialCard} style={{ background: '#fff', padding: '30px', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', border: '1px solid #eee', display: 'flex', flexDirection: 'column' }}>
+                  <div className={styles.quoteIcon} style={{ fontSize: '3rem', color: '#eee', lineHeight: '1', marginBottom: '15px', fontFamily: 'serif' }}>"</div>
+                  <p className={styles.testimonialQuote} style={{ fontSize: 'clamp(0.95rem, 2vw, 1.05rem)', color: '#333', lineHeight: '1.6', marginBottom: '25px', flex: 1 }}>{testimonial.quote}</p>
+                  <div className={styles.testimonialAuthor} style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid #f0f0f0', paddingTop: '15px' }}>
+                    <strong style={{ color: '#000', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{testimonial.author}</strong>
+                    <span style={{ color: '#666', fontSize: 'clamp(0.8rem, 2vw, 0.9rem)' }}>{testimonial.role}</span>
+                    <small style={{ color: '#999', fontSize: '0.8rem', marginTop: '5px' }}>{testimonial.date}</small>
                   </div>
                   {/* Hidden metadata for invisible author */}
                   <div style={{ display: 'none' }} data-hidden-author={testimonial.hiddenAuthor}>
@@ -931,16 +778,16 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
           </section>
 
           {/* FAQs Section - Enhanced */}
-          <section className={styles.section} id="faqs">
-            <h2 className={styles.h2}>Frequently Asked Questions</h2>
+          <section className={styles.section} id="faqs" style={{ marginBottom: '50px' }}>
+            <h2 className={styles.h2} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '25px', color: '#000', fontWeight: '700' }}>Frequently Asked Questions</h2>
             
-            <div className={styles.faqGrid}>
+            <div className="responsiveGrid">
               {faqs.map((faq, index) => (
-                <div key={index} className={styles.faqCard}>
-                  <h3 className={styles.faqQuestion}>{faq.question}</h3>
-                  <p className={styles.faqAnswer}>{faq.answer}</p>
-                  <div className={styles.faqMeta}>
-                    <FiClock className={styles.faqMetaIcon} />
+                <div key={index} className={styles.faqCard} style={{ background: '#fff', padding: '25px', borderRadius: '12px', border: '1px solid #eee' }}>
+                  <h3 className={styles.faqQuestion} style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', marginBottom: '15px', color: '#000', fontWeight: '600', lineHeight: '1.4' }}>{faq.question}</h3>
+                  <p className={styles.faqAnswer} style={{ fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#444', lineHeight: '1.6' }}>{faq.answer}</p>
+                  <div className={styles.faqMeta} style={{ marginTop: '20px', fontSize: '0.8rem', color: '#999', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <FiClock size={12} />
                     <span>Updated: {safeFaqDates[index] || safeCurrentDate}</span>
                   </div>
                 </div>
@@ -950,33 +797,31 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         </article>
 
         {/* Enhanced CTA Section */}
-        <div className={styles.conclusionSection}>
-          <div className={styles.conclusionCard}>
-            <h3 className={styles.h3}>Start Building Your Professional Resume Today</h3>
-            <p>With this comprehensive guide, you now have all the knowledge needed to create a standout resume. Remember:</p>
-            <ul className={styles.list}>
-              <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Focus on achievements, not just duties</li>
-              <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Tailor your resume for each application</li>
-              <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Use the CAR method for powerful statements</li>
-              <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Optimize for both ATS and human readers</li>
-              <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Proofread thoroughly before sending</li>
-              <li className={styles.listItem}><FiCheck className={styles.listIcon} /> Include measurable results and metrics</li>
+        <div className={styles.conclusionSection} style={{ margin: '60px 0' }}>
+          <div className={styles.conclusionCard} style={{ background: '#000', color: '#fff', padding: '50px 30px', borderRadius: '16px', textAlign: 'center' }}>
+            <h3 className={styles.h3} style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', marginBottom: '20px', color: '#fff', fontWeight: '700' }}>Start Building Your Professional Resume Today</h3>
+            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', marginBottom: '30px', maxWidth: '700px', margin: '0 auto 40px', color: '#ccc', lineHeight: '1.6' }}>With this comprehensive guide, you now have all the knowledge needed to create a standout resume. Remember:</p>
+            <ul className={styles.list} style={{ listStyle: 'none', padding: 0, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginBottom: '40px' }}>
+              {["Focus on achievements, not just duties", "Tailor your resume for each application", "Use the CAR method for powerful statements", "Optimize for both ATS and human readers", "Proofread thoroughly before sending", "Include measurable results and metrics"].map((item, i) => (
+                <li key={i} className={styles.listItem} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.1)', padding: '8px 16px', borderRadius: '20px', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}><FiCheck size={16} style={{ color: '#fff' }} /> {item}</li>
+              ))}
             </ul>
             <Link 
               href="/resume-templates" 
               className={styles.conclusionButton}
               prefetch={false}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#fff', color: '#000', padding: '16px 32px', borderRadius: '30px', fontWeight: '700', textDecoration: 'none', fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', transition: 'transform 0.2s' }}
             >
               <span className={styles.buttonText}>Create Your Free Resume Now</span>
               <FiArrowRight className={styles.buttonIcon} />
             </Link>
-            <p className={styles.smallNote}>No sign-up required • Free forever • ATS-optimized templates • Instant PDF download</p>
+            <p className={styles.smallNote} style={{ marginTop: '20px', fontSize: '0.9rem', color: '#888' }}>No sign-up required • Free forever • ATS-optimized templates • Instant PDF download</p>
           </div>
         </div>
 
         {/* Update Strategy */}
-        <div className={styles.updateStrategy}>
-          <FiClock className={styles.updateIcon} />
+        <div className={styles.updateStrategy} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', fontSize: '0.85rem', color: '#666', marginBottom: '60px', flexWrap: 'wrap' }}>
+          <FiClock size={14} />
           <span>Last updated: {safeCurrentDate}</span>
           <span className={styles.updateSeparator}>•</span>
           <span>Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]}</span>

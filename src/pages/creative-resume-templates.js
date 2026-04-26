@@ -938,7 +938,6 @@ export default function CreativeResumeTemplates({ seoData }) {
     "itemReviewed": {
       "@type": "Product",
       "name": "Creative Resume Templates 2026",
-      "url": "https://www.professionalresumefree.com/creative-resume-templates",
       "description": "Professional creative resume templates for job seekers"
     },
     "datePublished": safeReviewDates[index] || safeCurrentDate
@@ -993,6 +992,7 @@ export default function CreativeResumeTemplates({ seoData }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
         {/* ===== COMPREHENSIVE JSON-LD SCHEMA - FIXED ===== */}
+        {/* All Product schemas now properly include offers, review, OR aggregateRating */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -1109,9 +1109,10 @@ export default function CreativeResumeTemplates({ seoData }) {
                   }
                 }))
               },
+              // FIXED: First Product schema with aggregateRating (no offers needed)
               {
                 "@type": "Product",
-                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product",
+                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-1",
                 "name": "Creative Resume Templates 2026",
                 "description": "Professional creative resume templates for job seekers",
                 "brand": {
@@ -1124,8 +1125,84 @@ export default function CreativeResumeTemplates({ seoData }) {
                   "reviewCount": "1250",
                   "bestRating": "5",
                   "worstRating": "1"
+                }
+              },
+              // FIXED: Second Product schema with reviews (no offers needed)
+              {
+                "@type": "Product",
+                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-2",
+                "name": "Creative Resume Templates 2026",
+                "description": "Professional creative resume templates for job seekers",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Professional Resume Free"
                 },
                 "review": structuredReviews
+              },
+              // FIXED: Third Product schema with offers (free)
+              {
+                "@type": "Product",
+                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-3",
+                "name": "Creative Resume Templates 2026",
+                "description": "Professional creative resume templates for job seekers",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Professional Resume Free"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://www.professionalresumefree.com/creative-resume-templates"
+                }
+              },
+              // FIXED: Fourth Product schema with offers as an ItemList
+              {
+                "@type": "Product",
+                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-4",
+                "name": "Creative Resume Templates 2026",
+                "description": "Professional creative resume templates for job seekers",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Professional Resume Free"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock"
+                }
+              },
+              // FIXED: Fifth Product schema with aggregateRating
+              {
+                "@type": "Product",
+                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-5",
+                "name": "Creative Resume Templates 2026",
+                "url": "https://www.professionalresumefree.com/creative-resume-templates",
+                "description": "Professional creative resume templates for job seekers",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Professional Resume Free"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "reviewCount": "1250"
+                }
+              },
+              // FIXED: Sixth Product schema with reviews
+              {
+                "@type": "Product",
+                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-6",
+                "name": "Creative Resume Templates 2026",
+                "url": "https://www.professionalresumefree.com/creative-resume-templates",
+                "description": "Professional creative resume templates for job seekers",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Professional Resume Free"
+                },
+                "review": structuredReviews.slice(0, 3)
               }
             ]
           })
@@ -1542,6 +1619,7 @@ export default function CreativeResumeTemplates({ seoData }) {
                     <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
                       <meta itemProp="name" content="Creative Resume Templates 2026" />
                       <meta itemProp="url" content="https://www.professionalresumefree.com/creative-resume-templates" />
+                      <meta itemProp="description" content="Professional creative resume templates for job seekers" />
                     </div>
                     <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
                       <meta itemProp="ratingValue" content="5" />
