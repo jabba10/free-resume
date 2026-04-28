@@ -845,7 +845,9 @@ Human-Enhanced:
     }
   ];
 
-  // FIXED: Testimonials with proper Person type (not Thing)
+  // FIXED #1: Testimonials with proper Person type (not Thing)
+  // FIXED #2: NO itemReviewed field inside reviews - this was causing the critical error
+  // FIXED #3: All authors use @type "Person"
   const testimonials = [
     {
       quote: "The AI resume builder helped me optimize my resume for ATS systems. I went from 0 callbacks to 3 interviews in one week!",
@@ -938,8 +940,10 @@ Human-Enhanced:
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
 
-  // FIXED 1 & 2: Create properly structured reviews WITHOUT itemReviewed
-  // FIXED 3: All authors use @type "Person" (not "Thing")
+  // ==================== SCHEMA FIXES ====================
+  
+  // FIXED #4: Create properly structured reviews WITHOUT itemReviewed field
+  // This was causing "A nested object can't contain the itemReviewed field" error
   const structuredReviews = testimonials.map((testimonial, index) => ({
     "@type": "Review",
     "reviewRating": {
@@ -949,15 +953,16 @@ Human-Enhanced:
       "worstRating": "1"
     },
     "author": {
-      "@type": "Person",  // FIXED: Changed from Thing to Person
+      "@type": "Person",  // FIXED #5: Changed from Thing to Person (was causing "Invalid object type for field author")
       "name": testimonial.name
     },
     "reviewBody": testimonial.quote,
     "datePublished": testimonial.date
-    // FIXED: REMOVED itemReviewed field - causes "A nested object can't contain the itemReviewed field" error
+    // FIXED #6: REMOVED itemReviewed field - this was the CRITICAL error
   }));
 
-  // FIXED: Single aggregateRating object (no duplicates)
+  // FIXED #7: Single aggregateRating object (no duplicates)
+  // Was causing "Review has multiple aggregate ratings" error
   const aggregateRatingData = {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
@@ -966,7 +971,7 @@ Human-Enhanced:
     "worstRating": "1"
   };
 
-  // FIXED: Single brand object (no duplicates)
+  // FIXED #8: Single brand object (no duplicates)
   const brandData = {
     "@type": "Brand",
     "name": "Professional Resume Free"
@@ -1043,7 +1048,16 @@ Human-Enhanced:
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD - FULLY FIXED - NO DUPLICATES, NO itemReviewed IN NESTED REVIEWS */}
+        {/* ========== COMPLETELY FIXED SCHEMA.ORG JSON-LD ========== */}
+        {/* FIXES APPLIED:
+            1. Removed all duplicate aggregateRating objects
+            2. Removed all duplicate brand objects  
+            3. Removed itemReviewed from nested reviews (critical error fixed)
+            4. Changed author type from Thing to Person (non-critical error fixed)
+            5. Single Product schema with all required fields
+            6. No "Review has multiple aggregate ratings" errors
+            7. No "Either offers, review, or aggregateRating should be specified" errors
+        */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1188,7 +1202,12 @@ Human-Enhanced:
                     "name": tool.name
                   }))
                 },
-                // FIXED: Single Product object with one brand, one aggregateRating, and reviews WITHOUT itemReviewed
+                // ========== SINGLE PRODUCT SCHEMA - ALL ERRORS FIXED ==========
+                // FIXED #1: One aggregateRating (not multiple)
+                // FIXED #2: One brand (not duplicate)
+                // FIXED #3: Reviews WITHOUT itemReviewed field
+                // FIXED #4: Author uses @type "Person" not "Thing"
+                // FIXED #5: Has aggregateRating so no "Either offers, review, or aggregateRating should be specified" error
                 {
                   "@type": "Product",
                   "@id": `${canonicalUrl}#product`,
