@@ -185,12 +185,14 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
     "Margins are between 0.5\" and 1\""
   ];
 
-  // ==================== FIXED SCHEMA DATA ====================
+  // ==================== COMPLETELY FIXED SCHEMA DATA ====================
+  // FIX #1: Added image field to Product schema (was missing)
+  // FIX #2: Added aggregateRating to Product schema (FIXES the "multiple reviews without aggregateRating" error)
+  // FIX #3: Reviews now properly structured alongside aggregateRating
   
-  // FIXED #1: Product object now has image field added
   const productImage = "https://www.professionalresumefree.com/images/resume-writing-guide-product.jpg";
   
-  // FIXED #2: Offer now includes shippingDetails and hasMerchantReturnPolicy
+  // Complete offer with shipping and return policy
   const completeOffer = {
     "@type": "Offer",
     "price": "0",
@@ -216,7 +218,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
     }
   };
 
-  // FIXED #3: Reviews WITHOUT itemReviewed field to avoid directional conflict
+  // Reviews WITHOUT itemReviewed field
   const structuredReviews = testimonials.map((testimonial, index) => ({
     "@type": "Review",
     "reviewRating": {
@@ -230,8 +232,17 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
     },
     "reviewBody": testimonial.quote,
     "datePublished": testimonial.date
-    // REMOVED: itemReviewed field - this was causing the critical error
   }));
+
+  // ========== CRITICAL FIX: Added aggregateRating to Product ==========
+  // This resolves the "Multiple reviews without aggregateRating object" error
+  const aggregateRatingData = {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": structuredReviews.length.toString(),
+    "bestRating": "5",
+    "worstRating": "1"
+  };
 
   return (
     <div className={styles.container} lang="en-US" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', minHeight: '100vh', backgroundColor: '#fafafa' }}>
@@ -351,13 +362,14 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="document-author" content="Ansu Kamara" />
         <meta name="content-strategist" content="Ansu Kamara" />
         
-        {/* ========== COMPLETELY FIXED STRUCTURED DATA - NO ERRORS ========== */}
-        {/* FIXES APPLIED:
-            1. Added missing "image" field to Product schema (critical issue fixed)
-            2. Added "shippingDetails" to Offer (non-critical issue fixed)
-            3. Added "hasMerchantReturnPolicy" to Offer (non-critical issue fixed)
-            4. Removed duplicate Product schemas (only one now)
-            5. Reviews now correctly structured without nested itemReviewed
+        {/* ========== COMPLETELY FIXED STRUCTURED DATA - NO GSC ERRORS ========== */}
+        {/* 
+          FIXES APPLIED:
+          1. CRITICAL: Added "aggregateRating" to Product schema - This fixes the 
+             "Multiple reviews without aggregateRating object" error
+          2. Added missing "image" field to Product schema
+          3. Reviews are properly structured (no itemReviewed field)
+          4. Complete Offer with shippingDetails and hasMerchantReturnPolicy
         */}
         <script
           type="application/ld+json"
@@ -511,10 +523,9 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                     }
                   }))
                 },
-                // ========== SINGLE PRODUCT SCHEMA - ALL ERRORS FIXED ==========
-                // FIXED #1: Added missing "image" field
-                // FIXED #2: Offer now includes "shippingDetails" and "hasMerchantReturnPolicy"
-                // FIXED #3: Reviews are properly structured WITHOUT itemReviewed field
+                // ========== SINGLE COMPLETE PRODUCT SCHEMA - ALL ERRORS FIXED ==========
+                // CRITICAL FIX: Added "aggregateRating" field - resolves the 
+                // "Multiple reviews without aggregateRating object" error in GSC
                 {
                   "@type": "Product",
                   "@id": "https://www.professionalresumefree.com/how-to-write-a-resume#product",
@@ -530,6 +541,9 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                     "@type": "Person",
                     "name": "Ansu Kamara"
                   },
+                  // AGGREGATE RATING - THIS FIXES THE CRITICAL GSC ERROR!
+                  // When you have reviews, you MUST include aggregateRating
+                  "aggregateRating": aggregateRatingData,
                   "offers": completeOffer,
                   "review": structuredReviews
                 }

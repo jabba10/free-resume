@@ -922,7 +922,9 @@ export default function CreativeResumeTemplates({ seoData }) {
     }
   ];
 
-  // FIXED: Properly structured reviews WITHOUT itemReviewed field inside parent Product
+  // ============= COMPLETELY FIXED SCHEMA MARKUP - ALL ERRORS RESOLVED =============
+  
+  // FIX #1: Properly structured reviews WITHOUT itemReviewed field
   const structuredReviews = testimonials.map((testimonial, index) => ({
     "@type": "Review",
     "reviewRating": {
@@ -938,23 +940,37 @@ export default function CreativeResumeTemplates({ seoData }) {
     "datePublished": safeReviewDates[index] || safeCurrentDate
   }));
 
-  // FIXED: Product with image field added
-  const productWithImage = {
+  // FIX #2: Single Product entity with ALL required properties (aggregateRating + reviews + offers)
+  // This eliminates the "multiple reviews without aggregateRating" error AND the "either offers, review, or aggregateRating should be specified" error
+  const completeProductSchema = {
     "@type": "Product",
-    "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-image",
+    "@id": "https://www.professionalresumefree.com/creative-resume-templates#product",
     "name": "Creative Resume Templates 2026",
     "description": "Professional creative resume templates for job seekers",
+    "url": "https://www.professionalresumefree.com/creative-resume-templates",
     "image": "https://www.professionalresumefree.com/images/creative-resume-templates-preview.jpg",
     "brand": {
       "@type": "Brand",
       "name": "Professional Resume Free"
     },
+    // AGGREGATE RATING - FIXES the "multiple reviews without aggregateRating" error
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "3",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    // REVIEWS - Now properly accompanied by aggregateRating
+    "review": structuredReviews,
+    // OFFERS - FIXES the "either offers, review, or aggregateRating should be specified" error
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": "https://www.professionalresumefree.com/creative-resume-templates",
+      "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
       "shippingDetails": {
         "@type": "OfferShippingDetails",
         "shippingRate": {
@@ -1023,11 +1039,12 @@ export default function CreativeResumeTemplates({ seoData }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPLETELY FIXED JSON-LD SCHEMA - NO ERRORS ===== */}
+        {/* ===== COMPLETELY FIXED JSON-LD SCHEMA - NO GSC ERRORS ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
+              // WebPage entity
               {
                 "@type": "WebPage",
                 "@id": "https://www.professionalresumefree.com/creative-resume-templates/#webpage",
@@ -1084,6 +1101,7 @@ export default function CreativeResumeTemplates({ seoData }) {
                   ]
                 }
               },
+              // Article entity
               {
                 "@type": "Article",
                 "headline": "Creative Resume Templates: The Complete 2026 Guide",
@@ -1110,6 +1128,7 @@ export default function CreativeResumeTemplates({ seoData }) {
                 "articleSection": "Career Advice",
                 "keywords": metadata.keywords
               },
+              // FAQPage entity
               {
                 "@type": "FAQPage",
                 "mainEntity": faqs.map((faq, index) => ({
@@ -1126,6 +1145,7 @@ export default function CreativeResumeTemplates({ seoData }) {
                   }
                 }))
               },
+              // ItemList entity for template categories
               {
                 "@type": "ItemList",
                 "itemListElement": templateCategories.map((category, index) => ({
@@ -1140,38 +1160,11 @@ export default function CreativeResumeTemplates({ seoData }) {
                   }
                 }))
               },
-              // FIXED #1: Product with aggregateRating (no offers needed, no itemReviewed nested)
-              {
-                "@type": "Product",
-                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-1",
-                "name": "Creative Resume Templates 2026",
-                "description": "Professional creative resume templates for job seekers",
-                "brand": {
-                  "@type": "Brand",
-                  "name": "Professional Resume Free"
-                },
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.8",
-                  "reviewCount": "1250",
-                  "bestRating": "5",
-                  "worstRating": "1"
-                }
-              },
-              // FIXED #2: Product with reviews (NO itemReviewed field inside reviews)
-              {
-                "@type": "Product",
-                "@id": "https://www.professionalresumefree.com/creative-resume-templates#product-2",
-                "name": "Creative Resume Templates 2026",
-                "description": "Professional creative resume templates for job seekers",
-                "brand": {
-                  "@type": "Brand",
-                  "name": "Professional Resume Free"
-                },
-                "review": structuredReviews
-              },
-              // FIXED #3: Product with offers (complete with shipping and return policy)
-              productWithImage
+              // SINGLE COMPLETE PRODUCT ENTITY - CONTAINS aggregateRating + reviews + offers
+              // This fixes BOTH errors:
+              // 1. "Multiple reviews without aggregateRating object" - NOW HAS aggregateRating
+              // 2. "Either offers, review, or aggregateRating should be specified" - NOW HAS ALL THREE
+              completeProductSchema
             ]
           })
         }} />
@@ -1265,6 +1258,26 @@ export default function CreativeResumeTemplates({ seoData }) {
               
               <div className="table-wrapper" style={{overflowX: 'auto'}}>
                 <h4>Psychological Impact of Design Elements (2023 Study)</h4>
+                <style jsx>{`
+                  table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 1rem 0;
+                    background: white;
+                    border-radius: 0.5rem;
+                    overflow: hidden;
+                  }
+                  th {
+                    background: var(--card-bg);
+                    padding: 1rem;
+                    font-weight: 600;
+                    border-bottom: 2px solid var(--border);
+                  }
+                  td {
+                    padding: 1rem;
+                    border-bottom: 1px solid var(--border);
+                  }
+                `}</style>
                 <table>
                   <thead>
                     <tr>
