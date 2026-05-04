@@ -18,7 +18,9 @@ module.exports = {
     '/career-resources',
     '/career-advice',
     '/blog/best-job-boards',
-    '/job-search-tips'
+    '/job-search-tips',
+    '/sitemap.xml'
+
   ],
 
   transform: async (config, path) => {
