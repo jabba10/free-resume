@@ -2,6 +2,7 @@
 module.exports = {
   siteUrl: 'https://professionalresumefree.com',
   generateRobotsTxt: true,
+  generateIndexSitemap: false,
   outDir: 'public',
 
   exclude: [
