@@ -746,14 +746,14 @@ const MarketingResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" />
         <meta property="og:title" content="Free Marketing Resume Builder: Executive Templates for 2026" />
         <meta property="og:description" content="Create a professional marketing resume for free. ATS-friendly executive templates trusted by 3M+ marketing pros. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-marketing-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-marketing-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Marketing Resume Builder - Create Professional Marketing Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Marketing Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -764,7 +764,7 @@ const MarketingResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Marketing Resume Builder: Executive Templates for 2026" />
         <meta name="twitter:description" content="Create a professional marketing resume for free. ATS-friendly executive templates trusted by 3M+ marketing pros. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-marketing-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-marketing-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Marketing Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -787,8 +787,8 @@ const MarketingResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder",
                   "name": "Free Marketing Resume Builder: Executive Templates for 2026",
                   "description": "Create professional ATS-optimized marketing resumes for free. Land interviews 3x faster with our marketing resume builder.",
                   "datePublished": "2026-01-01",
@@ -796,18 +796,18 @@ const MarketingResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Marketing Resume Free",
                     "description": "Free online resume builder for marketing professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Marketing Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -821,7 +821,7 @@ const MarketingResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-marketing-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-marketing-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -832,13 +832,13 @@ const MarketingResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Marketing Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder"
                       }
                     ]
                   },
@@ -872,7 +872,7 @@ const MarketingResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-marketing-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-marketing-resume-builder.jpg",
                     "applicationSuite": "Marketing Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -880,7 +880,7 @@ const MarketingResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -893,7 +893,7 @@ const MarketingResume = ({
                         "name": "Marketing Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#webpage"
                   }))
                 },
                 {
@@ -912,32 +912,32 @@ const MarketingResume = ({
                       "position": 1,
                       "name": "Choose a Marketing Template",
                       "text": "Select from our ATS-optimized marketing resume templates designed for Marketing Executives, Digital Marketers, Brand Managers, and Marketing Directors.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-marketing-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-marketing-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Marketing Experience",
                       "text": "Add your marketing campaigns, achievements, ROI metrics, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-marketing-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-marketing-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our marketing-specific suggestions to improve keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Marketing Resume",
                       "text": "Export your professional marketing resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -947,7 +947,7 @@ const MarketingResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Marketing Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1023,7 +1023,7 @@ const MarketingResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly marketing resume builder that helps marketing professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder"
                       }
                     }
                   }))
@@ -2267,8 +2267,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Marketing Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Marketing Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-marketing-executive-manager-resume-builder' }
   ];
 
   return {

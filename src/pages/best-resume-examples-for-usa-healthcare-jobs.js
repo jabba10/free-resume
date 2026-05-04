@@ -509,14 +509,14 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/best-resume-examples-for-usa-healthcare-jobs";
+  const canonicalUrl = "https://professionalresumefree.com/best-resume-examples-for-usa-healthcare-jobs";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -531,7 +531,7 @@ export async function getStaticProps() {
     description: "Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals with ATS-optimized templates.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // AI citation data with sources
@@ -740,15 +740,15 @@ function HealthcareResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL (www REMOVED) */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH (www REMOVED) */}
         <meta property="og:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
         <meta property="og:description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -761,11 +761,11 @@ function HealthcareResumeExamples({
         <meta property="article:tag" content="Nursing Jobs" />
         <meta property="article:tag" content="Medical Careers" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD (www REMOVED) */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
         <meta name="twitter:description" content="Complete guide to healthcare resume examples. Expert tips for nurses, doctors, and administrators." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -778,7 +778,7 @@ function HealthcareResumeExamples({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA (www REMOVED) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -799,14 +799,14 @@ function HealthcareResumeExamples({
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "url": "https://professionalresumefree.com/logo.png",
                       "width": 200,
                       "height": 60
                     }
@@ -835,7 +835,7 @@ function HealthcareResumeExamples({
                   "isPartOf": {
                     "@type": "WebSite",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   }
                 },
                 {
@@ -1242,7 +1242,7 @@ function HealthcareResumeExamples({
           </div>
         </section>
 
-        {/* Internal Links - Only verified working links */}
+        {/* Internal Links - Only verified working links (www REMOVED) */}
         <section className="section" style={{background: '#f9fafb'}}>
           <div className="container">
             <h2 className="section-title">🔗 Free Resume Tools & Resources</h2>

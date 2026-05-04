@@ -765,20 +765,20 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot";
+  const canonicalUrl = "https://professionalresumefree.com/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "AI Resume Tools",
-      "item": "https://www.professionalresumefree.com/free-resume-tools"
+      "item": "https://professionalresumefree.com/free-resume-tools"
     },
     {
       "@type": "ListItem",
@@ -793,7 +793,7 @@ export async function getStaticProps() {
     description: "Learn to use ChatGPT for resume writing without robotic results. Expert prompts, editing strategies, and real examples to make your resume sound human.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ai-resume-guide.jpeg",
+    image: "https://professionalresumefree.com/ai-resume-guide.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -807,15 +807,15 @@ export async function getStaticProps() {
 
   // People Also Ask for GEO
   const peopleAlsoAsk = [
-    { question: "Can ChatGPT write a good resume?", answer: "True - ChatGPT might help shape a solid first version of your resume, though only if you guide it clearly. Feeding it rich details about what you’ve done makes a difference. After that, small tweaks through extra questions smooth out stiff phrasing. A person still needs to review everything, shaping tone and flow. Without hands-on adjustments, the result feels off. Details matter most when refining each line slowly. " },
+    { question: "Can ChatGPT write a good resume?", answer: "True - ChatGPT might help shape a solid first version of your resume, though only if you guide it clearly. Feeding it rich details about what you've done makes a difference. After that, small tweaks through extra questions smooth out stiff phrasing. A person still needs to review everything, shaping tone and flow. Without hands-on adjustments, the result feels off. Details matter most when refining each line slowly. " },
     { question: "How do I make ChatGPT not sound like a robot on my resume?", answer: "To make ChatGPT sound less robotic: 1) Provide specific metrics and achievements, 2) Ask it to use varied sentence structures, 3) Request multiple versions and mix the best parts, 4) Manually edit to add your unique voice, and 5) Use prompts like 'make this sound more natural and conversational.'" },
     { question: "What are the best ChatGPT prompts for resume writing?", answer: "Effective prompts include: 'Write 5 resume bullet points for a [role] highlighting [specific achievements] with metrics,' 'Rewrite this bullet point to sound more impactful and less generic,' and 'Give me 3 versions of this summary with different tones—professional, energetic, and results-focused.'" }
   ];
 
   // Conversational explanations for GEO
   const conversationalExplanations = [
-    { topic: "The Robot Problem with AI Resumes", content: "A resume drafted by ChatGPT with no direction often ends up sounding flat, packed with phrases everyone uses. What changes things is not skipping AI altogether - instead, shaping its output so it echoes how you speak and highlights what you’ve actually done." },
-    { topic: "Why Human Editing Matters More Than Ever", content: "A beginning, not an endpoint - that’s what artificial intelligence really is. Working together brings out the strongest results; ChatGPT lays down frameworks and possibilities while your voice adds depth, detail, uniqueness - things code simply cannot copy. " }
+    { topic: "The Robot Problem with AI Resumes", content: "A resume drafted by ChatGPT with no direction often ends up sounding flat, packed with phrases everyone uses. What changes things is not skipping AI altogether - instead, shaping its output so it echoes how you speak and highlights what you've actually done." },
+    { topic: "Why Human Editing Matters More Than Ever", content: "A beginning, not an endpoint - that's what artificial intelligence really is. Working together brings out the strongest results; ChatGPT lays down frameworks and possibilities while your voice adds depth, detail, uniqueness - things code simply cannot copy. " }
   ];
 
   const faqItems = [
@@ -825,7 +825,7 @@ export async function getStaticProps() {
     },
     {
       question: 'Is it cheating to use ChatGPT for my resume?',
-      answer: 'Actually no. Picture someone sharp at the office who knows how to phrase things well, lending a hand to tidy up your own material. What you’ve really done remains completely truthful - always stick to what happened. The tool simply assists in presenting those details more clearly; being genuine matters above everything else.',
+      answer: 'Actually no. Picture someone sharp at the office who knows how to phrase things well, lending a hand to tidy up your own material. What you have really done remains completely truthful - always stick to what happened. The tool simply assists in presenting those details more clearly; being genuine matters above everything else.',
     },
     {
       question: 'How do I add my personality to an AI-generated resume?',
@@ -833,7 +833,7 @@ export async function getStaticProps() {
     },
     {
       question: 'What sections should I avoid having AI write entirely?',
-      answer: 'Sensitive tales, tricky details, deep feelings - those stay with you. A machine often sands down what makes your story yours. Write your “About Me,” describe your projects, before anything else. Let your words shape them, not a program’s rough copy. Your voice matters most when it comes from you.',
+      answer: 'Sensitive tales, tricky details, deep feelings - those stay with you. A machine often sands down what makes your story yours. Write your "About Me," describe your projects, before anything else. Let your words shape them, not a program that makes a rough copy. Your voice matters most when it comes from you.',
     },
     {
       question: 'Can ChatGPT help with ATS keywords?',
@@ -929,15 +929,15 @@ function HowToUseChatGPTResume({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - Updated without www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
@@ -950,7 +950,7 @@ function HowToUseChatGPTResume({
         <meta property="article:published_time" content="2026-03-12" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
@@ -969,7 +969,7 @@ function HowToUseChatGPTResume({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - Updated without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -991,7 +991,7 @@ function HowToUseChatGPTResume({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-12",
@@ -1249,7 +1249,7 @@ function HowToUseChatGPTResume({
             <div className="card">
               <h2 className="section-title">The Robot Problem: Why Most AI Resumes Fail</h2>
               <p className="paragraph">
-                Start there, but skip the usual stuff. Without clear direction, ChatGPT pulls from endless similar examples stored in its memory - resumes that sound just like one another. You get lines such as "Results-driven professional with proven success in..." because those appear often online. Then comes "Leveraged synergistic solutions to maximize impact," something hiring managers spot again and again. Same words, different document. Familiarity doesn’t help here.
+                Start there, but skip the usual stuff. Without clear direction, ChatGPT pulls from endless similar examples stored in its memory - resumes that sound just like one another. You get lines such as "Results-driven professional with proven success in..." because those appear often online. Then comes "Leveraged synergistic solutions to maximize impact," something hiring managers spot again and again. Same words, different document. Familiarity doesn't help here.
                Truth is, artificial intelligence has no clue who you are. Not really aware of how you crack jokes, how you write emails, or even how you handled that tough situation back in June. Lean too hard on it without tweaking anything, and suddenly your job history looks like every other one floating around - losing the very thing you meant to keep.
                </p>
               <div className="ai-source">
@@ -1270,12 +1270,12 @@ function HowToUseChatGPTResume({
 
               <h3 className="subheading">The "Accomplishment First" Prompt</h3>
               <p className="paragraph">
-                 Now picture this instead - swap “write my experience section” with “Based on these specific accomplishments, write five resume bullet points for a Senior Marketing Manager role.” Focus shifts sharply when you mention actual numbers. Each line should reflect what changed because of your work. Let impact guide the wording, not vague claims. See how different structures shape meaning? Metrics matter more than titles here. Past wins show future potential without saying it outright. One phrase at a time, truth builds up. Specifics cut through noise better than slogans ever could.
+                 Now picture this instead - swap "write my experience section" with "Based on these specific accomplishments, write five resume bullet points for a Senior Marketing Manager role." Focus shifts sharply when you mention actual numbers. Each line should reflect what changed because of your work. Let impact guide the wording, not vague claims. See how different structures shape meaning? Metrics matter more than titles here. Past wins show future potential without saying it outright. One phrase at a time, truth builds up. Specifics cut through noise better than slogans ever could.
               </p>
 
               <h3 className="subheading">The "Multiple Versions" Technique</h3>
               <p className="paragraph">
-                  Start by asking ChatGPT to create several takes on one part, say three to five, each with its own flavor. One might snap along quickly, another could unfold like a story, while a third leans hard into specifics about know-how. Try flipping through these to grab what works best from each. Mix those pieces together freely. Imagine shaping your work overview with bits that are tight and sharp, others that flow step by step, some packed with tools and systems you’ve used. Pull it all into something that feels right.
+                  Start by asking ChatGPT to create several takes on one part, say three to five, each with its own flavor. One might snap along quickly, another could unfold like a story, while a third leans hard into specifics about know-how. Try flipping through these to grab what works best from each. Mix those pieces together freely. Imagine shaping your work overview with bits that are tight and sharp, others that flow step by step, some packed with tools and systems you've used. Pull it all into something that feels right.
               </p>
 
               <h3 className="subheading">The "Make It Sound Human" Follow-Up</h3>
@@ -1443,7 +1443,7 @@ function HowToUseChatGPTResume({
             <div className="card">
               <h2 className="section-title">Your Authentic Resume Starts Now</h2>
               <p className="paragraph">
-               Truth is, ChatGPT works well - but stops short on its own. Pair its power with how you speak, what you’ve lived through, suddenly things shift. Realness stands out when everything else blends into noise. Shape your resume using the methods here - edit sharp, prompt smart - so it carries your tone, not someone else’s echo. 
+               Truth is, ChatGPT works well - but stops short on its own. Pair its power with how you speak, what you've lived through, suddenly things shift. Realness stands out when everything else blends into noise. Shape your resume using the methods here - edit sharp, prompt smart - so it carries your tone, not someone else's echo. 
               </p>
               <div className="hero-actions">
                 <Link href="/resume-templates" className="btn-primary">

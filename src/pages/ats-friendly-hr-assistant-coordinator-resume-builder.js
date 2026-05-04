@@ -688,6 +688,9 @@ const HRResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -703,16 +706,16 @@ const HRResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" />
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
+        <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
         <meta property="og:description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-hr-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-hr-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free HR Resume Builder - Create Professional HR Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional HR Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -723,7 +726,7 @@ const HRResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
         <meta name="twitter:description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-hr-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-hr-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free HR Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@HRResumeFree" />
         <meta name="twitter:creator" content="@HRResumeFree" />
@@ -746,8 +749,8 @@ const HRResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free HR Resume Builder 2026: Assistant & Coordinator Templates",
                   "description": "Create professional ATS-optimized HR resumes for free. Land HR Assistant/Coordinator roles 3x faster with our HR resume builder.",
                   "datePublished": "2026-01-01",
@@ -755,32 +758,32 @@ const HRResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional HR Resume Free",
                     "description": "Free online resume builder for HR professionals worldwide",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional HR Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/HRResumeFree",
-                        "https://www.linkedin.com/company/hr-resume-free",
-                        "https://www.facebook.com/HRResumeFree",
-                        "https://www.youtube.com/@HRResumeFree"
+                        "https://linkedin.com/company/hr-resume-free",
+                        "https://facebook.com/HRResumeFree",
+                        "https://youtube.com/@HRResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-hr-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-hr-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -791,13 +794,13 @@ const HRResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "HR Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -831,7 +834,7 @@ const HRResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-hr-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-hr-resume-builder.jpg",
                     "applicationSuite": "HR Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -839,7 +842,7 @@ const HRResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -852,7 +855,7 @@ const HRResume = ({
                         "name": "HR Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -871,32 +874,32 @@ const HRResume = ({
                       "position": 1,
                       "name": "Choose HR Template",
                       "text": "Select from our ATS-optimized HR resume templates designed for HR Assistants, Coordinators, and HR professionals globally.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-hr-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-hr-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter HR Experience",
                       "text": "Add your HR experience, education, certifications, HRIS proficiency, and specialized HR skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-hr-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-hr-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize HR Content",
                       "text": "Use our HR-specific suggestions to improve HR keywords, metrics, and compliance documentation for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download HR Resume",
                       "text": "Export your professional HR resume as PDF - completely free, no watermarks, optimized for global HR job markets.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -906,7 +909,7 @@ const HRResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional HR Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -982,7 +985,7 @@ const HRResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly HR resume builder that helps HR professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2258,10 +2261,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'HR Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'HR Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder' }
   ];
 
   return {

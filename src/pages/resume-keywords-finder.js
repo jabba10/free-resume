@@ -904,18 +904,19 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
+  // Updated breadcrumbData - removed www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Keywords Finder",
-      "item": "https://www.professionalresumefree.com/resume-keywords-finder"
+      "item": "https://professionalresumefree.com/resume-keywords-finder"
     }
   ];
 
@@ -952,7 +953,8 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-keywords-finder";
+  // Updated canonicalUrl - removed www
+  const canonicalUrl = "https://professionalresumefree.com/resume-keywords-finder";
   const currentYear = new Date().getFullYear();
 
   const optimizedTitle = "Resume Keywords Finder 2026: Ultimate ATS Optimization Guide";
@@ -1076,6 +1078,7 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
     { industry: "Finance", keywords: ["Financial Analysis", "Risk Management", "Investment Strategy", "Excel Modeling", "Financial Reporting", "Compliance", "Portfolio Management", "Valuation", "Forecasting", "Audit"] }
   ];
 
+  // Updated structuredData - removed www
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1087,7 +1090,7 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
         "description": "Master resume keyword optimization with our comprehensive 2026 guide. Learn to identify, research & implement keywords that beat ATS systems. Get 40% more interviews.",
         "inLanguage": "en-US",
         "isPartOf": {
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "breadcrumb": {
           "@id": `${canonicalUrl}#breadcrumb`
@@ -1097,8 +1100,8 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
       },
       {
         "@type": "WebSite",
-        "@id": "https://www.professionalresumefree.com/#website",
-        "url": "https://www.professionalresumefree.com",
+        "@id": "https://professionalresumefree.com/#website",
+        "url": "https://professionalresumefree.com",
         "name": "Professional Resume Free",
         "description": "Free ATS-optimized resume builder and career resources",
         "publisher": {
@@ -1211,14 +1214,14 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content="Resume Keywords Finder 2026: Ultimate ATS Optimization Guide" />
         <meta property="og:description" content="Master resume keyword optimization. Learn to find and implement keywords that beat ATS. 40% more interviews. Free guide." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1229,7 +1232,7 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Keywords Finder 2026: Ultimate ATS Guide" />
         <meta name="twitter:description" content="Master resume keyword optimization. Free guide with strategies to beat ATS." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         <meta name="theme-color" content="#000000" />

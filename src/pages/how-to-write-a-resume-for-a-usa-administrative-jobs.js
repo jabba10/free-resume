@@ -846,20 +846,20 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-a-usa-administrative-jobs";
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-administrative-jobs";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Advice",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -874,7 +874,7 @@ export async function getStaticProps() {
     description: "Learn how to write a compelling resume for USA administrative jobs. Step-by-step guide with examples, ATS tips, and free templates for administrative assistants, office managers, and executive assistants.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1070,15 +1070,15 @@ function AdministrativeResumeGuide({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content="How to Write a Resume for USA Administrative Jobs (2026 Guide)" />
         <meta property="og:description" content="Learn how to write a compelling resume for USA administrative jobs. Step-by-step guide with examples." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1086,11 +1086,11 @@ function AdministrativeResumeGuide({
         <meta property="article:published_time" content="2026-01-23" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Write a Resume for USA Administrative Jobs" />
         <meta name="twitter:description" content="Step-by-step guide with examples and ATS tips for administrative resumes." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -1105,7 +1105,7 @@ function AdministrativeResumeGuide({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - Updated without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1127,7 +1127,7 @@ function AdministrativeResumeGuide({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-01-23",
@@ -1288,7 +1288,7 @@ function AdministrativeResumeGuide({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Browse Administrative Templates <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1493,27 +1493,27 @@ function AdministrativeResumeGuide({
                     <tr>
                       <th>Before (Weak)</th>
                       <th>After (Strong)</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
                     <tr>
-                       <td>"Responsible for answering phones and greeting visitors."</td>
+                        <td>"Responsible for answering phones and greeting visitors."</td>
                       <td className="text-success">"Managed high-volume phone lines (50+ calls daily) and welcomed 100+ weekly visitors, creating a positive first impression."</td>
                      </tr>
                      <tr>
-                       <td>"Scheduled meetings and managed calendars."</td>
+                        <td>"Scheduled meetings and managed calendars."</td>
                       <td className="text-success">"Coordinated complex calendars for 3 executives, scheduling 30+ meetings weekly and reducing conflicts by 25% through proactive management."</td>
                      </tr>
                      <tr>
-                       <td>"Assisted with office supplies and inventory."</td>
+                        <td>"Assisted with office supplies and inventory."</td>
                       <td className="text-success">"Streamlined office supply inventory system, reducing costs by 15% annually and ensuring 99% availability of essential items."</td>
                      </tr>
                      <tr>
-                       <td>"Planned company events."</td>
+                        <td>"Planned company events."</td>
                       <td className="text-success">"Organized 10+ company events (50-200 attendees), managing budgets up to $10,000 and receiving 95% positive feedback from employees."</td>
                      </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
             </div>
           </div>
@@ -1608,7 +1608,7 @@ function AdministrativeResumeGuide({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Browse Administrative Templates <FiArrowRight style={{marginLeft: '8px'}} />

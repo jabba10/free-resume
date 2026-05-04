@@ -483,14 +483,16 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume";
+  // UPDATED: Canonical URL without www
+  const canonicalUrl = "https://professionalresumefree.com/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume";
 
+  // UPDATED: Breadcrumb URLs without www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -500,12 +502,13 @@ export async function getStaticProps() {
     }
   ];
 
+  // UPDATED: Meta image URL without www
   const meta = {
     title: "How to List Prompt Engineering as a Skill on Your Professional Resume",
     description: "Expert guide on how to list prompt engineering as a skill on your professional resume. Learn formatting strategies, keyword optimization, and examples to showcase your AI expertise.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // AI citation data with sources
@@ -692,7 +695,7 @@ function HowToListPromptEngineering({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG TAGS */}
@@ -700,12 +703,12 @@ function HowToListPromptEngineering({
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="How to List Prompt Engineering as a Skill on Your Professional Resume" />
         <meta property="og:description" content="Expert guide on how to list prompt engineering as a skill on your professional resume. Learn formatting strategies, keyword optimization, and examples." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -718,11 +721,11 @@ function HowToListPromptEngineering({
         <meta property="article:tag" content="AI Skills" />
         <meta property="article:tag" content="Resume Tips" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to List Prompt Engineering as a Skill" />
         <meta name="twitter:description" content="Expert guide to showcasing prompt engineering on your resume." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -735,7 +738,7 @@ function HowToListPromptEngineering({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -756,14 +759,14 @@ function HowToListPromptEngineering({
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "url": "https://professionalresumefree.com/logo.png",
                       "width": 200,
                       "height": 60
                     }
@@ -792,7 +795,7 @@ function HowToListPromptEngineering({
                   "isPartOf": {
                     "@type": "WebSite",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   }
                 },
                 {

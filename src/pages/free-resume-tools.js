@@ -853,15 +853,14 @@ const ResumeToolsPage = ({
     "job search tools"
   ];
 
-  // ===== FIXED STRUCTURED DATA - SINGLE FAQPage (NO DUPLICATES) =====
-  // IMPORTANT: Only ONE FAQPage exists in the entire @graph array
+  // ===== FIXED STRUCTURED DATA - UPDATED WITHOUT www =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-tools/#webpage",
-        "url": "https://www.professionalresumefree.com/free-resume-tools",
+        "@id": "https://professionalresumefree.com/free-resume-tools/#webpage",
+        "url": "https://professionalresumefree.com/free-resume-tools",
         "name": "Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers",
         "description": "Access our complete suite of free resume tools. Check your resume score, optimize for ATS, generate summaries, match keywords, and more. All tools are completely free.",
         "datePublished": "2024-01-01",
@@ -869,18 +868,18 @@ const ResumeToolsPage = ({
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free online resume builder for job seekers",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             },
@@ -898,13 +897,13 @@ const ResumeToolsPage = ({
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://www.professionalresumefree.com"
+              "item": "https://professionalresumefree.com"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Resume Tools",
-              "item": "https://www.professionalresumefree.com/free-resume-tools"
+              "item": "https://professionalresumefree.com/free-resume-tools"
             }
           ]
         }
@@ -921,7 +920,7 @@ const ResumeToolsPage = ({
           "item": {
             "@type": "WebApplication",
             "name": tool.label,
-            "url": `https://www.professionalresumefree.com${tool.href}`,
+            "url": `https://professionalresumefree.com${tool.href}`,
             "applicationCategory": "BusinessApplication",
             "description": tool.description,
             "operatingSystem": "All",
@@ -940,10 +939,9 @@ const ResumeToolsPage = ({
           }
         }))
       },
-      // ===== SINGLE FAQPage - NO DUPLICATE! Only one instance =====
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-tools#faq",
+        "@id": "https://professionalresumefree.com/free-resume-tools#faq",
         "mainEntity": faqItems.map((item) => ({
           "@type": "Question",
           "name": item.question,
@@ -1008,8 +1006,8 @@ const ResumeToolsPage = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-tools" />
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/free-resume-tools" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Free Resume Tools 2026 - ATS Checker, Keyword Matcher, Summary Generator" />
@@ -1018,13 +1016,13 @@ const ResumeToolsPage = ({
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Resume Tools 2026" />
         
-        {/* Open Graph */}
+        {/* Open Graph - UPDATED without www */}
         <meta property="og:title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
         <meta property="og:description" content="Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/free-12-resume-tools.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/free-12-resume-tools.jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-tools" />
+        <meta property="og:url" content="https://professionalresumefree.com/free-resume-tools" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -1034,7 +1032,7 @@ const ResumeToolsPage = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
         <meta name="twitter:description" content="12+ free resume tools to optimize your job application. ATS checker, keyword matcher, summary generator, and more. No signup." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/free-12-resume-tools.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/free-12-resume-tools.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* Theme */}

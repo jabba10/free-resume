@@ -889,20 +889,20 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-tips-for-usa-college-students-and-graduates";
+  const canonicalUrl = "https://professionalresumefree.com/resume-tips-for-usa-college-students-and-graduates";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Advice",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -917,7 +917,7 @@ export async function getStaticProps() {
     description: "Essential resume tips for USA college students and recent graduates. Learn how to write a standout resume with no experience, ATS optimization, and free templates.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1130,7 +1130,7 @@ function ResumeTipsForCollegeStudents({
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-23",
@@ -1284,7 +1284,7 @@ function ResumeTipsForCollegeStudents({
         <meta property="og:description" content="Essential resume tips for USA college students and recent graduates. Free guide." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1296,7 +1296,7 @@ function ResumeTipsForCollegeStudents({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Tips for USA College Students and Graduates" />
         <meta name="twitter:description" content="Essential resume tips for students and recent grads. Free guide." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -1370,7 +1370,7 @@ function ResumeTipsForCollegeStudents({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Browse Student Templates <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1669,7 +1669,7 @@ function ResumeTipsForCollegeStudents({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Browse Student Templates <FiArrowRight style={{marginLeft: '8px'}} />

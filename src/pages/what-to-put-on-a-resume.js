@@ -966,8 +966,8 @@ export default function WhatToPutOnResume({ seoData }) {
     : new Date().toISOString().split('T')[0];
   const currentYear = new Date().getFullYear();
 
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/what-to-put-on-a-resume";
+  // SINGLE CANONICAL URL - www removed
+  const canonicalUrl = "https://professionalresumefree.com/what-to-put-on-a-resume";
 
   // FAQ data for structured data
   const faqItems = [
@@ -1001,7 +1001,7 @@ export default function WhatToPutOnResume({ seoData }) {
     }
   ];
 
-  // Structured Data
+  // Structured Data - all www removed
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1013,7 +1013,7 @@ export default function WhatToPutOnResume({ seoData }) {
         "description": "Learn exactly what to put on a resume in 2026. Comprehensive guide with sections, examples, and ATS optimization tips to maximize interview chances.",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "datePublished": "2026-01-01",
         "dateModified": lastModifiedDate,
@@ -1030,7 +1030,7 @@ export default function WhatToPutOnResume({ seoData }) {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
@@ -1044,18 +1044,18 @@ export default function WhatToPutOnResume({ seoData }) {
         "@type": "Article",
         "headline": "What to Put on a Resume 2026: Complete Guide & Examples",
         "description": "Definitive guide on what to include on your resume in 2026. Sections, content strategies, and professional examples for all career levels.",
-        "image": "https://www.professionalresumefree.com/og-what-to-put-on-resume.jpg",
+        "image": "https://professionalresumefree.com/og-what-to-put-on-resume.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-01",
@@ -1185,7 +1185,7 @@ export default function WhatToPutOnResume({ seoData }) {
         <meta property="og:description" content="Definitive guide on what to include on your resume in 2026. Sections, content strategies, and professional examples for all career levels." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-what-to-put-on-resume.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/og-what-to-put-on-resume.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="What to Put on a Resume Guide 2026" />
@@ -1206,7 +1206,7 @@ export default function WhatToPutOnResume({ seoData }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="What to Put on a Resume 2026: Complete Guide & Examples" />
         <meta name="twitter:description" content="The ultimate checklist for what belongs on your resume in 2026" />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/og-what-to-put-on-resume.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/og-what-to-put-on-resume.jpg" />
         <meta name="twitter:image:alt" content="What to Put on a Resume Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />

@@ -874,14 +874,14 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
   const pageTitle = `Fresher Resume Format ${currentYear}: Complete Guide to First Job`;
 
   // ===== FIXED STRUCTURED DATA - SINGLE FAQPage (NO DUPLICATES) =====
-  // Main structured data WITH the FAQPage included (ONLY ONCE)
+  // Updated structuredData - removed www from all URLs
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'WebPage',
-        '@id': 'https://www.professionalresumefree.com/resume-format-for-freshers',
-        url: 'https://www.professionalresumefree.com/resume-format-for-freshers',
+        '@id': 'https://professionalresumefree.com/resume-format-for-freshers',
+        url: 'https://professionalresumefree.com/resume-format-for-freshers',
         name: pageTitle,
         description: `Complete ${currentYear} guide to creating winning resume formats for freshers with templates, examples, and proven strategies. Includes ATS optimization, step-by-step instructions, and expert tips.`,
         datePublished: '2024-01-15',
@@ -889,34 +889,34 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         inLanguage: 'en-US',
         isPartOf: {
           '@type': 'WebSite',
-          '@id': 'https://www.professionalresumefree.com/#website',
+          '@id': 'https://professionalresumefree.com/#website',
           name: 'Professional Resume Free',
-          url: 'https://www.professionalresumefree.com'
+          url: 'https://professionalresumefree.com'
         }
       },
       {
         '@type': 'Article',
         headline: pageTitle,
         description: `Complete guide to creating ATS-friendly resumes for freshers with templates, examples, and interview-winning strategies for ${currentYear}. Based on analysis of 2,500+ successful fresher resumes.`,
-        image: 'https://www.professionalresumefree.com/images/fresher-resume-guide.jpg',
+        image: 'https://professionalresumefree.com/images/fresher-resume-guide.jpg',
         datePublished: '2024-01-15',
         dateModified: formattedDate,
         author: {
           '@type': 'Organization',
           name: 'Professional Resume Free Career Experts',
-          url: 'https://www.professionalresumefree.com/about'
+          url: 'https://professionalresumefree.com/about'
         },
         publisher: {
           '@type': 'Organization',
           name: 'Professional Resume Free',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://www.professionalresumefree.com/logo.png',
+            url: 'https://professionalresumefree.com/logo.png',
             width: 512,
             height: 512
           }
         },
-        mainEntityOfPage: 'https://www.professionalresumefree.com/resume-format-for-freshers',
+        mainEntityOfPage: 'https://professionalresumefree.com/resume-format-for-freshers',
         wordCount: 3500,
         timeRequired: 'PT18M'
       },
@@ -927,19 +927,19 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://www.professionalresumefree.com'
+            item: 'https://professionalresumefree.com'
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Career Guides',
-            item: 'https://www.professionalresumefree.com/resume-format-for-freshers'
+            item: 'https://professionalresumefree.com/resume-format-for-freshers'
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: pageTitle,
-            item: 'https://www.professionalresumefree.com/resume-format-for-freshers'
+            item: 'https://professionalresumefree.com/resume-format-for-freshers'
           }
         ]
       },
@@ -988,7 +988,7 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
       // ===== SINGLE FAQPage - ONLY ONE instance! =====
       {
         '@type': 'FAQPage',
-        '@id': 'https://www.professionalresumefree.com/resume-format-for-freshers#faq',
+        '@id': 'https://professionalresumefree.com/resume-format-for-freshers#faq',
         'mainEntity': faqData.map(faq => ({
           '@type': 'Question',
           'name': faq.question,
@@ -1023,8 +1023,8 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         <meta name="last-modified" content={formattedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-format-for-freshers" />
+        {/* SINGLE CANONICAL URL - Updated without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/resume-format-for-freshers" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content={pageTitle} />
@@ -1033,10 +1033,10 @@ const FresherResumeFormat = ({ currentYear, formattedDate, buildTimestamp }) => 
         <meta name="chatgpt-fts:last-updated" content={formattedDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources 2026" />
         
-        {/* Open Graph */}
+        {/* Open Graph - Updated without www */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={`Complete ${currentYear} guide to creating winning resumes for freshers with proven templates and strategies. Based on 2,500+ successful examples.`} />
-        <meta property="og:url" content="https://www.professionalresumefree.com/resume-format-for-freshers" />
+        <meta property="og:url" content="https://professionalresumefree.com/resume-format-for-freshers" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />

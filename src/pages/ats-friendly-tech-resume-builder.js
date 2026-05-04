@@ -687,22 +687,22 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         
         {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-tech-resume-builder" />
         
         <meta property="og:title" content="🔥 Free Tech Resume Builder 2026 | ATS Software Engineer CV Template" />
         <meta property="og:description" content="Free ATS-optimized tech resume builder. Trusted by 2M+ software engineers. Download PDF instantly. No sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Tech Resume Builder Interface" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-tech-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-tech-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Tech Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="🔥 Free Tech Resume Builder 2026 | ATS Software Engineer CV Template" />
         <meta name="twitter:description" content="Free ATS-optimized tech resume builder. Trusted by 2M+ software engineers. Download PDF instantly. No sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -718,8 +718,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-tech-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-tech-resume-builder",
                   "name": "🔥 Free Tech Resume Builder 2026 | ATS Software Engineer CV Template",
                   "description": "Free ATS-optimized tech resume builder. Trusted by 2M+ software engineers. Download PDF instantly. No sign-up.",
                   "datePublished": "2026-01-01",
@@ -727,17 +727,17 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
+                    "@id": "https://professionalresumefree.com/#website",
                     "name": "Professional Tech Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Tech Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       }
@@ -750,13 +750,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Tech Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-tech-resume-builder"
                       }
                     ]
                   },
@@ -781,7 +781,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder#faq",
+                  "@id": "https://professionalresumefree.com/ats-friendly-tech-resume-builder#faq",
                   "mainEntity": faqs.slice(0, 4).map((faq) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -1948,8 +1948,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Tech Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-tech-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Tech Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-tech-resume-builder' }
   ];
 
   return {

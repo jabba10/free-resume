@@ -588,17 +588,17 @@ margin-top: 24px;
 }
 `;
 
-// ===== METADATA CONFIGURATION =====
+// ===== METADATA CONFIGURATION - ALL URLs WITHOUT www =====
 const metadata = {
   title: 'Resume for Abroad Job: Complete Expert Guide (2026)',
   description: 'Learn how to write a resume for abroad jobs that passes ATS & impresses global recruiters. 46+ templates, visa-ready strategies, country-specific tips. Free builder included.',
   keywords: 'resume for abroad job, international resume, CV for overseas jobs, work abroad resume, global job application, ATS friendly resume international, expat resume template, visa application resume, international job search, resume for working overseas',
-  canonical: 'https://www.professionalresumefree.com/resume-for-abroad-job',
+  canonical: 'https://professionalresumefree.com/resume-for-abroad-job',
   
   openGraph: {
     title: 'Resume for Abroad Job: Complete Expert Guide (2026)',
     description: 'Expert-backed guide to creating a resume for abroad jobs that meets international hiring standards. Includes country-specific tips, ATS strategies, and free templates.',
-    url: 'https://www.professionalresumefree.com/resume-for-abroad-job',
+    url: 'https://professionalresumefree.com/resume-for-abroad-job',
     type: 'article',
     siteName: 'Professional Resume Free',
     locale: 'en_US',
@@ -796,7 +796,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
     }
   ];
 
-  // ===== SCHEMA.ORG JSON-LD =====
+  // ===== SCHEMA.ORG JSON-LD - ALL URLs WITHOUT www =====
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -809,14 +809,14 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
     author: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
-      url: 'https://www.professionalresumefree.com'
+      url: 'https://professionalresumefree.com'
     },
     publisher: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.professionalresumefree.com/logo.png'
+        url: 'https://professionalresumefree.com/logo.png'
       }
     },
     datePublished: '2025-01-01',
@@ -836,7 +836,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         '@type': 'ListItem',
         position: 1,
         name: 'Professional Resume Free',
-        item: 'https://www.professionalresumefree.com'
+        item: 'https://professionalresumefree.com'
       },
       {
         '@type': 'ListItem',
@@ -856,7 +856,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
     isPartOf: {
       '@type': 'WebSite',
       name: 'Professional Resume Free',
-      url: 'https://www.professionalresumefree.com'
+      url: 'https://professionalresumefree.com'
     },
     dateModified: generatedAt,
     inLanguage: 'en-US',
@@ -949,10 +949,10 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         <meta name="last-modified" content={generatedAt} />
         <meta httpEquiv="last-modified" content={generatedAt} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-for-abroad-job" />
+        {/* CANONICAL URL - NO www */}
+        <link rel="canonical" href="https://professionalresumefree.com/resume-for-abroad-job" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - NO www */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
@@ -966,7 +966,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
           <meta key={i} property="article:tag" content={tag} />
         ))}
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - NO www */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
@@ -1022,7 +1022,7 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
           <span itemProp="keywords">{metadata.keywords}</span>
         </div>
 
-        {/* Breadcrumb Navigation - Simplified */}
+        {/* Breadcrumb Navigation - NO www */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">

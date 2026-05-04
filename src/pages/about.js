@@ -842,8 +842,8 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
     }
   };
 
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/about";
+  // SINGLE CANONICAL URL - UPDATED (www removed)
+  const canonicalUrl = "https://professionalresumefree.com/about";
 
   return (
     <div style={styles.aboutPage}>
@@ -866,7 +866,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
+        {/* ===== SINGLE CANONICAL URL - UPDATED ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== ALTERNATE HREFLANG ===== */}
@@ -883,7 +883,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
         <meta property="og:title" content="About Us: 100% Free Resume Builder | No Sign Up | Private" />
         <meta property="og:description" content="Build your resume 100% free with no sign-up. Runs entirely in your browser—your data is never stored. Download PDF instantly." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/about-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/about-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
@@ -895,7 +895,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us: 100% Free Resume Builder | No Sign Up | Private" />
         <meta name="twitter:description" content="Build your resume 100% free with no sign-up. Runs entirely in your browser—your data is never stored. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/about-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/about-preview.jpg" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         <meta name="twitter:creator" content="@ProfResumeFree" />
         
@@ -903,18 +903,18 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA (FIXED: Added image, hasMerchantReturnPolicy, shippingDetails) ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA - UPDATED (www removed) ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
               {
                 "@type": "Organization",
-                "@id": "https://www.professionalresumefree.com/#organization",
+                "@id": "https://professionalresumefree.com/#organization",
                 "name": "ProfessionalResumeFree",
-                "url": "https://www.professionalresumefree.com",
-                "logo": "https://www.professionalresumefree.com/logo.png",
-                "image": "https://www.professionalresumefree.com/og-image.jpg",
+                "url": "https://professionalresumefree.com",
+                "logo": "https://professionalresumefree.com/logo.png",
+                "image": "https://professionalresumefree.com/og-image.jpg",
                 "description": "Free ATS-optimized resume builder that runs entirely in your browser with no data storage.",
                 "sameAs": [
                   "https://www.linkedin.com/company/professionalresumefree",
@@ -929,7 +929,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                 "name": "About ProfessionalResumeFree",
                 "description": "Learn about our mission to provide free, private, and ATS-optimized resume tools.",
                 "isPartOf": {
-                  "@id": "https://www.professionalresumefree.com/#website"
+                  "@id": "https://professionalresumefree.com/#website"
                 },
                 "datePublished": "2020-01-01",
                 "dateModified": lastModifiedDate,
@@ -940,7 +940,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -968,7 +968,7 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                 "@type": "Product",
                 "name": "ProfessionalResumeFree Resume Builder",
                 "description": "Free ATS-optimized resume builder with professional templates. No sign-up required.",
-                "image": "https://www.professionalresumefree.com/product-image.jpg",
+                "image": "https://professionalresumefree.com/product-image.jpg",
                 "brand": {
                   "@type": "Brand",
                   "name": "ProfessionalResumeFree"

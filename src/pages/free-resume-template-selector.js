@@ -625,7 +625,7 @@ export default function ResumeTemplateSelector() {
   const [activeFaq, setActiveFaq] = useState(null);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
 
-  // Schema data
+  // Schema data - UPDATED with non-www URLs
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -633,7 +633,7 @@ export default function ResumeTemplateSelector() {
         "@type": "WebApplication",
         "name": "Free Resume Template Selector",
         "description": "Curated collection of professional resume templates with ATS compatibility ratings and industry-specific designs",
-        "url": "https://www.professionalresumefree.com/resume-template-selector",
+        "url": "https://professionalresumefree.com/resume-template-selector",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -651,7 +651,7 @@ export default function ResumeTemplateSelector() {
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         }
       },
       {
@@ -692,7 +692,7 @@ export default function ResumeTemplateSelector() {
           "position": index + 1,
           "name": step.name,
           "text": step.text,
-          "url": `https://www.professionalresumefree.com/resume-template-selector#step-${index + 1}`
+          "url": `https://professionalresumefree.com/resume-template-selector#step-${index + 1}`
         }))
       },
       {
@@ -818,23 +818,23 @@ export default function ResumeTemplateSelector() {
         />
         <meta name="keywords" content="resume templates, free resume templates, ATS resume templates, professional resume templates, resume template selector, downloadable resumes, .docx templates, PDF resumes" />
         
-        {/* Open Graph */}
+        {/* Open Graph - UPDATED without www */}
         <meta property="og:title" content="Free Resume Template Selector - Professional ATS-Friendly Templates" />
         <meta property="og:description" content={`Browse and download professional resume templates with ATS compatibility ratings. Free .docx and PDF formats. ${CURRENT_YEAR}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/resume-template-selector" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-template-selector.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/resume-template-selector" />
+        <meta property="og:image" content="https://professionalresumefree.com/og-template-selector.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         
-        {/* Twitter */}
+        {/* Twitter - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Template Selector - Professional Templates" />
         <meta name="twitter:description" content="Browse and download professional resume templates with ATS compatibility ratings." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-template-selector.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-template-selector.jpg" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-template-selector" />
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/resume-template-selector" />
         
         {/* Structured Data */}
         <script

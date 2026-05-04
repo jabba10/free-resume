@@ -690,14 +690,15 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" />
+        {/* SINGLE CANONICAL URL - UPDATED (www removed) */}
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" />
         <meta property="og:title" content="Free Administrative Resume Builder: ATS Templates 2026" />
         <meta property="og:description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-administrative-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-administrative-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Administrative Assistant Resume Builder - Create Professional Administrative Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -708,7 +709,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Administrative Resume Builder: ATS Templates 2026" />
         <meta name="twitter:description" content="Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-administrative-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-administrative-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Administrative Assistant Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -731,8 +732,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder/#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder",
                   "name": "Free Administrative Resume Builder: ATS Templates 2026",
                   "description": "Create your professional ATS resume in 5 minutes. Free administrative resume builder with templates for executive assistants & office managers. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -740,18 +741,18 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Administrative Resume Free",
                     "description": "Free online resume builder for administrative professionals worldwide",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Administrative Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -765,7 +766,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-administrative-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-administrative-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -776,13 +777,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Administrative Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder"
                       }
                     ]
                   },
@@ -816,7 +817,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-administrative-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-administrative-resume-builder.jpg",
                     "applicationSuite": "Administrative Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -824,7 +825,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -837,7 +838,7 @@ const Resume = ({
                         "name": "Administrative Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#webpage"
                   }))
                 },
                 {
@@ -856,32 +857,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose an Administrative Template",
                       "text": "Select from our ATS-optimized administrative resume templates designed for executive assistants, office administrators, virtual assistants, and administrative coordinators.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-administrative-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-administrative-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Administrative Information",
                       "text": "Add your office management experience, education, certifications, software skills, and administrative competencies using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-administrative-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-administrative-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our administrative-specific suggestions to improve office management keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Administrative Resume",
                       "text": "Export your professional administrative resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -891,7 +892,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Administrative Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -967,7 +968,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly administrative resume builder that helps administrative professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder"
                       }
                     }
                   }))
@@ -2104,10 +2105,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - UPDATED (www removed)
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Administrative Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Administrative Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-administrative-assistant-resume-builder' }
   ];
 
   return {

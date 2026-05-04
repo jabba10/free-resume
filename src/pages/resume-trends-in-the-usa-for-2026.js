@@ -411,14 +411,14 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-trends-in-the-usa-for-2026";
+  const canonicalUrl = "https://professionalresumefree.com/resume-trends-in-the-usa-for-2026";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -433,7 +433,7 @@ export async function getStaticProps() {
     description: "Discover the definitive 2026 resume trends: AI optimization, skills-first formats, video resumes, micro-credentials, and ATS innovations. Free in-depth guide with data.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords
@@ -570,7 +570,7 @@ function ResumeTrends2026({
         <meta property="og:description" content="Discover the definitive 2026 resume trends: AI optimization, skills-first formats, video resumes, micro-credentials, and ATS innovations." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="article:published_time" content="2026-02-15" />
         <meta property="article:modified_time" content={lastModifiedDate} />
@@ -579,7 +579,7 @@ function ResumeTrends2026({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Trends in the USA for 2026" />
         <meta name="twitter:description" content="Free in-depth guide to 2026 resume trends: AI, skills-first, video, and more." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         
         {/* COMPREHENSIVE STRUCTURED DATA */}
         <script
@@ -603,7 +603,7 @@ function ResumeTrends2026({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-02-15",
@@ -833,7 +833,7 @@ function ResumeTrends2026({
             </p>
             
             <div className="table-wrap">
-               <table>
+              <table>
                 <thead>
                   <tr>
                     <th>Resume Format</th>
@@ -841,32 +841,32 @@ function ResumeTrends2026({
                     <th>2026 Preference</th>
                     <th>Change</th>
                     <th>Best For</th>
-                   </tr>
+                  </tr>
                 </thead>
                 <tbody>
-                   <tr>
+                  <tr>
                     <td><strong>Reverse-Chronological</strong></td>
                     <td>68%</td>
                     <td>41%</td>
                     <td className="text-small">-27%</td>
                     <td>Senior roles, stable careers</td>
-                   </tr>
-                   <tr>
+                  </tr>
+                  <tr>
                     <td><strong>Skills-Based (Functional)</strong></td>
                     <td>12%</td>
                     <td>19%</td>
                     <td className="text-small">+7%</td>
                     <td>Career changers, gaps</td>
-                   </tr>
-                   <tr>
+                  </tr>
+                  <tr>
                     <td><strong>Hybrid (Skills First + Timeline)</strong></td>
                     <td>20%</td>
                     <td>40%</td>
                     <td className="text-small">+20%</td>
                     <td>Tech, marketing, general</td>
-                   </tr>
+                  </tr>
                 </tbody>
-               </table>
+              </table>
             </div>
             
             <div className="flex-center" style={{marginTop:'30px'}}>

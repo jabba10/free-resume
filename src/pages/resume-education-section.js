@@ -413,11 +413,14 @@ export const getStaticProps = async () => {
   const metadata = {
     title: 'Resume Education Section Guide 2026 - Format, Examples & ATS Tips | ProfessionalResumeFree',
     description: 'Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.',
-    url: 'https://www.professionalresumefree.com/resume-education-section',
+    // REMOVED www
+    url: 'https://professionalresumefree.com/resume-education-section',
     siteName: 'ProfessionalResumeFree',
-    image: 'https://www.professionalresumefree.com/images/resume-education-section-guide-og.jpg',
+    // REMOVED www
+    image: 'https://professionalresumefree.com/images/resume-education-section-guide-og.jpg',
     twitterHandle: '@profresumefree',
-    canonical: 'https://www.professionalresumefree.com/resume-education-section',
+    // REMOVED www
+    canonical: 'https://professionalresumefree.com/resume-education-section',
     author: 'ProfessionalResumeFree',
     keywords: 'resume education section, education on resume, how to list education on resume, resume education format, ATS resume education, college resume education, resume education examples, recent graduate resume, professional resume education, resume degree section'
   };
@@ -1001,7 +1004,8 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     author: {
       '@type': 'Organization',
       name: 'ProfessionalResumeFree',
-      url: 'https://www.professionalresumefree.com',
+      // REMOVED www
+      url: 'https://professionalresumefree.com',
       sameAs: [
         'https://twitter.com/profresumefree',
         'https://www.linkedin.com/company/professional-resume-free',
@@ -1013,7 +1017,8 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
       name: 'ProfessionalResumeFree',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.professionalresumefree.com/images/logo.png',
+        // REMOVED www
+        url: 'https://professionalresumefree.com/images/logo.png',
         width: 512,
         height: 512
       }
@@ -1028,7 +1033,7 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     educationalLevel: 'Beginner, Intermediate'
   };
 
-  // ✅ FIXED: Added missing 'item' field to each breadcrumb item
+  // ✅ FIXED: Added missing 'item' field to each breadcrumb item - REMOVED www
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -1037,13 +1042,15 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://www.professionalresumefree.com'
+        // REMOVED www
+        item: 'https://professionalresumefree.com'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Resume Education Section',
-        item: 'https://www.professionalresumefree.com/resume-education-section'
+        // REMOVED www
+        item: 'https://professionalresumefree.com/resume-education-section'
       }
     ]
   };
@@ -1075,10 +1082,11 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     isPartOf: {
       '@type': 'WebSite',
       name: 'ProfessionalResumeFree',
-      url: 'https://www.professionalresumefree.com',
+      // REMOVED www
+      url: 'https://professionalresumefree.com',
       potentialAction: {
         '@type': 'SearchAction',
-        target: 'https://www.professionalresumefree.com/search?q={search_term_string}',
+        target: 'https://professionalresumefree.com/search?q={search_term_string}',
         'query-input': 'required name=search_term_string'
       }
     },
@@ -1137,7 +1145,8 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     provider: {
       '@type': 'Organization',
       name: 'ProfessionalResumeFree',
-      sameAs: 'https://www.professionalresumefree.com'
+      // REMOVED www
+      sameAs: 'https://professionalresumefree.com'
     },
     educationalLevel: 'Beginner',
     timeRequired: 'PT15M',
@@ -1167,20 +1176,20 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="date" content={safeCurrentDate} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-education-section" />
+        {/* ===== SINGLE CANONICAL URL - REMOVED www ===== */}
+        <link rel="canonical" href="https://professionalresumefree.com/resume-education-section" />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-education-section" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-education-section" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-education-section" hreflang="x-default" />
+        {/* ===== ALTERNATE HREFLANG - REMOVED www ===== */}
+        <link rel="alternate" href="https://professionalresumefree.com/resume-education-section" hreflang="en-us" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-education-section" hreflang="en" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-education-section" hreflang="x-default" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="Resume Education Section Guide 2026: Format & ATS Tips" />
         <meta name="chatgpt-fts:description" content="Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies for 2026." />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - REMOVED www from image URL ===== */}
         <meta property="og:title" content="Resume Education Section Guide 2026 - Format, Examples & ATS Tips" />
         <meta property="og:description" content="Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies." />
         <meta property="og:url" content={metadata.url} />
@@ -1192,7 +1201,7 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
         <meta property="article:published_time" content={safeLastModifiedDate} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - REMOVED www from image URL ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Education Section Guide 2026: Format & ATS Tips" />
         <meta name="twitter:description" content="Expert guide on writing ATS-optimized resume education sections with real examples." />
@@ -1231,13 +1240,15 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
                 <span itemProp="name">Home</span>
               </Link>
               <meta itemProp="position" content="1" />
-              <meta itemProp="item" content="https://www.professionalresumefree.com" />
+              {/* REMOVED www */}
+              <meta itemProp="item" content="https://professionalresumefree.com" />
               <FiChevronRight size={14} style={styles.breadcrumbSeparator} />
             </li>
             <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
               <span style={styles.breadcrumbCurrent} itemProp="name">Resume Education Section</span>
               <meta itemProp="position" content="2" />
-              <meta itemProp="item" content="https://www.professionalresumefree.com/resume-education-section" />
+              {/* REMOVED www */}
+              <meta itemProp="item" content="https://professionalresumefree.com/resume-education-section" />
             </li>
           </ol>
         </nav>

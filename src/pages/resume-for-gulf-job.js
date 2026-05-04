@@ -373,13 +373,14 @@ const criticalCSS = `
   }
 `;
 
+// Updated metadata - removed www
 export const metadata = {
   title: 'Resume for Gulf Job: Complete 2026 Guide | Professional Resume Free',
   description: 'Expert guide to crafting an ATS-friendly resume for Gulf/Middle East jobs with cultural insights, format tips, and industry-specific templates to secure interviews.',
   openGraph: {
     title: 'Resume for Gulf Job: Complete 2026 Guide | Professional Resume Free',
     description: 'Definitive guide for creating winning resumes for Gulf/Middle East job markets with cultural compliance and industry-specific strategies.',
-    url: 'https://www.professionalresumefree.com/resume-for-gulf-job',
+    url: 'https://professionalresumefree.com/resume-for-gulf-job',
     type: 'article',
     siteName: 'Professional Resume Free',
   },
@@ -389,7 +390,7 @@ export const metadata = {
     description: 'Master the art of resume writing for Gulf region jobs with this comprehensive expert guide.',
   },
   alternates: {
-    canonical: 'https://www.professionalresumefree.com/resume-for-gulf-job',
+    canonical: 'https://professionalresumefree.com/resume-for-gulf-job',
   },
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
 };
@@ -411,7 +412,8 @@ export const getStaticProps = async () => {
 };
 
 const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTimestamp }) => {
-  const primaryUrl = 'https://www.professionalresumefree.com/resume-for-gulf-job';
+  // Updated primaryUrl - removed www
+  const primaryUrl = 'https://professionalresumefree.com/resume-for-gulf-job';
   const safeCurrentDate = generatedAt || new Date().toISOString().split('T')[0];
 
   // ===== INLINE STYLES =====
@@ -632,6 +634,7 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
     }
   };
 
+  // Updated articleJsonLd - removed www
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -644,14 +647,14 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
     author: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
-      url: 'https://www.professionalresumefree.com',
+      url: 'https://professionalresumefree.com',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.professionalresumefree.com/logo.png',
+        url: 'https://professionalresumefree.com/logo.png',
       },
     },
     datePublished: '2026-01-01',
@@ -667,6 +670,7 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
     ],
   };
 
+  // Updated breadcrumbJsonLd - removed www
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -675,7 +679,7 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://www.professionalresumefree.com',
+        item: 'https://professionalresumefree.com',
       },
       {
         '@type': 'ListItem',
@@ -686,6 +690,7 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
     ],
   };
 
+  // Updated webPageJsonLd - removed www
   const webPageJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -695,7 +700,7 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
     isPartOf: {
       '@type': 'WebSite',
       name: 'Professional Resume Free',
-      url: 'https://www.professionalresumefree.com',
+      url: 'https://professionalresumefree.com',
     },
   };
 
@@ -784,7 +789,7 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
         <meta name="build-timestamp" content={buildTimestamp?.toString() || Date.now().toString()} />
         <meta name="date" content={safeCurrentDate} />
         
-        {/* ===== SINGLE CANONICAL TAG ===== */}
+        {/* ===== SINGLE CANONICAL TAG - Updated without www ===== */}
         <link rel="canonical" href={metadata.alternates.canonical} />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
@@ -794,13 +799,13 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Gulf Job Platform" />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - Updated without www ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:type" content={metadata.openGraph.type} />
         <meta property="og:url" content={metadata.openGraph.url} />
         <meta property="og:site_name" content={metadata.openGraph.siteName} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-gulf-resume-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-gulf-resume-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume for Gulf Job Guide 2026" />
@@ -812,11 +817,11 @@ const ResumeForGulfJobClusterArticle = ({ generatedAt, lastModifiedDate, buildTi
         <meta property="article:tag" content="Middle East Employment" />
         <meta property="article:tag" content="GCC Resume" />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - Updated without www ===== */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-gulf-resume-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-gulf-resume-guide.jpg" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ===== PERFORMANCE ===== */}

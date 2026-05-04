@@ -790,20 +790,21 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/best-resume-examples-for-usa-it-and-software-jobs";
+  // UPDATED: Removed www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/best-resume-examples-for-usa-it-and-software-jobs";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Examples",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -818,7 +819,7 @@ export async function getStaticProps() {
     description: "Explore the best resume examples for USA IT and software jobs. Learn from real-world samples for developers, engineers, and tech professionals to land interviews in 2026.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/it-resume-examples.jpeg",
+    image: "https://professionalresumefree.com/it-resume-examples.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -953,20 +954,20 @@ function ITResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - UPDATED without www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="Best Resume Examples for USA IT and Software Jobs: 2026 Guide" />
         <meta property="og:description" content="Explore the best resume examples for USA IT and software jobs. Learn from real-world samples for developers, engineers, and tech professionals." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/it-resume-examples.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/it-resume-examples.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -974,11 +975,11 @@ function ITResumeExamples({
         <meta property="article:published_time" content="2026-03-10" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Resume Examples for USA IT Jobs" />
         <meta name="twitter:description" content="Explore the best resume examples for USA IT and software jobs." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/it-resume-examples.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/it-resume-examples.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -990,7 +991,7 @@ function ITResumeExamples({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* SITEMAP */}
+        {/* SITEMAP - UPDATED without www */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed uses Article type */}
@@ -1015,7 +1016,7 @@ function ITResumeExamples({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-10",
@@ -1176,7 +1177,8 @@ function ITResumeExamples({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                // UPDATED: Removed www from this URL
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 View All Examples <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1760,7 +1762,8 @@ function ITResumeExamples({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  // UPDATED: Removed www from this URL
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Start Your Resume <FiArrowRight style={{marginLeft: '8px'}} />

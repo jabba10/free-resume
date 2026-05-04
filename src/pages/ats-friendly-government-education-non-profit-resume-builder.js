@@ -762,6 +762,9 @@ const GovernmentResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -777,16 +780,16 @@ const GovernmentResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" />
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
+        <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
         <meta property="og:description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-government-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-government-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Government & Non-Profit Resume Builder - Create Professional Public Sector Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Government Resume Builder" />
         <meta property="og:locale" content="en_US" />
@@ -797,7 +800,7 @@ const GovernmentResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
         <meta name="twitter:description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-government-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-government-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Government Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@GovResumeFree" />
         <meta name="twitter:creator" content="@GovResumeFree" />
@@ -820,8 +823,8 @@ const GovernmentResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Government Resume Builder 2026 | USAJobs Templates",
                   "description": "Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -829,30 +832,30 @@ const GovernmentResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Government Resume Builder",
                     "description": "Free online resume builder for government and non-profit professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Government Resume Builder",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/GovResumeFree",
-                        "https://www.linkedin.com/company/government-resume-builder"
+                        "https://linkedin.com/company/government-resume-builder"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-government-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-government-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -863,13 +866,13 @@ const GovernmentResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Government Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -903,7 +906,7 @@ const GovernmentResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-government-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-government-resume-builder.jpg",
                     "applicationSuite": "Public Sector Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -911,7 +914,7 @@ const GovernmentResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -924,7 +927,7 @@ const GovernmentResume = ({
                         "name": "Government Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -943,32 +946,32 @@ const GovernmentResume = ({
                       "position": 1,
                       "name": "Choose a Public Sector Template",
                       "text": "Select from our ATS-optimized government and non-profit resume templates designed for federal, state, local government, and NGO positions.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-government-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-government-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Public Service Information",
                       "text": "Add your government experience, policy work, grant management, project leadership, and public sector achievements using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-public-service-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-public-service-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize for Your Sector",
                       "text": "Use our government-specific suggestions for security clearances, GS-grade formatting, non-profit impact measurement, and public administration keywords.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Government Resume",
                       "text": "Export your professional government or non-profit resume as PDF - completely free, no watermarks, USAJobs ready.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 }
@@ -2372,10 +2375,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Government Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Government Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder' }
   ];
 
   return {

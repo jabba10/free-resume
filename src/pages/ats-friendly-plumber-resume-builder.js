@@ -686,15 +686,15 @@ const PlumberResume = ({
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-plumber-resume-builder" />
         
         <meta property="og:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
         <meta property="og:description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-plumber-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-plumber-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Plumber Resume Builder - Create Professional Plumbing Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-plumber-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Plumber Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -705,7 +705,7 @@ const PlumberResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
         <meta name="twitter:description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-plumber-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-plumber-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Plumber Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -728,8 +728,8 @@ const PlumberResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder",
                   "name": "Free Plumber Resume Builder 2026 - ATS Plumbing Templates for Pros",
                   "description": "Create professional ATS-optimized plumbing resumes for free. Land jobs 3x faster with our plumber resume builder.",
                   "datePublished": "2026-01-01",
@@ -737,18 +737,18 @@ const PlumberResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Plumber Resume Free",
                     "description": "Free online resume builder for plumbing professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Plumber Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -762,7 +762,7 @@ const PlumberResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-plumber-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-plumber-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -773,13 +773,13 @@ const PlumberResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Plumber Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder"
                       }
                     ]
                   },
@@ -813,7 +813,7 @@ const PlumberResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-plumber-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-plumber-resume-builder.jpg",
                     "applicationSuite": "Plumbing Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -821,7 +821,7 @@ const PlumberResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -834,7 +834,7 @@ const PlumberResume = ({
                         "name": "Plumber Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder#webpage"
                   }))
                 },
                 {
@@ -853,32 +853,32 @@ const PlumberResume = ({
                       "position": 1,
                       "name": "Choose a Plumbing Template",
                       "text": "Select from our ATS-optimized plumbing resume templates designed for apprentices, journeymen, master plumbers, and pipefitters.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-plumbing-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-plumbing-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Plumbing Information",
                       "text": "Add your plumbing experience, education, licenses, certifications, and technical skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-plumbing-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-plumbing-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our plumbing-specific suggestions to improve technical keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Plumber Resume",
                       "text": "Export your professional plumbing resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -888,7 +888,7 @@ const PlumberResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Plumber Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -964,7 +964,7 @@ const PlumberResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly plumber resume builder that helps plumbing professionals create professional resumes and land jobs faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-plumber-resume-builder"
                       }
                     }
                   }))
@@ -2073,8 +2073,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Plumber Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-plumber-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Plumber Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-plumber-resume-builder' }
   ];
 
   return {

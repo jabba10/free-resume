@@ -379,16 +379,16 @@ export const metadata = {
   keywords: 'software engineer resume example, software developer resume, resume writing guide, ATS optimization, tech resume, coding resume, programmer resume, software engineering cv, tech job application',
   authors: [{ name: 'Professional Resume Experts Team' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
+  canonical: 'https://professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
   
   openGraph: {
     title: 'Software Engineer Resume Example & Writing Guide 2026 | Professional Resume Free',
     description: 'Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips for 2026. Based on analysis of 10,000+ successful tech resumes.',
-    url: 'https://www.professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
+    url: 'https://professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
     siteName: 'Professional Resume Free',
     images: [
       {
-        url: 'https://www.professionalresumefree.com/og-software-resume-guide.jpg',
+        url: 'https://professionalresumefree.com/og-software-resume-guide.jpg',
         width: 1200,
         height: 630,
         alt: 'Software Engineer Resume Example & Writing Guide 2026'
@@ -406,7 +406,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Software Engineer Resume Example & Writing Guide 2026',
     description: 'Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips.',
-    images: ['https://www.professionalresumefree.com/og-software-resume-guide.jpg'],
+    images: ['https://professionalresumefree.com/og-software-resume-guide.jpg'],
     creator: '@ProfResumeFree',
     site: '@ProfResumeFree'
   },
@@ -910,18 +910,18 @@ export default function SoftwareEngineerResumeExampleWritingGuidePage({ generate
     '@type': 'Article',
     headline: `Software Engineer Resume Example & Writing Guide ${currentYear}: Complete ATS-Optimized Resource`,
     description: metadata.description,
-    image: 'https://www.professionalresumefree.com/og-software-resume-guide.jpg',
+    image: 'https://professionalresumefree.com/og-software-resume-guide.jpg',
     author: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
-      url: 'https://www.professionalresumefree.com'
+      url: 'https://professionalresumefree.com'
     },
     publisher: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.professionalresumefree.com/logo.png'
+        url: 'https://professionalresumefree.com/logo.png'
       }
     },
     datePublished: '2026-01-23',
@@ -946,7 +946,7 @@ export default function SoftwareEngineerResumeExampleWritingGuidePage({ generate
         '@type': 'ListItem',
         position: 1,
         name: 'Professional Resume Free',
-        item: 'https://www.professionalresumefree.com'
+        item: 'https://professionalresumefree.com'
       },
       {
         '@type': 'ListItem',
@@ -1032,7 +1032,7 @@ export default function SoftwareEngineerResumeExampleWritingGuidePage({ generate
     creator: {
       '@type': 'Organization',
       name: 'Professional Resume Free Research Lab',
-      url: 'https://www.professionalresumefree.com/'
+      url: 'https://professionalresumefree.com/'
     }
   };
 

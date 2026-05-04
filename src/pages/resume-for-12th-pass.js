@@ -520,15 +520,6 @@ td {
   border-bottom: none;
   padding-bottom: 0;
 }
-.faq-question {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: var(--primary);
-}
-.faq-answer {
-  color: var(--text-light);
-  line-height: 1.6;
-}
 .next-steps {
   background: var(--card-bg);
   padding: 24px;
@@ -635,10 +626,11 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
   });
 
   const currentYear = new Date().getFullYear();
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-12th-pass";
+  // SINGLE CANONICAL URL - www removed
+  const canonicalUrl = "https://professionalresumefree.com/resume-for-12th-pass";
 
-  // FAQ data for structured data
-  const faqs = [
+  // FAQ data for structured data - FIXED: renamed from faqs to faqItems to match mapping
+  const faqItems = [
     {
       question: "What should a 12th pass student include in a resume with no work experience?",
       answer: "A 12th pass student should include: 1) Contact information with professional email, 2) Concise career objective tailored to target job, 3) Academic qualifications with marks/percentage prominently displayed, 4) Relevant skills (computer, communication, subject-specific), 5) Academic projects with descriptions of your role and achievements, 6) Extracurricular activities highlighting leadership or teamwork, 7) Certifications and additional courses, 8) Languages known with proficiency levels, and 9) Basic personal details (avoid irrelevant information)."
@@ -669,7 +661,7 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
     }
   ];
 
-  // Structured Data for SEO
+  // Structured Data for SEO - www removed
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -679,11 +671,11 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
         "url": canonicalUrl,
         "name": "Resume for 12th Pass Students: Complete 2026 Guide",
         "isPartOf": {
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/resume-12th-pass-guide-og.jpg"
+          "url": "https://professionalresumefree.com/images/resume-12th-pass-guide-og.jpg"
         },
         "datePublished": generatedDate,
         "dateModified": lastUpdatedDate,
@@ -701,7 +693,7 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
@@ -718,14 +710,14 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": generatedDate,
@@ -740,7 +732,7 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
       {
         "@type": "FAQPage",
         "@id": `${canonicalUrl}#faq`,
-        "mainEntity": faqs.map(faq => ({
+        "mainEntity": faqItems.map(faq => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
@@ -830,20 +822,20 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
         <meta httpEquiv="last-modified" content={lastUpdatedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - www removed */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - www removed */}
         <meta property="og:title" content="Resume for 12th Pass Students: Complete 2026 Guide & Templates" />
         <meta property="og:description" content="Complete guide to creating a professional resume for 12th pass students. Expert tips, templates, and strategies for freshers with no work experience." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-12th-pass-guide-og.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/resume-12th-pass-guide-og.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume for 12th Pass Students Guide 2026" />
@@ -858,11 +850,11 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
         <meta property="article:tag" content="fresher resume" />
         <meta property="article:tag" content="student resume" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - www removed */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume for 12th Pass Students: Complete Guide 2026" />
         <meta name="twitter:description" content="Expert guide to creating a winning resume for 12th pass students with no work experience. Get hired faster with proven strategies." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/resume-12th-pass-guide-twitter.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/resume-12th-pass-guide-twitter.jpg" />
         <meta name="twitter:image:alt" content="Resume for 12th Pass Students Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -894,7 +886,7 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
           <meta name="content-freshness" content={lastUpdatedDate.split('T')[0]} />
         </div>
 
-        {/* Breadcrumb Navigation - Updated with valid links only */}
+        {/* Breadcrumb Navigation */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -914,13 +906,51 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
         </nav>
 
         {/* Header Section */}
-        <header className="header">
+        <header className="hero">
           <div className="container">
-            <h1 className="hero-title" style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', marginBottom: '20px', lineHeight: '1.2', fontWeight: '700', letterSpacing: '-0.02em' }}>
-              Resume for 12th Pass Students: Complete 2026 Guide & Templates
-            </h1>
+            <div className="trust-badge">🎓 FRESHER'S GUIDE 2026</div>
             
-            <div className="meta-info" style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '32px', color: '#4b5563' }}>
+            <h1>Resume for 12th Pass Students: Complete 2026 Guide & Templates</h1>
+            
+            <p>
+              Master the art of creating your first professional resume as a 12th pass student with no work experience. 
+              Based on analysis of <strong>25,000+ successful fresher resumes</strong>, learn proven strategies to get noticed by employers.
+            </p>
+
+            <div className="button-container">
+              <Link href="/resume-templates" className="btn-primary">
+                Create Your Free Resume
+              </Link>
+              <Link href="/resume-templates" className="btn-secondary">
+                Browse Templates
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="stats-grid">
+              <div className="stat-card">
+                <div className="stat-icon">📊</div>
+                <div className="stat-value">65%</div>
+                <div className="stat-label">Entry-level jobs filled by 12th pass graduates</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-icon">⏱️</div>
+                <div className="stat-value">7.4s</div>
+                <div className="stat-label">Average initial resume review time</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-icon">📈</div>
+                <div className="stat-value">3x</div>
+                <div className="stat-label">More interviews with optimized resume</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-icon">✅</div>
+                <div className="stat-value">92%</div>
+                <div className="stat-label">Employers value willingness to learn</div>
+              </div>
+            </div>
+
+            <div className="meta-info" style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '20px', color: '#4b5563' }}>
               <span className="meta-item">📚 3,200+ words</span>
               <span className="meta-item">⏱️ 12 min read</span>
               <span className="meta-item">🔄 Updated: {displayDate}</span>
@@ -938,7 +968,7 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
           {/* Introduction Section */}
           <section className="section" id="main-content">
             <div className="card">
-              <p className="introParagraph" style={{ color: '#4b5563', lineHeight: '1.8' }}>
+              <p style={{ color: '#4b5563', lineHeight: '1.8' }}>
                 Creating your first resume as a 12th pass student can feel overwhelming, especially when you have no formal work experience. 
                 However, this comprehensive guide will show you exactly how to craft a professional, compelling resume that highlights your 
                 potential, academic achievements, and transferable skills. According to recent employment statistics, over 65% of entry-level 
@@ -947,7 +977,7 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
                 that actually work in the competitive job market.
               </p>
               
-              <div className="cta-box" style={{ background: '#f3f4f6', padding: '24px', borderRadius: '8px', marginTop: '24px', textAlign: 'center' }}>
+              <div style={{ background: '#f3f4f6', padding: '24px', borderRadius: '8px', marginTop: '24px', textAlign: 'center' }}>
                 <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>Ready to Create Your 12th Pass Resume?</h3>
                 <p style={{ color: '#4b5563', marginBottom: '20px' }}>
                   Use our free, professionally designed resume builder specifically optimized for students and freshers with no experience.
@@ -964,16 +994,16 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
             <div className="card">
               <h2 className="section-title">Table of Contents</h2>
               <nav className="toc">
-                <ul className="toc-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', listStyle: 'none' }}>
-                  <li><a href="#section1" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>1. Why Your 12th Pass Resume Matters</a></li>
-                  <li><a href="#section2" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>2. Essential Resume Components</a></li>
-                  <li><a href="#section3" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>3. Compensating for No Experience</a></li>
-                  <li><a href="#section4" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>4. Skill Development Strategies</a></li>
-                  <li><a href="#section5" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>5. Resume Formatting</a></li>
-                  <li><a href="#section6" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>6. Industry-Specific Tips</a></li>
-                  <li><a href="#section7" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>7. Common Mistakes</a></li>
-                  <li><a href="#section8" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>8. Step-by-Step Process</a></li>
-                  <li><a href="#section9" className="toc-link" style={{ color: '#000000', textDecoration: 'none' }}>9. FAQs</a></li>
+                <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', listStyle: 'none' }}>
+                  <li><a href="#section1" style={{ color: '#000000', textDecoration: 'none' }}>1. Why Your Resume Matters</a></li>
+                  <li><a href="#section2" style={{ color: '#000000', textDecoration: 'none' }}>2. Essential Components</a></li>
+                  <li><a href="#section3" style={{ color: '#000000', textDecoration: 'none' }}>3. Compensating for No Experience</a></li>
+                  <li><a href="#section4" style={{ color: '#000000', textDecoration: 'none' }}>4. Skill Development Strategies</a></li>
+                  <li><a href="#section5" style={{ color: '#000000', textDecoration: 'none' }}>5. Resume Formatting</a></li>
+                  <li><a href="#section6" style={{ color: '#000000', textDecoration: 'none' }}>6. Industry-Specific Tips</a></li>
+                  <li><a href="#section7" style={{ color: '#000000', textDecoration: 'none' }}>7. Common Mistakes</a></li>
+                  <li><a href="#section8" style={{ color: '#000000', textDecoration: 'none' }}>8. Step-by-Step Process</a></li>
+                  <li><a href="#faq" style={{ color: '#000000', textDecoration: 'none' }}>9. FAQs</a></li>
                 </ul>
               </nav>
             </div>
@@ -992,43 +1022,43 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
               
               <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>The Psychology Behind Hiring Freshers:</h3>
               
-              <div className="table-wrap" style={{ margin: '20px 0' }}>
-                 <table>
+              <div className="table-wrap">
+                <table>
                   <thead>
-                     <tr>
+                    <tr>
                       <th>What Employers Look For</th>
                       <th>Percentage</th>
                       <th>How to Showcase It</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
-                     <tr>
-                       <td>Willingness to Learn</td>
-                       <td>92%</td>
-                       <td>Highlight quick learning in projects</td>
-                     </tr>
-                     <tr>
-                       <td>Adaptability</td>
-                       <td>87%</td>
-                       <td>Show diverse academic performance</td>
-                     </tr>
-                     <tr>
-                       <td>Basic Technical Skills</td>
-                       <td>81%</td>
-                       <td>List computer and software proficiency</td>
-                     </tr>
-                     <tr>
-                       <td>Communication Ability</td>
-                       <td>76%</td>
-                       <td>Demonstrate through group projects</td>
-                     </tr>
-                     <tr>
-                       <td>Academic Performance</td>
-                       <td>68%</td>
-                       <td>Include marks and achievements</td>
-                     </tr>
+                    <tr>
+                      <td>Willingness to Learn</td>
+                      <td className="text-success">92%</td>
+                      <td>Highlight quick learning in projects</td>
+                    </tr>
+                    <tr>
+                      <td>Adaptability</td>
+                      <td className="text-success">87%</td>
+                      <td>Show diverse academic performance</td>
+                    </tr>
+                    <tr>
+                      <td>Basic Technical Skills</td>
+                      <td className="text-success">81%</td>
+                      <td>List computer and software proficiency</td>
+                    </tr>
+                    <tr>
+                      <td>Communication Ability</td>
+                      <td className="text-success">76%</td>
+                      <td>Demonstrate through group projects</td>
+                    </tr>
+                    <tr>
+                      <td>Academic Performance</td>
+                      <td className="text-success">68%</td>
+                      <td>Include marks and achievements</td>
+                    </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
             </div>
           </section>
@@ -1098,8 +1128,8 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
               </p>
               
               <div className="stat-box">
-                <h4 className="stat-title" style={{ fontSize: '1rem', marginBottom: '8px' }}>Important Statistic:</h4>
-                <p className="stat-number">63%</p>
+                <h4 style={{ fontSize: '1rem', marginBottom: '8px' }}>Important Statistic:</h4>
+                <div className="stat-number">63%</div>
                 <p className="stat-desc">
                   of hiring managers consider well-documented academic projects and extracurricular activities as valid substitutes 
                   for formal work experience when hiring freshers.
@@ -1146,17 +1176,6 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
                 class presentations and debate club participation." Quantify where possible: "Managed team of 4 for school exhibition, 
                 coordinating tasks and timelines successfully."
               </p>
-              
-              <div className="cta-box" style={{ background: '#f3f4f6', padding: '24px', borderRadius: '8px', marginTop: '24px', textAlign: 'center' }}>
-                <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>Need Help Identifying Your Skills?</h3>
-                <p style={{ color: '#4b5563', marginBottom: '20px' }}>
-                  Our resume builder includes skill assessment tools specifically designed for 12th pass students to identify and 
-                  showcase their strongest abilities.
-                </p>
-                <Link href="/resume-templates" className="btn-primary" style={{ display: 'inline-flex' }}>
-                  Discover Your Marketable Skills
-                </Link>
-              </div>
             </div>
           </section>
 
@@ -1171,7 +1190,7 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
               </p>
               
               <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>5.1 Structural Guidelines for 12th Pass Resumes</h3>
-              <ul className="bullet-list" style={{ marginBottom: '20px' }}>
+              <ul className="bullet-list">
                 <li><strong>Length:</strong> Strictly 1 page - no exceptions</li>
                 <li><strong>Font:</strong> Professional (Calibri, Arial, Times New Roman) size 11-12</li>
                 <li><strong>Margins:</strong> 1 inch on all sides for clean appearance</li>
@@ -1179,19 +1198,6 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
                 <li><strong>Color:</strong> Black and white only - no colors for professionalism</li>
                 <li><strong>Spacing:</strong> Consistent spacing between sections</li>
               </ul>
-              
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>5.2 Optimal Section Order</h3>
-              <ol className="numbered-list" style={{ marginBottom: '20px' }}>
-                <li>Contact Information</li>
-                <li>Career Objective (2-3 sentences maximum)</li>
-                <li>Academic Qualifications (12th then 10th)</li>
-                <li>Skills (Technical then Soft Skills)</li>
-                <li>Projects/Academic Achievements</li>
-                <li>Extracurricular Activities</li>
-                <li>Certifications & Courses</li>
-                <li>Languages Known</li>
-                <li>Personal Details (Date of Birth, Nationality)</li>
-              </ol>
               
               <div className="tip-card">
                 <h4 className="tip-title">Formatting Pro Tip:</h4>
@@ -1264,38 +1270,27 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
                 
                 <div className="mistake-item">
                   <h5>1. Typos and Grammatical Errors</h5>
-                  <p>
-                    Even a single spelling mistake can lead to immediate rejection. Use grammar check tools and ask someone 
-                    to proofread.
-                  </p>
+                  <p>Even a single spelling mistake can lead to immediate rejection. Use grammar check tools and ask someone to proofread.</p>
                 </div>
                 
                 <div className="mistake-item">
                   <h5>2. Vague or Generic Statements</h5>
-                  <p>
-                    Avoid clichés like "hardworking individual" or "team player." Instead, provide specific examples.
-                  </p>
+                  <p>Avoid clichés like "hardworking individual" or "team player." Instead, provide specific examples.</p>
                 </div>
                 
                 <div className="mistake-item">
                   <h5>3. Including Irrelevant Personal Information</h5>
-                  <p>
-                    Do not include: height, weight, marital status, religion, caste, or photographs (unless specifically requested).
-                  </p>
+                  <p>Do not include: height, weight, marital status, religion, caste, or photographs (unless specifically requested).</p>
                 </div>
                 
                 <div className="mistake-item">
                   <h5>4. Using Unprofessional Email Address</h5>
-                  <p>
-                    Create a professional email: firstname.lastname@gmail.com. Avoid nicknames, birth years, or childish addresses.
-                  </p>
+                  <p>Create a professional email: firstname.lastname@gmail.com. Avoid nicknames, birth years, or childish addresses.</p>
                 </div>
                 
                 <div className="mistake-item">
                   <h5>5. Listing References Directly</h5>
-                  <p>
-                    Never include references on your resume. Simply state "References available upon request."
-                  </p>
+                  <p>Never include references on your resume. Simply state "References available upon request."</p>
                 </div>
               </div>
             </div>
@@ -1355,34 +1350,28 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
                   </div>
                 </div>
               </div>
-              
-              <div className="tip-card">
-                <h4 className="tip-title">Time Investment:</h4>
-                <p>
-                  A well-crafted 12th pass resume typically requires 8-12 hours of work spread over a week. This investment can 
-                  significantly increase your interview call rate and job opportunities.
-                </p>
-              </div>
             </div>
           </section>
 
-          {/* Section 9 - FAQs */}
-          <section id="section9" className="section">
+          {/* FAQ Section - FIXED: Now using faqItems instead of faqs */}
+          <section id="faq" className="section">
             <div className="card">
               <h2 className="section-title">9. Frequently Asked Questions</h2>
               
-              <div className="faq-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
-                {faqs.map((faq, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">Q: {faq.question}</h3>
-                    <p style={{ color: '#4b5563' }}>{faq.answer}</p>
+              <div className="faq-grid">
+                {faqItems.map((faq, index) => (
+                  <div key={index} className="faq-item" itemScope itemType="https://schema.org/Question">
+                    <h3 className="faq-question" itemProp="name">Q: {faq.question}</h3>
+                    <div itemScope itemType="https://schema.org/Answer">
+                      <p itemProp="text" style={{ color: '#4b5563' }}><strong>A:</strong> {faq.answer}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Conclusion & Related Articles - Updated with valid links only */}
+          {/* Conclusion */}
           <section className="section">
             <div className="card">
               <h2 className="section-title">Conclusion & Next Steps</h2>

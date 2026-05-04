@@ -830,18 +830,19 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
+  // Updated breadcrumbData - removed www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume for 10th Pass",
-      "item": "https://www.professionalresumefree.com/resume-for-10th-pass"
+      "item": "https://professionalresumefree.com/resume-for-10th-pass"
     }
   ];
 
@@ -878,7 +879,8 @@ export default function Resume10thPassPage({ seoData, buildTimestamp }) {
   const safeFaqDates = faqDates || Array(7).fill(freshnessIndicator);
   const safeReviewDates = reviewDates || Array(3).fill(freshnessIndicator);
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-10th-pass";
+  // Updated canonical URL - removed www
+  const canonicalUrl = "https://professionalresumefree.com/resume-for-10th-pass";
   const currentYear = new Date().getFullYear();
 
   // Optimized title - exactly 70 characters
@@ -999,7 +1001,7 @@ export default function Resume10thPassPage({ seoData, buildTimestamp }) {
     }
   ];
 
-  // Generate JSON-LD structured data
+  // Generate JSON-LD structured data - Updated without www
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1129,14 +1131,14 @@ export default function Resume10thPassPage({ seoData, buildTimestamp }) {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content="Resume for 10th Pass 2026: Free Guide & Templates" />
         <meta property="og:description" content="Step-by-step guide with free templates for creating a professional resume after 10th pass. 68% employment rate. No experience needed." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="Resume for 10th Pass Guide 2026" />
@@ -1147,11 +1149,11 @@ export default function Resume10thPassPage({ seoData, buildTimestamp }) {
         <meta property="article:published_time" content="2024-01-01" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume for 10th Pass 2026: Free Guide" />
         <meta name="twitter:description" content="Create a professional resume after 10th pass. Free templates. No experience needed." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Resume for 10th Pass Guide" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         

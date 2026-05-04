@@ -997,20 +997,23 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/most-googled-resume-questions-in-the-usa";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/most-googled-resume-questions-in-the-usa";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      // REMOVED www
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Career Resources",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      // REMOVED www
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -1025,7 +1028,8 @@ export async function getStaticProps() {
     description: "Find answers to the most Googled resume questions by Americans. Data-backed advice on formats, length, skills, ATS, and more to land interviews.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/resume-questions-guide.jpeg",
+    // REMOVED www
+    image: "https://professionalresumefree.com/resume-questions-guide.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1270,10 +1274,10 @@ function MostGoogledResumeQuestions({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URL */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
@@ -1286,7 +1290,7 @@ function MostGoogledResumeQuestions({
         <meta property="article:published_time" content="2026-03-13" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
@@ -1327,7 +1331,8 @@ function MostGoogledResumeQuestions({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      // REMOVED www
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-13",

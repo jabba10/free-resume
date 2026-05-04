@@ -40,7 +40,7 @@ function NextlyticsCustomEvents() {
  */
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const canonicalUrl = `https://www.professionalresumefree.com${router.asPath}`;
+  const canonicalUrl = `https://professionalresumefree.com${router.asPath}`;
 
   return (
     <>
@@ -78,10 +78,10 @@ function MyApp({ Component, pageProps }) {
         
         {/* ========== OPEN GRAPH (SOCIAL MEDIA) ========== */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.professionalresumefree.com" />
+        <meta property="og:url" content="https://professionalresumefree.com" />
         <meta property="og:title" content="Professional Resume Free - Build Your Perfect Resume" />
         <meta property="og:description" content="Create professional resumes for free. Build, customize, and download your perfect resume in minutes with our easy-to-use resume builder." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-image.png" />
+        <meta property="og:image" content="https://professionalresumefree.com/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Professional Resume Builder Interface" />
@@ -92,10 +92,10 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@ResumeFree" />
         <meta name="twitter:creator" content="@ResumeFree" />
-        <meta name="twitter:url" content="https://www.professionalresumefree.com" />
+        <meta name="twitter:url" content="https://professionalresumefree.com" />
         <meta name="twitter:title" content="Professional Resume Free - Build Your Perfect Resume" />
         <meta name="twitter:description" content="Create professional resumes for free. Build, customize, and download your perfect resume in minutes." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-image.png" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-image.png" />
         <meta name="twitter:image:alt" content="Professional Resume Builder Screenshot" />
         
         {/* ========== ADDITIONAL SEO ========== */}
@@ -113,7 +113,7 @@ function MyApp({ Component, pageProps }) {
               "@type": "WebApplication",
               name: "Professional Resume Free",
               description: "Free online resume builder for creating professional resumes",
-              url: "https://www.professionalresumefree.com",
+              url: "https://professionalresumefree.com",
               applicationCategory: "BusinessApplication",
               operatingSystem: "Any",
               offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

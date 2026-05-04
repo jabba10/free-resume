@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head> 
-        <link rel='canonical' href='https://www.professionalresumefree.com/' /> 
+        <link rel='canonical' href='https://professionalresumefree.com' /> 
         {/* Cloudflare Web Analytics */}
         <script 
           defer 

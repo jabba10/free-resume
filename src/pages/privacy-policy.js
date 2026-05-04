@@ -94,25 +94,25 @@ const PrivacyPolicy = () => {
         <meta name="author" content="ProfessionalResumeFree" />
         <meta name="robots" content="index, follow" />
 
-        {/* CANONICAL URL - Only one canonical tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/privacy-policy/" />
+        {/* CANONICAL URL - Only one canonical tag - UPDATED without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/privacy-policy/" />
 
-        {/* Open Graph / Social Media */}
+        {/* Open Graph / Social Media - UPDATED without www */}
         <meta property="og:title" content="Privacy Policy: Your Data, Your Control | ProfessionalResumeFree" />
         <meta property="og:description" content="We never store your resume or personal information. Built for privacy from the ground up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/privacy-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/privacy-policy" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/privacy-preview.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/privacy-policy" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ProfessionalResumeFree" />
 
-        {/* Twitter Card */}
+        {/* Twitter Card - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Privacy Policy: Your Data, Your Control | ProfessionalResumeFree" />
         <meta name="twitter:description" content="We never store your resume or personal information. Built for privacy from the ground up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/privacy-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/privacy-preview.jpg" />
         <meta name="twitter:site" content="@professionalresumefree" />
 
-        {/* Structured Data */}
+        {/* Structured Data - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -121,7 +121,7 @@ const PrivacyPolicy = () => {
               "@type": "WebPage",
               "name": "Privacy Policy: Your Data, Your Control - ProfessionalResumeFree",
               "description": "Our commitment to your privacy: we do not store any personal data or resume content.",
-              "url": "https://www.professionalresumefree.com/privacy-policy",
+              "url": "https://professionalresumefree.com/privacy-policy",
               "breadcrumb": {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
@@ -129,13 +129,13 @@ const PrivacyPolicy = () => {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://www.professionalresumefree.com"
+                    "item": "https://professionalresumefree.com"
                   },
                   {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Privacy Policy",
-                    "item": "https://www.professionalresumefree.com/privacy-policy"
+                    "item": "https://professionalresumefree.com/privacy-policy"
                   }
                 ]
               }

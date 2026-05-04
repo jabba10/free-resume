@@ -393,11 +393,11 @@ export const metadata = {
   openGraph: {
     title: 'How to Describe Work Experience on Resume: Complete 2026 Guide',
     description: 'Expert strategies for transforming job duties into compelling achievements on your resume',
-    url: 'https://www.professionalresumefree.com/how-to-describe-work-experience-on-resume',
+    url: 'https://professionalresumefree.com/how-to-describe-work-experience-on-resume',
     siteName: 'Professional Resume Free',
     images: [
       {
-        url: 'https://www.professionalresumefree.com/og-work-experience.jpg',
+        url: 'https://professionalresumefree.com/og-work-experience.jpg',
         width: 1200,
         height: 630,
         alt: 'Work Experience Writing Guide',
@@ -413,12 +413,12 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'How to Describe Work Experience on Resume: Complete 2026 Guide',
     description: 'Professional work experience writing strategies for maximum impact',
-    images: ['https://www.professionalresumefree.com/twitter-work-experience.jpg'],
+    images: ['https://professionalresumefree.com/twitter-work-experience.jpg'],
     creator: '@ProfessionalResumeFree',
     site: '@ProfessionalResumeFree',
   },
   alternates: {
-    canonical: 'https://www.professionalresumefree.com/how-to-describe-work-experience-on-resume',
+    canonical: 'https://professionalresumefree.com/how-to-describe-work-experience-on-resume',
   },
   category: 'career development',
   classification: 'professional resume writing guide',
@@ -984,7 +984,8 @@ export default function DescribeWorkExperience({ seoData }) {
     }
   ];
 
-  const siteUrl = 'https://www.professionalresumefree.com';
+  // UPDATED: Removed www from siteUrl
+  const siteUrl = 'https://professionalresumefree.com';
   const currentUrl = `${siteUrl}/how-to-describe-work-experience-on-resume`;
 
   return (
@@ -1009,19 +1010,19 @@ export default function DescribeWorkExperience({ seoData }) {
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="date" content={safeCurrentDate} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/how-to-describe-work-experience-on-resume" />
+        {/* ===== SINGLE CANONICAL URL - UPDATED without www ===== */}
+        <link rel="canonical" href="https://professionalresumefree.com/how-to-describe-work-experience-on-resume" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="How to Describe Work Experience on Resume: Complete 2026 Guide" />
         <meta name="chatgpt-fts:description" content="Master work experience description with achievement-focused formulas, industry examples, and ATS optimization strategies to transform duties into measurable results." />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - UPDATED without www ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:image" content={metadata.openGraph.images[0].url} />
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:image" content="https://professionalresumefree.com/og-work-experience.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
@@ -1029,18 +1030,18 @@ export default function DescribeWorkExperience({ seoData }) {
         <meta property="article:published_time" content={safeLastModifiedDate} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - UPDATED without www ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
-        <meta name="twitter:image" content={metadata.twitter.images[0]} />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-work-experience.jpg" />
         <meta name="twitter:site" content="@ProfessionalResumeFree" />
         
         {/* ===== PERFORMANCE ===== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA - UPDATED without www ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",

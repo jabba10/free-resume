@@ -965,20 +965,22 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-usa-customer-service-jobs";
+  // UPDATED: Removed www from canonicalUrl
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-customer-service-jobs";
 
+  // UPDATED: Removed www from breadcrumb items
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Resources",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -988,12 +990,13 @@ export async function getStaticProps() {
     }
   ];
 
+  // UPDATED: Removed www from meta image URL
   const meta = {
     title: "How to Write a Resume for USA Customer Service Jobs: 2026 Guide",
     description: "Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/customer-service-research.jpg",
+    image: "https://professionalresumefree.com/customer-service-research.jpg",
   };
 
   const longTailKeywords = [
@@ -1151,7 +1154,7 @@ function CustomerServiceResumeGuidePage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content="How to Write a Resume for USA Customer Service Jobs: 2026 Guide" />
@@ -1181,6 +1184,7 @@ function CustomerServiceResumeGuidePage({
         
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
+        {/* STRUCTURED DATA - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1202,7 +1206,7 @@ function CustomerServiceResumeGuidePage({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/ats.jpeg"
+                      "url": "https://professionalresumefree.com/ats.jpeg"
                     }
                   },
                   "datePublished": "2026-01-15",
@@ -1384,17 +1388,17 @@ function CustomerServiceResumeGuidePage({
                       <td><strong>Reverse-Chronological</strong></td>
                       <td>Experienced candidates with clear career progression</td>
                       <td className="text-success">+15% for experienced</td>
-                     </tr>
+                      </tr>
                      <tr>
                       <td><strong>Hybrid (Skills + Chronology)</strong></td>
                       <td>Entry-level, career changers, candidates with gaps</td>
                       <td className="text-success">+28% for entry-level</td>
-                     </tr>
+                      </tr>
                      <tr>
                       <td><strong>Functional (Skills-Only)</strong></td>
                       <td>Major career pivots or significant gaps</td>
                       <td>-8% overall (use with caution)</td>
-                     </tr>
+                      </tr>
                   </tbody>
                  </table>
               </div>
@@ -1485,7 +1489,7 @@ function CustomerServiceResumeGuidePage({
                      <tr>
                       <td>Answered customer calls<br/>Helped with billing issues<br/>Met performance goals</td>
                       <td className="text-success">• Handled 60+ inbound calls daily, resolving 85% of issues on first contact<br/>• Achieved 98% customer satisfaction score for 6 consecutive months<br/>• Reduced average handle time by 15% while maintaining quality scores<br/>• Trained 5 new hires on call procedures and CRM system</td>
-                     </tr>
+                      </tr>
                   </tbody>
                  </table>
               </div>
@@ -1503,7 +1507,7 @@ function CustomerServiceResumeGuidePage({
                      <tr>
                       <td>Helped customers find products<br/>Processed returns<br/>Kept store organized</td>
                       <td className="text-success">• Assisted 100+ customers daily, consistently receiving positive feedback<br/>• Resolved returns and exchanges efficiently, maintaining 100% accuracy<br/>• Recognized as 'Employee of the Month' twice for exceptional service<br/>• Increased repeat business by 15% through personalized follow-up</td>
-                     </tr>
+                      </tr>
                   </tbody>
                  </table>
               </div>

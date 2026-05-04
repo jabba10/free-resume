@@ -1405,7 +1405,8 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
   // Dynamic meta data - Shortened title to under 70 characters
   const metaDescription = `Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${CURRENT_YEAR}.`;
   const pageTitle = `Free Resume Bullet Point Generator: CAR Method & ATS Optimized`;
-  const canonicalUrl = "https://www.professionalresumefree.com/free-resume-bullet-point-generator";
+  // UPDATED: Removed www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/free-resume-bullet-point-generator";
 
   // Schema data
   const schemaData = {
@@ -1471,7 +1472,7 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
         <meta name="chatgpt-fts:keywords" content="resume bullet points, CAR method, ATS resume, achievement statements" />
         <meta name="chatgpt-fts:last-updated" content={seoData?.currentDate || new Date().toISOString().split('T')[0]} />
         
-        {/* Canonical URL - Single Tag */}
+        {/* Canonical URL - Single Tag - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Open Graph */}

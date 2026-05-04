@@ -794,20 +794,21 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/most-popular-resume-layouts-for-usa-tech-jobs";
+  // SINGLE CANONICAL URL - www removed
+  const canonicalUrl = "https://professionalresumefree.com/most-popular-resume-layouts-for-usa-tech-jobs";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Templates",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -822,7 +823,7 @@ export async function getStaticProps() {
     description: "Discover the most popular resume layouts for USA tech jobs in 2026. See which formats get past ATS, impress hiring managers, and land interviews. Free guide.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1016,20 +1017,20 @@ function PopularResumeLayouts({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - www removed */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - www removed */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - www removed */}
         <meta property="og:title" content="Most Popular Resume Layouts for USA Tech Jobs (2026 Guide)" />
         <meta property="og:description" content="Discover the most popular resume layouts for USA tech jobs in 2026. Free guide." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1037,11 +1038,11 @@ function PopularResumeLayouts({
         <meta property="article:published_time" content="2026-01-23" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - www removed */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Most Popular Resume Layouts for USA Tech Jobs" />
         <meta name="twitter:description" content="Which resume layouts work best for tech jobs in the USA? Free guide." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -1056,7 +1057,7 @@ function PopularResumeLayouts({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - www removed */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1078,7 +1079,7 @@ function PopularResumeLayouts({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-01-23",
@@ -1239,7 +1240,7 @@ function PopularResumeLayouts({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Browse Templates by Layout <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1571,7 +1572,7 @@ function PopularResumeLayouts({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Browse ATS-Friendly Templates <FiArrowRight style={{marginLeft: '8px'}} />

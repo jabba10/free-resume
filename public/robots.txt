@@ -9,9 +9,9 @@ Disallow: /resume-writing-guide
 Disallow: /resume-writing-guide/
 Disallow: /free-tools
 Disallow: /free-tools/
-Disallow: /veterinary-resume-builder
-Disallow: /veterinary-resume-builder/
+Disallow: /how-to-write-a-resume-for-usa-administrative-jobs
 Disallow: /how-to-write-a-resume-for-usa-administrative-jobs/
+Disallow: /how-to-write-a-resume-for-usa-sales-and-marketing-roles
 Disallow: /resume-writing-tips/
 Disallow: /how-to-beat-the-ats-optimization-time-for-resume/
 Disallow: /career-glossary
@@ -62,6 +62,8 @@ Disallow: /blog/best-job-boards
 Disallow: /blog/best-job-boards/
 Disallow: /job-search-tips
 Disallow: /job-search-tips/
+Disallow: /search?q={search_term_string}
+Disallow: /veterinary-resume-builder
 
 # --- AI CRAWLER ACCESS FOR LLMS.TXT ---
 
@@ -119,7 +121,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.professionalresumefree.com
+Host: https://professionalresumefree.com
 
 # Sitemaps
-Sitemap: https://www.professionalresumefree.com/sitemap.xml
+Sitemap: https://professionalresumefree.com/sitemap.xml

@@ -728,16 +728,17 @@ const AdvancedManufacturingResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" />
+        {/* SINGLE CANONICAL URL - UPDATED (www removed) */}
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Free Manufacturing Resume Builder | ATS-Friendly 2026" />
         <meta property="og:description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-manufacturing-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-manufacturing-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Manufacturing Resume Builder - Create Professional Industrial Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Manufacturing Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -750,7 +751,7 @@ const AdvancedManufacturingResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Manufacturing Resume Builder | ATS-Friendly 2026" />
         <meta name="twitter:description" content="Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-manufacturing-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-manufacturing-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Manufacturing Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -775,8 +776,8 @@ const AdvancedManufacturingResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder/#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder",
                   "name": "Free Manufacturing Resume Builder | ATS-Friendly 2026",
                   "description": "Create a professional manufacturing resume for free in 2026. ATS-friendly industry templates for engineers & technicians. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -784,18 +785,18 @@ const AdvancedManufacturingResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Manufacturing Resume Free",
                     "description": "Free online resume builder for manufacturing professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Manufacturing Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -809,7 +810,7 @@ const AdvancedManufacturingResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-manufacturing-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-manufacturing-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -820,13 +821,13 @@ const AdvancedManufacturingResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Manufacturing Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder"
                       }
                     ]
                   },
@@ -860,7 +861,7 @@ const AdvancedManufacturingResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-manufacturing-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-manufacturing-resume-builder.jpg",
                     "applicationSuite": "Manufacturing Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -868,7 +869,7 @@ const AdvancedManufacturingResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -881,7 +882,7 @@ const AdvancedManufacturingResume = ({
                         "name": "Manufacturing Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#webpage"
                   }))
                 },
                 {
@@ -900,32 +901,32 @@ const AdvancedManufacturingResume = ({
                       "position": 1,
                       "name": "Choose an Industry Template",
                       "text": "Select from our ATS-optimized manufacturing resume templates designed for engineers, technicians, automation specialists, and industrial staff.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-manufacturing-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-manufacturing-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Industrial Information",
                       "text": "Add your manufacturing experience, education, certifications, technical skills, and specialized equipment knowledge using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-industrial-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-industrial-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our industry-specific suggestions to improve technical keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Manufacturing Resume",
                       "text": "Export your professional manufacturing resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -935,7 +936,7 @@ const AdvancedManufacturingResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Manufacturing Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1011,7 +1012,7 @@ const AdvancedManufacturingResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly manufacturing resume builder that helps industrial professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder"
                       }
                     }
                   }))
@@ -2233,10 +2234,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - UPDATED (www removed)
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Manufacturing Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-manufacturing-and-automation-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Manufacturing Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-advanced-manufacturing-and-automation-resume-builder' }
   ];
 
   return {

@@ -821,7 +821,7 @@ const criticalCSS = `
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
-const SITE_URL = 'https://www.professionalresumefree.com';
+const SITE_URL = 'https://professionalresumefree.com';
 
 // FAQ Data
 const FAQS = [
@@ -951,9 +951,9 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, buildTimestamp }) => {
             },
             "sameAs": [
               "https://twitter.com/ProResumeFree",
-              "https://www.linkedin.com/company/professional-resume-free",
-              "https://www.facebook.com/ProfessionalResumeFree",
-              "https://www.youtube.com/@ProfessionalResumeFree"
+              "https://linkedin.com/company/professional-resume-free",
+              "https://facebook.com/ProfessionalResumeFree",
+              "https://youtube.com/@ProfessionalResumeFree"
             ]
           }
         },

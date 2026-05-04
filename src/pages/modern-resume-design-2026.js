@@ -376,7 +376,7 @@ export const metadata = {
   title: 'Modern Resume Design 2026: Future-Proof Guide & AI Integration Strategies | ProfessionalResumeFree',
   description: 'Master 2026 resume design with AI integration, interactive elements & future-proof templates. Get 3x more interviews with our cutting-edge strategies. Expert insights + free tools.',
   keywords: '2026 resume design, AI resume builder, future resume trends, interactive resume, blockchain credentials, AR/VR resume, modern resume 2026, ATS optimization 2026, professional resume templates, digital resume future',
-  authors: [{ name: 'Future Resume Experts Team', url: 'https://www.professionalresumefree.com' }],
+  authors: [{ name: 'Future Resume Experts Team', url: 'https://professionalresumefree.com' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1, archive',
   openGraph: {
     title: 'Modern Resume Design 2026: Complete Future-Proof Guide with AI Strategies',
@@ -387,7 +387,7 @@ export const metadata = {
     authors: ['Future Resume Strategy Experts'],
     images: [
       {
-        url: 'https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg',
+        url: 'https://professionalresumefree.com/images/og-modern-resume-2026.jpg',
         width: 1200,
         height: 630,
         alt: 'Modern Resume Design 2026 Future-Proof Guide'
@@ -399,7 +399,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Modern Resume Design 2026: Complete Future Guide',
     description: 'Future-proof resume strategies with AI integration & interactive elements for the 2026 job market',
-    images: ['https://www.professionalresumefree.com/images/twitter-modern-resume-2026.jpg'],
+    images: ['https://professionalresumefree.com/images/twitter-modern-resume-2026.jpg'],
     creator: '@ProResumeFree',
     site: '@ProResumeFree'
   }
@@ -1021,44 +1021,43 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
     }
   ];
 
-  // ===== FIXED JSON-LD SCHEMA WITH PROPER BreadcrumbList STRUCTURE =====
-  // Each ListItem now has BOTH "name" AND "item" properties
+  // ===== FIXED JSON-LD SCHEMA - ALL URLs WITHOUT www =====
   const jsonLdSchema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#article",
+        "@id": "https://professionalresumefree.com/modern-resume-design-2026#article",
         "headline": "Modern Resume Design 2026: The Complete Future-Proof Guide",
         "description": "Expert analysis of 2026 resume design trends including AI integration, interactive elements, blockchain verification, and emerging technologies for career success",
         "author": {
           "@type": "Organization",
           "name": "Future Resume Strategy Experts",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png",
+            "url": "https://professionalresumefree.com/logo.png",
             "width": 512,
             "height": 512
           },
           "sameAs": [
             "https://twitter.com/ProResumeFree",
-            "https://www.linkedin.com/company/professional-resume-free"
+            "https://linkedin.com/company/professional-resume-free"
           ]
         },
         "datePublished": "2024-01-01",
         "dateModified": lastModifiedDate,
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://www.professionalresumefree.com/modern-resume-design-2026"
+          "@id": "https://professionalresumefree.com/modern-resume-design-2026"
         },
         "image": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg",
+          "url": "https://professionalresumefree.com/images/og-modern-resume-2026.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1070,25 +1069,25 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#breadcrumb",
+        "@id": "https://professionalresumefree.com/modern-resume-design-2026#breadcrumb",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Modern Resume Design 2026",
-            "item": "https://www.professionalresumefree.com/modern-resume-design-2026"
+            "item": "https://professionalresumefree.com/modern-resume-design-2026"
           }
         ]
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#faqpage",
+        "@id": "https://professionalresumefree.com/modern-resume-design-2026#faqpage",
         "mainEntity": faqs.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
@@ -1119,8 +1118,8 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
       },
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#webpage",
-        "url": "https://www.professionalresumefree.com/modern-resume-design-2026",
+        "@id": "https://professionalresumefree.com/modern-resume-design-2026#webpage",
+        "url": "https://professionalresumefree.com/modern-resume-design-2026",
         "name": "Modern Resume Design 2026: Future-Proof Guide",
         "description": "Complete guide to future-proof resume design with AI integration and emerging technologies",
         "datePublished": "2024-01-01",
@@ -1128,17 +1127,17 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free online resume builder and career resources"
         },
         "breadcrumb": {
-          "@id": "https://www.professionalresumefree.com/modern-resume-design-2026#breadcrumb"
+          "@id": "https://professionalresumefree.com/modern-resume-design-2026#breadcrumb"
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg",
+          "url": "https://professionalresumefree.com/images/og-modern-resume-2026.jpg",
           "width": 1200,
           "height": 630
         }
@@ -1168,24 +1167,24 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="date" content={currentDate} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/modern-resume-design-2026" />
+        {/* ===== SINGLE CANONICAL URL - NO www ===== */}
+        <link rel="canonical" href="https://professionalresumefree.com/modern-resume-design-2026" />
         
-        {/* ===== ALTERNATE HREFLANG ===== */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/modern-resume-design-2026" hreflang="en-us" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/modern-resume-design-2026" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/modern-resume-design-2026" hreflang="x-default" />
+        {/* ===== ALTERNATE HREFLANG - NO www ===== */}
+        <link rel="alternate" href="https://professionalresumefree.com/modern-resume-design-2026" hreflang="en-us" />
+        <link rel="alternate" href="https://professionalresumefree.com/modern-resume-design-2026" hreflang="en" />
+        <link rel="alternate" href="https://professionalresumefree.com/modern-resume-design-2026" hreflang="x-default" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="Modern Resume Design 2026: Future-Proof Guide & AI Strategies" />
         <meta name="chatgpt-fts:description" content="Master 2026 resume design with AI integration, interactive elements & future-proof templates. Get 3x more interviews with cutting-edge strategies." />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - NO www ===== */}
         <meta property="og:title" content="Modern Resume Design 2026: Complete Future-Proof Guide with AI Strategies" />
         <meta property="og:description" content="Expert analysis of 2026 resume design trends including AI integration, interactive elements, blockchain verification, and emerging technologies for career success." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/modern-resume-design-2026" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-modern-resume-2026.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/modern-resume-design-2026" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-modern-resume-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
@@ -1193,18 +1192,18 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
         <meta property="article:published_time" content={lastModifiedDate} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - NO www ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Modern Resume Design 2026: Complete Future Guide" />
         <meta name="twitter:description" content="Future-proof resume strategies with AI integration & interactive elements for the 2026 job market" />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-modern-resume-2026.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-modern-resume-2026.jpg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ===== PERFORMANCE ===== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== FIXED COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        {/* ===== FIXED COMPREHENSIVE JSON-LD SCHEMA - NO www ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
@@ -1237,7 +1236,7 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
                   Modern Resume Design 2026
                 </span>
                 <meta itemProp="position" content="2" />
-                <meta itemProp="item" content="https://www.professionalresumefree.com/modern-resume-design-2026" />
+                <meta itemProp="item" content="https://professionalresumefree.com/modern-resume-design-2026" />
               </li>
             </ol>
           </nav>
@@ -1256,7 +1255,7 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
           </div>
 
           <div style={styles.websiteReference}>
-            <p>This comprehensive future guide is presented by <a href="https://www.professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}} target="_blank" rel="noopener noreferrer">Professional Resume Free</a> - Pioneering next-generation resume solutions since 2025. Access free AI-powered tools and future-ready templates.</p>
+            <p>This comprehensive future guide is presented by <a href="https://professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}} target="_blank" rel="noopener noreferrer">Professional Resume Free</a> - Pioneering next-generation resume solutions since 2025. Access free AI-powered tools and future-ready templates.</p>
           </div>
         </header>
 

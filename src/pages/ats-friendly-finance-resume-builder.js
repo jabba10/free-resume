@@ -676,8 +676,8 @@ const Resume = ({
     );
   };
 
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder";
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-finance-resume-builder";
 
   return (
     <div className={styles.resumeBuilder} lang="en-US">
@@ -694,7 +694,7 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
         <link rel="canonical" href={canonicalUrl} />
         
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
@@ -705,7 +705,7 @@ const Resume = ({
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Finance Resume Builder 2026 | ATS Investment Banking Templates" />
         <meta property="og:description" content="Create your professional finance resume for free in 2026. ATS-optimized templates help investment bankers, analysts & finance professionals land interviews faster. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-finance-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-finance-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Finance Resume Builder - Create Professional Finance Resumes Online" />
@@ -720,7 +720,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Finance Resume Builder 2026 | ATS Investment Banking Templates" />
         <meta name="twitter:description" content="Create your professional finance resume for free in 2026. ATS-optimized templates help investment bankers, analysts & finance professionals land interviews faster. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-finance-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-finance-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Finance Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -752,32 +752,32 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Finance Resume Free",
                     "description": "Free online resume builder for finance professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Finance Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
+                        "https://linkedin.com/company/professional-resume-free",
+                        "https://facebook.com/ProfessionalResumeFree",
+                        "https://youtube.com/@ProfessionalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-finance-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-finance-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -788,7 +788,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -828,7 +828,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-finance-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-finance-resume-builder.jpg",
                     "applicationSuite": "Finance Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -869,7 +869,7 @@ const Resume = ({
                       "name": "Choose a Finance Template",
                       "text": "Select from our ATS-optimized finance resume templates designed for investment banking, private equity, hedge funds, and corporate finance.",
                       "url": `${canonicalUrl}#templates`,
-                      "image": "https://www.professionalresumefree.com/images/step1-finance-template.jpg"
+                      "image": "https://professionalresumefree.com/images/step1-finance-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -877,7 +877,7 @@ const Resume = ({
                       "name": "Enter Your Finance Information",
                       "text": "Add your finance experience, deal history, technical skills, certifications, and specialized financial expertise using our guided forms.",
                       "url": `${canonicalUrl}#editor`,
-                      "image": "https://www.professionalresumefree.com/images/step2-finance-info.jpg"
+                      "image": "https://professionalresumefree.com/images/step2-finance-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -885,7 +885,7 @@ const Resume = ({
                       "name": "Customize and Optimize",
                       "text": "Use our finance-specific suggestions to improve financial keywords and formatting for ATS compatibility.",
                       "url": `${canonicalUrl}#optimize`,
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -893,7 +893,7 @@ const Resume = ({
                       "name": "Download Your Finance Resume",
                       "text": "Export your professional finance resume as PDF, Word, or plain text - completely free, no watermarks.",
                       "url": `${canonicalUrl}#download`,
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -903,7 +903,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Finance Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -2093,10 +2093,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Finance Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-finance-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Finance Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-finance-resume-builder' }
   ];
 
   return {

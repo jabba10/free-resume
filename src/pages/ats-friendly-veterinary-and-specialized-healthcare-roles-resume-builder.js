@@ -748,14 +748,14 @@ const VeterinaryResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" />
         <meta property="og:title" content="Free Veterinary Resume Builder 2026: ATS Vet Templates" />
         <meta property="og:description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates for vets, technicians & animal healthcare specialists. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-veterinary-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-veterinary-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Veterinary Resume Builder - Create Professional Animal Healthcare Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Veterinary Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -766,7 +766,7 @@ const VeterinaryResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Veterinary Resume Builder 2026: ATS Vet Templates" />
         <meta name="twitter:description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates for vets, technicians & animal healthcare specialists. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-veterinary-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-veterinary-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Veterinary Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@VetResumeFree" />
         <meta name="twitter:creator" content="@VetResumeFree" />
@@ -789,8 +789,8 @@ const VeterinaryResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder",
                   "name": "Free Veterinary Resume Builder 2026 - ATS Vet Templates",
                   "description": "Create professional ATS-optimized veterinary resumes for free. Land interviews faster with our animal healthcare resume builder.",
                   "datePublished": "2026-01-01",
@@ -798,18 +798,18 @@ const VeterinaryResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Veterinary Resume Free",
                     "description": "Free online resume builder for veterinary and animal healthcare professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Veterinary Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -823,7 +823,7 @@ const VeterinaryResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-veterinary-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-veterinary-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -834,13 +834,13 @@ const VeterinaryResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Veterinary Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder"
                       }
                     ]
                   },
@@ -874,7 +874,7 @@ const VeterinaryResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-veterinary-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-veterinary-resume-builder.jpg",
                     "applicationSuite": "Veterinary Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -882,7 +882,7 @@ const VeterinaryResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -895,7 +895,7 @@ const VeterinaryResume = ({
                         "name": "Veterinary Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#webpage"
                   }))
                 },
                 {
@@ -914,32 +914,32 @@ const VeterinaryResume = ({
                       "position": 1,
                       "name": "Choose a Veterinary Template",
                       "text": "Select from our ATS-optimized veterinary resume templates designed for veterinarians, vet techs, surgeons, and animal specialists.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-veterinary-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-veterinary-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Veterinary Information",
                       "text": "Add your clinical experience, education, licenses, certifications, and specialized animal healthcare skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-veterinary-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-veterinary-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our veterinary-specific suggestions to improve medical terminology and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Veterinary Resume",
                       "text": "Export your professional veterinary resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -949,7 +949,7 @@ const VeterinaryResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Veterinary Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1025,7 +1025,7 @@ const VeterinaryResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly veterinary resume builder that helps animal healthcare professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/veterinary-resume-builder"
+                        "url": "https://professionalresumefree.com/veterinary-resume-builder"
                       }
                     }
                   }))
@@ -2310,8 +2310,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Veterinary Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Veterinary Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder' }
   ];
 
   return {

@@ -673,8 +673,8 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
   const currentYear = new Date().getFullYear();
   const displayDate = currentDate;
 
-  // Updated URL to match the new slug
-  const canonicalUrl = "https://www.professionalresumefree.com/best-resume-templates-to-past-applicant-tracking-system/";
+  // Updated URL to remove "www"
+  const canonicalUrl = "https://professionalresumefree.com/best-resume-templates-to-past-applicant-tracking-system/";
 
   // Template count for dynamic content
   const templateCount = topTemplates.length;
@@ -714,14 +714,14 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* Single Canonical URL - Updated */}
+        {/* Single Canonical URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Open Graph Tags - Updated */}
+        {/* Open Graph Tags - Updated without www */}
         <meta property="og:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
         <meta property="og:description" content="Discover the best resume templates to pass applicant tracking systems. Proven ATS-friendly formats with keyword optimization. Free instant download." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats-templates-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats-templates-preview.jpg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="Best Resume Templates to Pass Applicant Tracking Systems - ATS-friendly examples" />
@@ -730,11 +730,11 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         <meta property="og:updated_time" content={lastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* Twitter Card Tags - Updated */}
+        {/* Twitter Card Tags - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
         <meta name="twitter:description" content="ATS-optimized resume templates proven to pass applicant tracking systems. Free instant download." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats-templates-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats-templates-preview.jpg" />
         <meta name="twitter:image:alt" content="Best Resume Templates to Pass Applicant Tracking Systems" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -763,7 +763,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         {/* Sitemap Link */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* JSON-LD Structured Data - Updated with new URL */}
+        {/* JSON-LD Structured Data - Updated with new URL without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -780,13 +780,13 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   }
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free ATS-Optimized Resume Templates and Tools",
                   "publisher": {
@@ -794,7 +794,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -806,13 +806,13 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
                       "position": 2,
                       "name": "Resume Templates",
-                      "item": "https://www.professionalresumefree.com/resume-templates"
+                      "item": "https://professionalresumefree.com/resume-templates"
                     },
                     {
                       "@type": "ListItem",
@@ -829,14 +829,14 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",
@@ -927,7 +927,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation - Updated with new path */}
+        {/* Breadcrumb Navigation - Updated with new path without www */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">

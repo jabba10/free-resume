@@ -1,4 +1,3 @@
-
 import Head from 'next/head';
 import Link from 'next/link';
 import { 
@@ -840,8 +839,8 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
 
   const currentYear = new Date().getFullYear();
 
-  // Updated canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-a-job";
+  // UPDATED: Canonical URL without www
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-a-job";
 
   const faqs = [
     {
@@ -955,16 +954,16 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
         <meta name="revisit-after" content="7 days" />
         <meta name="expires" content="never" />
         
-        {/* Single Canonical URL */}
+        {/* Single Canonical URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap-resume-guides.xml" />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - UPDATED without www */}
         <meta property="og:title" content="How to Write a Resume for a Job: 2026 Step-by-Step Guide" />
         <meta property="og:description" content="Master resume writing with our 2026 step-by-step guide. Learn ATS optimization, AI strategies, and get 55% more interviews. Free templates included." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-writing-guide-2026-og.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/resume-writing-guide-2026-og.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Writing Guide 2026 - How to Create Professional Resumes" />
@@ -983,13 +982,13 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
         <meta property="article:tag" content="Job Search" />
         <meta property="article:tag" content="Career Advice" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         <meta name="twitter:title" content="How to Write a Resume for a Job: 2026 Step-by-Step Guide" />
         <meta name="twitter:description" content="Step-by-step resume writing guide with AI optimization tips. Get 55% more interviews with our proven strategies." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-resume-guide-2026.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-guide-2026.jpg" />
         <meta name="twitter:image:alt" content="Resume Writing Guide with AI Optimization Tips" />
         
         {/* Additional Meta Tags */}
@@ -1001,7 +1000,7 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* Comprehensive Structured Data */}
+        {/* Comprehensive Structured Data - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1019,8 +1018,8 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Resume Free",
                     "description": "Free ATS-friendly resume builder and career resources"
                   },
@@ -1031,7 +1030,7 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -1046,18 +1045,18 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
                   "@type": "Article",
                   "headline": "How to Write a Resume for a Job: 2026 Step-by-Step Guide",
                   "description": "Master resume writing with our 2026 step-by-step guide. Learn ATS optimization, AI strategies, formatting tips, and get 55% more interviews.",
-                  "image": "https://www.professionalresumefree.com/images/resume-writing-guide-2026-og.jpg",
+                  "image": "https://professionalresumefree.com/images/resume-writing-guide-2026-og.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free Career Experts",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": currentDate,

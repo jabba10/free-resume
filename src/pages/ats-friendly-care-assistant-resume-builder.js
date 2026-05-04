@@ -657,8 +657,8 @@ const Resume = ({
     );
   };
 
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder";
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-care-assistant-resume-builder";
 
   return (
     <div className={styles.resumeBuilder} lang="en-GB">
@@ -675,7 +675,7 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
         <link rel="canonical" href={canonicalUrl} />
         
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
@@ -684,7 +684,7 @@ const Resume = ({
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
         <meta property="og:description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-care-assistant-cv-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-care-assistant-cv-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Care Assistant CV Builder - Create Professional UK Care CVs Online" />
@@ -698,7 +698,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
         <meta name="twitter:description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-care-assistant-cv-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-care-assistant-cv-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Care Assistant CV Builder with UK Templates" />
         <meta name="twitter:site" content="@CareCVFreeUK" />
         <meta name="twitter:creator" content="@CareCVFreeUK" />
@@ -730,32 +730,32 @@ const Resume = ({
                   "inLanguage": "en-GB",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Care Assistant CV Free UK",
                     "description": "Free online CV builder for care assistants and healthcare workers in the UK",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Care Assistant CV Free UK",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/CareCVFreeUK",
-                        "https://www.linkedin.com/company/care-assistant-cv-free-uk",
-                        "https://www.facebook.com/CareAssistantCVFreeUK",
-                        "https://www.youtube.com/@CareAssistantCVFreeUK"
+                        "https://linkedin.com/company/care-assistant-cv-free-uk",
+                        "https://facebook.com/CareAssistantCVFreeUK",
+                        "https://youtube.com/@CareAssistantCVFreeUK"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-care-assistant-cv-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-care-assistant-cv-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -766,7 +766,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -807,7 +807,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-care-assistant-cv-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-care-assistant-cv-builder.jpg",
                     "applicationSuite": "UK Care Career Tools",
                     "countriesSupported": "United Kingdom",
                     "fileSize": "Web Application"
@@ -848,7 +848,7 @@ const Resume = ({
                       "name": "Choose a UK Care Template",
                       "text": "Select from our UK-specific care assistant CV templates designed for NHS applications, care homes, domiciliary care, and UK healthcare agencies.",
                       "url": `${canonicalUrl}#templates`,
-                      "image": "https://www.professionalresumefree.com/images/step1-uk-care-template.jpg"
+                      "image": "https://professionalresumefree.com/images/step1-uk-care-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -856,7 +856,7 @@ const Resume = ({
                       "name": "Enter Your Care Experience",
                       "text": "Add your UK care experience, NVQ/SVQ qualifications, DBS status, Care Certificate, and UK-specific training using our guided forms.",
                       "url": `${canonicalUrl}#editor`,
-                      "image": "https://www.professionalresumefree.com/images/step2-care-info.jpg"
+                      "image": "https://professionalresumefree.com/images/step2-care-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -864,7 +864,7 @@ const Resume = ({
                       "name": "Customize for UK Standards",
                       "text": "Use our UK care-specific suggestions to improve care terminology and formatting for CQC compliance and NHS applications.",
                       "url": `${canonicalUrl}#optimize`,
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize-uk.jpg"
+                      "image": "https://professionalresumefree.com/images/step3-optimize-uk.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -872,7 +872,7 @@ const Resume = ({
                       "name": "Download Your Care CV",
                       "text": "Export your professional care assistant CV as PDF - completely free, no watermarks, ready for UK job applications.",
                       "url": `${canonicalUrl}#download`,
-                      "image": "https://www.professionalresumefree.com/images/step4-download-uk.jpg"
+                      "image": "https://professionalresumefree.com/images/step4-download-uk.jpg"
                     }
                   ]
                 },
@@ -882,7 +882,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Care Assistant CV Free UK",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+44-800-555-1234",
@@ -2105,10 +2105,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Care Assistant CV Builder UK', item: 'https://www.professionalresumefree.com/ats-friendly-care-assistant-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Care Assistant CV Builder UK', item: 'https://professionalresumefree.com/ats-friendly-care-assistant-resume-builder' }
   ];
 
   return {

@@ -525,8 +525,8 @@ const CertificateResumeSection = ({
   const safeCertificateDates = certificateDates || Array(12).fill(freshnessIndicator);
   const currentYear = new Date().getFullYear();
 
-  // Updated canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/certification-resume-section";
+  // Updated canonical URL - REMOVED www
+  const canonicalUrl = "https://professionalresumefree.com/certification-resume-section";
 
   const certificateCategories = [
     {
@@ -799,14 +799,14 @@ const CertificateResumeSection = ({
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
+        {/* Single Canonical URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - REMOVED www from image URLs */}
         <meta property="og:title" content="Certification Resume Section: 120+ ATS Templates (2026)" />
         <meta property="og:description" content="Create a professional certification section for your resume. 120+ ATS-optimized templates to showcase certificates. Free download." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-certificate-resume-section.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-certificate-resume-section.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Professional Certificate Resume Section Templates" />
@@ -815,11 +815,11 @@ const CertificateResumeSection = ({
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - REMOVED www from image URLs */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Certification Resume Section: 120+ ATS Templates (2026)" />
         <meta name="twitter:description" content="Professional certificate section templates for resumes. ATS-optimized. Free download." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-certificate-resume-section.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-certificate-resume-section.jpg" />
         <meta name="twitter:image:alt" content="Certificate Resume Section Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -844,7 +844,7 @@ const CertificateResumeSection = ({
         {/* Sitemap Link */}
         <link rel="sitemap" type="application/xml" href="/sitemap-certificates.xml" />
         
-        {/* JSON-LD Structured Data */}
+        {/* JSON-LD Structured Data - REMOVED www from website URL */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -862,8 +862,8 @@ const CertificateResumeSection = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Resume Free",
                     "description": "Free online resume builder for job seekers"
                   },
@@ -874,7 +874,7 @@ const CertificateResumeSection = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -970,7 +970,8 @@ const CertificateResumeSection = ({
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com" itemProp="item">
                   <span itemProp="name">Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />

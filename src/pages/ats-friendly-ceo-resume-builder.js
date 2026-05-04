@@ -743,6 +743,9 @@ const CeoResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-ceo-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -757,14 +760,14 @@ const CeoResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
         <meta property="og:description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-executive-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-executive-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Executive Resume Builder - Create Professional CEO Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Executive Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -775,7 +778,7 @@ const CeoResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
         <meta name="twitter:description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-executive-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-executive-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Executive Resume Builder with Board-Level Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -798,8 +801,8 @@ const CeoResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Executive Resume Builder 2026 | CEO/C-Suite Templates",
                   "description": "Create professional executive resumes for free. Land board-level interviews with our CEO resume builder.",
                   "datePublished": "2026-01-01",
@@ -807,32 +810,32 @@ const CeoResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Executive Resume Free",
                     "description": "Free online resume builder for business leaders and executives",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Executive Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
+                        "https://linkedin.com/company/professional-resume-free",
+                        "https://facebook.com/ProfessionalResumeFree",
+                        "https://youtube.com/@ProfessionalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-executive-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-executive-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -843,13 +846,13 @@ const CeoResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Executive Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -883,7 +886,7 @@ const CeoResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-executive-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-executive-resume-builder.jpg",
                     "applicationSuite": "Executive Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -891,7 +894,7 @@ const CeoResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -904,7 +907,7 @@ const CeoResume = ({
                         "name": "Executive Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -923,32 +926,32 @@ const CeoResume = ({
                       "position": 1,
                       "name": "Choose an Executive Template",
                       "text": "Select from our executive-level resume templates designed for CEOs, CFOs, COOs, board directors, and senior leaders.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-executive-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-executive-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Executive Information",
                       "text": "Add your leadership experience, education, board positions, certifications, and strategic achievements using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-executive-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-executive-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our executive-specific suggestions to improve leadership keywords and strategic formatting for board-level review.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Executive Resume",
                       "text": "Export your professional executive resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -958,7 +961,7 @@ const CeoResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Executive Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1034,7 +1037,7 @@ const CeoResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online executive resume builder that helps business leaders create professional resumes and land board-level interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2422,10 +2425,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Executive Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-ceo-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Executive Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-ceo-resume-builder' }
   ];
 
   return {

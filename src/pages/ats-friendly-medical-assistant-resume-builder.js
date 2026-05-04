@@ -650,14 +650,14 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" />
         <meta property="og:title" content="Free Medical Assistant Resume Builder 2026: CMA & RMA Templates" />
         <meta property="og:description" content="Create your professional Medical Assistant resume for free in 2026. ATS-optimized CMA/RMA templates help you land healthcare interviews faster. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-medical-assistant-resume-builder.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-medical-assistant-resume-builder.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Medical Assistant Resume Builder - Create Professional CMA/RMA Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Medical Assistant Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -665,7 +665,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Medical Assistant Resume Builder 2026: CMA & RMA Templates" />
         <meta name="twitter:description" content="Create your professional Medical Assistant resume for free in 2026. ATS-optimized CMA/RMA templates help you land healthcare interviews faster. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-medical-assistant-resume-builder.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-medical-assistant-resume-builder.jpg" />
         <meta name="twitter:image:alt" content="Free Medical Assistant Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@MA_ResumeFree" />
         <meta name="twitter:creator" content="@MA_ResumeFree" />
@@ -688,8 +688,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder/#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder",
                   "name": "Free Medical Assistant Resume Builder 2026 - CMA & RMA Templates",
                   "description": "Create professional ATS-optimized Medical Assistant resumes for free. Land interviews 3x faster with our CMA/RMA resume builder.",
                   "datePublished": "2026-01-01",
@@ -697,18 +697,18 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Medical Assistant Resume Free",
                     "description": "Free online resume builder for Medical Assistants in the USA",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Medical Assistant Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -720,7 +720,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-medical-assistant-resume-builder.jpg",
+                    "url": "https://professionalresumefree.com/images/og-medical-assistant-resume-builder.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -731,13 +731,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Medical Assistant Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder"
                       }
                     ]
                   },
@@ -771,7 +771,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-medical-assistant-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-medical-assistant-resume-builder.jpg",
                     "applicationSuite": "Medical Assistant Career Tools",
                     "countriesSupported": "USA",
                     "fileSize": "Web Application"
@@ -779,7 +779,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -792,7 +792,7 @@ const Resume = ({
                         "name": "Medical Assistant Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#webpage"
                   }))
                 },
                 {
@@ -811,32 +811,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Medical Assistant Template",
                       "text": "Select from our ATS-optimized Medical Assistant resume templates designed for CMA, RMA, CCMA, and Clinical Medical Assistants.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#templates",
-                      "image": "https://www.medicalassistantresume.com/images/step1-ma-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-ma-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Medical Assistant Information",
                       "text": "Add your clinical experience, education, certifications, clinical skills, and EHR/EMR software proficiency.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-ma-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-ma-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our Medical Assistant-specific suggestions to highlight clinical skills, certifications, and healthcare keywords for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize-ma.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize-ma.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Medical Assistant Resume",
                       "text": "Export your professional Medical Assistant resume as PDF - completely free, no watermarks, optimized for USA healthcare employers.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download-ma.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download-ma.jpg"
                     }
                   ]
                 }
@@ -1945,8 +1945,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Medical Assistant Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-medical-assistant-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Medical Assistant Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-medical-assistant-resume-builder' }
   ];
 
   return {

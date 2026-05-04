@@ -1287,14 +1287,14 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
     return samples;
   };
 
-  // Schema data with improved structure
+  // Schema data with improved structure - UPDATED WITHOUT www
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/free-action-verb-recommender",
-        "url": "https://www.professionalresumefree.com/free-action-verb-recommender",
+        "@id": "https://professionalresumefree.com/free-action-verb-recommender",
+        "url": "https://professionalresumefree.com/free-action-verb-recommender",
         "name": `Free Resume Action Verb Recommender - 150+ Power Verbs for ${CURRENT_YEAR}`,
         "description": "Completely free resume action verb recommender with 150+ powerful verbs categorized by industry. Find strong action verbs to replace weak words and optimize your resume for ATS systems.",
         "datePublished": safeCurrentDate,
@@ -1382,19 +1382,19 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Free Tools",
-            "item": "https://www.professionalresumefree.com/free-tools"
+            "item": "https://professionalresumefree.com/free-tools"
           },
           {
             "@type": "ListItem",
             "position": 3,
             "name": "Action Verb Recommender",
-            "item": "https://www.professionalresumefree.com/free-action-verb-recommender"
+            "item": "https://professionalresumefree.com/free-action-verb-recommender"
           }
         ]
       }
@@ -1421,13 +1421,13 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
         <meta name="chatgpt-fts:keywords" content="resume verbs, action verbs, power words, resume writing" />
         <meta name="chatgpt-fts:last-updated" content={freshnessIndicator} />
         
-        {/* Canonical URL - Single Tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-action-verb-recommender" />
+        {/* Canonical URL - Single Tag - UPDATED without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/free-action-verb-recommender" />
         
-        {/* Open Graph */}
+        {/* Open Graph - UPDATED without www */}
         <meta property="og:title" content="Free Resume Action Verb Recommender - 150+ Power Verbs" />
         <meta property="og:description" content="Free resume action verb recommender with 150+ powerful verbs. Find strong action verbs for your resume." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-action-verb-recommender" />
+        <meta property="og:url" content="https://professionalresumefree.com/free-action-verb-recommender" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />

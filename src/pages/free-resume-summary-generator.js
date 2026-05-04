@@ -981,7 +981,8 @@ const criticalCSS = `
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
-const SITE_URL = 'https://www.professionalresumefree.com';
+// REMOVED www from SITE_URL
+const SITE_URL = 'https://professionalresumefree.com';
 const PAGE_URL = `${SITE_URL}/free-resume-summary-generator`;
 
 // Template Categories
@@ -1555,10 +1556,10 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <meta name="chatgpt-fts:last-updated" content={safeSeoData.currentDate} />
         <meta name="generator" content="Professional Resume Free - Summary Generator" />
         
-        {/* Canonical URL - Single canonical tag */}
+        {/* Canonical URL - Single canonical tag - REMOVED www */}
         <link rel="canonical" href={PAGE_URL} />
         
-        {/* Hreflang Tags */}
+        {/* Hreflang Tags - REMOVED www */}
         <link rel="alternate" href={PAGE_URL} hreflang="en" />
         <link rel="alternate" href={PAGE_URL} hreflang="en-US" />
         <link rel="alternate" href={PAGE_URL} hreflang="en-GB" />
@@ -1566,7 +1567,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <link rel="alternate" href={PAGE_URL} hreflang="en-AU" />
         <link rel="alternate" href={PAGE_URL} hreflang="x-default" />
         
-        {/* Open Graph */}
+        {/* Open Graph - REMOVED www from image URLs */}
         <meta property="og:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
         <meta property="og:description" content="Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary." />
         <meta property="og:type" content="website" />
@@ -1579,7 +1580,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeSeoData.lastModifiedDate} />
         
-        {/* Twitter */}
+        {/* Twitter - REMOVED www from image URLs */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
         <meta name="twitter:description" content="Create professional ATS-friendly resume summaries instantly. 20+ templates, keyword optimization, free to use." />
@@ -1611,6 +1612,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <ol itemScope itemType="https://schema.org/BreadcrumbList">
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              {/* REMOVED www from href */}
               <a itemProp="item" href={SITE_URL}>
                 <span itemProp="name">Home</span>
               </a>

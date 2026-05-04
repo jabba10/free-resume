@@ -728,14 +728,14 @@ const ProjectManagerResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-project-manager-resume-builder" />
         <meta property="og:title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
         <meta property="og:description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-pm-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-pm-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Project Manager Resume Builder - Create Professional PM Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-project-manager-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Project Manager Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -746,7 +746,7 @@ const ProjectManagerResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
         <meta name="twitter:description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-pm-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-pm-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Project Manager Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@PMResumeFree" />
         <meta name="twitter:creator" content="@PMResumeFree" />
@@ -768,8 +768,8 @@ const ProjectManagerResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder",
                   "name": "Free PM Resume Builder 2026 | ATS Project Manager Templates",
                   "description": "Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -777,18 +777,18 @@ const ProjectManagerResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Project Manager Resume Free",
                     "description": "Free online resume builder for project managers worldwide",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Project Manager Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -802,7 +802,7 @@ const ProjectManagerResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-pm-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-pm-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -813,13 +813,13 @@ const ProjectManagerResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Project Manager Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder"
                       }
                     ]
                   },
@@ -853,7 +853,7 @@ const ProjectManagerResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-pm-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-pm-resume-builder.jpg",
                     "applicationSuite": "Project Management Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -861,7 +861,7 @@ const ProjectManagerResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -874,7 +874,7 @@ const ProjectManagerResume = ({
                         "name": "Project Manager Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#webpage"
                   }))
                 },
                 {
@@ -893,32 +893,32 @@ const ProjectManagerResume = ({
                       "position": 1,
                       "name": "Choose a Project Management Template",
                       "text": "Select from our ATS-optimized project management resume templates designed for IT, Construction, Agile, and global PM roles.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-pm-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-pm-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Project Management Experience",
                       "text": "Add your PM experience with budgets, team sizes, methodologies, and project achievements using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-pm-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-pm-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our PM-specific suggestions to improve project metrics and formatting for global ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your PM Resume",
                       "text": "Export your professional project management resume as PDF - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -928,7 +928,7 @@ const ProjectManagerResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Project Manager Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1004,7 +1004,7 @@ const ProjectManagerResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly project management resume builder that helps PMs create professional resumes and land global interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder"
                       }
                     }
                   }))
@@ -2244,8 +2244,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Project Manager Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-project-manager-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Project Manager Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-project-manager-resume-builder' }
   ];
 
   return {

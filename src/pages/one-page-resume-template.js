@@ -859,7 +859,6 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
   
-  // Generate dates for content freshness
   const reviewDates = Array(10).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 7 + 1));
@@ -883,13 +882,13 @@ export async function getStaticProps() {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "One-Page Resume Template",
-      "item": "https://www.professionalresumefree.com/one-page-resume-template"
+      "item": "https://professionalresumefree.com/one-page-resume-template"
     }
   ];
 
@@ -905,7 +904,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    revalidate: 3600, // Revalidate every hour
+    revalidate: 3600,
   };
 }
 
@@ -929,13 +928,11 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
   const safeFaqDates = faqDates || Array(7).fill(freshnessIndicator);
   const safeArticleDates = articleDates || Array(10).fill(freshnessIndicator);
 
-  const canonicalUrl = "https://www.professionalresumefree.com/one-page-resume-template";
+  const canonicalUrl = "https://professionalresumefree.com/one-page-resume-template";
   const currentYear = new Date().getFullYear();
 
-  // Optimized title - exactly 70 characters
   const optimizedTitle = "One-Page Resume Template 2026: Free Guide & ATS Examples";
 
-  // Long-tail keywords for GEO
   const longTailKeywords = [
     "one page resume template professional 2026",
     "single page resume format for experienced professionals",
@@ -944,14 +941,12 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
     "one page cv template for executives and managers"
   ];
 
-  // People Also Ask for GEO
   const peopleAlsoAsk = [
     { question: "Is a one-page resume really better than two pages?", answer: "For professionals with less than 10 years of experience, yes. One-page resumes receive 34% more interview requests. Senior executives may justify two pages if they have extensive relevant experience. The key is relevance—every line should serve your career objective." },
     { question: "How do I fit 10 years of experience on one page?", answer: "Focus on achievements from your most recent 3-5 roles. Use bullet points with metrics, combine similar responsibilities, and eliminate outdated or irrelevant experience. Prioritize impact over chronology." },
     { question: "What font size should I use for a one-page resume?", answer: "Never go below 10pt for body text. Ideal sizes: 11-12pt for body, 14-16pt for headings, 18-22pt for your name. Use 0.8-1.0 line spacing and 0.5-0.8 paragraph spacing to maximize space without compromising readability." }
   ];
 
-  // Conversational explanations for GEO
   const conversationalExplanations = [
     { topic: "One-Page Resume in Plain English", content: "Think of a one-page resume as your professional highlight reel. Instead of listing everything you've ever done, you showcase only the most impressive, relevant achievements that prove you're perfect for the job. It's quality over quantity." },
     { topic: "Why One Page Works Better", content: "Recruiters spend just 7.4 seconds scanning a resume initially. A one-page resume puts your best achievements right where their eyes look first. It's like giving them the executive summary instead of the whole book." }
@@ -1114,7 +1109,7 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 70 characters exactly */}
+        {/* OPTIMIZED TITLE */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
@@ -1137,19 +1132,19 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - NO www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - NO www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - NO www */}
         <meta property="og:title" content="One-Page Resume Template 2026: Free Guide & ATS Examples" />
         <meta property="og:description" content="Master one-page resumes with our free guide. ATS-optimized templates and expert strategies. 34% more interviews." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="One-Page Resume Template Guide 2026" />
@@ -1160,11 +1155,11 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
         <meta property="article:published_time" content="2026-01-01" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - NO www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="One-Page Resume Template 2026: Free Guide" />
         <meta name="twitter:description" content="Master one-page resumes with expert strategies. Free templates. No sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="One-Page Resume Template Guide" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1180,7 +1175,7 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - NO www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1192,7 +1187,7 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
                   "@id": `${canonicalUrl}#article`,
                   "headline": optimizedTitle,
                   "description": "Expert guide to creating effective one-page resumes with templates, strategies, and industry-specific advice",
-                  "image": "https://www.professionalresumefree.com/ats.jpeg",
+                  "image": "https://professionalresumefree.com/ats.jpeg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free"
@@ -1329,7 +1324,7 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
         {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
+        {/* Breadcrumb Navigation - NO www */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -1355,7 +1350,7 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
           </div>
         </nav>
 
-        {/* Hero Section with single H1 */}
+        {/* Hero Section */}
         <section className="hero" id="main-content" aria-labelledby="hero-heading">
           <div className="container">
             <div className="trust-badge" aria-label="Trust indicators">

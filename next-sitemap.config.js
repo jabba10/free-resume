@@ -1,41 +1,28 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://www.professionalresumefree.com',
+  siteUrl: 'https://professionalresumefree.com',
   generateRobotsTxt: true,
   outDir: 'public',
 
   exclude: [
-    // All invalid links that don't exist on your website
+    // All invalid links that don't exist on your website (without trailing slashes)
     '/veterinary-resume-templates',
-    '/veterinary-resume-templates/',
     '/resume-tools',
-    '/resume-tools/',
     '/resume-writing-guide',
-    '/resume-writing-guide/',
     '/free-tools',
-    '/free-tools/',
     '/chronological-resume-example/free-resume-formatting-checker',
-    '/chronological-resume-example/free-resume-formatting-checker/',
     '/cover-letter',
-    '/cover-letter/',
     '/cover-letter-guide',
-    '/cover-letter-guide/',
     '/free-cover-letter-builder',
-    '/free-cover-letter-builder/',
     '/html/head/title',
-    '/html/head/title/',
     '/career-resources',
-    '/career-resources/',
     '/career-advice',
-    '/career-advice/',
     '/blog/best-job-boards',
-    '/blog/best-job-boards/',
-    '/job-search-tips',
-    '/job-search-tips/'
+    '/job-search-tips'
   ],
 
   transform: async (config, path) => {
-    // Check if the path should be excluded
+    // Check if the path should be excluded (without trailing slashes)
     const excludedPaths = [
       '/veterinary-resume-templates',
       '/resume-tools',
@@ -52,12 +39,8 @@ module.exports = {
       '/job-search-tips'
     ];
 
-    // Skip excluded paths and their trailing slash variants
-    if (excludedPaths.some(excluded => 
-      path === excluded || 
-      path === `${excluded}/` || 
-      path.startsWith(excluded + '/')
-    )) {
+    // Skip excluded paths and their subpaths
+    if (excludedPaths.some(excluded => path === excluded || path.startsWith(excluded + '/'))) {
       return null;
     }
 
@@ -77,36 +60,23 @@ module.exports = {
         allow: '/',
         disallow: [
           '/veterinary-resume-templates',
-          '/veterinary-resume-templates/',
           '/resume-tools',
-          '/resume-tools/',
           '/resume-writing-guide',
-          '/resume-writing-guide/',
           '/free-tools',
-          '/free-tools/',
           '/chronological-resume-example/free-resume-formatting-checker',
-          '/chronological-resume-example/free-resume-formatting-checker/',
           '/cover-letter',
-          '/cover-letter/',
           '/cover-letter-guide',
-          '/cover-letter-guide/',
           '/free-cover-letter-builder',
-          '/free-cover-letter-builder/',
           '/html/head/title',
-          '/html/head/title/',
           '/career-resources',
-          '/career-resources/',
           '/career-advice',
-          '/career-advice/',
           '/blog/best-job-boards',
-          '/blog/best-job-boards/',
-          '/job-search-tips',
-          '/job-search-tips/'
+          '/job-search-tips'
         ]
       }
     ],
     additionalSitemaps: [
-      'https://www.professionalresumefree.com/sitemap.xml'
+      'https://professionalresumefree.com/sitemap.xml'
     ]
   }
 };

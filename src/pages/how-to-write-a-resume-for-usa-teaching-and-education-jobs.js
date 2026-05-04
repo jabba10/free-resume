@@ -785,20 +785,22 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-usa-teaching-and-education-jobs";
+  // UPDATED: Removed www from canonicalUrl
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-teaching-and-education-jobs";
 
+  // UPDATED: Removed www from breadcrumb items
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Career Resources",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -808,12 +810,13 @@ export async function getStaticProps() {
     }
   ];
 
+  // UPDATED: Removed www from meta image URL
   const meta = {
     title: "How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide",
     description: "Master the art of writing a resume for USA teaching and education jobs. Learn certification requirements, keyword strategies, and proven templates to land your dream teaching position.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/teaching-resume.jpeg",
+    image: "https://professionalresumefree.com/teaching-resume.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -948,7 +951,7 @@ function TeachingResumeGuide({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG TAGS */}
@@ -956,12 +959,12 @@ function TeachingResumeGuide({
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide" />
         <meta property="og:description" content="Master the art of writing a resume for USA teaching and education jobs. Learn certification requirements, keyword strategies, and proven templates." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/teaching-resume.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/teaching-resume.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -969,11 +972,11 @@ function TeachingResumeGuide({
         <meta property="article:published_time" content="2026-03-01" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Write a Resume for USA Teaching Jobs" />
         <meta name="twitter:description" content="Master the art of writing a resume for USA teaching and education jobs." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/teaching-resume.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/teaching-resume.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -988,7 +991,7 @@ function TeachingResumeGuide({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - FIXED ITEMREVIEWED ISSUE */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - FIXED ITEMREVIEWED ISSUE - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1010,7 +1013,7 @@ function TeachingResumeGuide({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-01",
@@ -1140,7 +1143,7 @@ function TeachingResumeGuide({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Start Your Teaching Resume <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1257,7 +1260,7 @@ function TeachingResumeGuide({
             <div className="card">
               <h2 className="section-title">Highlighting Certifications & Licenses</h2>
               <p className="paragraph">
-                In USA education, your state teaching license is your most important credential. It must appear prominently—ideatally right after your contact information or in a dedicated "Certifications" section at the top of your resume. Include the license type, grade levels, subject areas, and state of issuance.
+                In USA education, your state teaching license is your most important credential. It must appear prominently—ideally right after your contact information or in a dedicated "Certifications" section at the top of your resume. Include the license type, grade levels, subject areas, and state of issuance.
               </p>
               <p className="paragraph">
                 If you hold multiple endorsements (ESL, Special Education, Reading Specialist), list them clearly. Many schools use automated screening systems that filter for these specific credentials. Without them visible, your application may never reach human reviewers.
@@ -1410,11 +1413,6 @@ function TeachingResumeGuide({
                       <td>"Planned and delivered lessons for 4th grade class."</td>
                       <td className="text-success">"Designed and delivered differentiated lessons in math and reading, using formative assessments to target individual student needs, resulting in 90% of students meeting growth targets."</td>
                     </tr>
-                    <tr>
-                      <td><strong>Professional Development</strong></td>
-                      <td>Not included</td>
-                      <td className="text-success">"Completed 45+ hours of training in trauma-informed teaching, ESL strategies, and educational technology integration."</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -1539,7 +1537,7 @@ function TeachingResumeGuide({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Start Your Teaching Resume <FiArrowRight style={{marginLeft: '8px'}} />

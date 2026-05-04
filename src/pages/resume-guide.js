@@ -1213,14 +1213,14 @@ const ResumeGuide = ({
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="date" content={safeCurrentDate} />
         
-        {/* ===== SINGLE CANONICAL TAG ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-guide" />
+        {/* ===== SINGLE CANONICAL TAG - REMOVED www ===== */}
+        <link rel="canonical" href="https://professionalresumefree.com/resume-guide" />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - REMOVED www ===== */}
         <meta property="og:title" content="ATS Resume Guide 2026: Get 5× More Interviews with Optimization" />
         <meta property="og:description" content="Comprehensive ATS resume optimization guide with proven strategies, real examples, and free tools to land more interviews in 2026. Downloadable checklist included." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/resume-guide" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/ats-resume-optimization-guide-2026.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/resume-guide" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/ats-resume-optimization-guide-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
@@ -1228,18 +1228,18 @@ const ResumeGuide = ({
         <meta property="article:published_time" content={safeLastModifiedDate} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - REMOVED www ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ATS Resume Guide 2026: Get 5× More Interviews" />
         <meta name="twitter:description" content="Master ATS optimization with our step-by-step guide. Get the interview callbacks you deserve. Free checklist included." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-ats-guide-2026.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-ats-guide-2026.jpg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ===== PERFORMANCE ===== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE STRUCTURED DATA ===== */}
+        {/* ===== COMPREHENSIVE STRUCTURED DATA - REMOVED www ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1248,28 +1248,28 @@ const ResumeGuide = ({
               "@graph": [
                 {
                   "@type": "Article",
-                  "@id": "https://www.professionalresumefree.com/resume-guide/#article",
+                  "@id": "https://professionalresumefree.com/resume-guide/#article",
                   "headline": "ATS Resume Guide 2026: Get 5× More Interviews with Optimization",
                   "description": "Comprehensive guide to ATS resume optimization with proven strategies, real examples, and free tools to land more interviews in 2026.",
-                  "image": "https://www.professionalresumefree.com/images/ats-resume-optimization-guide-2026.jpg",
+                  "image": "https://professionalresumefree.com/images/ats-resume-optimization-guide-2026.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "ProfessionalResumeFree Career Experts",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "ProfessionalResumeFree",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-01-01",
                   "dateModified": safeLastModifiedDate,
                   "mainEntityOfPage": {
                     "@type": "WebPage",
-                    "@id": "https://www.professionalresumefree.com/resume-guide"
+                    "@id": "https://professionalresumefree.com/resume-guide"
                   },
                   "articleSection": "Career Development",
                   "keywords": "ATS resume, resume optimization, keyword strategy, CAR method",
@@ -1278,25 +1278,25 @@ const ResumeGuide = ({
                 },
                 {
                   "@type": "BreadcrumbList",
-                  "@id": "https://www.professionalresumefree.com/resume-guide/#breadcrumb",
+                  "@id": "https://professionalresumefree.com/resume-guide/#breadcrumb",
                   "itemListElement": [
                     {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
                       "position": 2,
                       "name": "Resume Guide",
-                      "item": "https://www.professionalresumefree.com/resume-guide"
+                      "item": "https://professionalresumefree.com/resume-guide"
                     }
                   ]
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/resume-guide/#faqpage",
+                  "@id": "https://professionalresumefree.com/resume-guide/#faqpage",
                   "mainEntity": faqItems.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,

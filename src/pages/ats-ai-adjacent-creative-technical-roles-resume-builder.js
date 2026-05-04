@@ -712,16 +712,16 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" />
+        {/* SINGLE CANONICAL URL - UPDATED (www removed) */}
+        <link rel="canonical" href="https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" />
         
         <meta property="og:title" content="Free AI Resume Builder 2026 | ATS Technical Templates" />
         <meta property="og:description" content="Create your professional AI/technical resume for free in 2026. ATS-optimized templates for AI engineers, ML researchers & data scientists. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-ai-technical-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-ai-technical-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free AI & Technical Resume Builder - Create Professional Technical Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Technical Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -732,7 +732,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free AI Resume Builder 2026 | ATS Technical Templates" />
         <meta name="twitter:description" content="Create your professional AI/technical resume for free in 2026. ATS-optimized templates for AI engineers, ML researchers & data scientists. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-ai-technical-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-ai-technical-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free AI & Technical Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@TechResumeFree" />
         <meta name="twitter:creator" content="@TechResumeFree" />
@@ -755,8 +755,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder",
                   "name": "Free AI Resume Builder 2026 - ATS Technical Templates",
                   "description": "Create professional ATS-optimized AI/technical resumes for free. Land interviews 3x faster with our technical resume builder.",
                   "datePublished": "2026-01-01",
@@ -764,18 +764,18 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Technical Resume Free",
                     "description": "Free online resume builder for AI and technical professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Technical Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -789,7 +789,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-ai-technical-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-ai-technical-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -800,13 +800,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "AI & Technical Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder"
                       }
                     ]
                   },
@@ -840,7 +840,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-ai-technical-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-ai-technical-resume-builder.jpg",
                     "applicationSuite": "Technical Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -848,7 +848,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -861,7 +861,7 @@ const Resume = ({
                         "name": "AI & Technical Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#webpage"
                   }))
                 },
                 {
@@ -880,32 +880,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Technical Template",
                       "text": "Select from our ATS-optimized technical resume templates designed for AI engineers, ML researchers, data scientists, and creative technologists.",
-                      "url": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-technical-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-technical-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Technical Information",
                       "text": "Add your AI projects, technical experience, education, certifications, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-technical-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-technical-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our technical-specific suggestions to improve AI/ML keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Technical Resume",
                       "text": "Export your professional AI/technical resume as PDF, Markdown, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -915,10 +915,10 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Technical Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
-                      "telephone": "+1-800-555-5678",
+                      "telephone": "",
                       "contactType": "Technical Support",
                       "availableLanguage": "en"
                     }
@@ -991,7 +991,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly AI/technical resume builder that helps technical professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder"
                       }
                     }
                   }))
@@ -2143,8 +2143,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'AI & Technical Resume Builder', item: 'https://www.professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'AI & Technical Resume Builder', item: 'https://professionalresumefree.com/ats-ai-adjacent-creative-technical-roles-resume-builder' }
   ];
 
   return {

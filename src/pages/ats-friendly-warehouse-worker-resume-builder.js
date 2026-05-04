@@ -678,7 +678,7 @@ const Resume = ({
   };
 
   // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder";
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder";
 
   return (
     <div className={styles.resumeBuilder} lang="en-US">
@@ -706,7 +706,7 @@ const Resume = ({
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Warehouse Resume Builder 2026 | ATS Logistics Templates" />
         <meta property="og:description" content="Create a professional warehouse resume for free in 2026. ATS-optimized templates for forklift operators, warehouse workers. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-warehouse-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-warehouse-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Warehouse Resume Builder - Create Professional Logistics Resumes Online" />
@@ -721,7 +721,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Warehouse Resume Builder 2026 | ATS Logistics Templates" />
         <meta name="twitter:description" content="Create a professional warehouse resume for free in 2026. ATS-optimized templates for forklift operators, warehouse workers. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-warehouse-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-warehouse-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Warehouse Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -753,18 +753,18 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Warehouse Resume Free",
                     "description": "Free online resume builder for warehouse professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Warehouse Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -778,7 +778,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-warehouse-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-warehouse-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -789,7 +789,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -829,7 +829,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-warehouse-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-warehouse-resume-builder.jpg",
                     "applicationSuite": "Logistics Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -870,7 +870,7 @@ const Resume = ({
                       "name": "Choose a Warehouse Template",
                       "text": "Select from our ATS-optimized warehouse resume templates designed for forklift operators, order pickers, warehouse supervisors, and logistics staff.",
                       "url": `${canonicalUrl}#templates`,
-                      "image": "https://www.professionalresumefree.com/images/step1-warehouse-template.jpg"
+                      "image": "https://professionalresumefree.com/images/step1-warehouse-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -878,7 +878,7 @@ const Resume = ({
                       "name": "Enter Your Warehouse Information",
                       "text": "Add your warehouse experience, equipment certifications, safety training, and specialized skills using our guided forms.",
                       "url": `${canonicalUrl}#editor`,
-                      "image": "https://www.professionalresumefree.com/images/step2-warehouse-info.jpg"
+                      "image": "https://professionalresumefree.com/images/step2-warehouse-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -886,7 +886,7 @@ const Resume = ({
                       "name": "Customize and Optimize",
                       "text": "Use our warehouse-specific suggestions to improve logistics keywords and formatting for ATS compatibility.",
                       "url": `${canonicalUrl}#optimize`,
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -894,7 +894,7 @@ const Resume = ({
                       "name": "Download Your Warehouse Resume",
                       "text": "Export your professional warehouse resume as PDF, Word, or plain text - completely free, no watermarks.",
                       "url": `${canonicalUrl}#download`,
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -904,7 +904,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Warehouse Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -2122,8 +2122,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Warehouse Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Warehouse Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-warehouse-worker-resume-builder' }
   ];
 
   return {

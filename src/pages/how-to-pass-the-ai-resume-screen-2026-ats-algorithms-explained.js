@@ -557,14 +557,15 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -579,7 +580,8 @@ export async function getStaticProps() {
     description: "Complete guide to passing AI resume screening in 2026. Learn how ATS algorithms work, optimization strategies, and data-backed techniques to land more interviews.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    // REMOVED www from image URL
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Expanded AI citation data with sources
@@ -796,20 +798,20 @@ function HowToPassAIResumeScreen({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - REMOVED www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URL */}
         <meta property="og:title" content="How to Pass the AI Resume Screen 2026: ATS Algorithms Explained" />
         <meta property="og:description" content="Complete guide to passing AI resume screening in 2026. Learn ATS algorithms, optimization strategies, and data-backed techniques." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -822,11 +824,11 @@ function HowToPassAIResumeScreen({
         <meta property="article:tag" content="ATS" />
         <meta property="article:tag" content="Resume Tips" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Pass AI Resume Screen 2026: ATS Algorithms Explained" />
         <meta name="twitter:description" content="Complete guide to passing AI resume screening. Learn ATS algorithms and optimization strategies." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -845,7 +847,7 @@ function HowToPassAIResumeScreen({
         {/* SITEMAP LINK */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE CANONICAL REFERENCE */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE CANONICAL REFERENCE - REMOVED www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -866,14 +868,14 @@ function HowToPassAIResumeScreen({
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "url": "https://professionalresumefree.com/logo.png",
                       "width": 200,
                       "height": 60
                     }
@@ -902,7 +904,7 @@ function HowToPassAIResumeScreen({
                   "isPartOf": {
                     "@type": "WebSite",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   }
                 },
                 {
@@ -1000,7 +1002,8 @@ function HowToPassAIResumeScreen({
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com" itemProp="item">
                   <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />

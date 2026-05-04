@@ -1,7 +1,7 @@
 // next.config.js - Optimized for Next.js 16.1.1
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: true,
+  trailingSlash: false,
   compress: true,
   reactStrictMode: true,
 
@@ -34,7 +34,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.professionalresumefree.com',
+        hostname: 'professionalresumefree.com',
         pathname: '/**',
       },
     ],
@@ -138,7 +138,7 @@ const nextConfig = {
           // --- AI & LLM DISCOVERY HEADERS (GEO - Generative Engine Optimization) ---
           {
             key: 'Link',
-            value: '<https://www.professionalresumefree.com/llms.txt>; rel="help"; type="text/plain", <https://www.professionalresumefree.com/llms-full.txt>; rel="alternate"; type="text/plain"',
+            value: '<https://professionalresumefree.com/llms.txt>; rel="help"; type="text/plain", <https://professionalresumefree.com/llms-full.txt>; rel="alternate"; type="text/plain"',
           },
           // --- ENHANCED SECURITY & PERFORMANCE HEADERS ---
           {

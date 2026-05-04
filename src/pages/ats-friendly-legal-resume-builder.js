@@ -732,6 +732,9 @@ const LegalResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-legal-resume-builder";
+
   return (
     <div 
       className={styles.legalResumeBuilder} 
@@ -754,14 +757,14 @@ const LegalResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
         <meta property="og:description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-legal-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-legal-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Legal Resume Builder - Create Professional Attorney Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-legal-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Legal Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -772,7 +775,7 @@ const LegalResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
         <meta name="twitter:description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-legal-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-legal-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Legal Resume Builder with ATS Templates for Global Jurisdictions" />
         <meta name="twitter:site" content="@LegalResumeFree" />
         <meta name="twitter:creator" content="@LegalResumeFree" />
@@ -794,8 +797,8 @@ const LegalResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Legal Resume Builder 2026 | ATS Attorney Templates",
                   "description": "Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -803,32 +806,32 @@ const LegalResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Legal Resume Free",
                     "description": "Free online resume builder for legal professionals worldwide",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Legal Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/LegalResumeFree",
-                        "https://www.linkedin.com/company/legal-resume-free",
-                        "https://www.facebook.com/ProfessionalLegalResumeFree",
-                        "https://www.youtube.com/@LegalResumeFree"
+                        "https://linkedin.com/company/legal-resume-free",
+                        "https://facebook.com/ProfessionalLegalResumeFree",
+                        "https://youtube.com/@LegalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-legal-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-legal-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -839,13 +842,13 @@ const LegalResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Legal Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -879,7 +882,7 @@ const LegalResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-legal-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-legal-resume-builder.jpg",
                     "applicationSuite": "Legal Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -887,7 +890,7 @@ const LegalResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -900,7 +903,7 @@ const LegalResume = ({
                         "name": "Legal Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -919,32 +922,32 @@ const LegalResume = ({
                       "position": 1,
                       "name": "Choose a Legal Template",
                       "text": "Select from our ATS-optimized legal resume templates designed for attorneys, paralegals, and legal professionals across global jurisdictions.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-legal-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-legal-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Legal Information",
                       "text": "Add your legal experience, education, bar admissions, court admissions, practice areas, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-legal-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-legal-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our legal-specific suggestions to improve legal keywords, jurisdiction formatting, and ATS compatibility for law firms and legal departments.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Legal Resume",
                       "text": "Export your professional legal resume as PDF with proper legal formatting - completely free, no watermarks, suitable for global applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -954,7 +957,7 @@ const LegalResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Legal Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-5678",
@@ -1030,7 +1033,7 @@ const LegalResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly legal resume builder that helps legal professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-legal-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2324,10 +2327,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Legal Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-legal-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Legal Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-legal-resume-builder' }
   ];
 
   return {

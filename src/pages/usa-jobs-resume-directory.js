@@ -639,8 +639,8 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/usa-jobs-resume-directory",
-        "url": "https://www.professionalresumefree.com/usa-jobs-resume-directory",
+        "@id": "https://professionalresumefree.com/usa-jobs-resume-directory",
+        "url": "https://professionalresumefree.com/usa-jobs-resume-directory",
         "name": "USA Jobs Resume Directory | Federal USAJOBS & ATS-Optimized Resume Guides",
         "description": "Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides. Free resources for American job seekers.",
         "dateModified": lastModified,
@@ -653,7 +653,7 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/usa-jobs-resume-directory#faq",
+        "@id": "https://professionalresumefree.com/usa-jobs-resume-directory#faq",
         "mainEntity": peopleAlsoAskUSA.map(faq => ({
           "@type": "Question",
           "name": faq.question,
@@ -693,12 +693,12 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
         <meta name="googlebot" content="index, follow" />
         <meta name="last-modified" content={lastModified} />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/usa-jobs-resume-directory" />
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
+        <link rel="canonical" href="https://professionalresumefree.com/usa-jobs-resume-directory" />
         
         <meta property="og:title" content="USA Resume Directory | Federal USAJOBS & ATS-Optimized" />
         <meta property="og:description" content="Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/usa-jobs-resume-directory" />
+        <meta property="og:url" content="https://professionalresumefree.com/usa-jobs-resume-directory" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />

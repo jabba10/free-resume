@@ -644,7 +644,7 @@ const Resume = ({
   };
 
   // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder";
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-support-worker-resume-builder";
 
   return (
     <div className={styles.resumeBuilder} lang="en-GB">
@@ -669,7 +669,7 @@ const Resume = ({
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free UK Support Worker CV Builder: DBS-Ready Templates 2026" />
         <meta property="og:description" content="Create a professional support worker CV for free. DBS-ready templates trusted by 200K+ UK care pros. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free UK Support Worker CV Builder - Create Professional Care Sector CVs Online" />
@@ -681,7 +681,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free UK Support Worker CV Builder: DBS-Ready Templates 2026" />
         <meta name="twitter:description" content="Create a professional support worker CV for free. DBS-ready templates trusted by 200K+ UK care pros. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-support-worker-cv-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-support-worker-cv-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free UK Support Worker CV Builder with DBS Ready Templates" />
         <meta name="twitter:site" content="@UKSupportWorkerCV" />
         <meta name="twitter:creator" content="@UKSupportWorkerCV" />
@@ -713,18 +713,18 @@ const Resume = ({
                   "inLanguage": "en-GB",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional UK Support Worker CV Free",
                     "description": "Free online CV builder for UK support workers and care professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional UK Support Worker CV Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -737,7 +737,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -748,7 +748,7 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -789,7 +789,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-support-worker-cv-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-support-worker-cv-builder.jpg",
                     "applicationSuite": "UK Care Career Tools",
                     "countriesSupported": "United Kingdom",
                     "fileSize": "Web Application"
@@ -830,7 +830,7 @@ const Resume = ({
                       "name": "Choose a UK Support Worker Template",
                       "text": "Select from our DBS-ready UK support worker CV templates designed for care homes, domiciliary care, learning disabilities, and mental health support.",
                       "url": `${canonicalUrl}#templates`,
-                      "image": "https://www.professionalresumefree.com/images/step1-uk-template.jpg"
+                      "image": "https://professionalresumefree.com/images/step1-uk-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -838,7 +838,7 @@ const Resume = ({
                       "name": "Enter Your Care Experience Information",
                       "text": "Add your support work experience, NVQ qualifications, DBS status, and care skills using our UK-specific forms.",
                       "url": `${canonicalUrl}#editor`,
-                      "image": "https://www.professionalresumefree.com/images/step2-care-info.jpg"
+                      "image": "https://professionalresumefree.com/images/step2-care-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -846,7 +846,7 @@ const Resume = ({
                       "name": "Customize and Optimize for UK Employers",
                       "text": "Use our UK care sector suggestions to improve keywords and formatting for CQC compliance and DBS requirements.",
                       "url": `${canonicalUrl}#optimize`,
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -854,7 +854,7 @@ const Resume = ({
                       "name": "Download Your Support Worker CV",
                       "text": "Export your professional support worker CV as PDF - completely free, no watermarks, ready for UK care sector applications.",
                       "url": `${canonicalUrl}#download`,
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -864,7 +864,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional UK Support Worker CV Free",
-                    "url": "https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder",
+                    "url": "https://professionalresumefree.com/ats-friendly-support-worker-resume-builder",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "",
@@ -2119,8 +2119,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Free Support Worker CV Builder', item: 'https://www.professionalresumefree.com/ats-friendly-support-worker-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Free Support Worker CV Builder', item: 'https://professionalresumefree.com/ats-friendly-support-worker-resume-builder' }
   ];
 
   return {

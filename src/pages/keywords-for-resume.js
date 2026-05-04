@@ -786,8 +786,8 @@ export default function KeywordsForResume({ seoData }) {
   
   const displayDate = currentDate;
   
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/keywords-for-resume";
+  // SINGLE CANONICAL URL - www removed
+  const canonicalUrl = "https://professionalresumefree.com/keywords-for-resume";
 
   // FAQ Schema Data
   const faqSchemaData = [
@@ -941,19 +941,19 @@ export default function KeywordsForResume({ seoData }) {
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* SINGLE CANONICAL URL - Only one canonical tag */}
+        {/* SINGLE CANONICAL URL - www removed */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG */}
+        {/* HREFLANG - www removed */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - www removed */}
         <meta property="og:title" content="Resume Keywords 2026: Complete ATS Guide (500+ Examples)" />
         <meta property="og:description" content="Master resume keywords for ATS in 2026. 500+ examples, industry-specific lists, and expert strategies to get 75% more interviews." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/resume-keywords-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/resume-keywords-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Keywords Guide 2026 - ATS optimization strategies" />
@@ -969,11 +969,11 @@ export default function KeywordsForResume({ seoData }) {
         <meta property="article:section" content="Resume Writing" />
         <meta property="article:tag" content="resume keywords, ATS optimization, job search tips, career advice" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - www removed */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Keywords 2026: Complete ATS Guide (500+ Examples)" />
         <meta name="twitter:description" content="Master resume keywords for ATS in 2026. 500+ examples and expert strategies to get 75% more interviews." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-resume-keywords-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-resume-keywords-guide.jpg" />
         <meta name="twitter:image:alt" content="Resume Keywords Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -988,7 +988,7 @@ export default function KeywordsForResume({ seoData }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD - www removed */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1005,7 +1005,7 @@ export default function KeywordsForResume({ seoData }) {
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -1013,8 +1013,8 @@ export default function KeywordsForResume({ seoData }) {
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free resume templates and career resources",
                   "publisher": {
@@ -1022,7 +1022,7 @@ export default function KeywordsForResume({ seoData }) {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -1034,7 +1034,7 @@ export default function KeywordsForResume({ seoData }) {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -1048,7 +1048,7 @@ export default function KeywordsForResume({ seoData }) {
                   "@type": "Article",
                   "headline": "Resume Keywords 2026: Complete ATS Optimization Guide",
                   "description": "Comprehensive guide to resume keywords and ATS optimization",
-                  "image": "https://www.professionalresumefree.com/resume-keywords-guide.jpg",
+                  "image": "https://professionalresumefree.com/resume-keywords-guide.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free"
@@ -1058,7 +1058,7 @@ export default function KeywordsForResume({ seoData }) {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",

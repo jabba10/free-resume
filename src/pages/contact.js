@@ -640,7 +640,8 @@ export async function getStaticProps() {
 export default function ContactPage({ lastModified, buildTimestamp }) {
   const currentYear = new Date().getFullYear();
   const displayDate = lastModified ? lastModified.split('T')[0] : new Date().toISOString().split('T')[0];
-  const canonicalUrl = "https://www.professionalresumefree.com/contact";
+  // Updated URL without www
+  const canonicalUrl = "https://professionalresumefree.com/contact";
 
   const contactInfo = [
     {
@@ -752,14 +753,14 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
+        {/* CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content="Contact Us: Email Support for Resume Builder (24h Response) 2026" />
         <meta property="og:description" content="Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/contact-support.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/contact-support.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Contact Professional Resume Free Support" />
@@ -768,11 +769,11 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         <meta property="og:updated_time" content={lastModified} />
         <meta property="og:locale" content="en_US" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Us: Email Support for Resume Builder (24h Response) 2026" />
         <meta name="twitter:description" content="Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-contact-support.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-contact-support.jpg" />
         <meta name="twitter:image:alt" content="Contact Professional Resume Free Support" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -787,7 +788,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD - Updated without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -804,7 +805,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -812,8 +813,8 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free resume templates and career resources",
                   "publisher": {
@@ -821,7 +822,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     },
                     "email": "contact@professionalresumefree.com",
                     "contactPoint": {
@@ -840,7 +841,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -885,9 +886,9 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                 },
                 {
                   "@type": "Organization",
-                  "@id": "https://www.professionalresumefree.com/#organization",
+                  "@id": "https://professionalresumefree.com/#organization",
                   "name": "Professional Resume Free",
-                  "url": "https://www.professionalresumefree.com",
+                  "url": "https://professionalresumefree.com",
                   "email": "contact@professionalresumefree.com",
                   "contactPoint": [
                     {

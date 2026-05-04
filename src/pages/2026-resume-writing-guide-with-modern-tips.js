@@ -1243,8 +1243,8 @@ Specialization: Artificial Intelligence
     }
   };
 
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/2026-resume-writing-guide-with-modern-tips";
+  // SINGLE CANONICAL URL - UPDATED (www removed)
+  const canonicalUrl = "https://professionalresumefree.com/2026-resume-writing-guide-with-modern-tips";
 
   // OPTIMIZED TITLE - UNDER 70 CHARACTERS
   const pageTitle = "2026 Resume Guide: ATS Tips & CAR Method Examples";
@@ -1270,7 +1270,7 @@ Specialization: Artificial Intelligence
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
+        {/* ===== SINGLE CANONICAL URL - UPDATED ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== ALTERNATE HREFLANG ===== */}
@@ -1287,7 +1287,7 @@ Specialization: Artificial Intelligence
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content="Expert 2026 resume guide by Isata Kamara (10+ years, 8,500+ reviews). Format comparison, CAR method, ATS keywords, emerging trends. Updated weekly." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/resume-guide-2026.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/resume-guide-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
@@ -1300,20 +1300,20 @@ Specialization: Artificial Intelligence
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content="Expert 2026 resume guide: Compare formats with success rates, CAR method examples, ATS keywords. Updated weekly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/resume-guide-2026.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/resume-guide-2026.jpg" />
         
         {/* ===== PERFORMANCE ===== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA - UPDATED (www removed) ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
               {
                 "@type": "Person",
-                "@id": "https://www.professionalresumefree.com/#isatakamara",
+                "@id": "https://professionalresumefree.com/#isatakamara",
                 "name": "Isata Kamara",
                 "description": "Professional Resume Writer with 10+ years experience, 8,500+ resumes reviewed",
                 "jobTitle": "Professional Resume Writer",
@@ -1338,7 +1338,7 @@ Specialization: Artificial Intelligence
                 "@id": `${canonicalUrl}#article`,
                 "headline": pageTitle,
                 "description": "Complete guide to writing effective resumes for the 2026 job market. Covers chronological, functional, and hybrid formats with success rates.",
-                "author": { "@id": "https://www.professionalresumefree.com/#isatakamara" },
+                "author": { "@id": "https://professionalresumefree.com/#isatakamara" },
                 "datePublished": lastModifiedDate,
                 "dateModified": lastModifiedDate,
                 "mainEntityOfPage": canonicalUrl
@@ -1352,7 +1352,7 @@ Specialization: Artificial Intelligence
                   "acceptedAnswer": {
                     "@type": "Answer",
                     "text": faq.answer,
-                    "author": { "@id": "https://www.professionalresumefree.com/#isatakamara" }
+                    "author": { "@id": "https://professionalresumefree.com/#isatakamara" }
                   }
                 }))
               },
@@ -1380,8 +1380,8 @@ Specialization: Artificial Intelligence
         <header style={styles.header} id="main-content">
           <div className="container">
             <div style={styles.heroContent}>
-              {/* ===== OPTIMIZED H1 TAG - ONLY ONE H1 ON THE PAGE ===== */}
-              <h1 style={styles.heroTitle}>2026 Resume Guide: ATS Tips & CAR Method Examples</h1>
+              {/* ===== SINGLE H1 TAG - ONLY ONE ON THE ENTIRE PAGE ===== */}
+              <h1 style={styles.heroTitle}>2026 Resume Writing Guide: ATS-Optimized Templates & CAR Method Examples</h1>
               
               <p style={styles.heroSubtitle}>
                 <strong>By Isata Kamara (10+ years, 8,500+ resumes reviewed)</strong> — Compare <strong>chronological (87% success), functional (63% success), and hybrid (94% ATS pass) formats</strong> with verified statistics. Master the <strong>CAR method</strong> for achievement bullets and optimize for AI screening.

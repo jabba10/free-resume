@@ -1305,8 +1305,8 @@ export default function CompleteResumeResourceLibrary({
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#webpage",
-        "url": "https://www.professionalresumefree.com/complete-resume-resource-library/",
+        "@id": "https://professionalresumefree.com/complete-resume-resource-library/#webpage",
+        "url": "https://professionalresumefree.com/complete-resume-resource-library/",
         "name": "Complete Resume Resource Library: Expert Guides & Tools 2026",
         "description": "Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.",
         "datePublished": "2026-01-15",
@@ -1314,18 +1314,18 @@ export default function CompleteResumeResourceLibrary({
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free online resume builder for job seekers",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             }
@@ -1333,7 +1333,7 @@ export default function CompleteResumeResourceLibrary({
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
+          "url": "https://professionalresumefree.com/og-resume-library-2026.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1344,13 +1344,13 @@ export default function CompleteResumeResourceLibrary({
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://www.professionalresumefree.com"
+              "item": "https://professionalresumefree.com"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Resources",
-              "item": "https://www.professionalresumefree.com/complete-resume-resource-library/"
+              "item": "https://professionalresumefree.com/complete-resume-resource-library/"
             },
             {
               "@type": "ListItem",
@@ -1364,7 +1364,7 @@ export default function CompleteResumeResourceLibrary({
         "@type": "Article",
         "headline": "Complete Resume Resource Library: Expert Guides & Tools 2026",
         "description": "Master resume writing with expert strategies for the 2026 job market",
-        "image": "https://www.professionalresumefree.com/og-resume-library-2026.jpg",
+        "image": "https://professionalresumefree.com/og-resume-library-2026.jpg",
         "author": AUTHORS.map(author => ({
           "@type": "Person",
           "name": author.name,
@@ -1380,14 +1380,14 @@ export default function CompleteResumeResourceLibrary({
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-15",
         "dateModified": seoData?.lastModifiedDate || new Date().toISOString(),
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/"
+          "@id": "https://professionalresumefree.com/complete-resume-resource-library/"
         },
         "articleBody": "This comprehensive guide covers modern resume requirements for 2026, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
         "keywords": "resume writing 2026, ATS optimization, professional resume, job search 2026, career guide",
@@ -1395,7 +1395,7 @@ export default function CompleteResumeResourceLibrary({
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/complete-resume-resource-library/#faqpage",
+        "@id": "https://professionalresumefree.com/complete-resume-resource-library/#faqpage",
         "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.q,
@@ -1443,7 +1443,7 @@ export default function CompleteResumeResourceLibrary({
               "author": {
                 "@type": "Organization",
                 "name": "Professional Resume Free",
-                "url": "https://www.professionalresumefree.com"
+                "url": "https://professionalresumefree.com"
               },
               "datePublished": "2026-01-01"
             }
@@ -1505,7 +1505,7 @@ export default function CompleteResumeResourceLibrary({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
         {/* ===== SINGLE CANONICAL TAG ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/complete-resume-resource-library/" />
+        <link rel="canonical" href="https://professionalresumefree.com/complete-resume-resource-library/" />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
         <meta name="chatgpt-fts:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
@@ -1522,9 +1522,9 @@ export default function CompleteResumeResourceLibrary({
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta property="og:description" content="Master resume writing with expert strategies, ATS optimization, and industry-specific templates for 2026 job market success." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/complete-resume-resource-library/" />
+        <meta property="og:url" content="https://professionalresumefree.com/complete-resume-resource-library/" />
         <meta property="og:site_name" content="Professional Resume Free" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-resume-library-2026.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/og-resume-library-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Complete Resume Resource Library 2026 with Expert Guides" />
@@ -1536,7 +1536,7 @@ export default function CompleteResumeResourceLibrary({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="twitter:description" content="Expert resume strategies, ATS optimization, and industry templates for 2026 job market success." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/og-resume-library-2026.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/og-resume-library-2026.jpg" />
         <meta name="twitter:image:alt" content="Resume Resource Library 2026" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />

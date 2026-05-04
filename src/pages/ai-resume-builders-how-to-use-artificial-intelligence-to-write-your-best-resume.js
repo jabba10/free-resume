@@ -936,7 +936,8 @@ Human-Enhanced:
     arrowRight: "→"
   };
 
-  const canonicalUrl = "https://www.professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume";
+  // SINGLE CANONICAL URL - UPDATED (www removed)
+  const canonicalUrl = "https://professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume";
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
 
@@ -1006,14 +1007,14 @@ Human-Enhanced:
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* OPEN GRAPH */}
         <meta property="og:title" content="AI Resume Builders 2026: Create Better Resumes 3x Faster (Free)" />
         <meta property="og:description" content={`Master AI resume building with ${templateCount}+ templates & ${toolCount}+ tools. Create ATS-optimized resumes 3x faster. Get 40% more interviews.`} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ai-resume-builder-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ai-resume-builder-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="AI Resume Builder Guide 2026 - Create optimized resumes with artificial intelligence" />
@@ -1033,7 +1034,7 @@ Human-Enhanced:
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="AI Resume Builders 2026: Create Better Resumes 3x Faster (Free)" />
         <meta name="twitter:description" content={`Master AI resume building with ${templateCount}+ templates & ${toolCount}+ tools. Get 40% more interviews.`} />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-ai-resume-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-ai-resume-guide.jpg" />
         <meta name="twitter:image:alt" content="AI Resume Builder Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1074,7 +1075,7 @@ Human-Enhanced:
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -1082,8 +1083,8 @@ Human-Enhanced:
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free AI-Powered Resume Builder and Templates",
                   "publisher": {
@@ -1091,7 +1092,7 @@ Human-Enhanced:
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -1103,7 +1104,7 @@ Human-Enhanced:
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -1117,14 +1118,14 @@ Human-Enhanced:
                   "@type": "Article",
                   "headline": "AI Resume Builders 2026: How to Use Artificial Intelligence to Write Your Best Resume",
                   "description": "A comprehensive guide to using AI resume builders effectively in 2026",
-                  "image": "https://www.professionalresumefree.com/ai-resume-builder-guide.jpg",
+                  "image": "https://professionalresumefree.com/ai-resume-builder-guide.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "publisher": {
@@ -1132,7 +1133,7 @@ Human-Enhanced:
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",
@@ -1188,7 +1189,7 @@ Human-Enhanced:
                   "itemListElement": resumeTemplates.slice(0, 3).map((template, index) => ({
                     "@type": "ListItem",
                     "position": index + 1,
-                    "url": `https://www.professionalresumefree.com${template.url}`,
+                    "url": `https://professionalresumefree.com${template.url}`,
                     "name": template.title
                   }))
                 },
@@ -1198,7 +1199,7 @@ Human-Enhanced:
                   "itemListElement": resumeTools.slice(0, 3).map((tool, index) => ({
                     "@type": "ListItem",
                     "position": index + 1,
-                    "url": `https://www.professionalresumefree.com${tool.url}`,
+                    "url": `https://professionalresumefree.com${tool.url}`,
                     "name": tool.name
                   }))
                 },

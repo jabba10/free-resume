@@ -706,6 +706,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-construction-worker-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -720,14 +723,14 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Free Construction Resume Builder 2026 | Trade Templates for Pros" />
         <meta property="og:description" content="Create a professional construction resume for free. ATS-friendly trade templates trusted by 3M+ construction pros. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-construction-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-construction-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Construction Resume Builder - Create Professional Trade Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Construction Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -738,7 +741,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Construction Resume Builder 2026 | Trade Templates for Pros" />
         <meta name="twitter:description" content="Create a professional construction resume for free. ATS-friendly trade templates trusted by 3M+ construction pros. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-construction-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-construction-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Construction Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -761,8 +764,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Construction Resume Builder 2026 | Trade Templates for Pros",
                   "description": "Create professional ATS-optimized construction resumes for free. Land jobs 3x faster with our construction resume builder.",
                   "datePublished": "2026-01-01",
@@ -770,32 +773,32 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Construction Resume Free",
                     "description": "Free online resume builder for construction professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Construction Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
+                        "https://linkedin.com/company/professional-resume-free",
+                        "https://facebook.com/ProfessionalResumeFree",
+                        "https://youtube.com/@ProfessionalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-construction-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-construction-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -806,13 +809,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Construction Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -846,7 +849,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-construction-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-construction-resume-builder.jpg",
                     "applicationSuite": "Construction Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -854,7 +857,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -867,7 +870,7 @@ const Resume = ({
                         "name": "Construction Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -886,32 +889,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Construction Template",
                       "text": "Select from our ATS-optimized construction resume templates designed for carpenters, electricians, plumbers, operators, and construction staff.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-construction-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-construction-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Trade Information",
                       "text": "Add your construction experience, education, certifications, safety training, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-trade-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-trade-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our construction-specific suggestions to improve trade keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Construction Resume",
                       "text": "Export your professional construction resume as PDF - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -921,7 +924,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Construction Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -997,7 +1000,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly construction resume builder that helps trade professionals create professional resumes and land jobs faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2156,10 +2159,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Construction Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-construction-worker-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Construction Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-construction-worker-resume-builder' }
   ];
 
   return {

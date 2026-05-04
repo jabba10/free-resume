@@ -36,13 +36,13 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.professionalresumefree.com"
+        "item": "https://professionalresumefree.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Resume Writing for Beginners",
-        "item": "https://www.professionalresumefree.com/resume-writing-for-beginners"
+        "item": "https://professionalresumefree.com/resume-writing-for-beginners"
       }
     ]
   };
@@ -119,7 +119,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         "name": "Gather Your Information",
         "text": "Collect all personal, educational, and skills information including contact details, education history, skills list, and any relevant projects or activities.",
         "url": "#getting-started",
-        "image": "https://www.professionalresumefree.com/images/step1-gather.jpg"
+        "image": "https://professionalresumefree.com/images/step1-gather.jpg"
       },
       {
         "@type": "HowToStep",
@@ -127,7 +127,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         "name": "Choose a Beginner Template",
         "text": "Select a simple, clean resume template designed for beginners with limited experience.",
         "url": "#formatting-tips",
-        "image": "https://www.professionalresumefree.com/images/step2-template.jpg"
+        "image": "https://professionalresumefree.com/images/step2-template.jpg"
       },
       {
         "@type": "HowToStep",
@@ -135,7 +135,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         "name": "Write Each Section",
         "text": "Fill in contact information, write a compelling summary, detail your education, list relevant skills, and include any projects or volunteer work.",
         "url": "#essential-sections",
-        "image": "https://www.professionalresumefree.com/images/step3-sections.jpg"
+        "image": "https://professionalresumefree.com/images/step3-sections.jpg"
       },
       {
         "@type": "HowToStep",
@@ -143,7 +143,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         "name": "Proofread and Optimize",
         "text": "Review for spelling errors, ensure consistent formatting, and optimize keywords for Applicant Tracking Systems (ATS).",
         "url": "#common-mistakes",
-        "image": "https://www.professionalresumefree.com/images/step4-proofread.jpg"
+        "image": "https://professionalresumefree.com/images/step4-proofread.jpg"
       },
       {
         "@type": "HowToStep",
@@ -151,7 +151,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         "name": "Download and Apply",
         "text": "Save your resume as a PDF with a professional filename and start applying to relevant positions.",
         "url": "#final-steps",
-        "image": "https://www.professionalresumefree.com/images/step5-download.jpg"
+        "image": "https://professionalresumefree.com/images/step5-download.jpg"
       }
     ]
   };
@@ -161,30 +161,30 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
     "headline": "Resume Writing for Beginners: Complete Step-by-Step Guide 2026",
     "description": "Beginner-friendly guide to creating your first professional resume with no prior experience. Learn resume writing basics, formatting, and tips for job seekers with limited experience.",
     "image": [
-      "https://www.professionalresumefree.com/images/beginner-resume-guide-og.jpg",
-      "https://www.professionalresumefree.com/images/beginner-resume-templates.jpg",
-      "https://www.professionalresumefree.com/images/resume-writing-process.jpg"
+      "https://professionalresumefree.com/images/beginner-resume-guide-og.jpg",
+      "https://professionalresumefree.com/images/beginner-resume-templates.jpg",
+      "https://professionalresumefree.com/images/resume-writing-process.jpg"
     ],
     "datePublished": seoData?.publishDate || "2026-01-01T08:00:00+00:00",
     "dateModified": safeLastModifiedDate,
     "author": {
       "@type": "Organization",
       "name": "Professional Resume Free",
-      "url": "https://www.professionalresumefree.com"
+      "url": "https://professionalresumefree.com"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Professional Resume Free",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.professionalresumefree.com/logo.png",
+        "url": "https://professionalresumefree.com/logo.png",
         "width": 512,
         "height": 512
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://www.professionalresumefree.com/resume-writing-for-beginners"
+      "@id": "https://professionalresumefree.com/resume-writing-for-beginners"
     },
     "articleSection": "Career Advice",
     "keywords": "resume writing for beginners, first resume, no experience resume, beginner resume guide, how to write a resume",
@@ -209,21 +209,21 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         <meta name="revisit-after" content="7 days" />
         
         {/* Canonical & Sitemap - Only one canonical tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-writing-for-beginners" />
+        <link rel="canonical" href="https://professionalresumefree.com/resume-writing-for-beginners" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* International SEO */}
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-writing-for-beginners" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-writing-for-beginners" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-writing-for-beginners" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-writing-for-beginners" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-writing-for-beginners" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/resume-writing-for-beginners" hreflang="x-default" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-writing-for-beginners" hreflang="en" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-writing-for-beginners" hreflang="en-US" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-writing-for-beginners" hreflang="en-GB" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-writing-for-beginners" hreflang="en-CA" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-writing-for-beginners" hreflang="en-AU" />
+        <link rel="alternate" href="https://professionalresumefree.com/resume-writing-for-beginners" hreflang="x-default" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Resume Writing for Beginners: Complete Step-by-Step Guide 2026" />
         <meta property="og:description" content="First-time resume writing made simple. Beginner guide with free ATS-optimized templates and examples for job seekers with no experience." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/resume-writing-for-beginners" />
+        <meta property="og:url" content="https://professionalresumefree.com/resume-writing-for-beginners" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -231,7 +231,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         <meta property="og:locale:alternate" content="en_CA" />
         <meta property="og:locale:alternate" content="en_AU" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/beginner-resume-guide-og.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/beginner-resume-guide-og.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Beginner Resume Writing Guide - Step by Step Tutorial" />
@@ -246,7 +246,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Writing for Beginners: Complete Step-by-Step Guide 2026" />
         <meta name="twitter:description" content="Beginner-friendly resume guide with free templates for first-time job seekers. Learn to create a professional resume with no experience." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/beginner-resume-guide-twitter.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/beginner-resume-guide-twitter.jpg" />
         <meta name="twitter:image:alt" content="Beginner Resume Writing Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -282,8 +282,8 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/resume-writing-for-beginners#webpage",
-                  "url": "https://www.professionalresumefree.com/resume-writing-for-beginners",
+                  "@id": "https://professionalresumefree.com/resume-writing-for-beginners#webpage",
+                  "url": "https://professionalresumefree.com/resume-writing-for-beginners",
                   "name": "Resume Writing for Beginners: Complete Step-by-Step Guide 2026",
                   "description": "Beginner-friendly guide to creating your first professional resume with no prior experience. Learn resume writing basics, formatting, and tips for job seekers with limited experience.",
                   "datePublished": seoData?.publishDate || "2026-01-01T08:00:00+00:00",
@@ -291,18 +291,18 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Resume Free",
                     "description": "Free online resume builder for job seekers",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -315,7 +315,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/beginner-resume-guide-og.jpg",
+                    "url": "https://professionalresumefree.com/images/beginner-resume-guide-og.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -328,7 +328,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
                 articleSchema,
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/resume-writing-for-beginners#faqpage",
+                  "@id": "https://professionalresumefree.com/resume-writing-for-beginners#faqpage",
                   "mainEntity": faqSchema
                 },
                 howToSchema,
@@ -338,7 +338,7 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",

@@ -895,7 +895,8 @@ export async function getStaticProps() {
 export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp }) {
   const currentYear = new Date().getFullYear();
   const displayDate = lastModified ? lastModified.split('T')[0] : new Date().toISOString().split('T')[0];
-  const canonicalUrl = "https://www.professionalresumefree.com/comprehensive-resume-guide-2026";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/comprehensive-resume-guide-2026";
 
   const faqs = [
     {
@@ -1072,14 +1073,14 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
+        {/* CANONICAL URL - REMOVED www - Only one canonical tag */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URLs */}
         <meta property="og:title" content="Comprehensive Resume Guide 2026: Expert Tips & Free Templates" />
         <meta property="og:description" content="Master resume writing in 2026 with our complete guide. 46+ templates, 12+ free tools, expert strategies, and ATS tips. Get 40% more interviews." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/comprehensive-resume-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/comprehensive-resume-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Comprehensive Resume Guide 2026 - Professional resume writing strategies" />
@@ -1095,11 +1096,11 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <meta property="article:section" content="Resume Writing" />
         <meta property="article:tag" content="resume guide, resume writing, career advice, job search 2026" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URLs */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Comprehensive Resume Guide 2026: Expert Tips & Free Templates" />
         <meta name="twitter:description" content="Master resume writing in 2026 with our complete guide. 46+ templates, 12+ free tools, expert strategies." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-comprehensive-resume-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-comprehensive-resume-guide.jpg" />
         <meta name="twitter:image:alt" content="Comprehensive Resume Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1114,7 +1115,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD - REMOVED www from website URL */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1131,7 +1132,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -1139,8 +1140,8 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free resume templates and career resources",
                   "publisher": {
@@ -1148,7 +1149,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -1160,7 +1161,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -1174,18 +1175,18 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                   "@type": "Article",
                   "headline": "Comprehensive Resume Guide 2026: Complete Professional Writing Guide",
                   "description": "A complete guide to creating professional resumes for the 2026 job market",
-                  "image": "https://www.professionalresumefree.com/comprehensive-resume-guide.jpg",
+                  "image": "https://professionalresumefree.com/comprehensive-resume-guide.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free Experts",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",
@@ -1267,19 +1268,19 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                     {
                       "@type": "ListItem",
                       "position": 1,
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder",
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-resume-builder",
                       "name": "Medical Resume Templates"
                     },
                     {
                       "@type": "ListItem",
                       "position": 2,
-                      "url": "https://www.professionalresumefree.com/ats-friendly-tech-resume-builder",
+                      "url": "https://professionalresumefree.com/ats-friendly-tech-resume-builder",
                       "name": "Technology Resume Templates"
                     },
                     {
                       "@type": "ListItem",
                       "position": 3,
-                      "url": "https://www.professionalresumefree.com/ats-friendly-finance-resume-builder",
+                      "url": "https://professionalresumefree.com/ats-friendly-finance-resume-builder",
                       "name": "Finance Resume Templates"
                     }
                   ]
@@ -1307,7 +1308,8 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com" itemProp="item">
                   <span itemProp="name">Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
@@ -1381,7 +1383,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <section className="section">
           <div className="container">
             <div className="website-reference">
-              <p>This comprehensive guide is brought to you by <Link href="/" className="website-link">ProfessionalResumeFree.com</Link> - Your trusted resource for professional resume building since 2010.</p>
+              <p>This comprehensive guide is brought to you by <Link href="https://professionalresumefree.com" className="website-link">ProfessionalResumeFree.com</Link> - Your trusted resource for professional resume building since 2010.</p>
             </div>
           </div>
         </section>

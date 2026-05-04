@@ -1025,8 +1025,8 @@ const CareerBlog = ({ seoData }) => {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/careers-blog/#webpage",
-        "url": "https://www.professionalresumefree.com/careers-blog",
+        "@id": "https://professionalresumefree.com/careers-blog/#webpage",
+        "url": "https://professionalresumefree.com/careers-blog",
         "name": `Career Change Guide ${currentYear}: How to Successfully Switch Careers & Advance`,
         "description": `Step-by-step career change strategies for ${currentYear}. Learn how to transition careers, develop new skills, write career change resumes, and land dream jobs with 89% success rates.`,
         "datePublished": "2026-01-01",
@@ -1034,32 +1034,32 @@ const CareerBlog = ({ seoData }) => {
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free online resume builder and career development resources",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             },
             "sameAs": [
               "https://twitter.com/ProResumeFree",
-              "https://www.linkedin.com/company/professional-resume-free",
-              "https://www.facebook.com/ProfessionalResumeFree",
-              "https://www.youtube.com/@ProfessionalResumeFree"
+              "https://linkedin.com/company/professional-resume-free",
+              "https://facebook.com/ProfessionalResumeFree",
+              "https://youtube.com/@ProfessionalResumeFree"
             ]
           }
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/career-blog-preview.jpg",
+          "url": "https://professionalresumefree.com/images/career-blog-preview.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1070,19 +1070,19 @@ const CareerBlog = ({ seoData }) => {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://www.professionalresumefree.com"
+              "item": "https://professionalresumefree.com"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Career Blog",
-              "item": "https://www.professionalresumefree.com/careers-blog"
+              "item": "https://professionalresumefree.com/careers-blog"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": `Career Change Guide ${currentYear}`,
-              "item": "https://www.professionalresumefree.com/careers-blog"
+              "item": "https://professionalresumefree.com/careers-blog"
             }
           ]
         }
@@ -1091,25 +1091,25 @@ const CareerBlog = ({ seoData }) => {
         "@type": "Article",
         "headline": `Career Change Guide ${currentYear}: How to Successfully Switch Careers & Advance`,
         "description": `Comprehensive guide to career development and successful career transitions for ${currentYear}, including skill assessment, networking strategies, goal setting, and proven career change methodologies with 89% success rates.`,
-        "image": "https://www.professionalresumefree.com/images/career-blog-preview.jpg",
+        "image": "https://professionalresumefree.com/images/career-blog-preview.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-01",
         "dateModified": safeLastModifiedDate,
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://www.professionalresumefree.com/careers-blog"
+          "@id": "https://professionalresumefree.com/careers-blog"
         },
         "articleBody": `Complete guide for career development and transition in ${currentYear} featuring data-backed strategies, statistical insights, and actionable frameworks for skill assessment, networking, goal setting, portfolio building, and career acceleration with 89% success rates.`,
         "articleSection": "Career Advice, Career Development",
@@ -1117,7 +1117,7 @@ const CareerBlog = ({ seoData }) => {
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/careers-blog/#faqpage",
+        "@id": "https://professionalresumefree.com/careers-blog/#faqpage",
         "mainEntity": faqs.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
@@ -1130,7 +1130,7 @@ const CareerBlog = ({ seoData }) => {
               "name": "Professional Resume Free Career Experts"
             }
           },
-          "mainEntityOfPage": "https://www.professionalresumefree.com/careers-blog"
+          "mainEntityOfPage": "https://professionalresumefree.com/careers-blog"
         }))
       },
       {
@@ -1148,14 +1148,14 @@ const CareerBlog = ({ seoData }) => {
           "position": i + 1,
           "name": step.title,
           "text": `${step.description} (Duration: ${step.duration}, Success Rate: ${step.successRate})`,
-          "url": `https://www.professionalresumefree.com/careers-blog#step-${i + 1}`,
-          "image": "https://www.professionalresumefree.com/images/career-step.jpg"
+          "url": `https://professionalresumefree.com/careers-blog#step-${i + 1}`,
+          "image": "https://professionalresumefree.com/images/career-step.jpg"
         })),
-        "image": "https://www.professionalresumefree.com/images/career-blog-preview.jpg",
+        "image": "https://professionalresumefree.com/images/career-blog-preview.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         }
       }
     ]
@@ -1183,7 +1183,7 @@ const CareerBlog = ({ seoData }) => {
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
         {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/careers-blog" />
+        <link rel="canonical" href="https://professionalresumefree.com/careers-blog" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
@@ -1193,8 +1193,8 @@ const CareerBlog = ({ seoData }) => {
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers & Advance`} />
         <meta property="og:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers, develop skills, and land dream jobs with expert guidance.`} />
-        <meta property="og:url" content="https://www.professionalresumefree.com/careers-blog" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/career-blog-preview.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/careers-blog" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/career-blog-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
@@ -1207,7 +1207,7 @@ const CareerBlog = ({ seoData }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
         <meta name="twitter:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers and land dream jobs.`} />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/career-blog-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/career-blog-preview.jpg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ===== PERFORMANCE ===== */}

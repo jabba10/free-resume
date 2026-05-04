@@ -837,23 +837,22 @@ const criticalCSS = `
   }
 `;
 
-// ===== METADATA CONFIGURATION =====
+// ===== METADATA CONFIGURATION - ALL URLs WITHOUT www =====
 export const metadata = {
-  // TITLE OPTIMIZED - 68 characters (BELOW 70 LIMIT)
   title: 'Project Manager Resume: Complete 2026 Guide with Templates & Examples',
   description: 'Complete 2026 guide to creating a winning project manager resume with templates, examples, and expert tips. Learn what hiring managers really want in PMP, Agile, and IT project manager resumes. Based on analysis of 2,000+ successful PM resumes.',
   keywords: 'project manager resume, project management resume, PMP resume, resume for project managers, project coordinator resume, senior project manager resume, technical project manager resume, agile project manager resume, scrum master resume, IT project manager resume, construction project manager resume, PMP certified resume, project management CV',
-  canonical: 'https://www.professionalresumefree.com/project-manager-resume',
+  canonical: 'https://professionalresumefree.com/project-manager-resume',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   
   openGraph: {
     title: 'Project Manager Resume: Complete 2026 Guide with Templates & Examples',
     description: 'Expert guide to creating a project manager resume that gets interviews in 2026. Includes templates, examples, and proven strategies based on 2,000+ successful PM resumes.',
-    url: 'https://www.professionalresumefree.com/project-manager-resume',
+    url: 'https://professionalresumefree.com/project-manager-resume',
     siteName: 'Professional Resume Free',
     images: [
       {
-        url: 'https://www.professionalresumefree.com/images/project-manager-resume-guide-og.jpg',
+        url: 'https://professionalresumefree.com/images/project-manager-resume-guide-og.jpg',
         width: 1200,
         height: 630,
         alt: 'Project Manager Resume Guide 2026'
@@ -871,12 +870,11 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Project Manager Resume: Complete 2026 Guide',
     description: 'Complete guide to creating a winning project manager resume with templates, examples, and expert tips.',
-    images: ['https://www.professionalresumefree.com/images/project-manager-resume-guide-twitter.jpg'],
+    images: ['https://professionalresumefree.com/images/project-manager-resume-guide-twitter.jpg'],
     creator: '@ProfResumeFree',
     site: '@ProfResumeFree'
   },
   
-  // GEO-specific meta tags for AI crawlers
   geo: {
     'chatgpt-fts:title': 'Project Manager Resume: Complete 2026 Guide with Templates and Examples',
     'chatgpt-fts:description': 'Comprehensive guide to creating project manager resumes that pass ATS and impress hiring managers. Includes PMP, Agile, IT, and construction PM examples.',
@@ -1001,7 +999,7 @@ export async function getStaticProps() {
       lastUpdatedDate,
       buildTimestamp: Date.now()
     },
-    revalidate: 3600 // ISR: Regenerate every hour
+    revalidate: 3600
   };
 }
 
@@ -1014,7 +1012,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
   });
   const primaryUrl = metadata.canonical;
 
-  // Structured Data
+  // Structured Data - ALL URLs WITHOUT www
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1024,10 +1022,10 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
         "url": primaryUrl,
         "name": metadata.title,
         "isPartOf": {
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "primaryImageOfPage": {
-          "@id": "https://www.professionalresumefree.com/images/project-manager-resume-guide-og.jpg"
+          "@id": "https://professionalresumefree.com/images/project-manager-resume-guide-og.jpg"
         },
         "datePublished": "2026-01-01",
         "dateModified": lastUpdatedDate,
@@ -1045,13 +1043,13 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Guides",
-            "item": "https://www.professionalresumefree.com/project-manager-resume"
+            "item": "https://professionalresumefree.com/project-manager-resume"
           },
           {
             "@type": "ListItem",
@@ -1064,11 +1062,11 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
         "@type": "Article",
         "headline": metadata.title,
         "description": metadata.description,
-        "image": "https://www.professionalresumefree.com/images/project-manager-resume-guide-og.jpg",
+        "image": "https://professionalresumefree.com/images/project-manager-resume-guide-og.jpg",
         "author": {
           "@type": "Person",
           "name": "Career Experts Team",
-          "url": "https://www.professionalresumefree.com/",
+          "url": "https://professionalresumefree.com/",
           "knowsAbout": ["Project Management", "Resume Writing", "Career Development", "HR Recruitment"]
         },
         "publisher": {
@@ -1076,7 +1074,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-01",
@@ -1176,7 +1174,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
         <meta name="keywords" content={metadata.keywords} />
         <meta name="robots" content={metadata.robots} />
         
-        {/* ===== CANONICAL TAG (SINGLE) ===== */}
+        {/* ===== CANONICAL TAG (SINGLE) - NO www ===== */}
         <link rel="canonical" href={metadata.canonical} />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
@@ -1193,7 +1191,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
         <meta httpEquiv="last-modified" content={generatedDate} />
         <meta name="build-timestamp" content={buildTimestamp.toString()} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - NO www ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
@@ -1211,7 +1209,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
           <meta key={i} property="article:tag" content={tag} />
         ))}
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - NO www ===== */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
@@ -1219,7 +1217,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
         <meta name="twitter:creator" content={metadata.twitter.creator} />
         <meta name="twitter:site" content={metadata.twitter.site} />
         
-        {/* ===== STRUCTURED DATA ===== */}
+        {/* ===== STRUCTURED DATA - NO www ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -1228,7 +1226,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
 
       <main className="main">
         <article className="article">
-          {/* ===== BREADCRUMB ===== */}
+          {/* ===== BREADCRUMB - NO www ===== */}
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <ul className="breadcrumbList">
               <li><a href="/">Home</a></li>
@@ -1675,7 +1673,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
                 <h3 className="ctaTitle">Ready to Transform Your Resume?</h3>
                 <p>Use our free project manager resume builder with ATS-optimized templates and real-time feedback:</p>
                 <a 
-                  href="https://www.professionalresumefree.com/resume-templates" 
+                  href="https://professionalresumefree.com/resume-templates" 
                   className="ctaButton"
                 >
                   Build Your Project Manager Resume Now
@@ -1739,7 +1737,7 @@ export default function ProjectManagerResumeGuide({ generatedDate, lastUpdatedDa
           background: '#f9fafb',
           borderRadius: '12px'
         }}>
-        
+          Last Updated: {displayDate} | Next Update: {new Date(new Date(lastUpdatedDate).setDate(new Date(lastUpdatedDate).getDate() + 7)).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} | Version: 2026.1
         </div>
 
         {/* ===== HIDDEN METADATA ===== */}

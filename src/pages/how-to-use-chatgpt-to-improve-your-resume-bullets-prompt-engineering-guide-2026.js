@@ -879,7 +879,8 @@ const ChatGPTResumeGuide = ({
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeFaqDates = faqDates || Array(4).fill(freshnessIndicator);
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026";
+  // UPDATED: Canonical URL without www
+  const canonicalUrl = "https://professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026";
   
   // Current year
   const currentYear = new Date().getFullYear();
@@ -899,13 +900,13 @@ const ChatGPTResumeGuide = ({
   // People Also Ask for GEO
   const peopleAlsoAsk = [
     { question: "Can ChatGPT really help write a better resume?", answer: "Truth is, ChatGPT helps sharpen resume lines - making them more precise with numbers, fitting in field-specific terms, using bolder verbs. Still, double-check every detail; keep it sounding like you. This walkthrough walks through balancing AI help while staying true to your own story." },
-    { question: "What are the best ChatGPT prompts for resume writing?", answer: "Start by shaping your questions carefully when using a ChatGPT. Instead of vague asks, try something such as: Could we include metrics for this result? A different angle might be: Show me three takes focused on technical skills. Spot missing terms? Name what you need - just request they fit smoothly into the flow. For stronger impact, aim for livelier action words without forcing them. Sharing extra bits about your work gives clearer results. When you explain what field you’re in, replies fit closer to your situation. Details turn flat answers into something that sounds like it’s meant for you." },
-    { question: "Is it ethical to use ChatGPT for resume writing?", answer: "Truth is, tweaking your resume with ChatGPT isn’t off limits - so long as you stay honest. Verify every detail matches reality, keep the voice sounding like your own, skip making up wins, while adjusting its ideas to reflect real work history. After all, it simply helps write better words - it can’t replace genuine results. " }
+    { question: "What are the best ChatGPT prompts for resume writing?", answer: "Start by shaping your questions carefully when using a ChatGPT. Instead of vague asks, try something such as: Could we include metrics for this result? A different angle might be: Show me three takes focused on technical skills. Spot missing terms? Name what you need - just request they fit smoothly into the flow. For stronger impact, aim for livelier action words without forcing them. Sharing extra bits about your work gives clearer results. When you explain what field you're in, replies fit closer to your situation. Details turn flat answers into something that sounds like it's meant for you." },
+    { question: "Is it ethical to use ChatGPT for resume writing?", answer: "Truth is, tweaking your resume with ChatGPT isn't off limits - so long as you stay honest. Verify every detail matches reality, keep the voice sounding like your own, skip making up wins, while adjusting its ideas to reflect real work history. After all, it simply helps write better words - it can't replace genuine results. " }
   ];
 
   // Conversational explanations for GEO
   const conversationalExplanations = [
-    { topic: "ChatGPT Resume Help Made Simple", content: "Picture ChatGPT sitting across from you, tossing ideas back and forth. When you share what happened during your day - say, helping people - it reshapes flat phrases into sharper ones. Instead of I helped customers, it might offer: Handled over fifty support requests each day, keeping satisfaction near 95 percent. This isn’t magic, just clearer framing. Someone who writes resumes often would make similar tweaks. The words change slightly; the truth stays." },
+    { topic: "ChatGPT Resume Help Made Simple", content: "Picture ChatGPT sitting across from you, tossing ideas back and forth. When you share what happened during your day - say, helping people - it reshapes flat phrases into sharper ones. Instead of I helped customers, it might offer: Handled over fifty support requests each day, keeping satisfaction near 95 percent. This isn't magic, just clearer framing. Someone who writes resumes often would make similar tweaks. The words change slightly; the truth stays." },
     { topic: "Why Prompt Engineering Matters", content: "Getting ChatGPT to help well means shaping your words with care. Not just tossing it a line like fix my resume, which brings back flat, one-size-fits-all replies. Instead, try something sharp - say, reworking a customer service detail for a tech job, adding numbers that prove impact. Clear direction leads to sharper output. The way you frame things changes what you get." }
   ];
 
@@ -1080,7 +1081,7 @@ After ChatGPT + Verification:
     },
     {
       question: "What are the most important elements of effective ChatGPT prompts for resumes?",
-      answer: "What matters most? Sharing clear details about your field and position helps shape the output. Job description keywords should appear naturally throughout. Numbers that measure results make a difference when included. Try prompting for several versions instead of just one. Tone and layout need mentioning too - don’t skip those. When you give more background, responses improve. Details guide the machine. "
+      answer: "What matters most? Sharing clear details about your field and position helps shape the output. Job description keywords should appear naturally throughout. Numbers that measure results make a difference when included. Try prompting for several versions instead of just one. Tone and layout need mentioning too - don't skip those. When you give more background, responses improve. Details guide the machine. "
     },
     {
       question: "Can ChatGPT help with ATS (Applicant Tracking System) optimization?",
@@ -1165,14 +1166,14 @@ After ChatGPT + Verification:
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="ChatGPT Resume Guide 2026: Prompt Engineering for Better Bullets" />
         <meta property="og:description" content="Master ChatGPT prompt engineering for resume optimization. Transform basic duties into powerful bullet points. Free guide." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="ChatGPT Resume Guide 2026" />
@@ -1183,11 +1184,11 @@ After ChatGPT + Verification:
         <meta property="article:published_time" content="2024-01-01" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ChatGPT Resume Guide 2026: Prompt Engineering" />
         <meta name="twitter:description" content="Learn ChatGPT prompt engineering for resume optimization. Free guide." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="ChatGPT Resume Guide" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1203,7 +1204,7 @@ After ChatGPT + Verification:
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1215,7 +1216,7 @@ After ChatGPT + Verification:
                   "@id": `${canonicalUrl}#article`,
                   "headline": optimizedTitle,
                   "description": "Master ChatGPT prompt engineering for resume optimization. Transform basic job duties into powerful bullet points with 85% better ATS compatibility.",
-                  "image": "https://www.professionalresumefree.com/ats.jpeg",
+                  "image": "https://professionalresumefree.com/ats.jpeg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free"
@@ -1841,24 +1842,25 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
+  // UPDATED: Breadcrumb URLs without www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Free Resume Tools",
-      "item": "https://www.professionalresumefree.com/free-resume-tools"
+      "item": "https://professionalresumefree.com/free-resume-tools"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "ChatGPT Resume Guide",
-      "item": "https://www.professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026"
+      "item": "https://professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026"
     }
   ];
 

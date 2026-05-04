@@ -1017,7 +1017,7 @@ const ProfessionalSummaryGuide = ({
         "Use power verbs and quantifiable results",
         "Keep it to 3-4 lines maximum"
       ],
-      example: `A Digital Marketing Manager who gets results, with more than eight years focused on SaaS B2B. Growth didn’t happen by accident - lead volume jumped 150%, while customer acquisition costs dropped 35%. Behind those numbers? Sharp campaign decisions shaped by real data. Now aiming to bring that same edge in growth strategy to a tech firm moving fast. Experience turns into impact when matched with momentum.`,
+      example: `A Digital Marketing Manager who gets results, with more than eight years focused on SaaS B2B. Growth didn't happen by accident - lead volume jumped 150%, while customer acquisition costs dropped 35%. Behind those numbers? Sharp campaign decisions shaped by real data. Now aiming to bring that same edge in growth strategy to a tech firm moving fast. Experience turns into impact when matched with momentum.`,
     },
     {
       title: "Quantifiable Achievement Integration",
@@ -1103,7 +1103,7 @@ const ProfessionalSummaryGuide = ({
       title: "Mid-Career (3-7 years experience)",
       description: "Balance skills with specific achievements and growing specialization. Demonstrates proven track record.",
       structure: "Experience + Achievements + Target Role",
-      example: `Starting out in fast-moving tech environments, I shaped full-cycle campaigns that stuck. One push lifted visibility fourfold while pulling in more than $2M in solid leads. Work runs on clear messaging, smart targeting, not guesswork. Now looking toward companies past the early stage, where scaling demands sharper focus. Growth isn’t just speed - it’s direction too.`,
+      example: `Starting out in fast-moving tech environments, I shaped full-cycle campaigns that stuck. One push lifted visibility fourfold while pulling in more than $2M in solid leads. Work runs on clear messaging, smart targeting, not guesswork. Now looking toward companies past the early stage, where scaling demands sharper focus. Growth isn't just speed - it's direction too.`,
       keywords: ["Marketing Manager", "Integrated campaigns", "Brand awareness", "Content marketing", "Qualified leads", "Growth marketing", "Strategy", "Analytics"],
       careerLevel: "Mid",
       industries: ["Marketing", "Technology", "Business Development"]
@@ -1132,7 +1132,7 @@ const ProfessionalSummaryGuide = ({
   const industryExamples = [
     {
       industry: "Technology & Software",
-      example: `A Digital Marketing Manager who gets results, with more than 8+ years focused on SaaS B2B. Growth didn’t happen by accident - lead volume jumped 150%, while customer acquisition costs dropped 35%. Behind those numbers? Sharp campaign decisions shaped by real data. Now aiming to bring that same edge in growth strategy to a tech firm moving fast. Experience turns into impact when matched with momentum.`,
+      example: `A Digital Marketing Manager who gets results, with more than 8+ years focused on SaaS B2B. Growth didn't happen by accident - lead volume jumped 150%, while customer acquisition costs dropped 35%. Behind those numbers? Sharp campaign decisions shaped by real data. Now aiming to bring that same edge in growth strategy to a tech firm moving fast. Experience turns into impact when matched with momentum.`,
       keywords: "AWS, Kubernetes, CI/CD, infrastructure, scalability, automation, cloud migration, DevOps",
       icon: "🖥️",
       demand: "High"
@@ -1153,14 +1153,14 @@ const ProfessionalSummaryGuide = ({
     },
     {
       industry: "Sales & Business Development",
-      example: `Not your average sales lead - 12+ years pushing past targets in tech and cloud software. Big wins add up to over a hundred million dollars, five of them giants on the Fortune list. What stands out? Long plays that need patience, alliances built smart, guiding teams where growth doesn’t slow down. Numbers talk loud here, but so does staying steady when deals twist tight.`,
+      example: `Not your average sales lead - 12+ years pushing past targets in tech and cloud software. Big wins add up to over a hundred million dollars, five of them giants on the Fortune list. What stands out? Long plays that need patience, alliances built smart, guiding teams where growth doesn't slow down. Numbers talk loud here, but so does staying steady when deals twist tight.`,
       keywords: "Enterprise sales, SaaS, quota achievement, strategic partnerships, team leadership, business development",
       icon: "📈",
       demand: "High"
     },
     {
       industry: "Education & Academia",
-      example: `8+ years leading education programs shaped a path built on real results. Student test outcomes rose 25% across entire school networks, thanks to methods rooted in classroom evidence. Training educators became a cornerstone, blending modern tools into daily lessons. Growth didn’t come from theory - it emerged from consistent support and tech-savvy coaching. Progress stuck because teachers learned by doing, guided by clear insights. What worked was shared fast; what failed got revised without delay.`,
+      example: `8+ years leading education programs shaped a path built on real results. Student test outcomes rose 25% across entire school networks, thanks to methods rooted in classroom evidence. Training educators became a cornerstone, blending modern tools into daily lessons. Growth didn't come from theory - it emerged from consistent support and tech-savvy coaching. Progress stuck because teachers learned by doing, guided by clear insights. What worked was shared fast; what failed got revised without delay.`,
       keywords: "Education, curriculum development, instructional leadership, student achievement, edtech, professional development",
       icon: "🎓",
       demand: "Medium"
@@ -1214,11 +1214,11 @@ const ProfessionalSummaryGuide = ({
     "Making it too generic without specific targeting"
   ];
 
-  // Breadcrumb data
+  // Breadcrumb data - UPDATED with non-www URLs
   const breadcrumbData = [
-    { name: "Home", item: "https://www.professionalresumefree.com/" },
-    { name: "Resume Writing Guides", item: "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" },
-    { name: "Professional Summary Guide", item: "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" }
+    { name: "Home", item: "https://professionalresumefree.com/" },
+    { name: "Resume Writing Guides", item: "https://professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" },
+    { name: "Professional Summary Guide", item: "https://professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" }
   ];
 
   // Copy to clipboard function
@@ -1271,9 +1271,10 @@ const ProfessionalSummaryGuide = ({
     "career change summary examples"
   ];
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds";
+  // UPDATED: Removed www from canonicalUrl
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds";
 
-  // Enhanced structured data - removed duplicate canonical reference
+  // Enhanced structured data - removed duplicate canonical reference - UPDATED with non-www URLs
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1288,18 +1289,18 @@ const ProfessionalSummaryGuide = ({
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free professional resume builder and career resources for job seekers worldwide",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             },
@@ -1313,7 +1314,7 @@ const ProfessionalSummaryGuide = ({
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/og-professional-summary-guide.jpg",
+          "url": "https://professionalresumefree.com/images/og-professional-summary-guide.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1331,18 +1332,18 @@ const ProfessionalSummaryGuide = ({
         "@type": "Article",
         "headline": "How to Write a Professional Summary That Hooks Recruiters in 6 Seconds",
         "description": "A comprehensive guide to writing effective professional summaries for resumes that capture recruiter attention within 6 seconds, including examples for different career levels and industries.",
-        "image": "https://www.professionalresumefree.com/images/og-professional-summary-guide.jpg",
+        "image": "https://professionalresumefree.com/images/og-professional-summary-guide.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png",
+            "url": "https://professionalresumefree.com/logo.png",
             "width": 512,
             "height": 512
           }
@@ -1480,7 +1481,7 @@ const ProfessionalSummaryGuide = ({
         <meta name="revisit-after" content="7 days" />
         <meta name="format-detection" content="telephone=no" />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
+        {/* ===== SINGLE CANONICAL URL - UPDATED without www ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
@@ -1490,10 +1491,10 @@ const ProfessionalSummaryGuide = ({
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources 2026" />
         
-        {/* ===== OPEN GRAPH (Facebook/LinkedIn) ===== */}
+        {/* ===== OPEN GRAPH (Facebook/LinkedIn) - UPDATED without www ===== */}
         <meta property="og:title" content="Professional Summary Guide: Hook Recruiters in 6 Seconds | 2026" />
         <meta property="og:description" content="Learn to write professional summaries that capture attention in 6 seconds. Get examples for every career level and industry with proven formulas that work." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-professional-summary-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-professional-summary-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Professional Summary Writing Guide - Examples and Templates" />
@@ -1508,11 +1509,11 @@ const ProfessionalSummaryGuide = ({
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="professional summary, resume writing, career advice, job search" />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - UPDATED without www ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Professional Summary Guide: Hook Recruiters in 6 Seconds | 2026" />
         <meta name="twitter:description" content="Learn to write professional summaries that capture attention in 6 seconds. Get examples for every career level and industry with proven formulas." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-professional-summary-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-professional-summary-guide.jpg" />
         <meta name="twitter:image:alt" content="Professional Summary Writing Guide with Examples" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />

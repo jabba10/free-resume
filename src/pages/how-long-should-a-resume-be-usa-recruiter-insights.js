@@ -753,20 +753,22 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-long-should-a-resume-be-usa-recruiter-insights";
+  // UPDATED: Canonical URL without www
+  const canonicalUrl = "https://professionalresumefree.com/how-long-should-a-resume-be-usa-recruiter-insights";
 
+  // UPDATED: Breadcrumb URLs without www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Advice",
-      "item": "https://www.professionalresumefree.com/resume-advice"
+      "item": "https://professionalresumefree.com/resume-advice"
     },
     {
       "@type": "ListItem",
@@ -776,12 +778,13 @@ export async function getStaticProps() {
     }
   ];
 
+  // UPDATED: Meta image URL without www
   const meta = {
     title: "How Long Should a Resume Be? USA Recruiter Insights (2026 Data)",
     description: "Get the definitive answer to 'how long should a resume be?' based on 2026 USA recruiter insights, ATS data, and hiring manager preferences. Free guide with examples.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -928,15 +931,15 @@ function ResumeLengthGuide({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="How Long Should a Resume Be? USA Recruiter Insights (2026 Data)" />
         <meta property="og:description" content="Get the definitive answer to 'how long should a resume be?' based on 2026 USA recruiter insights, ATS data, and hiring manager preferences." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -944,11 +947,11 @@ function ResumeLengthGuide({
         <meta property="article:published_time" content="2026-03-10" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How Long Should a Resume Be? 2026 Recruiter Insights" />
         <meta name="twitter:description" content="USA recruiter data on ideal resume length. One page or two? New 2026 research." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -963,8 +966,7 @@ function ResumeLengthGuide({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - FULLY FIXED */}
-        {/* CRITICAL FIX: Added missing "image" field to Product in Review structured data */}
+        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -986,7 +988,7 @@ function ResumeLengthGuide({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-10",
@@ -1060,10 +1062,6 @@ function ResumeLengthGuide({
                   ],
                   "totalTime": "PT20M"
                 },
-                // ===== FULLY FIXED: Review structured data with complete Product fields =====
-                // CRITICAL FIX 1: Changed itemReviewed from "Service" to "Product"
-                // CRITICAL FIX 2: Added missing "image" field to Product
-                // CRITICAL FIX 3: Added "shippingDetails" and "hasMerchantReturnPolicy" as optional fields
                 {
                   "@type": "ItemList",
                   "itemListElement": testimonials.map((testimonial, index) => ({
@@ -1086,12 +1084,11 @@ function ResumeLengthGuide({
                         "@type": "Organization",
                         "name": "Professional Resume Free"
                       },
-                      // FIXED: Complete Product object with all required fields
                       "itemReviewed": {
                         "@type": "Product",
                         "name": "Resume Length Guide",
                         "description": "Free comprehensive guide to resume length best practices.",
-                        "image": "https://www.professionalresumefree.com/ats.jpeg",
+                        "image": "https://professionalresumefree.com/ats.jpeg",
                         "url": canonicalUrl,
                         "brand": {
                           "@type": "Brand",
@@ -1180,7 +1177,7 @@ function ResumeLengthGuide({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Build Your Resume Now <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1519,7 +1516,7 @@ function ResumeLengthGuide({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Build Your Resume Now <FiArrowRight style={{marginLeft: '8px'}} />

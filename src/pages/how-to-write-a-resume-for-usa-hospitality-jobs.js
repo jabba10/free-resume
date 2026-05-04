@@ -394,20 +394,20 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-usa-hospitality-jobs";
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-hospitality-jobs";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Templates",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -422,7 +422,7 @@ export async function getStaticProps() {
     description: "Learn how to write a resume for USA hospitality jobs. Complete guide with examples for hotels, restaurants, event planning, and tourism. Free 2026 templates with expert tips.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -594,7 +594,7 @@ export async function getStaticProps() {
     },
     {
       question: 'What certifications matter for hospitality resumes?',
-      answer: 'Key certifications include: ServSafe Manager (essential for food service), CHA (Certified Hotel Administrator), CRME (Certified Revenue Management Executive), CHSP (Certual Hospitality Sales Professional), CMP (Certified Meeting Professional), TIPS Certification (alcohol service), and CPR/First Aid. List these prominently near the top of your resume.',
+      answer: 'Key certifications include: ServSafe Manager (essential for food service), CHA (Certified Hotel Administrator), CRME (Certified Revenue Management Executive), CHSP (Certified Hospitality Sales Professional), CMP (Certified Meeting Professional), TIPS Certification (alcohol service), and CPR/First Aid. List these prominently near the top of your resume.',
     },
     {
       question: 'How do I quantify hospitality achievements?',
@@ -701,15 +701,15 @@ function HospitalityResumeGuide({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - Updated without www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
@@ -722,7 +722,7 @@ function HospitalityResumeGuide({
         <meta property="article:published_time" content="2026-01-23" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Write a Resume for USA Hospitality Jobs 2026" />
         <meta name="twitter:description" content="Complete guide to hospitality resumes with examples for hotels, restaurants, and events." />
@@ -741,7 +741,7 @@ function HospitalityResumeGuide({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - Updated without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -763,7 +763,7 @@ function HospitalityResumeGuide({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-01-23",

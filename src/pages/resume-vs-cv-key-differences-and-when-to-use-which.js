@@ -1190,18 +1190,18 @@ CONVERTING RESUME TO CV:
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
-        {/* Single Canonical Tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which" />
+        {/* Single Canonical Tag - REMOVED www */}
+        <link rel="canonical" href="https://professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which" />
         
         <meta name="date" content={currentDate} />
         <meta name="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
 
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - REMOVED www */}
         <meta property="og:title" content="Resume vs CV: Key Differences & Global Standards Guide 2026" />
         <meta property="og:description" content="Complete guide to Resume vs CV differences with global standards for US, UK, and EU job markets. Learn when to use each document with examples." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-vs-cv-preview.jpg" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/resume-vs-cv-preview.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -1211,11 +1211,11 @@ CONVERTING RESUME TO CV:
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="resume, CV, job applications, international careers" />
 
-        {/* Twitter Cards */}
+        {/* Twitter Cards - REMOVED www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume vs CV: Key Differences & Global Standards Guide" />
         <meta name="twitter:description" content="Learn Resume vs CV differences for US, UK, and EU job markets. When to use each document with international standards and examples." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/resume-vs-cv-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/resume-vs-cv-preview.jpg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         <meta name="twitter:label1" content="Countries covered" />
@@ -1223,7 +1223,7 @@ CONVERTING RESUME TO CV:
         <meta name="twitter:label2" content="Document types" />
         <meta name="twitter:data2" content="Resume & CV" />
 
-        {/* Structured Data */}
+        {/* Structured Data - REMOVED www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1232,18 +1232,18 @@ CONVERTING RESUME TO CV:
               "@type": "Article",
               "headline": "Resume vs CV: Key Differences & Global Standards Guide 2026",
               "description": "A comprehensive guide explaining the differences between resumes and CVs, when to use each document, and global standards for US, UK, EU, and other international job markets.",
-              "image": "https://www.professionalresumefree.com/images/resume-vs-cv-preview.jpg",
+              "image": "https://professionalresumefree.com/images/resume-vs-cv-preview.jpg",
               "author": {
                 "@type": "Organization",
                 "name": "Professional Resume Free",
-                "url": "https://www.professionalresumefree.com"
+                "url": "https://professionalresumefree.com"
               },
               "publisher": {
                 "@type": "Organization",
                 "name": "Professional Resume Free",
                 "logo": {
                   "@type": "ImageObject",
-                  "url": "https://www.professionalresumefree.com/logo.png",
+                  "url": "https://professionalresumefree.com/logo.png",
                   "width": 512,
                   "height": 512
                 }
@@ -1252,7 +1252,7 @@ CONVERTING RESUME TO CV:
               "dateModified": lastModifiedDate,
               "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which"
+                "@id": "https://professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which"
               },
               "articleSection": "Career Resources",
               "keywords": "resume vs CV, job applications, international careers, global standards"
@@ -1315,19 +1315,19 @@ CONVERTING RESUME TO CV:
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Home",
-                  "item": "https://www.professionalresumefree.com"
+                  "item": "https://professionalresumefree.com"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Career Guides",
-                  "item": "https://www.professionalresumefree.com/career-guides"
+                  "item": "https://professionalresumefree.com/career-guides"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Resume vs CV: Key Differences",
-                  "item": "https://www.professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which"
+                  "item": "https://professionalresumefree.com/resume-vs-cv-key-differences-and-when-to-use-which"
                 }
               ]
             })

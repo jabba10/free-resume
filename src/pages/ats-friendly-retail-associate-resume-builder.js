@@ -693,21 +693,21 @@ const RetailResume = ({
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* CANONICAL URL - Only one canonical tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" />
         
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="x-default" />
+        <link rel="alternate" href="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en" />
+        <link rel="alternate" href="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-US" />
+        <link rel="alternate" href="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-GB" />
+        <link rel="alternate" href="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-CA" />
+        <link rel="alternate" href="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="en-AU" />
+        <link rel="alternate" href="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" hreflang="x-default" />
         <meta property="og:title" content="Free Retail Resume Builder 2026: Associate Templates" />
         <meta property="og:description" content="Create a professional retail resume for free. ATS-friendly associate templates trusted by 2M+ retail pros. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-retail-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-retail-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Retail Resume Builder - Create Professional Retail Associate Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Retail Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -718,7 +718,7 @@ const RetailResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Retail Resume Builder 2026: Associate Templates" />
         <meta name="twitter:description" content="Create a professional retail resume for free. ATS-friendly associate templates trusted by 2M+ retail pros. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-retail-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-retail-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Retail Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -741,8 +741,8 @@ const RetailResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder",
                   "name": "Free Retail Resume Builder 2026: Associate Templates",
                   "description": "Create professional ATS-optimized retail resumes for free. Land jobs 3x faster with our retail resume builder.",
                   "datePublished": "2026-01-01",
@@ -750,18 +750,18 @@ const RetailResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Retail Resume Free",
                     "description": "Free online resume builder for retail professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Retail Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -775,7 +775,7 @@ const RetailResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-retail-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-retail-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -786,13 +786,13 @@ const RetailResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Retail Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder"
                       }
                     ]
                   },
@@ -826,7 +826,7 @@ const RetailResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-retail-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-retail-resume-builder.jpg",
                     "applicationSuite": "Retail Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -834,7 +834,7 @@ const RetailResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -847,7 +847,7 @@ const RetailResume = ({
                         "name": "Retail Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder#webpage"
                   }))
                 },
                 {
@@ -866,32 +866,32 @@ const RetailResume = ({
                       "position": 1,
                       "name": "Choose a Retail Template",
                       "text": "Select from our ATS-optimized retail resume templates designed for sales associates, cashiers, supervisors, and store managers.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-retail-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-retail-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Retail Information",
                       "text": "Add your retail experience, sales achievements, customer service skills, and retail-specific qualifications using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-retail-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-retail-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our retail-specific suggestions to improve retail keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Retail Resume",
                       "text": "Export your professional retail resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -901,7 +901,7 @@ const RetailResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Retail Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -977,7 +977,7 @@ const RetailResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly retail resume builder that helps retail professionals create professional resumes and land retail jobs faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder"
                       }
                     }
                   }))
@@ -2113,8 +2113,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Retail Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-retail-associate-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Retail Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-retail-associate-resume-builder' }
   ];
 
   return {

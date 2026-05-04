@@ -511,14 +511,15 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-a-usa-sales-and-marketing-roles";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-a-usa-sales-and-marketing-roles";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -533,7 +534,8 @@ export async function getStaticProps() {
     description: "Complete guide to writing a resume for USA sales and marketing roles. Expert tips on highlighting revenue growth, lead generation, and marketing ROI with proven examples and ATS strategies.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    // REMOVED www from image URL
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // AI citation data with sources
@@ -742,20 +744,20 @@ function SalesMarketingResumeGuide({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - REMOVED www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URL */}
         <meta property="og:title" content="How to Write a Resume for USA Sales and Marketing Roles 2026" />
         <meta property="og:description" content="Complete guide to writing a resume for USA sales and marketing roles. Expert tips on highlighting revenue growth, lead generation, and marketing ROI." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -768,11 +770,11 @@ function SalesMarketingResumeGuide({
         <meta property="article:tag" content="Marketing Resume" />
         <meta property="article:tag" content="Sales Jobs" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Write a Resume for USA Sales and Marketing Roles" />
         <meta name="twitter:description" content="Complete guide to sales and marketing resumes. Expert tips on revenue growth and marketing ROI." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -785,7 +787,7 @@ function SalesMarketingResumeGuide({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - REMOVED www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -806,14 +808,14 @@ function SalesMarketingResumeGuide({
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "url": "https://professionalresumefree.com/logo.png",
                       "width": 200,
                       "height": 60
                     }
@@ -842,7 +844,7 @@ function SalesMarketingResumeGuide({
                   "isPartOf": {
                     "@type": "WebSite",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   }
                 },
                 {
@@ -922,7 +924,8 @@ function SalesMarketingResumeGuide({
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com" itemProp="item">
                   <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />

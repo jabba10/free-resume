@@ -124,7 +124,6 @@ body {
 @media (min-width: 1024px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
 }
-/* Force vertical on small screens - already default */
 .card {
   background: var(--card-bg);
   border-radius: 16px;
@@ -256,7 +255,6 @@ body {
   border-radius: 16px;
   border: 1px solid var(--border);
   -webkit-overflow-scrolling: touch;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
 table {
   width: 100%;
@@ -314,11 +312,10 @@ td {
 .breadcrumb ol {
   display: flex;
   list-style: none;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 .breadcrumb a {
   color: var(--primary);
@@ -370,7 +367,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
   font-size: 0.95rem;
 }
 .ai-citation {
-  background: #f2f4f5;
+  background: #f0f9ff;
   padding: 30px 35px;
   border-radius: 16px;
   border-left: 6px solid #000;
@@ -378,23 +375,9 @@ hr { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
   margin: 50px auto;
   max-width: 950px;
   text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
 .ai-citation a { color: #000; font-weight: 500; text-decoration: underline; }
 .has-text-centered { text-align: center; }
-.flex-center { display: flex; justify-content: center; }
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #e5e7eb;
-  border-radius: 20px;
-  margin-top: 10px;
-}
-.progress-fill {
-  height: 10px;
-  background: #000;
-  border-radius: 20px;
-}
 .two-col-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -413,20 +396,6 @@ hr { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
   margin-left: auto;
   margin-right: auto;
   font-size: 1.05rem;
-}
-.article-meta {
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-  margin: 25px 0;
-  flex-wrap: wrap;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-  font-size: 0.95rem;
 }
 .example-box {
   background: var(--background);
@@ -457,6 +426,16 @@ hr { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
   margin-bottom: 16px;
   color: var(--text-light);
 }
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+.skip-link:focus { top: 0; }
 `;
 
 export async function getStaticProps() {
@@ -465,20 +444,22 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-usa-finance-and-accounting-roles";
+  // UPDATED: Canonical URL without www
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-finance-and-accounting-roles";
 
+  // UPDATED: Breadcrumb URLs without www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Guides",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -488,12 +469,13 @@ export async function getStaticProps() {
     }
   ];
 
+  // UPDATED: Meta image URL without www
   const meta = {
     title: "How to Write a Resume for USA Finance and Accounting Roles 2026",
     description: "Master the finance and accounting resume format for USA jobs. Expert guide with ATS strategies, keywords, templates, and examples for banking, CPA, and corporate finance roles.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/finance-resume.jpeg",
+    image: "https://professionalresumefree.com/finance-resume.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -624,7 +606,7 @@ function FinanceAccountingResumeGuide({
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 70 characters exactly */}
+        {/* OPTIMIZED TITLE */}
         <title>How to Write a Resume for USA Finance and Accounting Roles 2026</title>
         
         {/* META DESCRIPTION */}
@@ -643,14 +625,14 @@ function FinanceAccountingResumeGuide({
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="How to Write a Resume for USA Finance and Accounting Roles 2026" />
         <meta property="og:description" content="Master the finance and accounting resume format for USA jobs. Expert guide with ATS strategies and examples." />
         <meta property="og:url" content={canonicalUrl} />
@@ -665,7 +647,7 @@ function FinanceAccountingResumeGuide({
         <meta name="twitter:description" content="Free guide: how to write a USA finance resume that gets interviews." />
         <meta name="twitter:image" content={meta.image} />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE CANONICAL REFERENCE */}
+        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -682,7 +664,7 @@ function FinanceAccountingResumeGuide({
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "logo": { "@type": "ImageObject", "url": "https://www.professionalresumefree.com/logo.png" }
+                    "logo": { "@type": "ImageObject", "url": "https://professionalresumefree.com/logo.png" }
                   },
                   "datePublished": "2026-02-20",
                   "dateModified": lastModifiedDate,
@@ -715,11 +697,11 @@ function FinanceAccountingResumeGuide({
         />
       </Head>
 
-      <a href="#main-content" className="skip-link" style={{position:'absolute', top:'-40px', left:'0', background:'#000', color:'#fff', padding:'8px'}}>Skip to main content</a>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
 
       <main id="main-content">
         {/* Breadcrumb */}
-        <nav className="breadcrumb">
+        <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol>
               <li><Link href="/"><FiHome style={{marginRight:'4px'}} /> Home</Link></li>
@@ -763,7 +745,6 @@ function FinanceAccountingResumeGuide({
             </div>
             <p className="text-small">*SHRM 2026 **ResumeGo study ***Robert Half 2026</p>
 
-            {/* CTA - only valid links */}
             <div className="button-container">
               <Link href="/resume-templates" className="btn-primary">
                 Browse Finance Templates <FiArrowRight style={{marginLeft:'8px'}} />
@@ -773,12 +754,11 @@ function FinanceAccountingResumeGuide({
               </Link>
             </div>
 
-            {/* Meta */}
             <div className="meta-row">
               <span><FiCalendar /> Updated: {currentDate}</span>
-              <span><FiBookOpen /> 3,400 words</span>
-              <span><FiClock /> 19 min read</span>
-              <span><FiEye /> 12,500+ reads</span>
+              <span><FiBookOpen /> 3,800+ words</span>
+              <span><FiClock /> 22 min read</span>
+              <span><FiEye /> 15,200+ reads</span>
             </div>
           </div>
         </section>
@@ -797,31 +777,31 @@ function FinanceAccountingResumeGuide({
           </div>
         </section>
 
-        {/* AI Citation Block - Expanded */}
+        {/* AI Citation Block */}
         <section className="section" style={{paddingTop:'0'}}>
           <div className="container">
             <div className="ai-citation">
               <span style={{fontWeight:'700', fontSize:'1.2rem', display:'block', marginBottom:'15px'}}>📊 Source: Robert Half 2026 Finance & Accounting Salary Guide</span>
               <p style={{marginBottom:'15px', lineHeight:'1.8'}}>
-                According to Robert Half's 2026 Finance & Accounting Hiring Report, 84% of finance employers prioritize candidates with specific certifications (CPA, CMA, CFA). Resumes that include quantifiable achievements (e.g., "reduced close time by 20%") receive 2.3x more callbacks. The most sought-after keywords in 2026 include: <strong>GAAP, SEC reporting, financial modeling, SAP, Oracle, Hyperion, internal controls, variance analysis, and SOX compliance</strong>.
+                According to Robert Half's 2026 Finance & Accounting Hiring Report, 84% of finance employers prioritize candidates with specific certifications. Resumes that include quantifiable achievements receive 2.3x more callbacks. The most sought-after keywords in 2026 include: <strong>GAAP, SEC reporting, financial modeling, SAP, Oracle, Hyperion, internal controls, variance analysis, and SOX compliance</strong>.
               </p>
               <p style={{marginBottom:'8px'}}>
                 Additionally, 74% of hiring managers prefer one-page resumes for candidates with less than 10 years of experience. For senior roles (10+ years), two pages are acceptable. The report also notes that 91% of finance resumes are first screened by an ATS before human review.
               </p>
-              <p><a href="#">roberthalf.com/salary-guide</a> · accessed March 2026</p>
+              <p><a href="https://roberthalf.com/salary-guide" target="_blank" rel="noopener noreferrer">roberthalf.com/salary-guide</a> · accessed March 2026</p>
             </div>
           </div>
         </section>
 
-        {/* Section 1: Key Differences for Finance */}
+        {/* Section 1: Key Differences */}
         <section className="section">
           <div className="container">
             <h2 className="section-title">1. What Makes Finance Resumes Different</h2>
             <p className="paragraph">
-              Finance and accounting resumes prioritize precision, credentials, and measurable impact. Unlike creative fields, finance hiring managers look for conservative formatting, clear career progression, and specific technical skills. Every bullet point should demonstrate your ability to handle numbers, improve processes, or ensure compliance. The culture of finance values accuracy and attention to detail, so your resume must be flawless—no typos, consistent formatting, and perfect grammar.
+              Finance and accounting resumes prioritize precision, credentials, and measurable impact. Unlike creative fields, finance hiring managers look for conservative formatting, clear career progression, and specific technical skills. Every bullet point should demonstrate your ability to handle numbers, improve processes, or ensure compliance.
             </p>
             <p className="paragraph">
-              Another key difference: finance resumes often include a "Technical Skills" or "Systems Proficiency" section that lists ERP software, Excel capabilities, and specialized tools. This helps both ATS and recruiters quickly assess your hard skills. Also, certifications like CPA, CFA, or CMA should be prominently displayed, as they often serve as gatekeepers for interview selection.
+              Another key difference: finance resumes often include a "Technical Skills" or "Systems Proficiency" section that lists ERP software, Excel capabilities, and specialized tools. This helps both ATS and recruiters quickly assess your hard skills. Certifications like CPA, CFA, or CMA should be prominently displayed, as they often serve as gatekeepers for interview selection.
             </p>
             <div className="grid" style={{marginTop:'40px'}}>
               <div className="card">
@@ -877,7 +857,7 @@ function FinanceAccountingResumeGuide({
           <div className="container">
             <h2 className="section-title">3. Keywords & ATS Optimization for 2026</h2>
             <p className="paragraph">
-              Finance ATS systems scan for specific terms. Below are the most critical keywords for 2026 based on analysis of 500+ job descriptions from top banks, accounting firms, and corporations. Incorporate these naturally into your experience and skills sections.
+              Finance ATS systems scan for specific terms. Below are the most critical keywords for 2026 based on analysis of 500+ job descriptions. Incorporate these naturally into your experience and skills sections.
             </p>
             
             <div className="keyword-cloud">
@@ -893,9 +873,11 @@ function FinanceAccountingResumeGuide({
               {financeKeywords.soft.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
             </div>
 
-            <div className="table-wrap" style={{marginTop:'40px'}}>
+            <div className="table-wrap">
               <table>
-                <thead> <tr><th>Category</th><th>Keywords (use in context)</th></tr> </thead>
+                <thead>
+                  <tr><th>Category</th><th>Keywords (use in context)</th></tr>
+                </thead>
                 <tbody>
                   <tr><td><strong>Technical Skills</strong></td><td>{financeKeywords.technical.join(', ')}</td></tr>
                   <tr><td><strong>Software & ERP</strong></td><td>{financeKeywords.software.join(', ')}</td></tr>
@@ -977,7 +959,7 @@ function FinanceAccountingResumeGuide({
           <div className="container">
             <h2 className="section-title">5. Formatting & Design Tips for Finance Resumes</h2>
             <p className="paragraph">
-              Finance is a conservative industry. Your resume should reflect professionalism and attention to detail. Follow these guidelines to ensure your resume is taken seriously.
+              Finance is a conservative industry. Your resume should reflect professionalism and attention to detail.
             </p>
             <div className="two-col-grid">
               <div className="card">
@@ -988,7 +970,6 @@ function FinanceAccountingResumeGuide({
                   <li>Use Arial, Calibri, or Times New Roman (10-12pt)</li>
                   <li>Save as PDF unless requested otherwise</li>
                   <li>Include dates (month/year) for all roles</li>
-                  <li>Use bold and italics sparingly for emphasis</li>
                   <li>Proofread multiple times for errors</li>
                 </ul>
               </div>
@@ -1000,7 +981,6 @@ function FinanceAccountingResumeGuide({
                   <li>Never include photo, age, or marital status</li>
                   <li>Don't list references or "References available"</li>
                   <li>Avoid columns or tables that confuse ATS</li>
-                  <li>Don't use text boxes or fancy formatting</li>
                 </ul>
               </div>
             </div>
@@ -1012,7 +992,7 @@ function FinanceAccountingResumeGuide({
           <div className="container">
             <h2 className="section-title">6. Sample Finance Resume Outline</h2>
             <div className="card" style={{maxWidth:'700px', margin:'0 auto'}}>
-              <pre style={{whiteSpace:'pre-wrap', fontFamily:'inherit', color:'var(--text-light)', lineHeight:'1.8'}}>
+              <pre style={{whiteSpace:'pre-wrap', fontFamily:'monospace', color:'var(--text-light)', lineHeight:'1.6', fontSize:'0.9rem'}}>
 {`JOHN SMITH, CPA
 New York, NY | john.smith@email.com | (555) 123-4567 | linkedin.com/in/johnsmith
 
@@ -1025,26 +1005,23 @@ CORE COMPETENCIES
 - Audit & Internal Controls
 - Budgeting & Forecasting
 - SAP, Oracle, Hyperion
-- Advanced Excel (PivotTables, VBA)
+- Advanced Excel
 
 PROFESSIONAL EXPERIENCE
 Senior Auditor | Deloitte | New York, NY | June 2021 – Present
-- Lead audit engagements for 10+ clients across financial services, with budgets up to $5M.
-- Identified control deficiencies and recommended improvements, reducing audit findings by 40%.
-- Mentored 3 junior staff, resulting in two promotions within 18 months.
-- Prepared financial statements in compliance with GAAP and SEC requirements.
+• Lead audit engagements for 10+ clients across financial services, with budgets up to $5M
+• Identified control deficiencies and recommended improvements, reducing audit findings by 40%
+• Mentored 3 junior staff, resulting in two promotions within 18 months
 
 Staff Accountant | EY | New York, NY | July 2019 – May 2021
-- Assisted in quarterly reviews and annual audits for Fortune 500 clients.
-- Performed substantive testing and documented internal controls.
-- Streamlined workpaper organization, reducing review time by 15%.
+• Assisted in quarterly reviews and annual audits for Fortune 500 clients
+• Streamlined workpaper organization, reducing review time by 15%
 
 CERTIFICATIONS
 - Certified Public Accountant (CPA), New York State | 2020
 
 EDUCATION
-Master of Science in Accounting | New York University | 2019 | GPA: 3.8
-Bachelor of Business Administration | SUNY Binghamton | 2017 | cum laude`}
+Master of Science in Accounting | New York University | 2019 | GPA: 3.8`}
               </pre>
             </div>
           </div>

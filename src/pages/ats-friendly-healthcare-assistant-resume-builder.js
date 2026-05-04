@@ -700,6 +700,9 @@ const HealthcareAssistantResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder";
+
   return (
     <div 
       className={styles.healthcareAssistantResume} 
@@ -722,16 +725,16 @@ const HealthcareAssistantResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder" />
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
+        <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
         <meta property="og:description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-healthcare-assistant-cv-builder.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-healthcare-assistant-cv-builder.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Healthcare Assistant CV Builder for UK Job Seekers" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="UK Healthcare Assistant CV Builder" />
         <meta property="og:locale" content="en_GB" />
@@ -739,7 +742,7 @@ const HealthcareAssistantResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
         <meta name="twitter:description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-healthcare-assistant-cv-builder.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-healthcare-assistant-cv-builder.jpg" />
         <meta name="twitter:image:alt" content="Free Healthcare Assistant CV Builder for UK Job Seekers" />
         <meta name="theme-color" content="#005EB8" />
         <meta name="msapplication-TileColor" content="#005EB8" />
@@ -776,8 +779,8 @@ const HealthcareAssistantResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Healthcare Assistant CV Builder UK | NHS-Compliant Templates 2026",
                   "description": "Create professional NHS-compliant healthcare assistant CVs for free. UK-specific templates for NHS, care homes, and private healthcare.",
                   "datePublished": "2026-01-01",
@@ -785,18 +788,18 @@ const HealthcareAssistantResume = ({
                   "inLanguage": "en-GB",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "UK Healthcare Assistant CV Builder",
                     "description": "Free online CV builder for UK healthcare assistants",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "UK Healthcare Assistant CV Builder",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       }
@@ -804,7 +807,7 @@ const HealthcareAssistantResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-healthcare-assistant-cv-builder.jpg",
+                    "url": "https://professionalresumefree.com/images/og-healthcare-assistant-cv-builder.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -815,13 +818,13 @@ const HealthcareAssistantResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Healthcare Assistant CV Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -855,7 +858,7 @@ const HealthcareAssistantResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-cv-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-cv-builder.jpg",
                     "applicationSuite": "UK Healthcare Career Tools",
                     "countriesSupported": "United Kingdom",
                     "fileSize": "Web Application"
@@ -863,7 +866,7 @@ const HealthcareAssistantResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -876,7 +879,7 @@ const HealthcareAssistantResume = ({
                         "name": "Healthcare Assistant CV Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 }
               ]
@@ -2094,10 +2097,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Healthcare Assistant CV Builder', item: 'https://www.professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Healthcare Assistant CV Builder', item: 'https://professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder' }
   ];
 
   return {

@@ -451,20 +451,21 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-a-resume-for-usa-retail-jobs";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-retail-jobs";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Guides",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -479,7 +480,8 @@ export async function getStaticProps() {
     description: "Master the retail resume format for USA jobs. Expert guide with keywords, examples, and strategies for sales associate, store manager, and retail management roles.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/retail-resume.jpeg",
+    // REMOVED www from image URL
+    image: "https://professionalresumefree.com/retail-resume.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -709,7 +711,7 @@ function RetailResumeGuide({
         <meta name="robots" content="index, follow" />
         <meta name="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL TAG */}
+        {/* SINGLE CANONICAL TAG - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content={meta.title} />
@@ -724,6 +726,7 @@ function RetailResumeGuide({
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         
+        {/* STRUCTURED DATA - REMOVED www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -740,7 +743,7 @@ function RetailResumeGuide({
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "logo": { "@type": "ImageObject", "url": "https://www.professionalresumefree.com/logo.png" }
+                    "logo": { "@type": "ImageObject", "url": "https://professionalresumefree.com/logo.png" }
                   },
                   "datePublished": "2026-02-25",
                   "dateModified": lastModifiedDate,
@@ -780,7 +783,10 @@ function RetailResumeGuide({
         <nav className="breadcrumb">
           <div className="container">
             <ol>
-              <li><Link href="/"><FiHome style={{marginRight:'4px'}} /> Home</Link></li>
+              <li>
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com"><FiHome style={{marginRight:'4px'}} /> Home</Link>
+              </li>
               <li><FiChevronRight /></li>
               <li><Link href="/resume-templates">Resume Templates</Link></li>
               <li><FiChevronRight /></li>

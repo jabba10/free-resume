@@ -679,13 +679,13 @@ export async function getStaticProps() {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Format Guide",
-      "item": "https://www.professionalresumefree.com/basic-resume-format"
+      "item": "https://professionalresumefree.com/basic-resume-format"
     }
   ];
 
@@ -724,7 +724,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
   const safeReviewDates = reviewDates || Array(8).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(8).fill(freshnessIndicator);
 
-  const canonicalUrl = "https://www.professionalresumefree.com/basic-resume-format";
+  const canonicalUrl = "https://professionalresumefree.com/basic-resume-format";
 
   // Optimized title - exactly 70 characters
   const optimizedTitle = "Basic Resume Format 2026: Free ATS Guide & Templates (No Sign-Up)";
@@ -901,7 +901,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
         <meta property="og:title" content="Basic Resume Format 2026: Free ATS Guide & Templates" />
         <meta property="og:description" content="Master ATS-friendly resume formatting. Free templates, expert tips, instant PDF download. No sign-up required." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="Basic Resume Format Guide - ATS-Optimized Templates" />
@@ -914,7 +914,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Basic Resume Format 2026: Free ATS Guide" />
         <meta name="twitter:description" content="Master resume formatting for ATS success. Free templates & tools. No sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Basic Resume Format Guide" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -947,7 +947,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -955,8 +955,8 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free ATS-Optimized Resume Templates and Tools",
                   "publisher": {

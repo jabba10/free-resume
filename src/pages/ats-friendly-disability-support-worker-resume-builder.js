@@ -712,6 +712,9 @@ const DisabilitySupportResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder";
+
   return (
     <div className={styles.disabilitySupportResumeBuilder} lang="en-AU" style={{ fontFamily: FONT_FAMILY }}>
       <Head>
@@ -727,16 +730,16 @@ const DisabilitySupportResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" />
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
+        <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
         <meta property="og:description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-disability-support-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-disability-support-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free NDIS Resume Builder - Create Professional Disability Support Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Australian Disability Support Resume Free" />
         <meta property="og:locale" content="en_AU" />
@@ -744,7 +747,7 @@ const DisabilitySupportResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
         <meta name="twitter:description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-disability-support-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-disability-support-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free NDIS Resume Builder with Australian Templates" />
         <meta name="twitter:site" content="@DisabilityResumeAU" />
         <meta name="twitter:creator" content="@DisabilityResumeAU" />
@@ -767,8 +770,8 @@ const DisabilitySupportResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free NDIS Resume Builder 2026 - Disability Support Worker Australia",
                   "description": "Create professional ATS-optimized disability support resumes for free. Australian NDIS-specific templates for Support Workers.",
                   "datePublished": "2026-01-01",
@@ -776,34 +779,33 @@ const DisabilitySupportResume = ({
                   "inLanguage": "en-AU",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Australian Disability Support Resume Free",
                     "description": "Free online resume builder for Australian disability support workers",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Australian Disability Support Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/DisabilityResumeAU",
-                        "https://www.linkedin.com/company/disability-support-resume-au",
-                        "https://www.facebook.com/DisabilitySupportResumeAU"
+                        "https://linkedin.com/company/disability-support-resume-au",
+                        "https://facebook.com/DisabilitySupportResumeAU"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-disability-support-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-disability-support-resume-builder-preview.jpg",
                     "width": 1200,
-                    "height": 630
-                  },
+                    "height": 630                  },
                   "breadcrumb": {
                     "@type": "BreadcrumbList",
                     "itemListElement": [
@@ -811,13 +813,13 @@ const DisabilitySupportResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Disability Support Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -851,7 +853,7 @@ const DisabilitySupportResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-disability-support-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-disability-support-resume-builder.jpg",
                     "applicationSuite": "Disability Support Career Tools",
                     "countriesSupported": "Australia",
                     "fileSize": "Web Application"
@@ -859,7 +861,7 @@ const DisabilitySupportResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -872,7 +874,7 @@ const DisabilitySupportResume = ({
                         "name": "Disability Support Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -891,32 +893,32 @@ const DisabilitySupportResume = ({
                       "position": 1,
                       "name": "Choose NDIS-Optimized Template",
                       "text": "Select from our ATS-optimized disability support resume templates designed for Australian support workers, coordinators, and team leaders.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-ndis-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-ndis-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Disability Support Information",
                       "text": "Add your support experience, Australian qualifications, NDIS certifications, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-support-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-support-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize for NDIS",
                       "text": "Use our NDIS-specific suggestions to improve keywords and formatting for Australian disability service providers.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Disability Support Resume",
                       "text": "Export your professional disability support resume as PDF - completely free, no watermarks, ready for Australian job applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -926,7 +928,7 @@ const DisabilitySupportResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Australian Disability Support Resume Free",
-                    "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder",
+                    "url": canonicalUrl,
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "",
@@ -1002,7 +1004,7 @@ const DisabilitySupportResume = ({
                           "priceCurrency": "AUD"
                         },
                         "description": "Free online ATS-friendly disability support resume builder that helps Australian disability workers create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2193,10 +2195,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Disability Support Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Disability Support Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-disability-support-worker-resume-builder' }
   ];
 
   return {

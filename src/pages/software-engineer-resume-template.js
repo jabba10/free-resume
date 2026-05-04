@@ -753,20 +753,21 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/software-engineer-resume-template";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/software-engineer-resume-template";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Templates",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -781,7 +782,7 @@ export async function getStaticProps() {
     description: "Master the software engineer resume template with expert tips, examples, and ATS strategies to land interviews fast. Free 2026 guide with proven templates.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -928,20 +929,20 @@ function SoftwareEngineerResumeTemplate({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - REMOVED www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www */}
         <meta property="og:title" content="Software Engineer Resume Template 2026: Free ATS-Optimized Guide" />
         <meta property="og:description" content="Master the software engineer resume template with expert tips, examples, and ATS strategies to land interviews fast. Free 2026 guide." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -949,11 +950,11 @@ function SoftwareEngineerResumeTemplate({
         <meta property="article:published_time" content="2026-01-23" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Software Engineer Resume Template 2026: Free Guide" />
         <meta name="twitter:description" content="Master the software engineer resume template with expert tips. Free ATS-optimized guide." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -968,7 +969,7 @@ function SoftwareEngineerResumeTemplate({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - REMOVED www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -990,7 +991,7 @@ function SoftwareEngineerResumeTemplate({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-01-23",
@@ -1158,7 +1159,7 @@ function SoftwareEngineerResumeTemplate({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Use This Template Now <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1507,39 +1508,6 @@ function SoftwareEngineerResumeTemplate({
           </div>
         </section>
 
-        {/* Resource Hub */}
-        <section className="section" aria-labelledby="hub-heading">
-          <div className="container">
-            <h2 id="hub-heading" className="section-title">Complete Career Resource Hub</h2>
-            <div className="hub-grid">
-              <div className="hub-category">
-                <h3>📚 Resume Writing Guides</h3>
-                <ul>
-                  <li><Link href="/basic-resume-format">Basic Resume Format</Link></li>
-                  <li><Link href="/chronological-resume-example">Chronological Resume Example</Link></li>
-                  <li><Link href="/functional-resume-templates">Functional Resume Templates</Link></li>
-                </ul>
-              </div>
-              <div className="hub-category">
-                <h3>⚡ AI & Modern Tools</h3>
-                <ul>
-                  <li><Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume">AI Resume Builders Guide</Link></li>
-                  <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026">ChatGPT Resume Prompts</Link></li>
-                  <li><Link href="/free-action-verb-recommender">Action Verb Recommender</Link></li>
-                </ul>
-              </div>
-              <div className="hub-category">
-                <h3>📊 Free Resume Tools</h3>
-                <ul>
-                  <li><Link href="/free-resume-score-checker">Resume Score Checker</Link></li>
-                  <li><Link href="/free-ats-resume-checker">ATS Resume Checker</Link></li>
-                  <li><Link href="/free-resume-word-and-character-counter">Word & Character Counter</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Section 6: Template vs Custom */}
         <section id="template-vs-custom" className="section">
           <div className="container">
@@ -1576,7 +1544,7 @@ function SoftwareEngineerResumeTemplate({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Start with the Software Engineer Template <FiArrowRight style={{marginLeft: '8px'}} />

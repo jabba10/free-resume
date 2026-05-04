@@ -759,15 +759,15 @@ const Resume = ({
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-medical-resume-builder" />
         
         <meta property="og:title" content="Free Healthcare Resume Builder 2026 | ATS Medical Templates" />
         <meta property="og:description" content="Create a professional healthcare resume for free in 2026. ATS-optimized medical templates for nurses, doctors. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-healthcare-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-healthcare-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Healthcare Resume Builder - Create Professional Medical Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-medical-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-medical-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Healthcare Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -778,7 +778,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Healthcare Resume Builder 2026 | ATS Medical Templates" />
         <meta name="twitter:description" content="Create a professional healthcare resume for free in 2026. ATS-optimized medical templates for nurses, doctors. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-healthcare-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-healthcare-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Healthcare Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -801,8 +801,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-medical-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-medical-resume-builder",
                   "name": "Free Healthcare Resume Builder 2026 | ATS Medical Templates",
                   "description": "Create a professional healthcare resume for free in 2026. ATS-optimized medical templates for nurses, doctors. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -810,18 +810,18 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Healthcare Resume Free",
                     "description": "Free online resume builder for medical professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Healthcare Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       }
@@ -829,7 +829,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-healthcare-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-healthcare-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -840,13 +840,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Healthcare Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-medical-resume-builder"
                       }
                     ]
                   },
@@ -880,7 +880,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-healthcare-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-healthcare-resume-builder.jpg",
                     "applicationSuite": "Medical Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -888,7 +888,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-medical-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -901,7 +901,7 @@ const Resume = ({
                         "name": "Healthcare Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-medical-resume-builder#webpage"
                   }))
                 },
                 {
@@ -920,32 +920,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Medical Template",
                       "text": "Select from our ATS-optimized healthcare resume templates designed for nurses, physicians, therapists, and medical professionals.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-medical-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-medical-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Clinical Information",
                       "text": "Add your medical experience, education, licenses, certifications, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-medical-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-medical-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our healthcare-specific suggestions to improve medical keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Healthcare Resume",
                       "text": "Export your professional medical resume as PDF - completely free, no watermarks, ready for hospital applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-medical-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -955,7 +955,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Healthcare Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1031,7 +1031,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly healthcare resume builder that helps medical professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-medical-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-medical-resume-builder"
                       }
                     }
                   }))
@@ -2084,7 +2084,7 @@ const Resume = ({
       <section className={styles.faqSection} aria-labelledby="faq-title">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
+            <h2 className={styles.faqTitle} id="faq-title">Frequently Asked Questions</h2>
             <p className={styles.sectionSubtitle}>
               Everything you need to know about creating professional healthcare resumes with our tool.
             </p>
@@ -2169,8 +2169,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Healthcare Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-medical-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Healthcare Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-medical-resume-builder' }
   ];
 
   return {

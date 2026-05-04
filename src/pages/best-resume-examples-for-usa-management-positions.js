@@ -873,20 +873,23 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/best-resume-examples-for-usa-management-positions";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/best-resume-examples-for-usa-management-positions";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      // REMOVED www
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Examples",
-      "item": "https://www.professionalresumefree.com/resume-examples"
+      // REMOVED www
+      "item": "https://professionalresumefree.com/resume-examples"
     },
     {
       "@type": "ListItem",
@@ -901,7 +904,8 @@ export async function getStaticProps() {
     description: "Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    // REMOVED www
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1163,15 +1167,15 @@ function ManagementResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URL */}
         <meta property="og:title" content="Best Resume Examples for USA Management Positions (2026 Edition)" />
         <meta property="og:description" content="Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1179,11 +1183,11 @@ function ManagementResumeExamples({
         <meta property="article:published_time" content="2026-03-14" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Management Resume Examples 2026" />
         <meta name="twitter:description" content="Proven management resume examples that landed interviews at Fortune 500 companies." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -1220,7 +1224,8 @@ function ManagementResumeExamples({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      // REMOVED www
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-14",
@@ -1351,14 +1356,16 @@ function ManagementResumeExamples({
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com" itemProp="item">
                   <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
               <li aria-hidden="true"><FiChevronRight /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/resume-examples" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com/resume-examples" itemProp="item">
                   <span itemProp="name">Resume Examples</span>
                 </Link>
                 <meta itemProp="position" content="2" />
@@ -1385,8 +1392,9 @@ function ManagementResumeExamples({
             </p>
 
             <div className="hero-actions">
+              {/* REMOVED www from href */}
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Build Your Management Resume <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1781,8 +1789,9 @@ function ManagementResumeExamples({
                 Use the examples in this guide as templates, not as copy-paste documents. Your leadership story is unique. The metrics will be different. The industries may vary. But the structure—clear, quantified, impact-focused—works across every management level and industry.
               </p>
               <div className="hero-actions">
+                {/* REMOVED www from href */}
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Build Your Management Resume <FiArrowRight style={{marginLeft: '8px'}} />

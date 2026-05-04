@@ -814,14 +814,14 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
         <meta property="og:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
         <meta property="og:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Registered Practical Nurse (RPN) Resume Builder for Canada" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional RPN Resume Free - Canada" />
         <meta property="og:locale" content="en_CA" />
@@ -830,7 +830,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
         <meta name="twitter:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-rpn-resume-builder-canada-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-rpn-resume-builder-canada-preview.jpg" />
         <meta name="twitter:image:alt" content="Free RPN Resume Builder for Canada" />
         <meta name="twitter:site" content="@RPNResumeCanada" />
         <meta name="twitter:creator" content="@RPNResumeCanada" />
@@ -853,8 +853,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder",
                   "name": "Free Registered Practical Nurse (RPN) Resume Builder - Canadian Healthcare Templates 2026",
                   "description": "Create professional ATS-optimized Registered Practical Nurse resumes for Canadian healthcare jobs. Free RPN resume builder with Canadian terminology and provincial licensing standards.",
                   "datePublished": "2026-01-01",
@@ -862,18 +862,18 @@ const Resume = ({
                   "inLanguage": "en-CA",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional RPN Resume Free - Canada",
                     "description": "Free online resume builder for Registered Practical Nurses in Canada",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional RPN Resume Free - Canada",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo-canada.png",
+                        "url": "https://professionalresumefree.com/logo-canada.png",
                         "width": 512,
                         "height": 512
                       },
@@ -886,7 +886,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -897,13 +897,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "RPN Resume Builder Canada",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
                       }
                     ]
                   },
@@ -938,7 +938,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-rpn-resume-builder-canada.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-rpn-resume-builder-canada.jpg",
                     "applicationSuite": "Canadian Healthcare Career Tools",
                     "countriesSupported": "Canada",
                     "fileSize": "Web Application"
@@ -946,7 +946,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -959,7 +959,7 @@ const Resume = ({
                         "name": "RPN Resume Builder Canada Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage"
                   }))
                 },
                 {
@@ -978,32 +978,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Enter Canadian RPN Credentials",
                       "text": "Add your RPN license number, provincial registration, and Canadian nursing education details with proper formatting for Canadian employers.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#credentials",
-                      "image": "https://www.professionalresumefree.com/images/step1-rpn-credentials.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#credentials",
+                      "image": "https://professionalresumefree.com/images/step1-rpn-credentials.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Add Canadian Nursing Experience",
                       "text": "Include your Canadian nursing experience with proper terminology for acute care, long-term care, community health, and other Canadian practice settings.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#experience",
-                      "image": "https://www.professionalresumefree.com/images/step2-canadian-experience.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#experience",
+                      "image": "https://professionalresumefree.com/images/step2-canadian-experience.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Highlight Canadian RPN Skills",
                       "text": "Add Canadian-specific RPN skills including medication administration, wound care, assessment skills, and CNO competencies required in Canadian healthcare facilities.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#skills",
-                      "image": "https://www.professionalresumefree.com/images/step3-canadian-skills.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#skills",
+                      "image": "https://professionalresumefree.com/images/step3-canadian-skills.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Canadian RPN Resume",
                       "text": "Export your professional Canadian RPN resume as PDF with proper Canadian healthcare formatting - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download-canada.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download-canada.jpg"
                     }
                   ]
                 },
@@ -1013,7 +1013,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional RPN Resume Free - Canada",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-9876",
@@ -1089,7 +1089,7 @@ const Resume = ({
                           "priceCurrency": "CAD"
                         },
                         "description": "Free online ATS-friendly Registered Practical Nurse resume builder for Canadian healthcare jobs.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
                       }
                     }
                   }))
@@ -2409,8 +2409,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'RPN Resume Builder Canada', item: 'https://www.professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'RPN Resume Builder Canada', item: 'https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder' }
   ];
 
   return {

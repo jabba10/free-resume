@@ -787,20 +787,23 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-write-bullet-points-that-impress-usa-recruiters";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-bullet-points-that-impress-usa-recruiters";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      // REMOVED www
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Advice",
-      "item": "https://www.professionalresumefree.com/resume-advice"
+      // REMOVED www
+      "item": "https://professionalresumefree.com/resume-advice"
     },
     {
       "@type": "ListItem",
@@ -815,7 +818,8 @@ export async function getStaticProps() {
     description: "Learn how to write resume bullet points that impress recruiters with proven formulas, before/after examples, and data-backed strategies to land more interviews.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    // REMOVED www
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1003,15 +1007,15 @@ function BulletPointGuide({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URL */}
         <meta property="og:title" content="How to Write Bullet Points That Impress USA Recruiters (2026 Guide)" />
         <meta property="og:description" content="Learn how to write resume bullet points that impress recruiters with proven formulas and before/after examples." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1019,11 +1023,11 @@ function BulletPointGuide({
         <meta property="article:published_time" content="2026-03-14" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Write Bullet Points That Impress Recruiters" />
         <meta name="twitter:description" content="Proven formulas for resume bullet points that get interviews." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -1060,7 +1064,8 @@ function BulletPointGuide({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      // REMOVED www
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-14",
@@ -1220,8 +1225,9 @@ function BulletPointGuide({
             </p>
 
             <div className="hero-actions">
+              {/* REMOVED www */}
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Build Your Resume Now <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1623,8 +1629,9 @@ function BulletPointGuide({
                 Start by reviewing your current resume. Identify three bullets that sound like duties and rewrite them using the frameworks in this guide. Then, apply the same thinking to every bullet. The results—more interviews, better opportunities, and faster callbacks—are worth the effort.
               </p>
               <div className="hero-actions">
+                {/* REMOVED www */}
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Build Your Resume Now <FiArrowRight style={{marginLeft: '8px'}} />

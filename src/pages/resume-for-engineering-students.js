@@ -532,8 +532,8 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
   const primaryKeyword = "Engineering Student Resume Builder Guide";
   const currentDate = lastUpdated ? lastUpdated.split('T')[0] : new Date().toISOString().split('T')[0];
   
-  // Updated canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-engineering-students";
+  // Updated canonical URL - NO www
+  const canonicalUrl = "https://professionalresumefree.com/resume-for-engineering-students";
 
   // FAQ data for structured data
   const faqs = [
@@ -563,7 +563,7 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
     }
   ];
 
-  // Structured Data
+  // Structured Data - NO www
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -574,7 +574,7 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
         "name": "Engineering Student Resume Guide 2026 | Complete Builder Guide",
         "description": "Complete 2026 guide to creating winning engineering resumes. Learn professional formatting, ATS optimization, project highlighting, and get our free resume builder tool.",
         "isPartOf": {
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "datePublished": "2026-01-15T08:00:00+00:00",
         "dateModified": lastUpdated,
@@ -591,7 +591,7 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
@@ -608,14 +608,14 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-15T08:00:00+00:00",
@@ -718,20 +718,20 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
         <meta httpEquiv="last-modified" content={lastUpdated} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE */}
+        {/* SINGLE CANONICAL URL - NO www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - NO www */}
         <meta property="og:title" content="Engineering Student Resume Guide 2026 | Complete Builder Guide" />
         <meta property="og:description" content="Master resume creation for engineering students with our comprehensive guide and free professional builder tool." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={siteBrand} />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/engineering-resume-guide-og.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/engineering-resume-guide-og.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Engineering Student Resume Guide 2026" />
@@ -746,11 +746,11 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
         <meta property="article:tag" content="student resume" />
         <meta property="article:tag" content="technical resume" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - NO www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Engineering Student Resume Guide 2026" />
         <meta name="twitter:description" content="Ultimate guide to engineering resumes with free professional builder tool included." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/engineering-resume-guide-twitter.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/engineering-resume-guide-twitter.jpg" />
         <meta name="twitter:image:alt" content="Engineering Student Resume Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -782,7 +782,7 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
           <meta name="content-freshness" content={currentDate} />
         </div>
 
-        {/* Breadcrumb Navigation - Updated with valid links only */}
+        {/* Breadcrumb Navigation - NO www */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">

@@ -373,22 +373,25 @@ const criticalCSS = `
   }
 `;
 
-// ===== METADATA CONFIGURATION =====
+// ===== METADATA CONFIGURATION - REMOVED www =====
 export const metadata = {
   title: 'Ultimate Canada PR Resume Guide 2026 | Professional Resume Free',
   description: 'Comprehensive guide to creating a winning resume for Canada Permanent Residency applications. Expert tips, formatting guidelines, and CRS score optimization strategies for Express Entry.',
   keywords: 'Canada PR resume, Express Entry resume, Canadian immigration resume, CRS score optimization, NOC code resume, professional resume Canada, permanent residency application, Canadian work experience documentation, IRCC resume requirements, Canada PR application guide 2026',
-  canonical: 'https://www.professionalresumefree.com/resume-for-canada-pr-guide',
+  // REMOVED www
+  canonical: 'https://professionalresumefree.com/resume-for-canada-pr-guide',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   
   openGraph: {
     title: 'Ultimate Canada PR Resume Guide 2026 | Professional Resume Free',
     description: 'Master Canada PR resume writing with our comprehensive guide. Boost your CRS score with expert-approved strategies for Express Entry success.',
-    url: 'https://www.professionalresumefree.com/resume-for-canada-pr-guide',
+    // REMOVED www
+    url: 'https://professionalresumefree.com/resume-for-canada-pr-guide',
     siteName: 'Professional Resume Free',
     images: [
       {
-        url: 'https://www.professionalresumefree.com/images/canada-pr-resume-guide-og.jpg',
+        // REMOVED www
+        url: 'https://professionalresumefree.com/images/canada-pr-resume-guide-og.jpg',
         width: 1200,
         height: 630,
         alt: 'Canada PR Resume Guide 2026'
@@ -404,7 +407,8 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Ultimate Canada PR Resume Guide 2026',
     description: 'Expert guide to creating a winning resume for Canada Permanent Residency applications.',
-    images: ['https://www.professionalresumefree.com/images/canada-pr-resume-guide-twitter.jpg'],
+    // REMOVED www
+    images: ['https://professionalresumefree.com/images/canada-pr-resume-guide-twitter.jpg'],
     creator: '@ProfResumeFree',
     site: '@ProfResumeFree'
   },
@@ -912,7 +916,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
     }
   };
 
-  // ===== STRUCTURED DATA =====
+  // ===== STRUCTURED DATA - REMOVED www =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -922,11 +926,13 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         "url": primaryUrl,
         "name": `Ultimate Canada PR Resume Guide ${currentYear} | Professional Resume Free`,
         "isPartOf": {
-          "@id": "https://www.professionalresumefree.com/#website"
+          // REMOVED www
+          "@id": "https://professionalresumefree.com/#website"
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/canada-pr-resume-guide-og.jpg"
+          // REMOVED www
+          "url": "https://professionalresumefree.com/images/canada-pr-resume-guide-og.jpg"
         },
         "datePublished": generatedDate,
         "dateModified": lastUpdatedDate,
@@ -949,7 +955,8 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            // REMOVED www
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
@@ -962,18 +969,21 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         "@type": "Article",
         "headline": `Ultimate Canada PR Resume Guide ${currentYear}`,
         "description": metadata.description,
-        "image": "https://www.professionalresumefree.com/images/canada-pr-resume-guide-og.jpg",
+        // REMOVED www
+        "image": "https://professionalresumefree.com/images/canada-pr-resume-guide-og.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          // REMOVED www
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            // REMOVED www
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": generatedDate,
@@ -1070,10 +1080,10 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         <meta httpEquiv="last-modified" content={lastUpdatedDate} />
         <meta name="build-timestamp" content={buildTimestamp.toString()} />
         
-        {/* ===== SINGLE CANONICAL TAG ===== */}
+        {/* ===== SINGLE CANONICAL TAG - REMOVED www ===== */}
         <link rel="canonical" href={metadata.canonical} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - REMOVED www ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
@@ -1091,7 +1101,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
           <meta key={i} property="article:tag" content={tag} />
         ))}
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - REMOVED www ===== */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />

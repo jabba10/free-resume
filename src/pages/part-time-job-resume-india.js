@@ -823,8 +823,8 @@ export default function PartTimeJobResumeIndiaPage() {
     wordCount: "3,200+ words"
   };
 
-  // SINGLE CANONICAL URL - Real URL
-  const canonicalUrl = `https://www.professionalresumefree.com/part-time-job-resume-india`;
+  // SINGLE CANONICAL URL - REMOVED www
+  const canonicalUrl = `https://professionalresumefree.com/part-time-job-resume-india`;
 
   // Internal links to cornerstone content (updated with valid paths)
   const internalLinks = [
@@ -887,7 +887,7 @@ export default function PartTimeJobResumeIndiaPage() {
     }
   ];
 
-  // Generate JSON-LD structured data
+  // Generate JSON-LD structured data - REMOVED www from all URLs
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -905,8 +905,8 @@ export default function PartTimeJobResumeIndiaPage() {
         "inLanguage": "en-IN",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free ATS-friendly resume builder and career resources"
         }
@@ -919,7 +919,7 @@ export default function PartTimeJobResumeIndiaPage() {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
@@ -938,7 +938,7 @@ export default function PartTimeJobResumeIndiaPage() {
         "author": {
           "@type": "Organization",
           "name": "Career Strategy Team",
-          "url": "https://www.professionalresumefree.com",
+          "url": "https://professionalresumefree.com",
           "description": "Certified career coaches with 12+ years specializing in part-time employment strategies across Indian industries"
         },
         "headline": articleData.title,
@@ -953,12 +953,14 @@ export default function PartTimeJobResumeIndiaPage() {
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            // REMOVED www
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "image": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/part-time-resume-guide-india.jpg",
+          // REMOVED www
+          "url": "https://professionalresumefree.com/images/part-time-resume-guide-india.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1023,18 +1025,18 @@ export default function PartTimeJobResumeIndiaPage() {
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* SINGLE CANONICAL URL - Real URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph Tags - Real URL */}
+        {/* Open Graph Tags - REMOVED www from image URLs */}
         <meta property="og:title" content="Part-Time Job Resume India 2026: Complete Guide & Templates" />
         <meta property="og:description" content={articleData.description} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/part-time-resume-guide-india-og.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/part-time-resume-guide-india-og.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Part-Time Job Resume India 2026 Guide" />
@@ -1051,11 +1053,11 @@ export default function PartTimeJobResumeIndiaPage() {
         <meta property="article:tag" content="resume writing" />
         <meta property="article:tag" content="student employment" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Part-Time Job Resume India 2026: Complete Guide & Templates" />
         <meta name="twitter:description" content={articleData.description} />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/part-time-resume-guide-twitter.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/part-time-resume-guide-twitter.jpg" />
         <meta name="twitter:image:alt" content="Part-Time Job Resume India 2026 Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -1500,7 +1502,7 @@ export default function PartTimeJobResumeIndiaPage() {
               </p>
               <ol className="action-list">
                 <li><strong>Day 1-2:</strong> Research your target industry and gather all relevant information</li>
-                <li><strong>Day 3:</strong> Download and customize a template from <Link href="/resume-templates" className="inline-link">www.professionalresumefree.com</Link></li>
+                <li><strong>Day 3:</strong> Download and customize a template from <Link href="/resume-templates" className="inline-link">professionalresumefree.com</Link></li>
                 <li><strong>Day 4:</strong> Draft your resume following this guide's structure</li>
                 <li><strong>Day 5:</strong> Optimize for ATS using the keyword strategies provided</li>
                 <li><strong>Day 6:</strong> Get professional feedback (use our free review service)</li>

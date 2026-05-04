@@ -657,12 +657,13 @@ export async function getStaticProps() {
       generatedAt,
       buildTimestamp
     },
-    revalidate: 3600, // ISR: Revalidate every hour
+    revalidate: 3600,
   };
 }
 
 const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, buildTimestamp }) => {
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-format-india";
+  // CANONICAL URL - NO www
+  const canonicalUrl = "https://professionalresumefree.com/resume-format-india";
 
   const stats = [
     {
@@ -760,6 +761,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
     india: "🇮🇳"
   };
 
+  // STRUCTURED DATA - ALL URLs WITHOUT www
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -774,7 +776,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
         inLanguage: 'en-IN',
         isPartOf: {
           '@type': 'WebSite',
-          '@id': 'https://www.professionalresumefree.com/#website'
+          '@id': 'https://professionalresumefree.com/#website'
         },
         breadcrumb: {
           '@id': `${canonicalUrl}#breadcrumb`
@@ -782,8 +784,8 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://www.professionalresumefree.com/#website',
-        url: 'https://www.professionalresumefree.com',
+        '@id': 'https://professionalresumefree.com/#website',
+        url: 'https://professionalresumefree.com',
         name: 'Professional Resume Free',
         description: 'Free resume templates and career resources',
         publisher: {
@@ -791,7 +793,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
           name: 'Professional Resume Free',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://www.professionalresumefree.com/logo.png'
+            url: 'https://professionalresumefree.com/logo.png'
           }
         }
       },
@@ -803,7 +805,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://www.professionalresumefree.com'
+            item: 'https://professionalresumefree.com'
           },
           {
             '@type': 'ListItem',
@@ -818,7 +820,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
         '@id': `${canonicalUrl}#article`,
         headline: `Indian Resume Format ${currentYear}: Complete Guide`,
         description: `Master Indian resume formats with our comprehensive ${currentYear} guide covering ATS optimization, industry standards, and professional templates.`,
-        image: 'https://www.professionalresumefree.com/resume-format-india.jpg',
+        image: 'https://professionalresumefree.com/resume-format-india.jpg',
         datePublished: `${currentYear}-01-15`,
         dateModified: formattedDate,
         author: {
@@ -830,7 +832,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
           name: 'Professional Resume Free',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://www.professionalresumefree.com/logo.png'
+            url: 'https://professionalresumefree.com/logo.png'
           }
         },
         mainEntityOfPage: canonicalUrl,
@@ -892,7 +894,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - Exactly 70 characters */}
+        {/* OPTIMIZED TITLE */}
         <title>Indian Resume Format 2026: Complete Guide (82% Preference)</title>
         
         {/* OPTIMIZED META DESCRIPTION */}
@@ -918,14 +920,14 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
         <meta name="last-modified" content={generatedAt} />
         <meta httpEquiv="last-modified" content={generatedAt} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
+        {/* CANONICAL URL - NO www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - NO www */}
         <meta property="og:title" content={`Indian Resume Format ${currentYear}: Complete Guide (82% Preference)`} />
         <meta property="og:description" content={`Master Indian resume formats with professional ${currentYear} templates and ATS optimization tips for the Indian job market.`} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/indian-resume-format-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/indian-resume-format-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={`Indian Resume Format Guide ${currentYear}`} />
@@ -936,11 +938,11 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
         <meta property="article:modified_time" content={formattedDate} />
         <meta property="article:section" content="Indian Jobs" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - NO www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Indian Resume Format ${currentYear}: Complete Guide`} />
         <meta name="twitter:description" content={`Professional ${currentYear} resume formats tailored for the Indian job market. Get hired faster with ATS-optimized templates.`} />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-indian-resume-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-indian-resume-guide.jpg" />
         <meta name="twitter:image:alt" content={`Indian Resume Format Guide ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -975,7 +977,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
           <span itemProp="last-updated">{formattedDate}</span>
         </div>
 
-        {/* Breadcrumb Navigation - Simplified */}
+        {/* Breadcrumb Navigation - NO www */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -1308,7 +1310,7 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
           </div>
         </section>
 
-        {/* Related Resources */}
+        {/* Related Resources - NO www */}
         <section className="section">
           <div className="container">
             <h2 className="section-title">Related Resources</h2>
@@ -1374,7 +1376,6 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
           borderRadius: '12px'
         }}>
           <p><strong>Data Freshness:</strong> Last updated {formattedDate} • Based on analysis of 3,200+ successful resumes • Build: {buildTimestamp}</p>
-          
         </div>
       </main>
     </>

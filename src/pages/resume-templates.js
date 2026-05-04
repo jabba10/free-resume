@@ -1272,7 +1272,7 @@ const ResumeTemplates = ({
     },
     {
       question: "Are these resume templates really free to download?",
-      answer: "Fresh start every time - that’s how we built our resume templates, totally free, nothing tucked away. Pick one, tweak it your way, then grab a copy in PDF format. No marks spoiling the page, no sign-up hoop to jump through. Built clean because fairness matters - landing a solid job begins with tools that actually work for you."
+      answer: "Fresh start every time - that's how we built our resume templates, totally free, nothing tucked away. Pick one, tweak it your way, then grab a copy in PDF format. No marks spoiling the page, no sign-up hoop to jump through. Built clean because fairness matters - landing a solid job begins with tools that actually work for you."
     },
     {
       question: "Which industries are covered by your ATS resume templates?",
@@ -1338,8 +1338,8 @@ const ResumeTemplates = ({
     "@graph": [
       {
         "@type": "CollectionPage",
-        "@id": "https://www.professionalresumefree.com/resume-templates",
-        "url": "https://www.professionalresumefree.com/resume-templates",
+        "@id": "https://professionalresumefree.com/resume-templates",
+        "url": "https://professionalresumefree.com/resume-templates",
         "name": "ATS-Friendly Resume Templates 2026 | Professional Templates",
         "description": "Browse ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles. Free downloads, no registration required.",
         "datePublished": "2024-01-01",
@@ -1348,9 +1348,9 @@ const ResumeTemplates = ({
         "numberOfItems": templateCategories.length,
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
+          "@id": "https://professionalresumefree.com/#website",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "about": {
           "@type": "Thing",
@@ -1364,13 +1364,13 @@ const ResumeTemplates = ({
             "position": index + 1,
             "name": template.title,
             "description": template.description,
-            "url": `https://www.professionalresumefree.com${template.link}`
+            "url": `https://professionalresumefree.com${template.link}`
           }))
         }
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/resume-templates#faq",
+        "@id": "https://professionalresumefree.com/resume-templates#faq",
         "mainEntity": faqs.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
@@ -1382,8 +1382,8 @@ const ResumeTemplates = ({
       },
       {
         "@type": "WebSite",
-        "@id": "https://www.professionalresumefree.com/#website",
-        "url": "https://www.professionalresumefree.com",
+        "@id": "https://professionalresumefree.com/#website",
+        "url": "https://professionalresumefree.com",
         "name": "Professional Resume Free",
         "description": "Free ATS-optimized resume templates and builder",
         "publisher": {
@@ -1391,7 +1391,7 @@ const ResumeTemplates = ({
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png",
+            "url": "https://professionalresumefree.com/logo.png",
             "width": 512,
             "height": 512
           }
@@ -1399,19 +1399,19 @@ const ResumeTemplates = ({
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://www.professionalresumefree.com/resume-templates#breadcrumb",
+        "@id": "https://professionalresumefree.com/resume-templates#breadcrumb",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "ATS Resume Templates 2026",
-            "item": "https://www.professionalresumefree.com/resume-templates"
+            "item": "https://professionalresumefree.com/resume-templates"
           }
         ]
       },
@@ -1459,7 +1459,7 @@ const ResumeTemplates = ({
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/resume-templates" />
+        <link rel="canonical" href="https://professionalresumefree.com/resume-templates" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="ATS-Friendly Resume Templates 2026 - Professional Templates" />
@@ -1471,10 +1471,10 @@ const ResumeTemplates = ({
         {/* Open Graph */}
         <meta property="og:title" content="ATS-Friendly Resume Templates 2026: Professional Templates" />
         <meta property="og:description" content="Browse ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/46-free-resume-templates.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/46-free-resume-templates.jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/resume-templates" />
+        <meta property="og:url" content="https://professionalresumefree.com/resume-templates" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -1484,7 +1484,7 @@ const ResumeTemplates = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ATS-Friendly Resume Templates 2026 | Free Downloads" />
         <meta name="twitter:description" content="Browse ATS-optimized resume templates for medical, tech, finance, government, manufacturing, retail, logistics & executive roles." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/46-free-resume-templates.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/46-free-resume-templates.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* Structured Data */}
@@ -1520,7 +1520,7 @@ const ResumeTemplates = ({
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <span className="breadcrumbText" itemProp="name">ATS Resume Templates 2026</span>
                 <meta itemProp="position" content="2" />
-                <meta itemProp="item" content="https://www.professionalresumefree.com/resume-templates" />
+                <meta itemProp="item" content="https://professionalresumefree.com/resume-templates" />
               </li>
             </ol>
           </div>
@@ -1823,13 +1823,13 @@ export async function getStaticProps() {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "ATS Resume Templates 2026",
-            "item": "https://www.professionalresumefree.com/resume-templates"
+            "item": "https://professionalresumefree.com/resume-templates"
           }
         ]
       },

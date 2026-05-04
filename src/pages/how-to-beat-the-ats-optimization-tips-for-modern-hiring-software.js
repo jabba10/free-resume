@@ -491,8 +491,8 @@ const ATSGuide = ({
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
   const currentYear = new Date().getFullYear();
 
-  // Single canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software";
+  // Single canonical URL - Updated without www
+  const canonicalUrl = "https://professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software";
 
   const atsSections = [
     {
@@ -749,10 +749,10 @@ const ATSGuide = ({
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         
-        {/* SINGLE CANONICAL URL - Updated */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags - Updated */}
+        {/* Hreflang Tags - Updated without www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="en-gb" />
@@ -760,11 +760,11 @@ const ATSGuide = ({
         <link rel="alternate" href={canonicalUrl} hreflang="en-au" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* Open Graph Tags - Updated */}
+        {/* Open Graph Tags - Updated without www */}
         <meta property="og:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring 2026" />
         <meta property="og:description" content="Master ATS optimization with our 2026 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/ats-optimization-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/ats-optimization-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="ATS Optimization Guide 2026 - Beat Applicant Tracking Systems" />
@@ -773,11 +773,11 @@ const ATSGuide = ({
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* Twitter Card Tags - Updated */}
+        {/* Twitter Card Tags - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring 2026" />
         <meta name="twitter:description" content="Master ATS optimization for 2026 hiring. Ensure your resume passes automated screening with our proven strategies." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/ats-optimization-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/ats-optimization-preview.jpg" />
         <meta name="twitter:image:alt" content="ATS Optimization Guide 2026" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -802,7 +802,7 @@ const ATSGuide = ({
         {/* Sitemap Link */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* JSON-LD Structured Data - Updated with new URL */}
+        {/* JSON-LD Structured Data - Updated without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -820,8 +820,8 @@ const ATSGuide = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Resume Free",
                     "description": "Free online resume builder for job seekers"
                   },
@@ -832,7 +832,7 @@ const ATSGuide = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -847,18 +847,18 @@ const ATSGuide = ({
                   "@type": "Article",
                   "headline": "How to Beat the ATS: Optimization Tips for Modern Hiring 2026",
                   "description": "A comprehensive guide to optimizing resumes for Applicant Tracking Systems in 2026, including keyword strategies, formatting tips, and industry-specific optimization techniques.",
-                  "image": "https://www.professionalresumefree.com/images/ats-optimization-preview.jpg",
+                  "image": "https://professionalresumefree.com/images/ats-optimization-preview.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",
@@ -977,7 +977,7 @@ const ATSGuide = ({
             
             <p>
               Master the art of <strong>ATS optimization for 2026</strong>. Learn proven strategies to ensure your resume 
-              passes automated screening and reaches hiring managers. Increase your interview chances by 
+              passes automated screening and reaches hiring managers. Increase your interview chances by
               <strong> up to 300%</strong> with our comprehensive guide based on analysis of 10,000+ resumes.
             </p>
 

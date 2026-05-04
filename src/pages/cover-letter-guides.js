@@ -832,7 +832,7 @@ const CoverLetterGuides = ({
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const displayDate = safeCurrentDate.split('T')[0];
-  const canonicalUrl = "https://www.professionalresumefree.com/cover-letter-guides";
+  const canonicalUrl = "https://professionalresumefree.com/cover-letter-guides";
   const currentYear = new Date().getFullYear();
   
   // FIXED: Define safeFaqDates and safeReviewDates
@@ -1285,7 +1285,7 @@ const CoverLetterGuides = ({
         <meta property="og:title" content="Cover Letter Guide 2026: 8 Templates & Expert Writing Tips (Free)" />
         <meta property="og:description" content="Master cover letter writing in 2026 with 8 proven templates and expert strategies. Get 3.2x more interviews with ATS-optimized formats." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/cover-letter-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/cover-letter-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Cover Letter Guide 2026 - Professional templates and writing tips" />
@@ -1305,7 +1305,7 @@ const CoverLetterGuides = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Cover Letter Guide 2026: 8 Templates & Expert Writing Tips (Free)" />
         <meta name="twitter:description" content="Master cover letter writing in 2026 with 8 proven templates and expert strategies. Get 3.2x more interviews." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-cover-letter-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-cover-letter-guide.jpg" />
         <meta name="twitter:image:alt" content="Cover Letter Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1337,7 +1337,7 @@ const CoverLetterGuides = ({
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -1345,8 +1345,8 @@ const CoverLetterGuides = ({
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free resume templates and career resources",
                   "publisher": {
@@ -1354,7 +1354,7 @@ const CoverLetterGuides = ({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -1366,7 +1366,7 @@ const CoverLetterGuides = ({
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -1380,7 +1380,7 @@ const CoverLetterGuides = ({
                   "@type": "Article",
                   "headline": "Cover Letter Writing Guide 2026: Complete Professional Guide",
                   "description": "A complete guide to creating professional cover letters for the 2026 job market",
-                  "image": "https://www.professionalresumefree.com/cover-letter-guide.jpg",
+                  "image": "https://professionalresumefree.com/cover-letter-guide.jpg",
                   "author": {
                     "@type": "Person",
                     "name": "Sahr Jabba",
@@ -1391,7 +1391,7 @@ const CoverLetterGuides = ({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",

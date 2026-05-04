@@ -503,14 +503,16 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/most-in-demand-resume-keywords-for-usa-job-seekers";
+  // Updated canonical URL - removed www
+  const canonicalUrl = "https://professionalresumefree.com/most-in-demand-resume-keywords-for-usa-job-seekers";
 
+  // Updated breadcrumbData - removed www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -525,7 +527,7 @@ export async function getStaticProps() {
     description: "Complete guide to the most in-demand resume keywords for USA job seekers in 2026. Learn which keywords employers search for, ATS optimization strategies, and industry-specific terms.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // AI citation data with sources
@@ -720,15 +722,15 @@ function MostInDemandKeywords({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE */}
+        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content="Most In-Demand Resume Keywords for USA Job Seekers 2026" />
         <meta property="og:description" content="Complete guide to the most in-demand resume keywords for USA job seekers. Learn which keywords employers search for and how to optimize your resume." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -741,11 +743,11 @@ function MostInDemandKeywords({
         <meta property="article:tag" content="ATS Optimization" />
         <meta property="article:tag" content="Job Search" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Most In-Demand Resume Keywords for USA Job Seekers 2026" />
         <meta name="twitter:description" content="Complete guide to resume keywords for USA job seekers. Learn which keywords employers search for." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -758,7 +760,7 @@ function MostInDemandKeywords({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - Updated without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -779,14 +781,14 @@ function MostInDemandKeywords({
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "url": "https://professionalresumefree.com/logo.png",
                       "width": 200,
                       "height": 60
                     }
@@ -815,7 +817,7 @@ function MostInDemandKeywords({
                   "isPartOf": {
                     "@type": "WebSite",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   }
                 },
                 {

@@ -678,6 +678,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-chef-cook-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -693,22 +696,22 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* CANONICAL URL - Only one canonical tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" />
+        {/* CANONICAL URL - Only one canonical tag - WITHOUT www */}
+        <link rel="canonical" href={canonicalUrl} />
         
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" hreflang="x-default" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Chef Resume Builder 2026: ATS-Friendly Culinary Templates" />
         <meta property="og:description" content="Create your professional chef resume for free in 2026. ATS-optimized culinary templates help chefs & cooks land kitchen interviews faster. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-chef-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-chef-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Chef Resume Builder - Create Professional Culinary Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -719,7 +722,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Chef Resume Builder 2026: ATS-Friendly Culinary Templates" />
         <meta name="twitter:description" content="Create your professional chef resume for free in 2026. ATS-optimized culinary templates help chefs & cooks land kitchen interviews faster. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-chef-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-chef-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Chef Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ChefResumeFree" />
         <meta name="twitter:creator" content="@ChefResumeFree" />
@@ -742,8 +745,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Chef Resume Builder 2026 - ATS Friendly Culinary Templates",
                   "description": "Create professional ATS-optimized chef resumes for free. Land interviews 3x faster with our culinary resume builder.",
                   "datePublished": "2026-01-01",
@@ -751,32 +754,32 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Chef Resume Free",
                     "description": "Free online resume builder for culinary professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Chef Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ChefResumeFree",
-                        "https://www.linkedin.com/company/chef-resume-free",
-                        "https://www.instagram.com/ChefResumeFree",
-                        "https://www.youtube.com/@ChefResumeFree"
+                        "https://linkedin.com/company/chef-resume-free",
+                        "https://instagram.com/ChefResumeFree",
+                        "https://youtube.com/@ChefResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-chef-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-chef-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -787,13 +790,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Chef Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -827,7 +830,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-chef-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-chef-resume-builder.jpg",
                     "applicationSuite": "Culinary Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -835,7 +838,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -848,7 +851,7 @@ const Resume = ({
                         "name": "Chef Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -867,32 +870,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Culinary Template",
                       "text": "Select from our ATS-optimized chef resume templates designed for executive chefs, sous chefs, pastry chefs, and kitchen staff.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-culinary-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-culinary-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Culinary Information",
                       "text": "Add your kitchen experience, culinary education, certifications, menu development, and specialized culinary skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-culinary-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-culinary-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our culinary-specific suggestions to improve industry keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Chef Resume",
                       "text": "Export your professional culinary resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-chef-cook-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -902,7 +905,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Chef Resume Free",
-                    "url": "https://www.professionalchefresume.com",
+                    "url": "https://professionalchefresume.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -978,7 +981,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly chef resume builder that helps culinary professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalchefresume.com/ats-friendly-chef-cook-resume-builder"
+                        "url": "https://professionalchefresume.com/ats-friendly-chef-cook-resume-builder"
                       }
                     }
                   }))
@@ -1586,7 +1589,7 @@ const Resume = ({
                           onChange={(e) => setCurrentCertification({ ...currentCertification, certificateNumber: e.target.value })} 
                           placeholder="123456789" 
                           className={styles.formInput} 
-                        />
+                      />
                       </label>
                       <label className={styles.formLabel}>
                         Expiry Date
@@ -2082,10 +2085,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalchefresume.com/' },
-    { name: 'Chef Resume Builder', item: 'https://www.professionalchefresume.com/ats-friendly-chef-cook-resume-builder' }
+    { name: 'Home', item: 'https://professionalchefresume.com/' },
+    { name: 'Chef Resume Builder', item: 'https://professionalchefresume.com/ats-friendly-chef-cook-resume-builder' }
   ];
 
   return {

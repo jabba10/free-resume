@@ -690,14 +690,14 @@ const BusinessAnalystResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder" />
         <meta property="og:title" content="Free Business Analyst Resume Builder: ATS Templates 2026" />
         <meta property="og:description" content="Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-business-analyst-resume-builder.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-business-analyst-resume-builder.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Business Analyst Resume Builder - Create Professional BA Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Business Analyst Resume Builder" />
         <meta property="og:locale" content="en_US" />
@@ -708,7 +708,7 @@ const BusinessAnalystResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Business Analyst Resume Builder: ATS Templates 2026" />
         <meta name="twitter:description" content="Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-business-analyst-resume-builder.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-business-analyst-resume-builder.jpg" />
         <meta name="twitter:image:alt" content="Free Business Analyst Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@BABuilder" />
         <meta name="twitter:creator" content="@BABuilder" />
@@ -731,8 +731,8 @@ const BusinessAnalystResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder",
                   "name": "Free Business Analyst Resume Builder: ATS Templates 2026",
                   "description": "Create your professional ATS-ready resume in 5 minutes. Free business analyst resume builder with templates for IT, finance & agile roles. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -740,31 +740,31 @@ const BusinessAnalystResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Business Analyst Resume Builder",
                     "description": "Free online resume builder for Business Analysts in the USA",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Business Analyst Resume Builder",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/BABuilder",
-                        "https://www.linkedin.com/company/business-analyst-resume-builder",
-                        "https://www.facebook.com/BusinessAnalystResumeBuilder"
+                        "https://linkedin.com/company/business-analyst-resume-builder",
+                        "https://facebook.com/BusinessAnalystResumeBuilder"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-business-analyst-resume-builder.jpg",
+                    "url": "https://professionalresumefree.com/images/og-business-analyst-resume-builder.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -775,13 +775,13 @@ const BusinessAnalystResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Business Analyst Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder"
                       }
                     ]
                   },
@@ -815,7 +815,7 @@ const BusinessAnalystResume = ({
                       "Free Forever for USA Job Seekers"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-business-analyst-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-business-analyst-resume-builder.jpg",
                     "applicationSuite": "Business Analyst Career Tools",
                     "countriesSupported": "United States",
                     "fileSize": "Web Application"
@@ -823,7 +823,7 @@ const BusinessAnalystResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -836,7 +836,7 @@ const BusinessAnalystResume = ({
                         "name": "Business Analyst Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder#webpage"
                   }))
                 },
                 {
@@ -855,32 +855,32 @@ const BusinessAnalystResume = ({
                       "position": 1,
                       "name": "Choose a Business Analyst Template",
                       "text": "Select from our ATS-optimized Business Analyst resume templates designed for IT, Finance, Agile, and Technical BA roles in the USA.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-business-analyst-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-business-analyst-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Professional Information",
                       "text": "Add your BA experience, projects, certifications, and analytical skills using our guided forms with USA industry terminology.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-ba-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-ba-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our business analyst-specific suggestions to improve industry keywords and formatting for ATS compatibility in the US market.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Business Analyst Resume",
                       "text": "Export your professional Business Analyst resume as PDF - completely free, no watermarks, optimized for US employers.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -890,7 +890,7 @@ const BusinessAnalystResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Business Analyst Resume Builder",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-BUILD",
@@ -966,7 +966,7 @@ const BusinessAnalystResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly business analyst resume builder that helps BA professionals in the USA create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder"
                       }
                     }
                   }))
@@ -2128,8 +2128,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Business Analyst Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-business-analyst-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Business Analyst Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-business-analyst-resume-builder' }
   ];
 
   return {

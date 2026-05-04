@@ -65,25 +65,6 @@ body {
 @media (min-width: 640px) {
   .container { padding: 0 24px; }
 }
-
-/* center all content */
-.hero,
-.section,
-.card,
-.grid-3,
-.grid-2,
-.faq-grid,
-.hub-grid,
-.breadcrumb ol,
-.article-meta,
-.stats,
-.hero-actions,
-.toc-list {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
 .hero {
   background: var(--background);
   padding: 40px 0;
@@ -394,21 +375,21 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/best-resume-examples-for-usa-engineering-jobs";
+  // SINGLE CANONICAL URL - REMOVED WWW
+  const canonicalUrl = "https://professionalresumefree.com/best-resume-examples-for-usa-engineering-jobs";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Templates",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -423,7 +404,7 @@ export async function getStaticProps() {
     description: "Discover the best resume examples for USA engineering jobs. Comprehensive guide with proven templates for civil, mechanical, electrical, chemical, and software engineers. Free 2026 examples with detailed analysis.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -615,7 +596,7 @@ export async function getStaticProps() {
     }
   ];
 
-  // Testimonials - fewer cards
+  // Testimonials
   const testimonials = [
     {
       quote: "Using these engineering resume examples, I completely rewrote my civil engineering resume. Within two weeks, I had interviews with three top firms including AECOM and Jacobs. I accepted an offer with a 22% salary increase and better project opportunities.",
@@ -687,7 +668,7 @@ function BestEngineeringResumeExamples({
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 72 characters */}
+        {/* OPTIMIZED TITLE */}
         <title>Best Resume Examples for USA Engineering Jobs 2026: Complete Expert Guide</title>
         
         {/* META DESCRIPTION */}
@@ -710,7 +691,7 @@ function BestEngineeringResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED WWW */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG TAGS */}
@@ -750,7 +731,7 @@ function BestEngineeringResumeExamples({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - REMOVED WWW */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -772,7 +753,7 @@ function BestEngineeringResumeExamples({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-01-23",
@@ -795,7 +776,7 @@ function BestEngineeringResumeExamples({
                   "@type": "FAQPage",
                   "@id": `${canonicalUrl}#faq`,
                   "mainEntity": [
-                    ...faqItems.map(item => ({
+                    ...faqItems.slice(0, 5).map(item => ({
                       "@type": "Question",
                       "name": item.question,
                       "acceptedAnswer": {
@@ -812,44 +793,6 @@ function BestEngineeringResumeExamples({
                       }
                     }))
                   ]
-                },
-                {
-                  "@type": "HowTo",
-                  "name": "How to Create an Engineering Resume",
-                  "description": "Step-by-step guide to creating an effective engineering resume with examples",
-                  "estimatedCost": {
-                    "@type": "MonetaryAmount",
-                    "value": "0",
-                    "currency": "USD"
-                  },
-                  "step": [
-                    {
-                      "@type": "HowToStep",
-                      "name": "Choose the Right Format",
-                      "text": "Select reverse-chronological format for most engineering roles. For entry-level, consider combination format highlighting education and projects."
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "name": "Craft a Technical Summary",
-                      "text": "Write a 2-4 line summary highlighting your engineering discipline, years of experience, key technical skills, and notable achievements."
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "name": "List Technical Skills",
-                      "text": "Group skills by category: Design Software, Analysis Tools, Programming Languages, Methodologies. Prioritize skills matching job descriptions."
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "name": "Detail Engineering Experience",
-                      "text": "Use bullet points with strong action verbs and quantifiable outcomes: project sizes, budget amounts, efficiency improvements, cost savings."
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "name": "Highlight Engineering Projects",
-                      "text": "Include 2-3 significant projects with your specific role, technologies used, and measurable results or innovations."
-                    }
-                  ],
-                  "totalTime": "PT30M"
                 }
               ]
             })
@@ -1065,7 +1008,7 @@ function BestEngineeringResumeExamples({
               </p>
               <div className="grid-2">
                 {achievementFormulas.map((item, index) => (
-                  <div key={index} className="font-card" style={{background: 'var(--card-bg)'}}>
+                  <div key={index} style={{background: 'var(--card-bg)', padding: '20px', borderRadius: '8px'}}>
                     <h3 style={{fontSize: '1.1rem', marginBottom: '8px', color: '#059669'}}>{item.formula}</h3>
                     <p style={{fontStyle: 'italic'}}>"{item.example}"</p>
                   </div>
@@ -1081,27 +1024,27 @@ function BestEngineeringResumeExamples({
             <div className="card">
               <h2 className="card-title">Essential Elements of Engineering Resumes</h2>
               <div className="grid-3">
-                <div className="font-card">
+                <div style={{background: 'var(--card-bg)', padding: '20px', borderRadius: '8px'}}>
                   <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>Technical Skills Section</h3>
                   <p>List engineering software (AutoCAD, SolidWorks, MATLAB, ANSYS), programming languages (Python, C++, VBA), design methodologies (DFM, FMEA, Six Sigma), and industry-specific tools. Group by category for easy scanning and prioritize skills matching job descriptions.</p>
                 </div>
-                <div className="font-card">
+                <div style={{background: 'var(--card-bg)', padding: '20px', borderRadius: '8px'}}>
                   <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>Project Experience</h3>
                   <p>Detail specific projects with your role, technologies used, and measurable outcomes. Include project scale (budget $2M, 500-acre development), timeline responsibility, and technical innovations. Show how you applied engineering principles to solve problems.</p>
                 </div>
-                <div className="font-card">
+                <div style={{background: 'var(--card-bg)', padding: '20px', borderRadius: '8px'}}>
                   <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>Certifications & Licenses</h3>
                   <p>Prominently display PE license (with state and number), EIT certification, LEED accreditation, Six Sigma (Green/Black Belt), PMP, and discipline-specific certifications. Include active memberships in professional organizations (ASCE, ASME, IEEE).</p>
                 </div>
-                <div className="font-card">
+                <div style={{background: 'var(--card-bg)', padding: '20px', borderRadius: '8px'}}>
                   <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>Education</h3>
                   <p>List ABET-accredited engineering degrees with graduation dates. Include GPA if 3.0+ for entry-level. Highlight relevant coursework, senior design projects, research, and academic honors. For experienced engineers, keep education brief.</p>
                 </div>
-                <div className="font-card">
+                <div style={{background: 'var(--card-bg)', padding: '20px', borderRadius: '8px'}}>
                   <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>Technical Publications</h3>
                   <p>Include conference papers, journal articles, technical reports, and presentations. Use standard citation format. This demonstrates thought leadership and technical communication skills valued in engineering.</p>
                 </div>
-                <div className="font-card">
+                <div style={{background: 'var(--card-bg)', padding: '20px', borderRadius: '8px'}}>
                   <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>Professional Affiliations</h3>
                   <p>List memberships in engineering societies (ASCE, ASME, IEEE, AIChE, etc.) and any committee leadership roles. This shows engagement with the broader engineering community.</p>
                 </div>
@@ -1177,7 +1120,7 @@ function BestEngineeringResumeExamples({
             <div className="card">
               <h2 className="section-title">Engineering Resume Frequently Asked Questions</h2>
               <div className="faq-grid">
-                {faqItems.map((item, index) => (
+                {faqItems.slice(0, 8).map((item, index) => (
                   <div key={index} className="faq-item">
                     <h3 className="faq-question">{item.question}</h3>
                     <p className="paragraph" style={{fontSize: '0.95rem'}}>{item.answer}</p>
@@ -1192,7 +1135,7 @@ function BestEngineeringResumeExamples({
         <section id="testimonials" className="section" style={{background: '#f9fafb'}} aria-labelledby="testimonials-heading">
           <div className="container">
             <h2 id="testimonials-heading" className="section-title">Real Success Stories from Engineers</h2>
-            <div className="grid-2" style={{maxWidth: '900px'}}>
+            <div className="grid-2" style={{maxWidth: '900px', margin: '0 auto'}}>
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="testimonial-card">
                   <p style={{fontStyle: 'italic', marginBottom: '16px', lineHeight: '1.6'}}>"{testimonial.quote}"</p>
@@ -1212,7 +1155,7 @@ function BestEngineeringResumeExamples({
           </div>
         </section>
 
-        {/* Resource Hub - only two working links */}
+        {/* Resource Hub */}
         <section id="resources" className="section" aria-labelledby="hub-heading">
           <div className="container">
             <h2 id="hub-heading" className="section-title">Continue Your Engineering Job Search</h2>
@@ -1284,8 +1227,6 @@ function BestEngineeringResumeExamples({
           <span itemProp="build-timestamp">{buildTimestamp}</span>
         </div>
       </main>
-
-     
     </>
   );
 }

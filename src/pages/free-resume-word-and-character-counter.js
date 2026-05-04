@@ -862,7 +862,7 @@ const criticalCSS = `
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
-const SITE_URL = 'https://www.professionalresumefree.com';
+const SITE_URL = 'https://professionalresumefree.com';
 
 // FAQ Data
 const FAQS = [
@@ -1006,7 +1006,7 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
             },
             "sameAs": [
               "https://twitter.com/ProResumeFree",
-              "https://www.linkedin.com/company/professional-resume-free"
+              "https://linkedin.com/company/professional-resume-free"
             ]
           }
         },
@@ -1313,13 +1313,13 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
       <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol>
           <li>
-            <a href="https://www.professionalresumefree.com" className="breadcrumb-link">
+            <a href="https://professionalresumefree.com" className="breadcrumb-link">
               Home
             </a>
           </li>
           <li className="breadcrumb-separator">›</li>
           <li>
-            <a href="https://www.professionalresumefree.com/resume-tools" className="breadcrumb-link">
+            <a href="https://professionalresumefree.com/resume-tools" className="breadcrumb-link">
               Resume Tools
             </a>
           </li>
@@ -1669,7 +1669,7 @@ Senior Developer | Tech Company | 2020-Present
           <div className="cta-card">
             <h2>Ready to Optimize Your Resume?</h2>
             <p>Use our free resume builder to create ATS-optimized resumes with perfect length and formatting.</p>
-            <a href="https://www.professionalresumefree.com/resume-templates" className="cta-button">
+            <a href="https://professionalresumefree.com/resume-templates" className="cta-button">
               Create Professional Resume
             </a>
           </div>

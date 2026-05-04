@@ -975,7 +975,7 @@ const ResumeFormattingChecker = () => {
   const textareaRef = useRef(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  // Schema Data - Comprehensive for SEO
+  // Schema Data - Comprehensive for SEO - UPDATED WITHOUT www
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -983,7 +983,7 @@ const ResumeFormattingChecker = () => {
         "@type": "WebApplication",
         "name": "Free Resume Formatting Checker & ATS Compatibility Analyzer 2024",
         "description": "Professional resume formatting analysis tool that checks ATS compatibility, spacing, structure, and formatting standards. Free formatting checker with detailed recommendations.",
-        "url": "https://www.professionalresumefree.com/free-resume-formatting-checker",
+        "url": "https://professionalresumefree.com/free-resume-formatting-checker",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -1002,7 +1002,7 @@ const ResumeFormattingChecker = () => {
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "featureList": [
           "ATS Compatibility Analysis",
@@ -1073,19 +1073,19 @@ const ResumeFormattingChecker = () => {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Free Tools",
-            "item": "https://www.professionalresumefree.com/free-tools"
+            "item": "https://professionalresumefree.com/free-tools"
           },
           {
             "@type": "ListItem",
             "position": 3,
             "name": "Resume Formatting Checker",
-            "item": "https://www.professionalresumefree.com/free-resume-formatting-checker"
+            "item": "https://professionalresumefree.com/free-resume-formatting-checker"
           }
         ]
       }
@@ -1399,13 +1399,13 @@ AWARDS & RECOGNITIONS
         <meta name="chatgpt-fts:keywords" content="resume formatting, ATS checker, resume analysis, formatting tool 2024" />
         <meta name="chatgpt-fts:last-updated" content={new Date().toISOString().split('T')[0]} />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-formatting-checker" />
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/free-resume-formatting-checker" />
         
-        {/* Open Graph */}
+        {/* Open Graph - UPDATED without www */}
         <meta property="og:title" content="Free Resume Formatting Checker 2024 - ATS Compatibility Analyzer" />
         <meta property="og:description" content="Professional resume formatting analysis tool. Check ATS compatibility, spacing, structure instantly. Free tool with detailed recommendations." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-formatting-checker" />
+        <meta property="og:url" content="https://professionalresumefree.com/free-resume-formatting-checker" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={new Date().toISOString()} />

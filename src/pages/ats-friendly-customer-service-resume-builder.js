@@ -652,6 +652,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-customer-service-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -667,16 +670,16 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" />
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
+        <link rel="canonical" href={canonicalUrl} />
         
         <meta property="og:title" content="Free Customer Service Resume Builder 2026 | ATS Global Templates" />
         <meta property="og:description" content="Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-customer-service-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-customer-service-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Customer Service Resume Builder - Create Professional Global Customer Service Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Customer Service Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -687,7 +690,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Customer Service Resume Builder 2026 | ATS Global Templates" />
         <meta name="twitter:description" content="Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-customer-service-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-customer-service-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Customer Service Resume Builder with Global ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -710,8 +713,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Customer Service Resume Builder 2026 | ATS Global Templates",
                   "description": "Create a professional customer service resume for free in 2026. ATS-optimized global templates for CSR, support agents. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -719,32 +722,32 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Customer Service Resume Free",
                     "description": "Free online resume builder for customer service professionals worldwide",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Customer Service Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
+                        "https://linkedin.com/company/professional-resume-free",
+                        "https://facebook.com/ProfessionalResumeFree",
+                        "https://youtube.com/@ProfessionalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-customer-service-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-customer-service-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -755,13 +758,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Customer Service Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -795,7 +798,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-customer-service-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-customer-service-resume-builder.jpg",
                     "applicationSuite": "Customer Service Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -803,7 +806,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -816,7 +819,7 @@ const Resume = ({
                         "name": "Customer Service Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -835,32 +838,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Customer Service Template",
                       "text": "Select from our ATS-optimized customer service resume templates designed for global roles: call center agents, customer success managers, technical support, and customer experience specialists.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-customer-service-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-customer-service-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Customer Service Information",
                       "text": "Add your customer service experience, education, certifications, languages, and key achievements using our guided forms optimized for global hiring.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-customer-service-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-customer-service-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize for Global Employers",
                       "text": "Use our customer service-specific suggestions to highlight multilingual abilities, global customer service metrics, and technical skills for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Customer Service Resume",
                       "text": "Export your professional customer service resume as PDF, Word, or plain text - completely free, no watermarks, ready for global applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -870,7 +873,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Customer Service Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -946,7 +949,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly customer service resume builder that helps customer service professionals create professional resumes and land interviews faster worldwide.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2056,10 +2059,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Customer Service Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-customer-service-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Customer Service Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-customer-service-resume-builder' }
   ];
 
   return {

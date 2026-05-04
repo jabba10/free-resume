@@ -852,20 +852,22 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/high-traffic-resume-templates-americans-search-for";
+  // UPDATED: Removed www from canonicalUrl
+  const canonicalUrl = "https://professionalresumefree.com/high-traffic-resume-templates-americans-search-for";
 
+  // UPDATED: Removed www from breadcrumb items
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Templates",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -875,12 +877,13 @@ export async function getStaticProps() {
     }
   ];
 
+  // UPDATED: Removed www from meta image URL
   const meta = {
     title: "High Traffic Resume Templates Americans Search For Most (2026 Data)",
     description: "Discover the most searched resume templates by Americans. Data-driven guide to the formats, industries, and styles job seekers use to get hired. Includes ATS-friendly options.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/resume-templates-guide.jpeg",
+    image: "https://professionalresumefree.com/resume-templates-guide.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1064,7 +1067,7 @@ function HighTrafficResumeTemplates({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG TAGS */}
@@ -1072,7 +1075,7 @@ function HighTrafficResumeTemplates({
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
@@ -1085,7 +1088,7 @@ function HighTrafficResumeTemplates({
         <meta property="article:published_time" content="2026-03-12" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
@@ -1126,7 +1129,7 @@ function HighTrafficResumeTemplates({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-12",
@@ -1833,39 +1836,39 @@ function HighTrafficResumeTemplates({
                       <th>Annual Search Volume</th>
                       <th>Primary Users</th>
                       <th>Success Rate</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
                      <tr>
                        <td><strong>Free (Microsoft Word)</strong></td>
                        <td>4.5M+</td>
-                       <td>All job seekers, especially entry-level and mid-career</td>
-                       <td>High (proven templates)</td>
-                     </tr>
+                        <td>All job seekers, especially entry-level and mid-career</td>
+                        <td>High (proven templates)</td>
+                      </tr>
                      <tr>
                        <td><strong>Free (Google Docs)</strong></td>
                        <td>3.7M+</td>
-                       <td>Students, tech workers, collaborative teams</td>
-                       <td>High</td>
-                     </tr>
+                        <td>Students, tech workers, collaborative teams</td>
+                        <td>High</td>
+                      </tr>
                      <tr>
                        <td><strong>Free Resume Builders</strong></td>
                        <td>2.8M+</td>
-                       <td>Job seekers wanting guided process</td>
-                       <td>Medium-High</td>
-                     </tr>
+                        <td>Job seekers wanting guided process</td>
+                        <td>Medium-High</td>
+                      </tr>
                      <tr>
                        <td><strong>Paid (Etsy, Creative Market)</strong></td>
                        <td>850k+</td>
-                       <td>Creative professionals, executives wanting unique designs</td>
-                       <td>Variable (depends on ATS compatibility)</td>
-                     </tr>
+                        <td>Creative professionals, executives wanting unique designs</td>
+                        <td>Variable (depends on ATS compatibility)</td>
+                      </tr>
                      <tr>
                        <td><strong>Premium Resume Sites</strong></td>
                        <td>350k+</td>
-                       <td>Executives, career changers seeking professional help</td>
-                       <td>Medium-High</td>
-                     </tr>
+                        <td>Executives, career changers seeking professional help</td>
+                        <td>Medium-High</td>
+                      </tr>
                   </tbody>
                 </table>
               </div>

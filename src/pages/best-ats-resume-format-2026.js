@@ -966,19 +966,19 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/best-ats-resume-format-2026" />
+        {/* ===== SINGLE CANONICAL URL (www REMOVED) ===== */}
+        <link rel="canonical" href="https://professionalresumefree.com/best-ats-resume-format-2026" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="Best ATS Resume Format 2026: Complete Optimization Guide" />
         <meta name="chatgpt-fts:description" content="Complete guide to ATS-friendly resume formats for 2026. Compare chronological, functional, and hybrid formats with success rates and ATS compatibility scores." />
         <meta name="chatgpt-fts:last-updated" content={lastUpdated} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH (www REMOVED) ===== */}
         <meta property="og:title" content="Best ATS Resume Format 2026: Complete Guide | Professional Resume Free" />
         <meta property="og:description" content="Definitive guide to ATS resume formats for 2026. Templates, formatting rules, and optimization strategies that pass every Applicant Tracking System." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/best-ats-resume-format-2026" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-ats-resume-format.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/best-ats-resume-format-2026" />
+        <meta property="og:image" content="https://professionalresumefree.com/og-ats-resume-format.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
@@ -987,69 +987,69 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <meta property="article:modified_time" content={lastModified} />
         <meta property="article:author" content="Professional Resume Free" />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD (www REMOVED) ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best ATS Resume Format 2026: Complete Guide" />
         <meta name="twitter:description" content="The ultimate guide to ATS-friendly resume formats that work in 2026. Compare formats, get templates, and optimize for success." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/og-ats-resume-format.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/og-ats-resume-format.jpg" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ===== PERFORMANCE ===== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA (www REMOVED) ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
               {
                 "@type": "Article",
-                "@id": "https://www.professionalresumefree.com/best-ats-resume-format-2026/#article",
+                "@id": "https://professionalresumefree.com/best-ats-resume-format-2026/#article",
                 "headline": "Best ATS Resume Format 2026: Complete Optimization Guide",
                 "description": "Comprehensive guide to ATS-optimized resume formats and templates for 2026 job applications",
-                "image": "https://www.professionalresumefree.com/og-ats-resume-format.jpg",
+                "image": "https://professionalresumefree.com/og-ats-resume-format.jpg",
                 "author": {
                   "@type": "Organization",
                   "name": "Professional Resume Free",
-                  "url": "https://www.professionalresumefree.com"
+                  "url": "https://professionalresumefree.com"
                 },
                 "publisher": {
                   "@type": "Organization",
                   "name": "Professional Resume Free",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/logo.png"
+                    "url": "https://professionalresumefree.com/logo.png"
                   }
                 },
                 "datePublished": "2026-01-01",
                 "dateModified": lastModified,
                 "mainEntityOfPage": {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/best-ats-resume-format-2026"
+                  "@id": "https://professionalresumefree.com/best-ats-resume-format-2026"
                 }
               },
               {
                 "@type": "BreadcrumbList",
-                "@id": "https://www.professionalresumefree.com/best-ats-resume-format-2026/#breadcrumb",
+                "@id": "https://professionalresumefree.com/best-ats-resume-format-2026/#breadcrumb",
                 "itemListElement": [
                   {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://www.professionalresumefree.com"
+                    "item": "https://professionalresumefree.com"
                   },
                   {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Best ATS Resume Format 2026",
-                    "item": "https://www.professionalresumefree.com/best-ats-resume-format-2026"
+                    "item": "https://professionalresumefree.com/best-ats-resume-format-2026"
                   }
                 ]
               },
               {
                 "@type": "FAQPage",
-                "@id": "https://www.professionalresumefree.com/best-ats-resume-format-2026/#faq",
+                "@id": "https://professionalresumefree.com/best-ats-resume-format-2026/#faq",
                 "mainEntity": [
                   {
                     "@type": "Question",
@@ -1667,7 +1667,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
             </div>
           </section>
 
-          {/* Internal Links - All Broken Links Removed */}
+          {/* Internal Links - All Broken Links Removed (www REMOVED) */}
           <section style={styles.internalLinks}>
             <h2 style={{textAlign: 'center'}}>Related Articles to Complete Your ATS Knowledge</h2>
             <div style={styles.linkGrid}>

@@ -674,18 +674,19 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
+  // REMOVED www from breadcrumb data
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Functional Resume Templates",
-      "item": "https://www.professionalresumefree.com/functional-resume-templates"
+      "item": "https://professionalresumefree.com/functional-resume-templates"
     }
   ];
 
@@ -714,11 +715,12 @@ export default function FunctionalResumeTemplates({ seoData }) {
   const safeLastModified = seoData?.lastModified || new Date().toISOString();
   const safeReviewDates = seoData?.reviewDates || Array(5).fill(safeCurrentDate);
   const breadcrumbData = seoData?.breadcrumbData || [
-    { position: 1, name: "Home", item: "https://www.professionalresumefree.com" },
-    { position: 2, name: "Functional Resume Templates", item: "https://www.professionalresumefree.com/functional-resume-templates" }
+    { position: 1, name: "Home", item: "https://professionalresumefree.com" },
+    { position: 2, name: "Functional Resume Templates", item: "https://professionalresumefree.com/functional-resume-templates" }
   ];
 
-  const canonicalUrl = "https://www.professionalresumefree.com/functional-resume-templates";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/functional-resume-templates";
 
   // Optimized title - exactly 70 characters
   const optimizedTitle = "Functional Resume Templates 2026: Free Guide & ATS Examples";
@@ -926,7 +928,7 @@ export default function FunctionalResumeTemplates({ seoData }) {
     }
   ];
 
-  // Enhanced JSON-LD Structured Data
+  // Enhanced JSON-LD Structured Data - REMOVED www
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -938,7 +940,7 @@ export default function FunctionalResumeTemplates({ seoData }) {
         "description": "Complete guide to functional resume templates with 5 downloadable examples for career changers, employment gaps & skill-focused professionals. Expert strategies included for 2026.",
         "inLanguage": "en-US",
         "isPartOf": {
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "breadcrumb": {
           "@id": `${canonicalUrl}#breadcrumb`
@@ -948,8 +950,8 @@ export default function FunctionalResumeTemplates({ seoData }) {
       },
       {
         "@type": "WebSite",
-        "@id": "https://www.professionalresumefree.com/#website",
-        "url": "https://www.professionalresumefree.com",
+        "@id": "https://professionalresumefree.com/#website",
+        "url": "https://professionalresumefree.com",
         "name": "Professional Resume Free",
         "description": "Free ATS-Optimized Resume Templates and Tools",
         "publisher": {
@@ -1104,19 +1106,19 @@ export default function FunctionalResumeTemplates({ seoData }) {
         <meta name="last-modified" content={safeLastModified} />
         <meta httpEquiv="last-modified" content={safeLastModified} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - REMOVED www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URL */}
         <meta property="og:title" content="Functional Resume Templates 2026: Free Guide & ATS Examples" />
         <meta property="og:description" content="5 free functional resume templates for career changers & employment gaps. ATS-optimized. No sign-up." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="Functional Resume Templates Guide" />
@@ -1125,11 +1127,11 @@ export default function FunctionalResumeTemplates({ seoData }) {
         <meta property="og:updated_time" content={safeLastModified} />
         <meta property="og:locale" content="en_US" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Functional Resume Templates 2026: Free Guide" />
         <meta name="twitter:description" content="Free functional resume templates for career changers. ATS-optimized. No sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Functional Resume Templates" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1168,7 +1170,8 @@ export default function FunctionalResumeTemplates({ seoData }) {
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com" itemProp="item">
                   <span itemProp="name">Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />

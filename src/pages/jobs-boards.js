@@ -781,7 +781,8 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   
   const currentYear = new Date().getFullYear();
-  const canonicalUrl = "https://www.professionalresumefree.com/jobs-boards";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/jobs-boards";
 
   // Optimized title - exactly 70 characters
   const optimizedTitle = "Best Job Boards 2026: Remote, Hybrid & International Jobs Guide";
@@ -1092,14 +1093,14 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URL */}
         <meta property="og:title" content="Best Job Boards 2026: Remote, Hybrid & International Jobs Guide" />
         <meta property="og:description" content="Discover 50+ best job search sites for remote work, hybrid jobs & international positions with visa sponsorship. Expert reviews." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="Best Job Boards 2026 Guide" />
@@ -1108,11 +1109,11 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URL */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Job Boards 2026: Remote, Hybrid & International Jobs" />
         <meta name="twitter:description" content="Expert guide to 50+ top job boards for remote work, hybrid positions & international careers." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Best Job Boards 2026 Guide" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         

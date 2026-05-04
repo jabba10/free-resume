@@ -708,16 +708,16 @@ const Resume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" />
+        {/* SINGLE CANONICAL URL - UPDATED (www removed) */}
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder" />
         
         <meta property="og:title" content="Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates" />
         <meta property="og:description" content="Create your professional biotech resume for free in 2026. ATS-optimized templates help scientists & researchers land pharma interviews. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-biotech-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-biotech-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Biotech Resume Builder - Create Professional Biotechnology Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -728,7 +728,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates" />
         <meta name="twitter:description" content="Create your professional biotech resume for free in 2026. ATS-optimized templates help scientists & researchers land pharma interviews. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-biotech-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-biotech-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Biotech Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@BiotechResumeFree" />
         <meta name="twitter:creator" content="@BiotechResumeFree" />
@@ -752,8 +752,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder",
                   "name": "Free Biotech Resume Builder 2026 - ATS Friendly Biotechnology Templates",
                   "description": "Create professional ATS-optimized biotech resumes for free. Land pharma interviews faster with our specialized resume builder.",
                   "datePublished": "2026-01-01",
@@ -761,18 +761,18 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Biotech Resume Free",
                     "description": "Free online resume builder for biotechnology professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Biotech Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -785,7 +785,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-biotech-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-biotech-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -796,13 +796,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Biotech Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder"
                       }
                     ]
                   },
@@ -836,7 +836,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-biotech-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-biotech-resume-builder.jpg",
                     "applicationSuite": "Biotech Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -844,7 +844,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -857,7 +857,7 @@ const Resume = ({
                         "name": "Biotech Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder#webpage"
                   }))
                 },
                 {
@@ -876,24 +876,24 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Biotech Template",
                       "text": "Select from our ATS-optimized biotechnology resume templates designed for scientists, researchers, biotech engineers, and pharmaceutical professionals.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-biotech-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-biotech-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Scientific Information",
                       "text": "Add your research experience, technical skills, publications, certifications, and biotech industry experience using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-scientific-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-scientific-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our biotech-specific suggestions to improve scientific keywords, technical skills, and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -901,7 +901,7 @@ const Resume = ({
                       "name": "Download Your Biotech Resume",
                       "text": "Export your professional biotechnology resume as PDF - completely free, no watermarks, optimized for pharma and biotech recruiters.",
                       "url": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -911,7 +911,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Biotech Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "",
@@ -987,7 +987,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly biotech resume builder that helps biotech professionals create professional resumes and land industry interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder"
                       }
                     }
                   }))
@@ -2219,10 +2219,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - UPDATED (www removed)
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Biotech Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-biotechnology-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Biotech Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-biotechnology-resume-builder' }
   ];
 
   return {

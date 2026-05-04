@@ -1105,7 +1105,8 @@ const criticalCSS = `
 
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
-const SITE_URL = 'https://www.professionalresumefree.com';
+// REMOVED www from SITE_URL
+const SITE_URL = 'https://professionalresumefree.com';
 
 // SEO-optimized keywords
 const SEO_KEYWORDS = [
@@ -1159,32 +1160,32 @@ const FAQS = [
   }
 ];
 
-// How-to steps
+// How-to steps - REMOVED www from image URLs
 const HOW_TO_STEPS = [
   {
     name: "Paste Job Description",
     text: "Copy and paste the complete job description into the first text area.",
-    image: "https://www.professionalresumefree.com/images/step1-job-desc.jpg"
+    image: "https://professionalresumefree.com/images/step1-job-desc.jpg"
   },
   {
     name: "Paste Your Resume",
     text: "Copy and paste your resume text into the second text area.",
-    image: "https://www.professionalresumefree.com/images/step2-resume.jpg"
+    image: "https://professionalresumefree.com/images/step2-resume.jpg"
   },
   {
     name: "Instant Keyword Analysis",
     text: "Our algorithm instantly analyzes keyword matches, missing terms, and optimization opportunities.",
-    image: "https://www.professionalresumefree.com/images/step3-analysis.jpg"
+    image: "https://professionalresumefree.com/images/step3-analysis.jpg"
   },
   {
     name: "Review Match Rate & Suggestions",
     text: "Get your keyword match percentage and actionable improvement suggestions.",
-    image: "https://www.professionalresumefree.com/images/step4-results.jpg"
+    image: "https://professionalresumefree.com/images/step4-results.jpg"
   },
   {
     name: "Optimize & Apply",
     text: "Update your resume with missing keywords and apply with confidence.",
-    image: "https://www.professionalresumefree.com/images/step5-apply.jpg"
+    image: "https://professionalresumefree.com/images/step5-apply.jpg"
   }
 ];
 
@@ -1563,21 +1564,21 @@ CERTIFICATIONS
         <meta name="revisit-after" content="7 days" />
         <meta name="build-timestamp" content={buildTimestamp} />
         
-        {/* Canonical & Hreflang - Only one canonical tag */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="en" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-US" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-GB" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-CA" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-AU" />
-        <link rel="alternate" href="https://www.professionalresumefree.com/free-resume-keyword-matcher" hreflang="x-default" />
+        {/* Canonical & Hreflang - Only one canonical tag - REMOVED www */}
+        <link rel="canonical" href="https://professionalresumefree.com/free-resume-keyword-matcher" />
+        <link rel="alternate" href="https://professionalresumefree.com/free-resume-keyword-matcher" hreflang="en" />
+        <link rel="alternate" href="https://professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-US" />
+        <link rel="alternate" href="https://professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-GB" />
+        <link rel="alternate" href="https://professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-CA" />
+        <link rel="alternate" href="https://professionalresumefree.com/free-resume-keyword-matcher" hreflang="en-AU" />
+        <link rel="alternate" href="https://professionalresumefree.com/free-resume-keyword-matcher" hreflang="x-default" />
         
-        {/* Open Graph */}
+        {/* Open Graph - REMOVED www from image URLs */}
         <meta property="og:title" content={`Free Resume Keyword Matcher - ATS Keyword Analysis Tool ${CURRENT_YEAR}`} />
         <meta property="og:description" content="Optimize your resume for ATS systems. Match job description keywords with your resume instantly. 100% free, privacy-first analysis." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-keyword-matcher" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-keyword-matcher-2026.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/free-resume-keyword-matcher" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-keyword-matcher-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Keyword Matcher - ATS Optimization Tool" />
@@ -1585,11 +1586,11 @@ CERTIFICATIONS
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeSeoData.lastModifiedDate} />
         
-        {/* Twitter Card */}
+        {/* Twitter Card - REMOVED www from image URLs */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Keyword Matcher - ATS Keyword Analysis" />
         <meta name="twitter:description" content="Match your resume keywords with job descriptions instantly. Get optimization suggestions for better ATS compatibility." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-keyword-matcher-2026.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-keyword-matcher-2026.jpg" />
         <meta name="twitter:image:alt" content="Resume Keyword Matching Tool" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -1609,7 +1610,7 @@ CERTIFICATIONS
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Structured Data - FIXED with itemReviewed fields */}
+        {/* Structured Data - FIXED with itemReviewed fields - REMOVED www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1618,8 +1619,8 @@ CERTIFICATIONS
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/free-resume-keyword-matcher#webpage",
-                  "url": "https://www.professionalresumefree.com/free-resume-keyword-matcher",
+                  "@id": "https://professionalresumefree.com/free-resume-keyword-matcher#webpage",
+                  "url": "https://professionalresumefree.com/free-resume-keyword-matcher",
                   "name": "Free Resume Keyword Matcher - ATS Keyword Analysis Tool",
                   "description": "Optimize your resume for ATS systems with our free keyword matcher. Analyze job description vs resume keywords instantly.",
                   "datePublished": "2024-01-01",
@@ -1627,18 +1628,18 @@ CERTIFICATIONS
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Resume Free",
                     "description": "Free resume tools for job seekers",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -1657,25 +1658,25 @@ CERTIFICATIONS
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Free Resume Tools",
-                        "item": "https://www.professionalresumefree.com/free-resume-tools"
+                        "item": "https://professionalresumefree.com/free-resume-tools"
                       },
                       {
                         "@type": "ListItem",
                         "position": 3,
                         "name": "Keyword Matcher",
-                        "item": "https://www.professionalresumefree.com/free-resume-keyword-matcher"
+                        "item": "https://professionalresumefree.com/free-resume-keyword-matcher"
                       }
                     ]
                   },
                   "mainEntity": {
                     "@type": "SoftwareApplication",
-                    "@id": "https://www.professionalresumefree.com/free-resume-keyword-matcher#software",
+                    "@id": "https://professionalresumefree.com/free-resume-keyword-matcher#software",
                     "name": "Resume Keyword Matcher",
                     "applicationCategory": "BusinessApplication",
                     "operatingSystem": "Any",
@@ -1716,7 +1717,7 @@ CERTIFICATIONS
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/free-resume-keyword-matcher#faqpage",
+                  "@id": "https://professionalresumefree.com/free-resume-keyword-matcher#faqpage",
                   "mainEntity": FAQS.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -1746,7 +1747,7 @@ CERTIFICATIONS
                     "position": index + 1,
                     "name": step.name,
                     "text": step.text,
-                    "url": `https://www.professionalresumefree.com/free-resume-keyword-matcher#step-${index + 1}`,
+                    "url": `https://professionalresumefree.com/free-resume-keyword-matcher#step-${index + 1}`,
                     "image": step.image
                   }))
                 },
@@ -1800,7 +1801,8 @@ CERTIFICATIONS
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <ol>
             <li>
-              <a href="/" className="breadcrumb-link">
+              {/* REMOVED www from href */}
+              <a href="https://professionalresumefree.com" className="breadcrumb-link">
                 <span className="breadcrumb-text">Home</span>
               </a>
             </li>
@@ -2201,7 +2203,7 @@ CERTIFICATIONS
           </div>
         </section>
 
-        {/* Resources Section - Links Preserved */}
+        {/* Resources Section - Links Preserved - REMOVED www */}
         <section className="resources-section" aria-labelledby="resources-title">
           <h2 className="section-title" id="resources-title">More Free Resume Tools & Resources</h2>
           <div className="resources-grid">

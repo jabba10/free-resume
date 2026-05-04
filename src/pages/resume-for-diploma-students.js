@@ -714,14 +714,15 @@ export const getStaticProps = async () => {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-diploma-students";
+  // Updated canonical URL - removed www
+  const canonicalUrl = "https://professionalresumefree.com/resume-for-diploma-students";
 
   const meta = {
     title: "Resume for Diploma Students 2026: Free Guide & Templates",
     description: "Complete guide for diploma students to create ATS-friendly resumes. Includes templates, examples, and expert tips for technician and junior engineer roles.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -806,12 +807,13 @@ export const getStaticProps = async () => {
     }
   ];
 
+  // Updated breadcrumbData - removed www
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -821,6 +823,7 @@ export const getStaticProps = async () => {
     }
   ];
 
+  // Updated structuredData - removed www
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -838,7 +841,7 @@ export const getStaticProps = async () => {
           "name": meta.siteName,
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png",
+            "url": "https://professionalresumefree.com/logo.png",
           },
         },
         "mainEntityOfPage": {
@@ -998,16 +1001,16 @@ const ResumeForDiplomaStudentsPage = ({ meta, faqItems, structuredData, seoData,
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content={optimizedTitle} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content={meta.siteName} />
-        <meta property="og:image" content={meta.image} />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="Resume for Diploma Students Guide 2026" />
@@ -1015,11 +1018,11 @@ const ResumeForDiplomaStudentsPage = ({ meta, faqItems, structuredData, seoData,
         <meta property="article:published_time" content="2024-01-01" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={optimizedTitle} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Resume for Diploma Students Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
@@ -1097,7 +1100,7 @@ const ResumeForDiplomaStudentsPage = ({ meta, faqItems, structuredData, seoData,
 
             <div className="hero-buttons">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Build Your Free Diploma Resume <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1333,7 +1336,7 @@ const ResumeForDiplomaStudentsPage = ({ meta, faqItems, structuredData, seoData,
               <p className="paragraph">
                 Finally, place your content into a clean, single-column template with consistent fonts, spacing, and headings. If you want to skip the formatting struggle, you can use{" "}
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="inline-link"
                 >
                   Professional Resume Free's free resume builder
@@ -1559,7 +1562,7 @@ const ResumeForDiplomaStudentsPage = ({ meta, faqItems, structuredData, seoData,
               </p>
               <div className="hero-buttons">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Start Your Free Diploma Resume Now <FiArrowRight style={{marginLeft: '8px'}} />

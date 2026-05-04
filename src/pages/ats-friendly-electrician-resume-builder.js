@@ -721,6 +721,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-electrician-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -735,14 +738,14 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Free Electrician Resume Builder: ATS Electrical Templates 2026" />
         <meta property="og:description" content="Create professional ATS-optimized electrician resumes for free. Land interviews 3x faster with our electrical resume builder. Trusted by 2M+ electricians worldwide." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-electrician-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-electrician-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Electrician Resume Builder - Create Professional Electrical Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Electrician Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -753,7 +756,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Electrician Resume Builder: ATS Electrical Templates 2026" />
         <meta name="twitter:description" content="Create professional ATS-optimized electrician resumes for free. Land interviews 3x faster. Trusted by 2M+ electricians worldwide." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-electrician-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-electrician-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Electrician Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -776,8 +779,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Electrician Resume Builder - ATS Friendly Electrical Templates 2026",
                   "description": "Create professional ATS-optimized electrician resumes for free. Land interviews 3x faster with our electrical resume builder.",
                   "datePublished": "2026-01-01",
@@ -785,32 +788,32 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Electrician Resume Free",
                     "description": "Free online resume builder for electricians worldwide",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Electrician Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
+                        "https://linkedin.com/company/professional-resume-free",
+                        "https://facebook.com/ProfessionalResumeFree",
+                        "https://youtube.com/@ProfessionalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-electrician-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-electrician-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -821,13 +824,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Electrician Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -861,7 +864,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-electrician-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-electrician-resume-builder.jpg",
                     "applicationSuite": "Electrical Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -869,7 +872,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -882,7 +885,7 @@ const Resume = ({
                         "name": "Electrician Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -901,32 +904,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose an Electrical Template",
                       "text": "Select from our ATS-optimized electrician resume templates designed for industrial, commercial, residential, and specialized electrical work.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-electrician-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-electrician-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Electrical Information",
                       "text": "Add your electrical experience, education, licenses, certifications, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-electrical-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-electrical-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our electrical-specific suggestions to improve industry keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Electrician Resume",
                       "text": "Export your professional electrician resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -936,7 +939,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Electrician Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1012,7 +1015,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly electrician resume builder that helps electrical professionals create professional resumes and land jobs faster globally.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2250,10 +2253,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Electrician Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-electrician-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Electrician Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-electrician-resume-builder' }
   ];
 
   return {

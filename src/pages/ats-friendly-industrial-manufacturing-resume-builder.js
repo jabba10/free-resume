@@ -784,6 +784,9 @@ const IndustrialResume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -799,14 +802,14 @@ const IndustrialResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Free Industrial Resume Builder 2026 | Manufacturing Templates" />
         <meta property="og:description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-industrial-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-industrial-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Industrial Resume Builder - Create Professional Manufacturing & Engineering Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Industrial Resume Builder" />
         <meta property="og:locale" content="en_US" />
@@ -817,7 +820,7 @@ const IndustrialResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Industrial Resume Builder 2026 | Manufacturing Templates" />
         <meta name="twitter:description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-industrial-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-industrial-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Industrial Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@IndustrialResume" />
         <meta name="twitter:creator" content="@IndustrialResume" />
@@ -840,8 +843,8 @@ const IndustrialResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Industrial Resume Builder 2026 | Manufacturing Templates",
                   "description": "Create professional ATS-optimized resumes for industrial, manufacturing, engineering, and technical jobs. Industry-specific templates with technical skill formatting.",
                   "datePublished": "2026-01-01",
@@ -849,30 +852,30 @@ const IndustrialResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Industrial Resume Builder",
                     "description": "Free online resume builder for industrial and manufacturing professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Industrial Resume Builder",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/IndustrialResume",
-                        "https://www.linkedin.com/company/industrial-resume-builder"
+                        "https://linkedin.com/company/industrial-resume-builder"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-industrial-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-industrial-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -883,13 +886,13 @@ const IndustrialResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Industrial Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -923,7 +926,7 @@ const IndustrialResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-industrial-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-industrial-resume-builder.jpg",
                     "applicationSuite": "Industrial Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -931,7 +934,7 @@ const IndustrialResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -944,7 +947,7 @@ const IndustrialResume = ({
                         "name": "Industrial Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -963,32 +966,32 @@ const IndustrialResume = ({
                       "position": 1,
                       "name": "Choose an Industrial Template",
                       "text": "Select from our ATS-optimized industrial resume templates designed for manufacturing, engineering, maintenance, and technical positions.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-industrial-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-industrial-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Industrial Experience",
                       "text": "Add your manufacturing experience, engineering projects, technical skills, certifications, and industrial achievements using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-industrial-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-industrial-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize for Your Industry",
                       "text": "Use our industrial-specific suggestions for technical skills, engineering certifications, safety records, and manufacturing metrics.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Industrial Resume",
                       "text": "Export your professional industrial or manufacturing resume as PDF - completely free, no watermarks, ATS ready.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 }
@@ -2427,10 +2430,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Industrial Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Industrial Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder' }
   ];
 
   return {

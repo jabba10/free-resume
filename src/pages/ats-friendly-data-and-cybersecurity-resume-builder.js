@@ -701,6 +701,9 @@ const Resume = ({
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder";
+
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
@@ -715,14 +718,14 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros" />
         <meta property="og:description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-cybersecurity-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-cybersecurity-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Cybersecurity Resume Builder - Create Professional Technical Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Cybersecurity Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -733,7 +736,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros" />
         <meta name="twitter:description" content="Create a professional cybersecurity resume for free. ATS-friendly technical templates trusted by 2M+ security pros. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-cybersecurity-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-cybersecurity-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Cybersecurity Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@TechResumeFree" />
         <meta name="twitter:creator" content="@TechResumeFree" />
@@ -756,8 +759,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder/#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Cybersecurity Resume Builder 2026 | Technical Templates for Pros",
                   "description": "Create professional ATS-optimized cybersecurity resumes for free. Land interviews 3x faster with our technical resume builder.",
                   "datePublished": "2026-01-01",
@@ -765,31 +768,31 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Cybersecurity Resume Free",
                     "description": "Free online resume builder for cybersecurity and data professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Cybersecurity Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/TechResumeFree",
-                        "https://www.linkedin.com/company/technical-resume-free",
-                        "https://www.github.com/TechnicalResumeFree"
+                        "https://linkedin.com/company/technical-resume-free",
+                        "https://github.com/TechnicalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-cybersecurity-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-cybersecurity-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -800,13 +803,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Cybersecurity Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -840,7 +843,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-cybersecurity-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-cybersecurity-resume-builder.jpg",
                     "applicationSuite": "Technical Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -848,7 +851,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -861,7 +864,7 @@ const Resume = ({
                         "name": "Cybersecurity Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -880,32 +883,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Technical Template",
                       "text": "Select from our ATS-optimized cybersecurity resume templates designed for security analysts, data scientists, and technical professionals.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-technical-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-technical-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Technical Information",
                       "text": "Add your security experience, education, certifications, tools, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-technical-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-technical-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our cybersecurity-specific suggestions to improve technical keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Cybersecurity Resume",
                       "text": "Export your professional cybersecurity resume as PDF - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -915,7 +918,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Cybersecurity Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-6789",
@@ -991,7 +994,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly cybersecurity resume builder that helps technical professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2188,10 +2191,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Cybersecurity Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Cybersecurity Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-data-and-cybersecurity-resume-builder' }
   ];
 
   return {

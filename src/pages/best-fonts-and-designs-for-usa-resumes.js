@@ -372,20 +372,20 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/best-fonts-and-designs-for-usa-resumes";
+  const canonicalUrl = "https://professionalresumefree.com/best-fonts-and-designs-for-usa-resumes";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Templates",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -400,7 +400,7 @@ export async function getStaticProps() {
     description: "Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules, and proven strategies to pass screening and impress recruiters. Free 2026 guide with examples.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   const longTailKeywords = [
@@ -645,10 +645,10 @@ function BestFontsAndDesignsPage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL (www REMOVED) */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH (www REMOVED) */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
@@ -661,7 +661,7 @@ function BestFontsAndDesignsPage({
         <meta property="article:published_time" content="2026-01-23" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD (www REMOVED) */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Fonts and Designs for USA Resumes 2026" />
         <meta name="twitter:description" content="ATS friendly fonts and designs to land more interviews. Free 2026 guide with expert tips." />
@@ -680,7 +680,7 @@ function BestFontsAndDesignsPage({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA (www REMOVED) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -702,7 +702,7 @@ function BestFontsAndDesignsPage({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-01-23",
@@ -964,15 +964,15 @@ function BestFontsAndDesignsPage({
                 This table compares the top fonts based on ATS compatibility, readability, and best use cases. Use it to select the perfect font for your industry and experience level.
               </p>
               <div className="table-wrap">
-                 <table>
+                <table>
                   <thead>
-                     <tr>
+                    <tr>
                       <th>Font</th>
                       <th>Category</th>
                       <th>ATS Score</th>
                       <th>Readability</th>
                       <th>Best For</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
                     {fontComparisonData.map((item, index) => (
@@ -985,7 +985,7 @@ function BestFontsAndDesignsPage({
                       </tr>
                     ))}
                   </tbody>
-                 </table>
+                </table>
               </div>
               <p className="helper-text">ATS scores based on testing with 8 major ATS platforms in 2026.</p>
             </div>
@@ -1042,47 +1042,47 @@ function BestFontsAndDesignsPage({
               </div>
 
               <div className="table-wrap" style={{marginTop: '30px'}}>
-                 <table>
+                <table>
                   <thead>
-                     <tr>
+                    <tr>
                       <th>Element</th>
                       <th>Weak design</th>
                       <th>Strong design</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
-                     <tr>
+                    <tr>
                       <td>Font</td>
                       <td>Brush Script or Comic Sans</td>
                       <td className="text-success">Arial, Calibri, or Garamond</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>Layout</td>
                       <td>2 columns with sidebar</td>
                       <td className="text-success">Single column, clear hierarchy</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>Contact</td>
                       <td>In footer (often missed by ATS)</td>
                       <td className="text-success">Top of page, one line</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>File format</td>
                       <td>Word file (.docx) may shift formatting</td>
                       <td className="text-success">PDF preserves formatting</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>Headings</td>
                       <td>Creative titles like "Where I've Worked"</td>
                       <td className="text-success">Standard: "Work Experience"</td>
-                     </tr>
-                     <tr>
+                    </tr>
+                    <tr>
                       <td>Margins</td>
                       <td>0.2 inches or inconsistent</td>
                       <td className="text-success">0.5 to 1 inch, consistent</td>
-                     </tr>
+                    </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
               <p className="helper-text">Based on 2026 ATS compatibility tests with major platforms.</p>
             </div>

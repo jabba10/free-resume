@@ -857,7 +857,7 @@ const criticalCSS = `
 // Current year for dynamic content
 const CURRENT_YEAR = new Date().getFullYear();
 const CURRENT_DATE = new Date().toISOString().split('T')[0];
-const SITE_URL = 'https://www.professionalresumefree.com';
+const SITE_URL = 'https://professionalresumefree.com';
 
 // FAQ Data
 const FAQS = [

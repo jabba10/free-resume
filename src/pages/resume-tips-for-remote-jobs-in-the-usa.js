@@ -1,4 +1,4 @@
-       import Head from 'next/head';
+import Head from 'next/head';
 import Link from 'next/link';
 import { 
   FiHome, 
@@ -908,20 +908,20 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-tips-for-remote-jobs-in-the-usa";
+  const canonicalUrl = "https://professionalresumefree.com/resume-tips-for-remote-jobs-in-the-usa";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Career Resources",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -936,7 +936,7 @@ export async function getStaticProps() {
     description: "Expert resume tips for landing remote jobs in the USA. Learn how to highlight remote skills, optimize for distributed teams, and stand out to hiring managers.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/remote-jobs-guide.jpeg",
+    image: "https://professionalresumefree.com/remote-jobs-guide.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -1177,7 +1177,7 @@ function ResumeTipsRemoteJobs({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-13",

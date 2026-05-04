@@ -1588,8 +1588,8 @@ const InterviewTips = ({
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/interview-tips/#webpage",
-        "url": "https://www.professionalresumefree.com/interview-tips/",
+        "@id": "https://professionalresumefree.com/interview-tips/#webpage",
+        "url": "https://professionalresumefree.com/interview-tips/",
         "name": "Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder",
         "description": "Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates.",
         "datePublished": "2026-01-01",
@@ -1597,18 +1597,18 @@ const InterviewTips = ({
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free online resume builder for job seekers",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             },
@@ -1622,7 +1622,7 @@ const InterviewTips = ({
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/og-interview-tips-preview.jpg",
+          "url": "https://professionalresumefree.com/images/og-interview-tips-preview.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1633,13 +1633,13 @@ const InterviewTips = ({
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://www.professionalresumefree.com"
+              "item": "https://professionalresumefree.com"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Interview Tips",
-              "item": "https://www.professionalresumefree.com/interview-tips"
+              "item": "https://professionalresumefree.com/interview-tips"
             }
           ]
         }
@@ -1733,11 +1733,11 @@ const InterviewTips = ({
         "@type": "HowTo",
         "name": "How to Create an ATS-Optimized Resume and Prepare for Job Interviews - 2026 Guide",
         "description": "A comprehensive step-by-step guide to building a professional resume that passes applicant tracking systems and preparing for job interviews to land your dream job.",
-        "image": "https://www.professionalresumefree.com/images/resume-tips-preview.jpg",
+        "image": "https://professionalresumefree.com/images/resume-tips-preview.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "datePublished": "2026-01-01",
         "dateModified": safeLastModifiedDate,
@@ -1789,7 +1789,7 @@ const InterviewTips = ({
       // ===== FIXED: Single FAQPage (removed duplicate) =====
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/interview-tips/#faq",
+        "@id": "https://professionalresumefree.com/interview-tips/#faq",
         "mainEntity": faqs.map((faq) => ({
           "@type": "Question",
           "name": faq.question,
@@ -1823,7 +1823,7 @@ const InterviewTips = ({
         <meta name="revisit-after" content="1 days" />
         
         {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/interview-tips/" />
+        <link rel="canonical" href="https://professionalresumefree.com/interview-tips/" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
@@ -1835,10 +1835,10 @@ const InterviewTips = ({
         {/* Open Graph */}
         <meta property="og:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta property="og:description" content="Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-interview-tips-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-interview-tips-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/interview-tips/" />
+        <meta property="og:url" content="https://professionalresumefree.com/interview-tips/" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -1848,7 +1848,7 @@ const InterviewTips = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
         <meta name="twitter:description" content="Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with templates." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-interview-tips-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-interview-tips-preview.jpg" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* Structured Data */}

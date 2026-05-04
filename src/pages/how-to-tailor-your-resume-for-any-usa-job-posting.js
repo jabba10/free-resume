@@ -514,14 +514,16 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-tailor-your-resume-for-any-usa-job-posting";
+  // UPDATED: Removed www from canonicalUrl
+  const canonicalUrl = "https://professionalresumefree.com/how-to-tailor-your-resume-for-any-usa-job-posting";
 
+  // UPDATED: Removed www from breadcrumb items
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -531,12 +533,13 @@ export async function getStaticProps() {
     }
   ];
 
+  // UPDATED: Removed www from meta image URL
   const meta = {
     title: "How to Tailor Your Resume for Any USA Job Posting 2026",
     description: "Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application and increase interview callbacks by up to 3x.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // AI citation data with sources
@@ -732,6 +735,8 @@ function HowToTailorResume({
   tailoringSteps,
   tailoringMistakes
 }) {
+  const siteUrl = 'https://professionalresumefree.com';
+
   return (
     <>
       <Head>
@@ -761,15 +766,15 @@ function HowToTailorResume({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="How to Tailor Your Resume for Any USA Job Posting 2026" />
         <meta property="og:description" content="Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -782,11 +787,11 @@ function HowToTailorResume({
         <meta property="article:tag" content="Job Search" />
         <meta property="article:tag" content="Interview Tips" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Tailor Your Resume for Any USA Job Posting 2026" />
         <meta name="twitter:description" content="Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -799,7 +804,7 @@ function HowToTailorResume({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
+        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -820,14 +825,14 @@ function HowToTailorResume({
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": siteUrl
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "url": `${siteUrl}/logo.png`,
                       "width": 200,
                       "height": 60
                     }
@@ -856,7 +861,7 @@ function HowToTailorResume({
                   "isPartOf": {
                     "@type": "WebSite",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": siteUrl
                   }
                 },
                 {
@@ -1185,7 +1190,7 @@ function HowToTailorResume({
                       <th>Mistake</th>
                       <th>Why It Hurts</th>
                       <th>Better Approach</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
                     {tailoringMistakes.map((item, index) => (

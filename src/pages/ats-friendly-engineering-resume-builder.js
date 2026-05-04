@@ -562,9 +562,9 @@ const Resume = ({
     return (
       <div className={styles.engineeringTemplate}>
         <header className={styles.resumeHeader}>
-          <h1 className={styles.name} style={{ fontSize: `${fontSizes.name}pt` }}>
+          <h2 className={styles.name} style={{ fontSize: `${fontSizes.name}pt` }}>
             {formData.fullName || 'Your Name'}
-          </h1>
+          </h2>
           {formData.title && (
             <p className={styles.title} style={{ fontSize: `${fontSizes.degree}pt` }}>{formData.title}</p>
           )}
@@ -584,18 +584,18 @@ const Resume = ({
 
         {hasSummary && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL SUMMARY</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL SUMMARY</h3>
             <p className={styles.summaryText} style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p>
           </section>
         )}
 
         {hasExperience && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL EXPERIENCE</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL EXPERIENCE</h3>
             {formData.experience.map((exp, i) => (
               <div key={i} className={styles.experienceItem}>
                 <div className={styles.experienceHeader}>
-                  <h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h3>
+                  <h4 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h4>
                   <p className={styles.company} style={{ fontSize: `${fontSizes.company}pt` }}>{exp.company} | {exp.startDate} – {exp.endDate || 'Present'}</p>
                   {exp.technologies && <p className={styles.technologies} style={{ fontSize: `${fontSizes.skillText}pt` }}><strong>Technologies:</strong> {exp.technologies}</p>}
                 </div>
@@ -609,7 +609,7 @@ const Resume = ({
 
         {hasTechnicalSkills && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL SKILLS</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>TECHNICAL SKILLS</h3>
             {formData.technicalSkills.map((skill, i) => (
               <div key={i} className={styles.skillCategory}>
                 <strong style={{ fontSize: `${fontSizes.skillText}pt` }}>{skill.category}:</strong>
@@ -621,10 +621,10 @@ const Resume = ({
 
         {hasProjects && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>ENGINEERING PROJECTS</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>ENGINEERING PROJECTS</h3>
             {formData.projects.map((project, i) => (
               <div key={i} className={styles.projectItem}>
-                <h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{project.name}</h3>
+                <h4 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{project.name}</h4>
                 {project.technologies && <p style={{ fontSize: `${fontSizes.company}pt` }}><strong>Technologies:</strong> {project.technologies}</p>}
                 <ul className={styles.bulletList}>
                   {project.description.split('\n').filter(line => line.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}
@@ -636,12 +636,12 @@ const Resume = ({
 
         {hasEducation && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION</h3>
             {formData.education.map((edu, i) => (
               <div key={i} className={styles.educationItem}>
-                <h3 style={{ fontSize: `${fontSizes.degree}pt` }}>
+                <h4 style={{ fontSize: `${fontSizes.degree}pt` }}>
                   {edu.degree}{edu.major && `, ${edu.major}`}
-                </h3>
+                </h4>
                 <p className={styles.institution} style={{ fontSize: `${fontSizes.institution}pt` }}>
                   {edu.institution} | 
                   <span className={styles.institutionDate} style={{ fontSize: `${fontSizes.institutionDate}pt` }}>
@@ -655,7 +655,7 @@ const Resume = ({
 
         {hasCertifications && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CERTIFICATIONS</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CERTIFICATIONS</h3>
             {formData.certifications.map((cert, i) => (
               <div key={i} className={styles.certificationItem} style={{ fontSize: `${fontSizes.certificationText}pt` }}>
                 <strong>{cert.name}</strong>
@@ -669,7 +669,7 @@ const Resume = ({
 
         {hasPublications && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PUBLICATIONS</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PUBLICATIONS</h3>
             {formData.publications.map((pub, i) => (
               <div key={i} className={styles.publicationItem} style={{ fontSize: `${fontSizes.regularText}pt` }}>
                 "{pub.title}" – {pub.conference}{pub.year && `, ${pub.year}`}
@@ -680,7 +680,7 @@ const Resume = ({
 
         {hasLanguages && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LANGUAGES</h2>
+            <h3 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LANGUAGES</h3>
             <ul className={styles.bulletList}>
               {formData.languages.map((l, i) => (
                 <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>
@@ -693,6 +693,9 @@ const Resume = ({
       </div>
     );
   };
+
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-engineering-resume-builder";
 
   return (
     <div className={styles.resumeBuilder} lang="en-US">
@@ -708,14 +711,14 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
         <meta property="og:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-engineering-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-engineering-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Engineering Resume Builder - Create Professional Technical Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Engineering Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -726,7 +729,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
         <meta name="twitter:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-engineering-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-engineering-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Engineering Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -749,8 +752,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder",
+                  "@id": `${canonicalUrl}#webpage`,
+                  "url": canonicalUrl,
                   "name": "Free Engineering Resume Builder 2026 | ATS Technical Templates",
                   "description": "Create professional ATS-optimized engineering resumes for free. Land interviews 3x faster with our engineering resume builder.",
                   "datePublished": "2026-01-01",
@@ -758,32 +761,32 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Engineering Resume Free",
                     "description": "Free online resume builder for engineering professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Engineering Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
+                        "https://linkedin.com/company/professional-resume-free",
+                        "https://facebook.com/ProfessionalResumeFree",
+                        "https://youtube.com/@ProfessionalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-engineering-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-engineering-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -794,13 +797,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Engineering Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder"
+                        "item": canonicalUrl
                       }
                     ]
                   },
@@ -834,7 +837,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-engineering-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-engineering-resume-builder.jpg",
                     "applicationSuite": "Engineering Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -842,7 +845,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#faqpage",
+                  "@id": `${canonicalUrl}#faqpage`,
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -855,7 +858,7 @@ const Resume = ({
                         "name": "Engineering Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#webpage"
+                    "mainEntityOfPage": `${canonicalUrl}#webpage`
                   }))
                 },
                 {
@@ -874,32 +877,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose an Engineering Template",
                       "text": "Select from our ATS-optimized engineering resume templates designed for software, mechanical, electrical, civil engineers and technical staff.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-engineering-template.jpg"
+                      "url": `${canonicalUrl}#templates`,
+                      "image": "https://professionalresumefree.com/images/step1-engineering-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Technical Information",
                       "text": "Add your engineering experience, education, certifications, projects, and technical skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-technical-info.jpg"
+                      "url": `${canonicalUrl}#editor`,
+                      "image": "https://professionalresumefree.com/images/step2-technical-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our engineering-specific suggestions to improve technical keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": `${canonicalUrl}#optimize`,
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Engineering Resume",
                       "text": "Export your professional engineering resume as PDF, Word, or plain text - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": `${canonicalUrl}#download`,
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -909,7 +912,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Engineering Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -985,7 +988,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly engineering resume builder that helps engineering professionals create professional resumes and land technical interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder"
+                        "url": canonicalUrl
                       }
                     }
                   }))
@@ -2173,10 +2176,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Engineering Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-engineering-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Engineering Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-engineering-resume-builder' }
   ];
 
   return {

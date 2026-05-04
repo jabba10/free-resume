@@ -897,20 +897,20 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/top-skills-employers-in-the-usa-want-on-resumes";
+  const canonicalUrl = "https://professionalresumefree.com/top-skills-employers-in-the-usa-want-on-resumes";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Resources",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -925,7 +925,7 @@ export async function getStaticProps() {
     description: "Data-driven analysis of the most in-demand skills by US employers. Based on labor market research, job posting analytics, and hiring manager surveys for 2026.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/skills-research.jpg",
+    image: "https://professionalresumefree.com/skills-research.jpg",
   };
 
   const longTailKeywords = [
@@ -1134,7 +1134,7 @@ function TopSkillsPage({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/ats.jpeg"
+                      "url": "https://professionalresumefree.com/ats.jpeg"
                     }
                   },
                   "datePublished": "2026-01-15",

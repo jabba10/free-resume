@@ -863,20 +863,20 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
-  const canonicalUrl = "https://www.professionalresumefree.com/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026";
+  const canonicalUrl = "https://professionalresumefree.com/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Resume Resources",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -891,7 +891,7 @@ export async function getStaticProps() {
     description: "Comprehensive analysis: Why skills-first resumes outperform chronological formats in 2026. Expert insights, ATS data, and implementation strategies from career industry professionals.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Enhanced long-tail keywords for GEO
@@ -1080,7 +1080,7 @@ function SkillsFirstResumePage({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/ats.jpeg"
+                      "url": "https://professionalresumefree.com/ats.jpeg"
                     }
                   },
                   "datePublished": "2026-01-15",

@@ -804,7 +804,8 @@ export default function ProfessionalResumeSummary({ seoData }) {
   const currentYear = new Date().getFullYear();
   const { currentDate, lastModifiedDate, buildTimestamp } = seoData || {};
   const displayDate = currentDate || new Date().toISOString().split('T')[0];
-  const canonicalUrl = "https://www.professionalresumefree.com/professional-resume-summary";
+  // SINGLE CANONICAL URL - www removed
+  const canonicalUrl = "https://professionalresumefree.com/professional-resume-summary";
 
   const faqs = [
     {
@@ -1006,19 +1007,19 @@ export default function ProfessionalResumeSummary({ seoData }) {
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - UPDATED */}
+        {/* SINGLE CANONICAL URL - www removed */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG - UPDATED */}
+        {/* HREFLANG - www removed */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH - UPDATED */}
+        {/* OPEN GRAPH - www removed */}
         <meta property="og:title" content="Resume Summary 2026: Complete Guide (60% More Views)" />
         <meta property="og:description" content="Master professional resume summaries with our 2026 guide. Expert templates, industry examples, and proven formulas to get 40% more interviews." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/resume-summary-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/resume-summary-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Summary Guide 2026 - Professional summary writing tips" />
@@ -1034,11 +1035,11 @@ export default function ProfessionalResumeSummary({ seoData }) {
         <meta property="article:section" content="Resume Writing" />
         <meta property="article:tag" content="resume summary, professional summary, career summary, resume writing" />
         
-        {/* TWITTER CARD - UPDATED */}
+        {/* TWITTER CARD - www removed */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Summary 2026: Complete Guide (60% More Views)" />
         <meta name="twitter:description" content="Master professional resume summaries with our 2026 guide. Expert templates and proven formulas to get more interviews." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-resume-summary-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-resume-summary-guide.jpg" />
         <meta name="twitter:image:alt" content="Resume Summary Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1053,7 +1054,7 @@ export default function ProfessionalResumeSummary({ seoData }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD - UPDATED */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD - www removed */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1070,7 +1071,7 @@ export default function ProfessionalResumeSummary({ seoData }) {
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -1078,8 +1079,8 @@ export default function ProfessionalResumeSummary({ seoData }) {
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free resume templates and career resources",
                   "publisher": {
@@ -1087,7 +1088,7 @@ export default function ProfessionalResumeSummary({ seoData }) {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -1099,7 +1100,7 @@ export default function ProfessionalResumeSummary({ seoData }) {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -1113,18 +1114,18 @@ export default function ProfessionalResumeSummary({ seoData }) {
                   "@type": "Article",
                   "headline": "Resume Summary 2026: Complete Expert Guide",
                   "description": "Complete guide to writing professional resume summaries for the 2026 job market",
-                  "image": "https://www.professionalresumefree.com/resume-summary-guide.jpg",
+                  "image": "https://professionalresumefree.com/resume-summary-guide.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free Experts",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",

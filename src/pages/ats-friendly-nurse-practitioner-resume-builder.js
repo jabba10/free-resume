@@ -735,14 +735,14 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" />
         <meta property="og:title" content="Free Nurse Practitioner Resume Builder: NP CV Templates 2026" />
         <meta property="og:description" content="Create your ATS-optimized nurse practitioner resume for free in 2026. Professional NP templates trusted by 50,000+ FNPs, AGNPs & PNPs." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-np-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-np-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Nurse Practitioner Resume Builder - Create Professional NP Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Nurse Practitioner Resume Builder" />
         <meta property="og:locale" content="en_US" />
@@ -753,7 +753,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Nurse Practitioner Resume Builder: NP CV Templates 2026" />
         <meta name="twitter:description" content="Create your ATS-optimized nurse practitioner resume for free in 2026. Professional NP templates trusted by 50,000+ FNPs, AGNPs & PNPs." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-np-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-np-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Nurse Practitioner Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@NPResumeBuilder" />
         <meta name="twitter:creator" content="@NPResumeBuilder" />
@@ -776,8 +776,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder",
                   "name": "Free Nurse Practitioner Resume Builder - ATS Friendly NP Templates 2026",
                   "description": "Create professional ATS-optimized nurse practitioner resumes for free. Land interviews 3x faster with our NP resume builder.",
                   "datePublished": "2026-01-01",
@@ -785,18 +785,18 @@ const Resume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Nurse Practitioner Resume Builder",
                     "description": "Free online resume builder for nurse practitioners and advanced practice nurses",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Nurse Practitioner Resume Builder",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -810,7 +810,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-np-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-np-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -821,13 +821,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Nurse Practitioner Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder"
                       }
                     ]
                   },
@@ -862,7 +862,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-np-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-np-resume-builder.jpg",
                     "applicationSuite": "Nurse Practitioner Career Tools",
                     "countriesSupported": "USA",
                     "fileSize": "Web Application"
@@ -870,7 +870,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -883,7 +883,7 @@ const Resume = ({
                         "name": "Nurse Practitioner Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#webpage"
                   }))
                 },
                 {
@@ -902,32 +902,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose a Nurse Practitioner Template",
                       "text": "Select from our ATS-optimized NP resume templates designed for FNPs, AGACNPs, PNPs, WHNPs, PMHNPs, and all NP specialties.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-np-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-np-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Advanced Practice Information",
                       "text": "Add your NP clinical experience, education, certifications, prescriptive authority, and specialized skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-np-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-np-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our NP-specific suggestions to improve advanced practice keywords and formatting for ATS compatibility.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your NP Resume",
                       "text": "Export your professional nurse practitioner resume as PDF - completely free, no watermarks.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -937,7 +937,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Nurse Practitioner Resume Builder",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1013,7 +1013,7 @@ const Resume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly nurse practitioner resume builder that helps advanced practice nurses create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder"
                       }
                     }
                   }))
@@ -2393,8 +2393,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Nurse Practitioner Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Nurse Practitioner Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-nurse-practitioner-resume-builder' }
   ];
 
   return {

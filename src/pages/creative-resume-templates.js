@@ -385,7 +385,8 @@ export const metadata = {
     authors: ['Resume Design Experts'],
     images: [
       {
-        url: 'https://www.professionalresumefree.com/images/og-creative-resume-templates.jpg',
+        // REMOVED www
+        url: 'https://professionalresumefree.com/images/og-creative-resume-templates.jpg',
         width: 1200,
         height: 630,
         alt: 'Creative Resume Templates 2026 - Professional Resume Free'
@@ -396,7 +397,8 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Creative Resume Templates: Ultimate 2026 Guide',
     description: 'Professional creative resume templates for standout applications',
-    images: ['https://www.professionalresumefree.com/images/twitter-creative-resume-templates.jpg'],
+    // REMOVED www
+    images: ['https://professionalresumefree.com/images/twitter-creative-resume-templates.jpg'],
     creator: '@ProResumeFree',
     site: '@ProResumeFree',
   },
@@ -412,12 +414,13 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: 'https://www.professionalresumefree.com/creative-resume-templates',
+    // REMOVED www from canonical URL
+    canonical: 'https://professionalresumefree.com/creative-resume-templates',
     languages: {
-      'en-US': 'https://www.professionalresumefree.com/creative-resume-templates',
-      'en-GB': 'https://www.professionalresumefree.com/creative-resume-templates',
-      'en-CA': 'https://www.professionalresumefree.com/creative-resume-templates',
-      'en-AU': 'https://www.professionalresumefree.com/creative-resume-templates',
+      'en-US': 'https://professionalresumefree.com/creative-resume-templates',
+      'en-GB': 'https://professionalresumefree.com/creative-resume-templates',
+      'en-CA': 'https://professionalresumefree.com/creative-resume-templates',
+      'en-AU': 'https://professionalresumefree.com/creative-resume-templates',
     },
   },
   other: {
@@ -944,11 +947,13 @@ export default function CreativeResumeTemplates({ seoData }) {
   // This eliminates the "multiple reviews without aggregateRating" error AND the "either offers, review, or aggregateRating should be specified" error
   const completeProductSchema = {
     "@type": "Product",
-    "@id": "https://www.professionalresumefree.com/creative-resume-templates#product",
+    "@id": "https://professionalresumefree.com/creative-resume-templates#product",
     "name": "Creative Resume Templates 2026",
     "description": "Professional creative resume templates for job seekers",
-    "url": "https://www.professionalresumefree.com/creative-resume-templates",
-    "image": "https://www.professionalresumefree.com/images/creative-resume-templates-preview.jpg",
+    // REMOVED www
+    "url": "https://professionalresumefree.com/creative-resume-templates",
+    // REMOVED www
+    "image": "https://professionalresumefree.com/images/creative-resume-templates-preview.jpg",
     "brand": {
       "@type": "Brand",
       "name": "Professional Resume Free"
@@ -969,7 +974,8 @@ export default function CreativeResumeTemplates({ seoData }) {
       "price": "0",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "url": "https://www.professionalresumefree.com/creative-resume-templates",
+      // REMOVED www
+      "url": "https://professionalresumefree.com/creative-resume-templates",
       "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
       "shippingDetails": {
         "@type": "OfferShippingDetails",
@@ -1013,13 +1019,13 @@ export default function CreativeResumeTemplates({ seoData }) {
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="date" content={safeCurrentDate} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/creative-resume-templates" />
+        {/* ===== SINGLE CANONICAL URL - REMOVED www ===== */}
+        <link rel="canonical" href="https://professionalresumefree.com/creative-resume-templates" />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - REMOVED www ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:url" content="https://www.professionalresumefree.com/creative-resume-templates" />
+        <meta property="og:url" content="https://professionalresumefree.com/creative-resume-templates" />
         <meta property="og:image" content={metadata.openGraph.images[0].url} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -1028,7 +1034,7 @@ export default function CreativeResumeTemplates({ seoData }) {
         <meta property="article:published_time" content={safeLastModifiedDate} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - REMOVED www ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
@@ -1039,7 +1045,7 @@ export default function CreativeResumeTemplates({ seoData }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPLETELY FIXED JSON-LD SCHEMA - NO GSC ERRORS ===== */}
+        {/* ===== COMPLETELY FIXED JSON-LD SCHEMA - NO GSC ERRORS - REMOVED www ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -1047,8 +1053,8 @@ export default function CreativeResumeTemplates({ seoData }) {
               // WebPage entity
               {
                 "@type": "WebPage",
-                "@id": "https://www.professionalresumefree.com/creative-resume-templates/#webpage",
-                "url": "https://www.professionalresumefree.com/creative-resume-templates",
+                "@id": "https://professionalresumefree.com/creative-resume-templates/#webpage",
+                "url": "https://professionalresumefree.com/creative-resume-templates",
                 "name": "Creative Resume Templates 2026: Professional Designs | Professional Resume Free",
                 "description": metadata.description,
                 "datePublished": "2026-01-01T00:00:00.000Z",
@@ -1056,18 +1062,18 @@ export default function CreativeResumeTemplates({ seoData }) {
                 "inLanguage": "en-US",
                 "isPartOf": {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free online resume builder for job seekers",
                   "publisher": {
                     "@type": "Organization",
-                    "@id": "https://www.professionalresumefree.com/#organization",
+                    "@id": "https://professionalresumefree.com/#organization",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png",
+                      "url": "https://professionalresumefree.com/logo.png",
                       "width": 512,
                       "height": 512
                     },
@@ -1090,13 +1096,13 @@ export default function CreativeResumeTemplates({ seoData }) {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
                       "position": 2,
                       "name": "Creative Resume Templates",
-                      "item": "https://www.professionalresumefree.com/creative-resume-templates"
+                      "item": "https://professionalresumefree.com/creative-resume-templates"
                     }
                   ]
                 }
@@ -1109,21 +1115,21 @@ export default function CreativeResumeTemplates({ seoData }) {
                 "author": {
                   "@type": "Organization",
                   "name": "Professional Resume Design Experts",
-                  "url": "https://www.professionalresumefree.com"
+                  "url": "https://professionalresumefree.com"
                 },
                 "publisher": {
                   "@type": "Organization",
                   "name": "Professional Resume Free",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/logo.png"
+                    "url": "https://professionalresumefree.com/logo.png"
                   }
                 },
                 "datePublished": "2026-01-01",
                 "dateModified": safeCurrentDate,
                 "mainEntityOfPage": {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/creative-resume-templates"
+                  "@id": "https://professionalresumefree.com/creative-resume-templates"
                 },
                 "articleSection": "Career Advice",
                 "keywords": metadata.keywords
@@ -1184,7 +1190,8 @@ export default function CreativeResumeTemplates({ seoData }) {
         <nav style={styles.breadcrumb} aria-label="Breadcrumb">
           <ol style={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="/" itemProp="item" style={{color: 'var(--primary)'}}>
+              {/* REMOVED www from Link href */}
+              <Link href="https://professionalresumefree.com" itemProp="item" style={{color: 'var(--primary)'}}>
                 <span itemProp="name">Home</span>
               </Link>
               <meta itemProp="position" content="1" />
@@ -1213,7 +1220,8 @@ export default function CreativeResumeTemplates({ seoData }) {
           </div>
 
           <div style={styles.websiteReference}>
-            <p>This comprehensive guide is brought to you by <a href="https://www.professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}} target="_blank" rel="noopener noreferrer">Professional Resume Free</a> - Your premier resource for professional resume design since 2025.</p>
+            {/* REMOVED www from href */}
+            <p>This comprehensive guide is brought to you by <a href="https://professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}} target="_blank" rel="noopener noreferrer">Professional Resume Free</a> - Your premier resource for professional resume design since 2025.</p>
           </div>
         </header>
 
@@ -1404,7 +1412,8 @@ export default function CreativeResumeTemplates({ seoData }) {
               </div>
               
               <h3 style={styles.subsectionTitle}>Testing ATS Compatibility</h3>
-              <p className="left-align">Always test creative templates through ATS simulators before submission. Our platform at <a href="https://www.professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}}>ProfessionalResumeFree.com</a> offers free ATS testing tools that analyze how different design elements affect parsing accuracy.</p>
+              {/* REMOVED www from href */}
+              <p className="left-align">Always test creative templates through ATS simulators before submission. Our platform at <a href="https://professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}}>ProfessionalResumeFree.com</a> offers free ATS testing tools that analyze how different design elements affect parsing accuracy.</p>
             </div>
           </section>
 
@@ -1599,7 +1608,7 @@ export default function CreativeResumeTemplates({ seoData }) {
                     </div>
                     <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
                       <meta itemProp="name" content="Creative Resume Templates 2026" />
-                      <meta itemProp="url" content="https://www.professionalresumefree.com/creative-resume-templates" />
+                      <meta itemProp="url" content="https://professionalresumefree.com/creative-resume-templates" />
                       <meta itemProp="description" content="Professional creative resume templates for job seekers" />
                     </div>
                     <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">

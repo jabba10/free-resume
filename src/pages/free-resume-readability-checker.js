@@ -847,14 +847,14 @@ export default function ResumeReadabilityChecker({ seoData, buildTimestamp }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const textareaRef = useRef(null);
 
-  // Schema data
+  // Schema data - UPDATED WITHOUT www
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-readability-checker",
-        "url": "https://www.professionalresumefree.com/free-resume-readability-checker",
+        "@id": "https://professionalresumefree.com/free-resume-readability-checker",
+        "url": "https://professionalresumefree.com/free-resume-readability-checker",
         "name": `Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization ${CURRENT_YEAR}`,
         "description": "Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions.",
         "datePublished": "2024-01-01",
@@ -865,7 +865,7 @@ export default function ResumeReadabilityChecker({ seoData, buildTimestamp }) {
         "@type": "SoftwareApplication",
         "name": "Resume Readability Checker Tool",
         "description": "Free professional resume readability analyzer with Flesch-Kincaid scoring, ATS optimization, and writing quality assessment",
-        "url": "https://www.professionalresumefree.com/free-resume-readability-checker",
+        "url": "https://professionalresumefree.com/free-resume-readability-checker",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -1120,13 +1120,13 @@ export default function ResumeReadabilityChecker({ seoData, buildTimestamp }) {
         <meta name="chatgpt-fts:keywords" content="resume readability, Flesch-Kincaid, ATS optimization, resume analysis" />
         <meta name="chatgpt-fts:last-updated" content={CURRENT_DATE} />
         
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-readability-checker" />
+        {/* Canonical URL - UPDATED without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/free-resume-readability-checker" />
         
-        {/* Open Graph */}
+        {/* Open Graph - UPDATED without www */}
         <meta property="og:title" content="Free Resume Readability Checker – Professional Flesch-Kincaid Analysis" />
         <meta property="og:description" content="Analyze and improve your resume's readability. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips. Free online tool." />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-readability-checker" />
+        <meta property="og:url" content="https://professionalresumefree.com/free-resume-readability-checker" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={LAST_MODIFIED} />

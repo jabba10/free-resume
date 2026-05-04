@@ -692,14 +692,15 @@ const Resume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" />
+        {/* SINGLE CANONICAL URL - UPDATED (www removed) */}
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" />
         <meta property="og:title" content="Free Aged Care Resume Builder Australia 2026 | ATS-Friendly Templates" />
         <meta property="og:description" content="Create a professional ATS-friendly aged care resume in minutes. Trusted by 100K+ Australian care professionals. Download PDF free. Updated for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-aged-care-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-aged-care-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Aged Care Resume Builder Australia - Create Professional Aged Care Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Aged Care Resume Australia" />
         <meta property="og:locale" content="en_AU" />
@@ -707,7 +708,7 @@ const Resume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Aged Care Resume Builder Australia 2026 | ATS-Friendly Templates" />
         <meta name="twitter:description" content="Create a professional ATS-friendly aged care resume in minutes. Trusted by 100K+ Australian care professionals. Download PDF free. Updated for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-aged-care-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-aged-care-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Aged Care Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@AgedCareResumeAU" />
         <meta name="twitter:creator" content="@AgedCareResumeAU" />
@@ -730,8 +731,8 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder",
                   "name": "Free Aged Care Resume Builder Australia 2026 - ATS Friendly Templates",
                   "description": "Create professional ATS-optimized aged care resumes for free. Land interviews 3x faster with Australian aged care providers.",
                   "datePublished": "2026-01-01",
@@ -739,18 +740,18 @@ const Resume = ({
                   "inLanguage": "en-AU",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Aged Care Resume Australia",
                     "description": "Free online resume builder for Australian aged care professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Aged Care Resume Australia",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -763,7 +764,7 @@ const Resume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-aged-care-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-aged-care-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -774,13 +775,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Aged Care Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder"
                       }
                     ]
                   },
@@ -814,7 +815,7 @@ const Resume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-aged-care-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-aged-care-resume-builder.jpg",
                     "applicationSuite": "Aged Care Career Tools",
                     "countriesSupported": "Australia",
                     "fileSize": "Web Application"
@@ -822,7 +823,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -835,7 +836,7 @@ const Resume = ({
                         "name": "Aged Care Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#webpage"
                   }))
                 },
                 {
@@ -854,32 +855,32 @@ const Resume = ({
                       "position": 1,
                       "name": "Choose an Australian Aged Care Template",
                       "text": "Select from our ATS-optimized aged care resume templates designed for Australian Personal Care Assistants, Support Workers, and aged care staff.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-aged-care-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-aged-care-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Australian Qualifications & Experience",
                       "text": "Add your Australian aged care experience, qualifications, certificates, and specialised skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-care-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-care-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customise and Optimise for Australian Employers",
                       "text": "Use our Australian-specific suggestions to improve care keywords and formatting for ATS compatibility with Australian providers.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#optimise",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimise.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#optimise",
+                      "image": "https://professionalresumefree.com/images/step3-optimise.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Aged Care Resume",
                       "text": "Export your professional aged care resume as PDF - completely free, no watermarks, ready for Australian employers.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -889,7 +890,7 @@ const Resume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Aged Care Resume Australia",
-                    "url": "https://www.professionalresumefree.com/",
+                    "url": "https://professionalresumefree.com/",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "",
@@ -965,7 +966,7 @@ const Resume = ({
                           "priceCurrency": "AUD"
                         },
                         "description": "Free online ATS-friendly aged care resume builder that helps Australian care professionals create professional resumes and land interviews faster.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder"
                       }
                     }
                   }))
@@ -2123,10 +2124,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - UPDATED (www removed)
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Aged Care Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Aged Care Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-aged-care-worker-resume-builder' }
   ];
 
   return {

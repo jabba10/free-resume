@@ -693,28 +693,33 @@ const Resume = ({
         <meta name="date" content={safeCurrentDate} />
         <meta name="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-builder" />
+        {/* SINGLE CANONICAL URL - REMOVED www */}
+        <link rel="canonical" href="https://professionalresumefree.com/free-resume-builder" />
         
+        {/* OPEN GRAPH - REMOVED www from image URLs */}
         <meta property="og:title" content="Free Professional Resume Builder 2026 | ATS-Friendly Templates" />
         <meta property="og:description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates trusted by 5M+ job seekers." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/free-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
+        
+        {/* TWITTER CARD - REMOVED www from image URLs */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Professional Resume Builder 2026 | ATS-Friendly Templates" />
         <meta name="twitter:description" content="Create your ATS-optimized professional resume for free in 2026. Land interviews faster with our templates." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-builder-preview.jpg" />
+        
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
+        {/* JSON-LD Structured Data - REMOVED www from all URLs */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -723,17 +728,17 @@ const Resume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/free-resume-builder",
-                  "url": "https://www.professionalresumefree.com/free-resume-builder",
+                  "@id": "https://professionalresumefree.com/free-resume-builder",
+                  "url": "https://professionalresumefree.com/free-resume-builder",
                   "name": "Free Professional Resume Builder 2026 | ATS-Friendly Templates",
                   "description": "Create professional ATS-optimized resumes for free. Land interviews faster with our universal resume builder.",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/",
+                    "@id": "https://professionalresumefree.com/",
                     "name": "Professional Resume Free",
-                    "url": "https://www.professionalresumefree.com"
+                    "url": "https://professionalresumefree.com"
                   },
                   "breadcrumb": {
                     "@type": "BreadcrumbList",
@@ -742,13 +747,13 @@ const Resume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Resume Builder",
-                        "item": "https://www.professionalresumefree.com/free-resume-builder"
+                        "item": "https://professionalresumefree.com/free-resume-builder"
                       }
                     ]
                   },
@@ -766,7 +771,7 @@ const Resume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/free-resume-builder#faq",
+                  "@id": "https://professionalresumefree.com/free-resume-builder#faq",
                   "mainEntity": faqs.map((faq) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -792,7 +797,8 @@ const Resume = ({
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <ol>
           <li>
-            <Link href="/" className={styles.breadcrumbLink} prefetch={false}>
+            {/* REMOVED www from Link href */}
+            <Link href="https://professionalresumefree.com" className={styles.breadcrumbLink} prefetch={false}>
               <FiHome className={styles.breadcrumbIcon} />
               <span className={styles.breadcrumbText}>Home</span>
             </Link>

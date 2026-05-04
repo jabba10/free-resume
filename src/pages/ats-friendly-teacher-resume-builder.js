@@ -733,14 +733,14 @@ const TeacherResume = ({
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" />
+        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-teacher-resume-builder" />
         <meta property="og:title" content="Free Teacher Resume Builder 2026 | ATS Education Templates" />
         <meta property="og:description" content="Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-teacher-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-teacher-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Teacher Resume Builder - Create Professional Education Resumes Online" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder" />
+        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-teacher-resume-builder" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Teacher Resume Free" />
         <meta property="og:locale" content="en_US" />
@@ -753,7 +753,7 @@ const TeacherResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Teacher Resume Builder 2026 | ATS Education Templates" />
         <meta name="twitter:description" content="Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-teacher-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-teacher-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Teacher Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProTeacherResume" />
         <meta name="twitter:creator" content="@ProTeacherResume" />
@@ -776,8 +776,8 @@ const TeacherResume = ({
               "@graph": [
                 {
                   "@type": "WebPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#webpage",
-                  "url": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder",
+                  "@id": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder#webpage",
+                  "url": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder",
                   "name": "Free Teacher Resume Builder 2026 | ATS Education Templates",
                   "description": "Create a professional teacher resume for free in 2026. ATS-optimized education templates for educators worldwide. Download PDF instantly.",
                   "datePublished": "2026-01-01",
@@ -785,18 +785,18 @@ const TeacherResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Teacher Resume Free",
                     "description": "Free online resume builder for education professionals worldwide",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Teacher Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
@@ -810,7 +810,7 @@ const TeacherResume = ({
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-teacher-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-teacher-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -821,13 +821,13 @@ const TeacherResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Teacher Resume Builder",
-                        "item": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder"
+                        "item": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder"
                       }
                     ]
                   },
@@ -861,7 +861,7 @@ const TeacherResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-teacher-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-teacher-resume-builder.jpg",
                     "applicationSuite": "Education Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -869,7 +869,7 @@ const TeacherResume = ({
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#faqpage",
+                  "@id": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder#faqpage",
                   "mainEntity": faqs.map((faq, index) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -882,7 +882,7 @@ const TeacherResume = ({
                         "name": "Teacher Resume Builder Support Team"
                       }
                     },
-                    "mainEntityOfPage": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#webpage"
+                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder#webpage"
                   }))
                 },
                 {
@@ -901,32 +901,32 @@ const TeacherResume = ({
                       "position": 1,
                       "name": "Choose a Teacher Template",
                       "text": "Select from our ATS-optimized teacher resume templates designed for all education levels: elementary, secondary, special education, ESL, and university teaching.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#templates",
-                      "image": "https://www.professionalresumefree.com/images/step1-teacher-template.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder#templates",
+                      "image": "https://professionalresumefree.com/images/step1-teacher-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 2,
                       "name": "Enter Your Teaching Information",
                       "text": "Add your teaching experience, education, certifications, teaching methods, and pedagogical skills using our guided forms.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#editor",
-                      "image": "https://www.professionalresumefree.com/images/step2-teaching-info.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder#editor",
+                      "image": "https://professionalresumefree.com/images/step2-teaching-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 3,
                       "name": "Customize and Optimize",
                       "text": "Use our education-specific suggestions to improve teaching keywords and formatting for ATS compatibility in schools worldwide.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#optimize",
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder#optimize",
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
                       "position": 4,
                       "name": "Download Your Teacher Resume",
                       "text": "Export your professional teacher resume as PDF - completely free, no watermarks, ready for international applications.",
-                      "url": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder#download",
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "url": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder#download",
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -936,7 +936,7 @@ const TeacherResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Teacher Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -1012,7 +1012,7 @@ const TeacherResume = ({
                           "priceCurrency": "USD"
                         },
                         "description": "Free online ATS-friendly teacher resume builder that helps education professionals create professional resumes and land teaching jobs faster worldwide.",
-                        "url": "https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder"
+                        "url": "https://professionalresumefree.com/ats-friendly-teacher-resume-builder"
                       }
                     }
                   }))
@@ -2235,8 +2235,8 @@ export async function getStaticProps() {
 
   // Breadcrumb data for structured data
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Teacher Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-teacher-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Teacher Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-teacher-resume-builder' }
   ];
 
   return {

@@ -775,22 +775,25 @@ const criticalCSS = `
   }
 `;
 
-// ===== METADATA CONFIGURATION =====
+// ===== METADATA CONFIGURATION - REMOVED www =====
 export const metadata = {
   title: 'Government Job Resume Guide 2026: Complete Official Format & Tips',
   description: 'Master government job resume creation for UPSC, SSC, State PSCs in 2026. Get official biodata formats, templates & proven strategies. Complete guide to government employment applications.',
   keywords: 'government job resume, government job biodata, UPSC resume format, SSC application form, state PSC resume, government employment application, official resume format, government job application 2026, civil services biodata, public sector resume',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://www.professionalresumefree.com/resume-for-government-job',
+  // REMOVED www
+  canonical: 'https://professionalresumefree.com/resume-for-government-job',
   
   openGraph: {
     title: 'Government Job Resume Guide 2026: Complete Official Format',
     description: 'Master government job applications with 2026 biodata formats, official templates, and proven strategies for UPSC, SSC, PSC exams. Complete guide with examples.',
-    url: 'https://www.professionalresumefree.com/resume-for-government-job',
+    // REMOVED www
+    url: 'https://professionalresumefree.com/resume-for-government-job',
     siteName: 'Professional Resume Free',
     images: [
       {
-        url: 'https://www.professionalresumefree.com/images/government-job-resume-og.jpg',
+        // REMOVED www
+        url: 'https://professionalresumefree.com/images/government-job-resume-og.jpg',
         width: 1200,
         height: 630,
         alt: 'Government Job Resume Guide 2026'
@@ -808,7 +811,8 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Government Job Resume Guide 2026: Official Format',
     description: 'Official resume formats and strategies for government job applications in 2026. Complete guide with templates.',
-    images: ['https://www.professionalresumefree.com/images/government-job-resume-twitter.jpg'],
+    // REMOVED www
+    images: ['https://professionalresumefree.com/images/government-job-resume-twitter.jpg'],
     creator: '@ProfResumeFree',
     site: '@ProfResumeFree'
   },
@@ -843,7 +847,7 @@ export async function getStaticProps() {
 const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, buildTimestamp }) => {
   const primaryUrl = metadata.canonical;
 
-  // ===== SCHEMA.ORG JSON-LD =====
+  // ===== SCHEMA.ORG JSON-LD - REMOVED www =====
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -857,7 +861,8 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         dateModified: formattedDate,
         isPartOf: {
           '@type': 'WebSite',
-          '@id': 'https://www.professionalresumefree.com/#website'
+          // REMOVED www
+          '@id': 'https://professionalresumefree.com/#website'
         },
         inLanguage: 'en-US',
         about: {
@@ -871,13 +876,15 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         '@id': `${primaryUrl}#article`,
         headline: `Government Job Resume Guide ${currentYear}: Complete Official Format & Tips`,
         description: `Comprehensive ${currentYear} guide to creating winning resumes for government jobs with official formats, biodata templates, and proven strategies for UPSC, SSC, PSC applications.`,
-        image: 'https://www.professionalresumefree.com/images/government-job-resume-guide.jpg',
+        // REMOVED www
+        image: 'https://professionalresumefree.com/images/government-job-resume-guide.jpg',
         datePublished: `${currentYear}-01-15`,
         dateModified: formattedDate,
         author: {
           '@type': 'Person',
           name: 'Government Recruitment Experts',
-          url: 'https://www.professionalresumefree.com/',
+          // REMOVED www
+          url: 'https://professionalresumefree.com/',
           jobTitle: 'Former Government Officers & Recruitment Consultants'
         },
         publisher: {
@@ -885,7 +892,8 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
           name: 'Professional Resume Free',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://www.professionalresumefree.com/logo.png'
+            // REMOVED www
+            url: 'https://professionalresumefree.com/logo.png'
           }
         },
         mainEntityOfPage: primaryUrl,
@@ -901,13 +909,15 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://www.professionalresumefree.com'
+            // REMOVED www
+            item: 'https://professionalresumefree.com'
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Guides',
-            item: 'https://www.professionalresumefree.com/resume-for-government-job'
+            // REMOVED www
+            item: 'https://professionalresumefree.com/resume-for-government-job'
           },
           {
             '@type': 'ListItem',
@@ -1180,10 +1190,10 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
     ],
     
     templates: [
-      { name: 'UPSC Civil Services Biodata', desc: 'Complete format for IAS, IPS, IFS applications', features: ['Detailed personal information section', 'Comprehensive educational qualifications', 'Optional subject expertise area', 'Hobbies and interests section', 'Declaration format included'], url: 'https://www.professionalresumefree.com/templates/upsc' },
-      { name: 'SSC Combined Format', desc: 'For CGL, CHSL, Stenographer exams', features: ['SSC prescribed biodata format', 'Educational marks table', 'Experience documentation section', 'Category certificate details', 'Photo and signature placement'], url: 'https://www.professionalresumefree.com/templates/ssc' },
-      { name: 'Banking Exam Resume', desc: 'For IBPS, SBI, RBI applications', features: ['Professional yet comprehensive', 'Financial skills highlight', 'Customer service experience', 'Computer proficiency section', 'Banking certifications area'], url: 'https://www.professionalresumefree.com/templates/banking' },
-      { name: 'State PSC Application', desc: 'For state-level government jobs', features: ['State-specific requirements', 'Local language proficiency', 'Domicile certificate section', 'Community information area', 'Regional preferences included'], url: 'https://www.professionalresumefree.com/templates/state-psc' }
+      { name: 'UPSC Civil Services Biodata', desc: 'Complete format for IAS, IPS, IFS applications', features: ['Detailed personal information section', 'Comprehensive educational qualifications', 'Optional subject expertise area', 'Hobbies and interests section', 'Declaration format included'], url: 'https://professionalresumefree.com/templates/upsc' },
+      { name: 'SSC Combined Format', desc: 'For CGL, CHSL, Stenographer exams', features: ['SSC prescribed biodata format', 'Educational marks table', 'Experience documentation section', 'Category certificate details', 'Photo and signature placement'], url: 'https://professionalresumefree.com/templates/ssc' },
+      { name: 'Banking Exam Resume', desc: 'For IBPS, SBI, RBI applications', features: ['Professional yet comprehensive', 'Financial skills highlight', 'Customer service experience', 'Computer proficiency section', 'Banking certifications area'], url: 'https://professionalresumefree.com/templates/banking' },
+      { name: 'State PSC Application', desc: 'For state-level government jobs', features: ['State-specific requirements', 'Local language proficiency', 'Domicile certificate section', 'Community information area', 'Regional preferences included'], url: 'https://professionalresumefree.com/templates/state-psc' }
     ],
     
     faqs: [
@@ -1218,11 +1228,11 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
     ],
     
     internalLinks: [
-      { title: 'Government Interview Guide 2026', desc: 'Complete guide to government job interviews and personality tests', url: 'https://www.professionalresumefree.com/guides/government-interview' },
-      { title: 'Document Verification Process', desc: 'How to prepare for government document verification', url: 'https://www.professionalresumefree.com/guides/document-verification' },
-      { title: 'Category Certificates Guide', desc: 'Complete information about SC/ST/OBC/EWS certificates', url: 'https://www.professionalresumefree.com/guides/category-certificates' },
-      { title: 'Government Exam Preparation', desc: `Strategies for UPSC, SSC, and other government exams`, url: 'https://www.professionalresumefree.com/guides/government-exam-preparation' },
-      { title: 'Government Career Growth', desc: 'Promotion avenues and career progression in government jobs', url: 'https://www.professionalresumefree.com/guides/government-career-growth' }
+      { title: 'Government Interview Guide 2026', desc: 'Complete guide to government job interviews and personality tests', url: 'https://professionalresumefree.com/guides/government-interview' },
+      { title: 'Document Verification Process', desc: 'How to prepare for government document verification', url: 'https://professionalresumefree.com/guides/document-verification' },
+      { title: 'Category Certificates Guide', desc: 'Complete information about SC/ST/OBC/EWS certificates', url: 'https://professionalresumefree.com/guides/category-certificates' },
+      { title: 'Government Exam Preparation', desc: `Strategies for UPSC, SSC, and other government exams`, url: 'https://professionalresumefree.com/guides/government-exam-preparation' },
+      { title: 'Government Career Growth', desc: 'Promotion avenues and career progression in government jobs', url: 'https://professionalresumefree.com/guides/government-career-growth' }
     ],
     
     longTailKeywords: [
@@ -1248,7 +1258,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         <meta name="keywords" content={metadata.keywords} />
         <meta name="robots" content={metadata.robots} />
         
-        {/* ===== SINGLE CANONICAL TAG ===== */}
+        {/* ===== SINGLE CANONICAL TAG - REMOVED www ===== */}
         <link rel="canonical" href={metadata.canonical} />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
@@ -1265,7 +1275,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         <meta httpEquiv="last-modified" content={generatedAt} />
         <meta name="build-timestamp" content={buildTimestamp.toString()} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH - REMOVED www ===== */}
         <meta property="og:title" content="Government Job Resume Guide 2026: Complete Official Format" />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
@@ -1283,7 +1293,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
           <meta key={i} property="article:tag" content={tag} />
         ))}
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - REMOVED www ===== */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content="Government Job Resume Guide 2026: Official Format" />
         <meta name="twitter:description" content={metadata.twitter.description} />
@@ -1299,11 +1309,11 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
       </Head>
 
       <main className="main">
-        {/* ===== BREADCRUMB ===== */}
+        {/* ===== BREADCRUMB - REMOVED www ===== */}
         <nav className="toc" style={{ marginBottom: '24px', padding: '16px' }}>
           <ol className="toc-list" style={{ gridTemplateColumns: '1fr', gap: '8px' }}>
-            <li><a href="https://www.professionalresumefree.com" className="toc-link">Home</a> ›</li>
-            <li><a href="https://www.professionalresumefree.com/resume-for-government-job" className="toc-link">Guides</a> ›</li>
+            <li><a href="https://professionalresumefree.com" className="toc-link">Home</a> ›</li>
+            <li><a href="https://professionalresumefree.com/resume-for-government-job" className="toc-link">Guides</a> ›</li>
             <li>Government Job Resume Guide</li>
           </ol>
         </nav>
@@ -1811,7 +1821,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
           <div className="cta-card">
             <h2>Ready to Create Your Government Job Resume?</h2>
             <p>Visit <a href="/" className="cta-link">Professional Resume Free</a> for our free government resume builder with {currentYear} approved templates, official format compliance, and guidance from former government recruitment officials.</p>
-            <a href="https://www.professionalresumefree.com/resume-templates" className="button-primary">
+            <a href="https://professionalresumefree.com/resume-templates" className="button-primary">
               Build Your {currentYear} Government Resume Now
             </a>
             <p className="note">Officially approved templates • Format compliance guaranteed • Expert guidance • Free to use</p>

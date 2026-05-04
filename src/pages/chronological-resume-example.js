@@ -676,13 +676,13 @@ export async function getStaticProps() {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Chronological Resume Example",
-      "item": "https://www.professionalresumefree.com/chronological-resume-example"
+      "item": "https://professionalresumefree.com/chronological-resume-example"
     }
   ];
 
@@ -751,7 +751,8 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
   const safeReviewDates = reviewDates || Array(3).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(7).fill(freshnessIndicator);
 
-  const canonicalUrl = "https://www.professionalresumefree.com/chronological-resume-example";
+  // Updated URL without www
+  const canonicalUrl = "https://professionalresumefree.com/chronological-resume-example";
 
   // Optimized title - exactly 70 characters
   const optimizedTitle = "Chronological Resume Example 2026: Free Guide & ATS Templates";
@@ -925,7 +926,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "breadcrumb": {
           "@type": "BreadcrumbList",
@@ -934,8 +935,8 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
       },
       {
         "@type": "WebSite",
-        "@id": "https://www.professionalresumefree.com/#website",
-        "url": "https://www.professionalresumefree.com",
+        "@id": "https://professionalresumefree.com/#website",
+        "url": "https://professionalresumefree.com",
         "name": "Professional Resume Free",
         "description": "Free ATS-Optimized Resume Templates and Tools",
         "publisher": {
@@ -1047,7 +1048,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG TAGS */}
@@ -1055,11 +1056,11 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content="Chronological Resume Example 2026: Free Guide & Templates" />
         <meta property="og:description" content="Master chronological resume format with free 2026 examples. ATS-optimized templates included." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:image:alt" content="Chronological Resume Example Guide" />
@@ -1068,11 +1069,11 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Chronological Resume Example 2026: Free Guide" />
         <meta name="twitter:description" content="Master chronological resume format. Free examples & templates. No sign-up." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Chronological Resume Example Guide" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         

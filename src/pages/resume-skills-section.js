@@ -21,7 +21,7 @@ import {
   FiBookOpen
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards - Same design as ATSGuide
+// Critical CSS inline with white background, black fonts, black buttons, grey cards
 const criticalCSS = `
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -520,12 +520,11 @@ export const getStaticProps = async () => {
   });
 
   const metadata = {
-    // OPTIMIZED TITLE - 63 characters (BELOW 70 LIMIT)
     title: 'Resume Skills Section Guide: ATS-Optimized Examples & Tips 2026',
     description: 'Master the resume skills section with expert strategies, examples, and ATS formatting tips to impress employers and land interviews faster.',
-    url: 'https://www.professionalresumefree.com/resume-skills-section',
+    url: 'https://professionalresumefree.com/resume-skills-section',
     siteName: 'ProfessionalResumeFree',
-    image: 'https://www.professionalresumefree.com/images/resume-skills-section-guide-og.jpg',
+    image: 'https://professionalresumefree.com/images/resume-skills-section-guide-og.jpg',
     twitterHandle: '@profresumefree',
   };
 
@@ -561,9 +560,9 @@ export const getStaticProps = async () => {
   ];
 
   const breadcrumbData = [
-    { name: 'Home', url: 'https://www.professionalresumefree.com' },
-    { name: 'Resume Guides', url: 'https://www.professionalresumefree.com/resume-skills-section' },
-    { name: 'Resume Skills Section', url: 'https://www.professionalresumefree.com/resume-skills-section' },
+    { name: 'Home', url: 'https://professionalresumefree.com' },
+    { name: 'Resume Guides', url: 'https://professionalresumefree.com/resume-skills-section' },
+    { name: 'Resume Skills Section', url: 'https://professionalresumefree.com/resume-skills-section' },
   ];
 
   return {
@@ -594,10 +593,8 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
   const safeLastModifiedDate = seoData?.lastModifiedDate || new Date().toISOString();
   const safeFaqDates = seoData?.faqDates || Array(faqItems.length).fill(freshnessIndicator);
   
-  // Single canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-skills-section";
+  const canonicalUrl = "https://professionalresumefree.com/resume-skills-section";
 
-  // FIXED: Removed duplicate FAQPage - now only ONE FAQPage in the @graph array
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -612,18 +609,18 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "ProfessionalResumeFree",
           "description": "Free online resume builder for job seekers",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "ProfessionalResumeFree",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             }
@@ -653,14 +650,14 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         "author": {
           "@type": "Organization",
           "name": "ProfessionalResumeFree",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "ProfessionalResumeFree",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/images/logo.png"
+            "url": "https://professionalresumefree.com/images/logo.png"
           }
         },
         "datePublished": "2026-01-29",
@@ -669,7 +666,6 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         "articleSection": "Resume Writing",
         "keywords": "resume skills, ATS skills, hard skills, soft skills, resume writing, job search"
       },
-      // FIXED: Only ONE FAQPage (removed the duplicate)
       {
         "@type": "FAQPage",
         "mainEntity": faqItems.map((item, index) => ({
@@ -727,23 +723,19 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* HTML Lang Attribute */}
         <html lang="en" />
         
-        {/* Primary Meta Tags */}
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content="resume skills section, ATS skills list, hard skills examples, soft skills for resume, resume writing 2026, skills-based resume, technical skills, professional skills" />
         <meta name="author" content="ProfessionalResumeFree" />
         
-        {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Resume Skills Section Guide: ATS-Optimized Examples & Tips 2026" />
         <meta name="chatgpt-fts:description" content="Master the resume skills section with expert strategies, examples, and ATS formatting tips to impress employers and land interviews faster." />
         <meta name="chatgpt-fts:keywords" content="resume skills section, how to list skills on resume, ATS skills, hard skills examples, soft skills list" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Resume Skills Section Guide" />
         
-        {/* Technical SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -752,10 +744,8 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags */}
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
         <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
@@ -763,10 +753,8 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph */}
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
         <meta property="og:image" content={metadata.image} />
@@ -784,7 +772,6 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         <meta property="article:tag" content="Resume Writing" />
         <meta property="article:tag" content="Job Search" />
         
-        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
@@ -793,29 +780,22 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         <meta name="twitter:site" content={metadata.twitterHandle} />
         <meta name="twitter:creator" content={metadata.twitterHandle} />
         
-        {/* Additional Meta */}
         <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* Preconnect for Performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Structured Data - FIXED: Only one FAQPage */}
         <script
           type="application/ld+json"
-          key="structured-data"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
 
       <main>
-        {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Hidden freshness indicators */}
         <div style={{ display: 'none' }}>
           <meta name="build-timestamp" content={buildTimestamp} />
           <meta name="content-freshness" content={freshnessIndicator} />
@@ -823,7 +803,6 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
           <span itemProp="build-timestamp">{buildTimestamp}</span>
         </div>
 
-        {/* Breadcrumb Navigation */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -832,18 +811,19 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
                   <span itemProp="name">Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
+                <meta itemProp="item" content="https://professionalresumefree.com" />
               </li>
               <li aria-hidden="true">/</li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <span itemProp="name" aria-current="page">Resume Skills Section Guide</span>
                 <meta itemProp="position" content="2" />
+                <meta itemProp="item" content={canonicalUrl} />
               </li>
             </ol>
           </div>
         </nav>
 
         <div className="container">
-          {/* Header Section */}
           <section className="hero" id="main-content" aria-labelledby="hero-heading">
             <div className="trust-badge" aria-label="Trust indicators">
               <FiStar /> Expert Guide | Updated January 2026 | ATS-Optimized Strategies
@@ -889,145 +869,71 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
               <span className="feature-tag">✓ Free Tools</span>
             </div>
 
-            {/* Freshness indicator */}
             <div style={{ marginTop: '20px', fontSize: '0.8rem', color: '#4b5563', textAlign: 'center' }}>
               Guide fresh as of: {safeCurrentDate} | Trusted by 500K+ Job Seekers
             </div>
           </section>
 
-          {/* Table of Contents */}
           <section className="section">
             <h2 className="section-title">Table of Contents</h2>
             <ul className="toc-list">
-              <li>
-                <a href="#why-skills-matter" className="toc-link">
-                  Why Your Skills Section Matters
-                </a>
-              </li>
-              <li>
-                <a href="#types-of-skills" className="toc-link">
-                  Hard Skills vs. Soft Skills vs. Transferable Skills
-                </a>
-              </li>
-              <li>
-                <a href="#formatting" className="toc-link">
-                  Formatting Strategies (2026 Best Practices)
-                </a>
-              </li>
-              <li>
-                <a href="#tailoring" className="toc-link">
-                  Tailoring Your Skills to Each Job
-                </a>
-              </li>
-              <li>
-                <a href="#examples" className="toc-link">
-                  Skills Section Examples by Role
-                </a>
-              </li>
-              <li>
-                <a href="#faq" className="toc-link">
-                  Frequently Asked Questions (2026)
-                </a>
-              </li>
+              <li><a href="#why-skills-matter" className="toc-link">Why Your Skills Section Matters</a></li>
+              <li><a href="#types-of-skills" className="toc-link">Hard Skills vs. Soft Skills vs. Transferable Skills</a></li>
+              <li><a href="#formatting" className="toc-link">Formatting Strategies (2026 Best Practices)</a></li>
+              <li><a href="#tailoring" className="toc-link">Tailoring Your Skills to Each Job</a></li>
+              <li><a href="#examples" className="toc-link">Skills Section Examples by Role</a></li>
+              <li><a href="#faq" className="toc-link">Frequently Asked Questions (2026)</a></li>
             </ul>
           </section>
 
-          {/* Why Skills Matter Section */}
           <section id="why-skills-matter" className="section">
-            <h2 className="section-title">
-              Why Your {primaryKeyword} Matters More Than You Think
-            </h2>
-
+            <h2 className="section-title">Why Your {primaryKeyword} Matters More Than You Think</h2>
             <p className="paragraph">
               Recruiters scan resumes in seconds. They're not reading—they're searching for proof that you can do the job. Your skills section is one of the fastest ways to communicate that proof. It acts as a high-level snapshot of your capabilities aligned with the role.
             </p>
-
             <p className="paragraph">
               Modern hiring relies heavily on Applicant Tracking Systems (ATS). These systems scan resumes for specific keywords. If your skills section is vague or generic, your resume may never reach a human reviewer. A well-structured skills section dramatically increases your chances of passing ATS filters.
             </p>
-
             <div className="content-block">
               <h3 className="block-title">Key Hiring Insights (2026)</h3>
               <div className="table-wrap">
                 <table>
                   <thead>
-                    <tr>
-                      <th>Hiring Insight</th>
-                      <th>What It Means</th>
-                    </tr>
+                    <tr><th>Hiring Insight</th><th>What It Means</th></tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>Recruiters scan resumes in <strong>under 7 seconds</strong></td>
-                        <td>Skills must be instantly visible and relevant.</td>
-                      </tr>
-                    <tr>
-                        <td>98% of Fortune 500 companies use ATS</td>
-                        <td>Precise keyword matching is non-negotiable in 2026.</td>
-                      </tr>
-                    <tr>
-                        <td>Skills validate your experience</td>
-                        <td>Every listed skill must be demonstrable in your work history.</td>
-                      </tr>
+                    <tr><td>Recruiters scan resumes in <strong>under 7 seconds</strong></td><td>Skills must be instantly visible and relevant.</td></tr>
+                    <tr><td>98% of Fortune 500 companies use ATS</td><td>Precise keyword matching is non-negotiable in 2026.</td></tr>
+                    <tr><td>Skills validate your experience</td><td>Every listed skill must be demonstrable in your work history.</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </section>
 
-          {/* Types of Skills Section */}
           <section id="types-of-skills" className="section">
-            <h2 className="section-title">
-              Hard Skills vs. Soft Skills vs. Transferable Skills
-            </h2>
-
+            <h2 className="section-title">Hard Skills vs. Soft Skills vs. Transferable Skills</h2>
             <p className="paragraph">
               A strong resume includes a balanced mix of hard, soft, and transferable skills. Hard skills are technical and measurable. Soft skills describe how you work with others. Transferable skills apply across roles and industries.
             </p>
-
             <div className="content-block">
               <h3 className="block-title">Skill Type Comparison (2026)</h3>
               <div className="table-wrap">
                 <table>
-                  <thead>
-                    <tr>
-                      <th>Skill Type</th>
-                      <th>Examples</th>
-                      <th>Best Use</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th>Skill Type</th><th>Examples</th><th>Best Use</th></tr></thead>
                   <tbody>
-                    <tr>
-                        <td>Hard Skills</td>
-                        <td>Python, Excel, SEO, SQL, AI Prompt Engineering</td>
-                        <td>Highlight in skills section and experience bullets.</td>
-                      </tr>
-                      <tr>
-                        <td>Soft Skills</td>
-                        <td>Adaptability, Cross-functional Collaboration, Emotional Intelligence</td>
-                        <td>Demonstrate through quantifiable achievements.</td>
-                      </tr>
-                      <tr>
-                        <td>Transferable Skills</td>
-                        <td>Project Management, Strategic Planning, Budget Oversight</td>
-                        <td>Critical for career changers and leadership roles.</td>
-                      </tr>
+                    <tr><td>Hard Skills</td><td>Python, Excel, SEO, SQL, AI Prompt Engineering</td><td>Highlight in skills section and experience bullets.</td></tr>
+                    <tr><td>Soft Skills</td><td>Adaptability, Cross-functional Collaboration, Emotional Intelligence</td><td>Demonstrate through quantifiable achievements.</td></tr>
+                    <tr><td>Transferable Skills</td><td>Project Management, Strategic Planning, Budget Oversight</td><td>Critical for career changers and leadership roles.</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </section>
 
-          {/* Formatting Section */}
           <section id="formatting" className="section">
-            <h2 className="section-title">
-              Formatting Strategies for a High-Impact Skills Section
-            </h2>
-
-            <p className="paragraph">
-              Formatting affects how quickly recruiters understand your value. Use clear headings, short lists, and grouped categories to improve readability and ATS parsing.
-            </p>
-
+            <h2 className="section-title">Formatting Strategies for a High-Impact Skills Section</h2>
+            <p className="paragraph">Formatting affects how quickly recruiters understand your value. Use clear headings, short lists, and grouped categories to improve readability and ATS parsing.</p>
             <h3 className="subheading">Step-by-Step Formatting (2026 Best Practices)</h3>
             <ol className="ordered-list">
               <li className="list-item">Use a clear heading: "Skills", "Core Competencies", or "Technical Proficiencies"</li>
@@ -1038,16 +944,9 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
             </ol>
           </section>
 
-          {/* Tailoring Section */}
           <section id="tailoring" className="section">
-            <h2 className="section-title">
-              How to Tailor Your Skills to Each Job Description (2026 Method)
-            </h2>
-
-            <p className="paragraph">
-              Tailoring your skills is the #1 most effective way to improve interview rates in today's competitive market. Start by extracting keywords from the job description and aligning them with your verified experience.
-            </p>
-
+            <h2 className="section-title">How to Tailor Your Skills to Each Job Description (2026 Method)</h2>
+            <p className="paragraph">Tailoring your skills is the #1 most effective way to improve interview rates in today's competitive market. Start by extracting keywords from the job description and aligning them with your verified experience.</p>
             <h3 className="subheading">Practical Workflow</h3>
             <ul className="unordered-list">
               <li className="list-item">Identify repeated keywords and required competencies in the job posting</li>
@@ -1058,111 +957,65 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
             </ul>
           </section>
 
-          {/* Examples Section */}
           <section id="examples" className="section">
-            <h2 className="section-title">
-              Resume Skills Section Examples by Role (2026)
-            </h2>
-
+            <h2 className="section-title">Resume Skills Section Examples by Role (2026)</h2>
             <div className="example-grid">
               <div className="example-card">
                 <h3 className="example-title">Software Engineer</h3>
                 <div className="skill-categories">
-                  <div className="skill-category">
-                    <strong>Programming:</strong> Python, TypeScript, Rust, SQL
-                  </div>
-                  <div className="skill-category">
-                    <strong>Frameworks:</strong> React, Node.js, Django
-                  </div>
-                  <div className="skill-category">
-                    <strong>Tools:</strong> Git, Docker, AWS, Kubernetes
-                  </div>
-                  <div className="skill-category">
-                    <strong>Practices:</strong> CI/CD, TDD, Agile/Scrum
-                  </div>
+                  <div className="skill-category"><strong>Programming:</strong> Python, TypeScript, Rust, SQL</div>
+                  <div className="skill-category"><strong>Frameworks:</strong> React, Node.js, Django</div>
+                  <div className="skill-category"><strong>Tools:</strong> Git, Docker, AWS, Kubernetes</div>
+                  <div className="skill-category"><strong>Practices:</strong> CI/CD, TDD, Agile/Scrum</div>
                 </div>
               </div>
-
               <div className="example-card">
                 <h3 className="example-title">Marketing Specialist</h3>
                 <div className="skill-categories">
-                  <div className="skill-category">
-                    <strong>Digital:</strong> SEO/SEM, Google Analytics 4, Meta Ads
-                  </div>
-                  <div className="skill-category">
-                    <strong>Content:</strong> Copywriting, A/B Testing, Email Marketing
-                  </div>
-                  <div className="skill-category">
-                    <strong>Tools:</strong> HubSpot, Canva, Mailchimp, Asana
-                  </div>
-                  <div className="skill-category">
-                    <strong>Analytics:</strong> ROI Tracking, Conversion Optimization
-                  </div>
+                  <div className="skill-category"><strong>Digital:</strong> SEO/SEM, Google Analytics 4, Meta Ads</div>
+                  <div className="skill-category"><strong>Content:</strong> Copywriting, A/B Testing, Email Marketing</div>
+                  <div className="skill-category"><strong>Tools:</strong> HubSpot, Canva, Mailchimp, Asana</div>
+                  <div className="skill-category"><strong>Analytics:</strong> ROI Tracking, Conversion Optimization</div>
                 </div>
               </div>
-
               <div className="example-card">
                 <h3 className="example-title">Project Manager</h3>
                 <div className="skill-categories">
-                  <div className="skill-category">
-                    <strong>Methodologies:</strong> Agile, Scrum, Waterfall
-                  </div>
-                  <div className="skill-category">
-                    <strong>Tools:</strong> Jira, Trello, MS Project, Smartsheet
-                  </div>
-                  <div className="skill-category">
-                    <strong>Skills:</strong> Budget Management ($500K+), Stakeholder Communication, Risk Mitigation, Cross-functional Leadership
-                  </div>
+                  <div className="skill-category"><strong>Methodologies:</strong> Agile, Scrum, Waterfall</div>
+                  <div className="skill-category"><strong>Tools:</strong> Jira, Trello, MS Project, Smartsheet</div>
+                  <div className="skill-category"><strong>Skills:</strong> Budget Management ($500K+), Stakeholder Communication, Risk Mitigation, Cross-functional Leadership</div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* FAQ Section */}
           <section id="faq" className="section">
             <h2 className="section-title">Frequently Asked Questions (Updated 2026)</h2>
             <div className="faq-grid">
               {faqItems.map((item, index) => (
-                <div key={index} className="faq-item">
-                  <h3 className="faq-question">{item.question}</h3>
-                  <p style={{ color: '#4b5563' }}>{item.answer}</p>
+                <div key={index} className="faq-item" itemScope itemType="https://schema.org/Question">
+                  <h3 className="faq-question" itemProp="name">{item.question}</h3>
+                  <p itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer" style={{ color: '#4b5563' }}>
+                    <span itemProp="text">{item.answer}</span>
+                  </p>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* CTA Section */}
           <section className="section">
-            <h2 className="section-title">
-              Next Steps: Build a Resume That Gets Results in 2026
-            </h2>
-
+            <h2 className="section-title">Next Steps: Build a Resume That Gets Results in 2026</h2>
             <p className="paragraph">
               Now that you understand how to build a powerful {primaryKeyword}, it's time to put your knowledge into action. Use the free, ATS-optimized tools at ProfessionalResumeFree.com to create a polished, modern resume in minutes—no signup required.
             </p>
-
             <div className="cta-card">
               <h3 className="cta-title">Start Building Your Professional Resume</h3>
-              <p className="cta-description">
-                Join job seekers who landed interviews faster with our ATS-friendly templates.
-              </p>
+              <p className="cta-description">Join job seekers who landed interviews faster with our ATS-friendly templates.</p>
               <div className="cta-features">
-                <div className="cta-feature">
-                  <FiCheck className="feature-icon" />
-                  <span>46+ ATS-Optimized Templates</span>
-                </div>
-                <div className="cta-feature">
-                  <FiCheck className="feature-icon" />
-                  <span>Instant PDF Download</span>
-                </div>
-                <div className="cta-feature">
-                  <FiCheck className="feature-icon" />
-                  <span>No Sign Up Required</span>
-                </div>
-                <div className="cta-feature">
-                  <FiCheck className="feature-icon" />
-                  <span>Mobile-Friendly Builder</span>
-                </div>
+                <div className="cta-feature"><FiCheck className="feature-icon" /><span>46+ ATS-Optimized Templates</span></div>
+                <div className="cta-feature"><FiCheck className="feature-icon" /><span>Instant PDF Download</span></div>
+                <div className="cta-feature"><FiCheck className="feature-icon" /><span>No Sign Up Required</span></div>
+                <div className="cta-feature"><FiCheck className="feature-icon" /><span>Mobile-Friendly Builder</span></div>
               </div>
               <div className="button-container">
                 <Link href="/resume-templates" className="btn-primary" style={{ background: '#ffffff', color: '#000000', borderColor: '#ffffff' }}>

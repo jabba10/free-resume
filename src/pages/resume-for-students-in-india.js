@@ -443,15 +443,16 @@ export const getStaticProps = async () => {
   const currentDate = new Date().toISOString().split('T')[0];
   const lastModifiedDate = new Date().toISOString();
 
+  // REMOVED www from meta URLs
   const meta = {
     title: "Resume for Students in India: Complete 2026 Guide",
     description:
       "A complete 2026 guide for students in India to write an ATS-friendly resume with formats, examples, and recruiter-backed tips to land internships and first jobs.",
     url:
-      "https://www.professionalresumefree.com/resume-for-students-in-india",
+      "https://professionalresumefree.com/resume-for-students-in-india",
     siteName: "Professional Resume Free",
     image:
-      "https://www.professionalresumefree.com/images/resume-for-students-in-india-og.jpg",
+      "https://professionalresumefree.com/images/resume-for-students-in-india-og.jpg",
   };
 
   const faqItems = [
@@ -492,6 +493,7 @@ export const getStaticProps = async () => {
     },
   ];
 
+  // REMOVED www from structured data URLs
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -503,7 +505,7 @@ export const getStaticProps = async () => {
         "description": meta.description,
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
@@ -524,7 +526,7 @@ export const getStaticProps = async () => {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
@@ -548,7 +550,7 @@ export const getStaticProps = async () => {
           "logo": {
             "@type": "ImageObject",
             "url":
-              "https://www.professionalresumefree.com/logo.png",
+              "https://professionalresumefree.com/logo.png",
           },
         },
         "mainEntityOfPage": {
@@ -636,8 +638,8 @@ export const getStaticProps = async () => {
 const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentDate, lastModifiedDate, buildTimestamp }) => {
   const currentYear = new Date().getFullYear();
   
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-students-in-india";
+  // SINGLE CANONICAL URL - REMOVED www
+  const canonicalUrl = "https://professionalresumefree.com/resume-for-students-in-india";
 
   return (
     <>
@@ -679,10 +681,10 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags */}
+        {/* Hreflang Tags - REMOVED www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-in" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
@@ -690,7 +692,7 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - REMOVED www */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content="Resume for Students in India: Complete 2026 Guide" />
         <meta property="og:description" content={meta.description} />
@@ -712,7 +714,7 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
         <meta property="article:tag" content="India resume" />
         <meta property="article:tag" content="fresher guide" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - REMOVED www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume for Students in India: Complete 2026 Guide" />
         <meta name="twitter:description" content={meta.description} />
@@ -900,25 +902,25 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
                       <td>Reverse-Chronological</td>
                       <td>
                         Most students applying for internships and campus placements
-                      </td>
+                       </td>
                       <td>
                         Familiar to Indian recruiters, easy to scan, highly ATS-friendly
-                      </td>
+                       </td>
                       <td>
                         Less flexible if you have gaps or non-traditional experience
-                      </td>
+                       </td>
                     </tr>
                     <tr>
                       <td>Hybrid / Combination</td>
                       <td>
                         Students with strong projects, certifications, or self-taught skills
-                      </td>
+                       </td>
                       <td>
                         Lets you showcase skills and projects before experience
-                      </td>
+                       </td>
                       <td>
                         Must be formatted carefully to remain clean and ATS-compatible
-                      </td>
+                       </td>
                     </tr>
                   </tbody>
                 </table>
@@ -1077,43 +1079,43 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
                       <th>Aspect</th>
                       <th>Student Resume</th>
                       <th>Experienced Resume</th>
-                     </tr>
+                    </tr>
                   </thead>
                   <tbody>
                      <tr>
                       <td>Focus</td>
                       <td>
                         Education, projects, internships, skills, and potential
-                      </td>
+                        </td>
                       <td>
                         Work history, achievements, leadership, and business impact
-                      </td>
-                     </tr>
-                     <tr>
+                        </td>
+                      </tr>
+                      <tr>
                       <td>Length</td>
                       <td>Usually 1 page</td>
                       <td>1–2 pages depending on experience</td>
-                     </tr>
-                     <tr>
+                      </tr>
+                      <tr>
                       <td>Key Sections</td>
                       <td>
                         Summary, Education, Skills, Projects, Internships, Activities
-                      </td>
+                        </td>
                       <td>
                         Summary, Experience, Key Achievements, Skills, Education
-                      </td>
-                     </tr>
-                     <tr>
+                        </td>
+                      </tr>
+                      <tr>
                       <td>Recruiter Expectation</td>
                       <td>
                         Evidence of learning ability, initiative, and alignment with role
-                      </td>
+                        </td>
                       <td>
                         Proven track record of delivering results and solving business problems
-                      </td>
-                     </tr>
+                        </td>
+                      </tr>
                   </tbody>
-                 </table>
+                </table>
               </div>
               <p className="paragraph" style={{ color: '#4b5563', marginBottom: '16px' }}>
                 Understanding this difference helps you stop comparing yourself to experienced candidates and instead focus on presenting the best version of your current profile. Your goal is not to look like a senior professional—it is to look like the most promising student or fresher in the applicant pool.

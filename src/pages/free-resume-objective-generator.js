@@ -922,7 +922,8 @@ const criticalCSS = `
 const CURRENT_YEAR = new Date().getFullYear();
 const CURRENT_DATE = new Date().toISOString().split('T')[0];
 const LAST_MODIFIED = new Date().toISOString();
-const SITE_URL = 'https://www.professionalresumefree.com';
+// UPDATED: Removed www from SITE_URL
+const SITE_URL = 'https://professionalresumefree.com';
 
 // FAQ Data
 const FAQS = [
@@ -963,27 +964,27 @@ const HOW_TO_STEPS = [
   {
     name: "Select Your Career Level",
     text: "Choose your current career stage (Entry, Mid, Senior, or Career Change) to get age-appropriate objective statements that match your experience.",
-    image: "https://www.professionalresumefree.com/images/step1-career-level.jpg"
+    image: "https://professionalresumefree.com/images/step1-career-level.jpg"
   },
   {
     name: "Enter Target Job Title",
     text: "Specify the exact job title you're targeting for customized professional phrasing that matches hiring manager expectations.",
-    image: "https://www.professionalresumefree.com/images/step2-job-title.jpg"
+    image: "https://professionalresumefree.com/images/step2-job-title.jpg"
   },
   {
     name: "Choose Your Industry",
     text: "Select your industry (Technology, Healthcare, Finance, etc.) for sector-specific language and terminology that resonates.",
-    image: "https://www.professionalresumefree.com/images/step3-industry.jpg"
+    image: "https://professionalresumefree.com/images/step3-industry.jpg"
   },
   {
     name: "Define Your Key Goal",
     text: "Select your primary career objective to generate goal-oriented statements that align with your aspirations.",
-    image: "https://www.professionalresumefree.com/images/step4-goal.jpg"
+    image: "https://professionalresumefree.com/images/step4-goal.jpg"
   },
   {
     name: "Generate & Customize",
     text: "Generate multiple professional options and customize them for each application. All outputs are ATS-optimized.",
-    image: "https://www.professionalresumefree.com/images/step5-customize.jpg"
+    image: "https://professionalresumefree.com/images/step5-customize.jpg"
   }
 ];
 
@@ -1058,11 +1059,11 @@ const SEO_KEYWORDS = [
   'career change objective generator'
 ];
 
-// Breadcrumb data
+// Breadcrumb data - UPDATED with non-www URLs
 const BREADCRUMB_DATA = [
-  { name: "Home", item: "https://www.professionalresumefree.com/" },
-  { name: "Free Tools", item: "https://www.professionalresumefree.com/free-tools" },
-  { name: "Resume Objective Generator", item: "https://www.professionalresumefree.com/free-resume-objective-generator" }
+  { name: "Home", item: "https://professionalresumefree.com/" },
+  { name: "Free Tools", item: "https://professionalresumefree.com/free-tools" },
+  { name: "Resume Objective Generator", item: "https://professionalresumefree.com/free-resume-objective-generator" }
 ];
 
 // Helper functions (kept as in your original code for brevity)
@@ -1755,14 +1756,14 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
   ];
 
   // ===== FIXED SCHEMA.ORG STRUCTURED DATA - All errors resolved =====
-  // CRITICAL FIX: Removed AggregateRating from WebPage and added proper itemReviewed to Reviews
+  // UPDATED: All URLs use non-www version
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-objective-generator/#webpage",
-        "url": "https://www.professionalresumefree.com/free-resume-objective-generator",
+        "@id": "https://professionalresumefree.com/free-resume-objective-generator/#webpage",
+        "url": "https://professionalresumefree.com/free-resume-objective-generator",
         "name": `Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR}`,
         "description": "Generate targeted, ATS-friendly resume objectives tailored to your career level, industry, and goals. Professional statements that get results. 100% free.",
         "datePublished": "2024-01-01",
@@ -1770,18 +1771,18 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free professional resume tools and resources",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             },
@@ -1794,7 +1795,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/og-objective-generator.jpg",
+          "url": "https://professionalresumefree.com/og-objective-generator.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1810,10 +1811,10 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://www.professionalresumefree.com/free-resume-objective-generator/#software",
+        "@id": "https://professionalresumefree.com/free-resume-objective-generator/#software",
         "name": "Free Resume Objective Generator - ATS Optimized",
         "description": "Professional resume objective generator with ATS-friendly templates for all career levels",
-        "url": "https://www.professionalresumefree.com/free-resume-objective-generator",
+        "url": "https://professionalresumefree.com/free-resume-objective-generator",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -1844,7 +1845,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.professionalresumefree.com/free-resume-objective-generator/#faqpage",
+        "@id": "https://professionalresumefree.com/free-resume-objective-generator/#faqpage",
         "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
@@ -1857,7 +1858,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
               "name": "Career Advisory Team"
             }
           },
-          "mainEntityOfPage": "https://www.professionalresumefree.com/free-resume-objective-generator/#webpage"
+          "mainEntityOfPage": "https://professionalresumefree.com/free-resume-objective-generator/#webpage"
         }))
       },
       {
@@ -1875,7 +1876,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           "position": index + 1,
           "name": step.name,
           "text": step.text,
-          "url": `https://www.professionalresumefree.com/free-resume-objective-generator#step-${index + 1}`,
+          "url": `https://professionalresumefree.com/free-resume-objective-generator#step-${index + 1}`,
           "image": step.image
         }))
       },
@@ -1886,7 +1887,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
       // ===== FIXED: Individual Reviews with REQUIRED itemReviewed field =====
       ...REVIEWS.map((review, index) => ({
         "@type": "Review",
-        "@id": `https://www.professionalresumefree.com/free-resume-objective-generator/#review-${index + 1}`,
+        "@id": `https://professionalresumefree.com/free-resume-objective-generator/#review-${index + 1}`,
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": review.rating,
@@ -1908,7 +1909,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           "name": "Free Resume Objective Generator",
           "applicationCategory": "BusinessApplication",
           "operatingSystem": "Any",
-          "url": "https://www.professionalresumefree.com/free-resume-objective-generator"
+          "url": "https://professionalresumefree.com/free-resume-objective-generator"
         }
       }))
     ]
@@ -2052,15 +2053,15 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="revisit-after" content="2 days" />
         <meta name="build-timestamp" content={buildTimestamp} />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://www.professionalresumefree.com/free-resume-objective-generator" />
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        <link rel="canonical" href="https://professionalresumefree.com/free-resume-objective-generator" />
         
-        {/* Open Graph */}
+        {/* Open Graph - UPDATED without www */}
         <meta property="og:title" content={`Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR}`} />
         <meta property="og:description" content="Generate professional resume objectives instantly. Tailored to your career level and goals. 100% free, no signup. ATS-optimized for 3x more interviews." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.professionalresumefree.com/free-resume-objective-generator" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/og-objective-generator.jpg" />
+        <meta property="og:url" content="https://professionalresumefree.com/free-resume-objective-generator" />
+        <meta property="og:image" content="https://professionalresumefree.com/og-objective-generator.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free ATS Resume Objective Generator - Create Professional Objectives" />
@@ -2068,11 +2069,11 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeSeoData.lastModifiedDate} />
         
-        {/* Twitter */}
+        {/* Twitter - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Free Resume Objective Generator ${CURRENT_YEAR}`} />
         <meta name="twitter:description" content="Generate professional, ATS-friendly resume objectives tailored to your career level. 100% free, no signup." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-objective-generator.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-objective-generator.jpg" />
         <meta name="twitter:image:alt" content="Free Resume Objective Generator with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -2102,13 +2103,13 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
-      {/* Breadcrumb Navigation - CENTERED */}
+      {/* Breadcrumb Navigation - CENTERED - UPDATED without www */}
       <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol>
           {BREADCRUMB_DATA.map((item, index) => (
             <li key={index}>
               <Link 
-                href={item.item.replace('https://www.professionalresumefree.com', '')}
+                href={item.item.replace('https://professionalresumefree.com', '')}
                 className="breadcrumb-link"
               >
                 <span className="breadcrumb-text">{item.name}</span>
@@ -2463,7 +2464,7 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                     <meta itemProp="name" content="Free Resume Objective Generator" />
                     <meta itemProp="applicationCategory" content="BusinessApplication" />
                     <meta itemProp="operatingSystem" content="Any" />
-                    <meta itemProp="url" content="https://www.professionalresumefree.com/free-resume-objective-generator" />
+                    <meta itemProp="url" content="https://professionalresumefree.com/free-resume-objective-generator" />
                   </div>
                 </div>
               ))}

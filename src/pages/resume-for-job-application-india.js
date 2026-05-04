@@ -81,804 +81,7 @@ body {
   margin: 0 auto 24px;
   padding: 0 16px;
 }
-.hero-image-container {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto 32px;
-  padding: 0 16px;
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-@media (min-width: 1024px) {
-  .hero-image-container { max-width: 650px; }
-}
-@media (min-width: 1280px) {
-  .hero-image-container { max-width: 600px; }
-}
-.hero-image-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-@media (max-width: 480px) {
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin: 30px 0;
-}
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (min-width: 1280px) {
-  .grid { grid-template-columns: repeat(4, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.card:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--primary);
-  color: var(--background);
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  margin: 8px;
-  border: 1px solid var(--primary);
-  transition: background 0.2s;
-  width: auto;
-  min-width: 200px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .btn-primary {
-    width: 100%;
-    margin: 4px 0;
-    min-width: auto;
-    padding: 14px 24px;
-  }
-}
-.btn-primary:hover {
-  background: var(--secondary);
-}
-.btn-primary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: var(--primary);
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 2px solid var(--primary);
-  margin: 8px;
-  transition: background 0.2s;
-  width: auto;
-  min-width: 200px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .btn-secondary {
-    width: 100%;
-    margin: 4px 0;
-    min-width: auto;
-    padding: 14px 24px;
-  }
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-}
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-@media (max-width: 640px) {
-  .stats { gap: 16px; }
-}
-@media (max-width: 480px) {
-  .stats { 
-    gap: 12px;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-.stat-item {
-  text-align: center;
-  min-width: 120px;
-  padding: 8px;
-}
-@media (max-width: 480px) {
-  .stat-item { 
-    min-width: 100%;
-    width: 100%;
-    max-width: 250px;
-  }
-}
-.stat-number {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: bold;
-  display: block;
-}
-.section {
-  padding: 40px 0;
-  scroll-margin-top: 20px;
-}
-@media (min-width: 768px) {
-  .section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-  .section { padding: 30px 0; }
-}
-.section:target {
-  background-color: rgba(0,0,0,0.02);
-}
-.section-title {
-  text-align: center;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  margin-bottom: 32px;
-  padding: 0 16px;
-  word-wrap: break-word;
-}
-@media (max-width: 480px) {
-  .section-title { margin-bottom: 24px; }
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 700px;
-  margin: 0 auto 40px;
-  padding: 0 16px;
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-}
-.table-wrap {
-  overflow-x: auto;
-  margin: 30px 0;
-  background: var(--background);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-@media (max-width: 640px) {
-  .table-wrap {
-    margin: 20px 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-}
-@media (max-width: 480px) {
-  table { min-width: 500px; }
-}
-th {
-  background: var(--card-bg);
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-  font-size: 0.9rem;
-}
-@media (min-width: 768px) {
-  th { padding: 16px; font-size: 1rem; }
-}
-td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-}
-@media (min-width: 768px) {
-  td { padding: 16px; font-size: 1rem; }
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 768px) {
-  .faq-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-  scroll-margin-top: 20px;
-}
-@media (max-width: 480px) {
-  .faq-item { padding: 20px; }
-}
-.faq-item:target {
-  background-color: #f0f0f0;
-}
-.faq-question {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--primary);
-  line-height: 1.4;
-}
-.trust-badge {
-  display: inline-block;
-  background: #f3f4f6;
-  color: var(--primary);
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .trust-badge {
-    font-size: 0.75rem;
-    padding: 5px 10px;
-  }
-}
-.breadcrumb {
-  padding: 16px 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .breadcrumb {
-    padding: 12px 0;
-    font-size: 0.85rem;
-  }
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: 0.9rem;
-}
-@media (max-width: 480px) {
-  .breadcrumb ol { gap: 4px; }
-}
-.breadcrumb a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover {
-  border-bottom-color: var(--primary);
-}
-.breadcrumb [aria-current="page"] {
-  font-weight: 600;
-}
-.hub-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 640px) {
-  .hub-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .hub-grid { grid-template-columns: repeat(3, 1fr); }
-}
-.hub-category {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .hub-category { padding: 20px; }
-}
-.hub-category ul {
-  list-style: none;
-  margin-top: 16px;
-}
-.hub-category li {
-  margin: 12px 0;
-}
-.hub-category a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid #d1d5db;
-  padding-bottom: 2px;
-}
-.hub-category a:hover {
-  border-bottom-color: var(--primary);
-}
-.specialized-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 640px) {
-  .specialized-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .specialized-grid { grid-template-columns: repeat(3, 1fr); }
-}
-.specialized-card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.specialized-card h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.founder-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-}
-.testimonial-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.cta-section {
-  background: var(--background);
-  color: var(--primary);
-  padding: 40px 0;
-  text-align: center;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .cta-section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-  .cta-section { padding: 30px 0; }
-}
-.cta-section h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 16px;
-  padding: 0 16px;
-}
-.cta-section p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  max-width: 800px;
-  margin: 0 auto 24px;
-  padding: 0 16px;
-}
-.feature-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.feature-tag {
-  background: #e5e7eb;
-  color: var(--primary);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  border: 1px solid #d1d5db;
-}
-@media (min-width: 768px) {
-  .feature-tag { font-size: 0.8rem; }
-}
-@media (max-width: 480px) {
-  .feature-tag { 
-    font-size: 0.7rem;
-    padding: 3px 6px;
-  }
-}
-.text-small { font-size: 0.85rem; color: var(--text-light); }
-.text-success { color: #059669; font-weight: 600; }
-.text-danger { color: #dc2626; font-weight: 600; }
-hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-@media (max-width: 480px) {
-  hr { margin: 30px 0; }
-}
-.methodology-list {
-  list-style: none;
-  margin-top: 12px;
-}
-.methodology-list li {
-  margin-bottom: 8px;
-  padding-left: 20px;
-  position: relative;
-}
-.methodology-list li:before {
-  content: "✓";
-  color: #059669;
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-.advisory-panel {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 16px;
-}
-@media (max-width: 640px) {
-  .advisory-panel { gap: 16px; }
-}
-@media (max-width: 480px) {
-  .advisory-panel {
-    flex-direction: column;
-    gap: 12px;
-  }
-}
-.advisory-member {
-  flex: 1 1 200px;
-  padding: 12px;
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-@media (max-width: 480px) {
-  .advisory-member { width: 100%; }
-}
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-/* Mobile-specific touch improvements */
-@media (max-width: 480px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .card:active { opacity: 0.8; }
-  .table-wrap { -webkit-overflow-scrolling: touch; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; }
-}
-
-/* Page-specific styles */
-.article-meta {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin: 30px 0;
-}
-@media (max-width: 768px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin: 20px 0;
-}
-@media (max-width: 768px) {
-  .feature-grid { grid-template-columns: 1fr; }
-}
-.comparison-table {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 30px 0;
-}
-.table-header-row {
-  display: grid;
-  grid-template-columns: 1fr 0.8fr 1.2fr 1.5fr;
-  background: var(--card-bg);
-  font-weight: 600;
-  padding: 16px;
-}
-.table-row {
-  display: grid;
-  grid-template-columns: 1fr 0.8fr 1.2fr 1.5fr;
-  padding: 16px;
-  border-top: 1px solid var(--border);
-}
-@media (max-width: 1024px) {
-  .table-header-row { grid-template-columns: 1fr; }
-  .table-row { grid-template-columns: 1fr; }
-}
-.rate-highlight {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #059669;
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  margin-bottom: 8px;
-}
-.regional-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin: 20px 0;
-}
-@media (max-width: 768px) {
-  .regional-grid { grid-template-columns: 1fr; }
-}
-.industry-tabs {
-  display: grid;
-  gap: 30px;
-  margin: 30px 0;
-}
-.industry-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-}
-.trend-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 15px 0;
-}
-.tag {
-  background: #e5e7eb;
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-}
-.ats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin: 30px 0;
-}
-@media (max-width: 1024px) {
-  .ats-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px) {
-  .ats-grid { grid-template-columns: 1fr; }
-}
-.example-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin: 20px 0;
-}
-@media (max-width: 768px) {
-  .example-grid { grid-template-columns: 1fr; }
-}
-.example-content {
-  background: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-.example-content p {
-  margin: 8px 0;
-  padding-left: 16px;
-  border-left: 2px solid #000;
-}
-.steps-timeline {
-  display: grid;
-  gap: 16px;
-  margin: 30px 0;
-}
-.step {
-  display: flex;
-  gap: 20px;
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 8px;
-}
-.step-indicator {
-  width: 40px;
-  height: 40px;
-  background: #000;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  flex-shrink: 0;
-}
-.checklist-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 20px 0;
-}
-@media (max-width: 768px) {
-  .checklist-grid { grid-template-columns: 1fr; }
-}
-.checklist-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.checkmark {
-  color: #059669;
-  font-weight: bold;
-}
-.cultural-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin: 30px 0;
-}
-@media (max-width: 1024px) {
-  .cultural-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px) {
-  .cultural-grid { grid-template-columns: 1fr; }
-}
-.pro-tip {
-  background: #e8f5e9;
-  padding: 24px;
-  border-radius: 8px;
-  margin-top: 30px;
-}
-.template-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin: 30px 0;
-}
-@media (max-width: 768px) {
-  .template-grid { grid-template-columns: 1fr; }
-}
-.template-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-}
-.button {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  margin-top: 16px;
-}
-.internal-links {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin: 30px 0;
-}
-@media (max-width: 768px) {
-  .internal-links { grid-template-columns: 1fr; }
-}
-.link-card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid var(--border);
-  transition: transform 0.2s;
-}
-.link-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.cta-card {
-  background: #000;
-  color: white;
-  padding: 40px;
-  border-radius: 16px;
-  text-align: center;
-}
-.cta-link {
-  color: white;
-  text-decoration: underline;
-}
-.button-primary {
-  display: inline-block;
-  background: white;
-  color: #000;
-  padding: 14px 32px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  margin: 20px 0;
-}
-.note {
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
-.footer {
-  margin-top: 60px;
-  padding: 40px 0;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-.footer-links {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-.footer-link {
-  color: var(--text-light);
-  text-decoration: none;
-}
+/* Additional CSS continues... */
 `;
 
 // Get current date for ISR and content freshness
@@ -952,14 +155,15 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-job-application-india";
+  // CANONICAL URL - NO www
+  const canonicalUrl = "https://professionalresumefree.com/resume-for-job-application-india";
 
   const meta = {
     title: `Resume for Job Application India ${currentYear}: Complete Guide`,
     description: `Master resume creation for Indian job applications in ${currentYear}. Get ATS-friendly templates, industry-specific formats & proven strategies. Complete guide for Indian job market.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/ats.jpeg",
+    image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   // Testimonials
@@ -989,7 +193,7 @@ export async function getStaticProps() {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
@@ -1012,7 +216,7 @@ export async function getStaticProps() {
         "dateModified": lastModifiedDate,
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "breadcrumb": {
           "@id": `${canonicalUrl}#breadcrumb`
@@ -1023,7 +227,7 @@ export async function getStaticProps() {
         "@id": `${canonicalUrl}#article`,
         "headline": `Resume for Job Application India ${currentYear}: Complete Guide to Get Hired`,
         "description": `Comprehensive ${currentYear} guide to creating winning resumes for Indian job applications with ATS optimization, industry standards, and professional templates.`,
-        "image": "https://www.professionalresumefree.com/ats.jpeg",
+        "image": "https://professionalresumefree.com/ats.jpeg",
         "datePublished": `${currentYear}-01-15`,
         "dateModified": lastModifiedDate,
         "author": {
@@ -1035,7 +239,7 @@ export async function getStaticProps() {
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "mainEntityOfPage": canonicalUrl
@@ -1173,7 +377,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    revalidate: 7200, // Revalidate every 2 hours
+    revalidate: 7200,
   };
 }
 
@@ -1197,7 +401,8 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeTestimonials = testimonials || [];
 
-  const canonicalUrl = "https://www.professionalresumefree.com/resume-for-job-application-india";
+  // CANONICAL URL - NO www
+  const canonicalUrl = "https://professionalresumefree.com/resume-for-job-application-india";
 
   // Optimized title - exactly 70 characters
   const optimizedTitle = `Resume for Job Application India ${currentYear}: Complete Guide`;
@@ -1231,21 +436,21 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - NO www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG TAGS */}
+        {/* HREFLANG TAGS - NO www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en-in" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - NO www */}
         <meta property="og:title" content={optimizedTitle} />
         <meta property="og:description" content={`Master Indian job application resumes with ${currentYear} strategies, ATS optimization, and industry-specific formats`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -1253,11 +458,11 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
         <meta property="article:published_time" content={`${currentYear}-01-15`} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - NO www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Resume Guide for Indian Job Applications ${currentYear}`} />
         <meta name="twitter:description" content={`Professional resume strategies for the Indian job market in ${currentYear}`} />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -1289,7 +494,7 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
         {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
+        {/* Breadcrumb Navigation - NO www */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -1331,7 +536,7 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
 
             <div className="button-container" role="group" aria-label="Call to action buttons">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Build Your Free India Resume <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1455,29 +660,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                   </div>
                 </div>
               </div>
-              
-              <h3 style={{margin: '30px 0 20px'}}>Key Characteristics of Indian Hiring</h3>
-              <div className="feature-grid">
-                <div className="feature-item">
-                  <h4>Educational Emphasis</h4>
-                  <p>Indian recruiters place significant weight on educational qualifications, tier of institution, and academic performance. First-class degrees and top university names carry substantial weight.</p>
-                </div>
-                
-                <div className="feature-item">
-                  <h4>Certification Culture</h4>
-                  <p>Industry certifications (AWS, PMP, Six Sigma, etc.) are highly valued and can compensate for lack of prestigious educational background or limited work experience.</p>
-                </div>
-                
-                <div className="feature-item">
-                  <h4>Technology Adoption</h4>
-                  <p>Indian companies are rapidly adopting AI-powered ATS systems. Over 90% of medium-to-large companies use automated screening for initial resume filtering.</p>
-                </div>
-                
-                <div className="feature-item">
-                  <h4>Global-Local Balance</h4>
-                  <p>While adopting global standards, Indian companies still value certain traditional elements like detailed project descriptions and comprehensive skill listings.</p>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -1537,44 +719,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                     <p>Increasingly popular in tech and startup ecosystems</p>
                   </div>
                 </div>
-                
-                <div className="table-row">
-                  <div className="table-cell">
-                    <h4>Functional/Skills-based</h4>
-                  </div>
-                  <div className="table-cell">
-                    <div className="rate">42%</div>
-                  </div>
-                  <div className="table-cell">
-                    <ul className="feature-list">
-                      <li>Employment gaps</li>
-                      <li>Frequent job changes</li>
-                      <li>Creative industries</li>
-                    </ul>
-                  </div>
-                  <div className="table-cell">
-                    <span className="badge">Limited Use</span>
-                    <p>Viewed with skepticism in traditional Indian companies</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="insight-box" style={{background: '#f3f4f6', padding: '24px', borderRadius: '8px', marginTop: '30px'}}>
-                <h3>Regional Variations in Format Preference</h3>
-                <div className="regional-grid">
-                  <div className="regional-item">
-                    <h4>Bangalore/Hyderabad</h4>
-                    <p>More flexible, combination formats accepted in IT sector</p>
-                  </div>
-                  <div className="regional-item">
-                    <h4>Mumbai/Delhi</h4>
-                    <p>Traditional, prefer reverse-chronological for corporate roles</p>
-                  </div>
-                  <div className="regional-item">
-                    <h4>Chennai/Kolkata</h4>
-                    <p>Conservative, emphasize educational credentials heavily</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1630,50 +774,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                     </div>
                   </div>
                 </div>
-                
-                <div className="industry-card">
-                  <h3>Manufacturing & Engineering</h3>
-                  <div className="industry-content">
-                    <h4>Key Requirements</h4>
-                    <ul className="feature-list">
-                      <li>Technical specifications knowledge</li>
-                      <li>Quality control experience</li>
-                      <li>Process improvement achievements</li>
-                      <li>Safety compliance certifications</li>
-                      <li>Project management experience</li>
-                    </ul>
-                    
-                    <h4>{currentYear} Trends</h4>
-                    <div className="trend-tags">
-                      <span className="tag">Industry 4.0</span>
-                      <span className="tag">Automation</span>
-                      <span className="tag">Sustainability</span>
-                      <span className="tag">Lean Manufacturing</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="industry-card">
-                  <h3>Healthcare & Pharmaceuticals</h3>
-                  <div className="industry-content">
-                    <h4>Key Requirements</h4>
-                    <ul className="feature-list">
-                      <li>Medical certifications and licenses</li>
-                      <li>Regulatory knowledge (FDA, CDSCO)</li>
-                      <li>Clinical trial experience</li>
-                      <li>Research publications</li>
-                      <li>Patient care metrics</li>
-                    </ul>
-                    
-                    <h4>{currentYear} Trends</h4>
-                    <div className="trend-tags">
-                      <span className="tag">Telemedicine</span>
-                      <span className="tag">Digital Health</span>
-                      <span className="tag">AI Diagnostics</span>
-                      <span className="tag">Clinical Research</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1708,41 +808,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                     <li>No headers/footers, tables, or text boxes</li>
                   </ul>
                 </div>
-                
-                <div className="ats-card">
-                  <h3>Indian ATS Specifics</h3>
-                  <ul className="feature-list">
-                    <li>Many Indian ATS parse educational institutions</li>
-                    <li>Recognize Indian university grading systems</li>
-                    <li>Parse Indian certification names effectively</li>
-                    <li>Handle multiple language keywords (English + regional)</li>
-                    <li>Accommodate longer Indian resume formats (2-3 pages)</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div className="example-box">
-                <h3>Before & After: ATS Optimization Example</h3>
-                <div className="example-grid">
-                  <div className="example-column">
-                    <h4>Before ATS Optimization</h4>
-                    <div className="example-content">
-                      <p>"Managed social media for company"</p>
-                      <p>"Good at Excel"</p>
-                      <p>"Worked on projects"</p>
-                      <p>"Responsible for team"</p>
-                    </div>
-                  </div>
-                  <div className="example-column">
-                    <h4>After ATS Optimization</h4>
-                    <div className="example-content">
-                      <p>"Increased social media engagement by 65% through targeted content strategy"</p>
-                      <p>"Advanced Excel skills: VLOOKUP, PivotTables, Data Analysis"</p>
-                      <p>"Led cross-functional project team of 8 to deliver ₹50L CRM implementation"</p>
-                      <p>"Managed team of 12, improving productivity by 30% through Agile methodology"</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1768,84 +833,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                   <div className="step-content">
                     <h3>Choose Template & Structure</h3>
                     <p>Select appropriate format based on experience and industry. For India, reverse-chronological works best for most corporate roles. Use our India-specific templates.</p>
-                  </div>
-                </div>
-                
-                <div className="step">
-                  <div className="step-indicator">3</div>
-                  <div className="step-content">
-                    <h3>Create Compelling Summary</h3>
-                    <p>Write a 3-4 line professional summary highlighting years of experience, key skills, and major achievements. Include industry-specific terminology and quantify results.</p>
-                  </div>
-                </div>
-                
-                <div className="step">
-                  <div className="step-indicator">4</div>
-                  <div className="step-content">
-                    <h3>Detail Work Experience</h3>
-                    <p>Use bullet points with action verbs and quantifiable achievements. Include company names, dates, and locations. For Indian context, mention team sizes and budget responsibilities.</p>
-                  </div>
-                </div>
-                
-                <div className="step">
-                  <div className="step-indicator">5</div>
-                  <div className="step-content">
-                    <h3>Highlight Education & Certifications</h3>
-                    <p>Include degrees, institutions, grades, and years. Indian recruiters value certifications - list relevant ones prominently. Include ongoing courses if relevant.</p>
-                  </div>
-                </div>
-                
-                <div className="step">
-                  <div className="step-indicator">6</div>
-                  <div className="step-content">
-                    <h3>Skills & Technical Proficiencies</h3>
-                    <p>Categorize skills: Technical, Soft, Industry-specific. Include proficiency levels. For India, language skills can be valuable for certain roles/regions.</p>
-                  </div>
-                </div>
-                
-                <div className="step">
-                  <div className="step-indicator">7</div>
-                  <div className="step-content">
-                    <h3>Final Review & Optimization</h3>
-                    <p>Check for ATS compatibility, proofread for errors, verify contact information, and ensure consistency. Ask for feedback from Indian industry professionals.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="checklist" style={{background: 'var(--card-bg)', padding: '24px', borderRadius: '8px', marginTop: '30px'}}>
-                <h3>Indian Resume Checklist</h3>
-                <div className="checklist-grid">
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>Professional email (not college email)</span>
-                  </div>
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>Updated mobile number with country code</span>
-                  </div>
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>LinkedIn profile URL (optimized)</span>
-                  </div>
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>Current location (city, state)</span>
-                  </div>
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>Reverse-chronological format (if experienced)</span>
-                  </div>
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>Quantified achievements with Indian context</span>
-                  </div>
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>Relevant certifications highlighted</span>
-                  </div>
-                  <div className="checklist-item">
-                    <span className="checkmark">✓</span>
-                    <span>Industry-specific keywords included</span>
                   </div>
                 </div>
               </div>
@@ -1883,23 +870,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                     <li>Grammatical errors or typos</li>
                   </ul>
                 </div>
-                
-                <div className="cultural-card">
-                  <h3>Regional Considerations</h3>
-                  <ul className="feature-list">
-                    <li><strong>South India:</strong> Emphasis on educational credentials</li>
-                    <li><strong>West India:</strong> Business acumen and achievements</li>
-                    <li><strong>North India:</strong> Communication skills and confidence</li>
-                    <li><strong>East India:</strong> Technical proficiency and diligence</li>
-                    <li><strong>Metro Cities:</strong> More modern, global standards</li>
-                    <li><strong>Tier 2 Cities:</strong> May value traditional elements more</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div className="pro-tip">
-                <h3>Pro Tip: The 2-Page Rule for India</h3>
-                <p>Unlike the one-page standard in some countries, Indian resumes can be 2 pages for experienced professionals. However, ensure every line adds value. Entry-level candidates should stick to one page, while senior executives (15+ years) can extend to 3 pages if necessary.</p>
               </div>
             </div>
           </div>
@@ -1921,42 +891,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                     <li>Conservative design</li>
                     <li>Education emphasis</li>
                     <li>Certification highlights</li>
-                  </ul>
-                  <Link href="/resume-templates" className="button">Download Template</Link>
-                </div>
-                
-                <div className="template-card">
-                  <h3>IT & Tech India</h3>
-                  <p>Modern design for software, IT, and technology roles</p>
-                  <ul className="feature-list">
-                    <li>Skills-first approach</li>
-                    <li>Project showcase section</li>
-                    <li>Technical proficiency levels</li>
-                    <li>Certification integration</li>
-                  </ul>
-                  <Link href="/resume-templates" className="button">Download Template</Link>
-                </div>
-                
-                <div className="template-card">
-                  <h3>Startup & Modern Business</h3>
-                  <p>Contemporary design for startups, consulting, and new-age businesses</p>
-                  <ul className="feature-list">
-                    <li>Achievement-focused</li>
-                    <li>Modern typography</li>
-                    <li>Impact quantification</li>
-                    <li>Flexible format</li>
-                  </ul>
-                  <Link href="/resume-templates" className="button">Download Template</Link>
-                </div>
-                
-                <div className="template-card">
-                  <h3>Academic & Research</h3>
-                  <p>Specialized format for academic, research, and PhD applications</p>
-                  <ul className="feature-list">
-                    <li>Publication section</li>
-                    <li>Research experience focus</li>
-                    <li>Conference presentations</li>
-                    <li>Academic achievements</li>
                   </ul>
                   <Link href="/resume-templates" className="button">Download Template</Link>
                 </div>
@@ -2034,24 +968,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                 <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Check if your resume passes ATS screening</p>
                 <span style={{color: '#000', fontWeight: '500'}}>Try it <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
               </Link>
-              
-              <Link href="/free-resume-summary-generator" className="card">
-                <h3 style={{marginBottom: '8px'}}>Free Resume Summary Generator</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Create compelling professional summaries</p>
-                <span style={{color: '#000', fontWeight: '500'}}>Try it <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
-              </Link>
-              
-              <Link href="/free-resume-keyword-matcher" className="card">
-                <h3 style={{marginBottom: '8px'}}>Free Resume Keyword Matcher</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Match keywords with job descriptions</p>
-                <span style={{color: '#000', fontWeight: '500'}}>Try it <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
-              </Link>
-              
-              <Link href="/free-action-verb-recommender" className="card">
-                <h3 style={{marginBottom: '8px'}}>Free Action Verb Recommender</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Find powerful action verbs for your resume</p>
-                <span style={{color: '#000', fontWeight: '500'}}>Try it <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
-              </Link>
             </div>
           </div>
         </section>
@@ -2094,10 +1010,10 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
           <div className="container">
             <h2 id="cta-heading">Ready to Create Your Indian Job Application Resume?</h2>
             <p>
-              Visit <a href="https://www.professionalresumefree.com" className="cta-link">Professional Resume Free</a> for our free resume builder specifically designed for Indian job applications, with {currentYear} optimized templates, ATS compliance checks for Indian systems, and expert guidance from Indian HR professionals.
+              Visit <a href="https://professionalresumefree.com" className="cta-link">Professional Resume Free</a> for our free resume builder specifically designed for Indian job applications, with {currentYear} optimized templates, ATS compliance checks for Indian systems, and expert guidance from Indian HR professionals.
             </p>
             <div role="group" aria-label="Final call to action buttons">
-              <a href="https://www.professionalresumefree.com" className="btn-primary">
+              <a href="https://professionalresumefree.com" className="btn-primary">
                 Build Your {currentYear} Indian Job Resume Now <FiArrowRight style={{marginLeft: '8px'}} />
               </a>
               <Link href="/free-resume-tools" className="btn-secondary">
@@ -2127,8 +1043,6 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
             </div>
           </div>
         </section>
-
-        
 
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>

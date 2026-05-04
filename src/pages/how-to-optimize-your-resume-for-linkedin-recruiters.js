@@ -785,20 +785,20 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-optimize-your-resume-for-linkedin-recruiters";
+  const canonicalUrl = "https://professionalresumefree.com/how-to-optimize-your-resume-for-linkedin-recruiters";
 
   const breadcrumbData = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.professionalresumefree.com"
+      "item": "https://professionalresumefree.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Career Resources",
-      "item": "https://www.professionalresumefree.com/resume-templates"
+      "item": "https://professionalresumefree.com/resume-templates"
     },
     {
       "@type": "ListItem",
@@ -813,7 +813,7 @@ export async function getStaticProps() {
     description: "Master LinkedIn resume optimization with expert strategies to attract recruiters. Learn keyword optimization, profile alignment, and proven techniques to get discovered.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
-    image: "https://www.professionalresumefree.com/linkedin-optimization.jpeg",
+    image: "https://professionalresumefree.com/linkedin-optimization.jpeg",
   };
 
   // Long-tail keywords for GEO
@@ -948,15 +948,15 @@ function OptimizeResumeLinkedIn({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - Updated without www */}
         <meta property="og:title" content="How to Optimize Your Resume for LinkedIn Recruiters: 2026 Guide" />
         <meta property="og:description" content="Master LinkedIn resume optimization with expert strategies to attract recruiters. Learn keyword optimization, profile alignment, and proven techniques to get discovered." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.professionalresumefree.com/linkedin-optimization.jpeg" />
+        <meta property="og:image" content="https://professionalresumefree.com/linkedin-optimization.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -964,11 +964,11 @@ function OptimizeResumeLinkedIn({
         <meta property="article:published_time" content="2026-02-15" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Optimize Your Resume for LinkedIn Recruiters" />
         <meta name="twitter:description" content="Master LinkedIn resume optimization with expert strategies to attract recruiters." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/linkedin-optimization.jpeg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/linkedin-optimization.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -983,7 +983,7 @@ function OptimizeResumeLinkedIn({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - Updated without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1005,7 +1005,7 @@ function OptimizeResumeLinkedIn({
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-02-15",
@@ -1166,7 +1166,7 @@ function OptimizeResumeLinkedIn({
 
             <div className="hero-actions">
               <a
-                href="https://www.professionalresumefree.com"
+                href="https://professionalresumefree.com"
                 className="btn-primary"
               >
                 Start Optimizing Now <FiArrowRight style={{marginLeft: '8px'}} />
@@ -1523,7 +1523,7 @@ function OptimizeResumeLinkedIn({
               </p>
               <div className="hero-actions">
                 <a
-                  href="https://www.professionalresumefree.com"
+                  href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
                   Start Optimizing Now <FiArrowRight style={{marginLeft: '8px'}} />

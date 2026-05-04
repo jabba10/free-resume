@@ -577,18 +577,18 @@ const criticalCSS = `
   }
 `;
 
-// ===== METADATA CONFIGURATION =====
+// ===== METADATA CONFIGURATION - ALL URLs WITHOUT www =====
 const metadata = {
   // OPTIMIZED TITLE - Under 70 characters (62 chars)
   title: 'Resume for Private Job: Expert Guide (2026) | Professional Resume Free',
   description: 'Learn how to write a resume for private jobs that impresses hiring managers & beats ATS. 46+ templates, industry examples, expert strategies. Free builder included.',
   keywords: 'resume for private job, private sector resume, corporate resume, ATS friendly resume, professional resume, job application resume, private company resume, business resume, corporate job application, professional CV',
-  canonical: 'https://www.professionalresumefree.com/resume-for-private-job',
+  canonical: 'https://professionalresumefree.com/resume-for-private-job',
   
   openGraph: {
     title: 'Resume for Private Job: Expert Guide (2026)',
     description: 'Expert-backed guide to creating a resume for private sector jobs. Includes industry examples, ATS strategies, and proven templates that get interviews.',
-    url: 'https://www.professionalresumefree.com/resume-for-private-job',
+    url: 'https://professionalresumefree.com/resume-for-private-job',
     type: 'article',
     siteName: 'Professional Resume Free',
     locale: 'en_US',
@@ -744,7 +744,7 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
   const displayDate = generatedAt.split('T')[0];
   const currentYear = new Date().getFullYear();
 
-  // ===== SCHEMA.ORG JSON-LD =====
+  // ===== SCHEMA.ORG JSON-LD - ALL URLs WITHOUT www =====
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -757,14 +757,14 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
     author: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
-      url: 'https://www.professionalresumefree.com'
+      url: 'https://professionalresumefree.com'
     },
     publisher: {
       '@type': 'Organization',
       name: 'Professional Resume Free',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.professionalresumefree.com/logo.png'
+        url: 'https://professionalresumefree.com/logo.png'
       }
     },
     datePublished: '2025-01-01',
@@ -784,19 +784,19 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
         '@type': 'ListItem',
         position: 1,
         name: 'Professional Resume Free',
-        item: 'https://www.professionalresumefree.com'
+        item: 'https://professionalresumefree.com'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Career Resources',
-        item: 'https://www.professionalresumefree.com/resume-for-private-job'
+        item: 'https://professionalresumefree.com/resume-for-private-job'
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: 'Resume Guides',
-        item: 'https://www.professionalresumefree.com/resume-for-private-job'
+        item: 'https://professionalresumefree.com/resume-for-private-job'
       },
       {
         '@type': 'ListItem',
@@ -816,7 +816,7 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
     isPartOf: {
       '@type': 'WebSite',
       name: 'Professional Resume Free',
-      url: 'https://www.professionalresumefree.com'
+      url: 'https://professionalresumefree.com'
     },
     dateModified: generatedAt,
     inLanguage: 'en-US',
@@ -901,7 +901,7 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
     creator: {
       '@type': 'Organization',
       name: 'Professional Resume Free Research Lab',
-      url: 'https://www.professionalresumefree.com/resume-for-private-job'
+      url: 'https://professionalresumefree.com/resume-for-private-job'
     }
   };
 
@@ -917,7 +917,7 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content={metadata.robots} />
         
-        {/* ===== SINGLE CANONICAL TAG ===== */}
+        {/* ===== SINGLE CANONICAL TAG - NO www ===== */}
         <link rel="canonical" href={metadata.canonical} />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
@@ -934,7 +934,7 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
         <meta httpEquiv="last-modified" content={generatedAt} />
         <meta name="build-timestamp" content={buildTimestamp.toString()} />
         
-        {/* ===== OPEN GRAPH (Facebook/LinkedIn) ===== */}
+        {/* ===== OPEN GRAPH (Facebook/LinkedIn) - NO www ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content={metadata.openGraph.url} />
@@ -948,14 +948,14 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
           <meta key={i} property="article:tag" content={tag} />
         ))}
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD - NO www ===== */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
         <meta name="twitter:creator" content={metadata.twitter.creator} />
         <meta name="twitter:site" content={metadata.twitter.site} />
         
-        {/* ===== SCHEMA.ORG JSON-LD ===== */}
+        {/* ===== SCHEMA.ORG JSON-LD - NO www ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -983,13 +983,13 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
       </Head>
 
       <main className="page-wrapper">
-        {/* ===== BREADCRUMB NAVIGATION ===== */}
+        {/* ===== BREADCRUMB NAVIGATION - NO www ===== */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <a href="https://www.professionalresumefree.com">Home</a>
+          <a href="https://professionalresumefree.com">Home</a>
           <span>/</span>
-          <a href="https://www.professionalresumefree.com/resume-for-private-job">Resources</a>
+          <a href="https://professionalresumefree.com/resume-for-private-job">Resources</a>
           <span>/</span>
-          <a href="https://www.professionalresumefree.com/resume-for-private-job">Resume Guides</a>
+          <a href="https://professionalresumefree.com/resume-for-private-job">Resume Guides</a>
           <span>/</span>
           <span>Resume for Private Job</span>
         </nav>

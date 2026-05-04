@@ -826,7 +826,8 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const displayDate = safeCurrentDate.split('T')[0];
   const currentYear = new Date().getFullYear();
-  const canonicalUrl = "https://www.professionalresumefree.com/how-to-create-a-resume-with-no-experience";
+  // REMOVED www from canonical URL
+  const canonicalUrl = "https://professionalresumefree.com/how-to-create-a-resume-with-no-experience";
   
   // FAQ data for structured data
   const faqs = [
@@ -997,6 +998,7 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
     heart: "❤️"
   };
 
+  // REMOVED www from schema data
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1011,18 +1013,18 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free resume templates and career resources",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             }
@@ -1030,7 +1032,7 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/no-experience-resume-guide.jpg",
+          "url": "https://professionalresumefree.com/no-experience-resume-guide.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1041,7 +1043,7 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://www.professionalresumefree.com"
+              "item": "https://professionalresumefree.com"
             },
             {
               "@type": "ListItem",
@@ -1056,18 +1058,18 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
         "@type": "Article",
         "headline": "How to Create a Resume With No Experience: Complete 2026 Guide",
         "description": "Comprehensive guide to building professional resumes without work experience",
-        "image": "https://www.professionalresumefree.com/no-experience-resume-guide.jpg",
+        "image": "https://professionalresumefree.com/no-experience-resume-guide.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2024-01-01",
@@ -1142,14 +1144,14 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* CANONICAL URL - Only one canonical tag */}
+        {/* CANONICAL URL - Only one canonical tag - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - REMOVED www from image URLs */}
         <meta property="og:title" content="No Experience Resume 2026: Complete Guide & Free Templates" />
         <meta property="og:description" content="Learn how to create a resume with no experience in 2026. Step-by-step guide with templates, strategies, and expert tips." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/no-experience-resume-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/no-experience-resume-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="No Experience Resume Guide 2026 - Professional tips and templates" />
@@ -1165,11 +1167,11 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="Resume Writing, Career Development, Job Search" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - REMOVED www from image URLs */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="No Experience Resume 2026: Complete Guide & Free Templates" />
         <meta name="twitter:description" content="Learn how to create a resume with no experience in 2026. Step-by-step guide with templates and expert tips." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-no-experience-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-no-experience-guide.jpg" />
         <meta name="twitter:image:alt" content="No Experience Resume Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1210,7 +1212,8 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
           <div className="container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
+                {/* REMOVED www from Link href */}
+                <Link href="https://professionalresumefree.com" itemProp="item">
                   <span itemProp="name">Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />

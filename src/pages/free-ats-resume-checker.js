@@ -1120,27 +1120,27 @@ const HOW_TO_STEPS = [
   {
     name: "Paste Resume Text",
     text: "Copy and paste your resume content (plain text only). Remove personal contact information for privacy.",
-    image: "https://www.professionalresumefree.com/images/step1-paste.jpg"
+    image: "https://professionalresumefree.com/images/step1-paste.jpg"
   },
   {
     name: "Analyze ATS Compatibility",
     text: "Our system scans for 50+ ATS parsing issues including formatting, structure, and content problems.",
-    image: "https://www.professionalresumefree.com/images/step2-analyze.jpg"
+    image: "https://professionalresumefree.com/images/step2-analyze.jpg"
   },
   {
     name: "Review Issues Found",
     text: "Get detailed feedback on high, medium, and low-risk issues that could prevent your resume from being parsed.",
-    image: "https://www.professionalresumefree.com/images/step3-review.jpg"
+    image: "https://professionalresumefree.com/images/step3-review.jpg"
   },
   {
     name: "Implement Fixes",
     text: "Follow our actionable fixes with before/after examples to optimize your resume for ATS systems.",
-    image: "https://www.professionalresumefree.com/images/step4-fix.jpg"
+    image: "https://professionalresumefree.com/images/step4-fix.jpg"
   },
   {
     name: "Test & Apply",
     text: "Test your optimized resume by copying it into Notepad to see what an ATS will actually read.",
-    image: "https://www.professionalresumefree.com/images/step5-test.jpg"
+    image: "https://professionalresumefree.com/images/step5-test.jpg"
   }
 ];
 
@@ -1198,9 +1198,9 @@ const REVIEWS = [
 
 // Breadcrumb data
 const BREADCRUMB_DATA = [
-  { name: "Home", item: "https://www.professionalresumefree.com/" },
-  { name: "Free Resume Tools", item: "https://www.professionalresumefree.com/free-resume-tools" },
-  { name: "ATS Resume Checker", item: "https://www.professionalresumefree.com/free-ats-resume-checker" }
+  { name: "Home", item: "https://professionalresumefree.com/" },
+  { name: "Free Resume Tools", item: "https://professionalresumefree.com/free-resume-tools" },
+  { name: "ATS Resume Checker", item: "https://professionalresumefree.com/free-ats-resume-checker" }
 ];
 
 // ATS Rules and Analysis Logic
@@ -1660,7 +1660,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   const safeBreadcrumbData = breadcrumbData || BREADCRUMB_DATA;
 
   // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/free-ats-resume-checker";
+  const canonicalUrl = "https://professionalresumefree.com/free-ats-resume-checker";
 
   // ===== FIXED SCHEMA DATA - All issues resolved =====
   const schemaData = {
@@ -1677,32 +1677,32 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free online resume builder and ATS optimization tools for job seekers worldwide",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             },
             "sameAs": [
               "https://twitter.com/ProResumeFree",
-              "https://www.linkedin.com/company/professional-resume-free",
-              "https://www.facebook.com/ProfessionalResumeFree",
-              "https://www.youtube.com/@ProfessionalResumeFree"
+              "https://linkedin.com/company/professional-resume-free",
+              "https://facebook.com/ProfessionalResumeFree",
+              "https://youtube.com/@ProfessionalResumeFree"
             ]
           }
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/og-ats-resume-checker.jpg",
+          "url": "https://professionalresumefree.com/images/og-ats-resume-checker.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1750,7 +1750,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "Mobile-Friendly Interface"
         ],
         "softwareVersion": "2026.1.0",
-        "screenshot": "https://www.professionalresumefree.com/images/screenshot-ats-checker.jpg",
+        "screenshot": "https://professionalresumefree.com/images/screenshot-ats-checker.jpg",
         "countriesSupported": "Global"
       },
       {
@@ -1858,7 +1858,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
         "description": "Professional ATS compatibility analysis tool for job seekers",
         "image": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/og-ats-resume-checker.jpg",
+          "url": "https://professionalresumefree.com/images/og-ats-resume-checker.jpg",
           "width": 1200,
           "height": 630,
           "caption": "Free ATS Resume Checker Tool Interface"
@@ -2006,7 +2006,7 @@ SKILLS
         {/* Open Graph */}
         <meta property="og:title" content="Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2026" />
         <meta property="og:description" content={`Analyze 50+ ATS parsing factors instantly. Privacy-first tool that works entirely in your browser. ${CURRENT_YEAR}`} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-ats-resume-checker.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-ats-resume-checker.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free ATS Resume Checker Tool Interface" />
@@ -2023,7 +2023,7 @@ SKILLS
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free ATS Resume Checker - Instant Compatibility Analysis 2026" />
         <meta name="twitter:description" content="Analyze your resume for 50+ ATS parsing issues. Privacy-first, browser-based tool. No signup required." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-ats-resume-checker.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-ats-resume-checker.jpg" />
         <meta name="twitter:image:alt" content="ATS Resume Checker Tool Preview" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />

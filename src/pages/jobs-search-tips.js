@@ -740,8 +740,8 @@ const JobSearchTips = ({ seoData }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const currentYear = new Date().getFullYear();
   
-  // Updated canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/jobs-search-tips";
+  // Updated canonical URL - removed www
+  const canonicalUrl = "https://professionalresumefree.com/jobs-search-tips";
   
   const onlineTips = [
     {
@@ -871,6 +871,7 @@ const JobSearchTips = ({ seoData }) => {
     }
   ];
 
+  // Updated schemaData with www removed from all URLs
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -885,18 +886,18 @@ const JobSearchTips = ({ seoData }) => {
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website",
-          "url": "https://www.professionalresumefree.com",
+          "@id": "https://professionalresumefree.com/#website",
+          "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
           "description": "Free online resume builder and career resources for job seekers",
           "publisher": {
             "@type": "Organization",
-            "@id": "https://www.professionalresumefree.com/#organization",
+            "@id": "https://professionalresumefree.com/#organization",
             "name": "Professional Resume Free",
-            "url": "https://www.professionalresumefree.com",
+            "url": "https://professionalresumefree.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.professionalresumefree.com/logo.png",
+              "url": "https://professionalresumefree.com/logo.png",
               "width": 512,
               "height": 512
             },
@@ -910,7 +911,7 @@ const JobSearchTips = ({ seoData }) => {
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://www.professionalresumefree.com/images/jobs-search-tips-preview.jpg",
+          "url": "https://professionalresumefree.com/images/jobs-search-tips-preview.jpg",
           "width": 1200,
           "height": 630
         },
@@ -921,7 +922,7 @@ const JobSearchTips = ({ seoData }) => {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://www.professionalresumefree.com"
+              "item": "https://professionalresumefree.com"
             },
             {
               "@type": "ListItem",
@@ -936,18 +937,18 @@ const JobSearchTips = ({ seoData }) => {
         "@type": "Article",
         "headline": "Job Search Tips 2026: Ultimate Guide to Land Your Dream Job Faster",
         "description": "Comprehensive guide to effective job search techniques for 2026, including digital tools, networking strategies, ATS optimization, and mindset techniques to accelerate your career growth by 400%.",
-        "image": "https://www.professionalresumefree.com/images/job-search-tips-preview.jpg",
+        "image": "https://professionalresumefree.com/images/job-search-tips-preview.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-01",
@@ -993,11 +994,11 @@ const JobSearchTips = ({ seoData }) => {
           "name": tip.title,
           "text": tip.content
         })),
-        "image": "https://www.professionalresumefree.com/images/jobs-search-tips-preview.jpg",
+        "image": "https://professionalresumefree.com/images/jobs-search-tips-preview.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         }
       }
     ]
@@ -1042,18 +1043,18 @@ const JobSearchTips = ({ seoData }) => {
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* Single Canonical URL */}
+        {/* Single Canonical URL - Updated without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - Updated without www */}
         <meta property="og:title" content="Job Search Tips 2026: Ultimate Guide to Land Your Dream Job" />
         <meta property="og:description" content="Master 50+ proven job search strategies for 2026. LinkedIn optimization, networking techniques, ATS resume tips, and interview preparation to accelerate career growth by 400%." />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/job-search-tips-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/job-search-tips-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Job Search Tips 2026 - Ultimate Guide to Career Success" />
@@ -1070,11 +1071,11 @@ const JobSearchTips = ({ seoData }) => {
         <meta property="article:tag" content="Career Development" />
         <meta property="article:tag" content="Professional Networking" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - Updated without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Job Search Tips 2026: Ultimate Guide to Land Your Dream Job" />
         <meta name="twitter:description" content="Master 50+ proven job search strategies for 2026. LinkedIn optimization, networking techniques, ATS resume tips, and interview preparation." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/jobs-search-tips-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/jobs-search-tips-preview.jpg" />
         <meta name="twitter:image:alt" content="Job Search Tips 2026 Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />

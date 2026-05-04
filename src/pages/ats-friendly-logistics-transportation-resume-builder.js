@@ -718,8 +718,8 @@ const LogisticsResume = ({
     );
   };
 
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder";
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder";
 
   return (
     <div className={styles.resumeBuilder} lang="en-US">
@@ -736,7 +736,7 @@ const LogisticsResume = ({
         <meta name="revisit-after" content="1 days" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - WITHOUT www */}
         <link rel="canonical" href={canonicalUrl} />
         
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
@@ -747,7 +747,7 @@ const LogisticsResume = ({
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         <meta property="og:title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
         <meta property="og:description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Free Logistics Resume Builder - Create Professional Logistics Resumes Online" />
@@ -762,7 +762,7 @@ const LogisticsResume = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
         <meta name="twitter:description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/twitter-logistics-resume-builder-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-logistics-resume-builder-preview.jpg" />
         <meta name="twitter:image:alt" content="Free Logistics Resume Builder with ATS Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -794,32 +794,32 @@ const LogisticsResume = ({
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
-                    "@id": "https://www.professionalresumefree.com/#website",
-                    "url": "https://www.professionalresumefree.com",
+                    "@id": "https://professionalresumefree.com/#website",
+                    "url": "https://professionalresumefree.com",
                     "name": "Professional Logistics Resume Free",
                     "description": "Free online resume builder for logistics professionals",
                     "publisher": {
                       "@type": "Organization",
-                      "@id": "https://www.professionalresumefree.com/#organization",
+                      "@id": "https://professionalresumefree.com/#organization",
                       "name": "Professional Logistics Resume Free",
-                      "url": "https://www.professionalresumefree.com",
+                      "url": "https://professionalresumefree.com",
                       "logo": {
                         "@type": "ImageObject",
-                        "url": "https://www.professionalresumefree.com/logo.png",
+                        "url": "https://professionalresumefree.com/logo.png",
                         "width": 512,
                         "height": 512
                       },
                       "sameAs": [
                         "https://twitter.com/ProResumeFree",
-                        "https://www.linkedin.com/company/professional-resume-free",
-                        "https://www.facebook.com/ProfessionalResumeFree",
-                        "https://www.youtube.com/@ProfessionalResumeFree"
+                        "https://linkedin.com/company/professional-resume-free",
+                        "https://facebook.com/ProfessionalResumeFree",
+                        "https://youtube.com/@ProfessionalResumeFree"
                       ]
                     }
                   },
                   "primaryImageOfPage": {
                     "@type": "ImageObject",
-                    "url": "https://www.professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg",
+                    "url": "https://professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -830,7 +830,7 @@ const LogisticsResume = ({
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://www.professionalresumefree.com"
+                        "item": "https://professionalresumefree.com"
                       },
                       {
                         "@type": "ListItem",
@@ -870,7 +870,7 @@ const LogisticsResume = ({
                       "Free Forever"
                     ],
                     "softwareVersion": "2026.1.0",
-                    "screenshot": "https://www.professionalresumefree.com/images/screenshot-logistics-resume-builder.jpg",
+                    "screenshot": "https://professionalresumefree.com/images/screenshot-logistics-resume-builder.jpg",
                     "applicationSuite": "Logistics Career Tools",
                     "countriesSupported": "Global",
                     "fileSize": "Web Application"
@@ -911,7 +911,7 @@ const LogisticsResume = ({
                       "name": "Choose a Logistics Template",
                       "text": "Select from our ATS-optimized logistics resume templates designed for supply chain managers, warehouse supervisors, transportation coordinators, and logistics analysts.",
                       "url": `${canonicalUrl}#templates`,
-                      "image": "https://www.professionalresumefree.com/images/step1-logistics-template.jpg"
+                      "image": "https://professionalresumefree.com/images/step1-logistics-template.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -919,7 +919,7 @@ const LogisticsResume = ({
                       "name": "Enter Your Logistics Information",
                       "text": "Add your logistics experience, education, certifications, technical skills, and supply chain achievements using our guided forms.",
                       "url": `${canonicalUrl}#editor`,
-                      "image": "https://www.professionalresumefree.com/images/step2-logistics-info.jpg"
+                      "image": "https://professionalresumefree.com/images/step2-logistics-info.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -927,7 +927,7 @@ const LogisticsResume = ({
                       "name": "Customize and Optimize",
                       "text": "Use our logistics-specific suggestions to improve supply chain keywords and formatting for ATS compatibility.",
                       "url": `${canonicalUrl}#optimize`,
-                      "image": "https://www.professionalresumefree.com/images/step3-optimize.jpg"
+                      "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
                     },
                     {
                       "@type": "HowToStep",
@@ -935,7 +935,7 @@ const LogisticsResume = ({
                       "name": "Download Your Logistics Resume",
                       "text": "Export your professional logistics resume as PDF, Word, or plain text - completely free, no watermarks.",
                       "url": `${canonicalUrl}#download`,
-                      "image": "https://www.professionalresumefree.com/images/step4-download.jpg"
+                      "image": "https://professionalresumefree.com/images/step4-download.jpg"
                     }
                   ]
                 },
@@ -945,7 +945,7 @@ const LogisticsResume = ({
                   "provider": {
                     "@type": "Organization",
                     "name": "Professional Logistics Resume Free",
-                    "url": "https://www.professionalresumefree.com",
+                    "url": "https://professionalresumefree.com",
                     "contactPoint": {
                       "@type": "ContactPoint",
                       "telephone": "+1-800-555-1234",
@@ -2111,7 +2111,7 @@ const LogisticsResume = ({
                         <span className={styles.fontSizeValue}>{fontSizes.achievementText}pt</span>
                       </label>
                       <input 
-                        type="range" 
+                        types="range" 
                         min="6" 
                         max="14" 
                         value={fontSizes.achievementText}
@@ -2222,10 +2222,10 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data
+  // Breadcrumb data for structured data - WITHOUT www
   const breadcrumbData = [
-    { name: 'Home', item: 'https://www.professionalresumefree.com/' },
-    { name: 'Logistics Resume Builder', item: 'https://www.professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder' }
+    { name: 'Home', item: 'https://professionalresumefree.com/' },
+    { name: 'Logistics Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder' }
   ];
 
   return {

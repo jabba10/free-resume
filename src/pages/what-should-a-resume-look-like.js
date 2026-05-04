@@ -697,8 +697,8 @@ const WhatShouldResumeLookLike = ({ seoData }) => {
     : new Date().toISOString().split('T')[0];
   const currentYear = new Date().getFullYear();
 
-  // Single canonical URL
-  const canonicalUrl = "https://www.professionalresumefree.com/what-should-a-resume-look-like";
+  // Single canonical URL - REMOVED www
+  const canonicalUrl = "https://professionalresumefree.com/what-should-a-resume-look-like";
 
   const formattingSections = [
     {
@@ -1023,7 +1023,7 @@ SKILLS
     }
   ];
 
-  // Structured Data
+  // Structured Data - REMOVED www
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1035,7 +1035,7 @@ SKILLS
         "description": "Learn proper resume formatting with visual examples. Guide to standard margins, font sizes, professional layouts, and formatting best practices for 2026.",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": "https://www.professionalresumefree.com/#website"
+          "@id": "https://professionalresumefree.com/#website"
         },
         "datePublished": "2026-01-01T00:00:00+00:00",
         "dateModified": lastModifiedDate,
@@ -1052,7 +1052,7 @@ SKILLS
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://www.professionalresumefree.com"
+            "item": "https://professionalresumefree.com"
           },
           {
             "@type": "ListItem",
@@ -1066,18 +1066,18 @@ SKILLS
         "@type": "Article",
         "headline": "Resume Formatting Guide 2026: What Should a Resume Look Like?",
         "description": "A comprehensive guide to professional resume formatting including standard margins, font sizes, professional layouts, and formatting best practices with visual examples for the 2026 job market.",
-        "image": "https://www.professionalresumefree.com/images/resume-formatting-preview.jpg",
+        "image": "https://professionalresumefree.com/images/resume-formatting-preview.jpg",
         "author": {
           "@type": "Organization",
           "name": "ProfessionalResumeFree",
-          "url": "https://www.professionalresumefree.com"
+          "url": "https://professionalresumefree.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "ProfessionalResumeFree",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.professionalresumefree.com/logo.png"
+            "url": "https://professionalresumefree.com/logo.png"
           }
         },
         "datePublished": "2026-01-01T00:00:00+00:00",
@@ -1188,10 +1188,10 @@ SKILLS
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* SINGLE CANONICAL URL */}
+        {/* SINGLE CANONICAL URL - REMOVED www */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags */}
+        {/* Hreflang Tags - REMOVED www */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="en-gb" />
@@ -1202,10 +1202,10 @@ SKILLS
         {/* Sitemap */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Open Graph Tags */}
+        {/* Open Graph Tags - REMOVED www */}
         <meta property="og:title" content="Resume Formatting Guide 2026: What Should a Resume Look Like?" />
         <meta property="og:description" content="Learn proper resume formatting with visual examples. Guide to standard margins, font sizes, professional layouts, and formatting best practices for 2026." />
-        <meta property="og:image" content="https://www.professionalresumefree.com/images/resume-formatting-preview.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/images/resume-formatting-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Formatting Guide 2026 with Visual Examples" />
@@ -1225,11 +1225,11 @@ SKILLS
         <meta property="article:tag" content="job search" />
         <meta property="article:tag" content="resume design" />
         
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags - REMOVED www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Resume Formatting Guide 2026: What Should a Resume Look Like?" />
         <meta name="twitter:description" content="Learn proper resume formatting with visual examples. Standard margins, font sizes, professional layouts, and formatting best practices for 2026." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/images/resume-formatting-preview.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/resume-formatting-preview.jpg" />
         <meta name="twitter:image:alt" content="Resume Formatting Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         <meta name="twitter:creator" content="@ProfResumeFree" />

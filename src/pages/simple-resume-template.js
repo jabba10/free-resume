@@ -905,7 +905,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const displayDate = safeCurrentDate;
-  const canonicalUrl = "https://www.professionalresumefree.com/simple-resume-template";
+  const canonicalUrl = "https://professionalresumefree.com/simple-resume-template";
 
   const stats = [
     {
@@ -1085,7 +1085,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
         <meta property="og:title" content="Simple Resume Template 2026: Complete Guide (47% More Interviews)" />
         <meta property="og:description" content="Get 2026's best simple resume templates. Clean, professional designs that pass ATS and impress recruiters. Free downloads included." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/simple-resume-template-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/simple-resume-template-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Simple Resume Template Guide 2026 - Clean professional designs" />
@@ -1105,7 +1105,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Simple Resume Template 2026: Complete Guide (47% More Interviews)" />
         <meta name="twitter:description" content="Get 2026's best simple resume templates. Clean, professional designs that pass ATS and impress recruiters. Free downloads." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-simple-resume-guide.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-simple-resume-guide.jpg" />
         <meta name="twitter:image:alt" content="Simple Resume Template Guide 2026" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -1137,7 +1137,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -1145,8 +1145,8 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free resume templates and career resources",
                   "publisher": {
@@ -1154,7 +1154,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -1166,7 +1166,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -1180,7 +1180,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
                   "@type": "Article",
                   "headline": "Simple Resume Template 2026: Complete Guide",
                   "description": "Comprehensive guide to simple resume templates with free downloads and customization instructions",
-                  "image": "https://www.professionalresumefree.com/simple-resume-template-guide.jpg",
+                  "image": "https://professionalresumefree.com/simple-resume-template-guide.jpg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free"
@@ -1190,7 +1190,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",
