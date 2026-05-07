@@ -95,7 +95,7 @@ const PrivacyPolicy = () => {
         <meta name="robots" content="index, follow" />
 
         {/* CANONICAL URL - Only one canonical tag - UPDATED without www */}
-        <link rel="canonical" href="https://professionalresumefree.com/privacy-policy/" />
+        <link rel="canonical" href="https://professionalresumefree.com/privacy-policy" />
 
         {/* Open Graph / Social Media - UPDATED without www */}
         <meta property="og:title" content="Privacy Policy: Your Data, Your Control | ProfessionalResumeFree" />

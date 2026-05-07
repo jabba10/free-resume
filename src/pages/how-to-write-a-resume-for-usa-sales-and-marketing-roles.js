@@ -512,7 +512,7 @@ export async function getStaticProps() {
   const lastModifiedDate = buildTime.toISOString();
 
   // REMOVED www from canonical URL
-  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-a-usa-sales-and-marketing-roles";
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-sales-and-marketing-roles";
 
   const breadcrumbData = [
     {

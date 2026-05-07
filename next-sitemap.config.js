@@ -8,12 +8,9 @@ module.exports = {
   exclude: [
     // All invalid links that don't exist on your website (without trailing slashes)
     '/veterinary-resume-templates',
-    '/resume-tools',
-    '/resume-writing-guide',
-    '/free-tools',
+    
     '/chronological-resume-example/free-resume-formatting-checker',
     '/cover-letter',
-    '/cover-letter-guide',
     '/free-cover-letter-builder',
     '/html/head/title',
     '/career-resources',

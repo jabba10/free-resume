@@ -1823,7 +1823,7 @@ const InterviewTips = ({
         <meta name="revisit-after" content="1 days" />
         
         {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://professionalresumefree.com/interview-tips/" />
+        <link rel="canonical" href="https://professionalresumefree.com/interview-tips" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />

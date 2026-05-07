@@ -1505,7 +1505,7 @@ export default function CompleteResumeResourceLibrary({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
         {/* ===== SINGLE CANONICAL TAG ===== */}
-        <link rel="canonical" href="https://professionalresumefree.com/complete-resume-resource-library/" />
+        <link rel="canonical" href="https://professionalresumefree.com/complete-resume-resource-library" />
         
         {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
         <meta name="chatgpt-fts:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
@@ -1522,7 +1522,7 @@ export default function CompleteResumeResourceLibrary({
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta property="og:description" content="Master resume writing with expert strategies, ATS optimization, and industry-specific templates for 2026 job market success." />
-        <meta property="og:url" content="https://professionalresumefree.com/complete-resume-resource-library/" />
+        <meta property="og:url" content="https://professionalresumefree.com/complete-resume-resource-library" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:image" content="https://professionalresumefree.com/og-resume-library-2026.jpg" />
         <meta property="og:image:width" content="1200" />

@@ -2,12 +2,11 @@
 User-agent: *
 Allow: /
 Disallow: /veterinary-resume-templates
-Disallow: /resume-tools
-Disallow: /resume-writing-guide
-Disallow: /free-tools
+
+
 Disallow: /chronological-resume-example/free-resume-formatting-checker
 Disallow: /cover-letter
-Disallow: /cover-letter-guide
+
 Disallow: /free-cover-letter-builder
 Disallow: /html/head/title
 Disallow: /career-resources
