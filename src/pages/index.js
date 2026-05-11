@@ -530,8 +530,9 @@ const TrustSignals = () => (
 export default function LandingPage({ lastModified, buildTimestamp }) {
   const router = useRouter();
   const currentYear = new Date().getFullYear();
-  // Updated: Removed www from canonical URL
-  const canonicalUrl = `https://professionalresumefree.com${router.asPath.split('?')[0]}`;
+  // Updated: Force non-www URL for canonical
+  const baseUrl = 'https://professionalresumefree.com';
+  const canonicalUrl = `${baseUrl}${router.asPath.split('?')[0]}`;
   const displayDate = lastModified.split('T')[0];
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
@@ -579,13 +580,13 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
 
-        {/* ── CANONICAL + HREFLANG (Updated URLs without www) ── */}
+        {/* ── CANONICAL + HREFLANG (No www) ── */}
         <link rel="canonical" href={canonicalUrl} />
         <link rel="alternate" href={canonicalUrl} hrefLang="en-us" />
         <link rel="alternate" href={canonicalUrl} hrefLang="en" />
         <link rel="alternate" href={canonicalUrl} hrefLang="x-default" />
 
-        {/* ── AI MACHINE-READABLE INDEX LINKS (Updated URLs without www)
+        {/* ── AI MACHINE-READABLE INDEX LINKS (No www)
             These <link> tags are the primary embedded pointers to llms.txt.
             Any AI crawler hitting this page immediately discovers the full
             machine-readable site index — no extra crawl request needed.
@@ -605,7 +606,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
         />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-        {/* ── OPEN GRAPH (Updated URLs without www) ── */}
+        {/* ── OPEN GRAPH (No www) ── */}
         <meta property="og:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools | No Sign-Up, Instant PDF`} />
         <meta property="og:description" content={`Get ${templateCount} industry-specific ATS templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly. No account or credit card needed.`} />
         <meta property="og:url" content={canonicalUrl} />
@@ -618,7 +619,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
         <meta property="og:updated_time" content={lastModified} />
         <meta property="og:locale" content="en_US" />
 
-        {/* ── TWITTER CARD (Updated URLs without www) ── */}
+        {/* ── TWITTER CARD (No www) ── */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools | No Sign-Up`} />
         <meta name="twitter:description" content={`Get ${templateCount} industry-specific ATS templates + ${toolCount} free tools. Download PDF instantly. No account or credit card needed.`} />
@@ -637,7 +638,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
         {/* Preload hero image — above-the-fold LCP element */}
         <link rel="preload" as="image" href="/ats.jpeg" />
 
-        {/* ── COMPREHENSIVE SCHEMA.ORG JSON-LD (Updated URLs without www) ── */}
+        {/* ── COMPREHENSIVE SCHEMA.ORG JSON-LD (No www) ── */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -824,7 +825,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
             </h1>
             <h2>Create a Professional Resume Online and Download PDF Instantly</h2>
 
-            {/* ── llms.txt DISCOVERY BANNER (Updated URLs without www)
+            {/* ── llms.txt DISCOVERY BANNER (No www)
                 Visible to both users and AI crawlers. Provides a human-readable
                 pointer to the machine-readable site index. AI bots that parse
                 HTML will find this in the first 10KB of the page.
@@ -1463,7 +1464,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
             <p style={{ marginTop: '30px', fontSize: '0.9rem', color: 'var(--text-light)' }}>
               ✓ No credit card required &nbsp;•&nbsp; Free forever &nbsp;•&nbsp; ATS-Optimized &nbsp;•&nbsp; Based on Industry Standards
             </p>
-            {/* llms.txt footer reference — catches any AI crawler that scans footers (Updated URLs without www) */}
+            {/* llms.txt footer reference — catches any AI crawler that scans footers (No www) */}
             <p style={{ marginTop: '16px', fontSize: '0.8rem', color: 'var(--text-lighter)' }}>
               🤖 AI crawlers: machine-readable index at{' '}
               <a href="https://professionalresumefree.com/llms.txt" style={{ color: 'var(--text-lighter)' }}>
@@ -1480,7 +1481,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
           </div>
         </section>
 
-        {/* Hidden metadata for crawlers (Updated URLs without www) */}
+        {/* Hidden metadata for crawlers (No www) */}
         <div style={{ display: 'none' }} aria-hidden="true">
           <span itemProp="templates-count">{templateCount}</span>
           <span itemProp="tools-count">{toolCount}</span>

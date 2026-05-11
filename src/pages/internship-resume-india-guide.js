@@ -192,23 +192,6 @@ flex-direction: column;
 align-items: center;
 }
 }
-.stat-item {
-text-align: center;
-min-width: 120px;
-padding: 8px;
-}
-@media (max-width: 480px) {
-.stat-item { 
-min-width: 100%;
-width: 100%;
-max-width: 250px;
-}
-}
-.stat-number {
-font-size: clamp(1.5rem, 4vw, 2rem);
-font-weight: bold;
-display: block;
-}
 .stat-card {
 background: var(--card-bg);
 padding: 24px;
@@ -228,9 +211,15 @@ min-width: 100%;
 width: 100%;
 }
 }
-.stat-icon {
-font-size: 2rem;
-margin-bottom: 12px;
+.stat-number {
+font-size: clamp(1.5rem, 4vw, 2rem);
+font-weight: bold;
+display: block;
+}
+.stat-label {
+font-size: 0.9rem;
+color: var(--text-light);
+margin-top: 8px;
 }
 .section {
 padding: 40px 0;
@@ -348,24 +337,6 @@ border-bottom-color: var(--primary);
 .breadcrumb [aria-current="page"] {
 font-weight: 600;
 }
-.trust-badge {
-display: inline-block;
-background: #f3f4f6;
-color: var(--primary);
-padding: 6px 12px;
-border-radius: 50px;
-font-size: 0.85rem;
-margin-bottom: 20px;
-border: 1px solid var(--border);
-margin-left: auto;
-margin-right: auto;
-}
-@media (max-width: 480px) {
-.trust-badge {
-font-size: 0.75rem;
-padding: 5px 10px;
-}
-}
 .faq-grid {
 display: grid;
 grid-template-columns: 1fr;
@@ -469,86 +440,8 @@ gap: 8px;
 align-items: center;
 }
 }
-.intro-text {
-font-size: 1.1rem;
-line-height: 1.8;
-margin-bottom: 30px;
-}
-.statistics {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 20px;
-margin: 40px 0;
-justify-items: center;
-}
-.stat-item {
-background: var(--background);
-padding: 24px;
-border-radius: 8px;
-border: 1px solid var(--border);
-width: 100%;
+.expert-card {
 text-align: center;
-}
-.stat-item h3 {
-font-size: 2rem;
-color: var(--primary);
-margin-bottom: 8px;
-}
-.toc {
-text-align: left;
-max-width: 600px;
-margin: 0 auto;
-}
-.toc ul {
-list-style: none;
-}
-.toc li {
-margin-bottom: 10px;
-}
-.toc a {
-color: var(--primary);
-text-decoration: none;
-border-bottom: 1px solid var(--border);
-padding-bottom: 2px;
-}
-.toc a:hover {
-border-bottom-color: var(--primary);
-}
-.steps-container {
-display: flex;
-flex-direction: column;
-gap: 20px;
-margin: 30px 0;
-}
-.step {
-display: flex;
-gap: 20px;
-align-items: flex-start;
-background: var(--background);
-padding: 24px;
-border-radius: 8px;
-border: 1px solid var(--border);
-text-align: left;
-}
-@media (max-width: 640px) {
-.step {
-flex-direction: column;
-align-items: center;
-text-align: center;
-}
-}
-.step-number {
-display: flex;
-align-items: center;
-justify-content: center;
-width: 50px;
-height: 50px;
-background: var(--primary);
-color: var(--background);
-border-radius: 50%;
-font-size: 1.5rem;
-font-weight: bold;
-flex-shrink: 0;
 }
 .comparison {
 display: grid;
@@ -582,24 +475,6 @@ content: "→";
 position: absolute;
 left: 0;
 color: var(--primary);
-}
-.keyword-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 20px;
-margin: 30px 0;
-justify-items: center;
-}
-.keyword-category {
-background: var(--background);
-padding: 20px;
-border-radius: 8px;
-border: 1px solid var(--border);
-width: 100%;
-text-align: center;
-}
-.keyword-category h4 {
-margin-bottom: 12px;
 }
 .skills-grid {
 display: grid;
@@ -645,27 +520,6 @@ border-radius: 8px;
 border: 1px solid var(--border);
 margin: 20px 0;
 text-align: left;
-}
-.checklist {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 16px;
-margin: 30px 0;
-justify-items: center;
-}
-.checklist-item {
-display: flex;
-align-items: center;
-gap: 8px;
-background: var(--background);
-padding: 12px;
-border-radius: 6px;
-border: 1px solid var(--border);
-width: 100%;
-}
-.checkmark {
-color: #059669;
-font-weight: bold;
 }
 .companies-grid {
 display: grid;
@@ -746,13 +600,24 @@ transition: background 0.2s;
 .primary-button:hover {
 background: var(--secondary);
 }
-.link {
-color: var(--primary);
-text-decoration: none;
+.cta-section {
+background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+padding: 60px 0;
+text-align: center;
+border-top: 1px solid var(--border);
 border-bottom: 1px solid var(--border);
 }
-.link:hover {
-border-bottom-color: var(--primary);
+@media (max-width: 480px) {
+.cta-section {
+padding: 40px 0;
+}
+}
+.cta-section h2 {
+margin-bottom: 20px;
+}
+.cta-section p {
+max-width: 700px;
+margin: 0 auto 30px;
 }
 .note {
 font-style: italic;
@@ -781,32 +646,61 @@ border-bottom: 1px solid var(--border);
 padding-bottom: 8px;
 margin-bottom: 12px;
 }
-/* Mobile improvements */
-@media (max-width: 480px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .card:active {
-    opacity: 0.8;
-  }
-  
-  .table-wrap {
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .container {
-    padding: 0 20px;
-  }
-  
-  p, li {
-    font-size: 16px;
-  }
+.steps-container {
+display: flex;
+flex-direction: column;
+gap: 20px;
+margin: 30px 0;
+}
+.step {
+display: flex;
+gap: 20px;
+align-items: flex-start;
+background: var(--background);
+padding: 24px;
+border-radius: 8px;
+border: 1px solid var(--border);
+text-align: left;
+}
+@media (max-width: 640px) {
+.step {
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+}
+.step-number {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 50px;
+height: 50px;
+background: var(--primary);
+color: var(--background);
+border-radius: 50%;
+font-size: 1.5rem;
+font-weight: bold;
+flex-shrink: 0;
+}
+.toc {
+text-align: left;
+max-width: 600px;
+margin: 0 auto;
+}
+.toc ul {
+list-style: none;
+}
+.toc li {
+margin-bottom: 10px;
+}
+.toc a {
+color: var(--primary);
+text-decoration: none;
+border-bottom: 1px solid var(--border);
+padding-bottom: 2px;
+}
+.toc a:hover {
+border-bottom-color: var(--primary);
 }
 `;
 
@@ -814,28 +708,15 @@ const InternshipResumeIndia = () => {
   const currentYear = new Date().getFullYear();
   const displayDate = new Date().toISOString().split('T')[0];
   
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://www.professionalresumefree.com/internship-resume-india-guide";
+  // UPDATED: Removed www from canonicalUrl
+  const canonicalUrl = "https://professionalresumefree.com/internship-resume-india-guide";
   
   const siteBrand = "Professional Resume Free";
-  const primaryKeyword = "Internship Resume India - Complete 2026 Guide";
 
   const stats = [
-    {
-      number: "95%",
-      label: "Resumes rejected in first 10 seconds",
-      description: "Indian recruiters screen quickly"
-    },
-    {
-      number: "78%",
-      label: "Indian companies use ATS",
-      description: "For initial screening"
-    },
-    {
-      number: "3x",
-      label: "More interviews",
-      description: "With optimized Indian format"
-    }
+    { number: "95%", label: "Resumes rejected in first 10 seconds" },
+    { number: "78%", label: "Indian companies use ATS" },
+    { number: "3x", label: "More interviews with optimized format" }
   ];
 
   const externalCitations = [
@@ -857,36 +738,21 @@ const InternshipResumeIndia = () => {
   const definitiveAnswers = [
     {
       question: "What do Indian recruiters look for first?",
-      answer: "**92% check 10th and 12th percentage first.** Academic consistency is highly valued in Indian recruitment, followed by relevant technical skills."
+      answer: "92% check 10th and 12th percentage first. Academic consistency is highly valued in Indian recruitment, followed by relevant technical skills."
     },
     {
       question: "How many projects should I include?",
-      answer: "**2-3 substantial projects with detailed descriptions.** Quality over quantity - show measurable outcomes and technologies used."
+      answer: "2-3 substantial projects with detailed descriptions. Quality over quantity - show measurable outcomes and technologies used."
     }
   ];
 
-  // Simple icons using emoji
+  // Icons using emoji
   const icons = {
     check: "✅",
     arrowRight: "→",
-    award: "🏆",
-    trendingUp: "📈",
-    fileText: "📄",
-    user: "👤",
-    cpu: "⚡",
-    shield: "🛡️",
     book: "📚",
-    download: "⬇️",
     star: "⭐",
-    home: "🏠",
-    chevronRight: "›",
-    edit: "✏️",
-    clock: "⏱️",
-    target: "🎯",
-    briefcase: "💼",
-    tool: "🛠️",
-    monitor: "💻",
-    heart: "❤️"
+    home: "🏠"
   };
 
   return (
@@ -895,10 +761,10 @@ const InternshipResumeIndia = () => {
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - Exactly 70 characters */}
+        {/* OPTIMIZED TITLE */}
         <title>Internship Resume India 2026: Complete Guide for Students (Free)</title>
         
-        {/* OPTIMIZED META DESCRIPTION */}
+        {/* META DESCRIPTION */}
         <meta name="description" content="Create a winning internship resume for Indian companies in 2026. Step-by-step guide with India-specific formats, ATS tips, and free templates. Get hired at TCS, Infosys, Amazon India." />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="internship resume india, indian student resume, resume for internship in india, indian resume format, ats resume india, campus placement resume, fresher resume india" />
@@ -918,7 +784,7 @@ const InternshipResumeIndia = () => {
         <meta name="last-modified" content={displayDate} />
         <meta httpEquiv="last-modified" content={displayDate} />
         
-        {/* SINGLE CANONICAL URL - Only one canonical tag */}
+        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG - India specific */}
@@ -926,14 +792,13 @@ const InternshipResumeIndia = () => {
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH */}
+        {/* OPEN GRAPH - UPDATED without www */}
         <meta property="og:title" content="Internship Resume India 2026: Complete Guide for Students (Free)" />
         <meta property="og:description" content="Create a winning internship resume for Indian companies in 2026. India-specific formats, ATS tips, and free templates for TCS, Infosys, Amazon India." />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://www.professionalresumefree.com/india-internship-guide.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/india-internship-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Internship Resume India Guide 2026 - Complete guide for Indian students" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={siteBrand} />
         <meta property="og:updated_time" content={displayDate} />
@@ -944,15 +809,13 @@ const InternshipResumeIndia = () => {
         <meta property="article:modified_time" content={displayDate} />
         <meta property="article:author" content="Rahul Sharma, Career Coach" />
         <meta property="article:section" content="Career Advice - India" />
-        <meta property="article:tag" content="internship resume, india jobs, student resume, campus placement" />
         
-        {/* TWITTER CARD */}
+        {/* TWITTER CARD - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Internship Resume India 2026: Complete Guide for Students (Free)" />
         <meta name="twitter:description" content="Create a winning internship resume for Indian companies in 2026. India-specific formats and free templates." />
-        <meta name="twitter:image" content="https://www.professionalresumefree.com/twitter-india-internship-guide.jpg" />
-        <meta name="twitter:image:alt" content="Internship Resume India Guide 2026" />
-        <meta name="twitter:site" content="@ProfResumeFree" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-india-internship-guide.jpg" />
+        <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
         <meta name="theme-color" content="#000000" />
@@ -967,7 +830,7 @@ const InternshipResumeIndia = () => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD - UPDATED without www */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -984,7 +847,7 @@ const InternshipResumeIndia = () => {
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-IN",
                   "isPartOf": {
-                    "@id": "https://www.professionalresumefree.com/#website"
+                    "@id": "https://professionalresumefree.com/#website"
                   },
                   "breadcrumb": {
                     "@id": `${canonicalUrl}#breadcrumb`
@@ -992,8 +855,8 @@ const InternshipResumeIndia = () => {
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://www.professionalresumefree.com/#website",
-                  "url": "https://www.professionalresumefree.com",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com",
                   "name": "Professional Resume Free",
                   "description": "Free resume templates and career resources",
                   "publisher": {
@@ -1001,7 +864,7 @@ const InternshipResumeIndia = () => {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   }
                 },
@@ -1013,7 +876,7 @@ const InternshipResumeIndia = () => {
                       "@type": "ListItem",
                       "position": 1,
                       "name": "Home",
-                      "item": "https://www.professionalresumefree.com"
+                      "item": "https://professionalresumefree.com"
                     },
                     {
                       "@type": "ListItem",
@@ -1027,7 +890,7 @@ const InternshipResumeIndia = () => {
                   "@type": "Article",
                   "headline": "Internship Resume India 2026: Complete Guide for Students",
                   "description": "Complete guide to creating professional internship resumes for Indian students with ATS optimization and India-specific requirements",
-                  "image": "https://www.professionalresumefree.com/india-internship-guide.jpg",
+                  "image": "https://professionalresumefree.com/india-internship-guide.jpg",
                   "author": {
                     "@type": "Person",
                     "name": "Rahul Sharma",
@@ -1038,7 +901,7 @@ const InternshipResumeIndia = () => {
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": "https://www.professionalresumefree.com/logo.png"
+                      "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2024-01-01",
@@ -1129,29 +992,25 @@ const InternshipResumeIndia = () => {
       </Head>
 
       <main>
-        {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
         {/* Hidden freshness indicators */}
         <div style={{ display: 'none' }}>
-          <meta name="content-freshness" content={displayDate} />
           <span itemProp="last-updated">{displayDate}</span>
         </div>
 
-        {/* Breadcrumb Navigation - Simplified */}
+        {/* Breadcrumb Navigation */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="container">
-            <ol itemScope itemType="https://schema.org/BreadcrumbList">
-              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
-                  <span itemProp="name">Home</span>
+            <ol>
+              <li>
+                <Link href="/">
+                  {icons.home} Home
                 </Link>
-                <meta itemProp="position" content="1" />
+                <span aria-hidden="true"> / </span>
               </li>
-              <li aria-hidden="true">/</li>
-              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Internship Resume India Guide 2026</span>
-                <meta itemProp="position" content="2" />
+              <li>
+                <span aria-current="page">Internship Resume India Guide</span>
               </li>
             </ol>
           </div>
@@ -1201,14 +1060,9 @@ const InternshipResumeIndia = () => {
 
             {/* Meta Info */}
             <div className="meta-info">
-              <span>By Rahul Sharma, Career Coach</span>
-              <span>Updated: {displayDate}</span>
-              <span>Reading Time: 18 minutes</span>
-            </div>
-
-            {/* Freshness indicator */}
-            <div style={{ marginTop: '20px', fontSize: '0.8rem', color: '#4b5563' }}>
-              Guide fresh as of: {displayDate}
+              <span>✨ By Rahul Sharma, Career Coach</span>
+              <span>📅 Updated: {displayDate}</span>
+              <span>⏱️ Reading Time: 18 minutes</span>
             </div>
           </div>
         </section>
@@ -1219,14 +1073,14 @@ const InternshipResumeIndia = () => {
             <h2 id="citations-heading" className="section-title">What Indian HR Research Shows</h2>
             <div className="grid">
               {externalCitations.map((citation, i) => (
-                <blockquote key={i} className="card" itemScope itemType="https://schema.org/Quotation">
-                  <p style={{ fontStyle: 'italic', marginBottom: '12px' }} itemProp="text">"{citation.quote}"</p>
+                <div key={i} className="card">
+                  <p style={{ fontStyle: 'italic', marginBottom: '12px' }}>"{citation.quote}"</p>
                   <footer>
-                    <cite itemProp="source">
+                    <cite>
                       {citation.source} ({citation.year})
                     </cite>
                   </footer>
-                </blockquote>
+                </div>
               ))}
             </div>
           </div>
@@ -1255,7 +1109,7 @@ const InternshipResumeIndia = () => {
               {definitiveAnswers.map((item, i) => (
                 <article key={i} className="card">
                   <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>{item.question}</h3>
-                  <p style={{ color: '#4b5563', marginBottom: '16px', flex: 1 }} dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                  <p style={{ color: '#4b5563', marginBottom: '16px', flex: 1 }}>{item.answer}</p>
                   <small className="text-small">Source: Indian HR Survey {currentYear}</small>
                 </article>
               ))}
@@ -1278,7 +1132,7 @@ const InternshipResumeIndia = () => {
                   <li><a href="#section6">Projects Showcase (Indian Context)</a></li>
                   <li><a href="#section7">Certifications Valued in India</a></li>
                   <li><a href="#section8">Complete Indian Internship Resume Template</a></li>
-                  <li><a href="#section9">Top 10 Indian Companies Requirements</a></li>
+                  <li><a href="#section9">Top Indian Companies Requirements</a></li>
                   <li><a href="#section10">Common Mistakes by Indian Students</a></li>
                   <li><a href="#faq">FAQs for Indian Students</a></li>
                 </ul>
@@ -1287,7 +1141,7 @@ const InternshipResumeIndia = () => {
           </div>
         </section>
 
-        {/* Section 1 - Understanding Indian Recruitment */}
+        {/* Section 1 */}
         <section id="section1" className="section">
           <div className="container">
             <div className="card">
@@ -1297,7 +1151,7 @@ const InternshipResumeIndia = () => {
               <h3 style={{ fontSize: '1.3rem', margin: '30px 0 16px' }}>Key Differences in Indian vs Global Resume Expectations</h3>
               
               <div className="table-wrap">
-                <table className="dataTable">
+                <table>
                   <thead>
                     <tr>
                       <th>Aspect</th>
@@ -1345,7 +1199,7 @@ const InternshipResumeIndia = () => {
                   <div className="step-number">1</div>
                   <div className="step-content">
                     <h3>Header with Contact & Personal Details</h3>
-                    <p><strong>Indian Specific:</strong> Include Name, Phone, Email, LinkedIn, GitHub, Address (City, State), Date of Birth (optional), and professional photo (optional).</p>
+                    <p><strong>Indian Specific:</strong> Include Name, Phone, Email, LinkedIn, GitHub, Address (City, State), and professional photo (optional).</p>
                   </div>
                 </div>
                 
@@ -1353,7 +1207,7 @@ const InternshipResumeIndia = () => {
                   <div className="step-number">2</div>
                   <div className="step-content">
                     <h3>Career Objective for Indian Context</h3>
-                    <p>Write a 2-3 line objective tailored to Indian companies. Example: "Seeking software development internship at a growth-focused Indian tech company to apply Java and Spring Boot skills in building scalable solutions for Indian market needs."</p>
+                    <p>Write a 2-3 line objective tailored to Indian companies. Example: "Seeking software development internship at a growth-focused Indian tech company to apply Java and Spring Boot skills."</p>
                   </div>
                 </div>
                 
@@ -1405,7 +1259,7 @@ const InternshipResumeIndia = () => {
           <div className="container">
             <div className="card">
               <h2 className="section-title">Technical Skills for Indian Market 2026</h2>
-              <p>Indian companies have specific skill expectations based on industry trends and NASSCOM 2026 skill report.</p>
+              <p>Indian companies have specific skill expectations based on industry trends.</p>
               
               <div className="skills-grid">
                 <div className="skill-category">
@@ -1465,9 +1319,9 @@ const InternshipResumeIndia = () => {
               <div className="project-example">
                 <h3>Example: E-commerce Website (Indian Market Focus)</h3>
                 <p><strong>Situation:</strong> Developed a full-stack e-commerce platform for Indian handicrafts sellers</p>
-                <p><strong>Task:</strong> Create responsive website with payment integration for Indian payment gateways (Razorpay, Paytm)</p>
+                <p><strong>Task:</strong> Create responsive website with payment integration for Indian payment gateways</p>
                 <p><strong>Action:</strong> Built using MERN stack, integrated Razorpay API, optimized for Indian mobile networks</p>
-                <p><strong>Result:</strong> 40% faster load times on Indian 4G networks, processed ₹50,000+ in test transactions</p>
+                <p><strong>Result:</strong> 40% faster load times on Indian 4G networks</p>
               </div>
             </div>
           </div>
@@ -1481,7 +1335,7 @@ const InternshipResumeIndia = () => {
               <p>Indian recruiters recognize specific certifications. Prioritize these based on your field:</p>
               
               <div className="table-wrap">
-                <table className="dataTable">
+                <table>
                   <thead>
                     <tr>
                       <th>Certification</th>
@@ -1493,17 +1347,17 @@ const InternshipResumeIndia = () => {
                     <tr>
                       <td>AWS Certified Cloud Practitioner</td>
                       <td>Amazon Web Services</td>
-                      <td>Very High</td>
+                      <td className="text-success">Very High</td>
                     </tr>
                     <tr>
                       <td>NPTEL Certifications</td>
                       <td>IITs/IISc</td>
-                      <td>Very High</td>
+                      <td className="text-success">Very High</td>
                     </tr>
                     <tr>
                       <td>Google Data Analytics</td>
                       <td>Google/Coursera</td>
-                      <td>High</td>
+                      <td className="text-success">High</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1596,7 +1450,7 @@ const InternshipResumeIndia = () => {
                 <div className="mistake-item">
                   <h3>❌ Generic Objective Statement</h3>
                   <p><strong>Wrong:</strong> "Seeking challenging internship to utilize my skills"</p>
-                  <p><strong>Right:</strong> Specific to Indian companies and role</p>
+                  <p><strong>Right:</strong> "Seeking software development internship at a leading Indian tech company to apply Java expertise"</p>
                 </div>
                 
                 <div className="mistake-item">
@@ -1615,11 +1469,9 @@ const InternshipResumeIndia = () => {
             <h2 className="section-title">FAQs for Indian Students: Internship Resumes 2026</h2>
             
             <div className="faq-grid">
-              <div className="faq-item" itemScope itemType="https://schema.org/Question">
-                <h3 className="faq-question" itemProp="name">What is the ideal resume format for Indian internship applications?</h3>
-                <div itemScope itemType="https://schema.org/Answer">
-                  <p itemProp="text">For 2026 Indian internships, use a hybrid format: Reverse-chronological structure with detailed academic sections (10th, 12th, current degree), technical skills categorization, and 2-3 substantial project descriptions. Include a professional photo optionally and ensure ATS compatibility by avoiding tables/graphics.</p>
-                </div>
+              <div className="faq-item">
+                <h3 className="faq-question">What is the ideal resume format for Indian internship applications?</h3>
+                <p>For 2026 Indian internships, use a hybrid format: Reverse-chronological structure with detailed academic sections (10th, 12th, current degree), technical skills categorization, and 2-3 substantial project descriptions. Ensure ATS compatibility by avoiding tables/graphics.</p>
               </div>
               
               <div className="faq-item">
@@ -1635,7 +1487,7 @@ const InternshipResumeIndia = () => {
           </div>
         </section>
 
-        {/* Internal Links - Only Valid Links */}
+        {/* Internal Links */}
         <section className="section">
           <div className="container">
             <h2 className="section-title">Related Resources for Indian Students</h2>
@@ -1646,9 +1498,6 @@ const InternshipResumeIndia = () => {
               <Link href="/free-resume-tools" className="internal-link">
                 Free Resume Tools {icons.arrowRight}
               </Link>
-              <Link href="/comprehensive-resume-guide-2026" className="internal-link">
-                Complete Resume Guide {icons.arrowRight}
-              </Link>
               <Link href="/how-to-create-a-resume-with-no-experience" className="internal-link">
                 No Experience Resume Guide {icons.arrowRight}
               </Link>
@@ -1656,7 +1505,7 @@ const InternshipResumeIndia = () => {
           </div>
         </section>
 
-        {/* Conclusion & Action Plan */}
+        {/* Conclusion */}
         <section className="section" style={{ background: '#f9fafb' }}>
           <div className="container">
             <div className="card">
@@ -1664,14 +1513,14 @@ const InternshipResumeIndia = () => {
               <p>Creating a winning internship resume for the Indian market requires balancing traditional expectations with modern ATS requirements. Your resume should tell a compelling story of academic excellence, technical competence, and practical application.</p>
               
               <p><strong>7-Day Action Plan for Indian Students:</strong></p>
-              <ol className="tips-list" style={{ textAlign: 'left', display: 'inline-block', marginTop: '16px' }}>
+              <ul style={{ textAlign: 'left', display: 'inline-block', marginTop: '16px' }}>
                 <li><strong>Day 1-2:</strong> Gather all academic details (10th, 12th, current marksheets)</li>
                 <li><strong>Day 3:</strong> List all technical skills with proficiency levels</li>
                 <li><strong>Day 4:</strong> Document 2-3 substantial projects using STAR method</li>
                 <li><strong>Day 5:</strong> Use our free Indian resume builder to create first draft</li>
                 <li><strong>Day 6:</strong> Get feedback from seniors or placement cell</li>
                 <li><strong>Day 7:</strong> Finalize and create company-specific versions</li>
-              </ol>
+              </ul>
               
               <div className="cta-container">
                 <Link href="/resume-templates" className="primary-button">
@@ -1683,9 +1532,9 @@ const InternshipResumeIndia = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="cta-section" aria-labelledby="cta-heading">
+        <div className="cta-section">
           <div className="container">
-            <h2 id="cta-heading">Ready to Create Your Indian Internship Resume?</h2>
+            <h2>Ready to Create Your Indian Internship Resume?</h2>
             <p>
               Join thousands of Indian students who landed internships at top companies using our free templates.
               Browse <strong>46+ templates</strong> and use <strong>12+ free tools</strong> designed for Indian formats.
@@ -1706,13 +1555,12 @@ const InternshipResumeIndia = () => {
               Guide updated: {displayDate}
             </p>
           </div>
-        </section>
+        </div>
       </main>
     </>
   );
 };
 
-// Static Generation with ISR
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
@@ -1727,7 +1575,7 @@ export async function getStaticProps() {
         buildTimestamp
       }
     },
-    revalidate: 3600 // Re-generate every hour
+    revalidate: 3600
   };
 }
 
