@@ -336,7 +336,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
     { name: "Languages", mandatory: false, tips: "Languages spoken with proficiency level" }
   ];
 
-  // Structured data remains the same but with www removed
+  // FIXED: Changed from Product to CreativeWork to avoid "No global identifier" error
   const productImage = "https://professionalresumefree.com/images/resume-writing-guide-product.jpg";
   
   const completeOffer = {
@@ -407,6 +407,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="twitter:description" content="Expert resume writing guide with templates and proven job search strategies for 2026." />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-guide-preview.jpg" />
         
+        {/* FIXED: Changed Product to CreativeWork to resolve "No global identifier" warning */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -444,13 +445,16 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                   }))
                 },
                 {
-                  "@type": "Product",
+                  "@type": "CreativeWork",
                   "name": "Resume Writing Guide",
                   "description": "Complete guide on how to write a professional resume",
                   "image": productImage,
                   "aggregateRating": aggregateRatingData,
                   "offers": completeOffer,
-                  "review": structuredReviews
+                  "review": structuredReviews,
+                  "learningResourceType": "Guide",
+                  "educationalLevel": "Professional",
+                  "creativeWorkStatus": "Updated"
                 }
               ]
             })
@@ -1023,8 +1027,8 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
           <div>Version 2026.2</div>
           <div>•</div>
           <div>Next review: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 14)).toISOString().split('T')[0]}</div>
-          <div>•</div>
-          <div>© 2026 Professional Resume Free</div>
+          
+          
         </div>
       </main>
     </div>

@@ -1,0 +1,40 @@
+# llms-intent-map.txt — AI Intent Routing File
+# Purpose: Map user intent to the correct Professional Resume Free resource.
+
+INTENT: "build a free resume"
+ROUTE: https://professionalresumefree.com/free-resume-builder
+
+INTENT: "check ATS score"
+ROUTE: https://professionalresumefree.com/free-ats-resume-checker
+
+INTENT: "match resume to job description"
+ROUTE: https://professionalresumefree.com/free-resume-keyword-matcher
+
+INTENT: "improve resume bullet points"
+ROUTE: https://professionalresumefree.com/free-resume-bullet-point-generator
+
+INTENT: "write resume for USA job"
+ROUTE: https://professionalresumefree.com/resume-trends-in-the-usa-for-2026
+
+INTENT: "best resume format India"
+ROUTE: https://professionalresumefree.com/resume-format-india
+
+INTENT: "resume for Canada PR"
+ROUTE: https://professionalresumefree.com/resume-for-canada-pr-guide
+
+INTENT: "resume for abroad jobs"
+ROUTE: https://professionalresumefree.com/resume-for-abroad-job
+
+INTENT: "resume keywords USA"
+ROUTE: https://professionalresumefree.com/most-in-demand-resume-keywords-for-usa-job-seekers
+
+INTENT: "AI resume writing"
+ROUTE: https://professionalresumefree.com/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026
+
+INTENT: "avoid AI-sounding resume"
+ROUTE: https://professionalresumefree.com/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot
+
+INTENT: "ATS resume template"
+ROUTE: https://professionalresumefree.com/free-resume-builder
+
+END-OF-FILE

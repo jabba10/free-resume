@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- AI Landing Page -->
+  <url>
+    <loc>https://professionalresumefree.com/ai/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Core LLM Files -->
+  <url><loc>https://professionalresumefree.com/ai/llms.txt</loc></url>
+  <url><loc>https://professionalresumefree.com/ai/llms-full.txt</loc></url>
+  <url><loc>https://professionalresumefree.com/ai/llms-seo.txt</loc></url>
+  <url><loc>https://professionalresumefree.com/ai/llms-ranking.txt</loc></url>
+
+  <!-- Schema & Structured Data -->
+  <url><loc>https://professionalresumefree.com/ai/llms-schema.json</loc></url>
+
+  <!-- Embeddings & Vectors -->
+  <url><loc>https://professionalresumefree.com/ai/llms-vector.txt</loc></url>
+
+  <!-- Crawler Navigation -->
+  <url><loc>https://professionalresumefree.com/ai/llms-crawlmap.txt</loc></url>
+  <url><loc>https://professionalresumefree.com/ai/llms-intent-map.txt</loc></url>
+
+  <!-- Semantic Expansion -->
+  <url><loc>https://professionalresumefree.com/ai/llms-synonyms.txt</loc></url>
+  <url><loc>https://professionalresumefree.com/ai/llms-topic-clusters.txt</loc></url>
+
+  <!-- AI Answering & Routing -->
+  <url><loc>https://professionalresumefree.com/ai/llms-qa-bank.txt</loc></url>
+  <url><loc>https://professionalresumefree.com/ai/llms-canonical-answers.txt</loc></url>
+  <url><loc>https://professionalresumefree.com/ai/llms-prompt-instructions.txt</loc></url>
+
+  <!-- Entity Definitions -->
+  <url><loc>https://professionalresumefree.com/ai/llms-entity-descriptions.txt</loc></url>
+
+</urlset>

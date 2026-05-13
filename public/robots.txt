@@ -1,21 +1,21 @@
-# *
 User-agent: *
 Allow: /
-Disallow: /veterinary-resume-templates
 
+# AI Metadata Hub
+Allow: /ai/
+Allow: /ai/*
 
-Disallow: /chronological-resume-example/free-resume-formatting-checker
-Disallow: /cover-letter
+#Host 
+https://professionalresumefree.com
 
-Disallow: /free-cover-letter-builder
-Disallow: /html/head/title
-Disallow: /career-resources
-Disallow: /career-advice
-Disallow: /blog/best-job-boards
-Disallow: /job-search-tips
+# AI Sitemap
+Sitemap: https://professionalresumefree.com/ai-sitemap.xml
 
-# Host
-Host: https://professionalresumefree.com
+# Standard Sitemap (if you have one)
+# Sitemap: https://professionalresumefree.com/sitemap.xml
 
-# Sitemaps
-Sitemap: https://professionalresumefree.com/sitemap.xml
+# Block irrelevant system folders (none for static Next.js, but included for safety)
+Disallow: /api/
+Disallow: /server/
+Disallow: /internal/
+

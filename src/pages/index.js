@@ -595,13 +595,13 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
         <link
           rel="describedby"
           type="text/plain"
-          href="https://professionalresumefree.com/llms.txt"
+          href="https://professionalresumefree.com/ai/llms.txt"
           title="AI Site Index — Machine-Readable Summary (llms.txt)"
         />
         <link
           rel="alternate"
           type="text/plain"
-          href="https://professionalresumefree.com/llms-full.txt"
+          href="https://professionalresumefree.com/ai/llms-full.txt"
           title="AI Full Content Index — Complete Site Content (llms-full.txt)"
         />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -1487,8 +1487,8 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
           <span itemProp="tools-count">{toolCount}</span>
           <span itemProp="last-updated">{displayDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
-          <span itemProp="llms-index">https://professionalresumefree.com/llms.txt</span>
-          <span itemProp="llms-full">https://professionalresumefree.com/llms-full.txt</span>
+          <span itemProp="llms-index">https://professionalresumefree.com/ai/llms.txt</span>
+          <span itemProp="llms-full">https://professionalresumefree.com/ai/llms-full.txt</span>
         </div>
       </main>
     </>

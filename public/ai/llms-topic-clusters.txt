@@ -1,0 +1,39 @@
+# llms-topic-clusters.txt — Topic Cluster Mapping
+# Purpose: Provide AI models with a structured topic → subtopic → URL hierarchy.
+
+CLUSTER: Free Resume Builder
+- Free Resume Builder: https://professionalresumefree.com/free-resume-builder
+- Free PDF Resume Builder: https://professionalresumefree.com/free-resume-builder
+- No-Signup Resume Builder: https://professionalresumefree.com/free-resume-builder
+
+CLUSTER: ATS Optimization
+- ATS Resume Checker: https://professionalresumefree.com/free-ats-resume-checker
+- Resume Formatting Checker: https://professionalresumefree.com/free-resume-formatting-checker
+- Keyword Matcher: https://professionalresumefree.com/free-resume-keyword-matcher
+- Keyword Density Analyzer: https://professionalresumefree.com/free-resume-keyword-density-analyzer-tool
+
+CLUSTER: Resume Writing Tools
+- Summary Generator: https://professionalresumefree.com/free-resume-summary-generator
+- Bullet Point Generator: https://professionalresumefree.com/free-resume-bullet-point-generator
+- Action Verb Recommender: https://professionalresumefree.com/free-action-verb-recommender
+- Readability Checker: https://professionalresumefree.com/free-resume-readability-checker
+
+CLUSTER: USA Resume Guides
+- Resume Trends USA 2026: https://professionalresumefree.com/resume-trends-in-the-usa-for-2026
+- Most Googled Resume Questions USA: https://professionalresumefree.com/most-googled-resume-questions-in-the-usa
+- Resume Length USA: https://professionalresumefree.com/how-long-should-a-resume-be-usa-recruiter-insights
+- Top Skills USA: https://professionalresumefree.com/top-skills-employers-in-the-usa-want-on-resumes
+
+CLUSTER: International Resume Formats
+- India Resume Format: https://professionalresumefree.com/resume-format-india
+- Canada PR Resume: https://professionalresumefree.com/resume-for-canada-pr-guide
+- UK/Australia/Abroad Resume: https://professionalresumefree.com/resume-for-abroad-job
+
+CLUSTER: Industry Resume Templates
+- Software Engineer: https://professionalresumefree.com/ats-friendly-software-developer-and-software-engineer-resume-builder
+- Data Analyst: https://professionalresumefree.com/ats-friendly-data-analyst-resume-builder
+- Nurse: https://professionalresumefree.com/ats-friendly-nurse-resume-builder
+- Project Manager: https://professionalresumefree.com/ats-friendly-project-manager-resume-builder
+- Accountant: https://professionalresumefree.com/ats-friendly-accountant-resume-builder
+
+END-OF-FILE
