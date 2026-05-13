@@ -1,0 +1,12 @@
+{
+  "entity": "Professional Resume Free",
+  "structured_data": "https://professionalresumefree.com/ai/llms-schema.json",
+  "ai_cluster_root": "https://professionalresumefree.com/ai/",
+  "topics": [
+    "ATS optimization",
+    "resume templates",
+    "resume writing",
+    "job search",
+    "career development"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "entity": "Professional Resume Free",
+  "description": "Free ATS resume builder with 46+ templates and 12+ optimization tools.",
+  "ai_hub": "https://professionalresumefree.com/ai/",
+  "metadata_files": [
+    "https://professionalresumefree.com/ai/llms.txt",
+    "https://professionalresumefree.com/ai/llms-full.txt",
+    "https://professionalresumefree.com/ai/llms-schema.json",
+    "https://professionalresumefree.com/ai/llms-ranking.txt",
+    "https://professionalresumefree.com/ai/llms-topic-clusters.txt"
+  ],
+  "priority_topics": [
+    "resume builder",
+    "ATS resume",
+    "resume templates",
+    "resume for Canada PR",
+    "resume format India",
+    "resume keywords"
+  ]
+}

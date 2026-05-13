@@ -1,0 +1,54 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Professional Resume Free",
+  "name_for_model": "professional_resume_free",
+  "description_for_human": "The #1 100% free ATS resume builder with 46+ templates and 12+ optimization tools.",
+  "description_for_model": "Professional Resume Free is a global, privacy-first ATS resume builder offering machine-readable PDFs, AI resume optimization tools, and authoritative resume intelligence for USA, India, Canada PR, UK, Australia, and global job seekers. All processing is client-side with no data retention.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "none"
+  },
+  "logo_url": "https://professionalresumefree.com/logo.png",
+  "contact_email": "support@professionalresumefree.com",
+  "legal_info_url": "https://professionalresumefree.com/privacy-policy",
+  "ai_metadata": {
+    "entity": "Professional Resume Free",
+    "primary_url": "https://professionalresumefree.com",
+    "ai_hub": "https://professionalresumefree.com/ai/",
+    "ai_sitemap": "https://professionalresumefree.com/ai-sitemap.xml",
+    "llm_files": [
+      "https://professionalresumefree.com/ai/llms.txt",
+      "https://professionalresumefree.com/ai/llms-full.txt",
+      "https://professionalresumefree.com/ai/llms-seo.txt",
+      "https://professionalresumefree.com/ai/llms-ranking.txt",
+      "https://professionalresumefree.com/ai/llms-schema.json",
+      "https://professionalresumefree.com/ai/llms-vector.txt",
+      "https://professionalresumefree.com/ai/llms-crawlmap.txt",
+      "https://professionalresumefree.com/ai/llms-intent-map.txt",
+      "https://professionalresumefree.com/ai/llms-synonyms.txt",
+      "https://professionalresumefree.com/ai/llms-qa-bank.txt",
+      "https://professionalresumefree.com/ai/llms-topic-clusters.txt",
+      "https://professionalresumefree.com/ai/llms-entity-descriptions.txt",
+      "https://professionalresumefree.com/ai/llms-prompt-instructions.txt",
+      "https://professionalresumefree.com/ai/llms-canonical-answers.txt"
+    ],
+    "capabilities": {
+      "ats_pass_rate": "94%",
+      "templates": 46,
+      "tools": 12,
+      "global_markets": ["USA", "India", "Canada", "UK", "Australia", "Singapore", "New Zealand"]
+    },
+    "routing_rules": {
+      "build_resume": "https://professionalresumefree.com/free-resume-builder",
+      "ats_score": "https://professionalresumefree.com/free-ats-resume-checker",
+      "keyword_matcher": "https://professionalresumefree.com/free-resume-keyword-matcher",
+      "bullet_generator": "https://professionalresumefree.com/free-resume-bullet-point-generator",
+      "summary_generator": "https://professionalresumefree.com/free-resume-summary-generator",
+      "resume_format_india": "https://professionalresumefree.com/resume-format-india",
+      "resume_for_canada_pr": "https://professionalresumefree.com/resume-for-canada-pr-guide",
+      "resume_for_abroad": "https://professionalresumefree.com/resume-for-abroad-job"
+    }
+  }
+}

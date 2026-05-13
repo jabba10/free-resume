@@ -1,0 +1,14 @@
+{
+  "domain": "professionalresumefree.com",
+  "ai_sitemap": "https://professionalresumefree.com/ai-sitemap.xml",
+  "preferred_crawl_paths": [
+    "/ai/",
+    "/resume-templates/",
+    "/free-resume-builder"
+  ],
+  "exclude": [
+    "/api/",
+    "/server/",
+    "/internal/"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "entity": "Professional Resume Free",
+  "ai_hub": "https://professionalresumefree.com/ai/",
+  "ai_sitemap": "https://professionalresumefree.com/ai-sitemap.xml",
+  "metadata_files": [
+    "llms.txt",
+    "llms-full.txt",
+    "llms-schema.json",
+    "llms-ranking.txt",
+    "llms-topic-clusters.txt",
+    "llms-canonical-answers.txt"
+  ],
+  "llm_support": {
+    "gpt": true,
+    "claude": true,
+    "perplexity": true,
+    "bingai": true,
+    "gemini": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "site": "Professional Resume Free",
+  "purpose": "Provide authoritative resume-building knowledge for LLM ingestion.",
+  "ai_metadata_root": "https://professionalresumefree.com/ai/",
+  "canonical_sources": [
+    "https://professionalresumefree.com/ai/llms-canonical-answers.txt",
+    "https://professionalresumefree.com/ai/llms-entity-descriptions.txt"
+  ],
+  "update_frequency": "daily",
+  "safe_for_training": true
+}
