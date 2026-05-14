@@ -979,7 +979,7 @@ const INDUSTRY_KEYWORDS = {
   healthcare: ['patient care', 'HIPAA', 'clinical', 'treatment', 'wellness', 'medical', 'healthcare', 'public health']
 };
 
-// Schema data
+// ===== FIXED SCHEMA DATA - Added missing itemReviewed fields =====
 const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => ({
   "@context": "https://schema.org",
   "@graph": [
@@ -1055,12 +1055,20 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
         "availability": "https://schema.org/InStock",
         "priceValidUntil": "2026-12-31"
       },
+      // ===== FIX 1: Added missing itemReviewed to AggregateRating =====
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.7",
         "reviewCount": "156",
         "bestRating": "5",
-        "worstRating": "1"
+        "worstRating": "1",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "Free Cover Letter Generator",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "url": `${SITE_URL}/free-cover-letter-generator`
+        }
       },
       "author": {
         "@type": "Organization",
@@ -1165,6 +1173,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
       "@type": "SpeakableSpecification",
       "cssSelector": [".title", ".subtitle", ".faqQuestion h3"]
     },
+    // ===== FIX 2: Added missing itemReviewed to each Review =====
     {
       "@type": "ItemList",
       "itemListElement": REVIEWS.map((review, index) => ({
@@ -1187,6 +1196,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
             "@type": "Organization",
             "name": "Professional Resume Free"
           },
+          // ===== FIX: Added itemReviewed field to each Review =====
           "itemReviewed": {
             "@type": "SoftwareApplication",
             "name": "Free Cover Letter Generator",
@@ -1572,7 +1582,7 @@ export default function CoverLetterGenerator({ seoData, buildTimestamp }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Structured Data */}
+        {/* Structured Data - FIXED VERSION */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1629,12 +1639,22 @@ export default function CoverLetterGenerator({ seoData, buildTimestamp }) {
           </div>
         </div>
 
-        {/* Aggregate Rating Display */}
-        <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
+        {/* Aggregate Rating Display - FIXED: added itemReviewed as a separate div for clarity */}
+        <div 
+          className="aggregate-rating" 
+          itemScope 
+          itemType="https://schema.org/AggregateRating"
+        >
           <meta itemProp="ratingValue" content="4.7" />
           <meta itemProp="ratingCount" content="156" />
           <meta itemProp="bestRating" content="5" />
           <meta itemProp="worstRating" content="1" />
+          {/* FIX: Added itemReviewed meta tags for AggregateRating */}
+          <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+            <meta itemProp="name" content="Free Cover Letter Generator" />
+            <meta itemProp="applicationCategory" content="BusinessApplication" />
+            <meta itemProp="url" content={`${SITE_URL}/free-cover-letter-generator`} />
+          </div>
           <div className="rating-stars">
             ★★★★★
             <span className="rating-value">4.7/5</span>
@@ -1943,7 +1963,7 @@ export default function CoverLetterGenerator({ seoData, buildTimestamp }) {
           </div>
         </section>
 
-        {/* Reviews Section */}
+        {/* Reviews Section - FIXED: Added itemReviewed for each review card */}
         <section className="reviews-section" aria-labelledby="reviews-title">
           <h2 className="section-title" id="reviews-title">What Users Say About Our Cover Letter Generator</h2>
           <div className="reviews-grid">
@@ -1971,6 +1991,12 @@ export default function CoverLetterGenerator({ seoData, buildTimestamp }) {
                 </div>
                 <div className="review-date" itemProp="datePublished">
                   {review.date}
+                </div>
+                {/* FIX: Added itemReviewed for each review card */}
+                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+                  <meta itemProp="name" content="Free Cover Letter Generator" />
+                  <meta itemProp="applicationCategory" content="BusinessApplication" />
+                  <meta itemProp="url" content={`${SITE_URL}/free-cover-letter-generator`} />
                 </div>
               </div>
             ))}

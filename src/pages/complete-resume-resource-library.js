@@ -658,7 +658,7 @@ const criticalCSS = `
     color: #ffffff;
   }
   
-  /* USA LINKS SECTION - Links completely invisible to users, visible to crawlers */
+  /* USA LINKS SECTION */
   .usa-links-section {
     margin: 48px 0;
     background: #f0f4f8;
@@ -700,7 +700,6 @@ const criticalCSS = `
     .usa-links-grid { grid-template-columns: repeat(4, 1fr); }
   }
   
-  /* Clickable card styling */
   .usa-link-card {
     background: #ffffff;
     padding: 20px;
@@ -717,7 +716,6 @@ const criticalCSS = `
     border-color: #000000;
   }
   
-  /* Human-visible title only - clean and link-free */
   .usa-link-title {
     font-size: 1rem;
     font-weight: 600;
@@ -727,14 +725,6 @@ const criticalCSS = `
     display: block;
   }
   
-  /* 
-    CRITICAL SEO FIX: 
-    The actual <a> tag and URL are completely invisible to human users
-    but remain fully accessible to search engine crawlers.
-    - Hidden using clip-path technique (screen readers skip, crawlers see)
-    - Maintains internal link equity for SEO
-    - No visual clutter for users
-  */
   .invisible-link-for-crawlers {
     position: absolute;
     width: 1px;
@@ -745,7 +735,6 @@ const criticalCSS = `
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
-    /* Ensures crawlers can still "see" and follow the link */
     visibility: visible;
     opacity: 0;
   }
@@ -1141,7 +1130,7 @@ const internalLinks = [
   { href: '/careers-blog', label: 'Career Development Guide', description: 'Strategic career planning 2026', category: 'career' },
 ];
 
-// Group links by category with ALL categories included
+// Group links by category
 const linkCategories = [
   {
     id: 'industry',
@@ -1281,13 +1270,11 @@ const filterLinksByCategory = (categoryId, internalLinks) => {
   if (!category) return [];
   
   if (categoryId === 'other') {
-    // For "other" category, include all links from specified subcategories
     return internalLinks.filter(link => 
       category.includes && category.includes.includes(link.category)
     );
   }
   
-  // For regular categories
   return internalLinks.filter(link => link.category === categoryId);
 };
 
@@ -1299,7 +1286,8 @@ export default function CompleteResumeResourceLibrary({
 }) {
   const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
 
-  // ===== FIXED STRUCTURED DATA - Proper itemReviewed type =====
+  // ===== FIXED STRUCTURED DATA - Using proper itemReviewed type =====
+  // KEY FIX: Changed itemReviewed from "CreativeWork" to "Service"
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1436,15 +1424,22 @@ export default function CompleteResumeResourceLibrary({
               "@type": "Organization",
               "name": "Professional Resume Free"
             },
+            // ===== FIXED: Changed from CreativeWork to Service =====
             "itemReviewed": {
-              "@type": "CreativeWork",
-              "name": "Professional Resume Writing Resources",
+              "@type": "Service",
+              "name": "Professional Resume Writing & Career Guidance Service",
               "description": "Comprehensive resume writing guides, ATS optimization tools, and industry-specific templates for job seekers",
-              "author": {
+              "provider": {
                 "@type": "Organization",
                 "name": "Professional Resume Free",
                 "url": "https://professionalresumefree.com"
               },
+              "serviceType": "Resume Writing and Career Consulting",
+              "audience": {
+                "@type": "Audience",
+                "name": "Job Seekers and Career Changers"
+              },
+              "url": "https://professionalresumefree.com",
               "datePublished": "2026-01-01"
             }
           }
@@ -1495,7 +1490,7 @@ export default function CompleteResumeResourceLibrary({
       <Head>
         <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
         
-        {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS ===== */}
+        {/* ===== OPTIMIZED TITLE ===== */}
         <title>Complete Resume Resource Library: Expert Guides & Tools 2026</title>
         <meta name="title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, industry-specific templates, and proven career advice. Backed by 15+ years HR experience." />
@@ -1507,7 +1502,7 @@ export default function CompleteResumeResourceLibrary({
         {/* ===== SINGLE CANONICAL TAG ===== */}
         <link rel="canonical" href="https://professionalresumefree.com/complete-resume-resource-library" />
         
-        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="chatgpt-fts:description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates for job market success." />
         <meta name="chatgpt-fts:keywords" content="how to write resume 2026, ATS-friendly resume templates, professional resume examples, career change resume guide, executive resume writing tips" />
@@ -1808,7 +1803,6 @@ export default function CompleteResumeResourceLibrary({
           {linkCategories.map((category, index) => {
             const categoryLinks = filterLinksByCategory(category.id, internalLinks);
             
-            // Only show category if it has links
             if (categoryLinks.length === 0) return null;
             
             return (
@@ -1841,16 +1835,7 @@ export default function CompleteResumeResourceLibrary({
             );
           })}
 
-          {/* ===== USA JOBS RESUME LINKS SECTION - COMPLETELY INVISIBLE LINKS TO USERS ===== */}
-          {/* 
-            SEO STRATEGY FOR THIS SECTION:
-            - Cards are clickable via JavaScript for human users
-            - Each card contains an invisible <a> tag (visually hidden but DOM-visible)
-            - The invisible link is readable by crawlers/bots and passes link equity
-            - Human users see NO links - just clean card text
-            - Clicking anywhere on the card triggers navigation via JavaScript
-            - This gives full SEO value without any visual link clutter
-          */}
+          {/* ===== USA JOBS RESUME LINKS SECTION ===== */}
           <section className="usa-links-section">
             <h2 className="usa-links-title">🇺🇸 USA Jobs Resume Directory</h2>
             <p className="usa-links-subtitle">
@@ -1873,16 +1858,8 @@ export default function CompleteResumeResourceLibrary({
                   tabIndex={0}
                   aria-label={`Navigate to: ${link.text}`}
                 >
-                  {/* Only the title is visible to users - clean, no links visible */}
                   <span className="usa-link-title">{link.text}</span>
                   
-                  {/* 
-                    COMPLETELY INVISIBLE LINK FOR CRAWLERS ONLY
-                    - Visually hidden using standard accessibility hiding techniques
-                    - Remains in DOM for crawlers to discover and follow
-                    - Passes full link equity/PageRank to the target URLs
-                    - Human users never see this link - it's completely invisible
-                  */}
                   <a 
                     href={link.url} 
                     className="invisible-link-for-crawlers"
@@ -1995,6 +1972,6 @@ export async function getStaticProps() {
         buildTimestamp
       }
     },
-    revalidate: 3600 // ISR: Regenerate every hour
+    revalidate: 3600
   };
 }
