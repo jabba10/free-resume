@@ -659,6 +659,62 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 .internal-link-card h3 { font-size: 1rem; margin-bottom: 4px; }
 .internal-link-card p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 8px; }
 .link-arrow { color: var(--primary); font-weight: bold; }
+
+/* Internal Linking Footer Styles */
+.internal-linking-footer {
+  margin-top: 60px;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  background: #f9fafb;
+}
+.footer-links-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--primary);
+}
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.footer-link-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.footer-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.footer-link-text {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.footer-link-sub {
+  color: var(--text-lighter);
+  font-size: 0.8rem;
+}
 `;
 
 // SSG with ISR revalidation every hour
@@ -1839,6 +1895,33 @@ export default function FunctionalResumeTemplates({ seoData }) {
                 <strong>Remember:</strong> A functional resume isn't about hiding your history—it's about strategically framing your skills and achievements to demonstrate your value to potential employers. By following the guidelines and using the templates in this comprehensive guide, you can create a functional resume that opens doors to new opportunities in 2026.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
+        <section className="internal-linking-footer">
+          <h3 className="footer-links-title">Related Career Resources</h3>
+          <div className="footer-links-grid">
+            <a href="/how-to-create-a-resume-with-no-experience" className="footer-link-card">
+              <span className="footer-link-text">Create Resume With No Experience</span>
+              <span className="footer-link-sub">Guide for Beginners</span>
+            </a>
+            <a href="/resume-writing-for-beginners" className="footer-link-card">
+              <span className="footer-link-text">Resume Writing for Beginners</span>
+              <span className="footer-link-sub">Start Your Career</span>
+            </a>
+            <a href="/free-resume-bullet-point-generator" className="footer-link-card">
+              <span className="footer-link-text">Resume Bullet Point Generator</span>
+              <span className="footer-link-sub">Write Strong Bullets</span>
+            </a>
+            <a href="/how-to-describe-work-experience-on-resume" className="footer-link-card">
+              <span className="footer-link-text">Describe Work Experience</span>
+              <span className="footer-link-sub">Perfect Your History</span>
+            </a>
+            <a href="/resume-tips-for-usa-college-students-and-graduates" className="footer-link-card">
+              <span className="footer-link-text">Resume Tips for Students</span>
+              <span className="footer-link-sub">College & Grad Guide</span>
+            </a>
           </div>
         </section>
 

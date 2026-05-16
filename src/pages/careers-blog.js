@@ -30,7 +30,11 @@ import {
   FiDownload,
   FiCalendar,
   FiMap,
-  FiPieChart
+  FiPieChart,
+  FiZap, // Added for new links
+  FiDollarSign, // Added for new links
+  FiCode, // Added for new links
+  FiAlignLeft // Added for new links
 } from 'react-icons/fi';
 
 // ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
@@ -1549,30 +1553,54 @@ const CareerBlog = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links Section - All Broken Links Removed */}
+        {/* Internal Links Section - Enhanced with 5 New Random High-Value Links */}
         <section style={styles.internalLinksSection} aria-labelledby="internal-links-title">
           <div className="container">
             <h2 style={styles.internalLinksTitle} id="internal-links-title">
               Continue Your Professional Development Journey
             </h2>
             <div style={styles.internalLinksGrid}>
-              <Link href="/free-resume-score-checker" style={styles.internalLinkCard}>
-                <h3 style={styles.internalLinkTitle}>Resume Score Checker</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>Check your resume score {currentYear}</p>
-                <FiChevronRight />
+              
+              {/* Link 1: Interview Tips (Next logical step) */}
+              <Link href="/interview-tips" style={styles.internalLinkCard}>
+                <FiUserCheck size={24} style={{marginBottom: '10px'}} />
+                <h3 style={styles.internalLinkTitle}>Master Your Job Interviews</h3>
+                <p className="left-align" style={styles.internalLinkDescription}>Ace your interviews with expert tips and common question guides.</p>
+                <FiArrowRight />
               </Link>
               
-              <Link href="/free-ats-resume-checker" style={styles.internalLinkCard}>
-                <h3 style={styles.internalLinkTitle}>ATS Resume Checker</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>Check your ATS resume {currentYear}</p>
-                <FiChevronRight />
+              {/* Link 2: Tech Resume Builder (High Value Niche) */}
+              <Link href="/ats-friendly-tech-resume-builder" style={styles.internalLinkCard}>
+                <FiCode size={24} style={{marginBottom: '10px'}} />
+                <h3 style={styles.internalLinkTitle}>Tech & Engineering Resumes</h3>
+                <p className="left-align" style={styles.internalLinkDescription}>Specialized ATS-friendly templates for developers and engineers.</p>
+                <FiArrowRight />
               </Link>
               
-              <Link href="/how-to-write-a-resume" style={styles.internalLinkCard}>
-                <h3 style={styles.internalLinkTitle}>Resume Writing Guide</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>How to write a resume {currentYear}</p>
-                <FiChevronRight />
+              {/* Link 3: Finance Resume Builder (High Value Niche) */}
+              <Link href="/ats-friendly-finance-resume-builder" style={styles.internalLinkCard}>
+                <FiDollarSign size={24} style={{marginBottom: '10px'}} />
+                <h3 style={styles.internalLinkTitle}>Finance & Accounting Resumes</h3>
+                <p className="left-align" style={styles.internalLinkDescription}>Tailored formats for banking, accounting, and financial roles.</p>
+                <FiArrowRight />
               </Link>
+              
+              {/* Link 4: Keyword Matcher (High Utility Tool) */}
+              <Link href="/free-resume-keyword-matcher" style={styles.internalLinkCard}>
+                <FiAlignLeft size={24} style={{marginBottom: '10px'}} />
+                <h3 style={styles.internalLinkTitle}>Free Keyword Matcher Tool</h3>
+                <p className="left-align" style={styles.internalLinkDescription}>Match your resume against job descriptions to boost ATS scores.</p>
+                <FiArrowRight />
+              </Link>
+
+              {/* Link 5: 2026 Trends (High GEO Relevance) */}
+              <Link href="/resume-trends-in-the-usa-for-2026" style={styles.internalLinkCard}>
+                <FiZap size={24} style={{marginBottom: '10px'}} />
+                <h3 style={styles.internalLinkTitle}>2026 Resume Trends Report</h3>
+                <p className="left-align" style={styles.internalLinkDescription}>Stay ahead with the latest hiring trends and format changes.</p>
+                <FiArrowRight />
+              </Link>
+
             </div>
           </div>
         </section>

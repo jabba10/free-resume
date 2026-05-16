@@ -945,6 +945,53 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   left: 0;
   font-weight: bold;
 }
+
+/* New Internal Links Section Styles */
+.internal-links-section {
+  padding: clamp(40px, 8vw, 60px) 0;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.link-grid-new {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.link-card-new {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.link-card-new:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: #d1d5db;
+}
+
+.link-card-new h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #111111;
+}
+
+.link-card-new p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 0;
+}
 `;
 
 export async function getStaticProps() {
@@ -1703,6 +1750,39 @@ function CustomerServiceResumeGuidePage({
               <p className="helper-text">
                 Research conducted Q1 2026. Updated quarterly. Data sources available upon request.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW RANDOMLY SELECTED LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h2 className="section-title">Explore More Career Resources</h2>
+            <div className="link-grid-new">
+              <Link href="/ats-friendly-retail-associate-resume-builder" className="link-card-new">
+                <h3>Retail Associate Resume Builder</h3>
+                <p>Specialized builder for retail roles</p>
+              </Link>
+              
+              <Link href="/ats-friendly-administrative-assistant-resume-builder" className="link-card-new">
+                <h3>Administrative Assistant Builder</h3>
+                <p>Tailored for admin support jobs</p>
+              </Link>
+              
+              <Link href="/jobs-search-tips" className="link-card-new">
+                <h3>Job Search Tips</h3>
+                <p>Strategies for finding USA jobs</p>
+              </Link>
+              
+              <Link href="/how-to-write-a-resume-for-usa-retail-jobs" className="link-card-new">
+                <h3>USA Retail Resume Guide</h3>
+                <p>Specific tips for retail sector</p>
+              </Link>
+              
+              <Link href="/usa-jobs-resume-directory" className="link-card-new">
+                <h3>USA Jobs Resume Directory</h3>
+                <p>Browse resumes by industry</p>
+              </Link>
             </div>
           </div>
         </section>

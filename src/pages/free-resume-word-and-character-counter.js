@@ -720,6 +720,69 @@ const criticalCSS = `
     transform: translateY(-2px); 
     box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.2);
   }
+
+  /* RECOMMENDED RESOURCES SECTION (NEW) */
+  .resources-section {
+    margin: 48px 0;
+    padding-top: 32px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .resources-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .resources-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  .resource-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .resource-card:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .resource-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #111827;
+    line-height: 1.4;
+  }
+
+  .resource-link {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+  }
+
+  .resource-link:hover {
+    text-decoration: underline;
+  }
   
   /* FOOTER */
   .footer { 
@@ -942,6 +1005,30 @@ const SEO_KEYWORDS = [
   'character count resume',
   'resume optimization tool',
   'job application resume length'
+];
+
+// Selected Internal Links for Bottom Section (Randomly selected from provided JSON)
+const INTERNAL_LINKS = [
+  {
+    path: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
+    text: "AI & ML Engineering Resume Builder"
+  },
+  {
+    path: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software",
+    text: "How to Beat ATS Optimization"
+  },
+  {
+    path: "/best-ats-resume-format-2026",
+    text: "Best ATS Resume Format 2026"
+  },
+  {
+    path: "/free-resume-keyword-matcher",
+    text: "Free Resume Keyword Matcher"
+  },
+  {
+    path: "/software-engineer-resume-example-and-writing-guide",
+    text: "Software Engineer Resume Guide"
+  }
 ];
 
 const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
@@ -1180,7 +1267,7 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
       processedText.trim().split(/\s+/).filter(word => word.length > 0).length;
     
     const lines = processedText === '' ? 0 : 
-      processedText.split('\n').filter(line => line.trim().length > 0).length;
+      processedText.split('\n').filter(line => line.trim().length > 0).lines;
     
     const paragraphs = processedText.trim() === '' ? 0 : 
       processedText.split(/\n\s*\n/).filter(para => para.trim().length > 0).length;
@@ -1672,6 +1759,24 @@ Senior Developer | Tech Company | 2020-Present
             <a href="https://professionalresumefree.com/resume-templates" className="cta-button">
               Create Professional Resume
             </a>
+          </div>
+        </section>
+
+        {/* Recommended Resources Section - Internal Linking for SEO/GEO */}
+        <section className="resources-section" aria-labelledby="resources-title">
+          <h2 className="section-title" id="resources-title">Recommended Resources</h2>
+          <p className="section-subtitle">
+            Enhance your job search with these specialized tools and guides
+          </p>
+          <div className="resources-grid">
+            {INTERNAL_LINKS.map((link, index) => (
+              <div key={index} className="resource-card">
+                <h3 className="resource-title">{link.text}</h3>
+                <a href={link.path} className="resource-link">
+                  View Resource →
+                </a>
+              </div>
+            ))}
           </div>
         </section>
       </main>

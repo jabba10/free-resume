@@ -769,6 +769,80 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   margin-left: auto;
   margin-right: auto;
 }
+
+/* NEW: Internal Links Footer Section - Responsive & SEO Optimized */
+.internal-links-footer {
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  padding: 30px 0 50px;
+  margin-top: 20px;
+}
+@media (min-width: 768px) {
+  .internal-links-footer { padding: 40px 0 60px; }
+}
+.internal-links-title {
+  text-align: center;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin-bottom: 24px;
+  padding: 0 16px;
+  font-weight: 600;
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .internal-links-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (min-width: 768px) {
+  .internal-links-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .internal-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.internal-link-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 12px;
+  text-decoration: none;
+  color: var(--primary);
+  text-align: center;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80px;
+  justify-content: center;
+}
+.internal-link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.internal-link-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.internal-link-text {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  font-weight: 500;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+.internal-link-icon {
+  margin-bottom: 6px;
+  color: var(--primary);
+  opacity: 0.8;
+}
+@media (max-width: 480px) {
+  .internal-link-card { padding: 14px 10px; min-height: 70px; }
+  .internal-link-text { font-size: 0.8rem; }
+}
 `;
 
 export async function getStaticProps() {
@@ -925,6 +999,15 @@ function ITResumeExamples({
   reviewDates,
   faqDates 
 }) {
+  // Randomly selected internal links for SEO/GEO strengthening (checked against history to avoid repeats)
+  const internalLinks = [
+    { href: "/ats-friendly-registered-practical-nurse-resume-builder", text: "ATS-Friendly Registered Practical Nurse Resume", icon: FiUser },
+    { href: "/resume-formatting-guide", text: "Resume Formatting Guide", icon: FiFileText },
+    { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", text: "Most In-Demand Resume Keywords for USA", icon: FiTarget },
+    { href: "/resume-tips-for-usa-college-students-and-graduates", text: "Resume Tips for USA College Students", icon: FiBookOpen },
+    { href: "/ats-friendly-marketing-executive-manager-resume-builder", text: "ATS-Friendly Marketing Executive Resume", icon: FiBriefcase },
+  ];
+
   return (
     <>
       <Head>
@@ -1784,6 +1867,35 @@ function ITResumeExamples({
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
         </div>
+
+        {/* === NEW: Internal Links Footer Section for SEO/GEO === */}
+        <section className="internal-links-footer" aria-labelledby="internal-links-heading">
+          <div className="container">
+            <h2 id="internal-links-heading" className="internal-links-title">
+              🔗 Explore More Resume Resources
+            </h2>
+            <div className="internal-links-grid">
+              {internalLinks.map((link, index) => {
+                const Icon = link.icon;
+                return (
+                  <Link 
+                    key={index} 
+                    href={link.href} 
+                    className="internal-link-card"
+                    aria-label={link.text}
+                  >
+                    <Icon className="internal-link-icon" size={18} aria-hidden="true" />
+                    <span className="internal-link-text">{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+            <p className="helper-text" style={{marginTop: '20px', fontSize: '0.75rem'}}>
+              These links help you discover related resume guides, templates, and tools to strengthen your job application.
+            </p>
+          </div>
+        </section>
+
       </main> 
     </>
   );

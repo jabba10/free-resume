@@ -34,7 +34,8 @@ import {
   FiCloud,
   FiTerminal,
   FiGrid,
-  FiLayout
+  FiLayout,
+  FiEdit // Added for writing guide
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -772,6 +773,63 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 }
 .layout-card li {
   margin-bottom: 4px;
+}
+
+/* New Styles for Bottom Internal Links Section */
+.internal-links-section {
+  padding: 60px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .internal-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.internal-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s;
+  height: 100%;
+}
+.internal-link-card:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.internal-link-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.internal-link-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 `;
 
@@ -1584,6 +1642,35 @@ function PopularResumeLayouts({
               <p className="helper-text">
                 Sources: 2026 industry surveys, interviews with FAANG recruiters, ATS provider data.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Essential Internal Links for SEO/GEO */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '24px' }}>Essential Tech Career Resources</h3>
+            <div className="internal-links-grid">
+              <Link href="/ats-friendly-software-developer-and-software-engineer-resume-builder" className="internal-link-card">
+                <FiCode className="internal-link-icon" />
+                <span className="internal-link-text">ATS-Friendly Software Engineer Resume Builder</span>
+              </Link>
+              <Link href="/most-popular-resume-layouts-for-usa-tech-jobs" className="internal-link-card">
+                <FiLayout className="internal-link-icon" />
+                <span className="internal-link-text">Popular USA Tech Resume Layouts</span>
+              </Link>
+              <Link href="/best-resume-examples-for-usa-it-and-software-jobs" className="internal-link-card">
+                <FiBriefcase className="internal-link-icon" />
+                <span className="internal-link-text">Best IT & Software Resume Examples</span>
+              </Link>
+              <Link href="/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume" className="internal-link-card">
+                <FiCpu className="internal-link-icon" />
+                <span className="internal-link-text">How to List Prompt Engineering Skills</span>
+              </Link>
+              <Link href="/software-engineer-resume-example-and-writing-guide" className="internal-link-card">
+                <FiEdit className="internal-link-icon" />
+                <span className="internal-link-text">Software Engineer Resume Writing Guide</span>
+              </Link>
             </div>
           </div>
         </section>

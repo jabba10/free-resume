@@ -32,7 +32,9 @@ import {
   FiCpu,
   FiDatabase,
   FiCloud,
-  FiTerminal
+  FiTerminal,
+  FiSearch,
+  FiGrid
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -945,6 +947,48 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   left: 0;
   font-weight: bold;
 }
+
+/* New Styles for Related Resources Section */
+.related-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.resource-link-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.resource-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.resource-icon {
+  background: var(--card-bg);
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.resource-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.resource-content p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
+}
 `;
 
 export async function getStaticProps() {
@@ -1053,7 +1097,7 @@ export async function getStaticProps() {
     },
     {
       question: "What is veterans' preference and how do I claim it?",
-      answer: "Veterans' preference gives eligible veterans priority in federal hiring. To claim it, you must include documentation of your service (DD-214, SF-15, etc.) with your application. On your resume, clearly state your veterans' preference eligibility and include your discharge type. Different levels of preference (5-point, 10-point) apply based on disability status and other factors. Check the OPM website for current requirements."
+      answer: "Veterans' preference gives eligible veterans priority in federal hiring. To claim it, you must include documentation of your service (DD-214, SF-15, etc.) with your application. On your resume, clearly state your veterans' preference eligibility and include your service branch and dates. Different levels of preference (5-point, 10-point) apply based on disability status and other factors. Check the OPM website for current requirements."
     },
     {
       question: "How do federal hiring specialists review resumes?",
@@ -1670,6 +1714,73 @@ function FederalResumeGuidePage({
                 <h3 style={{marginBottom: '8px'}}>Free Federal Tools</h3>
                 <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>USAJOBS checklist, KSA analyzer, and format validator</p>
                 <span style={{color: '#000', fontWeight: '500'}}>Use Tools <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO */}
+        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
+          <div className="container">
+            <h2 className="section-title">📚 Recommended Reading for Job Seekers</h2>
+            <p className="section-subtitle">
+              Deepen your knowledge with these specialized guides to complement your federal job search strategy.
+            </p>
+            
+            <div className="related-resources-grid">
+              {/* Link 1: USA Jobs Directory */}
+              <Link href="/usa-jobs-resume-directory" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiSearch size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>USAJOBS Resume Directory</h4>
+                  <p>Navigate the federal directory with our specialized resume examples.</p>
+                </div>
+              </Link>
+
+              {/* Link 2: Interview Tips */}
+              <Link href="/interview-tips" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiUsers size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Federal Interview Tips</h4>
+                  <p>Prepare for structured federal interviews with our expert guide.</p>
+                </div>
+              </Link>
+
+              {/* Link 3: Job Search Tips */}
+              <Link href="/jobs-search-tips" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiTarget size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>USA Job Search Strategies</h4>
+                  <p>Advanced strategies for finding and applying to government roles.</p>
+                </div>
+              </Link>
+
+              {/* Link 4: Resume Formatting Guide */}
+              <Link href="/resume-formatting-guide" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiGrid size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Resume Formatting Guide</h4>
+                  <p>Ensure your document layout passes automated screening systems.</p>
+                </div>
+              </Link>
+
+              {/* Link 5: Careers Blog */}
+              <Link href="/careers-blog" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiBookOpen size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Career Advice Blog</h4>
+                  <p>Latest insights on government hiring trends and career growth.</p>
+                </div>
               </Link>
             </div>
           </div>

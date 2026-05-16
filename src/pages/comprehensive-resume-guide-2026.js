@@ -1,6 +1,7 @@
 // app/comprehensive-resume-guide-2026/page.jsx
 import Link from 'next/link';
 import Head from 'next/head';
+import { FiArrowRight } from 'react-icons/fi'; // Added missing import
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
 const criticalCSS = `
@@ -836,6 +837,60 @@ text-align: center;
 .testimonial-card div {
 text-align: center;
 }
+
+/* NEW CSS FOR BOTTOM LINKS SECTION */
+.bottom-links-section {
+  background: #f3f4f6;
+  border-top: 1px solid var(--border);
+  padding: clamp(30px, 5vw, 50px) 0;
+  margin-top: 40px;
+}
+.link-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.link-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.link-card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.link-card-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+.link-arrow {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 /* Mobile improvements */
 @media (max-width: 480px) {
   button, 
@@ -1837,6 +1892,82 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
             </p>
           </div>
         </section>
+
+        {/* NEW SECTION: Bottom Internal Links for SEO/GEO Boost */}
+        <section className="bottom-links-section">
+          <div className="container">
+            <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Explore More Career Resources</h2>
+            <div className="link-card-grid">
+              
+              {/* Link 1: Student/Grad Niche */}
+              <Link href="/resume-tips-for-usa-college-students-and-graduates" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    🎓 Resume Tips for College Students & Grads
+                  </div>
+                  <p className="link-card-desc">
+                    Essential advice for entering the workforce with little to no experience.
+                  </p>
+                </div>
+                <div className="link-arrow">Read Guide <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 2: Companion Tool */}
+              <Link href="/free-cover-letter-generator" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    📝 Free Cover Letter Generator
+                  </div>
+                  <p className="link-card-desc">
+                    Create perfectly matched cover letters in seconds to boost your application.
+                  </p>
+                </div>
+                <div className="link-arrow">Generate Now <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 3: AI/Modern Trend */}
+              <Link href="/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    🤖 How to Use AI Without Sounding Like a Robot
+                  </div>
+                  <p className="link-card-desc">
+                    Master prompt engineering to write authentic, human-sounding resume bullets.
+                  </p>
+                </div>
+                <div className="link-arrow">Learn More <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 4: Remote Work Niche */}
+              <Link href="/resume-tips-for-remote-jobs-in-the-usa" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    🏠 Resume Tips for Remote Jobs
+                  </div>
+                  <p className="link-card-desc">
+                    Highlight the specific skills employers look for in distributed teams.
+                  </p>
+                </div>
+                <div className="link-arrow">Get Tips <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 5: Government/Federal Niche */}
+              <Link href="/how-to-write-a-federal-resume-for-usa-government-jobs" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    🏛️ How to Write a Federal Resume
+                  </div>
+                  <p className="link-card-desc">
+                    Navigate the complex requirements of USAJobs and government applications.
+                  </p>
+                </div>
+                <div className="link-arrow">View Guide <FiArrowRight size={14} /></div>
+              </Link>
+
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );

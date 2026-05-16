@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { FiArrowRight, FiBookOpen, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
 const criticalCSS = `
@@ -104,7 +105,10 @@ gap: 12px;
 }
 }
 .btn-primary {
-display: inline-block;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
 background: var(--primary);
 color: var(--background);
 padding: 12px 24px;
@@ -134,7 +138,10 @@ outline: 2px solid var(--primary);
 outline-offset: 2px;
 }
 .btn-secondary {
-display: inline-block;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
 background: transparent;
 color: var(--primary);
 padding: 12px 24px;
@@ -688,6 +695,58 @@ top: 0;
   flex-direction: column;
   height: 100%;
 }
+
+/* Internal Links Section Styles */
+.internal-links-section {
+  background: var(--background);
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.internal-link-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+.internal-link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.internal-link-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  line-height: 1.4;
+}
+.internal-link-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+.internal-link-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-top: auto;
+}
 `;
 
 const AIResumeGuide = ({ 
@@ -913,6 +972,35 @@ Human-Enhanced:
   const definitiveAnswers = [
     { question: "What is the best way to use AI for resume writing?", answer: "**Use AI for structure, optimization, and keyword analysis, but always add your personal achievements and voice.** This combination yields the best results." },
     { question: "How long should an AI-optimized resume be?", answer: "**Entry-level: 1 page | Mid-level: 1-2 pages | Senior: 2 pages.** AI helps you optimize content within these guidelines." }
+  ];
+
+  // ==================== SELECTED INTERNAL LINKS FOR SEO/GEO BOOST ====================
+  const internalLinks = [
+    {
+      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained",
+      desc: "Master the latest AI screening tactics used by USA employers in 2026."
+    },
+    {
+      href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
+      title: "Most In-Demand Resume Keywords for USA Job Seekers",
+      desc: "Boost your GEO ranking with high-volume keywords for the American market."
+    },
+    {
+      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
+      title: "ATS-Friendly Software Developer & Engineer Resume Builder",
+      desc: "Specialized templates for tech roles, optimized for engineering ATS filters."
+    },
+    {
+      href: "/free-resume-readability-checker",
+      title: "Free Resume Readability Checker Tool",
+      desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready."
+    },
+    {
+      href: "/resume-trends-in-the-usa-for-2026",
+      title: "Top Resume Trends in the USA for 2026",
+      desc: "Stay ahead of the curve with the latest formatting and content trends."
+    }
   ];
 
   // Simple icons using emoji
@@ -1652,6 +1740,27 @@ Human-Enhanced:
             </p>
           </div>
         </section>
+
+        {/* NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="internal-links-section" aria-labelledby="resources-heading">
+          <div className="container">
+            <h2 id="resources-heading" className="section-title">Recommended Resources for Job Seekers</h2>
+            <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
+            
+            <div className="internal-links-grid">
+              {internalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="internal-link-card">
+                  <div className="internal-link-title">{link.title}</div>
+                  <div className="internal-link-desc">{link.desc}</div>
+                  <div className="internal-link-cta">
+                    Read Guide <FiArrowRight size={16} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );

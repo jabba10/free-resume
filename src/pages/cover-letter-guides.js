@@ -1,6 +1,7 @@
 // app/cover-letter-guides/page.jsx
 import Head from 'next/head';
 import Link from 'next/link';
+import { FiBarChart, FiBriefcase, FiMonitor, FiCode, FiMessageCircle } from 'react-icons/fi'; // Added icons for new links
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
 const criticalCSS = `
@@ -775,6 +776,75 @@ margin-top: 20px;
 font-size: 0.9rem;
 color: var(--text-light);
 }
+
+/* NEW: Internal Links Footer Section Styles */
+.internal-links-footer {
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  padding: 40px 0 60px;
+  margin-top: 40px;
+}
+.internal-links-title {
+  text-align: center;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin-bottom: 30px;
+  padding: 0 16px;
+  font-weight: 700;
+}
+.internal-links-grid-footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 0 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .internal-links-grid-footer { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  .internal-links-grid-footer { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .internal-links-grid-footer { grid-template-columns: repeat(5, 1fr); }
+}
+.internal-link-card-footer {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-decoration: none;
+  color: var(--primary);
+  text-align: center;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+.internal-link-card-footer:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+  background: #ffffff;
+}
+.internal-link-card-footer:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.internal-link-text-footer {
+  font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+.internal-link-icon-footer {
+  margin-bottom: 10px;
+  color: var(--primary);
+  opacity: 0.7;
+}
+
 /* Mobile improvements */
 @media (max-width: 480px) {
   button, 
@@ -838,6 +908,15 @@ const CoverLetterGuides = ({
   // FIXED: Define safeFaqDates and safeReviewDates
   const safeFaqDates = faqDates || Array(12).fill(displayDate);
   const safeReviewDates = reviewDates || Array(4).fill(displayDate);
+
+  // NEW: Randomly selected internal links for SEO/GEO strengthening (checked against history to avoid repeats)
+  const footerInternalLinks = [
+    { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", icon: FiBarChart },
+    { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "How to Write a Resume for USA Customer Service Jobs", icon: FiBriefcase },
+    { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Resume Tips for Remote Jobs in USA", icon: FiMonitor },
+    { href: "/best-resume-examples-for-usa-engineering-jobs", text: "Best Resume Examples for USA Engineering Jobs", icon: FiCode },
+    { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "How to Use ChatGPT to Write a Natural Resume", icon: FiMessageCircle },
+  ];
 
   // Templates array
   const templates = [
@@ -1801,6 +1880,35 @@ const CoverLetterGuides = ({
             </p>
           </div>
         </section>
+
+        {/* === NEW: Internal Links Footer Section for SEO/GEO === */}
+        <section className="internal-links-footer" aria-labelledby="internal-links-heading">
+          <div className="container">
+            <h2 id="internal-links-heading" className="internal-links-title">
+              🔗 Explore More Resume Resources
+            </h2>
+            <div className="internal-links-grid-footer">
+              {footerInternalLinks.map((link, index) => {
+                const Icon = link.icon;
+                return (
+                  <Link 
+                    key={index} 
+                    href={link.href} 
+                    className="internal-link-card-footer"
+                    aria-label={link.text}
+                  >
+                    <Icon className="internal-link-icon-footer" size={20} aria-hidden="true" />
+                    <span className="internal-link-text-footer">{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+            <p className="helper-text" style={{marginTop: '20px', fontSize: '0.75rem', textAlign: 'center', color: 'var(--text-light)'}}>
+              These links help you discover related resume guides, tools, and tips to strengthen your job application.
+            </p>
+          </div>
+        </section>
+
       </main>
     </>
   );

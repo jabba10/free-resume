@@ -725,6 +725,63 @@ const criticalCSS = `
     color: #4b5563;
     font-size: 0.9rem;
   }
+  
+  /* INTERNAL LINKING FOOTER STYLES */
+  .internal-linking-footer {
+    margin-top: 60px;
+    padding: 40px 0;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+  }
+  .footer-links-title {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #111827;
+  }
+  .footer-links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+  .footer-link-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  .footer-link-card:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  .footer-link-text {
+    color: #111827;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .footer-link-sub {
+    color: #6b7280;
+    font-size: 0.8rem;
+  }
+
   .seo-hidden {
     display: none;
   }
@@ -1546,6 +1603,34 @@ Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
               </div>
             </div>
           </section>
+
+          {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
+          <section className="internal-linking-footer">
+            <h3 className="footer-links-title">Related Career Resources</h3>
+            <div className="footer-links-grid">
+              <a href="/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" className="footer-link-card">
+                <span className="footer-link-text">Write a hook summary</span>
+                <span className="footer-link-sub">Grab Recruiter Attention</span>
+              </a>
+              <a href="/free-resume-bullet-point-generator" className="footer-link-card">
+                <span className="footer-link-text">Bullet point generator</span>
+                <span className="footer-link-sub">Improve Structure</span>
+              </a>
+              <a href="/best-ats-resume-format-2026" className="footer-link-card">
+                <span className="footer-link-text">Best ATS resume format</span>
+                <span className="footer-link-sub">2026 Standards</span>
+              </a>
+              <a href="/resume-mistakes-americans-make-and-how-to-fix-them" className="footer-link-card">
+                <span className="footer-link-text">Common resume mistakes</span>
+                <span className="footer-link-sub">How to Fix Them</span>
+              </a>
+              <a href="/free-resume-word-and-character-counter" className="footer-link-card">
+                <span className="footer-link-text">Word & character counter</span>
+                <span className="footer-link-sub">Check Length Limits</span>
+              </a>
+            </div>
+          </section>
+
         </main>
       </div>
     </>

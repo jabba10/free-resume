@@ -25,7 +25,9 @@ import {
   FiBookOpen,
   FiThumbsUp,
   FiUsers,
-  FiInfo
+  FiInfo,
+  FiArrowRight,
+  FiLink
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -486,6 +488,74 @@ td {
     font-size: 0.8rem;
   }
 }
+
+/* NEW: Internal Links Footer Section Styles */
+.internal-links-footer {
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  padding: 40px 0 60px;
+  margin-top: 40px;
+}
+.internal-links-title {
+  text-align: center;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin-bottom: 30px;
+  padding: 0 16px;
+  font-weight: 700;
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 0 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .internal-links-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  .internal-links-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .internal-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.internal-link-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-decoration: none;
+  color: var(--primary);
+  text-align: center;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+.internal-link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+  background: #ffffff;
+}
+.internal-link-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.internal-link-text {
+  font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+.internal-link-icon {
+  margin-bottom: 10px;
+  color: var(--primary);
+  opacity: 0.7;
+}
 `;
 
 // Template Data
@@ -673,11 +743,20 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
   const currentYear = new Date().getFullYear();
   const displayDate = currentDate;
 
-  // Updated URL to remove "www"
-  const canonicalUrl = "https://professionalresumefree.com/best-resume-templates-to-past-applicant-tracking-system/";
+  // UPDATED URL: Changed 'past' to 'pass'
+  const canonicalUrl = "https://professionalresumefree.com/best-resume-templates-to-pass-applicant-tracking-system";
 
   // Template count for dynamic content
   const templateCount = topTemplates.length;
+
+  // Randomly selected internal links for SEO/GEO strengthening (checked against history to avoid repeats)
+  const internalLinks = [
+    { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "How to Beat ATS Optimization Tips", icon: FiShield },
+    { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", icon: FiSearch },
+    { href: "/best-resume-examples-for-career-changers-in-the-usa", text: "Best Resume Examples for Career Changers", icon: FiTrendingUp },
+    { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Resume Tips for Remote Jobs in USA", icon: FiBriefcase },
+    { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "How to Write a Professional Summary", icon: FiEdit },
+  ];
 
   return (
     <>
@@ -714,10 +793,10 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* Single Canonical URL - Updated without www */}
+        {/* Single Canonical URL - UPDATED without www and with 'pass' */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Open Graph Tags - Updated without www */}
+        {/* Open Graph Tags - UPDATED without www and with 'pass' */}
         <meta property="og:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
         <meta property="og:description" content="Discover the best resume templates to pass applicant tracking systems. Proven ATS-friendly formats with keyword optimization. Free instant download." />
         <meta property="og:url" content={canonicalUrl} />
@@ -730,7 +809,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         <meta property="og:updated_time" content={lastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* Twitter Card Tags - Updated without www */}
+        {/* Twitter Card Tags - UPDATED without www and with 'pass' */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
         <meta name="twitter:description" content="ATS-optimized resume templates proven to pass applicant tracking systems. Free instant download." />
@@ -763,7 +842,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         {/* Sitemap Link */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* JSON-LD Structured Data - Updated with new URL without www */}
+        {/* JSON-LD Structured Data - Updated with new URL without www and 'pass' */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1276,6 +1355,35 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
           <span itemProp="last-updated">{displayDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
         </div>
+
+        {/* === NEW: Internal Links Footer Section for SEO/GEO === */}
+        <section className="internal-links-footer" aria-labelledby="internal-links-heading">
+          <div className="container">
+            <h2 id="internal-links-heading" className="internal-links-title">
+              🔗 Explore More Resume Resources
+            </h2>
+            <div className="internal-links-grid">
+              {internalLinks.map((link, index) => {
+                const Icon = link.icon;
+                return (
+                  <Link 
+                    key={index} 
+                    href={link.href} 
+                    className="internal-link-card"
+                    aria-label={link.text}
+                  >
+                    <Icon className="internal-link-icon" size={20} aria-hidden="true" />
+                    <span className="internal-link-text">{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+            <p className="helper-text" style={{marginTop: '20px', fontSize: '0.75rem', textAlign: 'center', color: 'var(--text-light)'}}>
+              These links help you discover related resume guides, tools, and tips to strengthen your job application.
+            </p>
+          </div>
+        </section>
+
       </main>
     </>
   );

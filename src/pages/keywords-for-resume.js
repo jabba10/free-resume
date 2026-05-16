@@ -669,6 +669,75 @@ margin-bottom: 8px;
 font-size: 0.9rem;
 color: var(--text-light);
 }
+/* New Internal Link Section Styles */
+.strategy-section {
+  padding: 40px 0;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+}
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.strategy-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: left;
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.strategy-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+.strategy-icon {
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+.strategy-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.strategy-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+.strategy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: auto;
+}
+.strategy-link svg {
+  transition: transform 0.2s;
+}
+.strategy-card:hover .strategy-link svg {
+  transform: translateX(4px);
+}
+
 .cta-button {
 display: inline-block;
 background: var(--primary);
@@ -885,6 +954,40 @@ export default function KeywordsForResume({ seoData }) {
     {
       question: "How do I balance keywords for different job applications?",
       answer: "**Maintain a core keyword base and customize 20-30% for each role.** Use job descriptions to identify priority keywords for each application."
+    }
+  ];
+
+  // Selected Internal Links for SEO/GEO Boost
+  const recommendedStrategyLinks = [
+    {
+      title: "Free Keyword Density Analyzer",
+      desc: "Check your resume's keyword balance instantly to avoid stuffing penalties.",
+      link: "/free-resume-keyword-density-analyzer-tool",
+      icon: "📊"
+    },
+    {
+      title: "Most In-Demand USA Keywords",
+      desc: "Discover the top trending keywords US employers are searching for in 2026.",
+      link: "/most-in-demand-resume-keywords-for-usa-job-seekers",
+      icon: "🇺🇸"
+    },
+    {
+      title: "Tailor Resume for Any Job",
+      desc: "Step-by-step guide to customizing keywords for specific job postings.",
+      link: "/how-to-tailor-your-resume-for-any-usa-job-posting",
+      icon: "🎯"
+    },
+    {
+      title: "Data & Cybersecurity Keywords",
+      desc: "Specialized keyword list for high-demand tech and security roles.",
+      link: "/ats-friendly-data-and-cybersecurity-resume-builder",
+      icon: "🔒"
+    },
+    {
+      title: "Common American Resume Mistakes",
+      desc: "Avoid the keyword errors that frequently reject US-based applications.",
+      link: "/resume-mistakes-americans-make-and-how-to-fix-them",
+      icon: "⚠️"
     }
   ];
 
@@ -1412,6 +1515,34 @@ export default function KeywordsForResume({ seoData }) {
               <Link href="/resume-templates" className="cta-button">
                 Optimize Your Resume Now {icons.arrowRight}
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Recommended Strategy Links Section (New) */}
+        <section className="strategy-section">
+          <div className="container">
+            <h2 className="section-title">Deepen Your Keyword Strategy</h2>
+            <p className="section-subtitle">Explore these specialized tools and guides to further refine your resume's ATS performance</p>
+            <div className="strategy-grid">
+              {recommendedStrategyLinks.map((item, index) => (
+                <Link 
+                  key={index} 
+                  href={item.link} 
+                  className="strategy-card"
+                  aria-label={`Read more about ${item.title}`}
+                >
+                  <div className="strategy-icon">
+                    {item.icon}
+                  </div>
+                  <h3 className="strategy-title">{item.title}</h3>
+                  <p className="strategy-desc">{item.desc}</p>
+                  <div className="strategy-link">
+                    <span>Explore Resource</span>
+                    <span>{icons.arrowRight}</span>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

@@ -360,6 +360,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px auto; max-w
 .toc-list a { color: var(--primary); text-decoration: none; font-weight: 500; }
 .toc-list a:hover { text-decoration: underline; }
 footer { text-align: center; padding: 30px 0; border-top: 1px solid var(--border); }
+
+/* New Internal Links Section Styles */
+.recommended-resources {
+  background: var(--background);
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  line-height: 1.4;
+}
+.resource-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+.resource-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-top: auto;
+}
 `;
 
 export async function getStaticProps() {
@@ -624,6 +670,35 @@ export async function getStaticProps() {
     }
   ];
 
+  // ==================== NEW RANDOMLY SELECTED INTERNAL LINKS (UNIQUE & FRESH) ====================
+  const internalLinks = [
+    {
+      href: "/interview-tips",
+      title: "Essential Engineering Interview Tips for 2026",
+      desc: "Prepare for technical and behavioral interviews with our comprehensive guide for engineers."
+    },
+    {
+      href: "/jobs-search-tips",
+      title: "Strategic Job Search Tips for Engineering Professionals",
+      desc: "Navigate the engineering job market effectively with proven search strategies and networking tips."
+    },
+    {
+      href: "/ats-friendly-data-and-cybersecurity-resume-builder",
+      title: "ATS-Friendly Data & Cybersecurity Resume Builder",
+      desc: "Specialized templates for data scientists, analysts, and cybersecurity engineers."
+    },
+    {
+      href: "/ats-friendly-project-manager-resume-builder",
+      title: "ATS-Friendly Project Manager Resume Builder",
+      desc: "Optimized templates for engineering project managers and technical leads."
+    },
+    {
+      href: "/how-to-write-bullet-points-that-impress-usa-recruiters",
+      title: "How to Write Bullet Points That Impress USA Recruiters",
+      desc: "Master the art of writing impactful, quantified bullet points for engineering roles."
+    }
+  ];
+
   return {
     props: {
       buildTimestamp,
@@ -640,7 +715,8 @@ export async function getStaticProps() {
       achievementFormulas,
       faqItems,
       testimonials,
-      reviewDates
+      reviewDates,
+      internalLinks
     }
   };
 }
@@ -660,7 +736,8 @@ function BestEngineeringResumeExamples({
   achievementFormulas,
   faqItems,
   testimonials,
-  reviewDates
+  reviewDates,
+  internalLinks
 }) {
   return (
     <>
@@ -1217,6 +1294,29 @@ function BestEngineeringResumeExamples({
               <p className="helper-text">
                 Always tailor your engineering resume to specific job descriptions. These examples are proven for USA engineering job applications in 2026. Source data available upon request.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="recommended-resources" aria-labelledby="recommended-heading">
+          <div className="container">
+            <h2 id="recommended-heading" className="section-title">Recommended Resources for Job Seekers</h2>
+            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore our specialized guides to maximize your interview chances in 2026</p>
+            
+            <div className="internal-links-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px'}}>
+              {internalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="resource-card" style={{display: 'flex', flexDirection: 'column', padding: '20px', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease', height: '100%'}}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'var(--primary)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+                >
+                  <div className="resource-title" style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '8px', color: 'var(--primary)', lineHeight: '1.4', textAlign: 'left'}}>{link.title}</div>
+                  <div className="resource-desc" style={{fontSize: '0.95rem', color: 'var(--text-light)', marginBottom: '12px', flexGrow: '1', textAlign: 'left'}}>{link.desc}</div>
+                  <div className="resource-cta" style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--primary)', marginTop: 'auto'}}>
+                    Read Guide <FiArrowRight size={16} />
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

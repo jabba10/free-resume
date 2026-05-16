@@ -24,7 +24,8 @@ import {
   FiHeart,
   FiShield,
   FiUsers,
-  FiDatabase
+  FiDatabase,
+  FiExternalLink // Added for visual cue on external/internal resources
 } from 'react-icons/fi';
 
 // Critical CSS inline with enhanced responsive design
@@ -488,6 +489,60 @@ th {
 .skip-link:focus {
   top: 0;
 }
+
+/* NEW CSS FOR BOTTOM LINKS SECTION */
+.bottom-links-section {
+  background: #f3f4f6;
+  border-top: 1px solid var(--border);
+  padding: clamp(30px, 5vw, 50px) 0;
+  margin-top: 40px;
+}
+.link-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.link-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.link-card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.link-card-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+.link-arrow {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 @media (max-width: 768px) {
   button, 
   .btn-primary, 
@@ -1308,6 +1363,81 @@ function HealthcareResumeExamples({
               <p className="helper-text">
                 Data-driven strategies updated for 2026 healthcare hiring trends. Last updated: {currentDate} • Sources: BLS, Healthcare Recruitment Consortium, ANA, JobScan
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Bottom Internal Links for SEO/GEO Boost */}
+        <section className="bottom-links-section">
+          <div className="container">
+            <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Explore More Career Resources</h2>
+            <div className="link-card-grid">
+              
+              {/* Link 1: AI/Modern Resume Writing */}
+              <Link href="/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    <FiZap /> How to Use AI Without Sounding Like a Robot
+                  </div>
+                  <p className="link-card-desc">
+                    Master prompt engineering to write authentic, human-sounding resume bullets that pass AI screening.
+                  </p>
+                </div>
+                <div className="link-arrow">Read Guide <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 2: Complementary Tool */}
+              <Link href="/free-cover-letter-generator" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    <FiFileText /> Free Cover Letter Generator
+                  </div>
+                  <p className="link-card-desc">
+                    Create matching cover letters instantly. Perfect companion to your new healthcare resume.
+                  </p>
+                </div>
+                <div className="link-arrow">Generate Now <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 3: Core SEO Keyword */}
+              <Link href="/best-ats-resume-format-2026" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    <FiLayers /> Best ATS Resume Formats for 2026
+                  </div>
+                  <p className="link-card-desc">
+                    Ensure your layout is parsed correctly by modern Applicant Tracking Systems.
+                  </p>
+                </div>
+                <div className="link-arrow">View Formats <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 4: Niche Targeting (Remote) */}
+              <Link href="/resume-tips-for-remote-jobs-in-the-usa" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    <FiHome /> Resume Tips for Remote Healthcare Jobs
+                  </div>
+                  <p className="link-card-desc">
+                    Highlight telehealth and remote collaboration skills for the growing virtual care market.
+                  </p>
+                </div>
+                <div className="link-arrow">Get Tips <FiArrowRight size={14} /></div>
+              </Link>
+
+              {/* Link 5: Hub/Library */}
+              <Link href="/complete-resume-resource-library" className="link-card">
+                <div>
+                  <div className="link-card-title">
+                    <FiBookOpen /> Complete Resume Resource Library
+                  </div>
+                  <p className="link-card-desc">
+                    Access our full database of templates, examples, and career guides for every industry.
+                  </p>
+                </div>
+                <div className="link-arrow">Browse Library <FiArrowRight size={14} /></div>
+              </Link>
+
             </div>
           </div>
         </section>

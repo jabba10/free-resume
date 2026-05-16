@@ -1,5 +1,6 @@
 // pages/free-resume-score-checker.jsx
 import Head from 'next/head';
+import Link from 'next/link'; // Added Link import
 import { useState, useCallback, useMemo, useEffect } from 'react';
 
 // ===== INLINE CRITICAL CSS - Optimized for speed & Centered Layout =====
@@ -703,6 +704,49 @@ const criticalCSS = `
   .resource-card p { 
     color: #4b5563; 
     margin: 0;
+  }
+
+  /* NEW: Internal Linking Section Styles */
+  .internal-links-section {
+    margin: 48px 0;
+    width: 100%;
+  }
+  
+  .internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    width: 100%;
+  }
+
+  .internal-link-card {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #111827;
+    transition: all 0.2s ease;
+  }
+
+  .internal-link-card:hover {
+    border-color: #000000;
+    background: #f9fafb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .link-icon {
+    margin-right: 12px;
+    font-size: 1.2rem;
+    color: #000000;
+  }
+
+  .link-text {
+    font-weight: 600;
+    font-size: 1rem;
   }
   
   /* FOOTER */
@@ -1870,6 +1914,35 @@ Professional Example:
                 </a>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* NEW: Internal Linking Section for SEO/GEO Boost */}
+        <section className="internal-links-section" aria-labelledby="internal-links-title">
+          <div className="container">
+            <h2 className="section-title" id="internal-links-title">Boost Your Application Success</h2>
+            <div className="internal-links-grid">
+              <Link href="/how-to-write-a-resume" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Complete Guide: How to Write a Resume</span>
+              </Link>
+              <Link href="/free-resume-bullet-point-generator" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Free Bullet Point Generator</span>
+              </Link>
+              <Link href="/interview-tips" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Ace Your Interview: Expert Tips</span>
+              </Link>
+              <Link href="/careers-blog" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Latest Career Advice & Trends</span>
+              </Link>
+              <Link href="/resume-formatting-guide" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Professional Resume Formatting Guide</span>
+              </Link>
+            </div>
           </div>
         </section>
 

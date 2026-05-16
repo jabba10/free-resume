@@ -32,7 +32,10 @@ import {
   FiCpu,
   FiDatabase,
   FiCloud,
-  FiTerminal
+  FiTerminal,
+  FiMessageSquare, // Added for new links
+  FiSearch,       // Added for new links
+  FiEdit          // Added for new links
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -1432,6 +1435,52 @@ function HowToUseChatGPTResume({
                 <h3 style={{marginBottom: '8px'}}>Free Resume Tools</h3>
                 <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Score checker, keyword matcher, and more AI-powered tools</p>
                 <span style={{color: '#000', fontWeight: '500'}}>Explore Tools <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Related Career Resources (Randomly Selected Links) */}
+        <section className="section" style={{ borderTop: '1px solid var(--border)' }}>
+          <div className="container">
+            <h2 className="section-title">Related Career Resources</h2>
+            <p className="section-subtitle">
+              Expand your job search strategy with these essential guides and tools.
+            </p>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+              {/* Link 1: Interview Tips - Next step after resume */}
+              <Link href="/interview-tips" className="card">
+                <FiMessageSquare size={28} style={{marginBottom: '16px', color: 'var(--primary)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>Interview Preparation Tips</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Ace the human interview with our comprehensive tips on behavioral and technical questions.</p>
+              </Link>
+
+              {/* Link 2: Jobs Boards - Where to apply */}
+              <Link href="/jobs-boards" className="card">
+                <FiSearch size={28} style={{marginBottom: '16px', color: 'var(--primary)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>Top Job Boards</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Curated list of the best job boards for tech, remote, and creative roles in 2026.</p>
+              </Link>
+
+              {/* Link 3: Cover Letter Guides - Essential companion */}
+              <Link href="/cover-letter-guides" className="card">
+                <FiMail size={28} style={{marginBottom: '16px', color: 'var(--primary)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>Cover Letter Guides</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Step-by-step instructions to write compelling cover letters that complement your resume.</p>
+              </Link>
+
+              {/* Link 4: Tech/AI Resume Builder - Highly relevant to audience */}
+              <Link href="/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" className="card">
+                <FiCode size={28} style={{marginBottom: '16px', color: 'var(--primary)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>AI & ML Engineering Resume</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Specialized template for LLM Engineers and Data Scientists to highlight technical stacks.</p>
+              </Link>
+
+              {/* Link 5: How to Write a Resume - Foundational knowledge */}
+              <Link href="/how-to-write-a-resume" className="card">
+                <FiEdit size={28} style={{marginBottom: '16px', color: 'var(--primary)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>How to Write a Resume</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Master the fundamentals of resume writing, from structure to powerful action verbs.</p>
               </Link>
             </div>
           </div>

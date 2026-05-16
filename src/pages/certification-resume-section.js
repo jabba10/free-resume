@@ -32,7 +32,9 @@ import {
   FiHome,
   FiInfo,
   FiThumbsUp,
-  FiUsers
+  FiUsers,
+  FiTarget, // Added for new links
+  FiZap     // Added for new links
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -480,6 +482,51 @@ td {
   background: #e5e7eb;
   transform: translateY(-1px);
 }
+
+/* ===== NEW: Internal Links Section Styles ===== */
+.internal-link-card {
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card-bg);
+}
+.internal-link-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  background: #ffffff;
+}
+.internal-link-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.internal-link-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.internal-link-title {
+  font-weight: 600;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  display: block;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.internal-link-desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  display: block;
+  line-height: 1.4;
+}
+
 /* Mobile touch improvements */
 @media (max-width: 480px) {
   button, 
@@ -1372,6 +1419,64 @@ const CertificateResumeSection = ({
 
             <p style={{ marginTop: '32px', fontSize: '0.8rem', color: '#9ca3af' }}>
               Data fresh as of: {safeCurrentDate} | 120+ templates tested with major ATS platforms
+            </p>
+          </div>
+        </section>
+
+        {/* ===== NEW: Random Internal Links Section for SEO/GEO Boost ===== */}
+        <section className="section" style={{background: 'var(--background)', borderTop: '2px solid var(--border)'}} aria-labelledby="internal-links-heading">
+          <div className="container">
+            <h2 id="internal-links-heading" className="section-title" style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>🔗 Explore More Resume Resources</h2>
+            <p className="section-subtitle" style={{marginBottom: '24px'}}>
+              Strengthen your application with these expert guides and tools
+            </p>
+            
+            {/* Responsive grid: 1 col mobile → auto-fit up to 5 cols desktop */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '16px',
+              width: '100%'
+            }}>
+              {/* Link 1: Skills Section */}
+              <Link href="/resume-skills-section" className="internal-link-card">
+                <FiTarget className="internal-link-icon" />
+                <span className="internal-link-title">How to List Skills on Your Resume</span>
+                <span className="internal-link-desc">Complement your certs with a strong skills section</span>
+              </Link>
+              
+              {/* Link 2: Formatting Guide */}
+              <Link href="/resume-formatting-guide" className="internal-link-card">
+                <FiFileText className="internal-link-icon" />
+                <span className="internal-link-title">Professional Resume Formatting Guide</span>
+                <span className="internal-link-desc">Ensure perfect layout and structure for 2026</span>
+              </Link>
+              
+              {/* Link 3: Keyword Matcher */}
+              <Link href="/free-resume-keyword-matcher" className="internal-link-card">
+                <FiSearch className="internal-link-icon" />
+                <span className="internal-link-title">Free Resume Keyword Matcher Tool</span>
+                <span className="internal-link-desc">Match your resume to any job description instantly</span>
+              </Link>
+              
+              {/* Link 4: ATS Optimization */}
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="internal-link-card">
+                <FiZap className="internal-link-icon" />
+                <span className="internal-link-title">How to Beat ATS Optimization Tips</span>
+                <span className="internal-link-desc">Advanced strategies for modern hiring software</span>
+              </Link>
+              
+              {/* Link 5: 2026 Trends */}
+              <Link href="/resume-trends-in-the-usa-for-2026" className="internal-link-card">
+                <FiTrendingUp className="internal-link-icon" />
+                <span className="internal-link-title">2026 USA Resume Trends</span>
+                <span className="internal-link-desc">Stay ahead with the latest hiring market insights</span>
+              </Link>
+            </div>
+            
+            {/* Helper text for accessibility */}
+            <p className="helper-text" style={{textAlign: 'center', marginTop: '20px', fontSize: '0.85rem', color: 'var(--text-light)'}}>
+              All resources are free, mobile-optimized, and updated for 2026 hiring trends
             </p>
           </div>
         </section>

@@ -764,6 +764,62 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Internal Linking Footer Styles */
+.internal-linking-footer {
+  margin-top: 60px;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  background: #f9fafb;
+}
+.footer-links-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--primary);
+}
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.footer-link-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.footer-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.footer-link-text {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.footer-link-sub {
+  color: var(--text-lighter);
+  font-size: 0.8rem;
+}
 `;
 
 export async function getStaticProps() {
@@ -1536,6 +1592,33 @@ function OptimizeResumeLinkedIn({
                 Generated for educational and strategic guidance. Always tailor your approach to your specific industry and goals.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
+        <section className="internal-linking-footer">
+          <h3 className="footer-links-title">Related Career Resources</h3>
+          <div className="footer-links-grid">
+            <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="footer-link-card">
+              <span className="footer-link-text">Beat the ATS Algorithms</span>
+              <span className="footer-link-sub">Modern Hiring Software Tips</span>
+            </Link>
+            <Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="footer-link-card">
+              <span className="footer-link-text">AI Prompt Engineering</span>
+              <span className="footer-link-sub">Improve Resume Bullets</span>
+            </Link>
+            <Link href="/best-ats-resume-format-2026" className="footer-link-card">
+              <span className="footer-link-text">Best ATS Format 2026</span>
+              <span className="footer-link-sub">Pass Automated Screens</span>
+            </Link>
+            <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="footer-link-card">
+              <span className="footer-link-text">In-Demand Keywords</span>
+              <span className="footer-link-sub">USA Job Market Data</span>
+            </Link>
+            <Link href="/free-ats-resume-checker" className="footer-link-card">
+              <span className="footer-link-text">Free ATS Resume Checker</span>
+              <span className="footer-link-sub">Scan Your Document</span>
+            </Link>
           </div>
         </section>
 

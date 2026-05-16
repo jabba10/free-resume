@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from './free-resume-template-selector.module.css';
 
 // Current year for dynamic content
@@ -841,6 +842,64 @@ export default function ResumeTemplateSelector() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
+        
+        {/* Internal Footer Styles */}
+        <style jsx>{`
+          .internal-linking-footer {
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+          }
+          .footer-links-title {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #111827;
+          }
+          .footer-links-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          @media (min-width: 640px) {
+            .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+          }
+          @media (min-width: 1024px) {
+            .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
+          }
+          .footer-link-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+          }
+          .footer-link-card:hover {
+            border-color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+          }
+          .footer-link-text {
+            color: #111827;
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 4px;
+          }
+          .footer-link-sub {
+            color: #6b7280;
+            font-size: 0.8rem;
+          }
+        `}</style>
       </Head>
 
       <div className={styles.container}>
@@ -1234,6 +1293,34 @@ export default function ResumeTemplateSelector() {
               </a>
             </div>
           </section>
+
+          {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
+          <section className="internal-linking-footer">
+            <h3 className="footer-links-title">Related Career Resources</h3>
+            <div className="footer-links-grid">
+              <a href="/resume-formatting-guide" className="footer-link-card">
+                <span className="footer-link-text">Resume Formatting Guide</span>
+                <span className="footer-link-sub">Perfect Your Layout</span>
+              </a>
+              <a href="/one-page-resume-template" className="footer-link-card">
+                <span className="footer-link-text">One Page Resume Template</span>
+                <span className="footer-link-sub">Concise & Impactful</span>
+              </a>
+              <a href="/modern-resume-design-2026" className="footer-link-card">
+                <span className="footer-link-text">Modern Resume Design 2026</span>
+                <span className="footer-link-sub">Latest Trends</span>
+              </a>
+              <a href="/how-to-write-a-resume-for-a-job" className="footer-link-card">
+                <span className="footer-link-text">How to Write a Resume</span>
+                <span className="footer-link-sub">Step-by-Step Job Guide</span>
+              </a>
+              <a href="/free-resume-score-checker" className="footer-link-card">
+                <span className="footer-link-text">Free Resume Score Checker</span>
+                <span className="footer-link-sub">Grade Your Resume</span>
+              </a>
+            </div>
+          </section>
+
         </main>
 
         <footer className={styles.footer}>

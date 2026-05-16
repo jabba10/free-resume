@@ -18,7 +18,8 @@ import {
   FiStar,
   FiBookOpen,
   FiChevronRight,
-  FiHome
+  FiHome,
+  FiLink // Added for the new link section
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -770,6 +771,62 @@ td {
   border-bottom: 1px solid var(--primary);
   padding-bottom: 2px;
   align-self: flex-start;
+}
+/* New Styles for Bottom Link Section */
+.internal-links-section {
+  padding: 40px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .internal-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.internal-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s;
+  height: 100%;
+}
+.internal-link-card:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.internal-link-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.internal-link-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.3;
 }
 /* Mobile touch improvements */
 @media (max-width: 480px) {
@@ -1704,6 +1761,35 @@ export default function HowToMakeResume({ seoData, buildTimestamp }) {
             <p style={{ marginTop: '32px', fontSize: '0.8rem', color: '#9ca3af' }}>
               Data fresh as of: {currentDate} | Based on 2026 hiring data and ATS research
             </p>
+          </div>
+        </section>
+
+        {/* Essential Internal Links Section - Bottom of Screen */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '24px' }}>Essential Resume Resources</h3>
+            <div className="internal-links-grid">
+              <Link href="/free-ats-resume-checker" className="internal-link-card">
+                <FiCheck className="internal-link-icon" />
+                <span className="internal-link-text">Free ATS Resume Checker</span>
+              </Link>
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="internal-link-card">
+                <FiTarget className="internal-link-icon" />
+                <span className="internal-link-text">How to Beat the ATS: Optimization Tips</span>
+              </Link>
+              <Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="internal-link-card">
+                <FiZap className="internal-link-icon" />
+                <span className="internal-link-text">AI Resume Builders: How to Use AI</span>
+              </Link>
+              <Link href="/best-ats-resume-format-2026" className="internal-link-card">
+                <FiFileText className="internal-link-icon" />
+                <span className="internal-link-text">Best ATS Resume Format for 2026</span>
+              </Link>
+              <Link href="/resume-trends-in-the-usa-for-2026" className="internal-link-card">
+                <FiTrendingUp className="internal-link-icon" />
+                <span className="internal-link-text">USA Resume Trends for 2026</span>
+              </Link>
+            </div>
           </div>
         </section>
 

@@ -25,7 +25,9 @@ import {
   FiLayers,
   FiTarget,
   FiShield,
-  FiDatabase
+  FiDatabase,
+  FiStar,
+  FiBookmark
 } from 'react-icons/fi';
 
 // Critical CSS inline with enhanced responsive design
@@ -492,6 +494,41 @@ p { font-size: clamp(1rem, 2vw, 1.1rem); }
 }
 .skip-link:focus {
   top: 0;
+}
+/* New styles for recommended reading links */
+.recommended-link-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.recommended-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.recommended-icon {
+  background: var(--card-bg);
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.recommended-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.recommended-content p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
 }
 @media (max-width: 768px) {
   button, 
@@ -1306,6 +1343,73 @@ function HowToTailorResume({
                 <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
                   Explore All Tools →
                 </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Recommended Reading (Randomly Selected Links) */}
+        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
+          <div className="container">
+            <h2 className="section-title">📚 Recommended Reading for Job Seekers</h2>
+            <p className="section-subtitle">
+              Deepen your knowledge with these specialized guides to complement your resume tailoring strategy.
+            </p>
+            
+            <div className="responsive-grid" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'}}>
+              {/* Link 1: ATS Optimization */}
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="recommended-link-card">
+                <div className="recommended-icon">
+                  <FiZap size={24} />
+                </div>
+                <div className="recommended-content">
+                  <h4>Beat ATS Optimization Tips</h4>
+                  <p>Learn how modern hiring software parses your resume and how to structure your content for maximum visibility.</p>
+                </div>
+              </Link>
+
+              {/* Link 2: AI Resume Builders */}
+              <Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="recommended-link-card">
+                <div className="recommended-icon">
+                  <FiCode size={24} />
+                </div>
+                <div className="recommended-content">
+                  <h4>AI Resume Writing Guide</h4>
+                  <p>Discover how to leverage artificial intelligence to draft compelling bullet points without sounding robotic.</p>
+                </div>
+              </Link>
+
+              {/* Link 3: Best ATS Format 2026 */}
+              <Link href="/best-ats-resume-format-2026" className="recommended-link-card">
+                <div className="recommended-icon">
+                  <FiFileText size={24} />
+                </div>
+                <div className="recommended-content">
+                  <h4>Best ATS Resume Format 2026</h4>
+                  <p>The definitive guide to file formats, fonts, and layouts that pass automated screening in 2026.</p>
+                </div>
+              </Link>
+
+              {/* Link 4: Professional Summary */}
+              <Link href="/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" className="recommended-link-card">
+                <div className="recommended-icon">
+                  <FiEye size={24} />
+                </div>
+                <div className="recommended-content">
+                  <h4>Write a Hooking Professional Summary</h4>
+                  <p>Master the art of the 6-second hook. Learn to write summaries that grab recruiter attention instantly.</p>
+                </div>
+              </Link>
+
+              {/* Link 5: In-Demand Keywords */}
+              <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="recommended-link-card">
+                <div className="recommended-icon">
+                  <FiBarChart2 size={24} />
+                </div>
+                <div className="recommended-content">
+                  <h4>Most In-Demand USA Resume Keywords</h4>
+                  <p>Data-driven analysis of the highest-value keywords currently trending in the US job market.</p>
+                </div>
               </Link>
             </div>
           </div>

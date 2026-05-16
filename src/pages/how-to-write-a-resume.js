@@ -27,8 +27,164 @@ import {
   FiBriefcase,
   FiCode,
   FiLayers,
-  FiUsers
+  FiUsers,
+  FiLink
 } from 'react-icons/fi';
+
+// --- DATA & CONFIGURATION ---
+
+const internalLinksJson = {
+  "total_unique_links": 149,
+  "links": [
+    "/",
+    "/resume-guide",
+    "/cover-letter-guides",
+    "/jobs-boards",
+    "/jobs-search-tips",
+    "/careers-blog",
+    "/resume-formatting-guide",
+    "/usa-jobs-resume-directory",
+    "/interview-tips",
+    "/privacy-policy",
+    "/complete-resume-resource-library",
+    "/free-ats-resume-checker",
+    "/free-resume-score-checker",
+    "/free-resume-keyword-matcher",
+    "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software",
+    "/ats-friendly-medical-resume-builder",
+    "/ats-friendly-nurse-resume-builder",
+    "/ats-friendly-nurse-practitioner-resume-builder",
+    "/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder",
+    "/ats-friendly-care-assistant-resume-builder",
+    "/ats-friendly-support-worker-resume-builder",
+    "/ats-friendly-healthcare-assistant-resume-builder",
+    "/ats-friendly-aged-care-worker-resume-builder",
+    "/ats-friendly-medical-assistant-resume-builder",
+    "/ats-friendly-registered-practical-nurse-resume-builder",
+    "/ats-friendly-disability-support-worker-resume-builder",
+    "/ats-friendly-tech-resume-builder",
+    "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
+    "/ats-friendly-data-and-cybersecurity-resume-builder",
+    "/ats-ai-adjacent-creative-technical-roles-resume-builder",
+    "/ats-friendly-software-developer-and-software-engineer-resume-builder",
+    "/ats-friendly-data-analyst-resume-builder",
+    "/ats-friendly-finance-resume-builder",
+    "/ats-friendly-ceo-resume-builder",
+    "/ats-friendly-project-manager-resume-builder",
+    "/ats-friendly-accountant-resume-builder",
+    "/ats-friendly-sales-associate-resume-builder",
+    "/ats-friendly-marketing-executive-manager-resume-builder",
+    "/ats-friendly-business-analyst-resume-builder",
+    "/ats-friendly-customer-service-resume-builder",
+    "/ats-friendly-administrative-assistant-resume-builder",
+    "/ats-friendly-hr-assistant-coordinator-resume-builder",
+    "/ats-friendly-engineering-resume-builder",
+    "/ats-friendly-industrial-manufacturing-resume-builder",
+    "/ats-friendly-advanced-manufacturing-and-automation-resume-builder",
+    "/ats-friendly-biotechnology-resume-builder",
+    "/ats-friendly-electrician-resume-builder",
+    "/ats-friendly-plumber-resume-builder",
+    "/ats-friendly-construction-worker-resume-builder",
+    "/ats-friendly-government-education-non-profit-resume-builder",
+    "/ats-friendly-teacher-resume-builder",
+    "/ats-friendly-legal-resume-builder",
+    "/ats-friendly-security-guard-resume-builder",
+    "/ats-friendly-consumer-retail-resume-builder",
+    "/ats-friendly-retail-associate-resume-builder",
+    "/ats-friendly-logistics-transportation-resume-builder",
+    "/ats-friendly-driver-resume-builder",
+    "/ats-friendly-warehouse-worker-resume-builder",
+    "/ats-friendly-chef-cook-resume-builder",
+    "/ats-friendly-sustainability-and-green-industries-resume-builder",
+    "/free-resume-builder",
+    "/creative-resume-templates",
+    "/functional-resume-templates",
+    "/modern-resume-design-2026",
+    "/one-page-resume-template",
+    "/simple-resume-template",
+    "/resume-templates",
+    "/chronological-resume-example",
+    "/basic-resume-format",
+    "/how-to-write-a-resume",
+    "/how-to-write-a-resume-for-a-job",
+    "/how-to-create-a-resume-with-no-experience",
+    "/how-to-describe-work-experience-on-resume",
+    "/resume-writing-for-beginners",
+    "/what-to-put-on-a-resume",
+    "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume",
+    "/best-ats-resume-format-2026",
+    "/resume-education-section",
+    "/certification-resume-section",
+    "/resume-skills-section",
+    "/resume-objective-statement",
+    "/free-cover-letter-generator",
+    "/free-resume-summary-generator",
+    "/free-resume-objective-generator",
+    "/free-resume-bullet-point-generator",
+    "/free-action-verb-recommender",
+    "/free-resume-word-and-character-counter",
+    "/free-resume-readability-checker",
+    "/free-resume-formatting-checker",
+    "/free-resume-keyword-density-analyzer-tool",
+    "/resume-keywords-finder",
+    "/keywords-for-resume",
+    "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026",
+    "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds",
+    "/most-googled-resume-questions-in-the-usa",
+    "/most-in-demand-resume-keywords-for-usa-job-seekers",
+    "/most-popular-resume-layouts-for-usa-tech-jobs",
+    "/high-traffic-resume-templates-americans-search-for",
+    "/how-long-should-a-resume-be-usa-recruiter-insights",
+    "/best-fonts-and-designs-for-usa-resumes",
+    "/best-resume-examples-for-career-changers-in-the-usa",
+    "/best-resume-examples-for-usa-engineering-jobs",
+    "/best-resume-examples-for-usa-healthcare-jobs",
+    "/best-resume-examples-for-usa-it-and-software-jobs",
+    "/best-resume-examples-for-usa-management-positions",
+    "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume",
+    "/how-to-optimize-your-resume-for-linkedin-recruiters",
+    "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+    "/how-to-tailor-your-resume-for-any-usa-job-posting",
+    "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot",
+    "/how-to-write-a-federal-resume-for-usa-government-jobs",
+    "/how-to-write-a-resume-for-usa-administrative-jobs",
+    "/how-to-write-a-resume-for-usa-sales-and-marketing-roles",
+    "/how-to-write-a-resume-for-usa-customer-service-jobs",
+    "/how-to-write-a-resume-for-usa-finance-and-accounting-roles",
+    "/how-to-write-a-resume-for-usa-hospitality-jobs",
+    "/how-to-write-a-resume-for-usa-retail-jobs",
+    "/how-to-write-a-resume-for-usa-teaching-and-education-jobs",
+    "/how-to-write-bullet-points-that-impress-usa-recruiters",
+    "/the-death-of-the-objective-statement-what-to-write-instead",
+    "/top-skills-employers-in-the-usa-want-on-resumes",
+    "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026",
+    "/resume-mistakes-americans-make-and-how-to-fix-them",
+    "/resume-tips-for-remote-jobs-in-the-usa",
+    "/resume-tips-for-usa-college-students-and-graduates",
+    "/resume-trends-in-the-usa-for-2026",
+    "/free-resume-tools",
+    "/software-engineer-resume-example-and-writing-guide"
+  ]
+};
+
+// Helper to generate readable anchor text from slug
+const generateAnchorText = (path) => {
+  if (path === '/') return 'Home';
+  // Remove leading slash and file extensions if any
+  let clean = path.replace(/^\//, '').replace(/\.html$/, '');
+  // Replace hyphens with spaces
+  let text = clean.replace(/-/g, ' ');
+  // Capitalize first letter of each word
+  return text.replace(/\b\w/g, l => l.toUpperCase());
+};
+
+// Helper to select random links deterministically based on timestamp
+const getRandomLinks = (links, count, seed) => {
+  const shuffled = [...links].sort(() => 0.5 - Math.sin(seed));
+  // Filter out current page if present to avoid self-linking loops in this specific context
+  const filtered = shuffled.filter(l => l !== '/how-to-write-a-resume');
+  return filtered.slice(0, count);
+};
 
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -78,6 +234,9 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeFaqDates = faqDates || Array(12).fill(freshnessIndicator);
   const safeReviewDates = reviewDates || Array(12).fill(freshnessIndicator);
+
+  // Select 5 random links for the footer
+  const selectedLinks = getRandomLinks(internalLinksJson.links, 5, buildTimestamp || Date.now());
 
   // ENRICHED DATA SECTIONS
   
@@ -407,7 +566,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="twitter:description" content="Expert resume writing guide with templates and proven job search strategies for 2026." />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-guide-preview.jpg" />
         
-        {/* FIXED: Changed Product to CreativeWork to resolve "No global identifier" warning */}
+        {/* FIXED: Cleaned up Schema.org to prevent GSC Invalid object type errors */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -420,21 +579,47 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                   "url": "https://professionalresumefree.com/how-to-write-a-resume",
                   "name": "How to Write a Resume: Complete 2026 Guide",
                   "description": "Complete professional guide on how to write an effective resume with step-by-step instructions, expert examples, and ATS optimization strategies.",
-                  "dateModified": safeLastModifiedDate
+                  "dateModified": safeLastModifiedDate,
+                  "isPartOf": {
+                    "@id": "https://professionalresumefree.com/#website"
+                  }
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://professionalresumefree.com/#website",
+                  "url": "https://professionalresumefree.com/",
+                  "name": "Professional Resume Free",
+                  "publisher": {
+                    "@id": "https://professionalresumefree.com/#organization"
+                  }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://professionalresumefree.com/#organization",
+                  "name": "Professional Resume Free",
+                  "url": "https://professionalresumefree.com/"
                 },
                 {
                   "@type": "Article",
+                  "@id": "https://professionalresumefree.com/how-to-write-a-resume#article",
                   "headline": "How to Write a Resume: Complete 2026 Guide",
                   "description": "Expert guide on writing professional resumes that pass ATS systems and impress hiring managers.",
-                  "author": {
-                    "@type": "Organization",
-                    "name": "Professional Resume Free"
-                  },
+                  "image": productImage,
                   "datePublished": "2026-01-01",
-                  "dateModified": safeLastModifiedDate
+                  "dateModified": safeLastModifiedDate,
+                  "author": {
+                    "@id": "https://professionalresumefree.com/#organization"
+                  },
+                  "publisher": {
+                    "@id": "https://professionalresumefree.com/#organization"
+                  },
+                  "mainEntityOfPage": {
+                    "@id": "https://professionalresumefree.com/how-to-write-a-resume#webpage"
+                  }
                 },
                 {
                   "@type": "FAQPage",
+                  "@id": "https://professionalresumefree.com/how-to-write-a-resume#faq",
                   "mainEntity": faqs.map((faq) => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -446,6 +631,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                 },
                 {
                   "@type": "CreativeWork",
+                  "@id": "https://professionalresumefree.com/how-to-write-a-resume#creative-work",
                   "name": "Resume Writing Guide",
                   "description": "Complete guide on how to write a professional resume",
                   "image": productImage,
@@ -1018,6 +1204,59 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
           </div>
         </div>
 
+        {/* Random Internal Links Footer - Responsive & SEO Optimized */}
+        <section id="internal-linking-footer" style={{ 
+          width: '100%', 
+          background: '#f8f9fa', 
+          padding: '40px 20px', 
+          borderTop: '1px solid #e0e0e0',
+          marginTop: '40px'
+        }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', color: '#000', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <FiLink /> Explore More Resources
+            </h3>
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', 
+              gap: '15px' 
+            }}>
+              {selectedLinks.map((linkPath, idx) => {
+                const anchorText = generateAnchorText(linkPath);
+                return (
+                  <Link 
+                    key={idx} 
+                    href={linkPath}
+                    style={{ 
+                      display: 'block',
+                      padding: '12px 16px',
+                      background: '#fff',
+                      border: '1px solid #e0e0e0',
+                      borderRadius: '8px',
+                      color: '#333',
+                      textDecoration: 'none',
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      transition: 'all 0.2s ease',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = '#000';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = '#e0e0e0';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                  >
+                    {anchorText}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* Footer Meta Info */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', fontSize: '0.8rem', color: '#999', marginBottom: '50px', flexWrap: 'wrap', paddingTop: '20px', borderTop: '1px solid #e0e0e0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -1027,8 +1266,6 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
           <div>Version 2026.2</div>
           <div>•</div>
           <div>Next review: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 14)).toISOString().split('T')[0]}</div>
-          
-          
         </div>
       </main>
     </div>

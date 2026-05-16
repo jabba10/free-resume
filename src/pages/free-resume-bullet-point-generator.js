@@ -854,6 +854,50 @@ const criticalCSS = `
   .text-success { color: #10b981; font-weight: 600; }
   .text-danger { color: #ef4444; font-weight: 600; }
   .center-text { text-align: center; }
+
+  /* ===== NEW: Internal Links Section Styles ===== */
+  .internal-link-card {
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f9fafb;
+  }
+  .internal-link-card:hover {
+    transform: translateY(-3px);
+    border-color: #000000;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    background: #ffffff;
+  }
+  .internal-link-card:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+  .internal-link-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #000000;
+  }
+  .internal-link-title {
+    font-weight: 600;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    display: block;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .internal-link-desc {
+    font-size: 0.85rem;
+    color: #4b5563;
+    display: block;
+    line-height: 1.4;
+  }
 `;
 
 // Current year for dynamic content
@@ -1991,6 +2035,65 @@ Implemented marketing automation reducing manual work by 25 hours weekly`,
               </Link>
             </div>
           </section>
+
+          {/* ===== NEW: Random Internal Links Section for SEO/GEO Boost ===== */}
+          <section className="section" style={{background: '#ffffff', borderTop: '2px solid #e5e7eb'}} aria-labelledby="internal-links-heading">
+            <div className="container">
+              <h2 id="internal-links-heading" className="section-title" style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>🔗 Enhance Your Resume Further</h2>
+              <p className="section-subtitle" style={{marginBottom: '24px'}}>
+                Complement your new bullet points with these powerful tools and guides
+              </p>
+              
+              {/* Responsive grid: 1 col mobile → auto-fit up to 5 cols desktop */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: '16px',
+                width: '100%'
+              }}>
+                {/* Link 1: Keyword Matcher */}
+                <Link href="/free-resume-keyword-matcher" className="internal-link-card">
+                  <span className="internal-link-icon">🔑</span>
+                  <span className="internal-link-title">Free Resume Keyword Matcher Tool</span>
+                  <span className="internal-link-desc">Ensure your bullets match job descriptions</span>
+                </Link>
+                
+                {/* Link 2: Formatting Guide */}
+                <Link href="/resume-formatting-guide" className="internal-link-card">
+                  <span className="internal-link-icon">📄</span>
+                  <span className="internal-link-title">Professional Resume Formatting Guide</span>
+                  <span className="internal-link-desc">Make your bullet points visually appealing</span>
+                </Link>
+                
+                {/* Link 3: Summary Generator */}
+                <Link href="/free-resume-summary-generator" className="internal-link-card">
+                  <span className="internal-link-icon">📝</span>
+                  <span className="internal-link-title">Free Resume Summary Generator</span>
+                  <span className="internal-link-desc">Craft a compelling professional summary</span>
+                </Link>
+                
+                {/* Link 4: Engineering Examples */}
+                <Link href="/best-resume-examples-for-usa-engineering-jobs" className="internal-link-card">
+                  <span className="internal-link-icon">⚙️</span>
+                  <span className="internal-link-title">Best Resume Examples for Engineering Jobs</span>
+                  <span className="internal-link-desc">See technical bullet points in context</span>
+                </Link>
+                
+                {/* Link 5: Sales/Marketing Guide */}
+                <Link href="/how-to-write-a-resume-for-usa-sales-and-marketing-roles" className="internal-link-card">
+                  <span className="internal-link-icon">📈</span>
+                  <span className="internal-link-title">How to Write a Resume for Sales & Marketing</span>
+                  <span className="internal-link-desc">Tailor your achievements for growth roles</span>
+                </Link>
+              </div>
+              
+              {/* Helper text for accessibility */}
+              <p className="helper-text" style={{textAlign: 'center', marginTop: '20px', fontSize: '0.85rem', color: '#4b5563'}}>
+                All resources are free, mobile-optimized, and updated for 2026 hiring trends
+              </p>
+            </div>
+          </section>
+
         </main>
       </div>
     </>

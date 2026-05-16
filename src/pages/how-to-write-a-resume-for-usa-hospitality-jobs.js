@@ -32,7 +32,9 @@ import {
   FiCpu,
   FiDatabase,
   FiCloud,
-  FiTerminal
+  FiTerminal,
+  FiSearch,
+  FiGlobe
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards - all centered
@@ -78,7 +80,8 @@ body {
 .article-meta,
 .stats,
 .hero-actions,
-.toc-list {
+.toc-list,
+.related-resources-grid {
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -379,6 +382,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px auto; max-w
 .toc-list a { color: var(--primary); text-decoration: none; font-weight: 500; }
 .toc-list a:hover { text-decoration: underline; }
 footer { text-align: center; padding: 30px 0; border-top: 1px solid var(--border); }
+
+/* New Styles for Related Resources Section */
+.related-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 1200px;
+}
+.resource-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+.resource-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+.resource-icon {
+  background: var(--card-bg);
+  padding: 12px;
+  border-radius: 50%;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.resource-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.resource-content p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.5;
+}
 `;
 
 export async function getStaticProps() {
@@ -467,7 +516,7 @@ export async function getStaticProps() {
     },
     { 
       topic: "Why Hospitality Resumes Are Different", 
-      content: "Hospitality recruitment emphasizes personality, service orientation, and practical experience. Unlike corporate resumes, hospitality resumes should convey warmth, professionalism, and guest-centric thinking. Key differences: emphasis on customer service metrics, importance of language skills, need for flexibility in scheduling, and the expectation of working weekends/holidays. Your resume must demonstrate that you thrive in fast-paced, people-oriented environments while maintaining attention to detail." 
+      content: "Hospitality recruitment emphasizes personality, service orientation, and practical experience. Unlike corporate resumes, hospitality resumes should convey warmth, professionalism, and a genuine passion for serving others. Key differences: emphasis on customer service metrics, importance of language skills, need for flexibility in scheduling, and the expectation of working weekends/holidays. Your resume must demonstrate that you thrive in fast-paced, people-oriented environments while maintaining attention to detail." 
     },
     {
       topic: "The Importance of Service Metrics",
@@ -1227,6 +1276,73 @@ function HospitalityResumeGuide({
                   <li><Link href="/free-resume-tools">Certification Guide</Link></li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO */}
+        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
+          <div className="container">
+            <h2 className="section-title">📚 Recommended Reading for Job Seekers</h2>
+            <p className="section-subtitle" style={{maxWidth: '700px', margin: '0 auto 30px'}}>
+              Deepen your knowledge with these specialized guides to complement your hospitality job search strategy.
+            </p>
+            
+            <div className="related-resources-grid">
+              {/* Link 1: Customer Service Resume Guide */}
+              <Link href="/how-to-write-a-resume-for-usa-customer-service-jobs" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiHeart size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Customer Service Resume Guide</h4>
+                  <p>Master the art of highlighting service skills for broader support roles.</p>
+                </div>
+              </Link>
+
+              {/* Link 2: Remote Work Resume Tips */}
+              <Link href="/resume-tips-for-remote-jobs-in-the-usa" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiGlobe size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Remote Work Resume Tips</h4>
+                  <p>Adapt your hospitality skills for the growing remote support market.</p>
+                </div>
+              </Link>
+
+              {/* Link 3: Impressive Bullet Point Guide */}
+              <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiStar size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Impressive Bullet Point Guide</h4>
+                  <p>Learn to write achievement-focused bullets that grab recruiter attention.</p>
+                </div>
+              </Link>
+
+              {/* Link 4: Career Changer Resume Examples */}
+              <Link href="/best-resume-examples-for-career-changers-in-the-usa" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiTrendingUp size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Career Changer Resume Examples</h4>
+                  <p>Pivoting into hospitality? See how to translate your past experience.</p>
+                </div>
+              </Link>
+
+              {/* Link 5: Top USA Job Boards */}
+              <Link href="/jobs-boards" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiSearch size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Top USA Job Boards</h4>
+                  <p>Discover the best platforms to find your next hospitality opportunity.</p>
+                </div>
+              </Link>
             </div>
           </div>
         </section>

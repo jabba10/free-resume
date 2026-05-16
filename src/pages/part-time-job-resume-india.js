@@ -366,6 +366,80 @@ td {
   color: var(--primary);
   font-weight: 500;
 }
+
+/* New Strategy Section Styles */
+.strategy-section {
+  padding: 50px 0;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+}
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.strategy-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: left;
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.strategy-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+.strategy-icon {
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+.strategy-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  line-height: 1.3;
+}
+.strategy-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+.strategy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: auto;
+}
+.strategy-link svg {
+  transition: transform 0.2s;
+}
+.strategy-card:hover .strategy-link svg {
+  transform: translateX(4px);
+}
+
 .industry-table {
   width: 100%;
   border-collapse: collapse;
@@ -852,6 +926,40 @@ export default function PartTimeJobResumeIndiaPage() {
       title: "Part-Time Interview Preparation Checklist 2026",
       url: "/resume-templates",
       description: "Complete interview guide for part-time job seekers"
+    }
+  ];
+
+  // Selected Internal Links for SEO/GEO Boost
+  const recommendedStrategyLinks = [
+    {
+      title: "Resume with No Experience",
+      desc: "Perfect for students and freshers entering the Indian job market for the first time.",
+      link: "/how-to-create-a-resume-with-no-experience",
+      icon: "🎓"
+    },
+    {
+      title: "Tips for College Students",
+      desc: "Specialized advice for students seeking part-time roles or internships in the USA/Global market.",
+      link: "/resume-tips-for-usa-college-students-and-graduates",
+      icon: "🇺🇸"
+    },
+    {
+      title: "Free Objective Generator",
+      desc: "Create a compelling career objective instantly for your part-time application.",
+      link: "/free-resume-objective-generator",
+      icon: "🎯"
+    },
+    {
+      title: "Retail Associate Resume Builder",
+      desc: "Specialized template for one of the most common part-time industries in India.",
+      link: "/ats-friendly-retail-associate-resume-builder",
+      icon: "🛍️"
+    },
+    {
+      title: "Job Search Tips",
+      desc: "Strategic advice on where and how to find legitimate part-time opportunities.",
+      link: "/jobs-search-tips",
+      icon: "🔍"
     }
   ];
 
@@ -1485,6 +1593,34 @@ export default function PartTimeJobResumeIndiaPage() {
                     <span className="internal-link-arrow">→</span>
                   </Link>
                 ))}
+              </div>
+            </section>
+
+            {/* Recommended Strategy Links Section (New) */}
+            <section className="strategy-section">
+              <div className="container">
+                <h2 className="section-title">Essential Resources for Indian Job Seekers</h2>
+                <p className="section-subtitle">Explore these specialized guides and tools to further refine your resume for the Indian and Global market</p>
+                <div className="strategy-grid">
+                  {recommendedStrategyLinks.map((item, index) => (
+                    <Link 
+                      key={index} 
+                      href={item.link} 
+                      className="strategy-card"
+                      aria-label={`Read more about ${item.title}`}
+                    >
+                      <div className="strategy-icon">
+                        {item.icon}
+                      </div>
+                      <h3 className="strategy-title">{item.title}</h3>
+                      <p className="strategy-desc">{item.desc}</p>
+                      <div className="strategy-link">
+                        <span>Explore Resource</span>
+                        <span>→</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </section>
 

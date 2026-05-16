@@ -62,7 +62,8 @@ import {
   FiLock,
   FiTrash2,
   FiMonitor as FiBrowser,
-  FiAlertCircle
+  FiAlertCircle,
+  FiLink as FiLinkIcon
 } from 'react-icons/fi';
 
 // ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED & RESPONSIVENESS =============
@@ -393,7 +394,6 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
       description: 'Built with feedback from users to create the most intuitive, frustration-free resume building experience.',
       stat: ''
     }
-    // "Privacy First" card removed as requested
   ];
 
   // ============= COMPANY VALUES =============
@@ -480,6 +480,35 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
     { name: "Monster", icon: <FiUsers size={20} /> },
     { name: "Glassdoor", icon: <FiStar size={20} /> },
     { name: "ZipRecruiter", icon: <FiZap size={20} /> }
+  ];
+
+  // ============= RANDOMLY SELECTED INTERNAL LINKS FOR SEO/GEO BOOST =============
+  const internalLinks = [
+    {
+      href: "/free-resume-readability-checker",
+      text: "Free Resume Readability Checker for USA Job Applications",
+      description: "Ensure your resume scores high on clarity and ATS compatibility"
+    },
+    {
+      href: "/ats-friendly-logistics-transportation-resume-builder",
+      text: "ATS-Friendly Logistics & Transportation Resume Builder",
+      description: "Optimized templates for drivers, warehouse, and supply chain roles"
+    },
+    {
+      href: "/how-long-should-a-resume-be-usa-recruiter-insights",
+      text: "How Long Should Your Resume Be? USA Recruiter Insights 2026",
+      description: "Data-backed guidance from American hiring managers"
+    },
+    {
+      href: "/ats-friendly-driver-resume-builder",
+      text: "Professional Driver Resume Builder - ATS Optimized for USA Jobs",
+      description: "CDL, delivery, and transportation career templates"
+    },
+    {
+      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      text: "Pass AI Resume Screens: 2026 ATS Algorithm Guide for USA Applicants",
+      description: "Beat automated screening with proven optimization tactics"
+    }
   ];
 
   // ============= INLINE STYLES =============
@@ -839,6 +868,76 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
       fontSize: '0.85rem',
       color: 'var(--text-light)',
       textAlign: 'center'
+    },
+
+    // ============= NEW: INTERNAL LINKS SECTION STYLES =============
+    internalLinksSection: {
+      padding: 'clamp(2rem, 5vw, 3rem) 0',
+      backgroundColor: 'var(--background)',
+      borderTop: '1px solid var(--border)',
+      marginTop: '2rem'
+    },
+    internalLinksHeader: {
+      textAlign: 'center',
+      marginBottom: '2rem',
+      padding: '0 1rem'
+    },
+    internalLinksTitle: {
+      fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
+      fontWeight: '700',
+      marginBottom: '0.5rem',
+      color: 'var(--primary)'
+    },
+    internalLinksSubtitle: {
+      fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
+      color: 'var(--text-light)',
+      maxWidth: '600px',
+      margin: '0 auto'
+    },
+    internalLinksGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: '1.25rem',
+      width: '100%'
+    },
+    internalLinkCard: {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '1.25rem',
+      background: 'var(--card-bg)',
+      borderRadius: '0.75rem',
+      border: '1px solid var(--border)',
+      transition: 'all 0.25s ease',
+      textDecoration: 'none',
+      color: 'inherit',
+      height: '100%'
+    },
+    internalLinkCardHover: {
+      transform: 'translateY(-2px)',
+      boxShadow: 'var(--shadow-md)',
+      borderColor: 'var(--primary)'
+    },
+    internalLinkText: {
+      fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
+      fontWeight: '600',
+      marginBottom: '0.5rem',
+      color: 'var(--primary)',
+      lineHeight: '1.4'
+    },
+    internalLinkDesc: {
+      fontSize: '0.9rem',
+      color: 'var(--text-light)',
+      lineHeight: '1.5',
+      flex: 1
+    },
+    internalLinkIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      marginTop: '0.75rem',
+      fontSize: '0.85rem',
+      color: 'var(--primary)',
+      fontWeight: '500'
     }
   };
 
@@ -1239,6 +1338,44 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                 Explore Free Tools
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============= NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST ============= */}
+      <section style={styles.internalLinksSection}>
+        <div className="container">
+          <div style={styles.internalLinksHeader}>
+            <h2 style={styles.internalLinksTitle}>Explore More Free Resume Resources</h2>
+            <p style={styles.internalLinksSubtitle}>
+              Strengthen your job application with our USA-optimized tools and guides
+            </p>
+          </div>
+          <div style={styles.internalLinksGrid}>
+            {internalLinks.map((link, index) => (
+              <Link 
+                key={index} 
+                href={link.href} 
+                style={styles.internalLinkCard}
+                onMouseEnter={(e) => {
+                  Object.assign(e.currentTarget.style, styles.internalLinkCardHover);
+                }}
+                onMouseLeave={(e) => {
+                  Object.assign(e.currentTarget.style, {
+                    transform: 'none',
+                    boxShadow: 'none',
+                    borderColor: 'var(--border)'
+                  });
+                }}
+              >
+                <span style={styles.internalLinkText}>{link.text}</span>
+                <span style={styles.internalLinkDesc}>{link.description}</span>
+                <span style={styles.internalLinkIcon}>
+                  <FiArrowRight size={16} />
+                  Explore Resource
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

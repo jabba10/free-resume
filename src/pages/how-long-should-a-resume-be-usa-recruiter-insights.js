@@ -732,6 +732,57 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   gap: 20px;
   margin: 30px 0;
 }
+
+/* NEW STYLES FOR INTERNAL LINKS SECTION */
+.internal-links-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .internal-links-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .internal-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.internal-link-card {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.internal-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.internal-link-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.internal-link-cta {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
 `;
 
 export async function getStaticProps() {
@@ -902,6 +953,36 @@ function ResumeLengthGuide({
   reviewDates,
   faqDates 
 }) {
+  
+  // SELECTED 5 RANDOM LINKS FROM JSON (Distinct from previous request)
+  const internalLinks = [
+    {
+      path: "/resume-formatting-guide",
+      title: "Resume Formatting Guide",
+      desc: "Ensure your layout is clean and ATS-readable."
+    },
+    {
+      path: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
+      title: "AI & ML Engineering Resume",
+      desc: "Specialized builder for tech roles."
+    },
+    {
+      path: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      title: "Pass the AI Resume Screen",
+      desc: "Understand modern ATS algorithms."
+    },
+    {
+      path: "/ats-friendly-data-and-cybersecurity-resume-builder",
+      title: "Data & Cybersecurity Resume",
+      desc: "Tailored for data security professionals."
+    },
+    {
+      path: "/free-resume-keyword-matcher",
+      title: "Free Keyword Matcher",
+      desc: "Match your resume to job descriptions."
+    }
+  ];
+
   return (
     <>
       <Head>
@@ -1528,6 +1609,27 @@ function ResumeLengthGuide({
               <p className="helper-text">
                 Data sources: Professional Resume Free 2026 Recruiter Survey (March 2026), SHRM 2025 Resume Review Study, internal ATS analytics.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Deepen Your Knowledge (Internal Linking for SEO/GEO) */}
+        <section className="internal-links-section" aria-labelledby="deepen-heading">
+          <div className="container">
+            <h2 id="deepen-heading" className="section-title">Deepen Your Knowledge</h2>
+            <p className="section-subtitle">Explore these specialized guides to further optimize your application</p>
+            <div className="internal-links-grid">
+              {internalLinks.map((link, index) => (
+                <Link href={link.path} key={index} className="internal-link-card">
+                  <div>
+                    <h3 className="internal-link-title">{link.title}</h3>
+                    <p className="text-small">{link.desc}</p>
+                  </div>
+                  <span className="internal-link-cta">
+                    Read Guide <FiArrowRight size={14} />
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

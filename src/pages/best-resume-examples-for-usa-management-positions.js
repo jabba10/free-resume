@@ -852,6 +852,47 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 .competency-subcategory:first-of-type {
   margin-top: 0;
 }
+
+/* ===== NEW: Internal Links Section Styles ===== */
+.internal-link-card {
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.internal-link-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+.internal-link-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.internal-link-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.internal-link-title {
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.internal-link-desc {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  display: block;
+}
 `;
 
 export async function getStaticProps() {
@@ -1807,6 +1848,64 @@ function ManagementResumeExamples({
           </div>
         </section>
 
+        {/* ===== NEW: Random Internal Links Section for SEO/GEO Boost ===== */}
+        <section className="section" style={{background: 'var(--background)', borderTop: '2px solid var(--border)'}} aria-labelledby="internal-links-heading">
+          <div className="container">
+            <h2 id="internal-links-heading" className="section-title" style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>🔗 Explore More Resume Resources</h2>
+            <p className="section-subtitle" style={{marginBottom: '24px'}}>
+              Strengthen your job application with these expert guides and free tools
+            </p>
+            
+            {/* Responsive grid: 1 col mobile → auto-fit up to 5 cols desktop */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '16px',
+              width: '100%'
+            }}>
+              {/* Link 1: Tailor Resume */}
+              <Link href="/how-to-tailor-your-resume-for-any-usa-job-posting" className="internal-link-card">
+                <FiTarget className="internal-link-icon" />
+                <span className="internal-link-title">How to Tailor Your Resume for Any USA Job Posting</span>
+                <span className="internal-link-desc">Customize your management resume for specific job descriptions</span>
+              </Link>
+              
+              {/* Link 2: ATS Format */}
+              <Link href="/best-ats-resume-format-2026" className="internal-link-card">
+                <FiFileText className="internal-link-icon" />
+                <span className="internal-link-title">Best ATS-Friendly Resume Format for 2026</span>
+                <span className="internal-link-desc">Ensure your resume passes automated screening systems</span>
+              </Link>
+              
+              {/* Link 3: Bullet Points */}
+              <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="internal-link-card">
+                <FiAward className="internal-link-icon" />
+                <span className="internal-link-title">How to Write Resume Bullet Points That Impress Recruiters</span>
+                <span className="internal-link-desc">Craft achievement-focused bullets that get noticed</span>
+              </Link>
+              
+              {/* Link 4: Top Skills */}
+              <Link href="/top-skills-employers-in-the-usa-want-on-resumes" className="internal-link-card">
+                <FiTrendingUp className="internal-link-icon" />
+                <span className="internal-link-title">Top Skills USA Employers Want on Management Resumes</span>
+                <span className="internal-link-desc">Highlight the competencies hiring managers prioritize</span>
+              </Link>
+              
+              {/* Link 5: ATS Checker */}
+              <Link href="/free-ats-resume-checker" className="internal-link-card">
+                <FiCheck className="internal-link-icon" />
+                <span className="internal-link-title">Free ATS Resume Checker Tool</span>
+                <span className="internal-link-desc">Instantly analyze your resume's ATS compatibility</span>
+              </Link>
+            </div>
+            
+            {/* Helper text for accessibility */}
+            <p className="helper-text" style={{textAlign: 'center', marginTop: '20px'}}>
+              All resources are free, mobile-optimized, and updated for 2026 hiring trends
+            </p>
+          </div>
+        </section>
+
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>
           <span itemProp="last-updated">{currentDate}</span>
@@ -1816,6 +1915,5 @@ function ManagementResumeExamples({
     </>
   );
 }
-
 
 export default ManagementResumeExamples;

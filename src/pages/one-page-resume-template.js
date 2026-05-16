@@ -27,7 +27,11 @@ import {
   FiEye,
   FiBookOpen,
   FiShield,
-  FiHelpCircle
+  FiHelpCircle,
+  FiType, // Added for Fonts
+  FiAlertTriangle, // Added for Mistakes
+  FiMessageSquare, // Added for Summary
+  FiRuler // Added for Length
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -850,6 +854,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 .testimonial-author {
   display: flex;
   flex-direction: column;
+}
+
+/* New CSS for Bottom Recommended Resources */
+.bottom-resources-section {
+  padding: 50px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.resource-card-new {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+.resource-card-new:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-icon-new {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.resource-title-new {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.resource-desc-new {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
 }
 `;
 
@@ -1887,6 +1937,63 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
                   <FiArrowRight />
                 </button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO Boost */}
+        <section className="bottom-resources-section">
+          <div className="container">
+            <h2 className="section-title">Recommended Career Resources</h2>
+            <p className="section-subtitle">
+              Enhance your job search with these specialized guides and tools tailored for the 2026 market.
+            </p>
+            
+            <div className="resources-grid">
+              {/* Link 1: Word Counter - Essential for One Page */}
+              <Link href="/free-resume-word-and-character-counter" className="resource-card-new">
+                <FiRuler className="resource-icon-new" />
+                <h3 className="resource-title-new">Resume Word Counter</h3>
+                <p className="resource-desc-new">
+                  Precisely track your resume length to ensure it fits perfectly on one page without overcrowding.
+                </p>
+              </Link>
+
+              {/* Link 2: Professional Summary - Critical for Top of Page */}
+              <Link href="/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" className="resource-card-new">
+                <FiMessageSquare className="resource-icon-new" />
+                <h3 className="resource-title-new">Write a Hooking Summary</h3>
+                <p className="resource-desc-new">
+                  Craft a powerful 3-line summary that captures recruiter attention immediately in the top third of your page.
+                </p>
+              </Link>
+
+              {/* Link 3: Mistakes - Avoid Clutter */}
+              <Link href="/resume-mistakes-americans-make-and-how-to-fix-them" className="resource-card-new">
+                <FiAlertTriangle className="resource-icon-new" />
+                <h3 className="resource-title-new">Common Resume Mistakes</h3>
+                <p className="resource-desc-new">
+                  Identify and remove common errors that waste valuable space and hurt your chances of getting hired.
+                </p>
+              </Link>
+
+              {/* Link 4: Fonts - Visual Optimization */}
+              <Link href="/best-fonts-and-designs-for-usa-resumes" className="resource-card-new">
+                <FiType className="resource-icon-new" />
+                <h3 className="resource-title-new">Best Resume Fonts</h3>
+                <p className="resource-desc-new">
+                  Discover space-efficient, ATS-friendly fonts that maximize readability and professional appearance.
+                </p>
+              </Link>
+
+              {/* Link 5: Length Insights - Validation */}
+              <Link href="/how-long-should-a-resume-be-usa-recruiter-insights" className="resource-card-new">
+                <FiBarChart className="resource-icon-new" />
+                <h3 className="resource-title-new">Resume Length Insights</h3>
+                <p className="resource-desc-new">
+                  Get data-backed answers on whether one page is right for your specific experience level and industry.
+                </p>
+              </Link>
             </div>
           </div>
         </section>

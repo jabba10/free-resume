@@ -1013,6 +1013,50 @@ const criticalCSS = `
   .text-small { font-size: 0.85rem; color: #4b5563; }
   .text-success { color: #10b981; font-weight: 600; }
   .text-danger { color: #ef4444; font-weight: 600; }
+
+  /* ===== NEW: Internal Links Section Styles ===== */
+  .internal-link-card {
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f9fafb;
+  }
+  .internal-link-card:hover {
+    transform: translateY(-3px);
+    border-color: #000000;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    background: #ffffff;
+  }
+  .internal-link-card:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+  .internal-link-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #000000;
+  }
+  .internal-link-title {
+    font-weight: 600;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    display: block;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .internal-link-desc {
+    font-size: 0.85rem;
+    color: #4b5563;
+    display: block;
+    line-height: 1.4;
+  }
 `;
 
 // Current year for dynamic content
@@ -1935,6 +1979,65 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
               </div>
             </div>
           </section>
+
+          {/* ===== NEW: Random Internal Links Section for SEO/GEO Boost ===== */}
+          <section className="section" style={{background: '#ffffff', borderTop: '2px solid #e5e7eb'}} aria-labelledby="internal-links-heading">
+            <div className="container">
+              <h2 id="internal-links-heading" className="section-title" style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>🔗 Enhance Your Resume Further</h2>
+              <p className="section-subtitle" style={{marginBottom: '24px'}}>
+                Complement your action verbs with these powerful tools and guides
+              </p>
+              
+              {/* Responsive grid: 1 col mobile → auto-fit up to 5 cols desktop */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: '16px',
+                width: '100%'
+              }}>
+                {/* Link 1: Bullet Point Generator */}
+                <Link href="/free-resume-bullet-point-generator" className="internal-link-card">
+                  <span className="internal-link-icon">📝</span>
+                  <span className="internal-link-title">Free Resume Bullet Point Generator</span>
+                  <span className="internal-link-desc">Turn your verbs into full achievement statements</span>
+                </Link>
+                
+                {/* Link 2: How to Write Bullets */}
+                <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="internal-link-card">
+                  <span className="internal-link-icon">🎯</span>
+                  <span className="internal-link-title">How to Write Bullet Points That Impress Recruiters</span>
+                  <span className="internal-link-desc">Master the art of impactful resume writing</span>
+                </Link>
+                
+                {/* Link 3: Summary Generator */}
+                <Link href="/free-resume-summary-generator" className="internal-link-card">
+                  <span className="internal-link-icon">📄</span>
+                  <span className="internal-link-title">Free Resume Summary Generator</span>
+                  <span className="internal-link-desc">Craft a compelling professional summary</span>
+                </Link>
+                
+                {/* Link 4: ChatGPT Guide */}
+                <Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="internal-link-card">
+                  <span className="internal-link-icon">🤖</span>
+                  <span className="internal-link-title">ChatGPT Prompt Engineering Guide for Resumes</span>
+                  <span className="internal-link-desc">Use AI to refine your verb choices</span>
+                </Link>
+                
+                {/* Link 5: IT Resume Examples */}
+                <Link href="/best-resume-examples-for-usa-it-and-software-jobs" className="internal-link-card">
+                  <span className="internal-link-icon">💻</span>
+                  <span className="internal-link-title">Best Resume Examples for IT & Software Jobs</span>
+                  <span className="internal-link-desc">See action verbs in context for tech roles</span>
+                </Link>
+              </div>
+              
+              {/* Helper text for accessibility */}
+              <p className="helper-text" style={{textAlign: 'center', marginTop: '20px', fontSize: '0.85rem', color: '#4b5563'}}>
+                All resources are free, mobile-optimized, and updated for 2026 hiring trends
+              </p>
+            </div>
+          </section>
+
         </main>
       </div>
     </>

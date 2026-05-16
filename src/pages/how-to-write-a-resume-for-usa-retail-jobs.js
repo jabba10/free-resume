@@ -43,7 +43,8 @@ import {
   FiXCircle,
   FiAlertCircle,
   FiInfo,
-  FiAward as FiBadge
+  FiAward as FiBadge,
+  FiExternalLink
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -443,6 +444,52 @@ td {
 }
 .text-center { text-align: center; }
 .mx-auto { margin-left: auto; margin-right: auto; }
+
+/* New styles for the bottom link section */
+.related-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+@media (min-width: 640px) {
+  .related-links-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .related-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.related-link-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.related-link-card:hover {
+  border-color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.related-link-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.related-link-meta {
+  font-size: 0.85rem;
+  color: var(--text-lighter);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: auto;
+}
 `;
 
 export async function getStaticProps() {
@@ -1272,6 +1319,71 @@ function RetailResumeGuide({
               </Link>
             </div>
             <p className="helper-text">Last updated {currentDate} · Professional Resume Free</p>
+          </div>
+        </section>
+
+        {/* Related Career Resources - Bottom Internal Links for SEO/GEO */}
+        <section className="section" style={{ borderTop: '1px solid var(--border)', paddingTop: '60px' }}>
+          <div className="container">
+            <h2 className="section-title" style={{ fontSize: '1.8rem', marginBottom: '10px' }}>Explore More Career Resources</h2>
+            <p className="text-center" style={{ color: 'var(--text-light)', marginBottom: '30px' }}>Deepen your job search strategy with our specialized guides and tools.</p>
+            
+            <div className="related-links-grid">
+              {/* Link 1: Sales & Marketing (Adjacent Industry) */}
+              <Link href="/how-to-write-a-resume-for-usa-sales-and-marketing-roles" className="related-link-card">
+                <div>
+                  <div className="related-link-title">Sales & Marketing Resume Guide</div>
+                  <p className="text-small">Transition from retail to high-growth sales roles with targeted advice.</p>
+                </div>
+                <div className="related-link-meta">
+                  Read Guide <FiArrowRight size={14} />
+                </div>
+              </Link>
+
+              {/* Link 2: Keyword Matcher (Tool) */}
+              <Link href="/free-resume-keyword-matcher" className="related-link-card">
+                <div>
+                  <div className="related-link-title">Free Keyword Matcher Tool</div>
+                  <p className="text-small">Instantly check if your resume matches the job description keywords.</p>
+                </div>
+                <div className="related-link-meta">
+                  Try Tool <FiExternalLink size={14} />
+                </div>
+              </Link>
+
+              {/* Link 3: Students (Demographic) */}
+              <Link href="/resume-tips-for-usa-college-students-and-graduates" className="related-link-card">
+                <div>
+                  <div className="related-link-title">Student & Graduate Tips</div>
+                  <p className="text-small">Perfect for entry-level retail jobs and first-time job seekers.</p>
+                </div>
+                <div className="related-link-meta">
+                  Read Guide <FiArrowRight size={14} />
+                </div>
+              </Link>
+
+              {/* Link 4: AI/ATS (Technical/Geo) */}
+              <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="related-link-card">
+                <div>
+                  <div className="related-link-title">Beat the AI Screen</div>
+                  <p className="text-small">Understand how 2026 ATS algorithms filter retail applications.</p>
+                </div>
+                <div className="related-link-meta">
+                  Learn More <FiArrowRight size={14} />
+                </div>
+              </Link>
+
+              {/* Link 5: Career Changers (Demographic) */}
+              <Link href="/best-resume-examples-for-career-changers-in-the-usa" className="related-link-card">
+                <div>
+                  <div className="related-link-title">Career Change Examples</div>
+                  <p className="text-small">How to pivot from other industries into retail management.</p>
+                </div>
+                <div className="related-link-meta">
+                  See Examples <FiArrowRight size={14} />
+                </div>
+              </Link>
+            </div>
           </div>
         </section>
 

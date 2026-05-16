@@ -524,6 +524,49 @@ const criticalCSS = `
   .resourceLink:hover .resourceIcon {
     transform: translateX(4px);
   }
+
+  /* NEW: Internal Linking Section Styles */
+  .internal-links-section {
+    margin: 48px 0;
+    width: 100%;
+  }
+  
+  .internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    width: 100%;
+  }
+
+  .internal-link-card {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #111827;
+    transition: all 0.2s ease;
+  }
+
+  .internal-link-card:hover {
+    border-color: #000000;
+    background: #f9fafb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .link-icon {
+    margin-right: 12px;
+    font-size: 1.2rem;
+    color: #000000;
+  }
+
+  .link-text {
+    font-weight: 600;
+    font-size: 1rem;
+  }
   
   /* FAQ Section */
   .faqSection {
@@ -853,7 +896,7 @@ const ResumeToolsPage = ({
     "job search tools"
   ];
 
-  // ===== FIXED STRUCTURED DATA - UPDATED WITHOUT www =====
+  // ===== FIXED STRUCTURED DATA - SINGLE FAQPage WITH NO DUPLICATES =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -941,7 +984,7 @@ const ResumeToolsPage = ({
       },
       {
         "@type": "FAQPage",
-        "@id": "https://professionalresumefree.com/free-resume-tools#faq",
+        "@id": "https://professionalresumefree.com/free-resume-tools/#faq",
         "mainEntity": faqItems.map((item) => ({
           "@type": "Question",
           "name": item.question,
@@ -950,10 +993,6 @@ const ResumeToolsPage = ({
             "text": item.answer
           }
         }))
-      },
-      {
-        "@type": "SpeakableSpecification",
-        "cssSelector": [".pageTitle", ".pageSubtitle", ".toolCard h3", ".faqQuestion"]
       },
       {
         "@type": "SoftwareApplication",
@@ -1009,6 +1048,9 @@ const ResumeToolsPage = ({
         {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href="https://professionalresumefree.com/free-resume-tools" />
         
+        {/* Alternate language versions (if applicable) */}
+        <link rel="alternate" href="https://professionalresumefree.com/free-resume-tools" hrefLang="x-default" />
+        
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Free Resume Tools 2026 - ATS Checker, Keyword Matcher, Summary Generator" />
         <meta name="chatgpt-fts:description" content="12+ free resume tools to optimize your job application. Check ATS compatibility, analyze keywords, generate summaries, and more. No signup required." />
@@ -1039,12 +1081,15 @@ const ResumeToolsPage = ({
         <meta name="theme-color" content="#111111" />
         <meta name="msapplication-TileColor" content="#111111" />
         
-        {/* Structured Data - SINGLE script tag with NO duplicate FAQPage */}
+        {/* Structured Data - SINGLE script tag with ONE FAQPage */}
         <script
           type="application/ld+json"
           key="structured-data"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        
+        {/* Remove any other schema scripts that might be added by plugins/theme */}
+        <meta name="next-head-count" content="0" />
       </Head>
 
       <main>
@@ -1189,7 +1234,36 @@ const ResumeToolsPage = ({
           </div>
         </section>
 
-        {/* FAQ Section */}
+        {/* NEW: Internal Linking Section for SEO/GEO Boost */}
+        <section className="internal-links-section" aria-labelledby="internal-links-title">
+          <div className="container">
+            <h2 className="sectionTitle" id="internal-links-title">Boost Your Application Success</h2>
+            <div className="internal-links-grid">
+              <Link href="/how-to-write-a-resume" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Complete Guide: How to Write a Resume</span>
+              </Link>
+              <Link href="/interview-tips" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Ace Your Interview: Expert Tips</span>
+              </Link>
+              <Link href="/careers-blog" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Latest Career Advice & Trends</span>
+              </Link>
+              <Link href="/jobs-search-tips" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Effective Job Search Strategies</span>
+              </Link>
+              <Link href="/resume-formatting-guide" className="internal-link-card">
+                <span className="link-icon">→</span>
+                <span className="link-text">Professional Resume Formatting Guide</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section - Now using itemProp for FAQPage schema WITHOUT duplicating */}
         <section className="faqSection" aria-labelledby="faq-title" itemScope itemType="https://schema.org/FAQPage">
           <div className="container">
             <div className="sectionHeader">

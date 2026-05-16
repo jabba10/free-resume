@@ -32,7 +32,9 @@ import {
   FiCpu,
   FiDatabase,
   FiCloud,
-  FiTerminal
+  FiTerminal,
+  FiEdit, // Added for writing tools
+  FiSearch // Added for search/blog
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -765,6 +767,63 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   color: var(--text-light);
   margin: 0;
   line-height: 1.5;
+}
+
+/* New Styles for Bottom Internal Links Section */
+.internal-links-section {
+  padding: 60px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .internal-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.internal-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s;
+  height: 100%;
+}
+.internal-link-card:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.internal-link-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.internal-link-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 `;
 
@@ -1643,6 +1702,35 @@ function BulletPointGuide({
               <p className="helper-text">
                 Data sources: Professional Resume Free 2026 Recruiter Survey (March 2026), SHRM 2025 Resume Review Study, internal candidate tracking data.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Essential Internal Links for SEO/GEO */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '24px' }}>Essential Resume Writing Resources</h3>
+            <div className="internal-links-grid">
+              <Link href="/free-resume-bullet-point-generator" className="internal-link-card">
+                <FiEdit className="internal-link-icon" />
+                <span className="internal-link-text">Free Resume Bullet Point Generator</span>
+              </Link>
+              <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="internal-link-card">
+                <FiBookOpen className="internal-link-icon" />
+                <span className="internal-link-text">USA Recruiter Bullet Point Guide</span>
+              </Link>
+              <Link href="/free-action-verb-recommender" className="internal-link-card">
+                <FiSearch className="internal-link-icon" />
+                <span className="internal-link-text">Free Action Verb Recommender</span>
+              </Link>
+              <Link href="/resume-writing-for-beginners" className="internal-link-card">
+                <FiUser className="internal-link-icon" />
+                <span className="internal-link-text">Resume Writing for Beginners</span>
+              </Link>
+              <Link href="/careers-blog" className="internal-link-card">
+                <FiBriefcase className="internal-link-icon" />
+                <span className="internal-link-text">Professional Careers Blog</span>
+              </Link>
             </div>
           </div>
         </section>

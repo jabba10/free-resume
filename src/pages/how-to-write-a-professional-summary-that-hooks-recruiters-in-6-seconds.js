@@ -959,6 +959,53 @@ const criticalCSS = `
       display: none;
     }
   }
+
+  /* New Internal Links Section Styles */
+  .internal-links-section {
+    padding: clamp(40px, 8vw, 60px) 0;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .link-grid-new {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .link-card-new {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  
+  .link-card-new:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
+  }
+  
+  .link-card-new h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #111111;
+  }
+  
+  .link-card-new p {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin: 0;
+  }
 `;
 
 const ProfessionalSummaryGuide = ({ 
@@ -1949,6 +1996,39 @@ const ProfessionalSummaryGuide = ({
               <p className="textSmall" style={{marginTop: '24px'}}>
                 ✓ No sign-up required • Free forever • Updated {currentDate}
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW RANDOMLY SELECTED LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h2 className="sectionTitle">Explore More Career Resources</h2>
+            <div className="link-grid-new">
+              <Link href="/resume-formatting-guide" className="link-card-new">
+                <h3>Resume Formatting Guide</h3>
+                <p>Perfect layout for 2026 standards</p>
+              </Link>
+              
+              <Link href="/free-resume-score-checker" className="link-card-new">
+                <h3>Resume Score Checker</h3>
+                <p>Get instant feedback on your resume</p>
+              </Link>
+              
+              <Link href="/resume-skills-section" className="link-card-new">
+                <h3>Skills Section Guide</h3>
+                <p>Master your skills section</p>
+              </Link>
+              
+              <Link href="/free-resume-keyword-matcher" className="link-card-new">
+                <h3>Keyword Matcher Tool</h3>
+                <p>Match your resume to job descriptions</p>
+              </Link>
+              
+              <Link href="/how-to-write-a-resume" className="link-card-new">
+                <h3>How to Write a Resume</h3>
+                <p>Complete step-by-step guide</p>
+              </Link>
             </div>
           </div>
         </section>

@@ -31,7 +31,9 @@ import {
   FiBookOpen,
   FiCpu,
   FiShield,
-  FiDatabase
+  FiDatabase,
+  FiMessageSquare, // Added for interview tips
+  FiFileText // Added for resume guide
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -762,6 +764,63 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   font-weight: bold;
   color: var(--text-lighter);
   line-height: 1;
+}
+
+/* New Styles for Bottom Internal Links Section */
+.internal-links-section {
+  padding: 60px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .internal-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.internal-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s;
+  height: 100%;
+}
+.internal-link-card:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.internal-link-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.internal-link-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 `;
 
@@ -1654,6 +1713,35 @@ const JobBoardsBlog = ({ seoData, buildTimestamp }) => {
             <p style={{marginTop: '10px', fontSize: '0.8rem', color: 'var(--text-light)'}}>
               Updated: {safeCurrentDate}
             </p>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Essential Internal Links for SEO/GEO */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '24px' }}>Essential Job Search Resources</h3>
+            <div className="internal-links-grid">
+              <Link href="/jobs-search-tips" className="internal-link-card">
+                <FiSearch className="internal-link-icon" />
+                <span className="internal-link-text">Job Search Tips for 2026</span>
+              </Link>
+              <Link href="/interview-tips" className="internal-link-card">
+                <FiMessageSquare className="internal-link-icon" />
+                <span className="internal-link-text">Interview Preparation Guide</span>
+              </Link>
+              <Link href="/cover-letter-guides" className="internal-link-card">
+                <FiEdit className="internal-link-icon" />
+                <span className="internal-link-text">Cover Letter Writing Guides</span>
+              </Link>
+              <Link href="/resume-guide" className="internal-link-card">
+                <FiFileText className="internal-link-icon" />
+                <span className="internal-link-text">Complete Resume Writing Guide</span>
+              </Link>
+              <Link href="/careers-blog" className="internal-link-card">
+                <FiBookOpen className="internal-link-icon" />
+                <span className="internal-link-text">Professional Careers Blog</span>
+              </Link>
+            </div>
           </div>
         </section>
 

@@ -1725,6 +1725,39 @@ export default function HowToCreateResumeNoExperience({ seoData }) {
           </div>
         </section>
 
+        {/* NEW RANDOMLY SELECTED LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="section" style={{ borderTop: '1px solid var(--border)', paddingTop: '40px' }}>
+          <div className="container">
+            <h2 className="section-title">Explore More Career Tools</h2>
+            <div className="link-grid">
+              <Link href="/free-resume-keyword-matcher" className="link-card">
+                <h3>Keyword Matcher Tool</h3>
+                <p>Match your resume to job descriptions instantly</p>
+              </Link>
+              
+              <Link href="/free-resume-bullet-point-generator" className="link-card">
+                <h3>Bullet Point Generator</h3>
+                <p>Create impactful resume bullets with AI</p>
+              </Link>
+              
+              <Link href="/how-to-create-a-resume-with-no-experience" className="link-card">
+                <h3>No Experience Guide</h3>
+                <p>Strategies for your first resume</p>
+              </Link>
+              
+              <Link href="/free-resume-score-checker" className="link-card">
+                <h3>Resume Score Checker</h3>
+                <p>Get instant feedback on your resume</p>
+              </Link>
+              
+              <Link href="/free-cover-letter-generator" className="link-card">
+                <h3>Cover Letter Generator</h3>
+                <p>Write perfect cover letters in seconds</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA Section */}
         <section className="cta-section" aria-labelledby="cta-heading">
           <div className="container">

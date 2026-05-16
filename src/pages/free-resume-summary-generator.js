@@ -1,6 +1,7 @@
 // pages/free-resume-summary-generator.jsx
 import Head from 'next/head';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import Link from 'next/link';
 
 // ===== INLINE CRITICAL CSS - Optimized for speed with centering =====
 const criticalCSS = `
@@ -900,6 +901,54 @@ const criticalCSS = `
     .resources-section .benefits-grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* INTERNAL LINKS SECTION STYLES */
+  .internal-links-section {
+    margin: 48px 0;
+    padding: 32px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .links-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .links-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+  .link-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    color: #000000;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  .link-card:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  .link-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .link-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
   }
   
   /* BUILD INFO - Fixed hydration */
@@ -1972,9 +2021,9 @@ const ResumeSummaryGenerator = ({ seoData }) => {
                 <div key={i} className="tip-card" style={{ padding: '20px' }}>
                   <p style={{ fontWeight: '600', marginBottom: '12px', textAlign: 'center' }}>❓ {keyword}</p>
                   <div style={{ textAlign: 'center' }}>
-                    <a href="/complete-resume-resource-library" style={{ color: '#000000', fontWeight: '500' }}>
+                    <Link href="/complete-resume-resource-library" style={{ color: '#000000', fontWeight: '500' }}>
                       Find answer in our resource library →
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -2160,18 +2209,18 @@ const ResumeSummaryGenerator = ({ seoData }) => {
               Explore our complete suite of resume tools and guides
             </p>
             <div className="benefits-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-              <a href="/resume-templates" className="benefit-card" style={{ textDecoration: 'none' }}>
+              <Link href="/resume-templates" className="benefit-card" style={{ textDecoration: 'none' }}>
                 <h3 className="benefit-title">Resume Templates</h3>
                 <p className="benefit-description">Browse our collection of professional, ATS-friendly resume templates.</p>
-              </a>
-              <a href="/free-resume-builder" className="benefit-card" style={{ textDecoration: 'none' }}>
+              </Link>
+              <Link href="/free-resume-builder" className="benefit-card" style={{ textDecoration: 'none' }}>
                 <h3 className="benefit-title">Free Resume Builder</h3>
                 <p className="benefit-description">Create a complete resume with our free online builder.</p>
-              </a>
-              <a href="/resume-writing-guide" className="benefit-card" style={{ textDecoration: 'none' }}>
+              </Link>
+              <Link href="/resume-writing-guide" className="benefit-card" style={{ textDecoration: 'none' }}>
                 <h3 className="benefit-title">Resume Writing Guide</h3>
                 <p className="benefit-description">Learn how to write compelling resumes that get interviews.</p>
-              </a>
+              </Link>
             </div>
           </section>
 
@@ -2214,6 +2263,35 @@ const ResumeSummaryGenerator = ({ seoData }) => {
                   <span className="feature-check">✓</span>
                   <span>Instant Results - No Watermarks</span>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Internal Links Section for SEO/GEO Boost */}
+          <section className="internal-links-section">
+            <div className="container">
+              <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Recommended Career Resources</h2>
+              <div className="links-grid">
+                <Link href="/free-resume-keyword-density-analyzer-tool" className="link-card">
+                  <span className="link-icon">📊</span>
+                  <span className="link-text">Free Keyword Density Analyzer</span>
+                </Link>
+                <Link href="/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot" className="link-card">
+                  <span className="link-icon">🤖</span>
+                  <span className="link-text">AI Resume Writing Guide</span>
+                </Link>
+                <Link href="/ats-friendly-data-and-cybersecurity-resume-builder" className="link-card">
+                  <span className="link-icon">🔒</span>
+                  <span className="link-text">Cybersecurity Resume Builder</span>
+                </Link>
+                <Link href="/resume-tips-for-remote-jobs-in-the-usa" className="link-card">
+                  <span className="link-icon">🏠</span>
+                  <span className="link-text">Remote Job Resume Tips</span>
+                </Link>
+                <Link href="/best-resume-examples-for-usa-management-positions" className="link-card">
+                  <span className="link-icon">👔</span>
+                  <span className="link-text">Management Resume Examples</span>
+                </Link>
               </div>
             </div>
           </section>

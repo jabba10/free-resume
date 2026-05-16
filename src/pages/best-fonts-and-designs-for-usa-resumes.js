@@ -364,6 +364,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px auto; max-w
 .toc-list li { margin: 0; }
 .toc-list a { color: var(--primary); text-decoration: none; font-weight: 500; }
 .toc-list a:hover { text-decoration: underline; }
+
+/* New Internal Links Section Styles */
+.recommended-resources {
+  background: var(--background);
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  line-height: 1.4;
+}
+.resource-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+.resource-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-top: auto;
+}
 `;
 
 export async function getStaticProps() {
@@ -582,6 +628,35 @@ export async function getStaticProps() {
     }
   ];
 
+  // ==================== SELECTED INTERNAL LINKS FOR SEO/GEO BOOST ====================
+  const internalLinks = [
+    {
+      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained",
+      desc: "Master the latest AI screening tactics used by USA employers in 2026."
+    },
+    {
+      href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
+      title: "Most In-Demand Resume Keywords for USA Job Seekers",
+      desc: "Boost your GEO ranking with high-volume keywords for the American market."
+    },
+    {
+      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
+      title: "ATS-Friendly Software Developer & Engineer Resume Builder",
+      desc: "Specialized templates for tech roles, optimized for engineering ATS filters."
+    },
+    {
+      href: "/free-resume-readability-checker",
+      title: "Free Resume Readability Checker Tool",
+      desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready."
+    },
+    {
+      href: "/resume-trends-in-the-usa-for-2026",
+      title: "Top Resume Trends in the USA for 2026",
+      desc: "Stay ahead of the curve with the latest formatting and content trends."
+    }
+  ];
+
   return {
     props: {
       buildTimestamp,
@@ -596,7 +671,8 @@ export async function getStaticProps() {
       faqItems,
       testimonials,
       designPrinciples,
-      fontComparisonData
+      fontComparisonData,
+      internalLinks
     }
   };
 }
@@ -614,7 +690,8 @@ function BestFontsAndDesignsPage({
   faqItems,
   testimonials,
   designPrinciples,
-  fontComparisonData
+  fontComparisonData,
+  internalLinks
 }) {
   return (
     <>
@@ -1222,6 +1299,29 @@ function BestFontsAndDesignsPage({
               <p className="helper-text">
                 Always tailor your resume to each specific job application. These guidelines are proven for USA job applications in 2026.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="recommended-resources" aria-labelledby="recommended-heading">
+          <div className="container">
+            <h2 id="recommended-heading" className="section-title">Recommended Resources for Job Seekers</h2>
+            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore our specialized guides to maximize your interview chances in 2026</p>
+            
+            <div className="internal-links-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px'}}>
+              {internalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="resource-card" style={{display: 'flex', flexDirection: 'column', padding: '20px', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease', height: '100%'}}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'var(--primary)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+                >
+                  <div className="resource-title" style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '8px', color: 'var(--primary)', lineHeight: '1.4', textAlign: 'left'}}>{link.title}</div>
+                  <div className="resource-desc" style={{fontSize: '0.95rem', color: 'var(--text-light)', marginBottom: '12px', flexGrow: '1', textAlign: 'left'}}>{link.desc}</div>
+                  <div className="resource-cta" style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--primary)', marginTop: 'auto'}}>
+                    Read Guide <FiArrowRight size={16} />
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

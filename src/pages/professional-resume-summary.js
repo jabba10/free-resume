@@ -753,6 +753,53 @@ padding-bottom: 2px;
 .toc-list a:hover {
 border-bottom-color: var(--primary);
 }
+
+/* New CSS for Bottom Recommended Resources */
+.bottom-resources-section {
+  padding: 50px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.resource-card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.resource-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
 /* Mobile improvements */
 @media (max-width: 480px) {
   button, 
@@ -1704,6 +1751,63 @@ export default function ProfessionalResumeSummary({ seoData }) {
                   Explore Free Tools {icons.arrowRight}
                 </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO Boost */}
+        <section className="bottom-resources-section">
+          <div className="container">
+            <h2 className="section-title">Recommended Career Resources</h2>
+            <p className="section-subtitle">
+              Enhance your job search with these specialized guides and tools tailored for the 2026 market.
+            </p>
+            
+            <div className="resources-grid">
+              {/* Link 1: Skills Section - Crucial for Summary Content */}
+              <Link href="/resume-skills-section" className="resource-card">
+                <span className="resource-icon">💡</span>
+                <h3 className="resource-title">Master the Skills Section</h3>
+                <p className="resource-desc">
+                  Learn how to categorize and highlight the core competencies that make your summary powerful.
+                </p>
+              </Link>
+
+              {/* Link 2: Work Experience - Source of Achievements */}
+              <Link href="/how-to-describe-work-experience-on-resume" className="resource-card">
+                <span className="resource-icon">💼</span>
+                <h3 className="resource-title">Describe Work Experience</h3>
+                <p className="resource-desc">
+                  Extract the high-impact achievements from your history to fuel your professional summary.
+                </p>
+              </Link>
+
+              {/* Link 3: Keyword Matcher - Optimization Tool */}
+              <Link href="/free-resume-keyword-matcher" className="resource-card">
+                <span className="resource-icon">🔍</span>
+                <h3 className="resource-title">Free Keyword Matcher</h3>
+                <p className="resource-desc">
+                  Ensure your summary contains the exact keywords recruiters and ATS algorithms are scanning for.
+                </p>
+              </Link>
+
+              {/* Link 4: Objective Statement - Alternative Option */}
+              <Link href="/resume-objective-statement" className="resource-card">
+                <span className="resource-icon">🎯</span>
+                <h3 className="resource-title">Resume Objective Guide</h3>
+                <p className="resource-desc">
+                  Discover when to use an objective statement instead of a summary, especially for career changers.
+                </p>
+              </Link>
+
+              {/* Link 5: ATS Optimization - Technical Success */}
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="resource-card">
+                <span className="resource-icon">🤖</span>
+                <h3 className="resource-title">Beat the ATS Algorithms</h3>
+                <p className="resource-desc">
+                  Advanced tips to ensure your summary and full resume pass through automated screening software.
+                </p>
+              </Link>
             </div>
           </div>
         </section>

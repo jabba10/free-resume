@@ -35,7 +35,8 @@ import {
   FiTerminal,
   FiSearch,
   FiTrendingUp as FiTrend,
-  FiBarChart2
+  FiBarChart2,
+  FiEdit // Added FiEdit here to fix the error
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -982,6 +983,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
   font-weight: 600;
   margin-right: 8px;
 }
+
+/* New CSS for Bottom Recommended Resources */
+.bottom-resources-section {
+  padding: 50px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.resource-card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.resource-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
 `;
 
 export async function getStaticProps() {
@@ -1602,6 +1649,63 @@ function MostGoogledResumeQuestions({
               <p className="helper-text" style={{textAlign: 'center'}}>
                 Data updated {currentDate}. Next analysis scheduled for Q2 2026.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO Boost */}
+        <section className="bottom-resources-section">
+          <div className="container">
+            <h2 className="section-title">Recommended Career Resources</h2>
+            <p className="section-subtitle">
+              Enhance your job search with these specialized guides and tools tailored for the 2026 market.
+            </p>
+            
+            <div className="resources-grid">
+              {/* Link 1: ATS Checker - Direct Tool */}
+              <Link href="/free-ats-resume-checker" className="resource-card">
+                <FiShield className="resource-icon" />
+                <h3 className="resource-title">Free ATS Resume Checker</h3>
+                <p className="resource-desc">
+                  Scan your resume to ensure it passes automated screening systems used by 98% of Fortune 500 companies.
+                </p>
+              </Link>
+
+              {/* Link 2: How to Write - Fundamental Guide */}
+              <Link href="/how-to-write-a-resume" className="resource-card">
+                <FiEdit className="resource-icon" />
+                <h3 className="resource-title">How to Write a Resume</h3>
+                <p className="resource-desc">
+                  A complete step-by-step guide to crafting a compelling resume that highlights your strengths and experience.
+                </p>
+              </Link>
+
+              {/* Link 3: Formatting Guide - Specific Answers */}
+              <Link href="/resume-formatting-guide" className="resource-card">
+                <FiLayers className="resource-icon" />
+                <h3 className="resource-title">Resume Formatting Guide</h3>
+                <p className="resource-desc">
+                  Master the visual layout, fonts, and spacing to create a professional document that recruiters love to read.
+                </p>
+              </Link>
+
+              {/* Link 4: Tech Resume Builder - Niche High Value */}
+              <Link href="/ats-friendly-tech-resume-builder" className="resource-card">
+                <FiCode className="resource-icon" />
+                <h3 className="resource-title">Tech Resume Builder</h3>
+                <p className="resource-desc">
+                  Specialized builder for software engineers and developers to showcase projects and technical stacks effectively.
+                </p>
+              </Link>
+
+              {/* Link 5: Interview Tips - Next Step */}
+              <Link href="/interview-tips" className="resource-card">
+                <FiUsers className="resource-icon" />
+                <h3 className="resource-title">Ace Your Job Interview</h3>
+                <p className="resource-desc">
+                  Prepare for the next stage with proven strategies for answering tough questions and negotiating offers.
+                </p>
+              </Link>
             </div>
           </div>
         </section>

@@ -645,6 +645,53 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 .link-content h3 { font-size: 1rem; margin-bottom: 4px; }
 .link-content p { font-size: 0.85rem; color: var(--text-light); }
 .link-arrow { color: var(--primary); }
+
+/* New Internal Links Section Styles */
+.recommended-resources {
+  background: var(--background);
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  line-height: 1.4;
+}
+.resource-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+.resource-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-top: auto;
+}
+
 @media (max-width: 768px) {
   .article-meta { flex-direction: column; align-items: center; gap: 10px; }
   .hero-stats { flex-direction: column; gap: 20px; align-items: center; }
@@ -728,6 +775,35 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
 
   // Optimized title - exactly 70 characters
   const optimizedTitle = "Basic Resume Format 2026: Free ATS Guide & Templates (No Sign-Up)";
+
+  // ==================== SELECTED INTERNAL LINKS FOR SEO/GEO BOOST ====================
+  const internalLinks = [
+    {
+      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained",
+      desc: "Master the latest AI screening tactics used by USA employers in 2026."
+    },
+    {
+      href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
+      title: "Most In-Demand Resume Keywords for USA Job Seekers",
+      desc: "Boost your GEO ranking with high-volume keywords for the American market."
+    },
+    {
+      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
+      title: "ATS-Friendly Software Developer & Engineer Resume Builder",
+      desc: "Specialized templates for tech roles, optimized for engineering ATS filters."
+    },
+    {
+      href: "/free-resume-readability-checker",
+      title: "Free Resume Readability Checker Tool",
+      desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready."
+    },
+    {
+      href: "/resume-trends-in-the-usa-for-2026",
+      title: "Top Resume Trends in the USA for 2026",
+      desc: "Stay ahead of the curve with the latest formatting and content trends."
+    }
+  ];
 
   // Improved FAQ data with more comprehensive questions
   const faqs = [
@@ -1503,6 +1579,26 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
                 </div>
                 <FiArrowRight className="link-arrow" />
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="recommended-resources" aria-labelledby="recommended-heading">
+          <div className="container">
+            <h2 id="recommended-heading" className="section-title">Recommended Resources for Job Seekers</h2>
+            <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
+            
+            <div className="internal-links-grid">
+              {internalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="resource-card">
+                  <div className="resource-title">{link.title}</div>
+                  <div className="resource-desc">{link.desc}</div>
+                  <div className="resource-cta">
+                    Read Guide <FiArrowRight size={16} />
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

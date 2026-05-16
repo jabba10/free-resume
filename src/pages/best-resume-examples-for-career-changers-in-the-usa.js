@@ -877,6 +877,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
     gap: 16px;
   }
 }
+
+/* New Internal Links Section Styles */
+.recommended-resources {
+  background: var(--background);
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  line-height: 1.4;
+}
+.resource-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+.resource-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin-top: auto;
+}
 `;
 
 export async function getStaticProps() {
@@ -1024,6 +1070,35 @@ export async function getStaticProps() {
     }
   ];
 
+  // ==================== NEW RANDOMLY SELECTED INTERNAL LINKS FOR SEO/GEO BOOST ====================
+  const internalLinks = [
+    {
+      href: "/cover-letter-guides",
+      title: "Complete Cover Letter Guides for Career Switchers",
+      desc: "Pair your new resume with a compelling narrative that explains your transition."
+    },
+    {
+      href: "/ats-friendly-finance-resume-builder",
+      title: "ATS-Friendly Finance & Accounting Resume Builder",
+      desc: "Specialized templates for banking, accounting, and financial analysis roles."
+    },
+    {
+      href: "/how-to-create-a-resume-with-no-experience",
+      title: "How to Create a Resume With No Experience in New Field",
+      desc: "Strategies for entry-level candidates and those pivoting to entirely new industries."
+    },
+    {
+      href: "/ats-friendly-healthcare-assistant-resume-builder",
+      title: "ATS-Friendly Healthcare Assistant & Support Resume Builder",
+      desc: "Optimized templates for CNAs, medical assistants, and patient care roles."
+    },
+    {
+      href: "/free-cover-letter-generator",
+      title: "Free AI Cover Letter Generator for Job Applications",
+      desc: "Instantly generate tailored cover letters that complement your career change resume."
+    }
+  ];
+
   return {
     props: {
       buildTimestamp,
@@ -1038,7 +1113,8 @@ export async function getStaticProps() {
       faqItems,
       testimonials,
       reviewDates,
-      faqDates
+      faqDates,
+      internalLinks
     }
   };
 }
@@ -1056,7 +1132,8 @@ function CareerChangersResumePage({
   faqItems,
   testimonials,
   reviewDates,
-  faqDates 
+  faqDates,
+  internalLinks 
 }) {
   return (
     <>
@@ -1635,6 +1712,30 @@ function CareerChangersResumePage({
             </div>
           </div>
         </section>
+
+        {/* NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST */}
+        <section className="recommended-resources" aria-labelledby="recommended-heading">
+          <div className="container">
+            <h2 id="recommended-heading" className="section-title">Recommended Resources for Job Seekers</h2>
+            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore our specialized guides to maximize your interview chances in 2026</p>
+            
+            <div className="internal-links-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px'}}>
+              {internalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="resource-card" style={{display: 'flex', flexDirection: 'column', padding: '20px', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease', height: '100%'}}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'var(--primary)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+                >
+                  <div className="resource-title" style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '8px', color: 'var(--primary)', lineHeight: '1.4', textAlign: 'left'}}>{link.title}</div>
+                  <div className="resource-desc" style={{fontSize: '0.95rem', color: 'var(--text-light)', marginBottom: '12px', flexGrow: '1', textAlign: 'left'}}>{link.desc}</div>
+                  <div className="resource-cta" style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--primary)', marginTop: 'auto'}}>
+                    Read Guide <FiArrowRight size={16} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );

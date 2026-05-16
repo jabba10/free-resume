@@ -462,6 +462,58 @@ th {
 .skip-link:focus {
   top: 0;
 }
+
+/* NEW STYLES FOR INTERNAL LINKS SECTION */
+.internal-links-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .internal-links-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .internal-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.internal-link-card {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.internal-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.internal-link-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.internal-link-cta {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
+
 @media (max-width: 768px) {
   button, 
   .btn-primary, 
@@ -666,6 +718,36 @@ function HowToListPromptEngineering({
   optimizationStrategies,
   commonMistakes
 }) {
+  
+  // SELECTED 5 RANDOM LINKS FROM JSON (Distinct from previous requests)
+  const internalLinks = [
+    {
+      path: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume",
+      title: "AI Resume Builders Guide",
+      desc: "Leverage AI to write your best resume."
+    },
+    {
+      path: "/best-resume-examples-for-usa-it-and-software-jobs",
+      title: "IT & Software Resume Examples",
+      desc: "Tailored examples for tech professionals."
+    },
+    {
+      path: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026",
+      title: "ChatGPT Resume Bullet Guide",
+      desc: "Advanced prompt engineering for bullets."
+    },
+    {
+      path: "/modern-resume-design-2026",
+      title: "Modern Resume Design 2026",
+      desc: "Stay ahead with current design trends."
+    },
+    {
+      path: "/free-resume-keyword-density-analyzer-tool",
+      title: "Keyword Density Analyzer",
+      desc: "Optimize your resume's keyword balance."
+    }
+  ];
+
   return (
     <>
       <Head>
@@ -1292,6 +1374,27 @@ function HowToListPromptEngineering({
               <p className="helper-text">
                 Data-driven strategies updated for 2026 hiring trends. Last updated: {currentDate} • Sources: LinkedIn, SHRM, JobScan, Greenhouse, iCIMS
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Expand Your AI Career Toolkit (Internal Linking for SEO/GEO) */}
+        <section className="internal-links-section" aria-labelledby="toolkit-heading">
+          <div className="container">
+            <h2 id="toolkit-heading" className="section-title">Expand Your AI Career Toolkit</h2>
+            <p className="section-subtitle">Deepen your expertise with these specialized guides and tools</p>
+            <div className="internal-links-grid">
+              {internalLinks.map((link, index) => (
+                <Link href={link.path} key={index} className="internal-link-card">
+                  <div>
+                    <h3 className="internal-link-title">{link.title}</h3>
+                    <p className="text-small">{link.desc}</p>
+                  </div>
+                  <span className="internal-link-cta">
+                    Read Guide <FiArrowRight size={14} />
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

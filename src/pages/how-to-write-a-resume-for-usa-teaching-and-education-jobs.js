@@ -764,6 +764,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   margin-left: auto;
   margin-right: auto;
 }
+
+/* New Styles for Related Resources Section */
+.related-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 1200px;
+}
+.resource-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+.resource-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+.resource-icon {
+  background: var(--card-bg);
+  padding: 12px;
+  border-radius: 50%;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.resource-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.resource-content p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.5;
+}
 `;
 
 export async function getStaticProps() {
@@ -1491,6 +1537,73 @@ function TeachingResumeGuide({
                 <h3 style={{marginBottom: '8px'}}>Free Resume Tools</h3>
                 <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Check scores, match keywords, and optimize your resume</p>
                 <span style={{color: '#000', fontWeight: '500'}}>Explore Tools <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO */}
+        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
+          <div className="container">
+            <h2 className="section-title">📚 Recommended Reading for Educators</h2>
+            <p className="section-subtitle" style={{maxWidth: '700px', margin: '0 auto 30px'}}>
+              Deepen your knowledge with these specialized guides to complement your teaching job search strategy.
+            </p>
+            
+            <div className="related-resources-grid">
+              {/* Link 1: ATS Friendly Teacher Resume Builder */}
+              <Link href="/ats-friendly-teacher-resume-builder" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiTool size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>ATS-Friendly Teacher Resume Builder</h4>
+                  <p>Create a compliant resume specifically designed for school district screening systems.</p>
+                </div>
+              </Link>
+
+              {/* Link 2: Retail Job Resume Guide */}
+              <Link href="/how-to-write-a-resume-for-usa-retail-jobs" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiBriefcase size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Retail Job Resume Guide</h4>
+                  <p>Pivoting from retail to education? Learn how to translate your customer service skills.</p>
+                </div>
+              </Link>
+
+              {/* Link 3: College Graduate Resume Tips */}
+              <Link href="/resume-tips-for-usa-college-students-and-graduates" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiStar size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>College Graduate Resume Tips</h4>
+                  <p>New to teaching? Discover how to highlight your education and student teaching effectively.</p>
+                </div>
+              </Link>
+
+              {/* Link 4: Career Changer Resume Examples */}
+              <Link href="/best-resume-examples-for-career-changers-in-the-usa" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiTrendingUp size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Career Changer Resume Examples</h4>
+                  <p>Moving into education from another field? See how to frame your transferable skills.</p>
+                </div>
+              </Link>
+
+              {/* Link 5: Careers Blog */}
+              <Link href="/careers-blog" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiBookOpen size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Education Career Blog</h4>
+                  <p>Stay updated with the latest trends in teaching hiring and professional development.</p>
+                </div>
               </Link>
             </div>
           </div>

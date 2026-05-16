@@ -757,6 +757,73 @@ const criticalCSS = `
     font-size: 0.9rem;
   }
   
+  /* INTERNAL LINKING FOOTER - NEW RESPONSIVE SECTION */
+  .internal-linking-footer {
+    margin-top: 64px;
+    padding: 32px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .footer-links-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #111827;
+    text-align: center;
+  }
+
+  .footer-links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .footer-links-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-links-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  .footer-link-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+
+  .footer-link-card:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .footer-link-text {
+    color: #111827;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .footer-link-sub {
+    color: #6b7280;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  
   /* FRESHNESS INDICATOR */
   .freshness-indicator { 
     display: none;
@@ -1809,6 +1876,34 @@ Or select an industry above for suggestions.`}
             </div>
           </div>
         </section>
+
+        {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
+        <section className="internal-linking-footer">
+          <h3 className="footer-links-title">Related Career Resources</h3>
+          <div className="footer-links-grid">
+            <a href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="footer-link-card">
+              <span className="footer-link-text">Beat the ATS optimization tips</span>
+              <span className="footer-link-sub">Modern Hiring Software Guide</span>
+            </a>
+            <a href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="footer-link-card">
+              <span className="footer-link-text">AI resume builders guide</span>
+              <span className="footer-link-sub">Write Your Best Resume</span>
+            </a>
+            <a href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="footer-link-card">
+              <span className="footer-link-text">Most in-demand resume keywords</span>
+              <span className="footer-link-sub">USA Job Seeker Data</span>
+            </a>
+            <a href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="footer-link-card">
+              <span className="footer-link-text">Pass the AI resume screen</span>
+              <span className="footer-link-sub">2026 Algorithms Explained</span>
+            </a>
+            <a href="/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026" className="footer-link-card">
+              <span className="footer-link-text">Skills-first resumes trends</span>
+              <span className="footer-link-sub">2026 Layout Shift</span>
+            </a>
+          </div>
+        </section>
+
       </main>
 
       {/* Build Info - Fixed hydration */}

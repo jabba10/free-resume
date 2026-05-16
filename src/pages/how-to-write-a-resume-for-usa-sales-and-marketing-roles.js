@@ -26,7 +26,9 @@ import {
   FiTarget,
   FiDollarSign,
   FiUsers,
-  FiDatabase
+  FiDatabase,
+  FiSearch, // Added for search tools
+  FiEdit // Added for writing tools
 } from 'react-icons/fi';
 
 // Critical CSS inline with enhanced responsive design
@@ -490,6 +492,64 @@ th {
 .skip-link:focus {
   top: 0;
 }
+
+/* New Styles for Bottom Internal Links Section */
+.internal-links-section {
+  padding: 60px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.internal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .internal-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .internal-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.internal-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s;
+  height: 100%;
+}
+.internal-link-card:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.internal-link-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.internal-link-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
 @media (max-width: 768px) {
   button, 
   .btn-primary, 
@@ -1320,6 +1380,35 @@ function SalesMarketingResumeGuide({
               <p className="helper-text">
                 Data-driven strategies updated for 2026 sales and marketing hiring trends. Last updated: {currentDate} • Sources: LinkedIn, Salesforce, JobScan, Glassdoor, AMA
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Essential Internal Links for SEO/GEO */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '24px' }}>Essential Sales & Career Resources</h3>
+            <div className="internal-links-grid">
+              <Link href="/ats-friendly-marketing-executive-manager-resume-builder" className="internal-link-card">
+                <FiBriefcase className="internal-link-icon" />
+                <span className="internal-link-text">ATS-Friendly Marketing Executive Resume Builder</span>
+              </Link>
+              <Link href="/how-to-write-a-resume-for-usa-sales-and-marketing-roles" className="internal-link-card">
+                <FiBookOpen className="internal-link-icon" />
+                <span className="internal-link-text">USA Sales & Marketing Resume Guide</span>
+              </Link>
+              <Link href="/free-resume-bullet-point-generator" className="internal-link-card">
+                <FiEdit className="internal-link-icon" />
+                <span className="internal-link-text">Free Resume Bullet Point Generator</span>
+              </Link>
+              <Link href="/jobs-search-tips" className="internal-link-card">
+                <FiSearch className="internal-link-icon" />
+                <span className="internal-link-text">Job Search Tips for Sales Roles</span>
+              </Link>
+              <Link href="/cover-letter-guides" className="internal-link-card">
+                <FiMail className="internal-link-icon" />
+                <span className="internal-link-text">Sales Cover Letter Guides</span>
+              </Link>
             </div>
           </div>
         </section>

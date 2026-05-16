@@ -702,6 +702,50 @@ padding-bottom: 2px;
 .toc a:hover {
 border-bottom-color: var(--primary);
 }
+
+/* New CSS for Bottom Internal Links Section */
+.bottom-links-section {
+  background: var(--card-bg);
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+.bottom-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+.bottom-link-card {
+  background: var(--background);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.bottom-link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.bottom-link-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.bottom-link-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
 `;
 
 const InternshipResumeIndia = () => {
@@ -1556,6 +1600,59 @@ const InternshipResumeIndia = () => {
             </p>
           </div>
         </div>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO Boost */}
+        <section className="bottom-links-section">
+          <div className="container">
+            <h2 className="section-title">Essential Resume Resources for 2026</h2>
+            <p className="section-subtitle">
+              Explore our most popular guides to refine your job search strategy and perfect your application documents.
+            </p>
+            
+            <div className="bottom-links-grid">
+              {/* Link 1: No Experience - Critical for Internships */}
+              <Link href="/how-to-create-a-resume-with-no-experience" className="bottom-link-card">
+                <div className="bottom-link-title">Resume Guide for Beginners</div>
+                <div className="bottom-link-desc">
+                  Learn how to build a strong resume even if you have no prior work experience. Perfect for students and fresh graduates.
+                </div>
+              </Link>
+
+              {/* Link 2: ATS Optimization - High Priority for Tech Jobs */}
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="bottom-link-card">
+                <div className="bottom-link-title">Beat the ATS Algorithm</div>
+                <div className="bottom-link-desc">
+                  Discover proven tips to optimize your resume for Applicant Tracking Systems used by major Indian IT and corporate firms.
+                </div>
+              </Link>
+
+              {/* Link 3: Free Tools - High Conversion */}
+              <Link href="/free-resume-tools" className="bottom-link-card">
+                <div className="bottom-link-title">Free Resume Analysis Tools</div>
+                <div className="bottom-link-desc">
+                  Use our suite of free tools to check your resume score, keyword density, and formatting before you apply.
+                </div>
+              </Link>
+
+              {/* Link 4: Formatting Guide - Fundamental */}
+              <Link href="/resume-formatting-guide" className="bottom-link-card">
+                <div className="bottom-link-title">Professional Formatting Guide</div>
+                <div className="bottom-link-desc">
+                  Master the art of resume layout, fonts, and spacing to ensure your document looks professional and reads easily.
+                </div>
+              </Link>
+
+              {/* Link 5: Cover Letters - Complementary Skill */}
+              <Link href="/cover-letter-guides" className="bottom-link-card">
+                <div className="bottom-link-title">Cover Letter Writing Guides</div>
+                <div className="bottom-link-desc">
+                  Craft compelling cover letters that complement your resume and highlight your passion for the role.
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );

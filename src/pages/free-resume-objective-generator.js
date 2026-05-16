@@ -866,6 +866,54 @@ const criticalCSS = `
     color: #6b7280;
     text-align: center;
   }
+
+  /* INTERNAL LINKS SECTION STYLES */
+  .internal-links-section {
+    margin: 48px 0;
+    padding: 32px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .links-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .links-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+  .link-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    color: #000000;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  .link-card:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  .link-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .link-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
   
   /* RESPONSIVE ADJUSTMENTS */
   @media (max-width: 640px) {
@@ -2527,6 +2575,35 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                 <span className="guarantee-item">✓ 100% Free Forever</span>
                 <span className="guarantee-item">✓ ATS Optimized</span>
                 <span className="guarantee-item">✓ Mobile Friendly</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Internal Links Section for SEO/GEO Boost */}
+          <section className="internal-links-section">
+            <div className="container">
+              <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Recommended Career Resources</h2>
+              <div className="links-grid">
+                <Link href="/free-resume-keyword-matcher" className="link-card">
+                  <span className="link-icon">🔑</span>
+                  <span className="link-text">Free Resume Keyword Matcher</span>
+                </Link>
+                <Link href="/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" className="link-card">
+                  <span className="link-icon">⚡</span>
+                  <span className="link-text">Professional Summary Guide</span>
+                </Link>
+                <Link href="/ats-friendly-software-developer-and-software-engineer-resume-builder" className="link-card">
+                  <span className="link-icon">💻</span>
+                  <span className="link-text">Software Engineer Resume Builder</span>
+                </Link>
+                <Link href="/resume-tips-for-usa-college-students-and-graduates" className="link-card">
+                  <span className="link-icon">🎓</span>
+                  <span className="link-text">College Student Resume Tips</span>
+                </Link>
+                <Link href="/free-resume-bullet-point-generator" className="link-card">
+                  <span className="link-icon">📝</span>
+                  <span className="link-text">Bullet Point Generator</span>
+                </Link>
               </div>
             </div>
           </section>

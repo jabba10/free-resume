@@ -26,7 +26,10 @@ import {
   FiZap,
   FiGrid,
   FiLayers,
-  FiCode
+  FiCode,
+  FiBriefcase, // Added for new links
+  FiMessageSquare, // Added for new links
+  FiSearch // Added for new links
 } from 'react-icons/fi';
 
 // Critical CSS inline with enhanced responsive design
@@ -1539,6 +1542,52 @@ function HowToPassAIResumeScreen({
               <p className="helper-text">
                 Data-driven strategies updated for 2026 hiring trends. Last updated: {currentDate} • Sources: SHRM, LinkedIn, Glassdoor, iCIMS, Greenhouse
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Related Career Resources (Randomly Selected Links) */}
+        <section className="section" style={{ borderTop: '1px solid var(--border)' }}>
+          <div className="container">
+            <h2 className="section-title">Related Career Resources</h2>
+            <p className="section-subtitle">
+              Expand your job search strategy with these essential guides and tools.
+            </p>
+            <div className="grid-three">
+              {/* Link 1: Tech/AI Specific Resume Builder - Highly relevant to your audience */}
+              <Link href="/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" className="card">
+                <FiCode size={28} style={{marginBottom: '16px', color: 'var(--accent)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>AI & ML Engineering Resume Builder</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Specialized template for LLM Engineers and Data Scientists to highlight technical stacks effectively.</p>
+              </Link>
+
+              {/* Link 2: Cover Letter Guide - Essential companion to resume */}
+              <Link href="/cover-letter-guides" className="card">
+                <FiMail size={28} style={{marginBottom: '16px', color: 'var(--accent)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>Cover Letter Guides</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Step-by-step instructions to write compelling cover letters that complement your ATS-optimized resume.</p>
+              </Link>
+
+              {/* Link 3: Job Boards - Where to apply */}
+              <Link href="/jobs-boards" className="card">
+                <FiSearch size={28} style={{marginBottom: '16px', color: 'var(--accent)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>Top Job Boards</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Curated list of the best job boards for tech, remote, and creative roles in 2026.</p>
+              </Link>
+
+              {/* Link 4: Interview Tips - Next step after passing ATS */}
+              <Link href="/interview-tips" className="card">
+                <FiMessageSquare size={28} style={{marginBottom: '16px', color: 'var(--accent)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>Interview Preparation</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Ace the human interview with our comprehensive tips on behavioral and technical questions.</p>
+              </Link>
+
+              {/* Link 5: General Resume Writing - Foundational knowledge */}
+              <Link href="/how-to-write-a-resume" className="card">
+                <FiBriefcase size={28} style={{marginBottom: '16px', color: 'var(--accent)'}} />
+                <h3 style={{fontSize: '1.1rem', marginBottom: '8px'}}>How to Write a Resume</h3>
+                <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>Master the fundamentals of resume writing, from structure to powerful action verbs.</p>
+              </Link>
             </div>
           </div>
         </section>

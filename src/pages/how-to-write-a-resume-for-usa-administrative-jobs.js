@@ -34,7 +34,8 @@ import {
   FiCloud,
   FiTerminal,
   FiPrinter,
-  FiArchive
+  FiArchive,
+  FiSearch
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -825,6 +826,48 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px auto; width
   border-radius: 6px;
   border: 1px solid var(--border);
 }
+
+/* New Styles for Related Resources Section */
+.related-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.resource-link-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.resource-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.resource-icon {
+  background: var(--card-bg);
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.resource-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.resource-content p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
+}
 `;
 
 export async function getStaticProps() {
@@ -1590,6 +1633,73 @@ function AdministrativeResumeGuide({
                 <h3 style={{marginBottom: '8px', textAlign: 'center'}}>🛠️ Free Resume Checker</h3>
                 <p style={{color: 'var(--text-light)', marginBottom: '12px', textAlign: 'center'}}>Test your resume's ATS compatibility and get instant feedback.</p>
                 <span style={{color: '#000', fontWeight: '500', textAlign: 'center', display: 'block'}}>Try tools <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO */}
+        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
+          <div className="container">
+            <h2 className="section-title">📚 Recommended Reading for Job Seekers</h2>
+            <p className="section-subtitle">
+              Deepen your knowledge with these specialized guides to complement your administrative job search strategy.
+            </p>
+            
+            <div className="related-resources-grid">
+              {/* Link 1: Cover Letter Guides */}
+              <Link href="/cover-letter-guides" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiBookOpen size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Administrative Cover Letter Guides</h4>
+                  <p>Pair your resume with a compelling cover letter tailored for admin roles.</p>
+                </div>
+              </Link>
+
+              {/* Link 2: Interview Tips */}
+              <Link href="/interview-tips" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiUsers size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Admin Job Interview Tips</h4>
+                  <p>Prepare for common administrative interview questions with our expert guide.</p>
+                </div>
+              </Link>
+
+              {/* Link 3: Sales & Marketing Resume Guide */}
+              <Link href="/how-to-write-a-resume-for-usa-sales-and-marketing-roles" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiBriefcase size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Resume Guide for Sales & Marketing</h4>
+                  <p>Looking to pivot? Learn how to tailor your admin skills for sales support roles.</p>
+                </div>
+              </Link>
+
+              {/* Link 4: Resume Writing for Beginners */}
+              <Link href="/resume-writing-for-beginners" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiStar size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>Resume Writing for Beginners</h4>
+                  <p>New to the workforce? Start your administrative career with this foundational guide.</p>
+                </div>
+              </Link>
+
+              {/* Link 5: Job Search Tips */}
+              <Link href="/jobs-search-tips" className="resource-link-card">
+                <div className="resource-icon">
+                  <FiSearch size={24} />
+                </div>
+                <div className="resource-content">
+                  <h4>USA Job Search Strategies</h4>
+                  <p>Advanced strategies for finding and applying to administrative openings.</p>
+                </div>
               </Link>
             </div>
           </div>

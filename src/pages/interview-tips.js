@@ -29,7 +29,9 @@ import {
   FiBookOpen,
   FiVideo,
   FiCalendar,
-  FiUsers
+  FiUsers,
+  FiZap, // Added for new section
+  FiLink   // Added for new section
 } from 'react-icons/fi';
 
 // ===== INLINE CRITICAL CSS FOR MAXIMUM SPEED =====
@@ -1122,6 +1124,90 @@ const criticalCSS = `
     border-color: #111111;
   }
   
+  /* Internal Linking Section (New) */
+  .internalLinksSection {
+    padding: clamp(30px, 6vw, 50px) 0;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    width: 100%;
+  }
+
+  .internalLinksGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(16px, 3vw, 24px);
+    width: 100%;
+  }
+
+  .internalLinkCard {
+    display: flex;
+    flex-direction: column;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+    height: 100%;
+  }
+
+  .internalLinkCard:hover {
+    border-color: #111111;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  }
+
+  .internalLinkHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .internalLinkIcon {
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111111;
+    flex-shrink: 0;
+  }
+
+  .internalLinkTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #111111;
+  }
+
+  .internalLinkDesc {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+
+  .internalLinkAction {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111111;
+    margin-top: auto;
+  }
+
+  .internalLinkAction svg {
+    transition: transform 0.2s;
+  }
+
+  .internalLinkCard:hover .internalLinkAction svg {
+    transform: translateX(4px);
+  }
+  
   /* CTA Section */
   .ctaSection {
     padding: clamp(40px, 8vw, 60px) 0;
@@ -1537,6 +1623,40 @@ const InterviewTips = ({
     { title: "Resume Score Checker", link: "/free-resume-score-checker", icon: <FiEye /> },
     { title: "ATS Resume Checker", link: "/free-ats-resume-checker", icon: <FiBriefcase /> },
     { title: "Free Cover Letter Generator", link: "/free-cover-letter-generator", icon: <FiTarget /> }
+  ];
+
+  // Selected Internal Links for SEO/GEO Boost
+  const recommendedInternalLinks = [
+    {
+      title: "Use ChatGPT Without Sounding Like a Robot",
+      desc: "Learn prompt engineering techniques to keep your AI-generated resume authentic and human.",
+      link: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot",
+      icon: <FiZap />
+    },
+    {
+      title: "ATS-Friendly Tech Resume Builder",
+      desc: "Specialized templates for developers, engineers, and IT professionals to pass technical screens.",
+      link: "/ats-friendly-tech-resume-builder",
+      icon: <FiTool />
+    },
+    {
+      title: "How to Pass AI Resume Screens in 2026",
+      desc: "Deep dive into modern ATS algorithms and how to optimize your content for automated ranking.",
+      link: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      icon: <FiSettings />
+    },
+    {
+      title: "Free Resume Keyword Matcher",
+      desc: "Instantly analyze your resume against job descriptions to find missing critical keywords.",
+      link: "/free-resume-keyword-matcher",
+      icon: <FiSearch />
+    },
+    {
+      title: "USA Resume Trends for 2026",
+      desc: "Stay ahead of the curve with the latest formatting and content trends dominating the US job market.",
+      link: "/resume-trends-in-the-usa-for-2026",
+      icon: <FiTrendingUp />
+    }
   ];
 
   // SEO Keywords array
@@ -2242,6 +2362,40 @@ const InterviewTips = ({
                 <span>Start Building Your ATS Resume Now</span>
                 <FiArrowRight className="sectionButtonIcon" aria-hidden="true" />
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Recommended Internal Links Section (SEO/GEO Boost) */}
+        <section className="internalLinksSection" aria-labelledby="recommended-resources-title">
+          <div className="container">
+            <div className="sectionHeader">
+              <h2 className="sectionTitle" id="recommended-resources-title">Recommended Career Resources</h2>
+              <p className="sectionSubtitle">
+                Explore our specialized tools and guides to further enhance your job search strategy
+              </p>
+            </div>
+            <div className="internalLinksGrid">
+              {recommendedInternalLinks.map((item, index) => (
+                <Link 
+                  key={index} 
+                  href={item.link} 
+                  className="internalLinkCard"
+                  aria-label={`Read more about ${item.title}`}
+                >
+                  <div className="internalLinkHeader">
+                    <div className="internalLinkIcon">
+                      {item.icon}
+                    </div>
+                    <h3 className="internalLinkTitle">{item.title}</h3>
+                  </div>
+                  <p className="internalLinkDesc">{item.desc}</p>
+                  <div className="internalLinkAction">
+                    <span>Explore Resource</span>
+                    <FiArrowRight />
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

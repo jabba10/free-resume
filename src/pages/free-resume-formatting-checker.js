@@ -741,6 +741,55 @@ const criticalCSS = `
   .text-small { font-size: 0.85rem; color: #4b5563; }
   .text-success { color: #10b981; font-weight: 600; }
   .text-danger { color: #ef4444; font-weight: 600; }
+
+  /* New styles for Internal Links Section */
+  .internal-links-section {
+    background: #f9fafb;
+    padding: 40px 0;
+    border-top: 1px solid #e5e7eb;
+    width: 100%;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .links-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .links-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+  .link-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    color: #000000;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+  }
+  .link-card:hover {
+    border-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  .link-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .link-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
 `;
 
 // Current year for dynamic content
@@ -1844,6 +1893,35 @@ Our tool analyzes:
               <p className="text-small" style={{marginTop: '30px'}}>
                 Based on analysis of 50,000+ resumes • Updated for 2024 hiring standards
               </p>
+            </div>
+          </section>
+
+          {/* Internal Links Section for SEO/GEO Boost */}
+          <section className="internal-links-section">
+            <div className="container">
+              <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Explore More Resume Resources</h2>
+              <div className="links-grid">
+                <Link href="/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" className="link-card">
+                  <span className="link-icon">🤖</span>
+                  <span className="link-text">AI & ML Engineering Resume Builder</span>
+                </Link>
+                <Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="link-card">
+                  <span className="link-icon">💬</span>
+                  <span className="link-text">Prompt Engineering Guide for Resumes</span>
+                </Link>
+                <Link href="/free-ats-resume-checker" className="link-card">
+                  <span className="link-icon">✅</span>
+                  <span className="link-text">Free ATS Resume Checker</span>
+                </Link>
+                <Link href="/best-ats-resume-format-2026" className="link-card">
+                  <span className="link-icon">📄</span>
+                  <span className="link-text">Best ATS Resume Format 2026</span>
+                </Link>
+                <Link href="/software-engineer-resume-example-and-writing-guide" className="link-card">
+                  <span className="link-icon">💻</span>
+                  <span className="link-text">Software Engineer Resume Examples</span>
+                </Link>
+              </div>
             </div>
           </section>
         </main>

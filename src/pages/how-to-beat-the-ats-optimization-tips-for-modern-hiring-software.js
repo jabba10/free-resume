@@ -466,6 +466,62 @@ td {
     justify-content: center;
   }
 }
+
+/* Internal Linking Footer Styles */
+.internal-linking-footer {
+  margin-top: 60px;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  background: #f9fafb;
+}
+.footer-links-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--primary);
+}
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.footer-link-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.footer-link-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.footer-link-text {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.footer-link-sub {
+  color: var(--text-lighter);
+  font-size: 0.8rem;
+}
 `;
 
 const ATSGuide = ({ 
@@ -1303,6 +1359,33 @@ const ATSGuide = ({
             <p style={{ marginTop: '32px', fontSize: '0.8rem', color: '#9ca3af' }}>
               Data fresh as of: {safeCurrentDate} | Guide tested with 15+ major ATS platforms
             </p>
+          </div>
+        </section>
+
+        {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
+        <section className="internal-linking-footer">
+          <h3 className="footer-links-title">Related Career Resources</h3>
+          <div className="footer-links-grid">
+            <a href="/free-resume-keyword-matcher" className="footer-link-card">
+              <span className="footer-link-text">Free Resume Keyword Matcher</span>
+              <span className="footer-link-sub">Match Job Descriptions</span>
+            </a>
+            <a href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="footer-link-card">
+              <span className="footer-link-text">Pass the AI Resume Screen</span>
+              <span className="footer-link-sub">2026 Algorithms Explained</span>
+            </a>
+            <a href="/resume-keywords-finder" className="footer-link-card">
+              <span className="footer-link-text">Resume Keywords Finder</span>
+              <span className="footer-link-sub">Find High-Impact Words</span>
+            </a>
+            <a href="/best-ats-resume-format-2026" className="footer-link-card">
+              <span className="footer-link-text">Best ATS Resume Format</span>
+              <span className="footer-link-sub">2026 Standards Guide</span>
+            </a>
+            <a href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="footer-link-card">
+              <span className="footer-link-text">Most In-Demand Keywords</span>
+              <span className="footer-link-sub">USA Job Seeker Data</span>
+            </a>
           </div>
         </section>
 

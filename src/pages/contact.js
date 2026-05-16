@@ -622,6 +622,50 @@ align-items: center;
 .faq-answer {
   color: var(--text-light);
 }
+
+/* ===== NEW: Internal Links Section Styles ===== */
+.internal-link-card {
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card-bg);
+}
+.internal-link-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  background: #ffffff;
+}
+.internal-link-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.internal-link-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.internal-link-title {
+  font-weight: 600;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  display: block;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.internal-link-desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  display: block;
+  line-height: 1.4;
+}
 `;
 
 export async function getStaticProps() {
@@ -1143,6 +1187,65 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
             </p>
           </div>
         </section>
+
+        {/* ===== NEW: Random Internal Links Section for SEO/GEO Boost ===== */}
+        <section className="section" style={{background: 'var(--background)', borderTop: '2px solid var(--border)'}} aria-labelledby="internal-links-heading">
+          <div className="container">
+            <h2 id="internal-links-heading" className="section-title" style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>🔗 Helpful Self-Service Resources</h2>
+            <p className="section-subtitle" style={{marginBottom: '24px'}}>
+              Find instant answers and tools to improve your resume before contacting support
+            </p>
+            
+            {/* Responsive grid: 1 col mobile → auto-fit up to 5 cols desktop */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '16px',
+              width: '100%'
+            }}>
+              {/* Link 1: Templates */}
+              <Link href="/resume-templates" className="internal-link-card">
+                <span className="internal-link-icon">📄</span>
+                <span className="internal-link-title">Browse Free Resume Templates</span>
+                <span className="internal-link-desc">Access 46+ ATS-friendly designs instantly</span>
+              </Link>
+              
+              {/* Link 2: Tools */}
+              <Link href="/free-resume-tools" className="internal-link-card">
+                <span className="internal-link-icon">🛠️</span>
+                <span className="internal-link-title">Explore Free Resume Tools</span>
+                <span className="internal-link-desc">Checkers, generators, and analyzers</span>
+              </Link>
+              
+              {/* Link 3: How-to Guide */}
+              <Link href="/how-to-write-a-resume" className="internal-link-card">
+                <span className="internal-link-icon">📝</span>
+                <span className="internal-link-title">How to Write a Resume Guide</span>
+                <span className="internal-link-desc">Step-by-step instructions for beginners</span>
+              </Link>
+              
+              {/* Link 4: ATS Checker */}
+              <Link href="/free-ats-resume-checker" className="internal-link-card">
+                <span className="internal-link-icon">✅</span>
+                <span className="internal-link-title">Free ATS Resume Checker</span>
+                <span className="internal-link-desc">Scan your resume for compatibility issues</span>
+              </Link>
+              
+              {/* Link 5: Mistakes Guide */}
+              <Link href="/resume-mistakes-americans-make-and-how-to-fix-them" className="internal-link-card">
+                <span className="internal-link-icon">⚠️</span>
+                <span className="internal-link-title">Common Resume Mistakes & Fixes</span>
+                <span className="internal-link-desc">Avoid errors that cost you interviews</span>
+              </Link>
+            </div>
+            
+            {/* Helper text for accessibility */}
+            <p className="helper-text" style={{textAlign: 'center', marginTop: '20px', fontSize: '0.85rem', color: 'var(--text-light)'}}>
+              All resources are free, mobile-optimized, and updated for 2026 hiring trends
+            </p>
+          </div>
+        </section>
+
       </main>
     </>
   );

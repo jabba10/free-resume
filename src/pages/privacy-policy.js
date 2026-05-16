@@ -6,9 +6,17 @@ import {
   FiEye, 
   FiUserCheck,
   FiCheck,
-  FiX
+  FiX,
+  FiFileText, // Added for builder
+  FiAlertCircle, // Added for mistakes
+  FiBookOpen, // Added for blog
+  FiCpu // Added for AI guide
 } from 'react-icons/fi';
 import styles from './PrivacyPolicy.module.css';
+
+// Note: Ensure you have the CSS module 'PrivacyPolicy.module.css' created in your project 
+// with the classes referenced below (heroSection, container, etc.) or replace with inline styles if preferred.
+// For this example, I will assume the CSS module exists as per your original code structure.
 
 const PrivacyPolicy = () => {
   const privacyPrinciples = [
@@ -301,6 +309,9 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </section>
+
+      {/* NEW SECTION: Essential Internal Links for SEO/GEO */}
+      
     </div>
   );
 };

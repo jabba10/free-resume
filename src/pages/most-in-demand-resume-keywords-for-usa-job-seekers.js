@@ -25,7 +25,11 @@ import {
   FiLayers,
   FiDatabase,
   FiCpu,
-  FiTerminal
+  FiTerminal,
+  FiFlag, // Added for Federal/Gov
+  FiMonitor, // Added for Remote
+  FiUsers, // Added for Management
+  FiEdit // Added for Bullet Points
 } from 'react-icons/fi';
 
 // Critical CSS inline with enhanced responsive design
@@ -482,6 +486,82 @@ th {
 .skip-link:focus {
   top: 0;
 }
+
+/* New Internal Link Section Styles */
+.strategy-section {
+  padding: clamp(40px, 8vw, 60px) 0;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+  width: 100%;
+}
+.strategy-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: left;
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.strategy-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+.strategy-icon {
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+.strategy-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  line-height: 1.3;
+}
+.strategy-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+.strategy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: auto;
+}
+.strategy-link svg {
+  transition: transform 0.2s;
+}
+.strategy-card:hover .strategy-link svg {
+  transform: translateX(4px);
+}
+
 @media (max-width: 768px) {
   button, 
   .btn-primary, 
@@ -693,6 +773,40 @@ function MostInDemandKeywords({
   keywordCategories,
   keywordMistakes
 }) {
+  // Selected Internal Links for SEO/GEO Boost
+  const recommendedStrategyLinks = [
+    {
+      title: "How to Write a Federal Resume",
+      desc: "Specialized guide for USA government jobs requiring specific formatting and detailed keyword usage.",
+      link: "/how-to-write-a-federal-resume-for-usa-government-jobs",
+      icon: <FiFlag />
+    },
+    {
+      title: "Resume Tips for Remote Jobs",
+      desc: "Optimize your keywords for the growing remote work market in the USA.",
+      link: "/resume-tips-for-remote-jobs-in-the-usa",
+      icon: <FiMonitor />
+    },
+    {
+      title: "Management Position Examples",
+      desc: "See high-impact keyword examples for senior and management roles in the US.",
+      link: "/best-resume-examples-for-usa-management-positions",
+      icon: <FiUsers />
+    },
+    {
+      title: "Free Bullet Point Generator",
+      desc: "Generate keyword-rich, achievement-based bullet points instantly.",
+      link: "/free-resume-bullet-point-generator",
+      icon: <FiEdit />
+    },
+    {
+      title: "Impress USA Recruiters",
+      desc: "Learn how to write bullet points that specifically appeal to American hiring managers.",
+      link: "/how-to-write-bullet-points-that-impress-usa-recruiters",
+      icon: <FiAward />
+    }
+  ];
+
   return (
     <>
       <Head>
@@ -1281,6 +1395,34 @@ function MostInDemandKeywords({
                   Explore All Tools →
                 </span>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Recommended Strategy Links Section (New) */}
+        <section className="strategy-section">
+          <div className="container">
+            <h2 className="section-title">Strategic Resources for USA Job Seekers</h2>
+            <p className="section-subtitle">Explore these specialized guides and tools to further refine your resume for the US market</p>
+            <div className="strategy-grid">
+              {recommendedStrategyLinks.map((item, index) => (
+                <Link 
+                  key={index} 
+                  href={item.link} 
+                  className="strategy-card"
+                  aria-label={`Read more about ${item.title}`}
+                >
+                  <div className="strategy-icon">
+                    {item.icon}
+                  </div>
+                  <h3 className="strategy-title">{item.title}</h3>
+                  <p className="strategy-desc">{item.desc}</p>
+                  <div className="strategy-link">
+                    <span>Explore Resource</span>
+                    <FiArrowRight />
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

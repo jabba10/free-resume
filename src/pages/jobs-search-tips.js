@@ -682,6 +682,53 @@ td {
   transform: translateY(-50%);
   color: var(--primary);
 }
+
+/* New CSS for Bottom Recommended Resources */
+.bottom-resources-section {
+  padding: 50px 0;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.resource-card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  border-color: var(--primary);
+}
+.resource-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.resource-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
 /* Mobile touch improvements */
 @media (max-width: 480px) {
   button, 
@@ -1386,6 +1433,63 @@ const JobSearchTips = ({ seoData }) => {
                 <h3 className="internal-link-title">Discover Our Resume Templates</h3>
                 <p className="internal-link-description">ATS-Optimized Resume Templates</p>
                 <FiChevronRight className="internal-link-arrow" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO Boost */}
+        <section className="bottom-resources-section">
+          <div className="container">
+            <h2 className="section-title">Recommended Career Resources</h2>
+            <p className="section-subtitle">
+              Enhance your job search with these specialized guides and tools tailored for the 2026 market.
+            </p>
+            
+            <div className="resources-grid">
+              {/* Link 1: Interview Tips - Critical next step */}
+              <Link href="/interview-tips" className="resource-card">
+                <FiMessageSquare className="resource-icon" />
+                <h3 className="resource-title">Ace Your Job Interview</h3>
+                <p className="resource-desc">
+                  Master common interview questions, body language tips, and negotiation strategies to convert interviews into offers.
+                </p>
+              </Link>
+
+              {/* Link 2: LinkedIn Optimization - Supports online strategy */}
+              <Link href="/how-to-optimize-your-resume-for-linkedin-recruiters" className="resource-card">
+                <FiUser className="resource-icon" />
+                <h3 className="resource-title">Optimize for LinkedIn Recruiters</h3>
+                <p className="resource-desc">
+                  Learn how to structure your resume and profile so LinkedIn's algorithm ranks you higher for recruiter searches.
+                </p>
+              </Link>
+
+              {/* Link 3: Cover Letter Generator - Essential Tool */}
+              <Link href="/free-cover-letter-generator" className="resource-card">
+                <FiEdit className="resource-icon" />
+                <h3 className="resource-title">Free Cover Letter Generator</h3>
+                <p className="resource-desc">
+                  Create customized, professional cover letters in seconds that complement your resume and highlight your fit.
+                </p>
+              </Link>
+
+              {/* Link 4: Remote Jobs - High Value Niche */}
+              <Link href="/resume-tips-for-remote-jobs-in-the-usa" className="resource-card">
+                <FiGlobe className="resource-icon" />
+                <h3 className="resource-title">Remote Job Resume Tips</h3>
+                <p className="resource-desc">
+                  Specific advice for landing remote work in the USA, highlighting communication skills and self-management traits.
+                </p>
+              </Link>
+
+              {/* Link 5: Job Boards - Direct Utility */}
+              <Link href="/jobs-boards" className="resource-card">
+                <FiSearch className="resource-icon" />
+                <h3 className="resource-title">Top Job Boards Directory</h3>
+                <p className="resource-desc">
+                  A curated list of the best job boards for 2026, categorized by industry, remote options, and career level.
+                </p>
               </Link>
             </div>
           </div>

@@ -41,7 +41,7 @@ const criticalCSS = `
     color: var(--primary);
     background: var(--background);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-smoothing: grayscale;
     overflow-x: hidden;
     width: 100%;
   }
@@ -52,7 +52,7 @@ const criticalCSS = `
   }
   
   /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
-  ul, ol, .left-align, .breadcrumb, .stepDescription, .cardContent, .faqAnswer, .industrySection, .atsSafe, .atsDanger, .colorItem, .mistakeItem, .actionCard, .testimonialCard, .templateCard, .featureList, .stepByStep, .relatedLinks {
+  ul, ol, .left-align, .breadcrumb, .stepDescription, .cardContent, .faqAnswer, .industrySection, .atsSafe, .atsDanger, .colorItem, .mistakeItem, .actionCard, .testimonialCard, .templateCard, .featureList, .stepByStep, .relatedLinks, .resource-link-item {
     text-align: left;
   }
   
@@ -769,6 +769,44 @@ export default function CreativeResumeTemplates({ seoData }) {
       background: 'var(--card-bg)',
       borderRadius: '0.5rem',
       color: 'var(--primary)'
+    },
+
+    // NEW: Internal Linking Resource Section Styles
+    resourceSection: {
+      marginTop: '2rem',
+      padding: '1.5rem',
+      background: '#ffffff',
+      borderRadius: '0.75rem',
+      border: '1px solid var(--border)'
+    },
+    resourceList: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: '1rem',
+      listStyle: 'none',
+      padding: 0,
+      margin: 0
+    },
+    resourceLinkItem: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0.75rem 1rem',
+      background: 'var(--card-bg)',
+      borderRadius: '0.5rem',
+      border: '1px solid transparent',
+      transition: 'all 0.2s ease',
+      textDecoration: 'none',
+      color: 'var(--primary)'
+    },
+    resourceLinkIcon: {
+      marginRight: '0.75rem',
+      color: 'var(--primary)',
+      fontSize: '1.2rem'
+    },
+    resourceLinkText: {
+      fontSize: '0.95rem',
+      fontWeight: '500',
+      lineHeight: '1.4'
     },
 
     // Testimonials
@@ -1586,6 +1624,45 @@ export default function CreativeResumeTemplates({ seoData }) {
                   </Link>
                 </div>
               </div>
+            </div>
+          </section>
+
+          {/* NEW: Internal Linking Section for SEO/GEO Boost */}
+          <section style={styles.section}>
+            <div style={styles.resourceSection}>
+              <h3 style={{...styles.subsectionTitle, textAlign: 'center', marginBottom: '1.5rem'}}>Recommended Resources for Job Seekers</h3>
+              <ul style={styles.resourceList}>
+                <li>
+                  <Link href="/modern-resume-design-2026" style={styles.resourceLinkItem} className="resource-link-item">
+                    <span style={styles.resourceLinkIcon}>→</span>
+                    <span style={styles.resourceLinkText}>Modern Resume Design Trends 2026</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/best-ats-resume-format-2026" style={styles.resourceLinkItem} className="resource-link-item">
+                    <span style={styles.resourceLinkIcon}>→</span>
+                    <span style={styles.resourceLinkText}>Best ATS Resume Formats for 2026</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot" style={styles.resourceLinkItem} className="resource-link-item">
+                    <span style={styles.resourceLinkIcon}>→</span>
+                    <span style={styles.resourceLinkText}>AI Writing Guide: Avoiding Robotic Tone</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/free-resume-keyword-matcher" style={styles.resourceLinkItem} className="resource-link-item">
+                    <span style={styles.resourceLinkIcon}>→</span>
+                    <span style={styles.resourceLinkText}>Free Resume Keyword Matcher Tool</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026" style={styles.resourceLinkItem} className="resource-link-item">
+                    <span style={styles.resourceLinkIcon}>→</span>
+                    <span style={styles.resourceLinkText}>Skills-First vs. Chronological Layouts</span>
+                  </Link>
+                </li>
+              </ul>
             </div>
           </section>
 

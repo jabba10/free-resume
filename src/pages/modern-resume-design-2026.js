@@ -1,5 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { 
+  FiTrendingUp, // Added missing icon
+  FiCpu,        // Added missing icon
+  FiCode,       // Added missing icon
+  FiLayers,     // Added missing icon
+  FiBookOpen    // Added missing icon
+} from 'react-icons/fi';
 
 // ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
 const criticalCSS = `
@@ -52,7 +59,7 @@ const criticalCSS = `
   }
   
   /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
-  ul, ol, .left-align, .breadcrumb, .stepDescription, .cardContent, .faqItem, .faqAnswer, .trendCard, .aiStrategy, .benefitCard, .application, .vizType, .mobileRequirement, .roadmapPhase, .techCard, .actionCard, .dataTable, .featureList {
+  ul, ol, .left-align, .breadcrumb, .stepDescription, .cardContent, .faqItem, .faqAnswer, .trendCard, .aiStrategy, .benefitCard, .application, .vizType, .mobileRequirement, .roadmapPhase, .techCard, .actionCard, .dataTable, .featureList, .internal-link-text {
     text-align: left;
   }
   
@@ -369,6 +376,63 @@ const criticalCSS = `
     .grid {
       gap: 0.875rem;
     }
+  }
+
+  /* New Styles for Bottom Internal Links Section */
+  .internal-links-section {
+    padding: 60px 0;
+    background: var(--background);
+    border-top: 1px solid var(--border);
+  }
+  .internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1024px) {
+    .internal-links-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .internal-links-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .internal-links-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .internal-link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    transition: all 0.2s;
+    height: 100%;
+  }
+  .internal-link-card:hover {
+    background: #e5e7eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  .internal-link-icon {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: var(--primary);
+  }
+  .internal-link-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
   }
 `;
 
@@ -1635,6 +1699,35 @@ export default function ModernResumeDesign2026({ seoData, buildTimestamp }) {
             </div>
           </div>
         </main>
+
+        {/* NEW SECTION: Essential Internal Links for SEO/GEO */}
+        <section className="internal-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '24px' }}>Essential Future Career Resources</h3>
+            <div className="internal-links-grid">
+              <Link href="/resume-trends-in-the-usa-for-2026" className="internal-link-card">
+                <FiTrendingUp className="internal-link-icon" />
+                <span className="internal-link-text">USA Resume Trends for 2026</span>
+              </Link>
+              <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="internal-link-card">
+                <FiCpu className="internal-link-icon" />
+                <span className="internal-link-text">How to Pass AI Resume Screens</span>
+              </Link>
+              <Link href="/most-popular-resume-layouts-for-usa-tech-jobs" className="internal-link-card">
+                <FiCode className="internal-link-icon" />
+                <span className="internal-link-text">Popular Tech Resume Layouts</span>
+              </Link>
+              <Link href="/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026" className="internal-link-card">
+                <FiLayers className="internal-link-icon" />
+                <span className="internal-link-text">Skills-First Resume Guide</span>
+              </Link>
+              <Link href="/complete-resume-resource-library" className="internal-link-card">
+                <FiBookOpen className="internal-link-icon" />
+                <span className="internal-link-text">Complete Resume Resource Library</span>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* Update Strategy */}
         <div style={styles.updateStrategy}>
