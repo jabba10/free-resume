@@ -28,10 +28,10 @@ import {
   FiBookOpen,
   FiShield,
   FiHelpCircle,
-  FiType, // Added for Fonts
-  FiAlertTriangle, // Added for Mistakes
-  FiMessageSquare, // Added for Summary
-  FiRuler // Added for Length
+  FiType,
+  FiAlertTriangle,
+  FiMessageSquare,
+  FiMaximize // Replaced FiRuler with FiMaximize
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -1952,7 +1952,7 @@ const OnePageResumeTemplate = ({ seoData, buildTimestamp }) => {
             <div className="resources-grid">
               {/* Link 1: Word Counter - Essential for One Page */}
               <Link href="/free-resume-word-and-character-counter" className="resource-card-new">
-                <FiRuler className="resource-icon-new" />
+                <FiMaximize className="resource-icon-new" />
                 <h3 className="resource-title-new">Resume Word Counter</h3>
                 <p className="resource-desc-new">
                   Precisely track your resume length to ensure it fits perfectly on one page without overcrowding.
