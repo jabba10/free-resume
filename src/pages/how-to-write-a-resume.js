@@ -495,39 +495,8 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
     { name: "Languages", mandatory: false, tips: "Languages spoken with proficiency level" }
   ];
 
-  // FIXED: Changed from Product to CreativeWork to avoid "No global identifier" error
+  // Product image URL for schema
   const productImage = "https://professionalresumefree.com/images/resume-writing-guide-product.jpg";
-  
-  const completeOffer = {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "url": "https://professionalresumefree.com/how-to-write-a-resume"
-  };
-
-  const structuredReviews = testimonials.map((testimonial, index) => ({
-    "@type": "Review",
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": testimonial.rating,
-      "bestRating": 5
-    },
-    "author": {
-      "@type": "Person",
-      "name": testimonial.author
-    },
-    "reviewBody": testimonial.quote,
-    "datePublished": testimonial.date
-  }));
-
-  const aggregateRatingData = {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": structuredReviews.length.toString(),
-    "bestRating": "5",
-    "worstRating": "1"
-  };
 
   return (
     <div style={{ 
@@ -566,7 +535,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="twitter:description" content="Expert resume writing guide with templates and proven job search strategies for 2026." />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-guide-preview.jpg" />
         
-        {/* FIXED: Cleaned up Schema.org to prevent GSC Invalid object type errors */}
+        {/* FIXED: Properly structured Schema.org without nesting issues */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -635,9 +604,34 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                   "name": "Resume Writing Guide",
                   "description": "Complete guide on how to write a professional resume",
                   "image": productImage,
-                  "aggregateRating": aggregateRatingData,
-                  "offers": completeOffer,
-                  "review": structuredReviews,
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "4",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                  },
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://professionalresumefree.com/how-to-write-a-resume"
+                  },
+                  "review": testimonials.map((testimonial) => ({
+                    "@type": "Review",
+                    "reviewRating": {
+                      "@type": "Rating",
+                      "ratingValue": testimonial.rating.toString(),
+                      "bestRating": "5"
+                    },
+                    "author": {
+                      "@type": "Person",
+                      "name": testimonial.author
+                    },
+                    "reviewBody": testimonial.quote,
+                    "datePublished": testimonial.date
+                  })),
                   "learningResourceType": "Guide",
                   "educationalLevel": "Professional",
                   "creativeWorkStatus": "Updated"

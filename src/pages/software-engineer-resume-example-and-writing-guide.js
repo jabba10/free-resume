@@ -533,6 +533,40 @@ const data = {
     }
   ],
 
+  // NEW RANDOMLY SELECTED LINKS FROM JSON (SEO BOOST)
+  additionalInternalLinks: [
+    {
+      title: 'Beat the ATS Optimization Tips',
+      description: 'Learn how to bypass modern hiring software filters with advanced keyword strategies and formatting tricks for 2026.',
+      href: '/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software',
+      cta: 'Read ATS Guide'
+    },
+    {
+      title: 'Data Analyst Resume Builder',
+      description: 'Transition into data science with our specialized builder for analysts, focusing on SQL, Python, and visualization skills.',
+      href: '/ats-friendly-data-analyst-resume-builder',
+      cta: 'Build Data Resume'
+    },
+    {
+      title: 'ChatGPT Prompt Engineering Guide',
+      description: 'Master prompt engineering to generate perfect resume bullet points that sound human and impactful.',
+      href: '/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026',
+      cta: 'Get AI Prompts'
+    },
+    {
+      title: 'Remote Job Resume Tips',
+      description: 'Specific advice for highlighting asynchronous communication and remote-work readiness on your USA resume.',
+      href: '/resume-tips-for-remote-jobs-in-the-usa',
+      cta: 'See Remote Tips'
+    },
+    {
+      title: 'Top USA Employer Skills',
+      description: 'Discover the exact soft and hard skills American employers are prioritizing in their hiring algorithms right now.',
+      href: '/top-skills-employers-in-the-usa-want-on-resumes',
+      cta: 'View Top Skills'
+    }
+  ],
+
   // Long-tail keywords for GEO optimization
   longTailKeywords: [
     'how to write a software engineer resume with no experience',
@@ -1542,6 +1576,30 @@ export default function SoftwareEngineerResumeExampleWritingGuidePage({ generate
               <p style={styles.finalNote}>
                 <strong>Remember:</strong> Your resume is a living document. Update it with each new project, skill acquisition, or achievement. Regular refinement ensures you're always prepared for new opportunities in the dynamic software industry.
               </p>
+            </section>
+
+            {/* ===== RELATED CAREER RESOURCES (NEWLY ADDED LINKS) ===== */}
+            <section style={styles.resourcesSection}>
+              <h2 style={styles.sectionTitle}>Related Career Resources</h2>
+              <p style={styles.resourcesDescription}>
+                Expand your job search toolkit with these specialized guides and builders tailored for the 2026 market.
+              </p>
+              
+              <div style={styles.resourcesGrid}>
+                {data.additionalInternalLinks.map((link, index) => (
+                  <div key={index} style={styles.resourceCard}>
+                    <h3 style={styles.resourceTitle}>{link.title}</h3>
+                    <p className="left-align" style={styles.resourceDescription}>{link.description}</p>
+                    <Link 
+                      href={link.href} 
+                      style={styles.resourceButton}
+                      aria-label={`Access resource: ${link.title}`}
+                    >
+                      {link.cta} →
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </section>
           </main>
         </article>

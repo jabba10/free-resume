@@ -82,6 +82,598 @@ body {
   padding: 0 16px;
 }
 /* Additional CSS continues... */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 30px 0;
+}
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1280px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+.card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.btn-primary {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--background);
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  margin: 8px;
+  border: 1px solid var(--primary);
+  transition: background 0.2s;
+  width: auto;
+  min-width: 200px;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .btn-primary {
+    width: 100%;
+    margin: 4px 0;
+    min-width: auto;
+    padding: 14px 24px;
+  }
+}
+.btn-primary:hover {
+  background: var(--secondary);
+}
+.btn-primary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.btn-secondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--primary);
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  border: 2px solid var(--primary);
+  margin: 8px;
+  transition: background 0.2s;
+  width: auto;
+  min-width: 200px;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .btn-secondary {
+    width: 100%;
+    margin: 4px 0;
+    min-width: auto;
+    padding: 14px 24px;
+  }
+}
+.btn-secondary:hover {
+  background: #f5f5f5;
+}
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+@media (max-width: 640px) {
+  .stats { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .stats { 
+    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.stat-item {
+  text-align: center;
+  min-width: 120px;
+  padding: 8px;
+}
+@media (max-width: 480px) {
+  .stat-item { 
+    min-width: 100%;
+    width: 100%;
+    max-width: 250px;
+  }
+}
+.stat-number {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: bold;
+  display: block;
+}
+.section {
+  padding: 40px 0;
+  scroll-margin-top: 20px;
+}
+@media (min-width: 768px) {
+  .section { padding: 60px 0; }
+}
+@media (max-width: 480px) {
+  .section { padding: 30px 0; }
+}
+.section:target {
+  background-color: rgba(0,0,0,0.02);
+}
+.section-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 32px;
+  padding: 0 16px;
+  word-wrap: break-word;
+}
+@media (max-width: 480px) {
+  .section-title { margin-bottom: 24px; }
+}
+.section-subtitle {
+  text-align: center;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 40px;
+  padding: 0 16px;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+}
+.table-wrap {
+  overflow-x: auto;
+  margin: 30px 0;
+  background: var(--background);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+@media (max-width: 640px) {
+  .table-wrap {
+    margin: 20px 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+@media (max-width: 480px) {
+  table { min-width: 500px; }
+}
+th {
+  background: var(--card-bg);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.9rem;
+}
+@media (min-width: 768px) {
+  th { padding: 16px; font-size: 1rem; }
+}
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+@media (min-width: 768px) {
+  td { padding: 16px; font-size: 1rem; }
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .faq-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.faq-item {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  height: 100%;
+  scroll-margin-top: 20px;
+}
+@media (max-width: 480px) {
+  .faq-item { padding: 20px; }
+}
+.faq-item:target {
+  background-color: #f0f0f0;
+}
+.faq-question {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--primary);
+  line-height: 1.4;
+}
+.trust-badge {
+  display: inline-block;
+  background: #f3f4f6;
+  color: var(--primary);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+@media (max-width: 480px) {
+  .trust-badge {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+}
+.breadcrumb {
+  padding: 16px 0;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+@media (max-width: 480px) {
+  .breadcrumb {
+    padding: 12px 0;
+    font-size: 0.85rem;
+  }
+}
+.breadcrumb ol {
+  display: flex;
+  list-style: none;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+@media (max-width: 480px) {
+  .breadcrumb ol { gap: 4px; }
+}
+.breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.breadcrumb a:hover {
+  border-bottom-color: var(--primary);
+}
+.breadcrumb [aria-current="page"] {
+  font-weight: 600;
+}
+.hub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .hub-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .hub-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.hub-category {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+@media (max-width: 480px) {
+  .hub-category { padding: 20px; }
+}
+.hub-category ul {
+  list-style: none;
+  margin-top: 16px;
+}
+.hub-category li {
+  margin: 12px 0;
+}
+.hub-category a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid #d1d5db;
+  padding-bottom: 2px;
+}
+.hub-category a:hover {
+  border-bottom-color: var(--primary);
+}
+.specialized-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .specialized-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .specialized-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.specialized-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.specialized-card h4 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.founder-card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  height: 100%;
+}
+.testimonial-card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.cta-section {
+  background: var(--background);
+  color: var(--primary);
+  padding: 40px 0;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 768px) {
+  .cta-section { padding: 60px 0; }
+}
+@media (max-width: 480px) {
+  .cta-section { padding: 30px 0; }
+}
+.cta-section h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 16px;
+  padding: 0 16px;
+}
+.cta-section p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  max-width: 800px;
+  margin: 0 auto 24px;
+  padding: 0 16px;
+}
+.feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.feature-tag {
+  background: #e5e7eb;
+  color: var(--primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  border: 1px solid #d1d5db;
+}
+@media (min-width: 768px) {
+  .feature-tag { font-size: 0.8rem; }
+}
+@media (max-width: 480px) {
+  .feature-tag { 
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+}
+.text-small { font-size: 0.85rem; color: var(--text-light); }
+.text-success { color: #059669; font-weight: 600; }
+.text-danger { color: #dc2626; font-weight: 600; }
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+@media (max-width: 480px) {
+  hr { margin: 30px 0; }
+}
+.methodology-list {
+  list-style: none;
+  margin-top: 12px;
+}
+.methodology-list li {
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+.methodology-list li:before {
+  content: "✓";
+  color: #059669;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+.advisory-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 16px;
+}
+@media (max-width: 640px) {
+  .advisory-panel { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .advisory-panel {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+.advisory-member {
+  flex: 1 1 200px;
+  padding: 12px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+@media (max-width: 480px) {
+  .advisory-member { width: 100%; }
+}
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 0;
+}
+/* Mobile-specific touch improvements */
+@media (max-width: 480px) {
+  button, 
+  .btn-primary, 
+  .btn-secondary, 
+  .card, 
+  a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card:active { opacity: 0.8; }
+  .table-wrap { -webkit-overflow-scrolling: touch; }
+  .container { padding: 0 20px; }
+  p, li { font-size: 16px; }
+}
+
+/* Page-specific styles */
+.article-meta {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #000;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  border: 2px solid #000;
+}
+.toc-list {
+  list-style: none;
+  padding: 0;
+}
+.toc-list li {
+  margin: 12px 0;
+}
+.toc-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 1rem;
+}
+.toc-link:hover {
+  text-decoration: underline;
+}
+.table-wrapper {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th {
+  background: var(--card-bg);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+}
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.inline-link {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: underline;
+}
+.subheading {
+  font-size: 1.3rem;
+  margin: 30px 0 15px;
+}
+.list {
+  padding-left: 20px;
+  margin: 15px 0;
+}
+.list-item {
+  margin: 8px 0;
+}
 `;
 
 // Get current date for ISR and content freshness
@@ -1040,6 +1632,51 @@ const ResumeJobApplicationIndiaPage = ({ meta, faqItems, structuredData, seoData
                 <li><strong>Download</strong> your professional resume</li>
                 <li><strong>Start applying</strong> to your target roles</li>
               </ol>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: 5 Randomly Selected Links from JSON for Internal Linking Boost */}
+        <section className="section" style={{background: '#f9fafb', borderTop: '1px solid var(--border)'}} aria-labelledby="expand-toolkit-heading">
+          <div className="container" style={{maxWidth: '100%', padding: 0}}>
+            <h2 id="expand-toolkit-heading" className="section-title" style={{textAlign: 'left', marginBottom: '24px'}}>Expand Your Career Toolkit</h2>
+            <div className="grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px'}}>
+              
+              {/* Link 1: Jobs Boards - High Value for Job Seekers */}
+              <Link href="/jobs-boards" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Top Job Boards for India</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Discover the best platforms to find opportunities in your sector.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Browse Jobs <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 2: Interview Tips - Next Step After Resume */}
+              <Link href="/interview-tips" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Interview Preparation Tips</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Ace your next interview with proven strategies and common questions.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Get Tips <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 3: How to Beat ATS - Critical for Indian MNCs */}
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Beat the ATS Screening</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Optimize your application for online government and corporate portals.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Learn More <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 4: Cover Letter Guides - Essential Companion */}
+              <Link href="/cover-letter-guides" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Cover Letter Guides</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Learn how to write compelling cover letters that get noticed.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Read Guides <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 5: Resume Formatting Guide - Technical Precision */}
+              <Link href="/resume-formatting-guide" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Perfect Resume Formatting</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Ensure your biodata meets strict layout standards for Indian recruiters.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>View Guide <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
             </div>
           </div>
         </section>

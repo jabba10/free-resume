@@ -1003,6 +1003,35 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
             </div>
           </section>
 
+          {/* Randomly Selected Internal Links for SEO/GEO Boost */}
+          <section className="section">
+            <div className="container">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+                <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="card">
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Pass AI Resume Screen 2026</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-light)' }}>Beat modern ATS algorithms</p>
+                </Link>
+                <Link href="/how-to-optimize-your-resume-for-linkedin-recruiters" className="card">
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Optimize for LinkedIn</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-light)' }}>Get noticed by recruiters</p>
+                </Link>
+                <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="card">
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>In-Demand Keywords</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-light)' }}>Top keywords for 2026</p>
+                </Link>
+                <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="card">
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Impressive Bullet Points</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-light)' }}>Write impactful achievements</p>
+                </Link>
+                <Link href="/free-resume-keyword-matcher" className="card">
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Free Keyword Matcher</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-light)' }}>Check your resume match</p>
+                </Link>
+              </div>
+            </div>
+          </section>
+
           <section className="section">
             <h2 className="section-title">Next Steps: Build a Resume That Gets Results in 2026</h2>
             <p className="paragraph">

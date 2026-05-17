@@ -436,6 +436,42 @@ td {
     grid-template-columns: 1fr;
   }
 }
+/* New styles for the bottom link section */
+.related-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.related-link-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.related-link-card:hover {
+  border-color: var(--primary);
+  background: #f9fafb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.related-link-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: block;
+}
+.related-link-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
 `;
 
 export const getStaticProps = async () => {
@@ -640,6 +676,36 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
   
   // SINGLE CANONICAL URL - REMOVED www
   const canonicalUrl = "https://professionalresumefree.com/resume-for-students-in-india";
+
+  // Selected Links for Internal Linking (SEO/GEO Boost)
+  // Randomly selected from JSON but curated for relevance to Students/Freshers
+  const relatedLinks = [
+    {
+      href: "/how-to-create-a-resume-with-no-experience",
+      title: "Create a Resume with No Experience",
+      desc: "Perfect for freshers. Learn how to highlight projects and education when you lack work history."
+    },
+    {
+      href: "/free-resume-summary-generator",
+      title: "Free Resume Summary Generator",
+      desc: "Instantly generate a professional summary tailored to your student profile and target role."
+    },
+    {
+      href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software",
+      title: "How to Beat the ATS in 2026",
+      desc: "Advanced optimization tips to ensure your resume passes automated screening software."
+    },
+    {
+      href: "/resume-writing-for-beginners",
+      title: "Resume Writing for Beginners",
+      desc: "A foundational guide covering the basics of structure, tone, and formatting for first-time job seekers."
+    },
+    {
+      href: "/free-resume-keyword-matcher",
+      title: "Free Resume Keyword Matcher",
+      desc: "Compare your resume against job descriptions to find missing keywords and improve relevance."
+    }
+  ];
 
   return (
     <>
@@ -1161,6 +1227,27 @@ const ResumeForStudentsInIndiaPage = ({ meta, faqItems, structuredData, currentD
                 <Link href="/resume-templates" className="secondary-button">
                   Browse Student Templates
                 </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* RELATED INTERNAL LINKS SECTION - SEO & GEO BOOST */}
+        <section className="section" style={{ paddingTop: '20px' }}>
+          <div className="container">
+            <div className="card">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">
+                Deepen your job search strategy with these specialized guides and tools tailored for the 2026 hiring landscape.
+              </p>
+              
+              <div className="related-links-grid">
+                {relatedLinks.map((link, index) => (
+                  <Link href={link.href} key={index} className="related-link-card">
+                    <span className="related-link-title">{link.title}</span>
+                    <span className="related-link-desc">{link.desc}</span>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

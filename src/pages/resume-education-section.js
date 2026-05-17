@@ -28,7 +28,10 @@ import {
   FiMapPin,
   FiGlobe,
   FiMonitor,
-  FiHelpCircle
+  FiHelpCircle,
+  FiCpu, // Added for AI/Tech context
+  FiCode,
+  FiZap
 } from 'react-icons/fi';
 import { 
   FaGraduationCap,
@@ -86,7 +89,7 @@ const criticalCSS = `
   }
   
   /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
-  ul, ol, .left-align, .breadcrumb, .paragraph, .featureContent, .faqAnswer, .exampleCode, .statsNote, .featureText, .table, .faqMeta, .metaInfo {
+  ul, ol, .left-align, .breadcrumb, .paragraph, .featureContent, .faqAnswer, .exampleCode, .statsNote, .featureText, .table, .faqMeta, .metaInfo, .related-link-desc {
     text-align: left;
   }
   
@@ -413,13 +416,10 @@ export const getStaticProps = async () => {
   const metadata = {
     title: 'Resume Education Section Guide 2026 - Format, Examples & ATS Tips | ProfessionalResumeFree',
     description: 'Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.',
-    // REMOVED www
     url: 'https://professionalresumefree.com/resume-education-section',
     siteName: 'ProfessionalResumeFree',
-    // REMOVED www
     image: 'https://professionalresumefree.com/images/resume-education-section-guide-og.jpg',
     twitterHandle: '@profresumefree',
-    // REMOVED www
     canonical: 'https://professionalresumefree.com/resume-education-section',
     author: 'ProfessionalResumeFree',
     keywords: 'resume education section, education on resume, how to list education on resume, resume education format, ATS resume education, college resume education, resume education examples, recent graduate resume, professional resume education, resume degree section'
@@ -495,6 +495,41 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
   const safeLastModifiedDate = seoData?.lastModifiedDate || new Date().toISOString();
   const safeReviewDates = seoData?.reviewDates || Array(8).fill(safeCurrentDate);
   const safeFaqDates = seoData?.faqDates || Array(8).fill(safeCurrentDate);
+
+  // ============= SELECTED INTERNAL LINKS FOR SEO/GEO BOOST =============
+  // Selected randomly but strategically for Tech/AI relevance based on user profile
+  const relatedLinks = [
+    {
+      href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
+      title: "AI & ML Engineering Resume Builder",
+      desc: "Specialized template for LLM Engineers and Data Scientists.",
+      icon: <FiCpu />
+    },
+    {
+      href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026",
+      title: "Prompt Engineering for Resumes",
+      desc: "Use AI to write better bullet points that pass ATS filters.",
+      icon: <FiZap />
+    },
+    {
+      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
+      title: "Software Engineer Resume Guide",
+      desc: "Optimized formats for Full Stack and Backend developers.",
+      icon: <FiCode />
+    },
+    {
+      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      title: "Beating the AI Resume Screen",
+      desc: "Understand how 2026 ATS algorithms parse your education data.",
+      icon: <FiMonitor />
+    },
+    {
+      href: "/free-ats-resume-checker",
+      title: "Free ATS Resume Checker",
+      desc: "Instantly scan your education section for compatibility errors.",
+      icon: <FiSearch />
+    }
+  ];
 
   // ============= INLINE STYLES =============
   const styles = {
@@ -985,6 +1020,68 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
       marginTop: '2rem'
     },
 
+    // Related Links Section Styles
+    relatedLinksSection: {
+      marginTop: '4rem',
+      paddingTop: '2rem',
+      borderTop: '2px solid var(--border)'
+    },
+    relatedLinkCard: {
+      background: 'white',
+      border: '1px solid var(--border)',
+      borderRadius: '0.75rem',
+      padding: '1.5rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      transition: 'all 0.3s ease',
+      height: '100%',
+      textDecoration: 'none',
+      color: 'var(--primary)'
+    },
+    relatedLinkHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      marginBottom: '0.75rem',
+      width: '100%'
+    },
+    relatedLinkIconBox: {
+      width: '40px',
+      height: '40px',
+      background: 'var(--card-bg)',
+      borderRadius: '8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'var(--primary)',
+      fontSize: '1.25rem',
+      flexShrink: 0
+    },
+    relatedLinkTitle: {
+      fontSize: '1.1rem',
+      fontWeight: '600',
+      margin: 0,
+      textAlign: 'left',
+      flex: 1
+    },
+    relatedLinkDesc: {
+      fontSize: '0.9rem',
+      color: 'var(--text-light)',
+      marginBottom: '1rem',
+      lineHeight: '1.5',
+      textAlign: 'left'
+    },
+    relatedLinkArrow: {
+      marginTop: 'auto',
+      fontSize: '0.9rem',
+      fontWeight: '600',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.25rem',
+      color: 'var(--primary)'
+    },
+
     // Hidden SEO Elements
     seoHidden: {
       display: 'none'
@@ -1004,7 +1101,6 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     author: {
       '@type': 'Organization',
       name: 'ProfessionalResumeFree',
-      // REMOVED www
       url: 'https://professionalresumefree.com',
       sameAs: [
         'https://twitter.com/profresumefree',
@@ -1017,7 +1113,6 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
       name: 'ProfessionalResumeFree',
       logo: {
         '@type': 'ImageObject',
-        // REMOVED www
         url: 'https://professionalresumefree.com/images/logo.png',
         width: 512,
         height: 512
@@ -1033,7 +1128,6 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     educationalLevel: 'Beginner, Intermediate'
   };
 
-  // ✅ FIXED: Added missing 'item' field to each breadcrumb item - REMOVED www
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -1042,14 +1136,12 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        // REMOVED www
         item: 'https://professionalresumefree.com'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Resume Education Section',
-        // REMOVED www
         item: 'https://professionalresumefree.com/resume-education-section'
       }
     ]
@@ -1082,7 +1174,6 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     isPartOf: {
       '@type': 'WebSite',
       name: 'ProfessionalResumeFree',
-      // REMOVED www
       url: 'https://professionalresumefree.com',
       potentialAction: {
         '@type': 'SearchAction',
@@ -1145,7 +1236,6 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
     provider: {
       '@type': 'Organization',
       name: 'ProfessionalResumeFree',
-      // REMOVED www
       sameAs: 'https://professionalresumefree.com'
     },
     educationalLevel: 'Beginner',
@@ -1240,14 +1330,12 @@ export default function ResumeEducationClusterPage({ metadata, faqItems, seoData
                 <span itemProp="name">Home</span>
               </Link>
               <meta itemProp="position" content="1" />
-              {/* REMOVED www */}
               <meta itemProp="item" content="https://professionalresumefree.com" />
               <FiChevronRight size={14} style={styles.breadcrumbSeparator} />
             </li>
             <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
               <span style={styles.breadcrumbCurrent} itemProp="name">Resume Education Section</span>
               <meta itemProp="position" content="2" />
-              {/* REMOVED www */}
               <meta itemProp="item" content="https://professionalresumefree.com/resume-education-section" />
             </li>
           </ol>
@@ -1644,6 +1732,35 @@ B.S. Computer Science, MIT, 2000`}
                   ))}
                 </div>
               </div>
+            </div>
+          </section>
+
+          {/* RELATED CAREER RESOURCES - NEW SECTION FOR INTERNAL LINKING */}
+          <section style={styles.relatedLinksSection}>
+            <div style={styles.sectionHeader}>
+              <FiBook style={styles.sectionIcon} />
+              <h2 style={styles.sectionTitle}>Related Career Resources</h2>
+            </div>
+            <div style={styles.grid}>
+              {relatedLinks.map((link, index) => (
+                <Link 
+                  key={index} 
+                  href={link.href} 
+                  style={styles.relatedLinkCard}
+                  aria-label={`Read more about ${link.title}`}
+                >
+                  <div style={styles.relatedLinkHeader}>
+                    <div style={styles.relatedLinkIconBox}>
+                      {link.icon}
+                    </div>
+                    <h3 style={styles.relatedLinkTitle}>{link.title}</h3>
+                  </div>
+                  <p style={styles.relatedLinkDesc}>{link.desc}</p>
+                  <div style={styles.relatedLinkArrow}>
+                    Read Guide <FiArrowRight size={14} />
+                  </div>
+                </Link>
+              ))}
             </div>
           </section>
         </div>

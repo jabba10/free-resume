@@ -1,7 +1,7 @@
 import styles from './kpage.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
-import { FiCheck, FiHome, FiChevronRight, FiArrowRight, FiDownload, FiFileText, FiUser, FiAward, FiTool, FiStar, FiTrendingUp, FiMail, FiPhone, FiMapPin, FiBookOpen, FiClock, FiUsers, FiBriefcase, FiTarget, FiZap, FiShield, FiLayers, FiCode, FiGlobe } from 'react-icons/fi';
+import { FiCheck, FiHome, FiChevronRight, FiArrowRight, FiDownload, FiFileText, FiUser, FiAward, FiTool, FiStar, FiTrendingUp, FiMail, FiPhone, FiMapPin, FiBookOpen, FiClock, FiUsers, FiBriefcase, FiTarget, FiZap, FiShield, FiLayers, FiCode, FiGlobe, FiLayout } from 'react-icons/fi';
 
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -990,6 +990,45 @@ export default function ResumeWritingForBeginners({ seoData, buildTimestamp }) {
                 
               </div>
             </section>
+
+            {/* NEW: Internal Linking Footer for SEO/GEO Boost */}
+            <section className={styles.internalLinkingFooter} aria-label="Related Career Resources">
+              <div className={styles.footerContainer}>
+                <h3 style={{ textAlign: 'center', marginBottom: '24px', fontSize: '1.2rem', fontWeight: '600' }}>Explore More Career Resources</h3>
+                <div className={styles.linkGrid}>
+                  {/* Link 1: General Guide */}
+                  <Link href="/how-to-write-a-resume" className={styles.linkCard}>
+                    <FiBookOpen className={styles.linkIcon} size={20} />
+                    <span className={styles.linkText}>Complete Resume Writing Guide</span>
+                  </Link>
+                  
+                  {/* Link 2: Formatting */}
+                  <Link href="/resume-formatting-guide" className={styles.linkCard}>
+                    <FiLayout className={styles.linkIcon} size={20} />
+                    <span className={styles.linkText}>Resume Formatting Guide</span>
+                  </Link>
+                  
+                  {/* Link 3: Keywords */}
+                  <Link href="/keywords-for-resume" className={styles.linkCard}>
+                    <FiTarget className={styles.linkIcon} size={20} />
+                    <span className={styles.linkText}>Top Resume Keywords</span>
+                  </Link>
+                  
+                  {/* Link 4: Interview Prep */}
+                  <Link href="/interview-tips" className={styles.linkCard}>
+                    <FiUsers className={styles.linkIcon} size={20} />
+                    <span className={styles.linkText}>Interview Tips & Guides</span>
+                  </Link>
+                  
+                  {/* Link 5: AI/Modern Tips */}
+                  <Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className={styles.linkCard}>
+                    <FiZap className={styles.linkIcon} size={20} />
+                    <span className={styles.linkText}>AI Resume Writing Guide</span>
+                  </Link>
+                </div>
+              </div>
+            </section>
+
           </article>
         </main>
 

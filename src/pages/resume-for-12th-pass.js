@@ -590,6 +590,69 @@ td {
   line-height: 1.6;
   color: var(--text-light);
 }
+
+/* INTERNAL LINKS BAR (NEW) */
+.internalLinksBar {
+  margin-top: 48px;
+  padding: 32px 24px;
+  background: #f9fafb;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.internalLinksTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.internalLinksGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .internalLinksGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .internalLinksGrid { grid-template-columns: repeat(5, 1fr); }
+}
+
+.internalLinkItem {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.internalLinkItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+
+.internalLinkAnchor {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.internalLinkAnchor:hover {
+  text-decoration: underline;
+}
+
 /* Mobile touch improvements */
 @media (max-width: 480px) {
   button, 
@@ -1412,6 +1475,38 @@ const ResumeFor12thPass = ({ generatedDate, lastUpdatedDate, buildTimestamp }) =
               </div>
             </div>
           </section>
+
+          {/* ESSENTIAL CAREER RESOURCES (INTERNAL LINKING BAR) */}
+          <aside className="internalLinksBar">
+            <h3 className="internalLinksTitle">Essential Career Resources</h3>
+            <div className="internalLinksGrid">
+              <div className="internalLinkItem">
+                <a href="/free-resume-builder" className="internalLinkAnchor">
+                  Free Resume Builder Tool
+                </a>
+              </div>
+              <div className="internalLinkItem">
+                <a href="/basic-resume-format" className="internalLinkAnchor">
+                  Basic Resume Format Guide
+                </a>
+              </div>
+              <div className="internalLinkItem">
+                <a href="/interview-tips" className="internalLinkAnchor">
+                  Expert Interview Preparation Tips
+                </a>
+              </div>
+              <div className="internalLinkItem">
+                <a href="/how-to-write-a-resume-for-a-job" className="internalLinkAnchor">
+                  How to Write a Resume for a Job
+                </a>
+              </div>
+              <div className="internalLinkItem">
+                <a href="/jobs-search-tips" className="internalLinkAnchor">
+                  Effective Job Search Strategies
+                </a>
+              </div>
+            </div>
+          </aside>
 
           {/* Author & EEAT Section */}
           <section className="section">

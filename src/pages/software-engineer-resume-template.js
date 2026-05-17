@@ -32,7 +32,9 @@ import {
   FiCpu,
   FiDatabase,
   FiCloud,
-  FiTerminal
+  FiTerminal,
+  FiZap,
+  FiLayout
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -731,6 +733,53 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   display: grid;
   gap: 20px;
   margin: 30px 0;
+}
+
+/* Internal Linking Footer Styles */
+.internal-linking-footer {
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  margin-top: 40px;
+}
+.link-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .link-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .link-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.link-card {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.link-card:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.link-icon {
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.link-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
 }
 `;
 
@@ -1556,6 +1605,44 @@ function SoftwareEngineerResumeTemplate({
               <p className="helper-text">
                 Generated for educational and strategic guidance. Always tailor your resume to the specific role and company.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: Random Internal Links Footer for SEO/GEO Boost */}
+        <section className="internal-linking-footer" aria-label="Related Resources">
+          <div className="container">
+            <h3 style={{textAlign: 'center', marginBottom: '24px', fontSize: '1.2rem'}}>Explore More Career Resources</h3>
+            <div className="link-grid">
+              {/* Link 1: Specific Role (Data) */}
+              <Link href="/ats-friendly-data-analyst-resume-builder" className="link-card">
+                <FiDatabase className="link-icon" size={20} />
+                <span className="link-text">Data Analyst Resume Builder</span>
+              </Link>
+              
+              {/* Link 2: Specific Role (AI/ML) */}
+              <Link href="/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" className="link-card">
+                <FiCpu className="link-icon" size={20} />
+                <span className="link-text">AI & ML Engineering Resume</span>
+              </Link>
+              
+              {/* Link 3: Interview Prep */}
+              <Link href="/interview-tips" className="link-card">
+                <FiUsers className="link-icon" size={20} />
+                <span className="link-text">Interview Tips & Guides</span>
+              </Link>
+              
+              {/* Link 4: Prompt Engineering Skill */}
+              <Link href="/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume" className="link-card">
+                <FiZap className="link-icon" size={20} />
+                <span className="link-text">List Prompt Engineering Skill</span>
+              </Link>
+              
+              {/* Link 5: General Guide */}
+              <Link href="/how-to-write-a-resume" className="link-card">
+                <FiBookOpen className="link-icon" size={20} />
+                <span className="link-text">Complete Resume Writing Guide</span>
+              </Link>
             </div>
           </div>
         </section>

@@ -1786,6 +1786,51 @@ const ResumeGuide = ({
         </div>
       </section>
 
+      {/* NEW SECTION: 5 Randomly Selected Links from JSON for Internal Linking Boost */}
+      <section className="section" style={{background: '#f9fafb', borderTop: '1px solid var(--border)'}} aria-labelledby="expand-toolkit-heading">
+        <div className="container" style={{maxWidth: '100%', padding: 0}}>
+          <h2 id="expand-toolkit-heading" className="section-title" style={{textAlign: 'left', marginBottom: '24px'}}>Expand Your Career Toolkit</h2>
+          <div className="grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px'}}>
+            
+            {/* Link 1: No Experience Resume - Highly Relevant for Freshers */}
+            <Link href="/how-to-create-a-resume-with-no-experience" className="card">
+              <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Resume with No Experience</h3>
+              <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Perfect for freshers: How to highlight potential over history.</p>
+              <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Learn How <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+            </Link>
+
+            {/* Link 2: Interview Tips - Next Step After Resume */}
+            <Link href="/interview-tips" className="card">
+              <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Interview Preparation Tips</h3>
+              <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Ace your next interview with proven strategies and common questions.</p>
+              <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Get Tips <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+            </Link>
+
+            {/* Link 3: Jobs Boards - Where to Apply */}
+            <Link href="/jobs-boards" className="card">
+              <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Top Job Boards for 2026</h3>
+              <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Discover the best platforms to find entry-level and fresher roles.</p>
+              <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Browse Jobs <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+            </Link>
+
+            {/* Link 4: Cover Letter Guides - Essential Companion */}
+            <Link href="/cover-letter-guides" className="card">
+              <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Cover Letter Guides</h3>
+              <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Learn how to write compelling cover letters that get noticed.</p>
+              <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Read Guides <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+            </Link>
+
+            {/* Link 5: How to Beat ATS - Critical for Freshers */}
+            <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card">
+              <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Beat the ATS Screening</h3>
+              <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Optimize your application for online government and corporate portals.</p>
+              <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Learn More <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+            </Link>
+
+          </div>
+        </div>
+      </section>
+
       {/* Author Bio */}
       <section style={{padding: '2rem 0'}}>
         <div className="container">

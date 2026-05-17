@@ -559,6 +559,58 @@ text-align: center;
 .mt-4 {
 margin-top: 24px;
 }
+
+/* Related Resources Section Styles */
+.related-resources-section {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+.resource-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: left;
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--primary);
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+.resource-icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.resource-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.resource-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+.resource-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
+
 /* Mobile improvements */
 @media (max-width: 480px) {
   button, 
@@ -749,6 +801,40 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
     star: "⭐",
     globe: "🌍"
   };
+
+  // Selected Internal Links for SEO/GEO Boost
+  const relatedResources = [
+    {
+      href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
+      title: "AI & ML Engineering Resume Builder",
+      desc: "Specialized template for LLM Engineers and Data Scientists transitioning into AI roles.",
+      icon: "🤖"
+    },
+    {
+      href: "/software-engineer-resume-example-and-writing-guide",
+      title: "Software Engineer Resume Guide",
+      desc: "Optimized formats for Full Stack, Backend, and Mobile developers.",
+      icon: "💻"
+    },
+    {
+      href: "/how-to-tailor-your-resume-for-any-usa-job-posting",
+      title: "Tailor Resume for USA Jobs",
+      desc: "Essential guide for international applicants targeting the US market.",
+      icon: "🇺🇸"
+    },
+    {
+      href: "/free-ats-resume-checker",
+      title: "Free ATS Resume Checker",
+      desc: "Instantly scan your international resume for compatibility errors.",
+      icon: "🔍"
+    },
+    {
+      href: "/resume-tips-for-remote-jobs-in-the-usa",
+      title: "Remote Job Resume Tips",
+      desc: "How to highlight remote work skills for global opportunities.",
+      icon: "🏠"
+    }
+  ];
 
   const stats = [
     {
@@ -1637,6 +1723,26 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
             </p>
           </div>
         </section>
+
+        {/* RELATED RESOURCES SECTION - NEW INTERNAL LINKING BLOCK */}
+        <section className="related-resources-section" aria-labelledby="resources-heading">
+          <div className="container">
+            <h2 id="resources-heading" className="section-title">Recommended Resources for Your Career</h2>
+            <div className="card-grid">
+              {relatedResources.map((resource, index) => (
+                <Link key={index} href={resource.href} className="resource-card">
+                  <span className="resource-icon" role="img" aria-label="icon">{resource.icon}</span>
+                  <h3 className="resource-title">{resource.title}</h3>
+                  <p className="resource-desc">{resource.desc}</p>
+                  <span className="resource-link">
+                    Read Guide {icons.arrowRight}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );

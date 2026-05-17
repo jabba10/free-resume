@@ -1153,6 +1153,30 @@ const ResumeBuilderPage = ({ currentYear, lastUpdated, buildTimestamp }) => {
             </div>
           </section>
 
+          {/* Randomly Selected Internal Links for SEO/GEO Boost */}
+          <section className="section">
+            <div className="card">
+              <h2 className="section-title">Explore More Career Tools</h2>
+              <div className="internal-links" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                <Link href="/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder" className="internal-link">
+                  AI & ML Engineering Resume Builder
+                </Link>
+                <Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="internal-link">
+                  Prompt Engineering Guide 2026
+                </Link>
+                <Link href="/ats-friendly-data-and-cybersecurity-resume-builder" className="internal-link">
+                  Data & Cybersecurity Resume Builder
+                </Link>
+                <Link href="/software-engineer-resume-example-and-writing-guide" className="internal-link">
+                  Software Engineer Resume Example
+                </Link>
+                <Link href="/free-ats-resume-checker" className="internal-link">
+                  Free ATS Resume Checker
+                </Link>
+              </div>
+            </div>
+          </section>
+
           {/* Hidden metadata for crawlers */}
           <div style={{ display: 'none' }}>
             <span itemProp="last-updated">{currentDate}</span>

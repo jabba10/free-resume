@@ -35,7 +35,9 @@ import {
   FiZap,
   FiGlobe,
   FiCoffee,
-  FiActivity
+  FiActivity,
+  FiPenTool,
+  FiLayout
 } from 'react-icons/fi';
 import { 
   FaBuilding, 
@@ -822,6 +824,43 @@ const criticalCSS = `
     width: 100%;
     max-width: 1280px;
   }
+
+  /* New styles for the bottom link section */
+  .related-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .related-link-card {
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--primary);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .related-link-card:hover {
+    border-color: var(--primary);
+    background: #f9fafb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .related-link-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .related-link-desc {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
 `;
 
 const ResumeTemplates = ({ 
@@ -845,9 +884,50 @@ const ResumeTemplates = ({
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Selected Links for Internal Linking (SEO/GEO Boost)
+  // Randomly selected from JSON but curated for relevance to Design/Entry Level/Specific Roles
+  // Distinct from the top 4 requested links
+  const relatedLinks = [
+    {
+      href: "/modern-resume-design-2026",
+      title: "Modern Resume Design Trends 2026",
+      desc: "Explore contemporary layouts that balance visual appeal with ATS compatibility for creative and tech roles."
+    },
+    {
+      href: "/how-to-create-a-resume-with-no-experience",
+      title: "Resume Guide for No Experience",
+      desc: "Step-by-step instructions for students and career changers to build a strong resume without work history."
+    },
+    {
+      href: "/ats-friendly-data-analyst-resume-builder",
+      title: "Data Analyst Resume Builder",
+      desc: "Specialized templates highlighting SQL, Python, and visualization skills for data professionals."
+    },
+    {
+      href: "/ats-friendly-project-manager-resume-builder",
+      title: "Project Manager Resume Templates",
+      desc: "Showcase your PMP certification and leadership achievements with these targeted layouts."
+    },
+    {
+      href: "/functional-resume-templates",
+      title: "Functional Resume Templates",
+      desc: "Skill-based formats ideal for career pivots or hiding employment gaps while highlighting capabilities."
+    }
+  ];
+
   // Template categories data with ALL industry-specific links
+  // REORDERED: The 4 requested templates are now at the top (indices 0-3)
   const templateCategories = [
-    // Healthcare Industry Templates (11 links)
+    // 1. REQUESTED FIRST
+    {
+      title: 'ATS-Friendly Free Resume Templates',
+      description: 'Universal free resume templates suitable for all industries and career levels.',
+      icon: <FiFileText />,
+      link: '/free-resume-builder',
+      features: ['All Industries', 'Free Templates', 'Universal Design'],
+      color: '#000000'
+    },
+    // 2. REQUESTED SECOND
     {
       title: 'ATS-Friendly Medical Resume Templates',
       description: 'Healthcare-specific resume templates optimized for medical ATS systems. Designed for doctors, medical assistants, and healthcare administrators.',
@@ -856,6 +936,7 @@ const ResumeTemplates = ({
       features: ['Doctor Resume', 'Medical Assistant', 'Healthcare Admin'],
       color: '#000000'
     },
+    // 3. REQUESTED THIRD
     {
       title: 'ATS-Friendly Nursing Resume Templates',
       description: 'Nursing resume templates specifically designed for RNs, LPNs, nurse practitioners, and nursing students.',
@@ -864,6 +945,7 @@ const ResumeTemplates = ({
       features: ['Registered Nurse', 'Nurse Practitioner', 'Nursing Student'],
       color: '#000000'
     },
+    // 4. REQUESTED LAST
     {
       title: 'ATS-Friendly Nurse Practitioner Resume Templates',
       description: 'Advanced practice nursing resume templates for NPs, PAs, and specialized nursing roles.',
@@ -872,6 +954,8 @@ const ResumeTemplates = ({
       features: ['Nurse Practitioner', 'Physician Assistant', 'Specialized Nursing'],
       color: '#000000'
     },
+
+    // Remaining Templates (Original Order Preserved below)
     {
       title: 'ATS-Friendly Veterinary Resume Templates',
       description: 'Veterinary and animal healthcare resume templates for veterinarians, vet techs, and animal care professionals.',
@@ -1218,14 +1302,6 @@ const ResumeTemplates = ({
       icon: <FaLeaf />,
       link: '/ats-friendly-sustainability-and-green-industries-resume-builder',
       features: ['Sustainability', 'Green Energy', 'Environmental'],
-      color: '#000000'
-    },
-    {
-      title: 'ATS-Friendly Free Resume Templates',
-      description: 'Universal free resume templates suitable for all industries and career levels.',
-      icon: <FiFileText />,
-      link: '/free-resume-builder',
-      features: ['All Industries', 'Free Templates', 'Universal Design'],
       color: '#000000'
     }
   ];
@@ -1714,6 +1790,27 @@ const ResumeTemplates = ({
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* RELATED INTERNAL LINKS SECTION - SEO & GEO BOOST */}
+        <section className="section" style={{ paddingTop: '20px', background: '#f9fafb' }}>
+          <div className="container">
+            <div className="card" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
+              <h2 className="section-title">More Specialized Resume Resources</h2>
+              <p className="section-subtitle">
+                Explore additional guides and templates tailored to specific career needs and modern design trends.
+              </p>
+              
+              <div className="related-links-grid">
+                {relatedLinks.map((link, index) => (
+                  <Link href={link.href} key={index} className="related-link-card">
+                    <span className="related-link-title">{link.title}</span>
+                    <span className="related-link-desc">{link.desc}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>

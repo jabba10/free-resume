@@ -1,6 +1,7 @@
 // pages/resume-for-private-job.jsx
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link'; // Added this import to fix the error
 
 // ===== INLINE CRITICAL CSS - Optimized for speed =====
 const criticalCSS = `
@@ -1539,6 +1540,30 @@ const ResumeForPrivateJobPage = ({ generatedAt, buildTimestamp }) => {
               <p style={{ marginTop: '16px', color: '#6b7280', fontSize: '0.9rem' }}>
                 ✓ No sign-up required • Free forever • {data.stats.privateTemplates}+ templates • {data.stats.successRate} success rate
               </p>
+            </div>
+          </section>
+
+          {/* Randomly Selected Internal Links for SEO/GEO Boost */}
+          <section className="section">
+            <div className="card">
+              <h2 className="sectionHeading">Explore More Career Resources</h2>
+              <div className="internal-links" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="internal-link">
+                  Pass AI Resume Screen 2026
+                </Link>
+                <Link href="/how-to-optimize-your-resume-for-linkedin-recruiters" className="internal-link">
+                  Optimize for LinkedIn Recruiters
+                </Link>
+                <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="internal-link">
+                  In-Demand Resume Keywords
+                </Link>
+                <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="internal-link">
+                  Impressive Bullet Point Guide
+                </Link>
+                <Link href="/free-resume-keyword-matcher" className="internal-link">
+                  Free Keyword Matcher Tool
+                </Link>
+              </div>
             </div>
           </section>
 

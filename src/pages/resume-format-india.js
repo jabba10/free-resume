@@ -1338,6 +1338,35 @@ const ResumeFormatIndia = ({ currentYear, lastYear, formattedDate, generatedAt, 
           </div>
         </section>
 
+        {/* Randomly Selected Internal Links for SEO/GEO Boost */}
+        <section className="section">
+          <div className="container">
+            <h2 className="section-title">Explore More Career Resources</h2>
+            <div className="internal-links" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+              <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="link-card">
+                <h3>Pass AI Resume Screen 2026</h3>
+                <p>Beat modern ATS algorithms</p>
+              </Link>
+              <Link href="/how-to-optimize-your-resume-for-linkedin-recruiters" className="link-card">
+                <h3>Optimize for LinkedIn</h3>
+                <p>Get noticed by recruiters</p>
+              </Link>
+              <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="link-card">
+                <h3>In-Demand Keywords</h3>
+                <p>Top keywords for 2026</p>
+              </Link>
+              <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="link-card">
+                <h3>Impressive Bullet Points</h3>
+                <p>Write impactful achievements</p>
+              </Link>
+              <Link href="/free-resume-keyword-matcher" className="link-card">
+                <h3>Free Keyword Matcher</h3>
+                <p>Check your resume match</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA Section */}
         <section className="cta-section" aria-labelledby="cta-heading">
           <div className="container">

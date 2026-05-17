@@ -843,6 +843,53 @@ padding-bottom: 2px;
 .toc-list a:hover {
 border-bottom-color: var(--primary);
 }
+
+/* NEW CSS FOR FOOTER LINKS SECTION */
+.footer-links-section {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  margin-top: 40px;
+}
+.footer-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.footer-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--background);
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.footer-link-item:hover {
+  border-color: var(--primary);
+  transform: translateX(4px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.footer-link-arrow {
+  color: var(--text-lighter);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+@media (max-width: 480px) {
+  .footer-link-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-link-item {
+    width: 100%;
+  }
+}
+
 /* Mobile improvements */
 @media (max-width: 480px) {
   button, 
@@ -981,6 +1028,7 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
     }
   ];
 
+  // Existing internal links
   const internalLinks = [
     {
       title: "Resume Templates 2026",
@@ -1022,6 +1070,36 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
       title: "ChatGPT Resume Bullets Guide",
       url: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026",
       description: "Improve resume bullets with ChatGPT"
+    }
+  ];
+
+  // NEW: Randomly selected links from JSON for footer SEO boosting
+  // Selected 5 unique links not present in internalLinks above
+  const footerSeoLinks = [
+    {
+      title: "Resume Formatting Guide",
+      url: "/resume-formatting-guide",
+      description: "Perfect layout rules"
+    },
+    {
+      title: "No Experience Resume",
+      url: "/how-to-create-a-resume-with-no-experience",
+      description: "Entry-level strategies"
+    },
+    {
+      title: "Chronological Example",
+      url: "/chronological-resume-example",
+      description: "Standard format example"
+    },
+    {
+      title: "One Page Template",
+      url: "/one-page-resume-template",
+      description: "Concise 1-page design"
+    },
+    {
+      title: "Best Fonts for USA Resumes",
+      url: "/best-fonts-and-designs-for-usa-resumes",
+      description: "Typography guide"
     }
   ];
 
@@ -1834,6 +1912,21 @@ export default function SimpleResumeTemplate({ seoData, buildTimestamp }) {
             <p style={{ marginTop: '10px', fontSize: '0.8rem', color: 'var(--text-light)' }}>
               Guide updated: {displayDate}
             </p>
+          </div>
+        </section>
+
+        {/* NEW: Responsive Footer SEO Links Section */}
+        <section className="footer-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', fontWeight: '600' }}>Explore More Resume Guides</h3>
+            <div className="footer-link-grid">
+              {footerSeoLinks.map((link, index) => (
+                <Link key={index} href={link.url} className="footer-link-item">
+                  <span>{link.title}</span>
+                  <span className="footer-link-arrow">{icons.chevronRight}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 

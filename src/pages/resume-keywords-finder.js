@@ -1684,6 +1684,55 @@ export default function ResumeKeywordsFinder({ seoData, buildTimestamp }) {
           </div>
         </section>
 
+        {/* Randomly Selected Internal Links for SEO/GEO Boost */}
+        <section className="section">
+          <div className="container">
+            <h2 className="section-title">Explore More Career Resources</h2>
+            <div className="internal-links" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+              <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="internal-link-card">
+                <div className="link-icon"><FiShield /></div>
+                <div className="link-content">
+                  <h3>Pass AI Resume Screen 2026</h3>
+                  <p>Beat modern ATS algorithms</p>
+                </div>
+                <FiArrowRight className="link-arrow" />
+              </Link>
+              <Link href="/how-to-optimize-your-resume-for-linkedin-recruiters" className="internal-link-card">
+                <div className="link-icon"><FiUser /></div>
+                <div className="link-content">
+                  <h3>Optimize for LinkedIn</h3>
+                  <p>Get noticed by recruiters</p>
+                </div>
+                <FiArrowRight className="link-arrow" />
+              </Link>
+              <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="internal-link-card">
+                <div className="link-icon"><FiSearch /></div>
+                <div className="link-content">
+                  <h3>In-Demand Keywords</h3>
+                  <p>Top keywords for 2026</p>
+                </div>
+                <FiArrowRight className="link-arrow" />
+              </Link>
+              <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="internal-link-card">
+                <div className="link-icon"><FiEdit /></div>
+                <div className="link-content">
+                  <h3>Impressive Bullet Points</h3>
+                  <p>Write impactful achievements</p>
+                </div>
+                <FiArrowRight className="link-arrow" />
+              </Link>
+              <Link href="/free-resume-keyword-matcher" className="internal-link-card">
+                <div className="link-icon"><FiTarget /></div>
+                <div className="link-content">
+                  <h3>Free Keyword Matcher</h3>
+                  <p>Check your resume match</p>
+                </div>
+                <FiArrowRight className="link-arrow" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section className="cta-section" aria-labelledby="cta-heading">
           <div className="container">
             <h2 id="cta-heading">Ready to Optimize Your Resume with the Right Keywords?</h2>

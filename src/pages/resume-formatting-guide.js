@@ -653,6 +653,44 @@ td {
   align-items: center;
   gap: 8px;
 }
+
+/* New styles for the bottom link section */
+.related-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.related-link-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.related-link-card:hover {
+  border-color: var(--primary);
+  background: #f9fafb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.related-link-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: block;
+}
+.related-link-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
 /* Mobile touch improvements */
 @media (max-width: 480px) {
   button, 
@@ -699,6 +737,37 @@ const ResumeFormattingGuide = ({ seoData }) => {
 
   // Updated canonical URL - NO www
   const canonicalUrl = "https://professionalresumefree.com/resume-formatting-guide";
+
+  // Selected Links for Internal Linking (SEO/GEO Boost)
+  // Randomly selected from JSON but curated for relevance to Formatting/General Job Search
+  // Distinct from the previous "Student/India" selection
+  const relatedLinks = [
+    {
+      href: "/free-ats-resume-checker",
+      title: "Free ATS Resume Checker",
+      desc: "Scan your formatted resume to ensure it passes automated screening systems before you apply."
+    },
+    {
+      href: "/how-to-write-a-resume",
+      title: "How to Write a Resume",
+      desc: "A comprehensive step-by-step guide to crafting compelling content for every section of your CV."
+    },
+    {
+      href: "/interview-tips",
+      title: "Top Interview Tips for 2026",
+      desc: "Once your resume lands the interview, use these proven strategies to ace your next job conversation."
+    },
+    {
+      href: "/cover-letter-guides",
+      title: "Professional Cover Letter Guides",
+      desc: "Complement your perfectly formatted resume with a persuasive cover letter that tells your story."
+    },
+    {
+      href: "/resume-trends-in-the-usa-for-2026",
+      title: "2026 Resume Trends & Insights",
+      desc: "Stay ahead of the curve with the latest design trends and recruiter expectations for the current year."
+    }
+  ];
 
   const formattingSections = [
     {
@@ -1497,6 +1566,27 @@ SKILLS
                   <p style={{ color: '#4b5563' }}>{faq.answer}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* RELATED INTERNAL LINKS SECTION - SEO & GEO BOOST */}
+        <section className="section" style={{ paddingTop: '20px' }}>
+          <div className="container">
+            <div className="card">
+              <h2 className="section-title">Essential Career Resources & Tools</h2>
+              <p className="section-subtitle">
+                Enhance your job search with these specialized guides and tools tailored for the 2026 hiring landscape.
+              </p>
+              
+              <div className="related-links-grid">
+                {relatedLinks.map((link, index) => (
+                  <Link href={link.href} key={index} className="related-link-card">
+                    <span className="related-link-title">{link.title}</span>
+                    <span className="related-link-desc">{link.desc}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>

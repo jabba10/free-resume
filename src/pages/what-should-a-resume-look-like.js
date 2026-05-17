@@ -18,7 +18,10 @@ import {
   FiLayout,
   FiGrid,
   FiAlignLeft,
-  FiEye
+  FiEye,
+  FiZap,
+  FiList,
+  FiBriefcase
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -653,6 +656,54 @@ td {
   align-items: center;
   gap: 8px;
 }
+
+/* Internal Linking Footer Styles */
+.internal-linking-footer {
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  margin-top: 40px;
+}
+.link-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .link-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .link-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.link-card {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.link-card:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.link-icon {
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.link-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
 /* Mobile touch improvements */
 @media (max-width: 480px) {
   button, 
@@ -1536,6 +1587,44 @@ SKILLS
                   <FiCheck /> Visual Balance Guaranteed
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: Internal Linking Footer for SEO/GEO Boost */}
+        <section className="internal-linking-footer" aria-label="Related Career Resources">
+          <div className="container">
+            <h3 style={{ textAlign: 'center', marginBottom: '24px', fontSize: '1.2rem', fontWeight: '600' }}>Explore More Career Resources</h3>
+            <div className="link-grid">
+              {/* Link 1: Basic Format */}
+              <Link href="/basic-resume-format" className="link-card">
+                <FiLayout className="link-icon" size={20} />
+                <span className="link-text">Basic Resume Format Guide</span>
+              </Link>
+              
+              {/* Link 2: Chronological Example */}
+              <Link href="/chronological-resume-example" className="link-card">
+                <FiList className="link-icon" size={20} />
+                <span className="link-text">Chronological Resume Example</span>
+              </Link>
+              
+              {/* Link 3: ATS Optimization */}
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="link-card">
+                <FiZap className="link-icon" size={20} />
+                <span className="link-text">Beat the ATS Optimization Tips</span>
+              </Link>
+              
+              {/* Link 4: Work Experience */}
+              <Link href="/how-to-describe-work-experience-on-resume" className="link-card">
+                <FiBriefcase className="link-icon" size={20} />
+                <span className="link-text">Describe Work Experience Guide</span>
+              </Link>
+              
+              {/* Link 5: Skills Section */}
+              <Link href="/resume-skills-section" className="link-card">
+                <FiTarget className="link-icon" size={20} />
+                <span className="link-text">Resume Skills Section Guide</span>
+              </Link>
             </div>
           </div>
         </section>

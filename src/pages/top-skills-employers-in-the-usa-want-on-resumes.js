@@ -1024,6 +1024,41 @@ export async function getStaticProps() {
     }
   ];
 
+  // NEW LINKS SELECTED FROM JSON FOR INTERNAL LINKING BOOST
+  // Selected to avoid duplication with existing hero/conclusion links
+  const additionalInternalLinks = [
+    {
+      title: "How to Write Bullet Points That Impress Recruiters",
+      description: "Learn the CAR method to turn your skills into measurable achievements that hiring managers love.",
+      href: "/how-to-write-bullet-points-that-impress-usa-recruiters",
+      cta: "Master Bullet Points"
+    },
+    {
+      title: "Resume Trends in the USA for 2026",
+      description: "Stay ahead of the curve with the latest formatting and content trends dominating the US job market.",
+      href: "/resume-trends-in-the-usa-for-2026",
+      cta: "View 2026 Trends"
+    },
+    {
+      title: "Best Fonts and Designs for USA Resumes",
+      description: "Ensure your resume looks professional and passes ATS parsing with our typography guide.",
+      href: "/best-fonts-and-designs-for-usa-resumes",
+      cta: "See Font Guide"
+    },
+    {
+      title: "How to Tailor Your Resume for Any Job",
+      description: "Step-by-step guide to customizing your skills section for specific job postings efficiently.",
+      href: "/how-to-tailor-your-resume-for-any-usa-job-posting",
+      cta: "Learn Tailoring"
+    },
+    {
+      title: "Resume Mistakes Americans Make",
+      description: "Avoid common pitfalls that cause immediate rejection from US-based hiring managers.",
+      href: "/resume-mistakes-americans-make-and-how-to-fix-them",
+      cta: "Fix Common Errors"
+    }
+  ];
+
   return {
     props: {
       buildTimestamp,
@@ -1038,7 +1073,8 @@ export async function getStaticProps() {
       faqItems,
       testimonials,
       reviewDates,
-      faqDates
+      faqDates,
+      additionalInternalLinks
     }
   };
 }
@@ -1056,7 +1092,8 @@ function TopSkillsPage({
   faqItems,
   testimonials,
   reviewDates,
-  faqDates 
+  faqDates,
+  additionalInternalLinks 
 }) {
   return (
     <>
@@ -1628,6 +1665,30 @@ function TopSkillsPage({
             </div>
           </div>
         </section>
+
+        {/* ===== NEWLY ADDED LINKS SECTION (BOTTOM OF PAGE) ===== */}
+        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
+          <div className="container">
+            <h2 className="section-title">Deepen Your Research</h2>
+            <p className="section-subtitle">
+              Explore these specialized guides to further refine your resume strategy and maximize your interview potential.
+            </p>
+            <div className="grid" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', maxWidth: '1200px'}}>
+              {additionalInternalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="card" style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                  <div>
+                    <h3 style={{fontSize: '1.1rem', marginBottom: '10px', fontWeight: '600'}}>{link.title}</h3>
+                    <p style={{fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5'}}>{link.description}</p>
+                  </div>
+                  <div style={{marginTop: '16px', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '6px'}}>
+                    {link.cta} <FiArrowRight size={16} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );

@@ -28,7 +28,8 @@ import {
   FiMail,
   FiPhone,
   FiMapPin,
-  FiLinkedin
+  FiLinkedin,
+  FiExternalLink // Added for visual cue on resources
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -947,6 +948,36 @@ export default function Resume10thPassPage({ seoData, buildTimestamp }) {
     }
   ];
 
+  // NEW RANDOMLY SELECTED LINKS FROM JSON FOR BOTTOM SECTION
+  // Selected to avoid duplicates and target high-value SEO/GEO keywords
+  const recommendedResources = [
+    {
+      title: "How to Beat the ATS Optimization Tips",
+      url: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software",
+      description: "Master modern hiring software algorithms."
+    },
+    {
+      title: "Cover Letter Guides & Examples",
+      url: "/cover-letter-guides",
+      description: "Complete your application package."
+    },
+    {
+      title: "Top Interview Tips for 2026",
+      url: "/interview-tips",
+      description: "Prepare for the next step after applying."
+    },
+    {
+      title: "One-Page Resume Template",
+      url: "/one-page-resume-template",
+      description: "Perfect format for entry-level candidates."
+    },
+    {
+      title: "Functional Resume Templates",
+      url: "/functional-resume-templates",
+      description: "Highlight skills over limited experience."
+    }
+  ];
+
   // FAQ data
   const faqs = [
     {
@@ -1688,6 +1719,28 @@ export default function Resume10thPassPage({ seoData, buildTimestamp }) {
                 <li>Start applying to 5-10 relevant positions daily</li>
                 <li>Consider additional certifications to boost your profile</li>
               </ol>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW RECOMMENDED RESOURCES SECTION - Bottom of Screen */}
+        <section className="section" style={{background: '#f9fafb', borderTop: '1px solid var(--border)'}} aria-labelledby="recommended-resources-heading">
+          <div className="container">
+            <h2 id="recommended-resources-heading" className="section-title">Recommended Resources</h2>
+            <p className="section-subtitle">
+              Expand your job search toolkit with these essential guides and templates.
+            </p>
+            
+            <div className="internal-links-grid">
+              {recommendedResources.map((resource, index) => (
+                <Link key={index} href={resource.url} className="internal-link-card">
+                  <h3 className="internal-link-title">{resource.title}</h3>
+                  <p className="internal-link-desc">{resource.description}</p>
+                  <span className="internal-link-arrow">
+                    Read More <FiArrowRight style={{marginLeft: '4px', fontSize: '0.8rem'}} />
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

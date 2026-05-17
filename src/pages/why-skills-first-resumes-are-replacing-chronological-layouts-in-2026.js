@@ -974,6 +974,41 @@ export async function getStaticProps() {
     }
   ];
 
+  // NEW LINKS SELECTED FROM JSON FOR INTERNAL LINKING BOOST
+  // Selected to avoid duplication with existing hero/conclusion links
+  const additionalInternalLinks = [
+    {
+      title: "How to Describe Work Experience Effectively",
+      description: "Learn how to frame your chronological history to support your skills-first narrative without redundancy.",
+      href: "/how-to-describe-work-experience-on-resume",
+      cta: "Read Guide"
+    },
+    {
+      title: "Best Resume Examples for Career Changers",
+      description: "See real-world examples of professionals who successfully pivoted industries using skills-based layouts.",
+      href: "/best-resume-examples-for-career-changers-in-the-usa",
+      cta: "View Examples"
+    },
+    {
+      title: "Resume Tips for USA College Students",
+      description: "Why students benefit most from skills-first formats when they lack extensive work history.",
+      href: "/resume-tips-for-usa-college-students-and-graduates",
+      cta: "Student Guide"
+    },
+    {
+      title: "Most Popular Resume Layouts for Tech Jobs",
+      description: "Data-driven breakdown of which formats yield the highest interview rates in the technology sector.",
+      href: "/most-popular-resume-layouts-for-usa-tech-jobs",
+      cta: "Tech Insights"
+    },
+    {
+      title: "Free Resume Formatting Checker",
+      description: "Ensure your new skills-first layout parses correctly in all major ATS systems.",
+      href: "/free-resume-formatting-checker",
+      cta: "Check Format"
+    }
+  ];
+
   return {
     props: {
       buildTimestamp,
@@ -986,7 +1021,8 @@ export async function getStaticProps() {
       peopleAlsoAsk,
       conversationalExplanations,
       faqItems,
-      testimonials
+      testimonials,
+      additionalInternalLinks
     }
   };
 }
@@ -1002,7 +1038,8 @@ function SkillsFirstResumePage({
   peopleAlsoAsk,
   conversationalExplanations,
   faqItems,
-  testimonials
+  testimonials,
+  additionalInternalLinks
 }) {
   return (
     <>
@@ -1566,6 +1603,30 @@ function SkillsFirstResumePage({
             </div>
           </div>
         </section>
+
+        {/* ===== NEWLY ADDED LINKS SECTION (BOTTOM OF PAGE) ===== */}
+        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
+          <div className="container">
+            <h2 className="section-title">Deepen Your Research</h2>
+            <p className="section-subtitle">
+              Explore these specialized guides to further refine your resume strategy and maximize your interview potential.
+            </p>
+            <div className="grid" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', maxWidth: '1200px'}}>
+              {additionalInternalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="card" style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                  <div>
+                    <h3 style={{fontSize: '1.1rem', marginBottom: '10px', fontWeight: '600'}}>{link.title}</h3>
+                    <p style={{fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5'}}>{link.description}</p>
+                  </div>
+                  <div style={{marginTop: '16px', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '6px'}}>
+                    {link.cta} <FiArrowRight size={16} />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
     </>
   );

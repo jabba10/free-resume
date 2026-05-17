@@ -883,6 +883,53 @@ td {
   color: var(--text-light);
   font-size: 0.9rem;
 }
+
+/* NEW CSS FOR FOOTER LINKS SECTION */
+.footer-links-section {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  margin-top: 40px;
+}
+.footer-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.footer-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--background);
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.footer-link-item:hover {
+  border-color: var(--primary);
+  transform: translateX(4px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.footer-link-arrow {
+  color: var(--text-lighter);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+@media (max-width: 480px) {
+  .footer-link-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-link-item {
+    width: 100%;
+  }
+}
+
 /* Mobile touch improvements */
 @media (max-width: 480px) {
   button, 
@@ -998,6 +1045,36 @@ export default function WhatToPutOnResume({ seoData }) {
     {
       question: "How do I decide what to leave off my resume?",
       answer: "Remove: 1) Anything older than 10-15 years unless highly relevant, 2) Personal information (age, marital status), 3) High school details if you have a college degree, 4) Generic skills everyone claims, 5) Short-term jobs unless they fill gaps or show progression, 6) Anything that doesn't support your target position."
+    }
+  ];
+
+  // NEW: Randomly selected links from JSON for footer SEO boosting
+  // Selected 5 unique links not present in the existing internal links section
+  const footerSeoLinks = [
+    {
+      title: "Resume Formatting Guide",
+      url: "/resume-formatting-guide",
+      description: "Perfect layout rules"
+    },
+    {
+      title: "How to Write a Resume",
+      url: "/how-to-write-a-resume",
+      description: "Complete writing guide"
+    },
+    {
+      title: "Resume Education Section",
+      url: "/resume-education-section",
+      description: "Highlight academic achievements"
+    },
+    {
+      title: "Resume Skills Section",
+      url: "/resume-skills-section",
+      description: "Showcase key competencies"
+    },
+    {
+      title: "Basic Resume Format",
+      url: "/basic-resume-format",
+      description: "Standard structure explained"
     }
   ];
 
@@ -2036,6 +2113,21 @@ export default function WhatToPutOnResume({ seoData }) {
             </div>
           </section>
         </div>
+
+        {/* NEW: Responsive Footer SEO Links Section */}
+        <section className="footer-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', fontWeight: '600' }}>Explore More Career Guides</h3>
+            <div className="footer-link-grid">
+              {footerSeoLinks.map((link, index) => (
+                <Link key={index} href={link.url} className="footer-link-item">
+                  <span>{link.title}</span>
+                  <span className="footer-link-arrow">›</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

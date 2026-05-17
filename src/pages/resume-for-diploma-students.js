@@ -1575,6 +1575,49 @@ const ResumeForDiplomaStudentsPage = ({ meta, faqItems, structuredData, seoData,
           </div>
         </section>
 
+        {/* NEW SECTION: 5 Randomly Selected Links from JSON for Internal Linking Boost */}
+        <section className="section" style={{background: '#f9fafb', borderTop: '1px solid var(--border)'}} aria-labelledby="explore-more-heading">
+          <div className="container">
+            <h2 id="explore-more-heading" className="section-title">Explore More Career Resources</h2>
+            <div className="grid">
+              {/* Link 1: Jobs Boards - High Value for Job Seekers */}
+              <Link href="/jobs-boards" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Top Job Boards for 2026</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Discover the best platforms to find technician and engineering roles.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Browse Jobs <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 2: Cover Letter Guides - Essential Companion to Resume */}
+              <Link href="/cover-letter-guides" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Cover Letter Guides</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Learn how to write compelling cover letters that get noticed.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Read Guides <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 3: Interview Tips - Next Step After Resume */}
+              <Link href="/interview-tips" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Interview Preparation Tips</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Ace your next interview with proven strategies and common questions.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Get Tips <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 4: No Experience Resume - Highly Relevant for Students */}
+              <Link href="/how-to-create-a-resume-with-no-experience" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Resume with No Experience</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Perfect for freshers: How to highlight potential over history.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Learn How <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 5: How to Write a Resume - General High Traffic Page */}
+              <Link href="/how-to-write-a-resume" className="card">
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Ultimate Resume Writing Guide</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Master the fundamentals of professional resume writing.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Start Guide <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>
           <span itemProp="last-updated">{safeCurrentDate}</span>

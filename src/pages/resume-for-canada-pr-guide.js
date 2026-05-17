@@ -557,6 +557,36 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
     ]
   };
 
+  // NEW RANDOMLY SELECTED LINKS FROM JSON FOR BOTTOM SECTION
+  // Selected to avoid duplicates and target high-value SEO/GEO keywords relevant to Canada PR
+  const recommendedResources = [
+    {
+      title: "How to Beat the ATS Optimization Tips",
+      url: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software",
+      description: "Ensure your resume passes automated screening systems used by Canadian employers."
+    },
+    {
+      title: "Cover Letter Guides & Examples",
+      url: "/cover-letter-guides",
+      description: "Complete your application package with a compelling cover letter."
+    },
+    {
+      title: "Top Interview Tips for 2026",
+      url: "/interview-tips",
+      description: "Prepare for behavioral interviews common in the Canadian job market."
+    },
+    {
+      title: "One-Page Resume Template",
+      url: "/one-page-resume-template",
+      description: "Concise format ideal for specific Canadian job applications."
+    },
+    {
+      title: "Functional Resume Templates",
+      url: "/functional-resume-templates",
+      description: "Highlight transferable skills effectively for career changers."
+    }
+  ];
+
   // ===== INLINE STYLES =====
   const styles = {
     // Main Content
@@ -1511,6 +1541,28 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
                   Explore Free Tools
                 </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== NEW RECOMMENDED RESOURCES SECTION - Bottom of Screen ===== */}
+        <section style={styles.section}>
+          <div className="card">
+            <h2 style={styles.sectionTitle}>Essential Career Resources</h2>
+            <p className="left-align" style={{marginBottom: '2rem'}}>
+              Enhance your job search strategy with these curated guides and tools, selected to complement your Canada PR application.
+            </p>
+            
+            <div className="grid">
+              {recommendedResources.map((resource, index) => (
+                <Link key={index} href={resource.url} className="card" style={{textAlign: 'left', textDecoration: 'none', color: 'inherit'}}>
+                  <h4 style={{fontSize: '1.1rem', marginBottom: '0.5rem'}}>{resource.title}</h4>
+                  <p style={{fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '1rem'}}>{resource.description}</p>
+                  <span style={{fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center'}}>
+                    Read Guide <span style={{marginLeft: '4px'}}>→</span>
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

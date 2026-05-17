@@ -732,6 +732,52 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
   gap: 20px;
   margin: 30px 0;
 }
+
+/* NEW CSS FOR FOOTER LINKS SECTION */
+.footer-links-section {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  margin-top: 40px;
+}
+.footer-link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.footer-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--background);
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.footer-link-item:hover {
+  border-color: var(--primary);
+  transform: translateX(4px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.footer-link-arrow {
+  color: var(--text-lighter);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+@media (max-width: 480px) {
+  .footer-link-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-link-item {
+    width: 100%;
+  }
+}
 `;
 
 export async function getStaticProps() {
@@ -887,6 +933,37 @@ function DeathOfObjectiveStatement({
   reviewDates,
   faqDates 
 }) {
+  
+  // NEW: Randomly selected links from JSON for footer SEO boosting
+  // Selected 5 unique links not present in the existing internal links section
+  const footerSeoLinks = [
+    {
+      title: "How to Write a Professional Summary",
+      url: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds",
+      description: "Hook recruiters fast"
+    },
+    {
+      title: "Resume Skills Section Guide",
+      url: "/resume-skills-section",
+      description: "Highlight key competencies"
+    },
+    {
+      title: "Bullet Point Generator",
+      url: "/free-resume-bullet-point-generator",
+      description: "Improve impact statements"
+    },
+    {
+      title: "Action Verb Recommender",
+      url: "/free-action-verb-recommender",
+      description: "Stronger vocabulary"
+    },
+    {
+      title: "Top USA Resume Skills",
+      url: "/top-skills-employers-in-the-usa-want-on-resumes",
+      description: "In-demand skills list"
+    }
+  ];
+
   return (
     <>
       <Head>
@@ -1481,6 +1558,21 @@ function DeathOfObjectiveStatement({
               <p className="helper-text">
                 AI-assisted research cited from 2026 hiring data. Always tailor your resume to the specific role.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: Responsive Footer SEO Links Section */}
+        <section className="footer-links-section">
+          <div className="container">
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', fontWeight: '600' }}>Explore More Career Guides</h3>
+            <div className="footer-link-grid">
+              {footerSeoLinks.map((link, index) => (
+                <Link key={index} href={link.url} className="footer-link-item">
+                  <span>{link.title}</span>
+                  <span className="footer-link-arrow"><FiChevronRight /></span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

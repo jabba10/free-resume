@@ -1150,7 +1150,7 @@ function HighTrafficResumeTemplates({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT WITH SINGLE CANONICAL REFERENCE */}
+        {/* FIXED: Structured data with proper Product schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1213,34 +1213,44 @@ function HighTrafficResumeTemplates({
                     }))
                   ]
                 },
+                // FIXED: Moved Product out of ItemList and made it a standalone entity
+                // with required offers, review, or aggregateRating
                 {
-                  "@type": "ItemList",
-                  "itemListElement": testimonials.map((testimonial, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": testimonial.name
-                      },
-                      "reviewBody": testimonial.quote,
-                      "datePublished": testimonial.date,
-                      "publisher": {
-                        "@type": "Organization",
-                        "name": "Professional Resume Free"
-                      },
-                      "itemReviewed": {
-                        "@type": "Product",
-                        "name": "High Traffic Resume Templates Guide",
-                        "description": "Data-driven guide to popular resume templates.",
-                        "url": canonicalUrl
-                      }
+                  "@type": "Product",
+                  "@id": `${canonicalUrl}#product`,
+                  "name": "High Traffic Resume Templates Guide",
+                  "description": "Data-driven guide to popular resume templates.",
+                  "url": canonicalUrl,
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "url": canonicalUrl
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "5",
+                    "reviewCount": testimonials.length.toString(),
+                    "bestRating": "5",
+                    "worstRating": "1"
+                  },
+                  "review": testimonials.map((testimonial) => ({
+                    "@type": "Review",
+                    "reviewRating": {
+                      "@type": "Rating",
+                      "ratingValue": "5",
+                      "bestRating": "5"
+                    },
+                    "author": {
+                      "@type": "Person",
+                      "name": testimonial.name
+                    },
+                    "reviewBody": testimonial.quote,
+                    "datePublished": testimonial.date,
+                    "publisher": {
+                      "@type": "Organization",
+                      "name": "Professional Resume Free"
                     }
                   }))
                 }
@@ -2102,6 +2112,5 @@ function HighTrafficResumeTemplates({
     </>
   );
 }
-
 
 export default HighTrafficResumeTemplates;

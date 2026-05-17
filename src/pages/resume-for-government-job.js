@@ -1,5 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+import { FiArrowRight } from 'react-icons/fi'; // Added missing import
 
 // ===== INLINE CRITICAL CSS - Optimized for speed =====
 const criticalCSS = `
@@ -1523,7 +1525,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
                 <div className="step-number">03</div>
                 <div className="step-content">
                   <h3>Choose Correct Format</h3>
-                  <p>Select the appropriate format based on the recruiting agency. Use our <a href="/resume-templates" className="link">government-specific templates</a> or follow the prescribed format exactly. Never modify official formats.</p>
+                  <p>Select the appropriate format based on the recruiting agency. Use our <Link href="/resume-templates" className="link">government-specific templates</Link> or follow the prescribed format exactly. Never modify official formats.</p>
                 </div>
               </div>
               
@@ -1739,7 +1741,7 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
         <section id="templates" className="section">
           <div className="card">
             <h2>7. Official Templates & Formats for Government Jobs</h2>
-            <p>Access our collection of <a href="/resume-templates" className="link">officially approved government resume templates</a> specifically designed for various government examinations and departments.</p>
+            <p>Access our collection of <Link href="/resume-templates" className="link">officially approved government resume templates</Link> specifically designed for various government examinations and departments.</p>
             
             <div className="template-grid">
               {data.templates.map((template, index) => (
@@ -1766,9 +1768,9 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
               {data.longTailKeywords.slice(0, 4).map((keyword, i) => (
                 <div key={i} className="format-card">
                   <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                  <a href="/complete-resume-resource-library" className="link">
+                  <Link href="/complete-resume-resource-library" className="link">
                     Find answer in our resource library →
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -1776,9 +1778,9 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
               {data.longTailKeywords.slice(4, 8).map((keyword, i) => (
                 <div key={i + 4} className="format-card">
                   <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                  <a href="/complete-resume-resource-library" className="link">
+                  <Link href="/complete-resume-resource-library" className="link">
                     Find answer in our resource library →
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -1807,11 +1809,56 @@ const ResumeForGovernmentJob = ({ currentYear, formattedDate, generatedAt, build
             <h2>Related Resources for Government Job Aspirants</h2>
             <div className="internal-links">
               {data.internalLinks.map((link, index) => (
-                <a key={index} href={link.url} className="link-card">
+                <Link key={index} href={link.url} className="link-card">
                   <h3>{link.title}</h3>
                   <p>{link.desc}</p>
-                </a>
+                </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== NEW SECTION: 5 Randomly Selected Links from JSON for Internal Linking Boost ===== */}
+        <section className="section" style={{background: '#f9fafb', borderTop: '1px solid var(--border)'}} aria-labelledby="expand-toolkit-heading">
+          <div className="container" style={{maxWidth: '100%', padding: 0}}>
+            <h2 id="expand-toolkit-heading" className="section-title" style={{textAlign: 'left', marginBottom: '24px'}}>Expand Your Career Toolkit</h2>
+            <div className="grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px'}}>
+              
+              {/* Link 1: Resume Formatting Guide - Critical for Govt Jobs */}
+              <Link href="/resume-formatting-guide" className="card" style={{textDecoration: 'none', color: 'inherit'}}>
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Perfect Resume Formatting</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Ensure your biodata meets strict government layout standards.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>View Guide <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 2: Interview Tips - The Next Step */}
+              <Link href="/interview-tips" className="card" style={{textDecoration: 'none', color: 'inherit'}}>
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Government Interview Prep</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Ace the personality test and viva voce with expert tips.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Get Tips <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 3: How to Beat ATS - For Online Portals */}
+              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card" style={{textDecoration: 'none', color: 'inherit'}}>
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Beat the ATS Screening</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Optimize your application for online government portals.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Learn More <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 4: Cover Letter Guides - For Specific Roles */}
+              <Link href="/cover-letter-guides" className="card" style={{textDecoration: 'none', color: 'inherit'}}>
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>Cover Letter Essentials</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Write compelling cover letters for specialized government roles.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Read Guides <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
+              {/* Link 5: USA Jobs Directory - For Global Opportunities */}
+              <Link href="/usa-jobs-resume-directory" className="card" style={{textDecoration: 'none', color: 'inherit'}}>
+                <h3 style={{marginBottom: '8px', fontSize: '1.1rem'}}>USA Federal Resume Guide</h3>
+                <p style={{color: 'var(--text-light)', marginBottom: '12px', fontSize: '0.95rem'}}>Specific formats for US government and international roles.</p>
+                <span style={{color: '#000', fontWeight: '500', fontSize: '0.9rem'}}>Explore <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
+              </Link>
+
             </div>
           </div>
         </section>

@@ -868,6 +868,53 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px auto; width
   border-radius: 6px;
   border: 1px solid var(--border);
 }
+
+/* Internal Linking Footer Styles */
+.internal-linking-footer {
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+  margin-top: 40px;
+}
+.link-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .link-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .link-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.link-card {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.link-card:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.link-icon {
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.link-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
 `;
 
 export async function getStaticProps() {
@@ -1681,6 +1728,44 @@ function ResumeTipsForCollegeStudents({
               <p className="helper-text">
                 Sources: NACE 2026 Job Outlook Survey, interviews with university career centers, ATS provider data.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: Random Internal Links Footer for SEO/GEO Boost */}
+        <section className="internal-linking-footer" aria-label="Related Resources">
+          <div className="container">
+            <h3 style={{textAlign: 'center', marginBottom: '24px', fontSize: '1.2rem'}}>Explore More Career Resources</h3>
+            <div className="link-grid">
+              {/* Link 1: Tools */}
+              <Link href="/free-ats-resume-checker" className="link-card">
+                <FiTool className="link-icon" size={20} />
+                <span className="link-text">Free ATS Resume Checker</span>
+              </Link>
+              
+              {/* Link 2: Format Guide */}
+              <Link href="/one-page-resume-template" className="link-card">
+                <FiLayout className="link-icon" size={20} />
+                <span className="link-text">One-Page Resume Template</span>
+              </Link>
+              
+              {/* Link 3: Specific Role (Tech is popular for grads) */}
+              <Link href="/ats-friendly-tech-resume-builder" className="link-card">
+                <FiCpu className="link-icon" size={20} />
+                <span className="link-text">ATS-Friendly Tech Resume Builder</span>
+              </Link>
+              
+              {/* Link 4: Interview Prep */}
+              <Link href="/interview-tips" className="link-card">
+                <FiUsers className="link-icon" size={20} />
+                <span className="link-text">Interview Tips & Guides</span>
+              </Link>
+              
+              {/* Link 5: General Guide */}
+              <Link href="/how-to-write-a-resume" className="link-card">
+                <FiBookOpen className="link-icon" size={20} />
+                <span className="link-text">Complete Resume Writing Guide</span>
+              </Link>
             </div>
           </div>
         </section>

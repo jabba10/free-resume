@@ -525,6 +525,44 @@ th {
 .skip-link:focus {
   top: 0;
 }
+
+/* New styles for the bottom link section */
+.related-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.related-link-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.related-link-card:hover {
+  border-color: var(--primary);
+  background: #f9fafb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.related-link-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: block;
+}
+.related-link-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
 @media (max-width: 768px) {
   button, 
   .btn-primary, 
@@ -845,6 +883,38 @@ function ResumeMistakesGuide({
   industryMistakes,
   quickFixChecklist
 }) {
+  
+  // Selected Links for Internal Linking (SEO/GEO Boost)
+  // Randomly selected from JSON but curated for relevance to Job Search & Advanced Optimization
+  // Distinct from previous selections
+  const relatedLinks = [
+    {
+      href: "/jobs-search-tips",
+      title: "Advanced Job Search Tips",
+      desc: "Master modern search techniques to find hidden opportunities and apply more strategically."
+    },
+    {
+      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
+      title: "How to Pass the AI Resume Screen",
+      desc: "Understand the 2026 ATS algorithms and learn how to optimize your content for AI screening."
+    },
+    {
+      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
+      title: "Software Engineer Resume Builder",
+      desc: "Specialized templates and examples designed specifically for tech roles and engineering jobs."
+    },
+    {
+      href: "/how-to-optimize-your-resume-for-linkedin-recruiters",
+      title: "Optimize for LinkedIn Recruiters",
+      desc: "Align your resume with your LinkedIn profile to maximize visibility to headhunters."
+    },
+    {
+      href: "/best-resume-examples-for-career-changers-in-the-usa",
+      title: "Resume Examples for Career Changers",
+      desc: "Strategic layouts and wording tips for pivoting industries while highlighting transferable skills."
+    }
+  ];
+
   return (
     <>
       <Head>
@@ -1297,6 +1367,27 @@ function ResumeMistakesGuide({
                   Explore All Tools →
                 </span>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* RELATED INTERNAL LINKS SECTION - SEO & GEO BOOST */}
+        <section className="section" style={{ paddingTop: '20px' }}>
+          <div className="container">
+            <div className="card">
+              <h2 className="section-title">Expand Your Career Toolkit</h2>
+              <p className="section-subtitle">
+                Deepen your job search strategy with these specialized guides and tools tailored for the 2026 hiring landscape.
+              </p>
+              
+              <div className="related-links-grid">
+                {relatedLinks.map((link, index) => (
+                  <Link href={link.href} key={index} className="related-link-card">
+                    <span className="related-link-title">{link.title}</span>
+                    <span className="related-link-desc">{link.desc}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>

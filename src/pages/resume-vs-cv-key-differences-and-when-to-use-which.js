@@ -920,11 +920,94 @@ const criticalCSS = `
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+
+  /* New styles for the bottom link section */
+  .related-links-section {
+    padding: clamp(40px, 8vw, 60px) 0;
+    background: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .related-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .related-link-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: #111111;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .related-link-card:hover {
+    border-color: #111111;
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .related-link-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    display: block;
+    color: #111111;
+  }
+  
+  .related-link-desc {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.5;
+  }
 `;
 
 const ResumeVsCVGuide = ({ currentDate, lastModifiedDate }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [copied, setCopied] = useState(false);
+
+  // Selected Links for Internal Linking (SEO/GEO Boost)
+  // Randomly selected from JSON but curated for relevance to Job Search/Interviews/Cover Letters
+  // Distinct from previous selections
+  const relatedLinks = [
+    {
+      href: "/jobs-boards",
+      title: "Top Job Boards for 2026",
+      desc: "Discover the most effective job boards and platforms to find opportunities in your industry."
+    },
+    {
+      href: "/interview-tips",
+      title: "Essential Interview Tips",
+      desc: "Prepare for your next interview with proven strategies to answer tough questions confidently."
+    },
+    {
+      href: "/cover-letter-guides",
+      title: "Professional Cover Letter Guides",
+      desc: "Learn how to write compelling cover letters that complement your resume and CV perfectly."
+    },
+    {
+      href: "/ats-friendly-finance-resume-builder",
+      title: "Finance Resume Builder",
+      desc: "Specialized templates for accountants, analysts, and financial professionals to highlight key metrics."
+    },
+    {
+      href: "/software-engineer-resume-example-and-writing-guide",
+      title: "Software Engineer Resume Guide",
+      desc: "Technical resume examples and writing tips specifically designed for developers and engineers."
+    }
+  ];
 
   const comparisonSections = [
     {
@@ -1576,6 +1659,27 @@ CONVERTING RESUME TO CV:
                   <div className="mistake-number">{index + 1}</div>
                   <p className="mistake-text">{mistake}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* RELATED INTERNAL LINKS SECTION - SEO & GEO BOOST */}
+        <section className="related-links-section">
+          <div className="resume-vs-cv-container">
+            <div className="section-header">
+              <h2 className="section-title">Expand Your Job Search Toolkit</h2>
+              <p className="section-subtitle">
+                Complement your resume or CV with these essential resources for a successful international job search.
+              </p>
+            </div>
+            
+            <div className="related-links-grid">
+              {relatedLinks.map((link, index) => (
+                <Link href={link.href} key={index} className="related-link-card">
+                  <span className="related-link-title">{link.title}</span>
+                  <span className="related-link-desc">{link.desc}</span>
+                </Link>
               ))}
             </div>
           </div>
