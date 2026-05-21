@@ -35,7 +35,7 @@ import {
   FiTerminal,
   FiGrid,
   FiLayout,
-  FiEdit // Added for writing guide
+  FiEdit
 } from 'react-icons/fi';
 
 // Critical CSS inline with white background, black fonts, black buttons, grey cards
@@ -1115,7 +1115,7 @@ function PopularResumeLayouts({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - www removed */}
+        {/* FIXED STRUCTURED DATA - www removed */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1213,6 +1213,7 @@ function PopularResumeLayouts({
                 },
                 {
                   "@type": "ItemList",
+                  "name": "Resume Layouts Guide Reviews",
                   "itemListElement": testimonials.map((testimonial, index) => ({
                     "@type": "ListItem",
                     "position": index + 1,
@@ -1232,15 +1233,15 @@ function PopularResumeLayouts({
                       "publisher": {
                         "@type": "Organization",
                         "name": "Professional Resume Free"
-                      },
-                      "itemReviewed": {
-                        "@type": "CreativeWork",
-                        "name": "Resume Layouts Guide",
-                        "description": "Free guide to popular resume layouts for tech jobs.",
-                        "url": canonicalUrl
                       }
                     }
-                  }))
+                  })),
+                  "itemReviewed": {
+                    "@type": "CreativeWork",
+                    "name": "Resume Layouts Guide",
+                    "description": "Free guide to popular resume layouts for tech jobs.",
+                    "url": canonicalUrl
+                  }
                 }
               ]
             })
@@ -1684,6 +1685,5 @@ function PopularResumeLayouts({
     </>
   );
 }
-
 
 export default PopularResumeLayouts;

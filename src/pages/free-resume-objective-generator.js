@@ -970,7 +970,6 @@ const criticalCSS = `
 const CURRENT_YEAR = new Date().getFullYear();
 const CURRENT_DATE = new Date().toISOString().split('T')[0];
 const LAST_MODIFIED = new Date().toISOString();
-// UPDATED: Removed www from SITE_URL
 const SITE_URL = 'https://professionalresumefree.com';
 
 // FAQ Data
@@ -1036,7 +1035,7 @@ const HOW_TO_STEPS = [
   }
 ];
 
-// Reviews Data with dates for freshness
+// Reviews Data
 const REVIEWS = [
   {
     name: "Jennifer Carter",
@@ -1107,14 +1106,14 @@ const SEO_KEYWORDS = [
   'career change objective generator'
 ];
 
-// Breadcrumb data - UPDATED with non-www URLs
+// Breadcrumb data
 const BREADCRUMB_DATA = [
   { name: "Home", item: "https://professionalresumefree.com/" },
   { name: "Free Tools", item: "https://professionalresumefree.com/free-tools" },
   { name: "Resume Objective Generator", item: "https://professionalresumefree.com/free-resume-objective-generator" }
 ];
 
-// Helper functions (kept as in your original code for brevity)
+// Helper functions (all kept as original)
 const getEntryLevelSkills = (goal) => {
   const skills = {
     'gain professional experience': 'academic knowledge and practical skills',
@@ -1768,12 +1767,10 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
 
-  // Set build time on client to avoid hydration mismatch
   useEffect(() => {
     setBuildTime(Date.now().toString());
   }, []);
 
-  // Use SEO data with fallbacks
   const safeSeoData = seoData || {
     currentDate: CURRENT_DATE,
     lastModifiedDate: LAST_MODIFIED,
@@ -1804,7 +1801,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
   ];
 
   // ===== FIXED SCHEMA.ORG STRUCTURED DATA - All errors resolved =====
-  // UPDATED: All URLs use non-www version
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1877,7 +1873,14 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           "ratingValue": 4.8,
           "reviewCount": 156,
           "bestRating": 5,
-          "worstRating": 1
+          "worstRating": 1,
+          "itemReviewed": {
+            "@type": "SoftwareApplication",
+            "name": "Free Resume Objective Generator",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Any",
+            "url": "https://professionalresumefree.com/free-resume-objective-generator"
+          }
         },
         "featureList": [
           "ATS-Optimized Templates",
@@ -1932,7 +1935,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         "@type": "SpeakableSpecification",
         "cssSelector": [".title", ".subtitle", ".faq-question h3"]
       },
-      // ===== FIXED: Individual Reviews with REQUIRED itemReviewed field =====
       ...REVIEWS.map((review, index) => ({
         "@type": "Review",
         "@id": `https://professionalresumefree.com/free-resume-objective-generator/#review-${index + 1}`,
@@ -1951,7 +1953,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           "@type": "Organization",
           "name": "Professional Resume Free"
         },
-        // CRITICAL FIX: Added the required itemReviewed field
         "itemReviewed": {
           "@type": "SoftwareApplication",
           "name": "Free Resume Objective Generator",
@@ -2088,23 +2089,19 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
-        {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Free Resume Objective Generator - Professional & ATS-Safe" />
         <meta name="chatgpt-fts:description" content="Generate targeted, ATS-friendly resume objectives tailored to your career level, industry, and goals. 100% free, no signup." />
         <meta name="chatgpt-fts:keywords" content="resume objective generator, professional objective statement, ATS-friendly resume objective" />
         <meta name="chatgpt-fts:last-updated" content={safeSeoData.currentDate} />
         <meta name="generator" content="Professional Resume Free - Objective Generator" />
         
-        {/* Freshness Meta Tags */}
         <meta name="date" content={safeSeoData.currentDate} />
         <meta name="last-modified" content={safeSeoData.lastModifiedDate} />
         <meta name="revisit-after" content="2 days" />
         <meta name="build-timestamp" content={buildTimestamp} />
         
-        {/* SINGLE CANONICAL URL - UPDATED without www */}
         <link rel="canonical" href="https://professionalresumefree.com/free-resume-objective-generator" />
         
-        {/* Open Graph - UPDATED without www */}
         <meta property="og:title" content={`Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR}`} />
         <meta property="og:description" content="Generate professional resume objectives instantly. Tailored to your career level and goals. 100% free, no signup. ATS-optimized for 3x more interviews." />
         <meta property="og:type" content="website" />
@@ -2117,7 +2114,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeSeoData.lastModifiedDate} />
         
-        {/* Twitter - UPDATED without www */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Free Resume Objective Generator ${CURRENT_YEAR}`} />
         <meta name="twitter:description" content="Generate professional, ATS-friendly resume objectives tailored to your career level. 100% free, no signup." />
@@ -2126,18 +2122,15 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* Icons */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           key="structured-data"
@@ -2145,13 +2138,11 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         />
       </Head>
 
-      {/* Freshness Indicators */}
       <div className="freshness-indicator">
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={freshnessIndicator} />
       </div>
 
-      {/* Breadcrumb Navigation - CENTERED - UPDATED without www */}
       <nav className="breadcrumb" aria-label="Breadcrumb">
         <ol>
           {BREADCRUMB_DATA.map((item, index) => (
@@ -2181,7 +2172,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             Used by <strong>250,000+ professionals</strong> to get <strong>3x more interviews</strong>.
           </p>
           
-          {/* Trust Badges - CENTERED */}
           <div className="trust-badges">
             <div className="trust-badge">
               <span className="badge-icon">✓</span>
@@ -2201,7 +2191,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </div>
 
-          {/* Aggregate Rating - REMOVED FROM VISIBLE DISPLAY (kept for schema only) */}
           <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="156" />
@@ -2404,7 +2393,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           )}
 
-          {/* Long-Tail Keywords Section - GEO Optimization */}
           <section className="how-to-section">
             <h2 className="section-title">Common Questions About Resume Objectives</h2>
             <div className="how-to-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
@@ -2428,7 +2416,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* How-to Section */}
           <section className="how-to-section" aria-labelledby="how-to-title">
             <h2 className="section-title" id="how-to-title">How It Works: 5-Step Professional Objective Creation</h2>
             <p className="section-subtitle">Follow these steps to create compelling, ATS-optimized objective statements in minutes</p>
@@ -2443,7 +2430,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* FAQ Section */}
           <section className="faq-section" aria-labelledby="faq-title">
             <h2 className="section-title" id="faq-title">Frequently Asked Questions</h2>
             <p className="section-subtitle">Everything you need to know about creating professional resume objectives</p>
@@ -2473,7 +2459,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* Reviews Section - FIXED: Each Review now has itemReviewed */}
           <section className="reviews-section" aria-labelledby="reviews-title">
             <h2 className="section-title" id="reviews-title">What Professionals Say About Our Objective Generator</h2>
             <p className="section-subtitle">Trusted by HR managers, career coaches, and professionals at all levels</p>
@@ -2507,7 +2492,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
                     </div>
                     <div className="review-source">via Professional Resume Free</div>
                   </div>
-                  {/* FIXED: itemReviewed added to each Review - resolves "Missing field itemReviewed" error */}
                   <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
                     <meta itemProp="name" content="Free Resume Objective Generator" />
                     <meta itemProp="applicationCategory" content="BusinessApplication" />
@@ -2519,7 +2503,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* Resources Section */}
           <section className="resources-section" aria-labelledby="resources-title">
             <h2 className="section-title" id="resources-title">More Career Resources</h2>
             <p className="section-subtitle">Explore our complete suite of free professional tools</p>
@@ -2554,7 +2537,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* Final CTA */}
           <section className="cta-section">
             <div className="cta-content">
               <h2 className="cta-title">Ready to Transform Your Job Applications?</h2>
@@ -2579,7 +2561,6 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </section>
 
-          {/* Internal Links Section for SEO/GEO Boost */}
           <section className="internal-links-section">
             <div className="container">
               <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Recommended Career Resources</h2>
@@ -2609,13 +2590,11 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           </section>
         </main>
 
-        {/* Build Info */}
         <div className="build-info">
           <p>Last updated: {safeSeoData.currentDate} • Build: {buildTime}</p>
           <p>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
         </div>
 
-        {/* Hidden Metadata */}
         <div className="hidden">
           <span itemProp="dateModified">{safeSeoData.lastModifiedDate}</span>
           <span itemProp="softwareVersion">2026.1.0</span>
@@ -2644,7 +2623,6 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    // Revalidate every hour for fresh content
     revalidate: 3600,
   };
 }

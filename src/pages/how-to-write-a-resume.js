@@ -535,7 +535,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="twitter:description" content="Expert resume writing guide with templates and proven job search strategies for 2026." />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-guide-preview.jpg" />
         
-        {/* FIXED: Properly structured Schema.org without nesting issues */}
+        {/* FIXED: Properly structured Schema.org with proper nesting */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -599,8 +599,8 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                   }))
                 },
                 {
-                  "@type": "CreativeWork",
-                  "@id": "https://professionalresumefree.com/how-to-write-a-resume#creative-work",
+                  "@type": "Product",
+                  "@id": "https://professionalresumefree.com/how-to-write-a-resume#product",
                   "name": "Resume Writing Guide",
                   "description": "Complete guide on how to write a professional resume",
                   "image": productImage,
@@ -632,9 +632,23 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                     "reviewBody": testimonial.quote,
                     "datePublished": testimonial.date
                   })),
-                  "learningResourceType": "Guide",
-                  "educationalLevel": "Professional",
-                  "creativeWorkStatus": "Updated"
+                  "additionalProperty": [
+                    {
+                      "@type": "PropertyValue",
+                      "name": "learningResourceType",
+                      "value": "Guide"
+                    },
+                    {
+                      "@type": "PropertyValue",
+                      "name": "educationalLevel",
+                      "value": "Professional"
+                    },
+                    {
+                      "@type": "PropertyValue",
+                      "name": "creativeWorkStatus",
+                      "value": "Updated"
+                    }
+                  ]
                 }
               ]
             })

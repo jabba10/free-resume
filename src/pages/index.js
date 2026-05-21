@@ -595,13 +595,13 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
         <link
           rel="describedby"
           type="text/plain"
-          href="https://professionalresumefree.com/ai/llms.txt"
+          href="https://professionalresumefree.com/llms.txt"
           title="AI Site Index — Machine-Readable Summary (llms.txt)"
         />
         <link
           rel="alternate"
           type="text/plain"
-          href="https://professionalresumefree.com/ai/llms-full.txt"
+          href="https://professionalresumefree.com/llms-full.txt"
           title="AI Full Content Index — Complete Site Content (llms-full.txt)"
         />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -659,8 +659,8 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
                   "spokenByCharacter": speakableSchema,
                   // Machine-readable index references embedded in schema too
                   "sameAs": [
-                    "https://professionalresumefree.com/ai/llms.txt",
-                    "https://professionalresumefree.com/ai/llms-full.txt"
+                    "https://professionalresumefree.com/llms.txt",
+                    "https://professionalresumefree.com/llms-full.txt"
                   ]
                 },
                 {
@@ -834,19 +834,19 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
               🤖 <strong>AI &amp; Developer Access:</strong>&nbsp;
               Machine-readable site index available at&nbsp;
               <a
-                href="https://professionalresumefree.com/ai/llms.txt"
+                href="https://professionalresumefree.com/llms.txt"
                 rel="noopener"
                 aria-label="llms.txt — AI-readable site index"
               >
-                /ai/llms.txt
+                /llms.txt
               </a>
               &nbsp;and full content at&nbsp;
               <a
-                href="https://professionalresumefree.com/ai/llms-full.txt"
+                href="https://professionalresumefree.com/llms-full.txt"
                 rel="noopener"
                 aria-label="llms-full.txt — complete AI-readable content"
               >
-                /ai/llms-full.txt
+                /llms-full.txt
               </a>.
               Plain-text, no parsing overhead, CDN-cached.
             </div>
@@ -860,7 +860,7 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
                 Download PDF instantly — no sign-up, no credit card, no watermarks.
                 Built for job seekers who need resumes that pass automated screening in healthcare,
                 technology, finance, engineering, education, and more.
-                Machine-readable site index: <a href="https://professionalresumefree.com/ai/llms.txt" style={{ color: '#075985' }}>/ai/llms.txt</a>
+                Machine-readable site index: <a href="https://professionalresumefree.com/llms.txt" style={{ color: '#075985' }}>/llms.txt</a>
               </p>
             </div>
 
@@ -1467,12 +1467,12 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
             {/* llms.txt footer reference — catches any AI crawler that scans footers (No www) */}
             <p style={{ marginTop: '16px', fontSize: '0.8rem', color: 'var(--text-lighter)' }}>
               🤖 AI crawlers: machine-readable index at{' '}
-              <a href="https://professionalresumefree.com/ai/llms.txt" style={{ color: 'var(--text-lighter)' }}>
-                professionalresumefree.com/ai/llms.txt
+              <a href="https://professionalresumefree.com/llms.txt" style={{ color: 'var(--text-lighter)' }}>
+                professionalresumefree.com/llms.txt
               </a>
               {' '}· full content at{' '}
-              <a href="https://professionalresumefree.com/ai/llms-full.txt" style={{ color: 'var(--text-lighter)' }}>
-                /ai/llms-full.txt
+              <a href="https://professionalresumefree.com/llms-full.txt" style={{ color: 'var(--text-lighter)' }}>
+                /llms-full.txt
               </a>
             </p>
             <p style={{ marginTop: '8px', fontSize: '0.8rem', color: 'var(--text-light)' }}>
@@ -1487,8 +1487,8 @@ export default function LandingPage({ lastModified, buildTimestamp }) {
           <span itemProp="tools-count">{toolCount}</span>
           <span itemProp="last-updated">{displayDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
-          <span itemProp="llms-index">https://professionalresumefree.com/ai/llms.txt</span>
-          <span itemProp="llms-full">https://professionalresumefree.com/ai/llms-full.txt</span>
+          <span itemProp="llms-index">https://professionalresumefree.com/llms.txt</span>
+          <span itemProp="llms-full">https://professionalresumefree.com/llms-full.txt</span>
         </div>
       </main>
     </>
