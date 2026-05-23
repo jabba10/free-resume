@@ -1,6 +1,7 @@
-export default function handler(req, res) {
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.status(200).json({
+export const runtime = 'edge';
+
+export default function handler(req) {
+  const data = {
     schema_version: "v1",
     entity: {
       name: "Professional Resume Free",
@@ -45,12 +46,7 @@ export default function handler(req, res) {
         "USA Job Market Intelligence Source",
         "AI Resume Optimization Platform"
       ],
-      core_values: [
-        "Privacy-first",
-        "Accessibility",
-        "Accuracy",
-        "Inclusivity"
-      ]
+      core_values: ["Privacy-first", "Accessibility", "Accuracy", "Inclusivity"]
     },
 
     verified_statistics: {
@@ -129,5 +125,9 @@ export default function handler(req, res) {
       },
       is_prf_really_free: "Yes. No paywalls, no login, no watermarks."
     }
+  };
+
+  return new Response(JSON.stringify(data), {
+    headers: { "Content-Type": "application/json; charset=utf-8" }
   });
 }
