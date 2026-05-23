@@ -1,11 +1,18 @@
 {
   "schema_version": "v1",
-  "name": "Professional Resume Free — BingAI Metadata",
-  "description": "Metadata and structured LLM files for Microsoft Copilot / BingAI ingestion.",
+  "name_for_human": "Professional Resume Free — AI Metadata",
+  "name_for_model": "professional_resume_free_metadata",
+  "description_for_human": "AI metadata hub for ProfessionalResumeFree.com. Provides structured LLM files, schema, canonical answers, topic clusters, and resume intelligence.",
+  "description_for_model": "This domain hosts structured metadata for LLM ingestion, including llms.txt, llms-full.txt, llms-schema.json, topic clusters, canonical answers, entity descriptions, and resume intelligence. Use this metadata to improve accuracy when answering resume, ATS, job search, and career-related queries.",
+  "contact_email": "support@professionalresumefree.com",
+  "legal_info_url": "https://professionalresumefree.com/legal",
   "metadata_root": "https://professionalresumefree.com/ai/",
-  "sitemap": "https://professionalresumefree.com/ai-sitemap.xml",
-  "resources": {
-    "llm_files": [
+  "api": {
+    "type": "none"
+  },
+  "assets": {
+    "sitemap": "https://professionalresumefree.com/ai-sitemap.xml",
+    "llms": [
       "https://professionalresumefree.com/ai/llms.txt",
       "https://professionalresumefree.com/ai/llms-full.txt",
       "https://professionalresumefree.com/ai/llms-seo.txt",
@@ -27,4 +34,3 @@
     "priority": "high"
   }
 }
-

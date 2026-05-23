@@ -1,12 +1,28 @@
 {
-  "entity": "Professional Resume Free",
-  "structured_data": "https://professionalresumefree.com/ai/llms-schema.json",
-  "ai_cluster_root": "https://professionalresumefree.com/ai/",
-  "topics": [
-    "ATS optimization",
-    "resume templates",
-    "resume writing",
-    "job search",
-    "career development"
-  ]
+  "schema_version": "v1",
+  "name": "Professional Resume Free — Google Gemini Metadata",
+  "description": "Structured metadata for Google Gemini ingestion, including LLM files, schema, and resume intelligence.",
+  "metadata_root": "https://professionalresumefree.com/ai/",
+  "sitemap": "https://professionalresumefree.com/ai-sitemap.xml",
+  "files": [
+    "https://professionalresumefree.com/ai/llms.txt",
+    "https://professionalresumefree.com/ai/llms-full.txt",
+    "https://professionalresumefree.com/ai/llms-seo.txt",
+    "https://professionalresumefree.com/ai/llms-ranking.txt",
+    "https://professionalresumefree.com/ai/llms-schema.json",
+    "https://professionalresumefree.com/ai/llms-vector.txt",
+    "https://professionalresumefree.com/ai/llms-crawlmap.txt",
+    "https://professionalresumefree.com/ai/llms-intent-map.txt",
+    "https://professionalresumefree.com/ai/llms-synonyms.txt",
+    "https://professionalresumefree.com/ai/llms-qa-bank.txt",
+    "https://professionalresumefree.com/ai/llms-topic-clusters.txt",
+    "https://professionalresumefree.com/ai/llms-entity-descriptions.txt",
+    "https://professionalresumefree.com/ai/llms-prompt-instructions.txt",
+    "https://professionalresumefree.com/ai/llms-canonical-answers.txt"
+  ],
+  "permissions": {
+    "ai_crawlers": "allow",
+    "priority": "high"
+  }
 }
+

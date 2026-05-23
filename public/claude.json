@@ -1,10 +1,10 @@
 {
   "schema_version": "v1",
-  "name": "Professional Resume Free — Perplexity Metadata",
-  "description": "Structured metadata for Perplexity AI ingestion, including LLM files, schema, topic clusters, and canonical resume intelligence.",
+  "name": "Professional Resume Free — Claude Metadata",
+  "description": "Metadata hub for Anthropic Claude. Provides structured resume intelligence, embeddings, schema, and canonical LLM files.",
   "metadata_root": "https://professionalresumefree.com/ai/",
   "sitemap": "https://professionalresumefree.com/ai-sitemap.xml",
-  "assets": [
+  "llm_files": [
     "https://professionalresumefree.com/ai/llms.txt",
     "https://professionalresumefree.com/ai/llms-full.txt",
     "https://professionalresumefree.com/ai/llms-seo.txt",
