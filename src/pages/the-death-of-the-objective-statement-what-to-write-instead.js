@@ -964,6 +964,9 @@ function DeathOfObjectiveStatement({
     }
   ];
 
+  // ===== FIXED: Article @id for itemReviewed reference =====
+  const articleId = `${canonicalUrl}#article`;
+
   return (
     <>
       <Head>
@@ -1028,7 +1031,7 @@ function DeathOfObjectiveStatement({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed now proper Article type */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed references Article by @id */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1037,7 +1040,7 @@ function DeathOfObjectiveStatement({
               "@graph": [
                 {
                   "@type": "Article",
-                  "@id": `${canonicalUrl}#article`,
+                  "@id": articleId,
                   "headline": "The Death of the Objective Statement: What to Write Instead (2026 Guide)",
                   "description": meta.description,
                   "image": meta.image,
@@ -1147,10 +1150,7 @@ function DeathOfObjectiveStatement({
                         "name": "Professional Resume Free"
                       },
                       "itemReviewed": {
-                        "@type": "Article",
-                        "name": "Resume Objective Alternatives Guide",
-                        "description": "Free comprehensive guide to replacing resume objective statements.",
-                        "url": canonicalUrl
+                        "@id": articleId
                       }
                     }
                   }))

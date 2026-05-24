@@ -595,6 +595,7 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
   
   const canonicalUrl = "https://professionalresumefree.com/resume-skills-section";
 
+  // ===== FIXED: Only ONE FAQPage in the @graph array =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -666,8 +667,10 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
         "articleSection": "Resume Writing",
         "keywords": "resume skills, ATS skills, hard skills, soft skills, resume writing, job search"
       },
+      // ===== ONLY ONE FAQPage - THIS IS THE FIX =====
       {
         "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faqpage`,
         "mainEntity": faqItems.map((item, index) => ({
           "@type": "Question",
           "name": item.question,
@@ -1003,7 +1006,7 @@ export default function ResumeSkillsClusterPage({ metadata, faqItems, seoData, b
             </div>
           </section>
 
-          {/* Randomly Selected Internal Links for SEO/GEO Boost */}
+          {/* Internal Links for SEO/GEO Boost */}
           <section className="section">
             <div className="container">
               <h2 className="section-title">Explore More Career Resources</h2>

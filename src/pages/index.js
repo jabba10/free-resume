@@ -449,8 +449,10 @@ const conversationalExplanations = [
   { topic: "ATS in plain English", content: "Think of an ATS (Applicant Tracking System) as a robot recruiter. It reads your resume, extracts key information, and decides whether to show it to a human. Our templates are designed to speak this robot's language perfectly." }
 ];
 
+// UPDATED: Added '/free-resume-template-selector' under Resume Basics
 const categoryLinks = [
   { title: "Resume Basics", links: [
+    { name: "Free Resume Template Selector", url: "/free-resume-template-selector" },
     { name: "What to Put on a Resume", url: "/what-to-put-on-a-resume" },
     { name: "What Should a Resume Look Like", url: "/what-should-a-resume-look-like" },
     { name: "Resume vs CV: Key Differences", url: "/resume-vs-cv-key-differences-and-when-to-use-which" },
@@ -635,7 +637,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
 
-  // Generate comprehensive schema
+  // Generate comprehensive schema with FIXED Review items
   const comprehensiveSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -713,19 +715,52 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           "ratingValue": "4.8",
           "ratingCount": "1250",
           "bestRating": "5",
-          "worstRating": "1"
+          "worstRating": "1",
+          "itemReviewed": {
+            "@type": "Organization",
+            "name": "Professional Resume Free"
+          }
         },
+        // FIXED: Added itemReviewed to each Review
         "review": [
           ...testimonials.map(t => ({
             "@type": "Review",
-            "author": { "@type": "Person", "name": t.name },
-            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+            "author": { 
+              "@type": "Person", 
+              "name": t.name 
+            },
+            "itemReviewed": {
+              "@type": "SoftwareApplication",
+              "name": "Professional Resume Free Builder",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Web"
+            },
+            "reviewRating": { 
+              "@type": "Rating", 
+              "ratingValue": "5", 
+              "bestRating": "5",
+              "worstRating": "1"
+            },
             "reviewBody": t.quote
           })),
           ...caseStudies.map(s => ({
             "@type": "Review",
-            "author": { "@type": "Person", "name": s.name },
-            "reviewRating": { "@type": "Rating", "ratingValue": String(s.ratingValue), "bestRating": "5" },
+            "author": { 
+              "@type": "Person", 
+              "name": s.name 
+            },
+            "itemReviewed": {
+              "@type": "SoftwareApplication",
+              "name": "Professional Resume Free Builder",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Web"
+            },
+            "reviewRating": { 
+              "@type": "Rating", 
+              "ratingValue": String(s.ratingValue), 
+              "bestRating": "5",
+              "worstRating": "1"
+            },
             "reviewBody": s.reviewBody
           }))
         ],
@@ -1378,6 +1413,8 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                     <p><strong>Time to result:</strong> {study.timeToResult}</p>
                     <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
                       <meta itemProp="name" content="Professional Resume Free Builder" />
+                      <meta itemProp="applicationCategory" content="BusinessApplication" />
+                      <meta itemProp="operatingSystem" content="Web" />
                     </div>
                     <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
                       <meta itemProp="ratingValue" content={String(study.ratingValue)} />
@@ -1621,9 +1658,16 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                         <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-light)' }}>{t.role}, {t.company}</p>
                       </div>
                     </div>
+                    {/* FIXED: Added itemReviewed for inline schema */}
+                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+                      <meta itemProp="name" content="Professional Resume Free Builder" />
+                      <meta itemProp="applicationCategory" content="BusinessApplication" />
+                      <meta itemProp="operatingSystem" content="Web" />
+                    </div>
                     <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
                       <meta itemProp="ratingValue" content="5" />
                       <meta itemProp="bestRating" content="5" />
+                      <meta itemProp="worstRating" content="1" />
                     </div>
                   </div>
                 ))}

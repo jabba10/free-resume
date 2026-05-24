@@ -1263,8 +1263,8 @@ const ResumeToolsPage = ({
           </div>
         </section>
 
-        {/* FAQ Section - Now using itemProp for FAQPage schema WITHOUT duplicating */}
-        <section className="faqSection" aria-labelledby="faq-title" itemScope itemType="https://schema.org/FAQPage">
+        {/* FAQ Section - REMOVED duplicate FAQPage schema markup */}
+        <section className="faqSection" aria-labelledby="faq-title">
           <div className="container">
             <div className="sectionHeader">
               <h2 className="sectionTitle" id="faq-title">Frequently Asked Questions</h2>
@@ -1275,10 +1275,10 @@ const ResumeToolsPage = ({
             
             <div className="faqGrid">
               {faqItems.map((item, index) => (
-                <div key={index} className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                  <h3 className="faqQuestion" itemProp="name">{item.question}</h3>
-                  <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                    <p itemProp="text">{item.answer}</p>
+                <div key={index} className="faqItem">
+                  <h3 className="faqQuestion">{item.question}</h3>
+                  <div className="faqAnswer">
+                    <p>{item.answer}</p>
                   </div>
                 </div>
               ))}

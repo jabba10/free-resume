@@ -882,128 +882,139 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
     }
   ];
 
-  // ===== SCHEMA.ORG JSON-LD - ALL URLs WITHOUT www =====
-  const articleJsonLd = {
+  // ===== COMBINED SCHEMA.ORG JSON-LD (SINGLE @graph - NO DUPLICATES) =====
+  const combinedSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': primaryUrl
-    },
-    headline: 'Resume for Abroad Job: Complete Expert Guide for International Career Success',
-    description: metadata.description,
-    author: {
-      '@type': 'Organization',
-      name: 'Professional Resume Free',
-      url: 'https://professionalresumefree.com'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Professional Resume Free',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://professionalresumefree.com/logo.png'
-      }
-    },
-    datePublished: '2025-01-01',
-    dateModified: generatedAt,
-    articleSection: ['International Resumes', 'Global Careers', 'Job Search Abroad', 'CV Writing Tips'],
-    keywords: metadata.keywords,
-    wordCount: 4500,
-    inLanguage: 'en-US',
-    isAccessibleForFree: true
-  };
-
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
+    '@graph': [
+      // 1. Article Schema
       {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Professional Resume Free',
-        item: 'https://professionalresumefree.com'
+        '@type': 'Article',
+        '@id': `${primaryUrl}#article`,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': primaryUrl
+        },
+        headline: 'Resume for Abroad Job: Complete Expert Guide for International Career Success',
+        description: metadata.description,
+        author: {
+          '@type': 'Organization',
+          name: 'Professional Resume Free',
+          url: 'https://professionalresumefree.com'
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Professional Resume Free',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://professionalresumefree.com/logo.png'
+          }
+        },
+        datePublished: '2025-01-01',
+        dateModified: generatedAt,
+        articleSection: ['International Resumes', 'Global Careers', 'Job Search Abroad', 'CV Writing Tips'],
+        keywords: metadata.keywords,
+        wordCount: 4500,
+        inLanguage: 'en-US',
+        isAccessibleForFree: true
       },
+      // 2. BreadcrumbList Schema
       {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Resume for Abroad Job',
-        item: primaryUrl
+        '@type': 'BreadcrumbList',
+        '@id': `${primaryUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Professional Resume Free',
+            item: 'https://professionalresumefree.com'
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Resume for Abroad Job',
+            item: primaryUrl
+          }
+        ]
+      },
+      // 3. WebPage Schema (with isPartOf)
+      {
+        '@type': 'WebPage',
+        '@id': primaryUrl,
+        name: metadata.title,
+        url: primaryUrl,
+        description: metadata.description,
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'Professional Resume Free',
+          url: 'https://professionalresumefree.com'
+        },
+        dateModified: generatedAt,
+        inLanguage: 'en-US',
+        about: {
+          '@type': 'Thing',
+          name: 'International Resume Writing',
+          description: 'Guide to creating resumes for global job applications'
+        }
+      },
+      // 4. FAQPage Schema (ONLY ONE - includes all 8 FAQs)
+      {
+        '@type': 'FAQPage',
+        '@id': `${primaryUrl}#faq`,
+        mainEntity: data.faqs.map(faq => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+            dateModified: generatedAt
+          }
+        }))
+      },
+      // 5. HowTo Schema
+      {
+        '@type': 'HowTo',
+        '@id': `${primaryUrl}#howto`,
+        name: 'How to Write a Resume for Abroad Jobs',
+        description: 'Step-by-step guide to creating an effective international resume',
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Research country-specific requirements',
+            text: 'Understand resume expectations in your target country including length, format, and personal details.'
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Choose the right format',
+            text: 'Select reverse-chronological, functional, or hybrid format based on your experience and target country norms.'
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Optimize for international ATS',
+            text: 'Use standard headings, include relevant keywords, and ensure machine-readable formatting.'
+          },
+          {
+            '@type': 'HowToStep',
+            position: 4,
+            name: 'Highlight global readiness',
+            text: 'Showcase international experience, language skills, and cross-cultural competencies.'
+          },
+          {
+            '@type': 'HowToStep',
+            position: 5,
+            name: 'Include work authorization',
+            text: 'Clearly state your visa status or work eligibility for the target country.'
+          }
+        ],
+        totalTime: 'PT30M',
+        tool: {
+          '@type': 'HowToTool',
+          name: 'Professional Resume Free Builder'
+        }
       }
     ]
-  };
-
-  const webPageJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: metadata.title,
-    url: primaryUrl,
-    description: metadata.description,
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'Professional Resume Free',
-      url: 'https://professionalresumefree.com'
-    },
-    dateModified: generatedAt,
-    inLanguage: 'en-US',
-    about: {
-      '@type': 'Thing',
-      name: 'International Resume Writing',
-      description: 'Guide to creating resumes for global job applications'
-    }
-  };
-
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: data.faqs.map(faq => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-        dateModified: generatedAt
-      }
-    }))
-  };
-
-  const howToJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: 'How to Write a Resume for Abroad Jobs',
-    description: 'Step-by-step guide to creating an effective international resume',
-    step: [
-      {
-        '@type': 'HowToStep',
-        name: 'Research country-specific requirements',
-        text: 'Understand resume expectations in your target country including length, format, and personal details.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Choose the right format',
-        text: 'Select reverse-chronological, functional, or hybrid format based on your experience and target country norms.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Optimize for international ATS',
-        text: 'Use standard headings, include relevant keywords, and ensure machine-readable formatting.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Highlight global readiness',
-        text: 'Showcase international experience, language skills, and cross-cultural competencies.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Include work authorization',
-        text: 'Clearly state your visa status or work eligibility for the target country.'
-      }
-    ],
-    totalTime: 'PT30M',
-    tool: {
-      '@type': 'HowToTool',
-      name: 'Professional Resume Free Builder'
-    }
   };
 
   return (
@@ -1072,26 +1083,10 @@ const ResumeForAbroadJobClusterArticle = ({ generatedAt, buildTimestamp }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* SCHEMA.ORG JSON-LD */}
+        {/* FIXED: SINGLE COMBINED SCHEMA.ORG JSON-LD (No duplicate FAQPage) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
         />
       </Head>
 

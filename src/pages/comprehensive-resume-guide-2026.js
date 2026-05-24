@@ -952,6 +952,9 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
   const displayDate = lastModified ? lastModified.split('T')[0] : new Date().toISOString().split('T')[0];
   // REMOVED www from canonical URL
   const canonicalUrl = "https://professionalresumefree.com/comprehensive-resume-guide-2026";
+  
+  // ===== FIXED: Article @id for itemReviewed reference =====
+  const articleId = `${canonicalUrl}#article`;
 
   const faqs = [
     {
@@ -1170,7 +1173,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ENHANCED SCHEMA.ORG JSON-LD - REMOVED www from website URL */}
+        {/* ===== FIXED STRUCTURED DATA - Reviews now reference Article by @id ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1228,6 +1231,7 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                 },
                 {
                   "@type": "Article",
+                  "@id": articleId,
                   "headline": "Comprehensive Resume Guide 2026: Complete Professional Writing Guide",
                   "description": "A complete guide to creating professional resumes for the 2026 job market",
                   "image": "https://professionalresumefree.com/comprehensive-resume-guide.jpg",
@@ -1315,6 +1319,34 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
                     }
                   ],
                   "totalTime": "PT45M"
+                },
+                {
+                  "@type": "ItemList",
+                  "itemListElement": caseStudies.map((study, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "Review",
+                      "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": 5,
+                        "bestRating": 5
+                      },
+                      "author": {
+                        "@type": "Person",
+                        "name": study.name
+                      },
+                      "reviewBody": `Before: ${study.before}. After using ${study.template}: ${study.after}. Time to result: ${study.timeToResult}.`,
+                      "datePublished": displayDate,
+                      "publisher": {
+                        "@type": "Organization",
+                        "name": "Professional Resume Free"
+                      },
+                      "itemReviewed": {
+                        "@id": articleId
+                      }
+                    }
+                  }))
                 },
                 {
                   "@type": "ItemList",
@@ -1792,22 +1824,21 @@ export default function ComprehensiveResumeGuide({ lastModified, buildTimestamp 
           </div>
         </section>
 
-        {/* Case Studies Section */}
+        {/* Case Studies Section - REMOVED invalid schema from HTML */}
         <section className="section" aria-labelledby="case-studies-heading">
           <div className="container">
             <h2 id="case-studies-heading" className="section-title">Real Success Stories</h2>
             <div className="grid">
               {caseStudies.map((study, i) => (
-                <article key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
+                <article key={i} className="testimonial-card">
                   <div style={{ marginBottom: '16px' }}>
                     <span className="trust-badge" style={{ marginBottom: '8px', display: 'inline-block' }}>{study.industry}</span>
                   </div>
-                  <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }} itemProp="author">{study.name}</h3>
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>{study.name}</h3>
                   <p style={{ marginBottom: '8px' }}><strong>Before:</strong> {study.before}</p>
                   <p style={{ marginBottom: '8px' }}><strong>After:</strong> <span className="text-success">{study.after}</span></p>
                   <p style={{ marginBottom: '8px' }}><strong>Template used:</strong> {study.template}</p>
                   <p><strong>Time to result:</strong> {study.timeToResult}</p>
-                  <meta itemProp="reviewRating" content="5" />
                 </article>
               ))}
             </div>

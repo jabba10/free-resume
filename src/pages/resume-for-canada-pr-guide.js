@@ -946,7 +946,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
     }
   };
 
-  // ===== STRUCTURED DATA - REMOVED www =====
+  // ===== FIXED: SINGLE STRUCTURED DATA - NO DUPLICATE FAQPage =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -956,12 +956,10 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         "url": primaryUrl,
         "name": `Ultimate Canada PR Resume Guide ${currentYear} | Professional Resume Free`,
         "isPartOf": {
-          // REMOVED www
           "@id": "https://professionalresumefree.com/#website"
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          // REMOVED www
           "url": "https://professionalresumefree.com/images/canada-pr-resume-guide-og.jpg"
         },
         "datePublished": generatedDate,
@@ -985,7 +983,6 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            // REMOVED www
             "item": "https://professionalresumefree.com"
           },
           {
@@ -999,12 +996,10 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         "@type": "Article",
         "headline": `Ultimate Canada PR Resume Guide ${currentYear}`,
         "description": metadata.description,
-        // REMOVED www
         "image": "https://professionalresumefree.com/images/canada-pr-resume-guide-og.jpg",
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Free",
-          // REMOVED www
           "url": "https://professionalresumefree.com"
         },
         "publisher": {
@@ -1012,7 +1007,6 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
           "name": "Professional Resume Free",
           "logo": {
             "@type": "ImageObject",
-            // REMOVED www
             "url": "https://professionalresumefree.com/logo.png"
           }
         },
@@ -1026,6 +1020,7 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         "keywords": metadata.keywords,
         "wordCount": 3500
       },
+      // ONLY ONE FAQPage - this is the single instance
       {
         "@type": "FAQPage",
         "@id": `${primaryUrl}#faq`,
@@ -1073,20 +1068,6 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         }
       }
     ]
-  };
-
-  const faqStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": data.faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a,
-        "dateModified": lastUpdatedDate
-      }
-    }))
   };
 
   return (
@@ -1143,14 +1124,10 @@ const CanadaPRResumeGuide = ({ generatedDate, lastUpdatedDate, buildTimestamp })
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== STRUCTURED DATA ===== */}
+        {/* ===== FIXED: SINGLE STRUCTURED DATA SCRIPT - NO DUPLICATE FAQPage ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
         />
       </Head>
 

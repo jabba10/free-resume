@@ -41,7 +41,7 @@ const criticalCSS = `
     color: var(--primary);
     background: var(--background);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     width: 100%;
   }
@@ -385,7 +385,6 @@ export const metadata = {
     authors: ['Resume Design Experts'],
     images: [
       {
-        // REMOVED www
         url: 'https://professionalresumefree.com/images/og-creative-resume-templates.jpg',
         width: 1200,
         height: 630,
@@ -397,7 +396,6 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Creative Resume Templates: Ultimate 2026 Guide',
     description: 'Professional creative resume templates for standout applications',
-    // REMOVED www
     images: ['https://professionalresumefree.com/images/twitter-creative-resume-templates.jpg'],
     creator: '@ProResumeFree',
     site: '@ProResumeFree',
@@ -414,7 +412,6 @@ export const metadata = {
     },
   },
   alternates: {
-    // REMOVED www from canonical URL
     canonical: 'https://professionalresumefree.com/creative-resume-templates',
     languages: {
       'en-US': 'https://professionalresumefree.com/creative-resume-templates',
@@ -965,7 +962,7 @@ export default function CreativeResumeTemplates({ seoData }) {
 
   // ============= COMPLETELY FIXED SCHEMA MARKUP - ALL ERRORS RESOLVED =============
   
-  // FIX #1: Properly structured reviews WITHOUT itemReviewed field
+  // Create properly structured reviews (WITHOUT itemReviewed field for Product nesting)
   const structuredReviews = testimonials.map((testimonial, index) => ({
     "@type": "Review",
     "reviewRating": {
@@ -980,60 +977,6 @@ export default function CreativeResumeTemplates({ seoData }) {
     "reviewBody": testimonial.quote,
     "datePublished": safeReviewDates[index] || safeCurrentDate
   }));
-
-  // FIX #2: Single Product entity with ALL required properties (aggregateRating + reviews + offers)
-  // This eliminates the "multiple reviews without aggregateRating" error AND the "either offers, review, or aggregateRating should be specified" error
-  const completeProductSchema = {
-    "@type": "Product",
-    "@id": "https://professionalresumefree.com/creative-resume-templates#product",
-    "name": "Creative Resume Templates 2026",
-    "description": "Professional creative resume templates for job seekers",
-    // REMOVED www
-    "url": "https://professionalresumefree.com/creative-resume-templates",
-    // REMOVED www
-    "image": "https://professionalresumefree.com/images/creative-resume-templates-preview.jpg",
-    "brand": {
-      "@type": "Brand",
-      "name": "Professional Resume Free"
-    },
-    // AGGREGATE RATING - FIXES the "multiple reviews without aggregateRating" error
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "3",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    // REVIEWS - Now properly accompanied by aggregateRating
-    "review": structuredReviews,
-    // OFFERS - FIXES the "either offers, review, or aggregateRating should be specified" error
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      // REMOVED www
-      "url": "https://professionalresumefree.com/creative-resume-templates",
-      "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
-      "shippingDetails": {
-        "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "0",
-          "currency": "USD"
-        },
-        "shippingDestination": {
-          "@type": "DefinedRegion",
-          "addressCountry": "US"
-        }
-      },
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "applicableCountry": "US",
-        "returnPolicyCategory": "https://schema.org/NotPermitted"
-      }
-    }
-  };
 
   return (
     <>
@@ -1057,10 +1000,10 @@ export default function CreativeResumeTemplates({ seoData }) {
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="date" content={safeCurrentDate} />
         
-        {/* ===== SINGLE CANONICAL URL - REMOVED www ===== */}
+        {/* ===== SINGLE CANONICAL URL ===== */}
         <link rel="canonical" href="https://professionalresumefree.com/creative-resume-templates" />
         
-        {/* ===== OPEN GRAPH - REMOVED www ===== */}
+        {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:url" content="https://professionalresumefree.com/creative-resume-templates" />
@@ -1072,7 +1015,7 @@ export default function CreativeResumeTemplates({ seoData }) {
         <meta property="article:published_time" content={safeLastModifiedDate} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* ===== TWITTER CARD - REMOVED www ===== */}
+        {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
@@ -1083,7 +1026,15 @@ export default function CreativeResumeTemplates({ seoData }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPLETELY FIXED JSON-LD SCHEMA - NO GSC ERRORS - REMOVED www ===== */}
+        {/* ===== COMPLETELY FIXED JSON-LD SCHEMA - NO GSC ERRORS ===== */}
+        {/* 
+          FIXES APPLIED:
+          1. Only ONE Product entity in the @graph array (no duplicates)
+          2. The single Product has aggregateRating + review + offers
+          3. This satisfies "Either offers, review, or aggregateRating should be specified"
+          4. Reviews inside Product do NOT have itemReviewed field (prevents nesting error)
+          5. All authors use @type "Person"
+        */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -1204,11 +1155,56 @@ export default function CreativeResumeTemplates({ seoData }) {
                   }
                 }))
               },
-              // SINGLE COMPLETE PRODUCT ENTITY - CONTAINS aggregateRating + reviews + offers
-              // This fixes BOTH errors:
-              // 1. "Multiple reviews without aggregateRating object" - NOW HAS aggregateRating
-              // 2. "Either offers, review, or aggregateRating should be specified" - NOW HAS ALL THREE
-              completeProductSchema
+              // ========== SINGLE PRODUCT SCHEMA - ALL ERRORS FIXED ==========
+              // Only ONE Product entity with aggregateRating + review + offers
+              // This satisfies BOTH requirements:
+              // 1. "Either offers, review, or aggregateRating should be specified" - HAS ALL THREE
+              // 2. No duplicate Product entities causing false errors
+              {
+                "@type": "Product",
+                "@id": "https://professionalresumefree.com/creative-resume-templates#product",
+                "name": "Creative Resume Templates 2026",
+                "description": "Professional creative resume templates for job seekers",
+                "url": "https://professionalresumefree.com/creative-resume-templates",
+                "image": "https://professionalresumefree.com/images/creative-resume-templates-preview.jpg",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Professional Resume Free"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "5.0",
+                  "reviewCount": "3",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "review": structuredReviews,
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock",
+                  "url": "https://professionalresumefree.com/creative-resume-templates",
+                  "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+                  "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      "value": "0",
+                      "currency": "USD"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      "addressCountry": "US"
+                    }
+                  },
+                  "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": "US",
+                    "returnPolicyCategory": "https://schema.org/NotPermitted"
+                  }
+                }
+              }
             ]
           })
         }} />
@@ -1228,7 +1224,6 @@ export default function CreativeResumeTemplates({ seoData }) {
         <nav style={styles.breadcrumb} aria-label="Breadcrumb">
           <ol style={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              {/* REMOVED www from Link href */}
               <Link href="https://professionalresumefree.com" itemProp="item" style={{color: 'var(--primary)'}}>
                 <span itemProp="name">Home</span>
               </Link>
@@ -1244,7 +1239,6 @@ export default function CreativeResumeTemplates({ seoData }) {
 
         {/* Main Header */}
         <header style={styles.header} id="main-content">
-          {/* Single H1 tag - exactly 70 characters */}
           <h1 style={styles.mainTitle}>Creative Resume Templates 2026: 50+ Pro Designs</h1>
           
           <div style={styles.metaInfo}>
@@ -1258,7 +1252,6 @@ export default function CreativeResumeTemplates({ seoData }) {
           </div>
 
           <div style={styles.websiteReference}>
-            {/* REMOVED www from href */}
             <p>This comprehensive guide is brought to you by <a href="https://professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}} target="_blank" rel="noopener noreferrer">Professional Resume Free</a> - Your premier resource for professional resume design since 2025.</p>
           </div>
         </header>
@@ -1450,7 +1443,6 @@ export default function CreativeResumeTemplates({ seoData }) {
               </div>
               
               <h3 style={styles.subsectionTitle}>Testing ATS Compatibility</h3>
-              {/* REMOVED www from href */}
               <p className="left-align">Always test creative templates through ATS simulators before submission. Our platform at <a href="https://professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}}>ProfessionalResumeFree.com</a> offers free ATS testing tools that analyze how different design elements affect parsing accuracy.</p>
             </div>
           </section>
@@ -1627,7 +1619,7 @@ export default function CreativeResumeTemplates({ seoData }) {
             </div>
           </section>
 
-          {/* NEW: Internal Linking Section for SEO/GEO Boost */}
+          {/* Internal Linking Section for SEO/GEO Boost */}
           <section style={styles.section}>
             <div style={styles.resourceSection}>
               <h3 style={{...styles.subsectionTitle, textAlign: 'center', marginBottom: '1.5rem'}}>Recommended Resources for Job Seekers</h3>

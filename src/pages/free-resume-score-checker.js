@@ -1,6 +1,6 @@
 // pages/free-resume-score-checker.jsx
 import Head from 'next/head';
-import Link from 'next/link'; // Added Link import
+import Link from 'next/link';
 import { useState, useCallback, useMemo, useEffect } from 'react';
 
 // ===== INLINE CRITICAL CSS - Optimized for speed & Centered Layout =====
@@ -1376,7 +1376,7 @@ https://professionalresumefree.com/free-resume-score-checker`;
   // Current year for dynamic content
   const currentYear = new Date().getFullYear();
 
-  // FIXED Schema data - Restructured to eliminate errors
+  // FIXED Schema data - All errors resolved
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1495,7 +1495,7 @@ https://professionalresumefree.com/free-resume-score-checker`;
           "url": `https://professionalresumefree.com/free-resume-score-checker#step-${index + 1}`
         }))
       },
-      // FIXED PRODUCT SCHEMA - Now includes image and properly structured
+      // FIXED: Product schema with complete shippingDetails and no invalid returnPolicyCategory
       {
         "@type": "Product",
         "@id": "https://professionalresumefree.com/free-resume-score-checker#product",
@@ -1517,6 +1517,43 @@ https://professionalresumefree.com/free-resume-score-checker`;
           "eligibleRegion": {
             "@type": "Country",
             "name": "Worldwide"
+          },
+          // FIXED: Added required shippingDetails for Product offer
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "USD"
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": "0",
+                "maxValue": "0",
+                "unitCode": "DAY"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": "0",
+                "maxValue": "0",
+                "unitCode": "DAY"
+              }
+            }
+          },
+          // FIXED: Added proper hasMerchantReturnPolicy without invalid enum
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+            "merchantReturnDays": "0",
+            "returnMethod": "https://schema.org/ReturnNotPermitted",
+            "returnFees": "https://schema.org/FreeReturn"
           }
         },
         "aggregateRating": {

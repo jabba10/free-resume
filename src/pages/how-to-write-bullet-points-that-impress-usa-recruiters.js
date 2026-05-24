@@ -1037,6 +1037,10 @@ function BulletPointGuide({
   faqDates,
   mistakeCards
 }) {
+  
+  // ===== FIXED: Article @id for itemReviewed reference =====
+  const articleId = `${canonicalUrl}#article`;
+
   return (
     <>
       <Head>
@@ -1101,7 +1105,7 @@ function BulletPointGuide({
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
+        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed references Article by @id */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1110,7 +1114,7 @@ function BulletPointGuide({
               "@graph": [
                 {
                   "@type": "Article",
-                  "@id": `${canonicalUrl}#article`,
+                  "@id": articleId,
                   "headline": "How to Write Bullet Points That Impress USA Recruiters (2026 Guide)",
                   "description": meta.description,
                   "image": meta.image,
@@ -1221,10 +1225,7 @@ function BulletPointGuide({
                         "name": "Professional Resume Free"
                       },
                       "itemReviewed": {
-                        "@type": "Service",
-                        "name": "Resume Bullet Point Guide",
-                        "description": "Free guide to writing effective resume bullet points.",
-                        "url": canonicalUrl
+                        "@id": articleId
                       }
                     }
                   }))

@@ -1868,19 +1868,13 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
           "availability": "https://schema.org/InStock",
           "priceValidUntil": "2026-12-31"
         },
+        // ===== FIXED: REMOVED itemReviewed from inside aggregateRating =====
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": 4.8,
           "reviewCount": 156,
           "bestRating": 5,
-          "worstRating": 1,
-          "itemReviewed": {
-            "@type": "SoftwareApplication",
-            "name": "Free Resume Objective Generator",
-            "applicationCategory": "BusinessApplication",
-            "operatingSystem": "Any",
-            "url": "https://professionalresumefree.com/free-resume-objective-generator"
-          }
+          "worstRating": 1
         },
         "featureList": [
           "ATS-Optimized Templates",
@@ -1935,13 +1929,15 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
         "@type": "SpeakableSpecification",
         "cssSelector": [".title", ".subtitle", ".faq-question h3"]
       },
+      // Reviews with proper itemReviewed
       ...REVIEWS.map((review, index) => ({
         "@type": "Review",
         "@id": `https://professionalresumefree.com/free-resume-objective-generator/#review-${index + 1}`,
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": review.rating,
-          "bestRating": 5
+          "bestRating": 5,
+          "worstRating": 1
         },
         "author": {
           "@type": "Person",
@@ -2191,11 +2187,18 @@ const ResumeObjectiveGenerator = ({ seoData, buildTimestamp }) => {
             </div>
           </div>
 
+          {/* FIXED: AggregateRating now includes itemReviewed */}
           <div className="aggregate-rating" itemScope itemType="https://schema.org/AggregateRating">
             <meta itemProp="ratingValue" content="4.8" />
             <meta itemProp="ratingCount" content="156" />
             <meta itemProp="bestRating" content="5" />
             <meta itemProp="worstRating" content="1" />
+            <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+              <meta itemProp="name" content="Free Resume Objective Generator" />
+              <meta itemProp="applicationCategory" content="BusinessApplication" />
+              <meta itemProp="operatingSystem" content="Any" />
+              <meta itemProp="url" content="https://professionalresumefree.com/free-resume-objective-generator" />
+            </div>
           </div>
         </header>
 

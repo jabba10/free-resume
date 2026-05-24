@@ -30,8 +30,8 @@ import {
   FiVideo,
   FiCalendar,
   FiUsers,
-  FiZap, // Added for new section
-  FiLink   // Added for new section
+  FiZap,
+  FiLink
 } from 'react-icons/fi';
 
 // ===== INLINE CRITICAL CSS FOR MAXIMUM SPEED =====
@@ -1124,7 +1124,7 @@ const criticalCSS = `
     border-color: #111111;
   }
   
-  /* Internal Linking Section (New) */
+  /* Internal Linking Section */
   .internalLinksSection {
     padding: clamp(30px, 6vw, 50px) 0;
     background: #ffffff;
@@ -1361,7 +1361,7 @@ const InterviewTips = ({
 
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
-  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeReviewDates = reviewDates || Array(4).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(12).fill(freshnessIndicator);
 
   const mainTips = [
@@ -1462,7 +1462,7 @@ const InterviewTips = ({
     {
       id: 14,
       title: "Practice Common Interview Questions Daily",
-      content: "Maybe begin with shaping how you describe yourself. Then shift toward explaining why this role fits your direction. Next comes listing what you handle well, while also admitting areas growing slowly. Pull from old jobs - situations where tension broke because of you, teamwork flowed smoothly, or pressure didn't shake your focus. Try speaking it all straight through. If possible, capture the sound and replay it after. Every time you repeat, phrases link better, stumbles shrink, and speech feels truer - sharper, steadier, like your own voice finally caught up. Over time, doing it again makes it seem less awkward. Answers start coming naturally, not stuck in your head too long, simply because practice smooths the rough edges. That quiet comfort? Confidence shows up that way.",
+      content: "Maybe begin with shaping how you describe yourself. Then shift toward explaining why this role fits your direction. Next comes listing what you handle well, while also admitting areas growing slowly. Pull from old jobs - situations where tension broke because of you, teamwork flowed smoothly, or pressure didn't shake your focus. Try speaking it all straight through. If possible, capture the sound and replay it after. Every time you repeat, phrases link better, stumbles shrink, and speech feels truer - sharper, steadier, like your own voice finally caught up.",
       icon: <FiMessageCircle />,
       level: "Intermediate"
     }
@@ -1568,51 +1568,51 @@ const InterviewTips = ({
   const faqs = [
     {
       question: "How can I make my resume ATS-friendly for free in 2026?",
-      answer: "Start off strong with a clean layout that skips images and complex designs. Instead of clutter, go for clear parts like Work History, School, Abilities - nothing fancy. Tuck in words from the job post where they fit, without forcing them. Built-in styles help your file move smoothly through hiring software most companies rely on today. These layouts get made with one goal: making it past digital filters quietly. Each choice here lines up with how automated checkers read files now.."
+      answer: "Start off strong with a clean layout that skips images and complex designs. Instead of clutter, go for clear parts like Work History, School, Abilities - nothing fancy. Tuck in words from the job post where they fit, without forcing them. Built-in styles help your file move smoothly through hiring software most companies rely on today."
     },
     {
       question: "What are the most important resume writing tips for 2026 job market?",
-      answer: "A fresh look at your resume starts with matching it closely to the job, dropping the habit of sending the same copy everywhere. Numbers tell your story better than broad claims about success or performance. Smooth formatting helps hiring software catch every detail without hiccups along the way. Words matter - speak like someone already in the field, not like a brochure trying too hard. Length stays fixed, just like these changes keep the original intent intact. Start strong by placing what's newest and closest to your skills right up top - that part speaks loudest. A brief opening works best when it sounds like you, not a script. Changing fields? Focus on abilities that fit just the same. Glance at how it appears on a small screen first. These days, many reviewers scroll through applications on their phones, so clear lines make the difference."
+      answer: "A fresh look at your resume starts with matching it closely to the job, dropping the habit of sending the same copy everywhere. Numbers tell your story better than broad claims about success or performance. Smooth formatting helps hiring software catch every detail without hiccups along the way."
     },
     {
       question: "How should I prepare for job interviews in 2026?",
-      answer: "By 2026, getting ready for job talks means digging deep into each firm - look up what's new and what's tough lately. Instead of listing wins, shape a dozen sharp tales from past work using the STAR method. Talk through common prompts every day, mixing in oddball ones too. Before logging on, check cameras, audio, lighting - make sure nothing fails when it counts. Have real things to ask them, stuff that shows you've thought ahead. Match your résumé point by point with your online profile so gaps vanish. Think about clothes early; pick quiet colors plus a tidy spot behind you. Invite others to quiz you out loud before showtime."
+      answer: "By 2026, getting ready for job talks means digging deep into each firm - look up what's new and what's tough lately. Instead of listing wins, shape a dozen sharp tales from past work using the STAR method. Talk through common prompts every day, mixing in oddball ones too."
     },
     {
       question: "Is the resume builder really free with no hidden costs or watermarks?",
-      answer: "Totally free? That is right - ProfessionalResumeFree.com asks for nothing. Watermarks never show up. Hidden fees do not exist here either. Building resumes happens fast, even editing them later on. Download options include PDFs, Word files, or plain text versions. Updates take seconds, anytime at all. Need an ATS-friendly format? It adjusts automatically. Paying money? Never part of the process. Credit cards stay out of it completely. Signing up first? Not necessary just to begin."
+      answer: "Totally free? That is right - ProfessionalResumeFree.com asks for nothing. Watermarks never show up. Hidden fees do not exist here either. Building resumes happens fast, even editing them later on. Download options include PDFs, Word files, or plain text versions."
     },
     {
       question: "How long should my resume be for optimal results?",
-      answer: "Most pros keep it to one page unless they have more than a decade of experience - then two pages make sense. Senior roles or long careers often need that extra space. New grads stick to just one page, no exceptions. What matters is substance, not how much fits. Each sentence must earn its place. Put newer jobs up front, give them room to breathe. Older gigs? Just highlight what mattered. Leave out the rest."
+      answer: "Most pros keep it to one page unless they have more than a decade of experience - then two pages make sense. Senior roles or long careers often need that extra space. New grads stick to just one page, no exceptions."
     },
     {
       question: "What format should I use for online applications?",
-      answer:"Most online job forms work well with PDFs because they keep layout consistent on any screen. Yet certain outdated hiring software reads Word files better. Try sending a .docx when needed alongside the PDF version. Naming matters - call your document 'FirstName_LastName_JobTitle_Resume.pdf' without shortcuts. Match what each posting asks for, exactly. One size does not fit every submission."
+      answer: "Most online job forms work well with PDFs because they keep layout consistent on any screen. Yet certain outdated hiring software reads Word files better. Try sending a .docx when needed alongside the PDF version."
     },
     {
       question: "How do I handle employment gaps on my resume?",
-      answer: "Truth tends to land better when shaped with some thought. Skip listing each month - years alone do the job fine. Gaps? Short stints, odd jobs, or advising gigs smooth things out. Helping without pay fits here, particularly if skills came from it. The real weight lies in how growth happened while off course. When the gap stretches far back, pick a resume layout putting abilities up front, not timelines. Yet keep a quiet, clear reason close at hand for time off - doing so speaks of grown-up steadiness."
+      answer: "Truth tends to land better when shaped with some thought. Skip listing each month - years alone do the job fine. Gaps? Short stints, odd jobs, or advising gigs smooth things out. Helping without pay fits here, particularly if skills came from it."
     },
     {
       question: "What are the biggest ATS resume mistakes to avoid?",
-      answer: "Some resumes break on scanning software when images or charts block the text. Sections labeled oddly might confuse automated readers. Contact details need clear spacing so systems catch them right. Piling terms too tightly fails more than weaving them normally into sentences. Fancy typefaces often scramble what should stay clean and readable. Info tucked into page tops or bottoms sometimes disappears during processing. Sending files in rare formats stops upload engines cold. Leaving out words straight from the job post weakens match chances."
+      answer: "Some resumes break on scanning software when images or charts block the text. Sections labeled oddly might confuse automated readers. Contact details need clear spacing so systems catch them right."
     },
     {
       question: "How can I improve my resume without experience?",
-      answer: "Start here with classes that matter most. A different angle shows projects where grades stood out. Some time ago a short job helped others while teaching patience. Elsewhere abilities moved across jobs without warning. Online proof of learning appears near recent wins. Picture someone ready but still growing. Abilities listed again in their own space. Training completed online gets mentioned once more."
+      answer: "Start here with classes that matter most. A different angle shows projects where grades stood out. Some time ago a short job helped others while teaching patience. Elsewhere abilities moved across jobs without warning."
     },
     {
       question: "Should I include references on my resume?",
-      answer: "Skip putting references right on your resume. A better move? Keep a different page labeled. Professional References with 3 to 5 people who agree to speak when asked. That way, you free up room on your main page for real wins and abilities. Have those folks lined up ahead of time. Let each one know they might get a call out of the blue. Space matters - spend it where it counts."
+      answer: "Skip putting references right on your resume. A better move? Keep a different page labeled Professional References with 3 to 5 people who agree to speak when asked."
     },
     {
       question: "How often should I update my resume?",
-      answer: "Every few months, make changes - especially after big wins. Skipping updates means losing track of what you've done. When hunting for work, take time to rethink everything from scratch. Right after a key project ends, jot it down straight away. Even without plans to apply, go over your progress once a year. Missing that? Details fade faster than expected."
+      answer: "Every few months, make changes - especially after big wins. Skipping updates means losing track of what you've done. When hunting for work, take time to rethink everything from scratch."
     },
     {
       question: "What's the difference between resume and CV?",
-      answer: "A page or 2 - that's what you'll usually see in a U.S. resume, just enough to highlight work history tied to the role. Meanwhile, think of a CV as a deeper dive, stretching past two pages with full details on education, research, and career milestones. These longer versions show up often in universities, labs, medicine, or when applying beyond borders. Different paths call for different documents; check where your field stands before deciding. Most office-centered roles stick to the shorter format."
+      answer: "A page or 2 - that's what you'll usually see in a U.S. resume, just enough to highlight work history tied to the role. Meanwhile, think of a CV as a deeper dive, stretching past two pages with full details on education, research, and career milestones."
     }
   ];
 
@@ -1625,7 +1625,6 @@ const InterviewTips = ({
     { title: "Free Cover Letter Generator", link: "/free-cover-letter-generator", icon: <FiTarget /> }
   ];
 
-  // Selected Internal Links for SEO/GEO Boost
   const recommendedInternalLinks = [
     {
       title: "Use ChatGPT Without Sounding Like a Robot",
@@ -1659,7 +1658,6 @@ const InterviewTips = ({
     }
   ];
 
-  // SEO Keywords array
   const seoKeywords = [
     "resume writing tips 2026",
     "interview preparation guide",
@@ -1675,34 +1673,13 @@ const InterviewTips = ({
     "career advice 2026",
     "job search strategies",
     "resume optimization",
-    "interview techniques",
-    "resume skills section",
-    "behavioral interview questions",
-    "resume summary examples",
-    "cover letter tips",
-    "resume templates free ATS",
-    "interview success tips",
-    "job application tips",
-    "career development guide",
-    "free resume maker",
-    "professional resume templates",
-    "ATS optimization",
-    "job interview preparation",
-    "resume writing service free",
-    "interview questions and answers",
-    "resume builder online free",
-    "how to write a resume",
-    "interview skills",
-    "resume help free",
-    "job search tips 2026"
+    "interview techniques"
   ];
 
-  // ===== FIXED STRUCTURED DATA - All errors resolved =====
-  // Key fixes:
-  // 1. Removed duplicate FAQPage - now only one FAQPage in the graph
-  // 2. Changed itemReviewed in AggregateRating from WebPage to CreativeWork (valid type)
-  // 3. Each Review now has valid itemReviewed with @type: "CreativeWork"
-  // 4. Added proper @ids for all entities
+  // ===== FIXED STRUCTURED DATA =====
+  // FIX #1: AggregateRating now references a Product (not CreativeWork)
+  // FIX #2: All Reviews now have itemReviewed as Product (valid type)
+  // FIX #3: Only ONE FAQPage in the @graph (removed duplicate)
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1764,7 +1741,7 @@ const InterviewTips = ({
           ]
         }
       },
-      // ===== FIXED: AggregateRating with CreativeWork as itemReviewed =====
+      // FIXED: AggregateRating now references a Product type (VALID)
       {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
@@ -1772,11 +1749,12 @@ const InterviewTips = ({
         "bestRating": "5",
         "worstRating": "1",
         "itemReviewed": {
-          "@type": "CreativeWork",
-          "name": "Resume Writing Tips & Interview Guide 2026"
+          "@type": "Product",
+          "name": "Resume Writing Tips & Interview Guide 2026",
+          "description": "Professional resume writing tips and interview preparation guide"
         }
       },
-      // ===== FIXED: Individual Reviews with correct itemReviewed type =====
+      // FIXED: All Reviews now have itemReviewed as Product (VALID)
       {
         "@type": "Review",
         "reviewRating": {
@@ -1791,7 +1769,7 @@ const InterviewTips = ({
         "reviewBody": "Followed these tips and landed 5 interviews in 2 weeks! The ATS optimization guide helped my resume actually get seen by humans.",
         "datePublished": safeReviewDates[0] || safeCurrentDate,
         "itemReviewed": {
-          "@type": "CreativeWork",
+          "@type": "Product",
           "name": "Resume Writing Tips & Interview Guide 2026"
         }
       },
@@ -1809,7 +1787,7 @@ const InterviewTips = ({
         "reviewBody": "As a career changer, the transferable skills advice was invaluable. Landed a 40% salary increase in a new industry.",
         "datePublished": safeReviewDates[1] || safeCurrentDate,
         "itemReviewed": {
-          "@type": "CreativeWork",
+          "@type": "Product",
           "name": "Resume Writing Tips & Interview Guide 2026"
         }
       },
@@ -1827,7 +1805,7 @@ const InterviewTips = ({
         "reviewBody": "The interview preparation section helped me ace 3 final rounds. Got offers from all companies I interviewed with!",
         "datePublished": safeReviewDates[2] || safeCurrentDate,
         "itemReviewed": {
-          "@type": "CreativeWork",
+          "@type": "Product",
           "name": "Resume Writing Tips & Interview Guide 2026"
         }
       },
@@ -1845,7 +1823,7 @@ const InterviewTips = ({
         "reviewBody": "Free resume builder combined with these tips transformed my job search. Went from 0 responses to 3 offers in a month.",
         "datePublished": safeReviewDates[3] || safeCurrentDate,
         "itemReviewed": {
-          "@type": "CreativeWork",
+          "@type": "Product",
           "name": "Resume Writing Tips & Interview Guide 2026"
         }
       },
@@ -1906,7 +1884,7 @@ const InterviewTips = ({
         "areaServed": "Global",
         "description": "Free ATS-optimized resume builder with professional templates and interview tips"
       },
-      // ===== FIXED: Single FAQPage (removed duplicate) =====
+      // ===== ONLY ONE FAQPage - DUPLICATE REMOVED =====
       {
         "@type": "FAQPage",
         "@id": "https://professionalresumefree.com/interview-tips/#faq",
@@ -2128,17 +2106,14 @@ const InterviewTips = ({
             <div className="sectionHeader">
               <h2 className="sectionTitle" id="intro-title">Expert Resume Writing & Interview Preparation Guide for 2026</h2>
               <p className="sectionSubtitle">
-                Right now, getting hired means more than just listing your jobs. Many firms run applications through software that blocks most people right away. This book mixes old school tips with smart moves for tough interviews. Standing out happens when preparation meets opportunity - quietly but firmly. Tools inside turn small advantages into real results. The system favors those who know how it works.
+                Right now, getting hired means more than just listing your jobs. Many firms run applications through software that blocks most people right away. This book mixes old school tips with smart moves for tough interviews. Standing out happens when preparation meets opportunity - quietly but firmly. Tools inside turn small advantages into real results.
               </p>
             </div>
             <div className="introContent">
               <div className="introText">
                 <h3>Complete Career Success System</h3>
                 <p>
-                  This guide holds what it takes to move through today's job hunt terrain. Starting with resumes built to beat computer filters, moving into handling interview questions that probe past behavior, then building solid plans tailored for the hiring scene ahead. Each part fits together without relying on shortcuts or worn-out phrases. Tools here adjust naturally to shifts in how companies hire. What works now stays practical, not flashy. Methods stay grounded in real steps people can follow. The focus remains steady on clarity, not noise.
-                </p>
-                <p>
-                  One step follows another, forming a full plan to move your work life forward. If you just finished school, have years behind you, or are switching paths, these methods can make you noticeable now when things feel crowded.
+                  This guide holds what it takes to move through today's job hunt terrain. Starting with resumes built to beat computer filters, moving into handling interview questions that probe past behavior, then building solid plans tailored for the hiring scene ahead. Each part fits together without relying on shortcuts or worn-out phrases.
                 </p>
                 <div className="introFeatures">
                   <div className="featureItem">
@@ -2187,7 +2162,7 @@ const InterviewTips = ({
         </section>
 
         {/* Main Tips Section */}
-        <section id="main-tips" className="tipsSection" aria-labelledby="tips-title" itemScope itemType="https://schema.org/ItemList">
+        <section id="main-tips" className="tipsSection" aria-labelledby="tips-title">
           <div className="container">
             <div className="sectionHeader">
               <h2 className="sectionTitle" id="tips-title">Essential Resume Writing Tips for 2026 Job Market</h2>
@@ -2197,18 +2172,17 @@ const InterviewTips = ({
             </div>
             <div className="tipsGrid">
               {mainTips.map(tip => (
-                <div key={tip.id} className="tipCard" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                  <meta itemProp="position" content={tip.id} />
+                <div key={tip.id} className="tipCard">
                   <div className="cardHeader">
                     <div className="cardIconContainer" aria-hidden="true">
                       {tip.icon}
                     </div>
                     <div className="cardTitleContainer">
-                      <h3 className="tipTitle" itemProp="name">{tip.title}</h3>
+                      <h3 className="tipTitle">{tip.title}</h3>
                       <span className="tipCategory">{tip.category}</span>
                     </div>
                   </div>
-                  <p className="tipContent" itemProp="description">{tip.content}</p>
+                  <p className="tipContent">{tip.content}</p>
                   <div className="cardNumber" aria-hidden="true">{tip.id.toString().padStart(2, '0')}</div>
                   <div className="cardActions">
                     <Link 
@@ -2329,7 +2303,7 @@ const InterviewTips = ({
         </section>
 
         {/* FAQ Section */}
-        <section className="faqSection" aria-labelledby="faq-title" itemScope itemType="https://schema.org/FAQPage">
+        <section className="faqSection" aria-labelledby="faq-title">
           <div className="container">
             <div className="sectionHeader">
               <h2 className="sectionTitle" id="faq-title">Frequently Asked Questions About Resume Writing & Interviews</h2>
@@ -2339,10 +2313,10 @@ const InterviewTips = ({
             </div>
             <div className="faqGrid">
               {faqs.slice(0, 8).map((faq, index) => (
-                <div key={index} className="faqItem" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                  <h3 className="faqQuestion" itemProp="name">{faq.question}</h3>
-                  <div className="faqAnswer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                    <p itemProp="text">{faq.answer}</p>
+                <div key={index} className="faqItem">
+                  <h3 className="faqQuestion">{faq.question}</h3>
+                  <div className="faqAnswer">
+                    <p>{faq.answer}</p>
                   </div>
                 </div>
               ))}
@@ -2366,7 +2340,7 @@ const InterviewTips = ({
           </div>
         </section>
 
-        {/* Recommended Internal Links Section (SEO/GEO Boost) */}
+        {/* Recommended Internal Links Section */}
         <section className="internalLinksSection" aria-labelledby="recommended-resources-title">
           <div className="container">
             <div className="sectionHeader">
@@ -2406,7 +2380,7 @@ const InterviewTips = ({
             <div className="ctaContent">
               <h2 className="ctaTitle" id="cta-title">Ready to Transform Your Career with ATS-Optimized Resumes?</h2>
               <p className="ctaSubtitle">
-                Join 4 million+ successful job seekers who landed their dream jobs using our <strong>free ATS resume builder</strong> and <strong>expert career advice</strong>. Create a professional, ATS-friendly resume in minutes and start getting more interviews today.
+                Join 4 million+ successful job seekers who landed their dream jobs using our <strong>free ATS resume builder</strong> and <strong>expert career advice</strong>.
               </p>
               <div className="ctaButtons">
                 <Link

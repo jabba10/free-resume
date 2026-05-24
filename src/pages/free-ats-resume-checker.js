@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
-import { FiBriefcase, FiHeart, FiBookOpen, FiShield, FiSearch } from 'react-icons/fi'; // Added icons for new links
+import { FiBriefcase, FiHeart, FiBookOpen, FiShield, FiSearch } from 'react-icons/fi';
 
 // ===== INLINE CRITICAL CSS - Optimized for speed with CENTERING =====
 const criticalCSS = `
@@ -1731,7 +1731,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
   // SINGLE CANONICAL URL
   const canonicalUrl = "https://professionalresumefree.com/free-ats-resume-checker";
 
-  // NEW: Randomly selected internal links for SEO/GEO strengthening (checked against history to avoid repeats)
+  // Internal links for SEO/GEO strengthening
   const footerInternalLinks = [
     { href: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "How to Write a Resume for USA Administrative Jobs", icon: FiBriefcase },
     { href: "/best-resume-examples-for-usa-healthcare-jobs", text: "Best Resume Examples for USA Healthcare Jobs", icon: FiHeart },
@@ -1740,7 +1740,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
     { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", text: "Most In-Demand Resume Keywords for USA Job Seekers", icon: FiSearch },
   ];
 
-  // ===== FIXED SCHEMA DATA - All issues resolved =====
+  // ===== FIXED SCHEMA DATA - Added hasMerchantReturnPolicy to all Offers =====
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1806,7 +1806,27 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": "2026-12-31",
+          // FIXED: Added hasMerchantReturnPolicy for non-critical warning
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/NotPermitted",
+            "merchantReturnDays": 0
+          },
+          // FIXED: Added shippingDetails for completeness
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "USD"
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          }
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -1867,7 +1887,7 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "image": step.image
         }))
       },
-      // ===== FIXED: Individual Reviews with REQUIRED itemReviewed field =====
+      // Individual Reviews with itemReviewed field
       ...safeReviews.map((review, index) => ({
         "@type": "Review",
         "@id": `${canonicalUrl}#review-${index + 1}`,
@@ -1926,7 +1946,13 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
+          "availability": "https://schema.org/InStock",
+          // FIXED: Added hasMerchantReturnPolicy
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/NotPermitted"
+          }
         }
       },
       {
@@ -1951,7 +1977,27 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
           "priceValidUntil": "2026-12-31",
-          "url": canonicalUrl
+          "url": canonicalUrl,
+          // FIXED: Added hasMerchantReturnPolicy for non-critical warning
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/NotPermitted",
+            "merchantReturnDays": 0
+          },
+          // FIXED: Added shippingDetails for completeness
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "USD"
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            }
+          }
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -2292,7 +2338,7 @@ WORK EXPERIENCE
               </div>
             </section>
 
-            {/* Long-Tail Keywords Section - GEO Optimization */}
+            {/* Long-Tail Keywords Section */}
             <section className="how-to-section">
               <h2 className="section-title">Common Questions About ATS Resume Checking</h2>
               <div className="how-to-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
@@ -2455,7 +2501,7 @@ WORK EXPERIENCE
             </section>
           </main>
 
-          {/* Build Info - Fixed hydration issue by using client-side state */}
+          {/* Build Info */}
           <div className="build-info">
             <p>Last updated: {safeFreshnessIndicator} • Build: {buildTime}</p>
           </div>
@@ -2466,7 +2512,7 @@ WORK EXPERIENCE
             <span itemProp="softwareVersion">2026.1.0</span>
           </div>
 
-          {/* === NEW: Internal Links Footer Section for SEO/GEO === */}
+          {/* Internal Links Footer Section for SEO/GEO */}
           <section className="internal-links-footer" aria-labelledby="internal-links-heading">
             <div className="container">
               <h2 id="internal-links-heading" className="internal-links-title">
@@ -2514,7 +2560,6 @@ export async function getStaticProps() {
       howToSteps: HOW_TO_STEPS,
       breadcrumbData: BREADCRUMB_DATA
     },
-    // Revalidate every hour for fresh content
     revalidate: 3600,
   };
 }

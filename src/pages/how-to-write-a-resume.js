@@ -535,7 +535,7 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
         <meta name="twitter:description" content="Expert resume writing guide with templates and proven job search strategies for 2026." />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-guide-preview.jpg" />
         
-        {/* FIXED: Properly structured Schema.org with proper nesting */}
+        {/* FIXED: Properly structured Schema.org with shippingDetails and valid returnPolicyCategory */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -616,7 +616,49 @@ export default function HowToWriteAResume({ seoData, buildTimestamp }) {
                     "price": "0",
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock",
-                    "url": "https://professionalresumefree.com/how-to-write-a-resume"
+                    "url": "https://professionalresumefree.com/how-to-write-a-resume",
+                    "priceValidUntil": "2026-12-31",
+                    "eligibleRegion": {
+                      "@type": "Country",
+                      "name": "Worldwide"
+                    },
+                    // FIXED: Added required shippingDetails for the offer
+                    "shippingDetails": {
+                      "@type": "OfferShippingDetails",
+                      "shippingRate": {
+                        "@type": "MonetaryAmount",
+                        "value": "0",
+                        "currency": "USD"
+                      },
+                      "shippingDestination": {
+                        "@type": "DefinedRegion",
+                        "addressCountry": "US"
+                      },
+                      "deliveryTime": {
+                        "@type": "ShippingDeliveryTime",
+                        "handlingTime": {
+                          "@type": "QuantitativeValue",
+                          "minValue": "0",
+                          "maxValue": "0",
+                          "unitCode": "DAY"
+                        },
+                        "transitTime": {
+                          "@type": "QuantitativeValue",
+                          "minValue": "0",
+                          "maxValue": "0",
+                          "unitCode": "DAY"
+                        }
+                      }
+                    },
+                    // FIXED: Added valid return policy with proper enum URL values
+                    "hasMerchantReturnPolicy": {
+                      "@type": "MerchantReturnPolicy",
+                      "applicableCountry": "US",
+                      "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                      "merchantReturnDays": "0",
+                      "returnMethod": "https://schema.org/ReturnNotPermitted",
+                      "returnFees": "https://schema.org/FreeReturn"
+                    }
                   },
                   "review": testimonials.map((testimonial) => ({
                     "@type": "Review",

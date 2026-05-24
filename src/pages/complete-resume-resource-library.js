@@ -1286,8 +1286,7 @@ export default function CompleteResumeResourceLibrary({
 }) {
   const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
 
-  // ===== FIXED STRUCTURED DATA - Using proper itemReviewed type =====
-  // KEY FIX: Changed itemReviewed from "CreativeWork" to "Service"
+  // ===== FIXED STRUCTURED DATA - itemReviewed now uses Organization type =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1398,6 +1397,7 @@ export default function CompleteResumeResourceLibrary({
           }
         }))
       },
+      // ===== FIXED: ItemList with Reviews - itemReviewed now uses Organization =====
       {
         "@type": "ItemList",
         "itemListElement": SUCCESS_STORIES.map((story, index) => ({
@@ -1408,7 +1408,8 @@ export default function CompleteResumeResourceLibrary({
             "reviewRating": {
               "@type": "Rating",
               "ratingValue": 5,
-              "bestRating": 5
+              "bestRating": 5,
+              "worstRating": 1
             },
             "author": {
               "@type": "Person",
@@ -1424,23 +1425,17 @@ export default function CompleteResumeResourceLibrary({
               "@type": "Organization",
               "name": "Professional Resume Free"
             },
-            // ===== FIXED: Changed from CreativeWork to Service =====
+            // ===== FIXED: Changed from Service to Organization =====
             "itemReviewed": {
-              "@type": "Service",
-              "name": "Professional Resume Writing & Career Guidance Service",
-              "description": "Comprehensive resume writing guides, ATS optimization tools, and industry-specific templates for job seekers",
-              "provider": {
-                "@type": "Organization",
-                "name": "Professional Resume Free",
-                "url": "https://professionalresumefree.com"
-              },
-              "serviceType": "Resume Writing and Career Consulting",
-              "audience": {
-                "@type": "Audience",
-                "name": "Job Seekers and Career Changers"
-              },
+              "@type": "Organization",
+              "name": "Professional Resume Free",
               "url": "https://professionalresumefree.com",
-              "datePublished": "2026-01-01"
+              "description": "Professional resume writing guides, ATS optimization tools, and industry-specific templates for job seekers",
+              "foundingDate": "2024",
+              "areaServed": {
+                "@type": "Country",
+                "name": "United States"
+              }
             }
           }
         }))

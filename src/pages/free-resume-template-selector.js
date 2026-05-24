@@ -1,6 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import styles from './free-resume-template-selector.module.css';
 
 // Current year for dynamic content
@@ -375,10 +374,6 @@ function TemplateCard({ template, isSelected, onSelect, onPreview }) {
 function TemplatePreviewModal({ template, isOpen, onClose, onSelect }) {
   if (!isOpen) return null;
 
-  const compatibilityScore = Math.round(
-    (template.compatibility.ats + template.compatibility.readability + template.compatibility.design) / 3
-  );
-
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
@@ -605,7 +600,6 @@ function TemplateComparison({ templates }) {
             <div key={index} className={styles.comparisonCell}>
               <div className={styles.compFormats}>
                 <span className={styles.formatTag}>DOCX</span>
-                <span className={styles.formatTag}>PDF</span>
               </div>
             </div>
           ))}
@@ -626,7 +620,139 @@ export default function ResumeTemplateSelector() {
   const [activeFaq, setActiveFaq] = useState(null);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
 
-  // Schema data - UPDATED with non-www URLs
+  // Helper to generate and download a Word Doc directly
+  const generateWordDoc = (templateName) => {
+    const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+         "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+         "xmlns='http://www.w3.org/TR/REC-html40'>"+
+         "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+    const footer = "</body></html>";
+    
+    // Simple HTML structure for the resume
+    const sourceHTML = header+`
+      <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <h1 style="color: #2c3e50;">${templateName} Resume Template</h1>
+        <p>This is a starter template based on your selection. Replace this text with your details.</p>
+        
+        <h2 style="color: #2c3e50; border-bottom: 1px solid #ccc;">Profile</h2>
+        <p>[Insert Professional Summary Here]</p>
+        
+        <h2 style="color: #2c3e50; border-bottom: 1px solid #ccc;">Experience</h2>
+        <p><strong>Job Title</strong> | Company Name<br/>Dates<br/>- Achievement 1<br/>- Achievement 2</p>
+        
+        <h2 style="color: #2c3e50; border-bottom: 1px solid #ccc;">Education</h2>
+        <p><strong>Degree</strong> | University</p>
+      </div>
+    `+footer;
+    
+    const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+    const fileDownload = document.createElement("a");
+    document.body.appendChild(fileDownload);
+    fileDownload.href = source;
+    fileDownload.download = `${templateName.replace(/\s+/g, '-').toLowerCase()}-resume.doc`;
+    fileDownload.click();
+    document.body.removeChild(fileDownload);
+  };
+
+  // Filter templates based on selections - MOVED UP to avoid initialization errors
+  const filteredTemplates = useMemo(() => {
+    return RESUME_TEMPLATES.filter(template => {
+      // Category filter
+      if (selectedCategory !== 'all' && template.category !== selectedCategory) {
+        if (!(selectedCategory === 'ats-friendly' && template.compatibility.ats >= 85)) {
+          return false;
+        }
+      }
+      
+      // Experience filter
+      if (selectedExperience !== 'all' && !template.experience.includes(selectedExperience)) {
+        return false;
+      }
+      
+      // Style filter
+      if (selectedStyle !== 'all' && template.style !== selectedStyle) {
+        return false;
+      }
+      
+      // Industry filter
+      if (selectedIndustry !== 'All Industries' && !template.industry.includes(selectedIndustry.toLowerCase())) {
+        return false;
+      }
+      
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        return (
+          template.name.toLowerCase().includes(query) ||
+          template.description.toLowerCase().includes(query) ||
+          template.industry.some(ind => ind.includes(query)) ||
+          template.features.some(feat => feat.toLowerCase().includes(query))
+        );
+      }
+      
+      return true;
+    });
+  }, [selectedCategory, selectedExperience, selectedStyle, selectedIndustry, searchQuery]);
+
+  const handleSelectTemplate = useCallback((template) => {
+    setSelectedTemplates(prev => {
+      if (prev.some(t => t.id === template.id)) {
+        return prev.filter(t => t.id !== template.id);
+      } else {
+        return [...prev, template];
+      }
+    });
+  }, []);
+
+  const handleDownloadSelected = useCallback(() => {
+    if (selectedTemplates.length === 0) {
+      alert('Please select at least one template to download.');
+      return;
+    }
+    
+    // Download all selected templates
+    selectedTemplates.forEach((template, index) => {
+      setTimeout(() => {
+        generateWordDoc(template.name);
+      }, index * 500); // Stagger downloads slightly to prevent browser blocking
+    });
+  }, [selectedTemplates]);
+
+  const handleClearSelection = useCallback(() => {
+    setSelectedTemplates([]);
+  }, []);
+
+  const handlePreviewTemplate = useCallback((template) => {
+    setPreviewTemplate(template);
+  }, []);
+
+  const handleClosePreview = useCallback(() => {
+    setPreviewTemplate(null);
+  }, []);
+
+  const handleRecommendTemplate = useCallback(() => {
+    // Simple recommendation logic based on common filters
+    let recommended;
+    
+    if (selectedCategory !== 'all') {
+      recommended = filteredTemplates.find(t => t.category === selectedCategory);
+    } else if (selectedExperience !== 'all') {
+      recommended = filteredTemplates.find(t => t.experience.includes(selectedExperience));
+    } else if (selectedIndustry !== 'All Industries') {
+      recommended = filteredTemplates.find(t => t.industry.includes(selectedIndustry.toLowerCase()));
+    }
+    
+    if (!recommended && filteredTemplates.length > 0) {
+      recommended = filteredTemplates[0];
+    }
+    
+    if (recommended) {
+      setSelectedTemplates([recommended]);
+      alert(`Recommended: "${recommended.name}"\n\nPerfect for ${selectedIndustry !== 'All Industries' ? selectedIndustry : 'your'} needs with ${recommended.compatibility.ats}% ATS compatibility.`);
+    }
+  }, [filteredTemplates, selectedCategory, selectedExperience, selectedIndustry]);
+
+  // Schema data
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -668,7 +794,7 @@ export default function ResumeTemplateSelector() {
             "description": template.description,
             "about": template.industry.join(', '),
             "creativeWorkStatus": "Published",
-            "fileFormat": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/pdf"]
+            "fileFormat": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
           }
         }))
       },
@@ -717,98 +843,6 @@ export default function ResumeTemplateSelector() {
     ]
   };
 
-  // Filter templates based on selections
-  const filteredTemplates = RESUME_TEMPLATES.filter(template => {
-    // Category filter
-    if (selectedCategory !== 'all' && template.category !== selectedCategory) {
-      if (!(selectedCategory === 'ats-friendly' && template.compatibility.ats >= 85)) {
-        return false;
-      }
-    }
-    
-    // Experience filter
-    if (selectedExperience !== 'all' && !template.experience.includes(selectedExperience)) {
-      return false;
-    }
-    
-    // Style filter
-    if (selectedStyle !== 'all' && template.style !== selectedStyle) {
-      return false;
-    }
-    
-    // Industry filter
-    if (selectedIndustry !== 'All Industries' && !template.industry.includes(selectedIndustry.toLowerCase())) {
-      return false;
-    }
-    
-    // Search filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      return (
-        template.name.toLowerCase().includes(query) ||
-        template.description.toLowerCase().includes(query) ||
-        template.industry.some(ind => ind.includes(query)) ||
-        template.features.some(feat => feat.toLowerCase().includes(query))
-      );
-    }
-    
-    return true;
-  });
-
-  const handleSelectTemplate = useCallback((template) => {
-    setSelectedTemplates(prev => {
-      if (prev.some(t => t.id === template.id)) {
-        return prev.filter(t => t.id !== template.id);
-      } else {
-        return [...prev, template];
-      }
-    });
-  }, []);
-
-  const handleDownloadSelected = useCallback(() => {
-    if (selectedTemplates.length === 0) {
-      alert('Please select at least one template to download.');
-      return;
-    }
-    
-    // In a real implementation, this would trigger actual downloads
-    alert(`Downloading ${selectedTemplates.length} template(s)...\n\nThis would initiate download of:\n${selectedTemplates.map(t => `• ${t.name} (.docx & PDF)`).join('\n')}`);
-  }, [selectedTemplates]);
-
-  const handleClearSelection = useCallback(() => {
-    setSelectedTemplates([]);
-  }, []);
-
-  const handlePreviewTemplate = useCallback((template) => {
-    setPreviewTemplate(template);
-  }, []);
-
-  const handleClosePreview = useCallback(() => {
-    setPreviewTemplate(null);
-  }, []);
-
-  const handleRecommendTemplate = useCallback(() => {
-    // Simple recommendation logic based on common filters
-    let recommended;
-    
-    if (selectedCategory !== 'all') {
-      recommended = filteredTemplates.find(t => t.category === selectedCategory);
-    } else if (selectedExperience !== 'all') {
-      recommended = filteredTemplates.find(t => t.experience.includes(selectedExperience));
-    } else if (selectedIndustry !== 'All Industries') {
-      recommended = filteredTemplates.find(t => t.industry.includes(selectedIndustry.toLowerCase()));
-    }
-    
-    if (!recommended && filteredTemplates.length > 0) {
-      recommended = filteredTemplates[0];
-    }
-    
-    if (recommended) {
-      setSelectedTemplates([recommended]);
-      alert(`Recommended: "${recommended.name}"\n\nPerfect for ${selectedIndustry !== 'All Industries' ? selectedIndustry : 'your'} needs with ${recommended.compatibility.ats}% ATS compatibility.`);
-    }
-  }, [filteredTemplates, selectedCategory, selectedExperience, selectedIndustry]);
-
   return (
     <>
       <Head>
@@ -819,7 +853,7 @@ export default function ResumeTemplateSelector() {
         />
         <meta name="keywords" content="resume templates, free resume templates, ATS resume templates, professional resume templates, resume template selector, downloadable resumes, .docx templates, PDF resumes" />
         
-        {/* Open Graph - UPDATED without www */}
+        {/* Open Graph */}
         <meta property="og:title" content="Free Resume Template Selector - Professional ATS-Friendly Templates" />
         <meta property="og:description" content={`Browse and download professional resume templates with ATS compatibility ratings. Free .docx and PDF formats. ${CURRENT_YEAR}`} />
         <meta property="og:type" content="website" />
@@ -828,13 +862,13 @@ export default function ResumeTemplateSelector() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         
-        {/* Twitter - UPDATED without www */}
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Template Selector - Professional Templates" />
         <meta name="twitter:description" content="Browse and download professional resume templates with ATS compatibility ratings." />
         <meta name="twitter:image" content="https://professionalresumefree.com/twitter-template-selector.jpg" />
         
-        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href="https://professionalresumefree.com/resume-template-selector" />
         
         {/* Structured Data */}
@@ -842,64 +876,6 @@ export default function ResumeTemplateSelector() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
-        
-        {/* Internal Footer Styles */}
-        <style jsx>{`
-          .internal-linking-footer {
-            margin-top: 60px;
-            padding: 40px 0;
-            border-top: 1px solid #e5e7eb;
-            background: #f9fafb;
-          }
-          .footer-links-title {
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: #111827;
-          }
-          .footer-links-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-          }
-          @media (min-width: 640px) {
-            .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-          }
-          @media (min-width: 1024px) {
-            .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
-          }
-          .footer-link-card {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 16px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100%;
-          }
-          .footer-link-card:hover {
-            border-color: #000000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          }
-          .footer-link-text {
-            color: #111827;
-            font-weight: 600;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            margin-bottom: 4px;
-          }
-          .footer-link-sub {
-            color: #6b7280;
-            font-size: 0.8rem;
-          }
-        `}</style>
       </Head>
 
       <div className={styles.container}>
@@ -907,10 +883,10 @@ export default function ResumeTemplateSelector() {
           <h1 className={styles.title}>Free Resume Template Selector - Professional ATS-Friendly Templates {CURRENT_YEAR}</h1>
           <p className={styles.subtitle}>
             Browse our curated collection of professional resume templates with ATS compatibility ratings. 
-            Download free .docx and PDF templates optimized for your industry and career level.
+            Download free .docx templates optimized for your industry and career level.
           </p>
           
-          {/* Selected Templates Counter */}
+          {/* Selection Counter */}
           <div className={styles.selectionCounter}>
             <div className={styles.counterContent}>
               <div className={styles.counterNumber}>{selectedTemplates.length}</div>
@@ -922,7 +898,7 @@ export default function ResumeTemplateSelector() {
                 disabled={selectedTemplates.length === 0}
                 className={`${styles.button} ${selectedTemplates.length === 0 ? styles.disabled : ''}`}
               >
-                Download Selected
+                Download Word Docs
               </button>
               <button 
                 onClick={handleClearSelection}
@@ -1156,22 +1132,12 @@ export default function ResumeTemplateSelector() {
               <div className={styles.downloadOptions}>
                 <div className={styles.optionCard}>
                   <div className={styles.optionIcon}>📝</div>
-                  <h3 className={styles.optionTitle}>Microsoft Word (.docx)</h3>
+                  <h3 className={styles.optionTitle}>Microsoft Word (.doc)</h3>
                   <p className={styles.optionDescription}>
                     Fully editable in Word, Google Docs, or similar software. Best for customization.
                   </p>
                   <button onClick={handleDownloadSelected} className={styles.button}>
-                    Download .docx
-                  </button>
-                </div>
-                <div className={styles.optionCard}>
-                  <div className={styles.optionIcon}>📄</div>
-                  <h3 className={styles.optionTitle}>PDF Format</h3>
-                  <p className={styles.optionDescription}>
-                    Preserves formatting perfectly. Ideal for email submissions and printing.
-                  </p>
-                  <button onClick={handleDownloadSelected} className={styles.button}>
-                    Download PDF
+                    Download .doc
                   </button>
                 </div>
                 <div className={styles.optionCard}>
@@ -1294,39 +1260,34 @@ export default function ResumeTemplateSelector() {
             </div>
           </section>
 
-          {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
-          <section className="internal-linking-footer">
-            <h3 className="footer-links-title">Related Career Resources</h3>
-            <div className="footer-links-grid">
-              <a href="/resume-formatting-guide" className="footer-link-card">
-                <span className="footer-link-text">Resume Formatting Guide</span>
-                <span className="footer-link-sub">Perfect Your Layout</span>
+          {/* Beautified Internal Linking Section - Gray Cards with Black Fonts */}
+          <section className={styles.internalLinkingSection}>
+            <h3 className={styles.internalLinkingTitle}>Related Career Resources</h3>
+            <div className={styles.internalLinkingGrid}>
+              <a href="/resume-formatting-guide" className={styles.internalLinkCard}>
+                <span className={styles.internalLinkText}>Resume Formatting Guide</span>
+                <span className={styles.internalLinkSub}>Perfect Your Layout</span>
               </a>
-              <a href="/one-page-resume-template" className="footer-link-card">
-                <span className="footer-link-text">One Page Resume Template</span>
-                <span className="footer-link-sub">Concise & Impactful</span>
+              <a href="/one-page-resume-template" className={styles.internalLinkCard}>
+                <span className={styles.internalLinkText}>One Page Resume Template</span>
+                <span className={styles.internalLinkSub}>Concise & Impactful</span>
               </a>
-              <a href="/modern-resume-design-2026" className="footer-link-card">
-                <span className="footer-link-text">Modern Resume Design 2026</span>
-                <span className="footer-link-sub">Latest Trends</span>
+              <a href="/modern-resume-design-2026" className={styles.internalLinkCard}>
+                <span className={styles.internalLinkText}>Modern Resume Design 2026</span>
+                <span className={styles.internalLinkSub}>Latest Trends</span>
               </a>
-              <a href="/how-to-write-a-resume-for-a-job" className="footer-link-card">
-                <span className="footer-link-text">How to Write a Resume</span>
-                <span className="footer-link-sub">Step-by-Step Job Guide</span>
+              <a href="/how-to-write-a-resume-for-a-job" className={styles.internalLinkCard}>
+                <span className={styles.internalLinkText}>How to Write a Resume</span>
+                <span className={styles.internalLinkSub}>Step-by-Step Job Guide</span>
               </a>
-              <a href="/free-resume-score-checker" className="footer-link-card">
-                <span className="footer-link-text">Free Resume Score Checker</span>
-                <span className="footer-link-sub">Grade Your Resume</span>
+              <a href="/free-resume-score-checker" className={styles.internalLinkCard}>
+                <span className={styles.internalLinkText}>Free Resume Score Checker</span>
+                <span className={styles.internalLinkSub}>Grade Your Resume</span>
               </a>
             </div>
           </section>
 
         </main>
-
-        <footer className={styles.footer}>
-          <p>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
-          <p>All templates are 100% free for personal and professional use. No attribution required.</p>
-        </footer>
 
         {/* Preview Modal */}
         <TemplatePreviewModal

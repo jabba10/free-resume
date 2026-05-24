@@ -547,7 +547,7 @@ const ATSGuide = ({
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
   const currentYear = new Date().getFullYear();
 
-  // Single canonical URL - Updated without www
+  // Single canonical URL
   const canonicalUrl = "https://professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software";
 
   const atsSections = [
@@ -805,10 +805,10 @@ const ATSGuide = ({
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="1 days" />
         
-        {/* SINGLE CANONICAL URL - Updated without www */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags - Updated without www */}
+        {/* Hreflang Tags */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="en-gb" />
@@ -816,7 +816,7 @@ const ATSGuide = ({
         <link rel="alternate" href={canonicalUrl} hreflang="en-au" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* Open Graph Tags - Updated without www */}
+        {/* Open Graph Tags */}
         <meta property="og:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring 2026" />
         <meta property="og:description" content="Master ATS optimization with our 2026 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems." />
         <meta property="og:url" content={canonicalUrl} />
@@ -829,7 +829,7 @@ const ATSGuide = ({
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* Twitter Card Tags - Updated without www */}
+        {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring 2026" />
         <meta name="twitter:description" content="Master ATS optimization for 2026 hiring. Ensure your resume passes automated screening with our proven strategies." />
@@ -858,7 +858,8 @@ const ATSGuide = ({
         {/* Sitemap Link */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* JSON-LD Structured Data - Updated without www */}
+        {/* ===== FIXED JSON-LD Structured Data ===== */}
+        {/* Each Review now has itemReviewed field with @type "Product" */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -966,27 +967,65 @@ const ATSGuide = ({
                     }
                   ]
                 },
+                // ===== FIXED: Each Review now has itemReviewed =====
+                // Reviews are now standalone (not nested inside ItemList)
+                // and each has the REQUIRED itemReviewed field
                 {
-                  "@type": "ItemList",
-                  "name": "Success Stories",
-                  "itemListElement": testimonials.map((testimonial, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": testimonial.name
-                      },
-                      "reviewBody": testimonial.quote,
-                      "datePublished": safeReviewDates[index] || safeCurrentDate
-                    }
-                  }))
+                  "@type": "Review",
+                  "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": 5,
+                    "bestRating": 5
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "name": "Sarah L."
+                  },
+                  "reviewBody": "After implementing the ATS optimization strategies from this guide, I went from 0 interviews to 5 callbacks in 2 weeks. The keyword integration techniques were game-changing!",
+                  "datePublished": safeReviewDates[0] || safeCurrentDate,
+                  "itemReviewed": {
+                    "@type": "Product",
+                    "name": "ATS Optimization Guide 2026",
+                    "description": "Comprehensive guide to beating Applicant Tracking Systems"
+                  }
+                },
+                {
+                  "@type": "Review",
+                  "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": 5,
+                    "bestRating": 5
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "name": "Michael R."
+                  },
+                  "reviewBody": "The industry-specific keyword banks helped me tailor my resume perfectly. I landed a senior marketing position at a Fortune 500 company after struggling for months.",
+                  "datePublished": safeReviewDates[1] || safeCurrentDate,
+                  "itemReviewed": {
+                    "@type": "Product",
+                    "name": "ATS Optimization Guide 2026",
+                    "description": "Comprehensive guide to beating Applicant Tracking Systems"
+                  }
+                },
+                {
+                  "@type": "Review",
+                  "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": 5,
+                    "bestRating": 5
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "name": "Dr. Jessica P."
+                  },
+                  "reviewBody": "As a career changer, understanding ATS formatting was crucial. This guide helped me create a resume that passed automated screening and got me interviews in healthcare.",
+                  "datePublished": safeReviewDates[2] || safeCurrentDate,
+                  "itemReviewed": {
+                    "@type": "Product",
+                    "name": "ATS Optimization Guide 2026",
+                    "description": "Comprehensive guide to beating Applicant Tracking Systems"
+                  }
                 }
               ]
             })
@@ -1024,12 +1063,6 @@ const ATSGuide = ({
               <FiStar /> Rated 4.9/5 by 15000+ Users | Most Comprehensive ATS Guide 2026
             </div>
             <h1 id="hero-heading">How to Beat the ATS: Optimization Tips for Modern Hiring 2026</h1>
-            
-            <div className="searchIntent">
-              <p>
-                <strong>Search Intent Optimized:</strong> If you're searching for "how to pass ATS screening", "ATS resume tips 2026", or "resume keywords for ATS", this is the most comprehensive, data-driven guide available.
-              </p>
-            </div>
             
             <p>
               Master the art of <strong>ATS optimization for 2026</strong>. Learn proven strategies to ensure your resume 
@@ -1362,7 +1395,7 @@ const ATSGuide = ({
           </div>
         </section>
 
-        {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
+        {/* Internal Linking Footer */}
         <section className="internal-linking-footer">
           <h3 className="footer-links-title">Related Career Resources</h3>
           <div className="footer-links-grid">
@@ -1427,7 +1460,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    revalidate: 3600 // Revalidate every hour
+    revalidate: 3600
   };
 }
 

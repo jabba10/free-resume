@@ -904,9 +904,6 @@ Human-Enhanced:
     }
   ];
 
-  // FIXED #1: Testimonials with proper Person type (not Thing)
-  // FIXED #2: NO itemReviewed field inside reviews - this was causing the critical error
-  // FIXED #3: All authors use @type "Person"
   const testimonials = [
     {
       quote: "The AI resume builder helped me optimize my resume for ATS systems. I went from 0 callbacks to 3 interviews in one week!",
@@ -1024,16 +1021,15 @@ Human-Enhanced:
     arrowRight: "→"
   };
 
-  // SINGLE CANONICAL URL - UPDATED (www removed)
+  // SINGLE CANONICAL URL
   const canonicalUrl = "https://professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume";
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
 
-  // ==================== SCHEMA FIXES ====================
+  // ==================== SCHEMA FIXES - ALL ERRORS RESOLVED ====================
   
-  // FIXED #4: Create properly structured reviews WITHOUT itemReviewed field
-  // This was causing "A nested object can't contain the itemReviewed field" error
-  const structuredReviews = testimonials.map((testimonial, index) => ({
+  // Create properly structured reviews for Product schema (NO itemReviewed field)
+  const productReviews = testimonials.map((testimonial) => ({
     "@type": "Review",
     "reviewRating": {
       "@type": "Rating",
@@ -1042,29 +1038,12 @@ Human-Enhanced:
       "worstRating": "1"
     },
     "author": {
-      "@type": "Person",  // FIXED #5: Changed from Thing to Person (was causing "Invalid object type for field author")
+      "@type": "Person",
       "name": testimonial.name
     },
     "reviewBody": testimonial.quote,
     "datePublished": testimonial.date
-    // FIXED #6: REMOVED itemReviewed field - this was the CRITICAL error
   }));
-
-  // FIXED #7: Single aggregateRating object (no duplicates)
-  // Was causing "Review has multiple aggregate ratings" error
-  const aggregateRatingData = {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "1250",
-    "bestRating": "5",
-    "worstRating": "1"
-  };
-
-  // FIXED #8: Single brand object (no duplicates)
-  const brandData = {
-    "@type": "Brand",
-    "name": "Professional Resume Free"
-  };
 
   return (
     <>
@@ -1095,7 +1074,7 @@ Human-Enhanced:
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - UPDATED */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* OPEN GRAPH */}
@@ -1138,14 +1117,15 @@ Human-Enhanced:
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
         {/* ========== COMPLETELY FIXED SCHEMA.ORG JSON-LD ========== */}
-        {/* FIXES APPLIED:
-            1. Removed all duplicate aggregateRating objects
-            2. Removed all duplicate brand objects  
-            3. Removed itemReviewed from nested reviews (critical error fixed)
-            4. Changed author type from Thing to Person (non-critical error fixed)
-            5. Single Product schema with all required fields
-            6. No "Review has multiple aggregate ratings" errors
-            7. No "Either offers, review, or aggregateRating should be specified" errors
+        {/* 
+          ALL ERRORS FIXED:
+          1. Removed duplicate aggregateRating from Product
+          2. Removed duplicate brand from Product
+          3. Removed itemReviewed from nested reviews
+          4. Changed author type to Person
+          5. Product now has BOTH aggregateRating AND review (satisfies requirement)
+          6. No more "multiple aggregate ratings" error
+          7. No more "Either offers, review, or aggregateRating should be specified" error
         */}
         <script
           type="application/ld+json"
@@ -1292,20 +1272,28 @@ Human-Enhanced:
                   }))
                 },
                 // ========== SINGLE PRODUCT SCHEMA - ALL ERRORS FIXED ==========
-                // FIXED #1: One aggregateRating (not multiple)
-                // FIXED #2: One brand (not duplicate)
-                // FIXED #3: Reviews WITHOUT itemReviewed field
-                // FIXED #4: Author uses @type "Person" not "Thing"
-                // FIXED #5: Has aggregateRating so no "Either offers, review, or aggregateRating should be specified" error
+                // Only ONE aggregateRating and ONE brand (no duplicates)
+                // Reviews WITHOUT itemReviewed field
+                // Author uses @type "Person"
+                // Product has aggregateRating so requirement is met
                 {
                   "@type": "Product",
                   "@id": `${canonicalUrl}#product`,
                   "name": "AI Resume Builder Guide 2026",
                   "description": "Comprehensive guide to AI-powered resume creation",
                   "url": canonicalUrl,
-                  "brand": brandData,
-                  "aggregateRating": aggregateRatingData,
-                  "review": structuredReviews
+                  "brand": {
+                    "@type": "Brand",
+                    "name": "Professional Resume Free"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "1250",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                  },
+                  "review": productReviews
                 }
               ]
             })
@@ -1666,7 +1654,7 @@ Human-Enhanced:
           </div>
         </section>
 
-        {/* Testimonials Section - Fixed with proper Schema.org markup */}
+        {/* Testimonials Section */}
         <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="testimonials-heading">
           <div className="container">
             <h2 id="testimonials-heading" className="section-title">Success Stories: Real User Feedback</h2>
@@ -1741,7 +1729,7 @@ Human-Enhanced:
           </div>
         </section>
 
-        {/* NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST */}
+        {/* Internal Links Section for SEO/GEO Boost */}
         <section className="internal-links-section" aria-labelledby="resources-heading">
           <div className="container">
             <h2 id="resources-heading" className="section-title">Recommended Resources for Job Seekers</h2>
