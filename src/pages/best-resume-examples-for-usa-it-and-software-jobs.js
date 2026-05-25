@@ -1077,7 +1077,7 @@ function ITResumeExamples({
         {/* SITEMAP - UPDATED without www */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - FIXED: itemReviewed uses Article type */}
+        {/* FIXED STRUCTURED DATA - Changed itemReviewed from Article to CreativeWork */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1173,37 +1173,34 @@ function ITResumeExamples({
                   ],
                   "totalTime": "PT35M"
                 },
-                {
-                  "@type": "ItemList",
-                  "itemListElement": testimonials.map((testimonial, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": testimonial.name
-                      },
-                      "reviewBody": testimonial.quote,
-                      "datePublished": testimonial.date,
-                      "publisher": {
-                        "@type": "Organization",
-                        "name": "Professional Resume Free"
-                      },
-                      "itemReviewed": {
-                        "@type": "Article",
-                        "name": "IT Resume Examples Guide",
-                        "description": "Free comprehensive guide to the best resume examples for USA IT and software jobs.",
-                        "url": canonicalUrl
-                      }
-                    }
-                  }))
-                }
+                // FIXED: Reviews now use CreativeWork instead of Article for itemReviewed
+                // Each review is now a separate top-level Review item instead of nested in ItemList
+                ...testimonials.map((testimonial, index) => ({
+                  "@type": "Review",
+                  "@id": `${canonicalUrl}#review-${index + 1}`,
+                  "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": 5,
+                    "bestRating": 5,
+                    "worstRating": 1
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "name": testimonial.name
+                  },
+                  "reviewBody": testimonial.quote,
+                  "datePublished": testimonial.date,
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free"
+                  },
+                  "itemReviewed": {
+                    "@type": "CreativeWork",
+                    "name": "IT Resume Examples Guide",
+                    "description": "Free comprehensive guide to the best resume examples for USA IT and software jobs.",
+                    "url": canonicalUrl
+                  }
+                }))
               ]
             })
           }}
@@ -1260,7 +1257,6 @@ function ITResumeExamples({
 
             <div className="hero-actions">
               <a
-                // UPDATED: Removed www from this URL
                 href="https://professionalresumefree.com"
                 className="btn-primary"
               >
@@ -1845,7 +1841,6 @@ function ITResumeExamples({
               </p>
               <div className="hero-actions">
                 <a
-                  // UPDATED: Removed www from this URL
                   href="https://professionalresumefree.com"
                   className="btn-primary"
                 >
@@ -1900,6 +1895,5 @@ function ITResumeExamples({
     </>
   );
 }
-
 
 export default ITResumeExamples;

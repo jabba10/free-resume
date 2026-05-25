@@ -1,21 +1,68 @@
+# ============================
+# Global Access
+# ============================
 User-agent: *
 Allow: /
 
+# ============================
 # AI Metadata Hub
+# ============================
 Allow: /ai/
-Allow: /ai/*
 
-#Host 
-https://professionalresumefree.com
+# ============================
+# Host (Canonical Domain)
+# ============================
+Host: https://professionalresumefree.com
 
-# AI Sitemap
+# ============================
+# Sitemaps
+# ============================
+Sitemap: https://professionalresumefree.com/sitemap.xml
 Sitemap: https://professionalresumefree.com/ai-sitemap.xml
 
-# Standard Sitemap (if you have one)
-# Sitemap: https://professionalresumefree.com/sitemap.xml
+# ============================
+# Explicit AI + Search Crawlers
+# ============================
+User-agent: GPTBot
+Allow: /
 
-# Block irrelevant system folders (none for static Next.js, but included for safety)
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# ============================
+# Optional Safety Disallows
+# (Do NOT affect SEO)
+# ============================
 Disallow: /api/
 Disallow: /server/
 Disallow: /internal/
-
