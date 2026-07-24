@@ -1057,7 +1057,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 50,365+ Nurse Practitioners | Best Free NP Resume Builder 2026
+                 Best Free NP Resume Builder 2026
               </span>
             </div>
             
@@ -1092,24 +1092,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>50,000+</span>
-                <span className={styles.statLabel}>NP Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>94%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>$15K</span>
-                <span className={styles.statLabel}>Avg. Salary Increase</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from NPs</span>
-              </div>
-            </div>
+            
 
             <div className={styles.npBadges}>
               <div className={styles.badgeGrid}>

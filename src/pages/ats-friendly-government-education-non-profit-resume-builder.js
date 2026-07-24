@@ -1014,7 +1014,7 @@ const GovernmentResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Trusted by 85,000+ Public Sector Professionals | Best Free Government Resume Builder 2026
+                 Best Free Government Resume Builder 2026
               </span>
             </div>
             
@@ -1049,25 +1049,7 @@ const GovernmentResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>85K+</span>
-                <span className={styles.statLabel}>Government Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>USAJobs Application Success</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>78%</span>
-                <span className={styles.statLabel}>Non-Profit Interview Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.8/5</span>
-                <span className={styles.statLabel}>Public Sector Professional Rating</span>
-              </div>
-            </div>
-
+            
             <div className={styles.sectorBadges}>
               <div className={styles.badgeGrid}>
                 <span className={styles.badgeItem}><FiFlag /> Federal Government</span>

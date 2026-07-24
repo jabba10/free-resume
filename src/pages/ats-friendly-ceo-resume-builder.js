@@ -1081,7 +1081,7 @@ const CeoResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 50,365+ Executives | Best Free Executive Resume Builder 2026
+                 Best Free Executive Resume Builder 2026
               </span>
             </div>
             
@@ -1115,24 +1115,7 @@ const CeoResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>25K+</span>
-                <span className={styles.statLabel}>Executive Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>88%</span>
-                <span className={styles.statLabel}>Board Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>$500K+</span>
-                <span className={styles.statLabel}>Average Compensation Increase</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from C-Suite Leaders</span>
-              </div>
-            </div>
+            
 
             <div className={styles.executiveBadges}>
               <div className={styles.badgeGrid}>

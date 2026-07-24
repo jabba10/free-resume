@@ -920,7 +920,7 @@ const ResumeTemplates = ({
   const templateCategories = [
     // 1. REQUESTED FIRST
     {
-      title: 'ATS-Friendly Free Resume Templates',
+      title: 'ATS-Friendly Free Resume Template',
       description: 'Universal free resume templates suitable for all industries and career levels.',
       icon: <FiFileText />,
       link: '/free-resume-builder',
@@ -929,7 +929,7 @@ const ResumeTemplates = ({
     },
     // 2. REQUESTED SECOND
     {
-      title: 'ATS-Friendly Medical Resume Templates',
+      title: 'ATS-Friendly Medical Resume Template',
       description: 'Healthcare-specific resume templates optimized for medical ATS systems. Designed for doctors, medical assistants, and healthcare administrators.',
       icon: <FiHeart />,
       link: '/ats-friendly-medical-resume-builder',
@@ -938,7 +938,7 @@ const ResumeTemplates = ({
     },
     // 3. REQUESTED THIRD
     {
-      title: 'ATS-Friendly Nursing Resume Templates',
+      title: 'ATS-Friendly Nursing Resume Template',
       description: 'Nursing resume templates specifically designed for RNs, LPNs, nurse practitioners, and nursing students.',
       icon: <FiHeart />,
       link: '/ats-friendly-nurse-resume-builder',
@@ -947,7 +947,7 @@ const ResumeTemplates = ({
     },
     // 4. REQUESTED LAST
     {
-      title: 'ATS-Friendly Nurse Practitioner Resume Templates',
+      title: 'ATS-Friendly Nurse Practitioner Resume Template',
       description: 'Advanced practice nursing resume templates for NPs, PAs, and specialized nursing roles.',
       icon: <FiAward />,
       link: '/ats-friendly-nurse-practitioner-resume-builder',
@@ -957,7 +957,7 @@ const ResumeTemplates = ({
 
     // Remaining Templates (Original Order Preserved below)
     {
-      title: 'ATS-Friendly Veterinary Resume Templates',
+      title: 'ATS-Friendly Veterinary Resume Template',
       description: 'Veterinary and animal healthcare resume templates for veterinarians, vet techs, and animal care professionals.',
       icon: <FiHeart />,
       link: '/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder',
@@ -965,7 +965,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Care Assistant Resume Templates',
+      title: 'ATS-Friendly Care Assistant Resume Template',
       description: 'Care assistant and support worker resume templates for home health aides and personal care attendants.',
       icon: <FiUsers />,
       link: '/ats-friendly-care-assistant-resume-builder',
@@ -973,7 +973,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Support Worker Resume Templates',
+      title: 'ATS-Friendly Support Worker Resume Template',
       description: 'Support worker and healthcare aide resume templates for patient support roles.',
       icon: <FiUsers />,
       link: '/ats-friendly-support-worker-resume-builder',
@@ -981,7 +981,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Healthcare Assistant Resume Templates',
+      title: 'ATS-Friendly Healthcare Assistant Resume Template',
       description: 'Healthcare support staff resume templates for medical assistants, patient care technicians, and healthcare aides.',
       icon: <FiUsers />,
       link: '/ats-friendly-healthcare-assistant-resume-builder',
@@ -989,7 +989,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Aged Care Resume Templates',
+      title: 'ATS-Friendly Aged Care Resume Template',
       description: 'Aged care and geriatric care resume templates for nursing home staff and senior care professionals.',
       icon: <FiUsers />,
       link: '/ats-friendly-aged-care-worker-resume-builder',
@@ -997,7 +997,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Medical Assistant Resume Templates',
+      title: 'ATS-Friendly Medical Assistant Resume Template',
       description: 'Medical assistant and clinical support resume templates for MA certification holders.',
       icon: <FiHeart />,
       link: '/ats-friendly-medical-assistant-resume-builder',
@@ -1005,7 +1005,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Registered Practical Nurse Resume Templates',
+      title: 'ATS-Friendly Registered Practical Nurse Resume Template',
       description: 'RPN and practical nursing resume templates for licensed practical nurses.',
       icon: <FiHeart />,
       link: '/ats-friendly-registered-practical-nurse-resume-builder',
@@ -1013,7 +1013,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Disability Support Resume Templates',
+      title: 'ATS-Friendly Disability Support Resume Template',
       description: 'Disability support and special needs care resume templates for support workers.',
       icon: <FiUsers />,
       link: '/ats-friendly-disability-support-worker-resume-builder',
@@ -1023,7 +1023,7 @@ const ResumeTemplates = ({
 
     // Technology Industry Templates (6 links)
     {
-      title: 'ATS-Friendly Technology Resume Templates',
+      title: 'ATS-Friendly Technology Resume Template',
       description: 'Tech industry resume templates engineered to pass technical ATS screening.',
       icon: <FiCpu />,
       link: '/ats-friendly-tech-resume-builder',
@@ -1031,7 +1031,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Machine Learning Resume Templates',
+      title: 'ATS-Friendly Machine Learning Resume Template',
       description: 'AI and machine learning resume templates for data scientists and ML engineers.',
       icon: <FiActivity />,
       link: '/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder',
@@ -1039,7 +1039,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Data Science & Cybersecurity Resume Templates',
+      title: 'ATS-Friendly Data Science & Cybersecurity Resume Template',
       description: 'Data science and cybersecurity resume templates for analysts and security professionals.',
       icon: <FiShield />,
       link: '/ats-friendly-data-and-cybersecurity-resume-builder',
@@ -1047,7 +1047,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly AI Adjacent Creative Technical Resume Templates',
+      title: 'ATS-Friendly AI Adjacent Creative Technical Resume Template',
       description: 'Creative technical roles resume templates for AI-adjacent positions.',
       icon: <FiZap />,
       link: '/ats-ai-adjacent-creative-technical-roles-resume-builder',
@@ -1055,7 +1055,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Software Developer Resume Templates',
+      title: 'ATS-Friendly Software Developer Resume Template',
       description: 'Software development and engineering resume templates for developers.',
       icon: <FiCode />,
       link: '/ats-friendly-software-developer-and-software-engineer-resume-builder',
@@ -1063,7 +1063,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Data Analyst Resume Templates',
+      title: 'ATS-Friendly Data Analyst Resume Template',
       description: 'Data analysis and business intelligence resume templates for analysts.',
       icon: <FiBarChart />,
       link: '/ats-friendly-data-analyst-resume-builder',
@@ -1073,7 +1073,7 @@ const ResumeTemplates = ({
 
     // Business & Finance Templates (10 links)
     {
-      title: 'ATS-Friendly Finance Resume Templates',
+      title: 'ATS-Friendly Finance Resume Template',
       description: 'Finance sector resume templates optimized for financial ATS systems.',
       icon: <FiBriefcase />,
       link: '/ats-friendly-finance-resume-builder',
@@ -1081,7 +1081,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly CEO Resume Templates',
+      title: 'ATS-Friendly CEO Resume Template',
       description: 'Executive-level resume templates designed for C-suite ATS screening.',
       icon: <FiUser />,
       link: '/ats-friendly-ceo-resume-builder',
@@ -1089,7 +1089,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Project Manager Resume Templates',
+      title: 'ATS-Friendly Project Manager Resume Template',
       description: 'Project management resume templates for PMP and agile professionals.',
       icon: <FiTarget />,
       link: '/ats-friendly-project-manager-resume-builder',
@@ -1097,7 +1097,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Accountant Resume Templates',
+      title: 'ATS-Friendly Accountant Resume Template',
       description: 'Accounting and auditing resume templates for CPAs and accountants.',
       icon: <FiDollarSign />,
       link: '/ats-friendly-accountant-resume-builder',
@@ -1105,7 +1105,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Sales Associate Resume Templates',
+      title: 'ATS-Friendly Sales Associate Resume Template',
       description: 'Sales and business development resume templates for sales professionals.',
       icon: <FiTrendingUp />,
       link: '/ats-friendly-sales-associate-resume-builder',
@@ -1113,7 +1113,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Marketing Executive Resume Templates',
+      title: 'ATS-Friendly Marketing Executive Resume Template',
       description: 'Marketing and advertising resume templates for executives and managers.',
       icon: <FiGlobe />,
       link: '/ats-friendly-marketing-executive-manager-resume-builder',
@@ -1121,7 +1121,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Business Analyst Resume Templates',
+      title: 'ATS-Friendly Business Analyst Resume Template',
       description: 'Business analysis and consulting resume templates for analysts.',
       icon: <FiBarChart />,
       link: '/ats-friendly-business-analyst-resume-builder',
@@ -1129,7 +1129,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Customer Service Resume Templates',
+      title: 'ATS-Friendly Customer Service Resume Template',
       description: 'Customer service and support resume templates for service professionals.',
       icon: <FiUsers />,
       link: '/ats-friendly-customer-service-resume-builder',
@@ -1137,7 +1137,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Administrative Assistant Resume Templates',
+      title: 'ATS-Friendly Administrative Assistant Resume Template',
       description: 'Administrative and office support resume templates for assistants.',
       icon: <FaClipboard />,
       link: '/ats-friendly-administrative-assistant-resume-builder',
@@ -1145,7 +1145,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly HR Assistant Resume Templates',
+      title: 'ATS-Friendly HR Assistant Resume Template',
       description: 'Human resources and recruitment resume templates for HR professionals.',
       icon: <FiUsers />,
       link: '/ats-friendly-hr-assistant-coordinator-resume-builder',
@@ -1155,7 +1155,7 @@ const ResumeTemplates = ({
 
     // Engineering & Manufacturing Templates (7 links)
     {
-      title: 'ATS-Friendly Engineering Resume Templates',
+      title: 'ATS-Friendly Engineering Resume Template',
       description: 'Engineering resume templates for civil, mechanical, and electrical engineers.',
       icon: <FiTool />,
       link: '/ats-friendly-engineering-resume-builder',
@@ -1163,7 +1163,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Industrial & Manufacturing Resume Templates',
+      title: 'ATS-Friendly Industrial & Manufacturing Resume Template',
       description: 'Manufacturing industry resume templates for production and quality control.',
       icon: <FiPackage />,
       link: '/ats-friendly-industrial-manufacturing-resume-builder',
@@ -1171,7 +1171,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Automation Resume Templates',
+      title: 'ATS-Friendly Automation Resume Template',
       description: 'Automation and robotics resume templates for manufacturing professionals.',
       icon: <FiSettings />,
       link: '/ats-friendly-advanced-manufacturing-and-automation-resume-builder',
@@ -1179,7 +1179,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Biotechnology Resume Templates',
+      title: 'ATS-Friendly Biotechnology Resume Template',
       description: 'Biotech and pharmaceutical resume templates for lab and research roles.',
       icon: <FiActivity />,
       link: '/ats-friendly-biotechnology-resume-builder',
@@ -1187,7 +1187,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Electrician Resume Templates',
+      title: 'ATS-Friendly Electrician Resume Template',
       description: 'Electrical and wiring resume templates for licensed electricians.',
       icon: <FiZap />,
       link: '/ats-friendly-electrician-resume-builder',
@@ -1195,7 +1195,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Plumber Resume Templates',
+      title: 'ATS-Friendly Plumber Resume Template',
       description: 'Plumbing and pipefitting resume templates for certified plumbers.',
       icon: <FiTool />,
       link: '/ats-friendly-plumber-resume-builder',
@@ -1203,7 +1203,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Construction Resume Templates',
+      title: 'ATS-Friendly Construction Resume Template',
       description: 'Construction and trade resume templates for skilled workers.',
       icon: <FiTool />,
       link: '/ats-friendly-construction-worker-resume-builder',
@@ -1213,7 +1213,7 @@ const ResumeTemplates = ({
 
     // Education & Public Service Templates (4 links)
     {
-      title: 'ATS-Friendly Government & Non-Profit Resume Templates',
+      title: 'ATS-Friendly Government & Non-Profit Resume Template',
       description: 'Public sector resume templates compliant with government and non-profit requirements.',
       icon: <FaBuilding />,
       link: '/ats-friendly-government-education-non-profit-resume-builder',
@@ -1221,7 +1221,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Teacher Resume Templates',
+      title: 'ATS-Friendly Teacher Resume Template',
       description: 'Education and teaching resume templates for educators at all levels.',
       icon: <FiBook />,
       link: '/ats-friendly-teacher-resume-builder',
@@ -1229,7 +1229,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Legal Resume Templates',
+      title: 'ATS-Friendly Legal Resume Template',
       description: 'Legal industry resume templates for lawyers, paralegals, and legal staff.',
       icon: <FiShield />,
       link: '/ats-friendly-legal-resume-builder',
@@ -1237,7 +1237,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Security Guard Resume Templates',
+      title: 'ATS-Friendly Security Guard Resume Template',
       description: 'Security and protection resume templates for guards and officers.',
       icon: <FiShield />,
       link: '/ats-friendly-security-guard-resume-builder',
@@ -1247,7 +1247,7 @@ const ResumeTemplates = ({
 
     // Retail, Logistics & Services Templates (6 links)
     {
-      title: 'ATS-Friendly Retail Resume Templates',
+      title: 'ATS-Friendly Retail Resume Template',
       description: 'Retail industry resume templates for customer-facing and sales roles.',
       icon: <FiShoppingCart />,
       link: '/ats-friendly-consumer-retail-resume-builder',
@@ -1255,7 +1255,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Retail Associate Resume Templates',
+      title: 'ATS-Friendly Retail Associate Resume Template',
       description: 'Retail associate and store staff resume templates for entry-level positions.',
       icon: <FiShoppingCart />,
       link: '/ats-friendly-retail-associate-resume-builder',
@@ -1263,7 +1263,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Logistics Resume Templates',
+      title: 'ATS-Friendly Logistics Resume Template',
       description: 'Logistics and supply chain resume templates for transportation professionals.',
       icon: <FiTruck />,
       link: '/ats-friendly-logistics-transportation-resume-builder',
@@ -1271,7 +1271,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Driver Resume Templates',
+      title: 'ATS-Friendly Driver Resume Template',
       description: 'Driving and transportation resume templates for CDL holders.',
       icon: <FiTruck />,
       link: '/ats-friendly-driver-resume-builder',
@@ -1279,7 +1279,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Warehouse Resume Templates',
+      title: 'ATS-Friendly Warehouse Resume Template',
       description: 'Warehouse and distribution resume templates for logistics workers.',
       icon: <FiPackage />,
       link: '/ats-friendly-warehouse-worker-resume-builder',
@@ -1287,7 +1287,7 @@ const ResumeTemplates = ({
       color: '#000000'
     },
     {
-      title: 'ATS-Friendly Chef & Cook Resume Templates',
+      title: 'ATS-Friendly Chef & Cook Resume Template',
       description: 'Culinary and food service resume templates for chefs and cooks.',
       icon: <FiCoffee />,
       link: '/ats-friendly-chef-cook-resume-builder',
@@ -1297,7 +1297,7 @@ const ResumeTemplates = ({
 
     // Emerging Industries Templates (2 links)
     {
-      title: 'ATS-Friendly Sustainability Resume Templates',
+      title: 'ATS-Friendly Sustainability Resume Template',
       description: 'Sustainability and green industries resume templates for environmental roles.',
       icon: <FaLeaf />,
       link: '/ats-friendly-sustainability-and-green-industries-resume-builder',

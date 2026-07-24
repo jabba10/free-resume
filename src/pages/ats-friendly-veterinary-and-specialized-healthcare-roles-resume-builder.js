@@ -1067,7 +1067,7 @@ const VeterinaryResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 28,650+ Veterinary Professionals | Best Free Veterinary Resume Builder 2026
+                 Best Free Veterinary Resume Builder 2026
               </span>
             </div>
             
@@ -1101,25 +1101,7 @@ const VeterinaryResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>150K+</span>
-                <span className={styles.statLabel}>Veterinary Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Veterinary Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Veterinary Pros</span>
-              </div>
-            </div>
-
+            
             <div className={styles.veterinaryBadges}>
               <div className={styles.badgeGrid}>
                 <span className={styles.badgeItem}><FiScissors /> Veterinarian CVs</span>

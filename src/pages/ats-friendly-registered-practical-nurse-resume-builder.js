@@ -1133,7 +1133,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 25365+ Canadian RPNs | Best Free RPN Resume Builder Canada 2026
+                 Best Free RPN Resume Builder Canada 2026
               </span>
             </div>
             
@@ -1168,24 +1168,8 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>2M+</span>
-                <span className={styles.statLabel}>Canadian RPN Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>96%</span>
-                <span className={styles.statLabel}>Canadian Employer Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Canadian RPN Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Canadian RPNs</span>
-              </div>
-            </div>
+            
+            
 
             <div className={styles.medicalBadges}>
               <div className={styles.badgeGrid}>

@@ -585,41 +585,6 @@ const TrustProof = () => {
               </div>
             </div>
           )}
-          
-          <div className="trust-item">
-            <div className="trust-text">
-              <a href="https://www.trustpilot.com/review/professionalresumefree.com" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 itemProp="sameAs">
-                <strong>4.8</strong> on Trustpilot
-              </a>
-            </div>
-          </div>
-          
-          <div className="trust-item">
-            <div className="trust-text">
-              <strong>100% free resume builder</strong> — no hidden paywall
-            </div>
-          </div>
-          
-          <div className="trust-item">
-            <div className="trust-text">
-              <strong>Runs entirely in your browser</strong> — no backend, no data storage
-            </div>
-          </div>
-          
-          <div className="trust-item">
-            <div className="trust-text">
-              <strong>No Sign-Up</strong> Required
-            </div>
-          </div>
-          
-          <div className="trust-item">
-            <div className="trust-text">
-              <strong>25+ HR Experts</strong> Reviewed
-            </div>
-          </div>
         </div>
       </div>
     </div>

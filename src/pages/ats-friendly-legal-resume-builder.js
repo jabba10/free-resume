@@ -1077,7 +1077,7 @@ const LegalResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 50365+ Legal Professionals | Best Free Legal Resume Builder 2026
+                 Best Free Legal Resume Builder 2026
               </span>
             </div>
             
@@ -1111,25 +1111,7 @@ const LegalResume = ({
               </button>
             </div>
 
-            <div className={styles.legalStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>500K+</span>
-                <span className={styles.statLabel}>Legal Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Legal Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Legal Professionals</span>
-              </div>
-            </div>
-
+            
             <div className={styles.legalBadges}>
               <div className={styles.badgeGrid}>
                 <span className={styles.badgeItem}><FiGitlab /> Corporate Law</span>

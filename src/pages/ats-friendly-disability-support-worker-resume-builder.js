@@ -1048,7 +1048,7 @@ const DisabilitySupportResume = ({
             <div className={styles.trustBadge} style={{ fontFamily: FONT_FAMILY }}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 28650+ Australian Disability Support Workers | Best Free NDIS Resume Builder 2026
+                 Best Free NDIS Resume Builder 2026
               </span>
             </div>
             
@@ -1084,25 +1084,7 @@ const DisabilitySupportResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem} style={{ fontFamily: FONT_FAMILY }}>
-                <span className={styles.statNumber}>150K+</span>
-                <span className={styles.statLabel}>Australian Support Resumes Created</span>
-              </div>
-              <div className={styles.statItem} style={{ fontFamily: FONT_FAMILY }}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem} style={{ fontFamily: FONT_FAMILY }}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Disability Sector Hires</span>
-              </div>
-              <div className={styles.statItem} style={{ fontFamily: FONT_FAMILY }}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Support Workers</span>
-              </div>
-            </div>
-
+            
             <div className={styles.ndisBadges}>
               <div className={styles.badgeGrid}>
                 <span className={styles.badgeItem} style={{ fontFamily: FONT_FAMILY }}><FiCheckCircle /> NDIS Worker Screening</span>

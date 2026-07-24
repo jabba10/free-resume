@@ -1010,7 +1010,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 50365+ Australian Aged Care Professionals | Best Free Aged Care Resume Builder 2026
+               Best Free Aged Care Resume Builder 2026
               </span>
             </div>
             
@@ -1044,24 +1044,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>100K+</span>
-                <span className={styles.statLabel}>Aged Care Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>94%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>89%</span>
-                <span className={styles.statLabel}>ATS Approval Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Care Professionals</span>
-              </div>
-            </div>
+            
 
             <div className={styles.agedCareBadges}>
               <div className={styles.badgeGrid}>

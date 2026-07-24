@@ -1010,7 +1010,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 45,365+ Administrative Professionals | Best Free Administrative Resume Builder 2026
+                 Best Free Administrative Resume Builder 2026
               </span>
             </div>
             
@@ -1044,24 +1044,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>3M+</span>
-                <span className={styles.statLabel}>Administrative Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Administrative Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Administrative Pros</span>
-              </div>
-            </div>
+            
 
             <div className={styles.administrativeBadges}>
               <div className={styles.badgeGrid}>

@@ -1010,7 +1010,7 @@ const BusinessAnalystResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.8/5 by 32,568+ Business Analysts | Best Free BA Resume Builder 2026
+                 Best Free BA Resume Builder 2026
               </span>
             </div>
             
@@ -1045,24 +1045,7 @@ const BusinessAnalystResume = ({
               </button>
             </div>
 
-            <div className={styles.baStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>2M+</span>
-                <span className={styles.statLabel}>BA Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster US Job Placement</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.8/5</span>
-                <span className={styles.statLabel}>Rating from BA Professionals</span>
-              </div>
-            </div>
+            
 
             <div className={styles.baBadges}>
               <div className={styles.badgeGrid}>

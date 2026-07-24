@@ -1024,7 +1024,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.8/5 by 25,365+ Warehouse Professionals | Best Free Warehouse Resume Builder 2026
+                 Best Free Warehouse Resume Builder 2026
               </span>
             </div>
             
@@ -1058,24 +1058,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>2M+</span>
-                <span className={styles.statLabel}>Warehouse Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>42%</span>
-                <span className={styles.statLabel}>Faster Warehouse Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.8/5</span>
-                <span className={styles.statLabel}>Rating from Logistics Professionals</span>
-              </div>
-            </div>
+            
 
             <div className={styles.warehouseBadges}>
               <div className={styles.badgeGrid}>

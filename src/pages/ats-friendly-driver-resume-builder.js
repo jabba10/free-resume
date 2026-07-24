@@ -1048,7 +1048,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 25365+ Drivers | Best Free Driver Resume Builder 2026
+                 Best Free Driver Resume Builder 2026
               </span>
             </div>
             
@@ -1083,24 +1083,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>2M+</span>
-                <span className={styles.statLabel}>Driver Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Driver Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Drivers</span>
-              </div>
-            </div>
+            
 
             <div className={styles.driverBadges}>
               <div className={styles.badgeGrid}>

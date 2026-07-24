@@ -1056,7 +1056,7 @@ const TeacherResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 42,365+ Education Professionals | Best Free Teacher Resume Builder 2026
+                 Best Free Teacher Resume Builder 2026
               </span>
             </div>
             
@@ -1092,24 +1092,7 @@ const TeacherResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>3M+</span>
-                <span className={styles.statLabel}>Teacher Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Education Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Teachers</span>
-              </div>
-            </div>
+            
 
             <div className={styles.educationBadges} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               <div className={styles.badgeGrid}>

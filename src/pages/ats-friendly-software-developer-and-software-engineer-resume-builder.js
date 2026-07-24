@@ -1041,7 +1041,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 60,365+ Developers | Best Free Developer Resume Builder 2026
+                 Best Free Developer Resume Builder 2026
               </span>
             </div>
             
@@ -1076,24 +1076,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>5M+</span>
-                <span className={styles.statLabel}>Developer Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>96%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Tech Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Developers</span>
-              </div>
-            </div>
+            
 
             <div className={styles.techBadges}>
               <div className={styles.badgeGrid}>

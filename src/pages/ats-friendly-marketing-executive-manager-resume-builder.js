@@ -1067,7 +1067,7 @@ const MarketingResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.8/5 by 42580+ Marketing Professionals | Best Free Marketing Resume Builder 2026
+                 Best Free Marketing Resume Builder 2026
               </span>
             </div>
             
@@ -1101,24 +1101,7 @@ const MarketingResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>3M+</span>
-                <span className={styles.statLabel}>Marketing Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>91%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>42%</span>
-                <span className={styles.statLabel}>Faster Marketing Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.8/5</span>
-                <span className={styles.statLabel}>Rating from Marketing Pros</span>
-              </div>
-            </div>
+            
 
             <div className={styles.marketingBadges}>
               <div className={styles.badgeGrid}>

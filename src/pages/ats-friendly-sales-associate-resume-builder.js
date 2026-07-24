@@ -1035,7 +1035,7 @@ const SalesResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 42365+ Sales Professionals | Best Free Sales Resume Builder 2026
+                 Best Free Sales Resume Builder 2026
               </span>
             </div>
             
@@ -1069,24 +1069,7 @@ const SalesResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>3M+</span>
-                <span className={styles.statLabel}>Sales Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Higher Salary Offers</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Sales Pros</span>
-              </div>
-            </div>
+            
 
             <div className={styles.salesBadges}>
               <div className={styles.badgeGrid}>

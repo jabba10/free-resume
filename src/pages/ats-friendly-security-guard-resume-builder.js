@@ -1051,7 +1051,7 @@ const SecurityGuardResume = ({
             <div className={styles.trustBadge}>
               <FiShield className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.8/5 by 42,365+ Security Professionals | Best Free Security Guard Resume Builder 2026
+                 Best Free Security Guard Resume Builder 2026
               </span>
             </div>
             
@@ -1085,24 +1085,7 @@ const SecurityGuardResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>2M+</span>
-                <span className={styles.statLabel}>Security Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>40%</span>
-                <span className={styles.statLabel}>Faster Security Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.8/5</span>
-                <span className={styles.statLabel}>Rating from Security Professionals</span>
-              </div>
-            </div>
+            
 
             <div className={styles.securityBadges}>
               <div className={styles.badgeGrid}>

@@ -1032,7 +1032,7 @@ const IndustrialResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Trusted by 120,000+ Industrial Professionals | Best Free Industrial Resume Builder 2026
+                 Best Free Industrial Resume Builder 2026
               </span>
             </div>
             
@@ -1067,24 +1067,7 @@ const IndustrialResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>120K+</span>
-                <span className={styles.statLabel}>Industrial Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>88%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>42%</span>
-                <span className={styles.statLabel}>Faster Hiring Process</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.8/5</span>
-                <span className={styles.statLabel}>Industrial Professional Rating</span>
-              </div>
-            </div>
+            
 
             <div className={styles.industryBadges}>
               <div className={styles.badgeGrid}>

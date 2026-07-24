@@ -1065,7 +1065,7 @@ const LogisticsResume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 50,365+ Logistics Professionals | Best Free Logistics Resume Builder 2026
+                 Best Free Logistics Resume Builder 2026
               </span>
             </div>
             
@@ -1100,24 +1100,7 @@ const LogisticsResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>500K+</span>
-                <span className={styles.statLabel}>Logistics Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>32%</span>
-                <span className={styles.statLabel}>Faster Logistics Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Supply Chain Pros</span>
-              </div>
-            </div>
+            
 
             <div className={styles.logisticsBadges}>
               <div className={styles.badgeGrid}>

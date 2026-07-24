@@ -1030,7 +1030,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 60365+ Engineering Professionals | Best Free Engineering Resume Builder 2026
+                 Best Free Engineering Resume Builder 2026
               </span>
             </div>
             
@@ -1064,24 +1064,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>5M+</span>
-                <span className={styles.statLabel}>Engineering Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>92%</span>
-                <span className={styles.statLabel}>Technical Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>42%</span>
-                <span className={styles.statLabel}>Faster Engineering Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Engineers</span>
-              </div>
-            </div>
+            
 
             <div className={styles.engineeringBadges}>
               <div className={styles.badgeGrid}>

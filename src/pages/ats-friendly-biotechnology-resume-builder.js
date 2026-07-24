@@ -696,7 +696,7 @@ const Resume = ({
   return (
     <div className={styles.resumeBuilder} lang="en-US">
       <Head>
-        <title>Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates</title>
+        <title>Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Template</title>
         <meta name="title" content="Free Biotech Resume Builder 2026 | ATS-Friendly Scientist Templates" />
         <meta name="description" content="Create your professional biotech resume for free in 2026. ATS-optimized templates help scientists & researchers land pharma interviews. Start now—no sign-up." />
         <meta name="keywords" content="biotech resume builder, biotechnology resume, scientist resume, research resume, pharmaceutical resume, ATS friendly biotech resume, free resume builder for scientists, biotech CV, biotech engineer resume, pharma resume" />
@@ -1031,7 +1031,7 @@ const Resume = ({
             <div className={styles.trustBadge}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText}>
-                Rated 4.9/5 by 45650+ Biotech Professionals | Best Free Biotech Resume Builder 2026
+                 Best Free Biotech Resume Builder 2026
               </span>
             </div>
             
@@ -1066,24 +1066,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>3M+</span>
-                <span className={styles.statLabel}>Biotech Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>91%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>2.8x</span>
-                <span className={styles.statLabel}>More Pharma Interviews</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Biotech Professionals</span>
-              </div>
-            </div>
+            
 
             <div className={styles.biotechBadges}>
               <div className={styles.badgeGrid}>

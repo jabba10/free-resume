@@ -1110,24 +1110,7 @@ const Resume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4M+</span>
-                <span className={styles.statLabel}>Healthcare Resumes Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>94%</span>
-                <span className={styles.statLabel}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>36%</span>
-                <span className={styles.statLabel}>Faster Healthcare Hires</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>4.9/5</span>
-                <span className={styles.statLabel}>Rating from Medical Professionals</span>
-              </div>
-            </div>
+            
 
             <div className={styles.medicalBadges}>
               <div className={styles.badgeGrid}>

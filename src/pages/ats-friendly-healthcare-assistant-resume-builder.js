@@ -921,7 +921,7 @@ const HealthcareAssistantResume = ({
             <div className={styles.trustBadge} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
               <FiStar className={styles.starIcon} />
               <span className={styles.trustBadgeText} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-                Rated 4.8/5 by 25,630+ UK Healthcare Assistants | Best Free NHS CV Builder 2026
+                 Best Free NHS CV Builder 2026
               </span>
             </div>
             
@@ -957,24 +957,7 @@ const HealthcareAssistantResume = ({
               </button>
             </div>
 
-            <div className={styles.heroStats} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>50K+</span>
-                <span className={styles.statLabel} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>UK Healthcare CVs Created</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>92%</span>
-                <span className={styles.statLabel} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Interview Success Rate</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>NHS</span>
-                <span className={styles.statLabel} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>Compliant Templates</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>4.8/5</span>
-                <span className={styles.statLabel} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>UK User Rating</span>
-              </div>
-            </div>
+            
 
             <div className={styles.ukBadges} style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important" }}>
               <div className={styles.badgeGrid}>
