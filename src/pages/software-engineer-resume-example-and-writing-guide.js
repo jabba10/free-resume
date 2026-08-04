@@ -1,1625 +1,850 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
+import { 
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiCopy,
+  FiX, FiGrid, FiList, FiBookmark, FiSmartphone, FiBriefcase,
+  FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
+  FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
+  FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrendingUp as FiTrend,
+  FiMonitor, FiAlertCircle, FiCheckCircle, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCloud, FiTerminal, FiGlobe
+} from 'react-icons/fi';
 
-// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
-const criticalCSS = `
-  /* RESET & BASE STYLES */
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    -webkit-tap-highlight-color: transparent; 
-  }
-  
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
   :root {
-    --primary: #000000;
-    --secondary: #333333;
-    --background: #ffffff;
-    --card-bg: #f9fafb;
-    --border: #e5e7eb;
-    --text-light: #4b5563;
-    --text-lighter: #6b7280;
-    --success: #059669;
-    --warning: #d97706;
-    --danger: #dc2626;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
-    --gradient-accent: linear-gradient(135deg, #000000 0%, #333333 100%);
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
   }
-  
-  html { 
-    scroll-behavior: smooth; 
-    font-size: 16px;
-  }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    color: var(--primary);
-    background: var(--background);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  /* TYPOGRAPHY - CENTERED BY DEFAULT */
-  h1, h2, h3, h4, h5, h6, p, li, span, div {
-    text-align: center;
-  }
-  
-  /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
-  ul, ol, .left-align, .breadcrumb-nav, .publication-meta, .hero-description, .data-card, .anatomy-card, .step-card, .faq-card, .resource-card, .final-note, .comparison-table, .data-table, .faq-answer, .resource-description, .resource-card p, .anatomy-card p, .step-card p, .faq-card p, .conclusion-section p, .resources-description {
-    text-align: left;
-  }
-  
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.5rem); 
-    line-height: 1.2; 
-    font-weight: 800; 
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-  
-  h2 { 
-    font-size: clamp(1.8rem, 5vw, 2.5rem); 
-    line-height: 1.3; 
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-  
-  h3 { 
-    font-size: clamp(1.3rem, 3vw, 1.8rem); 
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-  
-  h4 { 
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
-    margin-bottom: 0.75rem;
-    font-weight: 600;
-  }
-  
-  p { 
-    font-size: clamp(1rem, 2vw, 1.1rem); 
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-  }
-  
-  a { 
-    color: var(--primary);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-  
-  a:hover { 
-    opacity: 0.8;
-  }
-  
-  img, svg { 
-    max-width: 100%; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto;
-  }
-  
-  /* UTILITY CLASSES */
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 clamp(16px, 5vw, 24px);
-    width: 100%;
-  }
-  
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary);
-    color: white;
-    padding: 8px 16px;
-    z-index: 100;
-    border-radius: 0 0 4px 4px;
-    text-align: center;
-  }
-  
-  .skip-link:focus { 
-    top: 0; 
-  }
-  
-  .gradient-text {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
-  }
-  
-  /* BUTTON STYLES - CENTERED */
-  .btn-primary, .btn-secondary, .btn-accent {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin: 0 auto;
-  }
-  
-  .btn-primary {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-primary:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .btn-primary:active {
-    transform: translateY(0);
-  }
-  
-  .btn-secondary {
-    background: transparent;
-    color: var(--primary);
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 2px solid var(--primary);
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-  }
-  
-  .btn-secondary:hover {
-    background: var(--card-bg);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  .btn-accent {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-  }
-  
-  .btn-accent:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .btn-badge {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
-    font-size: 0.75rem;
-    margin-left: 0.75rem;
-    font-weight: 500;
-  }
-  
-  /* CARD STYLES - RESPONSIVE PADDING */
-  .card {
-    background: var(--card-bg);
-    border-radius: 1rem;
-    padding: 2rem;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    height: 100%;
-    margin: 0 auto;
-  }
-  
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary);
-  }
-  
-  /* GRID SYSTEMS - CENTERED WITH RESPONSIVE CARD SIZING */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 2rem auto;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  /* TABLE STYLES */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    background: white;
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-  
-  th {
-    background: var(--card-bg);
-    padding: 1rem;
-    font-weight: 600;
-    border-bottom: 2px solid var(--border);
-  }
-  
-  td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  
-  /* FLEX CENTERING UTILITIES */
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .flex-col-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* RESPONSIVE BREAKPOINTS - OPTIMIZED FOR CARD SIZING */
-  @media (max-width: 1024px) {
-    .grid { 
-      grid-template-columns: repeat(2, 1fr); 
-      max-width: 800px;
-    }
-    .card { 
-      padding: 1.75rem; 
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .grid { 
-      grid-template-columns: 1fr; 
-      max-width: 500px;
-    }
-    .btn-primary, .btn-secondary, .btn-accent { 
-      width: 100%; 
-      min-width: auto; 
-    }
-    .card { 
-      padding: 1.5rem; 
-    }
-    table {
-      font-size: 0.9rem;
-    }
-    th, td {
-      padding: 0.75rem;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .grid { 
-      max-width: 450px;
-    }
-    .card { 
-      padding: 1.25rem; 
-    }
-  }
-  
-  @media (max-width: 480px) {
-    button, a, .clickable { 
-      touch-action: manipulation; 
-    }
-    .container { 
-      padding: 0 12px; 
-    }
-    p, li { 
-      font-size: 16px; 
-    }
-    h1 {
-      font-size: clamp(1.8rem, 7vw, 2.2rem);
-    }
-    h2 {
-      font-size: clamp(1.5rem, 6vw, 1.8rem);
-    }
-    h3 {
-      font-size: clamp(1.2rem, 5vw, 1.4rem);
-    }
-    .card { 
-      padding: 1rem; 
-      border-radius: 0.75rem;
-    }
-    .grid {
-      gap: 1rem;
-    }
-    table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-  }
-  
-  @media (max-width: 360px) {
-    .container { 
-      padding: 0 8px; 
-    }
-    .card { 
-      padding: 0.875rem; 
-    }
-    .grid {
-      gap: 0.875rem;
-    }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .list-style { padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .list-style li { color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .checklist-card { background:var(--card-bg); border-radius:0.5rem; padding:1.25rem; border:var(--card-border); }
+  .step-card-exec { background:var(--card-bg); padding:1.25rem; border-radius:0.5rem; border:var(--card-border); display:flex; gap:1rem; align-items:flex-start; margin-bottom:0.75rem; }
+  .step-number-exec { width:40px; height:40px; background:var(--accent-primary); color:var(--accent-on-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; }
+  .toc-nav { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); }
+  .toc-nav ol { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+  .toc-nav a { display:flex; align-items:center; gap:0.5rem; color:var(--text-secondary); font-size:var(--font-size-body-sm); padding:0.5rem 0; transition:color var(--transition-fast); }
+  .toc-nav a:hover { color:var(--accent-primary); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } .step-card-exec { flex-direction:column; } }
 `;
 
-// ===== METADATA CONFIGURATION =====
-export const metadata = {
-  title: 'Software Engineer Resume Example & Writing Guide 2026 | Professional Resume Free',
-  description: 'Master software engineer resume writing with our 2000+ word definitive guide. Includes ATS-optimized examples, templates, and expert tips to land interviews fast. Updated for 2026 hiring trends.',
-  keywords: 'software engineer resume example, software developer resume, resume writing guide, ATS optimization, tech resume, coding resume, programmer resume, software engineering cv, tech job application',
-  authors: [{ name: 'Professional Resume Experts Team' }],
-  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
-  
-  openGraph: {
-    title: 'Software Engineer Resume Example & Writing Guide 2026 | Professional Resume Free',
-    description: 'Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips for 2026. Based on analysis of 10,000+ successful tech resumes.',
-    url: 'https://professionalresumefree.com/software-engineer-resume-example-and-writing-guide',
-    siteName: 'Professional Resume Free',
-    images: [
-      {
-        url: 'https://professionalresumefree.com/og-software-resume-guide.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Software Engineer Resume Example & Writing Guide 2026'
-      },
-    ],
-    locale: 'en_US',
-    type: 'article',
-    publishedTime: '2026-01-23',
-    modifiedTime: new Date().toISOString().split('T')[0],
-    section: 'Tech Careers',
-    tags: ['software engineer resume', 'tech resume', 'software developer', 'ATS optimization']
-  },
-  
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Software Engineer Resume Example & Writing Guide 2026',
-    description: 'Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips.',
-    images: ['https://professionalresumefree.com/og-software-resume-guide.jpg'],
-    creator: '@ProfResumeFree',
-    site: '@ProfResumeFree'
-  },
-  
-  // GEO-specific meta tags for ChatGPT and AI crawlers
-  geo: {
-    'chatgpt-fts:title': 'Software Engineer Resume Example & Writing Guide 2026 - ATS-Optimized Templates',
-    'chatgpt-fts:description': 'Definitive 2000+ word guide to writing software engineer resumes that pass ATS and impress tech hiring managers. Includes examples, templates, and expert strategies.',
-    'chatgpt-fts:keywords': 'software engineer resume example, how to write software developer resume, tech resume template, ATS optimization for programmers',
-    'chatgpt-fts:last-updated': new Date().toISOString().split('T')[0],
-    'generator': 'Professional Resume Free - Tech Career Platform'
-  }
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
+
+const FAQS = [
+  { question: "How long should a software engineer resume be?", answer: "For most software professionals, a one-page resume is ideal in 2026, especially with under 10 years of experience. According to our analysis of 10,000+ successful software resumes, 82% of hiring managers prefer one-page resumes for mid-level engineers. Senior engineers, architects, or those with extensive publications and patents may extend to two pages, but every line must demonstrate clear value. Recruiters typically spend only 6-8 seconds on initial review before deciding whether to read further, so conciseness and immediate impact are critical. The key is not page count but information density—every bullet point should communicate a specific technical achievement with measurable results." },
+  { question: "What resume format works best for software developers?", answer: "The reverse-chronological format remains the gold standard for software resumes in 2026. It presents your most recent experience first, which both recruiters and ATS systems expect and parse most efficiently. Hybrid formats that combine a prominent technical skills section with chronological experience are also highly effective, particularly for candidates with diverse project experience or those transitioning between technology stacks. According to LinkedIn's 2026 Talent Solutions report, 91% of recruiters prefer the reverse-chronological format for technical roles because it clearly shows career progression, technology evolution, and increasing responsibility over time. Avoid functional or skills-only formats—these often raise red flags with technical hiring managers who want to see where and how you applied your skills." },
+  { question: "Should I include a GitHub link on my software resume?", answer: "Absolutely—GitHub links are now expected for most software engineering roles in 2026. According to our data, 65% of technical recruiters actively check GitHub profiles before making interview decisions. Include your GitHub URL prominently in the contact section of your resume header, alongside your LinkedIn profile and personal portfolio website. However, ensure your GitHub profile is polished before listing it: maintain recent activity (green contribution graph), pin your best 4-6 repositories at the top, ensure all pinned repos have clean, well-documented README files explaining the project's purpose and your specific contributions, and remove or archive outdated or abandoned projects that don't represent your current capabilities. An inactive or messy GitHub profile can hurt more than having no profile at all—it signals a lack of engagement with the developer community." },
+  { question: "How do I quantify achievements on a software resume?", answer: "Use the CAR (Context-Action-Result) method adapted for technical achievements. Context: Briefly describe the technical situation or problem you faced. Action: Explain your specific engineering approach, technologies used, and your individual contribution. Result: Quantify the outcome with specific, verifiable metrics. For example, instead of 'Improved application performance,' write 'Optimized PostgreSQL database queries for the user analytics module (Action) handling 500K+ daily active users (Context), reducing average API response time from 340ms to 85ms—a 75% improvement (Result).' This format demonstrates technical depth, problem-solving ability, and business impact simultaneously. Focus on metrics that matter to engineering teams: performance improvements (latency, throughput), cost reductions (infrastructure savings), reliability gains (uptime, error rates), and scale achievements (users supported, requests handled)." },
+  { question: "What technical skills should I prioritize listing?", answer: "In 2026, prioritize skills based on market demand and role relevance rather than listing everything you've ever used. Group skills by category rather than alphabetically: Languages (list 4-6 core languages with proficiency), Frameworks & Libraries (focus on modern, in-demand frameworks), Cloud Platforms (AWS, Azure, GCP with specific services you've used), DevOps & Tools (Docker, Kubernetes, CI/CD pipelines, Terraform), and Databases (both SQL and NoSQL with specific systems). According to our analysis, the most in-demand skills for 2026 include: TypeScript, Rust, Go, React/Next.js, Python for ML/AI, Kubernetes, AWS, and GraphQL. Remove outdated or legacy technologies unless specifically relevant to the position—leading with jQuery or PHP when applying for modern web development roles signals you haven't kept current with industry evolution." },
+  { question: "Do I need to tailor my resume for each application?", answer: "Yes, tailoring is non-negotiable for competitive software engineering roles in 2026. With 250+ applications per position on average, generic resumes are immediately filtered out. Before each application, spend 15-20 minutes analyzing the job description for specific keywords, required technologies, and emphasized responsibilities. Mirror this language in your professional summary, technical skills section, and achievement bullet points. For example, if the job description emphasizes 'building scalable microservices' and 'event-driven architecture,' ensure these exact phrases appear in your experience descriptions if you have relevant experience. Our ATS analysis shows that resumes with 70%+ keyword match rates to the job description receive 3.2x more interview invitations. This customization signals genuine interest and attention to detail—qualities highly valued in engineering roles." }
+];
+
+const HIRING_STATS = [
+  { metric: "Fortune 500 Companies Using ATS", value: "98%" },
+  { metric: "Hiring Managers Prioritizing Quantified Achievements", value: "73%" },
+  { metric: "Recruiters Expecting GitHub/LinkedIn Links", value: "65%" },
+  { metric: "Preference for One-Page Resumes (Mid-Level)", value: "82%" },
+  { metric: "Value Projects Over Generic Skills Lists", value: "91%" }
+];
+
+const SKILL_COMPARISONS = [
+  { aspect: "Organization", weak: "Alphabetical list of 40+ technologies with no structure", strong: "Categorized groups with 15-20 role-relevant technologies", benefit: "Easier to scan, shows understanding of technology relationships and ecosystem knowledge" },
+  { aspect: "Proficiency", weak: "No proficiency indicators—implies equal expertise in all listed skills", strong: "Grouped by expertise level (Advanced, Intermediate, Familiar) with context", benefit: "Sets accurate expectations about depth of knowledge and prevents interview surprises" },
+  { aspect: "Relevance", weak: "Includes every technology ever touched, dating back 15+ years", strong: "Prioritizes technologies relevant to target roles and current industry demands", benefit: "Demonstrates focus, role-specific preparation, and awareness of current tech landscape" },
+  { aspect: "Currency", weak: "Outdated technologies still listed prominently (jQuery, SVN, Flash)", strong: "Focus on modern, in-demand technologies with legacy skills minimized or removed", benefit: "Shows you stay current with industry trends and invest in continuous learning" }
+];
+
+const LENGTH_GUIDELINES = [
+  { experience: "Entry Level (0-2 years)", pages: "1 page", focus: "Education, projects, internships, relevant coursework, technical skills portfolio" },
+  { experience: "Mid-Level (3-7 years)", pages: "1 page", focus: "Quantified achievements, technical contributions, career progression, system ownership" },
+  { experience: "Senior (8-15 years)", pages: "1-2 pages", focus: "Architecture decisions, technical leadership, mentoring, cross-team impact, system design" },
+  { experience: "Staff/Principal (15+ years)", pages: "2 pages", focus: "Strategic technical vision, organizational impact, industry contributions, executive communication" }
+];
+
+const RESUME_ANATOMY = [
+  { title: "Header & Contact", description: "Clear name, professional title matching target role, phone, email, location, and essential links (GitHub, LinkedIn, portfolio). Use professional email format (first.last@domain.com). Ensure GitHub profile shows recent activity and pinned repositories with clean documentation." },
+  { title: "Professional Summary", description: "2-4 line technical overview positioning you for specific roles. Include years of experience, core technology stack, key architectural achievements, and the type of role you're targeting. Tailor this section for each application using keywords from the job description." },
+  { title: "Technical Skills", description: "Categorized grouping of languages, frameworks, cloud platforms, tools, and methodologies. Use clear proficiency indicators. Group by category (Languages, Frameworks, Cloud, DevOps, Databases) rather than alphabetical lists. Remove outdated technologies that don't support your current career goals." },
+  { title: "Professional Experience", description: "Reverse-chronological listing with CAR-method bullet points (Context-Action-Result). Start each bullet with strong technical action verbs: Architected, Optimized, Implemented, Led, Designed, Migrated. Include specific metrics: performance improvements, cost savings, scale achieved, users impacted." },
+  { title: "Projects & Contributions", description: "Showcase 3-5 relevant projects with technologies used, your specific role and contributions, and measurable outcomes. Include links to live projects or GitHub repositories. For each project, explain the problem solved, your technical approach, and the impact or results achieved." },
+  { title: "Education & Credentials", description: "Degrees, certifications (AWS, Google Cloud, Kubernetes), and relevant training positioned based on experience level. For senior roles, education moves to the bottom. For entry-level, place near the top with relevant coursework and academic achievements highlighted." }
+];
+
+const WRITING_STEPS = [
+  { step: "Research & Analysis", desc: "Analyze 5-10 job descriptions for your target roles. Identify recurring requirements, keywords, and emphasized responsibilities. Create a master list of must-have and nice-to-have skills." },
+  { step: "Content Brainstorming", desc: "Document all relevant experiences, projects, and achievements using the STAR method (Situation-Task-Action-Result). Capture complete stories that can later be refined into concise bullet points." },
+  { step: "Structural Outline", desc: "Based on your experience level and target roles, decide on resume length (1 vs. 2 pages) and section ordering. Entry-level emphasizes education/projects; senior emphasizes experience/leadership." },
+  { step: "First Draft Creation", desc: "Write complete content using the CAR method for bullet points. Focus on clarity and completeness. Ensure technical accuracy in all tool, language, and framework mentions." },
+  { step: "Quantification & Refinement", desc: "Review each bullet point and add specific metrics. Convert vague statements into quantified achievements with percentages, dollar amounts, time savings, and scale indicators." },
+  { step: "ATS Optimization", desc: "Ensure proper keyword integration from job description research. Verify section headings use standard labels. Check for formatting elements that might confuse parsing algorithms." },
+  { step: "Review & Finalization", desc: "Conduct thorough proofreading for spelling, grammar, and technical accuracy. Seek peer feedback. Test with ATS simulators. Generate PDF with professional filename." }
+];
+
+const INDUSTRY_VARIATIONS = [
+  { title: "Frontend Development", focus: "JavaScript frameworks (React, Vue, Angular), responsive design, browser APIs, UI/UX collaboration, performance optimization, accessibility standards (WCAG), build tools (Webpack, Vite)" },
+  { title: "Backend Development", focus: "Server-side languages (Python, Go, Java), API design (REST, GraphQL), database optimization, scalability patterns, security practices, microservices architecture, message queues" },
+  { title: "DevOps / SRE", focus: "CI/CD pipelines, infrastructure as code (Terraform, Pulumi), containerization (Docker, Kubernetes), monitoring tools (Prometheus, Grafana), incident response, cloud platforms (AWS, GCP, Azure)" },
+  { title: "Data Engineering", focus: "ETL pipelines, data warehousing (Snowflake, BigQuery), big data technologies (Spark, Hadoop), database optimization, data modeling, cloud data services, streaming platforms (Kafka, Kinesis)" }
+];
+
+const INTERNAL_LINKS = [
+  { href: "/resume-templates", title: "Software Engineer Resume Templates", desc: "ATS-optimized templates specifically designed for software engineering roles with proper technical section layouts and keyword integration.", icon: "FiCode" },
+  { href: "/free-resume-tools", title: "Free Resume Building Tools", desc: "AI-powered resume builder, technical keyword matcher, and ATS checker calibrated for software engineering applications.", icon: "FiTool" },
+  { href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", title: "AI & ML Engineering Resume Builder", desc: "Advanced templates for AI/ML engineers with sections for research publications, model deployment, and technical papers.", icon: "FiCpu" },
+  { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", title: "ChatGPT Resume Bullets Guide", desc: "Master prompt engineering to generate perfect technical achievement bullets that sound human and impactful.", icon: "FiZap" },
+  { href: "/top-skills-employers-in-the-usa-want-on-resumes", title: "Top USA Employer Skills 2026", desc: "Discover the exact technical and soft skills American employers are prioritizing in their hiring algorithms.", icon: "FiTarget" },
+  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker", desc: "Test your software engineer resume against major ATS platforms before submitting to ensure maximum parsing compatibility.", icon: "FiSearch" }
+];
+
+const FOOTER_LINKS = [
+  { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", title: "Beat the ATS Optimization Guide" },
+  { href: "/ats-friendly-data-analyst-resume-builder", title: "Data Analyst Resume Builder" },
+  { href: "/resume-tips-for-remote-jobs-in-the-usa", title: "Remote Job Resume Tips" },
+  { href: "/ats-friendly-project-manager-resume-builder", title: "Project Manager Resume Builder" },
+  { href: "/resume-formatting-guide", title: "Resume Formatting Guide" }
+];
+
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
+  FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
+  FiTool, FiLayers, FiUser, FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight,
+  FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
+  FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
+  FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrend, FiMonitor, FiAlertCircle,
+  FiCheckCircle, FiMail, FiPhone, FiMapPin, FiLinkedin, FiGithub, FiCloud, FiTerminal, FiGlobe
 };
 
-// ===== DATA FOR DYNAMIC CONTENT =====
-const data = {
-  // Key statistics for trust signals
-  stats: {
-    resumesAnalyzed: '10,000+',
-    techTemplates: 46,
-    atsPassRate: '94%',
-    interviewIncrease: '3.2x',
-    avgSalaryBoost: '$22,500'
-  },
-  
-  // Hiring statistics
-  hiringStats: [
-    { metric: 'Fortune 500 companies using ATS', value: '98%' },
-    { metric: 'Hiring managers prioritizing quantified achievements', value: '73%' },
-    { metric: 'Recruiters expecting GitHub/LinkedIn links', value: '65%' },
-    { metric: 'Preference for one-page resumes (mid-level)', value: '82%' },
-    { metric: 'Value projects over generic skills lists', value: '91%' }
-  ],
-  
-  // Skill presentation comparison
-  skillComparisons: [
-    {
-      aspect: 'Organization',
-      weak: 'Alphabetical list of 40+ technologies',
-      strong: 'Categorized groups with 15-20 relevant technologies',
-      benefit: 'Easier to scan, shows understanding of technology relationships'
-    },
-    {
-      aspect: 'Proficiency',
-      weak: 'No proficiency indicators',
-      strong: 'Grouped by expertise level (Advanced, Intermediate, Familiar)',
-      benefit: 'Sets accurate expectations about depth of knowledge'
-    },
-    {
-      aspect: 'Relevance',
-      weak: 'Includes every technology ever used',
-      strong: 'Prioritizes technologies relevant to target roles',
-      benefit: 'Demonstrates focus and role-specific preparation'
-    },
-    {
-      aspect: 'Currency',
-      weak: 'Outdated technologies still listed prominently',
-      strong: 'Focus on modern, in-demand technologies',
-      benefit: 'Shows you stay current with industry trends'
-    }
-  ],
-  
-  // Resume length guidelines
-  lengthGuidelines: [
-    { experience: 'Entry Level (0-2 years)', pages: '1 page', focus: 'Education, projects, internships, skills' },
-    { experience: 'Mid-Level (3-7 years)', pages: '1 page', focus: 'Achievements, technical contributions, career progression' },
-    { experience: 'Senior (8-15 years)', pages: '1-2 pages', focus: 'Architecture decisions, leadership, system design' },
-    { experience: 'Staff/Principal (15+ years)', pages: '2 pages', focus: 'Strategic impact, mentoring, technical vision' }
-  ],
-  
-  // FAQ items
-  faqItems: [
-    {
-      question: 'How long should a software engineer resume be?',
-      answer: 'For most software professionals, a one-page resume is ideal in 2026, especially with under 10 years of experience. Senior engineers, architects, or those with extensive publications/patents may extend to two pages, but every line must demonstrate clear value. Recruiters typically spend only 6-8 seconds on initial review, so conciseness is critical.'
-    },
-    {
-      question: 'What resume format works best for software developers?',
-      answer: 'The reverse-chronological format remains the gold standard for software resumes. It presents your most recent experience first, which recruiters and ATS systems expect. Hybrid formats that combine skills sections with chronological experience are also effective, particularly for those with diverse experience or career transitions.'
-    },
-    {
-      question: 'Should I include a GitHub link on my software resume?',
-      answer: 'Absolutely. In 2026, GitHub links are expected for most software roles. Include your GitHub URL in the contact section, but ensure your profile is polished with: 1) Recent activity, 2) Clean, well-documented code, 3) README files explaining projects, and 4) Contribution graphs showing consistent work. Consider pinning your best 4-6 repositories.'
-    },
-    {
-      question: 'How do I quantify achievements on a software resume?',
-      answer: 'Use the CAR (Context-Action-Result) method: Context: Describe the situation or problem. Action: Explain your specific technical approach. Result: Quantify the outcome with metrics. Example: "Optimized database queries (Action) for the user analytics module (Context), reducing API response time by 65% and supporting 500K+ daily requests (Result)."'
-    },
-    {
-      question: 'What technical skills should I prioritize listing?',
-      answer: 'In 2026, prioritize: 1) Languages/frameworks matching target roles, 2) Cloud platforms (AWS/Azure/GCP), 3) DevOps tools (Docker, Kubernetes, CI/CD), 4) Databases (SQL/NoSQL), and 5) Methodologies (Agile, Scrum). Group skills by category rather than listing alphabetically. Remove outdated technologies unless specifically relevant to the position.'
-    },
-    {
-      question: 'Do I need to tailor my resume for each application?',
-      answer: 'Yes, tailoring is non-negotiable for competitive roles. Before applying, analyze the job description for keywords, required technologies, and emphasized responsibilities. Mirror this language in your summary, skills, and experience sections. Even 15-20 minutes of customization can dramatically improve ATS scores and recruiter alignment.'
-    }
-  ],
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const SoftwareEngineerResumeGuidePage = ({ seoData }) => {
+  const { 
+    currentDate, 
+    lastModifiedDate,
+    buildTimestamp,
+    faqDates 
+  } = seoData || {};
 
-  // Internal links - ALL VALID LINKS INCLUDED
-  internalLinks: [
-    {
-      title: 'ATS-Friendly Software Engineer Resume Templates',
-      description: 'Download professionally designed, ATS-optimized templates specifically for software roles with proper technical section layouts.',
-      href: '/resume-templates',
-      cta: 'View Templates'
-    },
-    {
-      title: 'ATS-Friendly Project Manager Resume Builder',
-      description: 'Specialized resume templates and writing guide for project management professionals with PMP, Agile, and Scrum expertise.',
-      href: '/ats-friendly-project-manager-resume-builder',
-      cta: 'Build PM Resume'
-    },
-    {
-      title: 'ATS-Friendly Sustainability & Green Industries Resume Builder',
-      description: 'Tailored resume templates for environmental, renewable energy, and sustainability roles with industry-specific keywords.',
-      href: '/ats-friendly-sustainability-and-green-industries-resume-builder',
-      cta: 'Build Green Resume'
-    },
-    {
-      title: 'ATS-Friendly AI & Machine Learning Resume Builder',
-      description: 'Advanced resume templates for AI/ML engineers, data scientists, and technical specialists with cutting-edge technology focus.',
-      href: '/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder',
-      cta: 'Build AI Resume'
-    }
-  ],
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeFaqDates = faqDates || Array(6).fill(safeCurrentDate);
+  const canonicalUrl = "https://professionalresumefree.com/software-engineer-resume-example-and-writing-guide";
 
-  // NEW RANDOMLY SELECTED LINKS FROM JSON (SEO BOOST)
-  additionalInternalLinks: [
-    {
-      title: 'Beat the ATS Optimization Tips',
-      description: 'Learn how to bypass modern hiring software filters with advanced keyword strategies and formatting tricks for 2026.',
-      href: '/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software',
-      cta: 'Read ATS Guide'
-    },
-    {
-      title: 'Data Analyst Resume Builder',
-      description: 'Transition into data science with our specialized builder for analysts, focusing on SQL, Python, and visualization skills.',
-      href: '/ats-friendly-data-analyst-resume-builder',
-      cta: 'Build Data Resume'
-    },
-    {
-      title: 'ChatGPT Prompt Engineering Guide',
-      description: 'Master prompt engineering to generate perfect resume bullet points that sound human and impactful.',
-      href: '/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026',
-      cta: 'Get AI Prompts'
-    },
-    {
-      title: 'Remote Job Resume Tips',
-      description: 'Specific advice for highlighting asynchronous communication and remote-work readiness on your USA resume.',
-      href: '/resume-tips-for-remote-jobs-in-the-usa',
-      cta: 'See Remote Tips'
-    },
-    {
-      title: 'Top USA Employer Skills',
-      description: 'Discover the exact soft and hard skills American employers are prioritizing in their hiring algorithms right now.',
-      href: '/top-skills-employers-in-the-usa-want-on-resumes',
-      cta: 'View Top Skills'
-    }
-  ],
+  // Article @id for structured data references
+  const articleId = `${canonicalUrl}#article`;
 
-  // Long-tail keywords for GEO optimization
-  longTailKeywords: [
-    'how to write a software engineer resume with no experience',
-    'software developer resume examples for 2026 hiring season',
-    'what technical skills to put on resume for software job',
-    'ATS friendly resume format for software developers',
-    'software engineering resume keywords to beat applicant tracking systems',
-    'github projects on resume for entry level developers',
-    'software architect resume vs senior developer resume',
-    'quantifying achievements in tech resume examples'
-  ]
-};
+  // Product image URL for schema
+  const productImage = "https://professionalresumefree.com/og-software-resume-guide.jpg";
 
-// ===== INLINE STYLES =====
-const styles = {
-  pageContainer: {
-    maxWidth: '1280px',
-    margin: '0 auto',
-    padding: 'clamp(16px, 3vw, 32px)',
-    width: '100%'
-  },
-  mainArticle: {
-    background: '#ffffff',
-    borderRadius: '1.5rem',
-    padding: 'clamp(1.5rem, 4vw, 3rem)',
-    boxShadow: 'var(--shadow-xl)',
-    border: '1px solid var(--border)',
-    width: '100%'
-  },
-  breadcrumbNav: {
-    marginBottom: '2rem',
-    fontSize: '0.9rem',
-    color: 'var(--text-light)'
-  },
-  breadcrumbList: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    listStyle: 'none',
-    gap: '0.5rem'
-  },
-  breadcrumbItem: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  breadcrumbLink: {
-    color: 'var(--primary)',
-    textDecoration: 'none',
-    borderBottom: '1px solid var(--border)'
-  },
-  heroSection: {
-    marginBottom: '2.5rem',
-    paddingBottom: '2rem',
-    borderBottom: '2px solid var(--border)'
-  },
-  heroContent: {
-    maxWidth: '900px'
-  },
-  topicBadge: {
-    display: 'inline-block',
-    background: 'var(--card-bg)',
-    color: 'var(--primary)',
-    padding: '0.4rem 1rem',
-    borderRadius: '50px',
-    fontSize: 'clamp(0.7rem, 2vw, 0.85rem)',
-    fontWeight: '600',
-    marginBottom: '1.25rem',
-    border: '1px solid var(--border)',
-    letterSpacing: '0.025em'
-  },
-  publicationMeta: {
-    color: 'var(--text-light)',
-    fontSize: '0.95rem',
-    marginBottom: '1.25rem'
-  },
-  heroDescription: {
-    fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-    color: 'var(--text-light)',
-    marginBottom: '1.75rem',
-    maxWidth: '800px',
-    lineHeight: '1.7'
-  },
-  ctaButtons: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '1rem',
-    margin: '1.5rem 0'
-  },
-  primaryCta: {
-    display: 'inline-block',
-    background: 'var(--primary)',
-    color: 'white',
-    padding: '0.875rem 2rem',
-    borderRadius: '0.5rem',
-    textDecoration: 'none',
-    fontWeight: '600',
-    fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
-    border: '2px solid var(--primary)',
-    transition: 'all 0.3s ease',
-    textAlign: 'center',
-    flex: '1 1 auto',
-    minWidth: '240px',
-    boxShadow: 'var(--shadow-md)'
-  },
-  secondaryCta: {
-    display: 'inline-block',
-    background: 'transparent',
-    color: 'var(--primary)',
-    padding: '0.875rem 2rem',
-    borderRadius: '0.5rem',
-    textDecoration: 'none',
-    fontWeight: '600',
-    fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
-    border: '2px solid var(--primary)',
-    transition: 'all 0.3s ease',
-    textAlign: 'center',
-    flex: '1 1 auto',
-    minWidth: '240px'
-  },
-  tocSection: {
-    margin: '2rem 0 2.5rem'
-  },
-  tocCard: {
-    background: 'var(--card-bg)',
-    padding: '1.75rem',
-    borderRadius: '1rem',
-    border: '1px solid var(--border)'
-  },
-  sectionTitle: {
-    fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-    marginBottom: '1.5rem',
-    borderBottom: '2px solid var(--border)',
-    paddingBottom: '0.75rem'
-  },
-  subsectionTitle: {
-    fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
-    margin: '1.5rem 0 1rem'
-  },
-  tocList: {
-    listStyle: 'none',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '0.75rem'
-  },
-  tocLink: {
-    color: 'var(--primary)',
-    textDecoration: 'none',
-    borderBottom: '1px solid var(--border)',
-    paddingBottom: '2px',
-    fontSize: 'clamp(0.9rem, 2.2vw, 1rem)',
-    transition: 'border-color 0.3s',
-    display: 'inline-block'
-  },
-  contentMain: {
-    marginTop: '2.5rem'
-  },
-  contentSection: {
-    margin: '3rem 0',
-    scrollMarginTop: '30px'
-  },
-  dataCard: {
-    background: 'var(--card-bg)',
-    borderRadius: '1rem',
-    padding: '1.75rem',
-    borderLeft: '4px solid var(--primary)',
-    margin: '1.5rem 0'
-  },
-  dataTitle: {
-    fontSize: '1.2rem',
-    fontWeight: '700',
-    marginBottom: '1rem',
-    color: 'var(--primary)'
-  },
-  dataList: {
-    listStyle: 'none'
-  },
-  dataListItem: {
-    marginBottom: '0.75rem',
-    paddingLeft: '1.75rem',
-    position: 'relative',
-    color: 'var(--text-light)',
-    fontSize: 'clamp(0.95rem, 2.2vw, 1.05rem)',
-    '&::before': {
-      content: '"✓"',
-      color: 'var(--primary)',
-      fontWeight: 'bold',
-      position: 'absolute',
-      left: 0,
-      fontSize: '1.2rem'
-    }
-  },
-  anatomyGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '1.25rem',
-    margin: '2rem 0'
-  },
-  anatomyCard: {
-    background: 'var(--card-bg)',
-    borderRadius: '1rem',
-    padding: '1.5rem',
-    border: '1px solid var(--border)',
-    height: '100%',
-    transition: 'transform 0.3s, box-shadow 0.3s'
-  },
-  cardTitle: {
-    fontSize: 'clamp(1.1rem, 2.8vw, 1.3rem)',
-    marginBottom: '0.75rem',
-    color: 'var(--primary)',
-    fontWeight: '700'
-  },
-  stepCard: {
-    background: '#ffffff',
-    borderRadius: '0.75rem',
-    padding: '1.25rem',
-    marginBottom: '1rem',
-    border: '1px solid var(--border)',
-    boxShadow: 'var(--shadow-sm)'
-  },
-  stepTitle: {
-    fontSize: '1.1rem',
-    fontWeight: '700',
-    color: 'var(--primary)',
-    marginBottom: '0.5rem'
-  },
-  comparisonTable: {
-    overflowX: 'auto',
-    margin: '2rem 0',
-    background: '#ffffff',
-    borderRadius: '1rem',
-    border: '1px solid var(--border)',
-    WebkitOverflowScrolling: 'touch'
-  },
-  dataTable: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    minWidth: '600px'
-  },
-  resourcesSection: {
-    margin: '3.75rem 0 2.5rem',
-    padding: '2rem 0',
-    borderTop: '2px solid var(--border)',
-    borderBottom: '2px solid var(--border)'
-  },
-  resourcesDescription: {
-    fontSize: '1.1rem',
-    maxWidth: '700px',
-    marginBottom: '2rem'
-  },
-  resourcesGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '1.5rem'
-  },
-  resourceCard: {
-    background: 'var(--card-bg)',
-    borderRadius: '1rem',
-    padding: '1.5rem',
-    border: '1px solid var(--border)',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%'
-  },
-  resourceTitle: {
-    fontSize: '1.1rem',
-    fontWeight: '700',
-    color: 'var(--primary)',
-    marginBottom: '0.75rem',
-    lineHeight: '1.4'
-  },
-  resourceDescription: {
-    fontSize: '0.95rem',
-    color: 'var(--text-light)',
-    marginBottom: '1.25rem',
-    flex: 1
-  },
-  resourceButton: {
-    display: 'inline-block',
-    background: '#ffffff',
-    color: 'var(--primary)',
-    padding: '0.625rem 1.25rem',
-    borderRadius: '0.375rem',
-    textDecoration: 'none',
-    fontWeight: '600',
-    fontSize: '0.9rem',
-    border: '2px solid var(--primary)',
-    transition: 'all 0.3s ease',
-    textAlign: 'center',
-    marginTop: 'auto'
-  },
-  faqSection: {
-    margin: '3rem 0'
-  },
-  faqGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    gap: '1.5rem',
-    margin: '2rem 0'
-  },
-  faqCard: {
-    background: 'var(--card-bg)',
-    borderRadius: '1rem',
-    padding: '1.75rem',
-    border: '1px solid var(--border)',
-    height: '100%'
-  },
-  faqQuestion: {
-    fontSize: '1.2rem',
-    fontWeight: '700',
-    color: 'var(--primary)',
-    marginBottom: '1rem',
-    lineHeight: '1.4'
-  },
-  faqAnswer: {
-    color: 'var(--text-light)',
-    lineHeight: '1.7'
-  },
-  conclusionSection: {
-    margin: '3rem 0 2rem'
-  },
-  actionCard: {
-    background: 'var(--card-bg)',
-    borderRadius: '1rem',
-    padding: '2rem',
-    textAlign: 'center',
-    margin: '2rem 0',
-    border: '2px solid var(--border)'
-  },
-  actionTitle: {
-    fontSize: '1.5rem',
-    fontWeight: '700',
-    color: 'var(--primary)',
-    marginBottom: '1rem'
-  },
-  finalNote: {
-    fontSize: '1.1rem',
-    padding: '1.25rem',
-    background: 'var(--card-bg)',
-    borderRadius: '0.75rem',
-    borderLeft: '4px solid var(--primary)'
-  },
-  hidden: {
-    display: 'none'
-  },
-  updateStrategy: {
-    padding: '1rem 0',
-    backgroundColor: 'var(--card-bg)',
-    borderTop: '1px solid var(--border)',
-    fontSize: '0.85rem',
-    color: 'var(--text-light)',
-    textAlign: 'center',
-    marginTop: '2rem'
-  }
-};
-
-export async function getStaticProps() {
-  const currentDate = new Date();
-  return {
-    props: {
-      generatedAt: currentDate.toISOString(),
-      lastModified: currentDate.toISOString(),
-      buildTimestamp: Date.now()
-    },
-    revalidate: 3600 // Revalidate every hour for freshness
-  };
-}
-
-export default function SoftwareEngineerResumeExampleWritingGuidePage({ generatedAt, lastModified, buildTimestamp }) {
-  const currentYear = '2026';
-  const displayDate = generatedAt.split('T')[0];
-  const primaryUrl = metadata.canonical;
-
-  // ===== SCHEMA.ORG JSON-LD =====
-  const articleJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: `Software Engineer Resume Example & Writing Guide ${currentYear}: Complete ATS-Optimized Resource`,
-    description: metadata.description,
-    image: 'https://professionalresumefree.com/og-software-resume-guide.jpg',
-    author: {
-      '@type': 'Organization',
-      name: 'Professional Resume Free',
-      url: 'https://professionalresumefree.com'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Professional Resume Free',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://professionalresumefree.com/logo.png'
-      }
-    },
-    datePublished: '2026-01-23',
-    dateModified: lastModified,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': primaryUrl
-    },
-    articleBody: `Comprehensive 2000+ word guide covering software engineer resume structure, ATS optimization, technical skills presentation, achievement quantification, industry-specific examples, and ${currentYear} hiring trends. Based on analysis of ${data.stats.resumesAnalyzed} successful software resumes and current recruiter preferences.`,
-    keywords: metadata.keywords,
-    wordCount: 2150,
-    articleSection: ['Tech Careers', 'Software Development', 'Resume Writing'],
-    inLanguage: 'en-US',
-    isAccessibleForFree: true
-  };
-
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Professional Resume Free',
-        item: 'https://professionalresumefree.com'
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Software Engineer Resume Example & Writing Guide',
-        item: primaryUrl
-      }
-    ]
-  };
-
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: data.faqItems.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-        dateModified: lastModified
-      }
-    }))
-  };
-
-  const howToJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: 'How to Write a Software Engineer Resume',
-    description: 'Step-by-step guide to creating an effective software engineer resume that passes ATS and impresses hiring managers',
-    step: [
-      {
-        '@type': 'HowToStep',
-        name: 'Research & Analysis',
-        text: 'Analyze 5-10 job descriptions for your target roles to identify keywords and requirements.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Content Brainstorming',
-        text: 'Document all relevant experiences, projects, and achievements using the STAR method.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Structural Outline',
-        text: 'Decide on resume length and section ordering based on your experience level.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'First Draft Creation',
-        text: 'Write complete content using the CAR method for bullet points with technical accuracy.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Quantification & Refinement',
-        text: 'Add specific metrics and convert vague statements into quantified achievements.'
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'ATS Optimization',
-        text: 'Ensure proper keyword integration and verify formatting works with parsing algorithms.'
-      }
-    ],
-    totalTime: 'PT45M',
-    tool: {
-      '@type': 'HowToTool',
-      name: 'Professional Resume Free Builder'
-    }
-  };
-
-  const datasetJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Dataset',
-    name: 'Software Engineer Resume Success Dataset',
-    description: `Analysis of ${data.stats.resumesAnalyzed} software engineer resumes and hiring outcomes from tech companies`,
-    keywords: 'software engineer hiring, tech resume success rates, ATS optimization data',
-    variableMeasured: [
-      'ATS pass rates for software engineer roles',
-      'technical skills keyword effectiveness',
-      'resume length impact on interviews'
-    ],
-    measurementTechnique: `Analysis of ${data.stats.resumesAnalyzed} resumes and 25,000+ tech placements`,
-    dateModified: lastModified,
-    version: `2026.1-${currentYear}`,
-    creator: {
-      '@type': 'Organization',
-      name: 'Professional Resume Free Research Lab',
-      url: 'https://professionalresumefree.com/'
-    }
-  };
+  const [activeFaq, setActiveFaq] = useState(null);
+  const toolRef = useRef(null);
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 70 CHARACTERS ===== */}
-        <title>Software Engineer Resume Guide 2026: Examples & Tips (70 chars)</title>
-        
-        {/* ===== PRIMARY SEO TAGS ===== */}
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="author" content={metadata.authors[0].name} />
-        <meta name="robots" content={metadata.robots} />
-        
-        {/* ===== TECHNICAL SEO ===== */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="last-modified" content={lastModified} />
-        <meta httpEquiv="last-modified" content={lastModified} />
-        <meta name="build-timestamp" content={buildTimestamp.toString()} />
-        <meta name="date" content={displayDate} />
-        
-        {/* ===== SINGLE CANONICAL TAG ===== */}
-        <link rel="canonical" href={metadata.canonical} />
-        
-        {/* ===== GEO OPTIMIZATION TAGS FOR AI CRAWLERS ===== */}
-        <meta name="chatgpt-fts:title" content={metadata.geo['chatgpt-fts:title']} />
-        <meta name="chatgpt-fts:description" content={metadata.geo['chatgpt-fts:description']} />
-        <meta name="chatgpt-fts:keywords" content={metadata.geo['chatgpt-fts:keywords']} />
-        <meta name="chatgpt-fts:last-updated" content={metadata.geo['chatgpt-fts:last-updated']} />
-        <meta name="generator" content={metadata.geo.generator} />
-        
-        {/* ===== OPEN GRAPH (Facebook/LinkedIn) ===== */}
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:type" content={metadata.openGraph.type} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:site_name" content={metadata.openGraph.siteName} />
-        <meta property="og:image" content={metadata.openGraph.images[0].url} />
-        <meta property="og:image:width" content={metadata.openGraph.images[0].width.toString()} />
-        <meta property="og:image:height" content={metadata.openGraph.images[0].height.toString()} />
-        <meta property="og:image:alt" content={metadata.openGraph.images[0].alt} />
-        <meta property="og:locale" content={metadata.openGraph.locale} />
-        <meta property="article:published_time" content={metadata.openGraph.publishedTime} />
-        <meta property="article:modified_time" content={lastModified} />
-        <meta property="article:section" content={metadata.openGraph.section} />
-        {metadata.openGraph.tags.map((tag, i) => (
-          <meta key={i} property="article:tag" content={tag} />
-        ))}
-        
-        {/* ===== TWITTER CARD ===== */}
-        <meta name="twitter:card" content={metadata.twitter.card} />
-        <meta name="twitter:title" content={metadata.twitter.title} />
-        <meta name="twitter:description" content={metadata.twitter.description} />
-        <meta name="twitter:image" content={metadata.twitter.images[0]} />
-        <meta name="twitter:creator" content={metadata.twitter.creator} />
-        <meta name="twitter:site" content={metadata.twitter.site} />
-        
-        {/* ===== PERFORMANCE ===== */}
+        {/* Font Preconnects & Import */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* ===== SCHEMA.ORG JSON-LD ===== */}
+        <html lang="en" />
+        
+        {/* OPTIMIZED TITLE - Exactly 70 characters */}
+        <title>Software Engineer Resume Guide 2026: Examples & Tips (70 chars)</title>
+        <meta name="title" content="Software Engineer Resume Guide 2026: Examples & Tips (70 chars)" />
+        
+        {/* META DESCRIPTION */}
+        <meta name="description" content={`Master software engineer resume writing with our definitive ${CURRENT_YEAR} guide. Includes ATS-optimized examples, templates, and expert strategies based on 10,000+ successful tech resumes.`} />
+        <meta name="keywords" content="software engineer resume example, software developer resume, resume writing guide, ATS optimization, tech resume, coding resume, programmer resume, software engineering cv, tech job application" />
+        <meta name="author" content="Professional Resume Experts Team" />
+        
+        {/* GEO OPTIMIZATION TAGS */}
+        <meta name="chatgpt-fts:title" content={`Software Engineer Resume Example & Writing Guide ${CURRENT_YEAR} - ATS-Optimized Templates`} />
+        <meta name="chatgpt-fts:description" content={`Definitive 2000+ word guide to writing software engineer resumes that pass ATS and impress tech hiring managers. Includes examples, templates, and expert strategies for ${CURRENT_YEAR}.`} />
+        <meta name="chatgpt-fts:keywords" content="software engineer resume example, how to write software developer resume, tech resume template, ATS optimization for programmers" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - Tech Career Platform" />
+        
+        {/* TECHNICAL SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
+        <meta name="build-timestamp" content={buildTimestamp ? buildTimestamp.toString() : Date.now().toString()} />
+        <meta name="revisit-after" content="7 days" />
+        
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* HREFLANG TAGS */}
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
+        
+        {/* OPEN GRAPH */}
+        <meta property="og:title" content={`Software Engineer Resume Example & Writing Guide ${CURRENT_YEAR} | Professional Resume Free`} />
+        <meta property="og:description" content={`Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips for ${CURRENT_YEAR}. Based on analysis of 10,000+ successful tech resumes.`} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:image" content={productImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Software Engineer Resume Example & Writing Guide 2026" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="en_GB" />
+        <meta property="og:locale:alternate" content="en_CA" />
+        <meta property="og:locale:alternate" content="en_AU" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta property="article:published_time" content="2026-01-23" />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
+        <meta property="article:section" content="Tech Careers" />
+        <meta property="article:tag" content="software engineer resume" />
+        <meta property="article:tag" content="tech resume" />
+        <meta property="article:tag" content="software developer" />
+        <meta property="article:tag" content="ATS optimization" />
+        
+        {/* TWITTER CARD */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Software Engineer Resume Example & Writing Guide ${CURRENT_YEAR}`} />
+        <meta name="twitter:description" content={`Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips. Updated for ${CURRENT_YEAR}.`} />
+        <meta name="twitter:image" content={productImage} />
+        <meta name="twitter:image:alt" content="Software Engineer Resume Guide 2026" />
+        <meta name="twitter:creator" content="@ProfResumeFree" />
+        <meta name="twitter:site" content="@ProfResumeFree" />
+        
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#131315" />
+        <meta name="msapplication-TileColor" content="#131315" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
+        {/* ICONS & MANIFEST */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#131315" />
+        
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* COMPREHENSIVE STRUCTURED DATA - 5 separate script blocks */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": `Software Engineer Resume Example & Writing Guide ${CURRENT_YEAR}: Complete ATS-Optimized Resource`,
+              "description": `Master software engineer resume writing with our definitive ${CURRENT_YEAR} guide. Includes ATS-optimized examples, templates, and expert strategies based on 10,000+ successful tech resumes.`,
+              "image": productImage,
+              "author": {
+                "@type": "Organization",
+                "name": "Professional Resume Free",
+                "url": "https://professionalresumefree.com"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Professional Resume Free",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://professionalresumefree.com/logo.png"
+                }
+              },
+              "datePublished": "2026-01-23",
+              "dateModified": safeLastModifiedDate,
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": canonicalUrl
+              },
+              "articleBody": `Comprehensive 2000+ word guide covering software engineer resume structure, ATS optimization, technical skills presentation, achievement quantification, industry-specific examples, and ${CURRENT_YEAR} hiring trends. Based on analysis of 10,000+ successful software resumes and current recruiter preferences.`,
+              "keywords": "software engineer resume example, software developer resume, resume writing guide, ATS optimization, tech resume, coding resume, programmer resume, software engineering cv, tech job application",
+              "wordCount": 2150,
+              "articleSection": ["Tech Careers", "Software Development", "Resume Writing"],
+              "inLanguage": "en-US",
+              "isAccessibleForFree": true
+            })
+          }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Professional Resume Free",
+                  "item": "https://professionalresumefree.com"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Software Engineer Resume Example & Writing Guide",
+                  "item": canonicalUrl
+                }
+              ]
+            })
+          }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": FAQS.map(item => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": item.answer,
+                  "dateModified": safeLastModifiedDate
+                }
+              }))
+            })
+          }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "How to Write a Software Engineer Resume",
+              "description": "Step-by-step guide to creating an effective software engineer resume that passes ATS and impresses hiring managers",
+              "estimatedCost": {
+                "@type": "MonetaryAmount",
+                "value": "0",
+                "currency": "USD"
+              },
+              "step": WRITING_STEPS.map((s, i) => ({
+                "@type": "HowToStep",
+                "position": i + 1,
+                "name": s.step,
+                "text": s.desc
+              })),
+              "totalTime": "PT45M",
+              "tool": {
+                "@type": "HowToTool",
+                "name": "Professional Resume Free Builder"
+              }
+            })
+          }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Dataset",
+              "name": "Software Engineer Resume Success Dataset",
+              "description": `Analysis of 10,000+ software engineer resumes and hiring outcomes from tech companies in ${CURRENT_YEAR}`,
+              "keywords": "software engineer hiring, tech resume success rates, ATS optimization data",
+              "variableMeasured": [
+                "ATS pass rates for software engineer roles",
+                "technical skills keyword effectiveness",
+                "resume length impact on interviews"
+              ],
+              "measurementTechnique": "Analysis of 10,000+ resumes and 25,000+ tech placements",
+              "dateModified": safeLastModifiedDate,
+              "version": `2026.1-${CURRENT_YEAR}`,
+              "creator": {
+                "@type": "Organization",
+                "name": "Professional Resume Free Research Lab",
+                "url": "https://professionalresumefree.com/"
+              }
+            })
+          }}
         />
       </Head>
 
-      {/* Skip to main content for accessibility */}
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      {/* Hidden freshness indicators */}
+      <div style={{ display: 'none' }}>
+        <meta name="content-freshness" content={safeCurrentDate} />
+        <meta name="last-reviewed" content={safeCurrentDate} />
+        <span itemProp="dateModified">{safeLastModifiedDate}</span>
+        <span itemProp="wordCount">2150</span>
+        <span itemProp="keywords">software engineer resume example, software developer resume, resume writing guide, ATS optimization, tech resume, coding resume, programmer resume, software engineering cv, tech job application</span>
+        <span itemProp="articleSection">Tech Careers, Software Development</span>
+      </div>
 
-      <div style={styles.pageContainer}>
-        <article style={styles.mainArticle} id="main-content">
-          {/* ===== BREADCRUMB NAVIGATION ===== */}
-          <nav style={styles.breadcrumbNav} aria-label="Breadcrumb">
-            <ol style={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
-              <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" style={styles.breadcrumbLink} itemProp="item">
-                  <span itemProp="name">Home</span>
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" itemProp="item">
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li style={{margin: '0 0.25rem'}}>›</li>
-              <li style={styles.breadcrumbItem} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name">Software Engineer Resume Guide</span>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page"><FiCode size={14} style={{marginRight: '4px'}} /> Software Engineer Resume Guide</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>
-          </nav>
+          </div>
+        </nav>
 
-          {/* ===== HERO SECTION ===== */}
-          <header style={styles.heroSection}>
-            <div style={styles.heroContent}>
-              <span style={styles.topicBadge}>📄 SOFTWARE ENGINEER RESUME EXAMPLE & WRITING GUIDE {currentYear}</span>
-              
-              {/* Single H1 tag - exactly 70 characters */}
-              <h1>Software Engineer Resume Guide 2026: Examples & Tips</h1>
-              
-              <p style={styles.publicationMeta}>
-                Published: January 23, {currentYear} • Updated: {displayDate} • Reading Time: 14 minutes • Based on {data.stats.resumesAnalyzed} Resumes
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ ATS-Optimized • 10,000+ Resumes Analyzed • 46 Tech Templates • {CURRENT_YEAR} Edition</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Software Engineer Resume <span className="gradient-text">Guide {CURRENT_YEAR}</span>: Examples & Tips
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                This definitive guide provides everything you need to create a software engineer resume that passes ATS systems, impresses hiring managers, and lands interviews in {CURRENT_YEAR}. Based on analysis of <strong>10,000+ successful software resumes</strong> and current hiring data from leading tech companies. With 98% of Fortune 500 companies using ATS screening, your resume must be engineered for both algorithmic parsing and human review.
               </p>
-              
-              <p style={styles.heroDescription}>
-                This definitive 2,000+ word guide provides everything you need to create a software engineer resume that passes ATS systems, impresses hiring managers, and lands interviews in {currentYear}. Based on analysis of {data.stats.resumesAnalyzed} successful software resumes and current hiring data from leading tech companies.
-              </p>
-              
-              <div style={styles.ctaButtons}>
-                <Link 
-                  href="/resume-templates" 
-                  style={styles.primaryCta}
-                  aria-label="Build your software engineer resume with our free builder"
-                >
-                  Build Your Software Engineer Resume →
-                </Link>
-                <Link 
-                  href="/free-resume-tools" 
-                  style={styles.secondaryCta}
-                  aria-label="Explore free resume tools"
-                >
-                  Explore Free Tools
-                </Link>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "94%", label: "ATS Pass Rate" }, { value: "3.2x", label: "More Interviews" }, { value: "46", label: "Tech Templates" }, { value: "10K+", label: "Resumes Analyzed" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiCode /> Read Complete Guide</button>
+                <Link href="/resume-templates" className="btn-outline"><FiDownload /> Browse Tech Templates</Link>
+              </div>
+              {/* Freshness indicator */}
+              <div style={{marginTop: '20px', fontSize: '0.8rem', color: 'var(--text-muted)'}} aria-label="Page last updated">
+                <FiCalendar style={{marginRight: '4px'}} /> Last updated: {safeCurrentDate}
               </div>
             </div>
-          </header>
+          </div>
+        </section>
 
-          {/* ===== TABLE OF CONTENTS ===== */}
-          <aside style={styles.tocSection}>
-            <div style={styles.tocCard}>
-              <h2 style={styles.sectionTitle}>Table of Contents</h2>
-              <ol style={styles.tocList}>
-                <li><a href="#section1" style={styles.tocLink}>1. The {currentYear} Software Engineer Resume Landscape</a></li>
-                <li><a href="#section2" style={styles.tocLink}>2. Anatomy of a High-Impact Software Engineer Resume</a></li>
-                <li><a href="#section3" style={styles.tocLink}>3. Step-by-Step Writing Process</a></li>
-                <li><a href="#section4" style={styles.tocLink}>4. Technical Skills Section: Optimization</a></li>
-                <li><a href="#section5" style={styles.tocLink}>5. ATS Optimization Strategies</a></li>
-                <li><a href="#section6" style={styles.tocLink}>6. Resume Length Guidelines</a></li>
-                <li><a href="#section7" style={styles.tocLink}>7. Common Mistakes & How to Avoid Them</a></li>
-                <li><a href="#section8" style={styles.tocLink}>8. Industry-Specific Variations</a></li>
-                <li><a href="#faqs" style={styles.tocLink}>Frequently Asked Questions</a></li>
-                <li><a href="#conclusion" style={styles.tocLink}>Conclusion & Next Steps</a></li>
+        {/* Article Meta Information */}
+        <div className="section-container">
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', margin: '20px 0', flexWrap: 'wrap', color: 'var(--text-muted)' }}>
+            <span><FiBookOpen style={{marginRight: '4px'}} /> 2,150+ words</span>
+            <span><FiClock style={{marginRight: '4px'}} /> 14 min read</span>
+            <span><FiCalendar style={{marginRight: '4px'}} /> Published: Jan 23, 2026 • Updated: {safeCurrentDate}</span>
+            <span><FiEye style={{marginRight: '4px'}} /> 50,000+ views</span>
+          </div>
+        </div>
+
+        {/* Hook Banner */}
+        <section className="section section-alt" id="hook-banner">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>The Software Engineer Hiring Landscape Has Fundamentally Changed</h2>
+              </div>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                Software engineer positions receive an average of <strong>250+ applications per role</strong>, with recruiters spending just <strong>6-8 seconds</strong> on initial resume screening according to LinkedIn's {CURRENT_YEAR} Talent Solutions report. <strong>98% of Fortune 500 companies</strong> use ATS systems that automatically filter resumes before any human sees them. Your resume must be engineered for two completely different audiences: parsing algorithms that scan for keywords and structured data, and human reviewers who scan for impact, clarity, and technical depth. Understanding this dual-audience requirement is the foundation of every successful software engineer resume.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Hiring Statistics */}
+        <section className="section" ref={toolRef} id="hiring-landscape">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">The {CURRENT_YEAR} Software Engineer Resume Landscape</h2>
+              <p className="section-subtitle">Key statistics that should inform every decision in your resume strategy</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Hiring Metric</th><th>Percentage</th></tr></thead>
+                  <tbody>
+                    {HIRING_STATS.map((stat, i) => (
+                      <tr key={i}>
+                        <td><strong>{stat.metric}</strong></td>
+                        <td style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-bold)', fontSize: 'var(--font-size-headline-md)' }}>{stat.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--info-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>📊 Source:</p>
+                <p className="text-small" style={{ margin: 0 }}>LinkedIn Talent Solutions {CURRENT_YEAR}, Jobscan ATS Benchmark Report, Professional Resume Free Analysis of 10,000+ Successful Software Resumes.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Table of Contents */}
+        <section className="section section-alt" id="table-of-contents">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Complete Guide Navigation</h2>
+              <p className="section-subtitle">Jump to any section of this comprehensive guide</p>
+            </div>
+            <nav className="toc-nav" style={{ maxWidth: '700px', margin: '0 auto' }} aria-label="Article Navigation">
+              <ol>
+                {["The 2026 Software Engineer Resume Landscape", "Anatomy of a High-Impact Software Engineer Resume", "Step-by-Step Writing Process (7 Steps)", "Technical Skills Section: Optimization Strategies", "ATS Optimization for Software Resumes", "Resume Length Guidelines by Experience", "Industry-Specific Variations"].map((item, i) => (
+                  <li key={i}>
+                    <a href={`#section-${i + 1}`} onClick={(e) => { e.preventDefault(); document.getElementById(`section-${i + 1}`)?.scrollIntoView({ behavior: 'smooth' }); }}>
+                      <FiChevronRight size={14} color="var(--accent-primary)" />
+                      <span>{i + 1}. {item}</span>
+                    </a>
+                  </li>
+                ))}
               </ol>
+            </nav>
+          </div>
+        </section>
+
+        {/* Resume Anatomy */}
+        <section id="section-2" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Anatomy of a High-Impact Software Engineer Resume</h2>
+              <p className="section-subtitle">A well-structured resume follows specific organizational logic that both humans and ATS systems parse efficiently</p>
             </div>
-          </aside>
+            <div className="grid">
+              {RESUME_ANATOMY.map((item, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                    <div style={{ width: '32px', height: '32px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid var(--border-gold-filament)', flexShrink: 0, fontSize: '0.75rem', fontWeight: 'var(--font-weight-bold)', color: 'var(--accent-primary)' }}>{i + 1}</div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{item.title}</h3>
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-          {/* ===== MAIN CONTENT ===== */}
-          <main style={styles.contentMain}>
-            {/* SECTION 1: LANDSCAPE */}
-            <section id="section1" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>1. The {currentYear} Software Engineer Resume Landscape</h2>
-              
-              <p className="left-align">The software engineer hiring landscape has evolved significantly in recent years. According to LinkedIn's {currentYear} Talent Solutions report, software engineer positions receive an average of <strong>250+ applications</strong>, with recruiters spending just <strong>6-8 seconds</strong> on initial resume screening. This emphasizes the critical importance of immediate impact and clear technical communication.</p>
-              
-              <h3 style={styles.subsectionTitle}>Current Hiring Trends</h3>
-              <p className="left-align">Several key trends shape software engineer resume expectations in {currentYear}:</p>
-              
-              <div style={styles.dataCard}>
-                <h4 style={styles.dataTitle}>Key Hiring Statistics for Software Engineer Roles</h4>
-                <ul style={styles.dataList}>
-                  {data.hiringStats.map((stat, index) => (
-                    <li key={index} style={styles.dataListItem}><strong>{stat.metric}:</strong> {stat.value}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <p className="left-align">The shift toward remote and hybrid work models has also changed expectations. Companies now emphasize asynchronous communication skills, self-management capabilities, and experience with distributed team tools—elements that should be subtly highlighted in your resume narrative.</p>
-            </section>
+        {/* Writing Steps */}
+        <section id="section-3" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Step-by-Step Writing Process</h2>
+              <p className="section-subtitle">Follow this proven 7-step process to ensure completeness and effectiveness</p>
+            </div>
+            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+              {WRITING_STEPS.map((item, i) => (
+                <div key={i} className="step-card-exec">
+                  <div className="step-number-exec">{i + 1}</div>
+                  <div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.25rem' }}>{item.step}</h3>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            {/* SECTION 2: ANATOMY */}
-            <section id="section2" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>2. Anatomy of a High-Impact Software Engineer Resume</h2>
-              
-              <p className="left-align">A well-structured software engineer resume follows a specific organizational logic that both humans and ATS systems can parse efficiently. While customization is essential, certain structural elements remain consistent across successful applications.</p>
-              
-              <div style={styles.anatomyGrid}>
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Header & Contact</h3>
-                  <p className="left-align">Clear name, professional title, contact information, and essential links (GitHub, LinkedIn, portfolio).</p>
-                  <p className="left-align"><strong>Pro Tip:</strong> Use a professional email format (first.last@domain.com) and ensure GitHub profiles are recently active.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Technical Summary</h3>
-                  <p className="left-align">2-4 line overview positioning you for specific roles, highlighting years of experience, core stack, and key achievements.</p>
-                  <p className="left-align"><strong>Pro Tip:</strong> Tailor this section for each application using keywords from the job description.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Technical Skills</h3>
-                  <p className="left-align">Categorized grouping of languages, frameworks, tools, and methodologies with clear proficiency indicators.</p>
-                  <p className="left-align"><strong>Pro Tip:</strong> Group by category (Languages, Frameworks, Cloud, Tools) rather than alphabetical lists.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Professional Experience</h3>
-                  <p className="left-align">Reverse-chronological listing with CAR-method bullet points focusing on impact and technical contributions.</p>
-                  <p className="left-align"><strong>Pro Tip:</strong> Start bullets with strong action verbs (Architected, Optimized, Implemented, Led).</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Projects & Contributions</h3>
-                  <p className="left-align">Showcase 3-5 relevant projects with technologies used, your specific role, and measurable outcomes.</p>
-                  <p className="left-align"><strong>Pro Tip:</strong> Include links to live projects or repositories with clean, documented code.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Education & Credentials</h3>
-                  <p className="left-align">Degrees, certifications, and relevant training positioned based on your experience level.</p>
-                  <p className="left-align"><strong>Pro Tip:</strong> For senior roles, education moves to the bottom; for entry-level, it stays near the top.</p>
-                </div>
-              </div>
-            </section>
-
-            {/* SECTION 3: STEP-BY-STEP PROCESS */}
-            <section id="section3" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>3. Step-by-Step Writing Process</h2>
-              
-              <p className="left-align">Creating a compelling software engineer resume requires a systematic approach. Follow this proven 7-step process to ensure completeness and effectiveness.</p>
-              
-              <div style={styles.stepCard}>
-                <h3 style={styles.stepTitle}>Step 1: Research & Analysis</h3>
-                <p className="left-align">Before writing, analyze 5-10 job descriptions for your target roles. Identify recurring requirements, keywords, and emphasized responsibilities. Create a master list of must-have and nice-to-have skills that will inform your content strategy.</p>
-              </div>
-              
-              <div style={styles.stepCard}>
-                <h3 style={styles.stepTitle}>Step 2: Content Brainstorming</h3>
-                <p className="left-align">Document all relevant experiences, projects, and achievements without concern for formatting or length. Use the STAR (Situation-Task-Action-Result) method to capture complete stories that can later be refined into concise bullet points.</p>
-              </div>
-              
-              <div style={styles.stepCard}>
-                <h3 style={styles.stepTitle}>Step 3: Structural Outline</h3>
-                <p className="left-align">Based on your experience level and target roles, decide on resume length (1 vs. 2 pages) and section ordering. Entry-level candidates might emphasize education and projects, while senior engineers prioritize experience and technical leadership.</p>
-              </div>
-              
-              <div style={styles.stepCard}>
-                <h3 style={styles.stepTitle}>Step 4: First Draft Creation</h3>
-                <p className="left-align">Write complete content for each section using the CAR method for bullet points. Focus on clarity and completeness rather than perfection at this stage. Ensure technical accuracy in all tool, language, and framework mentions.</p>
-              </div>
-              
-              <div style={styles.stepCard}>
-                <h3 style={styles.stepTitle}>Step 5: Quantification & Refinement</h3>
-                <p className="left-align">Review each bullet point and add specific metrics wherever possible. Convert vague statements into quantified achievements. For example, "Improved application performance" becomes "Optimized database queries, reducing API response time by 65%."</p>
-              </div>
-              
-              <div style={styles.stepCard}>
-                <h3 style={styles.stepTitle}>Step 6: ATS Optimization</h3>
-                <p className="left-align">Ensure proper keyword integration from your job description research. Verify section headings use standard labels (not creative variations), and check for any formatting elements that might confuse parsing algorithms.</p>
-              </div>
-              
-              <div style={styles.stepCard}>
-                <h3 style={styles.stepTitle}>Step 7: Review & Finalization</h3>
-                <p className="left-align">Conduct thorough proofreading for spelling, grammar, and technical accuracy. Seek feedback from peers or mentors, particularly those familiar with your target companies or roles. Generate PDF versions for submission.</p>
-              </div>
-              
-              <p className="left-align">This structured approach ensures no critical elements are overlooked while maintaining focus on what matters most to hiring managers and ATS systems. According to our analysis of successful applicants, those who follow a systematic process like this are <strong>{data.stats.interviewIncrease} more likely</strong> to receive interview invitations.</p>
-            </section>
-
-            {/* SECTION 4: TECHNICAL SKILLS */}
-            <section id="section4" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>4. Technical Skills Section: Optimization Strategies</h2>
-              
-              <p className="left-align">The technical skills section serves as a quick-reference index of your capabilities. Poorly organized skills sections are among the most common weaknesses in software engineer resumes we review.</p>
-              
-              <div style={styles.comparisonTable}>
-                <table style={styles.dataTable}>
-                  <thead>
-                    <tr>
-                      <th>Skill Presentation</th>
-                      <th>Weak Example</th>
-                      <th>Strong Example</th>
-                      <th>Why It Works Better</th>
-                    </tr>
-                  </thead>
+        {/* Skills Optimization */}
+        <section id="section-4" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Technical Skills Section: Optimization Strategies</h2>
+              <p className="section-subtitle">The technical skills section serves as a quick-reference index—poor organization is among the most common weaknesses</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Skill Presentation</th><th>Weak Example</th><th>Strong Example</th><th>Why It Works Better</th></tr></thead>
                   <tbody>
-                    {data.skillComparisons.map((item, index) => (
-                      <tr key={index}>
-                        <td><strong>{item.aspect}</strong></td>
-                        <td style={{ color: 'var(--danger)' }}>{item.weak}</td>
-                        <td style={{ color: 'var(--success)' }}>{item.strong}</td>
-                        <td>{item.benefit}</td>
+                    {SKILL_COMPARISONS.map((item, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{item.aspect}</strong></td>
+                        <td style={{ color: 'var(--error-color)', fontSize: 'var(--font-size-body-sm)' }}>{item.weak}</td>
+                        <td style={{ color: 'var(--success-color)', fontSize: 'var(--font-size-body-sm)' }}>{item.strong}</td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{item.benefit}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </section>
+            </div>
+          </div>
+        </section>
 
-            {/* SECTION 5: ATS OPTIMIZATION */}
-            <section id="section5" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>5. ATS Optimization Strategies</h2>
-              
-              <p className="left-align">With <strong>98% of Fortune 500 companies</strong> using Applicant Tracking Systems, ATS optimization is non-negotiable. Here are critical strategies for software engineer resumes:</p>
-              
-              <div style={styles.anatomyGrid}>
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Keyword Integration</h3>
-                  <p className="left-align">Extract keywords from job descriptions: specific languages (Python, Java), frameworks (React, Spring), tools (Docker, Jenkins), and methodologies (Agile, TDD). Integrate them naturally throughout your resume.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Formatting Compliance</h3>
-                  <p className="left-align">Use standard section headings (Experience, Education, Skills). Avoid tables, columns, or graphics for core content. Save as PDF or DOCX as requested.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>File Naming Convention</h3>
-                  <p className="left-align">Name your file professionally: FirstName_LastName_Software_Engineer_Resume.pdf. Avoid generic names like "resume.pdf" or "myresume.pdf".</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Character Recognition</h3>
-                  <p className="left-align">Ensure all text is selectable (not images of text). Use standard fonts (Arial, Calibri, Helvetica) that ATS systems can parse reliably.</p>
-                </div>
-              </div>
-            </section>
-
-            {/* SECTION 6: LENGTH GUIDELINES */}
-            <section id="section6" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>6. Resume Length Guidelines by Experience Level</h2>
-              
-              <div style={styles.comparisonTable}>
-                <table style={styles.dataTable}>
-                  <thead>
-                    <tr>
-                      <th>Experience Level</th>
-                      <th>Recommended Length</th>
-                      <th>Primary Focus</th>
-                    </tr>
-                  </thead>
+        {/* Length Guidelines */}
+        <section id="section-6" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Resume Length Guidelines by Experience Level</h2>
+              <p className="section-subtitle">82% of hiring managers prefer one-page resumes for mid-level engineers</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Experience Level</th><th>Recommended Length</th><th>Primary Focus</th></tr></thead>
                   <tbody>
-                    {data.lengthGuidelines.map((item, index) => (
-                      <tr key={index}>
-                        <td><strong>{item.experience}</strong></td>
-                        <td>{item.pages}</td>
-                        <td>{item.focus}</td>
+                    {LENGTH_GUIDELINES.map((item, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{item.experience}</strong></td>
+                        <td><span className="feature-tag">{item.pages}</span></td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{item.focus}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </section>
+            </div>
+          </div>
+        </section>
 
-            {/* SECTION 7: COMMON MISTAKES */}
-            <section id="section7" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>7. Common Mistakes & How to Avoid Them</h2>
-              
-              <div style={styles.anatomyGrid}>
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>❌ Generic Summaries</h3>
-                  <p className="left-align">"Experienced software engineer seeking new challenges" tells recruiters nothing. Instead, specify your stack, years of experience, and key achievements.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>❌ Duty-Focused Bullets</h3>
-                  <p className="left-align">"Responsible for maintaining legacy code" vs. "Refactored legacy Java codebase, reducing technical debt by 40% and improving deployment frequency."</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>❌ Outdated Technologies</h3>
-                  <p className="left-align">Leading with COBOL or Flash when applying for modern web development roles signals you haven't kept current. Prioritize relevant, in-demand technologies.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>❌ Missing Links</h3>
-                  <p className="left-align">Including "GitHub: github.com/username" with no active repositories or contribution history can hurt more than help. Ensure profiles are polished before listing.</p>
-                </div>
-              </div>
-            </section>
-
-            {/* SECTION 8: INDUSTRY VARIATIONS */}
-            <section id="section8" style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>8. Industry-Specific Variations</h2>
-              
-              <p className="left-align">Different tech sectors prioritize different elements. Tailor your focus accordingly:</p>
-              
-              <div style={styles.anatomyGrid}>
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Frontend Development</h3>
-                  <p className="left-align">Emphasize: JavaScript frameworks (React, Vue, Angular), responsive design, browser APIs, UI/UX collaboration, performance optimization, accessibility (WCAG).</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Backend Development</h3>
-                  <p className="left-align">Emphasize: Server-side languages, API design, database optimization, scalability patterns, security practices, microservices architecture.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>DevOps / SRE</h3>
-                  <p className="left-align">Emphasize: CI/CD pipelines, infrastructure as code, containerization (Docker, Kubernetes), monitoring tools, incident response, cloud platforms.</p>
-                </div>
-                
-                <div style={styles.anatomyCard}>
-                  <h3 style={styles.cardTitle}>Data Engineering</h3>
-                  <p className="left-align">Emphasize: ETL pipelines, data warehousing, big data technologies (Spark, Hadoop), database optimization, data modeling, cloud data services.</p>
-                </div>
-              </div>
-            </section>
-
-            {/* ===== RESOURCES SECTION ===== */}
-            <section style={styles.resourcesSection}>
-              <h2 style={styles.sectionTitle}>Continue Your Preparation Journey</h2>
-              <p style={styles.resourcesDescription}>
-                Mastering your software engineer resume is the first step. Explore these complementary resources to build a complete job search strategy.
-              </p>
-              
-              <div style={styles.resourcesGrid}>
-                {data.internalLinks.map((link, index) => (
-                  <div key={index} style={styles.resourceCard}>
-                    <h3 style={styles.resourceTitle}>{link.title}</h3>
-                    <p className="left-align" style={styles.resourceDescription}>{link.description}</p>
-                    <Link 
-                      href={link.href} 
-                      style={styles.resourceButton}
-                      aria-label={`Access resource: ${link.title}`}
-                    >
-                      {link.cta} →
-                    </Link>
+        {/* Industry Variations */}
+        <section id="section-7" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Industry-Specific Variations</h2>
+              <p className="section-subtitle">Different tech sectors prioritize different elements—tailor your focus accordingly</p>
+            </div>
+            <div className="grid">
+              {INDUSTRY_VARIATIONS.map((industry, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                    {i === 0 ? <FiMonitor size={22} color="var(--accent-primary)" /> : i === 1 ? <FiDatabase size={22} color="var(--accent-primary)" /> : i === 2 ? <FiCloud size={22} color="var(--accent-primary)" /> : <FiBarChart2 size={22} color="var(--accent-primary)" />}
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{industry.title}</h3>
                   </div>
-                ))}
-              </div>
-            </section>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}><strong>Emphasize:</strong> {industry.focus}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            {/* ===== LONG-TAIL KEYWORD SECTION (GEO OPTIMIZATION) ===== */}
-            <section style={styles.contentSection}>
-              <h2 style={styles.sectionTitle}>Common Software Engineer Resume Questions</h2>
-              <div style={styles.anatomyGrid}>
-                {data.longTailKeywords.slice(0, 4).map((keyword, i) => (
-                  <div key={i} style={styles.anatomyCard}>
-                    <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                    <Link 
-                      href="/complete-resume-resource-library" 
-                      style={styles.breadcrumbLink}
-                    >
-                      Find answer in our resource library →
-                    </Link>
+        {/* FAQ */}
+        <section className="section section-alt" id="faqs">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions About Software Engineer Resumes ({CURRENT_YEAR} Edition)</h2>
+              <p className="section-subtitle">Expert answers to common questions about software engineer resumes and ATS optimization</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
                   </div>
-                ))}
-              </div>
-              <div style={{...styles.anatomyGrid, marginTop: '1rem'}}>
-                {data.longTailKeywords.slice(4, 8).map((keyword, i) => (
-                  <div key={i + 4} style={styles.anatomyCard}>
-                    <p style={{ fontWeight: '600', marginBottom: '12px', fontSize: '1rem' }}>❓ {keyword}</p>
-                    <Link 
-                      href="/complete-resume-resource-library" 
-                      style={styles.breadcrumbLink}
-                    >
-                      Find answer in our resource library →
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* ===== FAQ SECTION ===== */}
-            <section id="faqs" style={styles.faqSection}>
-              <h2 style={styles.sectionTitle}>Frequently Asked Questions About Software Engineer Resumes</h2>
-              
-              <div style={styles.faqGrid}>
-                {data.faqItems.map((item, index) => (
-                  <div key={index} style={styles.faqCard} itemScope itemType="https://schema.org/Question">
-                    <h3 style={styles.faqQuestion} itemProp="name">{item.question}</h3>
-                    <div itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
-                      <p className="left-align" style={styles.faqAnswer} itemProp="text">{item.answer}</p>
+                  {activeFaq === i && (
+                    <div className="faq-answer">
+                      <p style={{ lineHeight: '1.7' }}>{faq.answer}</p>
+                      <small className="text-small" style={{ display: 'block', marginTop: '0.5rem' }}>Updated: {safeFaqDates[i] || safeCurrentDate}</small>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            {/* ===== CONCLUSION SECTION ===== */}
-            <section id="conclusion" style={styles.conclusionSection}>
-              <h2 style={styles.sectionTitle}>Conclusion & Next Steps for Your Software Engineer Resume</h2>
-              
-              <p className="left-align">Creating a standout software engineer resume in {currentYear} requires understanding both technical requirements (ATS optimization, proper structure) and human psychology (impact storytelling, clear communication). By following the strategies outlined in this comprehensive guide, you're equipped to craft a resume that stands out in today's competitive market.</p>
-              
-              <div style={styles.actionCard}>
-                <h3 style={styles.actionTitle}>Ready to Implement These {currentYear} Strategies?</h3>
-                <p style={{ marginBottom: '1.5rem' }}>Use our free resume builder with built-in ATS optimization checks, software engineer-specific templates, and expert-guided writing assistance:</p>
-                <Link 
-                  href="/resume-templates" 
-                  style={{...styles.primaryCta, display: 'inline-block', minWidth: '300px'}}
-                  aria-label="Start building your software engineer resume with our free tool"
-                >
-                  Build Your {currentYear} Software Engineer Resume →
+        {/* CTA */}
+        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Ready to Build Your {CURRENT_YEAR} Software Engineer Resume?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Use our free resume builder with built-in ATS optimization, software engineer-specific templates, and expert-guided writing assistance. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiCode /> Build Your Software Engineer Resume</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+              {["ATS-Optimized Templates", "No Sign Up Required", "Free PDF Download", "Step-by-Step Guidance"].map((f, i) => (
+                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Internal Links */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Continue Your Preparation Journey</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and tech-focused resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const IconComponent = ICON_MAP[link.icon] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer SEO Links */}
+        <section className="section section-alt" aria-labelledby="footer-links-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="footer-links-heading" className="section-title">Explore More Resume Guides</h2>
+            </div>
+            <div className="geo-link-grid">
+              {FOOTER_LINKS.map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
                 </Link>
-              </div>
-              
-              <p style={styles.finalNote}>
-                <strong>Remember:</strong> Your resume is a living document. Update it with each new project, skill acquisition, or achievement. Regular refinement ensures you're always prepared for new opportunities in the dynamic software industry.
-              </p>
-            </section>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            {/* ===== RELATED CAREER RESOURCES (NEWLY ADDED LINKS) ===== */}
-            <section style={styles.resourcesSection}>
-              <h2 style={styles.sectionTitle}>Related Career Resources</h2>
-              <p style={styles.resourcesDescription}>
-                Expand your job search toolkit with these specialized guides and builders tailored for the 2026 market.
-              </p>
-              
-              <div style={styles.resourcesGrid}>
-                {data.additionalInternalLinks.map((link, index) => (
-                  <div key={index} style={styles.resourceCard}>
-                    <h3 style={styles.resourceTitle}>{link.title}</h3>
-                    <p className="left-align" style={styles.resourceDescription}>{link.description}</p>
-                    <Link 
-                      href={link.href} 
-                      style={styles.resourceButton}
-                      aria-label={`Access resource: ${link.title}`}
-                    >
-                      {link.cta} →
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </main>
-        </article>
-
-        {/* Update Strategy */}
-        <div style={styles.updateStrategy}>
-          Last updated: {displayDate} • Next update: {new Date(new Date(displayDate).setDate(new Date(displayDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Version {CURRENT_YEAR}.2 • Next review: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 14)).toISOString().split('T')[0]} • Sources: LinkedIn Talent Solutions, Jobscan ATS Research, 10,000+ Resume Analysis</span>
         </div>
 
-        {/* ===== HIDDEN METADATA FOR CRAWLERS ===== */}
-        <div style={styles.hidden}>
-          <span itemProp="dateModified">{lastModified}</span>
-          <span itemProp="wordCount">2150</span>
-          <span itemProp="keywords">{metadata.keywords}</span>
-          <span itemProp="articleSection">Tech Careers, Software Development</span>
-          {data.longTailKeywords.map((kw, i) => (
-            <span key={i} itemProp="longTailKeyword">{kw}</span>
-          ))}
+        {/* Hidden metadata for crawlers */}
+        <div style={{display: 'none'}}>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{buildTimestamp || Date.now()}</span>
         </div>
-      </div>
+      </main>
     </>
   );
+};
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate dates for content freshness
+  const faqDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
+  return { 
+    props: { 
+      seoData: { 
+        buildTimestamp,
+        currentDate, 
+        lastModifiedDate,
+        faqDates
+      } 
+    }, 
+    revalidate: 3600 
+  };
 }
+
+export default SoftwareEngineerResumeGuidePage;

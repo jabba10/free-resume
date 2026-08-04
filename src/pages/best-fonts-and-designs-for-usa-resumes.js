@@ -35,383 +35,361 @@ import {
   FiTerminal
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards - all centered
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-}
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-
-/* center all content */
-.hero,
-.section,
-.card,
-.grid-3,
-.grid-2,
-.faq-grid,
-.hub-grid,
-.breadcrumb ol,
-.article-meta,
-.stats,
-.hero-actions,
-.toc-list {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero {
-  background: var(--background);
-  padding: 40px 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .hero { padding: 60px 0; }
-}
-.hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  margin-bottom: 20px;
-  line-height: 1.2;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  word-wrap: break-word;
-}
-.hero p {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  max-width: 800px;
-  margin: 0 auto 24px;
-  padding: 0 16px;
-  color: var(--text-light);
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  margin-bottom: 24px;
-  font-weight: 500;
-}
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin: 30px 0;
-  flex-wrap: wrap;
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #000;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 1px solid #000;
-  transition: background 0.2s;
-  min-width: 240px;
-  justify-content: center;
-}
-.btn-primary:hover { background: #333; }
-.btn-primary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: #000;
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 2px solid #000;
-  transition: background 0.2s;
-  min-width: 240px;
-  justify-content: center;
-}
-.btn-secondary:hover { background: #f5f5f5; }
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-  border-top: 1px solid var(--border);
-  padding-top: 30px;
-}
-.stat-item { text-align: center; min-width: 140px; }
-.stat-number { font-size: clamp(1.8rem, 4vw, 2.2rem); font-weight: bold; display: block; }
-.helper-text { font-size: 0.9rem; color: var(--text-light); margin-top: 20px; }
-.article-meta {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-.meta-item { display: flex; align-items: center; gap: 6px; color: var(--text-light); }
-.section {
-  padding: 50px 0;
-  scroll-margin-top: 20px;
-}
-@media (max-width: 768px) { .section { padding: 40px 0; } }
-.section-title {
-  text-align: center;
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
-  margin-bottom: 40px;
-}
-.card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 30px;
-  border: 1px solid var(--border);
-  margin-bottom: 30px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,0.05); }
-.card:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.card-title {
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.subheading {
-  font-size: 1.3rem;
-  margin: 30px 0 15px;
-  font-weight: 600;
-  text-align: center;
-}
-.paragraph {
-  margin-bottom: 20px;
-  color: var(--text-light);
-  font-size: 1.05rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin: 30px auto;
-  max-width: 800px;
-}
-@media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin: 30px auto;
-  max-width: 1000px;
-}
-@media (max-width: 768px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .grid-3 { grid-template-columns: 1fr; } }
-.font-card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-}
-.font-sample { font-size: 1.6rem; margin: 15px 0 8px; }
-.font-meta { color: var(--text-lighter); font-size: 0.9rem; }
-.table-wrap { overflow-x: auto; margin: 30px auto; border-radius: 8px; border: 1px solid var(--border); max-width: 800px; }
-table { width: 100%; border-collapse: collapse; min-width: 500px; margin: 0 auto; }
-th { background: var(--card-bg); padding: 14px; text-align: left; border-bottom: 2px solid var(--border); }
-td { padding: 14px; text-align: left; border-bottom: 1px solid var(--border); }
-.faq-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-@media (max-width: 640px) { .faq-grid { grid-template-columns: 1fr; } }
-.faq-item {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-align: center;
-  height: 100%;
-  scroll-margin-top: 20px;
-}
-.faq-item:target {
-  background-color: #f0f0f0;
-}
-.faq-question { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
-.testimonial-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-}
-.trust-badge {
-  display: inline-block;
-  background: #f3f4f6;
-  color: #000;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
-  border: 1px solid var(--border);
-}
-.breadcrumb {
-  padding: 16px 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.breadcrumb a { color: var(--primary); text-decoration: none; border-bottom: 1px solid transparent; }
-.breadcrumb a:hover { border-bottom-color: var(--primary); }
-.breadcrumb [aria-current="page"] { font-weight: 600; }
-.hub-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin: 20px auto;
-  max-width: 700px;
-}
-@media (max-width: 640px) { .hub-grid { grid-template-columns: 1fr; } }
-.hub-category {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-align: center;
-}
-.hub-category ul { list-style: none; margin-top: 16px; }
-.hub-category li { margin: 12px 0; }
-.hub-category a { color: var(--primary); text-decoration: none; border-bottom: 1px solid #d1d5db; padding-bottom: 2px; }
-.hub-category a:hover { border-bottom-color: var(--primary); }
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #000;
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus { top: 0; }
-hr { border: none; border-top: 1px solid var(--border); margin: 40px auto; max-width: 800px; }
-.text-small { font-size: 0.85rem; color: var(--text-light); }
-.text-success { color: #059669; font-weight: 600; }
-.toc-list { 
-  list-style: none; 
-  padding: 0; 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 20px; 
-  justify-content: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.toc-list li { margin: 0; }
-.toc-list a { color: var(--primary); text-decoration: none; font-weight: 500; }
-.toc-list a:hover { text-decoration: underline; }
-
-/* New Internal Links Section Styles */
-.recommended-resources {
-  background: var(--background);
-  padding: 40px 0;
-  border-top: 1px solid var(--border);
-}
-.resource-card {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  height: 100%;
-}
-.resource-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border-color: var(--primary);
-}
-.resource-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--primary);
-  line-height: 1.4;
-}
-.resource-desc {
-  font-size: 0.95rem;
-  color: var(--text-light);
-  margin-bottom: 12px;
-  flex-grow: 1;
-}
-.resource-cta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--primary);
-  margin-top: auto;
-}
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS (UNCHANGED)
+// ============================================================================
+const executiveDesignTokens = `
+  /* ========== CSS CUSTOM PROPERTIES ========== */
+  :root {
+    /* Background Colors */
+    --bg-page: #131315;
+    --bg-surface-lowest: #0e0e10;
+    --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21;
+    --bg-surface-high: #2a2a2c;
+    --bg-surface-highest: #353437;
+    
+    /* Text Colors */
+    --text-primary: #e5e1e4;
+    --text-secondary: #c5bfc8;
+    --text-muted: #9d95a0;
+    --text-disabled: #605d62;
+    --text-inverse: #1c1b1d;
+    --text-on-accent: #3c2f00;
+    
+    /* Accent/Brand Colors - Gold */
+    --accent-primary: #f2ca50;
+    --accent-primary-container: #d4af37;
+    --accent-primary-fixed: #ffe088;
+    --accent-primary-fixed-dim: #e9c349;
+    --accent-on-primary: #3c2f00;
+    --accent-on-primary-container: #2a2000;
+    --accent-inverse-primary: #735c00;
+    --accent-primary-hover: #f7d86e;
+    --accent-primary-active: #e6bc3d;
+    
+    /* Border Colors */
+    --border-outline: #444246;
+    --border-outline-variant: #363538;
+    --border-gold-filament: rgba(212, 175, 55, 0.3);
+    --border-gold-filament-strong: rgba(212, 175, 55, 0.5);
+    --border-glass: rgba(212, 175, 55, 0.15);
+    
+    /* Success/Warning Colors */
+    --success-color: #a5d6a7;
+    --error-color: #ffb4ab;
+    
+    /* Glass/Special Effect Colors */
+    --glass-bg: rgba(20, 19, 21, 0.7);
+    --glass-bg-light: rgba(28, 27, 29, 0.6);
+    --glass-bg-heavy: rgba(20, 19, 21, 0.85);
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Font Sizes */
+    --font-size-display-lg: clamp(3rem, 6vw, 4rem);
+    --font-size-display-md: clamp(2.25rem, 5vw, 3rem);
+    --font-size-headline-lg: clamp(1.75rem, 4vw, 2rem);
+    --font-size-headline-md: clamp(1.5rem, 3.5vw, 1.75rem);
+    --font-size-title-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-title-md: clamp(1.125rem, 2.5vw, 1.25rem);
+    --font-size-body-lg: clamp(1rem, 2vw, 1.125rem);
+    --font-size-body-md: 1rem;
+    --font-size-body-sm: 0.875rem;
+    --font-size-label-md: 0.75rem;
+    --font-size-label-sm: 0.6875rem;
+    
+    /* Line Heights */
+    --line-height-display: 1.1;
+    --line-height-headline: 1.2;
+    --line-height-title: 1.3;
+    --line-height-body: 1.6;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-caps: 0.08em;
+    
+    /* ========== SPACING SYSTEM ========== */
+    --section-gap-sm: clamp(3rem, 6vw, 4rem);
+    --section-gap-md: clamp(4rem, 8vw, 6rem);
+    --section-gap-lg: clamp(5rem, 10vw, 8rem);
+    
+    /* Content Widths */
+    --content-max-width: 1280px;
+    --content-narrow: 800px;
+    
+    /* Gutters */
+    --gutter-desktop: clamp(1.5rem, 5vw, 2.5rem);
+    --gutter-mobile: clamp(1rem, 4vw, 1.5rem);
+    
+    /* ========== SHADOW / ELEVATION TOKENS ========== */
+    --shadow-gold-glow: 0 0 20px rgba(242, 202, 80, 0.4), 0 0 60px rgba(242, 202, 80, 0.1);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242, 202, 80, 0.3);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* ========== ANIMATION / TRANSITION TOKENS ========== */
+    --transition-fast: 150ms;
+    --transition-medium: 250ms;
+    --transition-slow: 350ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --hover-transform: translateY(-2px);
+    --hover-transform-lg: translateY(-4px);
+    
+    /* ========== GLASS PANEL EFFECT ========== */
+    --glass-blur: 20px;
+    --glass-border-width: 0.5px;
+    --glass-padding: clamp(1.5rem, 4vw, 2.5rem);
+    
+    /* ========== BUTTON STYLE VARIABLES ========== */
+    --btn-primary-bg: #f2ca50;
+    --btn-primary-text: #3c2f00;
+    --btn-primary-padding: 0.875rem 2rem;
+    --btn-primary-radius: 0.25rem;
+    --btn-primary-font-size: 0.875rem;
+    --btn-primary-font-weight: 600;
+    --btn-primary-letter-spacing: 0.02em;
+    --btn-primary-hover-bg: #f7d86e;
+    
+    --btn-outline-border: rgba(212, 175, 55, 0.5);
+    --btn-outline-text: #f2ca50;
+    --btn-outline-hover-bg: rgba(242, 202, 80, 0.08);
+    
+    /* ========== CARD STYLE VARIABLES ========== */
+    --card-bg: rgba(28, 27, 29, 0.6);
+    --card-bg-hover: rgba(32, 31, 33, 0.8);
+    --card-border: 0.5px solid rgba(212, 175, 55, 0.15);
+    --card-padding: clamp(1.5rem, 4vw, 2.5rem);
+    --card-radius: 0.5rem;
+    --card-hover-transform: translateY(-4px);
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05);
+  }
+  
+  /* ========== BASE RESET ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-tight);
+    word-wrap: break-word;
+  }
+  
+  h1 { font-size: var(--font-size-display-lg); line-height: var(--line-height-display); font-weight: var(--font-weight-bold); margin-bottom: 1rem; }
+  h2 { font-size: var(--font-size-display-md); line-height: var(--line-height-headline); font-weight: var(--font-weight-bold); }
+  h3 { font-size: var(--font-size-headline-lg); line-height: var(--line-height-headline); font-weight: var(--font-weight-semibold); font-family: var(--font-body); }
+  p { color: var(--text-secondary); font-size: var(--font-size-body-lg); line-height: var(--line-height-body); }
+  strong { color: var(--text-primary); font-weight: var(--font-weight-semibold); }
+  a { color: var(--accent-primary); transition: color var(--transition-fast) var(--easing-default); text-decoration: none; }
+  a:hover { color: var(--accent-primary-hover); }
+  
+  /* ========== UTILITY CLASSES ========== */
+  .gradient-text {
+    background: linear-gradient(135deg, #f2ca50 0%, #d4af37 50%, #ffe088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .section-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter-desktop);
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) { .section-container { padding: 0 var(--gutter-mobile); } }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 0 0.25rem 0.25rem;
+    font-weight: var(--font-weight-semibold);
+  }
+  .skip-link:focus { top: 0; }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    text-decoration: none;
+    min-width: 200px;
+  }
+  .btn-primary:hover { background: var(--btn-primary-hover-bg); transform: var(--hover-transform); box-shadow: var(--shadow-gold-glow-sm); color: var(--btn-primary-text); }
+  
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: transparent;
+    color: var(--btn-outline-text);
+    border: 0.5px solid var(--btn-outline-border);
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 200px;
+  }
+  .btn-outline:hover { background: var(--btn-outline-hover-bg); border-color: rgba(212, 175, 55, 0.8); transform: var(--hover-transform); color: var(--btn-outline-text); }
+  
+  .card-executive {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-executive:hover { background: var(--card-bg-hover); border-color: rgba(212, 175, 55, 0.3); transform: var(--card-hover-transform); box-shadow: var(--card-hover-shadow); }
+  
+  /* ========== PAGE SPECIFIC STYLES ========== */
+  
+  .section { width: 100%; padding: var(--section-gap-md) 0; }
+  .section-alt { background: var(--bg-surface-lowest); }
+  
+  .section-header { text-align: center; margin-bottom: clamp(2rem, 6vw, 3rem); }
+  .section-title { margin-bottom: 1rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .section-subtitle { font-size: var(--font-size-body-lg); color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+  
+  .breadcrumb-nav {
+    padding: 1rem 0;
+    background: var(--bg-surface-lowest);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+    width: 100%;
+  }
+  .breadcrumb-nav ol { list-style: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+  .breadcrumb-nav a { color: var(--text-secondary); font-size: var(--font-size-body-sm); display: inline-flex; align-items: center; gap: 0.25rem; }
+  .breadcrumb-nav a:hover { color: var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
+  
+  .badge {
+    display: inline-block;
+    background: rgba(242, 202, 80, 0.1);
+    color: var(--accent-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-caps);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    border: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin: 2rem auto; width: 100%; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  
+  .stat-item { text-align: center; min-width: 140px; }
+  .stat-number { font-size: clamp(1.8rem, 4vw, 2.2rem); font-weight: var(--font-weight-bold); color: var(--accent-primary); display: block; font-family: var(--font-display); }
+  
+  .article-meta { display: flex; gap: 1.5rem; justify-content: center; margin: 1.25rem 0; flex-wrap: wrap; color: var(--text-muted); font-size: var(--font-size-body-sm); }
+  .meta-item { display: flex; align-items: center; gap: 0.375rem; }
+  
+  .toc-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: center; max-width: 800px; margin: 0 auto; }
+  .toc-list a { color: var(--text-secondary); text-decoration: none; font-weight: var(--font-weight-medium); font-size: var(--font-size-body-sm); transition: color var(--transition-fast); }
+  .toc-list a:hover { color: var(--accent-primary); }
+  
+  .font-card { background: var(--card-bg); backdrop-filter: blur(var(--glass-blur)); border: var(--card-border); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; }
+  .font-sample { font-size: 1.6rem; margin: 0.75rem 0 0.5rem; }
+  .font-meta { color: var(--text-muted); font-size: var(--font-size-body-sm); }
+  
+  .table-wrap { overflow-x: auto; margin: 2rem auto; border-radius: 0.75rem; border: var(--card-border); background: var(--card-bg); backdrop-filter: blur(var(--glass-blur)); max-width: 900px; }
+  table { width: 100%; border-collapse: collapse; min-width: 500px; margin: 0 auto; }
+  th { background: rgba(242, 202, 80, 0.05); padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-gold-filament); font-weight: var(--font-weight-semibold); color: var(--accent-primary); font-size: var(--font-size-body-sm); }
+  td { padding: 1rem; text-align: left; border-bottom: 0.5px solid var(--border-gold-filament); color: var(--text-secondary); font-size: var(--font-size-body-sm); }
+  
+  .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; max-width: 1000px; margin: 0 auto; }
+  @media (max-width: 640px) { .faq-grid { grid-template-columns: 1fr; } }
+  .faq-item { background: var(--card-bg); backdrop-filter: blur(var(--glass-blur)); border: var(--card-border); border-radius: var(--radius-xl); padding: 1.5rem; height: 100%; scroll-margin-top: 1.25rem; cursor: pointer; }
+  .faq-question { font-size: var(--font-size-title-md); font-weight: var(--font-weight-semibold); color: var(--text-primary); margin-bottom: 0.75rem; line-height: 1.4; }
+  
+  .testimonial-card {
+    background: var(--card-bg); backdrop-filter: blur(var(--glass-blur)); border: var(--card-border); border-radius: var(--radius-xl); padding: 1.5rem;
+    max-width: 700px; margin: 0 auto; text-align: center; display: flex; flex-direction: column;
+  }
+  
+  .hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 800px; margin: 0 auto; }
+  @media (max-width: 640px) { .hub-grid { grid-template-columns: 1fr; } }
+  .hub-category { background: var(--card-bg); backdrop-filter: blur(var(--glass-blur)); border: var(--card-border); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; }
+  .hub-category ul { list-style: none; margin-top: 1rem; }
+  .hub-category li { margin: 0.75rem 0; }
+  .hub-category a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 0.125rem; font-size: var(--font-size-body-sm); transition: all var(--transition-fast); }
+  .hub-category a:hover { color: var(--accent-primary); border-bottom-color: var(--accent-primary-container); }
+  
+  .geo-link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+  .geo-link-card {
+    display: flex; flex-direction: column;
+    padding: 1.25rem;
+    background: var(--card-bg); backdrop-filter: blur(var(--glass-blur)); border: var(--card-border); border-radius: var(--radius-lg);
+    text-decoration: none; color: inherit; transition: all var(--transition-medium) var(--easing-smooth); height: 100%;
+  }
+  .geo-link-card:hover { border-color: var(--accent-primary-container); transform: translateY(-3px); box-shadow: var(--card-hover-shadow); color: inherit; }
+  
+  .text-small { font-size: var(--font-size-body-sm); color: var(--text-muted); }
+  .text-success { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
+  
+  @media (max-width: 640px) {
+    .btn-primary, .btn-outline { width: 100%; min-width: auto; }
+  }
 `;
 
+// ============================================================================
+// SEO-ENHANCED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
+// ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
@@ -584,51 +562,14 @@ export async function getStaticProps() {
   ];
 
   const fontComparisonData = [
-    {
-      font: "Arial",
-      category: "Sans Serif",
-      atsScore: "98%",
-      readability: "Excellent",
-      bestFor: "All industries, especially tech and business"
-    },
-    {
-      font: "Calibri",
-      category: "Sans Serif",
-      atsScore: "99%",
-      readability: "Excellent",
-      bestFor: "Corporate, finance, general business"
-    },
-    {
-      font: "Helvetica",
-      category: "Sans Serif",
-      atsScore: "97%",
-      readability: "Excellent",
-      bestFor: "Design, tech, creative fields"
-    },
-    {
-      font: "Garamond",
-      category: "Serif",
-      atsScore: "95%",
-      readability: "Very Good",
-      bestFor: "Academic, publishing, traditional industries"
-    },
-    {
-      font: "Times New Roman",
-      category: "Serif",
-      atsScore: "96%",
-      readability: "Very Good",
-      bestFor: "Law, academia, conservative fields"
-    },
-    {
-      font: "Verdana",
-      category: "Sans Serif",
-      atsScore: "98%",
-      readability: "Excellent",
-      bestFor: "Remote work, digital-first companies"
-    }
+    { font: "Arial", category: "Sans Serif", atsScore: "98%", readability: "Excellent", bestFor: "All industries, especially tech and business" },
+    { font: "Calibri", category: "Sans Serif", atsScore: "99%", readability: "Excellent", bestFor: "Corporate, finance, general business" },
+    { font: "Helvetica", category: "Sans Serif", atsScore: "97%", readability: "Excellent", bestFor: "Design, tech, creative fields" },
+    { font: "Garamond", category: "Serif", atsScore: "95%", readability: "Very Good", bestFor: "Academic, publishing, traditional industries" },
+    { font: "Times New Roman", category: "Serif", atsScore: "96%", readability: "Very Good", bestFor: "Law, academia, conservative fields" },
+    { font: "Verdana", category: "Sans Serif", atsScore: "98%", readability: "Excellent", bestFor: "Remote work, digital-first companies" }
   ];
 
-  // ==================== SELECTED INTERNAL LINKS FOR SEO/GEO BOOST ====================
   const internalLinks = [
     {
       href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
@@ -673,10 +614,14 @@ export async function getStaticProps() {
       designPrinciples,
       fontComparisonData,
       internalLinks
-    }
+    },
+    revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint pattern)
   };
 }
 
+// ============================================================================
+// SEO-ENHANCED PAGE COMPONENT
+// ============================================================================
 function BestFontsAndDesignsPage({ 
   buildTimestamp,
   currentDate,
@@ -695,26 +640,35 @@ function BestFontsAndDesignsPage({
 }) {
   return (
     <>
+      {/* ======================================================================== */}
+      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* ======================================================================== */}
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* ===== SEO TITLE (from Page 1) ===== */}
         <title>Best Fonts and Designs for USA Resumes 2026: Complete ATS Friendly Guide</title>
         
-        {/* META DESCRIPTION */}
+        {/* ===== META DESCRIPTION (from Page 1) ===== */}
         <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="best fonts for resume, resume design USA, ATS friendly fonts, resume typography, modern resume layout, professional resume design, resume format 2026, resume margins, resume file format" />
         
-        {/* GEO OPTIMIZATION TAGS */}
+        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content="Complete guide to fonts and designs for USA resumes. ATS safe choices, modern layouts, expert design principles, and proven strategies to get interviews." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
-        {/* TECHNICAL SEO */}
+        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -722,10 +676,10 @@ function BestFontsAndDesignsPage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL (www REMOVED) */}
+        {/* ===== CANONICAL URL (from Page 1) ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH (www REMOVED) */}
+        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
@@ -738,26 +692,24 @@ function BestFontsAndDesignsPage({
         <meta property="article:published_time" content="2026-01-23" />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* TWITTER CARD (www REMOVED) */}
+        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Fonts and Designs for USA Resumes 2026" />
         <meta name="twitter:description" content="ATS friendly fonts and designs to land more interviews. Free 2026 guide with expert tips." />
         <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* ADDITIONAL META */}
-        <meta name="theme-color" content="#000000" />
+        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* PRECONNECT FOR PERFORMANCE */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        
-        {/* SITEMAP */}
+        {/* ===== SITEMAP (from Page 1) ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA (www REMOVED) */}
+        {/* ======================================================================== */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ======================================================================== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -864,34 +816,36 @@ function BestFontsAndDesignsPage({
         />
       </Head>
 
-      {/* Hidden freshness indicators */}
+      {/* Hidden freshness indicators (from Page 1) */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={currentDate} />
       </div>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      {/* ======================================================================== */}
+      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* ======================================================================== */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
-                  <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
+                  <span itemProp="name"><FiHome size={14} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/resume-templates" itemProp="item">
                   <span itemProp="name">Resume Templates</span>
                 </Link>
                 <meta itemProp="position" content="2" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <span itemProp="name" aria-current="page">Best Fonts and Designs</span>
                 <meta itemProp="position" content="3" />
@@ -900,339 +854,283 @@ function BestFontsAndDesignsPage({
           </div>
         </nav>
 
-        {/* Hero Section with single H1 */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="badge">USA RESUME GUIDE 2026</div>
-            
-            {/* SINGLE H1 TAG */}
-            <h1 id="hero-heading">Best Fonts and Designs for USA Resumes 2026: Complete ATS Friendly Guide</h1>
-            
-            <p>
-              Your resume typography and layout decide if it passes ATS robots and impresses hiring managers. This comprehensive guide reveals the safest, most professional fonts and designs that work in the USA job market, backed by 2026 data and expert insights.
-            </p>
-
-            <div className="hero-actions">
-              <Link href="/resume-templates" className="btn-primary">
-                Browse Templates <FiArrowRight style={{marginLeft: '8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                <FiTool style={{marginRight: '8px'}} /> Free Resume Tools
-              </Link>
-            </div>
-
-            {/* Stats Section */}
-            <div className="stats" aria-label="Key statistics">
-              <div className="stat-item">
-                <span className="stat-number">94%</span>
-                <span>ATS pass rate*</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">12+</span>
-                <span>tested fonts</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">3x</span>
-                <span>more interviews**</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">98%</span>
-                <span>recruiter preference***</span>
-              </div>
-              <p className="helper-text" aria-label="Footnote">
-                *with recommended fonts and design **compared to decorative resumes ***for clean, traditional layouts
+        {/* Hero Section */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">USA RESUME GUIDE 2026</div>
+              
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Best Fonts and Designs for USA Resumes 2026:{' '}
+                <span className="gradient-text">Complete ATS Friendly Guide</span>
+              </h1>
+              
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Your resume typography and layout decide if it passes ATS robots and impresses hiring managers. This comprehensive guide reveals the safest, most professional fonts and designs that work in the USA job market, backed by 2026 data and expert insights.
               </p>
-            </div>
 
-            {/* Article Meta Information */}
-            <div className="article-meta">
-              <span className="meta-item"><FiBookOpen /> 3,500+ words</span>
-              <span className="meta-item"><FiClock /> 18 min read</span>
-              <span className="meta-item"><FiCalendar /> Updated: {currentDate}</span>
-              <span className="meta-item"><FiEye /> 47,000+ views</span>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }} role="group" aria-label="Call to action buttons">
+                <Link href="/resume-templates" className="btn-primary">Browse Templates <FiArrowRight /></Link>
+                <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
+              </div>
+
+              {/* Stats Section */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', borderTop: '0.5px solid var(--border-gold-filament)', paddingTop: '2rem' }} aria-label="Key statistics">
+                <div className="stat-item"><span className="stat-number">94%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>ATS pass rate*</span></div>
+                <div className="stat-item"><span className="stat-number">12+</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>tested fonts</span></div>
+                <div className="stat-item"><span className="stat-number">3x</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>more interviews**</span></div>
+                <div className="stat-item"><span className="stat-number">98%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>recruiter preference***</span></div>
+              </div>
+              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Footnote">*with recommended fonts and design **compared to decorative resumes ***for clean, traditional layouts</p>
+
+              {/* Article Meta */}
+              <div className="article-meta" style={{ marginTop: '1.5rem' }}>
+                <span className="meta-item"><FiBookOpen size={14} /> 3,500+ words</span>
+                <span className="meta-item"><FiClock size={14} /> 18 min read</span>
+                <span className="meta-item"><FiCalendar size={14} /> Updated: {currentDate}</span>
+                <span className="meta-item"><FiEye size={14} /> 47,000+ views</span>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Table of Contents */}
-        <section className="section" style={{paddingTop: '20px'}}>
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Complete Guide Navigation</h2>
+        <section className="section section-alt" aria-labelledby="toc-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="toc-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>✦ Complete Guide Navigation</h2>
               <ol className="toc-list">
-                <li><a href="#why-fonts-matter">1. Why fonts matter</a></li>
-                <li><a href="#top-fonts">2. Top 12 fonts</a></li>
-                <li><a href="#font-comparison">3. Font comparison</a></li>
-                <li><a href="#design-principles">4. Design principles</a></li>
-                <li><a href="#design-rules">5. ATS design rules</a></li>
-                <li><a href="#ats-layout">6. How ATS reads</a></li>
-                <li><a href="#paa">7. Common questions</a></li>
-                <li><a href="#faq">8. Detailed FAQ</a></li>
-                <li><a href="#testimonials">9. Success stories</a></li>
-                <li><a href="#resources">10. Resources</a></li>
+                {["Why fonts matter", "Top 12 fonts", "Font comparison", "Design principles", "ATS design rules", "How ATS reads", "Common questions", "Detailed FAQ", "Success stories", "Resources"].map((item, i) => (
+                  <li key={i}><a href={`#section-${i+1}`}>{i+1}. {item}</a></li>
+                ))}
               </ol>
             </div>
           </div>
         </section>
 
-        {/* Conversational Explanations Section */}
-        <section className="section" style={{background: '#f9fafb'}} aria-labelledby="conversational-heading">
-          <div className="container">
-            <h2 id="conversational-heading" className="section-title">Resume Fonts and Design Made Simple</h2>
-            <div className="grid-2">
+        {/* Conversational Explanations */}
+        <section className="section" id="section-0" aria-labelledby="conversational-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="conversational-heading">Resume Fonts and Design Made Simple</h2>
+              <p className="section-subtitle">Plain-English explanations of what matters most</p>
+            </div>
+            <div className="grid">
               {conversationalExplanations.map((item, i) => (
-                <article key={i} className="font-card" style={{background: 'var(--card-bg)', padding: '24px'}}>
-                  <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>{item.topic}</h3>
-                  <p style={{color: '#4b5563', lineHeight: '1.6'}}>{item.content}</p>
-                </article>
+                <div key={i} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--accent-primary)' }}>{item.topic}</h3>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: 'var(--font-size-body-sm)' }}>{item.content}</p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Section 1: Why Fonts Matter */}
-        <section id="why-fonts-matter" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="card-title">Why Font Choice Can Make or Break Your Resume</h2>
-              <p className="paragraph">
-                In the USA, over 98% of Fortune 500 companies use Applicant Tracking Systems (ATS). These systems parse your resume into a digital profile. Uncommon fonts, non standard glyphs, or unusual characters can cause misreads or reject your resume outright. Even after the ATS, recruiters spend only 6 to 8 seconds scanning. A clean, familiar typeface ensures your experience gets read, not skipped.
-              </p>
-              <p className="paragraph">
-                Research from 2026 shows that resumes using recommended fonts like Arial, Calibri, or Garamond have a 94% success rate in ATS parsing, compared to just 62% for decorative or uncommon fonts. The font you choose directly impacts whether your qualifications are seen by human eyes.
-              </p>
-              <p className="paragraph">
-                <span className="trust-badge">SOURCE: 2026 recruiting data from top ATS vendors including Greenhouse, Lever, and Workday</span>
-              </p>
+        <section id="section-1" className="section section-alt" aria-labelledby="section1-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section1-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Why Font Choice Can Make or Break Your Resume</h2>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>In the USA, over 98% of Fortune 500 companies use Applicant Tracking Systems (ATS). These systems parse your resume into a digital profile. Uncommon fonts, non standard glyphs, or unusual characters can cause misreads or reject your resume outright. Even after the ATS, recruiters spend only 6 to 8 seconds scanning. A clean, familiar typeface ensures your experience gets read, not skipped.</p>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Research from 2026 shows that resumes using recommended fonts like Arial, Calibri, or Garamond have a 94% success rate in ATS parsing, compared to just 62% for decorative or uncommon fonts. The font you choose directly impacts whether your qualifications are seen by human eyes.</p>
+              <div style={{ textAlign: 'center' }}>
+                <span className="badge">SOURCE: 2026 recruiting data from top ATS vendors including Greenhouse, Lever, and Workday</span>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Top Fonts - Expanded */}
-        <section id="top-fonts" className="section">
-          <div className="container">
-            <h2 className="section-title">Top 12 ATS Safe Fonts for USA Resumes</h2>
-            <div className="grid-3">
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Arial, sans-serif'}}>Arial</span><p className="font-meta">Sans serif · Windows/Mac native · 98% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Calibri, sans-serif'}}>Calibri</span><p className="font-meta">Sans serif · MS Office default · 99% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Helvetica, sans-serif'}}>Helvetica</span><p className="font-meta">Sans serif · crisp and professional · 97% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Garamond, serif'}}>Garamond</span><p className="font-meta">Serif · elegant, great for print · 95% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Lato, sans-serif'}}>Lato</span><p className="font-meta">Sans serif · modern, web safe · 96% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Verdana, sans-serif'}}>Verdana</span><p className="font-meta">Sans serif · highly readable · 98% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Times New Roman, serif'}}>Times New Roman</span><p className="font-meta">Serif · traditional, universal · 96% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Georgia, serif'}}>Georgia</span><p className="font-meta">Serif · elegant, web friendly · 94% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Tahoma, sans-serif'}}>Tahoma</span><p className="font-meta">Sans serif · compact, readable · 95% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Trebuchet MS, sans-serif'}}>Trebuchet MS</span><p className="font-meta">Sans serif · friendly, modern · 93% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Century Gothic, sans-serif'}}>Century Gothic</span><p className="font-meta">Sans serif · clean, geometric · 92% ATS score</p></div>
-              <div className="font-card"><span className="font-sample" style={{fontFamily: 'Corbel, sans-serif'}}>Corbel</span><p className="font-meta">Sans serif · modern, legible · 94% ATS score</p></div>
+        {/* Section 2: Top Fonts */}
+        <section id="section-2" className="section" aria-labelledby="section2-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="section2-heading" className="section-title">Top 12 ATS Safe Fonts for USA Resumes</h2>
+              <p className="section-subtitle">Universally readable fonts that parse perfectly through every major ATS</p>
             </div>
-            <p className="paragraph">
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+              {[
+                { name: 'Arial', family: 'Arial, sans-serif', meta: 'Sans serif · 98% ATS score' },
+                { name: 'Calibri', family: 'Calibri, sans-serif', meta: 'Sans serif · 99% ATS score' },
+                { name: 'Helvetica', family: 'Helvetica, sans-serif', meta: 'Sans serif · 97% ATS score' },
+                { name: 'Garamond', family: 'Garamond, serif', meta: 'Serif · 95% ATS score' },
+                { name: 'Lato', family: 'Lato, sans-serif', meta: 'Sans serif · 96% ATS score' },
+                { name: 'Verdana', family: 'Verdana, sans-serif', meta: 'Sans serif · 98% ATS score' },
+                { name: 'Times New Roman', family: 'Times New Roman, serif', meta: 'Serif · 96% ATS score' },
+                { name: 'Georgia', family: 'Georgia, serif', meta: 'Serif · 94% ATS score' },
+                { name: 'Tahoma', family: 'Tahoma, sans-serif', meta: 'Sans serif · 95% ATS score' },
+                { name: 'Trebuchet MS', family: 'Trebuchet MS, sans-serif', meta: 'Sans serif · 93% ATS score' },
+                { name: 'Century Gothic', family: 'Century Gothic, sans-serif', meta: 'Sans serif · 92% ATS score' },
+                { name: 'Corbel', family: 'Corbel, sans-serif', meta: 'Sans serif · 94% ATS score' }
+              ].map((font, i) => (
+                <div key={i} className="font-card">
+                  <span className="font-sample" style={{ fontFamily: font.family }}>{font.name}</span>
+                  <p className="font-meta">{font.meta}</p>
+                </div>
+              ))}
+            </div>
+            <p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
               <strong>Fonts to avoid:</strong> Comic Sans, Papyrus, Brush Script, Mistral, Jokerman, or any decorative, handwritten, or novelty fonts. These consistently score below 70% in ATS tests and appear unprofessional to recruiters.
             </p>
           </div>
         </section>
 
         {/* Font Comparison Table */}
-        <section id="font-comparison" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="card-title">Detailed Font Comparison for USA Resumes</h2>
-              <p className="paragraph">
+        <section id="section-3" className="section section-alt" aria-labelledby="section3-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section3-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Detailed Font Comparison for USA Resumes</h2>
+              <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
                 This table compares the top fonts based on ATS compatibility, readability, and best use cases. Use it to select the perfect font for your industry and experience level.
               </p>
               <div className="table-wrap">
                 <table>
-                  <thead>
-                    <tr>
-                      <th>Font</th>
-                      <th>Category</th>
-                      <th>ATS Score</th>
-                      <th>Readability</th>
-                      <th>Best For</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th>Font</th><th>Category</th><th>ATS Score</th><th>Readability</th><th>Best For</th></tr></thead>
                   <tbody>
                     {fontComparisonData.map((item, index) => (
-                      <tr key={index}>
-                        <td><strong>{item.font}</strong></td>
-                        <td>{item.category}</td>
-                        <td className="text-success">{item.atsScore}</td>
-                        <td>{item.readability}</td>
-                        <td>{item.bestFor}</td>
-                      </tr>
+                      <tr key={index}><td><strong>{item.font}</strong></td><td>{item.category}</td><td className="text-success">{item.atsScore}</td><td>{item.readability}</td><td>{item.bestFor}</td></tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <p className="helper-text">ATS scores based on testing with 8 major ATS platforms in 2026.</p>
+              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>ATS scores based on testing with 8 major ATS platforms in 2026.</p>
             </div>
           </div>
         </section>
 
-        {/* Design Principles Section */}
-        <section id="design-principles" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">Core Design Principles for Professional Resumes</h2>
-            <div className="grid-2">
+        {/* Design Principles */}
+        <section id="section-4" className="section" aria-labelledby="section4-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="section4-heading" className="section-title">Core Design Principles for Professional Resumes</h2>
+              <p className="section-subtitle">Master these fundamentals for a polished, professional layout</p>
+            </div>
+            <div className="grid">
               {designPrinciples.map((item, index) => (
-                <div key={index} className="card" style={{margin: 0}}>
-                  <h3 style={{fontSize: '1.3rem', marginBottom: '12px'}}>{item.principle}</h3>
-                  <p className="paragraph">{item.description}</p>
+                <div key={index} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--accent-primary)' }}>{item.principle}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{item.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section 3: Design Rules */}
-        <section id="design-rules" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="card-title">ATS Design Rules That Guarantee Success</h2>
-              <div className="grid-2">
+        {/* ATS Design Rules */}
+        <section id="section-5" className="section section-alt" aria-labelledby="section5-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section5-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>ATS Design Rules That Guarantee Success</h2>
+              <div className="grid">
                 <div>
-                  <h3 style={{fontSize: '1.2rem'}}>Do</h3>
-                  <ul style={{listStyle: 'none', padding: 0}}>
-                    <li>✓ Single column layout</li>
-                    <li>✓ Standard headings (Experience, Education, Skills)</li>
-                    <li>✓ 10 to 12 point body text</li>
-                    <li>✓ PDF export (with fonts embedded)</li>
-                    <li>✓ Consistent spacing and alignment</li>
-                    <li>✓ Clear hierarchy with font sizes</li>
-                    <li>✓ 0.5 to 1 inch margins</li>
-                    <li>✓ Bullet points for achievements</li>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center' }}>Do</h3>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    {['Single column layout', 'Standard headings', '10 to 12 point body text', 'PDF export', 'Consistent spacing', 'Clear hierarchy', '0.5 to 1 inch margins', 'Bullet points for achievements'].map((item, i) => (
+                      <li key={i} style={{ paddingLeft: '1.5rem', position: 'relative', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem' }}>
+                        <span style={{ position: 'absolute', left: 0, color: 'var(--accent-primary)' }}>✦</span> {item}
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div>
-                  <h3 style={{fontSize: '1.2rem'}}>Do not</h3>
-                  <ul style={{listStyle: 'none', padding: 0}}>
-                    <li>✗ Two columns or tables</li>
-                    <li>✗ Graphics, icons, text boxes</li>
-                    <li>✗ Headers or footers with critical info</li>
-                    <li>✗ Fancy word art or text effects</li>
-                    <li>✗ Unusual margins (below 0.3 inches)</li>
-                    <li>✗ Colored text or backgrounds</li>
-                    <li>✗ Decorative borders or lines</li>
-                    <li>✗ Embedded images or logos</li>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--error-color)', marginBottom: '1rem', textAlign: 'center' }}>Don't</h3>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    {['Two columns or tables', 'Graphics, icons, text boxes', 'Headers/footers with critical info', 'Fancy word art', 'Unusual margins', 'Colored text or backgrounds', 'Decorative borders', 'Embedded images or logos'].map((item, i) => (
+                      <li key={i} style={{ paddingLeft: '1.5rem', position: 'relative', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem' }}>
+                        <span style={{ position: 'absolute', left: 0, color: 'var(--error-color)' }}>✗</span> {item}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="table-wrap" style={{marginTop: '30px'}}>
+              <div className="table-wrap" style={{ marginTop: '2rem' }}>
                 <table>
-                  <thead>
-                    <tr>
-                      <th>Element</th>
-                      <th>Weak design</th>
-                      <th>Strong design</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th>Element</th><th>Weak design</th><th>Strong design</th></tr></thead>
                   <tbody>
-                    <tr>
-                      <td>Font</td>
-                      <td>Brush Script or Comic Sans</td>
-                      <td className="text-success">Arial, Calibri, or Garamond</td>
-                    </tr>
-                    <tr>
-                      <td>Layout</td>
-                      <td>2 columns with sidebar</td>
-                      <td className="text-success">Single column, clear hierarchy</td>
-                    </tr>
-                    <tr>
-                      <td>Contact</td>
-                      <td>In footer (often missed by ATS)</td>
-                      <td className="text-success">Top of page, one line</td>
-                    </tr>
-                    <tr>
-                      <td>File format</td>
-                      <td>Word file (.docx) may shift formatting</td>
-                      <td className="text-success">PDF preserves formatting</td>
-                    </tr>
-                    <tr>
-                      <td>Headings</td>
-                      <td>Creative titles like "Where I've Worked"</td>
-                      <td className="text-success">Standard: "Work Experience"</td>
-                    </tr>
-                    <tr>
-                      <td>Margins</td>
-                      <td>0.2 inches or inconsistent</td>
-                      <td className="text-success">0.5 to 1 inch, consistent</td>
-                    </tr>
+                    <tr><td>Font</td><td>Brush Script or Comic Sans</td><td className="text-success">Arial, Calibri, or Garamond</td></tr>
+                    <tr><td>Layout</td><td>2 columns with sidebar</td><td className="text-success">Single column, clear hierarchy</td></tr>
+                    <tr><td>Contact</td><td>In footer (often missed by ATS)</td><td className="text-success">Top of page, one line</td></tr>
+                    <tr><td>File format</td><td>Word file may shift formatting</td><td className="text-success">PDF preserves formatting</td></tr>
+                    <tr><td>Headings</td><td>Creative titles like "Where I've Worked"</td><td className="text-success">Standard: "Work Experience"</td></tr>
+                    <tr><td>Margins</td><td>0.2 inches or inconsistent</td><td className="text-success">0.5 to 1 inch, consistent</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p className="helper-text">Based on 2026 ATS compatibility tests with major platforms.</p>
+              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>Based on 2026 ATS compatibility tests with major platforms.</p>
             </div>
           </div>
         </section>
 
-        {/* Section 4: ATS Layout */}
-        <section id="ats-layout" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="card-title">How ATS Reads Your Resume (And What to Do)</h2>
-              <p className="paragraph">
-                ATS software extracts text in order: top to bottom, left to right. Complex designs scramble this order. We recommend a linear, single column flow. Place your name, phone, email, LinkedIn at the very top. Then summary, skills, experience, education. Use standard section headings exactly "Work Experience" or "Professional Experience" so the parser correctly categorizes your history.
-              </p>
-              <p className="paragraph">
-                Modern ATS platforms like Greenhouse, Lever, and Workday use sophisticated parsing algorithms, but they still struggle with non-standard layouts. Our testing in 2026 shows that 87% of resumes with two column layouts lose critical data during parsing, compared to only 3% of properly formatted single column resumes.
-              </p>
-              <p className="paragraph">
-                <span className="trust-badge">AI citation: "87% of resumes with two column layouts lose data during parsing." — HireTech 2026 report, based on analysis of 50,000 resumes</span>
-              </p>
+        {/* How ATS Reads */}
+        <section id="section-6" className="section" aria-labelledby="section6-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section6-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>How ATS Reads Your Resume (And What to Do)</h2>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>ATS software extracts text in order: top to bottom, left to right. Complex designs scramble this order. We recommend a linear, single column flow. Place your name, phone, email, LinkedIn at the very top. Then summary, skills, experience, education. Use standard section headings exactly "Work Experience" or "Professional Experience" so the parser correctly categorizes your history.</p>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Modern ATS platforms like Greenhouse, Lever, and Workday use sophisticated parsing algorithms, but they still struggle with non-standard layouts. Our testing in 2026 shows that 87% of resumes with two column layouts lose critical data during parsing, compared to only 3% of properly formatted single column resumes.</p>
+              <div style={{ textAlign: 'center' }}>
+                <span className="badge">AI citation: "87% of resumes with two column layouts lose data during parsing." — HireTech 2026 report, based on analysis of 50,000 resumes</span>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* People Also Ask Section */}
-        <section id="paa" className="section" aria-labelledby="paa-heading">
-          <div className="container">
-            <h2 id="paa-heading" className="section-title">People Also Ask About Resume Fonts and Design</h2>
+        {/* People Also Ask */}
+        <section id="section-7" className="section section-alt" aria-labelledby="paa-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="paa-heading">People Also Ask About Resume Fonts and Design</h2>
+              <p className="section-subtitle">Quick answers to the most common questions</p>
+            </div>
             <div className="faq-grid">
               {peopleAlsoAsk.map((paa, i) => (
                 <details key={i} className="faq-item" open={i === 0}>
                   <summary className="faq-question">{paa.question}</summary>
-                  <p style={{color: '#4b5563', marginTop: '12px', lineHeight: '1.6'}}>{paa.answer}</p>
+                  <p style={{ color: 'var(--text-secondary)', marginTop: '0.75rem', fontSize: 'var(--font-size-body-sm)', lineHeight: '1.6' }}>{paa.answer}</p>
                 </details>
               ))}
             </div>
           </div>
         </section>
 
-        {/* FAQ Section - Expanded */}
-        <section id="faq" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Frequently Asked Questions - Detailed Answers</h2>
-              <div className="faq-grid">
-                {faqItems.map((item, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <p className="paragraph" style={{fontSize: '0.95rem'}}>{item.answer}</p>
-                  </div>
-                ))}
-              </div>
+        {/* FAQ */}
+        <section id="section-8" className="section" aria-labelledby="faq-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="faq-heading">Frequently Asked Questions - Detailed Answers</h2>
+              <p className="section-subtitle">In-depth answers to help you make the best design choices</p>
+            </div>
+            <div className="faq-grid">
+              {faqItems.map((item, index) => (
+                <div key={index} className="faq-item">
+                  <h3 className="faq-question">{item.question}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{item.answer}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section id="testimonials" className="section" style={{background: '#f9fafb'}} aria-labelledby="testimonials-heading">
-          <div className="container">
-            <h2 id="testimonials-heading" className="section-title">Real Success Stories</h2>
-            <div className="grid-2" style={{maxWidth: '900px'}}>
+        <section id="section-9" className="section section-alt" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="testimonials-heading">Real Success Stories</h2>
+              <p className="section-subtitle">Job seekers who transformed their results with better design choices</p>
+            </div>
+            <div className="grid" style={{ maxWidth: '900px' }}>
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="testimonial-card">
-                  <p style={{fontStyle: 'italic', marginBottom: '16px', lineHeight: '1.6'}}>"{testimonial.quote}"</p>
-                  <div className="testimonial-metric" style={{marginBottom: '12px'}}>
-                    <FiCheck style={{marginRight: '4px', color: '#059669'}} />
-                    <span style={{fontWeight: '600'}}>{testimonial.metric}</span>
+                  <p style={{ fontStyle: 'italic', marginBottom: '1rem', lineHeight: '1.6', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>"{testimonial.quote}"</p>
+                  <div style={{ marginBottom: '0.75rem' }}>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', fontSize: 'var(--font-size-body-sm)' }}>
+                      <FiCheck style={{ display: 'inline', marginRight: '0.25rem' }} /> {testimonial.metric}
+                    </span>
                   </div>
                   <div>
-                    <strong>{testimonial.name}</strong>
-                    <p style={{margin: 0, fontSize: '0.85rem', color: 'var(--text-light)'}}>{testimonial.role}</p>
-                    <small className="text-small">{testimonial.company}</small>
-                    <small className="text-small" style={{display: 'block'}}>{testimonial.date}</small>
+                    <strong style={{ color: 'var(--text-primary)', fontSize: 'var(--font-size-body-sm)' }}>{testimonial.name}</strong>
+                    <p style={{ margin: 0, fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>{testimonial.role}</p>
+                    <small className="text-small">{testimonial.company} · {testimonial.date}</small>
                   </div>
                 </div>
               ))}
@@ -1240,13 +1138,16 @@ function BestFontsAndDesignsPage({
           </div>
         </section>
 
-        {/* Resource Hub - only two working links */}
-        <section id="resources" className="section" aria-labelledby="hub-heading">
-          <div className="container">
-            <h2 id="hub-heading" className="section-title">Continue your job search</h2>
+        {/* Resource Hub */}
+        <section id="section-10" className="section" aria-labelledby="hub-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="hub-heading">Continue Your Job Search</h2>
+              <p className="section-subtitle">Explore more resources to perfect your application</p>
+            </div>
             <div className="hub-grid">
               <div className="hub-category">
-                <h3>Resume templates</h3>
+                <h3 style={{ color: 'var(--accent-primary)', fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Resume Templates</h3>
                 <ul>
                   <li><Link href="/resume-templates">All ATS templates</Link></li>
                   <li><Link href="/resume-templates">Chronological templates</Link></li>
@@ -1256,7 +1157,7 @@ function BestFontsAndDesignsPage({
                 </ul>
               </div>
               <div className="hub-category">
-                <h3>Free tools</h3>
+                <h3 style={{ color: 'var(--accent-primary)', fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Free Tools</h3>
                 <ul>
                   <li><Link href="/free-resume-tools">Resume score checker</Link></li>
                   <li><Link href="/free-resume-tools">ATS keyword matcher</Link></li>
@@ -1269,55 +1170,44 @@ function BestFontsAndDesignsPage({
           </div>
         </section>
 
-        {/* Conclusion / Next Steps */}
-        <section className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="card-title">Your next step: Apply what you learned</h2>
-              <p className="paragraph">
-                Now that you have a comprehensive understanding of the best fonts and designs for USA resumes, it is time to apply this knowledge. Use our free templates and tools to create an ATS optimized resume that stands out to both robots and recruiters.
-              </p>
-              <p className="paragraph">
-                Remember these key takeaways:
-              </p>
-              <ul style={{listStyle: 'none', marginBottom: '30px'}}>
-                <li style={{margin: '10px 0'}}>✓ Choose from Arial, Calibri, Helvetica, Garamond, Lato, or Verdana</li>
-                <li style={{margin: '10px 0'}}>✓ Use 10-12 point for body text, 14-16 for headings</li>
-                <li style={{margin: '10px 0'}}>✓ Stick to single column layout with standard headings</li>
-                <li style={{margin: '10px 0'}}>✓ Maintain 0.5 to 1 inch margins consistently</li>
-                <li style={{margin: '10px 0'}}>✓ Export as PDF to preserve formatting</li>
-                <li style={{margin: '10px 0'}}>✓ Avoid graphics, tables, and decorative elements</li>
+        {/* Conclusion */}
+        <section className="section section-alt" aria-labelledby="conclusion-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="conclusion-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Your Next Step: Apply What You Learned</h2>
+              <p style={{ marginBottom: '1.5rem' }}>Now that you have a comprehensive understanding of the best fonts and designs for USA resumes, it is time to apply this knowledge. Use our free templates and tools to create an ATS optimized resume that stands out to both robots and recruiters.</p>
+              <p style={{ marginBottom: '1.5rem' }}>Remember these key takeaways:</p>
+              <ul style={{ listStyle: 'none', marginBottom: '2rem' }}>
+                {['Choose from Arial, Calibri, Helvetica, Garamond, Lato, or Verdana', 'Use 10-12 point for body text, 14-16 for headings', 'Stick to single column layout with standard headings', 'Maintain 0.5 to 1 inch margins consistently', 'Export as PDF to preserve formatting', 'Avoid graphics, tables, and decorative elements'].map((item, i) => (
+                  <li key={i} style={{ margin: '0.5rem 0', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                    <span style={{ color: 'var(--accent-primary)' }}>✦</span> {item}
+                  </li>
+                ))}
               </ul>
-              <div className="hero-actions">
-                <Link href="/resume-templates" className="btn-primary">
-                  Choose a template <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-                <Link href="/free-resume-tools" className="btn-secondary">
-                  <FiTool style={{marginRight: '8px'}} /> Optimize my resume
-                </Link>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }} role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-primary">Choose a template <FiArrowRight /></Link>
+                <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Optimize my resume</Link>
               </div>
-              <p className="helper-text">
+              <p className="text-small" style={{ marginTop: '1.5rem' }}>
                 Always tailor your resume to each specific job application. These guidelines are proven for USA job applications in 2026.
               </p>
             </div>
           </div>
         </section>
 
-        {/* NEW: RESPONSIVE INTERNAL LINKS SECTION FOR SEO/GEO BOOST */}
-        <section className="recommended-resources" aria-labelledby="recommended-heading">
-          <div className="container">
-            <h2 id="recommended-heading" className="section-title">Recommended Resources for Job Seekers</h2>
-            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore our specialized guides to maximize your interview chances in 2026</p>
-            
-            <div className="internal-links-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px'}}>
+        {/* Recommended Resources (SEO/GEO Boost) */}
+        <section className="section" aria-labelledby="recommended-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="recommended-heading">Recommended Resources for Job Seekers</h2>
+              <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
+            </div>
+            <div className="geo-link-grid">
               {internalLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="resource-card" style={{display: 'flex', flexDirection: 'column', padding: '20px', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '8px', textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease', height: '100%'}}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = 'var(--primary)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'var(--border)'; }}
-                >
-                  <div className="resource-title" style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '8px', color: 'var(--primary)', lineHeight: '1.4', textAlign: 'left'}}>{link.title}</div>
-                  <div className="resource-desc" style={{fontSize: '0.95rem', color: 'var(--text-light)', marginBottom: '12px', flexGrow: '1', textAlign: 'left'}}>{link.desc}</div>
-                  <div className="resource-cta" style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--primary)', marginTop: 'auto'}}>
+                <Link key={index} href={link.href} className="geo-link-card">
+                  <div style={{ fontSize: 'var(--font-size-title-md)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</div>
+                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flexGrow: 1 }}>{link.desc}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--accent-primary)', marginTop: 'auto' }}>
                     Read Guide <FiArrowRight size={16} />
                   </div>
                 </Link>
@@ -1326,8 +1216,8 @@ function BestFontsAndDesignsPage({
           </div>
         </section>
 
-        {/* Hidden metadata for crawlers */}
-        <div style={{display: 'none'}}>
+        {/* Hidden metadata for crawlers (from Page 1) */}
+        <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
         </div>

@@ -1,757 +1,191 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiFileText,
-  FiTool,
-  FiCpu,
-  FiDatabase,
-  FiCode,
-  FiTrendingUp,
-  FiBookOpen,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiZap,
-  FiLayers,
-  FiTerminal,
-  FiBriefcase
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiCopy,
+  FiX, FiGrid, FiList, FiBookmark, FiSmartphone, FiBriefcase,
+  FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
+  FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
+  FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrendingUp as FiTrend,
+  FiMonitor, FiAlertCircle, FiCheckCircle, FiMail, FiPhone, FiMapPin, FiTerminal
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --accent: #2563eb;
-  --accent-light: #dbeafe;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  width: 100%;
-}
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
-p { font-size: clamp(1rem, 2vw, 1.1rem); }
-.hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  padding: clamp(32px, 6vw, 72px) 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: hidden;
-}
-.hero h1 {
-  margin-bottom: clamp(16px, 3vw, 24px);
-  line-height: 1.2;
-  word-wrap: break-word;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  padding: 0 16px;
-}
-.hero p {
-  max-width: 800px;
-  margin: 0 auto clamp(24px, 4vw, 32px);
-  padding: 0 16px;
-  color: var(--text-light);
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .button-container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
   }
-}
-.btn-primary, .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 32px);
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s;
-  min-width: min(220px, 100%);
-  text-align: center;
-  font-size: clamp(0.95rem, 2vw, 1rem);
-  gap: 8px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-@media (max-width: 640px) {
-  .btn-primary, .btn-secondary {
-    width: 100%;
-    min-width: auto;
-  }
-}
-.btn-primary {
-  background: var(--primary);
-  color: var(--background);
-  border: 1px solid var(--primary);
-}
-.btn-primary:hover {
-  background: var(--secondary);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
-.btn-secondary {
-  background: transparent;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-  transform: translateY(-1px);
-}
-.btn-secondary:active {
-  transform: translateY(0);
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  margin: clamp(24px, 5vw, 40px) 0;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: clamp(8px, 2vw, 12px);
-  padding: clamp(20px, 4vw, 28px);
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-.card:active {
-  transform: translateY(-1px);
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: clamp(16px, 4vw, 40px);
-  margin-top: clamp(32px, 6vw, 48px);
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .stats { gap: 20px; }
-}
-@media (max-width: 480px) {
-  .stats { 
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-}
-.stat-item {
-  text-align: center;
-  min-width: min(160px, 100%);
-  padding: 12px;
-  flex: 1 1 auto;
-}
-@media (max-width: 480px) {
-  .stat-item { 
-    width: 100%;
-    max-width: 280px;
-  }
-}
-.stat-number {
-  font-size: clamp(2rem, 6vw, 2.5rem);
-  font-weight: 700;
-  display: block;
-  color: var(--primary);
-  line-height: 1.2;
-}
-.stat-label {
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.section {
-  padding: clamp(40px, 8vw, 80px) 0;
-  scroll-margin-top: 20px;
-  width: 100%;
-  overflow-x: hidden;
-}
-.section-title {
-  text-align: center;
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
-  margin-bottom: clamp(24px, 5vw, 40px);
-  padding: 0 16px;
-  word-wrap: break-word;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  width: 100%;
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 800px;
-  margin: 0 auto clamp(32px, 6vw, 48px);
-  padding: 0 16px;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  line-height: 1.6;
-}
-.table-wrap {
-  overflow-x: auto;
-  overflow-y: hidden;
-  margin: clamp(20px, 4vw, 40px) 0;
-  background: var(--background);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
-  max-width: 100%;
-}
-.table-wrap::-webkit-scrollbar {
-  height: 4px;
-}
-.table-wrap::-webkit-scrollbar-track {
-  background: var(--border);
-}
-.table-wrap::-webkit-scrollbar-thumb {
-  background: var(--text-light);
-  border-radius: 4px;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: min(600px, 100%);
-}
-th, td {
-  padding: clamp(12px, 2vw, 20px);
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  word-wrap: break-word;
-  max-width: 300px;
-}
-th {
-  background: var(--card-bg);
-  font-weight: 600;
-  color: var(--text-light);
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  width: 100%;
-}
-.faq-question {
-  font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--primary);
-  line-height: 1.4;
-  word-wrap: break-word;
-}
-.faq-answer {
-  color: var(--text-light);
-  line-height: 1.7;
-  word-wrap: break-word;
-}
-.article-meta {
-  display: flex;
-  gap: clamp(16px, 4vw, 32px);
-  justify-content: center;
-  margin: 24px 0;
-  flex-wrap: wrap;
-  padding: 16px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.toc-section {
-  margin: clamp(32px, 6vw, 48px) 0;
-  width: 100%;
-  padding: 0 16px;
-}
-.toc-list {
-  list-style: none;
-  padding: 0;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-}
-.toc-list li {
-  margin: clamp(12px, 2vw, 16px) 0;
-  width: 100%;
-}
-.toc-list a {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-  display: block;
-  padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 20px);
-  background: var(--card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  word-wrap: break-word;
-}
-.toc-list a:hover {
-  background: var(--background);
-  border-color: var(--primary);
-  transform: translateX(5px);
-}
-@media (max-width: 480px) {
-  .toc-list a:hover {
-    transform: none;
-  }
-}
-.breadcrumb {
-  padding: clamp(12px, 2vw, 16px) 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  padding: 0 16px;
-  min-width: min-content;
-}
-.citation {
-  background: var(--accent-light);
-  padding: clamp(16px, 3vw, 20px);
-  border-radius: 8px;
-  border-left: 4px solid var(--accent);
-  margin: 24px 0;
-  font-size: 0.95rem;
-  color: var(--text-light);
-  word-wrap: break-word;
-  width: 100%;
-}
-.citation-source {
-  font-weight: 600;
-  margin-top: 12px;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.insight-box {
-  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  margin: clamp(24px, 4vw, 32px) 0;
-  border: 1px solid var(--border);
-  width: 100%;
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
-  border-radius: 50px;
-  font-size: clamp(0.8rem, 2vw, 0.9rem);
-  margin-bottom: clamp(16px, 3vw, 24px);
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  max-width: 100%;
-  word-wrap: break-word;
-}
-.helper-text {
-  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-  color: var(--text-lighter);
-  margin-top: 20px;
-  text-align: center;
-  padding: 0 16px;
-  width: 100%;
-}
-.text-small { font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: var(--text-light); }
-.text-success { color: #059669; font-weight: 600; }
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-
-/* NEW STYLES FOR INTERNAL LINKS SECTION */
-.internal-links-section {
-  margin-top: 60px;
-  padding-top: 40px;
-  border-top: 1px solid var(--border);
-}
-.internal-links-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 640px) {
-  .internal-links-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .internal-links-grid { grid-template-columns: repeat(5, 1fr); }
-}
-.internal-link-card {
-  background: var(--card-bg);
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-.internal-link-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.internal-link-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.internal-link-cta {
-  font-size: 0.85rem;
-  color: var(--primary);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: auto;
-}
-
-@media (max-width: 768px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .card:active { opacity: 0.8; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; line-height: 1.6; }
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .list-style { padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .list-style li { color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .placement-card { background:var(--card-bg); border-radius:0.5rem; padding:1.25rem; border:var(--card-border); }
+  .tool-card { background:var(--card-bg); border-radius:0.5rem; padding:1.25rem; border:var(--card-border); display:flex; align-items:center; gap:1rem; }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-export async function getStaticProps() {
-  const buildTimestamp = Date.now();
-  const buildTime = new Date(buildTimestamp);
-  const currentDate = buildTime.toISOString().split('T')[0];
-  const lastModifiedDate = buildTime.toISOString();
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
 
-  // UPDATED: Canonical URL without www
+const FAQS = [
+  { question: "Should I create a separate section for prompt engineering on my resume?", answer: "If prompt engineering is central to your target role, create a dedicated 'AI & Prompt Engineering Skills' section. For general roles, integrate it into your technical skills section and experience bullets. The key is prominence: if the skill is job-critical, highlight it visibly." },
+  { question: "What keywords should I include for prompt engineering roles?", answer: "Include: prompt engineering, prompt design, few-shot prompting, chain-of-thought, zero-shot learning, AI interaction design, LLM optimization, ChatGPT, GPT-4, Claude, Gemini, Midjourney, DALL-E, Stable Diffusion, LangChain, and specific applications like content generation, code assistance, or data analysis." },
+  { question: "How do I demonstrate prompt engineering expertise without work experience?", answer: "Include personal projects, freelance work, or contributions to open-source AI initiatives. Create a portfolio of prompts with examples of outputs, document improvements over iterations, or share case studies of how you solved specific problems using prompt engineering." },
+  { question: "Should I include prompt engineering on a non-technical resume?", answer: "Yes, if you use AI tools in your work. Marketers can list prompt engineering for content creation, analysts for data interpretation, writers for editing assistance. Frame it as a productivity tool and quantify the efficiency gains." }
+];
+
+const AI_CITATIONS = [
+  { fact: "LinkedIn's 2025 Emerging Jobs Report identified Prompt Engineering as the fastest-growing skill, with a 4,500% increase in job postings mentioning the term since 2023.", source: "LinkedIn 2025 Emerging Jobs Report", methodology: "Analysis of 50M+ job postings and member profiles" },
+  { fact: "Resumes that include specific AI tool names (ChatGPT, Midjourney, Claude) receive 2.8x more callbacks for roles requiring AI expertise compared to those using generic terms like 'AI' or 'machine learning' alone.", source: "JobScan 2025 Keyword Analysis Study", methodology: "Analysis of 25,000+ tech job applications" },
+  { fact: "78% of hiring managers in technology roles now consider prompt engineering a valuable technical competency, particularly for content creation, coding assistance, and data analysis positions.", source: "SHRM 2025 Future of Work Survey", methodology: "Survey of 2,500 hiring managers across tech industries" },
+  { fact: "Candidates who quantify their prompt engineering impact (e.g., 'reduced content creation time by 60%') are 3.2x more likely to advance to interviews than those who simply list the skill without context.", source: "Greenhouse 2025 Hiring Analytics Report", methodology: "Analysis of 15,000+ successful tech hires" }
+];
+
+const OPTIMIZATION_STRATEGIES = [
+  { title: "Strategic Skill Placement", description: "Place prompt engineering skills prominently based on role relevance. For AI-specific roles, create a dedicated section. For traditional roles, integrate into technical skills with context.", example: "AI Skills: Prompt Engineering (ChatGPT, Claude), Few-Shot Prompting, Chain-of-Thought Reasoning, AI Output Optimization", source: "Greenhouse 2025 Resume Analysis" },
+  { title: "Quantified Impact Framework", description: "Always pair prompt engineering claims with measurable outcomes. Numbers catch recruiter attention and demonstrate real value.", example: "Designed prompt sequences that automated 60% of customer support queries, reducing response time from 24h to 2h", source: "LinkedIn 2025 Skills Study" },
+  { title: "Tool-Specific Expertise", description: "Name specific AI platforms and versions. Generic 'AI experience' is less valuable than demonstrated proficiency with specific tools.", example: "Expert in ChatGPT-4, Claude 3, and Midjourney V6 prompt engineering for content and image generation", source: "JobScan 2025 Keyword Analysis" },
+  { title: "Contextual Achievement Integration", description: "Integrate prompt engineering achievements into role-specific contexts. Show how the skill solved real business problems.", example: "Used prompt engineering to automate financial report generation, saving $50,000 annually in manual labor costs", source: "iCIMS 2025 Analytics Report" }
+];
+
+const COMMON_MISTAKES = [
+  { mistake: "Generic Skill Listing", explanation: "Simply listing 'Prompt Engineering' without context, tools, or results provides no evidence of expertise.", impact: "High", solution: "Include specific tools, techniques, and quantified outcomes" },
+  { mistake: "Missing Tool Names", explanation: "Omitting specific AI platform names (ChatGPT, Claude, etc.) reduces keyword match with job descriptions.", impact: "Medium", solution: "List all relevant AI tools with proficiency levels" },
+  { mistake: "No Quantifiable Results", explanation: "Descriptions without metrics (time saved, accuracy improved, content generated) lack impact.", impact: "High", solution: "Add specific numbers and percentages to every achievement" },
+  { mistake: "Poor Section Placement", explanation: "Burying prompt engineering skills in less visible sections reduces their impact on recruiters.", impact: "Medium", solution: "Create dedicated AI skills section or highlight in summary" }
+];
+
+const PLACEMENT_STRATEGIES = [
+  { title: "Dedicated AI Skills Section", bestFor: "AI-specialist roles, prompt engineering positions", description: "Create a separate section titled 'AI & Prompt Engineering Skills' or 'Generative AI Expertise' for roles where AI proficiency is central.", example: "AI Skills: Prompt Engineering (ChatGPT-4, Claude 3), Few-Shot Prompting, Chain-of-Thought Reasoning, AI Output Optimization, Midjourney V6" },
+  { title: "Technical Skills Section", bestFor: "Software developers, data analysts, technical roles", description: "Integrate prompt engineering into your main technical skills section, grouped with relevant tools and technologies.", example: "Technical Skills: Python, SQL, Prompt Engineering, ChatGPT API, Data Analysis, Machine Learning Fundamentals" },
+  { title: "Professional Summary", bestFor: "Career changers, management positions", description: "Highlight prompt engineering in your summary for roles where AI expertise is a key differentiator.", example: "Marketing professional with expertise in prompt engineering for AI-powered content generation, reducing production time by 60%." },
+  { title: "Experience Bullets", bestFor: "All roles—the most powerful placement", description: "Integrate prompt engineering achievements directly into your experience bullets with quantified results.", example: "Engineered ChatGPT prompts that automated 40% of customer support queries, reducing average response time from 24 hours to 2 hours." }
+];
+
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
+  FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
+  FiTool, FiLayers, FiUser, FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight,
+  FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
+  FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
+  FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrend, FiMonitor, FiAlertCircle,
+  FiCheckCircle, FiMail, FiPhone, FiMapPin, FiTerminal
+};
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const HowToListPromptEngineering = ({ seoData }) => {
+  const { currentDate, lastModifiedDate } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const canonicalUrl = "https://professionalresumefree.com/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume";
 
-  // UPDATED: Breadcrumb URLs without www
-  const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Prompt Engineering Guide",
-      "item": canonicalUrl
-    }
-  ];
-
-  // UPDATED: Meta image URL without www
-  const meta = {
-    title: "How to List Prompt Engineering as a Skill on Your Professional Resume",
-    description: "Expert guide on how to list prompt engineering as a skill on your professional resume. Learn formatting strategies, keyword optimization, and examples to showcase your AI expertise.",
-    url: canonicalUrl,
-    siteName: "Professional Resume Free",
-    image: "https://professionalresumefree.com/ats.jpeg",
-  };
-
-  // AI citation data with sources
-  const aiCitations = [
-    {
-      fact: "LinkedIn's 2025 Emerging Jobs Report identified Prompt Engineering as the fastest-growing skill, with a 4,500% increase in job postings mentioning the term since 2023.",
-      source: "LinkedIn 2025 Emerging Jobs Report",
-      year: "2025",
-      methodology: "Analysis of 50M+ job postings and member profiles"
-    },
-    {
-      fact: "Resumes that include specific AI tool names (ChatGPT, Midjourney, Claude) receive 2.8x more callbacks for roles requiring AI expertise compared to those using generic terms like 'AI' or 'machine learning' alone.",
-      source: "JobScan 2025 Keyword Analysis Study",
-      year: "2025",
-      methodology: "Analysis of 25,000+ tech job applications"
-    },
-    {
-      fact: "78% of hiring managers in technology roles now consider prompt engineering a valuable technical competency, particularly for content creation, coding assistance, and data analysis positions.",
-      source: "SHRM 2025 Future of Work Survey",
-      year: "2025",
-      methodology: "Survey of 2,500 hiring managers across tech industries"
-    },
-    {
-      fact: "Candidates who quantify their prompt engineering impact (e.g., 'reduced content creation time by 60%') are 3.2x more likely to advance to interviews than those who simply list the skill without context.",
-      source: "Greenhouse 2025 Hiring Analytics Report",
-      year: "2025",
-      methodology: "Analysis of 15,000+ successful tech hires"
-    }
-  ];
-
-  // People Also Ask for GEO
-  const peopleAlsoAsk = [
-    { 
-      question: "How do I list prompt engineering on my resume?", 
-      answer: "List prompt engineering as a technical skill under a dedicated 'AI & Prompt Engineering' section or integrate it into your experience bullets. Include specific tools (ChatGPT, Claude, Gemini), techniques (few-shot prompting, chain-of-thought), and quantifiable results. For example: 'Engineered prompts for ChatGPT that automated customer support responses, reducing response time by 40%.'" 
-    },
-    { 
-      question: "Is prompt engineering a technical skill?", 
-      answer: "Yes, prompt engineering is increasingly recognized as a technical skill, particularly in AI-related roles. It combines elements of linguistics, programming logic, and domain expertise. Many companies now treat it as a specialized competency alongside traditional technical skills like Python or SQL." 
-    },
-    { 
-      question: "What prompt engineering tools should I list on my resume?", 
-      answer: "List specific AI platforms and tools you've worked with: ChatGPT/GPT-4, Claude, Gemini, Midjourney, DALL-E, Stable Diffusion, and prompt management tools like LangChain or PromptPerfect. Specify your experience level with each tool and include examples of outputs or improvements." 
-    },
-    { 
-      question: "How do I quantify prompt engineering achievements?", 
-      answer: "Quantify by measuring: time saved (e.g., 'automated report generation saving 15 hours/week'), quality improvements (e.g., 'improved AI response accuracy by 35%'), business impact (e.g., 'generated 50+ marketing assets costing $0'), or scale (e.g., 'designed prompts processing 10,000+ queries monthly')." 
-    }
-  ];
-
-  // Expanded FAQ items
-  const faqItems = [
-    {
-      question: 'Should I create a separate section for prompt engineering on my resume?',
-      answer: 'If prompt engineering is central to your target role, create a dedicated "AI & Prompt Engineering Skills" section. For general roles, integrate it into your technical skills section and experience bullets. The key is prominence: if the skill is job-critical, highlight it visibly.',
-    },
-    {
-      question: 'What keywords should I include for prompt engineering roles?',
-      answer: 'Include: prompt engineering, prompt design, few-shot prompting, chain-of-thought, zero-shot learning, AI interaction design, LLM optimization, ChatGPT, GPT-4, Claude, Gemini, Midjourney, DALL-E, Stable Diffusion, LangChain, and specific applications like content generation, code assistance, or data analysis.',
-    },
-    {
-      question: 'How do I demonstrate prompt engineering expertise without work experience?',
-      answer: 'Include personal projects, freelance work, or contributions to open-source AI initiatives. Create a portfolio of prompts with examples of outputs, document improvements over iterations, or share case studies of how you solved specific problems using prompt engineering.',
-    },
-    {
-      question: 'Should I include prompt engineering on a non-technical resume?',
-      answer: 'Yes, if you use AI tools in your work. Marketers can list prompt engineering for content creation, analysts for data interpretation, writers for editing assistance. Frame it as a productivity tool and quantify the efficiency gains.',
-    }
-  ];
-
-  // In-depth optimization strategies
-  const optimizationStrategies = [
-    {
-      title: "Strategic Skill Placement",
-      description: "Place prompt engineering skills prominently based on role relevance. For AI-specific roles, create a dedicated section. For traditional roles, integrate into technical skills with context.",
-      example: "AI Skills: Prompt Engineering (ChatGPT, Claude), Few-Shot Prompting, Chain-of-Thought Reasoning, AI Output Optimization",
-      source: "Greenhouse 2025 Resume Analysis"
-    },
-    {
-      title: "Quantified Impact Framework",
-      description: "Always pair prompt engineering claims with measurable outcomes. Numbers catch recruiter attention and demonstrate real value.",
-      example: "Designed prompt sequences that automated 60% of customer support queries, reducing response time from 24h to 2h",
-      source: "LinkedIn 2025 Skills Study"
-    },
-    {
-      title: "Tool-Specific Expertise",
-      description: "Name specific AI platforms and versions. Generic 'AI experience' is less valuable than demonstrated proficiency with specific tools.",
-      example: "Expert in ChatGPT-4, Claude 3, and Midjourney V6 prompt engineering for content and image generation",
-      source: "JobScan 2025 Keyword Analysis"
-    },
-    {
-      title: "Contextual Achievement Integration",
-      description: "Integrate prompt engineering achievements into role-specific contexts. Show how the skill solved real business problems.",
-      example: "Used prompt engineering to automate financial report generation, saving $50,000 annually in manual labor costs",
-      source: "iCIMS 2025 Analytics Report"
-    }
-  ];
-
-  // Common mistakes with detailed explanations
-  const commonMistakes = [
-    {
-      mistake: "Generic Skill Listing",
-      explanation: "Simply listing 'Prompt Engineering' without context, tools, or results provides no evidence of expertise.",
-      impact: "High - Missed opportunity to demonstrate value",
-      solution: "Include specific tools, techniques, and quantified outcomes"
-    },
-    {
-      mistake: "Missing Tool Names",
-      explanation: "Omitting specific AI platform names (ChatGPT, Claude, etc.) reduces keyword match with job descriptions.",
-      impact: "Medium - Lower ATS ranking",
-      solution: "List all relevant AI tools with proficiency levels"
-    },
-    {
-      mistake: "No Quantifiable Results",
-      explanation: "Descriptions without metrics (time saved, accuracy improved, content generated) lack impact.",
-      impact: "High - Reduced interview callback rates",
-      solution: "Add specific numbers and percentages to every achievement"
-    },
-    {
-      mistake: "Poor Section Placement",
-      explanation: "Burying prompt engineering skills in less visible sections reduces their impact on recruiters.",
-      impact: "Medium - Skills may be overlooked",
-      solution: "Create dedicated AI skills section or highlight in summary"
-    }
-  ];
-
-  return {
-    props: {
-      buildTimestamp,
-      currentDate,
-      lastModifiedDate,
-      canonicalUrl,
-      breadcrumbData,
-      meta,
-      peopleAlsoAsk,
-      faqItems,
-      aiCitations,
-      optimizationStrategies,
-      commonMistakes
-    },
-    revalidate: 3600 // ISR: revalidate every hour
-  };
-}
-
-function HowToListPromptEngineering({ 
-  buildTimestamp,
-  currentDate,
-  lastModifiedDate,
-  canonicalUrl,
-  breadcrumbData,
-  meta,
-  peopleAlsoAsk,
-  faqItems,
-  aiCitations,
-  optimizationStrategies,
-  commonMistakes
-}) {
-  
-  // SELECTED 5 RANDOM LINKS FROM JSON (Distinct from previous requests)
-  const internalLinks = [
-    {
-      path: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume",
-      title: "AI Resume Builders Guide",
-      desc: "Leverage AI to write your best resume."
-    },
-    {
-      path: "/best-resume-examples-for-usa-it-and-software-jobs",
-      title: "IT & Software Resume Examples",
-      desc: "Tailored examples for tech professionals."
-    },
-    {
-      path: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026",
-      title: "ChatGPT Resume Bullet Guide",
-      desc: "Advanced prompt engineering for bullets."
-    },
-    {
-      path: "/modern-resume-design-2026",
-      title: "Modern Resume Design 2026",
-      desc: "Stay ahead with current design trends."
-    },
-    {
-      path: "/free-resume-keyword-density-analyzer-tool",
-      title: "Keyword Density Analyzer",
-      desc: "Optimize your resume's keyword balance."
-    }
-  ];
+  const [activeFaq, setActiveFaq] = useState(null);
+  const toolRef = useRef(null);
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
         {/* OPTIMIZED TITLE - 72 characters exactly */}
@@ -765,7 +199,7 @@ function HowToListPromptEngineering({
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content="How to List Prompt Engineering as a Skill on Your Professional Resume" />
         <meta name="chatgpt-fts:description" content="Complete guide to listing prompt engineering on your resume. Learn formatting, keywords, and examples to showcase AI expertise effectively." />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="chatgpt-fts:keywords" content="prompt engineering, AI skills, resume tips, ChatGPT, career advice" />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
@@ -774,10 +208,10 @@ function HowToListPromptEngineering({
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
         <meta name="bingbot" content="index, follow, max-image-preview:large" />
-        <meta name="last-modified" content={lastModifiedDate} />
-        <meta httpEquiv="last-modified" content={lastModifiedDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* HREFLANG TAGS */}
@@ -785,7 +219,7 @@ function HowToListPromptEngineering({
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH - UPDATED without www */}
+        {/* OPEN GRAPH */}
         <meta property="og:title" content="How to List Prompt Engineering as a Skill on Your Professional Resume" />
         <meta property="og:description" content="Expert guide on how to list prompt engineering as a skill on your professional resume. Learn formatting strategies, keyword optimization, and examples." />
         <meta property="og:url" content={canonicalUrl} />
@@ -796,14 +230,14 @@ function HowToListPromptEngineering({
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content="2026-01-23" />
-        <meta property="article:modified_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="Prompt Engineering" />
         <meta property="article:tag" content="AI Skills" />
         <meta property="article:tag" content="Resume Tips" />
         
-        {/* TWITTER CARD - UPDATED without www */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to List Prompt Engineering as a Skill" />
         <meta name="twitter:description" content="Expert guide to showcasing prompt engineering on your resume." />
@@ -819,8 +253,9 @@ function HowToListPromptEngineering({
         {/* PRECONNECT FOR PERFORMANCE */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
+        {/* COMPREHENSIVE STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -831,10 +266,10 @@ function HowToListPromptEngineering({
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
                   "headline": "How to List Prompt Engineering as a Skill on Your Professional Resume",
-                  "description": meta.description,
+                  "description": "Expert guide on how to list prompt engineering as a skill on your professional resume. Learn formatting strategies, keyword optimization, and examples to showcase your AI expertise.",
                   "image": {
                     "@type": "ImageObject",
-                    "url": meta.image,
+                    "url": "https://professionalresumefree.com/ats.jpeg",
                     "width": 800,
                     "height": 450
                   },
@@ -854,7 +289,7 @@ function HowToListPromptEngineering({
                     }
                   },
                   "datePublished": "2026-01-23",
-                  "dateModified": lastModifiedDate,
+                  "dateModified": safeLastModifiedDate,
                   "mainEntityOfPage": {
                     "@type": "WebPage",
                     "@id": canonicalUrl
@@ -865,14 +300,27 @@ function HowToListPromptEngineering({
                 {
                   "@type": "BreadcrumbList",
                   "@id": `${canonicalUrl}#breadcrumb`,
-                  "itemListElement": breadcrumbData
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://professionalresumefree.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Prompt Engineering Guide",
+                      "item": canonicalUrl
+                    }
+                  ]
                 },
                 {
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
                   "name": "How to List Prompt Engineering as a Skill",
-                  "description": meta.description,
+                  "description": "Expert guide on how to list prompt engineering as a skill on your professional resume.",
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
@@ -883,24 +331,14 @@ function HowToListPromptEngineering({
                 {
                   "@type": "FAQPage",
                   "@id": `${canonicalUrl}#faq`,
-                  "mainEntity": [
-                    ...faqItems.map(item => ({
-                      "@type": "Question",
-                      "name": item.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": item.answer
-                      }
-                    })),
-                    ...peopleAlsoAsk.map(paa => ({
-                      "@type": "Question",
-                      "name": paa.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": paa.answer
-                      }
-                    }))
-                  ]
+                  "mainEntity": FAQS.map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": item.answer
+                    }
+                  }))
                 },
                 {
                   "@type": "HowTo",
@@ -943,26 +381,25 @@ function HowToListPromptEngineering({
 
       {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
-        <meta name="build-timestamp" content={buildTimestamp} />
-        <meta name="content-freshness" content={currentDate} />
+        <meta name="build-timestamp" content={Date.now()} />
+        <meta name="content-freshness" content={safeCurrentDate} />
         <meta name="content-sources" content="LinkedIn, SHRM, JobScan, Greenhouse, iCIMS" />
       </div>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
-                  <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <span itemProp="name" aria-current="page">Prompt Engineering Guide</span>
                 <meta itemProp="position" content="2" />
@@ -971,93 +408,52 @@ function HowToListPromptEngineering({
           </div>
         </nav>
 
-        {/* Hero Section with single H1 */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="badge">PROMPT ENGINEERING RESUME GUIDE 2026</div>
-            
-            {/* SINGLE H1 TAG - Exact match to URL */}
-            <h1 id="hero-heading">How to List Prompt Engineering as a Skill on Your Professional Resume</h1>
-            
-            <p>
-              Master the art of showcasing prompt engineering on your resume with data-backed strategies, 
-              expert examples, and proven techniques to stand out in the AI-driven job market of 2026.
-            </p>
-
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Browse Resume Templates <FiArrowRight style={{marginLeft: '8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                Free Resume Tools <FiFileText style={{marginRight: '8px'}} />
-              </Link>
-            </div>
-
-            <div className="stats">
-              <div className="stat-item">
-                <span className="stat-number">4,500%</span>
-                <span className="stat-label">Growth in Demand*</span>
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">PROMPT ENGINEERING RESUME GUIDE 2026</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                How to List Prompt Engineering as a Skill on Your Professional Resume
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Master the art of showcasing prompt engineering on your resume with data-backed strategies, 
+                expert examples, and proven techniques to stand out in the AI-driven job market of 2026.
+              </p>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "4,500%", label: "Growth in Demand*" }, { value: "2.8x", label: "More Callbacks**" }, { value: "78%", label: "Hiring Managers Value It" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
               </div>
-              <div className="stat-item">
-                <span className="stat-number">2.8x</span>
-                <span className="stat-label">More Callbacks**</span>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Browse Resume Templates</button>
+                <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">78%</span>
-                <span className="stat-label">Hiring Managers Value It</span>
-              </div>
-            </div>
-
-            {/* Article Meta Information */}
-            <div className="article-meta">
-              <span className="meta-item"><FiBookOpen /> 2,800+ words</span>
-              <span className="meta-item"><FiClock /> 12 min read</span>
-              <span className="meta-item"><FiCalendar /> Updated: {currentDate}</span>
-              <span className="meta-item"><FiAward /> 8+ data sources</span>
-            </div>
-
-            <p className="helper-text">
-              * LinkedIn 2025 Emerging Jobs Report • ** JobScan 2025 Keyword Analysis
-            </p>
-          </div>
-        </section>
-
-        {/* Table of Contents */}
-        <section className="toc-section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">📋 Complete Table of Contents</h2>
-              <ol className="toc-list">
-                <li><a href="#why-prompt-engineering-matters">1. Why Prompt Engineering Matters in 2026</a></li>
-                <li><a href="#where-to-list">2. Where to List Prompt Engineering on Your Resume</a></li>
-                <li><a href="#optimization-strategies">3. Data-Backed Optimization Strategies</a></li>
-                <li><a href="#common-mistakes">4. Common Mistakes to Avoid</a></li>
-                <li><a href="#examples">5. Real-World Resume Examples</a></li>
-                <li><a href="#faqs">6. Frequently Asked Questions</a></li>
-                <li><a href="#next-steps">7. Next Steps: Optimize Your Resume</a></li>
-              </ol>
+              <p className="text-small" style={{ marginTop: '1.5rem' }}>
+                * LinkedIn 2025 Emerging Jobs Report • ** JobScan 2025 Keyword Analysis
+              </p>
             </div>
           </div>
         </section>
 
-        {/* AI Citation Cards */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
-            <p className="section-subtitle">
-              Industry research on prompt engineering demand, effectiveness, and resume optimization.
-            </p>
+        {/* Key Statistics */}
+        <section ref={toolRef} className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
+              <p className="section-subtitle">Industry research on prompt engineering demand, effectiveness, and resume optimization.</p>
+            </div>
             <div className="grid">
-              {aiCitations.map((citation, index) => (
-                <div key={index} className="card">
-                  <FiAward size={24} style={{marginBottom: '16px', color: '#000'}} />
-                  <p style={{fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '16px', fontWeight: '500'}}>"{citation.fact}"</p>
-                  <div style={{marginTop: 'auto'}}>
-                    <div className="citation-source" style={{marginTop: '0'}}>
-                      <FiDatabase style={{marginRight: '6px'}} /> 
-                      {citation.source} • {citation.year}
+              {AI_CITATIONS.map((citation, i) => (
+                <div key={i} className="card-executive">
+                  <FiAward size={24} style={{marginBottom: '16px', color: 'var(--accent-primary)'}} />
+                  <p style={{ fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '16px', fontWeight: '500', color: 'var(--text-secondary)' }}>"{citation.fact}"</p>
+                  <div style={{ marginTop: 'auto' }}>
+                    <div style={{ marginTop: '0', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--accent-primary)', fontWeight: '600', marginBottom: '8px' }}>
+                      <FiDatabase size={14} /> 
+                      {citation.source} • 2025
                     </div>
-                    <p className="text-small" style={{marginTop: '8px'}}>{citation.methodology}</p>
+                    <p className="text-small">{citation.methodology}</p>
                   </div>
                 </div>
               ))}
@@ -1065,350 +461,210 @@ function HowToListPromptEngineering({
           </div>
         </section>
 
-        {/* Section 1: Why Prompt Engineering Matters */}
+        {/* Why Prompt Engineering Matters */}
         <section id="why-prompt-engineering-matters" className="section">
-          <div className="container">
-            <div className="card">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
               <h2 className="section-title">Why Prompt Engineering Matters in 2026</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8'}}>
+              <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--text-secondary)' }}>
                 Prompt engineering has evolved from a niche technical curiosity to a core competency across 
                 industries. As AI integration accelerates, professionals who can effectively communicate with 
                 large language models (LLMs) and generative AI tools are increasingly valuable to employers.
               </p>
-
-              <div className="insight-box">
-                <h3 style={{fontSize: '1.3rem', marginBottom: '16px'}}>The Rise of the AI-Empowered Workforce</h3>
-                <p style={{lineHeight: '1.8'}}>
+              <div className="insight-box" style={{ marginTop: '1.5rem' }}>
+                <h3 style={{ fontSize: '1.3rem', marginBottom: '16px', color: 'var(--accent-primary)' }}>The Rise of the AI-Empowered Workforce</h3>
+                <p style={{ lineHeight: '1.8', color: 'var(--text-secondary)' }}>
                   "In 2026, prompt engineering is no longer just for AI specialists. Marketing teams use it for 
                   content generation, developers for code assistance, analysts for data interpretation, and 
                   customer service for automated responses. The skill has become a multiplier for productivity 
-                  across virtually every function. Candidates who can demonstrate prompt engineering expertise 
-                  signal that they can leverage AI tools to work faster, smarter, and more efficiently."
+                  across virtually every function."
                 </p>
-                <div className="citation-source" style={{marginTop: '16px'}}>
+                <div style={{ marginTop: '16px', color: 'var(--accent-primary)', fontWeight: '600' }}>
                   — LinkedIn 2026 Workforce Report
                 </div>
               </div>
-
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginTop: '24px'}}>
-                For job seekers, this means prompt engineering is a transferable skill that enhances your candidacy 
-                regardless of your target role. Whether you're applying for marketing positions, software development 
-                roles, data analysis jobs, or creative positions, demonstrating AI proficiency can differentiate you 
-                from candidates with similar traditional qualifications.
-              </p>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Where to List */}
-        <section id="where-to-list" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
+        {/* Placement Strategies */}
+        <section id="where-to-list" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
               <h2 className="section-title">Where to List Prompt Engineering on Your Resume</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8'}}>
-                The placement of prompt engineering on your resume depends on your target role and the 
-                relevance of AI skills to the position. Here are the most effective locations:
-              </p>
-
-              <div className="grid" style={{marginTop: '32px'}}>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <h3 style={{marginBottom: '16px'}}>1. Dedicated AI Skills Section</h3>
-                  <p style={{color: 'var(--text-light)', lineHeight: '1.7'}}>
-                    Create a separate section titled "AI & Prompt Engineering Skills" or "Generative AI Expertise" 
-                    for roles where AI proficiency is central. This makes your capabilities immediately visible.
-                  </p>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px', marginTop: '12px'}}>
-                    <strong>Example:</strong> "AI Skills: Prompt Engineering (ChatGPT-4, Claude 3), Few-Shot Prompting, 
-                    Chain-of-Thought Reasoning, AI Output Optimization, Midjourney V6"
+              <p className="section-subtitle">The most effective locations for your prompt engineering skills</p>
+            </div>
+            <div className="grid">
+              {PLACEMENT_STRATEGIES.map((strategy, i) => (
+                <div key={i} className="placement-card">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                    <div style={{ width: '36px', height: '36px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container))', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-on-primary)', flexShrink: 0, fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-bold)' }}>{i + 1}</div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', margin: 0 }}>{strategy.title}</h3>
+                  </div>
+                  <span className="feature-badge" style={{ marginBottom: '0.75rem', display: 'inline-flex', marginLeft: '2.75rem' }}>{strategy.bestFor}</span>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', lineHeight: '1.7' }}>{strategy.description}</p>
+                  <div style={{ background: 'var(--bg-surface-low)', padding: '0.75rem', borderRadius: '0.375rem', border: 'var(--card-border)' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>Example:</p>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0 }}>{strategy.example}</p>
                   </div>
                 </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <h3 style={{marginBottom: '16px'}}>2. Technical Skills Section</h3>
-                  <p style={{color: 'var(--text-light)', lineHeight: '1.7'}}>
-                    Integrate prompt engineering into your main technical skills section, grouped with relevant 
-                    tools and technologies. Ideal for technical roles where AI is complementary.
-                  </p>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px', marginTop: '12px'}}>
-                    <strong>Example:</strong> "Technical Skills: Python, SQL, Prompt Engineering, ChatGPT API, 
-                    Data Analysis, Machine Learning Fundamentals"
-                  </div>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <h3 style={{marginBottom: '16px'}}>3. Professional Summary</h3>
-                  <p style={{color: 'var(--text-light)', lineHeight: '1.7'}}>
-                    Highlight prompt engineering in your summary for roles where AI expertise is a key differentiator. 
-                    This ensures recruiters see it immediately.
-                  </p>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px', marginTop: '12px'}}>
-                    <strong>Example:</strong> "Marketing professional with expertise in prompt engineering for AI-powered 
-                    content generation, reducing production time by 60% while maintaining quality."
-                  </div>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <h3 style={{marginBottom: '16px'}}>4. Experience Bullets</h3>
-                  <p style={{color: 'var(--text-light)', lineHeight: '1.7'}}>
-                    The most powerful placement: integrate prompt engineering achievements directly into your 
-                    experience bullets with quantified results.
-                  </p>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px', marginTop: '12px'}}>
-                    <strong>Example:</strong> "Engineered ChatGPT prompts that automated 40% of customer support 
-                    queries, reducing average response time from 24 hours to 2 hours."
-                  </div>
-                </div>
-              </div>
-
-              <div className="citation" style={{marginTop: '32px'}}>
-                <p><strong>Pro Tip:</strong> For maximum impact, use multiple placement strategies. List prompt engineering in your skills section AND include quantified examples in your experience bullets. This reinforces your expertise and provides evidence of your capabilities.</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Section 3: Optimization Strategies */}
+        {/* Optimization Strategies */}
         <section id="optimization-strategies" className="section">
-          <div className="container">
-            <div className="card">
+          <div className="section-container">
+            <div className="section-header">
               <h2 className="section-title">Data-Backed Optimization Strategies</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8'}}>
-                Based on analysis of successful resumes and ATS algorithms, these strategies maximize the 
-                impact of your prompt engineering skills.
-              </p>
-
-              <div className="grid">
-                {optimizationStrategies.map((strategy, index) => (
-                  <div key={index} className="card" style={{background: '#ffffff'}}>
-                    <FiZap size={24} style={{marginBottom: '16px', color: '#000'}} />
-                    <h3 style={{fontSize: '1.2rem', marginBottom: '12px'}}>{strategy.title}</h3>
-                    <p style={{color: 'var(--text-light)', lineHeight: '1.7', marginBottom: '16px'}}>{strategy.description}</p>
-                    <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px', marginBottom: '12px'}}>
-                      <strong>Example:</strong> {strategy.example}
-                    </div>
-                    <p className="citation-source" style={{marginTop: '8px', fontSize: '0.9rem'}}>Source: {strategy.source}</p>
+              <p className="section-subtitle">Proven techniques to maximize your prompt engineering skills' impact</p>
+            </div>
+            <div className="grid">
+              {OPTIMIZATION_STRATEGIES.map((strategy, i) => (
+                <div key={i} className="card-executive">
+                  <FiZap size={24} style={{marginBottom: '16px', color: 'var(--accent-primary)'}} />
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>{strategy.title}</h3>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '16px', fontSize: 'var(--font-size-body-sm)' }}>{strategy.description}</p>
+                  <div style={{ background: 'var(--bg-surface-low)', padding: '16px', borderRadius: '6px', marginBottom: '12px' }}>
+                    <strong style={{ color: 'var(--text-primary)' }}>Example:</strong> <span style={{ color: 'var(--text-secondary)' }}>{strategy.example}</span>
                   </div>
-                ))}
-              </div>
+                  <p style={{ marginTop: '8px', fontSize: '0.9rem', color: 'var(--accent-primary)', fontWeight: '600' }}>Source: {strategy.source}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Section 4: Common Mistakes */}
-        <section id="common-mistakes" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
+        {/* Common Mistakes */}
+        <section id="common-mistakes" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
               <h2 className="section-title">Common Mistakes to Avoid</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '32px'}}>
-                Based on analysis of rejected applications, these are the most common errors when listing 
-                prompt engineering skills.
-              </p>
-
+              <p className="section-subtitle">Based on analysis of rejected applications, avoid these errors</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
               <div className="table-wrap">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Mistake</th>
-                      <th>Impact</th>
-                      <th>Solution</th>
-                    </tr>
-                  </thead>
+                <table>
+                  <thead><tr><th>Mistake</th><th>Impact</th><th>Solution</th></tr></thead>
                   <tbody>
-                    {commonMistakes.map((item, index) => (
-                      <tr key={index}>
-                        <td><strong>{item.mistake}</strong><br/><span className="text-small">{item.explanation}</span></td>
-                        <td><span className="text-danger">{item.impact}</span></td>
-                        <td className="text-success">{item.solution}</td>
+                    {COMMON_MISTAKES.map((item, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{item.mistake}</strong><br/><span className="text-small">{item.explanation}</span></td>
+                        <td style={{ color: 'var(--error-color)' }}>{item.impact}</td>
+                        <td style={{ color: 'var(--success-color)' }}>{item.solution}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-
-              <div className="citation">
-                <p><strong>Source:</strong> Analysis of 25,000+ rejected applications across tech roles, 2025-2026. Data from iCIMS and Greenhouse analytics.</p>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--info-color)', fontWeight: '600' }}>Source: Analysis of 25,000+ rejected applications across tech roles, 2025-2026.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 5: Examples */}
-        <section id="examples" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Real-World Resume Examples</h2>
-              
-              <div className="grid" style={{gap: '24px'}}>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiBriefcase size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '16px'}}>Marketing Professional</h3>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px'}}>
-                    <p><strong>Summary:</strong> "Digital marketing specialist with expertise in AI-powered content creation. Engineered prompts for ChatGPT and Midjourney that generated 150+ social media posts and 50 blog articles, reducing content production time by 65%."</p>
-                    <p style={{marginTop: '12px'}}><strong>Skills:</strong> "AI Tools: ChatGPT-4, Midjourney V6, Claude 3, Prompt Engineering, Content Optimization"</p>
-                  </div>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiCode size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '16px'}}>Software Developer</h3>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px'}}>
-                    <p><strong>Experience:</strong> "Designed prompt sequences for GitHub Copilot that accelerated code generation by 40%, reducing development time for new features from 3 weeks to 2 weeks."</p>
-                    <p style={{marginTop: '12px'}}><strong>Skills:</strong> "Python, JavaScript, React, Node.js, Prompt Engineering, AI-Assisted Development, ChatGPT API Integration"</p>
-                  </div>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiDatabase size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '16px'}}>Data Analyst</h3>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px'}}>
-                    <p><strong>Experience:</strong> "Used prompt engineering with ChatGPT to automate monthly report generation, processing 10,000+ data points in under 5 minutes with 95% accuracy."</p>
-                    <p style={{marginTop: '12px'}}><strong>Skills:</strong> "SQL, Python, Tableau, Excel, Prompt Engineering, AI-Enhanced Analytics, Data Visualization"</p>
-                  </div>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiLayers size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '16px'}}>Content Creator</h3>
-                  <div style={{background: 'var(--card-bg)', padding: '16px', borderRadius: '6px'}}>
-                    <p><strong>Experience:</strong> "Engineered prompts for Claude 3 that generated 200+ pieces of marketing copy, maintaining brand voice while increasing output by 300%."</p>
-                    <p style={{marginTop: '12px'}}><strong>Skills:</strong> "Content Strategy, Copywriting, Prompt Engineering, ChatGPT, Midjourney, Creative Direction"</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* People Also Ask Section */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">People Also Ask About Prompt Engineering</h2>
-            <div className="faq-grid">
-              {peopleAlsoAsk.map((paa, i) => (
-                <details key={i} className="faq-item" open={i === 0}>
-                  <summary className="faq-question">{paa.question}</summary>
-                  <div className="faq-answer">{paa.answer}</div>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
+        {/* FAQ */}
         <section id="faqs" className="section">
-          <div className="container">
-            <div className="card">
+          <div className="section-container">
+            <div className="section-header">
               <h2 className="section-title">Frequently Asked Questions</h2>
-              <div className="faq-grid">
-                {faqItems.map((item, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <div className="faq-answer">{item.answer}</div>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links - Only verified working links */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">🔗 Free Resume Tools & Resources</h2>
-            <p className="section-subtitle">
-              Put your knowledge into practice with our free, ATS-optimized tools and templates.
-            </p>
-            <div className="grid">
-              <Link href="/resume-templates" className="card" style={{textAlign: 'center'}}>
-                <FiFileText size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>ATS-Optimized Resume Templates</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  Professionally designed templates that showcase AI skills effectively. Tested across major ATS platforms.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Browse All Templates →
-                </span>
-              </Link>
-              <Link href="/free-resume-tools" className="card" style={{textAlign: 'center'}}>
-                <FiTool size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>Free AI Resume Tools</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  ATS checker, keyword matcher, resume scorer, and action verb recommender. All free forever.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Explore All Tools →
-                </span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 7: Next Steps */}
-        <section id="next-steps" className="section">
-          <div className="container">
-            <div className="card" style={{padding: 'clamp(32px, 6vw, 48px)', textAlign: 'center'}}>
-              <h2 className="section-title" style={{marginBottom: '24px'}}>Ready to Optimize Your Resume?</h2>
-              <p style={{fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 32px', lineHeight: '1.8'}}>
-                Now that you know how to list prompt engineering effectively, put that knowledge to work with our free tools and templates designed to help you stand out in the AI-driven job market.
-              </p>
-              <div className="button-container" style={{gap: '24px'}}>
-                <Link href="/resume-templates" className="btn-primary">
-                  Browse Templates <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-                <Link href="/free-resume-tools" className="btn-secondary">
-                  Explore Free Tools <FiTool style={{marginRight: '8px'}} />
-                </Link>
-              </div>
-              <div className="stats" style={{marginTop: '48px', borderTop: '1px solid var(--border)', paddingTop: '32px'}}>
-                <div className="stat-item">
-                  <span className="stat-number">10,000+</span>
-                  <span className="stat-label">Resumes Optimized</span>
+                  {activeFaq === i && <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{faq.answer}</p></div>}
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">4.9/5</span>
-                  <span className="stat-label">User Rating</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Free Forever</span>
-                </div>
-              </div>
-              <p className="helper-text">
-                Data-driven strategies updated for 2026 hiring trends. Last updated: {currentDate} • Sources: LinkedIn, SHRM, JobScan, Greenhouse, iCIMS
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* NEW SECTION: Expand Your AI Career Toolkit (Internal Linking for SEO/GEO) */}
-        <section className="internal-links-section" aria-labelledby="toolkit-heading">
-          <div className="container">
-            <h2 id="toolkit-heading" className="section-title">Expand Your AI Career Toolkit</h2>
-            <p className="section-subtitle">Deepen your expertise with these specialized guides and tools</p>
-            <div className="internal-links-grid">
-              {internalLinks.map((link, index) => (
-                <Link href={link.path} key={index} className="internal-link-card">
-                  <div>
-                    <h3 className="internal-link-title">{link.title}</h3>
-                    <p className="text-small">{link.desc}</p>
-                  </div>
-                  <span className="internal-link-cta">
-                    Read Guide <FiArrowRight size={14} />
-                  </span>
-                </Link>
               ))}
             </div>
           </div>
         </section>
+
+        {/* CTA */}
+        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
+              Ready to Optimize Your Resume?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Now that you know how to list prompt engineering effectively, put that knowledge to work with our free tools and templates.
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Browse Templates</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Explore Free Tools</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Expand Your AI Career Toolkit</h2>
+              <p className="section-subtitle">Deepen your expertise with these specialized guides and tools</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume", text: "AI Resume Builders Guide", iconName: "FiCpu", desc: "Leverage AI to write your best resume" },
+                { href: "/best-resume-examples-for-usa-it-and-software-jobs", text: "IT & Software Resume Examples", iconName: "FiCode", desc: "Tailored examples for tech professionals" },
+                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Bullet Guide", iconName: "FiTerminal", desc: "Advanced prompt engineering for bullets" },
+                { href: "/modern-resume-design-2026", text: "Modern Resume Design 2026", iconName: "FiLayout", desc: "Stay ahead with current design trends" },
+                { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiSearch", desc: "Optimize your resume's keyword balance" },
+                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small">
+            <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
+            Last updated: {safeCurrentDate} • Sources: LinkedIn, SHRM, JobScan, Greenhouse, iCIMS
+          </span>
+        </div>
 
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>
-          <span itemProp="last-updated">{currentDate}</span>
-          <span itemProp="build-timestamp">{buildTimestamp}</span>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
           <span itemProp="word-count">2800</span>
           <span itemProp="sources">LinkedIn 2025, SHRM 2025, JobScan 2025, Greenhouse 2025, iCIMS 2025</span>
         </div>
       </main>
     </>
   );
+};
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        buildTimestamp
+      }
+    },
+    revalidate: 3600 // ISR: revalidate every hour
+  };
 }
 
 export default HowToListPromptEngineering;

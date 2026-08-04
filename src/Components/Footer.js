@@ -168,7 +168,7 @@ const Footer = () => {
             {/* Company Info */}
             <div className={styles.footerCard}>
               <div className={styles.companyCard}>
-                <h3 className={styles.footerLogo}>ProfessionalResumeFree</h3>
+                <h3 className={styles.footerLogo}>PRF</h3>
                 <p className={styles.footerAbout}>
                   Build professional resumes in minutes with our free resume builder. 
                   Land your dream job with a resume that stands out.

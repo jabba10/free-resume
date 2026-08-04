@@ -1,671 +1,1004 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-}
-body {
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-line-height: 1.5;
-color: var(--primary);
-background: var(--background);
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
-.container {
-max-width: 1280px;
-margin: 0 auto;
-padding: 0 16px;
-width: 100%;
-}
-@media (min-width: 640px) {
-.container { padding: 0 24px; }
-}
-.hero {
-background: var(--background);
-padding: 40px 0;
-text-align: center;
-border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-.hero { padding: 60px 0; }
-}
-.hero h1 {
-font-size: clamp(1.5rem, 5vw, 3rem);
-margin-bottom: 16px;
-line-height: 1.2;
-word-wrap: break-word;
-max-width: 900px;
-margin-left: auto;
-margin-right: auto;
-}
-.hero p {
-font-size: clamp(1rem, 3vw, 1.25rem);
-max-width: 800px;
-margin: 0 auto 24px;
-padding: 0 16px;
-}
-.hero-tag {
-display: inline-block;
-background: #f3f4f6;
-color: var(--primary);
-padding: 8px 16px;
-border-radius: 50px;
-font-size: 0.9rem;
-margin-bottom: 20px;
-border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.hero-tag {
-font-size: 0.8rem;
-padding: 6px 12px;
-}
-}
-.button-container {
-display: flex;
-justify-content: center;
-gap: 16px;
-flex-wrap: wrap;
-margin-top: 24px;
-}
-@media (max-width: 480px) {
-.button-container {
-flex-direction: column;
-align-items: center;
-gap: 12px;
-}
-}
-.btn-primary {
-display: inline-block;
-background: var(--primary);
-color: var(--background);
-padding: 12px 24px;
-border-radius: 6px;
-text-decoration: none;
-font-weight: 500;
-margin: 8px;
-border: 1px solid var(--primary);
-transition: background 0.2s;
-width: auto;
-min-width: 200px;
-text-align: center;
-}
-@media (max-width: 480px) {
-.btn-primary {
-width: 100%;
-margin: 4px 0;
-min-width: auto;
-padding: 14px 24px;
-}
-}
-.btn-primary:hover {
-background: var(--secondary);
-}
-.btn-primary:focus-visible {
-outline: 2px solid var(--primary);
-outline-offset: 2px;
-}
-.btn-secondary {
-display: inline-block;
-background: transparent;
-color: var(--primary);
-padding: 12px 24px;
-border-radius: 6px;
-text-decoration: none;
-font-weight: 500;
-border: 2px solid var(--primary);
-margin: 8px;
-transition: background 0.2s;
-width: auto;
-min-width: 200px;
-text-align: center;
-}
-@media (max-width: 480px) {
-.btn-secondary {
-width: 100%;
-margin: 4px 0;
-min-width: auto;
-padding: 14px 24px;
-}
-}
-.btn-secondary:hover {
-background: #f5f5f5;
-}
-.btn-secondary:focus-visible {
-outline: 2px solid var(--primary);
-outline-offset: 2px;
-}
-.section {
-padding: 40px 0;
-scroll-margin-top: 20px;
-}
-@media (min-width: 768px) {
-.section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-.section { 
-padding: 30px 0;
-}
-}
-.section:target {
-background-color: rgba(0,0,0,0.02);
-}
-.section-title {
-text-align: center;
-font-size: clamp(1.5rem, 4vw, 2rem);
-margin-bottom: 16px;
-padding: 0 16px;
-word-wrap: break-word;
-}
-.section-subtitle {
-text-align: center;
-color: var(--text-light);
-max-width: 700px;
-margin: 0 auto 40px;
-padding: 0 16px;
-font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-}
-@media (max-width: 480px) {
-.section-subtitle {
-margin-bottom: 24px;
-}
-}
-.grid {
-display: grid;
-grid-template-columns: 1fr;
-gap: 16px;
-margin: 30px 0;
-}
-@media (min-width: 640px) {
-.grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-.grid { grid-template-columns: repeat(3, 1fr); }
-}
-.card {
-background: var(--card-bg);
-border-radius: 8px;
-padding: 20px;
-border: 1px solid var(--border);
-transition: transform 0.2s, box-shadow 0.2s;
-height: 100%;
-display: flex;
-flex-direction: column;
-text-decoration: none;
-color: inherit;
-}
-.card:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.card:focus-visible {
-outline: 2px solid var(--primary);
-outline-offset: 2px;
-}
-.breadcrumb {
-padding: 16px 0;
-background: var(--card-bg);
-border-bottom: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.breadcrumb {
-padding: 12px 0;
-font-size: 0.85rem;
-}
-}
-.breadcrumb ol {
-display: flex;
-list-style: none;
-gap: 8px;
-flex-wrap: wrap;
-}
-@media (max-width: 480px) {
-.breadcrumb ol {
-gap: 4px;
-}
-}
-.breadcrumb a {
-color: var(--primary);
-text-decoration: none;
-border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover {
-border-bottom-color: var(--primary);
-}
-.breadcrumb [aria-current="page"] {
-font-weight: 600;
-}
-.trust-badge {
-display: inline-block;
-background: #f3f4f6;
-color: var(--primary);
-padding: 6px 12px;
-border-radius: 50px;
-font-size: 0.85rem;
-margin-bottom: 20px;
-border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.trust-badge {
-font-size: 0.75rem;
-padding: 5px 10px;
-}
-}
-.skip-link {
-position: absolute;
-top: -40px;
-left: 0;
-background: var(--primary);
-color: white;
-padding: 8px;
-z-index: 100;
-}
-.skip-link:focus {
-top: 0;
-}
-.contact-grid {
-display: grid;
-grid-template-columns: 1fr 1.5fr;
-gap: 40px;
-margin: 40px 0;
-}
-@media (max-width: 768px) {
-.contact-grid {
-grid-template-columns: 1fr;
-gap: 30px;
-}
-}
-.contact-info {
-background: var(--card-bg);
-padding: 40px;
-border-radius: 12px;
-border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.contact-info {
-padding: 30px 20px;
-}
-}
-.info-header h2 {
-font-size: 1.8rem;
-margin-bottom: 12px;
-}
-.info-header p {
-color: var(--text-light);
-margin-bottom: 30px;
-}
-.contact-methods {
-display: flex;
-flex-direction: column;
-gap: 24px;
-margin-bottom: 40px;
-}
-.contact-method {
-display: flex;
-gap: 16px;
-align-items: flex-start;
-}
-.method-icon {
-width: 48px;
-height: 48px;
-background: var(--background);
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-border: 1px solid var(--border);
-flex-shrink: 0;
-}
-.method-content h3 {
-font-size: 1.1rem;
-margin-bottom: 4px;
-}
-.method-main {
-font-size: 1rem;
-color: var(--primary);
-margin-bottom: 2px;
-}
-.contact-link {
-color: var(--primary);
-text-decoration: none;
-font-weight: 500;
-border-bottom: 1px solid var(--border);
-}
-.contact-link:hover {
-border-bottom-color: var(--primary);
-}
-.method-sub {
-font-size: 0.9rem;
-color: var(--text-lighter);
-}
-.contact-tips {
-background: var(--background);
-padding: 24px;
-border-radius: 8px;
-border: 1px solid var(--border);
-}
-.contact-tips h3 {
-font-size: 1.2rem;
-margin-bottom: 16px;
-}
-.tips-list {
-list-style: none;
-}
-.tips-list li {
-margin-bottom: 12px;
-padding-left: 24px;
-position: relative;
-}
-.tips-list li:before {
-content: "✓";
-color: #059669;
-position: absolute;
-left: 0;
-font-weight: bold;
-}
-.contact-form-card {
-background: var(--background);
-padding: 40px;
-border-radius: 12px;
-border: 1px solid var(--border);
-height: 100%;
-}
-@media (max-width: 480px) {
-.contact-form-card {
-padding: 30px 20px;
-}
-}
-.form-header {
-margin-bottom: 30px;
-}
-.form-header h2 {
-font-size: 1.5rem;
-margin-bottom: 8px;
-}
-.form-header p {
-color: var(--text-light);
-}
-.email-header {
-display: flex;
-align-items: center;
-gap: 12px;
-margin-bottom: 8px;
-}
-.email-icon {
-font-size: 1.8rem;
-}
-.email-section {
-margin-bottom: 30px;
-}
-.email-box {
-background: var(--card-bg);
-padding: 30px;
-border-radius: 8px;
-border: 1px solid var(--border);
-text-align: center;
-}
-@media (max-width: 480px) {
-.email-box {
-padding: 20px;
-}
-}
-.email-address {
-margin-bottom: 24px;
-}
-.email-label {
-display: block;
-font-size: 0.9rem;
-color: var(--text-light);
-margin-bottom: 8px;
-}
-.email-link {
-display: inline-block;
-font-size: 1.2rem;
-color: var(--primary);
-text-decoration: none;
-font-weight: 600;
-margin-bottom: 16px;
-border-bottom: 2px solid var(--border);
-padding-bottom: 4px;
-}
-@media (max-width: 480px) {
-.email-link {
-font-size: 1rem;
-}
-}
-.email-link:hover {
-border-bottom-color: var(--primary);
-}
-.copy-button {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-padding: 8px 16px;
-background: var(--background);
-border: 1px solid var(--border);
-border-radius: 6px;
-cursor: pointer;
-font-size: 0.9rem;
-transition: all 0.2s;
-margin-top: 8px;
-}
-.copy-button:hover {
-background: #e5e7eb;
-}
-.copy-icon {
-font-size: 1rem;
-}
-.email-action {
-margin-top: 20px;
-}
-.email-button {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-background: var(--primary);
-color: var(--background);
-padding: 14px 28px;
-border-radius: 6px;
-text-decoration: none;
-font-weight: 500;
-border: 1px solid var(--primary);
-transition: background 0.2s;
-width: auto;
-min-width: 200px;
-}
-@media (max-width: 480px) {
-.email-button {
-width: 100%;
-}
-}
-.email-button:hover {
-background: var(--secondary);
-}
-.btn-icon {
-font-size: 1.1rem;
-}
-.response-info {
-background: var(--card-bg);
-padding: 20px;
-border-radius: 6px;
-border-left: 4px solid var(--primary);
-}
-.response-info p {
-color: var(--text-light);
-font-size: 0.95rem;
-}
-.cta-section {
-background: var(--background);
-color: var(--primary);
-padding: 60px 0;
-text-align: center;
-border-top: 1px solid var(--border);
-border-bottom: 1px solid var(--border);
-margin-top: 40px;
-}
-@media (min-width: 768px) {
-.cta-section { padding: 80px 0; }
-}
-@media (max-width: 480px) {
-.cta-section { padding: 40px 0; }
-}
-.cta-section h2 {
-font-size: clamp(1.5rem, 4vw, 2.5rem);
-margin-bottom: 16px;
-padding: 0 16px;
-}
-.cta-section p {
-font-size: clamp(1rem, 2.5vw, 1.2rem);
-max-width: 600px;
-margin: 0 auto 24px;
-padding: 0 16px;
-}
-.cta-buttons {
-display: flex;
-justify-content: center;
-gap: 16px;
-flex-wrap: wrap;
-}
-.meta-info {
-display: flex;
-justify-content: center;
-gap: 20px;
-flex-wrap: wrap;
-margin: 20px 0;
-font-size: 0.9rem;
-color: var(--text-light);
-}
-@media (max-width: 480px) {
-.meta-info {
-flex-direction: column;
-gap: 8px;
-align-items: center;
-}
-}
-/* Mobile improvements */
-@media (max-width: 480px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
+// ============= CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS =============
+const executiveDesignTokens = `
+  /* ========== CSS CUSTOM PROPERTIES ========== */
+  :root {
+    /* ========== COLOR SYSTEM ========== */
+    
+    /* Background Colors */
+    --bg-page: #131315;
+    --bg-surface-lowest: #0e0e10;
+    --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21;
+    --bg-surface-high: #2a2a2c;
+    --bg-surface-highest: #353437;
+    --bg-surface-dim: #131315;
+    --bg-surface-bright: #39393b;
+    --bg-container: #1c1b1d;
+    --bg-container-high: #2a2a2c;
+    
+    /* Text Colors */
+    --text-primary: #e5e1e4;
+    --text-secondary: #c5bfc8;
+    --text-muted: #9d95a0;
+    --text-disabled: #605d62;
+    --text-inverse: #1c1b1d;
+    --text-on-accent: #3c2f00;
+    
+    /* Accent/Brand Colors - Gold */
+    --accent-primary: #f2ca50;
+    --accent-primary-container: #d4af37;
+    --accent-primary-fixed: #ffe088;
+    --accent-primary-fixed-dim: #e9c349;
+    --accent-on-primary: #3c2f00;
+    --accent-on-primary-container: #2a2000;
+    --accent-inverse-primary: #735c00;
+    --accent-primary-hover: #f7d86e;
+    --accent-primary-active: #e6bc3d;
+    
+    /* Border Colors */
+    --border-outline: #444246;
+    --border-outline-variant: #363538;
+    --border-gold-filament: rgba(212, 175, 55, 0.3);
+    --border-gold-filament-strong: rgba(212, 175, 55, 0.5);
+    --border-glass: rgba(212, 175, 55, 0.15);
+    
+    /* Error/State Colors */
+    --error-color: #ffb4ab;
+    --error-container: #93000a;
+    --error-on-container: #ffdad6;
+    
+    /* Success Colors */
+    --success-color: #a5d6a7;
+    --success-container: #1b5e20;
+    
+    /* Glass/Special Effect Colors */
+    --glass-bg: rgba(20, 19, 21, 0.7);
+    --glass-bg-light: rgba(28, 27, 29, 0.6);
+    --glass-bg-heavy: rgba(20, 19, 21, 0.85);
+    --gradient-card-overlay: linear-gradient(180deg, rgba(19, 19, 21, 0) 0%, rgba(19, 19, 21, 0.9) 100%);
+    --gradient-hero-overlay: linear-gradient(135deg, rgba(19, 19, 21, 0.95) 0%, rgba(19, 19, 21, 0.8) 100%);
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Font Sizes - Responsive */
+    --font-size-display-lg: clamp(2rem, 6vw, 4rem);
+    --font-size-display-md: clamp(1.75rem, 5vw, 3rem);
+    --font-size-headline-lg: clamp(1.5rem, 4vw, 2rem);
+    --font-size-headline-md: clamp(1.25rem, 3.5vw, 1.75rem);
+    --font-size-title-lg: clamp(1.125rem, 3vw, 1.5rem);
+    --font-size-title-md: clamp(1rem, 2.5vw, 1.25rem);
+    --font-size-body-lg: clamp(0.9375rem, 2vw, 1.125rem);
+    --font-size-body-md: clamp(0.875rem, 1.5vw, 1rem);
+    --font-size-body-sm: clamp(0.8125rem, 1.2vw, 0.875rem);
+    --font-size-label-lg: 0.875rem;
+    --font-size-label-md: 0.75rem;
+    --font-size-label-sm: 0.6875rem;
+    --font-size-caps: 0.75rem;
+    
+    /* Line Heights */
+    --line-height-display: 1.1;
+    --line-height-headline: 1.2;
+    --line-height-title: 1.3;
+    --line-height-body: 1.6;
+    --line-height-label: 1.4;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-wider: 0.05em;
+    --letter-spacing-caps: 0.08em;
+    
+    /* Text Shadows for Glow Effects */
+    --glow-gold: 0 0 20px rgba(242, 202, 80, 0.3), 0 0 40px rgba(242, 202, 80, 0.1);
+    --glow-gold-strong: 0 0 30px rgba(242, 202, 80, 0.5), 0 0 60px rgba(242, 202, 80, 0.2);
+    
+    /* ========== BORDER RADIUS SCALE ========== */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-default: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* ========== SPACING SYSTEM ========== */
+    --space-unit: 0.25rem;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    
+    /* Section Spacing - Responsive */
+    --section-gap-sm: clamp(2rem, 6vw, 4rem);
+    --section-gap-md: clamp(3rem, 8vw, 6rem);
+    --section-gap-lg: clamp(3rem, 10vw, 8rem);
+    
+    /* Content Widths */
+    --content-max-width: 1280px;
+    --content-narrow: 800px;
+    --content-wide: 1440px;
+    
+    /* Gutters */
+    --gutter-desktop: clamp(1rem, 5vw, 2.5rem);
+    --gutter-mobile: clamp(0.75rem, 4vw, 1.5rem);
+    
+    /* ========== SHADOW / ELEVATION TOKENS ========== */
+    --shadow-nav: 0px 24px 48px rgba(0, 0, 0, 0.8), 0px 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-gold-glow: 0 0 20px rgba(242, 202, 80, 0.4), 0 0 60px rgba(242, 202, 80, 0.1);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242, 202, 80, 0.3);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-deep: 0 20px 40px rgba(0, 0, 0, 0.5);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* ========== ANIMATION / TRANSITION TOKENS ========== */
+    --transition-fast: 150ms;
+    --transition-medium: 250ms;
+    --transition-slow: 350ms;
+    --transition-very-slow: 500ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --hover-transform: translateY(-2px);
+    --hover-transform-lg: translateY(-4px);
+    
+    /* ========== GLASS PANEL EFFECT ========== */
+    --glass-blur: 20px;
+    --glass-blur-heavy: 40px;
+    --glass-border-width: 0.5px;
+    --glass-padding: clamp(1.25rem, 4vw, 2.5rem);
+    
+    /* ========== BUTTON STYLE VARIABLES ========== */
+    --btn-primary-bg: #f2ca50;
+    --btn-primary-text: #3c2f00;
+    --btn-primary-padding: clamp(0.75rem, 2vw, 0.875rem) clamp(1.5rem, 4vw, 2rem);
+    --btn-primary-radius: 0.25rem;
+    --btn-primary-font-size: clamp(0.8125rem, 1.5vw, 0.875rem);
+    --btn-primary-font-weight: 600;
+    --btn-primary-letter-spacing: 0.02em;
+    --btn-primary-transform: none;
+    --btn-primary-hover-bg: #f7d86e;
+    --btn-primary-hover-transform: translateY(-1px);
+    --btn-primary-hover-shadow: 0 4px 12px rgba(242, 202, 80, 0.3);
+    
+    --btn-outline-border: rgba(212, 175, 55, 0.5);
+    --btn-outline-text: #f2ca50;
+    --btn-outline-hover-bg: rgba(242, 202, 80, 0.08);
+    --btn-outline-hover-border: rgba(212, 175, 55, 0.8);
+    
+    /* ========== CARD STYLE VARIABLES ========== */
+    --card-bg: rgba(28, 27, 29, 0.6);
+    --card-bg-hover: rgba(32, 31, 33, 0.8);
+    --card-border: 0.5px solid rgba(212, 175, 55, 0.15);
+    --card-border-hover: 0.5px solid rgba(212, 175, 55, 0.3);
+    --card-padding: clamp(1.25rem, 4vw, 2.5rem);
+    --card-radius: 0.5rem;
+    --card-hover-transform: translateY(-4px);
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05);
+    
+    /* ========== GOLD ACCENT VALUES ========== */
+    --gold-filament-color: rgba(212, 175, 55, 0.3);
+    --gold-filament-width: 0.5px;
+    --gold-filament-opacity: 0.3;
+    --gold-divider-width: 60px;
+    --gold-divider-height: 1px;
+    --gold-divider-opacity: 0.4;
+  }
+  
+  /* ========== BASE RESET ========== */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
     -webkit-tap-highlight-color: transparent;
   }
   
-  .card:active {
-    opacity: 0.8;
-  }
-  
-  .container {
-    padding: 0 20px;
-  }
-  
-  p, li {
+  html {
     font-size: 16px;
+    -webkit-text-size-adjust: 100%;
   }
-}
-
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin: 30px 0 20px;
-}
-.stat-card {
-  text-align: center;
-  padding: 16px 24px;
-  background: var(--card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  min-width: 100px;
-}
-.stat-number {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-.stat-label {
-  font-size: 0.85rem;
-  color: var(--text-light);
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.faq-item {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid var(--border);
-}
-.faq-question {
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 12px;
-}
-.faq-answer {
-  color: var(--text-light);
-}
-
-/* ===== NEW: Internal Links Section Styles ===== */
-.internal-link-card {
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: var(--card-bg);
-}
-.internal-link-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--primary);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-  background: #ffffff;
-}
-.internal-link-card:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.internal-link-icon {
-  font-size: 1.8rem;
-  margin-bottom: 12px;
-  color: var(--primary);
-}
-.internal-link-title {
-  font-weight: 600;
-  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
-  display: block;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.internal-link-desc {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  display: block;
-  line-height: 1.4;
-}
+  
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-tight);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  h1 {
+    font-size: var(--font-size-display-lg);
+    line-height: var(--line-height-display);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  }
+  
+  h2 {
+    font-size: var(--font-size-display-md);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  h3 {
+    font-size: var(--font-size-headline-lg);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-body);
+  }
+  
+  h4 {
+    font-size: var(--font-size-headline-md);
+    line-height: var(--line-height-title);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-body);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-body);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  strong {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  a {
+    color: var(--accent-primary);
+    transition: color var(--transition-fast) var(--easing-default);
+    text-decoration: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  a:hover {
+    color: var(--accent-primary-hover);
+  }
+  
+  img, svg { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+  }
+  
+  /* ========== UTILITY CLASSES ========== */
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--glass-border-width) solid var(--border-glass);
+    width: 100%;
+  }
+  
+  .glass-panel-heavy {
+    background: var(--glass-bg-heavy);
+    backdrop-filter: blur(var(--glass-blur-heavy));
+    -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
+    border: var(--glass-border-width) solid var(--border-glass);
+  }
+  
+  .text-glow-gold {
+    text-shadow: var(--glow-gold);
+  }
+  
+  .text-glow-gold-strong {
+    text-shadow: var(--glow-gold-strong);
+  }
+  
+  .gold-filament-border {
+    border: var(--gold-filament-width) solid var(--gold-filament-color);
+  }
+  
+  .gold-divider {
+    width: var(--gold-divider-width);
+    height: var(--gold-divider-height);
+    background: var(--accent-primary);
+    opacity: var(--gold-divider-opacity);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #f2ca50 0%, #d4af37 50%, #ffe088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    text-transform: var(--btn-primary-transform);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    text-decoration: none;
+    width: fit-content;
+    white-space: nowrap;
+  }
+  
+  .btn-primary:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--btn-primary-hover-shadow);
+    color: var(--btn-primary-text);
+    text-decoration: none;
+  }
+  
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: transparent;
+    color: var(--btn-outline-text);
+    border: 0.5px solid var(--btn-outline-border);
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+    white-space: nowrap;
+  }
+  
+  .btn-outline:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--shadow-gold-glow-sm);
+    color: var(--btn-outline-text);
+    text-decoration: none;
+  }
+  
+  .btn-badge {
+    background: rgba(60, 47, 0, 0.3);
+    color: var(--accent-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    white-space: nowrap;
+  }
+  
+  .card-executive {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+  }
+  
+  @media (hover: hover) {
+    .card-executive:hover {
+      background: var(--card-bg-hover);
+      border: var(--card-border-hover);
+      transform: var(--card-hover-transform);
+      box-shadow: var(--card-hover-shadow);
+    }
+  }
+  
+  .section-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter-desktop);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .skip-link:focus { 
+    top: 0; 
+  }
+  
+  /* ========== CONTACT PAGE SPECIFIC STYLES ========== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    width: 100%;
+  }
+  
+  .stats-container {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    flex-wrap: wrap;
+    margin: clamp(1.25rem, 3vw, 2rem) 0;
+    width: 100%;
+  }
+  
+  .stat-card {
+    text-align: center;
+    padding: clamp(1rem, 2.5vw, 1.25rem) clamp(1rem, 2.5vw, 1.5rem);
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-lg);
+    border: var(--card-border);
+    min-width: clamp(100px, 20vw, 120px);
+    flex: 1;
+  }
+  
+  .stat-number {
+    font-size: var(--font-size-headline-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-primary);
+    margin-bottom: 0.25rem;
+    font-family: var(--font-display);
+  }
+  
+  .stat-label {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+  }
+  
+  .breadcrumb {
+    padding: clamp(0.75rem, 2vw, 1rem) 0;
+    background: var(--bg-surface-lowest);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+    width: 100%;
+  }
+  
+  .breadcrumb ol {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast) var(--easing-default);
+  }
+  
+  .breadcrumb a:hover {
+    color: var(--accent-primary);
+  }
+  
+  .breadcrumb [aria-current="page"] {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .breadcrumb li[aria-hidden="true"] {
+    color: var(--text-muted);
+  }
+  
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+    max-width: var(--content-narrow);
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .faq-item {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-lg);
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    border: var(--card-border);
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .faq-item summary {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-lg);
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  .faq-answer {
+    color: var(--text-secondary);
+    line-height: var(--line-height-body);
+    font-size: var(--font-size-body-md);
+  }
+  
+  .contact-method {
+    display: flex;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .method-icon {
+    width: clamp(40px, 8vw, 48px);
+    height: clamp(40px, 8vw, 48px);
+    background: rgba(242, 202, 80, 0.1);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    border: 0.5px solid var(--border-gold-filament);
+    flex-shrink: 0;
+  }
+  
+  .method-content {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .method-content h3 {
+    font-size: var(--font-size-body-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+  
+  .method-main {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 0.25rem;
+    word-break: break-all;
+  }
+  
+  .contact-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    border-bottom: 1px solid var(--border-gold-filament);
+    transition: border-color var(--transition-fast) var(--easing-default);
+    word-break: break-all;
+  }
+  
+  .contact-link:hover {
+    border-bottom-color: var(--accent-primary);
+    color: var(--accent-primary-hover);
+  }
+  
+  .method-sub {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-muted);
+  }
+  
+  .email-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-radius: var(--radius-xl);
+    border: var(--card-border);
+    text-align: center;
+    width: 100%;
+  }
+  
+  .email-address {
+    margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+  }
+  
+  .email-label {
+    display: block;
+    font-size: var(--font-size-body-sm);
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-caps);
+  }
+  
+  .email-link {
+    display: inline-block;
+    font-size: clamp(1rem, 3vw, var(--font-size-title-md));
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-gold-filament);
+    padding-bottom: 0.25rem;
+    transition: all var(--transition-fast) var(--easing-default);
+    word-break: break-all;
+  }
+  
+  .email-link:hover {
+    border-bottom-color: var(--accent-primary);
+    color: var(--accent-primary-hover);
+  }
+  
+  .copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(242, 202, 80, 0.1);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast) var(--easing-default);
+  }
+  
+  .copy-button:hover {
+    background: rgba(242, 202, 80, 0.2);
+    color: var(--accent-primary);
+  }
+  
+  .response-info {
+    background: rgba(242, 202, 80, 0.05);
+    padding: clamp(1rem, 2vw, 1.25rem);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--accent-primary);
+  }
+  
+  .response-info p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .contact-tips {
+    background: rgba(242, 202, 80, 0.05);
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    border-radius: var(--radius-lg);
+    border: var(--card-border);
+  }
+  
+  .tips-list {
+    list-style: none;
+  }
+  
+  .tips-list li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .tips-list li:before {
+    content: "✦";
+    color: var(--accent-primary);
+    position: absolute;
+    left: 0;
+    font-size: 0.75rem;
+  }
+  
+  .internal-link-card {
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  @media (hover: hover) {
+    .internal-link-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-primary-container);
+      box-shadow: var(--card-hover-shadow);
+      color: inherit;
+    }
+  }
+  
+  .internal-link-icon {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+  
+  .internal-link-title {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-md);
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+  
+  .internal-link-desc {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+    display: block;
+    line-height: 1.4;
+  }
+  
+  /* ========== RESPONSIVE BREAKPOINTS ========== */
+  
+  @media (max-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section-container {
+      padding: 0 var(--gutter-mobile);
+    }
+    
+    .btn-primary,
+    .btn-outline {
+      width: 100%;
+      justify-content: center;
+      min-width: auto;
+    }
+    
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    
+    .stats-container {
+      gap: 0.75rem;
+    }
+    
+    .stat-card {
+      min-width: 90px;
+    }
+    
+    .email-link {
+      font-size: 1rem;
+    }
+    
+    .contact-method {
+      flex-wrap: nowrap;
+    }
+    
+    .method-icon {
+      width: 44px;
+      height: 44px;
+      font-size: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    :root {
+      --font-size-display-lg: clamp(1.75rem, 7vw, 2rem);
+      --font-size-display-md: clamp(1.5rem, 6vw, 1.75rem);
+      --font-size-headline-lg: clamp(1.25rem, 5vw, 1.5rem);
+      --font-size-headline-md: clamp(1.125rem, 4.5vw, 1.25rem);
+      --font-size-body-lg: 0.9375rem;
+      --font-size-body-md: 0.875rem;
+      --font-size-body-sm: 0.8125rem;
+      --section-gap-sm: clamp(1.5rem, 5vw, 2.5rem);
+      --section-gap-md: clamp(2rem, 6vw, 3rem);
+      --section-gap-lg: clamp(2rem, 7vw, 4rem);
+      --gutter-desktop: 0.75rem;
+      --gutter-mobile: 0.75rem;
+      --glass-padding: 1rem;
+      --card-padding: 1rem;
+    }
+    
+    .section-container {
+      padding: 0 0.75rem;
+    }
+    
+    .btn-primary,
+    .btn-outline {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.8125rem;
+      padding: 0.75rem 1rem;
+    }
+    
+    .stats-container {
+      gap: 0.5rem;
+    }
+    
+    .stat-card {
+      padding: 0.75rem 0.75rem;
+      min-width: 80px;
+    }
+    
+    .stat-number {
+      font-size: 1.25rem;
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+    }
+    
+    .contact-method {
+      gap: 0.75rem;
+    }
+    
+    .method-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.125rem;
+    }
+    
+    .faq-item {
+      padding: 1rem;
+    }
+    
+    .faq-item summary {
+      font-size: 0.9375rem;
+    }
+    
+    .email-box {
+      padding: 1rem;
+    }
+    
+    .email-link {
+      font-size: 0.9375rem;
+    }
+    
+    .breadcrumb ol {
+      font-size: 0.8125rem;
+    }
+    
+    h1 {
+      font-size: clamp(1.75rem, 7vw, 2rem);
+    }
+    
+    h2 {
+      font-size: clamp(1.5rem, 6vw, 1.75rem);
+    }
+    
+    h3 {
+      font-size: clamp(1.125rem, 5vw, 1.375rem);
+    }
+    
+    p {
+      font-size: 0.9375rem;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .section-container {
+      padding: 0 0.625rem;
+    }
+    
+    .stats-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .stat-card {
+      width: 100%;
+      max-width: 250px;
+    }
+    
+    .contact-method {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .method-content {
+      text-align: center;
+    }
+    
+    .method-main {
+      word-break: break-all;
+    }
+    
+    .email-link {
+      word-break: break-all;
+    }
+    
+    .glass-panel {
+      padding: 0.875rem;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+  
+  /* Touch device optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    .card-executive:hover {
+      transform: none;
+    }
+    
+    .btn-primary:hover,
+    .btn-outline:hover {
+      transform: none;
+    }
+    
+    .internal-link-card:hover {
+      transform: none;
+    }
+  }
+  
+  /* Landscape phone optimization */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .stats-container {
+      flex-wrap: nowrap;
+    }
+    
+    .stat-card {
+      padding: 0.75rem 1rem;
+    }
+  }
 `;
 
 export async function getStaticProps() {
@@ -682,9 +1015,9 @@ export async function getStaticProps() {
 }
 
 export default function ContactPage({ lastModified, buildTimestamp }) {
+  const [copySuccess, setCopySuccess] = useState(false);
   const currentYear = new Date().getFullYear();
   const displayDate = lastModified ? lastModified.split('T')[0] : new Date().toISOString().split('T')[0];
-  // Updated URL without www
   const canonicalUrl = "https://professionalresumefree.com/contact";
 
   const contactInfo = [
@@ -738,43 +1071,42 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
   ];
 
   const stats = [
-    {
-      value: "24h",
-      label: "Response Time"
-    },
-    {
-      value: "100%",
-      label: "Free Support"
-    },
-    {
-      value: "50K+",
-      label: "Happy Users"
-    }
+    { value: "24h", label: "Response Time" },
+    { value: "100%", label: "Free Support" },
+    { value: "50K+", label: "Happy Users" }
   ];
 
-  // Simple icons using emoji
-  const icons = {
-    mail: "✉️",
-    clock: "⏱️",
-    user: "👤",
-    copy: "📋",
-    check: "✅",
-    arrowRight: "→",
-    book: "📚"
-  };
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText('contact@professionalresumefree.com');
-    alert('Email address copied to clipboard!');
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('contact@professionalresumefree.com');
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = 'contact@professionalresumefree.com';
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    }
   };
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* Google Fonts for Executive Design */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - Exactly 72 characters */}
+        {/* OPTIMIZED TITLE */}
         <title>Contact Us: Email Support for Resume Builder (24h Response) 2026</title>
         
         {/* OPTIMIZED META DESCRIPTION */}
@@ -790,17 +1122,17 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         <meta name="generator" content="Professional Resume Free - Contact Page" />
         
         {/* TECHNICAL SEO */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
         <meta name="bingbot" content="index, follow, max-image-preview:large" />
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* CANONICAL URL - Updated without www */}
+        {/* CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH - Updated without www */}
+        {/* OPEN GRAPH */}
         <meta property="og:title" content="Contact Us: Email Support for Resume Builder (24h Response) 2026" />
         <meta property="og:description" content="Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions." />
         <meta property="og:url" content={canonicalUrl} />
@@ -813,7 +1145,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         <meta property="og:updated_time" content={lastModified} />
         <meta property="og:locale" content="en_US" />
         
-        {/* TWITTER CARD - Updated without www */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Us: Email Support for Resume Builder (24h Response) 2026" />
         <meta name="twitter:description" content="Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions." />
@@ -822,17 +1154,13 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* PRECONNECT */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        
-        {/* ENHANCED SCHEMA.ORG JSON-LD - Updated without www */}
+        {/* ENHANCED SCHEMA.ORG JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -950,7 +1278,15 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         />
       </Head>
 
-      <main>
+      <main style={{
+        backgroundColor: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+        fontFamily: 'var(--font-body)',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        width: '100%',
+        maxWidth: '100vw'
+      }}>
         {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
@@ -964,7 +1300,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
 
         {/* Breadcrumb Navigation */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
@@ -982,21 +1318,72 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         </nav>
 
         {/* Hero Section */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="hero-tag" aria-label="Customer Support">
-              {icons.book} Customer Support {currentYear}
+        <section id="main-content" style={{
+          padding: 'var(--section-gap-lg) 0 var(--section-gap-sm)',
+          textAlign: 'center',
+          borderBottom: '0.5px solid var(--border-gold-filament)',
+          position: 'relative',
+          overflow: 'hidden',
+          width: '100%'
+        }} aria-labelledby="hero-heading">
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.03) 0%, transparent 70%)',
+            pointerEvents: 'none'
+          }} />
+          
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{
+              display: 'inline-block',
+              background: 'rgba(242, 202, 80, 0.1)',
+              color: 'var(--accent-primary)',
+              padding: 'clamp(0.375rem, 1vw, 0.5rem) clamp(1rem, 2vw, 1.25rem)',
+              borderRadius: 'var(--radius-full)',
+              fontSize: 'var(--font-size-body-sm)',
+              fontWeight: 'var(--font-weight-medium)',
+              letterSpacing: 'var(--letter-spacing-caps)',
+              textTransform: 'uppercase',
+              marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
+              border: '0.5px solid var(--border-gold-filament)'
+            }} aria-label="Customer Support">
+              ✦ Customer Support {currentYear}
             </div>
             
-            <h1 id="hero-heading">Contact Us: Email Support for Resume Builder</h1>
+            <h1 id="hero-heading" style={{
+              fontSize: 'var(--font-size-display-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-extrabold)',
+              lineHeight: 'var(--line-height-display)',
+              color: 'var(--text-primary)',
+              marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
+              letterSpacing: 'var(--letter-spacing-tight)',
+              maxWidth: '900px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              padding: '0 0.5rem'
+            }}>
+              Contact Us: <span className="gradient-text">Email Support</span> for Resume Builder
+            </h1>
             
-            <p>
+            <p style={{
+              fontSize: 'var(--font-size-body-lg)',
+              color: 'var(--text-secondary)',
+              maxWidth: '800px',
+              margin: '0 auto clamp(1.5rem, 3vw, 2rem)',
+              padding: '0 1rem',
+              lineHeight: 'var(--line-height-body)'
+            }}>
               Need help with your resume? Our support team is here to assist you. 
-              <strong> Free email support</strong> with <strong>24-hour response time</strong>.
+              <strong style={{ color: 'var(--text-primary)' }}> Free email support</strong> with{' '}
+              <strong style={{ color: 'var(--accent-primary)' }}>24-hour response time</strong>.
               Get help with templates, technical issues, and career questions.
             </p>
 
-            <div className="stats" aria-label="Key statistics" style={{ marginTop: '30px' }}>
+            <div className="stats-container" aria-label="Key statistics">
               {stats.map((stat, index) => (
                 <div key={index} className="stat-card">
                   <div className="stat-number">{stat.value}</div>
@@ -1006,24 +1393,64 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
             </div>
 
             {/* Meta Info */}
-            <div className="meta-info">
-              <span>Support: contact@professionalresumefree.com</span>
-              <span>Updated: {displayDate}</span>
-              <span>Response: Within 24h</span>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: 'clamp(0.75rem, 2vw, 1.5rem)',
+              flexWrap: 'wrap',
+              marginTop: 'clamp(1rem, 2vw, 1.5rem)',
+              fontSize: 'var(--font-size-body-sm)',
+              color: 'var(--text-muted)',
+              padding: '0 0.5rem'
+            }}>
+              <span>✦ Support: contact@professionalresumefree.com</span>
+              <span>✦ Updated: {displayDate}</span>
+              <span>✦ Response: Within 24h</span>
             </div>
           </div>
         </section>
 
         {/* External Citations Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="citations-heading">
-          <div className="container">
-            <h2 id="citations-heading" className="section-title">What Users Say About Our Support</h2>
-            <div className="grid">
+        <section style={{
+          padding: 'var(--section-gap-sm) 0',
+          background: 'var(--bg-surface-lowest)',
+          width: '100%'
+        }} aria-labelledby="citations-heading">
+          <div className="section-container">
+            <h2 id="citations-heading" style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+              padding: '0 0.5rem'
+            }}>
+              What Users Say About Our Support
+            </h2>
+            
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+              gap: 'clamp(1rem, 2vw, 1.5rem)',
+              width: '100%'
+            }}>
               {externalCitations.map((citation, i) => (
-                <blockquote key={i} className="card" itemScope itemType="https://schema.org/Quotation">
-                  <p style={{ fontStyle: 'italic', marginBottom: '12px' }} itemProp="text">"{citation.quote}"</p>
+                <blockquote key={i} className="card-executive" itemScope itemType="https://schema.org/Quotation">
+                  <p style={{ 
+                    fontStyle: 'italic', 
+                    marginBottom: '1rem', 
+                    color: 'var(--text-secondary)',
+                    fontSize: 'var(--font-size-body-md)'
+                  }} itemProp="text">
+                    "{citation.quote}"
+                  </p>
                   <footer>
-                    <cite itemProp="source">
+                    <cite itemProp="source" style={{
+                      color: 'var(--accent-primary)',
+                      fontStyle: 'normal',
+                      fontSize: 'var(--font-size-body-sm)'
+                    }}>
                       {citation.source} ({citation.year})
                     </cite>
                   </footer>
@@ -1034,14 +1461,31 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         </section>
 
         {/* People Also Ask Section */}
-        <section className="section" aria-labelledby="paa-heading">
-          <div className="container">
-            <h2 id="paa-heading" className="section-title">People Also Ask About Our Support</h2>
+        <section style={{
+          padding: 'var(--section-gap-sm) 0',
+          width: '100%'
+        }} aria-labelledby="paa-heading">
+          <div className="section-container">
+            <h2 id="paa-heading" style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+              padding: '0 0.5rem'
+            }}>
+              People Also Ask About Our Support
+            </h2>
+            
             <div className="faq-grid">
               {peopleAlsoAsk.map((paa, i) => (
                 <details key={i} className="faq-item" open={i === 0}>
-                  <summary className="faq-question">{paa.question}</summary>
-                  <p style={{ color: '#4b5563', marginTop: '12px' }}>{paa.answer}</p>
+                  <summary>
+                    <span style={{ color: 'var(--accent-primary)', flexShrink: 0 }}>✦</span>
+                    <span>{paa.question}</span>
+                  </summary>
+                  <p className="faq-answer" style={{ marginTop: '0.75rem' }}>{paa.answer}</p>
                 </details>
               ))}
             </div>
@@ -1049,18 +1493,40 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         </section>
 
         {/* Main Contact Section */}
-        <section className="section" style={{ background: '#f9fafb' }}>
-          <div className="container">
+        <section style={{
+          padding: 'var(--section-gap-md) 0',
+          background: 'var(--bg-surface-lowest)',
+          width: '100%'
+        }}>
+          <div className="section-container">
             <div className="contact-grid">
               
               {/* Contact Information */}
-              <div className="contact-info">
-                <div className="info-header">
-                  <h2>Get in Touch</h2>
-                  <p>Email us directly for assistance with our resume builder tool.</p>
+              <div className="glass-panel" style={{
+                padding: 'var(--glass-padding)',
+                borderRadius: 'var(--radius-2xl)'
+              }}>
+                <div style={{ marginBottom: 'clamp(1.5rem, 3vw, 2rem)' }}>
+                  <h2 style={{
+                    fontSize: 'var(--font-size-headline-lg)',
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 'var(--font-weight-bold)',
+                    color: 'var(--text-primary)',
+                    marginBottom: '0.75rem'
+                  }}>
+                    Get in Touch
+                  </h2>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-md)' }}>
+                    Email us directly for assistance with our resume builder tool.
+                  </p>
                 </div>
 
-                <div className="contact-methods">
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'clamp(1rem, 2vw, 1.5rem)',
+                  marginBottom: 'clamp(1.5rem, 3vw, 2.5rem)'
+                }}>
                   {contactInfo.map((item, index) => (
                     <div key={index} className="contact-method">
                       <div className="method-icon">
@@ -1085,7 +1551,14 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                 </div>
 
                 <div className="contact-tips">
-                  <h3>Email Tips</h3>
+                  <h3 style={{
+                    fontSize: 'var(--font-size-title-md)',
+                    fontWeight: 'var(--font-weight-semibold)',
+                    color: 'var(--text-primary)',
+                    marginBottom: '1rem'
+                  }}>
+                    Email Tips
+                  </h3>
                   <ul className="tips-list">
                     {contactTips.map((tip, index) => (
                       <li key={index}>{tip}</li>
@@ -1095,16 +1568,34 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
               </div>
 
               {/* Email Contact Card */}
-              <div className="contact-form-card">
-                <div className="form-header">
-                  <div className="email-header">
-                    <span className="email-icon">{icons.mail}</span>
-                    <h2>Email Us</h2>
+              <div className="glass-panel" style={{
+                padding: 'var(--glass-padding)',
+                borderRadius: 'var(--radius-2xl)'
+              }}>
+                <div style={{ marginBottom: 'clamp(1.5rem, 3vw, 2rem)' }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    marginBottom: '0.5rem',
+                    flexWrap: 'wrap'
+                  }}>
+                    <span style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>✉️</span>
+                    <h2 style={{
+                      fontSize: 'var(--font-size-headline-md)',
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 'var(--font-weight-bold)',
+                      color: 'var(--text-primary)'
+                    }}>
+                      Email Us
+                    </h2>
                   </div>
-                  <p>Send your message to our email address</p>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-md)' }}>
+                    Send your message to our email address
+                  </p>
                 </div>
 
-                <div className="email-section">
+                <div style={{ marginBottom: 'clamp(1.5rem, 3vw, 2rem)' }}>
                   <div className="email-box">
                     <div className="email-address">
                       <span className="email-label">Our Email:</span>
@@ -1117,18 +1608,21 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                       <button 
                         className="copy-button"
                         onClick={handleCopyEmail}
+                        style={{ display: 'block', margin: '0 auto', width: 'fit-content' }}
+                        aria-label="Copy email address to clipboard"
                       >
-                        <span className="copy-icon">{icons.copy}</span>
-                        Copy
+                        <span role="img" aria-hidden="true">📋</span>
+                        {copySuccess ? 'Copied!' : 'Copy'}
                       </button>
                     </div>
                     
-                    <div className="email-action">
+                    <div style={{ marginTop: 'clamp(1rem, 2vw, 1.5rem)' }}>
                       <a 
                         href="mailto:contact@professionalresumefree.com"
-                        className="email-button"
+                        className="btn-primary"
+                        style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}
                       >
-                        <span className="btn-icon">{icons.mail}</span>
+                        <span role="img" aria-hidden="true">✉️</span>
                         Open Email App
                       </a>
                     </div>
@@ -1147,91 +1641,186 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         </section>
 
         {/* FAQ Section */}
-        <section id="faq" className="section" aria-labelledby="faq-heading">
-          <div className="container">
-            <h2 id="faq-heading" className="section-title">Frequently Asked Questions</h2>
+        <section id="faq" style={{
+          padding: 'var(--section-gap-md) 0',
+          width: '100%'
+        }} aria-labelledby="faq-heading">
+          <div className="section-container">
+            <h2 id="faq-heading" style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-display-md)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+              padding: '0 0.5rem'
+            }}>
+              Frequently Asked Questions
+            </h2>
+            
             <div className="faq-grid">
               {faqs.map((faq, i) => (
-                <div key={i} className="faq-item" itemScope itemType="https://schema.org/Question">
-                  <h3 className="faq-question" itemProp="name">{faq.question}</h3>
-                  <div itemScope itemType="https://schema.org/Answer">
-                    <p itemProp="text" style={{ color: 'var(--text-light)' }}>{faq.answer}</p>
+                <details key={i} className="faq-item" itemScope itemType="https://schema.org/Question" open={i === 0}>
+                  <summary itemProp="name">
+                    <span style={{ color: 'var(--accent-primary)', flexShrink: 0 }}>✦</span>
+                    <span>{faq.question}</span>
+                  </summary>
+                  <div itemScope itemType="https://schema.org/Answer" style={{ marginTop: '0.75rem' }}>
+                    <p itemProp="text" className="faq-answer">{faq.answer}</p>
                   </div>
-                </div>
+                </details>
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="cta-section" aria-labelledby="cta-heading">
-          <div className="container">
-            <h2 id="cta-heading">Ready to Build Your Professional Resume?</h2>
-            <p>
+        <section style={{
+          padding: 'var(--section-gap-lg) 0',
+          background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: '0.5px solid var(--border-gold-filament)',
+          borderBottom: '0.5px solid var(--border-gold-filament)',
+          textAlign: 'center',
+          width: '100%'
+        }} aria-labelledby="cta-heading">
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%)',
+            pointerEvents: 'none'
+          }} />
+          
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 id="cta-heading" style={{
+              fontSize: 'var(--font-size-display-md)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
+              padding: '0 0.5rem',
+              textShadow: 'var(--glow-gold)'
+            }}>
+              Ready to Build Your Professional Resume?
+            </h2>
+            
+            <p style={{
+              fontSize: 'var(--font-size-body-lg)',
+              color: 'var(--text-secondary)',
+              maxWidth: '600px',
+              margin: '0 auto clamp(1.5rem, 3vw, 2rem)',
+              padding: '0 1rem'
+            }}>
               Start creating your resume with our free, easy-to-use platform.
-              <strong> 46+ templates</strong> and <strong>12+ free tools</strong> available.
+              <strong style={{ color: 'var(--accent-primary)' }}> 46+ templates</strong> and{' '}
+              <strong style={{ color: 'var(--accent-primary)' }}>12+ free tools</strong> available.
             </p>
-            <div className="cta-buttons">
-              <Link href="/resume-templates" className="btn-primary">
-                Get Started Free {icons.arrowRight}
+            
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: 'clamp(0.75rem, 2vw, 1rem)',
+              flexWrap: 'wrap',
+              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+              padding: '0 0.5rem'
+            }}>
+              <Link href="/resume-templates" className="btn-primary" style={{
+                boxShadow: 'var(--shadow-gold-glow)'
+              }}>
+                Get Started Free
+                <span style={{ fontWeight: 'var(--font-weight-bold)' }}>→</span>
               </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                Explore Tools {icons.arrowRight}
+              <Link href="/free-resume-tools" className="btn-outline" style={{
+                borderColor: 'var(--accent-primary)',
+                color: 'var(--accent-primary)'
+              }}>
+                Explore Tools
+                <span style={{ fontWeight: 'var(--font-weight-bold)' }}>→</span>
               </Link>
             </div>
-            <p style={{ marginTop: '30px', fontSize: '0.9rem', color: 'var(--text-light)' }}>
-              ✓ No credit card required • Free forever • 24h support
+            
+            <p style={{ 
+              fontSize: 'var(--font-size-body-sm)', 
+              color: 'var(--text-muted)',
+              marginBottom: '0.5rem',
+              padding: '0 0.5rem'
+            }}>
+              ✦ No credit card required ✦ Free forever ✦ 24h support
             </p>
-            <p style={{ marginTop: '10px', fontSize: '0.8rem', color: 'var(--text-light)' }}>
+            
+            <p style={{ 
+              fontSize: 'var(--font-size-label-md)', 
+              color: 'var(--text-muted)',
+              padding: '0 0.5rem'
+            }}>
               Page updated: {displayDate}
             </p>
           </div>
         </section>
 
-        {/* ===== NEW: Random Internal Links Section for SEO/GEO Boost ===== */}
-        <section className="section" style={{background: 'var(--background)', borderTop: '2px solid var(--border)'}} aria-labelledby="internal-links-heading">
-          <div className="container">
-            <h2 id="internal-links-heading" className="section-title" style={{fontSize: 'clamp(1.2rem, 3vw, 1.5rem)'}}>🔗 Helpful Self-Service Resources</h2>
-            <p className="section-subtitle" style={{marginBottom: '24px'}}>
+        {/* Internal Links Section */}
+        <section style={{
+          padding: 'var(--section-gap-sm) 0',
+          borderTop: '0.5px solid var(--border-gold-filament)',
+          width: '100%'
+        }} aria-labelledby="internal-links-heading">
+          <div className="section-container">
+            <h2 id="internal-links-heading" style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: 'clamp(0.5rem, 1.5vw, 0.75rem)',
+              padding: '0 0.5rem'
+            }}>
+              Helpful Self-Service Resources
+            </h2>
+            
+            <p style={{
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              fontSize: 'var(--font-size-body-md)',
+              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+              padding: '0 0.5rem'
+            }}>
               Find instant answers and tools to improve your resume before contacting support
             </p>
             
-            {/* Responsive grid: 1 col mobile → auto-fit up to 5 cols desktop */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '16px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+              gap: 'clamp(0.75rem, 1.5vw, 1rem)',
               width: '100%'
             }}>
-              {/* Link 1: Templates */}
               <Link href="/resume-templates" className="internal-link-card">
                 <span className="internal-link-icon">📄</span>
                 <span className="internal-link-title">Browse Free Resume Templates</span>
                 <span className="internal-link-desc">Access 46+ ATS-friendly designs instantly</span>
               </Link>
               
-              {/* Link 2: Tools */}
               <Link href="/free-resume-tools" className="internal-link-card">
                 <span className="internal-link-icon">🛠️</span>
                 <span className="internal-link-title">Explore Free Resume Tools</span>
                 <span className="internal-link-desc">Checkers, generators, and analyzers</span>
               </Link>
               
-              {/* Link 3: How-to Guide */}
               <Link href="/how-to-write-a-resume" className="internal-link-card">
                 <span className="internal-link-icon">📝</span>
                 <span className="internal-link-title">How to Write a Resume Guide</span>
                 <span className="internal-link-desc">Step-by-step instructions for beginners</span>
               </Link>
               
-              {/* Link 4: ATS Checker */}
               <Link href="/free-ats-resume-checker" className="internal-link-card">
                 <span className="internal-link-icon">✅</span>
                 <span className="internal-link-title">Free ATS Resume Checker</span>
                 <span className="internal-link-desc">Scan your resume for compatibility issues</span>
               </Link>
               
-              {/* Link 5: Mistakes Guide */}
               <Link href="/resume-mistakes-americans-make-and-how-to-fix-them" className="internal-link-card">
                 <span className="internal-link-icon">⚠️</span>
                 <span className="internal-link-title">Common Resume Mistakes & Fixes</span>
@@ -1239,13 +1828,17 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
               </Link>
             </div>
             
-            {/* Helper text for accessibility */}
-            <p className="helper-text" style={{textAlign: 'center', marginTop: '20px', fontSize: '0.85rem', color: 'var(--text-light)'}}>
-              All resources are free, mobile-optimized, and updated for 2026 hiring trends
+            <p style={{
+              textAlign: 'center',
+              marginTop: 'clamp(1rem, 2vw, 1.5rem)',
+              fontSize: 'var(--font-size-body-sm)',
+              color: 'var(--text-muted)',
+              padding: '0 0.5rem'
+            }}>
+              All resources are free, mobile-optimized, and updated for {currentYear} hiring trends
             </p>
           </div>
         </section>
-
       </main>
     </>
   );

@@ -3,750 +3,581 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { FiArrowRight, FiBookOpen, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-}
-body {
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-line-height: 1.5;
-color: var(--primary);
-background: var(--background);
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
-.container {
-max-width: 1280px;
-margin: 0 auto;
-padding: 0 16px;
-width: 100%;
-}
-@media (min-width: 640px) {
-.container { padding: 0 24px; }
-}
-.hero {
-background: var(--background);
-padding: 40px 0;
-text-align: center;
-border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-.hero { padding: 60px 0; }
-}
-.hero h1 {
-font-size: clamp(1.5rem, 5vw, 3rem);
-margin-bottom: 16px;
-line-height: 1.2;
-word-wrap: break-word;
-}
-.hero p {
-font-size: clamp(1rem, 3vw, 1.25rem);
-max-width: 800px;
-margin: 0 auto 24px;
-padding: 0 16px;
-}
-.hero-tag {
-display: inline-block;
-background: #f3f4f6;
-color: var(--primary);
-padding: 8px 16px;
-border-radius: 50px;
-font-size: 0.9rem;
-margin-bottom: 20px;
-border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.hero-tag {
-font-size: 0.8rem;
-padding: 6px 12px;
-}
-}
-.hero-features {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 12px;
-margin: 30px 0 20px;
-}
-.hero-feature-badge {
-background: #f3f4f6;
-color: var(--primary);
-padding: 6px 12px;
-border-radius: 50px;
-font-size: 0.85rem;
-border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.hero-feature-badge {
-font-size: 0.75rem;
-padding: 4px 10px;
-}
-}
-.button-container {
-display: flex;
-justify-content: center;
-gap: 16px;
-flex-wrap: wrap;
-margin-top: 24px;
-}
-@media (max-width: 480px) {
-.button-container {
-flex-direction: column;
-align-items: center;
-gap: 12px;
-}
-}
-.btn-primary {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-background: var(--primary);
-color: var(--background);
-padding: 12px 24px;
-border-radius: 6px;
-text-decoration: none;
-font-weight: 500;
-margin: 8px;
-border: 1px solid var(--primary);
-transition: background 0.2s;
-width: auto;
-min-width: 200px;
-text-align: center;
-}
-@media (max-width: 480px) {
-.btn-primary {
-width: 100%;
-margin: 4px 0;
-min-width: auto;
-padding: 14px 24px;
-}
-}
-.btn-primary:hover {
-background: var(--secondary);
-}
-.btn-primary:focus-visible {
-outline: 2px solid var(--primary);
-outline-offset: 2px;
-}
-.btn-secondary {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-background: transparent;
-color: var(--primary);
-padding: 12px 24px;
-border-radius: 6px;
-text-decoration: none;
-font-weight: 500;
-border: 2px solid var(--primary);
-margin: 8px;
-transition: background 0.2s;
-width: auto;
-min-width: 200px;
-text-align: center;
-}
-@media (max-width: 480px) {
-.btn-secondary {
-width: 100%;
-margin: 4px 0;
-min-width: auto;
-padding: 14px 24px;
-}
-}
-.btn-secondary:hover {
-background: #f5f5f5;
-}
-.btn-secondary:focus-visible {
-outline: 2px solid var(--primary);
-outline-offset: 2px;
-}
-.stats {
-display: flex;
-justify-content: center;
-gap: 20px;
-margin: 40px 0;
-flex-wrap: wrap;
-}
-@media (max-width: 640px) {
-.stats { gap: 16px; }
-}
-@media (max-width: 480px) {
-.stats { 
-gap: 12px;
-flex-direction: column;
-align-items: center;
-}
-}
-.stat-item {
-text-align: center;
-min-width: 120px;
-padding: 8px;
-}
-@media (max-width: 480px) {
-.stat-item { 
-min-width: 100%;
-width: 100%;
-max-width: 250px;
-}
-}
-.stat-number {
-font-size: clamp(1.5rem, 4vw, 2rem);
-font-weight: bold;
-display: block;
-}
-.stat-card {
-background: var(--card-bg);
-padding: 24px;
-border-radius: 8px;
-border: 1px solid var(--border);
-text-align: center;
-flex: 1;
-min-width: 150px;
-}
-@media (max-width: 480px) {
-.stat-card {
-min-width: 100%;
-}
-}
-.stat-icon {
-font-size: 2rem;
-margin-bottom: 12px;
-}
-.section {
-padding: 40px 0;
-scroll-margin-top: 20px;
-}
-@media (min-width: 768px) {
-.section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-.section { 
-padding: 30px 0;
-}
-}
-.section:target {
-background-color: rgba(0,0,0,0.02);
-}
-.section-title {
-text-align: center;
-font-size: clamp(1.5rem, 4vw, 2rem);
-margin-bottom: 16px;
-padding: 0 16px;
-word-wrap: break-word;
-}
-.section-subtitle {
-text-align: center;
-color: var(--text-light);
-max-width: 700px;
-margin: 0 auto 40px;
-padding: 0 16px;
-font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-}
-@media (max-width: 480px) {
-.section-subtitle {
-margin-bottom: 24px;
-}
-}
-.grid {
-display: grid;
-grid-template-columns: 1fr;
-gap: 16px;
-margin: 30px 0;
-}
-@media (min-width: 640px) {
-.grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-.grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (min-width: 1280px) {
-.grid { grid-template-columns: repeat(4, 1fr); }
-}
-.card {
-background: var(--card-bg);
-border-radius: 8px;
-padding: 20px;
-border: 1px solid var(--border);
-transition: transform 0.2s, box-shadow 0.2s;
-height: 100%;
-display: flex;
-flex-direction: column;
-text-decoration: none;
-color: inherit;
-}
-.card:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.card:focus-visible {
-outline: 2px solid var(--primary);
-outline-offset: 2px;
-}
-.guide-navigation {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-margin-bottom: 30px;
-justify-content: center;
-}
-.guide-tab {
-padding: 10px 20px;
-background: var(--card-bg);
-border: 1px solid var(--border);
-border-radius: 50px;
-cursor: pointer;
-font-size: 0.9rem;
-transition: all 0.2s;
-}
-@media (max-width: 640px) {
-.guide-tab {
-width: 100%;
-border-radius: 6px;
-}
-}
-.guide-tab:hover {
-background: #e5e7eb;
-}
-.guide-tab.active {
-background: var(--primary);
-color: var(--background);
-border-color: var(--primary);
-}
-.guide-content {
-background: var(--card-bg);
-border-radius: 12px;
-padding: 30px;
-border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.guide-content {
-padding: 20px;
-}
-}
-.content-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 24px;
-margin-top: 24px;
-}
-@media (max-width: 768px) {
-.content-grid {
-grid-template-columns: 1fr;
-gap: 20px;
-}
-}
-.tips-list, .strategy-list {
-list-style: none;
-margin-top: 16px;
-}
-.tips-list li, .strategy-list li {
-margin-bottom: 12px;
-padding-left: 24px;
-position: relative;
-}
-.tips-list li:before {
-content: "✓";
-color: #059669;
-position: absolute;
-left: 0;
-font-weight: bold;
-}
-.example-box {
-background: var(--background);
-padding: 20px;
-border-radius: 8px;
-border: 1px solid var(--border);
-font-family: monospace;
-white-space: pre-wrap;
-font-size: 0.9rem;
-margin-top: 16px;
-position: relative;
-}
-@media (max-width: 480px) {
-.example-box {
-padding: 16px;
-font-size: 0.8rem;
-}
-}
-.copy-button {
-position: absolute;
-top: 12px;
-right: 12px;
-padding: 6px 12px;
-background: var(--card-bg);
-border: 1px solid var(--border);
-border-radius: 4px;
-cursor: pointer;
-font-size: 0.8rem;
-}
-.copy-button:hover {
-background: #e5e7eb;
-}
-.balance-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 16px;
-margin: 30px 0;
-}
-@media (max-width: 768px) {
-.balance-grid {
-grid-template-columns: 1fr;
-}
-}
-.strategy-card {
-background: var(--card-bg);
-padding: 24px;
-border-radius: 8px;
-border: 1px solid var(--border);
-}
-.strategy-number {
-display: inline-block;
-width: 30px;
-height: 30px;
-background: var(--primary);
-color: var(--background);
-border-radius: 50%;
-text-align: center;
-line-height: 30px;
-margin-right: 12px;
-font-weight: bold;
-}
-.collaboration-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 16px;
-margin-top: 40px;
-}
-@media (max-width: 768px) {
-.collaboration-grid {
-grid-template-columns: 1fr;
-gap: 16px;
-}
-}
-.collaboration-card {
-background: var(--card-bg);
-padding: 24px;
-border-radius: 8px;
-border: 1px solid var(--border);
-}
-.collaboration-card h3 {
-margin-bottom: 16px;
-font-size: 1.1rem;
-}
-.collaboration-card ul {
-list-style: none;
-}
-.collaboration-card li {
-margin-bottom: 8px;
-padding-left: 20px;
-position: relative;
-}
-.collaboration-card li:before {
-content: "→";
-position: absolute;
-left: 0;
-color: var(--primary);
-}
-.mistakes-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 16px;
-margin: 30px 0;
-}
-@media (max-width: 640px) {
-.mistakes-grid {
-grid-template-columns: 1fr;
-}
-}
-.mistake-card {
-background: var(--card-bg);
-padding: 20px;
-border-radius: 8px;
-border: 1px solid var(--border);
-display: flex;
-align-items: center;
-gap: 16px;
-}
-.mistake-number {
-width: 30px;
-height: 30px;
-background: #fee2e2;
-color: #dc2626;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-flex-shrink: 0;
-}
-.breadcrumb {
-padding: 16px 0;
-background: var(--card-bg);
-border-bottom: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.breadcrumb {
-padding: 12px 0;
-font-size: 0.85rem;
-}
-}
-.breadcrumb ol {
-display: flex;
-list-style: none;
-gap: 8px;
-flex-wrap: wrap;
-}
-@media (max-width: 480px) {
-.breadcrumb ol {
-gap: 4px;
-}
-}
-.breadcrumb a {
-color: var(--primary);
-text-decoration: none;
-border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover {
-border-bottom-color: var(--primary);
-}
-.breadcrumb [aria-current="page"] {
-font-weight: 600;
-}
-.trust-badge {
-display: inline-block;
-background: #f3f4f6;
-color: var(--primary);
-padding: 6px 12px;
-border-radius: 50px;
-font-size: 0.85rem;
-margin-bottom: 20px;
-border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-.trust-badge {
-font-size: 0.75rem;
-padding: 5px 10px;
-}
-}
-.faq-grid {
-display: grid;
-grid-template-columns: 1fr;
-gap: 16px;
-}
-@media (min-width: 768px) {
-.faq-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.faq-item {
-background: var(--card-bg);
-padding: 24px;
-border-radius: 8px;
-border: 1px solid var(--border);
-height: 100%;
-scroll-margin-top: 20px;
-}
-@media (max-width: 480px) {
-.faq-item {
-padding: 20px;
-}
-}
-.faq-item:target {
-background-color: #f0f0f0;
-}
-.faq-question {
-font-size: 1.1rem;
-font-weight: 600;
-margin-bottom: 12px;
-color: var(--primary);
-line-height: 1.4;
-}
-.table-wrap {
-overflow-x: auto;
-margin: 30px 0;
-background: var(--background);
-border-radius: 8px;
-border: 1px solid var(--border);
--webkit-overflow-scrolling: touch;
-}
-@media (max-width: 640px) {
-.table-wrap {
-margin: 20px 0;
-border-radius: 0;
-border-left: none;
-border-right: none;
-}
-}
-table {
-width: 100%;
-border-collapse: collapse;
-min-width: 600px;
-}
-th {
-background: var(--card-bg);
-padding: 12px;
-text-align: left;
-font-weight: 600;
-border-bottom: 2px solid var(--border);
-}
-td {
-padding: 12px;
-border-bottom: 1px solid var(--border);
-}
-.text-success { color: #059669; font-weight: 600; }
-.text-small { font-size: 0.85rem; color: var(--text-light); }
-.skip-link {
-position: absolute;
-top: -40px;
-left: 0;
-background: var(--primary);
-color: white;
-padding: 8px;
-z-index: 100;
-}
-.skip-link:focus {
-top: 0;
-}
-/* Mobile improvements */
-@media (max-width: 480px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  /* ========== CSS CUSTOM PROPERTIES ========== */
+  :root {
+    /* Background Colors */
+    --bg-page: #131315;
+    --bg-surface-lowest: #0e0e10;
+    --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21;
+    --bg-surface-high: #2a2a2c;
+    --bg-surface-highest: #353437;
+    
+    /* Text Colors */
+    --text-primary: #e5e1e4;
+    --text-secondary: #c5bfc8;
+    --text-muted: #9d95a0;
+    --text-disabled: #605d62;
+    --text-inverse: #1c1b1d;
+    --text-on-accent: #3c2f00;
+    
+    /* Accent/Brand Colors - Gold */
+    --accent-primary: #f2ca50;
+    --accent-primary-container: #d4af37;
+    --accent-primary-fixed: #ffe088;
+    --accent-primary-fixed-dim: #e9c349;
+    --accent-on-primary: #3c2f00;
+    --accent-on-primary-container: #2a2000;
+    --accent-inverse-primary: #735c00;
+    --accent-primary-hover: #f7d86e;
+    --accent-primary-active: #e6bc3d;
+    
+    /* Border Colors */
+    --border-outline: #444246;
+    --border-outline-variant: #363538;
+    --border-gold-filament: rgba(212, 175, 55, 0.3);
+    --border-gold-filament-strong: rgba(212, 175, 55, 0.5);
+    --border-glass: rgba(212, 175, 55, 0.15);
+    
+    /* Success/Warning Colors */
+    --success-color: #a5d6a7;
+    --success-container: #1b5e20;
+    --warning-color: #ffb74d;
+    --error-color: #ffb4ab;
+    --error-container: #93000a;
+    
+    /* Glass/Special Effect Colors */
+    --glass-bg: rgba(20, 19, 21, 0.7);
+    --glass-bg-light: rgba(28, 27, 29, 0.6);
+    --glass-bg-heavy: rgba(20, 19, 21, 0.85);
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Font Sizes */
+    --font-size-display-lg: clamp(3rem, 6vw, 4rem);
+    --font-size-display-md: clamp(2.25rem, 5vw, 3rem);
+    --font-size-headline-lg: clamp(1.75rem, 4vw, 2rem);
+    --font-size-headline-md: clamp(1.5rem, 3.5vw, 1.75rem);
+    --font-size-title-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-title-md: clamp(1.125rem, 2.5vw, 1.25rem);
+    --font-size-body-lg: clamp(1rem, 2vw, 1.125rem);
+    --font-size-body-md: 1rem;
+    --font-size-body-sm: 0.875rem;
+    --font-size-label-md: 0.75rem;
+    --font-size-label-sm: 0.6875rem;
+    
+    /* Line Heights */
+    --line-height-display: 1.1;
+    --line-height-headline: 1.2;
+    --line-height-title: 1.3;
+    --line-height-body: 1.6;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-caps: 0.08em;
+    
+    /* ========== SPACING SYSTEM ========== */
+    --section-gap-sm: clamp(3rem, 6vw, 4rem);
+    --section-gap-md: clamp(4rem, 8vw, 6rem);
+    --section-gap-lg: clamp(5rem, 10vw, 8rem);
+    
+    /* Content Widths */
+    --content-max-width: 1280px;
+    --content-narrow: 800px;
+    
+    /* Gutters */
+    --gutter-desktop: clamp(1.5rem, 5vw, 2.5rem);
+    --gutter-mobile: clamp(1rem, 4vw, 1.5rem);
+    
+    /* ========== SHADOW / ELEVATION TOKENS ========== */
+    --shadow-gold-glow: 0 0 20px rgba(242, 202, 80, 0.4), 0 0 60px rgba(242, 202, 80, 0.1);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242, 202, 80, 0.3);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* ========== ANIMATION / TRANSITION TOKENS ========== */
+    --transition-fast: 150ms;
+    --transition-medium: 250ms;
+    --transition-slow: 350ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --hover-transform: translateY(-2px);
+    --hover-transform-lg: translateY(-4px);
+    
+    /* ========== GLASS PANEL EFFECT ========== */
+    --glass-blur: 20px;
+    --glass-border-width: 0.5px;
+    --glass-padding: clamp(1.5rem, 4vw, 2.5rem);
+    
+    /* ========== BUTTON STYLE VARIABLES ========== */
+    --btn-primary-bg: #f2ca50;
+    --btn-primary-text: #3c2f00;
+    --btn-primary-padding: 0.875rem 2rem;
+    --btn-primary-radius: 0.25rem;
+    --btn-primary-font-size: 0.875rem;
+    --btn-primary-font-weight: 600;
+    --btn-primary-letter-spacing: 0.02em;
+    --btn-primary-hover-bg: #f7d86e;
+    
+    --btn-outline-border: rgba(212, 175, 55, 0.5);
+    --btn-outline-text: #f2ca50;
+    --btn-outline-hover-bg: rgba(242, 202, 80, 0.08);
+    
+    /* ========== CARD STYLE VARIABLES ========== */
+    --card-bg: rgba(28, 27, 29, 0.6);
+    --card-bg-hover: rgba(32, 31, 33, 0.8);
+    --card-border: 0.5px solid rgba(212, 175, 55, 0.15);
+    --card-padding: clamp(1.5rem, 4vw, 2.5rem);
+    --card-radius: 0.5rem;
+    --card-hover-transform: translateY(-4px);
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05);
   }
   
-  .card:active {
-    opacity: 0.8;
+  /* ========== BASE RESET ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-tight);
+    word-wrap: break-word;
+  }
+  
+  h1 { font-size: var(--font-size-display-lg); line-height: var(--line-height-display); font-weight: var(--font-weight-bold); margin-bottom: 1rem; }
+  h2 { font-size: var(--font-size-display-md); line-height: var(--line-height-headline); font-weight: var(--font-weight-bold); }
+  h3 { font-size: var(--font-size-headline-lg); line-height: var(--line-height-headline); font-weight: var(--font-weight-semibold); font-family: var(--font-body); }
+  p { color: var(--text-secondary); font-size: var(--font-size-body-lg); line-height: var(--line-height-body); }
+  strong { color: var(--text-primary); font-weight: var(--font-weight-semibold); }
+  a { color: var(--accent-primary); transition: color var(--transition-fast) var(--easing-default); text-decoration: none; }
+  a:hover { color: var(--accent-primary-hover); }
+  
+  /* ========== UTILITY CLASSES ========== */
+  .gradient-text {
+    background: linear-gradient(135deg, #f2ca50 0%, #d4af37 50%, #ffe088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .section-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter-desktop);
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .section-container { padding: 0 var(--gutter-mobile); }
+  }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 0.125rem 0.125rem 0;
+    font-weight: var(--font-weight-semibold);
+  }
+  .skip-link:focus { top: 0; }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    text-decoration: none;
+    min-width: 200px;
+  }
+  .btn-primary:hover { background: var(--btn-primary-hover-bg); transform: var(--hover-transform); box-shadow: var(--shadow-gold-glow-sm); color: var(--btn-primary-text); }
+  
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: transparent;
+    color: var(--btn-outline-text);
+    border: 0.5px solid var(--btn-outline-border);
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 200px;
+  }
+  .btn-outline:hover { background: var(--btn-outline-hover-bg); border-color: rgba(212, 175, 55, 0.8); transform: var(--hover-transform); color: var(--btn-outline-text); }
+  
+  .btn-badge {
+    background: rgba(60, 47, 0, 0.3);
+    color: var(--accent-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+  
+  .card-executive {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-executive:hover { background: var(--card-bg-hover); border-color: rgba(212, 175, 55, 0.3); transform: var(--card-hover-transform); box-shadow: var(--card-hover-shadow); }
+  
+  /* ========== PAGE SPECIFIC STYLES ========== */
+  
+  .section { width: 100%; padding: var(--section-gap-md) 0; }
+  .section-alt { background: var(--bg-surface-lowest); }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 6vw, 3rem);
+  }
+  .section-title { margin-bottom: 1rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .section-subtitle { font-size: var(--font-size-body-lg); color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+  
+  .breadcrumb {
+    padding: 1rem 0;
+    background: var(--bg-surface-lowest);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+    width: 100%;
+  }
+  .breadcrumb ol { list-style: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--text-secondary); font-size: var(--font-size-body-sm); }
+  .breadcrumb a:hover { color: var(--accent-primary); }
+  .breadcrumb [aria-current="page"] { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
+  .breadcrumb li[aria-hidden="true"] { color: var(--text-muted); }
+  
+  .hero-tag {
+    display: inline-block;
+    background: rgba(242, 202, 80, 0.1);
+    color: var(--accent-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-caps);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    border: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin: 2rem auto; width: 100%; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1280px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+  
+  .feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: rgba(242, 202, 80, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    border: 0.5px solid var(--border-gold-filament);
+    font-size: var(--font-size-body-sm);
+    color: var(--accent-primary);
+  }
+  
+  .feature-tag {
+    display: inline-block;
+    background: rgba(242, 202, 80, 0.1);
+    color: var(--accent-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: var(--font-size-label-sm);
+    border: 0.5px solid var(--border-gold-filament);
+    margin: 0.25rem 0.25rem 0 0;
+  }
+  
+  .stat-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+  }
+  
+  .stat-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .stat-number { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: var(--font-weight-bold); color: var(--accent-primary); display: block; font-family: var(--font-display); margin-bottom: 0.25rem; }
+  .stat-label { color: var(--text-secondary); font-size: var(--font-size-body-sm); }
+  
+  .guide-navigation {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; justify-content: center;
+  }
+  
+  .guide-tab {
+    padding: 0.625rem 1.25rem;
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast) var(--easing-default);
+  }
+  .guide-tab:hover { border-color: var(--accent-primary-container); }
+  .guide-tab.active { background: var(--accent-primary); color: var(--accent-on-primary); border-color: var(--accent-primary); }
+  
+  @media (max-width: 640px) {
+    .guide-tab { width: 100%; border-radius: 0.375rem; }
+  }
+  
+  .guide-content {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    border: var(--card-border);
+  }
+  @media (max-width: 480px) {
+    .guide-content { padding: 1.25rem; }
+  }
+  
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 768px) {
+    .content-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  }
+  
+  .tips-list { list-style: none; margin-top: 1rem; }
+  .tips-list li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; color: var(--text-secondary); font-size: var(--font-size-body-sm); }
+  .tips-list li:before { content: "✦"; color: var(--accent-primary); position: absolute; left: 0; font-size: 0.75rem; }
+  
+  .example-box {
+    background: var(--bg-surface-low);
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    border: var(--card-border);
+    font-family: var(--font-mono);
+    white-space: pre-wrap;
+    font-size: var(--font-size-body-sm);
+    margin-top: 1rem;
+    position: relative;
+    color: var(--text-secondary);
+  }
+  @media (max-width: 480px) {
+    .example-box { padding: 1rem; font-size: 0.8rem; }
+  }
+  
+  .copy-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.375rem 0.75rem;
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast) var(--easing-default);
+  }
+  .copy-button:hover { border-color: var(--accent-primary-container); color: var(--accent-primary); }
   
   .table-wrap {
+    overflow-x: auto;
+    margin: 2rem 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: 0.75rem;
+    border: var(--card-border);
     -webkit-overflow-scrolling: touch;
   }
+  table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  th { background: rgba(242, 202, 80, 0.05); padding: 1rem; text-align: left; font-weight: var(--font-weight-semibold); color: var(--accent-primary); border-bottom: 1px solid var(--border-gold-filament); font-size: var(--font-size-body-sm); }
+  td { padding: 1rem; border-bottom: 0.5px solid var(--border-gold-filament); font-size: var(--font-size-body-sm); color: var(--text-secondary); }
   
-  .container {
-    padding: 0 20px;
+  .balance-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0; }
+  @media (max-width: 768px) { .balance-grid { grid-template-columns: 1fr; } }
+  
+  .strategy-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
   }
   
-  p, li {
-    font-size: 16px;
+  .strategy-number {
+    display: inline-block;
+    width: 30px; height: 30px;
+    background: linear-gradient(135deg, var(--accent-primary-container), var(--accent-primary));
+    color: var(--accent-on-primary);
+    border-radius: 9999px;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 0.75rem;
+    font-weight: var(--font-weight-bold);
   }
-}
-
-/* CTA Section Styles */
-.cta-section {
-  background: var(--primary);
-  color: var(--background);
-  padding: 60px 0;
-  text-align: center;
-}
-.cta-section h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  margin-bottom: 20px;
-}
-.cta-section p {
-  color: #cccccc;
-  max-width: 700px;
-  margin: 0 auto 30px;
-}
-.cta-section .btn-primary {
-  background: var(--background);
-  color: var(--primary);
-  border: 2px solid var(--background);
-}
-.cta-section .btn-primary:hover {
-  background: transparent;
-  color: var(--background);
-}
-.cta-section .btn-secondary {
-  background: transparent;
-  color: var(--background);
-  border: 2px solid var(--background);
-}
-.cta-section .btn-secondary:hover {
-  background: var(--background);
-  color: var(--primary);
-}
-
-.feature-tag {
-  display: inline-block;
-  background: #e5e7eb;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  margin: 4px 4px 0 0;
-}
-.testimonial-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-/* Internal Links Section Styles */
-.internal-links-section {
-  background: var(--background);
-  padding: 40px 0;
-  border-top: 1px solid var(--border);
-}
-.internal-links-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-.internal-link-card {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  height: 100%;
-}
-.internal-link-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border-color: var(--primary);
-}
-.internal-link-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--primary);
-  line-height: 1.4;
-}
-.internal-link-desc {
-  font-size: 0.95rem;
-  color: var(--text-light);
-  margin-bottom: 12px;
-  flex-grow: 1;
-}
-.internal-link-cta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--primary);
-  margin-top: auto;
-}
+  
+  .collaboration-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
+  @media (max-width: 768px) { .collaboration-grid { grid-template-columns: 1fr; } }
+  
+  .collaboration-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+  .collaboration-card ul { list-style: none; }
+  .collaboration-card li { margin-bottom: 0.5rem; padding-left: 1.25rem; position: relative; color: var(--text-secondary); font-size: var(--font-size-body-sm); }
+  .collaboration-card li:before { content: "✦"; color: var(--accent-primary); position: absolute; left: 0; }
+  
+  .mistakes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0; }
+  @media (max-width: 640px) { .mistakes-grid { grid-template-columns: 1fr; } }
+  
+  .mistake-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .mistake-number {
+    width: 30px; height: 30px;
+    background: rgba(255, 180, 171, 0.15);
+    color: var(--error-color);
+    border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+    border: 0.5px solid rgba(255, 180, 171, 0.3);
+  }
+  
+  .faq-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 768px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
+  
+  .faq-item {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    height: 100%;
+    scroll-margin-top: 1.25rem;
+  }
+  .faq-question { font-size: var(--font-size-title-md); font-weight: var(--font-weight-semibold); color: var(--text-primary); margin-bottom: 0.75rem; line-height: 1.4; }
+  .faq-answer { color: var(--text-secondary); font-size: var(--font-size-body-sm); line-height: 1.6; }
+  
+  .testimonial-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1.25rem; }
+  
+  .internal-link-card {
+    display: flex; flex-direction: column;
+    padding: 1.25rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+  }
+  .internal-link-card:hover { border-color: var(--accent-primary-container); transform: translateY(-3px); box-shadow: var(--card-hover-shadow); color: inherit; }
+  .internal-link-title { font-size: var(--font-size-title-md); font-weight: var(--font-weight-semibold); margin-bottom: 0.5rem; color: var(--text-primary); line-height: 1.4; }
+  .internal-link-desc { font-size: var(--font-size-body-sm); color: var(--text-secondary); margin-bottom: 0.75rem; flex-grow: 1; }
+  .internal-link-cta { display: flex; align-items: center; gap: 0.375rem; font-size: var(--font-size-body-sm); font-weight: var(--font-weight-medium); color: var(--accent-primary); margin-top: auto; }
+  
+  .cta-section {
+    padding: var(--section-gap-lg) 0;
+    background: linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%);
+    text-align: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top: 0.5px solid var(--border-gold-filament);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .text-small { font-size: var(--font-size-body-sm); color: var(--text-muted); }
+  
+  @media (max-width: 640px) {
+    .btn-primary, .btn-outline { width: 100%; min-width: auto; }
+  }
 `;
 
 const AIResumeGuide = ({ 
@@ -759,7 +590,6 @@ const AIResumeGuide = ({
   const [activeSection, setActiveSection] = useState(0);
   const currentYear = new Date().getFullYear();
 
-  // Generate freshness indicators
   const freshnessIndicator = buildTimestamp 
     ? new Date(buildTimestamp).toISOString().split('T')[0]
     : currentDate;
@@ -777,7 +607,6 @@ const AIResumeGuide = ({
     { id: 3, category: "Business & Finance", title: "ATS-Friendly Finance Resume Templates", url: "/ats-friendly-finance-resume-builder", description: "Finance sector resume templates optimized for financial ATS systems.", features: ["Accountant", "Financial Analyst", "Banking"] }
   ];
 
-  // Tools data
   const resumeTools = [
     { id: 1, name: "Free Resume Score Checker", url: "/free-resume-score-checker", description: "Get an instant resume score and detailed feedback.", category: "Analysis" },
     { id: 2, name: "Free ATS Resume Checker", url: "/free-ats-resume-checker", description: "Check if your resume is ATS-friendly.", category: "Analysis" },
@@ -795,15 +624,7 @@ const AIResumeGuide = ({
         "Generative AI creates content variations based on your input",
         "AI suggests industry-specific keywords and phrases"
       ],
-      example: `Traditional Resume:
-• Managed team projects
-• Improved processes
-• Handled customer service
-
-AI-Optimized Resume:
-• Directed cross-functional project teams of 8+ members, achieving 25% faster delivery times
-• Streamlined operational workflows, reducing processing time by 40%
-• Enhanced customer satisfaction scores by 35% through improved service protocols`
+      example: `Traditional Resume:\n• Managed team projects\n• Improved processes\n• Handled customer service\n\nAI-Optimized Resume:\n• Directed cross-functional project teams of 8+ members, achieving 25% faster delivery times\n• Streamlined operational workflows, reducing processing time by 40%\n• Enhanced customer satisfaction scores by 35% through improved service protocols`
     },
     {
       title: "Balancing AI Efficiency with a Human Touch",
@@ -815,11 +636,7 @@ AI-Optimized Resume:
         "Maintain consistent tone and voice throughout the resume",
         "Add industry-specific insights that AI might miss"
       ],
-      example: `AI-Generated:
-"Implemented strategic initiatives resulting in improved operational efficiency."
-
-Human-Enhanced:
-"Spearheaded a digital transformation initiative that reduced operational costs by $150K annually while improving team productivity by 30%—this achievement was recognized with the 2024 Innovation Excellence Award."`
+      example: `AI-Generated:\n"Implemented strategic initiatives resulting in improved operational efficiency."\n\nHuman-Enhanced:\n"Spearheaded a digital transformation initiative that reduced operational costs by $150K annually while improving team productivity by 30%—this achievement was recognized with the 2024 Innovation Excellence Award."`
     },
     {
       title: "Step-by-Step AI Resume Creation Process",
@@ -831,44 +648,19 @@ Human-Enhanced:
         "Review and customize AI suggestions personally",
         "Test multiple AI-generated variations for different roles"
       ],
-      example: `AI Resume Creation Workflow:
-1. Input: Basic job history and skills
-2. AI Processing: Structure optimization + keyword analysis
-3. First Draft: AI-generated resume template
-4. Human Review: Personal achievement injection
-5. Final Polish: ATS compatibility check
-6. Result: Professional, optimized resume`
+      example: `AI Resume Creation Workflow:\n1. Input: Basic job history and skills\n2. AI Processing: Structure optimization + keyword analysis\n3. First Draft: AI-generated resume template\n4. Human Review: Personal achievement injection\n5. Final Polish: ATS compatibility check\n6. Result: Professional, optimized resume`
     }
   ];
 
   const aiTools = [
-    {
-      title: "AI Content Generators",
-      description: "Create compelling achievement statements and summaries",
-      useCase: "Overcoming writer's block and generating initial content",
-      tips: ["Input specific achievements", "Request multiple variations", "Use industry-specific prompts"]
-    },
-    {
-      title: "ATS Optimization AI",
-      description: "Optimize resumes for Applicant Tracking Systems",
-      useCase: "Ensuring resume passes automated screening",
-      tips: ["Scan job descriptions", "Identify keyword gaps", "Optimize formatting"]
-    }
+    { title: "AI Content Generators", description: "Create compelling achievement statements and summaries", useCase: "Overcoming writer's block and generating initial content", tips: ["Input specific achievements", "Request multiple variations", "Use industry-specific prompts"] },
+    { title: "ATS Optimization AI", description: "Optimize resumes for Applicant Tracking Systems", useCase: "Ensuring resume passes automated screening", tips: ["Scan job descriptions", "Identify keyword gaps", "Optimize formatting"] }
   ];
 
   const stats = [
-    {
-      value: "3x",
-      label: "Faster resume creation with AI assistance"
-    },
-    {
-      value: "85%",
-      label: "Higher ATS compatibility with AI optimization"
-    },
-    {
-      value: "40%",
-      label: "More interviews with AI-optimized resumes"
-    }
+    { value: "3x", label: "Faster resume creation with AI assistance", icon: "⚡" },
+    { value: "85%", label: "Higher ATS compatibility with AI optimization", icon: "🛡️" },
+    { value: "40%", label: "More interviews with AI-optimized resumes", icon: "📈" }
   ];
 
   const commonMistakes = [
@@ -879,75 +671,27 @@ Human-Enhanced:
   ];
 
   const balanceStrategies = [
-    {
-      strategy: "AI for Structure, Human for Content",
-      description: "Use AI to organize and format, but write achievement statements personally",
-      example: "AI sets up sections → You write specific accomplishments"
-    },
-    {
-      strategy: "AI as Editor, Not Author",
-      description: "Write first draft yourself, then use AI to optimize and enhance",
-      example: "Your initial content → AI optimization → Your final review"
-    }
+    { strategy: "AI for Structure, Human for Content", description: "Use AI to organize and format, but write achievement statements personally", example: "AI sets up sections → You write specific accomplishments" },
+    { strategy: "AI as Editor, Not Author", description: "Write first draft yourself, then use AI to optimize and enhance", example: "Your initial content → AI optimization → Your final review" }
   ];
 
   const collaborationAreas = [
-    {
-      ai: "Structure and formatting optimization",
-      human: "Personal achievement storytelling",
-      workflow: "AI: Initial structure → Human: Personal content"
-    },
-    {
-      ai: "ATS keyword analysis and integration",
-      human: "Unique value proposition development",
-      workflow: "Human: Draft → AI: Optimization → Human: Review"
-    }
+    { ai: "Structure and formatting optimization", human: "Personal achievement storytelling", workflow: "AI: Initial structure → Human: Personal content" },
+    { ai: "ATS keyword analysis and integration", human: "Unique value proposition development", workflow: "Human: Draft → AI: Optimization → Human: Review" }
   ];
 
   const testimonials = [
-    {
-      quote: "The AI resume builder helped me optimize my resume for ATS systems. I went from 0 callbacks to 3 interviews in one week!",
-      name: "Sarah M.",
-      role: "Software Developer",
-      date: safeReviewDates[0] || safeCurrentDate
-    },
-    {
-      quote: "Perfect balance of AI efficiency and human touch. My resume looks professional and authentic, landing me my dream job.",
-      name: "James K.",
-      role: "Marketing Manager",
-      date: safeReviewDates[1] || safeCurrentDate
-    },
-    {
-      quote: "The AI optimization tools saved me hours of work. My resume now gets past ATS filters consistently, and I've doubled my interview rate.",
-      name: "Michael Chen",
-      role: "Software Engineer",
-      date: safeReviewDates[2] || safeCurrentDate
-    },
-    {
-      quote: "As a career changer, the AI resume builder helped me highlight transferable skills I didn't even know I had. Landed interviews within 2 weeks!",
-      name: "Lisa Thompson",
-      role: "Marketing Professional",
-      date: safeReviewDates[3] || safeCurrentDate
-    }
+    { quote: "The AI resume builder helped me optimize my resume for ATS systems. I went from 0 callbacks to 3 interviews in one week!", name: "Sarah M.", role: "Software Developer", date: safeReviewDates[0] || safeCurrentDate },
+    { quote: "Perfect balance of AI efficiency and human touch. My resume looks professional and authentic, landing me my dream job.", name: "James K.", role: "Marketing Manager", date: safeReviewDates[1] || safeCurrentDate },
+    { quote: "The AI optimization tools saved me hours of work. My resume now gets past ATS filters consistently, and I've doubled my interview rate.", name: "Michael Chen", role: "Software Engineer", date: safeReviewDates[2] || safeCurrentDate },
+    { quote: "As a career changer, the AI resume builder helped me highlight transferable skills I didn't even know I had. Landed interviews within 2 weeks!", name: "Lisa Thompson", role: "Marketing Professional", date: safeReviewDates[3] || safeCurrentDate }
   ];
 
   const faqs = [
-    {
-      question: "What is an AI resume builder and how does it work?",
-      answer: "An AI resume builder uses artificial intelligence, including natural language processing and machine learning, to analyze job descriptions, match skills to requirements, suggest keywords, and create optimized content variations for maximum ATS compatibility."
-    },
-    {
-      question: "How effective are AI-generated resumes compared to traditional ones?",
-      answer: "AI-optimized resumes can be up to 85% more ATS-compatible and generate 40% more interviews than traditional resumes, combining AI optimization with human customization for best results."
-    },
-    {
-      question: "Can AI resume builders maintain personal voice and authenticity?",
-      answer: "While AI generates content, maintaining personal voice requires human oversight. Use AI for structure and optimization, while personally writing achievement statements and unique experiences."
-    },
-    {
-      question: "What are the main benefits of using AI for resume creation?",
-      answer: `Key benefits include: 3x faster creation, 85% higher ATS compatibility, automatic keyword optimization, industry-specific language suggestions, and professional formatting assistance.`
-    }
+    { question: "What is an AI resume builder and how does it work?", answer: "An AI resume builder uses artificial intelligence, including natural language processing and machine learning, to analyze job descriptions, match skills to requirements, suggest keywords, and create optimized content variations for maximum ATS compatibility." },
+    { question: "How effective are AI-generated resumes compared to traditional ones?", answer: "AI-optimized resumes can be up to 85% more ATS-compatible and generate 40% more interviews than traditional resumes, combining AI optimization with human customization for best results." },
+    { question: "Can AI resume builders maintain personal voice and authenticity?", answer: "While AI generates content, maintaining personal voice requires human oversight. Use AI for structure and optimization, while personally writing achievement statements and unique experiences." },
+    { question: "What are the main benefits of using AI for resume creation?", answer: "Key benefits include: 3x faster creation, 85% higher ATS compatibility, automatic keyword optimization, industry-specific language suggestions, and professional formatting assistance." }
   ];
 
   const externalCitations = [
@@ -971,76 +715,22 @@ Human-Enhanced:
     { question: "How long should an AI-optimized resume be?", answer: "**Entry-level: 1 page | Mid-level: 1-2 pages | Senior: 2 pages.** AI helps you optimize content within these guidelines." }
   ];
 
-  // ==================== SELECTED INTERNAL LINKS FOR SEO/GEO BOOST ====================
   const internalLinks = [
-    {
-      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
-      title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained",
-      desc: "Master the latest AI screening tactics used by USA employers in 2026."
-    },
-    {
-      href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
-      title: "Most In-Demand Resume Keywords for USA Job Seekers",
-      desc: "Boost your GEO ranking with high-volume keywords for the American market."
-    },
-    {
-      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
-      title: "ATS-Friendly Software Developer & Engineer Resume Builder",
-      desc: "Specialized templates for tech roles, optimized for engineering ATS filters."
-    },
-    {
-      href: "/free-resume-readability-checker",
-      title: "Free Resume Readability Checker Tool",
-      desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready."
-    },
-    {
-      href: "/resume-trends-in-the-usa-for-2026",
-      title: "Top Resume Trends in the USA for 2026",
-      desc: "Stay ahead of the curve with the latest formatting and content trends."
-    }
+    { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained", desc: "Master the latest AI screening tactics used by USA employers in 2026." },
+    { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", title: "Most In-Demand Resume Keywords for USA Job Seekers", desc: "Boost your GEO ranking with high-volume keywords for the American market." },
+    { href: "/ats-friendly-software-developer-and-software-engineer-resume-builder", title: "ATS-Friendly Software Developer & Engineer Resume Builder", desc: "Specialized templates for tech roles, optimized for engineering ATS filters." },
+    { href: "/free-resume-readability-checker", title: "Free Resume Readability Checker Tool", desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready." },
+    { href: "/resume-trends-in-the-usa-for-2026", title: "Top Resume Trends in the USA for 2026", desc: "Stay ahead of the curve with the latest formatting and content trends." }
   ];
 
-  // Simple icons using emoji
-  const icons = {
-    cpu: "🤖",
-    target: "🎯",
-    trendingUp: "📈",
-    fileText: "📄",
-    user: "👤",
-    check: "✅",
-    book: "📚",
-    award: "🏆",
-    userCheck: "✓",
-    copy: "📋",
-    download: "⬇️",
-    shield: "🛡️",
-    zap: "⚡",
-    code: "💻",
-    brain: "🧠",
-    edit: "✏️",
-    arrowRight: "→"
-  };
-
-  // SINGLE CANONICAL URL
   const canonicalUrl = "https://professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume";
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
 
-  // ==================== SCHEMA FIXES - ALL ERRORS RESOLVED ====================
-  
-  // Create properly structured reviews for Product schema (NO itemReviewed field)
   const productReviews = testimonials.map((testimonial) => ({
     "@type": "Review",
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "5",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "author": {
-      "@type": "Person",
-      "name": testimonial.name
-    },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+    "author": { "@type": "Person", "name": testimonial.name },
     "reviewBody": testimonial.quote,
     "datePublished": testimonial.date
   }));
@@ -1048,10 +738,17 @@ Human-Enhanced:
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* Google Fonts for Executive Design */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        
+        {/* ========== FULLY SEO-OPTIMIZED HEAD SECTION ========== */}
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - Exactly 70 characters */}
+        {/* OPTIMIZED TITLE - Under 70 characters */}
         <title>AI Resume Builders 2026: Create Better Resumes 3x Faster (Free)</title>
         
         {/* OPTIMIZED META DESCRIPTION */}
@@ -1106,27 +803,13 @@ Human-Enhanced:
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* PRECONNECT */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        
-        {/* ========== COMPLETELY FIXED SCHEMA.ORG JSON-LD ========== */}
-        {/* 
-          ALL ERRORS FIXED:
-          1. Removed duplicate aggregateRating from Product
-          2. Removed duplicate brand from Product
-          3. Removed itemReviewed from nested reviews
-          4. Changed author type to Person
-          5. Product now has BOTH aggregateRating AND review (satisfies requirement)
-          6. No more "multiple aggregate ratings" error
-          7. No more "Either offers, review, or aggregateRating should be specified" error
-        */}
+        {/* ========== COMPREHENSIVE JSON-LD SCHEMA - ALL ERRORS FIXED ========== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1271,11 +954,6 @@ Human-Enhanced:
                     "name": tool.name
                   }))
                 },
-                // ========== SINGLE PRODUCT SCHEMA - ALL ERRORS FIXED ==========
-                // Only ONE aggregateRating and ONE brand (no duplicates)
-                // Reviews WITHOUT itemReviewed field
-                // Author uses @type "Person"
-                // Product has aggregateRating so requirement is met
                 {
                   "@type": "Product",
                   "@id": `${canonicalUrl}#product`,
@@ -1301,8 +979,14 @@ Human-Enhanced:
         />
       </Head>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      <main style={{
+        backgroundColor: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+        fontFamily: 'var(--font-body)',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        width: '100%'
+      }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
         {/* Hidden freshness indicators */}
@@ -1315,12 +999,10 @@ Human-Enhanced:
 
         {/* Breadcrumb Navigation */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
-                  <span itemProp="name">Home</span>
-                </Link>
+                <Link href="/" itemProp="item"><span itemProp="name">Home</span></Link>
                 <meta itemProp="position" content="1" />
               </li>
               <li aria-hidden="true">/</li>
@@ -1332,7 +1014,7 @@ Human-Enhanced:
               </li>
               <li aria-hidden="true">/</li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">AI Resume Guide 2026</span>
+                <span aria-current="page" itemProp="name">AI Resume Guide 2026</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -1340,64 +1022,79 @@ Human-Enhanced:
         </nav>
 
         {/* Hero Section */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="hero-tag" aria-label="AI Technology">
-              {icons.cpu} AI Career Technology Guide {currentYear}
-            </div>
-            <h1 id="hero-heading">AI Resume Builders 2026: Create Better Resumes 3x Faster</h1>
-            <p>
-              Master the art of <strong>AI-powered resume creation</strong>. Learn to balance artificial 
-              intelligence efficiency with human authenticity to create resumes that get <strong>40% more interviews</strong>.
-              Complete guide with <strong>{templateCount}+ templates</strong> and <strong>{toolCount}+ AI tools</strong>.
-            </p>
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="hero-tag" aria-label="AI Technology">
+                🤖 AI Career Technology Guide {currentYear}
+              </div>
+              
+              <h1 id="hero-heading" style={{
+                fontSize: 'var(--font-size-display-lg)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 'var(--font-weight-extrabold)',
+                lineHeight: 'var(--line-height-display)',
+                marginBottom: '1.25rem'
+              }}>
+                AI Resume Builders 2026:{' '}
+                <span className="gradient-text">Create Better Resumes 3x Faster</span>
+              </h1>
+              
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Master the art of <strong>AI-powered resume creation</strong>. Learn to balance artificial 
+                intelligence efficiency with human authenticity to create resumes that get <strong>40% more interviews</strong>.
+                Complete guide with <strong>{templateCount}+ templates</strong> and <strong>{toolCount}+ AI tools</strong>.
+              </p>
 
-            <div className="hero-features">
-              <span className="hero-feature-badge">{icons.check} AI Optimization Techniques</span>
-              <span className="hero-feature-badge">{icons.check} Human-AI Collaboration</span>
-              <span className="hero-feature-badge">{icons.check} {currentYear} Best Practices</span>
-              <span className="hero-feature-badge">{icons.check} Industry-Specific Templates</span>
-            </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
+                <span className="feature-badge">✅ AI Optimization Techniques</span>
+                <span className="feature-badge">✅ Human-AI Collaboration</span>
+                <span className="feature-badge">✅ {currentYear} Best Practices</span>
+                <span className="feature-badge">✅ Industry-Specific Templates</span>
+              </div>
 
-            <div className="button-container" role="group" aria-label="Call to action buttons">
-              <Link href="/resume-templates" className="btn-primary" aria-label={`Browse all ${templateCount} resume templates`}>
-                Browse {templateCount}+ Templates {icons.arrowRight}
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary" aria-label={`Explore all ${toolCount} free tools`}>
-                Explore {toolCount}+ AI Tools {icons.arrowRight}
-              </Link>
-            </div>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+                <Link href="/resume-templates" className="btn-primary" aria-label={`Browse all ${templateCount} resume templates`}>
+                  Browse {templateCount}+ Templates <FiArrowRight />
+                </Link>
+                <Link href="/free-resume-tools" className="btn-outline" aria-label={`Explore all ${toolCount} free tools`}>
+                  Explore {toolCount}+ AI Tools <FiArrowRight />
+                </Link>
+              </div>
 
-            {/* Stats */}
-            <div className="stats" aria-label="Key statistics">
-              {stats.map((stat, index) => (
-                <div key={index} className="stat-card">
-                  <div className="stat-icon">
-                    {index === 0 ? icons.zap : index === 1 ? icons.shield : icons.trendingUp}
+              {/* Stats */}
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+                {stats.map((stat, index) => (
+                  <div key={index} className="stat-card">
+                    <div className="stat-icon">{stat.icon}</div>
+                    <div className="stat-number">{stat.value}</div>
+                    <div className="stat-label">{stat.label}</div>
                   </div>
-                  <div className="stat-number">{stat.value}</div>
-                  <div className="stat-label">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Freshness indicator */}
-            <div style={{ marginTop: '20px', fontSize: '0.8rem', color: '#4b5563' }} aria-label="Page last updated">
-              Last updated: {displayDate}
+              <div className="text-small" style={{ marginTop: '1.25rem' }} aria-label="Page last updated">
+                Last updated: {displayDate}
+              </div>
             </div>
           </div>
         </section>
 
         {/* External Citations Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="citations-heading">
-          <div className="container">
-            <h2 id="citations-heading" className="section-title">What Industry Experts Say</h2>
+        <section className="section section-alt" aria-labelledby="citations-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="citations-heading">What Industry Experts Say About AI Resume Builders</h2>
+              <p className="section-subtitle">Validated by leading research organizations and industry publications</p>
+            </div>
             <div className="grid">
               {externalCitations.map((citation, i) => (
-                <blockquote key={i} className="card" itemScope itemType="https://schema.org/Quotation">
-                  <p style={{ fontStyle: 'italic', marginBottom: '12px' }} itemProp="text">"{citation.quote}"</p>
+                <blockquote key={i} className="card-executive" itemScope itemType="https://schema.org/Quotation">
+                  <p style={{ fontStyle: 'italic', marginBottom: '0.75rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="text">
+                    "{citation.quote}"
+                  </p>
                   <footer>
-                    <cite itemProp="source">
+                    <cite style={{ color: 'var(--accent-primary)', fontStyle: 'normal', fontSize: 'var(--font-size-body-sm)' }} itemProp="source">
                       {citation.source} ({citation.year})
                     </cite>
                   </footer>
@@ -1409,17 +1106,19 @@ Human-Enhanced:
 
         {/* AI Tools Section */}
         <section className="section" aria-labelledby="tools-heading">
-          <div className="container">
-            <h2 id="tools-heading" className="section-title">AI Resume Tools for 2026 ({toolCount})</h2>
-            <p className="section-subtitle">Leverage cutting-edge AI technology to optimize every aspect of your resume</p>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="tools-heading">AI Resume Tools for {currentYear} ({toolCount})</h2>
+              <p className="section-subtitle">Leverage cutting-edge AI technology to optimize every aspect of your resume</p>
+            </div>
             <div className="grid">
               {aiTools.map((tool, index) => (
-                <div key={index} className="card">
-                  <h3 style={{ marginBottom: '12px', fontSize: '1.1rem' }}>{tool.title}</h3>
-                  <p style={{ color: '#4b5563', marginBottom: '12px', flex: 1 }}>{tool.description}</p>
+                <div key={index} className="card-executive">
+                  <h3 style={{ marginBottom: '0.75rem', fontSize: 'var(--font-size-title-md)' }}>{tool.title}</h3>
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', flex: 1, fontSize: 'var(--font-size-body-sm)' }}>{tool.description}</p>
                   <div style={{ marginTop: 'auto' }}>
-                    <p><strong>Best for:</strong> {tool.useCase}</p>
-                    <div className="feature-tags" style={{ marginTop: '12px' }}>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-primary)' }}><strong>Best for:</strong> {tool.useCase}</p>
+                    <div style={{ marginTop: '0.75rem', display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }} aria-label="Tool tips">
                       {tool.tips.map((tip, tipIndex) => (
                         <span key={tipIndex} className="feature-tag">{tip}</span>
                       ))}
@@ -1432,16 +1131,18 @@ Human-Enhanced:
         </section>
 
         {/* Templates Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="templates-heading">
-          <div className="container">
-            <h2 id="templates-heading" className="section-title">AI-Ready Resume Templates ({templateCount})</h2>
-            <p className="section-subtitle">Industry-specific templates optimized for AI generation and ATS systems</p>
+        <section className="section section-alt" aria-labelledby="templates-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="templates-heading">AI-Ready Resume Templates ({templateCount})</h2>
+              <p className="section-subtitle">Industry-specific templates optimized for AI generation and ATS systems</p>
+            </div>
             <div className="grid">
               {resumeTemplates.map(template => (
-                <Link key={template.id} href={template.url} className="card" style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <h4 style={{ marginBottom: '8px', fontSize: '1.1rem' }}>{template.title}</h4>
-                  <p style={{ color: '#4b5563', marginBottom: '12px', flex: 1 }}>{template.description}</p>
-                  <div className="feature-tags" aria-label="Template features">
+                <Link key={template.id} href={template.url} className="card-executive" style={{ textDecoration: 'none' }}>
+                  <h4 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)', color: 'var(--text-primary)' }}>{template.title}</h4>
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', flex: 1, fontSize: 'var(--font-size-body-sm)' }}>{template.description}</p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }} aria-label="Template features">
                     {template.features.map((f, i) => (
                       <span key={i} className="feature-tag">{f}</span>
                     ))}
@@ -1449,9 +1150,9 @@ Human-Enhanced:
                 </Link>
               ))}
             </div>
-            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
               <Link href="/resume-templates" className="btn-primary">
-                View All {templateCount}+ Templates {icons.arrowRight}
+                View All {templateCount}+ Templates <FiArrowRight />
               </Link>
             </div>
           </div>
@@ -1459,13 +1160,16 @@ Human-Enhanced:
 
         {/* People Also Ask Section */}
         <section className="section" aria-labelledby="paa-heading">
-          <div className="container">
-            <h2 id="paa-heading" className="section-title">People Also Ask About AI Resume Builders</h2>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="paa-heading">People Also Ask About AI Resume Builders</h2>
+              <p className="section-subtitle">Common questions from job seekers exploring AI-powered resume tools</p>
+            </div>
             <div className="faq-grid">
               {peopleAlsoAsk.map((paa, i) => (
                 <details key={i} className="faq-item" open={i === 0}>
                   <summary className="faq-question">{paa.question}</summary>
-                  <p style={{ color: '#4b5563', marginTop: '12px' }}>{paa.answer}</p>
+                  <div className="faq-answer"><p>{paa.answer}</p></div>
                 </details>
               ))}
             </div>
@@ -1473,14 +1177,18 @@ Human-Enhanced:
         </section>
 
         {/* Definitive Answers Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="expert-heading">
-          <div className="container">
-            <h2 id="expert-heading" className="section-title">Expert Answers: AI Resume Best Practices</h2>
-            <div className="grid">
+        <section className="section section-alt" aria-labelledby="expert-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="expert-heading">Expert Answers: AI Resume Best Practices for {currentYear}</h2>
+              <p className="section-subtitle">Data-backed strategies for maximizing AI resume effectiveness</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
               {definitiveAnswers.map((item, i) => (
-                <article key={i} className="card">
-                  <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>{item.question}</h3>
-                  <p style={{ color: '#4b5563', marginBottom: '16px', flex: 1 }} dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                <article key={i} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>{item.question}</h3>
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', flex: 1, fontSize: 'var(--font-size-body-sm)' }}
+                    dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                   <small className="text-small">Source: Industry Best Practices & AI Research</small>
                 </article>
               ))}
@@ -1490,8 +1198,11 @@ Human-Enhanced:
 
         {/* AI-Human Collaboration Table */}
         <section className="section" aria-labelledby="collaboration-heading">
-          <div className="container">
-            <h2 id="collaboration-heading" className="section-title">AI-Human Collaboration Framework</h2>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="collaboration-heading">AI-Human Collaboration Framework for {currentYear}</h2>
+              <p className="section-subtitle">Understanding where AI excels and where human touch is essential</p>
+            </div>
             <div className="table-wrap">
               <table>
                 <thead>
@@ -1504,7 +1215,7 @@ Human-Enhanced:
                 <tbody>
                   {collaborationAreas.map((item, i) => (
                     <tr key={i}>
-                      <td className="text-success">{item.ai}</td>
+                      <td><span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>{item.ai}</span></td>
                       <td>{item.human}</td>
                       <td style={{ fontStyle: 'italic' }}>{item.workflow}</td>
                     </tr>
@@ -1516,20 +1227,23 @@ Human-Enhanced:
         </section>
 
         {/* Case Studies Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="case-studies-heading">
-          <div className="container">
-            <h2 id="case-studies-heading" className="section-title">Real Success Stories</h2>
-            <div className="grid">
+        <section className="section section-alt" aria-labelledby="case-studies-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="case-studies-heading">Real Success Stories: AI Resume Transformations</h2>
+              <p className="section-subtitle">Job seekers who transformed their careers using AI resume tools</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
               {caseStudies.map((study, i) => (
                 <article key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
-                  <div style={{ marginBottom: '16px' }}>
-                    <span className="trust-badge" style={{ marginBottom: '8px' }}>{study.industry}</span>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <span className="feature-badge">{study.industry}</span>
                   </div>
-                  <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }} itemProp="author">{study.name}</h3>
-                  <p style={{ marginBottom: '8px' }}><strong>Before:</strong> {study.before}</p>
-                  <p style={{ marginBottom: '8px' }}><strong>After:</strong> <span className="text-success">{study.after}</span></p>
-                  <p style={{ marginBottom: '8px' }}><strong>Template used:</strong> {study.template}</p>
-                  <p><strong>Time to result:</strong> {study.timeToResult}</p>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--text-primary)' }} itemProp="author">{study.name}</h3>
+                  <p style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><strong>Before:</strong> {study.before}</p>
+                  <p style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)' }}><strong>After:</strong> {study.after}</p>
+                  <p style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><strong>Template:</strong> {study.template}</p>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><strong>Time to result:</strong> {study.timeToResult}</p>
                   <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
                     <meta itemProp="name" content="AI Resume Builder Guide 2026" />
                     <meta itemProp="url" content={canonicalUrl} />
@@ -1546,29 +1260,40 @@ Human-Enhanced:
 
         {/* Guide Section */}
         <section id="guide" className="section" aria-labelledby="guide-heading">
-          <div className="container">
-            <h2 id="guide-heading" className="section-title">Complete AI Resume Creation Guide</h2>
-            <p className="section-subtitle">Follow this proven framework to create AI-optimized resumes that stand out</p>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="guide-heading">Complete AI Resume Creation Guide for {currentYear}</h2>
+              <p className="section-subtitle">Follow this proven framework to create AI-optimized resumes that stand out</p>
+            </div>
 
-            <div className="guide-navigation">
+            <div className="guide-navigation" role="tablist" aria-label="AI resume guide steps">
               {aiSections.map((section, index) => (
                 <button
                   key={index}
                   className={`guide-tab ${index === activeSection ? 'active' : ''}`}
                   onClick={() => setActiveSection(index)}
+                  role="tab"
+                  aria-selected={index === activeSection}
+                  aria-label={`Step ${index + 1}: ${section.title}`}
                 >
                   Step {index + 1}: {section.title.substring(0, 30)}...
                 </button>
               ))}
             </div>
 
-            <div className="guide-content">
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '12px' }}>{aiSections[activeSection].title}</h3>
-              <p style={{ color: '#4b5563', marginBottom: '24px' }}>{aiSections[activeSection].content}</p>
+            <div className="guide-content" role="tabpanel">
+              <h3 style={{ fontSize: 'var(--font-size-title-lg)', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+                {aiSections[activeSection].title}
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: 'var(--font-size-body-sm)' }}>
+                {aiSections[activeSection].content}
+              </p>
 
               <div className="content-grid">
                 <div>
-                  <h4 style={{ marginBottom: '16px' }}>Key Strategies for {currentYear}:</h4>
+                  <h4 style={{ marginBottom: '1rem', fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)' }}>
+                    Key Strategies for {currentYear}:
+                  </h4>
                   <ul className="tips-list">
                     {aiSections[activeSection].tips.map((tip, index) => (
                       <li key={index}>{tip}</li>
@@ -1576,16 +1301,19 @@ Human-Enhanced:
                   </ul>
                 </div>
                 <div>
-                  <h4 style={{ marginBottom: '16px' }}>Practical Example:</h4>
+                  <h4 style={{ marginBottom: '1rem', fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)' }}>
+                    Practical Example:
+                  </h4>
                   <div className="example-box">
-                    <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
+                    <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'var(--font-mono)' }}>
                       {aiSections[activeSection].example}
                     </pre>
                     <button 
                       className="copy-button"
                       onClick={() => navigator.clipboard.writeText(aiSections[activeSection].example)}
+                      aria-label={`Copy example for ${aiSections[activeSection].title}`}
                     >
-                      {icons.copy} Copy
+                      📋 Copy
                     </button>
                   </div>
                 </div>
@@ -1595,21 +1323,24 @@ Human-Enhanced:
         </section>
 
         {/* Balance Strategies Section */}
-        <section id="balance" className="section" style={{ background: '#f9fafb' }} aria-labelledby="balance-heading">
-          <div className="container">
-            <h2 id="balance-heading" className="section-title">Balancing AI Efficiency with Human Touch</h2>
-            <p className="section-subtitle">Master the art of combining AI power with personal authenticity</p>
+        <section id="balance" className="section section-alt" aria-labelledby="balance-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="balance-heading">Balancing AI Efficiency with Human Touch</h2>
+              <p className="section-subtitle">Master the art of combining AI power with personal authenticity</p>
+            </div>
 
             <div className="balance-grid">
               {balanceStrategies.map((strategy, index) => (
                 <div key={index} className="strategy-card">
-                  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
                     <span className="strategy-number">{index + 1}</span>
-                    <h3 style={{ fontSize: '1.1rem' }}>{strategy.strategy}</h3>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--text-primary)' }}>{strategy.strategy}</h3>
                   </div>
-                  <p style={{ color: '#4b5563', marginBottom: '16px' }}>{strategy.description}</p>
-                  <div style={{ background: '#ffffff', padding: '12px', borderRadius: '6px', border: '1px solid var(--border)' }}>
-                    <strong>Example:</strong> {strategy.example}
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: 'var(--font-size-body-sm)' }}>{strategy.description}</p>
+                  <div style={{ background: 'var(--bg-surface)', padding: '0.75rem', borderRadius: '0.375rem', border: 'var(--card-border)' }}>
+                    <strong style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)' }}>Example:</strong>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}> {strategy.example}</span>
                   </div>
                 </div>
               ))}
@@ -1617,7 +1348,7 @@ Human-Enhanced:
 
             <div className="collaboration-grid">
               <div className="collaboration-card">
-                <h3>Where AI Excels</h3>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem' }}>Where AI Excels</h3>
                 <ul>
                   <li>Structure and formatting optimization</li>
                   <li>ATS keyword analysis and integration</li>
@@ -1626,12 +1357,21 @@ Human-Enhanced:
                 </ul>
               </div>
               <div className="collaboration-card">
-                <h3>Where Human Touch is Essential</h3>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem' }}>Where Human Touch is Essential</h3>
                 <ul>
                   <li>Personal achievement storytelling</li>
                   <li>Unique value proposition development</li>
                   <li>Industry-specific insight integration</li>
                   <li>Authentic voice and tone maintenance</li>
+                </ul>
+              </div>
+              <div className="collaboration-card">
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem' }}>Optimal Workflow</h3>
+                <ul>
+                  <li>AI: Initial structure & optimization</li>
+                  <li>Human: Personal content & achievements</li>
+                  <li>AI: Final ATS compatibility check</li>
+                  <li>Human: Final review & authenticity check</li>
                 </ul>
               </div>
             </div>
@@ -1640,14 +1380,16 @@ Human-Enhanced:
 
         {/* Mistakes Section */}
         <section className="section" aria-labelledby="mistakes-heading">
-          <div className="container">
-            <h2 id="mistakes-heading" className="section-title">Common AI Resume Mistakes to Avoid</h2>
-            <p className="section-subtitle">These errors can undermine your AI-optimized resume</p>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="mistakes-heading">Common AI Resume Mistakes to Avoid in {currentYear}</h2>
+              <p className="section-subtitle">These errors can undermine your AI-optimized resume</p>
+            </div>
             <div className="mistakes-grid">
               {commonMistakes.map((mistake, index) => (
                 <div key={index} className="mistake-card">
                   <div className="mistake-number">{index + 1}</div>
-                  <p>{mistake}</p>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{mistake}</p>
                 </div>
               ))}
             </div>
@@ -1655,19 +1397,24 @@ Human-Enhanced:
         </section>
 
         {/* Testimonials Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="testimonials-heading">
-          <div className="container">
-            <h2 id="testimonials-heading" className="section-title">Success Stories: Real User Feedback</h2>
-            <div className="grid">
+        <section className="section section-alt" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="testimonials-heading">Success Stories: Real User Feedback on AI Resumes</h2>
+              <p className="section-subtitle">Job seekers who achieved results with AI-optimized resumes</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
               {testimonials.map((t, i) => (
                 <div key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
-                  <p style={{ fontSize: '1rem', fontStyle: 'italic', marginBottom: '16px', flex: 1 }} itemProp="reviewBody">"{t.quote}"</p>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+                  <p style={{ fontStyle: 'italic', marginBottom: '1rem', flex: 1, color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="reviewBody">
+                    "{t.quote}"
+                  </p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
                     <div>
-                      <strong itemProp="author" itemScope itemType="https://schema.org/Person">
+                      <strong style={{ color: 'var(--text-primary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="author" itemScope itemType="https://schema.org/Person">
                         <span itemProp="name">{t.name}</span>
                       </strong>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-light)' }}>{t.role}</p>
+                      <p style={{ margin: 0, fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>{t.role}</p>
                     </div>
                     <small className="text-small">{t.date}</small>
                   </div>
@@ -1687,14 +1434,17 @@ Human-Enhanced:
 
         {/* FAQ Section */}
         <section className="section" aria-labelledby="faq-heading">
-          <div className="container">
-            <h2 id="faq-heading" className="section-title">Frequently Asked Questions</h2>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="faq-heading">Frequently Asked Questions About AI Resume Builders</h2>
+              <p className="section-subtitle">Everything you need to know about AI-powered resume creation</p>
+            </div>
             <div className="faq-grid">
               {faqs.map((faq, i) => (
                 <div key={i} className="faq-item" itemScope itemType="https://schema.org/Question">
                   <h3 className="faq-question" itemProp="name">{faq.question}</h3>
-                  <div itemScope itemType="https://schema.org/Answer">
-                    <p itemProp="text" style={{ color: 'var(--text-light)' }}>{faq.answer}</p>
+                  <div className="faq-answer" itemScope itemType="https://schema.org/Answer">
+                    <p itemProp="text">{faq.answer}</p>
                     <meta itemProp="dateModified" content={safeFaqDates[i % safeFaqDates.length]} />
                   </div>
                 </div>
@@ -1705,35 +1455,48 @@ Human-Enhanced:
 
         {/* Final CTA Section */}
         <section className="cta-section" aria-labelledby="cta-heading">
-          <div className="container">
-            <h2 id="cta-heading">Ready to Create Your AI-Optimized Resume?</h2>
-            <p>
-              Combine the power of artificial intelligence with your unique human experience.
-              Choose from <strong>{templateCount}+ templates</strong> and use <strong>{toolCount}+ AI tools</strong>.
-              No sign-up required.
-            </p>
-            <div role="group" aria-label="Final call to action buttons">
-              <Link href="/resume-templates" className="btn-primary">
-                Create Your Resume Now {icons.arrowRight}
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                Explore AI Tools {icons.arrowRight}
-              </Link>
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 style={{ 
+                fontSize: 'var(--font-size-display-md)', 
+                fontFamily: 'var(--font-display)', 
+                fontWeight: 'var(--font-weight-bold)', 
+                color: 'var(--text-primary)', 
+                marginBottom: '1rem',
+                textShadow: '0 0 20px rgba(242, 202, 80, 0.3)'
+              }} id="cta-heading">
+                Ready to Create Your AI-Optimized Resume?
+              </h2>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                Combine the power of artificial intelligence with your unique human experience.
+                Choose from <strong>{templateCount}+ templates</strong> and use <strong>{toolCount}+ AI tools</strong>.
+                No sign-up required.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow)' }}>
+                  Create Your Resume Now <FiArrowRight />
+                </Link>
+                <Link href="/free-resume-tools" className="btn-outline" style={{ borderColor: 'var(--accent-primary)', color: 'var(--accent-primary)' }}>
+                  Explore AI Tools <FiArrowRight />
+                </Link>
+              </div>
+              <p className="text-small" style={{ marginTop: '2rem', color: 'var(--text-muted)' }}>
+                ✓ No credit card required • Free forever • AI-powered • ATS-optimized
+              </p>
+              <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+                Data fresh as of: {displayDate}
+              </p>
             </div>
-            <p style={{ marginTop: '30px', fontSize: '0.9rem', color: '#cccccc' }}>
-              ✓ No credit card required • Free forever • AI-powered • ATS-optimized
-            </p>
-            <p style={{ marginTop: '10px', fontSize: '0.8rem', color: '#999999' }}>
-              Data fresh as of: {displayDate}
-            </p>
           </div>
         </section>
 
-        {/* Internal Links Section for SEO/GEO Boost */}
-        <section className="internal-links-section" aria-labelledby="resources-heading">
-          <div className="container">
-            <h2 id="resources-heading" className="section-title">Recommended Resources for Job Seekers</h2>
-            <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
+        {/* Internal Links Section */}
+        <section className="section section-alt" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="resources-heading">Recommended Resources for Job Seekers in {currentYear}</h2>
+              <p className="section-subtitle">Explore our specialized guides to maximize your interview chances</p>
+            </div>
             
             <div className="internal-links-grid">
               {internalLinks.map((link, index) => (
@@ -1754,6 +1517,7 @@ Human-Enhanced:
   );
 };
 
+// ========== SEO-OPTIMIZED GETSTATICPROPS WITH FULL FRESHNESS SIGNALS ==========
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
@@ -1780,7 +1544,7 @@ export async function getStaticProps() {
       faqDates,
       reviewDates
     },
-    revalidate: 3600
+    revalidate: 3600 // Revalidate every hour for strong freshness signals
   };
 }
 

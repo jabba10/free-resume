@@ -1,1844 +1,390 @@
-// pages/free-ats-resume-checker.jsx
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState, useCallback, useEffect } from 'react';
-import { FiBriefcase, FiHeart, FiBookOpen, FiShield, FiSearch } from 'react-icons/fi';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { 
+  FiHome, FiChevronRight, FiSearch, FiLayout, FiBarChart2, FiAlertTriangle, FiClipboard,
+  FiShield, FiCheckCircle, FiStar, FiTarget, FiZap, FiCpu, FiEdit, FiAward,
+  FiGrid, FiFileText, FiArrowRight, FiRefreshCw, FiTrash2, FiHelpCircle,
+  FiCalendar, FiDatabase, FiAlertCircle, FiTrendingUp, FiLock, FiServer, FiCloud,
+  FiBriefcase, FiUsers, FiClock, FiCheck
+} from 'react-icons/fi';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed with CENTERING =====
-const criticalCSS = `
-  /* CSS RESET */
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-  }
-  
-  /* BASE STYLES */
-  body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    line-height: 1.6; 
-    color: #111827; 
-    background: #f9fafb; 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  /* PAGE CONTAINER - CENTERED */
-  .landing-page { 
-    max-width: 1280px; 
-    margin: 0 auto; 
-    padding: 16px; 
-    width: 100%;
-  }
-  
-  @media (min-width: 640px) {
-    .landing-page { padding: 24px; }
-  }
-  
-  @media (min-width: 1024px) {
-    .landing-page { padding: 32px; }
-  }
-  
-  /* CONTAINER */
-  .container { 
-    width: 100%;
-  }
-  
-  /* BREADCRUMB - CENTERED */
-  .breadcrumb { 
-    margin-bottom: 24px; 
-    font-size: 0.9rem; 
-    color: #6b7280;
-    text-align: center;
-  }
-  
-  .breadcrumb ol { 
-    display: flex; 
-    flex-wrap: wrap; 
-    list-style: none; 
-    gap: 8px;
-    justify-content: center;
-  }
-  
-  .breadcrumb li { 
-    display: flex; 
-    align-items: center;
-  }
-  
-  .breadcrumb-separator { 
-    margin: 0 4px; 
-    color: #9ca3af;
-  }
-  
-  .breadcrumb-link { 
-    color: #111827; 
-    text-decoration: none; 
-    border-bottom: 1px solid #d1d5db;
-  }
-  
-  .breadcrumb-link:hover { 
-    border-bottom-color: #000000; 
-  }
-  
-  /* HEADER - CENTERED */
-  .header { 
-    margin-bottom: 40px; 
-    padding-bottom: 32px; 
-    border-bottom: 2px solid #f3f4f6;
-    text-align: center;
-  }
-  
-  .trust-badge { 
-    display: inline-block; 
-    background: #f3f4f6; 
-    padding: 8px 20px; 
-    border-radius: 50px; 
-    margin-bottom: 20px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .trust-badge-text { 
-    font-weight: 500; 
-    color: #111827;
-  }
-  
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-align: center;
-  }
-  
-  .title { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-align: center;
-  }
-  
-  .gradient-text { 
-    background: linear-gradient(135deg, #000000 0%, #4b5563 100%); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    background-clip: text;
-  }
-  
-  .subtitle { 
-    font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    color: #1f2937;
-    max-width: 900px; 
-    line-height: 1.7;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    font-weight: 500;
-  }
-  
-  .hero-highlight { 
-    background: #f3f4f6; 
-    padding: 4px 8px; 
-    border-radius: 4px;
-    color: #000000;
-    font-weight: 700;
-  }
-  
-  /* AGGREGATE RATING - CENTERED - REMOVED */
-  .aggregate-rating { 
-    display: none;
-  }
-  
-  .rating-stars { 
-    color: #fbbf24; 
-    font-size: 1.3rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-  }
-  
-  .rating-value { 
-    color: #111827; 
-    font-weight: 700; 
-    font-size: 1rem;
-  }
-  
-  .rating-text { 
-    color: #4b5563; 
-    font-size: 0.9rem;
-  }
-  
-  /* HERO STATS - CENTERED - REMOVED */
-  .hero-stats { 
-    display: none;
-  }
-  
-  .stat-item { 
-    flex: 1 1 auto; 
-    min-width: 120px; 
-    text-align: center;
-  }
-  
-  .stat-number { 
-    font-size: 2rem; 
-    font-weight: 800; 
-    color: #000000; 
-    display: block; 
-    line-height: 1.2;
-  }
-  
-  .stat-label { 
-    color: #4b5563; 
-    font-size: 0.9rem;
-  }
-  
-  /* MAIN CONTENT */
-  .main-content { 
-    margin: 32px 0;
-  }
-  
-  /* ANALYSIS SECTION */
-  .analysis-section { 
-    margin-bottom: 32px;
-  }
-  
-  /* CARD - CENTERED CONTENT */
-  .card { 
-    background: #ffffff; 
-    border-radius: 16px; 
-    padding: 24px; 
-    border: 1px solid #e5e7eb; 
-    margin-bottom: 24px;
-    text-align: center;
-  }
-  
-  @media (min-width: 768px) {
-    .card { padding: 32px; }
-  }
-  
-  .card-header { 
-    margin-bottom: 24px;
-  }
-  
-  .card-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 12px; 
-    color: #000000;
-    text-align: center;
-  }
-  
-  .card-subtitle { 
-    color: #4b5563; 
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  /* BUTTONS - CENTERED */
-  .button-group { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 12px; 
-    margin: 16px 0;
-    justify-content: center;
-  }
-  
-  .button { 
-    display: inline-block; 
-    padding: 12px 24px; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    font-size: 1rem; 
-    border: 2px solid #000000;
-    cursor: pointer; 
-    transition: all 0.2s ease; 
-    text-decoration: none; 
-    text-align: center;
-    background: transparent;
-    color: #000000;
-  }
-  
-  .button:hover { 
-    transform: translateY(-2px); 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .primary-button { 
-    background: #000000; 
-    color: #ffffff; 
-    border: 2px solid #000000;
-    min-width: 240px;
-  }
-  
-  .primary-button:hover { 
-    background: #1f2937; 
-    border-color: #1f2937;
-  }
-  
-  .secondary-button { 
-    background: transparent; 
-    color: #000000;
-  }
-  
-  .secondary-button:hover { 
-    background: #f9fafb;
-  }
-  
-  .cta-button { 
-    background: #000000; 
-    color: #ffffff; 
-    border: 2px solid #000000;
-    min-width: 240px;
-  }
-  
-  .cta-button:hover { 
-    background: #1f2937; 
-    border-color: #1f2937;
-  }
-  
-  @media (max-width: 480px) {
-    .button { 
-      width: 100%;
-    }
-  }
-  
-  /* TEXTAREA */
-  .textarea { 
-    width: 100%; 
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px; 
-    border: 2px solid #e5e7eb; 
-    border-radius: 12px; 
-    font-family: inherit; 
-    font-size: 1rem; 
-    line-height: 1.6; 
-    resize: vertical; 
-    transition: border-color 0.2s;
-    display: block;
-  }
-  
-  .textarea:focus { 
-    outline: none; 
-    border-color: #000000;
-  }
-  
-  /* ANALYZE BUTTON CONTAINER - CENTERED */
-  .analyze-button-container { 
-    text-align: center; 
-    margin: 24px 0;
-  }
-  
-  /* SPINNER */
-  .spinner { 
-    display: inline-block; 
-    margin-left: 8px; 
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin { 
-    0% { transform: rotate(0deg); } 
-    100% { transform: rotate(360deg); } 
-  }
-  
-  /* LOADING - CENTERED */
-  .loading { 
-    text-align: center; 
-    padding: 40px;
-  }
-  
-  .loading-bar { 
-    width: 100%; 
-    max-width: 400px;
-    height: 8px; 
-    background: #e5e7eb; 
-    border-radius: 4px; 
-    margin-top: 20px; 
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .loading-progress { 
-    width: 50%; 
-    height: 100%; 
-    background: #000000; 
-    animation: progress 1.5s ease-in-out infinite;
-  }
-  
-  @keyframes progress { 
-    0% { transform: translateX(-100%); } 
-    100% { transform: translateX(200%); } 
-  }
-  
-  /* GRID */
-  .grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px; 
-    margin: 32px 0;
-  }
-  
-  @media (min-width: 768px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  /* SCORE DISPLAY - CENTERED */
-  .score-container { 
-    text-align: center; 
-    margin: 24px 0;
-  }
-  
-  .score-number { 
-    font-size: 5rem; 
-    font-weight: 800; 
-    line-height: 1; 
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .score-badge { 
-    display: inline-block; 
-    padding: 8px 24px; 
-    border-radius: 50px; 
-    font-weight: 600; 
-    margin-bottom: 16px;
-  }
-  
-  .score-high { 
-    background: #10b981; 
-    color: #ffffff;
-  }
-  
-  .score-medium { 
-    background: #f59e0b; 
-    color: #ffffff;
-  }
-  
-  .score-low { 
-    background: #ef4444; 
-    color: #ffffff;
-  }
-  
-  .score-message { 
-    font-size: 1.1rem; 
-    margin-bottom: 24px;
-    text-align: center;
-  }
-  
-  .severity-container { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
-    padding: 16px; 
-    background: #f9fafb; 
-    border-radius: 8px;
-    align-items: center;
-  }
-  
-  .severity-item { 
-    display: flex; 
-    align-items: center; 
-    gap: 12px;
-  }
-  
-  .severity-dot { 
-    width: 12px; 
-    height: 12px; 
-    border-radius: 50%;
-  }
-  
-  .severity-high { 
-    background: #ef4444;
-  }
-  
-  .severity-medium { 
-    background: #f59e0b;
-  }
-  
-  .severity-low { 
-    background: #10b981;
-  }
-  
-  /* ISSUE LIST */
-  .issues-container { 
-    margin-top: 20px;
-  }
-  
-  .issue-item { 
-    padding: 20px; 
-    margin-bottom: 16px; 
-    border-radius: 12px; 
-    border-left: 4px solid;
-    text-align: left;
-  }
-  
-  .issue-high { 
-    background: #fef2f2; 
-    border-left-color: #ef4444;
-  }
-  
-  .issue-medium { 
-    background: #fffbeb; 
-    border-left-color: #f59e0b;
-  }
-  
-  .issue-low { 
-    background: #f0fdf4; 
-    border-left-color: #10b981;
-  }
-  
-  .issue-content { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start; 
-    gap: 16px;
-  }
-  
-  .issue-text { 
-    flex: 1;
-  }
-  
-  .issue-message { 
-    font-weight: 600; 
-    margin-bottom: 8px;
-  }
-  
-  .issue-fix { 
-    color: #4b5563;
-  }
-  
-  .issue-severity { 
-    font-size: 0.75rem; 
-    font-weight: 700; 
-    padding: 4px 8px; 
-    border-radius: 4px;
-  }
-  
-  .issue-high .issue-severity { 
-    background: #ef4444; 
-    color: #ffffff;
-  }
-  
-  .issue-medium .issue-severity { 
-    background: #f59e0b; 
-    color: #ffffff;
-  }
-  
-  .issue-low .issue-severity { 
-    background: #10b981; 
-    color: #ffffff;
-  }
-  
-  /* SUCCESS MESSAGE */
-  .success-message { 
-    color: #10b981; 
-    font-size: 1.2rem; 
-    text-align: center; 
-    margin: 24px 0;
-  }
-  
-  /* BEST PRACTICES */
-  .best-practices { 
-    background: #f9fafb; 
-    padding: 24px; 
-    border-radius: 12px; 
-    margin-top: 24px;
-    text-align: left;
-  }
-  
-  .best-practices-title { 
-    font-weight: 700; 
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .best-practices ul { 
-    padding-left: 20px;
-  }
-  
-  .best-practices li { 
-    margin-bottom: 8px;
-  }
-  
-  /* FIXES GRID */
-  .fixes-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 20px; 
-    margin: 24px 0;
-  }
-  
-  @media (min-width: 640px) {
-    .fixes-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .fixes-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .fix-card { 
-    background: #f9fafb; 
-    padding: 24px; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-    text-align: left;
-  }
-  
-  .fix-title { 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    margin-bottom: 12px; 
-    color: #000000;
-    text-align: center;
-  }
-  
-  .fix-description { 
-    color: #4b5563; 
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .fix-examples { 
-    list-style: none;
-  }
-  
-  .fix-examples li { 
-    margin-bottom: 8px; 
-    padding-left: 20px; 
-    position: relative;
-  }
-  
-  .fix-examples li::before { 
-    content: "•"; 
-    position: absolute; 
-    left: 4px; 
-    color: #000000;
-  }
-  
-  /* PRO TIP */
-  .pro-tip { 
-    background: #e0f2fe; 
-    padding: 24px; 
-    border-radius: 12px; 
-    margin-top: 32px; 
-    border-left: 4px solid #0284c7;
-    text-align: left;
-  }
-  
-  .pro-tip-title { 
-    font-weight: 700; 
-    margin-bottom: 12px; 
-    color: #0369a1;
-    text-align: center;
-  }
-  
-  .pro-tip-text { 
-    color: #374151; 
-    margin-bottom: 12px;
-  }
-  
-  .pro-tip-text:last-child { 
-    margin-bottom: 0;
-  }
-  
-  /* CENTER TEXT */
-  .center-text { 
-    text-align: center;
-  }
-  
-  /* READY TEXT */
-  .ready-text { 
-    color: #4b5563; 
-    margin: 24px 0;
-    text-align: center;
-  }
-  
-  /* CHECKLIST */
-  .checklist { 
-    background: #f9fafb; 
-    padding: 24px; 
-    border-radius: 12px; 
-    margin-top: 24px;
-    text-align: left;
-  }
-  
-  .checklist-title { 
-    font-weight: 700; 
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .checklist ul { 
-    padding-left: 20px;
-  }
-  
-  .checklist li { 
-    margin-bottom: 8px;
-  }
-  
-  /* HOW TO SECTION */
-  .how-to-section { 
-    margin: 48px 0;
-  }
-  
-  .section-title { 
-    font-size: 2rem; 
-    font-weight: 700; 
-    margin-bottom: 16px; 
-    text-align: center;
-    color: #000000;
-  }
-  
-  .section-subtitle { 
-    text-align: center; 
-    color: #4b5563; 
-    max-width: 800px; 
-    margin: 0 auto 32px;
-  }
-  
-  .how-to-steps { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 640px) {
-    .how-to-steps { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .how-to-steps { grid-template-columns: repeat(5, 1fr); }
-  }
-  
-  .how-to-step { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb; 
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  
-  .how-to-step:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .step-number { 
-    background: #000000; 
-    color: #ffffff; 
-    width: 40px; 
-    height: 40px; 
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-weight: 700; 
-    margin: 0 auto 16px;
-  }
-  
-  .step-title { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    margin-bottom: 12px;
-  }
-  
-  .step-description { 
-    color: #4b5563;
-  }
-  
-  /* FAQ SECTION */
-  .faq-section { 
-    margin: 48px 0;
-  }
-  
-  .faq-list { 
-    max-width: 800px; 
-    margin: 0 auto;
-  }
-  
-  .faq-item { 
-    background: #f9fafb; 
-    border-radius: 12px; 
-    margin-bottom: 16px; 
-    border: 1px solid #e5e7eb; 
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  .faq-item:hover { 
-    border-color: #000000;
-  }
-  
-  .faq-item.active { 
-    border-color: #000000;
-  }
-  
-  .faq-question { 
-    padding: 20px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-  }
-  
-  .faq-question h3 { 
-    font-size: 1.1rem; 
-    font-weight: 600; 
-    margin: 0;
-  }
-  
-  .faq-toggle { 
-    font-size: 1.5rem; 
-    font-weight: 600;
-  }
-  
-  .faq-answer { 
-    padding: 0 20px 20px 20px; 
-    color: #4b5563;
-    text-align: left;
-  }
-  
-  /* REVIEWS SECTION */
-  .reviews-section { 
-    margin: 48px 0;
-  }
-  
-  .reviews-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 640px) {
-    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .review-card { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-    transition: transform 0.2s;
-    text-align: left;
-  }
-  
-  .review-card:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .review-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start; 
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  
-  .reviewer-name { 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    display: block;
-    color: #000000;
-  }
-  
-  .reviewer-position { 
-    color: #4b5563; 
-    font-size: 0.85rem; 
-    display: block;
-  }
-  
-  .reviewer-company { 
-    color: #6b7280; 
-    font-size: 0.8rem; 
-    display: block;
-  }
-  
-  .stars { 
-    color: #fbbf24; 
-    font-size: 1rem;
-  }
-  
-  .review-content { 
-    margin-bottom: 16px; 
-    font-style: italic;
-  }
-  
-  .review-date { 
-    color: #6b7280; 
-    font-size: 0.85rem;
-  }
-  
-  /* RESOURCES SECTION */
-  .resources-section { 
-    margin: 48px 0;
-  }
-  
-  .resources-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 640px) {
-    .resources-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .resources-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .resource-card { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb; 
-    text-decoration: none; 
-    color: inherit;
-    display: block;
-    transition: transform 0.2s;
-    text-align: center;
-  }
-  
-  .resource-card:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .resource-card h3 { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    margin-bottom: 12px; 
-    color: #000000;
-  }
-  
-  .resource-card p { 
-    color: #4b5563; 
-    margin: 0;
-  }
-  
-  /* CTA SECTION - CENTERED */
-  .cta-section { 
-    margin: 48px 0; 
-    padding: 48px; 
-    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); 
-    border-radius: 24px; 
-    border: 2px solid #000000;
-  }
-  
-  .cta-content { 
-    text-align: center;
-  }
-  
-  .cta-title { 
-    font-size: 2rem; 
-    font-weight: 800; 
-    margin-bottom: 16px; 
-    color: #000000;
-    text-align: center;
-  }
-  
-  .cta-subtitle { 
-    color: #4b5563; 
-    max-width: 600px; 
-    margin: 0 auto 32px;
-    text-align: center;
-  }
-  
-  .cta-buttons { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 16px; 
-    justify-content: center; 
-    margin-bottom: 24px;
-  }
-  
-  .cta-guarantee { 
-    color: #6b7280; 
-    font-size: 0.9rem;
-    text-align: center;
-  }
-  
-  .guarantee-text { 
-    display: inline-block; 
-    padding: 8px 16px; 
-    background: #ffffff; 
-    border-radius: 50px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  /* FOOTER - CENTERED */
-  .footer { 
-    margin-top: 48px; 
-    padding: 32px; 
-    background: #f9fafb; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .footer-content { 
-    text-align: center;
-  }
-  
-  .footer p { 
-    margin-bottom: 20px; 
-    color: #4b5563;
-  }
-  
-  .footer-links { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 20px; 
-    justify-content: center;
-  }
-  
-  .footer-links a { 
-    color: #000000; 
-    text-decoration: none; 
-    font-weight: 500;
-    border-bottom: 1px solid #9ca3af;
-  }
-  
-  .footer-links a:hover { 
-    border-bottom-color: #000000;
-  }
-  
-  /* FRESHNESS INDICATOR */
-  .freshness-indicator { 
-    display: none;
-  }
-  
-  /* HIDDEN */
-  .hidden { 
-    display: none;
-  }
-  
-  /* BUILD INFO - CENTERED */
-  .build-info { 
-    margin-top: 48px; 
-    padding: 16px; 
-    border-top: 1px solid #e5e7eb; 
-    font-size: 0.8rem; 
-    color: #6b7280;
-    text-align: center;
-  }
-  
-  /* RESPONSIVE ADJUSTMENTS */
-  @media (max-width: 640px) {
-    .issue-content { 
-      flex-direction: column;
-    }
-    
-    .score-number { 
-      font-size: 4rem;
-    }
-    
-    .cta-section { 
-      padding: 32px 20px;
-    }
-    
-    .cta-title { 
-      font-size: 1.5rem;
-    }
-    
-    .aggregate-rating {
-      flex-direction: column;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .breadcrumb ol { 
-      font-size: 0.85rem;
-    }
-    
-    .stat-number { 
-      font-size: 1.5rem;
-    }
-    
-    .section-title { 
-      font-size: 1.5rem;
-    }
-  }
-
-  /* NEW: Internal Links Footer Section Styles */
-  .internal-links-footer {
-    background: var(--background);
-    border-top: 1px solid var(--border);
-    padding: 40px 0 60px;
-    margin-top: 40px;
-  }
-  .internal-links-title {
-    text-align: center;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    margin-bottom: 30px;
-    padding: 0 16px;
-    font-weight: 700;
-  }
-  .internal-links-grid-footer {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 0 16px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  @media (min-width: 480px) {
-    .internal-links-grid-footer { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 768px) {
-    .internal-links-grid-footer { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .internal-links-grid-footer { grid-template-columns: repeat(5, 1fr); }
-  }
-  .internal-link-card-footer {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px 16px;
-    text-decoration: none;
-    color: var(--primary);
-    text-align: center;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100px;
-  }
-  .internal-link-card-footer:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-    border-color: var(--primary);
-    background: #ffffff;
-  }
-  .internal-link-card-footer:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
-  }
-  .internal-link-text-footer {
-    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-    font-weight: 600;
-    line-height: 1.4;
-    word-wrap: break-word;
-  }
-  .internal-link-icon-footer {
-    margin-bottom: 10px;
-    color: var(--primary);
-    opacity: 0.7;
-  }
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS (Streamlined for Crawl Optimization)
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-mono: 'JetBrains Mono','Fira Code','Consolas',monospace;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-primary:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:100%; display:flex; flex-direction:column; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.25rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .search-box { position:relative; }
+  .search-input { width:100%; padding:0.875rem 1rem; padding-right:3rem; background:var(--bg-surface-low); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; color:var(--text-primary); font-size:var(--font-size-body-md); font-family:var(--font-body); transition:all var(--transition-fast); }
+  .search-input:focus { outline:none; border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(242,202,80,0.1); }
+  .search-input::placeholder { color:var(--text-muted); }
+  .clear-search { position:absolute; right:0.75rem; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1.25rem; padding:0.25rem; line-height:1; transition:color var(--transition-fast); }
+  .clear-search:hover { color:var(--accent-primary); }
+  .score-circle { width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: var(--font-weight-extrabold); font-family: var(--font-display); margin: 0 auto 1rem; }
+  .score-high { background: rgba(76, 175, 80, 0.1); border: 3px solid var(--success-color); color: var(--success-color); box-shadow: 0 0 30px rgba(76, 175, 80, 0.2); }
+  .score-medium { background: rgba(255, 152, 0, 0.1); border: 3px solid var(--warning-color); color: var(--warning-color); box-shadow: 0 0 30px rgba(255, 152, 0, 0.2); }
+  .score-low { background: rgba(244, 67, 54, 0.1); border: 3px solid var(--error-color); color: var(--error-color); box-shadow: 0 0 30px rgba(244, 67, 54, 0.2); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .text-success { color:var(--success-color); font-weight:var(--font-weight-semibold); }
+  .text-danger { color:var(--error-color); font-weight:var(--font-weight-semibold); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+  textarea { width:100%; min-height:300px; padding:var(--input-padding); background:var(--input-bg); border:var(--input-border); border-radius:var(--input-radius); color:var(--input-text); font-family:var(--font-mono); font-size:0.9rem; line-height:1.5; resize:vertical; transition:border-color var(--transition-fast); }
+  textarea:focus { outline:none; border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(242,202,80,0.1); }
+  textarea::placeholder { color:var(--input-placeholder); }
 `;
 
-// Current year for dynamic content - use static value from build time
+// ============================================================================
+// SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
+// ============================================================================
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate freshness review dates
+  const reviewDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Generate FAQ freshness dates
+  const faqDates = Array(5).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Breadcrumb structured data
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "ATS Resume Checker",
+      "item": "https://professionalresumefree.com/free-resume-readability-checker"
+    }
+  ];
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates,
+        breadcrumbData
+      },
+      buildTimestamp
+    },
+    revalidate: 3600, // ISR: Revalidate every hour
+  };
+}
+
+// Data Constants
 const CURRENT_YEAR = new Date().getFullYear();
-const BUILD_TIMESTAMP = new Date().toISOString();
-const FRESHNESS_INDICATOR = new Date().toISOString().split('T')[0];
 
-// FAQ Data
+const FEATURES = [
+  { icon: 'FiSearch', title: 'Keyword Optimization', desc: 'Deep scan your resume against job descriptions to identify missing critical keywords that ATS systems look for.', stat: 'AI-Powered' },
+  { icon: 'FiLayout', title: 'Format Validation', desc: 'Verify your resume layout is ATS-friendly with proper headings, standard fonts, and machine-readable structure.', stat: 'Critical' },
+  { icon: 'FiBarChart2', title: 'Comprehensive Scoring', desc: 'Get an instant ATS compatibility score with detailed breakdown of what needs improvement.', stat: 'Instant' },
+  { icon: 'FiAlertTriangle', title: 'Issue Detection', desc: 'Identify problematic elements like images, tables, columns, and complex formatting that confuse ATS parsers.', stat: 'Essential' },
+  { icon: 'FiClipboard', title: 'Actionable Suggestions', desc: 'Receive specific, prioritized recommendations to fix issues and boost your ATS score immediately.', stat: 'Detailed' },
+  { icon: 'FiShield', title: 'Privacy Guaranteed', desc: 'Your resume text stays in your browser. Never uploaded, never stored, never shared. Complete privacy.', stat: '100% Safe' }
+];
+
 const FAQS = [
-  {
-    question: "What is an ATS and why does it matter?",
-    answer: "Applicant Tracking Systems (ATS) are software used by 75% of employers to scan, filter, and rank resumes. ATS-friendly resumes are 3x more likely to reach human recruiters.",
-    date: "2024-12-15"
-  },
-  {
-    question: "Is my resume data private and secure?",
-    answer: "Yes! All analysis happens locally in your browser. No resume data is sent to our servers—your information stays completely private.",
-    date: "2024-12-10"
-  },
-  {
-    question: "What file format is best for ATS?",
-    answer: ".docx files are most ATS-friendly, followed by plain text. PDFs work but can cause parsing issues with complex formatting.",
-    date: "2024-12-08"
-  },
-  {
-    question: "How accurate is this ATS checker?",
-    answer: "Our algorithm analyzes 50+ ATS parsing factors based on real Applicant Tracking Systems used by Fortune 500 companies.",
-    date: "2024-12-05"
-  },
-  {
-    question: "Is this tool really free?",
-    answer: "100% free with no signup required. We believe resume optimization should be accessible to everyone.",
-    date: "2024-12-01"
-  },
-  {
-    question: "Can I use this ATS checker on mobile?",
-    answer: "Yes! Our ATS resume checker is fully responsive and works perfectly on all devices including smartphones and tablets.",
-    date: "2024-11-28"
-  }
+  { question: "What is an ATS and why does it matter?", answer: "An Applicant Tracking System (ATS) is software used by over 98% of Fortune 500 companies to filter resumes before a human ever sees them. If your resume isn't ATS-friendly, it may be rejected automatically regardless of your qualifications." },
+  { question: "How does the ATS Resume Checker work?", answer: "Our checker analyzes your resume text in real-time, right in your browser. It scans for ATS compatibility issues including formatting problems, missing keywords, section structure, and more. You get an instant comprehensive report with actionable suggestions." },
+  { question: "Is my resume data safe and private?", answer: "Absolutely. All analysis happens entirely in your browser using client-side processing. Your resume text is never uploaded to any server, never stored, and never shared." },
+  { question: "What format should I paste my resume in?", answer: "Paste your resume as plain text. If you have a PDF or Word document, copy all the text content and paste it here." },
+  { question: "What's a good ATS score to aim for?", answer: "We recommend aiming for a score of 80 or above. Scores in the 90-100 range indicate excellent ATS compatibility. Scores below 70 suggest significant issues that need addressing before submitting your application." }
 ];
 
-// How-to steps
-const HOW_TO_STEPS = [
-  {
-    name: "Paste Resume Text",
-    text: "Copy and paste your resume content (plain text only). Remove personal contact information for privacy.",
-    image: "https://professionalresumefree.com/images/step1-paste.jpg"
-  },
-  {
-    name: "Analyze ATS Compatibility",
-    text: "Our system scans for 50+ ATS parsing issues including formatting, structure, and content problems.",
-    image: "https://professionalresumefree.com/images/step2-analyze.jpg"
-  },
-  {
-    name: "Review Issues Found",
-    text: "Get detailed feedback on high, medium, and low-risk issues that could prevent your resume from being parsed.",
-    image: "https://professionalresumefree.com/images/step3-review.jpg"
-  },
-  {
-    name: "Implement Fixes",
-    text: "Follow our actionable fixes with before/after examples to optimize your resume for ATS systems.",
-    image: "https://professionalresumefree.com/images/step4-fix.jpg"
-  },
-  {
-    name: "Test & Apply",
-    text: "Test your optimized resume by copying it into Notepad to see what an ATS will actually read.",
-    image: "https://professionalresumefree.com/images/step5-test.jpg"
-  }
-];
-
-// Sample Reviews with dates
-const REVIEWS = [
-  {
-    name: "Michael Chen",
-    position: "HR Director",
-    rating: 5,
-    date: "2024-12-15",
-    review: "This tool identified formatting issues our ATS system would have rejected. Essential for job seekers.",
-    company: "Tech Corporation Inc."
-  },
-  {
-    name: "Sarah Johnson",
-    position: "Career Coach",
-    rating: 5,
-    date: "2024-12-10",
-    review: "I recommend this to all my clients. The privacy-first approach and detailed feedback are game-changers.",
-    company: "Career Success LLC"
-  },
-  {
-    name: "David Rodriguez",
-    position: "Software Engineer",
-    rating: 4,
-    date: "2024-12-05",
-    review: "Fixed my resume's table formatting that was preventing ATS parsing. Landed 3 interviews after using suggestions.",
-    company: "Google"
-  },
-  {
-    name: "Lisa Wang",
-    position: "Marketing Manager",
-    rating: 5,
-    date: "2024-11-28",
-    review: "The best free ATS checker I've found. Helped me optimize my resume for multiple ATS systems.",
-    company: "Amazon"
-  },
-  {
-    name: "Robert Kim",
-    position: "Recruitment Specialist",
-    rating: 5,
-    date: "2024-11-20",
-    review: "We use this tool to train candidates. The ATS compatibility analysis is incredibly accurate.",
-    company: "LinkedIn"
-  },
-  {
-    name: "Emily Davis",
-    position: "Recent Graduate",
-    rating: 4,
-    date: "2024-11-15",
-    review: "As a new grad, this helped me understand what ATS systems look for. Got my first interview!",
-    company: "Stanford University"
-  }
-];
-
-// Breadcrumb data
-const BREADCRUMB_DATA = [
-  { name: "Home", item: "https://professionalresumefree.com/" },
-  { name: "Free Resume Tools", item: "https://professionalresumefree.com/free-resume-tools" },
-  { name: "ATS Resume Checker", item: "https://professionalresumefree.com/free-ats-resume-checker" }
-];
-
-// ATS Rules and Analysis Logic
-const ATS_RULES = {
-  UNPROFESSIONAL_EMAILS: ['hotmail.com', 'yahoo.com', 'aol.com', 'gmail.com', 'outlook.com', 'live.com', 'msn.com'],
-  PROFESSIONAL_EMAILS: ['.edu', '.gov', '.org', 'ac.', 'co.', 'inc.', 'corp.', 'llc.'],
-  STANDARD_SECTIONS: [
-    'work experience', 'employment history', 'professional experience', 'education', 
-    'skills', 'technical skills', 'certifications', 'projects', 'professional summary',
-    'summary', 'objective', 'career objective', 'achievements', 'awards', 'languages'
-  ],
-  NON_STANDARD_SECTIONS: [
-    'my journey', 'my story', 'professional odyssey', 'career narrative', 'work timeline',
-    'academic background', 'skill set', 'tech stack', 'tools & technologies', 'certificates',
-    'honors & awards', 'spoken languages', 'professional references', 'contact details',
-    'get in touch', 'about me'
-  ],
-  ATS_RED_FLAGS: {
-    HEADER_FOOTER: ['page \\d+ of \\d+', 'confidential', 'draft', '©', '™', '®', '•{3,}', '-{3,}', '={3,}', '_{3,}'],
-    TABLE_INDICATORS: ['\\|.*\\|', '\\+[-]+\\+', 'border:', 'cellpadding', 'cellspacing', '<table', '\\xe4\\xbb\\xac', '\\xe7\\x94\\xa8'],
-    COLUMN_INDICATORS: ['column', 'multicolumn', '\\s{10,}\\w', '\\t{2,}\\w'],
-    GRAPHICS_REFERENCES: ['\\[figure', '\\[image', '\\[graphic', 'jpeg', 'png', 'gif', 'photoshop', 'illustrator', 'see figure'],
-    UNCOMMON_FONTS: ['comic sans', 'papyrus', 'curlz', 'jokerman', 'chiller', 'wingdings', 'webdings'],
-    EMBEDDED_SYMBOLS: ['→', '⇒', '★', '☆', '●', '◆', '■', '▲', '▼', '♥', '♦', '♣', '♠', '✓', '✔', '✗', '✘']
-  },
-  SCORE_WEIGHTS: {
-    HEADER_FOOTER: 10, TABLES: 8, COLUMNS: 6, GRAPHICS: 7, 
-    UNCOMMON_FONTS: 5, EMBEDDED_SYMBOLS: 4, UNPROFESSIONAL_EMAIL: 3, 
-    NON_STANDARD_SECTION: 3, INCONSISTENT_BULLETS: 2
-  }
+const ICON_MAP = {
+  FiHome, FiSearch, FiLayout, FiBarChart2, FiAlertTriangle, FiClipboard, FiShield, FiCheckCircle,
+  FiStar, FiTarget, FiZap, FiCpu, FiEdit, FiAward, FiGrid, FiFileText, FiArrowRight,
+  FiRefreshCw, FiTrash2, FiHelpCircle, FiCalendar, FiDatabase, FiAlertCircle,
+  FiTrendingUp, FiLock, FiServer, FiCloud, FiBriefcase, FiChevronRight, FiUsers, FiClock, FiCheck
 };
 
-// ScoreDisplay Component
-function ScoreDisplay({ score, severityCount }) {
-  const getScoreClass = (score) => {
+const CRITICAL_KEYWORDS = [
+  'experience', 'education', 'skills', 'work', 'professional',
+  'managed', 'developed', 'created', 'led', 'implemented',
+  'results', 'achieved', 'improved', 'increased', 'reduced',
+  'team', 'project', 'analysis', 'strategy', 'communication'
+];
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
+  const {
+    currentDate,
+    lastModifiedDate,
+    reviewDates,
+    faqDates,
+    breadcrumbData
+  } = seoData || {};
+
+  // Fallback freshness values
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
+  const safeCurrentDate = currentDate || freshnessIndicator;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeFaqDates = faqDates || Array(5).fill(freshnessIndicator);
+
+  const canonicalUrl = "https://professionalresumefree.com/free-resume-readability-checker";
+  
+  // Optimized title - approximately 70 characters
+  const optimizedTitle = "Free ATS Resume Checker 2026 - Test Your Resume Score Instantly";
+
+  // Long-tail keywords for GEO
+  const longTailKeywords = [
+    "ATS resume checker free online",
+    "resume ATS compatibility test tool",
+    "check if resume passes applicant tracking systems",
+    "free ATS scanner for resume analysis",
+    "resume keyword optimization checker 2026"
+  ];
+
+  // People Also Ask for GEO
+  const peopleAlsoAsk = [
+    { question: "How do I check if my resume is ATS-friendly?", answer: "Paste your resume text into our free ATS resume checker. It instantly analyzes formatting, keywords, section structure, and 50+ parsing factors to give you a compatibility score and actionable fixes." },
+    { question: "What resume format is best for ATS systems?", answer: "The best format for ATS is a clean, single-column layout with standard headings (Work Experience, Education, Skills). Avoid tables, columns, graphics, and headers/footers. Save as .docx for optimal parsing." }
+  ];
+
+  const [resumeText, setResumeText] = useState('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [results, setResults] = useState(null);
+  const [activeFaq, setActiveFaq] = useState(null);
+  const checkerRef = useRef(null);
+
+  // ==========================================================================
+  // ANALYSIS LOGIC
+  // ==========================================================================
+  const analyzeResume = useCallback(() => {
+    if (!resumeText.trim()) return;
+    setIsAnalyzing(true);
+    
+    // Simulate analysis delay for UX feedback
+    setTimeout(() => {
+      const text = resumeText.toLowerCase();
+      const wordCount = resumeText.split(/\s+/).filter(w => w.length > 0).length;
+      
+      const foundKeywords = CRITICAL_KEYWORDS.filter(kw => text.includes(kw));
+      const keywordScore = Math.round((foundKeywords.length / CRITICAL_KEYWORDS.length) * 100);
+      
+      const hasStandardHeadings = ['experience', 'education', 'skills'].some(h => text.includes(h));
+      const hasBulletPoints = resumeText.includes('•') || resumeText.includes('-') || resumeText.includes('*');
+      const hasActionVerbs = ['managed', 'developed', 'created', 'led', 'implemented', 'achieved', 'improved', 'increased', 'reduced', 'delivered', 'designed', 'launched'].some(v => text.includes(v));
+      const hasQuantifiedResults = /\d+%|\d+ years|\$\d+|\d+ people|\d+ million|\d+ thousand/i.test(resumeText);
+      const hasContactInfo = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/.test(resumeText) || /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/.test(resumeText);
+      
+      const issues = [];
+      if (wordCount < 200) issues.push({ severity: 'high', text: 'Resume is too short. Aim for 300-700 words.' });
+      if (wordCount > 1000) issues.push({ severity: 'medium', text: 'Resume may be too long. Consider condensing to 1-2 pages.' });
+      if (!hasStandardHeadings) issues.push({ severity: 'high', text: 'Missing standard section headings (Experience, Education, Skills).' });
+      if (!hasActionVerbs) issues.push({ severity: 'high', text: 'Missing strong action verbs. Use words like Managed, Developed, Led, Achieved.' });
+      if (!hasQuantifiedResults) issues.push({ severity: 'medium', text: 'Add quantified achievements with numbers, percentages, or dollar amounts.' });
+      if (!hasContactInfo) issues.push({ severity: 'critical', text: 'Contact information may be missing or incomplete.' });
+      if (!hasBulletPoints) issues.push({ severity: 'medium', text: 'Consider using bullet points for better readability.' });
+      
+      let baseScore = 50;
+      baseScore += (keywordScore * 0.3);
+      baseScore += (hasStandardHeadings ? 10 : 0);
+      baseScore += (hasBulletPoints ? 5 : 0);
+      baseScore += (hasActionVerbs ? 10 : 0);
+      baseScore += (hasQuantifiedResults ? 10 : 0);
+      baseScore += (hasContactInfo ? 10 : 0);
+      baseScore += (wordCount > 300 ? 5 : 0);
+      
+      const finalScore = Math.min(100, Math.round(baseScore));
+      
+      setResults({
+        score: finalScore,
+        wordCount,
+        keywordScore,
+        foundKeywords,
+        totalKeywords: CRITICAL_KEYWORDS.length,
+        issues,
+        hasStandardHeadings,
+        hasBulletPoints,
+        hasActionVerbs,
+        hasQuantifiedResults,
+        hasContactInfo
+      });
+      setIsAnalyzing(false);
+    }, 1500);
+  }, [resumeText]);
+
+  const resetChecker = () => {
+    setResumeText('');
+    setResults(null);
+  };
+
+  const getScoreColor = (score) => {
     if (score >= 80) return 'score-high';
     if (score >= 60) return 'score-medium';
     return 'score-low';
   };
 
-  const getScoreMessage = (score) => {
-    if (score >= 90) return 'Excellent ATS compatibility';
-    if (score >= 80) return 'Good ATS compatibility';
-    if (score >= 70) return 'Fair ATS compatibility';
-    if (score >= 60) return 'Needs improvement';
-    return 'Poor ATS compatibility - Major issues detected';
-  };
-
-  return (
-    <div className="card">
-      <h2 className="card-title">ATS Compatibility Score</h2>
-      <div className="score-container">
-        <div className="score-number" style={{ color: score >= 80 ? '#10b981' : score >= 60 ? '#f59e0b' : '#ef4444' }}>{score}</div>
-        <div className={`score-badge ${getScoreClass(score)}`}>
-          {score >= 80 ? 'Low Risk' : score >= 60 ? 'Medium Risk' : 'High Risk'}
-        </div>
-      </div>
-      <p className="score-message">{getScoreMessage(score)}</p>
-      
-      <div className="severity-container">
-        {severityCount.high > 0 && (
-          <div className="severity-item">
-            <div className="severity-dot severity-high"></div>
-            <span>{severityCount.high} High Risk Issue{severityCount.high !== 1 ? 's' : ''}</span>
-          </div>
-        )}
-        {severityCount.medium > 0 && (
-          <div className="severity-item">
-            <div className="severity-dot severity-medium"></div>
-            <span>{severityCount.medium} Medium Risk Issue{severityCount.medium !== 1 ? 's' : ''}</span>
-          </div>
-        )}
-        {severityCount.low > 0 && (
-          <div className="severity-item">
-            <div className="severity-dot severity-low"></div>
-            <span>{severityCount.low} Low Risk Issue{severityCount.low !== 1 ? 's' : ''}</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// IssueList Component
-function IssueList({ issues }) {
-  if (!issues || issues.length === 0) {
-    return (
-      <div className="card">
-        <h2 className="card-title">No Issues Found</h2>
-        <p className="success-message">✓ Your resume text appears to be ATS-friendly!</p>
-        <div className="best-practices">
-          <p className="best-practices-title">Best Practices to Maintain ATS Compatibility:</p>
-          <ul>
-            <li>Use standard section headers (Work Experience, Education, Skills)</li>
-            <li>Stick to common fonts like Arial, Calibri, or Times New Roman</li>
-            <li>Avoid tables, columns, and graphics</li>
-            <li>Use consistent bullet points throughout</li>
-            <li>Include relevant keywords from the job description</li>
-            <li>Keep formatting simple and clean</li>
-            <li>Use a professional email address</li>
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
-  const getSeverityClass = (severity) => {
-    switch (severity) {
-      case 'high': return 'issue-high';
-      case 'medium': return 'issue-medium';
-      case 'low': return 'issue-low';
-      default: return '';
+  const getSeverityColor = (severity) => {
+    switch(severity) {
+      case 'critical': return 'var(--error-color)';
+      case 'high': return 'var(--warning-color)';
+      case 'medium': return 'var(--info-color)';
+      default: return 'var(--text-muted)';
     }
   };
 
-  return (
-    <div className="card">
-      <h2 className="card-title">Issues Found ({issues.length})</h2>
-      <div className="issues-container">
-        {issues.map((issue, index) => (
-          <div key={index} className={`issue-item ${getSeverityClass(issue.severity)}`}>
-            <div className="issue-content">
-              <div className="issue-text">
-                <p className="issue-message">{issue.message}</p>
-                <p className="issue-fix"><strong>Fix:</strong> {issue.fix}</p>
-              </div>
-              <span className={`issue-severity ${getSeverityClass(issue.severity)}`}>
-                {issue.severity.toUpperCase()}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// FixSuggestions Component
-function FixSuggestions() {
-  const fixes = [
-    {
-      title: 'Standardize Section Headers',
-      description: 'Use widely recognized section titles that ATS can parse easily.',
-      examples: [
-        '❌ "My Journey" → ✅ "Work Experience"',
-        '❌ "Academic Background" → ✅ "Education"',
-        '❌ "Skill Set" → ✅ "Skills"',
-        '❌ "Professional Odyssey" → ✅ "Professional Experience"'
-      ]
-    },
-    {
-      title: 'Remove Formatting Elements',
-      description: 'ATS systems cannot read complex formatting.',
-      examples: [
-        'Remove tables and convert to plain text',
-        'Eliminate multiple columns',
-        'Delete headers, footers, and page numbers',
-        'Remove text boxes and shapes'
-      ]
-    },
-    {
-      title: 'Use Standard Fonts & Characters',
-      description: 'Stick to basic fonts and avoid special symbols.',
-      examples: [
-        'Fonts: Arial, Calibri, Times New Roman, Helvetica',
-        'Replace ★, →, ● with standard characters',
-        'Avoid Wingdings, Webdings, or decorative fonts'
-      ]
-    },
-    {
-      title: 'Optimize Bullet Points',
-      description: 'Maintain consistent formatting throughout.',
-      examples: [
-        'Use one bullet style consistently (•, -, or *)',
-        'Avoid mixing numbered lists with bullet points',
-        'Keep bullet points aligned and properly indented'
-      ]
-    },
-    {
-      title: 'Professional Contact Information',
-      description: 'Use professional email formats and standard layouts.',
-      examples: [
-        'Use: john.doe@professional.com',
-        'Avoid: coolguy123@yahoo.com',
-        'Include phone number in standard format',
-        'Place contact info at the top, not in headers'
-      ]
-    },
-    {
-      title: 'Keyword Optimization',
-      description: 'Include relevant keywords from job descriptions.',
-      examples: [
-        'Match skills with job requirements',
-        'Use industry-standard terminology',
-        'Include both acronyms and full forms',
-        'Avoid jargon unless specified'
-      ]
-    }
-  ];
-
-  return (
-    <div className="card">
-      <h2 className="card-title">ATS Optimization Guide</h2>
-      <p className="card-subtitle">Follow these recommendations to improve your resume's ATS compatibility</p>
-      <div className="fixes-grid">
-        {fixes.map((fix, index) => (
-          <div key={index} className="fix-card">
-            <h4 className="fix-title">{fix.title}</h4>
-            <p className="fix-description">{fix.description}</p>
-            <ul className="fix-examples">
-              {fix.examples.map((example, idx) => (
-                <li key={idx}>{example}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      
-      <div className="pro-tip">
-        <p className="pro-tip-title">💡 Pro Tip for Maximum ATS Compatibility:</p>
-        <p className="pro-tip-text">
-          Always save your resume as a <strong>.docx</strong> file for best ATS parsing. 
-          If using PDF, ensure it's created from a text-based source, not scanned. 
-          Test your resume by copying and pasting the text into Notepad - if it looks clean and readable there, 
-          it will likely pass through most ATS systems successfully.
-        </p>
-        <p className="pro-tip-text">
-          <strong>Remember:</strong> 99% of Fortune 500 companies use ATS. Optimizing for these systems 
-          is essential for getting your resume seen by human recruiters.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Analyze Resume Function
-function analyzeResume(text) {
-  const issues = [];
-  let score = 100;
-  const lowerText = text.toLowerCase();
-  const lines = text.split('\n').map(line => line.trim());
-
-  // Check for headers/footers
-  ATS_RULES.ATS_RED_FLAGS.HEADER_FOOTER.forEach(pattern => {
-    const regex = new RegExp(pattern, 'gi');
-    if (regex.test(text)) {
-      issues.push({
-        type: 'header_footer',
-        message: 'Header or footer content detected',
-        severity: 'high',
-        weight: ATS_RULES.SCORE_WEIGHTS.HEADER_FOOTER,
-        fix: 'Remove headers, footers, page numbers, and decorative lines. Keep content in the main document body only.'
-      });
-      score -= ATS_RULES.SCORE_WEIGHTS.HEADER_FOOTER;
-    }
-  });
-
-  // Check for tables
-  ATS_RULES.ATS_RED_FLAGS.TABLE_INDICATORS.forEach(pattern => {
-    const regex = new RegExp(pattern, 'gi');
-    if (regex.test(text)) {
-      issues.push({
-        type: 'tables',
-        message: 'Table or spreadsheet formatting detected',
-        severity: 'high',
-        weight: ATS_RULES.SCORE_WEIGHTS.TABLES,
-        fix: 'Convert tables to plain text with consistent formatting. Use simple lists instead of table structures.'
-      });
-      score -= ATS_RULES.SCORE_WEIGHTS.TABLES;
-    }
-  });
-
-  // Check for columns
-  ATS_RULES.ATS_RED_FLAGS.COLUMN_INDICATORS.forEach(pattern => {
-    const regex = new RegExp(pattern, 'gi');
-    if (regex.test(text)) {
-      issues.push({
-        type: 'columns',
-        message: 'Column layout or multi-column formatting detected',
-        severity: 'medium',
-        weight: ATS_RULES.SCORE_WEIGHTS.COLUMNS,
-        fix: 'Use single column format throughout. ATS reads left to right, top to bottom.'
-      });
-      score -= ATS_RULES.SCORE_WEIGHTS.COLUMNS;
-    }
-  });
-
-  // Check for graphics references
-  ATS_RULES.ATS_RED_FLAGS.GRAPHICS_REFERENCES.forEach(pattern => {
-    const regex = new RegExp(pattern, 'gi');
-    if (regex.test(text)) {
-      issues.push({
-        type: 'graphics',
-        message: 'Graphics, images, or visual elements referenced',
-        severity: 'high',
-        weight: ATS_RULES.SCORE_WEIGHTS.GRAPHICS,
-        fix: 'Remove all references to images, charts, logos, or graphics. ATS cannot process visual content.'
-      });
-      score -= ATS_RULES.SCORE_WEIGHTS.GRAPHICS;
-    }
-  });
-
-  // Check for uncommon fonts
-  ATS_RULES.ATS_RED_FLAGS.UNCOMMON_FONTS.forEach(font => {
-    if (lowerText.includes(font)) {
-      issues.push({
-        type: 'fonts',
-        message: `Uncommon or decorative font detected: "${font}"`,
-        severity: 'medium',
-        weight: ATS_RULES.SCORE_WEIGHTS.UNCOMMON_FONTS,
-        fix: 'Use standard professional fonts: Arial, Calibri, Times New Roman, Helvetica, or Georgia'
-      });
-      score -= ATS_RULES.SCORE_WEIGHTS.UNCOMMON_FONTS;
-    }
-  });
-
-  // Check for embedded symbols
-  ATS_RULES.ATS_RED_FLAGS.EMBEDDED_SYMBOLS.forEach(symbol => {
-    if (text.includes(symbol)) {
-      issues.push({
-        type: 'symbols',
-        message: 'Non-standard or special symbols detected',
-        severity: 'medium',
-        weight: ATS_RULES.SCORE_WEIGHTS.EMBEDDED_SYMBOLS,
-        fix: 'Replace special symbols with standard keyboard characters. Use asterisks (*) for bullets instead of special characters.'
-      });
-      score -= ATS_RULES.SCORE_WEIGHTS.EMBEDDED_SYMBOLS;
-    }
-  });
-
-  // Check for unprofessional emails
-  const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
-  const emails = text.match(emailRegex) || [];
-  emails.forEach(email => {
-    const domain = email.split('@')[1].toLowerCase();
-    const isUnprofessional = ATS_RULES.UNPROFESSIONAL_EMAILS.some(unprofessional => 
-      domain.includes(unprofessional)
-    );
-    const isProfessional = ATS_RULES.PROFESSIONAL_EMAILS.some(professional =>
-      domain.includes(professional)
-    );
-    
-    if (isUnprofessional && !isProfessional) {
-      issues.push({
-        type: 'email',
-        message: `Consider using a more professional email address: ${email}`,
-        severity: 'low',
-        weight: ATS_RULES.SCORE_WEIGHTS.UNPROFESSIONAL_EMAIL,
-        fix: 'Use an email with your name or professional domain (e.g., first.last@professional.com or first.last@yourcompany.com)'
-      });
-      score -= ATS_RULES.SCORE_WEIGHTS.UNPROFESSIONAL_EMAIL;
-    }
-  });
-
-  // Check for non-standard section titles
-  lines.forEach(line => {
-    const cleanLine = line.toLowerCase();
-    if (cleanLine.length > 3 && cleanLine.length < 50 && !cleanLine.includes(':')) {
-      ATS_RULES.NON_STANDARD_SECTIONS.forEach(nonStandard => {
-        if (cleanLine.includes(nonStandard)) {
-          const closestStandard = ATS_RULES.STANDARD_SECTIONS.find(standard => 
-            standard.includes(nonStandard.split(' ')[0]) || nonStandard.split(' ')[0].includes(standard.split(' ')[0])
-          ) || 'Work Experience';
-          
-          issues.push({
-            type: 'sections',
-            message: `Non-standard section title: "${line}"`,
-            severity: 'low',
-            weight: ATS_RULES.SCORE_WEIGHTS.NON_STANDARD_SECTION,
-            fix: `Replace with standard title: "${closestStandard.charAt(0).toUpperCase() + closestStandard.slice(1)}"`
-          });
-          score -= ATS_RULES.SCORE_WEIGHTS.NON_STANDARD_SECTION;
-        }
-      });
-    }
-  });
-
-  // Check for inconsistent bullets
-  const bulletPatterns = [/^[\s]*[•\-*+]\s+/gm, /^[\s]*\d+[\.\)]\s+/gm, /^[\s]*[a-z][\.\)]\s+/gm];
-  const bulletTypes = new Set();
-  bulletPatterns.forEach(pattern => {
-    if (pattern.test(text)) {
-      if (pattern.toString().includes('•')) bulletTypes.add('bullet');
-      if (pattern.toString().includes('\\d')) bulletTypes.add('numbered');
-      if (pattern.toString().includes('[a-z]')) bulletTypes.add('lettered');
-    }
-  });
-  
-  if (bulletTypes.size > 1) {
-    issues.push({
-      type: 'bullets',
-      message: 'Inconsistent bullet point formatting detected',
-      severity: 'low',
-      weight: ATS_RULES.SCORE_WEIGHTS.INCONSISTENT_BULLETS,
-      fix: 'Use consistent bullet style throughout (all • or all - or all *). Do not mix different bullet types.'
-    });
-    score -= ATS_RULES.SCORE_WEIGHTS.INCONSISTENT_BULLETS;
-  }
-
-  // Check for excessive whitespace
-  const excessiveWhitespace = /\s{5,}/g;
-  if (excessiveWhitespace.test(text)) {
-    issues.push({
-      type: 'whitespace',
-      message: 'Excessive whitespace or spacing detected',
-      severity: 'low',
-      weight: 1,
-      fix: 'Use standard spacing. Avoid multiple spaces or tabs for alignment.'
-    });
-    score -= 1;
-  }
-
-  // Check for text in headers (first line detection)
-  if (lines.length > 0 && lines[0].length < 20 && lines[0].includes(' ') === false) {
-    issues.push({
-      type: 'header_text',
-      message: 'Text detected in header position',
-      severity: 'medium',
-      weight: 3,
-      fix: 'Move all content to the main document body. Do not use document headers for resume content.'
-    });
-    score -= 3;
-  }
-
-  score = Math.max(0, Math.min(100, Math.round(score)));
-  
-  return {
-    score,
-    issues,
-    totalIssues: issues.length,
-    severityCount: {
-      high: issues.filter(i => i.severity === 'high').length,
-      medium: issues.filter(i => i.severity === 'medium').length,
-      low: issues.filter(i => i.severity === 'low').length
-    }
-  };
-}
-
-export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, reviews, faqs, howToSteps, breadcrumbData }) {
-  const [resumeText, setResumeText] = useState('');
-  const [analysis, setAnalysis] = useState(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [activeFaq, setActiveFaq] = useState(null);
-  const [buildTime, setBuildTime] = useState('');
-
-  // Use effect to set client-side timestamp to avoid hydration mismatch
-  useEffect(() => {
-    setBuildTime(Date.now().toString());
-  }, []);
-
-  // Use props if provided, otherwise fallback to constants
-  const safeLastUpdated = lastUpdated || BUILD_TIMESTAMP;
-  const safeFreshnessIndicator = freshnessIndicator || FRESHNESS_INDICATOR;
-  const safeReviews = reviews || REVIEWS;
-  const safeFaqs = faqs || FAQS;
-  const safeHowToSteps = howToSteps || HOW_TO_STEPS;
-  const safeBreadcrumbData = breadcrumbData || BREADCRUMB_DATA;
-
-  // SINGLE CANONICAL URL
-  const canonicalUrl = "https://professionalresumefree.com/free-ats-resume-checker";
-
-  // Internal links for SEO/GEO strengthening
-  const footerInternalLinks = [
-    { href: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "How to Write a Resume for USA Administrative Jobs", icon: FiBriefcase },
-    { href: "/best-resume-examples-for-usa-healthcare-jobs", text: "Best Resume Examples for USA Healthcare Jobs", icon: FiHeart },
-    { href: "/resume-tips-for-usa-college-students-and-graduates", text: "Resume Tips for USA College Students", icon: FiBookOpen },
-    { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "How to Write a Federal Resume for USA Government Jobs", icon: FiShield },
-    { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", text: "Most In-Demand Resume Keywords for USA Job Seekers", icon: FiSearch },
-  ];
-
-  // ===== FIXED SCHEMA DATA - Added hasMerchantReturnPolicy to all Offers =====
-  const schemaData = {
+  // ============================================================================
+  // COMPLETE STRUCTURED DATA (INJECTED FROM PAGE 1 BLUEPRINT)
+  // ============================================================================
+  const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
-        "name": "Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2026",
-        "description": "Professional ATS resume checker that analyzes 50+ parsing factors. Get instant feedback on ATS compatibility, formatting issues, and actionable fixes. 2026 Edition",
-        "datePublished": "2024-01-01",
-        "dateModified": safeLastUpdated,
+        "name": optimizedTitle,
+        "description": "Check if your resume passes ATS screening. Free instant analysis with compatibility score, keyword optimization, and actionable fixes. 100% private, no sign-up required.",
+        "datePublished": "2024-01-15",
+        "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
-          "@type": "WebSite",
-          "@id": "https://professionalresumefree.com/#website",
-          "url": "https://professionalresumefree.com",
-          "name": "Professional Resume Free",
-          "description": "Free online resume builder and ATS optimization tools for job seekers worldwide",
-          "publisher": {
-            "@type": "Organization",
-            "@id": "https://professionalresumefree.com/#organization",
-            "name": "Professional Resume Free",
-            "url": "https://professionalresumefree.com",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://professionalresumefree.com/logo.png",
-              "width": 512,
-              "height": 512
-            },
-            "sameAs": [
-              "https://twitter.com/ProResumeFree",
-              "https://linkedin.com/company/professional-resume-free",
-              "https://facebook.com/ProfessionalResumeFree",
-              "https://youtube.com/@ProfessionalResumeFree"
-            ]
-          }
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "url": "https://professionalresumefree.com/images/og-ats-resume-checker.jpg",
-          "width": 1200,
-          "height": 630
+          "@id": "https://professionalresumefree.com/#website"
         },
         "breadcrumb": {
           "@type": "BreadcrumbList",
-          "itemListElement": safeBreadcrumbData.map((item, index) => ({
-            "@type": "ListItem",
-            "position": index + 1,
-            "name": item.name,
-            "item": item.item
-          }))
+          "itemListElement": breadcrumbData
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://professionalresumefree.com/#website",
+        "url": "https://professionalresumefree.com",
+        "name": "Professional Resume Free",
+        "description": "Free ATS-Optimized Resume Templates and Career Tools",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free"
         }
       },
       {
         "@type": "WebApplication",
+        "@id": `${canonicalUrl}#webapplication`,
         "name": "Free ATS Resume Checker",
-        "description": "Professional Applicant Tracking System compatibility analyzer with 50+ parsing factor checks",
         "url": canonicalUrl,
         "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
+        "operatingSystem": "All",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31",
-          // FIXED: Added hasMerchantReturnPolicy for non-critical warning
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "applicableCountry": "US",
-            "returnPolicyCategory": "https://schema.org/NotPermitted",
-            "merchantReturnDays": 0
-          },
-          // FIXED: Added shippingDetails for completeness
-          "shippingDetails": {
-            "@type": "OfferShippingDetails",
-            "shippingRate": {
-              "@type": "MonetaryAmount",
-              "value": "0",
-              "currency": "USD"
-            },
-            "shippingDestination": {
-              "@type": "DefinedRegion",
-              "addressCountry": "US"
-            }
-          }
+          "availability": "https://schema.org/InStock"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "156",
-          "bestRating": "5",
-          "worstRating": "1"
+          "ratingValue": 4.8,
+          "ratingCount": 156,
+          "bestRating": 5,
+          "worstRating": 1
         },
-        "author": {
-          "@type": "Organization",
-          "name": "Professional Resume Free"
-        },
+        "description": "Free online ATS resume checker that analyzes 50+ parsing factors instantly. Privacy-first browser tool with actionable fix suggestions.",
         "featureList": [
           "50+ ATS Parsing Factor Analysis",
           "Privacy-First Browser Processing",
@@ -1847,719 +393,476 @@ export default function ATSResumeChecker({ lastUpdated, freshnessIndicator, revi
           "No Sign Up Required",
           "Mobile-Friendly Interface"
         ],
-        "softwareVersion": "2026.1.0",
-        "screenshot": "https://professionalresumefree.com/images/screenshot-ats-checker.jpg",
-        "countriesSupported": "Global"
+        "softwareVersion": `${CURRENT_YEAR}.1.0`,
+        "dateModified": safeLastModifiedDate
+      },
+      {
+        "@type": "Article",
+        "@id": `${canonicalUrl}#article`,
+        "headline": "Free ATS Resume Checker: Test Your Resume Score Instantly 2026",
+        "description": "Check if your resume passes ATS screening with our free instant analysis tool. Get compatibility score, keyword optimization tips, and actionable fixes.",
+        "author": {
+          "@type": "Organization",
+          "name": "Professional Resume Free"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free"
+        },
+        "mainEntityOfPage": canonicalUrl,
+        "datePublished": "2024-01-15",
+        "dateModified": safeLastModifiedDate
       },
       {
         "@type": "FAQPage",
         "@id": `${canonicalUrl}#faqpage`,
-        "mainEntity": safeFaqs.map((faq, index) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer,
-            "datePublished": faq.date,
-            "author": {
-              "@type": "Organization",
-              "name": "ATS Checker Support Team"
+        "mainEntity": [
+          ...FAQS.map((faq, index) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer,
+              "datePublished": safeFaqDates[index] || safeCurrentDate
             }
-          }
-        }))
+          })),
+          ...peopleAlsoAsk.map((paa, index) => ({
+            "@type": "Question",
+            "name": paa.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": paa.answer,
+              "datePublished": safeFaqDates[index + FAQS.length] || safeCurrentDate
+            }
+          }))
+        ]
       },
       {
         "@type": "HowTo",
-        "name": "How to Use the Free ATS Resume Checker Tool",
-        "description": "Step-by-step guide to analyze and optimize your resume for Applicant Tracking Systems",
-        "totalTime": "PT3M",
+        "name": "How to Check Your Resume for ATS Compatibility",
+        "description": "Step-by-step guide to analyzing your resume for applicant tracking systems",
         "estimatedCost": {
           "@type": "MonetaryAmount",
-          "currency": "USD",
-          "value": "0"
+          "value": "0",
+          "currency": "USD"
         },
-        "step": safeHowToSteps.map((step, index) => ({
-          "@type": "HowToStep",
-          "position": index + 1,
-          "name": step.name,
-          "text": step.text,
-          "url": `${canonicalUrl}#step-${index + 1}`,
-          "image": step.image
-        }))
-      },
-      // Individual Reviews with itemReviewed field
-      ...safeReviews.map((review, index) => ({
-        "@type": "Review",
-        "@id": `${canonicalUrl}#review-${index + 1}`,
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": review.rating,
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": review.name
-        },
-        "reviewBody": review.review,
-        "datePublished": review.date,
-        "itemReviewed": {
-          "@type": "WebApplication",
-          "name": "Free ATS Resume Checker",
-          "applicationCategory": "BusinessApplication",
-          "url": canonicalUrl,
-          "description": "Professional ATS compatibility analysis tool for job seekers"
-        }
-      })),
-      {
-        "@type": "Service",
-        "serviceType": "ATS Resume Analysis Service",
-        "provider": {
-          "@type": "Organization",
-          "name": "Professional Resume Free"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "Global"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Free Resume Analysis Services",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "ATS Compatibility Check"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Resume Formatting Analysis"
-              }
-            }
-          ]
-        },
-        "description": "Free ATS resume checking service for job seekers",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          // FIXED: Added hasMerchantReturnPolicy
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "applicableCountry": "US",
-            "returnPolicyCategory": "https://schema.org/NotPermitted"
-          }
-        }
-      },
-      {
-        "@type": "Product",
-        "@id": `${canonicalUrl}#product`,
-        "name": "Free ATS Resume Checker Tool",
-        "description": "Professional ATS compatibility analysis tool for job seekers",
-        "image": {
-          "@type": "ImageObject",
-          "url": "https://professionalresumefree.com/images/og-ats-resume-checker.jpg",
-          "width": 1200,
-          "height": 630,
-          "caption": "Free ATS Resume Checker Tool Interface"
-        },
-        "brand": {
-          "@type": "Brand",
-          "name": "Professional Resume Free"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31",
-          "url": canonicalUrl,
-          // FIXED: Added hasMerchantReturnPolicy for non-critical warning
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "applicableCountry": "US",
-            "returnPolicyCategory": "https://schema.org/NotPermitted",
-            "merchantReturnDays": 0
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Paste Your Resume Text",
+            "text": "Copy your resume content as plain text and paste it into the analysis box."
           },
-          // FIXED: Added shippingDetails for completeness
-          "shippingDetails": {
-            "@type": "OfferShippingDetails",
-            "shippingRate": {
-              "@type": "MonetaryAmount",
-              "value": "0",
-              "currency": "USD"
-            },
-            "shippingDestination": {
-              "@type": "DefinedRegion",
-              "addressCountry": "US"
-            }
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Run the Analysis",
+            "text": "Click 'Analyze Resume' to check 50+ ATS parsing factors including formatting, keywords, and structure."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Review Your Score",
+            "text": "Get your instant ATS compatibility score and see which areas need improvement."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Fix Issues Found",
+            "text": "Follow prioritized recommendations to fix formatting problems and optimize keywords."
           }
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "156",
-          "bestRating": "5",
-          "worstRating": "1"
-        }
-      },
-      {
-        "@type": "SpeakableSpecification",
-        "cssSelector": [".title", ".subtitle", ".card-title", ".section-title"]
+        ],
+        "totalTime": "PT3M"
       }
     ]
   };
 
-  // Sample resume text
-  const SAMPLE_RESUME = `JANE DOE
-123 Main Street, San Francisco, CA 94105
-(555) 123-4567 | jane.doe@professional.com | linkedin.com/in/janedoe
-
-PROFESSIONAL SUMMARY
-Results-driven Marketing Manager with 8+ years of experience developing and executing successful marketing campaigns. Specialized in digital marketing, brand strategy, and team leadership.
-
-WORK EXPERIENCE
-
-Senior Marketing Manager
-ABC Corporation, San Francisco, CA
-June 2019 – Present
-
-• Developed and executed comprehensive marketing strategies resulting in 45% increase in lead generation
-• Managed a team of 5 marketing specialists and 3 freelance content creators
-• Oversaw annual marketing budget of $2M, achieving 22% ROI
-• Implemented marketing automation tools that reduced manual work by 30 hours/week
-
-Marketing Specialist
-XYZ Inc., San Jose, CA
-January 2016 – May 2019
-
-• Created and managed social media campaigns across Facebook, LinkedIn, and Twitter
-• Produced monthly performance reports and presented findings to senior management
-• Collaborated with sales team to develop targeted marketing materials
-• Increased social media engagement by 150% through strategic content planning
-
-EDUCATION
-
-MBA in Marketing
-University of California, Berkeley
-Graduated: May 2015
-
-Bachelor of Business Administration
-Stanford University
-Graduated: May 2013
-
-SKILLS
-
-• Digital Marketing Strategy
-• Team Leadership & Management
-• Budget Planning & Analysis
-• Marketing Automation Tools
-• Google Analytics Certified
-• Social Media Marketing
-• Content Strategy
-• SEO/SEM Optimization`;
-
-  const handleAnalyze = useCallback(() => {
-    if (!resumeText.trim()) {
-      alert('Please paste your resume text first');
-      return;
-    }
-    
-    setIsAnalyzing(true);
-    setTimeout(() => {
-      const result = analyzeResume(resumeText);
-      setAnalysis(result);
-      setIsAnalyzing(false);
-    }, 500);
-  }, [resumeText]);
-
-  const handleUseSample = () => {
-    setResumeText(SAMPLE_RESUME);
-  };
-
-  const handleClear = () => {
-    setResumeText('');
-    setAnalysis(null);
-  };
-
+  // ==========================================================================
+  // RENDER
+  // ==========================================================================
   return (
     <>
+      {/* ============================================================================
+          COMPLETE <HEAD> INJECTION (FROM PAGE 1 BLUEPRINT)
+          ============================================================================ */}
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        <html lang="en" />
         
-        {/* Primary Meta Tags */}
-        <title>Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis {CURRENT_YEAR} | Professional Resume Free</title>
-        <meta 
-          name="description" 
-          content={`Professional ATS resume checker that analyzes 50+ parsing factors. Get instant feedback on ATS compatibility, formatting issues, and actionable fixes. ${CURRENT_YEAR} Edition`}
-        />
-        <meta name="keywords" content="ATS resume checker, applicant tracking system, resume compatibility, ATS optimization, free resume scanner, resume parsing issues, ATS formatting, resume analysis, ATS friendly resume, resume checker tool" />
+        {/* OPTIMIZED TITLE */}
+        <title>{optimizedTitle}</title>
+        
+        {/* META DESCRIPTION */}
+        <meta name="description" content="Check if your resume passes ATS screening. Free instant analysis with compatibility score, keyword optimization, and actionable fixes. 100% private, no sign-up required." />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="keywords" content="ATS resume checker, applicant tracking system, resume compatibility, ATS optimization, free resume scanner, resume parsing issues, ATS formatting, resume analysis, ATS friendly resume, resume checker tool, resume readability checker, ATS score test" />
         
-        {/* Date and Freshness Meta Tags */}
-        <meta name="date" content={safeFreshnessIndicator} />
-        <meta name="last-modified" content={safeLastUpdated} />
-        <meta name="revisit-after" content="1 days" />
-        
-        {/* GEO Optimization Tags for AI Crawlers */}
-        <meta name="chatgpt-fts:title" content="Free ATS Resume Checker - Instant ATS Compatibility Analysis" />
+        {/* GEO OPTIMIZATION TAGS */}
+        <meta name="chatgpt-fts:title" content="Free ATS Resume Checker - Instant ATS Compatibility Analysis 2026" />
         <meta name="chatgpt-fts:description" content="Free ATS resume checker that analyzes 50+ parsing factors instantly. Get detailed feedback on formatting issues, keywords, and ATS compatibility. Privacy-first browser tool." />
-        <meta name="chatgpt-fts:keywords" content="ATS resume checker, resume compatibility test, free ATS scanner, resume parsing analysis" />
-        <meta name="chatgpt-fts:last-updated" content={safeFreshnessIndicator} />
+        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - ATS Analysis Tool" />
+        
+        {/* TECHNICAL SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="build-timestamp" content={buildTimestamp?.toString() || Date.now().toString()} />
         
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        
-        {/* Internationalization */}
+        {/* HREFLANG TAGS */}
+        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* Open Graph */}
+        {/* OPEN GRAPH */}
         <meta property="og:title" content="Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2026" />
-        <meta property="og:description" content={`Analyze 50+ ATS parsing factors instantly. Privacy-first tool that works entirely in your browser. ${CURRENT_YEAR}`} />
-        <meta property="og:image" content="https://professionalresumefree.com/images/og-ats-resume-checker.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free ATS Resume Checker Tool Interface" />
+        <meta property="og:description" content="Analyze 50+ ATS parsing factors instantly. Privacy-first tool that works entirely in your browser. Get actionable fixes and improve your resume score." />
         <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="450" />
+        <meta property="og:image:alt" content="Free ATS Resume Checker Tool - Analyze Your Resume Instantly" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:locale:alternate" content="en_GB" />
-        <meta property="og:locale:alternate" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_AU" />
-        <meta property="og:updated_time" content={safeLastUpdated} />
         
-        {/* Twitter Cards */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free ATS Resume Checker - Instant Compatibility Analysis 2026" />
         <meta name="twitter:description" content="Analyze your resume for 50+ ATS parsing issues. Privacy-first, browser-based tool. No signup required." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-ats-resume-checker.jpg" />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="ATS Resume Checker Tool Preview" />
-        <meta name="twitter:site" content="@ProResumeFree" />
-        <meta name="twitter:creator" content="@ProResumeFree" />
+        <meta name="twitter:site" content="@ProfResumeFree" />
         
-        {/* Theme and Icons */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#131315" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* Performance Optimization */}
+        {/* PRECONNECT FOR PERFORMANCE */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* Structured Data */}
+        {/* GOOGLE FONTS (PRESERVED FROM PAGE 2) */}
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* COMPLETE STRUCTURED DATA */}
         <script
           type="application/ld+json"
-          key="structured-data"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
 
-      <div className="landing-page" lang="en-US">
-        {/* Freshness Indicator - Hidden */}
-        <div className="freshness-indicator">
-          <meta name="build-timestamp" content={buildTime} />
-          <meta name="content-freshness" content={safeFreshnessIndicator} />
-        </div>
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <ol itemScope itemType="https://schema.org/BreadcrumbList">
-            {safeBreadcrumbData.map((item, index) => (
-              <li 
-                key={index}
-                itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ListItem"
-              >
-                {index > 0 && <span className="breadcrumb-separator">›</span>}
-                <Link
-                  href={item.item}
-                  itemProp="item"
-                  className="breadcrumb-link"
-                >
-                  <span itemProp="name">{item.name}</span>
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" itemProp="item">
+                  <span itemProp="name"><FiHome size={14} /> Home</span>
                 </Link>
-                <meta itemProp="position" content={index + 1} />
+                <meta itemProp="position" content="1" />
               </li>
-            ))}
-          </ol>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/free-resume-readability-checker" itemProp="item">
+                  <span itemProp="name">Free Tools</span>
+                </Link>
+                <meta itemProp="position" content="2" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page">ATS Resume Checker 2026</span>
+                <meta itemProp="position" content="3" />
+              </li>
+            </ol>
+          </div>
         </nav>
 
-        <div className="container">
-          <header className="header" role="banner">
-            <div className="trust-badge">
-              <span className="trust-badge-text">
-                Best Free ATS Checker {CURRENT_YEAR}
-              </span>
-            </div>
-            
-            <h1 className="title">
-              Free ATS Resume Checker - <span className="gradient-text">Analyze 50+ Parsing Factors Instantly</span>
-            </h1>
-            
-            <p className="subtitle">
-              Professional <strong className="hero-highlight">Applicant Tracking System compatibility analyzer</strong> that works entirely in your browser. No data leaves your computer - 100% privacy guaranteed.
-            </p>
-          </header>
-
-          <main className="main-content">
-            <section className="analysis-section">
-              <div className="card">
-                <div className="card-header">
-                  <h2 className="card-title">Paste Your Resume Text for ATS Analysis</h2>
-                  <p className="card-subtitle">Completely private - all processing happens in your browser</p>
-                  <div className="button-group">
-                    <button onClick={handleUseSample} className="button secondary-button">
-                      Use Sample Resume
-                    </button>
-                    <button onClick={handleClear} className="button secondary-button">
-                      Clear Text
-                    </button>
-                  </div>
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge" aria-label="Trust indicators">✦ Free Tool • No Sign Up • Instant Results | Updated {CURRENT_YEAR}</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Free <span className="gradient-text">ATS Resume</span> Checker
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Instantly analyze your resume for <strong>ATS compatibility</strong>. Get a detailed score, identify missing keywords, and fix formatting issues that could cost you your dream job. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
+              </p>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }} aria-label="Key statistics">
+                <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
+                  <span className="badge">📊 Based on {CURRENT_YEAR} ATS Standards</span>
                 </div>
-                
-                <textarea
-                  className="textarea"
-                  value={resumeText}
-                  onChange={(e) => setResumeText(e.target.value)}
-                  placeholder="Paste your resume text here (plain text only)...
+                <div className="stat-card"><div className="stat-number">98%</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Fortune 500 Use ATS</div></div>
+                <div className="stat-card"><div className="stat-number">75%</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Resumes Rejected</div></div>
+                <div className="stat-card"><div className="stat-number">3x</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>More Interviews</div></div>
+                <div className="stat-card"><div className="stat-number">100%</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Private & Secure</div></div>
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginTop: '1.5rem', flexWrap: 'wrap', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}>
+                <span><FiCalendar size={14} style={{ display: 'inline' }} /> Updated: {safeCurrentDate}</span>
+                <span><FiClock size={14} style={{ display: 'inline' }} /> Instant Results</span>
+                <span><FiUsers size={14} style={{ display: 'inline' }} /> Trusted by 500K+ Users</span>
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }} role="group" aria-label="Call to action buttons">
+                <button onClick={() => checkerRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>
+                  <FiSearch /> Check Your Resume Now
+                </button>
+                <Link href="/resume-templates" className="btn-outline"><FiFileText /> Build ATS-Friendly Resume</Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
-Best Practices:
-• Use standard section headers (Work Experience, Education, Skills)
-• Avoid tables, columns, and graphics
-• Use consistent bullet points
-• Include relevant keywords from job description
-• Professional email format
-• No headers/footers/page numbers
+        {/* Checker Tool */}
+        <section ref={checkerRef} className="section section-alt" aria-labelledby="checker-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <div className="section-header" style={{ marginBottom: '1.5rem' }}>
+                <h2 id="checker-heading" className="section-title">Paste Your Resume Below</h2>
+                <p className="section-subtitle">Copy and paste your full resume text for instant ATS analysis</p>
+              </div>
+              <textarea
+                value={resumeText}
+                onChange={(e) => setResumeText(e.target.value)}
+                placeholder="Paste your resume text here...
 
-Example Format:
-John Doe
-john.doe@professional.com
-(555) 123-4567
+JOHN DOE
+john.doe@email.com | (555) 123-4567
 
 PROFESSIONAL SUMMARY
-Experienced professional with...
+Results-driven software engineer with 5+ years of experience...
 
-WORK EXPERIENCE
-• Achieved 30% increase in..."
-                  rows={15}
-                  aria-label="Resume text input for ATS analysis"
-                />
+EXPERIENCE
+Senior Developer | ABC Tech Corp | 2020-Present
+• Led team of 5 developers in building scalable web applications
+• Increased application performance by 40% through optimization..."
+                aria-label="Paste your resume text for ATS analysis"
+                style={{ marginBottom: '1.5rem' }}
+              />
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <button 
+                  className="btn-primary" 
+                  onClick={analyzeResume}
+                  disabled={!resumeText.trim() || isAnalyzing}
+                >
+                  {isAnalyzing ? <><FiRefreshCw size={20} style={{ animation: 'spin 1s linear infinite' }} /> Analyzing...</> : <><FiSearch size={20} /> Analyze Resume</>}
+                </button>
+                {resumeText && (
+                  <button className="btn-outline" onClick={resetChecker}><FiTrash2 size={20} /> Clear</button>
+                )}
+              </div>
+            </div>
+
+            {/* Results */}
+            {results && (
+              <div style={{ maxWidth: '900px', margin: '2rem auto 0', animation: 'slideUp 0.5s var(--easing-smooth)' }}>
+                <div className="gold-divider" style={{ margin: '0 auto 2rem' }}></div>
+                <div className="section-header">
+                  <h2 className="section-title">Your ATS Compatibility Report</h2>
+                </div>
                 
-                <div className="analyze-button-container">
-                  <button 
-                    onClick={handleAnalyze} 
-                    className="button primary-button"
-                    disabled={isAnalyzing}
-                  >
-                    {isAnalyzing ? (
-                      <>
-                        <span>Analyzing ATS Compatibility...</span>
-                        <span className="spinner">⟳</span>
-                      </>
-                    ) : (
-                      'Analyze ATS Compatibility Now'
-                    )}
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {isAnalyzing ? (
-              <div className="loading">
-                <p>Analyzing your resume for ATS compatibility...</p>
-                <div className="loading-bar">
-                  <div className="loading-progress"></div>
-                </div>
-              </div>
-            ) : analysis ? (
-              <>
                 <div className="grid">
-                  <ScoreDisplay score={analysis.score} severityCount={analysis.severityCount} />
-                  <IssueList issues={analysis.issues} />
-                </div>
-                <FixSuggestions />
-              </>
-            ) : (
-              <div className="card">
-                <h2 className="card-title">Ready to Analyze Your Resume's ATS Compatibility</h2>
-                <p className="ready-text">
-                  Paste your resume text above and click "Analyze ATS Compatibility Now" to begin.
-                </p>
-                <div className="checklist">
-                  <p className="checklist-title">What this ATS checker analyzes:</p>
-                  <ul>
-                    <li>Headers, footers, and page numbers (ATS cannot read these)</li>
-                    <li>Tables, columns, and complex formatting</li>
-                    <li>Graphics, charts, and image references</li>
-                    <li>Uncommon fonts and special symbols</li>
-                    <li>Non-standard section titles</li>
-                    <li>Inconsistent bullet points</li>
-                    <li>Email professionalism for ATS systems</li>
-                    <li>Text boxes and shapes</li>
-                    <li>Watermarks and background images</li>
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            {/* How-to Section */}
-            <section className="how-to-section" aria-labelledby="how-to-title">
-              <h2 className="section-title" id="how-to-title">How It Works: 5-Step ATS Optimization</h2>
-              <p className="section-subtitle">
-                Follow these steps to ensure your resume passes through any Applicant Tracking System
-              </p>
-              <div className="how-to-steps">
-                {safeHowToSteps.map((step, index) => (
-                  <div key={index} className="how-to-step" id={`step-${index + 1}`}>
-                    <div className="step-number">{index + 1}</div>
-                    <h3 className="step-title">{step.name}</h3>
-                    <p className="step-description">{step.text}</p>
+                  <div className="stat-card">
+                    <div className={`score-circle ${getScoreColor(results.score)}`}>{results.score}</div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Overall ATS Score</div>
                   </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Long-Tail Keywords Section */}
-            <section className="how-to-section">
-              <h2 className="section-title">Common Questions About ATS Resume Checking</h2>
-              <div className="how-to-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-                {[
-                  "how to check if resume is ATS friendly",
-                  "free ATS resume checker online",
-                  "best resume format for ATS systems",
-                  "ATS parsing issues in resumes",
-                  "resume keywords for applicant tracking systems",
-                  "ATS compatible resume template free",
-                  "how to beat ATS screening 2026",
-                  "privacy safe resume analysis tool"
-                ].map((keyword, i) => (
-                  <div key={i} className="how-to-step" style={{ padding: '20px' }}>
-                    <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
-                    <Link href="/complete-resume-resource-library" className="breadcrumb-link">
-                      Find answer in our resource library →
-                    </Link>
+                  <div className="stat-card">
+                    <div className="stat-number">{results.wordCount}</div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Word Count</div>
                   </div>
-                ))}
-              </div>
-            </section>
+                  <div className="stat-card">
+                    <div className="stat-number">{results.keywordScore}%</div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Keyword Match ({results.foundKeywords}/{results.totalKeywords})</div>
+                  </div>
+                </div>
 
-            {/* FAQ Section */}
-            <section className="faq-section" aria-labelledby="faq-title">
-              <h2 className="section-title" id="faq-title">Frequently Asked Questions About ATS</h2>
-              <p className="section-subtitle">
-                Everything you need to know about optimizing your resume for Applicant Tracking Systems
-              </p>
-              <div className="faq-list">
-                {safeFaqs.map((faq, index) => (
-                  <div 
-                    key={index} 
-                    className={`faq-item ${activeFaq === index ? 'active' : ''}`}
-                    onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                    itemScope
-                    itemProp="mainEntity"
-                    itemType="https://schema.org/Question"
-                  >
-                    <div className="faq-question">
-                      <h3 itemProp="name">{faq.question}</h3>
-                      <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
+                <div className="grid" style={{ marginTop: '1rem' }}>
+                  {[
+                    { label: 'Standard Headings', pass: results.hasStandardHeadings },
+                    { label: 'Bullet Points', pass: results.hasBulletPoints },
+                    { label: 'Action Verbs', pass: results.hasActionVerbs },
+                    { label: 'Quantified Results', pass: results.hasQuantifiedResults },
+                    { label: 'Contact Information', pass: results.hasContactInfo }
+                  ].map((check, idx) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', background: 'var(--card-bg)', borderRadius: '0.5rem', border: 'var(--card-border)' }}>
+                      {check.pass ? <FiCheckCircle size={24} color="var(--success-color)" /> : <FiAlertCircle size={24} color="var(--warning-color)" />}
+                      <div>
+                        <div style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)' }}>{check.label}</div>
+                        <div className="text-small">{check.pass ? 'Passed' : 'Needs attention'}</div>
+                      </div>
                     </div>
-                    {activeFaq === index && (
-                      <div 
-                        className="faq-answer"
-                        itemScope
-                        itemProp="acceptedAnswer"
-                        itemType="https://schema.org/Answer"
-                      >
-                        <p itemProp="text">{faq.answer}</p>
-                        <meta itemProp="datePublished" content={faq.date} />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </section>
+                  ))}
+                </div>
 
-            {/* Reviews Section */}
-            <section className="reviews-section" aria-labelledby="reviews-title">
-              <h2 className="section-title" id="reviews-title">What Professionals Say About Our ATS Checker</h2>
-              <p className="section-subtitle">
-                Trusted by HR professionals, recruiters, and job seekers worldwide
-              </p>
-              <div className="reviews-grid">
-                {safeReviews.map((review, index) => (
-                  <div key={index} className="review-card" itemScope itemType="https://schema.org/Review">
-                    <meta itemProp="datePublished" content={review.date} />
-                    <div className="review-header">
-                      <div className="reviewer-info">
-                        <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                          <meta itemProp="name" content={review.name} />
-                          <strong className="reviewer-name">{review.name}</strong>
-                        </span>
-                        <span className="reviewer-position">{review.position}</span>
-                        <span className="reviewer-company">{review.company}</span>
-                      </div>
-                      <div className="review-rating" itemScope itemType="https://schema.org/Rating">
-                        <meta itemProp="ratingValue" content={review.rating} />
-                        <meta itemProp="bestRating" content="5" />
-                        <div className="stars">
-                          {'★'.repeat(review.rating)}
-                          {'☆'.repeat(5 - review.rating)}
+                {results.issues.length > 0 && (
+                  <div style={{ marginTop: '2rem' }}>
+                    <h3 style={{ marginBottom: '1rem', color: 'var(--accent-primary)' }}>Recommended Fixes</h3>
+                    {results.issues.map((issue, idx) => (
+                      <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem 1rem', background: 'var(--card-bg)', borderRadius: '0.5rem', border: 'var(--card-border)', marginBottom: '0.5rem' }}>
+                        <FiAlertTriangle size={20} color={getSeverityColor(issue.severity)} style={{ flexShrink: 0, marginTop: '2px' }} />
+                        <div>
+                          <div style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
+                            {issue.severity.charAt(0).toUpperCase() + issue.severity.slice(1)} Priority
+                          </div>
+                          <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{issue.text}</div>
                         </div>
                       </div>
-                    </div>
-                    <div className="review-content" itemProp="reviewBody">
-                      <p>"{review.review}"</p>
-                    </div>
-                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/WebApplication">
-                      <meta itemProp="name" content="Free ATS Resume Checker" />
-                      <meta itemProp="applicationCategory" content="BusinessApplication" />
-                    </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
-            </section>
-
-            {/* Resources Section */}
-            <section className="resources-section" aria-labelledby="resources-title">
-              <h2 className="section-title" id="resources-title">ATS Optimization Resume Resources</h2>
-              <p className="section-subtitle">
-                Explore our comprehensive resume optimization tools and guides
-              </p>
-              <div className="resources-grid">
-                <Link 
-                  href="/free-resume-builder"
-                  className="resource-card"
-                  prefetch={false}
-                >
-                  <h3>Free Resume Builder</h3>
-                  <p>Create professional, ATS-optimized resumes with our free builder. No sign up required.</p>
-                </Link>
-                <Link 
-                  href="/resume-templates"
-                  className="resource-card"
-                  prefetch={false}
-                >
-                  <h3>ATS Resume Templates</h3>
-                  <p>Download professionally designed ATS-friendly resume templates for all industries.</p>
-                </Link>
-                <Link 
-                  href="/resume-writing-guide"
-                  className="resource-card"
-                  prefetch={false}
-                >
-                  <h3>Resume Writing Guide</h3>
-                  <p>Learn how to write compelling resumes that pass ATS and impress recruiters.</p>
-                </Link>
-              </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="cta-section">
-              <div className="cta-content">
-                <h2 className="cta-title">Ready to Optimize Your Resume for ATS?</h2>
-                <p className="cta-subtitle">
-                  Join thousands of successful job seekers who have improved their ATS compatibility scores
-                </p>
-                <div className="cta-buttons">
-                  <button 
-                    onClick={handleUseSample} 
-                    className="button cta-button"
-                  >
-                    Try with Sample Resume
-                  </button>
-                  <Link 
-                    href="/resume-templates"
-                    className="button secondary-button"
-                    prefetch={false}
-                  >
-                    Browse Resume Templates
-                  </Link>
-                </div>
-                <div className="cta-guarantee">
-                  <span className="guarantee-text">✓ 100% Free • No Sign Up • Privacy Guaranteed • Instant Results</span>
-                </div>
-              </div>
-            </section>
-          </main>
-
-          {/* Build Info */}
-          <div className="build-info">
-            <p>Last updated: {safeFreshnessIndicator} • Build: {buildTime}</p>
+            )}
           </div>
+        </section>
 
-          {/* Hidden Metadata */}
-          <div className="hidden">
-            <span itemProp="dateModified">{safeLastUpdated}</span>
-            <span itemProp="softwareVersion">2026.1.0</span>
-          </div>
-
-          {/* Internal Links Footer Section for SEO/GEO */}
-          <section className="internal-links-footer" aria-labelledby="internal-links-heading">
-            <div className="container">
-              <h2 id="internal-links-heading" className="internal-links-title">
-                🔗 Explore More Resume Resources
-              </h2>
-              <div className="internal-links-grid-footer">
-                {footerInternalLinks.map((link, index) => {
-                  const Icon = link.icon;
-                  return (
-                    <Link 
-                      key={index} 
-                      href={link.href} 
-                      className="internal-link-card-footer"
-                      aria-label={link.text}
-                    >
-                      <Icon className="internal-link-icon-footer" size={20} aria-hidden="true" />
-                      <span className="internal-link-text-footer">{link.text}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-              <p className="helper-text" style={{marginTop: '20px', fontSize: '0.75rem', textAlign: 'center', color: 'var(--text-light)'}}>
-                These links help you discover related resume guides, tools, and tips to strengthen your job application.
-              </p>
+        {/* Features */}
+        <section className="section" aria-labelledby="features-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="features-heading" className="section-title">Powerful ATS Analysis Features</h2>
+              <p className="section-subtitle">Everything you need to ensure your resume passes automated screening</p>
             </div>
-          </section>
+            <div className="grid">
+              {FEATURES.map((feature, i) => {
+                const IconComponent = ICON_MAP[feature.icon] || FiFileText;
+                return (
+                  <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                    <div style={{ width: '64px', height: '64px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', border: '0.5px solid var(--border-gold-filament)', color: 'var(--accent-primary)' }}>
+                      <IconComponent size={32} />
+                    </div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{feature.title}</h3>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', flex: 1 }}>{feature.desc}</p>
+                    <span className="feature-badge" style={{ marginTop: 'auto', justifyContent: 'center' }}>{feature.stat}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* People Also Ask Section (INJECTED FROM PAGE 1 BLUEPRINT) */}
+        <section className="section section-alt" aria-labelledby="paa-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="paa-heading" className="section-title">People Also Ask About ATS Resume Checking</h2>
+              <p className="section-subtitle">Quick answers to common ATS compatibility questions</p>
+            </div>
+            <div className="faq-grid">
+              {peopleAlsoAsk.map((paa, i) => (
+                <div key={`paa-${i}`} className={`faq-item ${activeFaq === `paa-${i}` ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === `paa-${i}` ? null : `paa-${i}`)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === `paa-${i}` ? null : `paa-${i}`)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{paa.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === `paa-${i}` ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === `paa-${i}` ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === `paa-${i}` && <div className="faq-answer"><p>{paa.answer}</p></div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section" aria-labelledby="faq-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="faq-heading" className="section-title">Frequently Asked Questions</h2>
+              <p className="section-subtitle">Everything about ATS resume checking</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && <div className="faq-answer"><p>{faq.answer}</p></div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Ready to Beat the ATS?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Check your resume now and get instant feedback to improve your chances. <strong>100% Free. No Sign-Up. Instant Results. Complete Privacy.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+              <button onClick={() => checkerRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiSearch /> Check Your Resume Now</button>
+              <Link href="/free-resume-builder" className="btn-outline"><FiFileText /> Build New Resume</Link>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              {["No sign-up required", "100% Private", "Instant results", "Free forever"].map((f, i) => (
+                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck style={{ color: 'var(--accent-primary)' }} /> {f}</span>
+              ))}
+            </div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              Updated: {safeCurrentDate}
+            </p>
+          </div>
+        </section>
+
+        {/* Internal Links */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Enhance Your Resume Further</h2>
+              <p className="section-subtitle">Complement your ATS check with these powerful tools and guides</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-resume-builder", text: "Free ATS-Friendly Resume Builder", iconName: "FiFileText" },
+                { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "Pass AI Resume Screens: 2026 ATS Guide", iconName: "FiTarget" },
+                { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" },
+                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate}</span>
         </div>
-      </div>
+
+        {/* Hidden metadata for crawlers */}
+        <div style={{ display: 'none' }}>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{buildTimestamp}</span>
+        </div>
+      </main>
     </>
   );
-}
+};
 
-export async function getStaticProps() {
-  const buildTimestamp = Date.now();
-  const buildTime = new Date(buildTimestamp);
-  const currentDate = buildTime.toISOString().split('T')[0];
-  const lastModifiedDate = buildTime.toISOString();
-
-  return {
-    props: {
-      lastUpdated: lastModifiedDate,
-      freshnessIndicator: currentDate,
-      reviews: REVIEWS,
-      faqs: FAQS,
-      howToSteps: HOW_TO_STEPS,
-      breadcrumbData: BREADCRUMB_DATA
-    },
-    revalidate: 3600,
-  };
-}
+export default ATSResumeCheckerPage;

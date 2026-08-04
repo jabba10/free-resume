@@ -1,992 +1,294 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiStar, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiDownload,
-  FiFileText,
-  FiTool,
-  FiUsers,
-  FiTarget,
-  FiTrendingUp,
-  FiBriefcase,
-  FiCode,
-  FiHeart,
-  FiDollarSign,
-  FiBookOpen,
-  FiShield,
-  FiLayers,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiLinkedin,
-  FiGithub,
-  FiCpu,
-  FiDatabase,
-  FiCloud,
-  FiTerminal
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiAlertCircle, FiCheckCircle, FiXCircle, FiX, FiBarChart2,
+  FiActivity, FiZap, FiInfo, FiEdit, FiEdit3, FiSmartphone,
+  FiCopy, FiPenTool, FiType, FiAlignLeft, FiHash, FiLock,
+  FiSmile, FiUserCheck, FiSave, FiRefreshCw, FiThumbsUp,
+  FiGlobe, FiSearch, FiMonitor, FiSun, FiMoon, FiCoffee,
+  FiCompass, FiAnchor, FiPercent, FiPieChart, FiMessageCircle
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-.hero {
-  background: var(--background);
-  padding: 40px 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .hero { padding: 60px 0; }
-}
-.hero h1 {
-  font-size: clamp(1.5rem, 5vw, 3rem);
-  margin-bottom: 16px;
-  line-height: 1.2;
-  word-wrap: break-word;
-}
-.hero p {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  max-width: 800px;
-  margin: 0 auto 24px;
-  padding: 0 16px;
-}
-.hero-image-container {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto 32px;
-  padding: 0 16px;
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-@media (min-width: 1024px) {
-  .hero-image-container { max-width: 650px; }
-}
-@media (min-width: 1280px) {
-  .hero-image-container { max-width: 600px; }
-}
-.hero-image-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-@media (max-width: 480px) {
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6; --purple-accent: #bb86fc;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
   }
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin: 30px 0;
-}
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (min-width: 1280px) {
-  .grid { grid-template-columns: repeat(4, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  text-align: center;
-  align-items: center;
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.card:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--primary);
-  color: var(--background);
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  margin: 8px;
-  border: 1px solid var(--primary);
-  transition: background 0.2s;
-  width: auto;
-  min-width: 200px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .btn-primary {
-    width: 100%;
-    margin: 4px 0;
-    min-width: auto;
-    padding: 14px 24px;
-  }
-}
-.btn-primary:hover {
-  background: var(--secondary);
-}
-.btn-primary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: var(--primary);
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 2px solid var(--primary);
-  margin: 8px;
-  transition: background 0.2s;
-  width: auto;
-  min-width: 200px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .btn-secondary {
-    width: 100%;
-    margin: 4px 0;
-    min-width: auto;
-    padding: 14px 24px;
-  }
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-}
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-@media (max-width: 640px) {
-  .stats { gap: 16px; }
-}
-@media (max-width: 480px) {
-  .stats { 
-    gap: 12px;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-.stat-item {
-  text-align: center;
-  min-width: 120px;
-  padding: 8px;
-}
-@media (max-width: 480px) {
-  .stat-item { 
-    min-width: 100%;
-    width: 100%;
-    max-width: 250px;
-  }
-}
-.stat-number {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: bold;
-  display: block;
-}
-.section {
-  padding: 40px 0;
-  scroll-margin-top: 20px;
-  text-align: center;
-}
-@media (min-width: 768px) {
-  .section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-  .section { padding: 30px 0; }
-}
-.section:target {
-  background-color: rgba(0,0,0,0.02);
-}
-.section-title {
-  text-align: center;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  margin-bottom: 32px;
-  padding: 0 16px;
-  word-wrap: break-word;
-}
-@media (max-width: 480px) {
-  .section-title { margin-bottom: 24px; }
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 700px;
-  margin: 0 auto 40px;
-  padding: 0 16px;
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-}
-.table-wrap {
-  overflow-x: auto;
-  margin: 30px 0;
-  background: var(--background);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-@media (max-width: 640px) {
-  .table-wrap {
-    margin: 20px 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-}
-@media (max-width: 480px) {
-  table { min-width: 500px; }
-}
-th {
-  background: var(--card-bg);
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-  font-size: 0.9rem;
-}
-@media (min-width: 768px) {
-  th { padding: 16px; font-size: 1rem; }
-}
-td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-}
-@media (min-width: 768px) {
-  td { padding: 16px; font-size: 1rem; }
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 768px) {
-  .faq-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-  scroll-margin-top: 20px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .faq-item { padding: 20px; }
-}
-.faq-item:target {
-  background-color: #f0f0f0;
-}
-.faq-question {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--primary);
-  line-height: 1.4;
-  text-align: center;
-}
-.trust-badge {
-  display: inline-block;
-  background: #f3f4f6;
-  color: var(--primary);
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .trust-badge {
-    font-size: 0.75rem;
-    padding: 5px 10px;
-  }
-}
-.breadcrumb {
-  padding: 16px 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .breadcrumb {
-    padding: 12px 0;
-    font-size: 0.85rem;
-  }
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: 0.9rem;
-  justify-content: center;
-}
-@media (max-width: 480px) {
-  .breadcrumb ol { gap: 4px; }
-}
-.breadcrumb a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover {
-  border-bottom-color: var(--primary);
-}
-.breadcrumb [aria-current="page"] {
-  font-weight: 600;
-}
-.hub-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  justify-items: center;
-}
-@media (min-width: 640px) {
-  .hub-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .hub-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.hub-category {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  width: 100%;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .hub-category { padding: 20px; }
-}
-.hub-category ul {
-  list-style: none;
-  margin-top: 16px;
-}
-.hub-category li {
-  margin: 12px 0;
-}
-.hub-category a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid #d1d5db;
-  padding-bottom: 2px;
-}
-.hub-category a:hover {
-  border-bottom-color: var(--primary);
-}
-.specialized-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 640px) {
-  .specialized-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .specialized-grid { grid-template-columns: repeat(3, 1fr); }
-}
-.specialized-card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-.specialized-card h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.founder-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-  text-align: center;
-}
-.testimonial-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-.cta-section {
-  background: var(--background);
-  color: var(--primary);
-  padding: 40px 0;
-  text-align: center;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .cta-section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-  .cta-section { padding: 30px 0; }
-}
-.cta-section h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 16px;
-  padding: 0 16px;
-}
-.cta-section p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  max-width: 800px;
-  margin: 0 auto 24px;
-  padding: 0 16px;
-}
-.feature-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-  justify-content: center;
-}
-.feature-tag {
-  background: #e5e7eb;
-  color: var(--primary);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  border: 1px solid #d1d5db;
-}
-@media (min-width: 768px) {
-  .feature-tag { font-size: 0.8rem; }
-}
-@media (max-width: 480px) {
-  .feature-tag { 
-    font-size: 0.7rem;
-    padding: 3px 6px;
-  }
-}
-.text-small { font-size: 0.85rem; color: var(--text-light); }
-.text-success { color: #059669; font-weight: 600; }
-.text-danger { color: #dc2626; font-weight: 600; }
-hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-@media (max-width: 480px) {
-  hr { margin: 30px 0; }
-}
-.methodology-list {
-  list-style: none;
-  margin-top: 12px;
-}
-.methodology-list li {
-  margin-bottom: 8px;
-  padding-left: 20px;
-  position: relative;
-}
-.methodology-list li:before {
-  content: "✓";
-  color: #059669;
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-.advisory-panel {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 16px;
-  justify-content: center;
-}
-@media (max-width: 640px) {
-  .advisory-panel { gap: 16px; }
-}
-@media (max-width: 480px) {
-  .advisory-panel {
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-}
-.advisory-member {
-  flex: 1 1 200px;
-  padding: 12px;
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .advisory-member { width: 100%; }
-}
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-/* Mobile-specific touch improvements */
-@media (max-width: 480px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .card:active { opacity: 0.8; }
-  .table-wrap { -webkit-overflow-scrolling: touch; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; }
-}
-
-/* Page-specific styles */
-.article-meta {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-}
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin: 30px 0;
-  flex-wrap: wrap;
-}
-.primary-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #000;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-}
-.secondary-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: #000;
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 2px solid #000;
-}
-.helper-text {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  margin-top: 16px;
-  text-align: center;
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-}
-.toc-section {
-  margin: 40px 0;
-}
-.toc-list {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-}
-.toc-list li {
-  margin: 12px 0;
-}
-.toc-list a {
-  color: var(--primary);
-  text-decoration: none;
-}
-.toc-list a:hover {
-  text-decoration: underline;
-}
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin: 30px 0;
-  justify-items: center;
-}
-@media (max-width: 768px) {
-  .card-grid { grid-template-columns: 1fr; }
-}
-.card-title {
-  font-size: 1.1rem;
-  margin-bottom: 12px;
-}
-.subheading {
-  font-size: 1.3rem;
-  margin: 30px 0 15px;
-  text-align: center;
-}
-.table-wrapper {
-  overflow-x: auto;
-  margin: 30px 0;
-}
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.table th {
-  background: var(--card-bg);
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-  font-size: 0.9rem;
-}
-.table td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-}
-.list {
-  padding-left: 20px;
-  margin: 20px 0;
-  text-align: left;
-  display: inline-block;
-}
-.list li {
-  margin: 8px 0;
-}
-.inline-link {
-  color: var(--primary);
-  font-weight: 500;
-  text-decoration: underline;
-}
-.faq-list {
-  display: grid;
-  gap: 20px;
-  margin: 30px 0;
-}
-.paragraph {
-  text-align: center;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* New Styles for Related Resources Section */
-.related-resources-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin: 30px auto;
-  max-width: 1200px;
-}
-.resource-link-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  background: #fff;
-  border: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-}
-.resource-link-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
-}
-.resource-icon {
-  background: var(--card-bg);
-  padding: 12px;
-  border-radius: 50%;
-  color: var(--primary);
-  margin-bottom: 8px;
-}
-.resource-content h4 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.resource-content p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  margin: 0;
-  line-height: 1.5;
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  h4 { font-size:var(--font-size-title-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .grid-4 { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid-4 { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid-4 { grid-template-columns:repeat(4,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .list-style { padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .list-style li { color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .insight-box-success { background:rgba(76,175,80,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(76,175,80,0.3); }
+  .insight-box-danger { background:rgba(255,180,171,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,180,171,0.3); }
+  .insight-box-warning { background:rgba(255,183,77,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,183,77,0.3); }
+  .insight-box-purple { background:rgba(187,134,252,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(187,134,252,0.3); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .keyword-cloud { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin:1.5rem 0; }
+  .keyword-tag { background:rgba(242,202,80,0.08); color:var(--accent-primary); padding:0.5rem 1rem; border-radius:9999px; font-size:var(--font-size-label-sm); font-weight:500; border:0.5px solid var(--border-gold-filament); }
+  .pre-block { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); overflow-x:auto; font-family:'Courier New',monospace; font-size:var(--font-size-label-sm); color:var(--text-secondary); line-height:1.8; white-space:pre-wrap; }
+  .number-circle { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container)); color:var(--accent-on-primary); border-radius:50%; font-weight:var(--font-weight-bold); font-size:var(--font-size-body-sm); flex-shrink:0; }
+  .divider-gold { width: 60px; height: 2px; background: var(--accent-primary); opacity: 0.5; margin: 1.5rem auto; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-export async function getStaticProps() {
-  const buildTimestamp = Date.now();
-  const buildTime = new Date(buildTimestamp);
-  const currentDate = buildTime.toISOString().split('T')[0];
-  const lastModifiedDate = buildTime.toISOString();
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiAlertCircle, FiCheckCircle, FiXCircle, FiX, FiBarChart2,
+  FiActivity, FiZap, FiInfo, FiEdit, FiEdit3, FiSmartphone,
+  FiCopy, FiPenTool, FiType, FiAlignLeft, FiHash, FiLock,
+  FiSmile, FiUserCheck, FiSave, FiRefreshCw, FiThumbsUp,
+  FiGlobe, FiSearch, FiMonitor, FiSun, FiMoon, FiCoffee,
+  FiCompass, FiAnchor, FiPercent, FiPieChart, FiMessageCircle
+};
 
-  // Generate dates for content freshness
-  const reviewDates = Array(5).fill(null).map((_, i) => {
-    const date = new Date(buildTimestamp);
-    date.setDate(date.getDate() - (i * 7 + 1));
-    return date.toISOString().split('T')[0];
-  });
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
 
-  const faqDates = Array(7).fill(null).map((_, i) => {
-    const date = new Date(buildTimestamp);
-    date.setDate(date.getDate() - (i * 15 + 30));
-    return date.toISOString().split('T')[0];
-  });
+const TEACHING_STATS = [
+  { value: "92%", label: "Schools Require Certification", description: "State teaching license is non-negotiable for public school positions across all 50 states" },
+  { value: "3x", label: "More Interview Calls", description: "Resumes highlighting certification and student achievement data receive significantly more responses" },
+  { value: "85%", label: "Large Districts Use ATS", description: "Automated screening filters applications before human review in most urban and suburban districts" },
+  { value: "1-2", label: "Pages Ideal Length", description: "Concise, achievement-focused resumes preferred by busy principals and HR administrators" }
+];
 
-  // UPDATED: Removed www from canonicalUrl
-  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-teaching-and-education-jobs";
+const CERTIFICATION_EXAMPLES = [
+  { state: "California", license: "Multiple Subject Teaching Credential", requirements: "Bachelor's degree, CBEST, CSET, teacher preparation program, CPR certification", reciprocity: "Limited—NASDTEC Interstate Agreement, may require additional coursework" },
+  { state: "Texas", license: "Standard Certificate (EC-6, 4-8, 7-12)", requirements: "Bachelor's degree, content exams, PPR exam, internship or clinical teaching", reciprocity: "Review of out-of-state credentials; additional Texas exams may be required" },
+  { state: "New York", license: "Initial Teaching Certificate", requirements: "Bachelor's degree, edTPA, approved teacher preparation program, NYS exams", reciprocity: "Conditional initial certificate available; full certification requires NYS exams" },
+  { state: "Florida", license: "Professional Certificate", requirements: "Bachelor's degree, subject area exam, professional education exam, fingerprinting", reciprocity: "Full reciprocity for valid out-of-state standard certificates; no additional exams" },
+  { state: "Illinois", license: "Professional Educator License (PEL)", requirements: "Bachelor's degree, content test, teacher preparation program, edTPA", reciprocity: "Direct reciprocity for comparable out-of-state licenses; may require Illinois-specific tests" },
+  { state: "Pennsylvania", license: "Instructional I Certificate", requirements: "Bachelor's degree, Praxis exams, approved teacher preparation program, student teaching", reciprocity: "NASDTEC Interstate Agreement participant; credentials reviewed individually" }
+];
 
-  // UPDATED: Removed www from breadcrumb items
-  const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Career Resources",
-      "item": "https://professionalresumefree.com/resume-templates"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Teaching & Education Resume Guide",
-      "item": canonicalUrl
-    }
-  ];
+const SALARY_DATA = [
+  { role: "Elementary School Teacher", entry: "$42,000 - $52,000", mid: "$52,000 - $68,000", senior: "$68,000 - $88,000", demand: "Very High" },
+  { role: "Middle School Teacher", entry: "$43,000 - $53,000", mid: "$53,000 - $70,000", senior: "$70,000 - $90,000", demand: "High" },
+  { role: "High School Teacher", entry: "$44,000 - $55,000", mid: "$55,000 - $72,000", senior: "$72,000 - $92,000", demand: "High" },
+  { role: "Special Education Teacher", entry: "$46,000 - $58,000", mid: "$58,000 - $75,000", senior: "$75,000 - $95,000", demand: "Very High" },
+  { role: "ESL/ELL Teacher", entry: "$43,000 - $54,000", mid: "$54,000 - $70,000", senior: "$70,000 - $88,000", demand: "Very High" },
+  { role: "School Principal/Admin", entry: "$75,000 - $95,000", mid: "$95,000 - $125,000", senior: "$125,000 - $165,000+", demand: "Medium" }
+];
 
-  // UPDATED: Removed www from meta image URL
-  const meta = {
-    title: "How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide",
+const TEACHING_KEYWORDS = {
+  instructional: ["Curriculum Development", "Differentiated Instruction", "Lesson Planning", "Formative Assessment", "Summative Assessment", "Project-Based Learning", "Scaffolding", "Bloom's Taxonomy", "Universal Design for Learning", "Inquiry-Based Learning"],
+  management: ["Classroom Management", "Positive Behavior Support", "PBIS", "Restorative Practices", "Social-Emotional Learning", "Trauma-Informed Teaching", "De-escalation Techniques", "Behavior Intervention Plans"],
+  technology: ["Google Classroom", "Canvas LMS", "Schoology", "Nearpod", "Kahoot", "SMART Board", "Seesaw", "Flipgrid", "EdPuzzle", "Microsoft Teams for Education"],
+  assessment: ["Data-Driven Instruction", "RTI (Response to Intervention)", "MTSS", "Student Growth Percentiles", "Benchmark Assessment", "Progress Monitoring", "IEP Implementation", "504 Plans"],
+  specialties: ["ESL/ELL Strategies", "Gifted & Talented", "Reading Intervention", "Math Intervention", "STEM Education", "Dual Language Immersion", "CTE (Career Technical Education)", "Arts Integration"]
+};
+
+const BEFORE_AFTER_EXAMPLES = [
+  { before: "Responsible for teaching reading to 3rd graders.", after: "Implemented research-based literacy interventions (Fountas & Pinnell guided reading, Wilson Fundations), moving 85% of students from 'below grade level' to 'on or above grade level' in reading within one academic year as measured by DRA2 assessments." },
+  { before: "Planned and delivered lessons for 4th grade class.", after: "Designed and delivered differentiated lessons across all core subjects using Universal Design for Learning principles, incorporating formative assessments to target individual student needs, resulting in 90% of students meeting or exceeding NWEA MAP growth targets in both math and reading." },
+  { before: "Managed classroom behavior and discipline.", after: "Established comprehensive Positive Behavior Interventions and Supports (PBIS) system with clear expectations, consistent reinforcement, and restorative practices, reducing disciplinary referrals by 40% while improving student engagement scores from 72% to 94% on district climate surveys." },
+  { before: "Communicated with parents about student progress.", after: "Developed multi-channel parent engagement strategy including weekly ClassDojo updates, bi-monthly student-led conferences, digital portfolio sharing via Seesaw, and monthly curriculum newsletters, increasing parent participation from 45% to 85% and earning recognition from district leadership as a model program." },
+  { before: "Used technology in the classroom for instruction.", after: "Pioneered blended learning model integrating Google Classroom, Nearpod interactive lessons, and Flipgrid for student voice, resulting in 35% increase in student engagement metrics and selection as district technology demonstration classroom for peer observation." },
+  { before: "Taught math to 5th grade students.", after: "Implemented Singapore Math approach with manipulatives and visual models, supplemented by targeted small-group intervention for struggling learners, achieving 88% proficiency rate on state standardized math assessment—15 percentage points above district average." }
+];
+
+const ACHIEVEMENT_FORMULAS = [
+  { formula: "Intervention + Method + Student Outcome + Data Source", example: "Implemented Leveled Literacy Intervention (LLI) with 12 struggling readers, advancing 10 students (83%) by 2+ Fountas & Pinnell reading levels within 16 weeks as measured by BAS assessments." },
+  { formula: "Initiative + Implementation + Quantitative Impact + Comparison", example: "Launched school-wide positive behavior program serving 450+ students, reducing office discipline referrals by 55% year-over-year and recovering 300+ hours of instructional time previously lost to behavioral incidents." },
+  { formula: "Collaboration + Scope + Achievement + Recognition", example: "Co-led 4th grade PLC team of 6 teachers in implementing data-driven instruction cycles, contributing to 22% increase in state math proficiency rate and earning 'Model PLC School' designation." },
+  { formula: "Innovation + Technology Tool + Engagement Metric + Outcome", example: "Designed and piloted gamified vocabulary program using Quizlet Live and Kahoot, increasing weekly vocabulary assessment scores by 28% and expanding to all 5th grade classrooms after demonstrated success." }
+];
+
+const GRADE_LEVEL_STRATEGIES = [
+  { level: "Early Childhood (PreK-2)", focus: "Foundational skills, play-based learning, social-emotional development, phonemic awareness", keyTerms: "Developmentally Appropriate Practice, Phonological Awareness, Guided Reading, Number Sense, Fine Motor Skills, Conscious Discipline" },
+  { level: "Elementary (3-5)", focus: "Content mastery, critical thinking, collaborative learning, standardized test preparation", keyTerms: "Close Reading, Mathematical Reasoning, Writing Workshop, Science Inquiry, Project-Based Learning, Growth Mindset" },
+  { level: "Middle School (6-8)", focus: "Adolescent development, subject specialization, executive functioning, student autonomy", keyTerms: "Advisory Programs, Cross-Curricular Integration, Study Skills, Peer Collaboration, Formative Assessment, Student-Led Conferences" },
+  { level: "High School (9-12)", focus: "College/career readiness, advanced content, independent research, real-world application", keyTerms: "AP/IB Instruction, Dual Enrollment, Capstone Projects, Career Pathways, Socratic Seminar, Authentic Assessment" }
+];
+
+const FAQS = [
+  { question: "How long should a teaching resume be?", answer: "For most teachers with under 10 years of experience, one page is ideal. Experienced educators with extensive achievements, publications, or leadership roles can use two pages, but every line must add clear value. School principals often review 50-100+ applications per opening—concise, high-impact resumes that quickly demonstrate certification and student impact receive significantly more attention than lengthy, unfocused documents." },
+  { question: "Should I include my teaching philosophy on my resume?", answer: "Integrate your philosophy into your professional summary rather than creating a separate statement. A 2-3 sentence summary that captures your teaching approach, student-centered values, and key strengths is far more effective. Example: 'Student-centered educator committed to creating inclusive, culturally responsive learning environments where all students achieve academic and personal growth through differentiated instruction, data-driven practices, and authentic family engagement.' Save detailed philosophy for cover letters and interviews." },
+  { question: "How do I highlight student teaching experience effectively?", answer: "Treat student teaching as professional experience with full detail. Include it under 'Teaching Experience' with your role ('Student Teacher, 5th Grade'), school name, location, and dates. Write 3-5 bullet points describing grade levels, subjects taught, lesson plans created, independent teaching responsibilities, and measurable outcomes. Example: 'Completed 16-week full-time student teaching placement, independently planning and delivering differentiated instruction for 28 students across all core subjects, achieving 100% pass rate on end-of-unit assessments.'" },
+  { question: "What if I'm still pursuing certification?", answer: "Be transparent and strategic about your certification pathway. Note your status clearly: 'Eligible for [State] Teaching License (Expected June 2026)' or 'Alternative Certification Program in Progress—completion expected August 2026.' List exams you've passed (Praxis, edTPA, CSET) and remaining requirements. Some private and charter schools hire candidates actively pursuing certification. Always check specific district requirements as policies vary significantly." },
+  { question: "How do I demonstrate technology proficiency on my teaching resume?", answer: "List specific platforms and tools you've mastered, but more importantly, demonstrate how you've used technology to enhance student learning. Instead of just listing 'Google Classroom,' write: 'Leveraged Google Classroom and Nearpod to create interactive, self-paced learning modules that increased student engagement by 35% and provided real-time formative assessment data to guide instruction.' Name specific tools: Canvas, Schoology, Seesaw, Flipgrid, Kahoot, EdPuzzle, SMART Board, and any subject-specific software." },
+  { question: "Should I include professional development and continuing education?", answer: "Absolutely—create a dedicated 'Professional Development' section. Include recent workshops, conferences, online courses, and certifications. Prioritize training aligned with the specific position. Examples: 'Completed 45-hour Orton-Gillingham Multisensory Reading Training (2025),' 'Attended ISTE Conference—presented on blended learning strategies (2024),' 'Google Certified Educator Level 2.' This demonstrates commitment to professional growth and staying current with educational best practices." },
+  { question: "How do I address a career change into teaching?", answer: "Create a 'Relevant Experience' section that bridges your previous career to teaching competencies. Highlight transferable skills: training, mentoring, public speaking, curriculum development, data analysis, and any experience with children or youth. Example for a former corporate trainer: 'Transitioning from 8-year corporate training career to secondary education, bringing expertise in instructional design, adult learning theory, and engaging presentation skills applicable to high school classroom instruction.' Include any volunteer teaching, tutoring, or coaching experience prominently." },
+  { question: "What makes a teaching resume stand out to principals?", answer: "Three factors consistently differentiate strong teaching candidates: (1) Certification visibility—your license must be immediately apparent near the top; (2) Student achievement data—specific, verifiable metrics showing how your instruction improved learning outcomes; (3) Cultural fit indicators—language demonstrating alignment with the school's mission, values, and student population. Principals also value evidence of collaboration (PLC participation, co-teaching), parent engagement, and willingness to contribute beyond the classroom (sponsoring clubs, coaching, committees)." }
+];
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const TeachingResumeGuide = ({ seoData }) => {
+  const { 
+    currentDate, 
+    lastModifiedDate,
+    buildTimestamp,
+    canonicalUrl,
+    breadcrumbData,
+    meta,
+    longTailKeywords,
+    peopleAlsoAsk,
+    conversationalExplanations,
+    reviewDates,
+    faqDates 
+  } = seoData || {};
+
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeCanonicalUrl = canonicalUrl || "https://professionalresumefree.com/how-to-write-a-resume-for-usa-teaching-and-education-jobs";
+  const safeMeta = meta || {
+    title: `How to Write a Resume for USA Teaching and Education Jobs: ${CURRENT_YEAR} Guide`,
     description: "Master the art of writing a resume for USA teaching and education jobs. Learn certification requirements, keyword strategies, and proven templates to land your dream teaching position.",
-    url: canonicalUrl,
-    siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/teaching-resume.jpeg",
+    siteName: "Professional Resume Free"
   };
-
-  // Long-tail keywords for GEO
-  const longTailKeywords = [
+  const safeLongTailKeywords = longTailKeywords || [
     "how to write a resume for teaching jobs usa",
     "teacher resume examples 2026",
     "education resume template",
     "teaching certification on resume",
     "k-12 teacher resume format"
   ];
+  const safePeopleAlsoAsk = peopleAlsoAsk || [];
+  const safeConversationalExplanations = conversationalExplanations || [];
 
-  // People Also Ask for GEO
-  const peopleAlsoAsk = [
-    { question: "What should a teaching resume include?", answer: "A teaching resume should include your contact information, professional summary, teaching certifications, education, relevant teaching experience, classroom management approach, instructional strategies, and professional development. Highlight student achievement data and specialized skills like ESL or special education." },
-    { question: "How do I format a teacher resume?", answer: "Use a clean, reverse-chronological format with clear section headings. Include your teaching license/certification prominently. Focus on measurable achievements like test score improvements, lesson plan development, and parent engagement metrics. Keep it to 1-2 pages." },
-    { question: "What are the keywords for education resumes?", answer: "Important keywords include: curriculum development, classroom management, differentiated instruction, student assessment, IEP implementation, parent-teacher conferences, standardized testing, educational technology, lesson planning, and specific certifications like ESL, Special Education, or subject-area endorsements." }
-  ];
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [copiedText, setCopiedText] = useState('');
+  const toolRef = useRef(null);
 
-  // Conversational explanations for GEO
-  const conversationalExplanations = [
-    { topic: "Teaching Resume in Plain English", content: "Your teaching resume tells the story of how you create positive learning environments and help students succeed. Instead of just listing duties, you'll show how your teaching methods improved student outcomes, how you adapted to different learning styles, and how you collaborated with parents and colleagues." },
-    { topic: "Why Certifications Matter on Education Resumes", content: "In USA education hiring, state teaching certifications are non-negotiable. Schools must hire certified teachers to meet accreditation requirements. Your resume must clearly display your license type, grade levels, and subject areas—ideally right at the top near your name." }
-  ];
-
-  const faqItems = [
-    {
-      question: 'How long should a teaching resume be?',
-      answer: 'For most teachers, a one-page resume is ideal, especially with under 10 years of experience. Experienced educators with extensive achievements, publications, or leadership roles can use two pages, but every line should add value. School principals often review dozens of applications—brevity is appreciated.',
-    },
-    {
-      question: 'Should I include my teaching philosophy on my resume?',
-      answer: 'Briefly, yes—but integrate it into your professional summary. Instead of a separate philosophy statement, weave your approach into 2-3 sentences that capture your teaching style, values, and student-centered focus. Save detailed philosophy for cover letters and interviews.',
-    },
-    {
-      question: 'How do I highlight student teaching experience?',
-      answer: 'Treat student teaching as professional experience. Include it under "Teaching Experience" with your role, school, and dates. Use bullet points to describe grade levels, subjects taught, lesson plans created, and any independent teaching responsibilities. Emphasize outcomes and what you learned.',
-    },
-    {
-      question: 'What if I don\'t have state certification yet?',
-      answer: 'If you\'re pursuing certification, note your status clearly: "Eligible for [State] Teaching License" or "Alternative Certification Program in Progress." Some private schools hire uncertified teachers, but public schools typically require certification or a clear pathway to it.',
-    },
-    {
-      question: 'How important is technology on a teaching resume?',
-      answer: 'Very important. Modern classrooms use learning management systems, educational apps, and digital tools. List specific technologies you\'ve used—Google Classroom, Canvas, SMART Boards, Nearpod, etc. This shows you\'re ready for today\'s teaching environment.',
-    },
-    {
-      question: 'Should I list continuing education and workshops?',
-      answer: 'Yes, especially if they\'re recent or relevant. Create a "Professional Development" section to show you stay current with teaching methods, literacy strategies, or special education practices. This demonstrates commitment to growth.',
-    },
-  ];
-
-  // Testimonials (fewer cards as requested)
-  const testimonials = [
-    {
-      quote: "This teaching resume guide helped me land interviews at three top school districts. The certification placement and keyword tips made all the difference.",
-      metric: "District Interviews",
-      name: "Michelle R.",
-      role: "Elementary Teacher",
-      company: "Public School District",
-      date: reviewDates[0]
-    },
-    {
-      quote: "As a career changer entering teaching, I didn't know how to present my skills. This guide showed me how to transfer my experience into education terms. I'm now teaching high school science!",
-      metric: "Career Change Success",
-      name: "Thomas B.",
-      role: "Science Teacher",
-      company: "High School",
-      date: reviewDates[1]
-    }
-  ];
-
-  return {
-    props: {
-      buildTimestamp,
-      currentDate,
-      lastModifiedDate,
-      canonicalUrl,
-      breadcrumbData,
-      meta,
-      longTailKeywords,
-      peopleAlsoAsk,
-      conversationalExplanations,
-      faqItems,
-      testimonials,
-      reviewDates,
-      faqDates
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedText(text.substring(0, 30) + '...');
+      setTimeout(() => setCopiedText(''), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
     }
   };
-}
 
-function TeachingResumeGuide({ 
-  buildTimestamp,
-  currentDate,
-  lastModifiedDate,
-  canonicalUrl,
-  breadcrumbData,
-  meta,
-  longTailKeywords,
-  peopleAlsoAsk,
-  conversationalExplanations,
-  faqItems,
-  testimonials,
-  reviewDates,
-  faqDates 
-}) {
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* Font Preconnects & Import */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 72 characters exactly */}
-        <title>How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide</title>
+        {/* OPTIMIZED TITLE */}
+        <title>{safeMeta.title}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Master the art of writing a resume for USA teaching and education jobs. Learn certification requirements, keyword strategies, and proven templates to land your dream teaching position." />
-        <meta name="author" content="Professional Resume Free" />
+        <meta name="description" content={safeMeta.description} />
+        <meta name="author" content={safeMeta.siteName} />
         <meta name="keywords" content="teaching resume, education resume, teacher resume template, how to write teacher resume, education jobs usa, teaching certification, k-12 resume" />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide" />
-        <meta name="chatgpt-fts:description" content="Master the art of writing a resume for USA teaching and education jobs. Learn certification requirements, keyword strategies, and proven templates." />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        <meta name="chatgpt-fts:title" content={safeMeta.title} />
+        <meta name="chatgpt-fts:description" content={safeMeta.description} />
+        <meta name="chatgpt-fts:keywords" content={safeLongTailKeywords.join(', ')} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
         {/* TECHNICAL SEO */}
@@ -994,50 +296,46 @@ function TeachingResumeGuide({
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
         <meta name="bingbot" content="index, follow, max-image-preview:large" />
-        <meta name="last-modified" content={lastModifiedDate} />
-        <meta httpEquiv="last-modified" content={lastModifiedDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - UPDATED without www */}
-        <link rel="canonical" href={canonicalUrl} />
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={safeCanonicalUrl} />
         
         {/* HREFLANG TAGS */}
-        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
-        <link rel="alternate" href={canonicalUrl} hreflang="en" />
-        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
+        <link rel="alternate" href={safeCanonicalUrl} hreflang="en-us" />
+        <link rel="alternate" href={safeCanonicalUrl} hreflang="en" />
+        <link rel="alternate" href={safeCanonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH - UPDATED without www */}
-        <meta property="og:title" content="How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide" />
-        <meta property="og:description" content="Master the art of writing a resume for USA teaching and education jobs. Learn certification requirements, keyword strategies, and proven templates." />
-        <meta property="og:url" content={canonicalUrl} />
+        {/* OPEN GRAPH */}
+        <meta property="og:title" content={safeMeta.title} />
+        <meta property="og:description" content={safeMeta.description} />
+        <meta property="og:url" content={safeCanonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://professionalresumefree.com/teaching-resume.jpeg" />
+        <meta property="og:image" content={safeMeta.image} />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:site_name" content={safeMeta.siteName} />
         <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content="2026-03-01" />
-        <meta property="article:modified_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* TWITTER CARD - UPDATED without www */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Write a Resume for USA Teaching Jobs" />
-        <meta name="twitter:description" content="Master the art of writing a resume for USA teaching and education jobs." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/teaching-resume.jpeg" />
+        <meta name="twitter:description" content={safeMeta.description} />
+        <meta name="twitter:image" content={safeMeta.image} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        
-        {/* PRECONNECT FOR PERFORMANCE */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
         {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT - FIXED ITEMREVIEWED ISSUE - UPDATED without www */}
+        {/* COMPREHENSIVE STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1046,43 +344,62 @@ function TeachingResumeGuide({
               "@graph": [
                 {
                   "@type": "Article",
-                  "@id": `${canonicalUrl}#article`,
-                  "headline": "How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide",
-                  "description": meta.description,
-                  "image": meta.image,
+                  "@id": `${safeCanonicalUrl}#article`,
+                  "headline": safeMeta.title,
+                  "description": safeMeta.description,
+                  "image": safeMeta.image,
                   "author": {
                     "@type": "Organization",
-                    "name": "Professional Resume Free"
+                    "name": safeMeta.siteName
                   },
                   "publisher": {
                     "@type": "Organization",
-                    "name": "Professional Resume Free",
+                    "name": safeMeta.siteName,
                     "logo": {
                       "@type": "ImageObject",
                       "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
                   "datePublished": "2026-03-01",
-                  "dateModified": lastModifiedDate,
-                  "mainEntityOfPage": canonicalUrl
+                  "dateModified": safeLastModifiedDate,
+                  "mainEntityOfPage": safeCanonicalUrl
                 },
                 {
                   "@type": "BreadcrumbList",
-                  "@id": `${canonicalUrl}#breadcrumb`,
-                  "itemListElement": breadcrumbData
+                  "@id": `${safeCanonicalUrl}#breadcrumb`,
+                  "itemListElement": breadcrumbData || [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://professionalresumefree.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Career Resources",
+                      "item": "https://professionalresumefree.com/resume-templates"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": "Teaching & Education Resume Guide",
+                      "item": safeCanonicalUrl
+                    }
+                  ]
                 },
                 {
                   "@type": "WebPage",
-                  "@id": canonicalUrl,
-                  "url": canonicalUrl,
+                  "@id": safeCanonicalUrl,
+                  "url": safeCanonicalUrl,
                   "name": "How to Write a Resume for USA Teaching and Education Jobs",
-                  "description": meta.description
+                  "description": safeMeta.description
                 },
                 {
                   "@type": "FAQPage",
-                  "@id": `${canonicalUrl}#faq`,
+                  "@id": `${safeCanonicalUrl}#faq`,
                   "mainEntity": [
-                    ...faqItems.map(item => ({
+                    ...FAQS.map(item => ({
                       "@type": "Question",
                       "name": item.question,
                       "acceptedAnswer": {
@@ -1090,7 +407,7 @@ function TeachingResumeGuide({
                         "text": item.answer
                       }
                     })),
-                    ...peopleAlsoAsk.map(paa => ({
+                    ...safePeopleAlsoAsk.map(paa => ({
                       "@type": "Question",
                       "name": paa.question,
                       "acceptedAnswer": {
@@ -1141,540 +458,510 @@ function TeachingResumeGuide({
 
       {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
-        <meta name="build-timestamp" content={buildTimestamp} />
-        <meta name="content-freshness" content={currentDate} />
+        <meta name="build-timestamp" content={buildTimestamp || Date.now()} />
+        <meta name="content-freshness" content={safeCurrentDate} />
       </div>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
-                  <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/resume-templates" itemProp="item">
-                  <span itemProp="name">Career Resources</span>
+                  <span itemProp="name"><FiFileText size={14} style={{marginRight: '4px'}} /> Career Resources</span>
                 </Link>
                 <meta itemProp="position" content="2" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Teaching Resume Guide</span>
+                <span itemProp="name" aria-current="page"><FiBookOpen size={14} style={{marginRight: '4px'}} /> Teaching Resume Guide</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
           </div>
         </nav>
 
-        {/* Hero Section with single H1 */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="badge">TEACHING RESUME GUIDE 2026</div>
-            
-            {/* SINGLE H1 TAG */}
-            <h1 id="hero-heading">How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide</h1>
-            
-            <p>
-              Learn how to craft a compelling teaching resume that showcases your certifications, classroom impact, and educational philosophy. This guide covers everything from state requirements to student achievement data that helps you stand out.
-            </p>
-
-            <div className="hero-actions">
-              <a
-                href="https://professionalresumefree.com"
-                className="btn-primary"
-              >
-                Start Your Teaching Resume <FiArrowRight style={{marginLeft: '8px'}} />
-              </a>
-              <Link href="/resume-templates" className="btn-secondary">
-                <FiFileText style={{marginRight: '8px'}} /> Browse Templates
-              </Link>
-            </div>
-
-            {/* Stats Section */}
-            <div className="stats" style={{marginTop: '40px', borderTop: '1px solid #e5e7eb', paddingTop: '30px'}} aria-label="Key statistics">
-              <div style={{textAlign: 'center', width: '100%', marginBottom: '20px'}}>
-                <span className="trust-badge">📊 Based on 2026 Education Hiring Data</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">92%</span>
-                <span>of Schools Require Certification*</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">3x</span>
-                <span>More Interview Calls**</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">15+</span>
-                <span>State-Specific Tips</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">Free</span>
-                <span>Templates & Tools</span>
-              </div>
-              <p style={{fontSize: '0.75rem', color: '#6b7280', marginTop: '20px'}} aria-label="Footnote">
-                *Source: National Association of School Principals
-                **For resumes highlighting certification and student data
+        {/* Hero Section */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ {CURRENT_YEAR} Edition • Education Focus • 6 States • Salary Data • Grade Strategies • ATS-Optimized</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                How to Write a <span className="gradient-text">Resume</span> for USA Teaching & Education Jobs
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                A comprehensive guide based on <strong>state certification requirements, school district hiring data, salary research, and education-specific ATS analysis.</strong> Master certification placement, student achievement metrics, grade-level strategies, education keywords, and proven techniques that <strong>generate 3x more interview calls</strong> for K-12, higher education, and administrative positions.
               </p>
-            </div>
-
-            {/* Helper text */}
-            <p className="helper-text">
-              From certification placement to achievement metrics, this guide helps you present your teaching career in the best light.
-            </p>
-
-            {/* Freshness indicator */}
-            <div style={{marginTop: '20px', fontSize: '0.8rem', color: '#4b5563'}} aria-label="Page last updated">
-              <FiCalendar style={{marginRight: '4px'}} /> Last updated: {currentDate}
+              <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {TEACHING_STATS.map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)' }}>{s.label}</div><div style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-label-sm)', marginTop: '0.5rem' }}>{s.description}</div></div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Read Complete Guide</button>
+                <Link href="/resume-templates" className="btn-outline"><FiLayers /> Teaching Resume Templates</Link>
+              </div>
+              {/* Freshness indicator */}
+              <div style={{marginTop: '20px', fontSize: '0.8rem', color: 'var(--text-muted)'}} aria-label="Page last updated">
+                <FiCalendar style={{marginRight: '4px'}} /> Last updated: {safeCurrentDate}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Article Meta Information */}
-        <div className="container">
-          <div className="article-meta">
-            <span className="meta-item"><FiBookOpen /> 2,600+ words</span>
-            <span className="meta-item"><FiClock /> 14 min read</span>
-            <span className="meta-item"><FiCalendar /> Updated: {currentDate}</span>
-            <span className="meta-item"><FiEye /> 22,000+ views</span>
+        <div className="section-container">
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', margin: '20px 0', flexWrap: 'wrap', color: 'var(--text-muted)' }}>
+            <span><FiBookOpen style={{marginRight: '4px'}} /> 2,600+ words</span>
+            <span><FiClock style={{marginRight: '4px'}} /> 14 min read</span>
+            <span><FiCalendar style={{marginRight: '4px'}} /> Updated: {safeCurrentDate}</span>
+            <span><FiEye style={{marginRight: '4px'}} /> 22,000+ views</span>
           </div>
         </div>
 
-        {/* Table of Contents */}
-        <section className="toc-section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">📑 Table of Contents</h2>
-              <ol className="toc-list">
-                <li><a href="#why-teaching-resume" className="toc-link">1. Why Teaching Resumes Are Different</a></li>
-                <li><a href="#certifications" className="toc-link">2. Highlighting Certifications & Licenses</a></li>
-                <li><a href="#structure" className="toc-link">3. Ideal Structure for Education Resumes</a></li>
-                <li><a href="#keywords" className="toc-link">4. Keywords That Matter in Education</a></li>
-                <li><a href="#student-data" className="toc-link">5. Using Student Achievement Data</a></li>
-                <li><a href="#examples" className="toc-link">6. Before and After: Resume Examples</a></li>
-                <li><a href="#faqs" className="toc-link">7. Frequently Asked Questions</a></li>
-                <li><a href="#next-steps" className="toc-link">8. Conclusion and Next Steps</a></li>
-              </ol>
-            </div>
-          </div>
-        </section>
-
-        {/* Conversational Explanations Section */}
-        <section className="section" style={{background: '#f9fafb'}} aria-labelledby="conversational-heading">
-          <div className="container">
-            <h2 id="conversational-heading" className="section-title">Teaching Resume Writing Made Simple</h2>
-            <div className="grid">
-              {conversationalExplanations.map((item, i) => (
-                <article key={i} className="card">
-                  <h3 style={{fontSize: '1.1rem', marginBottom: '12px'}}>{item.topic}</h3>
-                  <p style={{color: '#4b5563', lineHeight: '1.6'}}>{item.content}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section 1: Why Teaching Resumes Are Different */}
-        <section id="why-teaching-resume" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Why Teaching Resumes Are Different</h2>
-              <p className="paragraph">
-                Education hiring follows unique patterns. School administrators look for specific credentials—state teaching licenses, grade-level endorsements, and subject certifications—before they even read about your experience. A teaching resume must prioritize these elements in ways that corporate resumes do not.
-              </p>
-              <p className="paragraph">
-                Beyond credentials, administrators want evidence of your impact on student learning. Test score improvements, reading level gains, and behavioral growth metrics carry significant weight. Your resume should tell a story of how you create positive learning environments and help students achieve measurable progress.
-              </p>
-              <p className="paragraph">
-                On <strong>Professional Resume Free</strong>, we focus on education-specific strategies that help you present your teaching career authentically and effectively. This guide walks you through each component, from certification placement to achievement data, so you can apply with confidence.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: Highlighting Certifications */}
-        <section id="certifications" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Highlighting Certifications & Licenses</h2>
-              <p className="paragraph">
-                In USA education, your state teaching license is your most important credential. It must appear prominently—ideally right after your contact information or in a dedicated "Certifications" section at the top of your resume. Include the license type, grade levels, subject areas, and state of issuance.
-              </p>
-              <p className="paragraph">
-                If you hold multiple endorsements (ESL, Special Education, Reading Specialist), list them clearly. Many schools use automated screening systems that filter for these specific credentials. Without them visible, your application may never reach human reviewers.
-              </p>
-              <p className="paragraph">
-                For out-of-state applicants, research reciprocity agreements and note your pathway to state certification. Phrases like "Eligible for [State] Teaching License" or "Reciprocity Pending" signal that you understand local requirements.
-              </p>
-
-              <div style={{background: '#f3f4f6', padding: '20px', borderRadius: '8px', marginTop: '20px', textAlign: 'center'}}>
-                <h3 style={{fontSize: '1.1rem', marginBottom: '10px'}}>Certification Section Example</h3>
-                <p><strong>PROFESSIONAL CERTIFICATIONS</strong></p>
-                <p>State of Texas Teaching License: EC-6 Generalist (Valid 2023-2027)</p>
-                <p>ESL Supplemental Certification (Grades K-6)</p>
-                <p>GT (Gifted & Talented) Endorsement</p>
-                <p className="text-small">CPR & First Aid Certified (2026)</p>
+        {/* Hook Banner */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>Critical Insight: Teaching Resumes Must Lead with Certification and Prove Student Impact</h2>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 3: Ideal Structure */}
-        <section id="structure" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Ideal Structure for Education Resumes</h2>
-              <p className="paragraph">
-                A well-organized teaching resume follows this structure, with certifications elevated above experience:
-              </p>
-
-              <div className="card-grid">
-                <div className="card">
-                  <h3 className="card-title"><FiUser /> 1. Header</h3>
-                  <p>Name, city/state, phone, email, LinkedIn (optional), and link to teaching portfolio if available.</p>
-                </div>
-                <div className="card">
-                  <h3 className="card-title"><FiAward /> 2. Certifications</h3>
-                  <p>State license, endorsements, grade levels, and expiration dates. Place this near the top.</p>
-                </div>
-                <div className="card">
-                  <h3 className="card-title"><FiTarget /> 3. Professional Summary</h3>
-                  <p>2-3 sentences on your teaching philosophy, years of experience, grade levels, and key strengths.</p>
-                </div>
-                <div className="card">
-                  <h3 className="card-title"><FiBriefcase /> 4. Teaching Experience</h3>
-                  <p>Reverse-chronological with school names, locations, dates, and bullet points focused on student outcomes.</p>
-                </div>
-                <div className="card">
-                  <h3 className="card-title"><FiBookOpen /> 5. Education</h3>
-                  <p>Degrees, institutions, graduation dates, and relevant coursework or honors.</p>
-                </div>
-                <div className="card">
-                  <h3 className="card-title"><FiTool /> 6. Professional Development</h3>
-                  <p>Workshops, continuing education, and specialized training that keeps your skills current.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: Keywords That Matter */}
-        <section id="keywords" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Keywords That Matter in Education</h2>
-              <p className="paragraph">
-                School districts often use applicant tracking systems similar to corporate HR departments. Your resume must include relevant keywords from the job description to pass initial screening. Common education keywords include:
-              </p>
-
-              <div className="feature-tags" style={{justifyContent: 'center', marginBottom: '20px'}}>
-                <span className="feature-tag">Curriculum Development</span>
-                <span className="feature-tag">Classroom Management</span>
-                <span className="feature-tag">Differentiated Instruction</span>
-                <span className="feature-tag">Student Assessment</span>
-                <span className="feature-tag">IEP Implementation</span>
-                <span className="feature-tag">Parent Engagement</span>
-                <span className="feature-tag">Data-Driven Instruction</span>
-                <span className="feature-tag">Literacy Intervention</span>
-                <span className="feature-tag">STEM Education</span>
-                <span className="feature-tag">Positive Behavior Support</span>
-              </div>
-
-              <p className="paragraph">
-                Incorporate these terms naturally into your experience bullets. Instead of "Taught 5th grade math," write "Developed and delivered differentiated math instruction, using data from formative assessments to adjust teaching strategies, resulting in 85% of students meeting or exceeding grade-level standards."
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                Education hiring follows fundamentally different rules than corporate recruitment. <strong>92% of public schools require state teaching certification as a non-negotiable qualification</strong>—your license must appear before your experience section. Beyond credentials, administrators seek <strong>specific, verifiable evidence of student achievement growth</strong> through assessment data, reading level advances, and behavioral improvement metrics. Generic teaching descriptions without measurable outcomes fail to differentiate you from dozens of identically credentialed applicants.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Section 5: Using Student Achievement Data */}
-        <section id="student-data" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Using Student Achievement Data</h2>
-              <p className="paragraph">
-                Numbers make your impact concrete. Whenever possible, include data that shows how your teaching improved student outcomes. This could include:
-              </p>
-
-              <ul className="list">
-                <li>Percentage of students meeting or exceeding grade-level standards</li>
-                <li>Reading level gains (e.g., "80% of students advanced 2+ reading levels")</li>
-                <li>Test score improvements (e.g., "Increased state math scores by 15%")</li>
-                <li>Growth in student engagement metrics</li>
-                <li>Reduction in disciplinary referrals</li>
-              </ul>
-
-              <p className="paragraph">
-                Be honest and use data you can verify. If exact numbers aren't available, use ranges or qualitative descriptions like "significantly improved" or "consistently high performance."
-              </p>
-
-              <div style={{background: '#f3f4f6', padding: '20px', borderRadius: '8px', marginTop: '20px', textAlign: 'center'}}>
-                <h3 style={{fontSize: '1.1rem', marginBottom: '10px'}}>Data-Driven Bullet Examples</h3>
-                <p><strong>Before:</strong> "Responsible for teaching reading to 3rd graders."</p>
-                <p><strong>After:</strong> "Implemented research-based literacy interventions, moving 85% of students from "below grade level" to "on or above grade level" in reading within one academic year."</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 6: Before and After Examples */}
-        <section id="examples" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Before and After: Resume Examples</h2>
-              <p className="paragraph">
-                See how these teaching resume sections transform with education-specific optimization:
-              </p>
-
-              <div className="table-wrapper">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Section</th>
-                      <th>Before Optimization</th>
-                      <th>After Optimization</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><strong>Certifications</strong></td>
-                      <td>Mentioned at bottom of resume</td>
-                      <td className="text-success">Prominently displayed near top with license number, grade levels, and endorsements</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Summary</strong></td>
-                      <td>"Dedicated teacher with 5 years of experience."</td>
-                      <td className="text-success">"Passionate elementary educator with 5 years of experience creating inclusive classrooms and using data-driven instruction to improve reading proficiency by 25%."</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Experience Bullet</strong></td>
-                      <td>"Planned and delivered lessons for 4th grade class."</td>
-                      <td className="text-success">"Designed and delivered differentiated lessons in math and reading, using formative assessments to target individual student needs, resulting in 90% of students meeting growth targets."</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials - fewer cards */}
-        <section className="section" style={{background: '#f9fafb'}} aria-labelledby="testimonials-heading">
-          <div className="container">
-            <h2 id="testimonials-heading" className="section-title">Success Stories</h2>
-            <div className="grid">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="testimonial-card">
-                  <p style={{fontStyle: 'italic', marginBottom: '16px', flex: 1}}>"{testimonial.quote}"</p>
-                  <div className="testimonial-metric" style={{marginBottom: '12px'}}>
-                    <FiCheck style={{marginRight: '4px', color: '#059669'}} />
-                    <span>{testimonial.metric}</span>
-                  </div>
-                  <div>
-                    <strong>{testimonial.name}</strong>
-                    <p style={{margin: 0, fontSize: '0.85rem', color: 'var(--text-light)'}}>{testimonial.role}</p>
-                    <small className="text-small">{testimonial.company}</small>
-                    <small className="text-small" style={{display: 'block'}}>{testimonial.date}</small>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* People Also Ask Section */}
-        <section className="section" aria-labelledby="paa-heading">
-          <div className="container">
-            <h2 id="paa-heading" className="section-title">People Also Ask About Teaching Resumes</h2>
-            <div className="faq-grid">
-              {peopleAlsoAsk.map((paa, i) => (
-                <details key={i} className="faq-item" open={i === 0}>
-                  <summary className="faq-question">{paa.question}</summary>
-                  <p style={{color: '#4b5563', marginTop: '12px'}}>{paa.answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faqs" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Frequently Asked Questions</h2>
-              <div className="faq-grid">
-                {faqItems.map((item, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <p className="paragraph">{item.answer}</p>
-                    <small className="text-small">Updated: {faqDates[index] || currentDate}</small>
-                  </div>
+        {/* Conversational Explanations Section (if available from SEO data) */}
+        {safeConversationalExplanations.length > 0 && (
+          <section className="section" aria-labelledby="conversational-heading">
+            <div className="section-container">
+              <h2 id="conversational-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>Teaching Resume Writing Made Simple</h2>
+              <div className="grid">
+                {safeConversationalExplanations.map((item, i) => (
+                  <article key={i} className="card-executive">
+                    <h3 style={{fontSize: '1.1rem', marginBottom: '12px', textAlign: 'center'}}>{item.topic}</h3>
+                    <p style={{color: 'var(--text-secondary)', lineHeight: '1.6'}}>{item.content}</p>
+                  </article>
                 ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        {/* Internal Links - ONLY TWO WORKING LINKS */}
-        <section className="section" style={{background: '#f9fafb'}} aria-labelledby="resources-heading">
-          <div className="container">
-            <h2 id="resources-heading" className="section-title">🔗 Recommended Resources</h2>
+        {/* Why Teaching Resumes Are Different */}
+        <section ref={toolRef} className="section" id="why-teaching-resume">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Why Teaching Resumes Are Fundamentally Different</h2>
+              <p className="section-subtitle">Education hiring prioritizes credentials, student outcomes, and pedagogical expertise over traditional business metrics</p>
+            </div>
             <div className="grid">
-              <Link href="/resume-templates" className="card">
-                <h3 style={{marginBottom: '8px'}}>Resume Templates</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Browse ATS-optimized templates for educators</p>
-                <span style={{color: '#000', fontWeight: '500'}}>View Templates <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
-              </Link>
-              <Link href="/free-resume-tools" className="card">
-                <h3 style={{marginBottom: '8px'}}>Free Resume Tools</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Check scores, match keywords, and optimize your resume</p>
-                <span style={{color: '#000', fontWeight: '500'}}>Explore Tools <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
-              </Link>
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div className="number-circle">1</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Certifications Must Lead—Always</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  In teaching, your state license is your single most important credential—not your work history. It must appear in a dedicated "Professional Certifications" section positioned immediately after your contact information and before your professional summary. Include: license type, grade levels, subject endorsements, expiration dates, and state of issuance. Many school district ATS systems automatically filter candidates without visible certification credentials, regardless of experience or qualifications. For multi-state applicants, list each state certification separately and note reciprocity status.
+                </p>
+              </div>
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div className="number-circle">2</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Student Achievement Data Is Your Professional Currency</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  Corporate resumes highlight revenue and efficiency. Teaching resumes must demonstrate student growth through specific, named assessments and verifiable data points. "85% of students advanced two or more Fountas & Pinnell reading levels" carries exponentially more weight than "Taught 3rd grade reading." Always name the specific assessment tool (NWEA MAP, DRA2, BAS, state standardized test), include baseline and outcome data, and provide context through grade-level or district comparisons. Administrators need evidence that your instructional methods produce measurable, replicable student outcomes.
+                </p>
+              </div>
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div className="number-circle">3</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Pedagogical Vocabulary Signals Professional Competence</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  Education has its own precise professional vocabulary that immediately signals your expertise level to principals and hiring committees. Terms like "differentiated instruction," "formative assessment cycles," "scaffolded learning," "Universal Design for Learning," "IEP implementation," and "data-driven instruction" demonstrate fluency in current educational best practices. Using generic corporate language ("managed," "coordinated," "facilitated") without pedagogical context suggests you haven't fully internalized education's professional standards. Pair every action verb with an educational methodology or framework.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* NEW SECTION: Randomly Selected Internal Links for SEO/GEO */}
-        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
-          <div className="container">
-            <h2 className="section-title">📚 Recommended Reading for Educators</h2>
-            <p className="section-subtitle" style={{maxWidth: '700px', margin: '0 auto 30px'}}>
-              Deepen your knowledge with these specialized guides to complement your teaching job search strategy.
+        {/* Salary Data */}
+        <section id="salary-data" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Teaching Salary Outlook {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Understanding compensation across grade levels and specialties helps you target the right opportunities</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Role</th><th>Entry-Level</th><th>Mid-Career</th><th>Senior/Lead</th><th>Demand</th></tr></thead>
+                  <tbody>
+                    {SALARY_DATA.map((row, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{row.role}</strong></td>
+                        <td style={{ color: 'var(--text-secondary)' }}>{row.entry}</td>
+                        <td style={{ color: 'var(--text-secondary)' }}>{row.mid}</td>
+                        <td style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>{row.senior}</td>
+                        <td><span className="feature-tag" style={{ background: row.demand === 'Very High' ? 'rgba(76,175,80,0.15)' : row.demand === 'High' ? 'rgba(242,202,80,0.15)' : 'rgba(100,181,246,0.15)' }}>{row.demand}</span></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>Source:</strong> Bureau of Labor Statistics {CURRENT_YEAR}, National Education Association Salary Survey, state department of education data. Salaries vary significantly by state, district, and years of experience.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* State Certification Guide */}
+        <section id="certifications" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">State-by-State Teaching Certification Requirements</h2>
+              <p className="section-subtitle">Certification requirements vary significantly by state—understanding these differences is critical for positioning your credentials correctly</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>State</th><th>Teaching License</th><th>Key Requirements</th><th>Reciprocity for Out-of-State</th></tr></thead>
+                  <tbody>
+                    {CERTIFICATION_EXAMPLES.map((row, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{row.state}</strong></td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{row.license}</td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{row.requirements}</td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--info-color)' }}>{row.reciprocity}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>Important:</strong> Certification requirements change periodically. Always verify current requirements with your target state's Department of Education website. NASDTEC Interstate Agreement facilitates reciprocity but does not guarantee automatic certification transfer.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Grade-Level Strategies */}
+        <section id="grade-strategies" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Grade-Level Resume Strategies: Tailor Your Message</h2>
+              <p className="section-subtitle">Each grade band values different skills and terminology—customize your resume accordingly</p>
+            </div>
+            <div className="grid">
+              {GRADE_LEVEL_STRATEGIES.map((item, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <div style={{ width: '40px', height: '40px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                      <FiTarget size={20} color="var(--accent-primary)" />
+                    </div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{item.level}</h3>
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}><strong>Focus:</strong> {item.focus}</p>
+                  <div className="insight-box-purple" style={{ padding: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--purple-accent)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>Key Terms to Include:</p>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0 }}>{item.keyTerms}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Education Keywords */}
+        <section id="keywords" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Essential Education Keywords for ATS Optimization</h2>
+              <p className="section-subtitle">Organized by category—incorporate these terms naturally throughout your resume for maximum screening visibility</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              {Object.entries(TEACHING_KEYWORDS).map(([category, keywords], i) => (
+                <div key={i}>
+                  <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center', marginTop: i > 0 ? '1.5rem' : '0', textTransform: 'capitalize' }}>{category.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                  <div className="keyword-cloud">
+                    {keywords.map((kw, j) => (
+                      <span key={j} className="keyword-tag">{kw}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div className="citation-card" style={{ marginTop: '1.5rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>ATS Strategy:</strong> Include both specific program names (Google Classroom, NWEA MAP) and general pedagogical terms (Learning Management Systems, benchmark assessment). This ensures keyword matching regardless of the exact language used in the job description while demonstrating both technical proficiency and conceptual understanding.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Achievement Formulas */}
+        <section id="achievement-formulas" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">4 Achievement Formulas for Teaching Resumes</h2>
+              <p className="section-subtitle">Proven templates to transform ordinary teaching descriptions into compelling, data-backed achievements</p>
+            </div>
+            <div className="grid">
+              {ACHIEVEMENT_FORMULAS.map((item, i) => (
+                <div key={i} className="card-executive">
+                  <div className="feature-badge" style={{ marginBottom: '0.75rem', justifyContent: 'center' }}>{item.formula}</div>
+                  <div className="insight-box-success" style={{ padding: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', margin: 0, lineHeight: '1.6' }}>"{item.example}"</p>
+                  </div>
+                  <button onClick={() => handleCopy(item.example)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '1rem', alignSelf: 'center' }}>
+                    <FiCopy size={14} /> {copiedText === item.example.substring(0, 30) + '...' ? 'Copied!' : 'Copy Formula'}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Before/After */}
+        <section id="examples" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Before & After: 6 Teaching Bullet Point Transformations</h2>
+              <p className="section-subtitle">See how generic duty statements become powerful, student-focused achievement statements with named methodologies and data</p>
+            </div>
+            <div className="grid">
+              {BEFORE_AFTER_EXAMPLES.map((item, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ marginBottom: '1rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>❌ Before (Generic):</p>
+                    <div className="insight-box-danger" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', margin: 0 }}>{item.before}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>✅ After (Data-Driven & Specific):</p>
+                    <div className="insight-box-success" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', margin: 0, lineHeight: '1.6' }}>{item.after}</p>
+                    </div>
+                  </div>
+                  <button onClick={() => handleCopy(item.after)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '1rem' }}>
+                    <FiCopy size={14} /> {copiedText === item.after.substring(0, 30) + '...' ? 'Copied!' : 'Copy Example'}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* People Also Ask Section (if available) */}
+        {safePeopleAlsoAsk.length > 0 && (
+          <section className="section section-alt" aria-labelledby="paa-heading">
+            <div className="section-container">
+              <h2 id="paa-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>People Also Ask About Teaching Resumes</h2>
+              <div className="faq-grid">
+                {safePeopleAlsoAsk.map((paa, i) => (
+                  <details key={i} className="faq-item" open={i === 0}>
+                    <summary className="faq-question" style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)' }}>{paa.question}</summary>
+                    <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{paa.answer}</p></div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* FAQ */}
+        <section id="faqs" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions About Teaching Resumes</h2>
+              <p className="section-subtitle">Expert answers based on education hiring data, principal surveys, and school administrator insights</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && (
+                    <div className="faq-answer">
+                      <p style={{ lineHeight: '1.7' }}>{faq.answer}</p>
+                      <small className="text-small" style={{ display: 'block', marginTop: '0.5rem' }}>Updated: {faqDates ? faqDates[i] || safeCurrentDate : safeCurrentDate}</small>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Create Your Standout Teaching Resume Today
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Apply these education-specific strategies, certification positioning, achievement formulas, and grade-level insights to create a resume that demonstrates your teaching impact and student-centered approach. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
             </p>
-            
-            <div className="related-resources-grid">
-              {/* Link 1: ATS Friendly Teacher Resume Builder */}
-              <Link href="/ats-friendly-teacher-resume-builder" className="resource-link-card">
-                <div className="resource-icon">
-                  <FiTool size={24} />
-                </div>
-                <div className="resource-content">
-                  <h4>ATS-Friendly Teacher Resume Builder</h4>
-                  <p>Create a compliant resume specifically designed for school district screening systems.</p>
-                </div>
-              </Link>
-
-              {/* Link 2: Retail Job Resume Guide */}
-              <Link href="/how-to-write-a-resume-for-usa-retail-jobs" className="resource-link-card">
-                <div className="resource-icon">
-                  <FiBriefcase size={24} />
-                </div>
-                <div className="resource-content">
-                  <h4>Retail Job Resume Guide</h4>
-                  <p>Pivoting from retail to education? Learn how to translate your customer service skills.</p>
-                </div>
-              </Link>
-
-              {/* Link 3: College Graduate Resume Tips */}
-              <Link href="/resume-tips-for-usa-college-students-and-graduates" className="resource-link-card">
-                <div className="resource-icon">
-                  <FiStar size={24} />
-                </div>
-                <div className="resource-content">
-                  <h4>College Graduate Resume Tips</h4>
-                  <p>New to teaching? Discover how to highlight your education and student teaching effectively.</p>
-                </div>
-              </Link>
-
-              {/* Link 4: Career Changer Resume Examples */}
-              <Link href="/best-resume-examples-for-career-changers-in-the-usa" className="resource-link-card">
-                <div className="resource-icon">
-                  <FiTrendingUp size={24} />
-                </div>
-                <div className="resource-content">
-                  <h4>Career Changer Resume Examples</h4>
-                  <p>Moving into education from another field? See how to frame your transferable skills.</p>
-                </div>
-              </Link>
-
-              {/* Link 5: Careers Blog */}
-              <Link href="/careers-blog" className="resource-link-card">
-                <div className="resource-icon">
-                  <FiBookOpen size={24} />
-                </div>
-                <div className="resource-content">
-                  <h4>Education Career Blog</h4>
-                  <p>Stay updated with the latest trends in teaching hiring and professional development.</p>
-                </div>
-              </Link>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Browse Teaching Templates</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+              {["6 State Guide", "Salary Data", "4 Grade Strategies", "6 Before/After", "Achievement Formulas", "Free PDF Download"].map((f, i) => (
+                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Resource Hub - Two categories only */}
-        <section className="section" aria-labelledby="hub-heading">
-          <div className="container">
-            <h2 id="hub-heading" className="section-title">Career Resource Hub</h2>
-            <div className="hub-grid">
-              <div className="hub-category">
-                <h3>⚡ AI & Modern Tools</h3>
-                <ul>
-                  <li><Link href="/free-resume-tools">AI Resume Builders Guide</Link></li>
-                  <li><Link href="/free-resume-tools">ChatGPT Resume Prompts</Link></li>
-                  <li><Link href="/free-resume-tools">Action Verb Recommender</Link></li>
-                </ul>
-              </div>
-              <div className="hub-category">
-                <h3>📊 Free Resume Tools</h3>
-                <ul>
-                  <li><Link href="/free-resume-tools">Resume Score Checker</Link></li>
-                  <li><Link href="/free-resume-tools">ATS Resume Checker</Link></li>
-                  <li><Link href="/free-resume-tools">Word & Character Counter</Link></li>
-                </ul>
-              </div>
+        {/* Internal Links */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources for educators</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+                { href: "/ats-friendly-teacher-resume-builder", text: "Teacher Resume Builder", iconName: "FiEdit" },
+                { href: "/resume-tips-for-usa-college-students-and-graduates", text: "College Graduate Tips", iconName: "FiStar" },
+                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+                { href: "/best-resume-examples-for-career-changers-in-the-usa", text: "Career Changer Examples", iconName: "FiTrendingUp" },
+                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Next Steps Section */}
-        <section id="next-steps" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Conclusion and Next Steps</h2>
-              <p className="paragraph">
-                Writing a resume for USA teaching and education jobs requires a different approach than standard corporate resumes. By prioritizing your certifications, using education-specific keywords, and backing your experience with student achievement data, you position yourself as a strong candidate who understands what schools value most.
-              </p>
-              <p className="paragraph">
-                Start by auditing your current resume against the strategies in this guide. Ensure your certifications are prominent, your bullets include measurable outcomes, and your language reflects current education terminology. Then, tailor each application to the specific grade levels and subjects the school needs.
-              </p>
-              <p className="paragraph">
-                Remember, your resume is just one part of your teaching application. Pair it with a thoughtful cover letter, strong references, and a teaching portfolio when possible. The tools and templates on Professional Resume Free are here to support you at every stage.
-              </p>
-              <div className="hero-actions">
-                <a
-                  href="https://professionalresumefree.com"
-                  className="btn-primary"
-                >
-                  Start Your Teaching Resume <FiArrowRight style={{marginLeft: '8px'}} />
-                </a>
-                <Link href="/resume-templates" className="btn-secondary">
-                  <FiFileText style={{marginRight: '8px'}} /> Browse Templates
-                </Link>
-              </div>
-              <p className="helper-text">
-                Generated for educational and strategic guidance. Always verify specific state certification requirements for your target schools.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Sources: State Depts of Education, NASDTEC, NCES, BLS, NEA</span>
+        </div>
 
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>
-          <span itemProp="last-updated">{currentDate}</span>
-          <span itemProp="build-timestamp">{buildTimestamp}</span>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{buildTimestamp || Date.now()}</span>
         </div>
       </main>
     </>
   );
-}
+};
 
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate dates for content freshness
+  const reviewDates = Array(5).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 7 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  const faqDates = Array(8).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-teaching-and-education-jobs";
+
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Career Resources",
+      "item": "https://professionalresumefree.com/resume-templates"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Teaching & Education Resume Guide",
+      "item": canonicalUrl
+    }
+  ];
+
+  const meta = {
+    title: "How to Write a Resume for USA Teaching and Education Jobs: 2026 Guide",
+    description: "Master the art of writing a resume for USA teaching and education jobs. Learn certification requirements, keyword strategies, and proven templates to land your dream teaching position.",
+    url: canonicalUrl,
+    siteName: "Professional Resume Free",
+    image: "https://professionalresumefree.com/teaching-resume.jpeg",
+  };
+
+  const longTailKeywords = [
+    "how to write a resume for teaching jobs usa",
+    "teacher resume examples 2026",
+    "education resume template",
+    "teaching certification on resume",
+    "k-12 teacher resume format"
+  ];
+
+  const peopleAlsoAsk = [
+    { question: "What should a teaching resume include?", answer: "A teaching resume should include your contact information, professional summary, teaching certifications, education, relevant teaching experience, classroom management approach, instructional strategies, and professional development. Highlight student achievement data and specialized skills like ESL or special education." },
+    { question: "How do I format a teacher resume?", answer: "Use a clean, reverse-chronological format with clear section headings. Include your teaching license/certification prominently. Focus on measurable achievements like test score improvements, lesson plan development, and parent engagement metrics. Keep it to 1-2 pages." },
+    { question: "What are the keywords for education resumes?", answer: "Important keywords include: curriculum development, classroom management, differentiated instruction, student assessment, IEP implementation, parent-teacher conferences, standardized testing, educational technology, lesson planning, and specific certifications like ESL, Special Education, or subject-area endorsements." }
+  ];
+
+  const conversationalExplanations = [
+    { topic: "Teaching Resume in Plain English", content: "Your teaching resume tells the story of how you create positive learning environments and help students succeed. Instead of just listing duties, you'll show how your teaching methods improved student outcomes, how you adapted to different learning styles, and how you collaborated with parents and colleagues." },
+    { topic: "Why Certifications Matter on Education Resumes", content: "In USA education hiring, state teaching certifications are non-negotiable. Schools must hire certified teachers to meet accreditation requirements. Your resume must clearly display your license type, grade levels, and subject areas—ideally right at the top near your name." }
+  ];
+
+  return {
+    props: {
+      seoData: {
+        buildTimestamp,
+        currentDate,
+        lastModifiedDate,
+        canonicalUrl,
+        breadcrumbData,
+        meta,
+        longTailKeywords,
+        peopleAlsoAsk,
+        conversationalExplanations,
+        reviewDates,
+        faqDates
+      }
+    },
+    revalidate: 86400 // ISR: revalidate once per day
+  };
+}
 
 export default TeachingResumeGuide;

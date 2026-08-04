@@ -1,1986 +1,709 @@
-// pages/interview-tips.js
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiSearch, 
-  FiMessageCircle, 
-  FiUser,
-  FiStar,
-  FiTrendingUp,
-  FiAward,
-  FiCheckCircle,
-  FiFileText,
-  FiEdit,
-  FiDownload,
-  FiEye,
-  FiHome,
-  FiChevronRight,
-  FiArrowRight,
-  FiTool,
-  FiLayers,
-  FiClock,
-  FiSmartphone,
-  FiBriefcase,
-  FiCheck,
-  FiHeart,
-  FiTarget,
-  FiBarChart,
-  FiSettings,
-  FiBookOpen,
-  FiVideo,
-  FiCalendar,
-  FiUsers,
-  FiZap,
-  FiLink
+  FiSearch, FiMessageCircle, FiUser, FiStar, FiTrendingUp,
+  FiAward, FiCheckCircle, FiFileText, FiEdit, FiDownload,
+  FiEye, FiHome, FiChevronRight, FiArrowRight, FiTool,
+  FiLayers, FiClock, FiSmartphone, FiBriefcase, FiCheck,
+  FiHeart, FiTarget, FiBarChart2, FiSettings, FiBookOpen,
+  FiVideo, FiCalendar, FiUsers, FiZap, FiLink, FiAlertCircle,
+  FiXCircle, FiX, FiActivity, FiInfo, FiEdit3, FiCopy,
+  FiPenTool, FiType, FiAlignLeft, FiHash, FiLock,
+  FiSmile, FiUserCheck, FiSave, FiRefreshCw, FiThumbsUp,
+  FiGlobe, FiMonitor, FiSun, FiMoon, FiCoffee, FiCompass,
+  FiAnchor, FiPercent, FiPieChart, FiDatabase, FiCloud,
+  FiTerminal, FiShield, FiDollarSign, FiCode, FiHeadphones,
+  FiShoppingBag, FiTruck, FiPackage, FiCreditCard, FiCamera, FiCpu
 } from 'react-icons/fi';
 
-// ===== INLINE CRITICAL CSS FOR MAXIMUM SPEED =====
-const criticalCSS = `
-  /* Reset & Base Styles */
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-  }
-  
-  html { 
-    -webkit-text-size-adjust: 100%; 
-    -moz-text-size-adjust: 100%; 
-    text-size-adjust: 100%;
-    scroll-behavior: smooth;
-  }
-  
-  body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    line-height: 1.6; 
-    color: #111111; 
-    background: #ffffff; 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  img, svg { 
-    max-width: 100%; 
-    height: auto; 
-    display: block;
-  }
-  
-  /* Container System - Fluid & Responsive */
-  .container { 
-    width: 100%;
-    max-width: 1280px; 
-    margin: 0 auto; 
-    padding: 0 clamp(16px, 4vw, 32px);
-  }
-  
-  /* Typography - Fluid & Overflow Protected */
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.5rem); 
-    line-height: 1.2; 
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-  }
-  
-  h2 { 
-    font-size: clamp(1.75rem, 5vw, 2.5rem); 
-    line-height: 1.3; 
-    word-wrap: break-word; 
-    margin-bottom: clamp(16px, 3vw, 24px);
-    font-weight: 600;
-  }
-  
-  h3 { 
-    font-size: clamp(1.25rem, 4vw, 1.5rem); 
-    line-height: 1.4; 
-    word-wrap: break-word; 
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-  
-  h4 { 
-    font-size: clamp(1rem, 3vw, 1.125rem); 
-    line-height: 1.5; 
-    word-wrap: break-word; 
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-  
-  p { 
-    font-size: clamp(1rem, 2.5vw, 1.125rem); 
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    color: #4b5563;
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-  
-  a {
-    color: #111111;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  
-  /* Breadcrumb Navigation */
-  .breadcrumb {
-    background: #f9fafb;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 12px 0;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .breadcrumb ol {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0;
-    margin: 0;
-    flex-wrap: wrap;
-  }
-  
-  .breadcrumb li {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  
-  .breadcrumbSeparator {
-    color: #9ca3af;
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  .breadcrumbSeparator svg {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .breadcrumbLink {
-    color: #111111;
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-    white-space: nowrap;
-  }
-  
-  .breadcrumbLink:hover {
-    border-bottom-color: #111111;
-  }
-  
-  .breadcrumbIcon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-  }
-  
-  .breadcrumbText {
-    white-space: nowrap;
-  }
-  
-  .breadcrumbCurrent {
-    color: #6b7280;
-    font-size: 0.9rem;
-    white-space: nowrap;
-  }
-  
-  /* Hero Section */
-  .heroSection {
-    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-    padding: clamp(40px, 8vw, 60px) 0;
-    border-bottom: 1px solid #e5e7eb;
-    width: 100%;
-  }
-  
-  .heroContent {
-    max-width: 900px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  
-  .trustBadge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #111111;
-    color: #ffffff;
-    padding: clamp(8px, 2vw, 8px) clamp(12px, 3vw, 16px);
-    border-radius: 50px;
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-    border: 1px solid #111111;
-    width: fit-content;
-    max-width: 100%;
-    flex-wrap: wrap;
-  }
-  
-  .starIcon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    color: #fbbf24;
-  }
-  
-  .trustBadgeText {
-    font-weight: 500;
-  }
-  
-  .heroTitle {
-    margin-bottom: 20px;
-  }
-  
-  .gradientText {
-    background: linear-gradient(135deg, #111111 0%, #4b5563 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
-  }
-  
-  .heroSubtitle {
-    font-size: clamp(1.1rem, 3vw, 1.25rem);
-    max-width: 800px;
-    margin-bottom: 32px;
-    color: #4b5563;
-  }
-  
-  .heroHighlight {
-    color: #111111;
-    font-weight: 700;
-    background: linear-gradient(120deg, #fbbf24 0%, #fbbf24 40%, transparent 80%);
-    padding: 0 4px;
-  }
-  
-  /* Button System */
-  .ctaButtons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(12px, 2vw, 16px);
-    margin-bottom: 40px;
-    width: 100%;
-  }
-  
-  .primaryButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: clamp(12px, 2vw, 14px) clamp(20px, 4vw, 28px);
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: clamp(0.95rem, 2.5vw, 1rem);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: 2px solid transparent;
-    white-space: normal;
-    text-align: center;
-    min-height: 48px;
-    background: #111111;
-    color: #ffffff;
-    border-color: #111111;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .primaryButton:hover {
-    background: #333333;
-    border-color: #333333;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-  }
-  
-  .secondaryButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: clamp(12px, 2vw, 14px) clamp(20px, 4vw, 28px);
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: clamp(0.95rem, 2.5vw, 1rem);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: 2px solid transparent;
-    white-space: normal;
-    text-align: center;
-    min-height: 48px;
-    background: transparent;
-    color: #111111;
-    border-color: #111111;
-  }
-  
-  .secondaryButton:hover {
-    background: #f5f5f5;
-    transform: translateY(-2px);
-  }
-  
-  .buttonIcon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-  }
-  
-  .buttonPulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-    50% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-  }
-  
-  @media (max-width: 640px) {
-    .ctaButtons {
-      flex-direction: column;
-    }
-    
-    .primaryButton, .secondaryButton {
-      width: 100%;
-    }
-  }
-  
-  /* Hero Stats */
-  .heroStats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: clamp(16px, 3vw, 20px);
-    margin: 40px 0;
-    width: 100%;
-  }
-  
-  .statItem {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: clamp(16px, 3vw, 20px);
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-  }
-  
-  .statNumber {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 700;
-    color: #111111;
-    line-height: 1.2;
-    margin-bottom: 4px;
-  }
-  
-  .statLabel {
-    font-size: 0.85rem;
-    color: #6b7280;
-    font-weight: 500;
-  }
-  
-  /* Press Logos */
-  .pressLogos {
-    margin: 40px 0 20px;
-  }
-  
-  .pressLogosTitle {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .logoGrid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-  }
-  
-  .logoItem {
-    background: #f3f4f6;
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    border: 1px solid #e5e7eb;
-    color: #111111;
-  }
-  
-  /* Resource Badges */
-  .resourceBadges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 24px;
-    justify-content: center;
-  }
-  
-  .resourceBadge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 50px;
-    padding: 8px 16px;
-    font-size: 0.85rem;
-    color: #111111;
-    transition: all 0.2s;
-  }
-  
-  .resourceBadge:hover {
-    background: #111111;
-    color: #ffffff;
-    border-color: #111111;
-  }
-  
-  .resourceBadge svg {
-    width: 16px;
-    height: 16px;
-  }
-  
-  .resourceBadge:hover svg {
-    color: #ffffff;
-  }
-  
-  /* Section Styles */
-  .sectionHeader {
-    text-align: center;
-    margin-bottom: clamp(32px, 6vw, 48px);
-    width: 100%;
-  }
-  
-  .sectionTitle {
-    margin-bottom: 16px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .sectionSubtitle {
-    font-size: clamp(1rem, 2.5vw, 1.125rem);
-    color: #6b7280;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  
-  .sectionCta {
-    text-align: center;
-    margin-top: 40px;
-  }
-  
-  .sectionButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px 28px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: all 0.2s;
-    background: #111111;
-    color: #ffffff;
-    border: 2px solid #111111;
-  }
-  
-  .sectionButton:hover {
-    background: #333333;
-    border-color: #333333;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-  }
-  
-  .sectionButtonIcon {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.2s;
-  }
-  
-  .sectionButton:hover .sectionButtonIcon {
-    transform: translateX(4px);
-  }
-  
-  /* Stats Section */
-  .statsSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #f9fafb;
-    width: 100%;
-  }
-  
-  .statsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: clamp(20px, 3vw, 24px);
-    width: 100%;
-  }
-  
-  .statCard {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    padding: clamp(24px, 5vw, 32px);
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  
-  .statCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-    border-color: #111111;
-  }
-  
-  .statDescription {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-top: 8px;
-  }
-  
-  /* Intro Section */
-  .introSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #ffffff;
-    width: 100%;
-  }
-  
-  .introContent {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-  }
-  
-  @media (max-width: 768px) {
-    .introContent {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .introText h3 {
-    margin-bottom: 16px;
-  }
-  
-  .introFeatures {
-    margin-top: 24px;
-  }
-  
-  .featureItem {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  
-  .featureCheck {
-    width: 20px;
-    height: 20px;
-    color: #059669;
-    flex-shrink: 0;
-  }
-  
-  .introVisual {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .visualCard {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 24px;
-    transition: all 0.3s ease;
-  }
-  
-  .visualCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-    border-color: #111111;
-  }
-  
-  .visualIcon {
-    width: 48px;
-    height: 48px;
-    background: #ffffff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    border: 1px solid #e5e7eb;
-  }
-  
-  .visualIcon svg {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .visualCard h4 {
-    margin-bottom: 8px;
-  }
-  
-  .visualCard p {
-    font-size: 0.9rem;
-    margin-bottom: 0;
-  }
-  
-  /* Tips Grid */
-  .tipsSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #f9fafb;
-    width: 100%;
-  }
-  
-  .tipsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: clamp(20px, 3vw, 24px);
-    width: 100%;
-  }
-  
-  .tipCard {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    padding: clamp(24px, 5vw, 32px);
-    position: relative;
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-  
-  .tipCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-    border-color: #111111;
-  }
-  
-  .cardHeader {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .cardIconContainer {
-    width: 56px;
-    height: 56px;
-    background: #f3f4f6;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    border: 1px solid #e5e7eb;
-  }
-  
-  .cardIconContainer svg {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .cardTitleContainer {
-    flex: 1;
-  }
-  
-  .tipTitle {
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-  
-  .tipCategory {
-    font-size: 0.8rem;
-    background: #f3f4f6;
-    padding: 4px 8px;
-    border-radius: 50px;
-    display: inline-block;
-    border: 1px solid #e5e7eb;
-  }
-  
-  .tipContent {
-    color: #6b7280;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  
-  .cardNumber {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #f3f4f6;
-    line-height: 1;
-    z-index: 0;
-  }
-  
-  .cardActions {
-    margin-top: auto;
-  }
-  
-  .cardActionLink {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #111111;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  
-  .cardActionLink:hover {
-    border-bottom-color: #111111;
-  }
-  
-  /* Interview Section */
-  .interviewSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #ffffff;
-    width: 100%;
-  }
-  
-  .interviewGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(20px, 3vw, 24px);
-    width: 100%;
-  }
-  
-  .interviewCard {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    padding: clamp(24px, 5vw, 32px);
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .interviewCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-    border-color: #111111;
-  }
-  
-  .interviewHeader {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  
-  .interviewIcon {
-    width: 48px;
-    height: 48px;
-    background: #ffffff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e5e7eb;
-  }
-  
-  .interviewIcon svg {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .interviewTitle {
-    font-size: 1.1rem;
-    margin-bottom: 0;
-  }
-  
-  .interviewTipsList {
-    list-style: none;
-    margin-bottom: 20px;
-    flex: 1;
-  }
-  
-  .interviewTip {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 12px;
-    font-size: 0.95rem;
-    color: #4b5563;
-  }
-  
-  .tipCheck {
-    width: 18px;
-    height: 18px;
-    color: #059669;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  
-  .interviewResources {
-    display: flex;
-    gap: 16px;
-    margin-top: auto;
-    flex-wrap: wrap;
-  }
-  
-  .resourceLink {
-    color: #111111;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  
-  .resourceLink:hover {
-    border-bottom-color: #111111;
-  }
-  
-  /* Advanced Tips Section */
-  .advancedSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #f9fafb;
-    width: 100%;
-  }
-  
-  .advancedGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: clamp(20px, 3vw, 24px);
-    width: 100%;
-  }
-  
-  .advancedCard {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    padding: clamp(24px, 5vw, 32px);
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .advancedCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-    border-color: #111111;
-  }
-  
-  .advancedHeader {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .advancedHeader svg {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-  }
-  
-  .advancedTitleContainer {
-    flex: 1;
-  }
-  
-  .advancedTitle {
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-  }
-  
-  .levelBadge {
-    font-size: 0.75rem;
-    background: #111111;
-    color: #ffffff;
-    padding: 2px 8px;
-    border-radius: 50px;
-    display: inline-block;
-  }
-  
-  .advancedContent {
-    color: #6b7280;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    flex: 1;
-  }
-  
-  .advancedActions {
-    margin-top: auto;
-  }
-  
-  .advancedLink {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #111111;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  
-  .advancedLink:hover {
-    border-bottom-color: #111111;
-  }
-  
-  /* Testimonials Section */
-  .testimonialsSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #ffffff;
-    width: 100%;
-  }
-  
-  .testimonialsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: clamp(20px, 3vw, 24px);
-    width: 100%;
-  }
-  
-  .testimonialCard {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    padding: clamp(24px, 5vw, 32px);
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  .testimonialCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-    border-color: #111111;
-  }
-  
-  .quoteMark {
-    font-size: 4rem;
-    line-height: 1;
-    color: #e5e7eb;
-    position: absolute;
-    top: 16px;
-    right: 24px;
-    font-family: serif;
-  }
-  
-  .quote {
-    font-style: italic;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .testimonialMetric {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 50px;
-    padding: 4px 12px;
-    margin-bottom: 16px;
-    font-size: 0.85rem;
-  }
-  
-  .metricIcon {
-    width: 16px;
-    height: 16px;
-    color: #059669;
-  }
-  
-  .metricText {
-    font-weight: 600;
-  }
-  
-  .userInfo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .userAvatar {
-    width: 48px;
-    height: 48px;
-    background: #e5e7eb;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-  
-  .userName {
-    font-size: 1rem;
-    margin-bottom: 2px;
-  }
-  
-  .userRole {
-    font-size: 0.85rem;
-    color: #6b7280;
-    margin-bottom: 2px;
-  }
-  
-  .userCompany {
-    font-size: 0.8rem;
-    color: #9ca3af;
-  }
-  
-  /* FAQ Section */
-  .faqSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #f9fafb;
-    width: 100%;
-  }
-  
-  .faqGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: clamp(20px, 3vw, 24px);
-    width: 100%;
-    margin-bottom: 40px;
-  }
-  
-  @media (max-width: 640px) {
-    .faqGrid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .faqItem {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: clamp(20px, 4vw, 24px);
-    transition: all 0.2s;
-  }
-  
-  .faqItem:hover {
-    border-color: #111111;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  }
-  
-  .faqQuestion {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    line-height: 1.4;
-  }
-  
-  .faqAnswer {
-    font-size: 0.95rem;
-    color: #6b7280;
-    margin-bottom: 0;
-  }
-  
-  .additionalFaqs {
-    text-align: center;
-    margin: 40px 0;
-    padding: 32px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-  }
-  
-  .additionalTitle {
-    margin-bottom: 20px;
-  }
-  
-  .additionalList {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-  }
-  
-  .additionalLink {
-    display: inline-block;
-    padding: 8px 16px;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-  }
-  
-  .additionalLink:hover {
-    background: #111111;
-    color: #ffffff;
-    border-color: #111111;
-  }
-  
-  /* Internal Linking Section */
-  .internalLinksSection {
-    padding: clamp(30px, 6vw, 50px) 0;
-    background: #ffffff;
-    border-top: 1px solid #e5e7eb;
-    width: 100%;
-  }
-
-  .internalLinksGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(16px, 3vw, 24px);
-    width: 100%;
-  }
-
-  .internalLinkCard {
-    display: flex;
-    flex-direction: column;
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 20px;
-    transition: all 0.2s ease;
-    height: 100%;
-  }
-
-  .internalLinkCard:hover {
-    border-color: #111111;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  }
-
-  .internalLinkHeader {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .internalLinkIcon {
-    width: 40px;
-    height: 40px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #111111;
-    flex-shrink: 0;
-  }
-
-  .internalLinkTitle {
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.4;
-    color: #111111;
-  }
-
-  .internalLinkDesc {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-bottom: 16px;
-    flex-grow: 1;
-  }
-
-  .internalLinkAction {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #111111;
-    margin-top: auto;
-  }
-
-  .internalLinkAction svg {
-    transition: transform 0.2s;
-  }
-
-  .internalLinkCard:hover .internalLinkAction svg {
-    transform: translateX(4px);
-  }
-  
-  /* CTA Section */
-  .ctaSection {
-    padding: clamp(40px, 8vw, 60px) 0;
-    background: #111111;
-    color: #ffffff;
-    text-align: center;
-    width: 100%;
-  }
-  
-  .ctaContent {
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  
-  .ctaTitle {
-    color: #ffffff;
-    margin-bottom: 16px;
-  }
-  
-  .ctaSubtitle {
-    color: #e5e7eb;
-    margin-bottom: 32px;
-  }
-  
-  .ctaSection .ctaButtons {
-    justify-content: center;
-  }
-  
-  .ctaButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 32px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: all 0.2s;
-    background: #ffffff;
-    color: #111111;
-    border: 2px solid #ffffff;
-  }
-  
-  .ctaButton:hover {
-    background: #f3f4f6;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2);
-  }
-  
-  .ctaButtonIcon {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.2s;
-  }
-  
-  .ctaButton:hover .ctaButtonIcon {
-    transform: translateX(4px);
-  }
-  
-  .ctaGuarantee {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
-  
-  .guaranteeIcon {
-    width: 20px;
-    height: 20px;
-    color: #10b981;
-  }
-  
-  .guaranteeText {
-    color: #e5e7eb;
-    font-size: 0.9rem;
-  }
-  
-  .ctaFeatures {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 32px;
-  }
-  
-  .ctaFeatures .featureItem {
-    background: rgba(255,255,255,0.1);
-    padding: 8px 16px;
-    border-radius: 50px;
-    color: #ffffff;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-  
-  .ctaFeatures .featureCheck {
-    color: #10b981;
-  }
-  
-  /* Utility Classes */
-  .textSmall {
-    font-size: 0.85rem;
-    color: #9ca3af;
-  }
-  
-  .textCenter {
-    text-align: center;
-  }
-  
-  .mt-4 { margin-top: 16px; }
-  .mt-8 { margin-top: 32px; }
-  .mb-4 { margin-bottom: 16px; }
-  .mb-8 { margin-bottom: 32px; }
-  
-  /* Freshness Indicator (Hidden) */
-  .freshnessIndicator {
-    display: none;
-  }
-  
-  /* Accessibility */
-  .srOnly {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    border: 0;
-  }
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6; --purple-accent: #bb86fc;
+    --rose-accent: #f8bbd0; --teal-accent: #80cbc4; --amber-accent: #ffd54f;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  h4 { font-size:var(--font-size-title-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .grid-4 { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid-4 { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid-4 { grid-template-columns:repeat(4,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .insight-box-success { background:rgba(76,175,80,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(76,175,80,0.3); }
+  .insight-box-danger { background:rgba(255,180,171,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,180,171,0.3); }
+  .insight-box-warning { background:rgba(255,183,77,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,183,77,0.3); }
+  .insight-box-teal { background:rgba(128,203,196,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(128,203,196,0.3); }
+  .insight-box-purple { background:rgba(187,134,252,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(187,134,252,0.3); }
+  .insight-box-rose { background:rgba(248,187,208,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(248,187,208,0.3); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .keyword-cloud { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin:1.5rem 0; }
+  .keyword-tag { background:rgba(242,202,80,0.08); color:var(--accent-primary); padding:0.5rem 1rem; border-radius:9999px; font-size:var(--font-size-label-sm); font-weight:500; border:0.5px solid var(--border-gold-filament); }
+  .number-circle { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container)); color:var(--accent-on-primary); border-radius:50%; font-weight:var(--font-weight-bold); font-size:var(--font-size-body-sm); flex-shrink:0; }
+  .divider-gold { width: 60px; height: 2px; background: var(--accent-primary); opacity: 0.5; margin: 1.5rem auto; }
+  .freshness-indicator { display: none; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-const InterviewTips = ({ 
-  seoData,
-  buildTimestamp 
-}) => {
-  const {
-    currentDate,
-    lastModifiedDate,
-    reviewDates,
-    faqDates,
-    breadcrumbData
-  } = seoData || {};
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiSearch, FiMessageCircle, FiUser, FiStar, FiTrendingUp, FiAward,
+  FiCheckCircle, FiFileText, FiEdit, FiDownload, FiEye, FiHome,
+  FiChevronRight, FiArrowRight, FiTool, FiLayers, FiClock, FiSmartphone,
+  FiBriefcase, FiCheck, FiHeart, FiTarget, FiBarChart2, FiSettings,
+  FiBookOpen, FiVideo, FiCalendar, FiUsers, FiZap, FiLink, FiAlertCircle,
+  FiXCircle, FiX, FiActivity, FiInfo, FiEdit3, FiCopy, FiPenTool,
+  FiType, FiAlignLeft, FiHash, FiLock, FiSmile, FiUserCheck,
+  FiSave, FiRefreshCw, FiThumbsUp, FiGlobe, FiMonitor, FiSun,
+  FiMoon, FiCoffee, FiCompass, FiAnchor, FiPercent, FiPieChart,
+  FiDatabase, FiCloud, FiTerminal, FiShield, FiDollarSign, FiCode,
+  FiHeadphones, FiShoppingBag, FiTruck, FiPackage, FiCreditCard, FiCamera, FiCpu
+};
 
-  const freshnessIndicator = buildTimestamp 
-    ? new Date(buildTimestamp).toISOString().split('T')[0]
-    : new Date().toISOString().split('T')[0];
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
+const CURRENT_DATE = new Date().toISOString().split('T')[0];
+const SITE_URL = 'https://professionalresumefree.com';
 
-  const safeCurrentDate = currentDate || freshnessIndicator;
-  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
-  const safeReviewDates = reviewDates || Array(4).fill(freshnessIndicator);
-  const safeFaqDates = faqDates || Array(12).fill(freshnessIndicator);
+const STATS = [
+  { value: "4M+", label: "Career Success Stories", description: "Job seekers who transformed their careers using our strategies" },
+  { value: "94%", label: "Interview Success Rate", description: "Users who applied these tips and landed interviews" },
+  { value: "36%", label: "Faster Job Placement", description: "Average reduction in job search time" },
+  { value: "4.9/5", label: "Expert Rating", description: "Based on 2,150+ verified reviews" }
+];
 
-  const mainTips = [
-    {
-      id: 1,
-      title: "Tailor Your Resume for Each Role & ATS Systems",
-      content: "Start by reading each job post like a detective hunting clues. Match its exact words whenever possible - this sneaks past automated filters quietly. Recruiters notice when your background echoes their wording naturally. Shape your resume fresh each time, aligning details precisely where they matter most.",
-      icon: <FiEdit />,
-      category: "ATS Optimization"
-    },
-    {
-      id: 2,
-      title: "Quantify Achievements with Numbers & Metrics",
-      content: "What you did matters less than what changed because of it. Try showing results instead of tasks. For example, swap 'Managed social media' with 'Raised engagement on social platforms by 45%, added ten thousand followers within three months.' Proof sticks better when seen through growth. Hard figures pull focus more easily. They show clear value made visible.",
-      icon: <FiTrendingUp />,
-      category: "Resume Content"
-    },
-    {
-      id: 3,
-      title: "Use Clean, ATS-Friendly Professional Format",
-      content: "Start strong with clean layouts using common typefaces and clear divisions between parts. Skip anything flashy - stick to straightforward formatting without images or charts. Ditch multi-column setups, boxes, or footers likely to trip up automated scanners. A smooth flow works better when every piece has its place. The tool offers ready-to-use designs built for seamless processing.",
-      icon: <FiFileText />,
-      category: "Formatting"
-    },
-    {
-      id: 4,
-      title: "Craft Powerful Professional Summary Statements",
-      content: "Start strong. Grab attention fast. A sharp opening matters most. 6 seconds can make it real. Show who you are right away. Bring up time in the field. Name what you do well. Lay out where you're headed. Think: 8 years shaping campaigns. Tech spaces. Big wins. Numbers that speak. 30% jumps. Growth that sticks. Lead with proof, not promises.",
-      icon: <FiUser />,
-      category: "Content Strategy"
-    },
-    {
-      id: 5,
-      title: "Incorporate Industry Keywords Strategically",
-      content: "Search words that people frequently use in your area of work. If you work in tech, you could see if Agile, Scrum, CI/CD, AWS or React fit browsing their names. Marketers might throw in ROI, CTR, SEO, PPC and CRM. Spread them throughout your resume so systems spot your file faster. Words that fit how real teams talk every day flow better together.",
-      icon: <FiSearch />,
-      category: "Keyword Strategy"
-    },
-    {
-      id: 6,
-      title: "Highlight Transferable Skills for Career Changes",
-      content: "Starting fresh in a different field? Focus on abilities that cross borders - project oversight, number crunching, guiding teams, sharing ideas clearly. Picture old jobs not as chapters closed but as tools sharpened. Show how yesterday's work built today's readiness. Let each example point forward, not back.",
-      icon: <FiAward />,
-      category: "Career Strategy"
-    },
-    {
-      id: 7,
-      title: "Proofread Meticulously & Use Multiple Tools",
-      content: "Odd mistakes might cost you the job. Try a spellcheck first - better safe than sorry. Reading out loud often reveals what your eyes skip over. Someone else spotting errors usually works better than going solo. Different screens show different results, so test it around. Mid-story shifts in verb tension can pull attention away. A steady hand from start to finish keeps things grounded.",
-      icon: <FiCheckCircle />,
-      category: "Quality Control"
-    },
-    {
-      id: 8,
-      title: "Save in Proper Formats with Professional Naming",
-      content: "Avoid generic labels like resume_final_v3_new_updated.pdf when saving files. Most programs work best with PDFs since they hold layout intact. Still, it helps to also have a Word copy ready just in case. Try something clear, such as John Smith_Marketing_Manager_Resume.pdf - it shows attention to detail..",
-      icon: <FiDownload />,
-      category: "Technical"
-    }
-  ];
+const INTERVIEW_WISDOM = [
+  { quote: "The best interviews feel like conversations, not interrogations. Your goal is to make the interviewer forget they're interviewing you.", author: "Hiring Manager Wisdom", icon: "FiMessageCircle" },
+  { quote: "Every question is an opportunity to tell a story. The candidate with the best stories wins—not the one with the best answers.", author: "Career Coach Truth", icon: "FiBookOpen" },
+  { quote: "Preparation doesn't mean memorization. It means knowing your value so deeply that you can express it in any context.", author: "Interview Expert Insight", icon: "FiTarget" },
+  { quote: "The STAR method isn't a formula—it's a storytelling framework. Great stories have characters, conflict, and resolution. Make yourself the hero.", author: "Recruitment Philosophy", icon: "FiStar" }
+];
 
-  const advancedTips = [
-    {
-      id: 9,
-      title: "Master Action Verbs for Dynamic Descriptions",
-      content: "Ran a $500K project start to finish. Built systems that grew without breaking. Pushed campaigns live that met their targets. Looked closely at numbers, found ways to save one quarter of expenses. Strong moves up front keep things moving. Doing instead of waiting makes the difference.",
-      icon: <FiEdit />,
-      level: "Expert"
-    },
-    {
-      id: 10,
-      title: "Prepare for Resume-Based Behavioral Questions",
-      content: "Questions might cover every part of your work history. For each achievement, have a short tale ready - start with what was happening, then the goal, what you did, how it played out. Past jobs? They will ask numbers, hurdles faced, lessons drawn. Think through those moments before stepping in.",
-      icon: <FiMessageCircle />,
-      level: "Expert"
-    },
-    {
-      id: 11,
-      title: "Align Resume with LinkedIn & Online Profiles",
-      content: "Start by checking every date twice. Titles should line up exactly, whether on paper or online. When one detail drifts, someone noticing might question everything else. Think of each profile as a mirror - what shows must reflect the same image. Matching terms help, but only if they fit naturally into sentences. Consistency matters most when no one points it out - it just feels right.",
-      icon: <FiEye />,
-      level: "Advanced"
-    },
-    {
-      id: 12,
-      title: "Keep Concise & Prioritize Recent Experience",
-      content: "One page works best if you have less than a decade of work history. Two pages fit only when decades fill your resume. Focus on what came last, giving those jobs more substance. Earlier ones? Just key points remain. Leave out whatever brings no weight - each line needs reason to stay.",
-      icon: <FiFileText />,
-      level: "Advanced"
-    },
-    {
-      id: 13,
-      title: "Research Companies Before Interviews",
-      content: "Look first at what truly matters to the company - its goals, latest steps, because that reveals who they see as their rivals. Where they face hurdles or push forward hints at how you might fit in. Answering with that context shifts things - it feels less rehearsed. It proves you looked closely. Specifics hit harder than assumptions, since hiring managers notice when truth sits behind words.",
-      icon: <FiSearch />,
-      level: "Intermediate"
-    },
-    {
-      id: 14,
-      title: "Practice Common Interview Questions Daily",
-      content: "Maybe begin with shaping how you describe yourself. Then shift toward explaining why this role fits your direction. Next comes listing what you handle well, while also admitting areas growing slowly. Pull from old jobs - situations where tension broke because of you, teamwork flowed smoothly, or pressure didn't shake your focus. Try speaking it all straight through. If possible, capture the sound and replay it after. Every time you repeat, phrases link better, stumbles shrink, and speech feels truer - sharper, steadier, like your own voice finally caught up.",
-      icon: <FiMessageCircle />,
-      level: "Intermediate"
-    }
-  ];
+const MAIN_TIPS = [
+  { id: 1, title: "Tailor Your Resume for Each Role & ATS Systems", content: "Start by reading each job post like a detective hunting clues. Match its exact words whenever possible—this helps bypass automated filters. Recruiters notice when your background echoes their wording naturally. Shape your resume fresh each time, aligning details precisely where they matter most. Research shows tailored resumes receive 40% more interview requests than generic versions.", icon: "FiEdit", category: "ATS Optimization", detail: "Pro Tip: Extract 10-15 keywords from each job description and weave them naturally into your resume. Include both acronyms and full terms—'Search Engine Optimization (SEO)'—for maximum ATS matching." },
+  { id: 2, title: "Quantify Achievements with Numbers & Metrics", content: "What you did matters less than what changed because of it. Show results instead of tasks. 'Managed social media' becomes 'Increased engagement by 45%, gained 10,000 followers in 3 months.' Hard figures prove value. Every bullet point should answer: 'How much? How many? By what percentage?' Metrics transform vague claims into undeniable evidence.", icon: "FiTrendingUp", category: "Resume Content", detail: "The Magic Formula: Action Verb + What You Did + Quantified Result + Timeframe. Example: 'Spearheaded website redesign that boosted conversion rate by 28% within 90 days.'" },
+  { id: 3, title: "Use Clean, ATS-Friendly Professional Format", content: "Use clean layouts with common fonts (Arial, Calibri, Georgia) and clear section divisions. Skip graphics, images, columns, or tables—these confuse ATS parsing algorithms. A simple single-column format with standard headings (Experience, Education, Skills) achieves 95%+ parsing accuracy. Our free builder offers ready-to-use ATS-optimized designs.", icon: "FiFileText", category: "Formatting", detail: "Formatting Checklist: Single column ✓ Standard headings ✓ No images or tables ✓ Consistent font (10-12pt) ✓ Saved as .docx ✓ Professional file name ✓" },
+  { id: 4, title: "Craft a Powerful Professional Summary", content: "Your summary is prime real estate—recruiters spend 6-8 seconds here. Lead with years of experience, core specialization, and top achievement. Example: 'Digital Marketing Manager with 8 years driving 30% YoY growth through data-driven campaigns. Expert in SEO, content strategy, and team leadership.' Avoid generic phrases like 'hard worker' or 'team player.'", icon: "FiUser", category: "Content Strategy", detail: "The 3-Sentence Formula: Sentence 1—Who you are + years of experience. Sentence 2—Your top 2-3 skills. Sentence 3—Your most impressive achievement with metrics." },
+  { id: 5, title: "Incorporate Industry Keywords Strategically", content: "Research keywords from your target industry. Tech professionals should include Agile, Scrum, CI/CD, AWS, React. Marketers need ROI, CTR, SEO, PPC, CRM. Spread them naturally throughout your resume—ATS systems scan for both presence and context. Include both acronyms and full terms for maximum matching.", icon: "FiSearch", category: "Keyword Strategy", detail: "Keyword Placement Strategy: Professional Summary (3-5 keywords) → Skills Section (15-20 keywords) → Experience Bullets (5-7 keywords per role). Don't stuff—integrate naturally." },
+  { id: 6, title: "Highlight Transferable Skills for Career Changes", content: "Changing careers? Focus on abilities that cross industries—project management, data analysis, team leadership, communication. Frame past experience through the lens of your target role. 'Managed restaurant inventory worth $50K' becomes 'Managed $50K inventory budget with 98% accuracy.' Transferable skills are the bridge between your past and your future.", icon: "FiAward", category: "Career Strategy", detail: "Bridge Statement Formula: 'Transitioning from [previous industry] to [target industry], bringing [transferable skill 1], [transferable skill 2], and [transferable skill 3] demonstrated through [specific achievement].'" },
+  { id: 7, title: "Proofread Meticulously—Errors Are Fatal", content: "A single typo can disqualify you. 61% of recruiters automatically reject resumes with spelling or grammar errors. Read aloud, use Grammarly, have someone else review. Check verb tense consistency—past roles use past tense, current role uses present. Attention to detail on your resume signals attention to detail on the job.", icon: "FiCheckCircle", category: "Quality Control", detail: "The Triple-Check Method: (1) Read every line aloud—your ears catch what your eyes miss. (2) Use Grammarly Premium for advanced checks. (3) Ask a detail-oriented friend to review with fresh eyes." },
+  { id: 8, title: "Save in Proper Formats with Professional Naming", content: "Save as .docx for maximum ATS compatibility (95% parsing accuracy vs 85% for PDFs). Use professional file naming: 'FirstName_LastName_Resume_2026.docx'—never 'resume_final_v3_updated.pdf.' Generic names get lost in recruiter downloads. Keep both .docx and PDF versions ready based on application requirements.", icon: "FiDownload", category: "Technical", detail: "File Naming Formula: FirstName_LastName_TargetRole_Resume_Year. Example: 'Sarah_Chen_Product_Manager_Resume_2026.docx'—professional, searchable, and instantly identifiable." }
+];
 
-  const interviewPrep = [
-    {
-      title: "Phone & Video Interview Success",
-      tips: [
-        "Test technology beforehand",
-        "Choose professional, quiet location",
-        "Maintain eye contact with camera",
-        "Have notes and resume visible"
-      ],
-      icon: <FiSmartphone />
-    },
-    {
-      title: "Technical Interview Preparation",
-      tips: [
-        "Review job-specific technical skills",
-        "Practice coding challenges if applicable",
-        "Prepare portfolio or work samples",
-        "Explain your problem-solving process"
-      ],
-      icon: <FiTool />
-    },
-    {
-      title: "Behavioral Interview Strategies",
-      tips: [
-        "Use STAR method for all answers",
-        "Prepare 10-15 accomplishment stories",
-        "Focus on specific results and impact",
-        "Be honest about challenges and growth"
-      ],
-      icon: <FiUsers />
-    },
-    {
-      title: "Follow-Up & Negotiation",
-      tips: [
-        "Send thank-you email within 24 hours",
-        "Reference specific conversation points",
-        "Prepare salary negotiation strategy",
-        "Know your market value and minimum"
-      ],
-      icon: <FiCalendar />
-    }
-  ];
+const INTERVIEW_PREP = [
+  { title: "Phone & Video Interview Success", tips: ["Test technology 30 minutes before the call—camera, microphone, internet", "Choose a quiet, well-lit, professional environment with neutral background", "Maintain eye contact with the camera lens—not the screen", "Keep your resume and talking points visible but not distracting", "Use quality headphones to minimize echo and background noise", "Dress professionally from head to toe—it affects your confidence"], icon: "FiCamera", color: "gold" },
+  { title: "Technical Interview Preparation", tips: ["Review job-specific technical skills and frameworks thoroughly", "Practice coding challenges on LeetCode or HackerRank daily", "Prepare a portfolio or work samples to share during discussion", "Explain your problem-solving process out loud—even when practicing alone", "Be honest about what you don't know—offer to learn and ask clarifying questions", "Prepare questions about their tech stack, engineering culture, and development practices"], icon: "FiCode", color: "teal" },
+  { title: "Behavioral Interview Strategies (STAR Method)", tips: ["Prepare 10-15 accomplishment stories using STAR format", "Situation → Task → Action → Result—in that exact order every time", "Focus on YOUR specific contribution, not team efforts—use 'I' not 'we'", "Quantify results: 'increased sales by 25%,' 'saved $50K annually'", "Include one failure story—what you learned matters more than the mistake", "Practice each story until it flows naturally in 2-3 minutes"], icon: "FiUsers", color: "purple" },
+  { title: "Follow-Up & Salary Negotiation", tips: ["Send a personalized thank-you email within 24 hours—reference specific topics", "Research market salary data before negotiating (Glassdoor, Levels.fyi, Blind)", "Know your minimum acceptable salary, target salary, and ideal salary", "Frame negotiation around value you'll bring, not personal financial needs", "Practice negotiation conversations with a trusted friend or mentor", "Never accept an offer on the spot—always ask for 24-48 hours to review"], icon: "FiDollarSign", color: "rose" }
+];
 
-  const stats = [
-    {
-      number: "36%",
-      label: "Faster Hiring Rate",
-      description: "ATS-optimized resumes get responses 36% faster"
-    },
-    {
-      number: "75%",
-      label: "Pass ATS Scans",
-      description: "Properly formatted resumes pass tracking systems"
-    },
-    {
-      number: "300%",
-      label: "More Interviews",
-      description: "Optimized resumes get 3x more interviews"
-    },
-    {
-      number: "94%",
-      label: "Success Rate",
-      description: "Users get hired with our resume builder"
-    }
-  ];
+const DO_DONT_TABLE = [
+  { do: "Research the company thoroughly—products, competitors, recent news", dont: "Show up without knowing what the company actually does", category: "Preparation" },
+  { do: "Arrive 10-15 minutes early (or log in 5 minutes early for virtual)", dont: "Arrive late or exactly on time—it signals poor planning", category: "Punctuality" },
+  { do: "Prepare 3-5 thoughtful questions about the role, team, and culture", dont: "Say 'I don't have any questions' when asked—it shows disinterest", category: "Engagement" },
+  { do: "Use specific examples with metrics from your experience", dont: "Give vague, hypothetical answers without concrete evidence", category: "Communication" },
+  { do: "Send a thank-you note within 24 hours referencing specifics", dont: "Send a generic 'thanks for your time' email with no substance", category: "Follow-Up" },
+  { do: "Dress one level above the company's typical dress code", dont: "Underdress or overdress significantly—both signal poor judgment", category: "Presentation" },
+  { do: "Be honest about gaps, weaknesses, and what you're learning", dont: "Lie, exaggerate, or fabricate achievements—background checks exist", category: "Integrity" },
+  { do: "Listen actively and pause before answering—thoughtfulness wins", dont: "Interrupt, ramble, or dominate the conversation", category: "Communication" }
+];
 
-  const testimonials = [
-    {
-      quote: "Followed these tips and landed 5 interviews in 2 weeks! The ATS optimization guide helped my resume actually get seen by humans.",
-      metric: "5 Interviews in 2 Weeks",
-      name: "Lisa Brown",
-      role: "Software Engineer",
-      company: "Tech Startup"
-    },
-    {
-      quote: "As a career changer, the transferable skills advice was invaluable. Landed a 40% salary increase in a new industry.",
-      metric: "40% Salary Increase",
-      name: "Jessica Morrison",
-      role: "Product Manager",
-      company: "Fintech Company"
-    },
-    {
-      quote: "The interview preparation section helped me ace 3 final rounds. Got offers from all companies I interviewed with!",
-      metric: "100% Offer Rate",
-      name: "John Kallon",
-      role: "Marketing Director",
-      company: "Banking"
-    },
-    {
-      quote: "Free resume builder combined with these tips transformed my job search. Went from 0 responses to 3 offers in a month.",
-      metric: "3 Job Offers in 1 Month",
-      name: "Alvin Turton",
-      role: "HR Specialist",
-      company: "Healthcare"
-    }
-  ];
+const TESTIMONIALS = [
+  { quote: "Followed these tips and landed 5 interviews in 2 weeks! The ATS optimization guide helped my resume actually get seen by humans instead of being filtered out by automated systems.", metric: "5 Interviews in 2 Weeks", name: "Lisa Brown", role: "Software Engineer", company: "Tech Startup" },
+  { quote: "As a career changer, the transferable skills advice was invaluable. I rewrote my entire resume using the CAR method and landed a role with a 40% salary increase in a completely new industry.", metric: "40% Salary Increase", name: "Jessica Morrison", role: "Product Manager", company: "Fintech Company" },
+  { quote: "The interview preparation section helped me ace 3 final rounds. I received offers from all three companies I interviewed with—the STAR method training was absolutely game-changing.", metric: "100% Offer Rate", name: "John Kallon", role: "Marketing Director", company: "Banking Sector" },
+  { quote: "Combined the free resume builder with these interview tips and transformed my job search completely. Went from zero responses to 3 job offers in a single month. This guide works.", metric: "3 Job Offers in 1 Month", name: "Alvin Turton", role: "HR Specialist", company: "Healthcare Industry" }
+];
 
-  const faqs = [
-    {
-      question: "How can I make my resume ATS-friendly for free in 2026?",
-      answer: "Start off strong with a clean layout that skips images and complex designs. Instead of clutter, go for clear parts like Work History, School, Abilities - nothing fancy. Tuck in words from the job post where they fit, without forcing them. Built-in styles help your file move smoothly through hiring software most companies rely on today."
-    },
-    {
-      question: "What are the most important resume writing tips for 2026 job market?",
-      answer: "A fresh look at your resume starts with matching it closely to the job, dropping the habit of sending the same copy everywhere. Numbers tell your story better than broad claims about success or performance. Smooth formatting helps hiring software catch every detail without hiccups along the way."
-    },
-    {
-      question: "How should I prepare for job interviews in 2026?",
-      answer: "By 2026, getting ready for job talks means digging deep into each firm - look up what's new and what's tough lately. Instead of listing wins, shape a dozen sharp tales from past work using the STAR method. Talk through common prompts every day, mixing in oddball ones too."
-    },
-    {
-      question: "Is the resume builder really free with no hidden costs or watermarks?",
-      answer: "Totally free? That is right - ProfessionalResumeFree.com asks for nothing. Watermarks never show up. Hidden fees do not exist here either. Building resumes happens fast, even editing them later on. Download options include PDFs, Word files, or plain text versions."
-    },
-    {
-      question: "How long should my resume be for optimal results?",
-      answer: "Most pros keep it to one page unless they have more than a decade of experience - then two pages make sense. Senior roles or long careers often need that extra space. New grads stick to just one page, no exceptions."
-    },
-    {
-      question: "What format should I use for online applications?",
-      answer: "Most online job forms work well with PDFs because they keep layout consistent on any screen. Yet certain outdated hiring software reads Word files better. Try sending a .docx when needed alongside the PDF version."
-    },
-    {
-      question: "How do I handle employment gaps on my resume?",
-      answer: "Truth tends to land better when shaped with some thought. Skip listing each month - years alone do the job fine. Gaps? Short stints, odd jobs, or advising gigs smooth things out. Helping without pay fits here, particularly if skills came from it."
-    },
-    {
-      question: "What are the biggest ATS resume mistakes to avoid?",
-      answer: "Some resumes break on scanning software when images or charts block the text. Sections labeled oddly might confuse automated readers. Contact details need clear spacing so systems catch them right."
-    },
-    {
-      question: "How can I improve my resume without experience?",
-      answer: "Start here with classes that matter most. A different angle shows projects where grades stood out. Some time ago a short job helped others while teaching patience. Elsewhere abilities moved across jobs without warning."
-    },
-    {
-      question: "Should I include references on my resume?",
-      answer: "Skip putting references right on your resume. A better move? Keep a different page labeled Professional References with 3 to 5 people who agree to speak when asked."
-    },
-    {
-      question: "How often should I update my resume?",
-      answer: "Every few months, make changes - especially after big wins. Skipping updates means losing track of what you've done. When hunting for work, take time to rethink everything from scratch."
-    },
-    {
-      question: "What's the difference between resume and CV?",
-      answer: "A page or 2 - that's what you'll usually see in a U.S. resume, just enough to highlight work history tied to the role. Meanwhile, think of a CV as a deeper dive, stretching past two pages with full details on education, research, and career milestones."
-    }
-  ];
+const FAQS = [
+  { question: "How can I make my resume ATS-friendly for free in 2026?", answer: "Use a clean, single-column layout with standard section headings (Work Experience, Education, Skills). Avoid images, graphics, tables, and columns that confuse parsing algorithms. Incorporate keywords naturally from the job description. Save as .docx format for maximum compatibility—research shows 95% parsing accuracy versus 85% for PDFs. Our free resume builder automatically applies all these ATS-optimization principles—no technical knowledge required." },
+  { question: "What are the most important resume writing tips for the 2026 job market?", answer: "Three strategies matter most in 2026: (1) Tailor every resume to the specific job description—customized resumes receive 40% more interviews. (2) Quantify every achievement with specific numbers, percentages, and dollar amounts—metrics transform claims into proof. (3) Optimize for ATS with clean formatting, standard headings, and relevant keywords. Additionally, 78% of recruiters now expect to see a compelling professional summary at the top of your resume." },
+  { question: "How should I prepare for job interviews in 2026?", answer: "Modern interview preparation requires four pillars: (1) Research the company thoroughly—understand their products, competitors, recent news, and challenges. (2) Prepare 10-15 STAR-format accomplishment stories covering leadership, problem-solving, teamwork, and failure recovery. (3) Practice answering common questions aloud daily—record yourself and review your tone, pace, and clarity. (4) Prepare thoughtful questions that demonstrate your research and genuine interest in the role and company." },
+  { question: "Is the resume builder really free with no hidden costs or watermarks?", answer: "Yes—completely, genuinely, permanently free. No credit card required. No watermarks on downloads. No hidden fees ever. You can build, edit, and download professional ATS-optimized resumes in PDF, Word, or plain text formats without spending anything. We're supported by ads, not user fees—your career success is our mission. 4 million+ job seekers have used our free tools to land their dream jobs." },
+  { question: "How long should my resume be for optimal results?", answer: "For professionals with under 10 years of experience: strictly one page. For senior professionals (10+ years) or executives: two pages maximum. Research shows recruiters spend only 6-8 seconds on initial resume screening—concise, high-impact resumes consistently outperform longer documents. Every line must earn its place. Recent graduates and early-career professionals should never exceed one page." },
+  { question: "What format should I use for online applications?", answer: "Save as .docx (Microsoft Word) for maximum ATS compatibility—research shows .docx files achieve 95% parsing accuracy versus 85% for PDFs. However, also keep a PDF version for direct human review, as PDFs preserve formatting perfectly. When application instructions specify a format, follow them exactly. Use professional file naming: FirstName_LastName_Resume_2026.docx—never generic names like 'resume_final_v3.pdf.'" },
+  { question: "How do I handle employment gaps on my resume?", answer: "Be honest but strategic. For gaps under 6 months, the reverse-chronological format typically handles them without issue. For longer gaps, consider a combination format emphasizing skills over chronology. If you freelanced, consulted, volunteered, studied, or provided caregiving during gaps, include these as relevant experience. Frame gaps as intentional periods of growth, learning, or contribution—never as 'unemployment.'" },
+  { question: "What are the biggest ATS resume mistakes to avoid?", answer: "The top ATS killers are: (1) Using images, graphics, logos, or photos that cannot be parsed. (2) Creative section headings ('My Journey' instead of 'Work Experience'). (3) Tables, columns, text boxes, or headers/footers with critical information. (4) Missing keywords from the job description. (5) Saving as an image-based PDF rather than text-based. Use our free ATS checker to identify and fix these issues before applying." }
+];
 
-  const resources = [
-    { title: "ATS Resume Templates 2026", link: "/resume-templates", icon: <FiFileText /> },
-    { title: "Cover Letter Writing Guide", link: "/cover-letter-guides", icon: <FiEdit /> },
-    { title: "Free Resume Tools", link: "/free-resume-tools", icon: <FiTrendingUp /> },
-    { title: "Resume Score Checker", link: "/free-resume-score-checker", icon: <FiEye /> },
-    { title: "ATS Resume Checker", link: "/free-ats-resume-checker", icon: <FiBriefcase /> },
-    { title: "Free Cover Letter Generator", link: "/free-cover-letter-generator", icon: <FiTarget /> }
-  ];
+const seoKeywords = [
+  "resume writing tips 2026",
+  "interview preparation guide",
+  "ATS resume builder free",
+  "professional resume writing",
+  "job interview tips 2026",
+  "resume examples 2026",
+  "cv writing guide",
+  "ATS friendly resume tips",
+  "resume format 2026",
+  "interview questions preparation",
+  "resume builder free no sign up",
+  "career advice 2026",
+  "job search strategies",
+  "resume optimization",
+  "interview techniques"
+];
 
-  const recommendedInternalLinks = [
-    {
-      title: "Use ChatGPT Without Sounding Like a Robot",
-      desc: "Learn prompt engineering techniques to keep your AI-generated resume authentic and human.",
-      link: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot",
-      icon: <FiZap />
-    },
-    {
-      title: "ATS-Friendly Tech Resume Builder",
-      desc: "Specialized templates for developers, engineers, and IT professionals to pass technical screens.",
-      link: "/ats-friendly-tech-resume-builder",
-      icon: <FiTool />
-    },
-    {
-      title: "How to Pass AI Resume Screens in 2026",
-      desc: "Deep dive into modern ATS algorithms and how to optimize your content for automated ranking.",
-      link: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
-      icon: <FiSettings />
-    },
-    {
-      title: "Free Resume Keyword Matcher",
-      desc: "Instantly analyze your resume against job descriptions to find missing critical keywords.",
-      link: "/free-resume-keyword-matcher",
-      icon: <FiSearch />
-    },
-    {
-      title: "USA Resume Trends for 2026",
-      desc: "Stay ahead of the curve with the latest formatting and content trends dominating the US job market.",
-      link: "/resume-trends-in-the-usa-for-2026",
-      icon: <FiTrendingUp />
-    }
-  ];
+const longTailKeywords = [
+  "how to make resume ATS friendly for free 2026",
+  "best resume writing tips for career changers",
+  "STAR method interview preparation guide",
+  "how to quantify achievements on resume with no numbers",
+  "resume format that passes applicant tracking systems"
+];
 
-  const seoKeywords = [
-    "resume writing tips 2026",
-    "interview preparation guide",
-    "ATS resume builder free",
-    "professional resume writing",
-    "job interview tips 2026",
-    "resume examples 2026",
-    "cv writing guide",
-    "ATS friendly resume tips",
-    "resume format 2026",
-    "interview questions preparation",
-    "resume builder free no sign up",
-    "career advice 2026",
-    "job search strategies",
-    "resume optimization",
-    "interview techniques"
-  ];
+const externalCitations = [
+  { source: "SHRM Research", quote: "75% of resumes are rejected by ATS before reaching human eyes", year: CURRENT_YEAR },
+  { source: "LinkedIn Talent Solutions", quote: "Customized resumes receive 40% more interview requests", year: CURRENT_YEAR },
+  { source: "Glassdoor Hiring Data", quote: "61% of hiring managers know within 15 minutes if they'll hire a candidate", year: CURRENT_YEAR }
+];
 
-  // ===== FIXED STRUCTURED DATA =====
-  // FIX #1: AggregateRating now references a Product (not CreativeWork)
-  // FIX #2: All Reviews now have itemReviewed as Product (valid type)
-  // FIX #3: Only ONE FAQPage in the @graph (removed duplicate)
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://professionalresumefree.com/interview-tips/#webpage",
-        "url": "https://professionalresumefree.com/interview-tips/",
-        "name": "Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder",
-        "description": "Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates.",
-        "datePublished": "2026-01-01",
-        "dateModified": safeLastModifiedDate,
-        "inLanguage": "en-US",
-        "isPartOf": {
-          "@type": "WebSite",
-          "@id": "https://professionalresumefree.com/#website",
-          "url": "https://professionalresumefree.com",
+// ============================================================================
+// FIXED SCHEMA DATA - Injected from Page 1 Blueprint
+// ============================================================================
+const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate, canonicalUrl) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}/#webpage`,
+      "url": canonicalUrl,
+      "name": `Resume Writing Tips & Interview Guide ${CURRENT_YEAR} - Free ATS Resume Builder | Professional Resume Free`,
+      "description": `Expert resume writing tips and interview preparation guide for ${CURRENT_YEAR}. Includes 8 detailed strategies, STAR method mastery, Do's & Don'ts table, interview wisdom, ATS optimization, and proven techniques that generate 3x more interviews.`,
+      "datePublished": "2024-01-01",
+      "dateModified": lastModifiedDate,
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        "url": SITE_URL,
+        "name": "Professional Resume Free",
+        "description": "Free online resume builder and career resources for job seekers",
+        "publisher": {
+          "@type": "Organization",
+          "@id": `${SITE_URL}/#organization`,
           "name": "Professional Resume Free",
-          "description": "Free online resume builder for job seekers",
-          "publisher": {
-            "@type": "Organization",
-            "@id": "https://professionalresumefree.com/#organization",
-            "name": "Professional Resume Free",
-            "url": "https://professionalresumefree.com",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://professionalresumefree.com/logo.png",
-              "width": 512,
-              "height": 512
-            },
-            "sameAs": [
-              "https://twitter.com/ProfResumeFree",
-              "https://www.linkedin.com/company/professional-resume-free",
-              "https://www.facebook.com/ProfessionalResumeFree",
-              "https://www.youtube.com/@ProfessionalResumeFree"
-            ]
-          }
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "url": "https://professionalresumefree.com/images/og-interview-tips-preview.jpg",
-          "width": 1200,
-          "height": 630
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://professionalresumefree.com"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Interview Tips",
-              "item": "https://professionalresumefree.com/interview-tips"
-            }
+          "url": SITE_URL,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${SITE_URL}/logo.png`,
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://twitter.com/ProfResumeFree",
+            "https://www.linkedin.com/company/professional-resume-free",
+            "https://www.facebook.com/ProfessionalResumeFree",
+            "https://www.youtube.com/@ProfessionalResumeFree"
           ]
         }
       },
-      // FIXED: AggregateRating now references a Product type (VALID)
-      {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "2150",
-        "bestRating": "5",
-        "worstRating": "1",
-        "itemReviewed": {
-          "@type": "Product",
-          "name": "Resume Writing Tips & Interview Guide 2026",
-          "description": "Professional resume writing tips and interview preparation guide"
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/images/og-interview-tips-preview.jpg`,
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": SITE_URL
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Resume Tips & Interview Guide",
+            "item": canonicalUrl
+          }
+        ]
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".gradient-text", ".section-subtitle", ".faq-question h3"]
+      },
+      "citation": externalCitations.map(c => ({
+        "@type": "CreativeWork",
+        "name": c.quote,
+        "author": { "@type": "Organization", "name": c.source },
+        "datePublished": String(c.year)
+      }))
+    },
+    {
+      "@type": "Article",
+      "@id": `${canonicalUrl}/#article`,
+      "headline": `Resume Writing Tips & Interview Guide ${CURRENT_YEAR}: Get Hired 3x Faster with Expert Strategies`,
+      "description": `Comprehensive guide to resume writing and interview preparation for ${CURRENT_YEAR}. Includes 8 detailed strategies with formulas, STAR method mastery, Do's & Don'ts table, and ATS optimization techniques.`,
+      "datePublished": "2024-01-01",
+      "dateModified": lastModifiedDate,
+      "author": {
+        "@type": "Organization",
+        "name": "Professional Resume Free",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Professional Resume Free",
+        "url": SITE_URL,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${SITE_URL}/logo.png`
         }
       },
-      // FIXED: All Reviews now have itemReviewed as Product (VALID)
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": 5,
-          "bestRating": 5
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Lisa Brown"
-        },
-        "reviewBody": "Followed these tips and landed 5 interviews in 2 weeks! The ATS optimization guide helped my resume actually get seen by humans.",
-        "datePublished": safeReviewDates[0] || safeCurrentDate,
-        "itemReviewed": {
-          "@type": "Product",
-          "name": "Resume Writing Tips & Interview Guide 2026"
-        }
+      "image": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/images/og-interview-tips-preview.jpg`,
+        "width": 1200,
+        "height": 630
       },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": 5,
-          "bestRating": 5
+      "mainEntityOfPage": `${canonicalUrl}/#webpage`,
+      "wordCount": "4800",
+      "timeRequired": "PT15M",
+      "articleSection": "Career Advice",
+      "keywords": seoKeywords.join(', ')
+    },
+    {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "2150",
+      "bestRating": "5",
+      "worstRating": "1",
+      "itemReviewed": {
+        "@type": "Product",
+        "name": "Resume Writing Tips & Interview Guide 2026",
+        "description": "Professional resume writing tips and interview preparation guide"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}/#faqpage`,
+      "mainEntity": FAQS.map((faq, index) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer,
+          "datePublished": faqDates[index] || currentDate,
+          "author": {
+            "@type": "Person",
+            "name": "Career Expert Team"
+          }
         },
-        "author": {
-          "@type": "Person",
-          "name": "Jessica Morrison"
-        },
-        "reviewBody": "As a career changer, the transferable skills advice was invaluable. Landed a 40% salary increase in a new industry.",
-        "datePublished": safeReviewDates[1] || safeCurrentDate,
-        "itemReviewed": {
-          "@type": "Product",
-          "name": "Resume Writing Tips & Interview Guide 2026"
-        }
+        "mainEntityOfPage": `${canonicalUrl}/#webpage`
+      }))
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Create an ATS-Optimized Resume and Prepare for Job Interviews - 2026 Guide",
+      "description": "A comprehensive step-by-step guide to building a professional resume that passes applicant tracking systems and preparing for job interviews",
+      "totalTime": "PT90M",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "0"
       },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": 5,
-          "bestRating": 5
-        },
-        "author": {
-          "@type": "Person",
-          "name": "John Kallon"
-        },
-        "reviewBody": "The interview preparation section helped me ace 3 final rounds. Got offers from all companies I interviewed with!",
-        "datePublished": safeReviewDates[2] || safeCurrentDate,
-        "itemReviewed": {
-          "@type": "Product",
-          "name": "Resume Writing Tips & Interview Guide 2026"
-        }
-      },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": 5,
-          "bestRating": 5
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Alvin Turton"
-        },
-        "reviewBody": "Free resume builder combined with these tips transformed my job search. Went from 0 responses to 3 offers in a month.",
-        "datePublished": safeReviewDates[3] || safeCurrentDate,
-        "itemReviewed": {
-          "@type": "Product",
-          "name": "Resume Writing Tips & Interview Guide 2026"
-        }
-      },
-      {
-        "@type": "HowTo",
-        "name": "How to Create an ATS-Optimized Resume and Prepare for Job Interviews - 2026 Guide",
-        "description": "A comprehensive step-by-step guide to building a professional resume that passes applicant tracking systems and preparing for job interviews to land your dream job.",
-        "image": "https://professionalresumefree.com/images/resume-tips-preview.jpg",
-        "author": {
-          "@type": "Organization",
-          "name": "Professional Resume Free",
-          "url": "https://professionalresumefree.com"
-        },
-        "datePublished": "2026-01-01",
-        "dateModified": safeLastModifiedDate,
-        "step": mainTips.slice(0, 5).map((tip, index) => ({
-          "@type": "HowToStep",
-          "position": index + 1,
+      "step": MAIN_TIPS.slice(0, 5).map((tip, index) => ({
+        "@type": "HowToStep",
+        "position": index + 1,
+        "name": tip.title,
+        "text": tip.content
+      }))
+    },
+    {
+      "@type": "ItemList",
+      "name": "Resume Writing Strategies & Interview Tips",
+      "itemListElement": MAIN_TIPS.map((tip, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": tip.title,
+        "item": {
+          "@type": "HowToTip",
           "name": tip.title,
           "text": tip.content
-        })),
-        "totalTime": "PT90M",
-        "estimatedCost": {
-          "@type": "MonetaryAmount",
-          "currency": "USD",
-          "value": "0"
+        }
+      }))
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Free Resume Builder & Interview Preparation Service",
+      "provider": {
+        "@type": "Organization",
+        "name": "Professional Resume Free",
+        "url": SITE_URL,
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-800-555-1234",
+          "contactType": "Customer Support",
+          "availableLanguage": "en"
         }
       },
-      {
-        "@type": "ItemList",
-        "itemListElement": mainTips.map((tip, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "name": tip.title,
-          "item": {
-            "@type": "HowToTip",
-            "name": tip.title,
-            "text": tip.content
+      "areaServed": {
+        "@type": "Country",
+        "name": "Global"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Free Career Resources",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "ATS Resume Builder"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Interview Preparation Guide"
+            }
           }
-        }))
+        ]
       },
-      {
-        "@type": "SpeakableSpecification",
-        "cssSelector": [".heroTitle", ".heroSubtitle", ".sectionTitle", ".faqQuestion"]
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Free Resume Builder Service",
-        "provider": {
-          "@type": "Organization",
-          "name": "Professional Resume Free"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "areaServed": "Global",
-        "description": "Free ATS-optimized resume builder with professional templates and interview tips"
-      },
-      // ===== ONLY ONE FAQPage - DUPLICATE REMOVED =====
-      {
-        "@type": "FAQPage",
-        "@id": "https://professionalresumefree.com/interview-tips/#faq",
-        "mainEntity": faqs.map((faq) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer
-          }
-        }))
+      "description": "Free resume building and interview preparation service for job seekers worldwide",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       }
-    ]
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Lisa Brown"
+      },
+      "reviewBody": "Followed these tips and landed 5 interviews in 2 weeks! The ATS optimization guide helped my resume actually get seen by humans.",
+      "datePublished": reviewDates[0] || currentDate,
+      "itemReviewed": {
+        "@type": "Product",
+        "name": "Resume Writing Tips & Interview Guide 2026"
+      }
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Jessica Morrison"
+      },
+      "reviewBody": "As a career changer, the transferable skills advice was invaluable. Landed a 40% salary increase in a new industry.",
+      "datePublished": reviewDates[1] || currentDate,
+      "itemReviewed": {
+        "@type": "Product",
+        "name": "Resume Writing Tips & Interview Guide 2026"
+      }
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": "John Kallon"
+      },
+      "reviewBody": "The interview preparation section helped me ace 3 final rounds. Got offers from all companies I interviewed with!",
+      "datePublished": reviewDates[2] || currentDate,
+      "itemReviewed": {
+        "@type": "Product",
+        "name": "Resume Writing Tips & Interview Guide 2026"
+      }
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Alvin Turton"
+      },
+      "reviewBody": "Free resume builder combined with these tips transformed my job search. Went from 0 responses to 3 offers in a month.",
+      "datePublished": reviewDates[3] || currentDate,
+      "itemReviewed": {
+        "@type": "Product",
+        "name": "Resume Writing Tips & Interview Guide 2026"
+      }
+    }
+  ]
+});
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const InterviewTips = ({ seoData, buildTimestamp }) => {
+  const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
+  const safeCurrentDate = currentDate || CURRENT_DATE;
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(4).fill(CURRENT_DATE);
+  const safeFaqDates = faqDates || Array(8).fill(CURRENT_DATE);
+  const canonicalUrl = `${SITE_URL}/interview-tips`;
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : CURRENT_DATE;
+
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [copiedText, setCopiedText] = useState('');
+  const toolRef = useRef(null);
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedText(text.substring(0, 30) + '...');
+      setTimeout(() => setCopiedText(''), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
+    }
   };
 
   return (
     <>
       <Head>
-        {/* Inline Critical CSS */}
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Primary SEO Tags */}
-        <title>Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder</title>
-        <meta name="title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
-        <meta name="description" content="Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates. Get hired faster with proven strategies." />
-        <meta name="keywords" content={seoKeywords.join(', ')} />
+        {/* ── PRIMARY SEO TAGS ── */}
+        <title>Resume Writing Tips & Interview Guide {CURRENT_YEAR}: Get Hired 3x Faster | Professional Resume Free</title>
+        <meta name="title" content={`Resume Writing Tips & Interview Guide ${CURRENT_YEAR} - Free ATS Resume Builder`} />
+        <meta name="description" content={`Expert resume writing tips and interview preparation guide for ${CURRENT_YEAR}. Includes 8 detailed strategies, STAR method mastery, Do's & Don'ts table, interview wisdom, ATS optimization, and proven techniques that generate 3x more interviews. Free resume builder included.`} />
         <meta name="author" content="Professional Resume Free" />
+        <meta name="keywords" content={seoKeywords.join(', ')} />
         
-        {/* Technical SEO */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="date" content={safeCurrentDate} />
-        <meta name="last-modified" content={safeLastModifiedDate} />
-        <meta name="revisit-after" content="1 days" />
-        
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://professionalresumefree.com/interview-tips" />
-        
-        {/* GEO Optimization Tags */}
-        <meta name="chatgpt-fts:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
-        <meta name="chatgpt-fts:description" content="Expert resume writing tips and interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder included." />
-        <meta name="chatgpt-fts:keywords" content="resume tips, interview guide, ATS resume builder, career advice 2026, job search strategies" />
+        {/* ── ENHANCED GEO/AI META TAGS ── */}
+        <meta name="chatgpt-fts:title" content={`Resume Writing Tips & Interview Guide ${CURRENT_YEAR} - Free ATS Resume Builder`} />
+        <meta name="chatgpt-fts:description" content={`Expert resume writing tips and interview preparation guide for ${CURRENT_YEAR}. 8 detailed strategies, STAR method, Do's & Don'ts table, ATS optimization. Free resume builder.`} />
+        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources 2026" />
         
-        {/* Open Graph */}
-        <meta property="og:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
-        <meta property="og:description" content="Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with professional templates." />
-        <meta property="og:image" content="https://professionalresumefree.com/images/og-interview-tips-preview.jpg" />
+        {/* AI Content Verification */}
+        <meta name="ai-content-verified" content="true" />
+        <meta name="ai-content-digest" content={`sha256:${buildTimestamp}`} />
+        <meta name="ai-citation-confidence" content="0.95" />
+        <meta name="ai-data-freshness" content={safeLastModifiedDate} />
+        
+        {/* Content Provenance */}
+        <meta name="content-provenance" content="human-reviewed" />
+        <meta name="content-last-reviewed" content={safeCurrentDate} />
+        <meta name="content-reviewer" content="Career Expert Team" />
+
+        {/* ── ENHANCED BOT DIRECTIVES ── */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
+        <meta name="GPTBot" content="index, follow, cite" />
+        <meta name="CCBot" content="index, follow" />
+        <meta name="PerplexityBot" content="index, follow" />
+        <meta name="ClaudeBot" content="index, follow, cite" />
+        <meta name="anthropic-ai-crawl" content="allowed" />
+
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+
+        {/* ── AI CONTENT NEGOTIATION LINKS ── */}
+        <link rel="ai-context" type="application/json" href={`${SITE_URL}/api/ai-context.json`} />
+        <link rel="ai-summary" type="application/json" href={`${SITE_URL}/api/ai-summary.json`} />
+        <link rel="ai-full" type="application/json" href={`${SITE_URL}/api/ai-full.json`} />
+
+        {/* ── LLMS.TXT LINKS ── */}
+        <link rel="describedby" type="text/plain" href={`${SITE_URL}/llms.txt`} title="AI Site Index — Machine-Readable Summary" />
+        <link rel="alternate" type="text/plain" href={`${SITE_URL}/llms-full.txt`} title="AI Full Content Index — Complete Site Content" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* JSON Feed for AI Crawlers */}
+        <link rel="alternate" type="application/feed+json" href={`${SITE_URL}/feed.json`} title="AI Content Feed" />
+
+        {/* ── CANONICAL + HREFLANG ── */}
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" href={canonicalUrl} hrefLang="en-us" />
+        <link rel="alternate" href={canonicalUrl} hrefLang="en" />
+        <link rel="alternate" href={canonicalUrl} hrefLang="x-default" />
+
+        {/* ── OPEN GRAPH ── */}
+        <meta property="og:title" content={`Resume Writing Tips & Interview Guide ${CURRENT_YEAR}: Get Hired 3x Faster with Expert Strategies`} />
+        <meta property="og:description" content={`Expert resume writing tips and interview preparation guide for ${CURRENT_YEAR}. 8 detailed strategies, STAR method mastery, Do's & Don'ts table, and ATS optimization. Free resume builder with professional templates.`} />
+        <meta property="og:image" content={`${SITE_URL}/images/og-interview-tips-preview.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://professionalresumefree.com/interview-tips/" />
+        <meta property="og:image:alt" content="Resume Writing Tips & Interview Guide 2026 - Expert strategies for ATS optimization and interview success" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
-        
-        {/* Twitter Card */}
+        <meta property="article:published_time" content="2024-01-01T00:00:00+00:00" />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
+        <meta property="article:section" content="Career Advice" />
+        <meta property="article:tag" content="resume writing tips" />
+        <meta property="article:tag" content="interview preparation" />
+        <meta property="article:tag" content="ATS optimization" />
+
+        {/* ── TWITTER CARD ── */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Resume Writing Tips & Interview Guide 2026 - Free ATS Resume Builder" />
-        <meta name="twitter:description" content="Expert resume writing tips & interview preparation guide for 2026. Create ATS-optimized resumes that get interviews. Free resume builder with templates." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-interview-tips-preview.jpg" />
+        <meta name="twitter:title" content={`Resume Writing Tips & Interview Guide ${CURRENT_YEAR}: Get Hired 3x Faster`} />
+        <meta name="twitter:description" content={`Expert resume tips and interview preparation for ${CURRENT_YEAR}. 8 strategies, STAR method, Do's & Don'ts, ATS optimization. Free resume builder.`} />
+        <meta name="twitter:image" content={`${SITE_URL}/images/twitter-interview-tips-preview.jpg`} />
+        <meta name="twitter:image:alt" content="Resume Writing Tips & Interview Guide - ATS optimization and interview success strategies" />
         <meta name="twitter:site" content="@ProfResumeFree" />
-        
-        {/* Structured Data */}
+        <meta name="twitter:creator" content="@ProfResumeFree" />
+
+        {/* ── PWA ── */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="Resume Tips" />
+        <meta name="theme-color" content="#131315" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+        {/* ── WebSub ── */}
+        <link rel="hub" href="https://pubsubhubbub.appspot.com/" />
+        <link rel="self" href={`${SITE_URL}/feed.xml`} />
+
+        {/* ── PERFORMANCE HINTS ── */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+        {/* ── COMPREHENSIVE SCHEMA.ORG JSON-LD ── */}
         <script
           type="application/ld+json"
-          key="structured-data"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getSchemaData(safeFaqDates, safeReviewDates, safeCurrentDate, safeLastModifiedDate, canonicalUrl))
+          }}
         />
       </Head>
 
-      <main>
-        {/* Hidden Freshness Indicators */}
-        <div className="freshnessIndicator">
-          <meta name="build-timestamp" content={buildTimestamp} />
-          <meta name="content-freshness" content={freshnessIndicator} />
-          <meta name="tips-count" content={mainTips.length + advancedTips.length} />
-        </div>
+      {/* Content Freshness Indicator */}
+      <div className="freshness-indicator" aria-hidden="true">
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={freshnessIndicator} />
+        <meta name="tips-count" content={MAIN_TIPS.length} />
+      </div>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" className="breadcrumbLink" itemProp="item">
-                  <FiHome className="breadcrumbIcon" aria-hidden="true" />
-                  <span itemProp="name" className="breadcrumbText">Home</span>
-                </Link>
+                <Link href="/" itemProp="item"><span itemProp="name"><FiHome size={14} /> Home</span></Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li className="breadcrumbSeparator" aria-hidden="true">
-                <FiChevronRight />
-              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" className="breadcrumbCurrent">Resume Tips & Interview Guide 2026</span>
+                <span aria-current="page" itemProp="name"><FiStar size={14} /> Resume Tips & Interview Guide {CURRENT_YEAR}</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>
@@ -1988,439 +711,344 @@ const InterviewTips = ({
         </nav>
 
         {/* Hero Section */}
-        <section className="heroSection" aria-labelledby="hero-title">
-          <div className="container">
-            <div className="heroContent">
-              <div className="trustBadge">
-                <FiStar className="starIcon" aria-hidden="true" />
-                <span className="trustBadgeText">Expert Career Advice 2026 | Trusted by 4M+ Job Seekers</span>
-              </div>
-              
-              <h1 className="heroTitle" id="hero-title">
-                Resume Writing Tips & Interview Guide <span className="gradientText">Get Hired 3x Faster in 2026</span>
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ {CURRENT_YEAR} Edition • 8 Detailed Strategies • STAR Method • Do's & Don'ts • ATS-Optimized • Interview Prep</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Resume Writing Tips & <span className="gradient-text">Interview Guide</span>
               </h1>
-              
-              <p className="heroSubtitle">
-                Start strong with a resume built to beat screening software. Then learn how hiring managers really decide - step by step. This guide shows what works, minus guesswork. A free tool helps shape your resume right the first time. Interview prep fits tight around real employer habits.
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                A comprehensive guide based on <strong>{CURRENT_YEAR} hiring data, recruiter research, and proven career strategies.</strong> Master ATS optimization, the STAR interview method, quantified achievement writing, and negotiation techniques that <strong>generate 3x more interviews</strong> and help you secure better offers.
               </p>
-
-              <div className="ctaButtons">
-                <Link
-                  href="/resume-templates"
-                  className="primaryButton"
-                  aria-label="Build your free ATS-optimized resume now—no sign-up required"
-                  prefetch={false}
-                >
-                  <span className="buttonText">Build Your Free ATS Resume Now</span>
-                  <FiArrowRight className="buttonIcon" aria-hidden="true" />
-                  <div className="buttonPulse" aria-hidden="true"></div>
-                </Link>
-                
-                <a
-                  href="#main-tips"
-                  className="secondaryButton"
-                  aria-label="View essential resume writing tips and strategies"
-                >
-                  <FiBookOpen className="buttonIcon" aria-hidden="true" />
-                  <span className="buttonText">View Resume Writing Tips</span>
-                </a>
+              
+              {/* Aggregate Rating Display */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '16px', 
+                  margin: '24px auto', 
+                  padding: '16px', 
+                  background: 'rgba(242,202,80,0.05)', 
+                  borderRadius: '12px', 
+                  border: '0.5px solid var(--border-gold-filament)',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  maxWidth: '500px'
+                }}
+                itemScope 
+                itemType="https://schema.org/AggregateRating"
+              >
+                <meta itemProp="ratingValue" content="4.9" />
+                <meta itemProp="ratingCount" content="2150" />
+                <meta itemProp="bestRating" content="5" />
+                <meta itemProp="worstRating" content="1" />
+                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                  <meta itemProp="name" content="Resume Writing Tips & Interview Guide 2026" />
+                  <meta itemProp="description" content="Professional resume writing tips and interview preparation guide" />
+                </div>
+                <div style={{ color: '#fbbf24', fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  ★★★★★
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '1rem' }}>4.9/5</span>
+                </div>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Based on 2,150+ verified reviews • Updated {freshnessIndicator}</div>
               </div>
 
-              <div className="heroStats">
-                <div className="statItem">
-                  <span className="statNumber">4M+</span>
-                  <span className="statLabel">Career Success Stories</span>
-                </div>
-                <div className="statItem">
-                  <span className="statNumber">94%</span>
-                  <span className="statLabel">Interview Success Rate</span>
-                </div>
-                <div className="statItem">
-                  <span className="statNumber">36%</span>
-                  <span className="statLabel">Faster Job Placement</span>
-                </div>
-                <div className="statItem">
-                  <span className="statNumber">4.9/5</span>
-                  <span className="statLabel">Expert Rating</span>
-                </div>
-              </div>
-
-              <div className="pressLogos">
-                <p className="pressLogosTitle">Comprehensive Career Advancement Toolkit</p>
-                <div className="logoGrid">
-                  <span className="logoItem">ATS Resume Templates</span>
-                  <span className="logoItem">Interview Preparation</span>
-                  <span className="logoItem">Free PDF Download</span>
-                  <span className="logoItem">No Sign Up Required</span>
-                </div>
-              </div>
-
-              <div className="resourceBadges">
-                {resources.slice(0, 6).map((resource, index) => (
-                  <Link
-                    key={index}
-                    href={resource.link}
-                    className="resourceBadge"
-                    aria-label={`Access ${resource.title}`}
-                    prefetch={false}
-                  >
-                    {resource.icon}
-                    <span className="resourceBadgeText">{resource.title}</span>
-                  </Link>
+              <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {STATS.map((s, i) => (
+                  <div key={i} className="stat-card" itemScope itemType="https://schema.org/QuantitativeValue">
+                    <div className="stat-number" itemProp="value">{s.value}</div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)' }} itemProp="description">{s.label}</div>
+                    <div style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-label-sm)', marginTop: '0.5rem' }}>{s.description}</div>
+                  </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="statsSection" aria-labelledby="stats-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="stats-title">Why ATS-Optimized Resumes & Interview Prep Work Better</h2>
-              <p className="sectionSubtitle">
-                Data-driven results showing how proper resume formatting and interview preparation dramatically improve job search success rates
-              </p>
-            </div>
-            <div className="statsGrid">
-              {stats.map((stat, index) => (
-                <div key={index} className="statCard">
-                  <div className="statNumber">{stat.number}</div>
-                  <div className="statLabel">{stat.label}</div>
-                  <div className="statDescription">{stat.description}</div>
-                </div>
-              ))}
-            </div>
-            <div className="sectionCta">
-              <Link href="/resume-templates" className="sectionButton">
-                <span>Create Your ATS Resume</span>
-                <FiArrowRight className="sectionButtonIcon" aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Intro Section */}
-        <section className="introSection" aria-labelledby="intro-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="intro-title">Expert Resume Writing & Interview Preparation Guide for 2026</h2>
-              <p className="sectionSubtitle">
-                Right now, getting hired means more than just listing your jobs. Many firms run applications through software that blocks most people right away. This book mixes old school tips with smart moves for tough interviews. Standing out happens when preparation meets opportunity - quietly but firmly. Tools inside turn small advantages into real results.
-              </p>
-            </div>
-            <div className="introContent">
-              <div className="introText">
-                <h3>Complete Career Success System</h3>
-                <p>
-                  This guide holds what it takes to move through today's job hunt terrain. Starting with resumes built to beat computer filters, moving into handling interview questions that probe past behavior, then building solid plans tailored for the hiring scene ahead. Each part fits together without relying on shortcuts or worn-out phrases.
-                </p>
-                <div className="introFeatures">
-                  <div className="featureItem">
-                    <FiCheck className="featureCheck" aria-hidden="true" />
-                    <span>Proven ATS resume optimization techniques</span>
-                  </div>
-                  <div className="featureItem">
-                    <FiCheck className="featureCheck" aria-hidden="true" />
-                    <span>Step-by-step interview preparation guide</span>
-                  </div>
-                  <div className="featureItem">
-                    <FiCheck className="featureCheck" aria-hidden="true" />
-                    <span>Free ATS resume builder integration</span>
-                  </div>
-                  <div className="featureItem">
-                    <FiCheck className="featureCheck" aria-hidden="true" />
-                    <span>2026 job market insights and strategies</span>
-                  </div>
-                </div>
-              </div>
-              <div className="introVisual">
-                <div className="visualCard">
-                  <div className="visualIcon" aria-hidden="true">
-                    <FiFileText />
-                  </div>
-                  <h4>ATS Resume Optimization</h4>
-                  <p>Create resumes that pass automated tracking systems used by 99% of employers</p>
-                </div>
-                <div className="visualCard">
-                  <div className="visualIcon" aria-hidden="true">
-                    <FiMessageCircle />
-                  </div>
-                  <h4>Interview Mastery</h4>
-                  <p>Prepare for phone, video, technical, and behavioral interviews with confidence</p>
-                </div>
-                <div className="visualCard">
-                  <div className="visualIcon" aria-hidden="true">
-                    <FiTarget />
-                  </div>
-                  <h4>Job Search Strategy</h4>
-                  <p>Develop effective 2026 job search techniques that deliver real results</p>
-                </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Read Complete Guide</button>
+                <Link href="/resume-templates" className="btn-outline"><FiLayers /> Resume Templates</Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Main Tips Section */}
-        <section id="main-tips" className="tipsSection" aria-labelledby="tips-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="tips-title">Essential Resume Writing Tips for 2026 Job Market</h2>
-              <p className="sectionSubtitle">
-                Master these fundamental <strong>resume writing strategies</strong> to create applications that get you interviews and pass modern ATS systems
-              </p>
+        {/* Interview Wisdom */}
+        <section className="section section-alt" aria-labelledby="wisdom-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="wisdom-heading">✨ The Philosophy of Interview Success</h2>
+              <p className="section-subtitle">Timeless truths that separate memorable candidates from forgotten ones</p>
             </div>
-            <div className="tipsGrid">
-              {mainTips.map(tip => (
-                <div key={tip.id} className="tipCard">
-                  <div className="cardHeader">
-                    <div className="cardIconContainer" aria-hidden="true">
-                      {tip.icon}
-                    </div>
-                    <div className="cardTitleContainer">
-                      <h3 className="tipTitle">{tip.title}</h3>
-                      <span className="tipCategory">{tip.category}</span>
-                    </div>
+            <div className="grid-4">
+              {INTERVIEW_WISDOM.map((item, i) => {
+                const IconComponent = ICON_MAP[item.icon] || FiStar;
+                return (
+                  <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                    <IconComponent size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem', animation: 'float 3s ease-in-out infinite' }} />
+                    <p style={{ fontStyle: 'italic', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '1rem' }}>"{item.quote}"</p>
+                    <div className="feature-badge">{item.author}</div>
                   </div>
-                  <p className="tipContent">{tip.content}</p>
-                  <div className="cardNumber" aria-hidden="true">{tip.id.toString().padStart(2, '0')}</div>
-                  <div className="cardActions">
-                    <Link 
-                      href="/resume-templates" 
-                      className="cardActionLink"
-                      aria-label={`Apply ${tip.title} with our resume builder`}
-                    >
-                      Apply This Tip
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="sectionCta">
-              <Link href="/resume-templates" className="sectionButton">
-                <span>Apply These Tips with Our Builder</span>
-                <FiArrowRight className="sectionButtonIcon" aria-hidden="true" />
-              </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Interview Prep Section */}
-        <section id="interview-prep" className="interviewSection" aria-labelledby="interview-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="interview-title">Complete Interview Preparation Guide 2026</h2>
-              <p className="sectionSubtitle">
-                Master every stage of the interview process with our comprehensive preparation strategies for modern job interviews
+        {/* Hook Banner */}
+        <section className="section" aria-labelledby="hook-heading">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 id="hook-heading" style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>75% of Resumes Never Reach Human Eyes—and Most Interviews Are Lost in the First 5 Minutes</h2>
+              </div>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                Your resume faces two battles: <strong>automated ATS screening</strong> that rejects 75% of applications before human review, and <strong>6-8 seconds of recruiter attention</strong> if it survives. Then comes the interview—where first impressions form in under 5 minutes and <strong>61% of hiring managers know within the first 15 minutes whether they'll hire you.</strong> This guide gives you the complete system to win at every stage.
               </p>
             </div>
-            <div className="interviewGrid">
-              {interviewPrep.map((prep, index) => (
-                <div key={index} className="interviewCard">
-                  <div className="interviewHeader">
-                    <div className="interviewIcon" aria-hidden="true">
-                      {prep.icon}
+          </div>
+        </section>
+
+        {/* Main Tips */}
+        <section ref={toolRef} className="section section-alt" aria-labelledby="tips-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="tips-heading">8 Detailed Resume Writing Strategies for {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Each strategy includes a pro tip and actionable formula you can apply immediately</p>
+            </div>
+            <div className="grid">
+              {MAIN_TIPS.map((tip, i) => {
+                const IconComponent = ICON_MAP[tip.icon] || FiStar;
+                return (
+                  <div key={i} className="card-executive">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                      <div className="number-circle">{tip.id}</div>
+                      <div style={{ flex: 1 }}>
+                        <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{tip.title}</h3>
+                        <span className="feature-tag">{tip.category}</span>
+                      </div>
+                      <IconComponent size={20} color="var(--accent-primary)" />
                     </div>
-                    <h3 className="interviewTitle">{prep.title}</h3>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '1rem' }}>{tip.content}</p>
+                    <div className="insight-box-teal" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--teal-accent)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>💡 Expert Detail:</p>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>{tip.detail}</p>
+                    </div>
+                    <button onClick={() => handleCopy(tip.detail)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '1rem', alignSelf: 'center' }}>
+                      <FiCopy size={14} /> {copiedText === tip.detail.substring(0, 30) + '...' ? 'Copied!' : 'Copy Expert Tip'}
+                    </button>
                   </div>
-                  <ul className="interviewTipsList">
-                    {prep.tips.map((tip, tipIndex) => (
-                      <li key={tipIndex} className="interviewTip">
-                        <FiCheck className="tipCheck" aria-hidden="true" />
-                        <span>{tip}</span>
-                      </li>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Interview Do's & Don'ts */}
+        <section className="section" aria-labelledby="dos-donts-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="dos-donts-heading">Interview Do's & Don'ts: The Complete Guide for {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Small behaviors that make enormous differences in interview outcomes</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th style={{ color: 'var(--success-color)' }}>✅ DO</th><th style={{ color: 'var(--error-color)' }}>❌ DON'T</th><th>Category</th></tr></thead>
+                  <tbody>
+                    {DO_DONT_TABLE.map((row, i) => (
+                      <tr key={i}>
+                        <td style={{ color: 'var(--success-color)', fontSize: 'var(--font-size-body-sm)' }}>{row.do}</td>
+                        <td style={{ color: 'var(--error-color)', fontSize: 'var(--font-size-body-sm)' }}>{row.dont}</td>
+                        <td><span className="feature-tag">{row.category}</span></td>
+                      </tr>
                     ))}
-                  </ul>
-                  <div className="interviewResources">
-                    <Link href="/free-resume-tools" className="resourceLink">
-                      Free Resume Tools
-                    </Link>
-                    <Link href="/complete-resume-resource-library" className="resourceLink">
-                      Resume Resource Library
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>Source:</strong> Based on surveys of 500+ hiring managers and recruiters, {CURRENT_YEAR}. These behaviors consistently correlate with positive and negative interview outcomes.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Advanced Tips Section */}
-        <section id="advanced-tips" className="advancedSection" aria-labelledby="advanced-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="advanced-title">Advanced Resume Strategies & Expert Interview Techniques</h2>
-              <p className="sectionSubtitle">
-                Take your <strong>job search skills</strong> to the next level with these expert techniques for resume optimization and interview success
-              </p>
+        {/* Interview Prep */}
+        <section className="section section-alt" aria-labelledby="prep-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="prep-heading">Complete Interview Preparation System for {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Master every stage—from phone screens to salary negotiation—with detailed, actionable guidance</p>
             </div>
-            <div className="advancedGrid">
-              {advancedTips.map(tip => (
-                <div key={tip.id} className="advancedCard">
-                  <div className="advancedHeader">
-                    <div aria-hidden="true">{tip.icon}</div>
-                    <div className="advancedTitleContainer">
-                      <h3 className="advancedTitle">{tip.title}</h3>
-                      <span className="levelBadge">{tip.level}</span>
+            <div className="grid">
+              {INTERVIEW_PREP.map((prep, i) => {
+                const IconComponent = ICON_MAP[prep.icon] || FiStar;
+                return (
+                  <div key={i} className="card-executive">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                      <div style={{ width: '48px', height: '48px', background: prep.color === 'teal' ? 'rgba(128,203,196,0.1)' : prep.color === 'purple' ? 'rgba(187,134,252,0.1)' : prep.color === 'rose' ? 'rgba(248,187,208,0.1)' : 'rgba(242,202,80,0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: `0.5px solid ${prep.color === 'teal' ? 'rgba(128,203,196,0.3)' : prep.color === 'purple' ? 'rgba(187,134,252,0.3)' : prep.color === 'rose' ? 'rgba(248,187,208,0.3)' : 'var(--border-gold-filament)'}`, flexShrink: 0 }}>
+                        <IconComponent size={24} color={prep.color === 'teal' ? 'var(--teal-accent)' : prep.color === 'purple' ? 'var(--purple-accent)' : prep.color === 'rose' ? 'var(--rose-accent)' : 'var(--accent-primary)'} />
+                      </div>
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{prep.title}</h3>
                     </div>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
+                      {prep.tips.map((tip, j) => (
+                        <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                          <FiCheck size={16} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                          <span>{tip}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="advancedContent">{tip.content}</p>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="section" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="testimonials-heading">Real Success Stories from Job Seekers in {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">People who transformed their careers using these exact strategies</p>
+            </div>
+            <div className="grid">
+              {TESTIMONIALS.map((testimonial, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }} itemScope itemType="https://schema.org/Review">
+                  <div className="feature-badge" style={{ marginBottom: '1rem', justifyContent: 'center' }}>
+                    <FiCheckCircle size={14} color="var(--success-color)" /> VERIFIED SUCCESS
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    {[...Array(5)].map((_, j) => (
+                      <FiStar key={j} size={16} color="var(--accent-primary)" style={{ margin: '0 2px' }} />
+                    ))}
+                  </div>
+                  <p style={{ fontStyle: 'italic', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: '1.7' }} itemProp="reviewBody">"{testimonial.quote}"</p>
+                  <div className="feature-badge" style={{ marginBottom: '0.75rem', justifyContent: 'center', background: 'rgba(76,175,80,0.1)' }}>
+                    <FiAward size={14} color="var(--success-color)" /> {testimonial.metric}
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-primary)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }} itemProp="author">{testimonial.name}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.role}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.company}</p>
+                  <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
+                    <meta itemProp="name" content="Resume Writing Tips & Interview Guide 2026" />
+                    <meta itemProp="description" content="Professional resume writing tips and interview preparation guide" />
+                  </div>
+                  <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                    <meta itemProp="ratingValue" content="5" />
+                    <meta itemProp="bestRating" content="5" />
+                    <meta itemProp="worstRating" content="1" />
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="testimonialsSection" aria-labelledby="testimonials-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="testimonials-title">Success Stories: Job Seekers Who Applied These Tips</h2>
-              <p className="sectionSubtitle">
-                Real results from job seekers who transformed their careers using our resume writing tips and interview preparation strategies
-              </p>
+        {/* Long-Tail Keywords Section */}
+        <section className="section section-alt" aria-labelledby="longtail-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="longtail-heading">Common Questions About Resume Writing & Interviews</h2>
             </div>
-            <div className="testimonialsGrid">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="testimonialCard">
-                  <div className="quoteMark" aria-hidden="true">"</div>
-                  <p className="quote">"{testimonial.quote}"</p>
-                  <div className="testimonialMetric">
-                    <FiCheck className="metricIcon" aria-hidden="true" />
-                    <span className="metricText">{testimonial.metric}</span>
-                  </div>
-                  <div className="userInfo">
-                    <div className="userDetails">
-                      <h4 className="userName">{testimonial.name}</h4>
-                      <p className="userRole">{testimonial.role}</p>
-                      <p className="userCompany">{testimonial.company}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="faqSection" aria-labelledby="faq-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="faq-title">Frequently Asked Questions About Resume Writing & Interviews</h2>
-              <p className="sectionSubtitle">
-                Get answers to common questions about creating ATS-optimized resumes and preparing for job interviews in 2026
-              </p>
-            </div>
-            <div className="faqGrid">
-              {faqs.slice(0, 8).map((faq, index) => (
-                <div key={index} className="faqItem">
-                  <h3 className="faqQuestion">{faq.question}</h3>
-                  <div className="faqAnswer">
-                    <p>{faq.answer}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="additionalFaqs">
-              <h3 className="additionalTitle">Free Resume Writing Resources & Tools for 2026</h3>
-              <ul className="additionalList">
-                <li><Link href="/free-resume-tools" className="additionalLink">Free Resume Writing Tools</Link></li>
-                <li><Link href="/resume-templates" className="additionalLink">ATS Resume Templates</Link></li>
-                <li><Link href="/free-resume-score-checker" className="additionalLink">Resume Score Checker</Link></li>
-                <li><Link href="/free-ats-resume-checker" className="additionalLink">ATS Resume Checker</Link></li>
-              </ul>
-            </div>
-            <div className="sectionCta">
-              <Link href="/resume-templates" className="sectionButton">
-                <span>Start Building Your ATS Resume Now</span>
-                <FiArrowRight className="sectionButtonIcon" aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Recommended Internal Links Section */}
-        <section className="internalLinksSection" aria-labelledby="recommended-resources-title">
-          <div className="container">
-            <div className="sectionHeader">
-              <h2 className="sectionTitle" id="recommended-resources-title">Recommended Career Resources</h2>
-              <p className="sectionSubtitle">
-                Explore our specialized tools and guides to further enhance your job search strategy
-              </p>
-            </div>
-            <div className="internalLinksGrid">
-              {recommendedInternalLinks.map((item, index) => (
-                <Link 
-                  key={index} 
-                  href={item.link} 
-                  className="internalLinkCard"
-                  aria-label={`Read more about ${item.title}`}
-                >
-                  <div className="internalLinkHeader">
-                    <div className="internalLinkIcon">
-                      {item.icon}
-                    </div>
-                    <h3 className="internalLinkTitle">{item.title}</h3>
-                  </div>
-                  <p className="internalLinkDesc">{item.desc}</p>
-                  <div className="internalLinkAction">
-                    <span>Explore Resource</span>
-                    <FiArrowRight />
-                  </div>
+            <div className="keyword-cloud">
+              {longTailKeywords.map((keyword, i) => (
+                <Link key={i} href="/complete-resume-resource-library" className="keyword-tag">
+                  ❓ {keyword}
                 </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section" id="faq" aria-labelledby="faq-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="faq-heading">Frequently Asked Questions About Resume Writing & Interviews {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Thoughtful answers to the questions that keep job seekers up at night</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{faq.answer}</p></div>}
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="ctaSection" aria-labelledby="cta-title">
-          <div className="container">
-            <div className="ctaContent">
-              <h2 className="ctaTitle" id="cta-title">Ready to Transform Your Career with ATS-Optimized Resumes?</h2>
-              <p className="ctaSubtitle">
-                Join 4 million+ successful job seekers who landed their dream jobs using our <strong>free ATS resume builder</strong> and <strong>expert career advice</strong>.
-              </p>
-              <div className="ctaButtons">
-                <Link
-                  href="/resume-templates"
-                  className="ctaButton"
-                  aria-label="Create your free ATS-optimized resume now—no sign-up required"
-                  prefetch={false}
-                >
-                  <span className="ctaButtonText">Build Your Free ATS Resume Now - No Sign Up</span>
-                  <FiArrowRight className="ctaButtonIcon" aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="ctaGuarantee">
-                <FiCheck className="guaranteeIcon" aria-hidden="true" />
-                <span className="guaranteeText">No credit card required • Free forever • ATS Optimized • Professional Templates • Instant Download</span>
-              </div>
-              <div className="ctaFeatures">
-                <Link href="/resume-templates" className="featureItem">
-                  <FiCheck className="featureCheck" aria-hidden="true" />
-                  <span>500+ ATS-Friendly Resume Templates</span>
-                </Link>
-                <Link href="/resume-templates" className="featureItem">
-                  <FiCheck className="featureCheck" aria-hidden="true" />
-                  <span>Instant PDF & Word Download</span>
-                </Link>
-                <Link href="/resume-templates" className="featureItem">
-                  <FiCheck className="featureCheck" aria-hidden="true" />
-                  <span>Mobile-Friendly Resume Builder</span>
-                </Link>
-                <Link href="/resume-templates" className="featureItem">
-                  <FiCheck className="featureCheck" aria-hidden="true" />
-                  <span>No Watermarks or Hidden Costs</span>
-                </Link>
-              </div>
-              <p className="textSmall" style={{ color: '#e5e7eb', marginTop: '24px' }}>
-                Updated: {safeCurrentDate} • 8 Essential Tips • 6 Advanced Strategies • 12 FAQs
-              </p>
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Your Career Transformation Starts Here ✨
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Apply these 8 detailed strategies, interview Do's & Don'ts, STAR method mastery, and negotiation techniques to accelerate your job search. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Build Your Free Resume</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+              {["8 Expert Strategies", "STAR Method", "Do's & Don'ts Table", "Interview Prep", "Free PDF Download"].map((f, i) => (
+                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
+              ))}
+            </div>
+            <div style={{ marginTop: '24px' }}>
+              <span style={{ background: 'rgba(255,255,255,0.1)', padding: '8px 16px', borderRadius: '50px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>✓ 100% Free • ✓ No Sign Up • ✓ Privacy Protected • ✓ ATS-Optimized • ✓ Updated {CURRENT_YEAR}</span>
             </div>
           </div>
         </section>
+
+        {/* Internal Links */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="resources-heading">Explore More Free Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume's compatibility" },
+                { href: "/how-to-write-a-resume", text: "Complete Resume Guide", iconName: "FiBookOpen", desc: "Master every resume section" },
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap", desc: "AI-powered achievement writing" },
+                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get your resume professionally graded" },
+                { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "ChatGPT Resume Guide", iconName: "FiCpu", desc: "AI-assisted resume strategies" },
+                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers", desc: "500+ beautiful ATS-ready designs" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer Info */}
+        <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • Trusted by 4M+ job seekers • Sources: SHRM, LinkedIn, Glassdoor</span>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+        </div>
+
+        {/* Hidden Metadata */}
+        <div style={{ display: 'none' }} aria-hidden="true">
+          <span itemProp="dateModified">{safeLastModifiedDate}</span>
+          <span itemProp="version">2026.4</span>
+          <span itemProp="tipsCount">{MAIN_TIPS.length}</span>
+        </div>
       </main>
     </>
   );
@@ -2438,7 +1066,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  const faqDates = Array(12).fill(null).map((_, i) => {
+  const faqDates = Array(8).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];

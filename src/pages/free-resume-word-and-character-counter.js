@@ -1,997 +1,123 @@
-// pages/free-resume-word-and-character-counter.jsx
 import Head from 'next/head';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import Link from 'next/link';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { 
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiCopy,
+  FiX, FiGrid, FiList, FiBookmark, FiSmartphone, FiBriefcase,
+  FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
+  FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
+  FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash
+} from 'react-icons/fi';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed =====
-const criticalCSS = `
-  /* CSS RESET */
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-  }
-  
-  /* BASE STYLES */
-  body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    line-height: 1.6; 
-    color: #111827; 
-    background: #f9fafb; 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  /* CONTAINER */
-  .container { 
-    max-width: 1280px; 
-    margin: 0 auto; 
-    padding: 16px; 
-    width: 100%;
-  }
-  
-  @media (min-width: 640px) {
-    .container { padding: 24px; }
-  }
-  
-  @media (min-width: 1024px) {
-    .container { padding: 32px; }
-  }
-  
-  /* BREADCRUMB */
-  .breadcrumb { 
-    margin-bottom: 24px; 
-    font-size: 0.9rem; 
-    color: #6b7280;
-  }
-  
-  .breadcrumb ol { 
-    display: flex; 
-    flex-wrap: wrap; 
-    list-style: none; 
-    gap: 8px;
-  }
-  
-  .breadcrumb li { 
-    display: flex; 
-    align-items: center;
-  }
-  
-  .breadcrumb-separator { 
-    margin: 0 4px; 
-    color: #9ca3af;
-  }
-  
-  .breadcrumb-link { 
-    color: #111827; 
-    text-decoration: none; 
-    border-bottom: 1px solid #d1d5db;
-  }
-  
-  .breadcrumb-link:hover { 
-    border-bottom-color: #000000; 
-  }
-  
-  /* HEADER */
-  .header { 
-    margin-bottom: 40px; 
-    padding-bottom: 32px; 
-    border-bottom: 2px solid #f3f4f6;
-  }
-  
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  .title { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  .year-badge { 
-    display: inline-block; 
-    background: #000000; 
-    color: #ffffff; 
-    padding: 4px 12px; 
-    border-radius: 50px; 
-    font-size: 0.9rem; 
-    margin-left: 12px; 
-    vertical-align: middle;
-  }
-  
-  .subtitle { 
-    font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    color: #4b5563; 
-    max-width: 900px; 
-    line-height: 1.7; 
-    margin-bottom: 20px; 
-    display: flex; 
-    align-items: center; 
-    flex-wrap: wrap; 
-    gap: 16px;
-  }
-  
-  .word-count { 
-    display: inline-block; 
-    padding: 4px 12px; 
-    border-radius: 50px; 
-    font-weight: 600; 
-    font-size: 1rem;
-  }
-  
-  .in-range { 
-    background: #10b981; 
-    color: #ffffff;
-  }
-  
-  .out-of-range { 
-    background: #f59e0b; 
-    color: #ffffff;
-  }
-  
-  /* AGGREGATE RATING */
-  .aggregate-rating { 
-    display: flex; 
-    align-items: center; 
-    gap: 16px; 
-    margin: 24px 0; 
-    padding: 16px; 
-    background: #f3f4f6; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-    flex-wrap: wrap;
-  }
-  
-  .rating-stars { 
-    color: #fbbf24; 
-    font-size: 1.3rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-  }
-  
-  .rating-value { 
-    color: #111827; 
-    font-weight: 700; 
-    font-size: 1rem;
-  }
-  
-  .rating-text { 
-    color: #4b5563; 
-    font-size: 0.9rem;
-  }
-  
-  /* MAIN */
-  .main { 
-    margin: 32px 0;
-  }
-  
-  /* EDITOR SECTION */
-  .editor-section { 
-    background: #ffffff; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border: 1px solid #e5e7eb; 
-    margin-bottom: 32px;
-  }
-  
-  .editor-header { 
-    margin-bottom: 24px;
-  }
-  
-  .editor-header h2 { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 12px;
-  }
-  
-  .editor-header p { 
-    color: #4b5563;
-  }
-  
-  .text-area-container { 
-    width: 100%;
-  }
-  
-  .textarea { 
-    width: 100%; 
-    padding: 20px; 
-    border: 2px solid #e5e7eb; 
-    border-radius: 12px; 
-    font-family: inherit; 
-    font-size: 1rem; 
-    line-height: 1.6; 
-    resize: vertical; 
-    margin-bottom: 20px;
-    transition: border-color 0.2s;
-  }
-  
-  .textarea:focus { 
-    outline: none; 
-    border-color: #000000;
-  }
-  
-  .button-group { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 12px;
-  }
-  
-  .primary-button, .secondary-button { 
-    padding: 12px 24px; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    font-size: 1rem; 
-    border: 2px solid #000000;
-    cursor: pointer; 
-    transition: all 0.2s ease;
-  }
-  
-  .primary-button { 
-    background: #000000; 
-    color: #ffffff;
-  }
-  
-  .primary-button:hover { 
-    background: #1f2937; 
-    border-color: #1f2937;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .secondary-button { 
-    background: transparent; 
-    color: #000000;
-  }
-  
-  .secondary-button:hover { 
-    background: #f9fafb;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  @media (max-width: 480px) {
-    .primary-button, .secondary-button { 
-      width: 100%;
-    }
-  }
-  
-  /* STATS SECTION */
-  .stats-section { 
-    background: #ffffff; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border: 1px solid #e5e7eb; 
-    margin-bottom: 32px;
-  }
-  
-  .stats-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 24px; 
-    flex-wrap: wrap; 
-    gap: 16px;
-  }
-  
-  .stats-header h2 { 
-    font-size: 1.5rem; 
-    font-weight: 700;
-  }
-  
-  .status-indicator { 
-    font-weight: 600; 
-    padding: 8px 16px; 
-    background: #f3f4f6; 
-    border-radius: 50px;
-  }
-  
-  .stats-grid { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 16px; 
-    margin-bottom: 32px;
-  }
-  
-  @media (min-width: 640px) {
-    .stats-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .stats-grid { grid-template-columns: repeat(6, 1fr); }
-  }
-  
-  .stat-card { 
-    background: #f9fafb; 
-    padding: 20px; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .stat-label { 
-    font-size: 0.85rem; 
-    color: #6b7280; 
-    margin-bottom: 8px;
-  }
-  
-  .stat-value { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    color: #000000;
-  }
-  
-  .stat-subtext { 
-    font-size: 0.75rem; 
-    color: #6b7280; 
-    margin-top: 4px;
-  }
-  
-  .under-limit { 
-    color: #ef4444;
-  }
-  
-  .over-limit { 
-    color: #ef4444;
-  }
-  
-  /* RANGE SECTION */
-  .range-section { 
-    margin-bottom: 32px;
-  }
-  
-  .range-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 16px; 
-    flex-wrap: wrap; 
-    gap: 12px;
-  }
-  
-  .range-header h3 { 
-    font-size: 1.2rem; 
-    font-weight: 600;
-  }
-  
-  .current-position { 
-    color: #4b5563;
-  }
-  
-  .range-indicator { 
-    width: 100%;
-  }
-  
-  .range-labels { 
-    display: flex; 
-    justify-content: space-between; 
-    margin-bottom: 8px;
-  }
-  
-  .range-label { 
-    font-size: 0.85rem; 
-    color: #6b7280;
-  }
-  
-  .active-warning { 
-    color: #ef4444; 
-    font-weight: 600;
-  }
-  
-  .active-success { 
-    color: #10b981; 
-    font-weight: 600;
-  }
-  
-  .range-bar { 
-    width: 100%; 
-    height: 20px; 
-    background: #f3f4f6; 
-    border-radius: 10px; 
-    position: relative; 
-    margin-bottom: 8px;
-  }
-  
-  .range-progress { 
-    height: 100%; 
-    background: #000000; 
-    border-radius: 10px; 
-    transition: width 0.3s;
-  }
-  
-  .in-range-bar { 
-    background: #10b981;
-  }
-  
-  .under-bar { 
-    background: #ef4444;
-  }
-  
-  .over-bar { 
-    background: #ef4444;
-  }
-  
-  .range-markers { 
-    display: flex; 
-    justify-content: space-between; 
-    font-size: 0.75rem; 
-    color: #9ca3af;
-  }
-  
-  /* OPTIONS SECTION */
-  .options-section { 
-    margin-top: 24px;
-  }
-  
-  .options-section h3 { 
-    font-size: 1.2rem; 
-    font-weight: 600; 
-    margin-bottom: 16px;
-  }
-  
-  .options-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 16px;
-  }
-  
-  @media (min-width: 640px) {
-    .options-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  .option { 
-    display: flex; 
-    gap: 12px; 
-    padding: 16px; 
-    background: #f9fafb; 
-    border-radius: 8px; 
-    border: 1px solid #e5e7eb; 
-    cursor: pointer;
-  }
-  
-  .option input[type="checkbox"] { 
-    width: 18px; 
-    height: 18px; 
-    margin-top: 2px;
-  }
-  
-  .option-content { 
-    flex: 1;
-  }
-  
-  .option-title { 
-    font-weight: 600; 
-    margin-bottom: 4px;
-  }
-  
-  .option-description { 
-    font-size: 0.85rem; 
-    color: #6b7280;
-  }
-  
-  /* GUIDELINES SECTION */
-  .guidelines-section { 
-    margin: 48px 0;
-  }
-  
-  .section-title { 
-    font-size: 2rem; 
-    font-weight: 700; 
-    margin-bottom: 16px; 
-    text-align: center;
-  }
-  
-  .section-subtitle { 
-    text-align: center; 
-    color: #4b5563; 
-    max-width: 800px; 
-    margin: 0 auto 32px;
-  }
-  
-  .guidelines-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 640px) {
-    .guidelines-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .guidelines-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  
-  .guideline-card { 
-    background: #ffffff; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .guideline-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 16px;
-  }
-  
-  .guideline-level { 
-    font-size: 1.2rem; 
-    font-weight: 700;
-  }
-  
-  .guideline-words { 
-    background: #f3f4f6; 
-    padding: 4px 12px; 
-    border-radius: 50px; 
-    font-size: 0.9rem;
-  }
-  
-  .guideline-body { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 8px;
-  }
-  
-  .guideline-pages, .guideline-focus { 
-    display: flex; 
-    gap: 8px;
-  }
-  
-  .guideline-label { 
-    font-size: 0.85rem; 
-    color: #6b7280; 
-    min-width: 45px;
-  }
-  
-  .guideline-value { 
-    font-weight: 500;
-  }
-  
-  /* TIPS SECTION */
-  .tips-section { 
-    margin: 48px 0;
-  }
-  
-  .tips-grid { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 16px;
-  }
-  
-  @media (min-width: 640px) {
-    .tips-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .tips-grid { grid-template-columns: repeat(5, 1fr); }
-  }
-  
-  .tip-card { 
-    background: #ffffff; 
-    padding: 20px; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .tip-number { 
-    font-size: 1.5rem; 
-    font-weight: 800; 
-    color: #9ca3af;
-  }
-  
-  .tip-content { 
-    color: #374151;
-  }
-  
-  /* FAQ SECTION */
-  .faq-section { 
-    margin: 48px 0;
-  }
-  
-  .faq-list { 
-    max-width: 800px; 
-    margin: 0 auto;
-  }
-  
-  .faq-item { 
-    background: #ffffff; 
-    border-radius: 12px; 
-    margin-bottom: 16px; 
-    border: 1px solid #e5e7eb; 
-    cursor: pointer;
-  }
-  
-  .faq-item.active { 
-    border-color: #000000;
-  }
-  
-  .faq-question { 
-    padding: 20px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-  }
-  
-  .faq-question h3 { 
-    font-size: 1.1rem; 
-    font-weight: 600; 
-    margin: 0;
-  }
-  
-  .faq-toggle { 
-    font-size: 1.5rem; 
-    font-weight: 600;
-  }
-  
-  .faq-answer { 
-    padding: 0 20px 20px 20px; 
-    color: #4b5563;
-  }
-  
-  /* BENEFITS SECTION */
-  .benefits-section { 
-    margin: 48px 0;
-  }
-  
-  .benefits-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 768px) {
-    .benefits-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .benefit-card { 
-    background: #ffffff; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .benefit-title { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    margin-bottom: 12px;
-  }
-  
-  .benefit-description { 
-    color: #4b5563;
-  }
-  
-  /* CTA SECTION */
-  .cta-section { 
-    margin: 48px 0;
-  }
-  
-  .cta-card { 
-    background: linear-gradient(135deg, #000000 0%, #1f2937 100%); 
-    padding: 48px; 
-    border-radius: 24px; 
-    color: #ffffff; 
-    text-align: center;
-  }
-  
-  .cta-card h2 { 
-    font-size: 2rem; 
-    font-weight: 800; 
-    margin-bottom: 16px;
-  }
-  
-  .cta-card p { 
-    color: #9ca3af; 
-    max-width: 600px; 
-    margin: 0 auto 24px;
-  }
-  
-  .cta-button { 
-    display: inline-block; 
-    padding: 16px 32px; 
-    background: #ffffff; 
-    color: #000000; 
-    border: none; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    font-size: 1.1rem; 
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  .cta-button:hover { 
-    transform: translateY(-2px); 
-    box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.2);
-  }
-
-  /* RECOMMENDED RESOURCES SECTION (NEW) */
-  .resources-section {
-    margin: 48px 0;
-    padding-top: 32px;
-    border-top: 1px solid #e5e7eb;
-  }
-
-  .resources-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 24px;
-  }
-
-  @media (min-width: 640px) {
-    .resources-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (min-width: 1024px) {
-    .resources-grid { grid-template-columns: repeat(5, 1fr); }
-  }
-
-  .resource-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-
-  .resource-card:hover {
-    border-color: #000000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-
-  .resource-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #111827;
-    line-height: 1.4;
-  }
-
-  .resource-link {
-    color: #000000;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin-top: auto;
-  }
-
-  .resource-link:hover {
-    text-decoration: underline;
-  }
-  
-  /* FOOTER */
-  .footer { 
-    margin-top: 48px; 
-    padding: 48px; 
-    background: #f9fafb; 
-    border-radius: 24px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .footer-content { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 32px; 
-    margin-bottom: 32px;
-  }
-  
-  @media (min-width: 768px) {
-    .footer-content { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .footer-title { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    margin-bottom: 16px;
-  }
-  
-  .footer-description { 
-    color: #4b5563;
-  }
-  
-  .feature-list { 
-    list-style: none;
-  }
-  
-  .feature-list li { 
-    margin-bottom: 8px;
-  }
-  
-  .feature-list a { 
-    color: #4b5563; 
-    text-decoration: none;
-  }
-  
-  .feature-list a:hover { 
-    color: #000000;
-  }
-  
-  .stats-list { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px;
-  }
-  
-  .stat-item { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-  }
-  
-  .stat-number { 
-    font-weight: 700;
-  }
-  
-  .copyright { 
-    text-align: center; 
-    padding-top: 32px; 
-    border-top: 1px solid #e5e7eb; 
-    color: #6b7280; 
-    font-size: 0.9rem;
-  }
-  
-  .privacy-note { 
-    margin-top: 8px; 
-    font-size: 0.8rem;
-  }
-  
-  /* FRESHNESS INDICATOR */
-  .freshness-indicator { 
-    display: none;
-  }
-  
-  /* HIDDEN */
-  .hidden { 
-    display: none;
-  }
-  
-  /* BUILD INFO - FIXED HYDRATION */
-  .build-info { 
-    margin-top: 48px; 
-    padding: 16px; 
-    border-top: 1px solid #e5e7eb; 
-    font-size: 0.8rem; 
-    color: #6b7280;
-    text-align: center;
-  }
-  
-  /* RESPONSIVE ADJUSTMENTS */
-  @media (max-width: 640px) {
-    .stats-header { 
-      flex-direction: column; 
-      align-items: flex-start;
-    }
-    
-    .range-labels { 
-      flex-direction: column; 
-      gap: 8px;
-    }
-    
-    .footer-content { 
-      gap: 24px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .title { 
-      font-size: 1.8rem;
-    }
-    
-    .year-badge { 
-      display: inline-block; 
-      margin-left: 0; 
-      margin-top: 10px;
-    }
-    
-    .subtitle { 
-      flex-direction: column; 
-      align-items: flex-start;
-    }
-    
-    .cta-card { 
-      padding: 32px 20px;
-    }
-    
-    .cta-card h2 { 
-      font-size: 1.5rem;
-    }
-  }
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  .range-bar { width:100%; height:8px; background:rgba(229,225,228,0.1); border-radius:4px; overflow:hidden; position:relative; }
+  .range-fill { height:100%; border-radius:4px; transition:width var(--transition-medium); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+  textarea, input, select { font-family:var(--font-body); background:var(--input-bg); border:var(--input-border); color:var(--input-text); padding:var(--input-padding); border-radius:var(--input-radius); font-size:var(--font-size-body-md); width:100%; transition:border-color var(--transition-fast); }
+  textarea:focus, input:focus, select:focus { outline:none; border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(242,202,80,0.1); }
+  textarea::placeholder, input::placeholder { color:var(--input-placeholder); }
+  textarea { min-height:100px; resize:vertical; }
+  select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23f2ca50' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
+  select option { background:var(--bg-surface); color:var(--text-primary); }
+  .range-markers { display:flex; justify-content:space-between; font-size:var(--font-size-label-sm); color:var(--text-muted); margin-top:0.25rem; }
 `;
 
-// Current year for dynamic content
+// ============================================================================
+// CONSTANTS
+// ============================================================================
 const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
-
-// FAQ Data
-const FAQS = [
-  {
-    question: "What is the ideal resume length?",
-    answer: "For most positions, aim for 300-800 words. Entry-level: 300-500 words, Mid-career: 400-700 words, Executive: 600-800 words. One page typically equals 450-500 words."
-  },
-  {
-    question: "Does word count really matter for resumes?",
-    answer: "Yes! Recruiters spend an average of 6-7 seconds scanning a resume. The right length ensures you include essential information without overwhelming the reader. ATS systems also prefer concise, well-structured resumes."
-  },
-  {
-    question: "Should I exclude bullet points from the count?",
-    answer: "It depends. Some ATS systems parse bullet points differently. Our tool lets you toggle this option to see both counts. Generally, bullet points improve readability and should be included in your final count."
-  },
-  {
-    question: "How accurate is the character count?",
-    answer: "Our counter is 100% accurate, tracking characters with and without spaces in real-time. This helps ensure your resume fits within application system limits, which often have character constraints."
-  },
-  {
-    question: "Can I use this for cover letters too?",
-    answer: "Absolutely! The same length principles apply to cover letters. Aim for 250-400 words for cover letters, focusing on quality over quantity while covering key points concisely."
-  }
-];
-
-// Resume Length Guidelines
-const LENGTH_GUIDELINES = [
-  {
-    level: "Entry-Level",
-    words: "300-500 words",
-    pages: "≤ 1 page",
-    focus: "Education, internships, basic skills"
-  },
-  {
-    level: "Mid-Career",
-    words: "400-700 words",
-    pages: "1-2 pages",
-    focus: "Experience, achievements, specific skills"
-  },
-  {
-    level: "Senior/Manager",
-    words: "500-800 words",
-    pages: "1-2 pages",
-    focus: "Leadership, strategic impact, results"
-  },
-  {
-    level: "Executive",
-    words: "600-800 words",
-    pages: "2 pages max",
-    focus: "Vision, P&L, organizational impact"
-  }
-];
-
-// Tips Data
-const RESUME_TIPS = [
-  "Start with strong action verbs",
-  "Quantify achievements with numbers",
-  "Tailor content to job description",
-  "Use bullet points for readability",
-  "Focus on recent experience",
-  "Include relevant keywords",
-  "Keep formatting clean and simple",
-  "Proofread multiple times",
-  "Save as PDF for consistency",
-  "Update regularly"
-];
+const PAGE_URL = `${SITE_URL}/free-resume-word-and-character-counter`;
 
 // SEO-optimized keywords
 const SEO_KEYWORDS = [
@@ -1007,82 +133,139 @@ const SEO_KEYWORDS = [
   'job application resume length'
 ];
 
-// Selected Internal Links for Bottom Section (Randomly selected from provided JSON)
-const INTERNAL_LINKS = [
+const FAQS = [
+  { question: "What is the ideal resume length?", answer: "For most positions, aim for 300-800 words. Entry-level: 300-500 words, Mid-career: 400-700 words, Executive: 600-800 words. One page typically equals 450-500 words." },
+  { question: "Does word count really matter for resumes?", answer: "Yes! Recruiters spend an average of 6-7 seconds scanning a resume. The right length ensures you include essential information without overwhelming the reader. ATS systems also prefer concise, well-structured resumes." },
+  { question: "Should I exclude bullet points from the count?", answer: "It depends. Some ATS systems parse bullet points differently. Our tool lets you toggle this option to see both counts. Generally, bullet points improve readability and should be included." },
+  { question: "How accurate is the character count?", answer: "Our counter is 100% accurate, tracking characters with and without spaces in real-time. This helps ensure your resume fits within application system limits." },
+  { question: "Can I use this for cover letters too?", answer: "Absolutely! The same length principles apply to cover letters. Aim for 250-400 words for cover letters, focusing on quality over quantity." }
+];
+
+const LENGTH_GUIDELINES = [
+  { level: "Entry-Level", words: "300-500 words", pages: "≤ 1 page", focus: "Education, internships, basic skills" },
+  { level: "Mid-Career", words: "400-700 words", pages: "1-2 pages", focus: "Experience, achievements, specific skills" },
+  { level: "Senior/Manager", words: "500-800 words", pages: "1-2 pages", focus: "Leadership, strategic impact, results" },
+  { level: "Executive", words: "600-800 words", pages: "2 pages max", focus: "Vision, P&L, organizational impact" }
+];
+
+const RESUME_TIPS = [
+  "Start with strong action verbs",
+  "Quantify achievements with numbers",
+  "Tailor content to job description",
+  "Use bullet points for readability",
+  "Focus on recent experience",
+  "Include relevant keywords",
+  "Keep formatting clean and simple",
+  "Proofread multiple times",
+  "Save as PDF for consistency",
+  "Update regularly"
+];
+
+// How-to steps
+const HOW_TO_STEPS = [
   {
-    path: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
-    text: "AI & ML Engineering Resume Builder"
+    name: "Paste Your Resume Content",
+    text: "Copy and paste your entire resume content into the text area for instant analysis."
   },
   {
-    path: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software",
-    text: "How to Beat ATS Optimization"
+    name: "Review Real-Time Statistics",
+    text: "Watch as the tool instantly calculates words, characters, paragraphs, and estimated pages."
   },
   {
-    path: "/best-ats-resume-format-2026",
-    text: "Best ATS Resume Format 2026"
+    name: "Check Against Guidelines",
+    text: "Compare your word count against professional resume length guidelines for your career level."
   },
   {
-    path: "/free-resume-keyword-matcher",
-    text: "Free Resume Keyword Matcher"
-  },
-  {
-    path: "/software-engineer-resume-example-and-writing-guide",
-    text: "Software Engineer Resume Guide"
+    name: "Optimize and Adjust",
+    text: "Use the tips and recommendations to adjust your resume content for optimal length and impact."
   }
 ];
 
-const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
-  const [buildTime, setBuildTime] = useState('');
-  const [text, setText] = useState('');
-  const [stats, setStats] = useState({
-    words: 0,
-    charactersWithSpaces: 0,
-    charactersWithoutSpaces: 0,
-    lines: 0,
-    paragraphs: 0,
-    estimatedPages: 0,
-  });
-  const [excludeBullets, setExcludeBullets] = useState(false);
-  const [countOnlyBody, setCountOnlyBody] = useState(false);
-  const [activeFaq, setActiveFaq] = useState(null);
-  const textareaRef = useRef(null);
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
+  FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
+  FiTool, FiLayers, FiUser, FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight,
+  FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
+  FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
+  FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash
+};
 
-  // Set build time on client to avoid hydration mismatch
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const ResumeWordCharacterCounter = ({ seoData }) => {
+  const { currentDate, lastModifiedDate } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const canonicalUrl = PAGE_URL;
+  const [buildTime, setBuildTime] = useState('');
+
   useEffect(() => {
     setBuildTime(Date.now().toString());
   }, []);
 
-  // Use SEO data with fallbacks
-  const safeSeoData = seoData || {
-    currentDate: new Date().toISOString().split('T')[0],
-    lastModifiedDate: new Date().toISOString()
+  const [text, setText] = useState('');
+  const [stats, setStats] = useState({ words: 0, charactersWithSpaces: 0, charactersWithoutSpaces: 0, lines: 0, paragraphs: 0, estimatedPages: 0 });
+  const [excludeBullets, setExcludeBullets] = useState(false);
+  const [countOnlyBody, setCountOnlyBody] = useState(false);
+  const [activeFaq, setActiveFaq] = useState(null);
+  const textareaRef = useRef(null);
+  const toolRef = useRef(null);
+
+  const calculateStats = useCallback((content) => {
+    let processedText = content;
+    if (excludeBullets) processedText = processedText.replace(/^[•\-*]\s*/gm, '');
+    if (countOnlyBody) { const lines = processedText.split('\n'); if (lines.length > 2) processedText = lines.slice(2).join('\n'); }
+    const charsWithSpaces = processedText.length;
+    const charsWithoutSpaces = processedText.replace(/\s+/g, '').length;
+    const words = processedText.trim() === '' ? 0 : processedText.trim().split(/\s+/).filter(w => w.length > 0).length;
+    const lines = processedText === '' ? 0 : processedText.split('\n').filter(l => l.trim().length > 0).length;
+    const paragraphs = processedText.trim() === '' ? 0 : processedText.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
+    const estimatedPages = parseFloat((words / 475).toFixed(2));
+    return { words, charactersWithSpaces: charsWithSpaces, charactersWithoutSpaces: charsWithoutSpaces, lines, paragraphs, estimatedPages };
+  }, [excludeBullets, countOnlyBody]);
+
+  useEffect(() => { const timer = setTimeout(() => setStats(calculateStats(text)), 300); return () => clearTimeout(timer); }, [text, calculateStats]);
+
+  const handleReset = () => { setText(''); setStats(calculateStats('')); textareaRef.current?.focus(); };
+  const handleClearOptions = () => { setExcludeBullets(false); setCountOnlyBody(false); };
+
+  const isWithinRange = stats.words >= 300 && stats.words <= 800;
+  const isOverLimit = stats.words > 800;
+  const isUnderLimit = stats.words < 300;
+  const getWordCountStatus = () => {
+    if (isWithinRange) return { text: '✓ Perfect length!', color: 'var(--success-color)' };
+    if (isUnderLimit) return { text: '⚠ Add more content', color: 'var(--warning-color)' };
+    return { text: '⚠ Consider shortening', color: 'var(--warning-color)' };
   };
+  const status = getWordCountStatus();
 
-  const currentDate = safeSeoData.currentDate;
-  const lastModifiedDate = safeSeoData.lastModifiedDate;
-
-  // Schema data - Expanded with comprehensive structured data
+  // ===== ENHANCED STRUCTURED DATA - Following Page 1 Blueprint =====
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": `${SITE_URL}/free-resume-word-character-counter#webpage`,
-        "url": `${SITE_URL}/free-resume-word-character-counter`,
+        "@id": `${PAGE_URL}#webpage`,
+        "url": PAGE_URL,
         "name": `Resume Word & Character Counter - Professional Length Checker ${CURRENT_YEAR}`,
         "description": "Free professional resume word counter and character counter with ATS optimization guidance. Check your resume length against industry standards with real-time analysis.",
         "datePublished": "2024-01-01",
-        "dateModified": lastModifiedDate,
+        "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
-          "@id": `${SITE_URL}/#website`,
+          "@id": `${SITE_URL}#website`,
           "url": SITE_URL,
           "name": "Professional Resume Free",
-          "description": "Free online resume building tools for job seekers",
+          "description": "Free resume building tools and resources for job seekers",
           "publisher": {
             "@type": "Organization",
-            "@id": `${SITE_URL}/#organization`,
+            "@id": `${SITE_URL}#organization`,
             "name": "Professional Resume Free",
             "url": SITE_URL,
             "logo": {
@@ -1093,13 +276,14 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
             },
             "sameAs": [
               "https://twitter.com/ProResumeFree",
-              "https://linkedin.com/company/professional-resume-free"
+              "https://www.linkedin.com/company/professional-resume-free",
+              "https://www.facebook.com/ProfessionalResumeFree"
             ]
           }
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": `${SITE_URL}/og-word-counter.jpg`,
+          "url": `${SITE_URL}/images/og-word-counter.jpg`,
           "width": 1200,
           "height": 630
         },
@@ -1115,73 +299,76 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
             {
               "@type": "ListItem",
               "position": 2,
-              "name": "Resume Tools",
-              "item": `${SITE_URL}/resume-tools`
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Word & Character Counter",
-              "item": `${SITE_URL}/free-resume-word-character-counter`
+              "name": "Free Resume Word & Character Counter",
+              "item": PAGE_URL
             }
           ]
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Resume Word & Character Counter - ATS Optimized Resume Length Checker",
+        "description": "Free online ATS-friendly resume word and character counter that helps job seekers optimize resume length for better ATS performance.",
+        "url": PAGE_URL,
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-12-31"
         },
-        "mainEntity": {
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": 4.8,
+          "ratingCount": 142,
+          "bestRating": 5,
+          "worstRating": 1
+        },
+        "featureList": [
+          "Real-time Word Count",
+          "Character Count with/without Spaces",
+          "ATS-Optimized Length Guidelines",
+          "Professional Resume Tips",
+          "One-Click Clear Options",
+          "Mobile-Friendly Interface",
+          "No Sign Up Required",
+          "Free Forever"
+        ],
+        "softwareVersion": "2026.1.0",
+        "applicationSuite": "Career Tools",
+        "countriesSupported": "Global",
+        "fileSize": "Web Application"
+      },
+      {
+        "@type": "AggregateRating",
+        "@id": `${PAGE_URL}#rating`,
+        "ratingValue": "4.8",
+        "ratingCount": "142",
+        "bestRating": "5",
+        "worstRating": "1",
+        "itemReviewed": {
           "@type": "SoftwareApplication",
-          "@id": `${SITE_URL}/free-resume-word-character-counter#software`,
-          "name": "Resume Word & Character Counter - ATS Optimized Resume Length Checker",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "Any",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock",
-            "priceValidUntil": "2026-12-31"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 4.8,
-            "ratingCount": 142,
-            "bestRating": 5,
-            "worstRating": 1,
-            "itemReviewed": {
-              "@type": "SoftwareApplication",
-              "name": "Resume Word & Character Counter",
-              "applicationCategory": "BusinessApplication"
-            }
-          },
-          "description": "Free online ATS-friendly resume word and character counter that helps job seekers optimize resume length for better ATS performance.",
-          "featureList": [
-            "Real-time Word Count",
-            "Character Count with/without Spaces",
-            "ATS-Optimized Length Guidelines",
-            "Professional Resume Tips",
-            "One-Click Clear Options",
-            "Mobile-Friendly Interface",
-            "No Sign Up Required",
-            "Free Forever"
-          ],
-          "softwareVersion": "2026.1.0",
-          "applicationSuite": "Resume Optimization Tools",
-          "countriesSupported": "Global"
+          "name": "Resume Word & Character Counter",
+          "url": PAGE_URL
         }
       },
       {
         "@type": "FAQPage",
-        "@id": `${SITE_URL}/free-resume-word-character-counter#faqpage`,
         "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
             "text": faq.answer,
-            "datePublished": lastModifiedDate,
+            "datePublished": safeCurrentDate,
             "author": {
               "@type": "Person",
-              "name": "Resume Expert Team"
+              "name": "Resume Builder Team"
             }
-          }
+          },
+          "mainEntityOfPage": `${PAGE_URL}#faq-${index + 1}`
         }))
       },
       {
@@ -1194,44 +381,31 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
           "currency": "USD",
           "value": "0"
         },
-        "step": [
+        "step": HOW_TO_STEPS.map((step, index) => ({
+          "@type": "HowToStep",
+          "position": index + 1,
+          "name": step.name,
+          "text": step.text,
+          "url": `${PAGE_URL}#step-${index + 1}`
+        })),
+        "supply": [
           {
-            "@type": "HowToStep",
-            "position": 1,
-            "name": "Paste Your Resume Content",
-            "text": "Copy and paste your entire resume content into the text area.",
-            "url": `${SITE_URL}/free-resume-word-character-counter#paste`,
-            "image": `${SITE_URL}/images/step1-paste.jpg`
-          },
+            "@type": "HowToSupply",
+            "name": "Resume Content"
+          }
+        ],
+        "tool": [
           {
-            "@type": "HowToStep",
-            "position": 2,
-            "name": "Review Real-Time Statistics",
-            "text": "Watch as the tool instantly calculates words, characters, paragraphs, and estimated pages.",
-            "url": `${SITE_URL}/free-resume-word-character-counter#stats`,
-            "image": `${SITE_URL}/images/step2-stats.jpg`
-          },
-          {
-            "@type": "HowToStep",
-            "position": 3,
-            "name": "Check Against Guidelines",
-            "text": "Compare your word count against professional resume length guidelines for your career level.",
-            "url": `${SITE_URL}/free-resume-word-character-counter#guidelines`,
-            "image": `${SITE_URL}/images/step3-guidelines.jpg`
-          },
-          {
-            "@type": "HowToStep",
-            "position": 4,
-            "name": "Optimize and Adjust",
-            "text": "Use the tips and recommendations to adjust your resume content for optimal length and impact.",
-            "url": `${SITE_URL}/free-resume-word-character-counter#optimize`,
-            "image": `${SITE_URL}/images/step4-optimize.jpg`
+            "@type": "HowToTool",
+            "name": "Resume Word & Character Counter"
           }
         ]
       },
       {
         "@type": "ItemList",
         "name": "Resume Length Guidelines by Career Level",
+        "description": "Professional resume length recommendations for different career levels",
+        "numberOfItems": LENGTH_GUIDELINES.length,
         "itemListElement": LENGTH_GUIDELINES.map((guideline, index) => ({
           "@type": "ListItem",
           "position": index + 1,
@@ -1240,89 +414,51 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
         }))
       },
       {
+        "@type": "Service",
+        "serviceType": "Online Resume Length Analysis",
+        "provider": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "url": SITE_URL
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Global"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Free Resume Building Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Resume Word Count Analysis"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Resume Length Optimization"
+              }
+            }
+          ]
+        }
+      },
+      {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".title", ".subtitle", ".section-title", ".faq-question h3"]
+        "cssSelector": [".section-title", ".section-subtitle", ".stat-number"]
       }
     ]
   };
 
-  const calculateStats = useCallback((content) => {
-    let processedText = content;
-    
-    if (excludeBullets) {
-      processedText = processedText.replace(/^[•\-*]\s*/gm, '');
-    }
-    
-    if (countOnlyBody) {
-      const lines = processedText.split('\n');
-      if (lines.length > 2) {
-        processedText = lines.slice(2).join('\n');
-      }
-    }
-
-    const charsWithSpaces = processedText.length;
-    const charsWithoutSpaces = processedText.replace(/\s+/g, '').length;
-    
-    const words = processedText.trim() === '' ? 0 : 
-      processedText.trim().split(/\s+/).filter(word => word.length > 0).length;
-    
-    const lines = processedText === '' ? 0 : 
-      processedText.split('\n').filter(line => line.trim().length > 0).lines;
-    
-    const paragraphs = processedText.trim() === '' ? 0 : 
-      processedText.split(/\n\s*\n/).filter(para => para.trim().length > 0).length;
-    
-    const estimatedPages = words / 475;
-
-    return {
-      words,
-      charactersWithSpaces: charsWithSpaces,
-      charactersWithoutSpaces: charsWithoutSpaces,
-      lines,
-      paragraphs,
-      estimatedPages: parseFloat(estimatedPages.toFixed(2)),
-    };
-  }, [excludeBullets, countOnlyBody]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setStats(calculateStats(text));
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [text, calculateStats]);
-
-  const handleReset = () => {
-    setText('');
-    setStats(calculateStats(''));
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
-  };
-
-  const handleClearOptions = () => {
-    setExcludeBullets(false);
-    setCountOnlyBody(false);
-  };
-
-  const isWithinRange = stats.words >= 300 && stats.words <= 800;
-  const isOverLimit = stats.words > 800;
-  const isUnderLimit = stats.words < 300;
-
-  const getWordCountStatus = () => {
-    if (isWithinRange) return { text: '✓ Perfect length!', color: '#10b981' };
-    if (isUnderLimit) return { text: '⚠ Add more content', color: '#ef4444' };
-    return { text: '⚠ Consider shortening', color: '#ef4444' };
-  };
-
-  const status = getWordCountStatus();
-
   return (
-    <div className="container" lang="en-US">
+    <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Primary Meta Tags */}
+        {/* Primary Meta Tags - Enhanced following Page 1 blueprint */}
         <title>Resume Word & Character Counter – Professional Length Checker {CURRENT_YEAR} | Free ATS Optimized Tool</title>
         <meta 
           name="description" 
@@ -1332,44 +468,55 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="theme-color" content="#131315" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Resume Word & Character Counter - Professional Length Checker" />
         <meta name="chatgpt-fts:description" content="Free professional resume word counter and character counter with ATS optimization. Check your resume length against industry standards." />
-        <meta name="chatgpt-fts:keywords" content="resume word counter, resume character counter, resume length checker" />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        <meta name="chatgpt-fts:keywords" content="resume word counter, resume character counter, resume length checker, ATS resume word count" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Word Counter Tool" />
         
-        {/* Freshness Meta Tags */}
-        <meta name="date" content={currentDate} />
-        <meta name="last-modified" content={lastModifiedDate} />
-        <meta name="revisit-after" content="2 days" />
-        <meta name="build-timestamp" content={buildTimestamp} />
+        {/* Canonical URL */}
+        <link rel="canonical" href={canonicalUrl} />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href={`${SITE_URL}/free-resume-word-character-counter`} />
+        {/* Hreflang Tags */}
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* Open Graph */}
+        {/* Open Graph - Enhanced */}
         <meta property="og:title" content={`Resume Word & Character Counter – Professional Length Checker ${CURRENT_YEAR}`} />
         <meta property="og:description" content="Free professional resume word counter with ATS optimization guidance. Check length, characters, and get industry-standard recommendations." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${SITE_URL}/free-resume-word-character-counter`} />
-        <meta property="og:image" content={`${SITE_URL}/og-word-counter.jpg`} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={`${SITE_URL}/images/og-word-counter.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Word & Character Counter - Free Professional Tool" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:updated_time" content={lastModifiedDate} />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
         
-        {/* Twitter Cards */}
+        {/* Twitter Cards - Enhanced */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Word & Character Counter" />
         <meta name="twitter:description" content="Professional resume length checker with ATS optimization and real-time analysis" />
-        <meta name="twitter:image" content={`${SITE_URL}/twitter-word-counter.jpg`} />
+        <meta name="twitter:image" content={`${SITE_URL}/images/twitter-word-counter.jpg`} />
         <meta name="twitter:image:alt" content="Resume Word Counter Tool" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
+        
+        {/* Preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Icons */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -1378,424 +525,353 @@ const ResumeWordCharacterCounter = ({ seoData, buildTimestamp }) => {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Preconnect */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
         {/* Structured Data */}
         <script
           type="application/ld+json"
           key="structured-data"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
+        
+        <html lang="en" />
       </Head>
 
-      {/* Hidden freshness indicator */}
-      <div className="freshness-indicator">
-        <meta name="build-timestamp" content={buildTimestamp} />
-        <meta name="content-freshness" content={currentDate} />
-      </div>
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
 
-      {/* Breadcrumb Navigation */}
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <ol>
-          <li>
-            <a href="https://professionalresumefree.com" className="breadcrumb-link">
-              Home
-            </a>
-          </li>
-          <li className="breadcrumb-separator">›</li>
-          <li>
-            <a href="https://professionalresumefree.com/resume-tools" className="breadcrumb-link">
-              Resume Tools
-            </a>
-          </li>
-          <li className="breadcrumb-separator">›</li>
-          <li>
-            <span>Word & Character Counter</span>
-          </li>
-        </ol>
-      </nav>
-
-      <header className="header">
-        <h1 className="title">
-          Resume Word & Character Counter
-          <span className="year-badge">{CURRENT_YEAR}</span>
-        </h1>
-        <p className="subtitle">
-          Professional resume length analyzer with ATS optimization guidance
-          <span className={`word-count ${isWithinRange ? 'in-range' : 'out-of-range'}`}>
-            {stats.words} words
-          </span>
-        </p>
-        
-        <div className="aggregate-rating">
-          <div className="rating-stars">
-            ★★★★★
-            <span className="rating-value">4.8/5</span>
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href={SITE_URL} itemProp="item">
+                  <FiHome size={14} /> <span itemProp="name">Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page"><FiType size={14} /> Resume Word & Character Counter</span>
+                <meta itemProp="position" content="2" />
+              </li>
+            </ol>
           </div>
-          <div className="rating-text">Trusted by 10,000+ professionals</div>
-        </div>
-      </header>
+        </nav>
 
-      <main className="main">
-        {/* Main Editor Section */}
-        <section className="editor-section" aria-labelledby="editor-title">
-          <div className="editor-header">
-            <h2 id="editor-title">Paste Your Resume Content</h2>
-            <p>
-              Paste or type your resume content below for real-time analysis. All processing happens in your browser - your data never leaves your device.
-            </p>
-          </div>
-          
-          <div className="text-area-container">
-            <textarea
-              ref={textareaRef}
-              className="textarea"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder={`Paste your resume content here...
-              
-For example:
-John Doe
-Software Engineer
-(123) 456-7890 | john@email.com
-LinkedIn: linkedin.com/in/johndoe
-
-PROFESSIONAL SUMMARY
-Results-driven software engineer with 5+ years of experience...
-
-EXPERIENCE
-Senior Developer | Tech Company | 2020-Present
-• Led development of scalable web applications...
-• Reduced page load time by 40%...
-• Mentored 3 junior developers...`}
-              rows={20}
-              autoFocus
-              aria-label="Resume content input area"
-            />
-            
-            <div className="button-group">
-              <button
-                className="primary-button"
-                onClick={handleReset}
-                type="button"
-                aria-label="Clear all text from the input area"
-              >
-                Clear All Text
-              </button>
-              <button
-                className="secondary-button"
-                onClick={handleClearOptions}
-                type="button"
-                aria-label="Reset counting options to default settings"
-              >
-                Reset Options
-              </button>
+        {/* Hero */}
+        <section className="section" id="main-content">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ Free Tool • No Sign Up • Real-Time Analysis • ATS Optimized</div>
+              <h1 className="section-title" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Resume Word & Character Counter <span style={{ display: 'inline-block', background: 'var(--accent-primary)', color: 'var(--accent-on-primary)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.9rem', marginLeft: '0.5rem', verticalAlign: 'middle' }}>{CURRENT_YEAR}</span>
+              </h1>
+              <p className="section-subtitle" style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Professional resume length analyzer with <strong>ATS optimization guidance</strong>. Check your resume length against industry standards with real-time word count, character count, and professional recommendations. <strong>Optimized for ATS systems and human recruiters.</strong>
+              </p>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "4.8/5", label: "User Rating" }, { value: "10,000+", label: "Professionals" }, { value: "300-800", label: "Ideal Word Range" }, { value: "100%", label: "Free to Use" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiType /> Start Counting</button>
+                <Link href="/resume-templates" className="btn-outline"><FiFileText /> View Templates</Link>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Display Section */}
-        <section className="stats-section" aria-labelledby="stats-title">
-          <div className="stats-header">
-            <h2 id="stats-title">Resume Analysis Results</h2>
-            <div className="status-indicator" style={{ color: status.color }}>
-              <span className="status-text">{status.text}</span>
+        {/* How It Works Section */}
+        <section className="section section-alt" id="steps">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">How to Use the Resume Word Counter to Optimize Your Resume</h2>
+              <p className="section-subtitle">Step-by-step guide to check and optimize your resume length using our free tool</p>
             </div>
-          </div>
-          
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-label">Word Count</div>
-              <div className={`stat-value ${isUnderLimit ? 'under-limit' : ''} ${isOverLimit ? 'over-limit' : ''}`}>
-                {stats.words.toLocaleString()}
-                <div className="stat-subtext">
-                  {isWithinRange ? 'Ideal range: 300-800' : isUnderLimit ? 'Below minimum: 300' : 'Above maximum: 800'}
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+              {HOW_TO_STEPS.map((step, index) => (
+                <div key={index} className="card-executive" style={{ textAlign: 'center' }} id={`step-${index + 1}`}>
+                  <div style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{index + 1}</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>{step.name}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{step.text}</p>
                 </div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-label">Characters</div>
-              <div className="stat-value">
-                {stats.charactersWithSpaces.toLocaleString()}
-                <div className="stat-subtext">including spaces</div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-label">Characters</div>
-              <div className="stat-value">
-                {stats.charactersWithoutSpaces.toLocaleString()}
-                <div className="stat-subtext">excluding spaces</div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-label">Lines</div>
-              <div className="stat-value">
-                {stats.lines}
-                <div className="stat-subtext">non-empty lines</div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-label">Paragraphs</div>
-              <div className="stat-value">
-                {stats.paragraphs}
-                <div className="stat-subtext">content sections</div>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-label">Estimated Pages</div>
-              <div className="stat-value">
-                {stats.estimatedPages}
-                <div className="stat-subtext">based on 475 words/page</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Range Indicator */}
-          <div className="range-section">
-            <div className="range-header">
-              <h3>Word Count Range Analysis</h3>
-              <div className="current-position">
-                Current: <strong>{stats.words} words</strong>
-              </div>
-            </div>
-            
-            <div className="range-indicator">
-              <div className="range-labels">
-                <span className={`range-label ${isUnderLimit ? 'active-warning' : ''}`}>
-                  Too Short ({stats.words < 300 ? '←' : ''})
-                </span>
-                <span className={`range-label ${isWithinRange ? 'active-success' : ''}`}>
-                  Ideal Range
-                </span>
-                <span className={`range-label ${isOverLimit ? 'active-warning' : ''}`}>
-                  Too Long ({stats.words > 800 ? '→' : ''})
-                </span>
-              </div>
-              
-              <div className="range-bar">
-                <div 
-                  className={`range-progress ${isWithinRange ? 'in-range-bar' : isUnderLimit ? 'under-bar' : 'over-bar'}`}
-                  style={{ width: `${Math.min(Math.max(stats.words / 1000 * 100, 2), 100)}%` }}
-                />
-                <div className="range-markers">
-                  <div className="range-marker" style={{ left: '0%' }}>0</div>
-                  <div className="range-marker" style={{ left: '30%' }}>300</div>
-                  <div className="range-marker" style={{ left: '80%' }}>800</div>
-                  <div className="range-marker" style={{ left: '100%' }}>1000</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Options Section */}
-          <div className="options-section">
-            <h3>Counting Options</h3>
-            <div className="options-grid">
-              <label className="option">
-                <input
-                  type="checkbox"
-                  checked={excludeBullets}
-                  onChange={(e) => setExcludeBullets(e.target.checked)}
-                  aria-label="Exclude bullet points from word count"
-                />
-                <div className="option-content">
-                  <div className="option-title">Exclude bullet points</div>
-                  <div className="option-description">Ignore lines starting with •, -, or *</div>
-                </div>
-              </label>
-              
-              <label className="option">
-                <input
-                  type="checkbox"
-                  checked={countOnlyBody}
-                  onChange={(e) => setCountOnlyBody(e.target.checked)}
-                  aria-label="Count only body text, skip first 2 lines"
-                />
-                <div className="option-content">
-                  <div className="option-title">Count only body text</div>
-                  <div className="option-description">Skip first 2 lines (header/contact info)</div>
-                </div>
-              </label>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Length Guidelines Section */}
-        <section className="guidelines-section" aria-labelledby="guidelines-title">
-          <h2 className="section-title" id="guidelines-title">Professional Resume Length Guidelines</h2>
-          <p className="section-subtitle">
-            Industry standards for different career levels (based on ATS optimization research)
-          </p>
-          
-          <div className="guidelines-grid">
-            {LENGTH_GUIDELINES.map((guideline, index) => (
-              <div key={index} className="guideline-card">
-                <div className="guideline-header">
-                  <div className="guideline-level">{guideline.level}</div>
-                  <div className="guideline-words">{guideline.words}</div>
+        {/* Counter Tool */}
+        <section ref={toolRef} className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Paste Your Resume Content</h2>
+              <p className="section-subtitle">Real-time analysis happens entirely in your browser—your data never leaves your device</p>
+            </div>
+
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }} id="paste">
+              <textarea ref={textareaRef} value={text} onChange={(e) => setText(e.target.value)} placeholder={`Paste your resume content here...\n\nJohn Doe\nSoftware Engineer\n(123) 456-7890 | john@email.com\n\nPROFESSIONAL SUMMARY\nResults-driven software engineer with 5+ years of experience...\n\nEXPERIENCE\nSenior Developer | Tech Company | 2020-Present\n• Led development of scalable web applications\n• Reduced page load time by 40%\n• Mentored 3 junior developers`} rows={15} style={{ marginBottom: '1rem' }} aria-label="Resume content input area" />
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <button onClick={handleReset} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem' }} aria-label="Clear all text from the input area"><FiRefreshCw size={16} /> Clear All</button>
+                <button onClick={handleClearOptions} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem' }} aria-label="Reset counting options to default settings"><FiX size={16} /> Reset Options</button>
+              </div>
+            </div>
+
+            {/* Stats */}
+            <div style={{ maxWidth: '900px', margin: '2rem auto 0', animation: 'slideUp 0.5s var(--easing-smooth)' }} id="stats">
+              <div className="card-executive" style={{ marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                  <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0 }}>Analysis Results</h2>
+                  <span className="feature-badge" style={{ background: isWithinRange ? 'rgba(76,175,80,0.1)' : 'rgba(255,183,77,0.1)', color: status.color, borderColor: status.color }}>{status.text}</span>
                 </div>
-                <div className="guideline-body">
-                  <div className="guideline-pages">
-                    <span className="guideline-label">Pages:</span>
-                    <span className="guideline-value">{guideline.pages}</span>
+                
+                <div className="grid">
+                  {[
+                    { label: 'Word Count', value: stats.words.toLocaleString(), sub: isWithinRange ? 'Ideal range: 300-800' : isUnderLimit ? 'Below minimum: 300' : 'Above maximum: 800', color: isWithinRange ? 'var(--success-color)' : 'var(--warning-color)' },
+                    { label: 'Characters (with spaces)', value: stats.charactersWithSpaces.toLocaleString(), sub: 'including spaces', color: 'var(--accent-primary)' },
+                    { label: 'Characters (no spaces)', value: stats.charactersWithoutSpaces.toLocaleString(), sub: 'excluding spaces', color: 'var(--accent-primary)' },
+                    { label: 'Lines', value: stats.lines, sub: 'non-empty lines', color: 'var(--accent-primary)' },
+                    { label: 'Paragraphs', value: stats.paragraphs, sub: 'content sections', color: 'var(--accent-primary)' },
+                    { label: 'Est. Pages', value: stats.estimatedPages, sub: 'at 475 words/page', color: 'var(--accent-primary)' }
+                  ].map((item, i) => (
+                    <div key={i} className="stat-card">
+                      <div className="stat-number" style={{ color: item.color }}>{item.value}</div>
+                      <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{item.label}</div>
+                      <span className="text-small">{item.sub}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Range Bar */}
+                <div style={{ marginTop: '1.5rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                    <span className="text-small" style={{ color: isUnderLimit ? 'var(--warning-color)' : 'var(--text-muted)' }}>0 words</span>
+                    <span className="text-small" style={{ color: isWithinRange ? 'var(--success-color)' : 'var(--text-muted)' }}>Ideal: 300-800</span>
+                    <span className="text-small" style={{ color: isOverLimit ? 'var(--warning-color)' : 'var(--text-muted)' }}>1000+ words</span>
                   </div>
-                  <div className="guideline-focus">
-                    <span className="guideline-label">Focus on:</span>
-                    <span className="guideline-value">{guideline.focus}</span>
+                  <div className="range-bar">
+                    <div className="range-fill" style={{ width: `${Math.min(Math.max(stats.words / 1000 * 100, 2), 100)}%`, background: isWithinRange ? 'var(--success-color)' : isUnderLimit ? 'var(--warning-color)' : 'var(--warning-color)' }}></div>
+                  </div>
+                  <div className="range-markers">
+                    <span>0</span><span>300</span><span>800</span><span>1000</span>
+                  </div>
+                </div>
+
+                {/* Options */}
+                <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '0.5px solid var(--border-gold-filament)' }}>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>Counting Options</h3>
+                  <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+                    <label style={{ display: 'flex', gap: '0.75rem', padding: '1rem', background: 'var(--bg-surface-low)', borderRadius: '0.5rem', border: 'var(--card-border)', cursor: 'pointer', alignItems: 'flex-start' }}>
+                      <input type="checkbox" checked={excludeBullets} onChange={(e) => setExcludeBullets(e.target.checked)} style={{ width: '18px', height: '18px', marginTop: '2px' }} aria-label="Exclude bullet points from word count" />
+                      <div>
+                        <strong style={{ display: 'block', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.25rem' }}>Exclude bullet points</strong>
+                        <span className="text-small">Ignore lines starting with •, -, or *</span>
+                      </div>
+                    </label>
+                    <label style={{ display: 'flex', gap: '0.75rem', padding: '1rem', background: 'var(--bg-surface-low)', borderRadius: '0.5rem', border: 'var(--card-border)', cursor: 'pointer', alignItems: 'flex-start' }}>
+                      <input type="checkbox" checked={countOnlyBody} onChange={(e) => setCountOnlyBody(e.target.checked)} style={{ width: '18px', height: '18px', marginTop: '2px' }} aria-label="Count only body text, skip first 2 lines" />
+                      <div>
+                        <strong style={{ display: 'block', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.25rem' }}>Count only body text</strong>
+                        <span className="text-small">Skip first 2 lines (header/contact info)</span>
+                      </div>
+                    </label>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
-        {/* Long-Tail Keywords Section - GEO Optimization */}
-        <section className="guidelines-section">
-          <h2 className="section-title">Common Questions About Resume Length</h2>
-          <div className="guidelines-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-            {[
-              "how many words should a resume be 2026",
-              "resume word count for experienced professionals",
-              "ideal resume length for ATS systems",
-              "one page resume word count guideline",
-              "character count for online job applications",
-              "resume length for senior executives",
-              "how to shorten resume without losing impact",
-              "resume word counter free online tool"
-            ].map((keyword, i) => (
-              <div key={i} className="guideline-card" style={{ padding: '20px' }}>
-                <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
-                <a href="/complete-resume-resource-library" className="breadcrumb-link">
-                  Find answer in our resource library →
-                </a>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Tips Section */}
-        <section className="tips-section" aria-labelledby="tips-title">
-          <h2 className="section-title" id="tips-title">Professional Resume Writing Tips</h2>
-          <div className="tips-grid">
-            {RESUME_TIPS.map((tip, index) => (
-              <div key={index} className="tip-card">
-                <div className="tip-number">{String(index + 1).padStart(2, '0')}</div>
-                <div className="tip-content">{tip}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQ Section - REMOVED MICRODATA TO PREVENT DUPLICATES WITH JSON-LD */}
-        <section className="faq-section" aria-labelledby="faq-title">
-          <h2 className="section-title" id="faq-title">Frequently Asked Questions</h2>
-          <div className="faq-list">
-            {FAQS.map((faq, index) => (
-              <div 
-                key={index} 
-                className={`faq-item ${activeFaq === index ? 'active' : ''}`}
-                onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                onKeyDown={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
-                tabIndex={0}
-                role="button"
-                aria-expanded={activeFaq === index}
-                aria-controls={`faq-answer-${index}`}
-              >
-                <div className="faq-question">
-                  <h3>{faq.question}</h3>
-                  <span className="faq-toggle" aria-hidden="true">
-                    {activeFaq === index ? '−' : '+'}
-                  </span>
-                </div>
-                {activeFaq === index && (
-                  <div className="faq-answer" id={`faq-answer-${index}`}>
-                    <p>{faq.answer}</p>
+        {/* Guidelines */}
+        <section className="section section-alt" id="guidelines">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Professional Resume Length Guidelines</h2>
+              <p className="section-subtitle">Industry standards for different career levels based on ATS optimization research</p>
+            </div>
+            <div className="grid">
+              {LENGTH_GUIDELINES.map((g, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{g.level}</h3>
+                    <span className="feature-badge">{g.words}</span>
                   </div>
-                )}
-              </div>
-            ))}
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}><strong>Pages:</strong> {g.pages}</p>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><strong>Focus:</strong> {g.focus}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Common Questions Section - Long-Tail Keywords for GEO */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Common Questions About Resume Length</h2>
+              <p className="section-subtitle">Expert answers to help you optimize your resume word count</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+              {[
+                "how many words should a resume be 2026",
+                "resume word count for experienced professionals",
+                "ideal resume length for ATS systems",
+                "one page resume word count guideline",
+                "character count for online job applications",
+                "resume length for senior executives",
+                "how to shorten resume without losing impact",
+                "resume word counter free online tool"
+              ].map((keyword, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center', padding: '1.5rem' }}>
+                  <p style={{ fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)' }}>❓ {keyword}</p>
+                  <div>
+                    <Link href="/complete-resume-resource-library" style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>
+                      Find answer in our resource library →
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Tips */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Professional Resume Writing Tips</h2>
+              <p className="section-subtitle">Proven strategies to enhance your resume's impact and optimize word count</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+              {RESUME_TIPS.map((tip, i) => (
+                <div key={i} className="card-executive" style={{ flexDirection: 'row', alignItems: 'center', gap: '0.75rem', padding: '1rem 1.25rem' }}>
+                  <span style={{ fontSize: '1.5rem', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-muted)', fontFamily: 'var(--font-display)', minWidth: '30px' }}>{String(i + 1).padStart(2, '0')}</span>
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{tip}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Benefits Section */}
-        <section className="benefits-section" aria-labelledby="benefits-title">
-          <h2 className="section-title" id="benefits-title">Why Optimize Resume Length?</h2>
-          <div className="benefits-grid">
-            <div className="benefit-card">
-              <h3 className="benefit-title">ATS Friendly</h3>
-              <p className="benefit-description">
-                Applicant Tracking Systems prefer concise, well-structured resumes. Optimal length improves parsing accuracy.
-              </p>
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Why Optimize Resume Length?</h2>
+              <p className="section-subtitle">The data-backed truth about what actually gets interviews</p>
             </div>
-            
-            <div className="benefit-card">
-              <h3 className="benefit-title">Recruiter Attention</h3>
-              <p className="benefit-description">
-                Recruiters spend 6-7 seconds per resume. The right length ensures key information gets noticed quickly.
-              </p>
-            </div>
-            
-            <div className="benefit-card">
-              <h3 className="benefit-title">Professional Standards</h3>
-              <p className="benefit-description">
-                Following industry length standards shows professionalism and respect for the hiring process.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="cta-section">
-          <div className="cta-card">
-            <h2>Ready to Optimize Your Resume?</h2>
-            <p>Use our free resume builder to create ATS-optimized resumes with perfect length and formatting.</p>
-            <a href="https://professionalresumefree.com/resume-templates" className="cta-button">
-              Create Professional Resume
-            </a>
-          </div>
-        </section>
-
-        {/* Recommended Resources Section - Internal Linking for SEO/GEO */}
-        <section className="resources-section" aria-labelledby="resources-title">
-          <h2 className="section-title" id="resources-title">Recommended Resources</h2>
-          <p className="section-subtitle">
-            Enhance your job search with these specialized tools and guides
-          </p>
-          <div className="resources-grid">
-            {INTERNAL_LINKS.map((link, index) => (
-              <div key={index} className="resource-card">
-                <h3 className="resource-title">{link.text}</h3>
-                <a href={link.path} className="resource-link">
-                  View Resource →
-                </a>
+            <div className="grid">
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>ATS Friendly</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  Applicant Tracking Systems prefer concise, well-structured resumes. Optimal length improves parsing accuracy.
+                </p>
               </div>
-            ))}
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Recruiter Attention</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  Recruiters spend 6-7 seconds per resume. The right length ensures key information gets noticed quickly.
+                </p>
+              </div>
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Professional Standards</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  Following industry length standards shows professionalism and respect for the hiring process.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
+
+        {/* FAQ */}
+        <section className="section section-alt" id="faqs">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions About Resume Length</h2>
+              <p className="section-subtitle">Everything you need to know about resume word count and length optimization</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} id={`faq-${i + 1}`} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <div className="faq-question" onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)} aria-expanded={activeFaq === i} aria-controls={`faq-answer-${i}`}>
+                    <h3 itemProp="name" style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && (
+                    <div className="faq-answer" id={`faq-answer-${i}`} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                      <p itemProp="text">{faq.answer}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Ready to Optimize Your Resume Length?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Use our free tools to create ATS-optimized resumes with perfect length and formatting. Join 10,000+ professionals who have improved their resumes. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              <button onClick={() => { handleReset(); toolRef.current?.scrollIntoView({ behavior: 'smooth' }); }} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Start counting your resume words"><FiType /> Start Counting Now</button>
+              <Link href="/resume-templates" className="btn-outline" aria-label="Browse professional resume templates"><FiGrid /> View Templates</Link>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> 100% Free - No Sign Up Required</span>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> ATS-Optimized Analysis</span>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Instant Results - Private & Secure</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Recommended Career Resources</h2>
+              <p className="section-subtitle">Explore our complete suite of resume tools and guides</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield" },
+                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "How to Beat ATS Optimization", iconName: "FiTarget" },
+                { href: "/best-ats-resume-format-2026", text: "Best ATS Resume Format 2026", iconName: "FiFileText" },
+                { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", iconName: "FiSearch" },
+                { href: "/software-engineer-resume-example-and-writing-guide", text: "Software Engineer Resume Guide", iconName: "FiCode" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTime}</span>
+        </div>
+
+        {/* Hidden Metadata */}
+        <div style={{ display: 'none' }}>
+          <span itemProp="dateModified">{safeLastModifiedDate}</span>
+          <span itemProp="softwareVersion">2026.1.0</span>
+        </div>
       </main>
-
-      {/* Build Info - Fixed hydration */}
-      <div className="build-info">
-        <p>Last updated: {currentDate} • Build: {buildTime}</p>
-      </div>
-
-      {/* Hidden Metadata */}
-      <div className="hidden">
-        <span>{lastModifiedDate}</span>
-        <span>2026.1.0</span>
-      </div>
-    </div>
+    </>
   );
 };
 
-// SSG with ISR
+// SSG with ISR - Enhanced following Page 1 blueprint
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
@@ -1806,11 +882,11 @@ export async function getStaticProps() {
     props: {
       seoData: {
         currentDate,
-        lastModifiedDate
-      },
-      buildTimestamp
+        lastModifiedDate,
+        buildTimestamp
+      }
     },
-    // Revalidate every hour
+    // Revalidate every hour for fresh content
     revalidate: 3600,
   };
 }

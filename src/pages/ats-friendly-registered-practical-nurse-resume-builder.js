@@ -38,15 +38,381 @@ import {
   FiCalendar,
   FiClipboard,
   FiDroplet,
-  FiThermometer
+  FiThermometer,
+  FiMenu,
+  FiX as FiCloseIcon,
+  FiCode,
+  FiDollarSign,
+  FiShoppingBag,
+  FiMonitor,
+  FiTruck
 } from 'react-icons/fi';
 import Link from 'next/link';
-import styles from './Resume.module.css';
 
-const Resume = ({ 
-  seoData,
-  buildTimestamp
-}) => {
+const careerFlowStyles = `
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+  :root {
+    --cf-background: #131315;
+    --cf-surface: #131315;
+    --cf-surface-dim: #131315;
+    --cf-surface-bright: #39393b;
+    --cf-surface-container: #201f21;
+    --cf-surface-container-low: #1c1b1d;
+    --cf-surface-container-lowest: #0e0e10;
+    --cf-surface-container-high: #2a2a2c;
+    --cf-surface-container-highest: #353437;
+    --cf-surface-variant: #353437;
+    --cf-on-background: #e5e1e4;
+    --cf-on-surface: #e5e1e4;
+    --cf-on-surface-variant: #d0c5af;
+    --cf-primary: #f2ca50;
+    --cf-primary-container: #d4af37;
+    --cf-on-primary: #3c2f00;
+    --cf-on-primary-container: #554300;
+    --cf-primary-fixed: #ffe088;
+    --cf-primary-fixed-dim: #e9c349;
+    --cf-secondary: #c8c6c3;
+    --cf-secondary-container: #474744;
+    --cf-on-secondary: #30312e;
+    --cf-on-secondary-container: #b6b5b1;
+    --cf-tertiary: #d0cdd3;
+    --cf-tertiary-container: #b4b2b7;
+    --cf-on-tertiary: #303034;
+    --cf-on-tertiary-container: #454449;
+    --cf-outline: #99907c;
+    --cf-outline-variant: #4d4635;
+    --cf-error: #ffb4ab;
+    --cf-on-error: #690005;
+    --cf-error-container: #93000a;
+    --cf-on-error-container: #ffdad6;
+    --cf-inverse-surface: #e5e1e4;
+    --cf-inverse-on-surface: #313032;
+    --cf-inverse-primary: #735c00;
+    --cf-surface-tint: #e9c349;
+    --cf-secondary-fixed: #e4e2de;
+    --cf-secondary-fixed-dim: #c8c6c3;
+    --cf-on-secondary-fixed: #1b1c1a;
+    --cf-on-secondary-fixed-variant: #474744;
+    --cf-tertiary-fixed: #e4e1e7;
+    --cf-tertiary-fixed-dim: #c8c5cb;
+    --cf-on-tertiary-fixed: #1b1b1f;
+    --cf-on-tertiary-fixed-variant: #47464b;
+    --cf-gutter: 32px;
+    --cf-section-gap: 120px;
+    --cf-margin-desktop: 64px;
+    --cf-margin-mobile: 24px;
+    --cf-container-max: 1280px;
+    --cf-unit: 8px;
+    --cf-font-display: 'Playfair Display', Georgia, serif;
+    --cf-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --cf-glass-bg: rgba(20, 19, 21, 0.7);
+    --cf-glass-blur: blur(20px);
+    --cf-gold-border: 0.5px solid rgba(212, 175, 55, 0.3);
+    --cf-gold-border-strong: 0.5px solid rgba(212, 175, 55, 0.4);
+    --cf-gold-glow: 0 0 15px rgba(242, 202, 80, 0.3);
+    --cf-shadow-nav: 0px 24px 48px rgba(0, 0, 0, 0.8);
+    --cf-transition-fast: 200ms ease;
+    --cf-transition-base: 300ms ease;
+    --cf-transition-slow: 500ms ease;
+    --cf-transition-image: 700ms ease;
+  }
+
+  @keyframes pulse {
+    0% { width: 0; height: 0; opacity: 0.5; }
+    100% { width: 300px; height: 300px; opacity: 0; }
+  }
+
+  @keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  * { box-sizing: border-box; }
+  body { background-color: #131315 !important; margin: 0; padding: 0; }
+
+  .cf-resume-builder {
+    background-color: #131315 !important;
+    color: var(--cf-on-background);
+    font-family: var(--cf-font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .cf-resume-builder * { box-sizing: border-box; }
+  .cf-resume-builder ::selection { background: rgba(242, 202, 80, 0.3); color: var(--cf-on-background); }
+  .cf-container { width: 100%; max-width: var(--cf-container-max); margin: 0 auto; padding: 0 var(--cf-margin-desktop); box-sizing: border-box; }
+  .cf-freshness-indicator { display: none; }
+
+  .cf-breadcrumb { background: var(--cf-surface-container-lowest); padding: 16px 0; border-bottom: 0.5px solid var(--cf-outline-variant); }
+  .cf-breadcrumb ol { display: flex; align-items: center; list-style: none; margin: 0; padding: 0 var(--cf-margin-desktop); flex-wrap: wrap; max-width: var(--cf-container-max); margin-left: auto; margin-right: auto; }
+  .cf-breadcrumb li { display: flex; align-items: center; }
+  .cf-breadcrumb-separator { margin: 0 8px; color: var(--cf-outline); }
+  .cf-breadcrumb-link { display: flex; align-items: center; gap: 6px; color: var(--cf-on-surface-variant); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; transition: color var(--cf-transition-fast); text-transform: uppercase; }
+  .cf-breadcrumb-link:hover { color: var(--cf-primary); }
+  .cf-breadcrumb-icon { font-size: 14px; }
+  .cf-breadcrumb-text { white-space: nowrap; }
+
+  .cf-hero { padding: 120px 0 80px; background: #131315; text-align: center; position: relative; overflow: hidden; min-height: 70vh; display: flex; align-items: center; }
+  .cf-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(ellipse at center, rgba(242, 202, 80, 0.03) 0%, transparent 70%); pointer-events: none; }
+  .cf-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  .cf-trust-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(242, 202, 80, 0.08); padding: 8px 20px; border-radius: 50px; margin-bottom: 32px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-trust-icon { color: var(--cf-primary); font-size: 16px; }
+  .cf-trust-text { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-primary); }
+  .cf-hero-title { font-family: var(--cf-font-display); font-size: 64px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--cf-on-background); margin: 0 0 24px; }
+  .cf-gradient-text { background: linear-gradient(135deg, var(--cf-primary) 0%, #f7d96a 50%, var(--cf-primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: var(--cf-gold-glow); font-style: italic; }
+  .cf-hero-subtitle { font-family: var(--cf-font-body); font-size: 18px; font-weight: 400; line-height: 1.6; color: var(--cf-on-surface-variant); margin: 0 auto 40px; max-width: 650px; }
+  .cf-hero-highlight { color: var(--cf-primary); font-weight: 600; }
+  .cf-cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+  .cf-btn-primary { display: inline-flex; align-items: center; gap: 12px; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 16px 40px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); text-decoration: none; position: relative; overflow: hidden; }
+  .cf-btn-primary:hover { filter: brightness(1.1); box-shadow: 0 0 25px rgba(242, 202, 80, 0.3); transform: translateY(-2px); }
+  .cf-btn-text { position: relative; z-index: 1; }
+  .cf-btn-icon { font-size: 18px; transition: transform var(--cf-transition-base); }
+  .cf-btn-primary:hover .cf-btn-icon { transform: translateX(4px); }
+  .cf-btn-pulse { position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1); transform: translate(-50%, -50%); animation: pulse 2s infinite; }
+  .cf-btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--cf-primary); border: var(--cf-gold-border-strong); padding: 16px 40px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); text-decoration: none; }
+  .cf-btn-secondary:hover { background: rgba(242, 202, 80, 0.05); transform: translateY(-2px); }
+  .cf-btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .cf-hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; margin: 48px 0 0; padding: 0; }
+  .cf-stat-item { display: flex; flex-direction: column; align-items: center; padding: 24px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; }
+  .cf-stat-number { font-family: var(--cf-font-display); font-size: 2.5rem; font-weight: 700; color: var(--cf-primary); margin-bottom: 8px; }
+  .cf-stat-label { font-family: var(--cf-font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-on-surface-variant); text-align: center; }
+  .cf-industry-badges { margin-top: 48px; }
+  .cf-badge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .cf-badge-item { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: rgba(242, 202, 80, 0.05); border: 0.5px solid rgba(212, 175, 55, 0.2); border-radius: 2px; font-family: var(--cf-font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--cf-on-surface-variant); transition: all var(--cf-transition-base); justify-content: center; }
+  .cf-badge-item:hover { border-color: rgba(212, 175, 55, 0.5); color: var(--cf-primary); background: rgba(242, 202, 80, 0.08); }
+
+  .cf-layout { display: flex; flex-direction: column; gap: var(--cf-gutter); padding: 80px var(--cf-margin-desktop); max-width: var(--cf-container-max); margin: 0 auto; background: #131315; }
+  .cf-preview-section { flex: 1; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .cf-preview-header { display: flex; flex-direction: column; gap: 16px; }
+  .cf-preview-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .cf-preview-btn, .cf-download-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; transition: all var(--cf-transition-base); cursor: pointer; white-space: nowrap; min-height: 48px; }
+  .cf-preview-btn { background: transparent; color: var(--cf-primary); border: var(--cf-gold-border-strong); }
+  .cf-preview-btn:hover { background: rgba(242, 202, 80, 0.05); transform: translateY(-2px); }
+  .cf-download-btn { background: var(--cf-primary); color: var(--cf-on-primary); border: none; }
+  .cf-download-btn:not(:disabled):hover { filter: brightness(1.1); box-shadow: 0 0 20px rgba(242, 202, 80, 0.3); transform: translateY(-2px); }
+  .cf-download-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .cf-preview-container { background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); padding: 24px; border-radius: 4px; min-height: 500px; display: flex; justify-content: center; align-items: flex-start; overflow: auto; }
+  .cf-full-preview { background: transparent; padding: 0; border: none; border-radius: 0; overflow: visible; }
+  .cf-resume-card { width: 100%; display: flex; justify-content: center; }
+  .cf-preview-content { position: relative; width: 100%; max-width: 210mm; min-height: 297mm; overflow: visible; }
+
+  .cf-resume-preview { display: block; width: 210mm; min-height: 297mm; background: #ffffff; padding: 10mm 15mm; box-sizing: border-box; box-shadow: 0 0 40px rgba(0, 0, 0, 0.5); border: 0.5px solid rgba(212, 175, 55, 0.3); color: #000000; font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.25; }
+  .cf-universal-template { color: #000000; line-height: 1.25; height: 100%; }
+  .cf-resume-header { text-align: center; margin-bottom: 8pt; padding-bottom: 6pt; border-bottom: 0.5pt solid #000000; }
+  .cf-resume-name { font-weight: 700; margin: 0 0 3pt; color: #000000; text-transform: uppercase; letter-spacing: 0.4pt; }
+  .cf-rpn-designation { font-weight: 400; color: #495057; }
+  .cf-contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 4pt; color: #495057; margin-top: 3pt; }
+  .cf-contact-item { display: flex; align-items: center; gap: 2pt; }
+  .cf-contact-separator { color: #adb5bd; }
+  .cf-college-registration { text-align: center; margin-top: 3pt; color: #495057; }
+  .cf-section { margin-bottom: 8pt; page-break-inside: avoid; }
+  .cf-section-title { text-transform: uppercase; letter-spacing: 0.5pt; margin: 0 0 3pt; padding-bottom: 1pt; border-bottom: 0.5pt solid #000000; color: #000000; font-weight: 700; }
+  .cf-summary-text { margin: 0; text-align: justify; line-height: 1.3; }
+  .cf-experience-item, .cf-education-item { margin-bottom: 6pt; page-break-inside: avoid; }
+  .cf-experience-header h3 { font-weight: 700; margin: 0 0 1.5pt; color: #000000; }
+  .cf-company { color: #495057; margin: 0 0 3pt; font-style: italic; }
+  .cf-institution-text { color: #495057; }
+  .cf-institution-date { color: #6c757d; }
+  .cf-bullet-list { margin: 3pt 0 0; padding-left: 8pt; list-style-type: disc; }
+  .cf-bullet-list li { margin-bottom: 2pt; text-align: justify; line-height: 1.25; }
+  .cf-skills-list { display: flex; flex-wrap: wrap; gap: 3pt; list-style: none; padding: 0; margin: 3pt 0 0; }
+  .cf-skills-list li { background: #f8f9fa; padding: 1.5pt 4pt; border-radius: 1.5pt; border: 0.5pt solid #dee2e6; }
+  .cf-license-item, .cf-cert-item, .cf-affiliation-item { margin-bottom: 3pt; line-height: 1.25; }
+
+  .cf-form-section { flex: 1; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .cf-form-nav { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; }
+  .cf-nav-btn { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border: 0.5px solid rgba(212, 175, 55, 0.2); border-radius: 2px; background: transparent; color: var(--cf-on-surface-variant); font-family: var(--cf-font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); white-space: nowrap; min-height: 48px; flex: 1; min-width: 100px; justify-content: center; }
+  .cf-nav-btn:hover { background: rgba(242, 202, 80, 0.05); border-color: rgba(212, 175, 55, 0.4); color: var(--cf-primary); }
+  .cf-nav-btn-active { background: var(--cf-primary); border-color: var(--cf-primary); color: var(--cf-on-primary); }
+  .cf-form-content { flex: 1; min-width: 0; overflow-y: auto; max-height: 600px; padding-right: 8px; }
+  .cf-form-content::-webkit-scrollbar { width: 6px; }
+  .cf-form-content::-webkit-scrollbar-track { background: var(--cf-surface-container-lowest); border-radius: 3px; }
+  .cf-form-content::-webkit-scrollbar-thumb { background: var(--cf-outline-variant); border-radius: 3px; }
+  .cf-form-content::-webkit-scrollbar-thumb:hover { background: var(--cf-outline); }
+  .cf-form-section-content { display: flex; flex-direction: column; gap: 24px; }
+  .cf-form-section-title { font-family: var(--cf-font-display); font-size: 24px; font-weight: 600; margin: 0 0 8px; color: var(--cf-on-background); display: flex; align-items: center; gap: 12px; }
+  .cf-section-desc { color: var(--cf-on-surface-variant); font-family: var(--cf-font-body); font-size: 14px; margin: 0 0 16px; line-height: 1.6; }
+  .cf-form-card { background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 24px; width: 100%; box-sizing: border-box; }
+  .cf-form-group { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 20px; width: 100%; }
+  .cf-form-label { display: flex; flex-direction: column; gap: 8px; font-family: var(--cf-font-body); font-weight: 600; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--cf-on-surface-variant); width: 100%; }
+  .cf-form-input, .cf-form-textarea, .cf-form-select { padding: 14px 16px; border: 0.5px solid var(--cf-outline-variant); border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; color: var(--cf-on-background); background: rgba(14, 14, 16, 0.6); transition: all var(--cf-transition-base); width: 100%; box-sizing: border-box; min-width: 0; }
+  .cf-form-input:focus, .cf-form-textarea:focus, .cf-form-select:focus { outline: none; border-color: var(--cf-primary); box-shadow: 0 0 0 2px rgba(242, 202, 80, 0.15); }
+  .cf-form-input::placeholder, .cf-form-textarea::placeholder { color: var(--cf-outline); }
+  .cf-form-textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+  .cf-form-select { cursor: pointer; }
+  .cf-form-select option { background: var(--cf-surface-container); color: var(--cf-on-background); }
+  .cf-char-count { text-align: right; font-size: 11px; color: var(--cf-outline); margin-top: 8px; font-family: var(--cf-font-body); letter-spacing: 0.05em; }
+  .cf-sub-section-title { font-family: var(--cf-font-display); font-size: 18px; font-weight: 600; margin: 0 0 16px; color: var(--cf-primary); display: flex; align-items: center; gap: 12px; }
+  .cf-skills-input { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+  .cf-form-actions { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; align-items: center; width: 100%; }
+  .cf-add-btn, .cf-cancel-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: all var(--cf-transition-base); min-height: 48px; flex-shrink: 0; }
+  .cf-add-btn { background: var(--cf-primary); color: var(--cf-on-primary); border: none; }
+  .cf-add-btn:hover:not(:disabled) { filter: brightness(1.1); box-shadow: 0 0 20px rgba(242, 202, 80, 0.3); transform: translateY(-2px); }
+  .cf-add-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .cf-cancel-btn { background: transparent; color: var(--cf-on-surface-variant); border: 0.5px solid var(--cf-outline-variant); }
+  .cf-cancel-btn:hover { background: rgba(255, 255, 255, 0.03); border-color: var(--cf-outline); transform: translateY(-2px); }
+  .cf-items-list { margin-top: 24px; }
+  .cf-empty-msg { color: var(--cf-outline); font-style: italic; margin: 0; padding: 20px; text-align: center; background: rgba(14, 14, 16, 0.4); border-radius: 2px; border: 1px dashed var(--cf-outline-variant); font-family: var(--cf-font-body); font-size: 14px; }
+  .cf-list-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 16px; border-bottom: 0.5px solid var(--cf-outline-variant); width: 100%; box-sizing: border-box; background: rgba(14, 14, 16, 0.3); border-radius: 2px; margin-bottom: 8px; }
+  .cf-list-item:last-child { border-bottom: none; margin-bottom: 0; }
+  .cf-item-content { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .cf-item-header { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+  .cf-item-title { font-weight: 700; color: var(--cf-on-background); word-break: break-word; font-size: 16px; }
+  .cf-item-subtitle { color: var(--cf-on-surface-variant); font-size: 14px; word-break: break-word; }
+  .cf-item-meta { display: flex; gap: 16px; flex-wrap: wrap; color: var(--cf-outline); font-size: 12px; align-items: center; letter-spacing: 0.05em; }
+  .cf-item-desc { margin-top: 8px; }
+  .cf-bullet-point { margin: 4px 0; font-size: 14px; color: var(--cf-on-surface-variant); line-height: 1.5; }
+  .cf-item-actions { display: flex; gap: 8px; margin-left: 16px; flex-shrink: 0; }
+  .cf-edit-btn, .cf-delete-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(255, 255, 255, 0.03); color: var(--cf-on-surface-variant); border: 0.5px solid var(--cf-outline-variant); cursor: pointer; transition: all var(--cf-transition-base); }
+  .cf-edit-btn:hover { background: rgba(242, 202, 80, 0.1); border-color: var(--cf-primary); color: var(--cf-primary); transform: translateY(-2px); }
+  .cf-delete-btn { color: var(--cf-error); border-color: rgba(255, 180, 171, 0.3); }
+  .cf-delete-btn:hover { background: rgba(255, 180, 171, 0.1); border-color: var(--cf-error); transform: translateY(-2px); }
+
+  .cf-font-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+  .cf-font-control { display: flex; flex-direction: column; gap: 12px; }
+  .cf-font-label { display: flex; justify-content: space-between; align-items: center; font-family: var(--cf-font-body); font-weight: 600; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--cf-on-surface-variant); }
+  .cf-font-value { background: rgba(242, 202, 80, 0.1); padding: 4px 12px; border-radius: 20px; font-weight: 700; color: var(--cf-primary); font-size: 12px; min-width: 50px; text-align: center; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-font-slider { width: 100%; height: 4px; -webkit-appearance: none; appearance: none; background: var(--cf-outline-variant); border-radius: 2px; outline: none; }
+  .cf-font-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--cf-primary); cursor: pointer; border: 2px solid var(--cf-background); box-shadow: 0 0 10px rgba(242, 202, 80, 0.3); }
+  .cf-font-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--cf-primary); cursor: pointer; border: 2px solid var(--cf-background); box-shadow: 0 0 10px rgba(242, 202, 80, 0.3); }
+  .cf-reset-btn { display: block; width: 100%; padding: 14px 24px; background: transparent; color: var(--cf-on-surface-variant); border: 0.5px solid var(--cf-outline-variant); border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); text-align: center; }
+  .cf-reset-btn:hover { background: rgba(242, 202, 80, 0.05); border-color: var(--cf-primary); color: var(--cf-primary); }
+
+  .cf-faq-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: var(--cf-surface-container-lowest); border-top: 0.5px solid rgba(153, 144, 124, 0.1); border-bottom: 0.5px solid rgba(153, 144, 124, 0.1); }
+  .cf-section-header { text-align: center; margin-bottom: 64px; }
+  .cf-section-header h2 { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; }
+  .cf-section-header p { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+  .cf-faq-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
+  .cf-faq-item { background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 32px; transition: all var(--cf-transition-base); }
+  .cf-faq-item:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+  .cf-faq-question { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 16px; line-height: 1.4; }
+  .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
+
+  .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
+  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
+  .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
+  .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
+  .cf-cta-btn { display: inline-flex; align-items: center; gap: 16px; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 20px 48px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 16px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); }
+  .cf-cta-btn:hover { filter: brightness(1.1); box-shadow: 0 0 30px rgba(242, 202, 80, 0.3); transform: translateY(-4px); }
+  .cf-cta-btn-text { position: relative; z-index: 1; }
+  .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
+  .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
+  .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
+  .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
+  .cf-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 32px; border-bottom: 0.5px solid rgba(212, 175, 55, 0.3); background: var(--cf-surface-container-lowest); border-radius: 4px 4px 0 0; }
+  .cf-modal-header h3 { font-family: var(--cf-font-display); font-size: 20px; margin: 0; color: var(--cf-primary); font-weight: 600; }
+  .cf-close-btn { background: rgba(255, 255, 255, 0.05); width: 40px; height: 40px; border-radius: 2px; border: 0.5px solid rgba(212, 175, 55, 0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--cf-on-surface-variant); font-size: 20px; transition: all var(--cf-transition-base); }
+  .cf-close-btn:hover { background: rgba(255, 180, 171, 0.1); border-color: var(--cf-error); color: var(--cf-error); transform: rotate(90deg); }
+  .cf-modal-pages { padding: 32px; background: var(--cf-surface-container-lowest); display: flex; justify-content: center; align-items: center; }
+  .cf-modal-page { background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3); width: 210mm; height: 297mm; display: flex; justify-content: center; align-items: flex-start; }
+  .cf-modal-page .cf-universal-template { width: 100%; height: 100%; padding: 10mm 15mm; box-sizing: border-box; overflow-y: auto; }
+
+  .cf-share-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; }
+  .cf-share-card { background: var(--cf-surface-container-high); border-radius: 8px; max-width: 420px; width: 100%; padding: 32px 28px; text-align: center; border: 0.5px solid rgba(212, 175, 55, 0.4); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); animation: modalSlideIn 0.3s ease-out; }
+  .cf-share-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+  .cf-share-headline { font-family: var(--cf-font-display); font-size: 24px; font-weight: 600; color: var(--cf-primary); margin: 0 0 12px; }
+  .cf-share-body { font-family: var(--cf-font-body); font-size: 15px; color: var(--cf-on-surface-variant); margin: 0 0 28px; line-height: 1.6; }
+  .cf-share-close-btn { display: inline-block; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 12px 32px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); }
+  .cf-share-close-btn:hover { filter: brightness(1.1); box-shadow: 0 0 18px rgba(242, 202, 80, 0.3); transform: translateY(-1px); }
+
+  @media (min-width: 1024px) {
+    .cf-layout { flex-direction: row; gap: 48px; }
+    .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; }
+    .cf-form-section { max-width: 500px; }
+    .cf-faq-grid { grid-template-columns: repeat(2, 1fr); }
+    .cf-form-group { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 1023px) {
+    :root { --cf-margin-desktop: 32px; --cf-section-gap: 80px; }
+    .cf-container { padding: 0 var(--cf-margin-desktop); }
+    .cf-hero { padding: 100px 0 60px; min-height: auto; }
+    .cf-hero-title { font-size: 48px; }
+    .cf-layout { padding: 60px var(--cf-margin-desktop); gap: 32px; }
+    .cf-form-group { grid-template-columns: 1fr 1fr; }
+    .cf-faq-grid { grid-template-columns: 1fr 1fr; }
+    .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+  }
+
+  @media (max-width: 768px) {
+    :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; }
+    .cf-hero { padding: 80px 0 40px; }
+    .cf-hero-title { font-size: 36px; }
+    .cf-hero-subtitle { font-size: 14px; }
+    .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; }
+    .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; }
+    .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; }
+    .cf-preview-container { padding: 16px; }
+    .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; }
+    .cf-form-nav { gap: 6px; padding: 12px; }
+    .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; }
+    .cf-nav-btn span { display: none; }
+    .cf-form-card { padding: 16px; }
+    .cf-form-group { grid-template-columns: 1fr; }
+    .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .cf-faq-grid { grid-template-columns: 1fr; }
+    .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); }
+    .cf-section-header h2, .cf-cta-title { font-size: 28px; }
+    .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; }
+    .cf-modal-page { width: 100%; height: auto; min-height: 400px; }
+    .cf-modal-page .cf-universal-template { padding: 8mm 12mm; }
+    .cf-font-grid { grid-template-columns: 1fr 1fr; }
+    .cf-list-item { flex-direction: column; gap: 12px; }
+    .cf-item-actions { margin-left: 0; align-self: flex-end; }
+    .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; }
+    .cf-hero-title { font-size: 28px; }
+    .cf-hero-subtitle { font-size: 13px; }
+    .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; }
+    .cf-stat-number { font-size: 2rem; }
+    .cf-layout { padding: 32px var(--cf-margin-desktop); }
+    .cf-resume-preview { padding: 6mm 8mm; }
+    .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; }
+    .cf-form-card { padding: 12px; }
+    .cf-form-section-title { font-size: 20px; }
+    .cf-sub-section-title { font-size: 16px; }
+    .cf-font-grid { grid-template-columns: 1fr; }
+    .cf-faq-item { padding: 20px; }
+    .cf-faq-question { font-size: 18px; }
+    .cf-section-header h2, .cf-cta-title { font-size: 24px; }
+    .cf-cta-btn { padding: 16px 32px; font-size: 14px; }
+    .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; }
+    .cf-guarantee-text { font-size: 12px; }
+    .cf-modal-header { padding: 16px 20px; }
+    .cf-modal-header h3 { font-size: 16px; }
+    .cf-modal-pages { padding: 16px; }
+    .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
+    .cf-share-headline { font-size: 20px; }
+    .cf-share-body { font-size: 13px; }
+  }
+
+  @media (max-width: 360px) {
+    .cf-hero-title { font-size: 24px; }
+    .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+  }
+
+  @media print {
+    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; }
+    .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; }
+    .cf-universal-template, .cf-section { page-break-inside: avoid; }
+  }
+`;
+
+const Resume = ({ seoData, buildTimestamp }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const {
     currentDate,
     lastModifiedDate,
@@ -217,6 +583,7 @@ const Resume = ({
   const resumeRef = useRef(null);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
+  const [showSharePopup, setShowSharePopup] = useState(false);
 
   // Testimonials for Registered Practical Nurses in Canada
   const testimonials = [
@@ -518,7 +885,7 @@ const Resume = ({
         width: 210 * 3.7795275591,
         height: 297 * 3.7795275591,
         onclone: (doc) => {
-          const clone = doc.querySelector(`.${styles.resumePreview}`);
+          const clone = doc.querySelector('.cf-resume-preview');
           if (clone) {
             clone.style.display = 'block';
             clone.style.visibility = 'visible';
@@ -529,65 +896,65 @@ const Resume = ({
             clone.style.color = '#000000';
             
             // Apply custom font sizes
-            const name = clone.querySelector(`.${styles.name}`);
+            const name = clone.querySelector('.cf-resume-name');
             if (name) name.style.fontSize = `${fontSizes.name}pt`;
             
-            const sectionTitles = clone.querySelectorAll(`.${styles.sectionTitle}`);
+            const sectionTitles = clone.querySelectorAll('.cf-section-title');
             sectionTitles.forEach(title => {
               title.style.fontSize = `${fontSizes.sectionTitle}pt`;
             });
             
-            const contactItems = clone.querySelectorAll(`.${styles.contactInfoItem}`);
+            const contactItems = clone.querySelectorAll('.cf-contact-item');
             contactItems.forEach(item => {
               item.style.fontSize = `${fontSizes.contactInfo}pt`;
             });
             
-            const jobTitles = clone.querySelectorAll(`.${styles.experienceItem} h3`);
+            const jobTitles = clone.querySelectorAll('.cf-experience-item h3');
             jobTitles.forEach(title => {
               title.style.fontSize = `${fontSizes.jobTitle}pt`;
             });
             
-            const companies = clone.querySelectorAll(`.${styles.company}`);
+            const companies = clone.querySelectorAll('.cf-company');
             companies.forEach(company => {
               company.style.fontSize = `${fontSizes.company}pt`;
             });
             
-            const degrees = clone.querySelectorAll(`.${styles.educationItem} h3`);
+            const degrees = clone.querySelectorAll('.cf-education-item h3');
             degrees.forEach(degree => {
               degree.style.fontSize = `${fontSizes.degree}pt`;
             });
             
-            const institutions = clone.querySelectorAll(`.${styles.institution}`);
+            const institutions = clone.querySelectorAll('.cf-institution-text');
             institutions.forEach(institution => {
               institution.style.fontSize = `${fontSizes.institution}pt`;
             });
             
-            const institutionDates = clone.querySelectorAll(`.${styles.institutionDate}`);
+            const institutionDates = clone.querySelectorAll('.cf-institution-date');
             institutionDates.forEach(date => {
               date.style.fontSize = `${fontSizes.institutionDate}pt`;
             });
             
-            const regularTexts = clone.querySelectorAll(`.${styles.summaryText}, .${styles.licenseItem}, .${styles.affiliationItem}`);
+            const regularTexts = clone.querySelectorAll('.cf-summary-text, .cf-license-item, .cf-affiliation-item');
             regularTexts.forEach(text => {
               text.style.fontSize = `${fontSizes.regularText}pt`;
             });
             
-            const bulletPoints = clone.querySelectorAll(`.${styles.bulletList} li`);
+            const bulletPoints = clone.querySelectorAll('.cf-bullet-list li');
             bulletPoints.forEach(bullet => {
               bullet.style.fontSize = `${fontSizes.bulletText}pt`;
             });
             
-            const skills = clone.querySelectorAll(`.${styles.skillsList} li`);
+            const skills = clone.querySelectorAll('.cf-skills-list li');
             skills.forEach(skill => {
               skill.style.fontSize = `${fontSizes.skillText}pt`;
             });
             
-            const licenseTexts = clone.querySelectorAll(`.${styles.licenseItem}`);
+            const licenseTexts = clone.querySelectorAll('.cf-license-item');
             licenseTexts.forEach(license => {
               license.style.fontSize = `${fontSizes.licenseText}pt`;
             });
             
-            const certificationTexts = clone.querySelectorAll(`.${styles.certificationItem}`);
+            const certificationTexts = clone.querySelectorAll('.cf-cert-item');
             certificationTexts.forEach(cert => {
               cert.style.fontSize = `${fontSizes.certificationText}pt`;
             });
@@ -609,6 +976,7 @@ const Resume = ({
       Object.assign(el.style, originalStates);
 
       pdf.save(`${formData.fullName || 'RPN_resume'}_Registered_Practical_Nurse_Canada.pdf`);
+      setShowSharePopup(true);
     } catch (err) {
       console.error("PDF Error:", err);
       alert("Failed to generate PDF. Please try again.");
@@ -633,56 +1001,56 @@ const Resume = ({
     const hasCanadianCertifications = formData.canadianCertifications.length > 0;
 
     return (
-      <div className={styles.healthcareTemplate}>
-        <header className={styles.resumeHeader}>
-          <h1 className={styles.name} style={{ fontSize: `${fontSizes.name}pt` }}>
-            {formData.fullName || 'Your Name'} <span className={styles.rpnDesignation}>, RPN</span>
+      <div className="cf-universal-template">
+        <header className="cf-resume-header">
+          <h1 className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt` }}>
+            {formData.fullName || 'Your Name'} <span className="cf-rpn-designation">, RPN</span>
           </h1>
-          <div className={styles.contactInfoRow}>
-            {formData.email && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
-            {(formData.email && (formData.phone || formData.address)) && <div className={styles.contactSeparator}>•</div>}
-            {formData.phone && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiPhone /> {formData.phone}</div>}
-            {(formData.phone && formData.address) && <div className={styles.contactSeparator}>•</div>}
-            {formData.address && <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMapPin /> {formData.address}{formData.province && `, ${formData.province}, Canada`}</div>}
+          <div className="cf-contact-row">
+            {formData.email && <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
+            {(formData.email && (formData.phone || formData.address)) && <div className="cf-contact-separator">•</div>}
+            {formData.phone && <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiPhone /> {formData.phone}</div>}
+            {(formData.phone && formData.address) && <div className="cf-contact-separator">•</div>}
+            {formData.address && <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMapPin /> {formData.address}{formData.province && `, ${formData.province}, Canada`}</div>}
             {formData.rpnLicenseNumber && (
-              <div className={styles.contactInfoItem} style={{ fontSize: `${fontSizes.contactInfo}pt` }}>
+              <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt` }}>
                 <FiShield /> RPN License: {formData.rpnLicenseNumber}
               </div>
             )}
           </div>
           {formData.collegeRegistration && (
-            <div className={styles.collegeRegistration} style={{ fontSize: `${fontSizes.contactInfo}pt` }}>
+            <div className="cf-college-registration" style={{ fontSize: `${fontSizes.contactInfo}pt` }}>
               <FiShield /> {formData.collegeRegistration}
             </div>
           )}
         </header>
 
         {hasSummary && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL PROFILE</h2>
-            <p className={styles.summaryText} style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL PROFILE</h2>
+            <p className="cf-summary-text" style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p>
           </section>
         )}
 
         {hasPracticeSettings && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>RPN PRACTICE SETTINGS</h2>
-            <ul className={styles.skillsList}>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>RPN PRACTICE SETTINGS</h2>
+            <ul className="cf-skills-list">
               {formData.practiceSettings.map((setting, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{setting.name}</li>)}
             </ul>
           </section>
         )}
 
         {hasExperience && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>NURSING EXPERIENCE</h2>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>NURSING EXPERIENCE</h2>
             {formData.experience.map((exp, i) => (
-              <div key={i} className={styles.experienceItem}>
-                <div className={styles.experienceHeader}>
+              <div key={i} className="cf-experience-item">
+                <div className="cf-experience-header">
                   <h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h3>
-                  <p className={styles.company} style={{ fontSize: `${fontSizes.company}pt` }}>{exp.employer}{exp.department && ` – ${exp.department}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
+                  <p className="cf-company" style={{ fontSize: `${fontSizes.company}pt` }}>{exp.employer}{exp.department && ` – ${exp.department}`} | {exp.startDate} – {exp.endDate || 'Present'}</p>
                 </div>
-                <ul className={styles.bulletList}>
+                <ul className="cf-bullet-list">
                   {exp.description.split('\n').filter(line => line.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}
                 </ul>
               </div>
@@ -691,16 +1059,16 @@ const Resume = ({
         )}
 
         {hasEducation && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION & NURSING PROGRAMS</h2>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION & NURSING PROGRAMS</h2>
             {formData.education.map((edu, i) => (
-              <div key={i} className={styles.educationItem}>
+              <div key={i} className="cf-education-item">
                 <h3 style={{ fontSize: `${fontSizes.degree}pt` }}>
                   {edu.degree}{edu.program && ` – ${edu.program}`}
                 </h3>
-                <p className={styles.institution} style={{ fontSize: `${fontSizes.institution}pt` }}>
+                <p className="cf-institution-text" style={{ fontSize: `${fontSizes.institution}pt` }}>
                   {edu.institution} | 
-                  <span className={styles.institutionDate} style={{ fontSize: `${fontSizes.institutionDate}pt` }}>
+                  <span className="cf-institution-date" style={{ fontSize: `${fontSizes.institutionDate}pt` }}>
                     {edu.startDate} – {edu.endDate || 'Present'}
                   </span>
                 </p>
@@ -710,28 +1078,28 @@ const Resume = ({
         )}
 
         {hasMedicationSkills && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>MEDICATION ADMINISTRATION SKILLS</h2>
-            <ul className={styles.bulletList}>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>MEDICATION ADMINISTRATION SKILLS</h2>
+            <ul className="cf-bullet-list">
               {formData.medicationSkills.map((skill, i) => <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{skill.name}</li>)}
             </ul>
           </section>
         )}
 
         {hasWoundCareSkills && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>WOUND CARE & CLINICAL PROCEDURES</h2>
-            <ul className={styles.bulletList}>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>WOUND CARE & CLINICAL PROCEDURES</h2>
+            <ul className="cf-bullet-list">
               {formData.woundCareSkills.map((skill, i) => <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{skill.name}</li>)}
             </ul>
           </section>
         )}
 
         {hasLicenses && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>REGISTRATION & LICENSURE</h2>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>REGISTRATION & LICENSURE</h2>
             {formData.licenses.map((l, i) => (
-              <div key={i} className={styles.licenseItem} style={{ fontSize: `${fontSizes.licenseText}pt` }}>
+              <div key={i} className="cf-license-item" style={{ fontSize: `${fontSizes.licenseText}pt` }}>
                 <strong>{l.name}</strong>
                 {l.issuingAuthority && ` – ${l.issuingAuthority}`}
                 {l.licenseNumber && ` (#${l.licenseNumber})`}
@@ -742,10 +1110,10 @@ const Resume = ({
         )}
 
         {hasCanadianCertifications && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CANADIAN CERTIFICATIONS</h2>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CANADIAN CERTIFICATIONS</h2>
             {formData.canadianCertifications.map((cert, i) => (
-              <div key={i} className={styles.certificationItem} style={{ fontSize: `${fontSizes.certificationText}pt` }}>
+              <div key={i} className="cf-cert-item" style={{ fontSize: `${fontSizes.certificationText}pt` }}>
                 <strong>{cert.name}</strong>
                 {cert.issuingAuthority && ` – ${cert.issuingAuthority}`}
                 {cert.expiryDate && ` – Expires: ${cert.expiryDate}`}
@@ -755,28 +1123,28 @@ const Resume = ({
         )}
 
         {hasSpecialties && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CLINICAL SPECIALTIES</h2>
-            <ul className={styles.skillsList}>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CLINICAL SPECIALTIES</h2>
+            <ul className="cf-skills-list">
               {formData.specialties.map((s, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{s.name}</li>)}
             </ul>
           </section>
         )}
 
         {hasProcedures && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>NURSING PROCEDURES</h2>
-            <ul className={styles.bulletList}>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>NURSING PROCEDURES</h2>
+            <ul className="cf-bullet-list">
               {formData.procedures.map((p, i) => <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{p.name}</li>)}
             </ul>
           </section>
         )}
 
         {hasAffiliations && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL AFFILIATIONS</h2>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL AFFILIATIONS</h2>
             {formData.affiliations.map((a, i) => (
-              <div key={i} className={styles.affiliationItem} style={{ fontSize: `${fontSizes.regularText}pt` }}>
+              <div key={i} className="cf-affiliation-item" style={{ fontSize: `${fontSizes.regularText}pt` }}>
                 <strong>{a.organization}</strong>
                 {a.role && ` – ${a.role}`}
               </div>
@@ -785,9 +1153,9 @@ const Resume = ({
         )}
 
         {hasLanguages && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LANGUAGES</h2>
-            <ul className={styles.bulletList}>
+          <section className="cf-section">
+            <h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>LANGUAGES</h2>
+            <ul className="cf-bullet-list">
               {formData.languages.map((l, i) => (
                 <li key={i} style={{ fontSize: `${fontSizes.bulletText}pt` }}>
                   {l.name}{l.proficiency && ` (${l.proficiency})`}
@@ -801,1572 +1169,1411 @@ const Resume = ({
   };
 
   return (
-    <div className={styles.resumeBuilder} lang="en-CA">
-      <Head>
-        <title>Free RPN Resume Builder Canada | Canadian Nursing Templates 2026</title>
-        <meta name="title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
-        <meta name="description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology. Trusted by 2M+ Canadian RPNs." />
-        <meta name="keywords" content="RPN resume builder, Registered Practical Nurse resume Canada, Canadian RPN resume, healthcare resume builder Canada, RPN resume template Ontario, BC RPN resume, Alberta RPN resume, nursing resume Canada, CNO resume format, ATS friendly RPN resume" />
-        <meta name="author" content="Professional RPN Resume Free - Canada" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="date" content={safeCurrentDate} />
-        <meta name="last-modified" content={safeLastModifiedDate} />
-        <meta name="revisit-after" content="1 days" />
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
-        <meta property="og:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
-        <meta property="og:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
-        <meta property="og:image" content="https://professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free Registered Practical Nurse (RPN) Resume Builder for Canada" />
-        <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Professional RPN Resume Free - Canada" />
-        <meta property="og:locale" content="en_CA" />
-        <meta property="og:locale:alternate" content="en_US" />
-        <meta property="og:updated_time" content={safeLastModifiedDate} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
-        <meta name="twitter:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-rpn-resume-builder-canada-preview.jpg" />
-        <meta name="twitter:image:alt" content="Free RPN Resume Builder for Canada" />
-        <meta name="twitter:site" content="@RPNResumeCanada" />
-        <meta name="twitter:creator" content="@RPNResumeCanada" />
-        <meta name="theme-color" content="#D70015" />
-        <meta name="msapplication-TileColor" content="#D70015" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        <script
-          type="application/ld+json"
-          key="structured-data"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "WebPage",
-                  "@id": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage",
-                  "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder",
-                  "name": "Free Registered Practical Nurse (RPN) Resume Builder - Canadian Healthcare Templates 2026",
-                  "description": "Create professional ATS-optimized Registered Practical Nurse resumes for Canadian healthcare jobs. Free RPN resume builder with Canadian terminology and provincial licensing standards.",
-                  "datePublished": "2026-01-01",
-                  "dateModified": safeLastModifiedDate,
-                  "inLanguage": "en-CA",
-                  "isPartOf": {
-                    "@type": "WebSite",
-                    "@id": "https://professionalresumefree.com/#website",
-                    "url": "https://professionalresumefree.com",
-                    "name": "Professional RPN Resume Free - Canada",
-                    "description": "Free online resume builder for Registered Practical Nurses in Canada",
-                    "publisher": {
-                      "@type": "Organization",
-                      "@id": "https://professionalresumefree.com/#organization",
-                      "name": "Professional RPN Resume Free - Canada",
+    <>
+      <style>{careerFlowStyles}</style>
+      <div className="cf-resume-builder" lang="en-CA">
+        <Head>
+          <title>Free RPN Resume Builder Canada | Canadian Nursing Templates 2026</title>
+          <meta name="title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
+          <meta name="description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology. Trusted by 2M+ Canadian RPNs." />
+          <meta name="keywords" content="RPN resume builder, Registered Practical Nurse resume Canada, Canadian RPN resume, healthcare resume builder Canada, RPN resume template Ontario, BC RPN resume, Alberta RPN resume, nursing resume Canada, CNO resume format, ATS friendly RPN resume" />
+          <meta name="author" content="Professional RPN Resume Free - Canada" />
+          <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+          <meta name="date" content={safeCurrentDate} />
+          <meta name="last-modified" content={safeLastModifiedDate} />
+          <meta name="revisit-after" content="1 days" />
+          <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+          <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
+          <meta property="og:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
+          <meta property="og:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
+          <meta property="og:image" content="https://professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content="Free Registered Practical Nurse (RPN) Resume Builder for Canada" />
+          <meta property="og:url" content="https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder" />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Professional RPN Resume Free - Canada" />
+          <meta property="og:locale" content="en_CA" />
+          <meta property="og:locale:alternate" content="en_US" />
+          <meta property="og:updated_time" content={safeLastModifiedDate} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Free RPN Resume Builder Canada | Canadian Nursing Templates 2026" />
+          <meta name="twitter:description" content="Create your Canadian RPN resume for free in 2026. ATS-optimized templates with provincial licensing, CNO standards & Canadian healthcare terminology." />
+          <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-rpn-resume-builder-canada-preview.jpg" />
+          <meta name="twitter:image:alt" content="Free RPN Resume Builder for Canada" />
+          <meta name="twitter:site" content="@RPNResumeCanada" />
+          <meta name="twitter:creator" content="@RPNResumeCanada" />
+          <meta name="theme-color" content="#D70015" />
+          <meta name="msapplication-TileColor" content="#D70015" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="manifest" href="/site.webmanifest" />
+          <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          
+          <script
+            type="application/ld+json"
+            key="structured-data"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                  {
+                    "@type": "WebPage",
+                    "@id": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage",
+                    "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder",
+                    "name": "Free Registered Practical Nurse (RPN) Resume Builder - Canadian Healthcare Templates 2026",
+                    "description": "Create professional ATS-optimized Registered Practical Nurse resumes for Canadian healthcare jobs. Free RPN resume builder with Canadian terminology and provincial licensing standards.",
+                    "datePublished": "2026-01-01",
+                    "dateModified": safeLastModifiedDate,
+                    "inLanguage": "en-CA",
+                    "isPartOf": {
+                      "@type": "WebSite",
+                      "@id": "https://professionalresumefree.com/#website",
                       "url": "https://professionalresumefree.com",
-                      "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://professionalresumefree.com/logo-canada.png",
-                        "width": 512,
-                        "height": 512
-                      },
-                      "sameAs": [
-                        "https://twitter.com/RPNResumeCanada",
-                        "https://www.linkedin.com/company/rpn-resume-canada",
-                        "https://www.facebook.com/RPNResumeCanada"
+                      "name": "Professional RPN Resume Free - Canada",
+                      "description": "Free online resume builder for Registered Practical Nurses in Canada",
+                      "publisher": {
+                        "@type": "Organization",
+                        "@id": "https://professionalresumefree.com/#organization",
+                        "name": "Professional RPN Resume Free - Canada",
+                        "url": "https://professionalresumefree.com",
+                        "logo": {
+                          "@type": "ImageObject",
+                          "url": "https://professionalresumefree.com/logo-canada.png",
+                          "width": 512,
+                          "height": 512
+                        },
+                        "sameAs": [
+                          "https://twitter.com/RPNResumeCanada",
+                          "https://www.linkedin.com/company/rpn-resume-canada",
+                          "https://www.facebook.com/RPNResumeCanada"
+                        ]
+                      }
+                    },
+                    "primaryImageOfPage": {
+                      "@type": "ImageObject",
+                      "url": "https://professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg",
+                      "width": 1200,
+                      "height": 630
+                    },
+                    "breadcrumb": {
+                      "@type": "BreadcrumbList",
+                      "itemListElement": [
+                        {
+                          "@type": "ListItem",
+                          "position": 1,
+                          "name": "Home",
+                          "item": "https://professionalresumefree.com"
+                        },
+                        {
+                          "@type": "ListItem",
+                          "position": 2,
+                          "name": "RPN Resume Builder Canada",
+                          "item": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
+                        }
                       ]
+                    },
+                    "mainEntity": {
+                      "@type": "SoftwareApplication",
+                      "name": "Registered Practical Nurse (RPN) Resume Builder - Canadian Edition",
+                      "applicationCategory": "BusinessApplication",
+                      "operatingSystem": "Any",
+                      "offers": {
+                        "@type": "Offer",
+                        "price": "0",
+                        "priceCurrency": "CAD",
+                        "availability": "https://schema.org/InStock",
+                        "priceValidUntil": "2026-12-31"
+                      },
+                      "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": 4.9,
+                        "ratingCount": 25365,
+                        "bestRating": 5,
+                        "worstRating": 1
+                      },
+                      "description": "Free online ATS-friendly Registered Practical Nurse resume builder for Canadian healthcare jobs. Includes Canadian terminology, provincial licensing formats, and CNO standards.",
+                      "featureList": [
+                        "Canadian RPN ATS-Optimized Templates",
+                        "Provincial Licensing Formats",
+                        "CNO Standards & Competencies",
+                        "Canadian Healthcare Terminology",
+                        "One-Click PDF Download",
+                        "Mobile-Friendly Editor",
+                        "No Sign Up Required",
+                        "Free Forever"
+                      ],
+                      "softwareVersion": "2026.1.0",
+                      "screenshot": "https://professionalresumefree.com/images/screenshot-rpn-resume-builder-canada.jpg",
+                      "applicationSuite": "Canadian Healthcare Career Tools",
+                      "countriesSupported": "Canada",
+                      "fileSize": "Web Application"
                     }
                   },
-                  "primaryImageOfPage": {
-                    "@type": "ImageObject",
-                    "url": "https://professionalresumefree.com/images/og-rpn-resume-builder-canada-preview.jpg",
-                    "width": 1200,
-                    "height": 630
+                  {
+                    "@type": "FAQPage",
+                    "@id": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#faqpage",
+                    "mainEntity": faqs.map((faq, index) => ({
+                      "@type": "Question",
+                      "name": faq.question,
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.answer,
+                        "datePublished": safeFaqDates[index] || safeCurrentDate,
+                        "author": {
+                          "@type": "Person",
+                          "name": "RPN Resume Builder Canada Support Team"
+                        }
+                      },
+                      "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage"
+                    }))
                   },
-                  "breadcrumb": {
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
+                  {
+                    "@type": "HowTo",
+                    "name": "How to Create a Professional RPN Resume for Canadian Healthcare Jobs",
+                    "description": "Step-by-step guide to create an ATS-optimized Registered Practical Nurse resume for Canadian employers",
+                    "totalTime": "PT20M",
+                    "estimatedCost": {
+                      "@type": "MonetaryAmount",
+                      "currency": "CAD",
+                      "value": "0"
+                    },
+                    "step": [
                       {
-                        "@type": "ListItem",
+                        "@type": "HowToStep",
                         "position": 1,
-                        "name": "Home",
-                        "item": "https://professionalresumefree.com"
+                        "name": "Enter Canadian RPN Credentials",
+                        "text": "Add your RPN license number, provincial registration, and Canadian nursing education details with proper formatting for Canadian employers.",
+                        "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#credentials",
+                        "image": "https://professionalresumefree.com/images/step1-rpn-credentials.jpg"
                       },
                       {
-                        "@type": "ListItem",
+                        "@type": "HowToStep",
                         "position": 2,
-                        "name": "RPN Resume Builder Canada",
-                        "item": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
+                        "name": "Add Canadian Nursing Experience",
+                        "text": "Include your Canadian nursing experience with proper terminology for acute care, long-term care, community health, and other Canadian practice settings.",
+                        "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#experience",
+                        "image": "https://professionalresumefree.com/images/step2-canadian-experience.jpg"
+                      },
+                      {
+                        "@type": "HowToStep",
+                        "position": 3,
+                        "name": "Highlight Canadian RPN Skills",
+                        "text": "Add Canadian-specific RPN skills including medication administration, wound care, assessment skills, and CNO competencies required in Canadian healthcare facilities.",
+                        "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#skills",
+                        "image": "https://professionalresumefree.com/images/step3-canadian-skills.jpg"
+                      },
+                      {
+                        "@type": "HowToStep",
+                        "position": 4,
+                        "name": "Download Canadian RPN Resume",
+                        "text": "Export your professional Canadian RPN resume as PDF with proper Canadian healthcare formatting - completely free, no watermarks.",
+                        "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#download",
+                        "image": "https://professionalresumefree.com/images/step4-download-canada.jpg"
                       }
                     ]
                   },
-                  "mainEntity": {
-                    "@type": "SoftwareApplication",
-                    "name": "Registered Practical Nurse (RPN) Resume Builder - Canadian Edition",
-                    "applicationCategory": "BusinessApplication",
-                    "operatingSystem": "Any",
+                  {
+                    "@type": "Service",
+                    "serviceType": "Online RPN Resume Building Service for Canada",
+                    "provider": {
+                      "@type": "Organization",
+                      "name": "Professional RPN Resume Free - Canada",
+                      "url": "https://professionalresumefree.com",
+                      "contactPoint": {
+                        "@type": "ContactPoint",
+                        "telephone": "+1-800-555-9876",
+                        "contactType": "Customer Support",
+                        "availableLanguage": "en, fr"
+                      }
+                    },
+                    "areaServed": {
+                      "@type": "Country",
+                      "name": "Canada"
+                    },
+                    "hasOfferCatalog": {
+                      "@type": "OfferCatalog",
+                      "name": "Free RPN Resume Building Services for Canada",
+                      "itemListElement": [
+                        {
+                          "@type": "Offer",
+                          "itemOffered": {
+                            "@type": "Service",
+                            "name": "Canadian RPN Resume Templates"
+                          }
+                        },
+                        {
+                          "@type": "Offer",
+                          "itemOffered": {
+                            "@type": "Service",
+                            "name": "Provincial License Formatting"
+                          }
+                        }
+                      ]
+                    },
+                    "description": "Free ATS-friendly Registered Practical Nurse resume builder for Canadian healthcare professionals",
                     "offers": {
                       "@type": "Offer",
                       "price": "0",
-                      "priceCurrency": "CAD",
-                      "availability": "https://schema.org/InStock",
-                      "priceValidUntil": "2026-12-31"
-                    },
-                    "aggregateRating": {
-                      "@type": "AggregateRating",
-                      "ratingValue": 4.9,
-                      "ratingCount": 25365,
-                      "bestRating": 5,
-                      "worstRating": 1
-                    },
-                    "description": "Free online ATS-friendly Registered Practical Nurse resume builder for Canadian healthcare jobs. Includes Canadian terminology, provincial licensing formats, and CNO standards.",
-                    "featureList": [
-                      "Canadian RPN ATS-Optimized Templates",
-                      "Provincial Licensing Formats",
-                      "CNO Standards & Competencies",
-                      "Canadian Healthcare Terminology",
-                      "One-Click PDF Download",
-                      "Mobile-Friendly Editor",
-                      "No Sign Up Required",
-                      "Free Forever"
-                    ],
-                    "softwareVersion": "2026.1.0",
-                    "screenshot": "https://professionalresumefree.com/images/screenshot-rpn-resume-builder-canada.jpg",
-                    "applicationSuite": "Canadian Healthcare Career Tools",
-                    "countriesSupported": "Canada",
-                    "fileSize": "Web Application"
-                  }
-                },
-                {
-                  "@type": "FAQPage",
-                  "@id": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#faqpage",
-                  "mainEntity": faqs.map((faq, index) => ({
-                    "@type": "Question",
-                    "name": faq.question,
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": faq.answer,
-                      "datePublished": safeFaqDates[index] || safeCurrentDate,
-                      "author": {
-                        "@type": "Person",
-                        "name": "RPN Resume Builder Canada Support Team"
-                      }
-                    },
-                    "mainEntityOfPage": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#webpage"
-                  }))
-                },
-                {
-                  "@type": "HowTo",
-                  "name": "How to Create a Professional RPN Resume for Canadian Healthcare Jobs",
-                  "description": "Step-by-step guide to create an ATS-optimized Registered Practical Nurse resume for Canadian employers",
-                  "totalTime": "PT20M",
-                  "estimatedCost": {
-                    "@type": "MonetaryAmount",
-                    "currency": "CAD",
-                    "value": "0"
-                  },
-                  "step": [
-                    {
-                      "@type": "HowToStep",
-                      "position": 1,
-                      "name": "Enter Canadian RPN Credentials",
-                      "text": "Add your RPN license number, provincial registration, and Canadian nursing education details with proper formatting for Canadian employers.",
-                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#credentials",
-                      "image": "https://professionalresumefree.com/images/step1-rpn-credentials.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 2,
-                      "name": "Add Canadian Nursing Experience",
-                      "text": "Include your Canadian nursing experience with proper terminology for acute care, long-term care, community health, and other Canadian practice settings.",
-                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#experience",
-                      "image": "https://professionalresumefree.com/images/step2-canadian-experience.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 3,
-                      "name": "Highlight Canadian RPN Skills",
-                      "text": "Add Canadian-specific RPN skills including medication administration, wound care, assessment skills, and CNO competencies required in Canadian healthcare facilities.",
-                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#skills",
-                      "image": "https://professionalresumefree.com/images/step3-canadian-skills.jpg"
-                    },
-                    {
-                      "@type": "HowToStep",
-                      "position": 4,
-                      "name": "Download Canadian RPN Resume",
-                      "text": "Export your professional Canadian RPN resume as PDF with proper Canadian healthcare formatting - completely free, no watermarks.",
-                      "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder#download",
-                      "image": "https://professionalresumefree.com/images/step4-download-canada.jpg"
-                    }
-                  ]
-                },
-                {
-                  "@type": "Service",
-                  "serviceType": "Online RPN Resume Building Service for Canada",
-                  "provider": {
-                    "@type": "Organization",
-                    "name": "Professional RPN Resume Free - Canada",
-                    "url": "https://professionalresumefree.com",
-                    "contactPoint": {
-                      "@type": "ContactPoint",
-                      "telephone": "+1-800-555-9876",
-                      "contactType": "Customer Support",
-                      "availableLanguage": "en, fr"
+                      "priceCurrency": "CAD"
                     }
                   },
-                  "areaServed": {
-                    "@type": "Country",
-                    "name": "Canada"
+                  {
+                    "@type": "SpeakableSpecification",
+                    "cssSelector": [".cf-hero-title", ".cf-hero-subtitle", ".cf-faq-item h3"]
                   },
-                  "hasOfferCatalog": {
-                    "@type": "OfferCatalog",
-                    "name": "Free RPN Resume Building Services for Canada",
-                    "itemListElement": [
-                      {
-                        "@type": "Offer",
-                        "itemOffered": {
-                          "@type": "Service",
-                          "name": "Canadian RPN Resume Templates"
-                        }
-                      },
-                      {
-                        "@type": "Offer",
-                        "itemOffered": {
-                          "@type": "Service",
-                          "name": "Provincial License Formatting"
-                        }
-                      }
-                    ]
-                  },
-                  "description": "Free ATS-friendly Registered Practical Nurse resume builder for Canadian healthcare professionals",
-                  "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "CAD"
-                  }
-                },
-                {
-                  "@type": "SpeakableSpecification",
-                  "cssSelector": [".heroTitle", ".heroSubtitle", ".faqItem h3"]
-                },
-                {
-                  "@type": "ItemList",
-                  "itemListElement": testimonials.map((testimonial, index) => ({
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "item": {
-                      "@type": "Review",
-                      "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5
-                      },
-                      "author": {
-                        "@type": "Person",
-                        "name": testimonial.name
-                      },
-                      "reviewBody": testimonial.quote,
-                      "datePublished": safeReviewDates[index] || safeCurrentDate,
-                      "publisher": {
-                        "@type": "Organization",
-                        "name": "Professional RPN Resume Free - Canada"
-                      },
-                      "itemReviewed": {
-                        "@type": "SoftwareApplication",
-                        "name": "Registered Practical Nurse (RPN) Resume Builder - Canadian Edition",
-                        "applicationCategory": "BusinessApplication",
-                        "operatingSystem": "Any",
-                        "offers": {
-                          "@type": "Offer",
-                          "price": "0",
-                          "priceCurrency": "CAD"
+                  {
+                    "@type": "ItemList",
+                    "itemListElement": testimonials.map((testimonial, index) => ({
+                      "@type": "ListItem",
+                      "position": index + 1,
+                      "item": {
+                        "@type": "Review",
+                        "reviewRating": {
+                          "@type": "Rating",
+                          "ratingValue": 5,
+                          "bestRating": 5
                         },
-                        "description": "Free online ATS-friendly Registered Practical Nurse resume builder for Canadian healthcare jobs.",
-                        "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
+                        "author": {
+                          "@type": "Person",
+                          "name": testimonial.name
+                        },
+                        "reviewBody": testimonial.quote,
+                        "datePublished": safeReviewDates[index] || safeCurrentDate,
+                        "publisher": {
+                          "@type": "Organization",
+                          "name": "Professional RPN Resume Free - Canada"
+                        },
+                        "itemReviewed": {
+                          "@type": "SoftwareApplication",
+                          "name": "Registered Practical Nurse (RPN) Resume Builder - Canadian Edition",
+                          "applicationCategory": "BusinessApplication",
+                          "operatingSystem": "Any",
+                          "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "CAD"
+                          },
+                          "description": "Free online ATS-friendly Registered Practical Nurse resume builder for Canadian healthcare jobs.",
+                          "url": "https://professionalresumefree.com/ats-friendly-registered-practical-nurse-resume-builder"
+                        }
                       }
-                    }
-                  }))
-                }
-              ]
-            })
-          }}
-        />
-      </Head>
+                    }))
+                  }
+                ]
+              })
+            }}
+          />
+        </Head>
 
-      {/* Freshness Indicator */}
-      <div className={styles.freshnessIndicator} style={{ display: 'none' }}>
-        <meta name="build-timestamp" content={buildTimestamp} />
-        <meta name="content-freshness" content={freshnessIndicator} />
-      </div>
+        {/* Freshness Indicator */}
+        <div className="cf-freshness-indicator" style={{ display: 'none' }}>
+          <meta name="build-timestamp" content={buildTimestamp} />
+          <meta name="content-freshness" content={freshnessIndicator} />
+        </div>
 
-      {/* Breadcrumb Navigation */}
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-        <ol>
-          <li>
-            <Link href="/" className={styles.breadcrumbLink} prefetch={false}>
-              <FiHome className={styles.breadcrumbIcon} />
-              <span className={styles.breadcrumbText}>Home</span>
-            </Link>
-          </li>
-          <li className={styles.breadcrumbSeparator}>
-            <FiChevronRightIcon />
-          </li>
-          <li>
-            <Link href="/ats-friendly-registered-practical-nurse-resume-builder" className={styles.breadcrumbLink} prefetch={false}>
-              <span className={styles.breadcrumbText}>Canadian RPN Template</span>
-            </Link>
-          </li>
-        </ol>
-      </nav>
+        {/* Breadcrumb Navigation */}
+        <nav className="cf-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="https://professionalresumefree.com" className="cf-breadcrumb-link" prefetch={false}>
+                <FiHome className="cf-breadcrumb-icon"/>
+                <span className="cf-breadcrumb-text">Home</span>
+              </Link>
+            </li>
+            <li className="cf-breadcrumb-separator">
+              <FiChevronRightIcon/>
+            </li>
+            <li>
+              <Link href="/ats-friendly-registered-practical-nurse-resume-builder" className="cf-breadcrumb-link" prefetch={false}>
+                <span className="cf-breadcrumb-text">Canadian RPN Template</span>
+              </Link>
+            </li>
+          </ol>
+        </nav>
 
-      {/* Hero Section */}
-      <section className={styles.heroSection}>
-        <div className={styles.container}>
-          <div className={styles.heroContent}>
-            <div className={styles.trustBadge}>
-              <FiStar className={styles.starIcon} />
-              <span className={styles.trustBadgeText}>
+        {/* Hero Section */}
+        <section className="cf-hero">
+          <div className="cf-container">
+            <div className="cf-hero-content">
+              <div className="cf-trust-badge">
+                <FiStar className="cf-trust-icon"/>
+                <span className="cf-trust-text">
                  Best Free RPN Resume Builder Canada 2026
-              </span>
-            </div>
-            
-            {/* SINGLE H1 TAG */}
-            <h1 className={styles.heroTitle}>
-              Create Your Canadian RPN Resume 2026
-            </h1>
-            
-            <p className={styles.heroSubtitle}>
-              Create a <strong className={styles.heroHighlight}>professional, ATS-optimized RPN resume for Canadian healthcare jobs in minutes.</strong> Our Canadian RPN resume builder ensures your credentials meet provincial standards and get noticed by hospitals, LTC facilities, and healthcare employers across Canada.
-            </p>
-
-            <div className={styles.ctaButtons}>
-              <button
-                onClick={() => setActiveSection('personal')}
-                className={styles.primaryButton}
-                aria-label="Start building your free Canadian RPN resume now—no sign-up required"
-              >
-                <span className={styles.buttonText}>Start Building Your Canadian RPN Resume Now</span>
-                <FiArrowRight className={styles.buttonIcon} />
-                <div className={styles.buttonPulse}></div>
-              </button>
+                </span>
+              </div>
               
-              <button
-                onClick={generatePDF}
-                className={styles.secondaryButton}
-                aria-label="Download RPN resume as PDF"
-                disabled={isGeneratingPDF || !hasContent()}
-              >
-                <FiDownload className={styles.buttonIcon} />
-                <span className={styles.buttonText}>Download Canadian RPN Resume PDF</span>
-              </button>
-            </div>
+              <h1 className="cf-hero-title">
+                Create Your Canadian <span className="cf-gradient-text">RPN Resume 2026</span>
+              </h1>
+              
+              <p className="cf-hero-subtitle">
+                Create a <strong className="cf-hero-highlight">professional, ATS-optimized RPN resume for Canadian healthcare jobs in minutes.</strong> Our Canadian RPN resume builder ensures your credentials meet provincial standards and get noticed by hospitals, LTC facilities, and healthcare employers across Canada.
+              </p>
 
-            
-            
-
-            <div className={styles.medicalBadges}>
-              <div className={styles.badgeGrid}>
-                <span className={styles.badgeItem}>Ontario RPN Templates</span>
-                <span className={styles.badgeItem}>BC RPN Templates</span>
-                <span className={styles.badgeItem}>Alberta RPN Templates</span>
-                <span className={styles.badgeItem}>CNO Standards</span>
-                <span className={styles.badgeItem}>Canadian LTC Format</span>
-                <span className={styles.badgeItem}>Acute Care Canada</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <div className={styles.singleColumnLayout}>
-        {/* Preview Section */}
-        <div className={styles.previewSection}>
-          <div className={styles.previewHeader}>
-            <div className={styles.previewActions}>
-              <button onClick={() => setShowFullPreview(!showFullPreview)} className={styles.previewButton}>
-                <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
-              </button>
-              <button
-                onClick={generatePDF}
-                className={styles.downloadButton}
-                disabled={isGeneratingPDF || !hasContent()}
-              >
-                <FiDownload />
-                {isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}
-              </button>
-            </div>
-          </div>
-
-          <div className={`${styles.previewContainer} ${showFullPreview ? styles.fullPreview : ''}`}>
-            <div className={styles.resumePreviewCard}>
-              <div className={styles.previewContent}>
-                <div
-                  className={styles.resumePreview}
-                  ref={resumeRef}
+              <div className="cf-cta-buttons">
+                <button
+                  onClick={() => setActiveSection('personal')}
+                  className="cf-btn-primary"
+                  aria-label="Start building your free Canadian RPN resume now—no sign-up required"
                 >
-                  <CanadianRPNTemplate formData={formData} />
+                  <span className="cf-btn-text">Start Building Your Canadian RPN Resume Now</span>
+                  <FiArrowRight className="cf-btn-icon" />
+                  <div className="cf-btn-pulse"></div>
+                </button>
+                
+                <button
+                  onClick={generatePDF}
+                  className="cf-btn-secondary"
+                  aria-label="Download RPN resume as PDF"
+                  disabled={isGeneratingPDF || !hasContent()}
+                >
+                  <FiDownload className="cf-btn-icon" />
+                  <span className="cf-btn-text">Download Canadian RPN Resume PDF</span>
+                </button>
+              </div>
+
+              <div className="cf-hero-stats">
+                <div className="cf-stat-item">
+                  <span className="cf-stat-number">98%</span>
+                  <span className="cf-stat-label">ATS Pass Rate</span>
+                </div>
+                <div className="cf-stat-item">
+                  <span className="cf-stat-number">2M+</span>
+                  <span className="cf-stat-label">Canadian RPNs</span>
+                </div>
+              </div>
+
+              <div className="cf-industry-badges">
+                <div className="cf-badge-grid">
+                  <span className="cf-badge-item"><FiShield/> Ontario RPN</span>
+                  <span className="cf-badge-item"><FiMapPin/> BC RPN</span>
+                  <span className="cf-badge-item"><FiAward/> Alberta RPN</span>
+                  <span className="cf-badge-item"><FiFileText/> CNO Standards</span>
+                  <span className="cf-badge-item"><FiHome/> Canadian LTC</span>
+                  <span className="cf-badge-item"><FiActivity/> Acute Care</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Form Section */}
-        <div className={styles.formSection}>
-          <div className={styles.formNavigation}>
-            {[
-              { id: 'personal', label: 'RPN Credentials', icon: <FiShield /> },
-              { id: 'experience', label: 'Nursing Experience', icon: <FiHeart /> },
-              { id: 'education', label: 'Nursing Education', icon: <FiBook /> },
-              { id: 'skills', label: 'RPN Skills', icon: <FiActivity /> },
-              { id: 'licenses', label: 'Licenses', icon: <FiAward /> },
-              { id: 'settings', label: 'Font Settings', icon: <FiSettings /> },
-            ].map((item) => (
-              <button
-                key={item.id}
-                className={`${styles.navButton} ${activeSection === item.id ? styles.active : ''}`}
-                onClick={() => setActiveSection(item.id)}
-              >
-                {item.icon} <span>{item.label}</span>
-              </button>
-            ))}
+        {/* Main Content */}
+        <div className="cf-layout">
+          {/* Preview Section */}
+          <div className="cf-preview-section">
+            <div className="cf-preview-header">
+              <div className="cf-preview-actions">
+                <button onClick={() => setShowFullPreview(!showFullPreview)} className="cf-preview-btn">
+                  <FiEye /> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
+                </button>
+                <button
+                  onClick={generatePDF}
+                  className="cf-download-btn"
+                  disabled={isGeneratingPDF || !hasContent()}
+                >
+                  <FiDownload />
+                  {isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}
+                </button>
+              </div>
+            </div>
+
+            <div className={`cf-preview-container ${showFullPreview ? 'cf-full-preview' : ''}`}>
+              <div className="cf-resume-card">
+                <div className="cf-preview-content">
+                  <div
+                    className="cf-resume-preview"
+                    ref={resumeRef}
+                  >
+                    <CanadianRPNTemplate formData={formData} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className={styles.formContent}>
-            {/* Personal Section */}
-            {activeSection === 'personal' && (
-              <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiShield /> RPN Credentials & Contact Information</h3>
-                <div className={styles.formCard}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      Full Name (with RPN designation)*
-                      <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Jane Smith, RPN" required className={styles.formInput} />
-                    </label>
-                    <label className={styles.formLabel}>
-                      Email*
-                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="jane.smith@healthcare.ca" required className={styles.formInput} />
-                    </label>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      Phone
-                      <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className={styles.formInput} />
-                    </label>
-                    <label className={styles.formLabel}>
-                      City & Province*
-                      <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Toronto, ON" required className={styles.formInput} />
-                    </label>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      RPN License Number*
-                      <input type="text" name="rpnLicenseNumber" value={formData.rpnLicenseNumber} onChange={handleInputChange} placeholder="RN1234567" required className={styles.formInput} />
-                    </label>
-                    <label className={styles.formLabel}>
-                      College Registration*
-                      <input type="text" name="collegeRegistration" value={formData.collegeRegistration} onChange={handleInputChange} placeholder="College of Nurses of Ontario (CNO)" required className={styles.formInput} />
-                    </label>
-                  </div>
-                </div>
+          {/* Form Section */}
+          <div className="cf-form-section">
+            <div className="cf-form-nav">
+              {[
+                { id: 'personal', label: 'RPN Credentials', icon: <FiShield /> },
+                { id: 'experience', label: 'Nursing Exp', icon: <FiHeart /> },
+                { id: 'education', label: 'Nursing Edu', icon: <FiBook /> },
+                { id: 'skills', label: 'RPN Skills', icon: <FiActivity /> },
+                { id: 'licenses', label: 'Licenses', icon: <FiAward /> },
+                { id: 'settings', label: 'Font Settings', icon: <FiSettings /> },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  className={`cf-nav-btn ${activeSection === item.id ? 'cf-nav-btn-active' : ''}`}
+                  onClick={() => setActiveSection(item.id)}
+                >
+                  {item.icon} <span>{item.label}</span>
+                </button>
+              ))}
+            </div>
 
-                <div className={styles.formCard}>
-                  <label className={styles.formLabel}>
-                    Canadian RPN Professional Summary*
-                    <textarea
-                      name="summary"
-                      value={formData.summary}
-                      onChange={handleInputChange}
-                      placeholder="Compassionate and dedicated Registered Practical Nurse (RPN) with 5+ years of experience in Canadian long-term care and acute care settings. Proficient in medication administration, wound care, and patient assessment according to Canadian nursing standards. Demonstrated ability to provide safe, competent, and ethical nursing care in accordance with provincial regulations and CNO standards. Committed to patient-centered care and interdisciplinary collaboration in the Canadian healthcare system."
-                      required
-                      className={styles.formTextarea}
-                      rows="6"
-                    />
-                    <div className={styles.characterCount}>
-                      {formData.summary.length}/500 characters
+            <div className="cf-form-content">
+              {/* Personal Section */}
+              {activeSection === 'personal' && (
+                <div className="cf-form-section-content">
+                  <h3 className="cf-form-section-title"><FiShield /> RPN Credentials & Contact</h3>
+                  <div className="cf-form-card">
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">
+                        Full Name (with RPN designation)*
+                        <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Jane Smith, RPN" required className="cf-form-input" />
+                      </label>
+                      <label className="cf-form-label">
+                        Email*
+                        <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="jane.smith@healthcare.ca" required className="cf-form-input" />
+                      </label>
                     </div>
-                  </label>
-                </div>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">
+                        Phone
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className="cf-form-input" />
+                      </label>
+                      <label className="cf-form-label">
+                        City & Province*
+                        <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Toronto, ON" required className="cf-form-input" />
+                      </label>
+                    </div>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">
+                        RPN License Number*
+                        <input type="text" name="rpnLicenseNumber" value={formData.rpnLicenseNumber} onChange={handleInputChange} placeholder="RN1234567" required className="cf-form-input" />
+                      </label>
+                      <label className="cf-form-label">
+                        College Registration*
+                        <input type="text" name="collegeRegistration" value={formData.collegeRegistration} onChange={handleInputChange} placeholder="College of Nurses of Ontario (CNO)" required className="cf-form-input" />
+                      </label>
+                    </div>
+                  </div>
 
-                {/* Practice Settings */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiActivity /> Canadian RPN Practice Settings</h4>
-                  <p className={styles.sectionDescription}>Select your Canadian nursing practice settings</p>
-                  <div className={styles.skillsInput}>
-                    <select 
-                      value={currentPracticeSetting.name} 
-                      onChange={(e) => setCurrentPracticeSetting({ ...currentPracticeSetting, name: e.target.value })} 
-                      className={styles.formSelect}
-                    >
-                      <option value="">Select Practice Setting</option>
-                      <option value="Acute Care Hospital">Acute Care Hospital</option>
-                      <option value="Long-Term Care Facility">Long-Term Care Facility</option>
-                      <option value="Community Health">Community Health</option>
-                      <option value="Home Care">Home Care</option>
-                      <option value="Rehabilitation Center">Rehabilitation Center</option>
-                      <option value="Mental Health Facility">Mental Health Facility</option>
-                      <option value="Palliative Care">Palliative Care</option>
-                      <option value="Correctional Facility">Correctional Facility</option>
-                      <option value="Public Health">Public Health</option>
-                      <option value="Occupational Health">Occupational Health</option>
-                    </select>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addPracticeSetting} 
-                        className={styles.addButton} 
-                        disabled={!currentPracticeSetting.name.trim()}
+                  <div className="cf-form-card">
+                    <label className="cf-form-label">
+                      Canadian RPN Professional Summary*
+                      <textarea
+                        name="summary"
+                        value={formData.summary}
+                        onChange={handleInputChange}
+                        placeholder="Compassionate and dedicated Registered Practical Nurse (RPN) with 5+ years of experience in Canadian long-term care and acute care settings. Proficient in medication administration, wound care, and patient assessment according to Canadian nursing standards. Demonstrated ability to provide safe, competent, and ethical nursing care in accordance with provincial regulations and CNO standards. Committed to patient-centered care and interdisciplinary collaboration in the Canadian healthcare system."
+                        required
+                        className="cf-form-textarea"
+                        rows="6"
+                      />
+                      <div className="cf-char-count">
+                        {formData.summary.length}/500 characters
+                      </div>
+                    </label>
+                  </div>
+
+                  {/* Practice Settings */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title"><FiActivity /> Canadian RPN Practice Settings</h4>
+                    <p className="cf-section-desc">Select your Canadian nursing practice settings</p>
+                    <div className="cf-skills-input">
+                      <select 
+                        value={currentPracticeSetting.name} 
+                        onChange={(e) => setCurrentPracticeSetting({ ...currentPracticeSetting, name: e.target.value })} 
+                        className="cf-form-select"
                       >
-                        <FiPlus /> {currentPracticeSetting.isEditing ? 'Update' : 'Add Setting'}
-                      </button>
-                      {currentPracticeSetting.isEditing && (
+                        <option value="">Select Practice Setting</option>
+                        <option value="Acute Care Hospital">Acute Care Hospital</option>
+                        <option value="Long-Term Care Facility">Long-Term Care Facility</option>
+                        <option value="Community Health">Community Health</option>
+                        <option value="Home Care">Home Care</option>
+                        <option value="Rehabilitation Center">Rehabilitation Center</option>
+                        <option value="Mental Health Facility">Mental Health Facility</option>
+                        <option value="Palliative Care">Palliative Care</option>
+                        <option value="Public Health">Public Health</option>
+                      </select>
+                      <div className="cf-form-actions">
                         <button 
                           type="button" 
-                          onClick={() => setCurrentPracticeSetting(defaultPracticeSetting())} 
-                          className={styles.cancelButton}
+                          onClick={addPracticeSetting} 
+                          className="cf-add-btn" 
+                          disabled={!currentPracticeSetting.name.trim()}
                         >
-                          <FiX /> Cancel
+                          <FiPlus /> {currentPracticeSetting.isEditing ? 'Update' : 'Add Setting'}
                         </button>
+                        {currentPracticeSetting.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentPracticeSetting(defaultPracticeSetting())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.practiceSettings.length === 0 ? (
+                        <p className="cf-empty-msg">No practice settings added yet</p>
+                      ) : (
+                        formData.practiceSettings.map((setting, i) => (
+                          <div key={i} className="cf-list-item">
+                            <span>{setting.name}</span>
+                            <div className="cf-item-actions">
+                              <button onClick={() => editPracticeSetting(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                              <button onClick={() => deletePracticeSetting(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                            </div>
+                          </div>
+                        ))
                       )}
                     </div>
                   </div>
-                  <div className={styles.itemsList}>
-                    {formData.practiceSettings.length === 0 ? (
-                      <p className={styles.emptyMessage}>No practice settings added yet</p>
-                    ) : (
-                      formData.practiceSettings.map((setting, i) => (
-                        <div key={i} className={styles.listItem}>
-                          <span>{setting.name}</span>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editPracticeSetting(i)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deletePracticeSetting(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Nursing Experience Section */}
-            {activeSection === 'experience' && (
-              <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiHeart /> Canadian Nursing Experience</h3>
-                <p className={styles.sectionDescription}>List your Canadian nursing positions in reverse chronological order</p>
-                
-                <div className={styles.formCard}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      Position Title*
+              {/* Nursing Experience Section */}
+              {activeSection === 'experience' && (
+                <div className="cf-form-section-content">
+                  <h3 className="cf-form-section-title"><FiHeart /> Canadian Nursing Experience</h3>
+                  <p className="cf-section-desc">List your Canadian nursing positions in reverse chronological order</p>
+                  
+                  <div className="cf-form-card">
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">
+                        Position Title*
+                        <input 
+                          value={currentExperience.position} 
+                          onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} 
+                          placeholder="Registered Practical Nurse (RPN)" 
+                          required 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                      <label className="cf-form-label">
+                        Canadian Healthcare Facility*
+                        <input 
+                          value={currentExperience.employer} 
+                          onChange={(e) => setCurrentExperience({ ...currentExperience, employer: e.target.value })} 
+                          placeholder="Toronto General Hospital" 
+                          required 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                    </div>
+                    <label className="cf-form-label">
+                      Department / Unit
                       <input 
-                        value={currentExperience.position} 
-                        onChange={(e) => setCurrentExperience({ ...currentExperience, position: e.target.value })} 
-                        placeholder="Registered Practical Nurse (RPN)" 
-                        required 
-                        className={styles.formInput} 
+                        value={currentExperience.department} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} 
+                        placeholder="Medical-Surgical Unit" 
+                        className="cf-form-input" 
                       />
                     </label>
-                    <label className={styles.formLabel}>
-                      Canadian Healthcare Facility*
-                      <input 
-                        value={currentExperience.employer} 
-                        onChange={(e) => setCurrentExperience({ ...currentExperience, employer: e.target.value })} 
-                        placeholder="Toronto General Hospital" 
-                        required 
-                        className={styles.formInput} 
-                      />
-                    </label>
-                  </div>
-                  <label className={styles.formLabel}>
-                    Department / Unit / Specialty
-                    <input 
-                      value={currentExperience.department} 
-                      onChange={(e) => setCurrentExperience({ ...currentExperience, department: e.target.value })} 
-                      placeholder="Medical-Surgical Unit / Long-Term Care" 
-                      className={styles.formInput} 
-                    />
-                  </label>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      Start Date*
-                      <input 
-                        type="text" 
-                        placeholder="Month Year (e.g., January 2020)" 
-                        value={currentExperience.startDate} 
-                        onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} 
-                        required 
-                        className={styles.formInput} 
-                      />
-                    </label>
-                    <label className={styles.formLabel}>
-                      End Date
-                      <input 
-                        type="text" 
-                        placeholder="Month Year or Present" 
-                        value={currentExperience.endDate} 
-                        onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} 
-                        className={styles.formInput} 
-                      />
-                    </label>
-                  </div>
-                  <label className={styles.formLabel}>
-                    Key Canadian Nursing Responsibilities & Achievements*
-                    <textarea 
-                      value={currentExperience.description} 
-                      onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} 
-                      placeholder="• Provided comprehensive nursing care to 20+ residents in LTC facility according to Canadian standards
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">
+                        Start Date*
+                        <input 
+                          type="text" 
+                          placeholder="Month Year (e.g., January 2020)" 
+                          value={currentExperience.startDate} 
+                          onChange={(e) => setCurrentExperience({ ...currentExperience, startDate: e.target.value })} 
+                          required 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                      <label className="cf-form-label">
+                        End Date
+                        <input 
+                          type="text" 
+                          placeholder="Month Year or Present" 
+                          value={currentExperience.endDate} 
+                          onChange={(e) => setCurrentExperience({ ...currentExperience, endDate: e.target.value })} 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                    </div>
+                    <label className="cf-form-label">
+                      Key Canadian Nursing Responsibilities*
+                      <textarea 
+                        value={currentExperience.description} 
+                        onChange={(e) => setCurrentExperience({ ...currentExperience, description: e.target.value })} 
+                        placeholder="• Provided comprehensive nursing care to 20+ residents in LTC facility according to Canadian standards
 • Administered medications, treatments, and performed wound care following CNO guidelines
 • Conducted thorough patient assessments and documented in electronic health records (EMR)
 • Collaborated with interdisciplinary healthcare team including RNs, physicians, and allied health
 • Participated in quality improvement initiatives to enhance patient care delivery
 • Mentored nursing students and new RPN graduates in Canadian healthcare practices"
-                      required 
-                      className={styles.formTextarea} 
-                      rows="8" 
-                    />
-                    <div className={styles.characterCount}>
-                      {currentExperience.description.length}/2000 characters
-                    </div>
-                  </label>
-                  <div className={styles.formActions}>
-                    <button 
-                      type="button" 
-                      onClick={addExperience} 
-                      className={styles.addButton} 
-                      disabled={!currentExperience.position || !currentExperience.employer || !currentExperience.startDate}
-                    >
-                      <FiPlus /> {currentExperience.isEditing ? 'Update Nursing Experience' : 'Add Nursing Experience'}
-                    </button>
-                    {currentExperience.isEditing && (
-                      <button 
-                        type="button" 
-                        onClick={() => setCurrentExperience(defaultExperience())} 
-                        className={styles.cancelButton}
-                      >
-                        <FiX /> Cancel
-                      </button>
-                    )}
-                  </div>
-                </div>
-                
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Canadian Nursing Experience</h4>
-                  {formData.experience.length === 0 ? (
-                    <p className={styles.emptyMessage}>No nursing experience added yet</p>
-                  ) : (
-                    <div className={styles.itemsList}>
-                      {formData.experience.map((exp, i) => (
-                        <div key={i} className={styles.listItem}>
-                          <div className={styles.itemContent}>
-                            <div className={styles.itemHeader}>
-                              <strong className={styles.itemTitle}>{exp.position}</strong>
-                              <span className={styles.itemSubtitle}>at {exp.employer}</span>
-                            </div>
-                            <div className={styles.itemMeta}>
-                              <span>{exp.startDate} – {exp.endDate || 'Present'}</span>
-                              {exp.department && <span>{exp.department}</span>}
-                            </div>
-                            <div className={styles.itemDescription}>
-                              {exp.description.split('\n').filter(l => l.trim()).map((line, j) => (
-                                <p key={j} className={styles.bulletPoint}>• {line}</p>
-                              ))}
-                            </div>
-                          </div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editExperience(i)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteExperience(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Education Section */}
-            {activeSection === 'education' && (
-              <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiBook /> Canadian Nursing Education</h3>
-                <p className={styles.sectionDescription}>List your Canadian nursing education and training programs</p>
-                
-                <div className={styles.formCard}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      Canadian Institution*
-                      <input 
-                        value={currentEducation.institution} 
-                        onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} 
-                        placeholder="Seneca College School of Nursing" 
                         required 
-                        className={styles.formInput} 
+                        className="cf-form-textarea" 
+                        rows="8" 
                       />
+                      <div className="cf-char-count">
+                        {currentExperience.description.length}/2000 characters
+                      </div>
                     </label>
-                    <label className={styles.formLabel}>
-                      Nursing Diploma/Degree*
-                      <input 
-                        value={currentEducation.degree} 
-                        onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} 
-                        placeholder="Practical Nursing Diploma" 
-                        required 
-                        className={styles.formInput} 
-                      />
-                    </label>
-                  </div>
-                  <label className={styles.formLabel}>
-                    Program Specialization
-                    <input 
-                      value={currentEducation.program} 
-                      onChange={(e) => setCurrentEducation({ ...currentEducation, program: e.target.value })} 
-                      placeholder="Registered Practical Nursing Program" 
-                      className={styles.formInput} 
-                    />
-                  </label>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
-                      Start Date
-                      <input 
-                        type="text" 
-                        placeholder="Month Year" 
-                        value={currentEducation.startDate} 
-                        onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} 
-                        className={styles.formInput} 
-                      />
-                    </label>
-                    <label className={styles.formLabel}>
-                      End Date / Expected
-                      <input 
-                        type="text" 
-                        placeholder="Month Year" 
-                        value={currentEducation.endDate} 
-                        onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} 
-                        className={styles.formInput} 
-                      />
-                    </label>
-                  </div>
-                  <div className={styles.formActions}>
-                    <button 
-                      type="button" 
-                      onClick={addEducation} 
-                      className={styles.addButton} 
-                      disabled={!currentEducation.institution || !currentEducation.degree}
-                    >
-                      <FiPlus /> {currentEducation.isEditing ? 'Update Education' : 'Add Education'}
-                    </button>
-                    {currentEducation.isEditing && (
+                    <div className="cf-form-actions">
                       <button 
                         type="button" 
-                        onClick={() => setCurrentEducation(defaultEducation())} 
-                        className={styles.cancelButton}
+                        onClick={addExperience} 
+                        className="cf-add-btn" 
+                        disabled={!currentExperience.position || !currentExperience.employer || !currentExperience.startDate}
                       >
-                        <FiX /> Cancel
+                        <FiPlus /> {currentExperience.isEditing ? 'Update Nursing Experience' : 'Add Nursing Experience'}
                       </button>
-                    )}
-                  </div>
-                </div>
-                
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Your Canadian Nursing Education</h4>
-                  {formData.education.length === 0 ? (
-                    <p className={styles.emptyMessage}>No education added yet</p>
-                  ) : (
-                    <div className={styles.itemsList}>
-                      {formData.education.map((edu, i) => (
-                        <div key={i} className={styles.listItem}>
-                          <div className={styles.itemContent}>
-                            <div className={styles.itemHeader}>
-                              <strong className={styles.itemTitle}>{edu.degree}</strong>
-                              {edu.program && <span className={styles.itemSubtitle}> – {edu.program}</span>}
-                            </div>
-                            <div className={styles.itemMeta}>
-                              <span>{edu.institution}</span>
-                              <span>{edu.startDate} – {edu.endDate || 'Present'}</span>
-                            </div>
-                          </div>
-                          <div className={styles.itemActions}>
-                            <button onClick={() => editEducation(i)} className={styles.editButton}><FiEdit2 /></button>
-                            <button onClick={() => deleteEducation(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* RPN Skills Section */}
-            {activeSection === 'skills' && (
-              <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiActivity /> Canadian RPN Clinical Skills</h3>
-                
-                {/* Medication Administration Skills */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiDroplet /> Medication Administration Skills</h4>
-                  <p className={styles.sectionDescription}>Add your Canadian medication administration competencies</p>
-                  <div className={styles.skillsInput}>
-                    <select 
-                      value={currentMedicationSkill.name} 
-                      onChange={(e) => setCurrentMedicationSkill({ ...currentMedicationSkill, name: e.target.value })} 
-                      className={styles.formSelect}
-                    >
-                      <option value="">Select Medication Skill</option>
-                      <option value="Oral Medication Administration">Oral Medication Administration</option>
-                      <option value="Subcutaneous Injections">Subcutaneous Injections</option>
-                      <option value="Intramuscular Injections">Intramuscular Injections</option>
-                      <option value="Topical Medication Application">Topical Medication Application</option>
-                      <option value="Eye/Ear Drop Administration">Eye/Ear Drop Administration</option>
-                      <option value="Nebulizer Treatment Administration">Nebulizer Treatment Administration</option>
-                      <option value="Medication Reconciliation">Medication Reconciliation</option>
-                      <option value="Controlled Substance Administration">Controlled Substance Administration</option>
-                      <option value="PRN Medication Management">PRN Medication Management</option>
-                      <option value="Medication Storage & Handling">Medication Storage & Handling</option>
-                    </select>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addMedicationSkill} 
-                        className={styles.addButton} 
-                        disabled={!currentMedicationSkill.name.trim()}
-                      >
-                        <FiPlus /> {currentMedicationSkill.isEditing ? 'Update Skill' : 'Add Skill'}
-                      </button>
-                      {currentMedicationSkill.isEditing && (
+                      {currentExperience.isEditing && (
                         <button 
                           type="button" 
-                          onClick={() => setCurrentMedicationSkill(defaultMedicationSkill())} 
-                          className={styles.cancelButton}
+                          onClick={() => setCurrentExperience(defaultExperience())} 
+                          className="cf-cancel-btn"
                         >
                           <FiX /> Cancel
                         </button>
                       )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.medicationSkills.map((skill, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <span>{skill.name}</span>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editMedicationSkill(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteMedicationSkill(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.medicationSkills.length === 0 && <p className={styles.emptyMessage}>No medication skills added yet</p>}
-                  </div>
-                </div>
-
-                {/* Wound Care Skills */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiThermometer /> Wound Care & Clinical Procedures</h4>
-                  <p className={styles.sectionDescription}>Add your wound care and clinical procedure competencies</p>
-                  <div className={styles.skillsInput}>
-                    <select 
-                      value={currentWoundCareSkill.name} 
-                      onChange={(e) => setCurrentWoundCareSkill({ ...currentWoundCareSkill, name: e.target.value })} 
-                      className={styles.formSelect}
-                    >
-                      <option value="">Select Wound Care Skill</option>
-                      <option value="Wound Assessment & Documentation">Wound Assessment & Documentation</option>
-                      <option value="Dressing Changes (Sterile & Clean)">Dressing Changes (Sterile & Clean)</option>
-                      <option value="Pressure Injury Prevention & Management">Pressure Injury Prevention & Management</option>
-                      <option value="Wound Vacuum Therapy">Wound Vacuum Therapy</option>
-                      <option value="Staple/Suture Removal">Staple/Suture Removal</option>
-                      <option value="Diabetic Foot Care">Diabetic Foot Care</option>
-                      <option value="Tracheostomy Care">Tracheostomy Care</option>
-                      <option value="Ostomy Care">Ostomy Care</option>
-                      <option value="Catheter Insertion & Care">Catheter Insertion & Care</option>
-                      <option value="IV Therapy Management">IV Therapy Management</option>
-                    </select>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addWoundCareSkill} 
-                        className={styles.addButton} 
-                        disabled={!currentWoundCareSkill.name.trim()}
-                      >
-                        <FiPlus /> {currentWoundCareSkill.isEditing ? 'Update Skill' : 'Add Skill'}
-                      </button>
-                      {currentWoundCareSkill.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentWoundCareSkill(defaultWoundCareSkill())} 
-                          className={styles.cancelButton}
-                        >
-                          <FiX /> Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.woundCareSkills.map((skill, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <span>{skill.name}</span>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editWoundCareSkill(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteWoundCareSkill(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.woundCareSkills.length === 0 && <p className={styles.emptyMessage}>No wound care skills added yet</p>}
-                  </div>
-                </div>
-
-                {/* Clinical Specialties */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Clinical Specialties</h4>
-                  <p className={styles.sectionDescription}>List your nursing specialties and areas of expertise</p>
-                  <div className={styles.skillsInput}>
-                    <input 
-                      value={currentSpecialty.name} 
-                      onChange={(e) => setCurrentSpecialty({ ...currentSpecialty, name: e.target.value })} 
-                      placeholder="Geriatric Care, Palliative Care, Mental Health" 
-                      className={styles.formInput} 
-                    />
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addSpecialty} 
-                        className={styles.addButton} 
-                        disabled={!currentSpecialty.name.trim()}
-                      >
-                        <FiPlus /> {currentSpecialty.isEditing ? 'Update Specialty' : 'Add Specialty'}
-                      </button>
-                      {currentSpecialty.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentSpecialty(defaultSpecialty())} 
-                          className={styles.cancelButton}
-                        >
-                          <FiX /> Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.specialties.map((s, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <span>{s.name}</span>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editSpecialty(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteSpecialty(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.specialties.length === 0 && <p className={styles.emptyMessage}>No specialties added yet</p>}
-                  </div>
-                </div>
-
-                {/* Nursing Procedures */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Nursing Procedures</h4>
-                  <p className={styles.sectionDescription}>List additional nursing procedures and technical skills</p>
-                  <div className={styles.skillsInput}>
-                    <input 
-                      value={currentProcedure.name} 
-                      onChange={(e) => setCurrentProcedure({ ...currentProcedure, name: e.target.value })} 
-                      placeholder="Vital Signs Monitoring, Blood Glucose Testing, ECG" 
-                      className={styles.formInput} 
-                    />
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addProcedure} 
-                        className={styles.addButton} 
-                        disabled={!currentProcedure.name.trim()}
-                      >
-                        <FiPlus /> {currentProcedure.isEditing ? 'Update Skill' : 'Add Skill'}
-                      </button>
-                      {currentProcedure.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentProcedure(defaultProcedure())} 
-                          className={styles.cancelButton}
-                        >
-                          <FiX /> Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.procedures.map((p, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <span>{p.name}</span>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editProcedure(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteProcedure(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.procedures.length === 0 && <p className={styles.emptyMessage}>No procedures added yet</p>}
-                  </div>
-                </div>
-
-                {/* Languages */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Languages</h4>
-                  <p className={styles.sectionDescription}>List languages you speak (especially valuable in multicultural Canada)</p>
-                  <div className={styles.skillsInput}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        Language*
-                        <input 
-                          value={currentLanguage.name} 
-                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} 
-                          placeholder="French, Punjabi, Mandarin" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                      <label className={styles.formLabel}>
-                        Proficiency Level
-                        <input 
-                          value={currentLanguage.proficiency} 
-                          onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} 
-                          placeholder="Fluent, Conversational, Basic" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                    </div>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addLanguage} 
-                        className={styles.addButton} 
-                        disabled={!currentLanguage.name.trim()}
-                      >
-                        <FiPlus /> {currentLanguage.isEditing ? 'Update Language' : 'Add Language'}
-                      </button>
-                      {currentLanguage.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentLanguage(defaultLanguage())} 
-                          className={styles.cancelButton}
-                        >
-                          <FiX /> Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.languages.map((l, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <div>
-                          {l.name}{l.proficiency && ` (${l.proficiency})`}
-                        </div>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editLanguage(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteLanguage(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.languages.length === 0 && <p className={styles.emptyMessage}>No languages added yet</p>}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Licenses Section */}
-            {activeSection === 'licenses' && (
-              <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiAward /> Canadian Licenses & Certifications</h3>
-                
-                {/* Licenses & Registrations */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiShield /> Professional Licenses & Registrations</h4>
-                  <p className={styles.sectionDescription}>Add your Canadian professional licenses and registrations</p>
-                  <div className={styles.skillsInput}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        License/Registration Name*
-                        <input 
-                          value={currentLicense.name} 
-                          onChange={(e) => setCurrentLicense({ ...currentLicense, name: e.target.value })} 
-                          placeholder="Registered Practical Nurse (RPN) License" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                      <label className={styles.formLabel}>
-                        Issuing Authority (Canadian)
-                        <input 
-                          value={currentLicense.issuingAuthority} 
-                          onChange={(e) => setCurrentLicense({ ...currentLicense, issuingAuthority: e.target.value })} 
-                          placeholder="College of Nurses of Ontario (CNO)" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        License Number
-                        <input 
-                          value={currentLicense.licenseNumber} 
-                          onChange={(e) => setCurrentLicense({ ...currentLicense, licenseNumber: e.target.value })} 
-                          placeholder="RN1234567" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                      <label className={styles.formLabel}>
-                        Expiry Date
-                        <input 
-                          value={currentLicense.expiryDate} 
-                          onChange={(e) => setCurrentLicense({ ...currentLicense, expiryDate: e.target.value })} 
-                          placeholder="Month Year" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                    </div>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addLicense} 
-                        className={styles.addButton} 
-                        disabled={!currentLicense.name.trim()}
-                      >
-                        <FiPlus /> {currentLicense.isEditing ? 'Update License' : 'Add License'}
-                      </button>
-                      {currentLicense.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentLicense(defaultLicense())} 
-                          className={styles.cancelButton}
-                        >
-                          <FiX /> Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.licenses.map((l, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <div>
-                          <strong>{l.name}</strong>
-                          {l.issuingAuthority && ` – ${l.issuingAuthority}`}
-                          {l.licenseNumber && ` (#${l.licenseNumber})`}
-                          {l.expiryDate && ` – Expires: ${l.expiryDate}`}
-                        </div>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editLicense(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteLicense(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.licenses.length === 0 && <p className={styles.emptyMessage}>No licenses added yet</p>}
-                  </div>
-                </div>
-
-                {/* Canadian Certifications */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}><FiAward /> Canadian Nursing Certifications</h4>
-                  <p className={styles.sectionDescription}>Add your Canadian nursing certifications and training</p>
-                  <div className={styles.skillsInput}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        Certification Name*
-                        <input 
-                          value={currentCanadianCertification.name} 
-                          onChange={(e) => setCurrentCanadianCertification({ ...currentCanadianCertification, name: e.target.value })} 
-                          placeholder="Basic Life Support (BLS)" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                      <label className={styles.formLabel}>
-                        Issuing Organization (Canadian)
-                        <input 
-                          value={currentCanadianCertification.issuingAuthority} 
-                          onChange={(e) => setCurrentCanadianCertification({ ...currentCanadianCertification, issuingAuthority: e.target.value })} 
-                          placeholder="Heart & Stroke Foundation of Canada" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        Expiry Date
-                        <input 
-                          value={currentCanadianCertification.expiryDate} 
-                          onChange={(e) => setCurrentCanadianCertification({ ...currentCanadianCertification, expiryDate: e.target.value })} 
-                          placeholder="Month Year" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                    </div>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addCanadianCertification} 
-                        className={styles.addButton} 
-                        disabled={!currentCanadianCertification.name.trim()}
-                      >
-                        <FiPlus /> {currentCanadianCertification.isEditing ? 'Update Certification' : 'Add Certification'}
-                      </button>
-                      {currentCanadianCertification.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentCanadianCertification(defaultCanadianCertification())} 
-                          className={styles.cancelButton}
-                        >
-                          <FiX /> Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.canadianCertifications.map((cert, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <div>
-                          <strong>{cert.name}</strong>
-                          {cert.issuingAuthority && ` – ${cert.issuingAuthority}`}
-                          {cert.expiryDate && ` – Expires: ${cert.expiryDate}`}
-                        </div>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editCanadianCertification(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteCanadianCertification(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.canadianCertifications.length === 0 && <p className={styles.emptyMessage}>No certifications added yet</p>}
-                  </div>
-                </div>
-
-                {/* Professional Affiliations */}
-                <div className={styles.formCard}>
-                  <h4 className={styles.subSectionTitle}>Professional Affiliations</h4>
-                  <p className={styles.sectionDescription}>Add your Canadian professional nursing organization memberships</p>
-                  <div className={styles.skillsInput}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>
-                        Organization*
-                        <input 
-                          value={currentAffiliation.organization} 
-                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, organization: e.target.value })} 
-                          placeholder="Registered Practical Nurses Association of Ontario (RPNAO)" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                      <label className={styles.formLabel}>
-                        Role / Membership Type
-                        <input 
-                          value={currentAffiliation.role} 
-                          onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, role: e.target.value })} 
-                          placeholder="Active Member, Committee Member" 
-                          className={styles.formInput} 
-                        />
-                      </label>
-                    </div>
-                    <div className={styles.formActions}>
-                      <button 
-                        type="button" 
-                        onClick={addAffiliation} 
-                        className={styles.addButton} 
-                        disabled={!currentAffiliation.organization.trim()}
-                      >
-                        <FiPlus /> {currentAffiliation.isEditing ? 'Update Affiliation' : 'Add Affiliation'}
-                      </button>
-                      {currentAffiliation.isEditing && (
-                        <button 
-                          type="button" 
-                          onClick={() => setCurrentAffiliation(defaultAffiliation())} 
-                          className={styles.cancelButton}
-                        >
-                          <FiX /> Cancel
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.itemsList}>
-                    {formData.affiliations.map((a, i) => (
-                      <div key={i} className={styles.listItem}>
-                        <div>
-                          <strong>{a.organization}</strong>
-                          {a.role && ` – ${a.role}`}
-                        </div>
-                        <div className={styles.itemActions}>
-                          <button onClick={() => editAffiliation(i)} className={styles.editButton}><FiEdit2 /></button>
-                          <button onClick={() => deleteAffiliation(i)} className={styles.deleteButton}><FiTrash2 /></button>
-                        </div>
-                      </div>
-                    ))}
-                    {formData.affiliations.length === 0 && <p className={styles.emptyMessage}>No affiliations added yet</p>}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Font Settings Section */}
-            {activeSection === 'settings' && (
-              <div className={styles.formSectionContent}>
-                <h3 className={styles.sectionTitle}><FiSettings /> Font Size Settings</h3>
-                <p className={styles.sectionDescription}>Customize font sizes for your RPN resume PDF. All sizes are in points (pt).</p>
-                
-                <div className={styles.formCard}>
-                  <div className={styles.fontSizeGrid}>
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Name</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.name}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="8" 
-                        max="24" 
-                        value={fontSizes.name}
-                        onChange={(e) => handleFontSizeChange('name', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Section Titles</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.sectionTitle}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="18" 
-                        value={fontSizes.sectionTitle}
-                        onChange={(e) => handleFontSizeChange('sectionTitle', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Job Titles</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.jobTitle}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="16" 
-                        value={fontSizes.jobTitle}
-                        onChange={(e) => handleFontSizeChange('jobTitle', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Degrees</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.degree}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="16" 
-                        value={fontSizes.degree}
-                        onChange={(e) => handleFontSizeChange('degree', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Institution Names</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.institution}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="14" 
-                        value={fontSizes.institution}
-                        onChange={(e) => handleFontSizeChange('institution', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Institution Dates</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.institutionDate}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="4" 
-                        max="12" 
-                        value={fontSizes.institutionDate}
-                        onChange={(e) => handleFontSizeChange('institutionDate', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Regular Text</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.regularText}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="14" 
-                        value={fontSizes.regularText}
-                        onChange={(e) => handleFontSizeChange('regularText', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Bullet Points</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.bulletText}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="14" 
-                        value={fontSizes.bulletText}
-                        onChange={(e) => handleFontSizeChange('bulletText', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-                    
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Contact Info</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.contactInfo}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="12" 
-                        value={fontSizes.contactInfo}
-                        onChange={(e) => handleFontSizeChange('contactInfo', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Skills Text</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.skillText}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="12" 
-                        value={fontSizes.skillText}
-                        onChange={(e) => handleFontSizeChange('skillText', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>License Text</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.licenseText}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="14" 
-                        value={fontSizes.licenseText}
-                        onChange={(e) => handleFontSizeChange('licenseText', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
-                    </div>
-
-                    <div className={styles.fontSizeControl}>
-                      <label className={styles.fontSizeLabel}>
-                        <span>Certification Text</span>
-                        <span className={styles.fontSizeValue}>{fontSizes.certificationText}pt</span>
-                      </label>
-                      <input 
-                        type="range" 
-                        min="6" 
-                        max="14" 
-                        value={fontSizes.certificationText}
-                        onChange={(e) => handleFontSizeChange('certificationText', e.target.value)}
-                        className={styles.fontSizeSlider}
-                      />
                     </div>
                   </div>
                   
-                  <button 
-                    type="button" 
-                    onClick={resetFontSizes}
-                    className={styles.resetButton}
-                  >
-                    Reset to Default Font Sizes
-                  </button>
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Your Canadian Nursing Experience</h4>
+                    {formData.experience.length === 0 ? (
+                      <p className="cf-empty-msg">No nursing experience added yet</p>
+                    ) : (
+                      <div className="cf-items-list">
+                        {formData.experience.map((exp, i) => (
+                          <div key={i} className="cf-list-item">
+                            <div className="cf-item-content">
+                              <div className="cf-item-header">
+                                <strong className="cf-item-title">{exp.position}</strong>
+                                <span className="cf-item-subtitle">at {exp.employer}</span>
+                              </div>
+                              <div className="cf-item-meta">
+                                <span>{exp.startDate} – {exp.endDate || 'Present'}</span>
+                                {exp.department && <span>{exp.department}</span>}
+                              </div>
+                              <div className="cf-item-desc">
+                                {exp.description.split('\n').filter(l => l.trim()).map((line, j) => (
+                                  <p key={j} className="cf-bullet-point">• {line}</p>
+                                ))}
+                              </div>
+                            </div>
+                            <div className="cf-item-actions">
+                              <button onClick={() => editExperience(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                              <button onClick={() => deleteExperience(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Education Section */}
+              {activeSection === 'education' && (
+                <div className="cf-form-section-content">
+                  <h3 className="cf-form-section-title"><FiBook /> Canadian Nursing Education</h3>
+                  <p className="cf-section-desc">List your Canadian nursing education and training</p>
+                  
+                  <div className="cf-form-card">
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">
+                        Canadian Institution*
+                        <input 
+                          value={currentEducation.institution} 
+                          onChange={(e) => setCurrentEducation({ ...currentEducation, institution: e.target.value })} 
+                          placeholder="Seneca College School of Nursing" 
+                          required 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                      <label className="cf-form-label">
+                        Nursing Diploma/Degree*
+                        <input 
+                          value={currentEducation.degree} 
+                          onChange={(e) => setCurrentEducation({ ...currentEducation, degree: e.target.value })} 
+                          placeholder="Practical Nursing Diploma" 
+                          required 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                    </div>
+                    <label className="cf-form-label">
+                      Program Specialization
+                      <input 
+                        value={currentEducation.program} 
+                        onChange={(e) => setCurrentEducation({ ...currentEducation, program: e.target.value })} 
+                        placeholder="Registered Practical Nursing Program" 
+                        className="cf-form-input" 
+                      />
+                    </label>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">
+                        Start Date
+                        <input 
+                          type="text" 
+                          placeholder="Month Year" 
+                          value={currentEducation.startDate} 
+                          onChange={(e) => setCurrentEducation({ ...currentEducation, startDate: e.target.value })} 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                      <label className="cf-form-label">
+                        End Date / Expected
+                        <input 
+                          type="text" 
+                          placeholder="Month Year" 
+                          value={currentEducation.endDate} 
+                          onChange={(e) => setCurrentEducation({ ...currentEducation, endDate: e.target.value })} 
+                          className="cf-form-input" 
+                        />
+                      </label>
+                    </div>
+                    <div className="cf-form-actions">
+                      <button 
+                        type="button" 
+                        onClick={addEducation} 
+                        className="cf-add-btn" 
+                        disabled={!currentEducation.institution || !currentEducation.degree}
+                      >
+                        <FiPlus /> {currentEducation.isEditing ? 'Update Education' : 'Add Education'}
+                      </button>
+                      {currentEducation.isEditing && (
+                        <button 
+                          type="button" 
+                          onClick={() => setCurrentEducation(defaultEducation())} 
+                          className="cf-cancel-btn"
+                        >
+                          <FiX /> Cancel
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Your Canadian Nursing Education</h4>
+                    {formData.education.length === 0 ? (
+                      <p className="cf-empty-msg">No education added yet</p>
+                    ) : (
+                      <div className="cf-items-list">
+                        {formData.education.map((edu, i) => (
+                          <div key={i} className="cf-list-item">
+                            <div className="cf-item-content">
+                              <div className="cf-item-header">
+                                <strong className="cf-item-title">{edu.degree}</strong>
+                                {edu.program && <span className="cf-item-subtitle"> – {edu.program}</span>}
+                              </div>
+                              <div className="cf-item-meta">
+                                <span>{edu.institution}</span>
+                                <span>{edu.startDate} – {edu.endDate || 'Present'}</span>
+                              </div>
+                            </div>
+                            <div className="cf-item-actions">
+                              <button onClick={() => editEducation(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                              <button onClick={() => deleteEducation(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* RPN Skills Section */}
+              {activeSection === 'skills' && (
+                <div className="cf-form-section-content">
+                  <h3 className="cf-form-section-title"><FiActivity /> Canadian RPN Clinical Skills</h3>
+                  
+                  {/* Medication Administration Skills */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title"><FiDroplet /> Medication Administration</h4>
+                    <p className="cf-section-desc">Add your Canadian medication competencies</p>
+                    <div className="cf-skills-input">
+                      <select 
+                        value={currentMedicationSkill.name} 
+                        onChange={(e) => setCurrentMedicationSkill({ ...currentMedicationSkill, name: e.target.value })} 
+                        className="cf-form-select"
+                      >
+                        <option value="">Select Medication Skill</option>
+                        <option value="Oral Medication Administration">Oral Medication Administration</option>
+                        <option value="Subcutaneous Injections">Subcutaneous Injections</option>
+                        <option value="Intramuscular Injections">Intramuscular Injections</option>
+                        <option value="Topical Medication Application">Topical Medication Application</option>
+                        <option value="Eye/Ear Drop Administration">Eye/Ear Drop Administration</option>
+                        <option value="Nebulizer Treatment Administration">Nebulizer Treatment</option>
+                        <option value="Medication Reconciliation">Medication Reconciliation</option>
+                        <option value="Controlled Substance Administration">Controlled Substance Administration</option>
+                      </select>
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addMedicationSkill} 
+                          className="cf-add-btn" 
+                          disabled={!currentMedicationSkill.name.trim()}
+                        >
+                          <FiPlus /> {currentMedicationSkill.isEditing ? 'Update Skill' : 'Add Skill'}
+                        </button>
+                        {currentMedicationSkill.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentMedicationSkill(defaultMedicationSkill())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.medicationSkills.map((skill, i) => (
+                        <div key={i} className="cf-list-item">
+                          <span>{skill.name}</span>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editMedicationSkill(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteMedicationSkill(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.medicationSkills.length === 0 && <p className="cf-empty-msg">No medication skills added yet</p>}
+                    </div>
+                  </div>
+
+                  {/* Wound Care Skills */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title"><FiThermometer /> Wound Care & Clinical Procedures</h4>
+                    <p className="cf-section-desc">Add your wound care competencies</p>
+                    <div className="cf-skills-input">
+                      <select 
+                        value={currentWoundCareSkill.name} 
+                        onChange={(e) => setCurrentWoundCareSkill({ ...currentWoundCareSkill, name: e.target.value })} 
+                        className="cf-form-select"
+                      >
+                        <option value="">Select Wound Care Skill</option>
+                        <option value="Wound Assessment & Documentation">Wound Assessment & Documentation</option>
+                        <option value="Dressing Changes (Sterile & Clean)">Dressing Changes</option>
+                        <option value="Pressure Injury Prevention & Management">Pressure Injury Prevention</option>
+                        <option value="Wound Vacuum Therapy">Wound Vacuum Therapy</option>
+                        <option value="Staple/Suture Removal">Staple/Suture Removal</option>
+                        <option value="Diabetic Foot Care">Diabetic Foot Care</option>
+                        <option value="Tracheostomy Care">Tracheostomy Care</option>
+                        <option value="Ostomy Care">Ostomy Care</option>
+                        <option value="Catheter Insertion & Care">Catheter Insertion & Care</option>
+                        <option value="IV Therapy Management">IV Therapy Management</option>
+                      </select>
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addWoundCareSkill} 
+                          className="cf-add-btn" 
+                          disabled={!currentWoundCareSkill.name.trim()}
+                        >
+                          <FiPlus /> {currentWoundCareSkill.isEditing ? 'Update Skill' : 'Add Skill'}
+                        </button>
+                        {currentWoundCareSkill.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentWoundCareSkill(defaultWoundCareSkill())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.woundCareSkills.map((skill, i) => (
+                        <div key={i} className="cf-list-item">
+                          <span>{skill.name}</span>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editWoundCareSkill(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteWoundCareSkill(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.woundCareSkills.length === 0 && <p className="cf-empty-msg">No wound care skills added yet</p>}
+                    </div>
+                  </div>
+
+                  {/* Clinical Specialties */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Clinical Specialties</h4>
+                    <p className="cf-section-desc">List your nursing specialties</p>
+                    <div className="cf-skills-input">
+                      <input 
+                        value={currentSpecialty.name} 
+                        onChange={(e) => setCurrentSpecialty({ ...currentSpecialty, name: e.target.value })} 
+                        placeholder="Geriatric Care, Palliative Care" 
+                        className="cf-form-input" 
+                      />
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addSpecialty} 
+                          className="cf-add-btn" 
+                          disabled={!currentSpecialty.name.trim()}
+                        >
+                          <FiPlus /> {currentSpecialty.isEditing ? 'Update Specialty' : 'Add Specialty'}
+                        </button>
+                        {currentSpecialty.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentSpecialty(defaultSpecialty())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.specialties.map((s, i) => (
+                        <div key={i} className="cf-list-item">
+                          <span>{s.name}</span>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editSpecialty(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteSpecialty(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.specialties.length === 0 && <p className="cf-empty-msg">No specialties added yet</p>}
+                    </div>
+                  </div>
+
+                  {/* Nursing Procedures */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Nursing Procedures</h4>
+                    <p className="cf-section-desc">List additional nursing procedures</p>
+                    <div className="cf-skills-input">
+                      <input 
+                        value={currentProcedure.name} 
+                        onChange={(e) => setCurrentProcedure({ ...currentProcedure, name: e.target.value })} 
+                        placeholder="Vital Signs, Blood Glucose, ECG" 
+                        className="cf-form-input" 
+                      />
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addProcedure} 
+                          className="cf-add-btn" 
+                          disabled={!currentProcedure.name.trim()}
+                        >
+                          <FiPlus /> {currentProcedure.isEditing ? 'Update Skill' : 'Add Procedure'}
+                        </button>
+                        {currentProcedure.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentProcedure(defaultProcedure())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.procedures.map((p, i) => (
+                        <div key={i} className="cf-list-item">
+                          <span>{p.name}</span>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editProcedure(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteProcedure(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.procedures.length === 0 && <p className="cf-empty-msg">No procedures added yet</p>}
+                    </div>
+                  </div>
+
+                  {/* Languages */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Languages</h4>
+                    <p className="cf-section-desc">List languages (valuable in multicultural Canada)</p>
+                    <div className="cf-skills-input">
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">
+                          Language*
+                          <input 
+                            value={currentLanguage.name} 
+                            onChange={(e) => setCurrentLanguage({ ...currentLanguage, name: e.target.value })} 
+                            placeholder="French, Punjabi" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                        <label className="cf-form-label">
+                          Proficiency Level
+                          <input 
+                            value={currentLanguage.proficiency} 
+                            onChange={(e) => setCurrentLanguage({ ...currentLanguage, proficiency: e.target.value })} 
+                            placeholder="Fluent" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                      </div>
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addLanguage} 
+                          className="cf-add-btn" 
+                          disabled={!currentLanguage.name.trim()}
+                        >
+                          <FiPlus /> {currentLanguage.isEditing ? 'Update Language' : 'Add Language'}
+                        </button>
+                        {currentLanguage.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentLanguage(defaultLanguage())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.languages.map((l, i) => (
+                        <div key={i} className="cf-list-item">
+                          <div>
+                            {l.name}{l.proficiency && ` (${l.proficiency})`}
+                          </div>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editLanguage(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteLanguage(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.languages.length === 0 && <p className="cf-empty-msg">No languages added yet</p>}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Licenses Section */}
+              {activeSection === 'licenses' && (
+                <div className="cf-form-section-content">
+                  <h3 className="cf-form-section-title"><FiAward /> Canadian Licenses & Certifications</h3>
+                  
+                  {/* Licenses & Registrations */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title"><FiShield /> Professional Licenses</h4>
+                    <p className="cf-section-desc">Add your Canadian professional licenses</p>
+                    <div className="cf-skills-input">
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">
+                          License Name*
+                          <input 
+                            value={currentLicense.name} 
+                            onChange={(e) => setCurrentLicense({ ...currentLicense, name: e.target.value })} 
+                            placeholder="Registered Practical Nurse (RPN)" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                        <label className="cf-form-label">
+                          Issuing Authority (Canadian)
+                          <input 
+                            value={currentLicense.issuingAuthority} 
+                            onChange={(e) => setCurrentLicense({ ...currentLicense, issuingAuthority: e.target.value })} 
+                            placeholder="College of Nurses of Ontario (CNO)" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                      </div>
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">
+                          License Number
+                          <input 
+                            value={currentLicense.licenseNumber} 
+                            onChange={(e) => setCurrentLicense({ ...currentLicense, licenseNumber: e.target.value })} 
+                            placeholder="RN1234567" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                        <label className="cf-form-label">
+                          Expiry Date
+                          <input 
+                            value={currentLicense.expiryDate} 
+                            onChange={(e) => setCurrentLicense({ ...currentLicense, expiryDate: e.target.value })} 
+                            placeholder="Month Year" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                      </div>
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addLicense} 
+                          className="cf-add-btn" 
+                          disabled={!currentLicense.name.trim()}
+                        >
+                          <FiPlus /> {currentLicense.isEditing ? 'Update License' : 'Add License'}
+                        </button>
+                        {currentLicense.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentLicense(defaultLicense())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.licenses.map((l, i) => (
+                        <div key={i} className="cf-list-item">
+                          <div>
+                            <strong>{l.name}</strong>
+                            {l.issuingAuthority && ` – ${l.issuingAuthority}`}
+                            {l.licenseNumber && ` (#${l.licenseNumber})`}
+                            {l.expiryDate && ` – Expires: ${l.expiryDate}`}
+                          </div>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editLicense(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteLicense(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.licenses.length === 0 && <p className="cf-empty-msg">No licenses added yet</p>}
+                    </div>
+                  </div>
+
+                  {/* Canadian Certifications */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title"><FiAward /> Canadian Nursing Certifications</h4>
+                    <p className="cf-section-desc">Add your Canadian nursing certifications</p>
+                    <div className="cf-skills-input">
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">
+                          Certification Name*
+                          <input 
+                            value={currentCanadianCertification.name} 
+                            onChange={(e) => setCurrentCanadianCertification({ ...currentCanadianCertification, name: e.target.value })} 
+                            placeholder="Basic Life Support (BLS)" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                        <label className="cf-form-label">
+                          Issuing Organization (Canadian)
+                          <input 
+                            value={currentCanadianCertification.issuingAuthority} 
+                            onChange={(e) => setCurrentCanadianCertification({ ...currentCanadianCertification, issuingAuthority: e.target.value })} 
+                            placeholder="Heart & Stroke Foundation" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                      </div>
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">
+                          Expiry Date
+                          <input 
+                            value={currentCanadianCertification.expiryDate} 
+                            onChange={(e) => setCurrentCanadianCertification({ ...currentCanadianCertification, expiryDate: e.target.value })} 
+                            placeholder="Month Year" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                      </div>
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addCanadianCertification} 
+                          className="cf-add-btn" 
+                          disabled={!currentCanadianCertification.name.trim()}
+                        >
+                          <FiPlus /> {currentCanadianCertification.isEditing ? 'Update Certification' : 'Add Certification'}
+                        </button>
+                        {currentCanadianCertification.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentCanadianCertification(defaultCanadianCertification())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.canadianCertifications.map((cert, i) => (
+                        <div key={i} className="cf-list-item">
+                          <div>
+                            <strong>{cert.name}</strong>
+                            {cert.issuingAuthority && ` – ${cert.issuingAuthority}`}
+                            {cert.expiryDate && ` – Expires: ${cert.expiryDate}`}
+                          </div>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editCanadianCertification(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteCanadianCertification(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.canadianCertifications.length === 0 && <p className="cf-empty-msg">No certifications added yet</p>}
+                    </div>
+                  </div>
+
+                  {/* Professional Affiliations */}
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Professional Affiliations</h4>
+                    <p className="cf-section-desc">Add your Canadian nursing organization memberships</p>
+                    <div className="cf-skills-input">
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">
+                          Organization*
+                          <input 
+                            value={currentAffiliation.organization} 
+                            onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, organization: e.target.value })} 
+                            placeholder="RPNAO" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                        <label className="cf-form-label">
+                          Role / Membership Type
+                          <input 
+                            value={currentAffiliation.role} 
+                            onChange={(e) => setCurrentAffiliation({ ...currentAffiliation, role: e.target.value })} 
+                            placeholder="Active Member" 
+                            className="cf-form-input" 
+                          />
+                        </label>
+                      </div>
+                      <div className="cf-form-actions">
+                        <button 
+                          type="button" 
+                          onClick={addAffiliation} 
+                          className="cf-add-btn" 
+                          disabled={!currentAffiliation.organization.trim()}
+                        >
+                          <FiPlus /> {currentAffiliation.isEditing ? 'Update Affiliation' : 'Add Affiliation'}
+                        </button>
+                        {currentAffiliation.isEditing && (
+                          <button 
+                            type="button" 
+                            onClick={() => setCurrentAffiliation(defaultAffiliation())} 
+                            className="cf-cancel-btn"
+                          >
+                            <FiX /> Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.affiliations.map((a, i) => (
+                        <div key={i} className="cf-list-item">
+                          <div>
+                            <strong>{a.organization}</strong>
+                            {a.role && ` – ${a.role}`}
+                          </div>
+                          <div className="cf-item-actions">
+                            <button onClick={() => editAffiliation(i)} className="cf-edit-btn"><FiEdit2 /></button>
+                            <button onClick={() => deleteAffiliation(i)} className="cf-delete-btn"><FiTrash2 /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.affiliations.length === 0 && <p className="cf-empty-msg">No affiliations added yet</p>}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Font Settings Section */}
+              {activeSection === 'settings' && (
+                <div className="cf-form-section-content">
+                  <h3 className="cf-form-section-title"><FiSettings /> Font Size Settings</h3>
+                  <p className="cf-section-desc">Customize font sizes for your RPN resume PDF. All sizes are in points (pt).</p>
+                  
+                  <div className="cf-form-card">
+                    <div className="cf-font-grid">
+                      {[{key:'name',label:'Name'},{key:'sectionTitle',label:'Section Titles'},{key:'jobTitle',label:'Job Titles'},{key:'degree',label:'Degrees'},{key:'institution',label:'Institution Names'},{key:'institutionDate',label:'Dates'},{key:'regularText',label:'Regular Text'},{key:'bulletText',label:'Bullet Points'},{key:'contactInfo',label:'Contact Info'},{key:'skillText',label:'Skills Text'},{key:'licenseText',label:'License Text'},{key:'certificationText',label:'Certification Text'}].map(({key,label})=>(<div key={key} className="cf-font-control"><label className="cf-font-label"><span>{label}</span><span className="cf-font-value">{fontSizes[key]}pt</span></label><input type="range" min={key==='institutionDate'?6:8} max={key==='name'?24:key==='sectionTitle'?18:key==='jobTitle'||key==='degree'?16:14} value={fontSizes[key]} onChange={e=>handleFontSizeChange(key,e.target.value)} className="cf-font-slider"/></div>))}
+                    </div>
+                    
+                    <button 
+                      type="button" 
+                      onClick={resetFontSizes}
+                      className="cf-reset-btn"
+                    >
+                      Reset to Default Font Sizes
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <section className="cf-faq-section" aria-labelledby="faq-title">
+          <div className="cf-container">
+            <div className="cf-section-header">
+              <h2 id="faq-title">Frequently Asked Questions</h2>
+              <p>
+                Everything you need to know about creating professional RPN resumes for Canadian healthcare jobs.
+              </p>
+            </div>
+            <div className="cf-faq-grid">
+              {faqs.map((faq, index) => (
+                <div key={index} className="cf-faq-item">
+                  <h3 className="cf-faq-question">{faq.question}</h3>
+                  <p className="cf-faq-answer">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="cf-cta-section" aria-labelledby="cta-title">
+          <div className="cf-container">
+            <div className="cf-cta-content">
+              <h2 className="cf-cta-title" id="cta-title">Ready to Advance Your RPN Career in Canada?</h2>
+              <p className="cf-cta-subtitle">
+                Join 2 million+ Canadian RPNs who landed their dream jobs with our free ATS-friendly RPN resume builder designed specifically for Canadian healthcare.
+              </p>
+              <div className="cf-cta-btn-wrap">
+                <button
+                  onClick={() => setActiveSection('personal')}
+                  className="cf-cta-btn"
+                  aria-label="Create your free Canadian RPN resume now—no sign-up required"
+                >
+                  <span className="cf-cta-btn-text">Create Your Free Canadian RPN Resume Now</span>
+                  <FiArrowRight className="cf-cta-btn-icon" />
+                </button>
+              </div>
+              <div className="cf-cta-guarantee">
+                <FiCheck className="cf-guarantee-icon" />
+                <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • Canadian ATS Optimized • CNO Standards</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Full Preview Modal */}
+        {showFullPreview && (
+          <div className="cf-modal" onClick={() => setShowFullPreview(false)}>
+            <div className="cf-modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="cf-modal-header">
+                <h3>Full Canadian RPN Resume Preview</h3>
+                <button className="cf-close-btn" onClick={() => setShowFullPreview(false)}><FiX /></button>
+              </div>
+              <div className="cf-modal-pages">
+                <div className="cf-modal-page">
+                  <CanadianRPNTemplate formData={formData} />
                 </div>
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        )}
+
+        {showSharePopup && (
+          <div className="cf-share-overlay" onClick={() => setShowSharePopup(false)}>
+            <div className="cf-share-card" onClick={e => e.stopPropagation()}>
+              <span className="cf-share-icon">💬</span>
+              <h2 className="cf-share-headline">Loved Using This?</h2>
+              <p className="cf-share-body">It only takes 5 seconds to share professionalresumefree.com — but it could change someone's career. Thanks for spreading the word!</p>
+              <button className="cf-share-close-btn" onClick={() => setShowSharePopup(false)}>Close</button>
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* FAQ Section */}
-      <section className={styles.faqSection} aria-labelledby="faq-title">
-        <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle} id="faq-title">Frequently Asked Questions</h2>
-            <p className={styles.sectionSubtitle}>
-              Everything you need to know about creating professional RPN resumes for Canadian healthcare jobs.
-            </p>
-          </div>
-          <div className={styles.faqGrid}>
-            {faqs.map((faq, index) => (
-              <div key={index} className={styles.faqItem}>
-                <h3 className={styles.faqQuestion}>{faq.question}</h3>
-                <p className={styles.faqAnswer}>{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section - Changed to h3 for single H1 compliance */}
-      <section className={styles.ctaSection} aria-labelledby="cta-title">
-        <div className={styles.container}>
-          <div className={styles.ctaContent}>
-            <h3 className={styles.ctaTitle} id="cta-title">Ready to Advance Your RPN Career in Canada?</h3>
-            <p className={styles.ctaSubtitle}>
-              Join 2 million+ Canadian RPNs who landed their dream jobs with our free ATS-friendly RPN resume builder designed specifically for Canadian healthcare.
-            </p>
-            <div className={styles.ctaButtons}>
-              <button
-                onClick={() => setActiveSection('personal')}
-                className={styles.ctaButton}
-                aria-label="Create your free Canadian RPN resume now—no sign-up required"
-              >
-                <span className={styles.ctaButtonText}>Create Your Free Canadian RPN Resume Now</span>
-                <FiArrowRight className={styles.ctaButtonIcon} />
-              </button>
-            </div>
-            <div className={styles.ctaGuarantee}>
-              <FiCheck className={styles.guaranteeIcon} />
-              <span className={styles.guaranteeText}>No credit card required • Free forever • Download in minutes • Canadian ATS Optimized • CNO Standards</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Full Preview Modal */}
-      {showFullPreview && (
-        <div className={styles.fullPreviewModal} onClick={() => setShowFullPreview(false)}>
-          <div className={styles.fullPreviewContent} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.fullPreviewHeader}>
-              <h3>Full Canadian RPN Resume Preview</h3>
-              <button className={styles.closeButton} onClick={() => setShowFullPreview(false)}><FiX /></button>
-            </div>
-            <div className={styles.fullPreviewPages}>
-              <div className={styles.fullPreviewPage}>
-                <CanadianRPNTemplate formData={formData} />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 
@@ -2409,7 +2616,7 @@ export async function getStaticProps() {
       buildTimestamp
     },
     // ISR: Revalidate every 24 hours (86400 seconds)
-    revalidate: 3600
+    revalidate: 86400
   };
 }
 

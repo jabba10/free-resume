@@ -1,380 +1,102 @@
-'use client';
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { 
-  FiAward,
-  FiTarget,
-  FiTrendingUp,
-  FiUsers,
-  FiSearch,
-  FiRefreshCw,
-  FiArrowRight,
-  FiCheck,
-  FiBook,
-  FiBriefcase,
-  FiUserCheck,
-  FiStar,
-  FiHome,
-  FiChevronRight,
-  FiClock,
-  FiFileText,
-  FiTool,
-  FiHeart,
-  FiEdit,
-  FiBarChart,
-  FiLayers,
-  FiMessageSquare,
-  FiMonitor,
-  FiSettings,
-  FiDownload,
-  FiCalendar,
-  FiMap,
-  FiPieChart,
-  FiZap, // Added for new links
-  FiDollarSign, // Added for new links
-  FiCode, // Added for new links
-  FiAlignLeft // Added for new links
+  FiAward, FiTarget, FiTrendingUp, FiUsers, FiSearch, FiRefreshCw,
+  FiArrowRight, FiCheck, FiBook, FiBriefcase, FiUserCheck, FiStar,
+  FiHome, FiChevronRight, FiClock, FiFileText, FiTool, FiHeart,
+  FiEdit, FiBarChart, FiLayers, FiMessageSquare, FiMonitor, FiSettings,
+  FiDownload, FiCalendar, FiMap, FiPieChart, FiZap, FiDollarSign,
+  FiCode, FiAlignLeft
 } from 'react-icons/fi';
 
-// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
-const criticalCSS = `
-  /* RESET & BASE STYLES */
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    -webkit-tap-highlight-color: transparent; 
-  }
-  
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS (UNCHANGED)
+// ============================================================================
+const executiveDesignTokens = `
   :root {
-    --primary: #000000;
-    --secondary: #333333;
-    --background: #ffffff;
-    --card-bg: #f9fafb;
-    --border: #e5e7eb;
-    --text-light: #4b5563;
-    --text-lighter: #6b7280;
-    --success: #059669;
-    --warning: #d97706;
-    --danger: #dc2626;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
-    --gradient-accent: linear-gradient(135deg, #000000 0%, #333333 100%);
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
   }
-  
-  html { 
-    scroll-behavior: smooth; 
-    font-size: 16px;
-  }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    color: var(--primary);
-    background: var(--background);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  /* TYPOGRAPHY - CENTERED BY DEFAULT */
-  h1, h2, h3, h4, h5, h6, p, li, span, div {
-    text-align: center;
-  }
-  
-  /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
-  ul, ol, .left-align, .breadcrumb, .stepDescription, .cardContent, .faqAnswer, .internalLinkDescription {
-    text-align: left;
-  }
-  
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.5rem); 
-    line-height: 1.2; 
-    font-weight: 800; 
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-  
-  h2 { 
-    font-size: clamp(1.8rem, 5vw, 2.5rem); 
-    line-height: 1.3; 
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-  
-  h3 { 
-    font-size: clamp(1.3rem, 3vw, 1.8rem); 
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-  
-  h4 { 
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
-    margin-bottom: 0.75rem;
-    font-weight: 600;
-  }
-  
-  p { 
-    font-size: clamp(1rem, 2vw, 1.1rem); 
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-  }
-  
-  a { 
-    color: var(--primary);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-  
-  a:hover { 
-    opacity: 0.8;
-  }
-  
-  img, svg { 
-    max-width: 100%; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto;
-  }
-  
-  /* UTILITY CLASSES */
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 clamp(16px, 5vw, 24px);
-    width: 100%;
-  }
-  
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary);
-    color: white;
-    padding: 8px 16px;
-    z-index: 100;
-    border-radius: 0 0 4px 4px;
-    text-align: center;
-  }
-  
-  .skip-link:focus { 
-    top: 0; 
-  }
-  
-  .gradient-text {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
-  }
-  
-  /* BUTTON STYLES - CENTERED */
-  .btn-primary, .btn-secondary, .btn-accent {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin: 0 auto;
-  }
-  
-  .btn-primary {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-primary:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .btn-primary:active {
-    transform: translateY(0);
-  }
-  
-  .btn-secondary {
-    background: transparent;
-    color: var(--primary);
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 2px solid var(--primary);
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-  }
-  
-  .btn-secondary:hover {
-    background: var(--card-bg);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  .btn-accent {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-  }
-  
-  .btn-accent:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .btn-badge {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
-    font-size: 0.75rem;
-    margin-left: 0.75rem;
-    font-weight: 500;
-  }
-  
-  /* CARD STYLES - RESPONSIVE PADDING */
-  .card {
-    background: var(--card-bg);
-    border-radius: 1rem;
-    padding: 2rem;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    height: 100%;
-    margin: 0 auto;
-  }
-  
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary);
-  }
-  
-  /* GRID SYSTEMS - CENTERED WITH RESPONSIVE CARD SIZING */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 2rem auto;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  /* FLEX CENTERING UTILITIES */
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .flex-col-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* RESPONSIVE BREAKPOINTS - OPTIMIZED FOR CARD SIZING */
-  @media (max-width: 1024px) {
-    .grid { 
-      grid-template-columns: repeat(2, 1fr); 
-      max-width: 800px;
-    }
-    .card { 
-      padding: 1.75rem; 
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .grid { 
-      grid-template-columns: 1fr; 
-      max-width: 500px;
-    }
-    .btn-primary, .btn-secondary, .btn-accent { 
-      width: 100%; 
-      min-width: auto; 
-    }
-    .card { 
-      padding: 1.5rem; 
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .grid { 
-      max-width: 450px;
-    }
-    .card { 
-      padding: 1.25rem; 
-    }
-  }
-  
-  @media (max-width: 480px) {
-    button, a, .clickable { 
-      touch-action: manipulation; 
-    }
-    .container { 
-      padding: 0 12px; 
-    }
-    p, li { 
-      font-size: 16px; 
-    }
-    h1 {
-      font-size: clamp(1.8rem, 7vw, 2.2rem);
-    }
-    h2 {
-      font-size: clamp(1.5rem, 6vw, 1.8rem);
-    }
-    h3 {
-      font-size: clamp(1.2rem, 5vw, 1.4rem);
-    }
-    .card { 
-      padding: 1rem; 
-      border-radius: 0.75rem;
-    }
-    .grid {
-      gap: 1rem;
-    }
-  }
-  
-  @media (max-width: 360px) {
-    .container { 
-      padding: 0 8px; 
-    }
-    .card { 
-      padding: 0.875rem; 
-    }
-    .grid {
-      gap: 0.875rem;
-    }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color 150ms; text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; borderRadius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); borderRadius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:100%; display:flex; flex-direction:column; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; borderRadius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.25rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; borderRadius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .step-card { padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; margin-bottom:1rem; }
+  .step-number { width:40px; height:40px; background:linear-gradient(135deg,var(--accent-primary-container),var(--accent-primary)); color:var(--accent-on-primary); borderRadius:9999px; display:flex; align-items:center; justify-content:center; font-weight:var(--font-weight-bold); }
+  .faq-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
+  @media (min-width:768px) { .faq-grid { grid-template-columns:repeat(2,1fr); } }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.75rem; padding:1.5rem; height:100%; }
+  .faq-question { font-size:var(--font-size-title-md); font-weight:var(--font-weight-semibold); color:var(--text-primary); margin-bottom:0.75rem; }
+  .testimonial-card { padding:2rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.75rem; max-width:800px; margin:0 auto; }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-2px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
+// ============================================================================
+// SEO-ENHANCED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
+// ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
@@ -389,648 +111,84 @@ export async function getStaticProps() {
         buildTimestamp
       }
     },
-    revalidate: 3600, // ISR: Regenerate every hour
+    revalidate: 3600 // ISR: Regenerate every hour (from Page 1 blueprint)
   };
 }
 
+// ============================================================================
+// SEO-ENHANCED PAGE COMPONENT
+// ============================================================================
 const CareerBlog = ({ seoData }) => {
   const { currentDate, lastModifiedDate, buildTimestamp } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
-  const [activeStep, setActiveStep] = useState(0);
   const currentYear = new Date().getFullYear();
+  const canonicalUrl = "https://professionalresumefree.com/careers-blog";
 
-  // ============= INLINE STYLES =============
-  const styles = {
-    careerBlog: {
-      width: '100%',
-      overflowX: 'hidden',
-      backgroundColor: '#ffffff'
-    },
-
-    // Breadcrumb
-    breadcrumb: {
-      padding: '1rem 0',
-      backgroundColor: 'var(--card-bg)',
-      borderBottom: '1px solid var(--border)'
-    },
-    breadcrumbContainer: {
-      maxWidth: '1280px',
-      margin: '0 auto',
-      padding: '0 clamp(16px, 5vw, 24px)'
-    },
-    breadcrumbList: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '0.5rem',
-      alignItems: 'center',
-      listStyle: 'none',
-      fontSize: '0.9rem'
-    },
-    breadcrumbItem: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem'
-    },
-    breadcrumbLink: {
-      color: 'var(--primary)',
-      textDecoration: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.25rem'
-    },
-    breadcrumbSeparator: {
-      color: 'var(--text-light)',
-      display: 'flex',
-      alignItems: 'center'
-    },
-    breadcrumbCurrent: {
-      color: 'var(--text-light)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.25rem'
-    },
-
-    // Hero Section
-    heroSection: {
-      padding: 'clamp(2rem, 6vw, 4rem) 0',
-      background: 'linear-gradient(135deg, #ffffff 0%, #f9fafb 100%)'
-    },
-    heroContainer: {
-      maxWidth: '1280px',
-      margin: '0 auto',
-      padding: '0 clamp(16px, 5vw, 24px)'
-    },
-    heroContent: {
-      maxWidth: '900px',
-      margin: '0 auto',
-      textAlign: 'center'
-    },
-    heroTag: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem 1rem',
-      background: 'var(--card-bg)',
-      border: '1px solid var(--border)',
-      borderRadius: '2rem',
-      marginBottom: '2rem'
-    },
-    heroTitle: {
-      fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-      fontWeight: '800',
-      lineHeight: '1.2',
-      marginBottom: '1.5rem',
-      letterSpacing: '-0.02em'
-    },
-    heroSubtitle: {
-      fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
-      color: 'var(--text-light)',
-      marginBottom: '2rem',
-      maxWidth: '800px',
-      margin: '0 auto 2rem auto'
-    },
-    heroButtons: {
-      display: 'flex',
-      gap: '1rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      marginBottom: '2rem'
-    },
-    heroFeatures: {
-      display: 'flex',
-      gap: '1rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap'
-    },
-    heroStats: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '3rem'
-    },
-    statCard: {
-      padding: '1.5rem',
-      background: 'var(--card-bg)',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)',
-      textAlign: 'center'
-    },
-
-    // Intro Section
-    introSection: {
-      padding: 'clamp(2rem, 5vw, 3rem) 0',
-      backgroundColor: '#ffffff'
-    },
-    introContent: {
-      maxWidth: '800px',
-      margin: '0 auto',
-      textAlign: 'center'
-    },
-    introHighlights: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1.5rem',
-      justifyContent: 'center',
-      marginTop: '2rem'
-    },
-    highlightItem: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem 1rem',
-      background: 'var(--card-bg)',
-      borderRadius: '2rem',
-      border: '1px solid var(--border)'
-    },
-
-    // Steps Section
-    stepsSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: 'var(--card-bg)'
-    },
-    sectionHeader: {
-      maxWidth: '800px',
-      margin: '0 auto 3rem auto',
-      textAlign: 'center'
-    },
-    sectionTitle: {
-      fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
-      marginBottom: '1rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '0.75rem',
-      flexWrap: 'wrap'
-    },
-    sectionSubtitle: {
-      fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-      color: 'var(--text-light)'
-    },
-    stepsContainer: {
-      maxWidth: '900px',
-      margin: '0 auto'
-    },
-    stepCard: {
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)',
-      marginBottom: '1rem'
-    },
-    stepHeader: {
-      display: 'flex',
-      gap: '1rem',
-      alignItems: 'center',
-      marginBottom: '1rem',
-      flexWrap: 'wrap'
-    },
-    stepNumber: {
-      width: '40px',
-      height: '40px',
-      background: 'var(--primary)',
-      color: 'white',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: '700'
-    },
-    stepInfo: {
-      flex: 1
-    },
-    stepTitle: {
-      fontSize: '1.2rem',
-      marginBottom: '0.25rem'
-    },
-    stepMetrics: {
-      display: 'flex',
-      gap: '1rem',
-      fontSize: '0.9rem',
-      color: 'var(--text-light)'
-    },
-    stepDescription: {
-      fontSize: '1rem',
-      color: 'var(--text-light)',
-      lineHeight: '1.6'
-    },
-
-    // Strategies Section
-    strategiesSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: '#ffffff'
-    },
-    cardsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '1.5rem',
-      maxWidth: '1000px',
-      margin: '0 auto'
-    },
-    strategyCard: {
-      padding: '1.5rem',
-      background: 'var(--card-bg)',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)',
-      height: '100%'
-    },
-    cardHeader: {
-      display: 'flex',
-      gap: '1rem',
-      alignItems: 'center',
-      marginBottom: '1rem',
-      flexWrap: 'wrap'
-    },
-    cardIconContainer: {
-      width: '48px',
-      height: '48px',
-      background: 'white',
-      borderRadius: '1rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      border: '1px solid var(--border)',
-      color: 'var(--primary)'
-    },
-    cardTitleContainer: {
-      flex: 1
-    },
-    cardTitle: {
-      fontSize: '1.2rem',
-      marginBottom: '0.25rem'
-    },
-    cardMetrics: {
-      fontSize: '0.9rem',
-      color: 'var(--success)',
-      fontWeight: '500'
-    },
-    cardContent: {
-      fontSize: '1rem',
-      color: 'var(--text-light)',
-      marginBottom: '1rem',
-      lineHeight: '1.6'
-    },
-    cardTips: {
-      marginTop: '1rem'
-    },
-    tipsTitle: {
-      fontSize: '1rem',
-      marginBottom: '0.75rem'
-    },
-    tipsList: {
-      listStyle: 'none'
-    },
-    tipItem: {
-      display: 'flex',
-      gap: '0.5rem',
-      alignItems: 'flex-start',
-      marginBottom: '0.5rem',
-      fontSize: '0.95rem'
-    },
-
-    // Testimonial Section
-    testimonialSection: {
-      marginTop: '3rem'
-    },
-    testimonialCard: {
-      padding: '2rem',
-      background: 'var(--card-bg)',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)',
-      maxWidth: '800px',
-      margin: '0 auto'
-    },
-    testimonialQuote: {
-      fontSize: '1.1rem',
-      fontStyle: 'italic',
-      marginBottom: '1rem',
-      lineHeight: '1.6'
-    },
-    testimonialAuthor: {
-      fontSize: '0.95rem',
-      color: 'var(--text-light)'
-    },
-
-    // FAQ Section
-    faqSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: 'var(--card-bg)'
-    },
-    faqGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-      gap: '1.5rem',
-      maxWidth: '1000px',
-      margin: '0 auto 2rem auto'
-    },
-    faqItem: {
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)'
-    },
-    faqQuestion: {
-      fontSize: '1.1rem',
-      marginBottom: '0.75rem'
-    },
-    faqAnswer: {
-      fontSize: '0.95rem',
-      color: 'var(--text-light)',
-      lineHeight: '1.6'
-    },
-    faqCta: {
-      textAlign: 'center'
-    },
-    faqLink: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.75rem 1.5rem',
-      background: 'var(--primary)',
-      color: 'white',
-      borderRadius: '0.75rem',
-      fontWeight: '600'
-    },
-
-    // CTA Section
-    ctaSection: {
-      padding: 'clamp(3rem, 6vw, 5rem) 0',
-      background: 'var(--gradient-primary)',
-      color: 'white'
-    },
-    ctaContent: {
-      maxWidth: '700px',
-      margin: '0 auto',
-      textAlign: 'center'
-    },
-    ctaTitle: {
-      fontSize: 'clamp(2rem, 5vw, 2.5rem)',
-      color: 'white',
-      marginBottom: '1rem'
-    },
-    ctaSubtitle: {
-      fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-      color: 'rgba(255, 255, 255, 0.9)',
-      marginBottom: '2rem'
-    },
-    ctaButtons: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginBottom: '2rem'
-    },
-    ctaButton: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.75rem',
-      padding: '1rem 2rem',
-      background: 'white',
-      color: 'var(--primary)',
-      borderRadius: '0.75rem',
-      fontWeight: '600',
-      border: 'none',
-      cursor: 'pointer'
-    },
-    ctaGuarantee: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '0.5rem',
-      marginBottom: '1.5rem',
-      fontSize: '0.95rem'
-    },
-    ctaFeatures: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1.5rem',
-      justifyContent: 'center'
-    },
-    ctaFeature: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem'
-    },
-
-    // Internal Links Section
-    internalLinksSection: {
-      padding: 'clamp(2rem, 5vw, 3rem) 0',
-      backgroundColor: 'var(--card-bg)'
-    },
-    internalLinksTitle: {
-      fontSize: '1.8rem',
-      marginBottom: '2rem',
-      textAlign: 'center'
-    },
-    internalLinksGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '1.5rem',
-      maxWidth: '1000px',
-      margin: '0 auto'
-    },
-    internalLinkCard: {
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)',
-      textDecoration: 'none',
-      color: 'var(--primary)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      textAlign: 'center',
-      gap: '0.5rem',
-      transition: 'all 0.3s ease'
-    },
-    internalLinkTitle: {
-      fontSize: '1.1rem',
-      marginBottom: '0.25rem'
-    },
-    internalLinkDescription: {
-      fontSize: '0.9rem',
-      color: 'var(--text-light)',
-      marginBottom: '0.5rem'
-    },
-
-    // Update Strategy
-    updateStrategy: {
-      padding: '1rem 0',
-      backgroundColor: 'var(--card-bg)',
-      borderTop: '1px solid var(--border)',
-      fontSize: '0.85rem',
-      color: 'var(--text-light)',
-      textAlign: 'center'
-    }
-  };
+  // Long-tail keywords for GEO (from Page 1)
+  const longTailKeywords = [
+    `career change guide ${currentYear} how to successfully switch careers`,
+    "step by step career transition strategies 2026",
+    "how to write career change resume",
+    "career development strategies for professionals",
+    "successful career change roadmap 2026"
+  ];
 
   const careerDevelopmentStrategies = [
-    {
-      title: "Continuous Learning & Skill Development for 2026",
-      content: "Master in-demand technologies and methodologies for 2026 job markets. Our data shows professionals who upskill quarterly earn 35% more and receive 60% more opportunities.",
-      icon: <FiTrendingUp size={24} />,
-      tips: [
-        "Quarterly upskilling through online platforms (Coursera, Udemy, LinkedIn Learning)",
-        "Annual industry conference attendance with 500% ROI on networking",
-        "Professional certification programs with 85% industry recognition rates",
-        "Micro-learning for rapid skill acquisition (15 min daily = 91 hours yearly)"
-      ],
-      metrics: "35% higher earnings, 60% more opportunities"
-    },
-    {
-      title: "Strategic Networking & Relationship Building Framework",
-      content: "Build professional relationships with 2026's 500% networking ROI methodology. Each quality connection generates 3-5 new opportunities annually.",
-      icon: <FiUsers size={24} />,
-      tips: [
-        "Quarterly industry events with 50+ targeted connections",
-        "Daily LinkedIn engagement (15 min = 300% visibility increase)",
-        "Monthly mentorship sessions (93% career acceleration impact)",
-        "Professional association membership (75% higher promotion rates)"
-      ],
-      metrics: "500% ROI, 3-5 opportunities per connection"
-    },
-    {
-      title: "Goal Setting & Career Roadmapping System",
-      content: "Create SMART career roadmaps with 89% success rates for 2026 professional growth. Structured planning reduces transition time by 65%.",
-      icon: <FiTarget size={24} />,
-      tips: [
-        "Annual SMART goal setting with quarterly 90-day sprints",
-        "Monthly progress tracking with 15 key career metrics",
-        "Bi-annual career plan reviews with 40% adjustment rates",
-        "Career dashboard with 25+ development KPIs"
-      ],
-      metrics: "89% success rate, 65% faster transitions"
-    }
+    { title: "Continuous Learning & Skill Development for 2026", content: "Master in-demand technologies and methodologies for 2026 job markets. Our data shows professionals who upskill quarterly earn 35% more and receive 60% more opportunities.", icon: <FiTrendingUp size={24} />, tips: ["Quarterly upskilling through online platforms (Coursera, Udemy, LinkedIn Learning)", "Annual industry conference attendance with 500% ROI on networking", "Professional certification programs with 85% industry recognition rates", "Micro-learning for rapid skill acquisition (15 min daily = 91 hours yearly)"], metrics: "35% higher earnings, 60% more opportunities" },
+    { title: "Strategic Networking & Relationship Building Framework", content: "Build professional relationships with 2026's 500% networking ROI methodology. Each quality connection generates 3-5 new opportunities annually.", icon: <FiUsers size={24} />, tips: ["Quarterly industry events with 50+ targeted connections", "Daily LinkedIn engagement (15 min = 300% visibility increase)", "Monthly mentorship sessions (93% career acceleration impact)", "Professional association membership (75% higher promotion rates)"], metrics: "500% ROI, 3-5 opportunities per connection" },
+    { title: "Goal Setting & Career Roadmapping System", content: "Create SMART career roadmaps with 89% success rates for 2026 professional growth. Structured planning reduces transition time by 65%.", icon: <FiTarget size={24} />, tips: ["Annual SMART goal setting with quarterly 90-day sprints", "Monthly progress tracking with 15 key career metrics", "Bi-annual career plan reviews with 40% adjustment rates", "Career dashboard with 25+ development KPIs"], metrics: "89% success rate, 65% faster transitions" }
   ];
 
   const careerChangeStrategies = [
-    {
-      title: "Comprehensive Self-Assessment & Market Analysis",
-      content: "Evaluate skills, interests, and 2026 market demand with 92% accuracy assessment tools. Identify careers with 45% growth projections.",
-      icon: <FiSearch size={24} />,
-      tips: [
-        "Career aptitude tests with 95% industry alignment accuracy",
-        "Transferable skill mapping across 200+ industry categories",
-        "Market demand analysis for 2026's top 50 growth careers",
-        "Personal brand positioning for 300% visibility increase"
-      ],
-      metrics: "92% assessment accuracy, 45% growth careers"
-    },
-    {
-      title: "Strategic Skill Transition & Development Blueprint",
-      content: "Bridge skill gaps with 78% efficiency using targeted learning pathways. Our graduates achieve 85% career transition success rates.",
-      icon: <FiRefreshCw size={24} />,
-      tips: [
-        "120-day skill gap bridging programs with 90% completion rates",
-        "Portfolio development with 10+ real-world projects",
-        "Industry certification pathways (3-6 month completion)",
-        "Freelance experience building (500+ hours minimum)"
-      ],
-      metrics: "78% efficiency, 85% transition success"
-    },
-    {
-      title: "Targeted Job Search & Transition Execution",
-      content: "Execute career transitions with 89% success rates using proven 2026 methodologies. Average transition time: 4-8 months.",
-      icon: <FiUsers size={24} />,
-      tips: [
-        "ATS-optimized career change resumes (90% pass rates)",
-        "Strategic networking (15-20 connections weekly)",
-        "Industry research (10+ target companies monthly)",
-        "Interview preparation system (95% confidence scores)"
-      ],
-      metrics: "89% success rate, 4-8 month transitions"
-    }
+    { title: "Comprehensive Self-Assessment & Market Analysis", content: "Evaluate skills, interests, and 2026 market demand with 92% accuracy assessment tools. Identify careers with 45% growth projections.", icon: <FiSearch size={24} />, tips: ["Career aptitude tests with 95% industry alignment accuracy", "Transferable skill mapping across 200+ industry categories", "Market demand analysis for 2026's top 50 growth careers", "Personal brand positioning for 300% visibility increase"], metrics: "92% assessment accuracy, 45% growth careers" },
+    { title: "Strategic Skill Transition & Development Blueprint", content: "Bridge skill gaps with 78% efficiency using targeted learning pathways. Our graduates achieve 85% career transition success rates.", icon: <FiRefreshCw size={24} />, tips: ["120-day skill gap bridging programs with 90% completion rates", "Portfolio development with 10+ real-world projects", "Industry certification pathways (3-6 month completion)", "Freelance experience building (500+ hours minimum)"], metrics: "78% efficiency, 85% transition success" },
+    { title: "Targeted Job Search & Transition Execution", content: "Execute career transitions with 89% success rates using proven 2026 methodologies. Average transition time: 4-8 months.", icon: <FiUsers size={24} />, tips: ["ATS-optimized career change resumes (90% pass rates)", "Strategic networking (15-20 connections weekly)", "Industry research (10+ target companies monthly)", "Interview preparation system (95% confidence scores)"], metrics: "89% success rate, 4-8 month transitions" }
   ];
 
   const stats = [
-    {
-      value: "72%",
-      label: "Workers planning career changes in 2026 (Gallup Research)",
-      icon: <FiTrendingUp size={24} />
-    },
-    {
-      value: "4-8 mo",
-      label: "Successful transition timeframe (2026 Industry Standard)",
-      icon: <FiTarget size={24} />
-    },
-    {
-      value: "89%",
-      label: "Career change success with structured plans (NACE Data)",
-      icon: <FiAward size={24} />
-    }
+    { value: "72%", label: "Workers planning career changes in 2026 (Gallup Research)", icon: <FiTrendingUp size={24} /> },
+    { value: "4-8 mo", label: "Successful transition timeframe (2026 Industry Standard)", icon: <FiTarget size={24} /> },
+    { value: "89%", label: "Career change success with structured plans (NACE Data)", icon: <FiAward size={24} /> }
   ];
 
   const testimonials = [
-    {
-      quote: "Transitioned from marketing to UX design in 6 months using strategic skill mapping, portfolio building, and targeted networking. The structured approach reduced my transition time by 60% and resulted in a 45% salary increase.",
-      author: "Sarah J., Marketing to UX Design Transition",
-      role: "Career Changer Success Story"
-    }
+    { quote: "Transitioned from marketing to UX design in 6 months using strategic skill mapping, portfolio building, and targeted networking. The structured approach reduced my transition time by 60% and resulted in a 45% salary increase.", author: "Sarah J., Marketing to UX Design Transition", role: "Career Changer Success Story" }
   ];
 
-  // FAQ data for structured data
   const faqs = [
-    {
-      question: "How long does a successful career change typically take in 2026?",
-      answer: "Successful career transitions take 4-8 months with proper planning according to 2026 industry data. This includes 2-3 months for skill assessment and development, 1-2 months for networking and portfolio building, and 1-3 months for targeted job searching. Structured planning reduces transition time by 65% and increases success rates to 89%."
-    },
-    {
-      question: "What are the most important steps for changing careers in 2026?",
-      answer: "The 6 critical steps for 2026 career changes: 1) Comprehensive self-assessment (92% accuracy tools), 2) Market analysis of 45% growth careers, 3) Strategic skill development (78% efficiency pathways), 4) Portfolio building (10+ real projects), 5) Targeted networking (15-20 weekly connections), 6) ATS-optimized application strategy (90% pass rates). Structured roadmaps deliver 89% success rates."
-    },
-    {
-      question: "How do I write a resume for a career change in 2026?",
-      answer: "For 2026 career change resumes: Use functional/combination formats, highlight transferable skills (5-7 core competencies), include quantifiable achievements (3-5 per role), showcase recent training/education, and optimize for ATS with 15-20 job-specific keywords. Our career change templates achieve 90% ATS pass rates and 65% more interviews."
-    },
-    {
-      question: "What percentage of workers are considering career changes in 2026?",
-      answer: "72% of workers are actively considering or planning career changes in 2026 according to Gallup Research. Primary drivers include: 45% seek better work-life balance, 30% pursue higher earnings, 15% desire industry alignment with personal values, and 10% seek remote/hybrid opportunities. Structured planning delivers 89% success rates."
-    }
+    { question: "How long does a successful career change typically take in 2026?", answer: "Successful career transitions take 4-8 months with proper planning according to 2026 industry data. This includes 2-3 months for skill assessment and development, 1-2 months for networking and portfolio building, and 1-3 months for targeted job searching. Structured planning reduces transition time by 65% and increases success rates to 89%." },
+    { question: "What are the most important steps for changing careers in 2026?", answer: "The 6 critical steps for 2026 career changes: 1) Comprehensive self-assessment (92% accuracy tools), 2) Market analysis of 45% growth careers, 3) Strategic skill development (78% efficiency pathways), 4) Portfolio building (10+ real projects), 5) Targeted networking (15-20 weekly connections), 6) ATS-optimized application strategy (90% pass rates). Structured roadmaps deliver 89% success rates." },
+    { question: "How do I write a resume for a career change in 2026?", answer: "For 2026 career change resumes: Use functional/combination formats, highlight transferable skills (5-7 core competencies), include quantifiable achievements (3-5 per role), showcase recent training/education, and optimize for ATS with 15-20 job-specific keywords. Our career change templates achieve 90% ATS pass rates and 65% more interviews." },
+    { question: "What percentage of workers are considering career changes in 2026?", answer: "72% of workers are actively considering or planning career changes in 2026 according to Gallup Research. Primary drivers include: 45% seek better work-life balance, 30% pursue higher earnings, 15% desire industry alignment with personal values, and 10% seek remote/hybrid opportunities. Structured planning delivers 89% success rates." }
   ];
 
   const stepByStepProcess = [
-    {
-      step: 1,
-      title: "Self-Assessment Phase (Weeks 1-4)",
-      description: "Complete comprehensive skills, interests, and market analysis with 92% accuracy tools",
-      duration: "4 weeks",
-      successRate: "95%"
-    },
-    {
-      step: 2,
-      title: "Skill Development Phase (Weeks 5-16)",
-      description: "Bridge skill gaps through targeted learning with 78% efficiency pathways",
-      duration: "12 weeks",
-      successRate: "90%"
-    },
-    {
-      step: 3,
-      title: "Portfolio Building Phase (Weeks 17-20)",
-      description: "Create 10+ real-world projects demonstrating new capabilities",
-      duration: "4 weeks",
-      successRate: "85%"
-    },
-    {
-      step: 4,
-      title: "Networking Phase (Weeks 21-24)",
-      description: "Build 60-80 strategic connections with 500% networking ROI",
-      duration: "4 weeks",
-      successRate: "80%"
-    },
-    {
-      step: 5,
-      title: "Job Search Phase (Weeks 25-32)",
-      description: "Execute targeted applications with 90% ATS optimization",
-      duration: "8 weeks",
-      successRate: "75%"
-    }
+    { step: 1, title: "Self-Assessment Phase (Weeks 1-4)", description: "Complete comprehensive skills, interests, and market analysis with 92% accuracy tools", duration: "4 weeks", successRate: "95%" },
+    { step: 2, title: "Skill Development Phase (Weeks 5-16)", description: "Bridge skill gaps through targeted learning with 78% efficiency pathways", duration: "12 weeks", successRate: "90%" },
+    { step: 3, title: "Portfolio Building Phase (Weeks 17-20)", description: "Create 10+ real-world projects demonstrating new capabilities", duration: "4 weeks", successRate: "85%" },
+    { step: 4, title: "Networking Phase (Weeks 21-24)", description: "Build 60-80 strategic connections with 500% networking ROI", duration: "4 weeks", successRate: "80%" },
+    { step: 5, title: "Job Search Phase (Weeks 25-32)", description: "Execute targeted applications with 90% ATS optimization", duration: "8 weeks", successRate: "75%" }
   ];
 
+  const internalLinks = [
+    { href: "/interview-tips", text: "Master Your Job Interviews", iconName: "FiUserCheck", desc: "Ace your interviews with expert tips and common question guides." },
+    { href: "/ats-friendly-tech-resume-builder", text: "Tech & Engineering Resumes", iconName: "FiCode", desc: "Specialized ATS-friendly templates for developers and engineers." },
+    { href: "/ats-friendly-finance-resume-builder", text: "Finance & Accounting Resumes", iconName: "FiDollarSign", desc: "Tailored formats for banking, accounting, and financial roles." },
+    { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher Tool", iconName: "FiAlignLeft", desc: "Match your resume against job descriptions to boost ATS scores." },
+    { href: "/resume-trends-in-the-usa-for-2026", text: "2026 Resume Trends Report", iconName: "FiZap", desc: "Stay ahead with the latest hiring trends and format changes." }
+  ];
+
+  const iconMap = { FiUserCheck, FiCode, FiDollarSign, FiAlignLeft, FiZap, FiTrendingUp, FiTarget, FiAward, FiFileText };
+
+  // Schema data (from Page 1)
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://professionalresumefree.com/careers-blog/#webpage",
-        "url": "https://professionalresumefree.com/careers-blog",
+        "@id": `${canonicalUrl}/#webpage`,
+        "url": canonicalUrl,
         "name": `Career Change Guide ${currentYear}: How to Successfully Switch Careers & Advance`,
         "description": `Step-by-step career change strategies for ${currentYear}. Learn how to transition careers, develop new skills, write career change resumes, and land dream jobs with 89% success rates.`,
         "datePublished": "2026-01-01",
@@ -1070,24 +228,9 @@ const CareerBlog = ({ seoData }) => {
         "breadcrumb": {
           "@type": "BreadcrumbList",
           "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://professionalresumefree.com"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Career Blog",
-              "item": "https://professionalresumefree.com/careers-blog"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": `Career Change Guide ${currentYear}`,
-              "item": "https://professionalresumefree.com/careers-blog"
-            }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://professionalresumefree.com" },
+            { "@type": "ListItem", "position": 2, "name": "Career Blog", "item": canonicalUrl },
+            { "@type": "ListItem", "position": 3, "name": `Career Change Guide ${currentYear}`, "item": canonicalUrl }
           ]
         }
       },
@@ -1113,7 +256,7 @@ const CareerBlog = ({ seoData }) => {
         "dateModified": safeLastModifiedDate,
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://professionalresumefree.com/careers-blog"
+          "@id": canonicalUrl
         },
         "articleBody": `Complete guide for career development and transition in ${currentYear} featuring data-backed strategies, statistical insights, and actionable frameworks for skill assessment, networking, goal setting, portfolio building, and career acceleration with 89% success rates.`,
         "articleSection": "Career Advice, Career Development",
@@ -1121,8 +264,8 @@ const CareerBlog = ({ seoData }) => {
       },
       {
         "@type": "FAQPage",
-        "@id": "https://professionalresumefree.com/careers-blog/#faqpage",
-        "mainEntity": faqs.map((faq, index) => ({
+        "@id": `${canonicalUrl}/#faqpage`,
+        "mainEntity": faqs.map((faq) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
@@ -1134,7 +277,7 @@ const CareerBlog = ({ seoData }) => {
               "name": "Professional Resume Free Career Experts"
             }
           },
-          "mainEntityOfPage": "https://professionalresumefree.com/careers-blog"
+          "mainEntityOfPage": canonicalUrl
         }))
       },
       {
@@ -1152,7 +295,7 @@ const CareerBlog = ({ seoData }) => {
           "position": i + 1,
           "name": step.title,
           "text": `${step.description} (Duration: ${step.duration}, Success Rate: ${step.successRate})`,
-          "url": `https://professionalresumefree.com/careers-blog#step-${i + 1}`,
+          "url": `${canonicalUrl}#step-${i + 1}`,
           "image": "https://professionalresumefree.com/images/career-step.jpg"
         })),
         "image": "https://professionalresumefree.com/images/career-blog-preview.jpg",
@@ -1166,220 +309,188 @@ const CareerBlog = ({ seoData }) => {
   };
 
   return (
-    <div style={styles.careerBlog} lang="en-US">
+    <>
+      {/* ======================================================================== */}
+      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* ======================================================================== */}
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 65 CHARACTERS ===== */}
+        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
+        <html lang="en-US" />
+        
+        {/* ===== SEO TITLE (from Page 1) ===== */}
         <title>Career Change Guide 2026: How to Successfully Switch Careers (65 chars)</title>
         
-        {/* ===== META DESCRIPTION ===== */}
+        {/* ===== META DESCRIPTION (from Page 1) ===== */}
         <meta name="description" content={`Step-by-step career change strategies for ${currentYear} with 89% success rates. Learn how to transition careers, develop new skills, write career change resumes, and land dream jobs using proven methodologies.`} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content={`career change guide ${currentYear}, how to change careers, career transition strategies, career development plan, switching careers successfully, career change resume tips, professional development ${currentYear}, career advancement strategies, job transition guide`} />
         
-        {/* ===== TECHNICAL SEO ===== */}
+        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
+        <meta name="chatgpt-fts:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
+        <meta name="chatgpt-fts:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers and land dream jobs.`} />
+        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        
+        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://professionalresumefree.com/careers-blog" />
+        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
-        <meta name="chatgpt-fts:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers and land dream jobs.`} />
-        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
-        
-        {/* ===== OPEN GRAPH ===== */}
+        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
         <meta property="og:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers & Advance`} />
         <meta property="og:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers, develop skills, and land dream jobs with expert guidance.`} />
-        <meta property="og:url" content="https://professionalresumefree.com/careers-blog" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/images/career-blog-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
-        <meta property="article:published_time" content={safeLastModifiedDate} />
+        <meta property="og:locale" content="en_US" />
+        <meta property="article:published_time" content="2026-01-01" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
         <meta name="twitter:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers and land dream jobs.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/career-blog-preview.jpg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* ===== PERFORMANCE ===== */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        {/* ===== ADDITIONAL META (from Page 1 blueprint best practices) ===== */}
+        <meta name="theme-color" content="#131315" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
+        {/* ===== SITEMAP (from Page 1 blueprint) ===== */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* ======================================================================== */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ======================================================================== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData)
         }} />
       </Head>
 
-      <main style={styles.careerBlog}>
-        {/* Skip to main content for accessibility */}
+      {/* Hidden freshness indicators (from Page 1) */}
+      <div style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={safeCurrentDate} />
+      </div>
+
+      {/* ======================================================================== */}
+      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* ======================================================================== */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav style={styles.breadcrumb} aria-label="Breadcrumb">
-          <div style={styles.breadcrumbContainer}>
-            <ul style={styles.breadcrumbList}>
-              <li style={styles.breadcrumbItem}>
-                <Link href="/" style={styles.breadcrumbLink}>
-                  <FiHome size={14} />
-                  <span>Home</span>
-                </Link>
+        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" itemProp="item"><span itemProp="name"><FiHome size={14} /> Home</span></Link>
+                <meta itemProp="position" content="1" />
               </li>
-              <li style={styles.breadcrumbSeparator}>
-                <FiChevronRight size={14} />
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page"><FiRefreshCw size={14} /> {`Career Change Guide ${currentYear}`}</span>
+                <meta itemProp="position" content="2" />
               </li>
-              <li style={styles.breadcrumbItem}>
-                <span style={styles.breadcrumbCurrent}>
-                  <FiRefreshCw size={14} />
-                  {`Career Change Guide ${currentYear}`}
-                </span>
-              </li>
-            </ul>
+            </ol>
           </div>
         </nav>
 
-        {/* Hero Section */}
-        <section id="main-content" style={styles.heroSection}>
-          <div style={styles.heroContainer}>
-            <div style={styles.heroContent}>
-              <div style={styles.heroTag}>
-                <FiAward size={16} />
-                <span>Data-Driven Career Success System {currentYear}</span>
-              </div>
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ Data-Driven Career Success System {currentYear}</div>
               
-              {/* Single H1 tag - exactly 65 characters */}
-              <h1 style={styles.heroTitle}>
-                Career Change Guide 2026: How to Successfully Switch Careers
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Career Change Guide 2026:{' '}
+                <span className="gradient-text">How to Successfully Switch Careers</span>
               </h1>
               
-              <p style={styles.heroSubtitle}>
-                Your comprehensive roadmap to <strong>successful career transitions with 89% success rates</strong> in {currentYear}. 
-                Master proven frameworks to switch careers, accelerate professional growth, and achieve career goals with 500% ROI strategies.
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Your comprehensive roadmap to <strong>successful career transitions with 89% success rates</strong> in {currentYear}. Master proven frameworks to switch careers, accelerate professional growth, and achieve career goals with 500% ROI strategies.
               </p>
 
-              <div style={styles.heroButtons}>
-                <Link
-                  href="/resume-templates"
-                  className="btn-primary"
-                  aria-label={`Build ATS-optimized career change resume for ${currentYear}`}
-                >
-                  Build Career Change Resume Now
-                  <FiArrowRight />
-                </Link>
-                
-                <a
-                  href="#strategies"
-                  className="btn-secondary"
-                  aria-label="Explore comprehensive career change strategies"
-                >
-                  <FiSearch />
-                  Explore Career Change Strategies
-                </a>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" aria-label={`Build ATS-optimized career change resume for ${currentYear}`}>Build Career Change Resume Now <FiArrowRight /></Link>
+                <a href="#strategies" className="btn-outline" aria-label="Explore comprehensive career change strategies"><FiSearch /> Explore Career Change Strategies</a>
               </div>
 
-              <div style={styles.heroFeatures}>
-                <span className="feature-badge">
-                  <FiCheck /> 89% Success Rate
-                </span>
-                <span className="feature-badge">
-                  <FiCheck /> 4-8 Month Timeline
-                </span>
-                <span className="feature-badge">
-                  <FiCheck /> 500% Networking ROI
-                </span>
-                <span className="feature-badge">
-                  <FiCheck /> ATS-Optimized Templates
-                </span>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }} aria-label="Key features">
+                <span className="feature-badge"><FiCheck /> 89% Success Rate</span>
+                <span className="feature-badge"><FiCheck /> 4-8 Month Timeline</span>
+                <span className="feature-badge"><FiCheck /> 500% Networking ROI</span>
+                <span className="feature-badge"><FiCheck /> ATS-Optimized Templates</span>
               </div>
-            </div>
-            
-            <div style={styles.heroStats}>
-              {stats.map((stat, index) => (
-                <div key={index} style={styles.statCard}>
-                  <div className="stat-icon">{stat.icon}</div>
-                  <div className="stat-value">{stat.value}</div>
-                  <div className="stat-label">{stat.label}</div>
-                </div>
-              ))}
+
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }} aria-label="Key statistics">
+                {stats.map((stat, index) => (
+                  <div key={index} className="stat-card">
+                    <div style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }}>{stat.icon}</div>
+                    <div className="stat-number">{stat.value}</div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Introduction Section */}
-        <section style={styles.introSection}>
-          <div className="container">
-            <div style={styles.introContent}>
-              <p className="lead-text">
-                With <strong>72% of professionals planning career changes in {currentYear}</strong>, 
-                this comprehensive guide delivers <strong>data-backed strategies with 89% success rates</strong>. 
-                Whether advancing in your field or transitioning industries, our proven frameworks accelerate career growth by 400% with structured planning.
+        {/* Introduction Highlights */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                With <strong>72% of professionals planning career changes in {currentYear}</strong>, this comprehensive guide delivers <strong>data-backed strategies with 89% success rates</strong>. Whether advancing in your field or transitioning industries, our proven frameworks accelerate career growth by 400% with structured planning.
               </p>
-              <div style={styles.introHighlights}>
-                <div style={styles.highlightItem}>
-                  <FiUserCheck className="highlight-icon" />
-                  <span>89% Career Change Success Rate</span>
-                </div>
-                <div style={styles.highlightItem}>
-                  <FiBook className="highlight-icon" />
-                  <span>78% Skill Development Efficiency</span>
-                </div>
-                <div style={styles.highlightItem}>
-                  <FiBriefcase className="highlight-icon" />
-                  <span>4-8 Month Transition Timeline</span>
-                </div>
-                <div style={styles.highlightItem}>
-                  <FiStar className="highlight-icon" />
-                  <span>500% Networking ROI</span>
-                </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
+                {["89% Career Change Success Rate", "78% Skill Development Efficiency", "4-8 Month Transition Timeline", "500% Networking ROI"].map((item, i) => (
+                  <span key={i} className="feature-badge">{item}</span>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* Step-by-Step Process */}
-        <section style={styles.stepsSection} aria-labelledby="steps-title">
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle} id="steps-title">
-                <FiMap />
-                {currentYear} Career Change Roadmap: 5-Phase System
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                Execute successful career transitions with our <strong>89% success rate 5-phase system</strong> designed for {currentYear} job markets.
-              </p>
+        <section className="section" aria-labelledby="steps-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="steps-title"><FiMap size={28} style={{ display: 'inline', marginRight: '0.75rem', color: 'var(--accent-primary)' }} />{currentYear} Career Change Roadmap: 5-Phase System</h2>
+              <p className="section-subtitle">Execute successful career transitions with our <strong>89% success rate 5-phase system</strong> designed for {currentYear} job markets.</p>
             </div>
-            
-            <div style={styles.stepsContainer}>
+            <div style={{ maxWidth: '900px', margin: '0 auto' }}>
               {stepByStepProcess.map((step, index) => (
-                <div key={index} style={styles.stepCard} id={`step-${step.step}`}>
-                  <div style={styles.stepHeader}>
-                    <div style={styles.stepNumber}>{step.step}</div>
-                    <div style={styles.stepInfo}>
-                      <h3 style={styles.stepTitle}>{step.title}</h3>
-                      <div style={styles.stepMetrics}>
-                        <span>
-                          <FiClock /> {step.duration}
-                        </span>
-                        <span>
-                          <FiTrendingUp /> {step.successRate} Success Rate
-                        </span>
+                <div key={index} className="step-card" id={`step-${step.step}`}>
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                    <div className="step-number">{step.step}</div>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.25rem' }}>{step.title}</h3>
+                      <div style={{ display: 'flex', gap: '1rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>
+                        <span><FiClock size={14} style={{ display: 'inline' }} /> {step.duration}</span>
+                        <span><FiTrendingUp size={14} style={{ display: 'inline' }} /> {step.successRate} Success Rate</span>
                       </div>
                     </div>
                   </div>
-                  <p className="left-align" style={styles.stepDescription}>{step.description}</p>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{step.description}</p>
                 </div>
               ))}
             </div>
@@ -1387,38 +498,30 @@ const CareerBlog = ({ seoData }) => {
         </section>
 
         {/* Career Development Strategies */}
-        <section id="strategies" style={styles.strategiesSection} aria-labelledby="development-title">
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle} id="development-title">
-                <FiTrendingUp />
-                Career Development Strategies for {currentYear}
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                Master <strong>proven approaches to advance and grow</strong> in your current career with {currentYear} market insights.
-              </p>
+        <section id="strategies" className="section section-alt" aria-labelledby="development-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="development-title"><FiTrendingUp size={28} style={{ display: 'inline', marginRight: '0.75rem', color: 'var(--accent-primary)' }} />Career Development Strategies for {currentYear}</h2>
+              <p className="section-subtitle">Master <strong>proven approaches to advance and grow</strong> in your current career with {currentYear} market insights.</p>
             </div>
-            
-            <div style={styles.cardsGrid}>
+            <div className="grid">
               {careerDevelopmentStrategies.map((strategy, index) => (
-                <div key={index} style={styles.strategyCard}>
-                  <div style={styles.cardHeader}>
-                    <div style={styles.cardIconContainer}>
-                      {strategy.icon}
-                    </div>
-                    <div style={styles.cardTitleContainer}>
-                      <h3 style={styles.cardTitle}>{strategy.title}</h3>
-                      <div style={styles.cardMetrics}>{strategy.metrics}</div>
+                <div key={index} className="card-executive">
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                    <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)' }}>{strategy.icon}</div>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.25rem' }}>{strategy.title}</h3>
+                      <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>{strategy.metrics}</div>
                     </div>
                   </div>
-                  <p className="left-align" style={styles.cardContent}>{strategy.content}</p>
-                  <div style={styles.cardTips}>
-                    <h4 style={styles.tipsTitle}>Actionable Implementation:</h4>
-                    <ul style={styles.tipsList}>
-                      {strategy.tips.map((tip, tipIndex) => (
-                        <li key={tipIndex} style={styles.tipItem}>
-                          <FiCheck color="var(--success)" />
-                          <span className="left-align">{tip}</span>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1rem' }}>{strategy.content}</p>
+                  <div>
+                    <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Actionable Implementation:</h4>
+                    <ul style={{ listStyle: 'none' }}>
+                      {strategy.tips.map((tip, i) => (
+                        <li key={i} style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                          <FiCheck style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '0.2rem' }} />
+                          <span>{tip}</span>
                         </li>
                       ))}
                     </ul>
@@ -1430,38 +533,30 @@ const CareerBlog = ({ seoData }) => {
         </section>
 
         {/* Career Change Strategies */}
-        <section style={styles.strategiesSection} aria-labelledby="change-title">
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle} id="change-title">
-                <FiRefreshCw />
-                Career Change Success Strategies for {currentYear}
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                Execute <strong>successful industry transitions</strong> with proven {currentYear} methodologies achieving 89% success rates.
-              </p>
+        <section className="section" aria-labelledby="change-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="change-title"><FiRefreshCw size={28} style={{ display: 'inline', marginRight: '0.75rem', color: 'var(--accent-primary)' }} />Career Change Success Strategies for {currentYear}</h2>
+              <p className="section-subtitle">Execute <strong>successful industry transitions</strong> with proven {currentYear} methodologies achieving 89% success rates.</p>
             </div>
-            
-            <div style={styles.cardsGrid}>
+            <div className="grid">
               {careerChangeStrategies.map((strategy, index) => (
-                <div key={index} style={styles.strategyCard}>
-                  <div style={styles.cardHeader}>
-                    <div style={styles.cardIconContainer}>
-                      {strategy.icon}
-                    </div>
-                    <div style={styles.cardTitleContainer}>
-                      <h3 style={styles.cardTitle}>{strategy.title}</h3>
-                      <div style={styles.cardMetrics}>{strategy.metrics}</div>
+                <div key={index} className="card-executive">
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                    <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)' }}>{strategy.icon}</div>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.25rem' }}>{strategy.title}</h3>
+                      <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>{strategy.metrics}</div>
                     </div>
                   </div>
-                  <p className="left-align" style={styles.cardContent}>{strategy.content}</p>
-                  <div style={styles.cardTips}>
-                    <h4 style={styles.tipsTitle}>Strategic Implementation:</h4>
-                    <ul style={styles.tipsList}>
-                      {strategy.tips.map((tip, tipIndex) => (
-                        <li key={tipIndex} style={styles.tipItem}>
-                          <FiCheck color="var(--success)" />
-                          <span className="left-align">{tip}</span>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1rem' }}>{strategy.content}</p>
+                  <div>
+                    <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Strategic Implementation:</h4>
+                    <ul style={{ listStyle: 'none' }}>
+                      {strategy.tips.map((tip, i) => (
+                        <li key={i} style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                          <FiCheck style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '0.2rem' }} />
+                          <span>{tip}</span>
                         </li>
                       ))}
                     </ul>
@@ -1469,151 +564,100 @@ const CareerBlog = ({ seoData }) => {
                 </div>
               ))}
             </div>
-            
-            <div style={styles.testimonialSection}>
-              <div style={styles.testimonialCard}>
-                <blockquote style={styles.testimonialQuote}>
-                  "{testimonials[0].quote}"
-                </blockquote>
-                <cite style={styles.testimonialAuthor}>
-                  <strong>{testimonials[0].author}</strong> - {testimonials[0].role}
-                </cite>
-              </div>
+            <div className="testimonial-card" style={{ marginTop: '2rem' }}>
+              <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                "{testimonials[0].quote}"
+              </blockquote>
+              <cite style={{ color: 'var(--accent-primary)', fontStyle: 'normal', fontSize: 'var(--font-size-body-sm)' }}>
+                <strong>{testimonials[0].author}</strong> - {testimonials[0].role}
+              </cite>
             </div>
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section style={styles.faqSection} aria-labelledby="faq-title">
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle} id="faq-title">
-                <FiMessageSquare />
-                Career Change FAQ: Expert Answers for {currentYear}
-              </h2>
-              <p style={styles.sectionSubtitle}>
-                Get clarity on career transition questions with <strong>data-backed solutions</strong> and 89% success methodologies.
-              </p>
+        {/* FAQ */}
+        <section className="section section-alt" aria-labelledby="faq-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="faq-title"><FiMessageSquare size={28} style={{ display: 'inline', marginRight: '0.75rem', color: 'var(--accent-primary)' }} />Career Change FAQ: Expert Answers for {currentYear}</h2>
+              <p className="section-subtitle">Get clarity on career transition questions with <strong>data-backed solutions</strong> and 89% success methodologies.</p>
             </div>
-            
-            <div style={styles.faqGrid}>
+            <div className="faq-grid" style={{ maxWidth: '1000px', margin: '0 auto' }}>
               {faqs.map((faq, index) => (
-                <div key={index} style={styles.faqItem}>
-                  <h3 style={styles.faqQuestion}>{faq.question}</h3>
-                  <p className="left-align" style={styles.faqAnswer}>{faq.answer}</p>
+                <div key={index} className="faq-item">
+                  <h3 className="faq-question">{faq.question}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{faq.answer}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section style={styles.ctaSection} aria-labelledby="cta-title">
-          <div className="container">
-            <div style={styles.ctaContent}>
-              <h2 style={styles.ctaTitle} id="cta-title">
-                Ready to Execute Your {currentYear} Career Transformation?
-              </h2>
-              <p style={styles.ctaSubtitle}>
-                Create a <strong>professional, career-change optimized resume</strong> with 90% ATS pass rates. 
-                Combine these proven strategies with our specialized templates to achieve 89% career transition success.
-              </p>
-              
-              <div style={styles.ctaButtons}>
-                <Link
-                  href="/resume-templates"
-                  style={styles.ctaButton}
-                  aria-label={`Build free ATS-optimized career change resume for ${currentYear}`}
-                >
-                  Build Your Career Change Resume Now
-                  <FiArrowRight />
-                </Link>
-              </div>
-              
-              <div style={styles.ctaGuarantee}>
-                <FiCheck />
-                <span>No credit card required • Free forever • 90% ATS Optimization • 89% Success Rate</span>
-              </div>
-              
-              <div style={styles.ctaFeatures}>
-                <div style={styles.ctaFeature}>
-                  <FiTarget />
-                  <span>Career Change Templates</span>
-                </div>
-                <div style={styles.ctaFeature}>
-                  <FiTrendingUp />
-                  <span>Transferable Skills Focus</span>
-                </div>
-                <div style={styles.ctaFeature}>
-                  <FiAward />
-                  <span>Industry-Specific Formats</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links Section - Enhanced with 5 New Random High-Value Links */}
-        <section style={styles.internalLinksSection} aria-labelledby="internal-links-title">
-          <div className="container">
-            <h2 style={styles.internalLinksTitle} id="internal-links-title">
-              Continue Your Professional Development Journey
+        {/* CTA */}
+        <section aria-labelledby="cta-title" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 id="cta-title" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Ready to Execute Your {currentYear} Career Transformation?
             </h2>
-            <div style={styles.internalLinksGrid}>
-              
-              {/* Link 1: Interview Tips (Next logical step) */}
-              <Link href="/interview-tips" style={styles.internalLinkCard}>
-                <FiUserCheck size={24} style={{marginBottom: '10px'}} />
-                <h3 style={styles.internalLinkTitle}>Master Your Job Interviews</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>Ace your interviews with expert tips and common question guides.</p>
-                <FiArrowRight />
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Create a <strong>professional, career-change optimized resume</strong> with 90% ATS pass rates. Combine these proven strategies with our specialized templates to achieve 89% career transition success.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action">
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label={`Build free ATS-optimized career change resume for ${currentYear}`}>
+                Build Your Career Change Resume Now <FiArrowRight />
               </Link>
-              
-              {/* Link 2: Tech Resume Builder (High Value Niche) */}
-              <Link href="/ats-friendly-tech-resume-builder" style={styles.internalLinkCard}>
-                <FiCode size={24} style={{marginBottom: '10px'}} />
-                <h3 style={styles.internalLinkTitle}>Tech & Engineering Resumes</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>Specialized ATS-friendly templates for developers and engineers.</p>
-                <FiArrowRight />
-              </Link>
-              
-              {/* Link 3: Finance Resume Builder (High Value Niche) */}
-              <Link href="/ats-friendly-finance-resume-builder" style={styles.internalLinkCard}>
-                <FiDollarSign size={24} style={{marginBottom: '10px'}} />
-                <h3 style={styles.internalLinkTitle}>Finance & Accounting Resumes</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>Tailored formats for banking, accounting, and financial roles.</p>
-                <FiArrowRight />
-              </Link>
-              
-              {/* Link 4: Keyword Matcher (High Utility Tool) */}
-              <Link href="/free-resume-keyword-matcher" style={styles.internalLinkCard}>
-                <FiAlignLeft size={24} style={{marginBottom: '10px'}} />
-                <h3 style={styles.internalLinkTitle}>Free Keyword Matcher Tool</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>Match your resume against job descriptions to boost ATS scores.</p>
-                <FiArrowRight />
-              </Link>
-
-              {/* Link 5: 2026 Trends (High GEO Relevance) */}
-              <Link href="/resume-trends-in-the-usa-for-2026" style={styles.internalLinkCard}>
-                <FiZap size={24} style={{marginBottom: '10px'}} />
-                <h3 style={styles.internalLinkTitle}>2026 Resume Trends Report</h3>
-                <p className="left-align" style={styles.internalLinkDescription}>Stay ahead with the latest hiring trends and format changes.</p>
-                <FiArrowRight />
-              </Link>
-
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1.5rem', fontSize: 'var(--font-size-body-sm)' }}>
+              <FiCheck style={{ color: 'var(--accent-primary)' }} />
+              <span style={{ color: 'var(--text-secondary)' }}>No credit card required • Free forever • 90% ATS Optimization • 89% Success Rate</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+              {["Career Change Templates", "Transferable Skills Focus", "Industry-Specific Formats"].map((item, i) => (
+                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck style={{ color: 'var(--accent-primary)' }} /> {item}</span>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Update Strategy */}
-        <div style={styles.updateStrategy}>
-          <div className="container">
-            <FiCalendar style={{marginRight: '0.5rem', display: 'inline'}} />
-            Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+        {/* Internal Links (SEO/GEO Boost) */}
+        <section className="section" aria-labelledby="internal-links-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="internal-links-title">Continue Your Professional Development Journey</h2>
+              <p className="section-subtitle">Explore related career resources to strengthen your application</p>
+            </div>
+            <div className="geo-link-grid">
+              {internalLinks.map((link, index) => {
+                const IconComponent = iconMap[link.iconName] || FiFileText;
+                return (
+                  <Link key={index} href={link.href} className="geo-link-card" aria-label={link.text}>
+                    <IconComponent size={24} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Update Strategy Footer */}
+        <div style={{ padding: '1rem 0', background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <div className="section-container">
+            <p className="text-small">
+              <FiCalendar style={{ display: 'inline', marginRight: '0.5rem' }} />
+              Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+            </p>
           </div>
         </div>
+
+        {/* Hidden metadata for crawlers (from Page 1) */}
+        <div style={{ display: 'none' }}>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{buildTimestamp}</span>
+        </div>
       </main>
-    </div>
+    </>
   );
 };
 

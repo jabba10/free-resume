@@ -11,279 +11,500 @@ import {
   FiCode, FiCloud, FiSmartphone, FiMonitor, FiPieChart, FiTrendingDown
 } from 'react-icons/fi';
 
-// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
-const criticalCSS = `
-  /* RESET & BASE STYLES */
-  * { 
+// ============================================================================
+// CRITICAL FLASH PREVENTION - Inline script to set theme BEFORE paint
+// ============================================================================
+const themeFlashPreventionScript = `
+  (function() {
+    // Immediately set dark theme attributes before any rendering
+    document.documentElement.style.backgroundColor = '#131315';
+    document.documentElement.style.color = '#e5e1e4';
+    document.body.style.backgroundColor = '#131315';
+    document.body.style.color = '#e5e1e4';
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.minHeight = '100vh';
+    document.body.style.fontFamily = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+    document.body.style.webkitFontSmoothing = 'antialiased';
+    document.body.style.mozOsxFontSmoothing = 'grayscale';
+  })();
+`;
+
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  /* ========== CSS CUSTOM PROPERTIES ========== */
+  :root {
+    /* ========== COLOR SYSTEM ========== */
+    
+    /* Background Colors */
+    --bg-page: #131315;
+    --bg-surface-lowest: #0e0e10;
+    --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21;
+    --bg-surface-high: #2a2a2c;
+    --bg-surface-highest: #353437;
+    --bg-surface-dim: #131315;
+    --bg-surface-bright: #39393b;
+    --bg-container: #1c1b1d;
+    --bg-container-high: #2a2a2c;
+    
+    /* Text Colors */
+    --text-primary: #e5e1e4;
+    --text-secondary: #c5bfc8;
+    --text-muted: #9d95a0;
+    --text-disabled: #605d62;
+    --text-inverse: #1c1b1d;
+    --text-on-accent: #3c2f00;
+    
+    /* Accent/Brand Colors - Gold */
+    --accent-primary: #f2ca50;
+    --accent-primary-container: #d4af37;
+    --accent-primary-fixed: #ffe088;
+    --accent-primary-fixed-dim: #e9c349;
+    --accent-on-primary: #3c2f00;
+    --accent-on-primary-container: #2a2000;
+    --accent-inverse-primary: #735c00;
+    --accent-primary-hover: #f7d86e;
+    --accent-primary-active: #e6bc3d;
+    
+    /* Border Colors */
+    --border-outline: #444246;
+    --border-outline-variant: #363538;
+    --border-gold-filament: rgba(212, 175, 55, 0.3);
+    --border-gold-filament-strong: rgba(212, 175, 55, 0.5);
+    --border-glass: rgba(212, 175, 55, 0.15);
+    
+    /* Success/Warning Colors */
+    --success-color: #a5d6a7;
+    --success-container: #1b5e20;
+    --warning-color: #ffb74d;
+    
+    /* Glass/Special Effect Colors */
+    --glass-bg: rgba(20, 19, 21, 0.7);
+    --glass-bg-light: rgba(28, 27, 29, 0.6);
+    --glass-bg-heavy: rgba(20, 19, 21, 0.85);
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Font Sizes */
+    --font-size-display-lg: clamp(3rem, 6vw, 4rem);
+    --font-size-display-md: clamp(2.25rem, 5vw, 3rem);
+    --font-size-headline-lg: clamp(1.75rem, 4vw, 2rem);
+    --font-size-headline-md: clamp(1.5rem, 3.5vw, 1.75rem);
+    --font-size-title-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-title-md: clamp(1.125rem, 2.5vw, 1.25rem);
+    --font-size-body-lg: clamp(1rem, 2vw, 1.125rem);
+    --font-size-body-md: 1rem;
+    --font-size-body-sm: 0.875rem;
+    --font-size-label-md: 0.75rem;
+    --font-size-label-sm: 0.6875rem;
+    
+    /* Line Heights */
+    --line-height-display: 1.1;
+    --line-height-headline: 1.2;
+    --line-height-title: 1.3;
+    --line-height-body: 1.6;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-caps: 0.08em;
+    
+    /* ========== SPACING SYSTEM ========== */
+    --section-gap-sm: clamp(3rem, 6vw, 4rem);
+    --section-gap-md: clamp(4rem, 8vw, 6rem);
+    --section-gap-lg: clamp(5rem, 10vw, 8rem);
+    
+    /* Content Widths */
+    --content-max-width: 1280px;
+    --content-narrow: 800px;
+    
+    /* Gutters */
+    --gutter-desktop: clamp(1.5rem, 5vw, 2.5rem);
+    --gutter-mobile: clamp(1rem, 4vw, 1.5rem);
+    
+    /* ========== SHADOW / ELEVATION TOKENS ========== */
+    --shadow-gold-glow: 0 0 20px rgba(242, 202, 80, 0.4), 0 0 60px rgba(242, 202, 80, 0.1);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242, 202, 80, 0.3);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* ========== ANIMATION / TRANSITION TOKENS ========== */
+    --transition-fast: 150ms;
+    --transition-medium: 250ms;
+    --transition-slow: 350ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --hover-transform: translateY(-2px);
+    --hover-transform-lg: translateY(-4px);
+    
+    /* ========== GLASS PANEL EFFECT ========== */
+    --glass-blur: 20px;
+    --glass-border-width: 0.5px;
+    --glass-padding: clamp(1.5rem, 4vw, 2.5rem);
+    
+    /* ========== BUTTON STYLE VARIABLES ========== */
+    --btn-primary-bg: #f2ca50;
+    --btn-primary-text: #3c2f00;
+    --btn-primary-padding: 0.875rem 2rem;
+    --btn-primary-radius: 0.25rem;
+    --btn-primary-font-size: 0.875rem;
+    --btn-primary-font-weight: 600;
+    --btn-primary-letter-spacing: 0.02em;
+    --btn-primary-hover-bg: #f7d86e;
+    
+    --btn-outline-border: rgba(212, 175, 55, 0.5);
+    --btn-outline-text: #f2ca50;
+    --btn-outline-hover-bg: rgba(242, 202, 80, 0.08);
+    
+    /* ========== CARD STYLE VARIABLES ========== */
+    --card-bg: rgba(28, 27, 29, 0.6);
+    --card-bg-hover: rgba(32, 31, 33, 0.8);
+    --card-border: 0.5px solid rgba(212, 175, 55, 0.15);
+    --card-padding: clamp(1.5rem, 4vw, 2.5rem);
+    --card-radius: 0.5rem;
+    --card-hover-transform: translateY(-4px);
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05);
+  }
+  
+  /* ========== BASE RESET ========== */
+  *, *::before, *::after { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
     -webkit-tap-highlight-color: transparent; 
   }
   
-  :root {
-    --primary: #000000;
-    --secondary: #333333;
-    --background: #ffffff;
-    --card-bg: #f9fafb;
-    --border: #e5e7eb;
-    --text-light: #4b5563;
-    --text-lighter: #6b7280;
-    --success: #059669;
-    --warning: #d97706;
-    --danger: #dc2626;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
-  
-  html { 
-    scroll-behavior: smooth; 
-    font-size: 16px;
+  html {
+    background-color: #131315 !important;
+    color: #e5e1e4 !important;
   }
   
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    color: var(--primary);
-    background: var(--background);
+    background-color: #131315 !important;
+    color: #e5e1e4 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    width: 100%;
+    min-height: 100vh;
   }
   
-  /* TYPOGRAPHY */
-  h1 { 
-    font-size: clamp(1.8rem, 5vw, 2.5rem); 
-    line-height: 1.2; 
-    font-weight: 700; 
-    margin-bottom: 1rem;
+  #__next {
+    background-color: #131315;
+    min-height: 100vh;
   }
   
-  h2 { 
-    font-size: clamp(1.5rem, 4vw, 2rem); 
-    line-height: 1.3; 
-    margin-bottom: 1rem;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-tight);
+    word-wrap: break-word;
   }
   
-  h3 { 
-    font-size: clamp(1.2rem, 3vw, 1.5rem); 
-    margin-bottom: 0.75rem;
+  h1 { font-size: var(--font-size-display-lg); line-height: var(--line-height-display); font-weight: var(--font-weight-bold); margin-bottom: 1rem; }
+  h2 { font-size: var(--font-size-display-md); line-height: var(--line-height-headline); font-weight: var(--font-weight-bold); }
+  h3 { font-size: var(--font-size-headline-lg); line-height: var(--line-height-headline); font-weight: var(--font-weight-semibold); font-family: var(--font-body); }
+  p { color: var(--text-secondary); font-size: var(--font-size-body-lg); line-height: var(--line-height-body); }
+  strong { color: var(--text-primary); font-weight: var(--font-weight-semibold); }
+  a { color: var(--accent-primary); transition: color var(--transition-fast) var(--easing-default); text-decoration: none; }
+  a:hover { color: var(--accent-primary-hover); }
+  
+  /* ========== UTILITY CLASSES ========== */
+  .gradient-text {
+    background: linear-gradient(135deg, #f2ca50 0%, #d4af37 50%, #ffe088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
-  h4 { 
-    font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    margin-bottom: 0.5rem;
-  }
-  
-  p { 
-    font-size: clamp(1rem, 2vw, 1.1rem); 
-    color: var(--text-light);
-    margin-bottom: 1rem;
-  }
-  
-  a { 
-    color: var(--primary);
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  
-  a:hover { 
-    opacity: 0.8;
-  }
-  
-  img, svg { 
-    max-width: 100%; 
-    height: auto; 
-    display: block; 
-  }
-  
-  /* UTILITY CLASSES */
-  .container {
-    max-width: 1280px;
+  .section-container {
+    max-width: var(--content-max-width);
     margin: 0 auto;
-    padding: 0 clamp(16px, 5vw, 24px);
+    padding: 0 var(--gutter-desktop);
     width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .section-container { padding: 0 var(--gutter-mobile); }
   }
   
   .skip-link {
     position: absolute;
     top: -40px;
     left: 0;
-    background: var(--primary);
-    color: white;
-    padding: 8px;
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 8px 16px;
     z-index: 100;
+    border-radius: 0 0.125rem 0.125rem 0;
+    font-weight: var(--font-weight-semibold);
   }
+  .skip-link:focus { top: 0; }
   
-  .skip-link:focus { 
-    top: 0; 
-  }
-  
-  .gradient-text {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  /* BUTTON STYLES */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: var(--primary);
-    color: var(--background);
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    border: 1px solid var(--primary);
-    transition: all 0.2s ease;
-    min-width: 200px;
-    text-align: center;
+    padding: var(--btn-primary-padding);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
     cursor: pointer;
+    box-shadow: var(--shadow-button);
+    text-decoration: none;
+    min-width: 200px;
   }
+  .btn-primary:hover { background: var(--btn-primary-hover-bg); transform: var(--hover-transform); box-shadow: var(--shadow-gold-glow-sm); color: var(--btn-primary-text); }
   
-  .btn-primary:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  .btn-secondary {
+  .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    padding: var(--btn-primary-padding);
     background: transparent;
-    color: var(--primary);
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    border: 2px solid var(--primary);
-    transition: all 0.2s ease;
-    min-width: 200px;
-    text-align: center;
+    color: var(--btn-outline-text);
+    border: 0.5px solid var(--btn-outline-border);
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
     cursor: pointer;
+    text-decoration: none;
+    min-width: 200px;
   }
-  
-  .btn-secondary:hover {
-    background: var(--card-bg);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
+  .btn-outline:hover { background: var(--btn-outline-hover-bg); border-color: rgba(212, 175, 55, 0.8); transform: var(--hover-transform); color: var(--btn-outline-text); }
   
   .btn-badge {
-    background: var(--success);
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 1rem;
+    background: rgba(60, 47, 0, 0.3);
+    color: var(--accent-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
     font-size: 0.75rem;
-    margin-left: 0.5rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
   }
   
-  /* CARD STYLES */
-  .card {
+  .card-executive {
     background: var(--card-bg);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    transition: all 0.2s ease;
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    transition: all var(--transition-medium) var(--easing-smooth);
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
+  .card-executive:hover { background: var(--card-bg-hover); border-color: rgba(212, 175, 55, 0.3); transform: var(--card-hover-transform); box-shadow: var(--card-hover-shadow); }
   
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+  /* ========== GUIDE PAGE SPECIFIC STYLES ========== */
+  
+  .section { width: 100%; padding: var(--section-gap-md) 0; }
+  .section-alt { background: var(--bg-surface-lowest); }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 6vw, 3rem);
   }
+  .section-title { margin-bottom: 1rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .section-subtitle { font-size: var(--font-size-body-lg); color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
   
-  /* GRID SYSTEMS */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-  }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin: 2rem auto; width: 100%; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1280px) { .grid { grid-template-columns: repeat(4, 1fr); } }
   
-  /* TABLE STYLES */
-  .table-wrapper {
-    overflow-x: auto;
-    margin: 2rem 0;
-    background: var(--background);
-    border-radius: 0.75rem;
-    border: 1px solid var(--border);
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px;
-  }
-  
-  th {
-    background: var(--card-bg);
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    border-bottom: 2px solid var(--border);
-  }
-  
-  td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  
-  .highlight-cell {
-    color: var(--success);
-    font-weight: 600;
-  }
-  
-  .warning-cell {
-    color: var(--warning);
-    font-weight: 600;
-  }
-  
-  /* STATS & BADGES */
   .stat-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
     padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    border: 1px solid var(--border);
-    font-size: 0.9rem;
+    border-radius: 9999px;
+    border: var(--card-border);
+    font-size: var(--font-size-body-sm);
   }
   
   .feature-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    background: var(--card-bg);
+    background: rgba(242, 202, 80, 0.1);
     padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
-    border: 1px solid var(--border);
-    font-size: 0.85rem;
+    border-radius: 9999px;
+    border: 0.5px solid var(--border-gold-filament);
+    font-size: var(--font-size-body-sm);
+    color: var(--accent-primary);
   }
   
-  /* RESPONSIVE BREAKPOINTS */
-  @media (max-width: 1024px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
+  .table-wrap {
+    overflow-x: auto;
+    margin: 2rem 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: 0.75rem;
+    border: var(--card-border);
+    -webkit-overflow-scrolling: touch;
   }
   
-  @media (max-width: 768px) {
-    .grid { grid-template-columns: 1fr; }
-    .btn-primary, .btn-secondary { width: 100%; min-width: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  th { background: rgba(242, 202, 80, 0.05); padding: 1rem; text-align: left; font-weight: var(--font-weight-semibold); color: var(--accent-primary); border-bottom: 1px solid var(--border-gold-filament); font-size: var(--font-size-body-sm); }
+  td { padding: 1rem; border-bottom: 0.5px solid var(--border-gold-filament); font-size: var(--font-size-body-sm); color: var(--text-secondary); }
+  
+  .highlight-cell { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
+  .warning-cell { color: var(--warning-color); font-weight: var(--font-weight-semibold); }
+  
+  .format-tab {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: var(--font-size-body-md);
+    transition: all var(--transition-fast) var(--easing-default);
+    color: var(--text-secondary);
+  }
+  .format-tab:hover { background: rgba(242, 202, 80, 0.08); }
+  .format-tab.active { background: var(--accent-primary); color: var(--accent-on-primary); border-color: var(--accent-primary); }
+  
+  .guide-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+    transition: all var(--transition-fast) var(--easing-default);
+  }
+  .guide-tab:hover { border-color: var(--accent-primary-container); }
+  .guide-tab.active { background: rgba(242, 202, 80, 0.1); border-color: var(--accent-primary); color: var(--accent-primary); }
+  
+  .tab-number {
+    width: 24px; height: 24px;
+    background: var(--accent-primary); color: var(--accent-on-primary);
+    border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: var(--font-weight-bold);
   }
   
-  @media (max-width: 480px) {
-    button, a, .clickable { touch-action: manipulation; }
-    .container { padding: 0 20px; }
-    p, li { font-size: 16px; }
-    .card { padding: 1.25rem; }
+  .direct-answer-block {
+    background: rgba(242, 202, 80, 0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border: var(--card-border);
+  }
+  
+  .direct-answer-question { font-size: var(--font-size-title-md); font-weight: var(--font-weight-semibold); color: var(--text-primary); margin-bottom: 0.5rem; }
+  .direct-answer-text { font-size: var(--font-size-body-lg); line-height: 1.6; margin-bottom: 1rem; color: var(--text-secondary); }
+  
+  .example-box {
+    background: var(--bg-surface-low);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: var(--card-border);
+    position: relative;
+  }
+  
+  .example-text {
+    font-family: var(--font-mono);
+    white-space: pre-wrap;
+    font-size: var(--font-size-body-sm);
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+  }
+  
+  .copy-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast) var(--easing-default);
+  }
+  .copy-button:hover { border-color: var(--accent-primary-container); color: var(--accent-primary); }
+  
+  .ats-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: 0.75rem;
+    border: var(--card-border);
+  }
+  
+  .ats-number {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent-primary-container), var(--accent-primary));
+    color: var(--accent-on-primary);
+    border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-weight: var(--font-weight-bold);
+  }
+  
+  .cta-section {
+    padding: var(--section-gap-lg) 0;
+    background: linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%);
+    text-align: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top: 0.5px solid var(--border-gold-filament);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .text-small { font-size: var(--font-size-body-sm); color: var(--text-muted); }
+  .text-center { text-align: center; }
+  
+  @media (max-width: 640px) {
+    .btn-primary, .btn-outline { width: 100%; min-width: auto; }
   }
 `;
 
@@ -297,7 +518,6 @@ const ResumeGuide2026 = ({ currentDate, lastModifiedDate }) => {
 
   useEffect(() => {
     setMounted(true);
-    
     const nextUpdate = new Date();
     nextUpdate.setHours(nextUpdate.getHours() + 24);
     const now = new Date();
@@ -505,34 +725,6 @@ Specialization: Artificial Intelligence
     }
   };
 
-  // JSON-LD format for RAG optimization
-  const formatsJSON = [
-    {
-      format: "Chronological",
-      atsCompatibility: 98,
-      recruiterPreference: 72,
-      gapVisibility: "High",
-      skillEmphasis: "Low",
-      bestFor: "Experienced professionals (10+ years)"
-    },
-    {
-      format: "Functional",
-      atsCompatibility: 65,
-      recruiterPreference: 28,
-      gapVisibility: "Low",
-      skillEmphasis: "High",
-      bestFor: "Career changers, employment gaps"
-    },
-    {
-      format: "Hybrid",
-      atsCompatibility: 94,
-      recruiterPreference: 85,
-      gapVisibility: "Medium",
-      skillEmphasis: "High",
-      bestFor: "Most 2026 job seekers (5-15 years)"
-    }
-  ];
-
   // ============= ATS OPTIMIZATION =============
   const atsTips = [
     { tip: "Use standard section headings (Experience, Education, Skills)", stat: "85% of ATS systems expect these exact headers" },
@@ -663,587 +855,7 @@ Specialization: Artificial Intelligence
 
   if (!mounted) return null;
 
-  // ============= INLINE STYLES FOR COMPONENT-SPECIFIC DESIGN =============
-  const styles = {
-    main: {
-      width: '100%',
-      overflowX: 'hidden',
-      backgroundColor: '#ffffff'
-    },
-    header: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: '#ffffff',
-      borderBottom: '1px solid var(--border)'
-    },
-    heroContent: {
-      maxWidth: '800px',
-      margin: '0 auto',
-      textAlign: 'center'
-    },
-    heroTitle: {
-      fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
-      fontWeight: '700',
-      lineHeight: '1.2',
-      marginBottom: '1rem'
-    },
-    heroSubtitle: {
-      fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-      color: 'var(--text-light)',
-      marginBottom: '2rem'
-    },
-    heroButtons: {
-      display: 'flex',
-      gap: '1rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      marginBottom: '2rem'
-    },
-    heroFeatures: {
-      display: 'flex',
-      gap: '0.75rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      marginBottom: '2rem'
-    },
-    heroStats: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '2rem'
-    },
-    statCard: {
-      background: 'var(--card-bg)',
-      padding: '1.5rem',
-      borderRadius: '0.75rem',
-      textAlign: 'center',
-      border: '1px solid var(--border)'
-    },
-    statIconContainer: {
-      fontSize: '2rem',
-      marginBottom: '0.5rem',
-      color: 'var(--primary)'
-    },
-    statValue: {
-      fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-      fontWeight: '700',
-      marginBottom: '0.25rem'
-    },
-    statLabel: {
-      fontSize: '0.9rem',
-      color: 'var(--text-light)',
-      marginBottom: '0.5rem'
-    },
-    statSource: {
-      fontSize: '0.75rem',
-      color: 'var(--text-lighter)'
-    },
-    authoritySection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: 'var(--card-bg)'
-    },
-    authorityGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '2rem'
-    },
-    authorityContent: {
-      padding: '1rem'
-    },
-    authorityText: {
-      marginBottom: '1rem',
-      lineHeight: '1.6'
-    },
-    credentialsList: {
-      display: 'grid',
-      gap: '1rem',
-      marginTop: '1.5rem'
-    },
-    credentialItem: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
-      padding: '0.75rem',
-      background: '#ffffff',
-      borderRadius: '0.5rem',
-      border: '1px solid var(--border)'
-    },
-    credentialIcon: {
-      fontSize: '1.5rem',
-      color: 'var(--success)',
-      flexShrink: 0
-    },
-    trustSignals: {
-      padding: '1rem',
-      background: '#ffffff',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    trustTitle: {
-      fontSize: '1.2rem',
-      marginBottom: '1rem'
-    },
-    trustGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(2, 1fr)',
-      gap: '0.75rem',
-      marginBottom: '1.5rem'
-    },
-    trustSignal: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      fontSize: '0.9rem',
-      color: 'var(--text-light)'
-    },
-    socialLinks: {
-      display: 'flex',
-      gap: '0.75rem',
-      flexWrap: 'wrap',
-      marginTop: '1rem'
-    },
-    socialLink: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem 1rem',
-      background: 'var(--card-bg)',
-      borderRadius: '0.5rem',
-      border: '1px solid var(--border)',
-      fontSize: '0.9rem'
-    },
-    formatsSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: '#ffffff'
-    },
-    sectionHeader: {
-      textAlign: 'center',
-      maxWidth: '800px',
-      margin: '0 auto 3rem'
-    },
-    sectionTitle: {
-      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-      marginBottom: '1rem'
-    },
-    sectionSubtitle: {
-      fontSize: 'clamp(1rem, 2vw, 1.1rem)',
-      color: 'var(--text-light)'
-    },
-    formatTabs: {
-      display: 'flex',
-      gap: '0.5rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      marginBottom: '2rem'
-    },
-    formatTab: {
-      padding: '0.75rem 1.5rem',
-      background: 'transparent',
-      border: '1px solid var(--border)',
-      borderRadius: '2rem',
-      cursor: 'pointer',
-      fontSize: '1rem',
-      transition: 'all 0.2s ease'
-    },
-    formatContent: {
-      maxWidth: '1000px',
-      margin: '0 auto'
-    },
-    formatInfo: {
-      background: 'var(--card-bg)',
-      padding: '2rem',
-      borderRadius: '1rem',
-      border: '1px solid var(--border)'
-    },
-    formatHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      marginBottom: '1rem'
-    },
-    formatTitle: {
-      fontSize: '1.5rem'
-    },
-    successBadge: {
-      padding: '0.5rem 1rem',
-      background: 'var(--success)',
-      color: 'white',
-      borderRadius: '2rem',
-      fontSize: '0.9rem',
-      fontWeight: '500'
-    },
-    formatDescription: {
-      marginBottom: '1.5rem'
-    },
-    formatStats: {
-      display: 'flex',
-      gap: '1rem',
-      flexWrap: 'wrap',
-      marginBottom: '2rem'
-    },
-    comparisonTable: {
-      marginTop: '2rem'
-    },
-    comparisonTitle: {
-      marginBottom: '1rem'
-    },
-    tableWrapper: {
-      overflowX: 'auto',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)',
-      background: '#ffffff'
-    },
-    guideSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: 'var(--card-bg)'
-    },
-    guideNavigation: {
-      display: 'flex',
-      gap: '0.5rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      marginBottom: '2rem'
-    },
-    guideTab: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem 1rem',
-      background: '#ffffff',
-      border: '1px solid var(--border)',
-      borderRadius: '0.5rem',
-      cursor: 'pointer'
-    },
-    tabNumber: {
-      width: '24px',
-      height: '24px',
-      background: 'var(--primary)',
-      color: 'white',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: '0.8rem'
-    },
-    guideContent: {
-      maxWidth: '900px',
-      margin: '0 auto'
-    },
-    directAnswerBlock: {
-      background: 'linear-gradient(135deg, #f0f9ff 0%, #e6f3ff 100%)',
-      padding: '2rem',
-      borderRadius: '1rem',
-      marginBottom: '2rem',
-      border: '1px solid var(--border)'
-    },
-    directAnswerQuestion: {
-      fontSize: '1.2rem',
-      fontWeight: '600',
-      marginBottom: '0.5rem'
-    },
-    directAnswerText: {
-      fontSize: '1.1rem',
-      lineHeight: '1.6',
-      marginBottom: '1rem'
-    },
-    directAnswerSource: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      fontSize: '0.9rem',
-      color: 'var(--text-light)'
-    },
-    contentHeader: {
-      marginBottom: '2rem'
-    },
-    contentTitle: {
-      fontSize: '1.3rem',
-      marginBottom: '0.5rem'
-    },
-    contentDescription: {
-      color: 'var(--text-light)'
-    },
-    contentStats: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem 1rem',
-      background: '#ffffff',
-      borderRadius: '2rem',
-      border: '1px solid var(--border)',
-      fontSize: '0.9rem',
-      marginTop: '1rem'
-    },
-    contentGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '2rem'
-    },
-    tipsColumn: {
-      background: '#ffffff',
-      padding: '1.5rem',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    tipsTitle: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      marginBottom: '1rem'
-    },
-    tipsList: {
-      listStyle: 'none'
-    },
-    tipItem: {
-      padding: '0.5rem 0',
-      borderBottom: '1px dashed var(--border)',
-      '&:last-child': {
-        borderBottom: 'none'
-      }
-    },
-    exampleColumn: {
-      background: '#ffffff',
-      padding: '1.5rem',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    exampleTitle: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      marginBottom: '1rem'
-    },
-    exampleBox: {
-      background: 'var(--card-bg)',
-      padding: '1rem',
-      borderRadius: '0.5rem',
-      position: 'relative'
-    },
-    exampleText: {
-      fontFamily: 'monospace',
-      whiteSpace: 'pre-wrap',
-      fontSize: '0.9rem',
-      marginBottom: '1rem'
-    },
-    copyButton: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem 1rem',
-      background: '#ffffff',
-      border: '1px solid var(--border)',
-      borderRadius: '0.5rem',
-      cursor: 'pointer',
-      fontSize: '0.9rem'
-    },
-    atsSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: '#ffffff'
-    },
-    atsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '1rem',
-      maxWidth: '1000px',
-      margin: '0 auto'
-    },
-    atsCard: {
-      display: 'flex',
-      gap: '1rem',
-      padding: '1.5rem',
-      background: 'var(--card-bg)',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    atsNumber: {
-      width: '32px',
-      height: '32px',
-      background: 'var(--primary)',
-      color: 'white',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexShrink: 0,
-      fontWeight: '600'
-    },
-    atsContent: {
-      flex: 1
-    },
-    atsText: {
-      fontWeight: '500',
-      marginBottom: '0.5rem'
-    },
-    atsStat: {
-      fontSize: '0.9rem',
-      color: 'var(--success)'
-    },
-    trendsSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: 'var(--card-bg)'
-    },
-    trendsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '1.5rem'
-    },
-    trendCard: {
-      background: '#ffffff',
-      padding: '1.5rem',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    trendIconContainer: {
-      fontSize: '2rem',
-      marginBottom: '1rem',
-      color: 'var(--primary)'
-    },
-    trendTitle: {
-      fontSize: '1.2rem',
-      marginBottom: '0.5rem'
-    },
-    trendDescription: {
-      fontSize: '0.95rem',
-      marginBottom: '1rem',
-      color: 'var(--text-light)'
-    },
-    trendAdoption: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem',
-      background: 'var(--card-bg)',
-      borderRadius: '0.5rem',
-      fontSize: '0.9rem',
-      marginBottom: '0.5rem'
-    },
-    trendStat: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.5rem',
-      background: 'var(--card-bg)',
-      borderRadius: '0.5rem',
-      fontSize: '0.9rem'
-    },
-    faqSection: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      backgroundColor: '#ffffff'
-    },
-    faqGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '1.5rem',
-      marginBottom: '2rem'
-    },
-    faqCard: {
-      background: 'var(--card-bg)',
-      padding: '1.5rem',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    faqQuestion: {
-      fontSize: '1.1rem',
-      fontWeight: '600',
-      marginBottom: '0.5rem'
-    },
-    faqAnswer: {
-      fontSize: '0.95rem',
-      color: 'var(--text-light)',
-      marginBottom: '1rem'
-    },
-    faqSource: {
-      fontSize: '0.8rem',
-      color: 'var(--text-lighter)'
-    },
-    faqMore: {
-      textAlign: 'center'
-    },
-    faqLink: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0.75rem 1.5rem',
-      background: 'transparent',
-      border: '1px solid var(--border)',
-      borderRadius: '0.5rem',
-      fontSize: '1rem'
-    },
-    ctaSection: {
-      padding: 'clamp(3rem, 6vw, 5rem) 0',
-      backgroundColor: 'var(--primary)',
-      color: 'white'
-    },
-    ctaContent: {
-      textAlign: 'center',
-      maxWidth: '800px',
-      margin: '0 auto'
-    },
-    ctaTitle: {
-      fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
-      color: 'white',
-      marginBottom: '1rem'
-    },
-    ctaSubtitle: {
-      fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-      color: 'rgba(255, 255, 255, 0.9)',
-      marginBottom: '2rem'
-    },
-    ctaHighlight: {
-      color: '#ffd700',
-      fontWeight: '600'
-    },
-    ctaButtons: {
-      display: 'flex',
-      gap: '1rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      marginBottom: '2rem'
-    },
-    ctaButton: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '1rem 2rem',
-      background: 'white',
-      color: 'var(--primary)',
-      borderRadius: '0.5rem',
-      fontWeight: '600',
-      border: 'none',
-      cursor: 'pointer'
-    },
-    ctaFeatures: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '1rem',
-      marginTop: '2rem'
-    },
-    ctaFeature: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      justifyContent: 'center',
-      color: 'rgba(255, 255, 255, 0.9)'
-    },
-    updateStrategy: {
-      padding: '1rem 0',
-      backgroundColor: 'var(--card-bg)',
-      borderTop: '1px solid var(--border)',
-      fontSize: '0.9rem',
-      color: 'var(--text-light)'
-    },
-    lastUpdated: {
-      padding: '1rem 0',
-      backgroundColor: '#ffffff',
-      borderTop: '1px solid var(--border)',
-      fontSize: '0.8rem',
-      color: 'var(--text-lighter)',
-      textAlign: 'center'
-    }
-  };
-
-  // SINGLE CANONICAL URL - UPDATED (www removed)
+  // SINGLE CANONICAL URL
   const canonicalUrl = "https://professionalresumefree.com/2026-resume-writing-guide-with-modern-tips";
 
   // OPTIMIZED TITLE - UNDER 70 CHARACTERS
@@ -1252,7 +864,16 @@ Specialization: Artificial Intelligence
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        {/* CRITICAL: Prevent theme flash with blocking script */}
+        <script dangerouslySetInnerHTML={{ __html: themeFlashPreventionScript }} />
+        
+        {/* Inline critical CSS that loads synchronously */}
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* Google Fonts with display=swap to prevent invisible text */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS (58 chars) ===== */}
         <title>{pageTitle}</title>
@@ -1270,7 +891,7 @@ Specialization: Artificial Intelligence
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== SINGLE CANONICAL URL - UPDATED ===== */}
+        {/* ===== SINGLE CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== ALTERNATE HREFLANG ===== */}
@@ -1292,6 +913,7 @@ Specialization: Artificial Intelligence
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content={lastModifiedDate} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="Isata Kamara" />
@@ -1302,11 +924,9 @@ Specialization: Artificial Intelligence
         <meta name="twitter:description" content="Expert 2026 resume guide: Compare formats with success rates, CAR method examples, ATS keywords. Updated weekly." />
         <meta name="twitter:image" content="https://professionalresumefree.com/resume-guide-2026.jpg" />
         
-        {/* ===== PERFORMANCE ===== */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <meta name="theme-color" content="#131315" />
         
-        {/* ===== COMPREHENSIVE JSON-LD SCHEMA - UPDATED (www removed) ===== */}
+        {/* ===== COMPREHENSIVE JSON-LD SCHEMA ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -1372,32 +992,47 @@ Specialization: Artificial Intelligence
         }} />
       </Head>
 
-      <main style={styles.main}>
+      <main style={{
+        backgroundColor: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+        fontFamily: 'var(--font-body)',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        width: '100%'
+      }}>
         {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
         {/* ============= HERO SECTION ============= */}
-        <header style={styles.header} id="main-content">
-          <div className="container">
-            <div style={styles.heroContent}>
-              {/* ===== SINGLE H1 TAG - ONLY ONE ON THE ENTIRE PAGE ===== */}
-              <h1 style={styles.heroTitle}>2026 Resume Writing Guide: ATS-Optimized Templates & CAR Method Examples</h1>
+        <section className="section" id="main-content">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <h1 style={{
+                fontSize: 'var(--font-size-display-lg)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 'var(--font-weight-extrabold)',
+                lineHeight: 'var(--line-height-display)',
+                marginBottom: '1.25rem'
+              }}>
+                2026 Resume Writing Guide:{' '}
+                <span className="gradient-text">ATS-Optimized Templates & CAR Method</span>
+              </h1>
               
-              <p style={styles.heroSubtitle}>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                 <strong>By Isata Kamara (10+ years, 8,500+ resumes reviewed)</strong> — Compare <strong>chronological (87% success), functional (63% success), and hybrid (94% ATS pass) formats</strong> with verified statistics. Master the <strong>CAR method</strong> for achievement bullets and optimize for AI screening.
               </p>
               
-              <div style={styles.heroButtons}>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
                 <Link href="/resume-templates" className="btn-primary">
                   <FiDownload /> Build Your ATS-Optimized Resume
                   <span className="btn-badge">Free</span>
                 </Link>
-                <a href="#format-comparison" className="btn-secondary">
+                <a href="#format-comparison" className="btn-outline">
                   Compare Formats by Success Rate
                 </a>
               </div>
               
-              <div style={styles.heroFeatures}>
+              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <span className="feature-badge"><FiCheck /> 3 Formats Compared</span>
                 <span className="feature-badge"><FiCheck /> CAR Method Examples</span>
                 <span className="feature-badge"><FiCheck /> ATS Keywords 2026</span>
@@ -1406,79 +1041,81 @@ Specialization: Artificial Intelligence
             </div>
 
             {/* Stats with Sources */}
-            <div style={styles.heroStats}>
+            <div className="grid" style={{ marginTop: '3rem' }}>
               {stats.map((stat, index) => (
-                <div key={index} style={styles.statCard}>
-                  <div style={styles.statIconContainer}>{stat.icon}</div>
-                  <div style={styles.statValue}>{stat.value}</div>
-                  <div style={styles.statLabel}>{stat.label}</div>
-                  <div style={styles.statSource}>{stat.source}</div>
+                <div key={index} className="card-executive" style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>{stat.icon}</div>
+                  <div style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 'var(--font-weight-bold)', color: 'var(--accent-primary)', fontFamily: 'var(--font-display)', marginBottom: '0.25rem' }}>
+                    {stat.value}
+                  </div>
+                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                    {stat.label}
+                  </div>
+                  <div className="text-small">{stat.source}</div>
                 </div>
               ))}
             </div>
           </div>
-        </header>
+        </section>
 
         {/* ============= AUTHORITY SECTION ============= */}
-        <section style={styles.authoritySection}>
-          <div className="container">
-            <div style={styles.authorityGrid}>
-              <article style={styles.authorityContent}>
-                <h2 className="section-title">Why Trust This Guide?</h2>
-                <p style={styles.authorityText}>
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              <article style={{ padding: '1rem' }}>
+                <h2 style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem' }}>Why Trust This Guide?</h2>
+                <p style={{ marginBottom: '1rem', lineHeight: '1.6' }}>
                   I'm <strong>Isata Kamara</strong>, a Professional Resume Writer with <strong>10+ years of experience</strong> in career documentation and resume optimization. I've personally reviewed over <strong>8,500 resumes</strong> across 300+ companies including Fortune 500 organizations. I served as an <strong>HR professional</strong> for several years, reviewing 1,500+ candidates, and have been featured in <strong>CareerBuilder and industry resume panels</strong> for my resume strategies.
                 </p>
-                <p style={styles.authorityText}>
+                <p style={{ marginBottom: '1.5rem', lineHeight: '1.6' }}>
                   Every recommendation in this 2026 guide is backed by <strong>verified data from ATS providers, recruiter surveys, and placement outcomes</strong> from my clients (84% placement rate within 90 days). I analyze <strong>1.2M+ data points annually</strong> from ATS systems, recruiter behavior, and job market trends.
                 </p>
                 
-                <div style={styles.credentialsList}>
-                  <div style={styles.credentialItem}>
-                    <FiShield style={styles.credentialIcon} />
-                    <div>
-                      <strong>Certified Professional Resume Writer (CPRW)</strong>
-                      <span style={{display: 'block', fontSize: '0.9rem', color: 'var(--text-light)'}}>Career Directors International</span>
+                <div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
+                  {[
+                    { icon: <FiShield />, title: "Certified Professional Resume Writer (CPRW)", subtitle: "Career Directors International" },
+                    { icon: <FiBriefcase />, title: "Former HR Professional", subtitle: "1,500+ candidates reviewed" },
+                    { icon: <FiMessageCircle />, title: "Featured Expert", subtitle: "CareerBuilder, Resume Expert Panel" },
+                    { icon: <FiUsers />, title: "8,500+ Resumes Reviewed", subtitle: "84% placement rate within 90 days" }
+                  ].map((cred, idx) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.75rem', background: 'var(--card-bg)', borderRadius: '0.5rem', border: 'var(--card-border)' }}>
+                      <div style={{ fontSize: '1.5rem', color: 'var(--accent-primary)', flexShrink: 0 }}>{cred.icon}</div>
+                      <div>
+                        <strong style={{ fontSize: 'var(--font-size-body-sm)' }}>{cred.title}</strong>
+                        <span style={{ display: 'block', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>{cred.subtitle}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div style={styles.credentialItem}>
-                    <FiBriefcase style={styles.credentialIcon} />
-                    <div>
-                      <strong>Former HR Professional</strong>
-                      <span style={{display: 'block', fontSize: '0.9rem', color: 'var(--text-light)'}}>1,500+ candidates reviewed</span>
-                    </div>
-                  </div>
-                  <div style={styles.credentialItem}>
-                    <FiMessageCircle style={styles.credentialIcon} />
-                    <div>
-                      <strong>Featured Expert</strong>
-                      <span style={{display: 'block', fontSize: '0.9rem', color: 'var(--text-light)'}}>CareerBuilder, Resume Expert Panel</span>
-                    </div>
-                  </div>
-                  <div style={styles.credentialItem}>
-                    <FiUsers style={styles.credentialIcon} />
-                    <div>
-                      <strong>8,500+ Resumes Reviewed</strong>
-                      <span style={{display: 'block', fontSize: '0.9rem', color: 'var(--text-light)'}}>84% placement rate within 90 days</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </article>
               
-              <aside style={styles.trustSignals}>
-                <h3 style={styles.trustTitle}>Trust Signals & Credentials</h3>
-                <div style={styles.trustGrid}>
-                  <div style={styles.trustSignal}><FiAward /> CDI Excellence Award 2024</div>
-                  <div style={styles.trustSignal}><FiCheck /> Updated Weekly</div>
-                  <div style={styles.trustSignal}><FiFileText /> Data-Verified Tips</div>
-                  <div style={styles.trustSignal}><FiUsers /> 8.5K+ Success Stories</div>
-                  <div style={styles.trustSignal}><FiCpu /> AI/ATS Certified</div>
-                  <div style={styles.trustSignal}><FiDatabase /> 1.2M Data Points</div>
+              <aside style={{ padding: '1rem', background: 'var(--card-bg)', backdropFilter: 'blur(var(--glass-blur))', borderRadius: '0.75rem', border: 'var(--card-border)' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>Trust Signals & Credentials</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  {[
+                    ['Award', 'CDI Excellence 2024'],
+                    ['Updated', 'Weekly'],
+                    ['Data', 'Verified Tips'],
+                    ['Reviews', '8.5K+ Success'],
+                    ['AI/ATS', 'Certified'],
+                    ['Data Points', '1.2M Analyzed']
+                  ].map(([label, value], idx) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                      <FiCheck style={{ color: 'var(--accent-primary)', flexShrink: 0 }} /> <strong>{label}:</strong> {value}
+                    </div>
+                  ))}
                 </div>
 
-                <div style={styles.socialLinks}>
-                  <a href={authorData.social.linkedin} target="_blank" rel="noopener noreferrer" style={styles.socialLink}><FiLinkedin /> LinkedIn</a>
-                  <a href={authorData.social.twitter} target="_blank" rel="noopener noreferrer" style={styles.socialLink}><FiTwitter /> Twitter</a>
-                  <a href={authorData.social.github} target="_blank" rel="noopener noreferrer" style={styles.socialLink}><FiGithub /> GitHub</a>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <a href={authorData.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '0.5rem 1rem', fontSize: 'var(--font-size-body-sm)', minWidth: 'auto' }}>
+                    <FiLinkedin /> LinkedIn
+                  </a>
+                  <a href={authorData.social.twitter} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '0.5rem 1rem', fontSize: 'var(--font-size-body-sm)', minWidth: 'auto' }}>
+                    <FiTwitter /> Twitter
+                  </a>
+                  <a href={authorData.social.github} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: '0.5rem 1rem', fontSize: 'var(--font-size-body-sm)', minWidth: 'auto' }}>
+                    <FiGithub /> GitHub
+                  </a>
                 </div>
               </aside>
             </div>
@@ -1486,104 +1123,99 @@ Specialization: Artificial Intelligence
         </section>
 
         {/* ============= FORMAT COMPARISON SECTION ============= */}
-        <section id="format-comparison" style={styles.formatsSection}>
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle}>
-                Resume Format Comparison for 2026: <span className="gradient-text">Chronological vs Functional vs Hybrid</span>
+        <section id="format-comparison" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">
+                Resume Format Comparison for 2026:{' '}
+                <span className="gradient-text">Chronological vs Functional vs Hybrid</span>
               </h2>
-              <p style={styles.sectionSubtitle}>
+              <p className="section-subtitle">
                 Data-driven comparison with <strong>success rates and ATS pass percentages</strong> based on 8,500+ resume reviews.
               </p>
             </div>
 
-            <div style={styles.formatTabs}>
+            <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
               {Object.entries(resumeFormats).map(([key, format]) => (
                 <button
                   key={key}
-                  style={{
-                    ...styles.formatTab,
-                    ...(activeFormat === key ? {
-                      background: 'var(--primary)',
-                      color: 'white',
-                      borderColor: 'var(--primary)'
-                    } : {})
-                  }}
+                  className={`format-tab ${activeFormat === key ? 'active' : ''}`}
                   onClick={() => setActiveFormat(key)}
+                  aria-label={`View ${format.name} details`}
                 >
                   <span>{format.name.split(' ')[0]}</span> {format.name.split(' ').slice(1).join(' ')}
                 </button>
               ))}
             </div>
 
-            <article style={styles.formatContent}>
-              <div style={styles.formatInfo}>
-                <div style={styles.formatHeader}>
-                  <h3 style={styles.formatTitle}>{resumeFormats[activeFormat].name}</h3>
-                  <div style={styles.successBadge}>Success Rate: {resumeFormats[activeFormat].successRate}</div>
+            <article style={{ maxWidth: '1000px', margin: '0 auto' }}>
+              <div className="card-executive">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+                  <h3 style={{ fontSize: 'var(--font-size-headline-md)' }}>{resumeFormats[activeFormat].name}</h3>
+                  <span style={{ padding: '0.5rem 1rem', background: 'var(--accent-primary)', color: 'var(--accent-on-primary)', borderRadius: '9999px', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)' }}>
+                    Success Rate: {resumeFormats[activeFormat].successRate}
+                  </span>
                 </div>
                 
-                <p style={styles.formatDescription}>{resumeFormats[activeFormat].description}</p>
+                <p style={{ marginBottom: '1.5rem' }}>{resumeFormats[activeFormat].description}</p>
                 
-                <div style={styles.formatStats}>
-                  <div className="stat-pill"><FiTarget /> Best for: {resumeFormats[activeFormat].bestFor[0]}</div>
-                  <div className="stat-pill"><FiActivity /> ATS Pass Rate: {resumeFormats[activeFormat].atsPassRate}</div>
-                  <div className="stat-pill"><FiUsers /> Recruiter Preference: {resumeFormats[activeFormat].recruiterPreference}</div>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                  <span className="stat-pill"><FiTarget /> Best for: {resumeFormats[activeFormat].bestFor[0]}</span>
+                  <span className="stat-pill"><FiActivity /> ATS Pass Rate: {resumeFormats[activeFormat].atsPassRate}</span>
+                  <span className="stat-pill"><FiUsers /> Recruiter Preference: {resumeFormats[activeFormat].recruiterPreference}</span>
                 </div>
 
                 {/* Responsive Comparison Table */}
-                <div style={styles.comparisonTable}>
-                  <h4 style={styles.comparisonTitle}>Quick Format Comparison Matrix</h4>
-                  <div style={styles.tableWrapper}>
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>Factor</th>
-                          <th>Chronological</th>
-                          <th>Functional</th>
-                          <th>Hybrid</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>ATS Compatibility</td>
-                          <td className="highlight-cell">98%</td>
-                          <td className="warning-cell">65%</td>
-                          <td className="highlight-cell">94%</td>
-                        </tr>
-                        <tr>
-                          <td>Recruiter Preference</td>
-                          <td>72%</td>
-                          <td>28%</td>
-                          <td className="highlight-cell">85%</td>
-                        </tr>
-                        <tr>
-                          <td>Gap Visibility</td>
-                          <td>High</td>
-                          <td>Low</td>
-                          <td>Medium</td>
-                        </tr>
-                        <tr>
-                          <td>Skill Emphasis</td>
-                          <td>Low</td>
-                          <td>High</td>
-                          <td>High</td>
-                        </tr>
-                        <tr>
-                          <td>Best For</td>
-                          <td>10+ years experience</td>
-                          <td>Career changers</td>
-                          <td>Most 2026 job seekers</td>
-                        </tr>
-                        <tr>
-                          <td>Success Rate</td>
-                          <td>87%</td>
-                          <td>63%</td>
-                          <td className="highlight-cell">91%</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                <h4 style={{ marginBottom: '1rem', fontSize: 'var(--font-size-title-md)' }}>Quick Format Comparison Matrix</h4>
+                <div className="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Factor</th>
+                        <th>Chronological</th>
+                        <th>Functional</th>
+                        <th>Hybrid</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>ATS Compatibility</td>
+                        <td className="highlight-cell">98%</td>
+                        <td className="warning-cell">65%</td>
+                        <td className="highlight-cell">94%</td>
+                      </tr>
+                      <tr>
+                        <td>Recruiter Preference</td>
+                        <td>72%</td>
+                        <td>28%</td>
+                        <td className="highlight-cell">85%</td>
+                      </tr>
+                      <tr>
+                        <td>Gap Visibility</td>
+                        <td>High</td>
+                        <td>Low</td>
+                        <td>Medium</td>
+                      </tr>
+                      <tr>
+                        <td>Skill Emphasis</td>
+                        <td>Low</td>
+                        <td>High</td>
+                        <td>High</td>
+                      </tr>
+                      <tr>
+                        <td>Best For</td>
+                        <td>10+ years experience</td>
+                        <td>Career changers</td>
+                        <td>Most 2026 job seekers</td>
+                      </tr>
+                      <tr>
+                        <td>Success Rate</td>
+                        <td>87%</td>
+                        <td>63%</td>
+                        <td className="highlight-cell">91%</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </article>
@@ -1591,77 +1223,71 @@ Specialization: Artificial Intelligence
         </section>
 
         {/* ============= STEP-BY-STEP GUIDE ============= */}
-        <section style={styles.guideSection}>
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle}>Step-by-Step Resume Writing Guide for 2026</h2>
-              <p style={styles.sectionSubtitle}>
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Step-by-Step Resume Writing Guide for 2026</h2>
+              <p className="section-subtitle">
                 Each section starts with a <strong>direct answer</strong> to your key questions, followed by expert examples.
               </p>
             </div>
 
-            <nav style={styles.guideNavigation}>
+            <nav style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
               {resumeSections.map((section, index) => (
                 <button
                   key={index}
-                  style={{
-                    ...styles.guideTab,
-                    ...(index === activeSection ? {
-                      background: 'var(--primary)',
-                      color: 'white',
-                      borderColor: 'var(--primary)'
-                    } : {})
-                  }}
+                  className={`guide-tab ${index === activeSection ? 'active' : ''}`}
                   onClick={() => setActiveSection(index)}
                   aria-label={`Go to section: ${section.title}`}
                 >
-                  <div style={{
-                    ...styles.tabNumber,
-                    ...(index === activeSection ? {
-                      background: 'white',
-                      color: 'var(--primary)'
-                    } : {})
-                  }}>{index + 1}</div>
-                  <span style={index === activeSection ? {color: 'white'} : {}}>{section.title.split(' ').slice(0, 3).join(' ')}...</span>
+                  <div className="tab-number" style={index === activeSection ? { background: 'var(--accent-on-primary-container)', color: 'var(--accent-primary)' } : {}}>{index + 1}</div>
+                  <span>{section.title.split(' ').slice(0, 3).join(' ')}...</span>
                 </button>
               ))}
             </nav>
 
-            <article style={styles.guideContent}>
+            <article style={{ maxWidth: '900px', margin: '0 auto' }}>
               {/* Direct Answer Block */}
-              <div style={styles.directAnswerBlock}>
-                <h3 style={styles.directAnswerQuestion}>{resumeSections[activeSection].question}</h3>
-                <p style={styles.directAnswerText}>{resumeSections[activeSection].directAnswer}</p>
-                <div style={styles.directAnswerSource}>
+              <div className="direct-answer-block">
+                <h3 className="direct-answer-question">{resumeSections[activeSection].question}</h3>
+                <p className="direct-answer-text">{resumeSections[activeSection].directAnswer}</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>
                   <FiBook /> Source: Isata Kamara • Based on 8,500+ resume reviews
                 </div>
               </div>
 
-              <div style={styles.contentHeader}>
-                <h3 style={styles.contentTitle}>{resumeSections[activeSection].title}</h3>
-                <p style={styles.contentDescription}>{resumeSections[activeSection].content}</p>
+              <div style={{ marginBottom: '2rem' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-lg)', marginBottom: '0.5rem' }}>{resumeSections[activeSection].title}</h3>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>{resumeSections[activeSection].content}</p>
                 {resumeSections[activeSection].stats && (
-                  <div style={styles.contentStats}><FiBarChart2 /> {resumeSections[activeSection].stats}</div>
+                  <div className="stat-pill"><FiBarChart2 /> {resumeSections[activeSection].stats}</div>
                 )}
               </div>
 
-              <div style={styles.contentGrid}>
-                <div style={styles.tipsColumn}>
-                  <h4 style={styles.tipsTitle}><FiCheck /> Best Practices for 2026</h4>
-                  <ul style={styles.tipsList}>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                <div className="card-executive">
+                  <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', fontSize: 'var(--font-size-title-md)' }}>
+                    <FiCheck style={{ color: 'var(--accent-primary)' }} /> Best Practices for 2026
+                  </h4>
+                  <ul style={{ listStyle: 'none' }}>
                     {resumeSections[activeSection].tips.map((tip, index) => (
-                      <li key={index} style={styles.tipItem}>{tip}</li>
+                      <li key={index} style={{ padding: '0.5rem 0', borderBottom: '1px dashed var(--border-gold-filament)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                        ✦ {tip}
+                      </li>
                     ))}
                   </ul>
                 </div>
 
-                <div style={styles.exampleColumn}>
-                  <h4 style={styles.exampleTitle}><FiFileText /> Professional Example</h4>
-                  <div style={styles.exampleBox}>
-                    <pre style={styles.exampleText}>{resumeSections[activeSection].example}</pre>
+                <div className="card-executive">
+                  <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', fontSize: 'var(--font-size-title-md)' }}>
+                    <FiFileText style={{ color: 'var(--accent-primary)' }} /> Professional Example
+                  </h4>
+                  <div className="example-box">
+                    <pre className="example-text">{resumeSections[activeSection].example}</pre>
                     <button 
-                      style={styles.copyButton}
+                      className="copy-button"
                       onClick={() => copyToClipboard(resumeSections[activeSection].example, activeSection)}
+                      aria-label={`Copy example for ${resumeSections[activeSection].title}`}
                     >
                       <FiCopy /> {copiedIndex === activeSection ? 'Copied!' : 'Copy Example'}
                     </button>
@@ -1673,22 +1299,22 @@ Specialization: Artificial Intelligence
         </section>
 
         {/* ============= ATS OPTIMIZATION SECTION ============= */}
-        <section style={styles.atsSection}>
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle}>ATS Optimization for 2026: Keywords, Formatting & Success Rates</h2>
-              <p style={styles.sectionSubtitle}>
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">ATS Optimization for 2026: Keywords, Formatting & Success Rates</h2>
+              <p className="section-subtitle">
                 <strong>75% of resumes are rejected by ATS before human review.</strong> Follow these data-backed tips.
               </p>
             </div>
             
-            <div style={styles.atsGrid}>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', maxWidth: '1000px', margin: '0 auto' }}>
               {atsTips.map((item, index) => (
-                <div key={index} style={styles.atsCard}>
-                  <div style={styles.atsNumber}>{index + 1}</div>
-                  <div style={styles.atsContent}>
-                    <p style={styles.atsText}>{item.tip}</p>
-                    <span style={styles.atsStat}>{item.stat}</span>
+                <div key={index} className="ats-card">
+                  <div className="ats-number">{index + 1}</div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 'var(--font-weight-medium)', color: 'var(--text-primary)', marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)' }}>{item.tip}</p>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)' }}>{item.stat}</span>
                   </div>
                 </div>
               ))}
@@ -1697,23 +1323,27 @@ Specialization: Artificial Intelligence
         </section>
 
         {/* ============= EMERGING TRENDS 2026 ============= */}
-        <section style={styles.trendsSection}>
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle}>Emerging Resume Trends for 2026</h2>
-              <p style={styles.sectionSubtitle}>
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Emerging Resume Trends for 2026</h2>
+              <p className="section-subtitle">
                 Stay ahead with these <strong>adoption rates and statistics</strong> based on analysis of 1.2M+ job applications.
               </p>
             </div>
 
-            <div style={styles.trendsGrid}>
+            <div className="grid">
               {emergingTrends2026.map((trend, index) => (
-                <div key={index} style={styles.trendCard}>
-                  <div style={styles.trendIconContainer}>{trend.icon}</div>
-                  <h3 style={styles.trendTitle}>{trend.title}</h3>
-                  <p style={styles.trendDescription}>{trend.description}</p>
-                  <div style={styles.trendAdoption}><FiActivity /> {trend.adoption}</div>
-                  <div style={styles.trendStat}><FiBarChart2 /> {trend.stat}</div>
+                <div key={index} className="card-executive">
+                  <div style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--accent-primary)' }}>{trend.icon}</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{trend.title}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '1rem', flex: 1, color: 'var(--text-secondary)' }}>{trend.description}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem', background: 'rgba(242, 202, 80, 0.05)', borderRadius: '0.5rem', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem' }}>
+                    <FiActivity style={{ color: 'var(--accent-primary)' }} /> {trend.adoption}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem', background: 'rgba(242, 202, 80, 0.05)', borderRadius: '0.5rem', fontSize: 'var(--font-size-body-sm)' }}>
+                    <FiBarChart2 style={{ color: 'var(--accent-primary)' }} /> {trend.stat}
+                  </div>
                 </div>
               ))}
             </div>
@@ -1721,19 +1351,19 @@ Specialization: Artificial Intelligence
         </section>
 
         {/* ============= FAQ SECTION ============= */}
-        <section style={styles.faqSection}>
-          <div className="container">
-            <div style={styles.sectionHeader}>
-              <h2 style={styles.sectionTitle}>Frequently Asked Questions About 2026 Resumes</h2>
-              <p style={styles.sectionSubtitle}>Expert answers from 8,500+ job seekers</p>
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions About 2026 Resumes</h2>
+              <p className="section-subtitle">Expert answers from 8,500+ job seekers</p>
             </div>
 
-            <div style={styles.faqGrid}>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
               {faqData.slice(0, 6).map((faq, index) => (
-                <div key={index} style={styles.faqCard}>
-                  <h3 style={styles.faqQuestion}>{faq.question}</h3>
-                  <p style={styles.faqAnswer}>{faq.answer}</p>
-                  <div style={styles.faqSource}>Source: Isata Kamara • 10+ years experience</div>
+                <div key={index} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', fontWeight: 'var(--font-weight-semibold)' }}>{faq.question}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '1rem', flex: 1, color: 'var(--text-secondary)' }}>{faq.answer}</p>
+                  <div className="text-small">Source: Isata Kamara • 10+ years experience</div>
                 </div>
               ))}
             </div>
@@ -1741,51 +1371,62 @@ Specialization: Artificial Intelligence
         </section>
 
         {/* ============= FINAL CTA SECTION ============= */}
-        <section style={styles.ctaSection}>
-          <div className="container">
-            <div style={styles.ctaContent}>
-              <h2 style={styles.ctaTitle}>Ready to Create Your 2026 Resume?</h2>
-              <p style={styles.ctaSubtitle}>
+        <section className="cta-section">
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 style={{ 
+                fontSize: 'var(--font-size-display-md)', 
+                fontFamily: 'var(--font-display)', 
+                fontWeight: 'var(--font-weight-bold)', 
+                color: 'var(--text-primary)', 
+                marginBottom: '1rem' 
+              }}>
+                Ready to Create Your 2026 Resume?
+              </h2>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                 Use our <strong>ATS-optimized resume builder</strong> with templates for all formats. 
                 Based on Isata Kamara's 10+ years of expertise and verified by 8,500+ successful job seekers.
-                <strong style={styles.ctaHighlight}> 94% ATS pass rate guaranteed.</strong>
+                <strong style={{ color: 'var(--accent-primary)', display: 'block', marginTop: '0.5rem' }}>94% ATS pass rate guaranteed.</strong>
               </p>
               
-              <div style={styles.ctaButtons}>
-                <Link href="/resume-templates" style={styles.ctaButton}>
-                  <FiDownload />
-                  Build Your Free Resume Now
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow)' }}>
+                  <FiDownload /> Build Your Free Resume Now
                   <span className="btn-badge">Free</span>
                 </Link>
-                <a href="#format-comparison" className="btn-secondary" style={{background: 'transparent', borderColor: 'white', color: 'white'}}>
-                  <FiFileText />
-                  Compare Resume Formats
+                <a href="#format-comparison" className="btn-outline" style={{ borderColor: 'var(--accent-primary)', color: 'var(--accent-primary)' }}>
+                  <FiFileText /> Compare Resume Formats
                 </a>
               </div>
               
-              <div style={styles.ctaFeatures}>
-                <div style={styles.ctaFeature}><FiCheck /> ATS-Friendly Templates (94% pass rate)</div>
-                <div style={styles.ctaFeature}><FiCheck /> All 3 Formats Included</div>
-                <div style={styles.ctaFeature}><FiCheck /> Expert Tips (10+ years)</div>
-                <div style={styles.ctaFeature}><FiCheck /> Free PDF Download</div>
-                <div style={styles.ctaFeature}><FiCheck /> Updated for 2026</div>
-                <div style={styles.ctaFeature}><FiCheck /> CAR Method Examples</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
+                {['ATS-Friendly Templates (94%)', 'All 3 Formats Included', 'Expert Tips (10+ years)', 'Free PDF Download', 'Updated for 2026', 'CAR Method Examples'].map((feature, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                    <FiCheck style={{ color: 'var(--accent-primary)' }} /> {feature}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* Update Strategy */}
-        <div style={styles.updateStrategy}>
-          <div className="container">
-            <FiClock /> Update strategy: <strong>Every 24 hours</strong> {timeUntilUpdate && <span>({timeUntilUpdate})</span>}
+        <div style={{ padding: '1rem 0', background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <div className="section-container">
+            <p className="text-small">
+              <FiClock style={{ display: 'inline', marginRight: '0.5rem' }} />
+              Update strategy: <strong>Every 24 hours</strong> {timeUntilUpdate && <span>({timeUntilUpdate})</span>}
+            </p>
           </div>
         </div>
 
         {/* Last Updated */}
-        <footer style={styles.lastUpdated}>
-          <div className="container">
-            <FiCalendar /> Guide updated: {currentDate} • Version 2026.2 • Based on 8,500+ resume reviews
+        <footer style={{ padding: '1rem 0', background: 'var(--bg-page)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <div className="section-container">
+            <p className="text-small">
+              <FiCalendar style={{ display: 'inline', marginRight: '0.5rem' }} />
+              Guide updated: {currentDate} • Version 2026.2 • Based on 8,500+ resume reviews
+            </p>
           </div>
         </footer>
       </main>
@@ -1801,7 +1442,7 @@ export async function getStaticProps() {
   
   return {
     props: { currentDate, lastModifiedDate },
-    revalidate: 3600 // 24 hours
+    revalidate: 3600 // Revalidate every hour for freshness
   };
 }
 

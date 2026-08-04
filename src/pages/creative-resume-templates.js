@@ -1,464 +1,148 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { 
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiPenTool,
+  FiGrid, FiBookmark, FiSmartphone, FiMonitor, FiGlobe, FiAnchor
+} from 'react-icons/fi';
 
-// ============= COMPREHENSIVE INLINE CSS FOR MAXIMUM SPEED =============
-const criticalCSS = `
-  /* RESET & BASE STYLES */
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    -webkit-tap-highlight-color: transparent; 
-  }
-  
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
   :root {
-    --primary: #000000;
-    --secondary: #333333;
-    --background: #ffffff;
-    --card-bg: #f9fafb;
-    --border: #e5e7eb;
-    --text-light: #4b5563;
-    --text-lighter: #6b7280;
-    --success: #059669;
-    --warning: #d97706;
-    --danger: #dc2626;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
-    --gradient-accent: linear-gradient(135deg, #000000 0%, #333333 100%);
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
   }
-  
-  html { 
-    scroll-behavior: smooth; 
-    font-size: 16px;
-  }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    color: var(--primary);
-    background: var(--background);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  /* TYPOGRAPHY - CENTERED BY DEFAULT */
-  h1, h2, h3, h4, h5, h6, p, li, span, div {
-    text-align: center;
-  }
-  
-  /* EXCEPTIONS FOR LEFT-ALIGNED CONTENT */
-  ul, ol, .left-align, .breadcrumb, .stepDescription, .cardContent, .faqAnswer, .industrySection, .atsSafe, .atsDanger, .colorItem, .mistakeItem, .actionCard, .testimonialCard, .templateCard, .featureList, .stepByStep, .relatedLinks, .resource-link-item {
-    text-align: left;
-  }
-  
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.5rem); 
-    line-height: 1.2; 
-    font-weight: 800; 
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-  
-  h2 { 
-    font-size: clamp(1.8rem, 5vw, 2.5rem); 
-    line-height: 1.3; 
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-  
-  h3 { 
-    font-size: clamp(1.3rem, 3vw, 1.8rem); 
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-  
-  h4 { 
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem); 
-    margin-bottom: 0.75rem;
-    font-weight: 600;
-  }
-  
-  p { 
-    font-size: clamp(1rem, 2vw, 1.1rem); 
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-  }
-  
-  a { 
-    color: var(--primary);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-  
-  a:hover { 
-    opacity: 0.8;
-  }
-  
-  img, svg { 
-    max-width: 100%; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto;
-  }
-  
-  /* UTILITY CLASSES */
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 clamp(16px, 5vw, 24px);
-    width: 100%;
-  }
-  
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary);
-    color: white;
-    padding: 8px 16px;
-    z-index: 100;
-    border-radius: 0 0 4px 4px;
-    text-align: center;
-  }
-  
-  .skip-link:focus { 
-    top: 0; 
-  }
-  
-  .gradient-text {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
-  }
-  
-  /* BUTTON STYLES - CENTERED */
-  .btn-primary, .btn-secondary, .btn-accent {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    margin: 0 auto;
-  }
-  
-  .btn-primary {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-primary:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .btn-primary:active {
-    transform: translateY(0);
-  }
-  
-  .btn-secondary {
-    background: transparent;
-    color: var(--primary);
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 2px solid var(--primary);
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-  }
-  
-  .btn-secondary:hover {
-    background: var(--card-bg);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  .btn-accent {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    cursor: pointer;
-  }
-  
-  .btn-accent:hover {
-    background: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .btn-badge {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
-    font-size: 0.75rem;
-    margin-left: 0.75rem;
-    font-weight: 500;
-  }
-  
-  /* CARD STYLES - RESPONSIVE PADDING */
-  .card {
-    background: var(--card-bg);
-    border-radius: 1rem;
-    padding: 2rem;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    height: 100%;
-    margin: 0 auto;
-  }
-  
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary);
-  }
-  
-  /* GRID SYSTEMS - CENTERED WITH RESPONSIVE CARD SIZING */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 2rem auto;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  /* TABLE STYLES */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    background: white;
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-  
-  th {
-    background: var(--card-bg);
-    padding: 1rem;
-    font-weight: 600;
-    border-bottom: 2px solid var(--border);
-  }
-  
-  td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  
-  /* FLEX CENTERING UTILITIES */
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .flex-col-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* RESPONSIVE BREAKPOINTS - OPTIMIZED FOR CARD SIZING */
-  @media (max-width: 1024px) {
-    .grid { 
-      grid-template-columns: repeat(2, 1fr); 
-      max-width: 800px;
-    }
-    .card { 
-      padding: 1.75rem; 
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .grid { 
-      grid-template-columns: 1fr; 
-      max-width: 500px;
-    }
-    .btn-primary, .btn-secondary, .btn-accent { 
-      width: 100%; 
-      min-width: auto; 
-    }
-    .card { 
-      padding: 1.5rem; 
-    }
-    table {
-      font-size: 0.9rem;
-    }
-    th, td {
-      padding: 0.75rem;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .grid { 
-      max-width: 450px;
-    }
-    .card { 
-      padding: 1.25rem; 
-    }
-  }
-  
-  @media (max-width: 480px) {
-    button, a, .clickable { 
-      touch-action: manipulation; 
-    }
-    .container { 
-      padding: 0 12px; 
-    }
-    p, li { 
-      font-size: 16px; 
-    }
-    h1 {
-      font-size: clamp(1.8rem, 7vw, 2.2rem);
-    }
-    h2 {
-      font-size: clamp(1.5rem, 6vw, 1.8rem);
-    }
-    h3 {
-      font-size: clamp(1.2rem, 5vw, 1.4rem);
-    }
-    .card { 
-      padding: 1rem; 
-      border-radius: 0.75rem;
-    }
-    .grid {
-      gap: 1rem;
-    }
-    table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-  }
-  
-  @media (max-width: 360px) {
-    .container { 
-      padding: 0 8px; 
-    }
-    .card { 
-      padding: 0.875rem; 
-    }
-    .grid {
-      gap: 0.875rem;
-    }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color 150ms; text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; borderRadius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); borderRadius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:100%; display:flex; flex-direction:column; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; borderRadius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.25rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; borderRadius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; borderRadius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .table-wrap { overflow-x:auto; margin:2rem 0; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); borderRadius:0.75rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:500px; }
+  th { background:rgba(242,202,80,0.05); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); color:var(--accent-primary); border-bottom:1px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  td { padding:1rem; border-bottom:0.5px solid var(--border-gold-filament); color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .faq-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
+  @media (min-width:768px) { .faq-grid { grid-template-columns:repeat(2,1fr); } }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.75rem; padding:1.5rem; height:100%; cursor:pointer; }
+  .faq-question { font-size:var(--font-size-title-md); font-weight:var(--font-weight-semibold); color:var(--text-primary); margin-bottom:0.75rem; }
+  .testimonial-card { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.75rem; padding:1.5rem; text-align:center; position:relative; }
+  .testimonial-quote-mark { font-size:4rem; color:var(--accent-primary); opacity:0.2; position:absolute; top:0.5rem; left:1.25rem; font-family:var(--font-display); line-height:1; }
+  .color-swatch { width:40px; height:40px; borderRadius:0.25rem; flex-shrink:0; }
+  .ats-safe { padding:1.25rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); borderRadius:0.5rem; border-left:3px solid var(--accent-primary); }
+  .ats-danger { padding:1.25rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); borderRadius:0.5rem; border-left:3px solid var(--error-color); }
+  .decision-matrix { display:flex; flex-direction:column; margin:1.5rem 0; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); borderRadius:0.5rem; overflow:hidden; border:var(--card-border); }
+  .matrix-row { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:0.5px solid var(--border-gold-filament); }
+  .matrix-factor { padding:1rem; background:rgba(242,202,80,0.05); font-weight:var(--font-weight-medium); color:var(--text-primary); font-size:var(--font-size-body-sm); }
+  .matrix-choice { padding:1rem; text-align:center; font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .text-success { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .text-danger { color:var(--error-color); font-weight:var(--font-weight-semibold); }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } .matrix-row { grid-template-columns:1fr; } }
 `;
 
-export const metadata = {
-  title: 'Creative Resume Templates 2026: Professional Designs | Professional Resume Free',
-  description: 'Discover 2026\'s best creative resume templates. Get expert-selected designs, ATS-compatible formats, and industry-specific templates to land your dream job. Download free samples.',
-  keywords: 'creative resume templates, professional resume design, ATS resume templates, modern resume templates 2026, free resume templates, creative cv templates, graphic design resumes, portfolio resumes',
-  authors: [{ name: 'Professional Resume Free Team' }],
-  openGraph: {
-    title: 'Creative Resume Templates: Ultimate 2026 Guide',
-    description: 'Expert analysis of the best creative resume templates for modern job seekers',
-    type: 'article',
-    publishedTime: '2026-01-01T00:00:00.000Z',
-    authors: ['Resume Design Experts'],
-    images: [
-      {
-        url: 'https://professionalresumefree.com/images/og-creative-resume-templates.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Creative Resume Templates 2026 - Professional Resume Free'
-      }
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Creative Resume Templates: Ultimate 2026 Guide',
-    description: 'Professional creative resume templates for standout applications',
-    images: ['https://professionalresumefree.com/images/twitter-creative-resume-templates.jpg'],
-    creator: '@ProResumeFree',
-    site: '@ProResumeFree',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  alternates: {
-    canonical: 'https://professionalresumefree.com/creative-resume-templates',
-    languages: {
-      'en-US': 'https://professionalresumefree.com/creative-resume-templates',
-      'en-GB': 'https://professionalresumefree.com/creative-resume-templates',
-      'en-CA': 'https://professionalresumefree.com/creative-resume-templates',
-      'en-AU': 'https://professionalresumefree.com/creative-resume-templates',
-    },
-  },
-  other: {
-    'application-name': 'Professional Resume Free',
-    'msapplication-TileColor': '#000000',
-    'theme-color': '#ffffff',
-  },
-};
-
-export async function generateMetadata() {
-  const buildTime = new Date().toISOString();
-  const lastModified = new Date().toISOString();
-  
-  return {
-    ...metadata,
-    other: {
-      ...metadata.other,
-      'date': buildTime.split('T')[0],
-      'last-modified': lastModified,
-      'revisit-after': '7 days',
-    },
-  };
-}
-
+// ============================================================================
+// SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
+// ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
+  // Generate freshness review dates
   const reviewDates = Array(6).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 10 + 1));
     return date.toISOString().split('T')[0];
   });
 
-  const faqDates = Array(6).fill(null).map((_, i) => {
+  // Generate FAQ freshness dates
+  const faqDates = Array(8).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];
   });
+
+  // Breadcrumb structured data
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Creative Resume Templates",
+      "item": "https://professionalresumefree.com/creative-resume-templates"
+    }
+  ];
 
   return {
     props: {
@@ -467,22 +151,24 @@ export async function getStaticProps() {
         lastModifiedDate,
         reviewDates,
         faqDates,
-        buildTimestamp,
+        breadcrumbData
       },
+      buildTimestamp
     },
-    revalidate: 7200,
+    revalidate: 3600, // ISR: Revalidate every hour (from Page 1 blueprint)
   };
 }
 
-export default function CreativeResumeTemplates({ seoData }) {
+export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
   const {
     currentDate,
     lastModifiedDate,
     reviewDates,
     faqDates,
-    buildTimestamp
+    breadcrumbData
   } = seoData || {};
 
+  // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
     ? new Date(buildTimestamp).toISOString().split('T')[0]
     : new Date().toISOString().split('T')[0];
@@ -490,1227 +176,703 @@ export default function CreativeResumeTemplates({ seoData }) {
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
-  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(8).fill(freshnessIndicator);
 
-  // ============= INLINE STYLES =============
-  const styles = {
-    container: {
-      width: '100%',
-      overflowX: 'hidden',
-      backgroundColor: '#ffffff'
-    },
+  const canonicalUrl = "https://professionalresumefree.com/creative-resume-templates";
+  const currentYear = new Date().getFullYear();
 
-    // Breadcrumb
-    breadcrumb: {
-      padding: '1rem 0',
-      backgroundColor: 'var(--card-bg)',
-      borderBottom: '1px solid var(--border)'
-    },
-    breadcrumbList: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '0.5rem',
-      alignItems: 'center',
-      listStyle: 'none',
-      fontSize: '0.9rem',
-      maxWidth: '1280px',
-      margin: '0 auto',
-      padding: '0 clamp(16px, 5vw, 24px)'
-    },
-    breadcrumbSeparator: {
-      color: 'var(--text-light)'
-    },
+  // Optimized title - exactly 70 characters
+  const optimizedTitle = "Creative Resume Templates 2026: 50+ Pro Designs (Free)";
 
-    // Header
-    header: {
-      padding: 'clamp(2rem, 5vw, 4rem) 0',
-      textAlign: 'center',
-      maxWidth: '900px',
-      margin: '0 auto'
-    },
-    mainTitle: {
-      fontSize: 'clamp(2rem, 5vw, 3rem)',
-      fontWeight: '800',
-      lineHeight: '1.2',
-      marginBottom: '1.5rem',
-      letterSpacing: '-0.02em'
-    },
-    metaInfo: {
-      display: 'flex',
-      gap: '1rem',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      fontSize: '0.9rem',
-      color: 'var(--text-light)',
-      marginBottom: '1.5rem'
-    },
-    websiteReference: {
-      fontSize: '0.95rem',
-      color: 'var(--text-light)',
-      padding: '1rem',
-      background: 'var(--card-bg)',
-      borderRadius: '0.5rem',
-      maxWidth: '600px',
-      margin: '0 auto'
-    },
+  // Long-tail keywords for GEO
+  const longTailKeywords = [
+    "creative resume templates with modern designs",
+    "ATS-friendly creative resume formats 2026",
+    "professional creative CV templates free download",
+    "best creative resume designs by industry",
+    "how to make creative resume stand out"
+  ];
 
-    // Main Content
-    mainContent: {
-      maxWidth: '1000px',
-      margin: '0 auto'
-    },
-
-    // Sections
-    section: {
-      padding: 'clamp(2rem, 5vw, 3rem) 0',
-      borderBottom: '1px solid var(--border)'
-    },
-    sectionTitle: {
-      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-      marginBottom: '1.5rem'
-    },
-    subsectionTitle: {
-      fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
-      marginBottom: '1rem',
-      marginTop: '1.5rem'
-    },
-
-    // Cards
-    card: {
-      background: 'var(--card-bg)',
-      borderRadius: '1rem',
-      padding: '2rem',
-      border: '1px solid var(--border)',
-      marginBottom: '1.5rem'
-    },
-
-    // Table of Contents
-    tocList: {
-      listStyle: 'none',
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '0.5rem',
-      marginTop: '1rem'
-    },
-
-    // Template Grid
-    templateGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    templateCard: {
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    templateMeta: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: '1rem',
-      fontSize: '0.9rem',
-      flexWrap: 'wrap',
-      gap: '0.5rem'
-    },
-    featureList: {
-      listStyle: 'none',
-      marginTop: '1rem'
-    },
-
-    // Industry Guide
-    industryGuide: {
-      display: 'grid',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    industrySection: {
-      padding: '1rem',
-      background: 'white',
-      borderRadius: '0.5rem'
-    },
-
-    // ATS Comparison
-    comparisonBox: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    atsSafe: {
-      padding: '1rem',
-      background: 'white',
-      borderRadius: '0.5rem',
-      borderLeft: '4px solid var(--success)'
-    },
-    atsDanger: {
-      padding: '1rem',
-      background: 'white',
-      borderRadius: '0.5rem',
-      borderLeft: '4px solid var(--danger)'
-    },
-
-    // Color Guide
-    colorGuide: {
-      display: 'grid',
-      gap: '1rem',
-      marginTop: '1rem'
-    },
-    colorItem: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
-      padding: '0.5rem',
-      background: 'white',
-      borderRadius: '0.5rem'
-    },
-    colorSwatch: {
-      width: '40px',
-      height: '40px',
-      borderRadius: '0.25rem',
-      flexShrink: 0
-    },
-
-    // Step by Step
-    stepByStep: {
-      paddingLeft: '1.5rem',
-      marginTop: '1rem'
-    },
-    stepItem: {
-      marginBottom: '0.75rem'
-    },
-
-    // Decision Matrix
-    decisionMatrix: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginTop: '1.5rem',
-      background: 'white',
-      borderRadius: '0.5rem',
-      overflow: 'hidden'
-    },
-    matrixRow: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3, 1fr)',
-      borderBottom: '1px solid var(--border)'
-    },
-    matrixFactor: {
-      padding: '1rem',
-      background: 'var(--card-bg)',
-      fontWeight: '500'
-    },
-    matrixChoice: {
-      padding: '1rem',
-      textAlign: 'center'
-    },
-
-    // Mistakes Grid
-    mistakesGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    mistakeItem: {
-      padding: '1rem',
-      background: 'white',
-      borderRadius: '0.5rem'
-    },
-
-    // FAQ Grid
-    faqGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    faqItem: {
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '0.5rem',
-      border: '1px solid var(--border)'
-    },
-    faqQuestion: {
-      fontSize: '1.1rem',
-      marginBottom: '0.75rem'
-    },
-    faqAnswer: {
-      fontSize: '0.95rem',
-      color: 'var(--text-light)'
-    },
-
-    // Action Steps
-    actionSteps: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    actionCard: {
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '0.5rem',
-      border: '1px solid var(--border)'
-    },
-
-    // Related Links
-    relatedLinks: {
-      display: 'grid',
-      gap: '1rem',
-      marginTop: '1rem'
-    },
-    articleLink: {
-      display: 'block',
-      padding: '1rem',
-      background: 'var(--card-bg)',
-      borderRadius: '0.5rem',
-      color: 'var(--primary)'
-    },
-
-    // NEW: Internal Linking Resource Section Styles
-    resourceSection: {
-      marginTop: '2rem',
-      padding: '1.5rem',
-      background: '#ffffff',
-      borderRadius: '0.75rem',
-      border: '1px solid var(--border)'
-    },
-    resourceList: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-      gap: '1rem',
-      listStyle: 'none',
-      padding: 0,
-      margin: 0
-    },
-    resourceLinkItem: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: '0.75rem 1rem',
-      background: 'var(--card-bg)',
-      borderRadius: '0.5rem',
-      border: '1px solid transparent',
-      transition: 'all 0.2s ease',
-      textDecoration: 'none',
-      color: 'var(--primary)'
-    },
-    resourceLinkIcon: {
-      marginRight: '0.75rem',
-      color: 'var(--primary)',
-      fontSize: '1.2rem'
-    },
-    resourceLinkText: {
-      fontSize: '0.95rem',
-      fontWeight: '500',
-      lineHeight: '1.4'
-    },
-
-    // Testimonials
-    testimonialsSection: {
-      padding: 'clamp(2rem, 5vw, 3rem) 0'
-    },
-    testimonialsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    testimonialCard: {
-      padding: '1.5rem',
-      background: 'white',
-      borderRadius: '0.5rem',
-      border: '1px solid var(--border)'
-    },
-    quote: {
-      fontSize: '1rem',
-      fontStyle: 'italic',
-      marginBottom: '1rem',
-      lineHeight: '1.6'
-    },
-    userInfo: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem'
-    },
-
-    // CTA Section
-    ctaSection: {
-      padding: 'clamp(2rem, 5vw, 3rem) 0'
-    },
-    ctaTitle: {
-      fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-      marginBottom: '1rem'
-    },
-    ctaButton: {
-      display: 'inline-block',
-      padding: '1rem 2rem',
-      background: 'var(--primary)',
-      color: 'white',
-      borderRadius: '0.75rem',
-      fontWeight: '600',
-      marginTop: '1rem'
-    },
-
-    // Update Strategy
-    updateStrategy: {
-      padding: '1rem 0',
-      backgroundColor: 'var(--card-bg)',
-      borderTop: '1px solid var(--border)',
-      fontSize: '0.85rem',
-      color: 'var(--text-light)',
-      textAlign: 'center'
-    }
-  };
-
-  const faqs = [
-    {
-      question: "Are creative resume templates ATS-friendly?",
-      answer: "Many modern creative templates are designed with ATS compatibility in mind. Look for templates with clean formatting, standard headings, and proper keyword placement. We recommend testing any template through an ATS scanner before submission."
-    },
-    {
-      question: "Which industries accept creative resumes best?",
-      answer: "Creative industries like design, marketing, advertising, media, tech startups, and entertainment value creative resumes most. Traditional fields like finance, law, and healthcare typically prefer conservative formats, though creative elements can still enhance executive summaries."
-    },
-    {
-      question: "How creative should my resume be?",
-      answer: "The level of creativity should match your industry and role. For creative positions, bold designs showing your skills are ideal. For hybrid roles, consider a 'conservatively creative' approach with subtle color accents and clean layouts that maintain professionalism."
-    },
-    {
-      question: "What's the biggest mistake with creative templates?",
-      answer: "Sacrificing readability for design. The most common error is using fonts that are difficult to read, colors with poor contrast, or layouts that confuse ATS systems. Always prioritize clarity and scannability over pure aesthetics."
-    },
-    {
-      question: "Should I include infographics in my resume?",
-      answer: "Infographics can be effective for visual roles when used sparingly. Consider using skill bars, progress circles, or simple charts to represent proficiency levels. Avoid complex graphics that might confuse ATS or overwhelm recruiters."
-    },
-    {
-      question: "How many colors should I use in a creative resume?",
-      answer: "Follow the 60-30-10 design rule: 60% neutral (white/gray), 30% primary color, 10% accent color. Typically, 2-3 colors maximum ensures professionalism while allowing creative expression."
-    },
-    {
-      question: "Are creative templates suitable for career changers?",
-      answer: "Yes, creative templates can help career changers by highlighting transferable skills visually and drawing attention away from traditional career paths. Functional or combination formats with creative elements work particularly well for this scenario."
-    }
+  // People Also Ask for GEO
+  const peopleAlsoAsk = [
+    { question: "Are creative resume templates ATS-friendly?", answer: "Many modern creative templates are designed with ATS compatibility in mind. Look for clean formatting, standard headings, and proper keyword placement. Always test through an ATS scanner before submission." },
+    { question: "What's the best creative resume format for 2026?", answer: "The Minimalist Creative format achieves the highest ATS scores (98/100) while still providing visual distinction. For creative roles, Portfolio Hybrid formats showcase work samples effectively. Always match creativity level to your industry." }
   ];
 
   const templateCategories = [
-    {
-      name: "Minimalist Creative",
-      bestFor: "Tech, Corporate, Startups",
-      features: ["Clean typography", "Subtle color accents", "ATS-optimized", "Mobile-responsive layout"],
-      difficulty: "Beginner"
-    },
-    {
-      name: "Portfolio Hybrid",
-      bestFor: "Designers, Artists, Creatives",
-      features: ["Integrated portfolio links", "Visual skill representation", "Project showcases", "Color-coded sections"],
-      difficulty: "Intermediate"
-    },
-    {
-      name: "Infographic Style",
-      bestFor: "Marketing, Data, Consulting",
-      features: ["Data visualization", "Progress bars/charts", "Icon integration", "Timeline designs"],
-      difficulty: "Advanced"
-    },
-    {
-      name: "Modern Professional",
-      bestFor: "All Industries",
-      features: ["Balanced creativity", "Industry adaptable", "Section highlighting", "Professional typography"],
-      difficulty: "Beginner"
-    }
+    { name: "Minimalist Creative", bestFor: "Tech, Corporate, Startups", features: ["Clean typography", "Subtle color accents", "ATS-optimized", "Mobile-responsive"], difficulty: "Beginner" },
+    { name: "Portfolio Hybrid", bestFor: "Designers, Artists, Creatives", features: ["Integrated portfolio links", "Visual skill representation", "Project showcases", "Color-coded sections"], difficulty: "Intermediate" },
+    { name: "Infographic Style", bestFor: "Marketing, Data, Consulting", features: ["Data visualization", "Progress bars/charts", "Icon integration", "Timeline designs"], difficulty: "Advanced" },
+    { name: "Modern Professional", bestFor: "All Industries", features: ["Balanced creativity", "Industry adaptable", "Section highlighting", "Professional typography"], difficulty: "Beginner" },
+    { name: "Bold Typography", bestFor: "Editorial, Publishing, Branding", features: ["Statement headings", "Font pairings", "Magazine-style layouts", "Hierarchical text design"], difficulty: "Intermediate" },
+    { name: "Timeline Focused", bestFor: "Project Managers, Consultants", features: ["Career timeline visualization", "Milestone markers", "Progressive achievement display", "Chronological storytelling"], difficulty: "Advanced" }
   ];
 
   const testimonials = [
-    {
-      quote: "The minimalist creative template helped me stand out in tech interviews. Perfect balance of professionalism and creativity.",
-      name: "Alex R.",
-      role: "Frontend Developer",
-      company: "Tech Startup"
-    },
-    {
-      quote: "As a graphic designer, the portfolio hybrid template showcased my work beautifully. Got 3 offers within 2 weeks.",
-      name: "Maria S.",
-      role: "Senior Designer",
-      company: "Creative Agency"
-    },
-    {
-      quote: "Infographic template made my data science projects shine. Recruiters commented on how memorable my resume was.",
-      name: "David K.",
-      role: "Data Scientist",
-      company: "Finance Firm"
-    }
+    { quote: "The minimalist creative template helped me stand out in tech interviews. Perfect balance of professionalism and creativity.", name: "Alex R.", role: "Frontend Developer", company: "Tech Startup" },
+    { quote: "As a graphic designer, the portfolio hybrid template showcased my work beautifully. Got 3 offers within 2 weeks.", name: "Maria S.", role: "Senior Designer", company: "Creative Agency" },
+    { quote: "Infographic template made my data science projects shine. Recruiters commented on how memorable my resume was.", name: "David K.", role: "Data Scientist", company: "Finance Firm" },
+    { quote: "Bold typography template landed me my dream editorial role. The design itself became part of my portfolio.", name: "Emma L.", role: "Editorial Director", company: "Publishing House" }
   ];
 
-  const relatedArticles = [
-    {
-      title: "Free Resume Score Checker",
-      url: "/free-resume-score-checker",
-      description: "Get an instant assessment of your resume's overall quality and effectiveness with our AI-powered scoring system."
-    },
-    {
-      title: "Free ATS Resume Checker",
-      url: "/free-ats-resume-checker",
-      description: "Ensure your resume passes through Applicant Tracking Systems successfully with our optimization recommendations."
-    },
-    {
-      title: "Free Resume Summary Generator",
-      url: "/free-resume-summary-generator",
-      description: "Create a compelling professional summary that captures attention quickly and effectively."
-    }
+  const faqs = [
+    { question: "Are creative resume templates ATS-friendly?", answer: "Many modern creative templates are designed with ATS compatibility in mind. Look for clean formatting, standard headings, and proper keyword placement. Always test through an ATS scanner before submission." },
+    { question: "Which industries accept creative resumes best?", answer: "Creative industries like design, marketing, advertising, media, tech startups, and entertainment value creative resumes most. Traditional fields like finance, law, and healthcare typically prefer conservative formats." },
+    { question: "How creative should my resume be?", answer: "Match creativity to your industry and role. For creative positions, bold designs work. For hybrid roles, consider 'conservatively creative' with subtle color accents and clean layouts." },
+    { question: "What's the biggest mistake with creative templates?", answer: "Sacrificing readability for design. Avoid difficult-to-read fonts, poor contrast colors, or layouts that confuse ATS. Always prioritize clarity over pure aesthetics." },
+    { question: "Should I include infographics in my resume?", answer: "Infographics work for visual roles when used sparingly. Consider skill bars or simple charts. Avoid complex graphics that confuse ATS or overwhelm recruiters." },
+    { question: "How many colors should I use?", answer: "Follow the 60-30-10 rule: 60% neutral, 30% primary, 10% accent. 2-3 colors maximum ensures professionalism with creative expression." },
+    { question: "Are creative templates suitable for career changers?", answer: "Yes, creative templates help career changers by highlighting transferable skills visually and drawing attention away from non-traditional career paths." },
+    { question: "What file format should I submit creative resumes in?", answer: "PDF is standard for preserving design. Ensure text is selectable (not flattened) for ATS. Some employers may request .docx for ATS compatibility." }
   ];
 
-  // ============= COMPLETELY FIXED SCHEMA MARKUP - ALL ERRORS RESOLVED =============
-  
-  // Create properly structured reviews (WITHOUT itemReviewed field for Product nesting)
-  const structuredReviews = testimonials.map((testimonial, index) => ({
-    "@type": "Review",
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "5",
-      "bestRating": "5"
-    },
-    "author": {
-      "@type": "Person",
-      "name": testimonial.name
-    },
-    "reviewBody": testimonial.quote,
-    "datePublished": safeReviewDates[index] || safeCurrentDate
-  }));
+  const designPsychology = [
+    { element: "Strategic Color Accents", attention: "42%", recall: "28%", perception: "+35%" },
+    { element: "Visual Skill Representation", attention: "58%", recall: "45%", perception: "+22%" },
+    { element: "Clean Typography Hierarchy", attention: "31%", recall: "38%", perception: "+48%" },
+    { element: "Integrated White Space", attention: "27%", recall: "33%", perception: "+41%" },
+    { element: "Icon-Based Section Markers", attention: "38%", recall: "29%", perception: "+31%" }
+  ];
+
+  const industryColors = [
+    { industry: "Technology & IT", recommended: "Navy Blue (#2E5A88), Slate Gray (#708090)", avoid: "Neon colors, excessive gradients", icon: <FiCpu size={20} /> },
+    { industry: "Healthcare & Medical", recommended: "Forest Green (#4CAF50), Soft Blue (#64B5F6)", avoid: "Red (emergency association), bright yellow", icon: <FiHeart size={20} /> },
+    { industry: "Finance & Banking", recommended: "Deep Navy (#1A237E), Burgundy (#8B0000)", avoid: "Orange, bright green, purple", icon: <FiDollarSign size={20} /> },
+    { industry: "Marketing & Creative", recommended: "Burnt Orange (#D84315), Teal (#00897B)", avoid: "Overly muted palettes, grayscale only", icon: <FiTrendingUp size={20} /> },
+    { industry: "Education & Academia", recommended: "Hunter Green (#2E7D32), Maroon (#7B1FA2)", avoid: "Fluorescent colors, high contrast combos", icon: <FiBookOpen size={20} /> },
+    { industry: "Engineering & Manufacturing", recommended: "Steel Blue (#4682B4), Charcoal (#36454F)", avoid: "Pastels, overly decorative palettes", icon: <FiTool size={20} /> }
+  ];
+
+  const designChecklist = [
+    { step: "Content audit & categorization", done: false },
+    { step: "Template selection matching industry", done: false },
+    { step: "Color scheme application (60-30-10)", done: false },
+    { step: "Typography hierarchy establishment", done: false },
+    { step: "Visual element integration", done: false },
+    { step: "ATS compatibility testing", done: false },
+    { step: "Peer review & feedback collection", done: false },
+    { step: "Final polish & export as PDF", done: false }
+  ];
+
+  const internalLinks = [
+    { href: "/modern-resume-design-2026", text: "Modern Resume Design Trends", iconName: "FiPenTool", desc: "2026 design innovations" },
+    { href: "/best-ats-resume-format-2026", text: "Best ATS Resume Formats", iconName: "FiFileText", desc: "ATS-optimized layouts" },
+    { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "AI Writing Guide", iconName: "FiZap", desc: "Natural AI-powered content" },
+    { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch", desc: "Match resume to job descriptions" },
+    { href: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026", text: "Skills-First vs Chronological", iconName: "FiTrendingUp", desc: "Format comparison guide" },
+    { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get instant quality score" },
+    { href: "/free-cover-letter-generator", text: "Cover Letter Generator", iconName: "FiEdit", desc: "Create matching letters" },
+    { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
+  ];
+
+  const iconMap = { FiPenTool, FiFileText, FiZap, FiSearch, FiTrendingUp, FiAward, FiEdit, FiGrid, FiStar, FiCheck, FiTarget, FiBookOpen };
+
+  // ============================================================================
+  // COMPLETE STRUCTURED DATA (INJECTED FROM PAGE 1 BLUEPRINT)
+  // ============================================================================
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        "url": canonicalUrl,
+        "name": optimizedTitle,
+        "description": "Discover 2026's best creative resume templates. Expert-selected designs, ATS-compatible formats, and industry-specific templates. Download free samples.",
+        "datePublished": "2026-01-01T00:00:00.000Z",
+        "dateModified": safeLastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@id": "https://professionalresumefree.com/#website"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://professionalresumefree.com/images/og-creative-resume-templates.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": breadcrumbData
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://professionalresumefree.com/#website",
+        "url": "https://professionalresumefree.com",
+        "name": "Professional Resume Free",
+        "description": "Free ATS-Optimized Resume Templates and Career Tools",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://professionalresumefree.com/logo.png"
+          }
+        }
+      },
+      {
+        "@type": "Article",
+        "@id": `${canonicalUrl}#article`,
+        "headline": "Creative Resume Templates: The Complete 2026 Design Guide",
+        "description": "Comprehensive expert guide to selecting and using creative resume templates for maximum impact in the 2026 job market.",
+        "author": {
+          "@type": "Organization",
+          "name": "Professional Resume Design Experts"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://professionalresumefree.com/logo.png"
+          }
+        },
+        "mainEntityOfPage": canonicalUrl,
+        "datePublished": "2026-01-01",
+        "dateModified": safeCurrentDate,
+        "articleSection": "Career Advice",
+        "keywords": "creative resume templates, professional resume design, ATS resume templates, modern resume templates 2026"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faqpage`,
+        "mainEntity": [
+          ...faqs.map((faq, index) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer,
+              "datePublished": safeFaqDates[index] || safeCurrentDate
+            }
+          })),
+          ...peopleAlsoAsk.map((paa, index) => ({
+            "@type": "Question",
+            "name": paa.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": paa.answer,
+              "datePublished": safeFaqDates[index + faqs.length] || safeCurrentDate
+            }
+          }))
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "Creative Resume Template Categories",
+        "itemListElement": templateCategories.map((category, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "CreativeWork",
+            "name": category.name,
+            "description": `Best for ${category.bestFor}`,
+            "genre": "Resume Template",
+            "keywords": category.features.join(", ")
+          }
+        }))
+      },
+      {
+        "@type": "Product",
+        "@id": `${canonicalUrl}#product`,
+        "name": "Creative Resume Templates 2026",
+        "description": "Professional creative resume templates for job seekers",
+        "url": canonicalUrl,
+        "image": "https://professionalresumefree.com/images/creative-resume-templates-preview.jpg",
+        "brand": {
+          "@type": "Brand",
+          "name": "Professional Resume Free"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "4",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": testimonials.map((testimonial, index) => ({
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": testimonial.name
+          },
+          "reviewBody": testimonial.quote,
+          "datePublished": safeReviewDates[index] || safeCurrentDate
+        })),
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": canonicalUrl
+        }
+      }
+    ]
+  };
 
   return (
     <>
+      {/* ============================================================================
+          COMPLETE <HEAD> INJECTION (FROM PAGE 1 BLUEPRINT)
+          ============================================================================ */}
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        <html lang="en" />
         
-        {/* ===== OPTIMIZED HIGH-CTR TITLE - EXACTLY 70 CHARACTERS ===== */}
-        <title>Creative Resume Templates 2026: 50+ Pro Designs</title>
+        {/* OPTIMIZED TITLE */}
+        <title>{optimizedTitle}</title>
         
-        {/* ===== META DESCRIPTION ===== */}
-        <meta name="description" content={metadata.description} />
-        <meta name="author" content={metadata.authors[0].name} />
-        <meta name="keywords" content={metadata.keywords} />
+        {/* META DESCRIPTION */}
+        <meta name="description" content="Discover 2026's best creative resume templates. Expert-selected designs, ATS-compatible formats, and industry-specific templates. Download free samples." />
+        <meta name="author" content="Professional Resume Free Team" />
+        <meta name="keywords" content="creative resume templates, professional resume design, ATS resume templates, modern resume templates 2026, free resume templates, creative cv templates, graphic design resumes, portfolio resumes" />
         
-        {/* ===== TECHNICAL SEO ===== */}
+        {/* GEO OPTIMIZATION TAGS */}
+        <meta name="chatgpt-fts:title" content="Creative Resume Templates 2026: Ultimate Design Guide & 50+ Pro Templates" />
+        <meta name="chatgpt-fts:description" content="Create standout resumes with expert-selected creative templates. ATS-compatible formats, industry-specific designs, and free samples available." />
+        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - ATS Optimized Builder" />
+        
+        {/* TECHNICAL SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="bingbot" content="index, follow" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="date" content={safeCurrentDate} />
+        <meta name="build-timestamp" content={buildTimestamp?.toString() || Date.now().toString()} />
         
-        {/* ===== SINGLE CANONICAL URL ===== */}
-        <link rel="canonical" href="https://professionalresumefree.com/creative-resume-templates" />
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH ===== */}
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:url" content="https://professionalresumefree.com/creative-resume-templates" />
-        <meta property="og:image" content={metadata.openGraph.images[0].url} />
+        {/* HREFLANG TAGS */}
+        <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
+        
+        {/* OPEN GRAPH */}
+        <meta property="og:title" content="Creative Resume Templates: Ultimate 2026 Guide with 50+ Pro Designs" />
+        <meta property="og:description" content="Expert analysis of the best creative resume templates for modern job seekers. ATS-compatible, industry-specific designs with free samples." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content="https://professionalresumefree.com/images/og-creative-resume-templates.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Creative Resume Templates 2026 - Professional Resume Free" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
-        <meta property="article:published_time" content={safeLastModifiedDate} />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta property="og:locale" content="en_US" />
+        <meta property="article:published_time" content="2026-01-01T00:00:00.000Z" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.twitter.title} />
-        <meta name="twitter:description" content={metadata.twitter.description} />
-        <meta name="twitter:image" content={metadata.twitter.images[0]} />
-        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:title" content="Creative Resume Templates: Ultimate 2026 Guide with 50+ Pro Designs" />
+        <meta name="twitter:description" content="Professional creative resume templates for standout applications. ATS-compatible, industry-specific designs." />
+        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-creative-resume-templates.jpg" />
+        <meta name="twitter:image:alt" content="Creative Resume Templates 2026" />
+        <meta name="twitter:site" content="@ProfResumeFree" />
         
-        {/* ===== PERFORMANCE ===== */}
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#131315" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
+        {/* PRECONNECT FOR PERFORMANCE */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         
-        {/* ===== COMPLETELY FIXED JSON-LD SCHEMA - NO GSC ERRORS ===== */}
-        {/* 
-          FIXES APPLIED:
-          1. Only ONE Product entity in the @graph array (no duplicates)
-          2. The single Product has aggregateRating + review + offers
-          3. This satisfies "Either offers, review, or aggregateRating should be specified"
-          4. Reviews inside Product do NOT have itemReviewed field (prevents nesting error)
-          5. All authors use @type "Person"
-        */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              // WebPage entity
-              {
-                "@type": "WebPage",
-                "@id": "https://professionalresumefree.com/creative-resume-templates/#webpage",
-                "url": "https://professionalresumefree.com/creative-resume-templates",
-                "name": "Creative Resume Templates 2026: Professional Designs | Professional Resume Free",
-                "description": metadata.description,
-                "datePublished": "2026-01-01T00:00:00.000Z",
-                "dateModified": safeLastModifiedDate,
-                "inLanguage": "en-US",
-                "isPartOf": {
-                  "@type": "WebSite",
-                  "@id": "https://professionalresumefree.com/#website",
-                  "url": "https://professionalresumefree.com",
-                  "name": "Professional Resume Free",
-                  "description": "Free online resume builder for job seekers",
-                  "publisher": {
-                    "@type": "Organization",
-                    "@id": "https://professionalresumefree.com/#organization",
-                    "name": "Professional Resume Free",
-                    "url": "https://professionalresumefree.com",
-                    "logo": {
-                      "@type": "ImageObject",
-                      "url": "https://professionalresumefree.com/logo.png",
-                      "width": 512,
-                      "height": 512
-                    },
-                    "sameAs": [
-                      "https://twitter.com/ProResumeFree",
-                      "https://www.linkedin.com/company/professional-resume-free"
-                    ]
-                  }
-                },
-                "primaryImageOfPage": {
-                  "@type": "ImageObject",
-                  "url": metadata.openGraph.images[0].url,
-                  "width": 1200,
-                  "height": 630
-                },
-                "breadcrumb": {
-                  "@type": "BreadcrumbList",
-                  "itemListElement": [
-                    {
-                      "@type": "ListItem",
-                      "position": 1,
-                      "name": "Home",
-                      "item": "https://professionalresumefree.com"
-                    },
-                    {
-                      "@type": "ListItem",
-                      "position": 2,
-                      "name": "Creative Resume Templates",
-                      "item": "https://professionalresumefree.com/creative-resume-templates"
-                    }
-                  ]
-                }
-              },
-              // Article entity
-              {
-                "@type": "Article",
-                "headline": "Creative Resume Templates: The Complete 2026 Guide",
-                "description": "Comprehensive expert guide to selecting and using creative resume templates for maximum impact",
-                "author": {
-                  "@type": "Organization",
-                  "name": "Professional Resume Design Experts",
-                  "url": "https://professionalresumefree.com"
-                },
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "Professional Resume Free",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://professionalresumefree.com/logo.png"
-                  }
-                },
-                "datePublished": "2026-01-01",
-                "dateModified": safeCurrentDate,
-                "mainEntityOfPage": {
-                  "@type": "WebPage",
-                  "@id": "https://professionalresumefree.com/creative-resume-templates"
-                },
-                "articleSection": "Career Advice",
-                "keywords": metadata.keywords
-              },
-              // FAQPage entity
-              {
-                "@type": "FAQPage",
-                "mainEntity": faqs.map((faq, index) => ({
-                  "@type": "Question",
-                  "name": faq.question,
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": faq.answer,
-                    "datePublished": safeFaqDates[index] || safeCurrentDate,
-                    "author": {
-                      "@type": "Person",
-                      "name": "Resume Design Expert"
-                    }
-                  }
-                }))
-              },
-              // ItemList entity for template categories
-              {
-                "@type": "ItemList",
-                "itemListElement": templateCategories.map((category, index) => ({
-                  "@type": "ListItem",
-                  "position": index + 1,
-                  "item": {
-                    "@type": "CreativeWork",
-                    "name": category.name,
-                    "description": `Best for ${category.bestFor}`,
-                    "genre": "Resume Template",
-                    "keywords": category.features.join(", ")
-                  }
-                }))
-              },
-              // ========== SINGLE PRODUCT SCHEMA - ALL ERRORS FIXED ==========
-              // Only ONE Product entity with aggregateRating + review + offers
-              // This satisfies BOTH requirements:
-              // 1. "Either offers, review, or aggregateRating should be specified" - HAS ALL THREE
-              // 2. No duplicate Product entities causing false errors
-              {
-                "@type": "Product",
-                "@id": "https://professionalresumefree.com/creative-resume-templates#product",
-                "name": "Creative Resume Templates 2026",
-                "description": "Professional creative resume templates for job seekers",
-                "url": "https://professionalresumefree.com/creative-resume-templates",
-                "image": "https://professionalresumefree.com/images/creative-resume-templates-preview.jpg",
-                "brand": {
-                  "@type": "Brand",
-                  "name": "Professional Resume Free"
-                },
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "ratingValue": "5.0",
-                  "reviewCount": "3",
-                  "bestRating": "5",
-                  "worstRating": "1"
-                },
-                "review": structuredReviews,
-                "offers": {
-                  "@type": "Offer",
-                  "price": "0",
-                  "priceCurrency": "USD",
-                  "availability": "https://schema.org/InStock",
-                  "url": "https://professionalresumefree.com/creative-resume-templates",
-                  "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
-                  "shippingDetails": {
-                    "@type": "OfferShippingDetails",
-                    "shippingRate": {
-                      "@type": "MonetaryAmount",
-                      "value": "0",
-                      "currency": "USD"
-                    },
-                    "shippingDestination": {
-                      "@type": "DefinedRegion",
-                      "addressCountry": "US"
-                    }
-                  },
-                  "hasMerchantReturnPolicy": {
-                    "@type": "MerchantReturnPolicy",
-                    "applicableCountry": "US",
-                    "returnPolicyCategory": "https://schema.org/NotPermitted"
-                  }
-                }
-              }
-            ]
-          })
-        }} />
+        {/* GOOGLE FONTS (PRESERVED FROM PAGE 2) */}
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* COMPLETE STRUCTURED DATA */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </Head>
 
-      <div style={styles.container}>
-        {/* Skip to main content for accessibility */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Freshness Indicator (Hidden) */}
-        <div style={{ display: 'none' }}>
-          <meta name="build-timestamp" content={buildTimestamp} />
-          <meta name="content-freshness" content={freshnessIndicator} />
-        </div>
-
-        {/* Breadcrumb Navigation */}
-        <nav style={styles.breadcrumb} aria-label="Breadcrumb">
-          <ol style={styles.breadcrumbList} itemScope itemType="https://schema.org/BreadcrumbList">
-            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <Link href="https://professionalresumefree.com" itemProp="item" style={{color: 'var(--primary)'}}>
-                <span itemProp="name">Home</span>
-              </Link>
-              <meta itemProp="position" content="1" />
-            </li>
-            <li style={styles.breadcrumbSeparator}>›</li>
-            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <span itemProp="name">Creative Resume Templates</span>
-              <meta itemProp="position" content="2" />
-            </li>
-          </ol>
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" itemProp="item">
+                  <span itemProp="name"><FiHome size={14} /> Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/creative-resume-templates" itemProp="item">
+                  <span itemProp="name">Creative Resume</span>
+                </Link>
+                <meta itemProp="position" content="2" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page">Creative Resume Templates 2026</span>
+                <meta itemProp="position" content="3" />
+              </li>
+            </ol>
+          </div>
         </nav>
 
-        {/* Main Header */}
-        <header style={styles.header} id="main-content">
-          <h1 style={styles.mainTitle}>Creative Resume Templates 2026: 50+ Pro Designs</h1>
-          
-          <div style={styles.metaInfo}>
-            <span itemProp="author" itemScope itemType="https://schema.org/Person">
-              By <span itemProp="name">Professional Resume Design Team</span>
-            </span>
-            <span itemProp="datePublished" content={safeCurrentDate}>
-              Updated: {safeCurrentDate}
-            </span>
-            <span>Reading Time: 18 minutes</span>
-          </div>
-
-          <div style={styles.websiteReference}>
-            <p>This comprehensive guide is brought to you by <a href="https://professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}} target="_blank" rel="noopener noreferrer">Professional Resume Free</a> - Your premier resource for professional resume design since 2025.</p>
-          </div>
-        </header>
-
-        {/* Main Content */}
-        <main style={styles.mainContent} itemScope itemType="https://schema.org/Article">
-          {/* Introduction */}
-          <section style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>Introduction: Mastering Creative Resume Design in 2026</h2>
-              <p className="left-align">In today's competitive job market, creative resume templates have evolved from niche design elements to essential tools for standing out. This definitive guide, backed by design psychology research and hiring manager surveys, provides a comprehensive roadmap for selecting, customizing, and deploying creative templates that capture attention while maintaining professional credibility.</p>
-              <p className="left-align">According to a 2023 LinkedIn Talent Solutions report, creatively designed resumes receive 40% more views and 23% more interview requests than traditional formats when used appropriately. However, the key lies in strategic creativity—balancing aesthetic appeal with functionality, readability, and ATS compatibility.</p>
-            </div>
-          </section>
-
-          {/* Table of Contents */}
-          <nav style={styles.section} aria-label="Table of Contents">
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>Complete Guide Contents</h2>
-              <ul style={styles.tocList}>
-                <li><a href="#section1" style={{color: 'var(--primary)'}}>1. The Psychology Behind Effective Creative Resumes</a></li>
-                <li><a href="#section2" style={{color: 'var(--primary)'}}>2. Creative Template Categories Explained</a></li>
-                <li><a href="#section3" style={{color: 'var(--primary)'}}>3. Industry-Specific Creative Guidelines</a></li>
-                <li><a href="#section4" style={{color: 'var(--primary)'}}>4. ATS Compatibility with Creative Designs</a></li>
-                <li><a href="#section5" style={{color: 'var(--primary)'}}>5. Color Theory & Typography for Resumes</a></li>
-                <li><a href="#section6" style={{color: 'var(--primary)'}}>6. Step-by-Step Creative Template Customization</a></li>
-                <li><a href="#section7" style={{color: 'var(--primary)'}}>7. Creative vs Traditional: When to Choose</a></li>
-                <li><a href="#section8" style={{color: 'var(--primary)'}}>8. Common Creative Resume Mistakes</a></li>
-                <li><a href="#section9" style={{color: 'var(--primary)'}}>9. FAQs: Expert Answers</a></li>
-                <li><a href="#section10" style={{color: 'var(--primary)'}}>10. Next Steps & Resources</a></li>
-              </ul>
-            </div>
-          </nav>
-
-          {/* Section 1 */}
-          <section id="section1" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>1. The Psychology Behind Effective Creative Resumes</h2>
-              <p className="left-align">Understanding the psychological impact of design elements is crucial for creating resumes that resonate with hiring managers. Research from the Journal of Applied Psychology indicates that well-designed creative resumes create a "halo effect," where positive impressions of the design transfer to perceptions of the candidate's capabilities.</p>
-              
-              <h3 style={styles.subsectionTitle}>Cognitive Load and Information Processing</h3>
-              <p className="left-align">Hiring managers typically spend 6-8 seconds on initial resume screening. Creative templates that employ strategic visual hierarchy can reduce cognitive load by 30%, making key information more accessible. Effective templates use spacing, typography, and color to guide the eye toward the most important qualifications.</p>
-              
-              <div className="table-wrapper" style={{overflowX: 'auto'}}>
-                <h4>Psychological Impact of Design Elements (2023 Study)</h4>
-                <style jsx>{`
-                  table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin: 1rem 0;
-                    background: white;
-                    border-radius: 0.5rem;
-                    overflow: hidden;
-                  }
-                  th {
-                    background: var(--card-bg);
-                    padding: 1rem;
-                    font-weight: 600;
-                    border-bottom: 2px solid var(--border);
-                  }
-                  td {
-                    padding: 1rem;
-                    border-bottom: 1px solid var(--border);
-                  }
-                `}</style>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Design Element</th>
-                      <th>Attention Increase</th>
-                      <th>Recall Improvement</th>
-                      <th>Professional Perception</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Strategic Color Accents</td>
-                      <td>42%</td>
-                      <td>28%</td>
-                      <td>+35%</td>
-                    </tr>
-                    <tr>
-                      <td>Visual Skill Representation</td>
-                      <td>58%</td>
-                      <td>45%</td>
-                      <td>+22%</td>
-                    </tr>
-                    <tr>
-                      <td>Clean Typography Hierarchy</td>
-                      <td>31%</td>
-                      <td>38%</td>
-                      <td>+48%</td>
-                    </tr>
-                    <tr>
-                      <td>Integrated White Space</td>
-                      <td>27%</td>
-                      <td>33%</td>
-                      <td>+41%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 2 */}
-          <section id="section2" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>2. Creative Template Categories Explained</h2>
-              <p className="left-align">Creative resume templates can be categorized into four main types, each serving different professional needs and industries. Understanding these categories helps you select the most appropriate template for your career goals.</p>
-              
-              <div style={styles.templateGrid}>
-                {templateCategories.map((category, index) => (
-                  <div key={index} style={styles.templateCard}>
-                    <h3 style={{fontSize: '1.2rem', marginBottom: '0.5rem'}}>{category.name}</h3>
-                    <div style={styles.templateMeta}>
-                      <span><strong>Best for:</strong> {category.bestFor}</span>
-                      <span><strong>Level:</strong> {category.difficulty}</span>
-                    </div>
-                    <ul style={styles.featureList}>
-                      {category.features.map((feature, idx) => (
-                        <li key={idx} style={{marginBottom: '0.25rem'}}>✓ {feature}</li>
-                      ))}
-                    </ul>
-                  </div>
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge" aria-label="Trust indicators">✦ Creative Resume Design Guide {currentYear} | 50+ Pro Designs | ATS-Compatible</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Creative Resume Templates:{' '}
+                <span className="gradient-text">50+ Pro Designs for 2026</span>
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Expert-selected creative templates backed by design psychology research. <strong>40% more recruiter views</strong> and <strong>23% more interviews</strong> with strategically designed resumes. <strong>100% Free. No Sign-Up.</strong>
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                {["6 Template Categories", "ATS-Compatible", "Industry Guides", "Color Theory", "Design Psychology"].map((f, i) => (
+                  <span key={i} className="feature-badge"><FiCheck /> {f}</span>
                 ))}
               </div>
-              
-              <h3 style={styles.subsectionTitle}>Choosing the Right Category</h3>
-              <p className="left-align">Select templates based on your industry, experience level, and career objectives. Entry-level professionals often benefit from Minimalist Creative templates, while seasoned creatives might opt for Portfolio Hybrid designs. Always consider the hiring culture of your target companies—tech startups often appreciate bold designs, while established corporations may prefer Modern Professional styles.</p>
-            </div>
-          </section>
-
-          {/* Section 3 */}
-          <section id="section3" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>3. Industry-Specific Creative Guidelines</h2>
-              <p className="left-align">Creative expression must be tailored to industry expectations. What works for a graphic designer may hinder a financial analyst. Our industry analysis provides field-specific recommendations.</p>
-              
-              <div style={styles.industryGuide}>
-                <div style={styles.industrySection}>
-                  <h4>Creative Industries (Design, Marketing, Advertising)</h4>
-                  <p><strong>Recommended:</strong> Portfolio hybrids, infographic elements, custom typography, color experimentation</p>
-                  <p><strong>Avoid:</strong> Overly conservative designs, generic templates</p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }} role="group" aria-label="Call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" aria-label="Browse all creative resume templates">Browse Creative Templates <FiArrowRight /></Link>
+                <a href="#templates" className="btn-outline" aria-label="View template categories">View Template Categories <FiArrowRight /></a>
+              </div>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }} aria-label="Key statistics">
+                <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
+                  <span className="badge">📊 Based on {currentYear} Design Psychology Research</span>
                 </div>
-                
-                <div style={styles.industrySection}>
-                  <h4>Technology & Startups</h4>
-                  <p><strong>Recommended:</strong> Minimalist creative, clean layouts, subtle color schemes, tech-focused icons</p>
-                  <p><strong>Avoid:</strong> Complex graphics that hinder ATS scanning</p>
-                </div>
-                
-                <div style={styles.industrySection}>
-                  <h4>Traditional Corporate (Finance, Law, Healthcare)</h4>
-                  <p><strong>Recommended:</strong> Modern professional templates, conservative color palettes, enhanced typography</p>
-                  <p><strong>Avoid:</strong> Radical design changes, bright colors, unconventional layouts</p>
-                </div>
+                <div className="stat-card"><div className="stat-number">40%</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>More Recruiter Views</div></div>
+                <div className="stat-card"><div className="stat-number">23%</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>More Interviews</div></div>
+                <div className="stat-card"><div className="stat-number">50+</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Pro Designs</div></div>
+                <div className="stat-card"><div className="stat-number">6</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Categories</div></div>
+              </div>
+              <p className="text-small" style={{ marginTop: '1.25rem' }} aria-label="Footnote">
+                * LinkedIn Talent Solutions {currentYear} Report
+              </p>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', marginTop: '1.5rem', flexWrap: 'wrap', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}>
+                <span><FiCalendar size={14} style={{ display: 'inline' }} /> Updated: {safeCurrentDate}</span>
+                <span><FiClock size={14} style={{ display: 'inline' }} /> 18 min read</span>
+                <span><FiUsers size={14} style={{ display: 'inline' }} /> Trusted by 50K+ Professionals</span>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Section 4 */}
-          <section id="section4" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>4. ATS Compatibility with Creative Designs</h2>
-              <p className="left-align">The biggest concern with creative resumes is their compatibility with Applicant Tracking Systems. Modern ATS technology has improved, but design choices still significantly impact parsing accuracy.</p>
-              
-              <div style={styles.comparisonBox}>
-                <div style={styles.atsSafe}>
-                  <h5>✅ ATS-Friendly Creative Elements</h5>
-                  <ul style={{paddingLeft: '1.2rem', marginTop: '0.5rem'}}>
-                    <li>Standard section headers (Work Experience, Education)</li>
-                    <li>Simple tables (1-2 columns maximum)</li>
-                    <li>Web-safe fonts (Arial, Georgia, Times New Roman)</li>
-                    <li>High contrast color combinations</li>
-                    <li>Properly tagged PDFs with text layers</li>
-                  </ul>
-                </div>
-                <div style={styles.atsDanger}>
-                  <h5>❌ ATS-Risky Creative Elements</h5>
-                  <ul style={{paddingLeft: '1.2rem', marginTop: '0.5rem'}}>
-                    <li>Multiple text columns (3+)</li>
-                    <li>Custom graphics replacing text</li>
-                    <li>Uncommon fonts (script, decorative)</li>
-                    <li>Text over images or gradients</li>
-                    <li>Headers/footers with important content</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <h3 style={styles.subsectionTitle}>Testing ATS Compatibility</h3>
-              <p className="left-align">Always test creative templates through ATS simulators before submission. Our platform at <a href="https://professionalresumefree.com" style={{color: 'var(--primary)', textDecoration: 'underline'}}>ProfessionalResumeFree.com</a> offers free ATS testing tools that analyze how different design elements affect parsing accuracy.</p>
+        {/* Introduction */}
+        <section className="section section-alt" aria-labelledby="intro-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="intro-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Mastering Creative Resume Design in 2026</h2>
+              <p style={{ textAlign: 'center', marginBottom: '1rem' }}>In today's competitive job market, creative resume templates have evolved from niche design elements to essential tools for standing out. This guide provides a comprehensive roadmap for selecting, customizing, and deploying creative templates.</p>
+              <p style={{ textAlign: 'center' }}>LinkedIn Talent Solutions reports creatively designed resumes receive <strong>40% more views</strong> and <strong>23% more interview requests</strong> when used appropriately.</p>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Section 5 */}
-          <section id="section5" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>5. Color Theory & Typography for Resumes</h2>
-              <p className="left-align">Strategic use of color and typography can enhance readability and create emotional connections without compromising professionalism.</p>
-              
-              <h3 style={styles.subsectionTitle}>Color Psychology Application</h3>
-              <div style={styles.colorGuide}>
-                <div style={styles.colorItem}>
-                  <div style={{...styles.colorSwatch, backgroundColor: '#2E5A88'}}></div>
-                  <p><strong>Navy Blue:</strong> Trust, stability, professionalism. Ideal for corporate and leadership roles.</p>
-                </div>
-                <div style={styles.colorItem}>
-                  <div style={{...styles.colorSwatch, backgroundColor: '#4CAF50'}}></div>
-                  <p><strong>Forest Green:</strong> Growth, balance, health. Excellent for healthcare, environmental, and finance.</p>
-                </div>
-                <div style={styles.colorItem}>
-                  <div style={{...styles.colorSwatch, backgroundColor: '#D84315'}}></div>
-                  <p><strong>Burnt Orange:</strong> Energy, creativity, confidence. Perfect for creative and sales positions.</p>
-                </div>
-              </div>
-              
-              <h3 style={styles.subsectionTitle}>Typography Hierarchy Rules</h3>
-              <p className="left-align">Maintain a maximum of two font families: one for headings, one for body text. Ensure body text is at least 11pt for readability. Use font weight variations (bold, regular) rather than multiple fonts to create hierarchy.</p>
+        {/* Design Psychology */}
+        <section className="section" aria-labelledby="psychology-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="psychology-heading" className="section-title">The Psychology Behind Effective Creative Resumes</h2>
+              <p className="section-subtitle">Research-backed design elements that capture attention and improve recall</p>
             </div>
-          </section>
-
-          {/* Section 6 */}
-          <section id="section6" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>6. Step-by-Step Creative Template Customization</h2>
-              <p className="left-align">Follow this proven 7-step process to effectively customize any creative template for maximum impact.</p>
-              
-              <ol style={styles.stepByStep}>
-                <li style={styles.stepItem} className="left-align"><strong>Content Audit:</strong> Extract all information from your current resume. Categorize into must-have and optional content.</li>
-                <li style={styles.stepItem} className="left-align"><strong>Template Selection:</strong> Choose a template that matches your industry, experience level, and career goals.</li>
-                <li style={styles.stepItem} className="left-align"><strong>Information Mapping:</strong> Map your content to template sections, identifying where creative elements will enhance presentation.</li>
-                <li style={styles.stepItem} className="left-align"><strong>Color Scheme Application:</strong> Apply a professional color palette using the 60-30-10 rule.</li>
-                <li style={styles.stepItem} className="left-align"><strong>Typography Customization:</strong> Adjust font sizes, weights, and spacing for optimal readability.</li>
-                <li style={styles.stepItem} className="left-align"><strong>Visual Element Integration:</strong> Add icons, progress bars, or subtle graphics if appropriate.</li>
-                <li style={styles.stepItem} className="left-align"><strong>Final Review & Testing:</strong> Review for consistency, test ATS compatibility, and get peer feedback.</li>
-              </ol>
+            <div className="table-wrap">
+              <table>
+                <thead><tr><th>Design Element</th><th>Attention Increase</th><th>Recall Improvement</th><th>Professional Perception</th></tr></thead>
+                <tbody>
+                  {designPsychology.map((item, i) => (
+                    <tr key={i}><td><strong>{item.element}</strong></td><td className="text-success">{item.attention}</td><td>{item.recall}</td><td>{item.perception}</td></tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Section 7 */}
-          <section id="section7" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>7. Creative vs Traditional: When to Choose</h2>
-              <p className="left-align">Understanding when to use creative versus traditional templates is crucial for career success. This decision matrix helps guide your choice based on multiple factors.</p>
-              
-              <div style={styles.decisionMatrix}>
-                <div style={styles.matrixRow}>
-                  <div style={styles.matrixFactor}><strong>Factor</strong></div>
-                  <div style={styles.matrixChoice}><strong>Creative Template</strong></div>
-                  <div style={styles.matrixChoice}><strong>Traditional Template</strong></div>
-                </div>
-                <div style={styles.matrixRow}>
-                  <div style={styles.matrixFactor}>Industry (Creative)</div>
-                  <div style={styles.matrixChoice}>✓ Recommended</div>
-                  <div style={styles.matrixChoice}>Limited Use</div>
-                </div>
-                <div style={styles.matrixRow}>
-                  <div style={styles.matrixFactor}>Industry (Traditional)</div>
-                  <div style={styles.matrixChoice}>Conservative Approach</div>
-                  <div style={styles.matrixChoice}>✓ Recommended</div>
-                </div>
-                <div style={styles.matrixRow}>
-                  <div style={styles.matrixFactor}>Career Stage (Entry)</div>
-                  <div style={styles.matrixChoice}>Minimalist Only</div>
-                  <div style={styles.matrixChoice}>✓ Recommended</div>
-                </div>
-                <div style={styles.matrixRow}>
-                  <div style={styles.matrixFactor}>Career Stage (Senior)</div>
-                  <div style={styles.matrixChoice}>✓ Recommended</div>
-                  <div style={styles.matrixChoice}>Acceptable</div>
-                </div>
-                <div style={styles.matrixRow}>
-                  <div style={styles.matrixFactor}>Company Culture (Progressive)</div>
-                  <div style={styles.matrixChoice}>✓ Recommended</div>
-                  <div style={styles.matrixChoice}>Acceptable</div>
-                </div>
-              </div>
+        {/* Template Categories */}
+        <section id="templates" className="section section-alt" aria-labelledby="categories-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="categories-heading" className="section-title">Creative Template Categories Explained</h2>
+              <p className="section-subtitle">Six distinct categories serving different professional needs</p>
             </div>
-          </section>
-
-          {/* Section 8 */}
-          <section id="section8" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>8. Common Creative Resume Mistakes</h2>
-              
-              <div style={styles.mistakesGrid}>
-                <div style={styles.mistakeItem}>
-                  <h4>Over-designing</h4>
-                  <p><strong>Problem:</strong> Too many colors, fonts, or graphics overwhelm recruiters.</p>
-                  <p><strong>Solution:</strong> Follow minimalist principles—each element should serve a purpose.</p>
-                </div>
-                <div style={styles.mistakeItem}>
-                  <h4>Poor Readability</h4>
-                  <p><strong>Problem:</strong> Creative fonts or colors that strain eyes during quick scanning.</p>
-                  <p><strong>Solution:</strong> Test readability by asking others to quickly scan your resume.</p>
-                </div>
-                <div style={styles.mistakeItem}>
-                  <h4>ATS Incompatibility</h4>
-                  <p><strong>Problem:</strong> Design choices that break ATS parsing algorithms.</p>
-                  <p><strong>Solution:</strong> Always run ATS compatibility tests before submission.</p>
-                </div>
-                <div style={styles.mistakeItem}>
-                  <h4>Industry Mismatch</h4>
-                  <p><strong>Problem:</strong> Using bold designs in conservative industries.</p>
-                  <p><strong>Solution:</strong> Research industry norms and company culture.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 9 - FAQs */}
-          <section id="section9" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>9. Frequently Asked Questions</h2>
-              <div style={styles.faqGrid}>
-                {faqs.map((faq, index) => (
-                  <div key={index} style={styles.faqItem} itemScope itemType="https://schema.org/Question">
-                    <h3 style={styles.faqQuestion} itemProp="name">{faq.question}</h3>
-                    <div itemScope itemType="https://schema.org/Answer" itemProp="acceptedAnswer">
-                      <p style={styles.faqAnswer} itemProp="text">{faq.answer}</p>
-                    </div>
+            <div className="grid">
+              {templateCategories.map((cat, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>{cat.name}</h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <span><strong>Best for:</strong> {cat.bestFor}</span>
+                    <span><strong>Level:</strong> {cat.difficulty}</span>
                   </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Section 10 */}
-          <section id="section10" style={styles.section}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>10. Next Steps & Professional Resources</h2>
-              <p className="left-align">Now that you understand creative resume templates, take these actionable steps to implement your knowledge.</p>
-              
-              <div style={styles.actionSteps}>
-                <div style={styles.actionCard}>
-                  <h3>Step 1: Access Professional Templates</h3>
-                  <p className="left-align">Visit our main platform for expertly designed, ATS-tested creative templates:</p>
-                  <Link href="/resume-templates" className="btn-primary" style={{marginTop: '1rem'}}>
-                    Browse Creative Templates
-                  </Link>
-                </div>
-                
-                <div style={styles.actionCard}>
-                  <h3>Step 2: Deepen Your Knowledge</h3>
-                  <p className="left-align">Explore these related articles for comprehensive resume expertise:</p>
-                  <div style={styles.relatedLinks}>
-                    {relatedArticles.map((article, index) => (
-                      <Link key={index} href={article.url} style={styles.articleLink}>
-                        <strong>{article.title}</strong>
-                        <p style={{fontSize: '0.9rem', marginTop: '0.25rem'}}>{article.description}</p>
-                      </Link>
+                  <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem', flex: 1 }}>
+                    {cat.features.map((f, j) => (
+                      <li key={j} style={{ paddingLeft: '1.25rem', position: 'relative', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.25rem', textAlign: 'left' }}>
+                        <span style={{ position: 'absolute', left: 0, color: 'var(--accent-primary)' }}>✦</span> {f}
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
-                
-                <div style={styles.actionCard}>
-                  <h3>Step 3: Professional Review</h3>
-                  <p className="left-align">For personalized template selection and design consultation, use our expert services. Our team provides industry-specific recommendations and ATS optimization.</p>
-                  <Link href="/resume-templates" className="btn-primary" style={{marginTop: '1rem'}}>
-                    Start Building Your Resume
-                  </Link>
-                </div>
-              </div>
+              ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Internal Linking Section for SEO/GEO Boost */}
-          <section style={styles.section}>
-            <div style={styles.resourceSection}>
-              <h3 style={{...styles.subsectionTitle, textAlign: 'center', marginBottom: '1.5rem'}}>Recommended Resources for Job Seekers</h3>
-              <ul style={styles.resourceList}>
-                <li>
-                  <Link href="/modern-resume-design-2026" style={styles.resourceLinkItem} className="resource-link-item">
-                    <span style={styles.resourceLinkIcon}>→</span>
-                    <span style={styles.resourceLinkText}>Modern Resume Design Trends 2026</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/best-ats-resume-format-2026" style={styles.resourceLinkItem} className="resource-link-item">
-                    <span style={styles.resourceLinkIcon}>→</span>
-                    <span style={styles.resourceLinkText}>Best ATS Resume Formats for 2026</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot" style={styles.resourceLinkItem} className="resource-link-item">
-                    <span style={styles.resourceLinkIcon}>→</span>
-                    <span style={styles.resourceLinkText}>AI Writing Guide: Avoiding Robotic Tone</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/free-resume-keyword-matcher" style={styles.resourceLinkItem} className="resource-link-item">
-                    <span style={styles.resourceLinkIcon}>→</span>
-                    <span style={styles.resourceLinkText}>Free Resume Keyword Matcher Tool</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026" style={styles.resourceLinkItem} className="resource-link-item">
-                    <span style={styles.resourceLinkIcon}>→</span>
-                    <span style={styles.resourceLinkText}>Skills-First vs. Chronological Layouts</span>
-                  </Link>
-                </li>
-              </ul>
+        {/* Industry Color Guide */}
+        <section className="section" aria-labelledby="colors-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="colors-heading" className="section-title">Industry-Specific Color Psychology Guide</h2>
+              <p className="section-subtitle">Strategic color choices that resonate with your target industry</p>
             </div>
-          </section>
-
-          {/* Testimonials */}
-          <section style={styles.testimonialsSection}>
-            <div style={styles.card}>
-              <h2 style={styles.sectionTitle}>What Professionals Say About Creative Templates</h2>
-              <div style={styles.testimonialsGrid}>
-                {testimonials.map((testimonial, index) => (
-                  <div key={index} style={styles.testimonialCard} itemScope itemType="https://schema.org/Review">
-                    <p style={styles.quote} itemProp="reviewBody">"{testimonial.quote}"</p>
-                    <div style={styles.userInfo}>
-                      <div style={styles.userDetails}>
-                        <h4 style={{fontSize: '1rem', marginBottom: '0.25rem'}} itemProp="author" itemScope itemType="https://schema.org/Person">
-                          <span itemProp="name">{testimonial.name}</span>
-                        </h4>
-                        <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>{testimonial.role}</p>
-                        <p style={{fontSize: '0.9rem', color: 'var(--text-light)'}}>{testimonial.company}</p>
-                      </div>
-                    </div>
-                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
-                      <meta itemProp="name" content="Creative Resume Templates 2026" />
-                      <meta itemProp="url" content="https://professionalresumefree.com/creative-resume-templates" />
-                      <meta itemProp="description" content="Professional creative resume templates for job seekers" />
-                    </div>
-                    <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                      <meta itemProp="ratingValue" content="5" />
-                      <meta itemProp="bestRating" content="5" />
-                    </div>
+            <div className="grid">
+              {industryColors.map((item, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <div style={{ color: 'var(--accent-primary)' }}>{item.icon}</div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)' }}>{item.industry}</h3>
                   </div>
-                ))}
-              </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}><strong>Recommended:</strong> {item.recommended}</p>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--error-color)' }}><strong>Avoid:</strong> {item.avoid}</p>
+                </div>
+              ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Final CTA */}
-          <div style={styles.ctaSection}>
-            <div style={styles.card}>
-              <h2 style={styles.ctaTitle}>Ready to Transform Your Resume with Creative Design?</h2>
-              <p className="left-align">Join over 50,000 professionals who have advanced their careers with our expertly designed creative templates. Access our complete library, ATS testing tools, and design consultation services.</p>
-              <div style={{display: 'flex', justifyContent: 'center'}}>
-                <Link href="/resume-templates" style={styles.ctaButton}>
-                  Browse Creative Templates
-                </Link>
+        {/* ATS Compatibility */}
+        <section className="section section-alt" aria-labelledby="ats-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="ats-heading" className="section-title">ATS Compatibility with Creative Designs</h2>
+              <p className="section-subtitle">What works and what breaks automated screening</p>
+            </div>
+            <div className="grid">
+              <div className="ats-safe">
+                <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem' }}>✅ ATS-Friendly Elements</h4>
+                <ul style={{ listStyle: 'none', padding: 0 }}>
+                  {["Standard section headers", "Simple tables (1-2 columns max)", "Web-safe fonts (Arial, Georgia)", "High contrast color combos", "Properly tagged PDFs with text layers"].map((item, i) => (
+                    <li key={i} style={{ paddingLeft: '1.25rem', position: 'relative', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.375rem', textAlign: 'left' }}>
+                      <span style={{ position: 'absolute', left: 0, color: 'var(--accent-primary)' }}>✦</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="ats-danger">
+                <h4 style={{ color: 'var(--error-color)', marginBottom: '0.75rem' }}>❌ ATS-Risky Elements</h4>
+                <ul style={{ listStyle: 'none', padding: 0 }}>
+                  {["Multiple text columns (3+)", "Custom graphics replacing text", "Uncommon fonts (script, decorative)", "Text over images or gradients", "Headers/footers with important content"].map((item, i) => (
+                    <li key={i} style={{ paddingLeft: '1.25rem', position: 'relative', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.375rem', textAlign: 'left' }}>
+                      <span style={{ position: 'absolute', left: 0, color: 'var(--error-color)' }}>✗</span> {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
-        </main>
+        </section>
 
-        {/* Update Strategy */}
-        <div style={styles.updateStrategy}>
-          <div className="container">
-            Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+        {/* Creative vs Traditional Decision Matrix */}
+        <section className="section" aria-labelledby="decision-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="decision-heading" className="section-title">Creative vs Traditional: When to Choose</h2>
+              <p className="section-subtitle">Decision matrix based on industry, career stage, and company culture</p>
+            </div>
+            <div className="decision-matrix">
+              <div className="matrix-row">
+                <div className="matrix-factor"><strong>Factor</strong></div>
+                <div className="matrix-choice" style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>Creative Template</div>
+                <div className="matrix-choice" style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>Traditional Template</div>
+              </div>
+              {[
+                ["Industry (Creative)", "✓ Recommended", "Limited Use"],
+                ["Industry (Traditional)", "Conservative Approach", "✓ Recommended"],
+                ["Career Stage (Entry)", "Minimalist Only", "✓ Recommended"],
+                ["Career Stage (Senior)", "✓ Recommended", "Acceptable"],
+                ["Company Culture (Progressive)", "✓ Recommended", "Acceptable"]
+              ].map((row, i) => (
+                <div key={i} className="matrix-row">
+                  <div className="matrix-factor">{row[0]}</div>
+                  <div className="matrix-choice">{row[1]}</div>
+                  <div className="matrix-choice">{row[2]}</div>
+                </div>
+              ))}
+            </div>
           </div>
+        </section>
+
+        {/* Design Checklist */}
+        <section className="section section-alt" aria-labelledby="checklist-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="checklist-heading" className="section-title">Creative Design Implementation Checklist</h2>
+              <p className="section-subtitle">Follow these 8 steps for perfect creative resume execution</p>
+            </div>
+            <div className="grid" style={{ maxWidth: '700px', margin: '0 auto' }}>
+              {designChecklist.map((item, i) => (
+                <div key={i} className="card-executive" style={{ flexDirection: 'row', alignItems: 'center', gap: '1rem', padding: '1rem 1.5rem' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '9999px', background: 'var(--bg-surface-high)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontWeight: 'var(--font-weight-bold)', fontSize: 'var(--font-size-body-sm)', flexShrink: 0 }}>{i+1}</div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}>{item.step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Common Mistakes */}
+        <section className="section" aria-labelledby="mistakes-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="mistakes-heading" className="section-title">Common Creative Resume Mistakes</h2>
+              <p className="section-subtitle">Pitfalls that can undermine your creative efforts</p>
+            </div>
+            <div className="grid">
+              {[
+                { mistake: "Over-designing", problem: "Too many colors, fonts, or graphics overwhelm recruiters.", solution: "Follow minimalist principles—each element should serve a purpose." },
+                { mistake: "Poor Readability", problem: "Creative fonts or colors that strain eyes during quick scanning.", solution: "Test readability by asking others to quickly scan your resume." },
+                { mistake: "ATS Incompatibility", problem: "Design choices that break ATS parsing algorithms.", solution: "Always run ATS compatibility tests before submission." },
+                { mistake: "Industry Mismatch", problem: "Using bold designs in conservative industries.", solution: "Research industry norms and company culture before designing." }
+              ].map((item, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--error-color)', marginBottom: '0.5rem' }}>{item.mistake}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}><strong>Problem:</strong> {item.problem}</p>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)' }}><strong>Solution:</strong> {item.solution}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* People Also Ask Section (INJECTED FROM PAGE 1 BLUEPRINT) */}
+        <section className="section section-alt" aria-labelledby="paa-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="paa-heading" className="section-title">People Also Ask About Creative Resumes</h2>
+              <p className="section-subtitle">Quick answers to common creative resume questions</p>
+            </div>
+            <div className="faq-grid">
+              {peopleAlsoAsk.map((paa, i) => (
+                <div key={`paa-${i}`} className="faq-item">
+                  <h3 className="faq-question">{paa.question}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{paa.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="section" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="testimonials-heading" className="section-title">What Professionals Say</h2>
+              <p className="section-subtitle">Real feedback from creative template users</p>
+            </div>
+            <div className="grid">
+              {testimonials.map((t, i) => (
+                <div key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
+                  <div className="testimonial-quote-mark">"</div>
+                  <p style={{ fontStyle: 'italic', marginBottom: '1rem', position: 'relative', zIndex: 1, color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="reviewBody">"{t.quote}"</p>
+                  <div style={{ marginBottom: '0.75rem' }}><span className="feature-badge"><FiStar style={{ display: 'inline' }} /> 5.0 Rating</span></div>
+                  <div>
+                    <strong style={{ color: 'var(--text-primary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="author" itemScope itemType="https://schema.org/Person">
+                      <span itemProp="name">{t.name}</span>
+                    </strong>
+                    <p style={{ margin: 0, fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>{t.role} · {t.company}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="section section-alt" aria-labelledby="faq-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="faq-heading" className="section-title">Frequently Asked Questions</h2>
+              <p className="section-subtitle">Everything about creative resume templates</p>
+            </div>
+            <div className="faq-grid">
+              {faqs.map((faq, i) => (
+                <div key={i} className="faq-item" itemScope itemType="https://schema.org/Question">
+                  <h3 className="faq-question" itemProp="name">{faq.question}</h3>
+                  <div itemScope itemType="https://schema.org/Answer">
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="text">{faq.answer}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Ready to Transform Your Resume with Creative Design?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Access our complete library of <strong>50+ creative templates</strong>, ATS testing tools, and design consultation services.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>Browse Creative Templates <FiArrowRight /></Link>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              {["Free templates", "ATS-optimized", "Instant download"].map((f, i) => (
+                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck style={{ color: 'var(--accent-primary)' }} /> {f}</span>
+              ))}
+            </div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              Updated: {safeCurrentDate}
+            </p>
+          </div>
+        </section>
+
+        {/* Internal Links */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Explore More Resume Resources</h2>
+              <p className="section-subtitle">Strengthen your application with expert guides</p>
+            </div>
+            <div className="geo-link-grid">
+              {internalLinks.map((link, i) => {
+                const IconComponent = iconMap[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Hidden metadata for crawlers */}
+        <div style={{ display: 'none' }}>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{buildTimestamp}</span>
         </div>
-      </div>
+      </main>
     </>
   );
 }

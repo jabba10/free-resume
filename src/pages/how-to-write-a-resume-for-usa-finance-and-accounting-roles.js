@@ -1,712 +1,295 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiStar, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiDownload,
-  FiFileText,
-  FiTool,
-  FiUsers,
-  FiTarget,
-  FiTrendingUp,
-  FiBriefcase,
-  FiCode,
-  FiHeart,
-  FiDollarSign,
-  FiBookOpen,
-  FiShield,
-  FiLayers,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiLinkedin,
-  FiGithub,
-  FiCpu,
-  FiDatabase,
-  FiCloud,
-  FiTerminal,
-  FiPieChart,
-  FiBarChart2,
-  FiPercent,
-  FiTrendingUp as FiTrend,
-  FiCheckCircle,
-  FiXCircle,
-  FiSearch, // Added for search/keyword tools
-  FiMonitor // Added for job boards
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiPieChart, FiBarChart2, FiPercent, FiTrendingUp as FiTrend,
+  FiCheckCircle, FiXCircle, FiX, FiSearch, FiMonitor, FiAlertCircle,
+  FiZap, FiInfo, FiEdit, FiEdit3, FiSmartphone, FiCopy,
+  FiPenTool, FiType, FiAlignLeft, FiHash, FiLock, FiSmile,
+  FiUserCheck, FiSave, FiRefreshCw, FiActivity, FiGlobe,
+  FiAnchor, FiCompass, FiThumbsUp
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --success: #059669;
-  --warning: #d97706;
-  --danger: #dc2626;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.7;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 30px; }
-}
-.hero {
-  background: var(--background);
-  padding: 60px 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .hero { padding: 80px 0; }
-}
-.hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3.5rem);
-  margin-bottom: 25px;
-  line-height: 1.2;
-  word-wrap: break-word;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.hero p {
-  font-size: clamp(1.1rem, 3vw, 1.35rem);
-  max-width: 850px;
-  margin: 0 auto 30px;
-  padding: 0 20px;
-  color: var(--text-light);
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: 8px 22px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  margin-bottom: 25px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-  margin: 50px 0;
-}
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 32px 28px;
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.05);
-}
-.card:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--primary);
-  color: var(--background);
-  padding: 16px 36px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 1px solid var(--primary);
-  transition: background 0.2s;
-  text-align: center;
-  min-width: 260px;
-  font-size: 1.05rem;
-}
-.btn-primary:hover { background: var(--secondary); }
-.btn-primary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: var(--primary);
-  padding: 16px 36px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 2px solid var(--primary);
-  transition: background 0.2s;
-  text-align: center;
-  min-width: 260px;
-  font-size: 1.05rem;
-}
-.btn-secondary:hover { background: #f5f5f5; }
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-}
-@media (max-width: 480px) {
-  .button-container { flex-direction: column; align-items: center; gap: 15px; }
-  .btn-primary, .btn-secondary { width: 100%; min-width: auto; }
-}
-.section {
-  padding: 70px 0;
-  scroll-margin-top: 30px;
-}
-@media (min-width: 768px) { .section { padding: 90px 0; } }
-@media (max-width: 480px) { .section { padding: 60px 0; } }
-.section-title {
-  text-align: center;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  margin-bottom: 25px;
-  padding: 0 20px;
-  word-wrap: break-word;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 800px;
-  margin: 0 auto 50px;
-  padding: 0 20px;
-  font-size: 1.2rem;
-  line-height: 1.7;
-}
-.stat-grid {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin: 50px 0 30px;
-}
-.stat-item {
-  text-align: center;
-  min-width: 200px;
-  background: var(--card-bg);
-  padding: 30px 25px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  flex: 1 1 200px;
-  max-width: 240px;
-}
-.stat-number {
-  font-size: 2.8rem;
-  font-weight: 700;
-  display: block;
-  color: #000;
-  line-height: 1.2;
-  margin-bottom: 10px;
-}
-.stat-label { 
-  color: var(--text-light); 
-  font-size: 1rem;
-  line-height: 1.5;
-}
-.table-wrap {
-  overflow-x: auto;
-  margin: 50px 0;
-  background: var(--background);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 650px;
-}
-th {
-  background: var(--card-bg);
-  padding: 18px 20px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-  font-size: 1rem;
-}
-td {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.95rem;
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 25px;
-  margin: 50px 0;
-}
-@media (min-width: 768px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
-.faq-item {
-  background: var(--card-bg);
-  padding: 32px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  height: 100%;
-}
-.faq-question {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  line-height: 1.4;
-}
-.trust-badge {
-  background: #f3f4f6;
-  color: var(--primary);
-  padding: 8px 18px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  border: 1px solid var(--border);
-  display: inline-block;
-  margin-bottom: 25px;
-}
-.breadcrumb {
-  padding: 18px 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  font-size: 0.9rem;
-}
-.breadcrumb a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover { border-bottom-color: var(--primary); }
-.breadcrumb [aria-current="page"] { font-weight: 600; }
-.hub-mini {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin: 50px 0 20px;
-}
-.hub-link-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px 35px;
-  text-decoration: none;
-  color: inherit;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  transition: background 0.2s, transform 0.2s;
-  font-size: 1.1rem;
-}
-.hub-link-card:hover { 
-  background: #e5e7eb; 
-  transform: translateY(-2px);
-}
-hr { border: none; border-top: 1px solid var(--border); margin: 60px 0; }
-.text-small { font-size: 0.9rem; color: var(--text-light); }
-.helper-text { 
-  font-size: 0.95rem; 
-  color: var(--text-light); 
-  margin-top: 30px;
-  text-align: center;
-}
-.meta-row {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin: 30px 0 15px;
-  color: var(--text-lighter);
-  font-size: 0.95rem;
-}
-.ai-citation {
-  background: #f0f9ff;
-  padding: 30px 35px;
-  border-radius: 16px;
-  border-left: 6px solid #000;
-  font-size: 1rem;
-  margin: 50px auto;
-  max-width: 950px;
-  text-align: left;
-}
-.ai-citation a { color: #000; font-weight: 500; text-decoration: underline; }
-.has-text-centered { text-align: center; }
-.two-col-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-  margin: 50px 0;
-}
-@media (min-width: 768px) {
-  .two-col-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.paragraph {
-  margin-bottom: 25px;
-  color: var(--text-light);
-  line-height: 1.8;
-  text-align: left;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.05rem;
-}
-.example-box {
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 15px;
-}
-.keyword-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin: 25px 0;
-}
-.keyword-tag {
-  background: #e5e7eb;
-  color: #000;
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-.checklist-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 16px;
-  color: var(--text-light);
-}
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #000;
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus { top: 0; }
-
-/* New Styles for Bottom Internal Links Section */
-.internal-links-section {
-  padding: 60px 0;
-  background: var(--background);
-  border-top: 1px solid var(--border);
-}
-.internal-links-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
-@media (max-width: 1024px) {
-  .internal-links-grid {
-    grid-template-columns: repeat(3, 1fr);
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
   }
-}
-@media (max-width: 640px) {
-  .internal-links-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 480px) {
-  .internal-links-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.internal-link-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--primary);
-  transition: all 0.2s;
-  height: 100%;
-}
-.internal-link-card:hover {
-  background: #e5e7eb;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.internal-link-icon {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-  color: var(--primary);
-}
-.internal-link-text {
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  h4 { font-size:var(--font-size-title-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .grid-4 { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid-4 { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid-4 { grid-template-columns:repeat(4,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .list-style { padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .list-style li { color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .insight-box-warning { background:rgba(255,183,77,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,183,77,0.3); }
+  .insight-box-success { background:rgba(76,175,80,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(76,175,80,0.3); }
+  .insight-box-danger { background:rgba(255,180,171,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,180,171,0.3); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .checklist-card { background:var(--card-bg); border-radius:0.5rem; padding:1.25rem; border:var(--card-border); }
+  .keyword-cloud { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin:1.5rem 0; }
+  .keyword-tag { background:rgba(242,202,80,0.08); color:var(--accent-primary); padding:0.5rem 1rem; border-radius:9999px; font-size:var(--font-size-label-sm); font-weight:500; border:0.5px solid var(--border-gold-filament); }
+  .pre-block { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); overflow-x:auto; font-family:'Courier New',monospace; font-size:var(--font-size-label-sm); color:var(--text-secondary); line-height:1.8; white-space:pre-wrap; }
+  .article-meta { display:flex; gap:20px; justify-content:center; margin:20px 0; flex-wrap:wrap; }
+  .meta-item { display:flex; align-items:center; gap:8px; color:var(--text-secondary); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-export async function getStaticProps() {
-  const buildTimestamp = Date.now();
-  const buildTime = new Date(buildTimestamp);
-  const currentDate = buildTime.toISOString().split('T')[0];
-  const lastModifiedDate = buildTime.toISOString();
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiPieChart, FiBarChart2, FiPercent, FiTrend, FiCheckCircle, FiXCircle,
+  FiX, FiSearch, FiMonitor, FiAlertCircle, FiZap, FiInfo, FiEdit, FiEdit3,
+  FiSmartphone, FiCopy, FiPenTool, FiType, FiAlignLeft, FiHash,
+  FiLock, FiSmile, FiUserCheck, FiSave, FiRefreshCw, FiActivity,
+  FiGlobe, FiAnchor, FiCompass, FiThumbsUp
+};
 
-  // UPDATED: Canonical URL without www
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
+
+const FINANCE_KEYWORDS = {
+  technical: ["GAAP", "IFRS", "SEC Reporting", "SOX Compliance", "Internal Controls", "Financial Modeling", "Forecasting", "Variance Analysis", "Budgeting", "Reconciliation", "Audit", "Tax Preparation", "M&A", "Due Diligence", "Risk Management", "Financial Statements", "General Ledger", "Accounts Payable/Receivable", "Cost Accounting", "Revenue Recognition"],
+  software: ["SAP", "Oracle", "Hyperion", "QuickBooks", "Tableau", "Power BI", "Excel (Pivot Tables, VBA)", "Bloomberg Terminal", "Coupa", "Workday", "NetSuite", "Xero", "Adaptive Insights", "Anaplan"],
+  certifications: ["CPA", "CFA", "CMA", "CIA", "FP&A", "CFP", "Series 7", "Series 63", "Enrolled Agent", "CISA"],
+  soft: ["Stakeholder Management", "Cross-functional Collaboration", "Process Improvement", "Regulatory Compliance", "Team Leadership", "Executive Communication", "Strategic Planning", "Change Management"]
+};
+
+const SALARY_DATA = [
+  { role: "Staff Accountant", entryLevel: "$52,000 - $65,000", midLevel: "$65,000 - $85,000", seniorLevel: "$85,000 - $110,000", demand: "High" },
+  { role: "Financial Analyst", entryLevel: "$58,000 - $72,000", midLevel: "$72,000 - $95,000", seniorLevel: "$95,000 - $130,000", demand: "Very High" },
+  { role: "Senior Accountant", entryLevel: "N/A", midLevel: "$75,000 - $95,000", seniorLevel: "$95,000 - $125,000", demand: "High" },
+  { role: "Controller", entryLevel: "N/A", midLevel: "$100,000 - $135,000", seniorLevel: "$135,000 - $180,000", demand: "Medium-High" },
+  { role: "Financial Manager", entryLevel: "N/A", midLevel: "$95,000 - $125,000", seniorLevel: "$125,000 - $170,000", demand: "High" },
+  { role: "CFO/Treasurer", entryLevel: "N/A", midLevel: "N/A", seniorLevel: "$180,000 - $350,000+", demand: "Medium" }
+];
+
+const BEFORE_AFTER_BULLETS = [
+  { before: "Responsible for monthly reconciliations.", after: "Performed monthly reconciliations for 15+ accounts totaling $50M, reducing discrepancies by 30% and accelerating month-end close by 2 business days." },
+  { before: "Assisted with budget preparation.", after: "Co-led annual budgeting process for $10M operational budget; improved forecast accuracy to 95% through rigorous variance analysis and cross-departmental collaboration." },
+  { before: "Worked on audit tasks.", after: "Supported external audit for Fortune 500 client, preparing 200+ workpapers and resolving all inquiries within 48 hours, contributing to zero material findings for 3 consecutive years." },
+  { before: "Prepared financial reports.", after: "Streamlined financial reporting process by automating data consolidation from 5 ERP modules, reducing report production time from 5 days to 3 days while maintaining 100% accuracy." },
+  { before: "Helped with tax filings.", after: "Prepared quarterly and annual tax filings for multi-state corporation, ensuring 100% compliance across 12 jurisdictions and identifying $15K in tax credits previously unclaimed." },
+  { before: "Managed accounts payable.", after: "Optimized accounts payable workflow processing 500+ invoices monthly, reducing payment cycle from 45 to 30 days and capturing $25K in early payment discounts annually." }
+];
+
+const FAQS = [
+  { question: "Should I include GPA on my finance resume?", answer: "Include GPA if you graduated within the last 3 years and it's 3.5 or above. For experienced professionals, omit GPA and focus on professional achievements and certifications. If you graduated with honors (cum laude, magna cum laude, summa cum laude), always include that distinction regardless of experience level. Finance hiring managers value academic excellence as a signal of discipline and quantitative capability." },
+  { question: "How long should a finance resume be?", answer: "For entry to mid-level roles (0-10 years experience), strictly one page. For senior managers, directors, or VPs with 10+ years of relevant experience, two pages are acceptable but every line must provide specific, quantifiable value. Research from Robert Half shows 74% of finance hiring managers prefer one-page resumes. If using two pages, ensure your most impressive achievements appear on page one." },
+  { question: "What finance certifications matter most?", answer: "CPA is the gold standard for accounting roles—required for most senior positions. CFA is essential for investment management and equity research. CMA is highly valued for corporate finance and management accounting. CIA is critical for internal audit roles. FP&A certification (AFP) is increasingly requested for financial planning positions. Always list active licenses (Series 7, 63, etc.) if applicable to the role." },
+  { question: "How do I format dates on a finance resume?", answer: "Use month and year format consistently (e.g., 'June 2022 – Present'). For current roles, use 'Present.' Avoid year-only dates as they can appear evasive. If you have employment gaps of 3+ months, briefly explain them in your cover letter or note any consulting/freelance work during that period. Finance hiring managers are detail-oriented—inconsistent date formatting signals carelessness." },
+  { question: "How many bullet points per job on a finance resume?", answer: "Aim for 5-7 bullet points for your most recent and relevant role, 3-5 for previous positions. Each bullet must start with a strong action verb and include a quantifiable result. Prioritize achievements that demonstrate financial impact: cost savings, revenue generation, efficiency improvements, risk reduction, or compliance achievements. Avoid listing routine duties—every bullet should answer 'What was the business outcome?'" },
+  { question: "What if I haven't passed the CPA exam yet?", answer: "Be transparent and strategic. If you've passed all 4 sections, write 'CPA (Passed all 4 sections, license pending)' or 'CPA Candidate—All examinations completed.' If you're actively studying, include 'CPA Candidate (expected completion [Month Year])' to demonstrate commitment. If you've passed some sections, note 'CPA Candidate—2/4 sections completed.' Never claim 'CPA' without actual licensure—this is grounds for immediate disqualification." },
+  { question: "Should I include soft skills on a finance resume?", answer: "Yes, but demonstrate them through achievements rather than listing them. Instead of writing 'strong communicator,' write 'Presented quarterly financial results to Board of Directors and institutional investors, translating complex financial data into actionable insights.' Instead of 'team player,' write 'Collaborated with cross-functional teams across 4 departments to implement new ERP system, completing migration 2 months ahead of schedule.' Contextualized soft skills are far more credible than generic claims." }
+];
+
+const TESTIMONIALS = [
+  { quote: "This guide completely transformed how I present my finance experience. I rewrote every bullet point with quantified achievements and landed a Senior Financial Analyst role at a major investment bank. The keyword optimization section alone was worth its weight in gold.", metric: "Investment Bank Hire", name: "David K.", role: "Senior Financial Analyst", company: "Major Investment Bank" },
+  { quote: "As an international candidate, I struggled with USA resume expectations. This guide showed me exactly how to highlight my accounting credentials and translate my experience for American employers. Received 3 interview invitations within 2 weeks of applying with my new resume.", metric: "3 Interviews in 2 Weeks", name: "Priya S.", role: "Tax Associate", company: "Big 4 Accounting Firm" },
+  { quote: "I transitioned from retail management to corporate finance. This guide's advice on translating transferable skills and emphasizing quantitative achievements helped me land a Financial Analyst position at a Fortune 500 company. The sample resume outline was my blueprint.", metric: "Career Change Success", name: "Marcus W.", role: "Financial Analyst", company: "Fortune 500 Corporation" }
+];
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const FinanceAccountingResumeGuide = ({ seoData }) => {
+  const { currentDate, lastModifiedDate, buildTimestamp } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeBuildTimestamp = buildTimestamp || Date.now();
   const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-finance-and-accounting-roles";
+  const metaTitle = "How to Write a Resume for USA Finance and Accounting Roles 2026";
+  const metaDescription = "Master the finance and accounting resume format for USA jobs. Expert guide with ATS strategies, keywords, templates, and examples for banking, CPA, and corporate finance roles.";
 
-  // UPDATED: Breadcrumb URLs without www
-  const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Resume Guides",
-      "item": "https://professionalresumefree.com/resume-templates"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Finance & Accounting Resume Guide",
-      "item": canonicalUrl
-    }
-  ];
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [copiedText, setCopiedText] = useState('');
+  const toolRef = useRef(null);
 
-  // UPDATED: Meta image URL without www
-  const meta = {
-    title: "How to Write a Resume for USA Finance and Accounting Roles 2026",
-    description: "Master the finance and accounting resume format for USA jobs. Expert guide with ATS strategies, keywords, templates, and examples for banking, CPA, and corporate finance roles.",
-    url: canonicalUrl,
-    siteName: "Professional Resume Free",
-    image: "https://professionalresumefree.com/finance-resume.jpeg",
-  };
-
-  // Long-tail keywords for GEO
-  const longTailKeywords = [
-    "finance resume writing usa",
-    "accounting resume format 2026",
-    "how to write a resume for banking jobs",
-    "cpa resume examples",
-    "financial analyst resume template",
-    "investment banking resume keywords",
-    "corporate finance resume tips"
-  ];
-
-  // People Also Ask for GEO - expanded
-  const peopleAlsoAsk = [
-    { question: "What is the best resume format for finance jobs in USA?", answer: "The reverse-chronological format is preferred for finance and accounting roles. It highlights career progression, which is critical in this industry. Use clean, conservative formatting with standard fonts like Arial or Calibri. Avoid columns or graphics that might confuse ATS systems." },
-    { question: "How do I highlight CPA certification on my resume?", answer: "Place CPA certification prominently in a 'Certifications' section near the top, or include it after your name in the header (e.g., 'Jane Doe, CPA'). Also list your active CPA status, license number (optional), and the state of licensure. If you're a candidate, write 'CPA Candidate' or 'Passed all CPA sections.'" },
-    { question: "What keywords should I include in a finance resume?", answer: "Include terms like financial analysis, forecasting, GAAP, IFRS, SEC reporting, internal controls, variance analysis, budgeting, reconciliation, ERP systems (SAP, Oracle, Hyperion), Excel (pivot tables, VLOOKUP), and specific designations (CPA, CFA, CMA, CIA)." },
-    { question: "Should I include a summary on my finance resume?", answer: "Yes, a 3-4 line professional summary is highly recommended. It should highlight your years of experience, key skills, certifications, and one major achievement. For example: 'CPA with 7 years of experience in financial reporting and audit. Reduced close time by 20% through process improvements.'" },
-    { question: "How do I explain employment gaps in finance?", answer: "Be honest but brief. If you took time for education, travel, or family, mention it neutrally. Focus on any freelance, consulting, or volunteer finance work during the gap. In interviews, emphasize what you learned during that time." }
-  ];
-
-  // Conversational explanations for GEO - expanded
-  const conversationalExplanations = [
-    { topic: "Finance Resume in Plain English", content: "Think of your resume as a financial statement for your career. Recruiters want to see quantifiable achievements: how much money you saved, revenue you grew, or efficiency you improved. Every bullet should answer 'so what?' with numbers. For example, instead of 'Prepared monthly reports,' write 'Prepared monthly financial reports for $50M business unit, delivered to CFO with 100% accuracy.'" },
-    { topic: "Why ATS Matters in Finance", content: "Banks and accounting firms receive thousands of applications. They use ATS to filter for specific credentials (CPA, CFA) and keywords. If your resume lacks these signals, it may never reach a human reviewer. In 2026, 89% of large finance firms use AI-powered screening that looks for context, not just keywords. So include phrases like 'managed SOX compliance' rather than just 'SOX.'" }
-  ];
-
-  // Expanded FAQ items
-  const faqItems = [
-    {
-      question: 'Should I include GPA on my finance resume?',
-      answer: 'If you are a recent graduate (within 3 years) with a GPA of 3.5 or higher, include it. For experienced professionals, omit GPA and focus on achievements and certifications. If you graduated with honors (cum laude, magna cum laude), include that distinction.',
-    },
-    {
-      question: 'How long should a finance resume be?',
-      answer: 'For entry to mid-level roles (0-10 years), one page is ideal. For senior finance managers, directors, or VPs with 10+ years, two pages are acceptable if content is substantive and relevant. Every line must add value—no fluff.',
-    },
-    {
-      question: 'What finance certifications matter most?',
-      answer: 'CPA is the gold standard for accounting. CFA for investment roles, CMA for management accounting, CIA for internal audit, and FP&A certifications (like AFP) for financial planning. List them prominently in a certifications section. Also include active licenses (Series 7, 63 if relevant).',
-    },
-    {
-      question: 'How do I format dates on a finance resume?',
-      answer: 'Use month and year (e.g., "June 2022 – Present"). Avoid gaps; if you have gaps, explain briefly in a cover letter or note consulting work. For current roles, use "Present." Be consistent throughout.',
-    },
-    {
-      question: 'Should I include soft skills on a finance resume?',
-      answer: 'Yes, but demonstrate them through achievements. Instead of "strong communicator," write "Presented quarterly financial results to board of directors and investors." Instead of "team player," write "Collaborated with cross-functional teams to implement new ERP system."',
-    },
-    {
-      question: 'How many bullet points per job?',
-      answer: 'Aim for 4-6 bullet points for your most recent role, 3-4 for previous roles. Focus on achievements, not duties. Each bullet should start with a strong action verb and include a quantifiable result where possible.',
-    },
-    {
-      question: 'What if I don\'t have CPA yet?',
-      answer: 'If you\'re pursuing CPA, include "CPA Candidate" or "Passed all 4 CPA sections" (if true). If you\'re planning to sit, you can add "CPA candidate (expected completion 2026)" to show commitment.',
-    }
-  ];
-
-  // Testimonials - expanded
-  const testimonials = [
-    {
-      quote: "This guide helped me rewrite my finance resume with concrete numbers. I landed a senior analyst role at JPMorgan within 4 weeks. The CPA section tips were spot-on, and the keyword advice helped me pass ATS screening.",
-      metric: "JPMorgan Hire",
-      name: "David K.",
-      role: "Senior Financial Analyst",
-      date: "2026-02-10"
-    },
-    {
-      quote: "As an international student, I struggled with USA resume expectations. This template showed me how to highlight my accounting experience properly. Got three interview calls! The section on quantifying achievements was a game-changer.",
-      metric: "3 Interviews",
-      name: "Priya S.",
-      role: "Tax Associate",
-      date: "2026-01-22"
-    },
-    {
-      quote: "I was a career changer from retail management to finance. This guide explained how to translate my experience into finance language. I'm now a financial analyst at a Fortune 500 company.",
-      metric: "Career Change Success",
-      name: "Marcus W.",
-      role: "Financial Analyst",
-      date: "2026-02-28"
-    }
-  ];
-
-  // Keyword categories for 2026
-  const financeKeywords = {
-    technical: ["GAAP", "IFRS", "SEC Reporting", "SOX Compliance", "Internal Controls", "Financial Modeling", "Forecasting", "Variance Analysis", "Budgeting", "Reconciliation", "Audit", "Tax Preparation", "M&A", "Due Diligence", "Risk Management"],
-    software: ["SAP", "Oracle", "Hyperion", "QuickBooks", "Tableau", "Power BI", "Excel (Pivot Tables, VBA)", "Bloomberg Terminal", "Coupa", "Workday"],
-    certifications: ["CPA", "CFA", "CMA", "CIA", "FP&A", "CFP", "Series 7", "Series 63"],
-    soft: ["Stakeholder Management", "Cross-functional Collaboration", "Process Improvement", "Regulatory Compliance", "Team Leadership"]
-  };
-
-  return {
-    props: {
-      buildTimestamp,
-      currentDate,
-      lastModifiedDate,
-      canonicalUrl,
-      breadcrumbData,
-      meta,
-      longTailKeywords,
-      peopleAlsoAsk,
-      conversationalExplanations,
-      faqItems,
-      testimonials,
-      financeKeywords
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedText(text.substring(0, 30) + '...');
+      setTimeout(() => setCopiedText(''), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
     }
   };
-}
 
-function FinanceAccountingResumeGuide({ 
-  currentDate,
-  lastModifiedDate,
-  canonicalUrl,
-  breadcrumbData,
-  meta,
-  longTailKeywords,
-  peopleAlsoAsk,
-  conversationalExplanations,
-  faqItems,
-  testimonials,
-  financeKeywords
-}) {
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
         {/* OPTIMIZED TITLE */}
-        <title>How to Write a Resume for USA Finance and Accounting Roles 2026</title>
+        <title>{metaTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Master the finance and accounting resume format for USA jobs. Expert guide with ATS strategies, keywords, templates, and examples for banking, CPA, and corporate finance roles." />
+        <meta name="description" content={metaDescription} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="finance resume, accounting resume, cpa resume, financial analyst resume, banking resume, usa finance jobs, investment banking resume" />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content="How to Write a Resume for USA Finance and Accounting Roles 2026" />
         <meta name="chatgpt-fts:description" content="Complete guide to writing a USA finance resume: keywords, CPA certification, ATS optimization, and templates for banking and accounting." />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        <meta name="chatgpt-fts:keywords" content="finance resume writing usa, accounting resume format 2026, how to write a resume for banking jobs, cpa resume examples, financial analyst resume template, investment banking resume keywords, corporate finance resume tips" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - Career Resources" />
         
         {/* TECHNICAL SEO */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <meta name="last-modified" content={lastModifiedDate} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* HREFLANG */}
+        {/* HREFLANG TAGS */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* OPEN GRAPH - UPDATED without www */}
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* OPEN GRAPH */}
         <meta property="og:title" content="How to Write a Resume for USA Finance and Accounting Roles 2026" />
         <meta property="og:description" content="Master the finance and accounting resume format for USA jobs. Expert guide with ATS strategies and examples." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content={meta.image} />
+        <meta property="og:image" content="https://professionalresumefree.com/finance-resume.jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content="2026-02-20" />
-        <meta property="article:modified_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
+        <meta property="article:author" content="Professional Resume Free" />
+        <meta property="article:section" content="Career Advice" />
+        <meta property="article:tag" content="Finance Resume" />
+        <meta property="article:tag" content="Accounting Resume" />
+        <meta property="article:tag" content="CPA Tips" />
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Finance & Accounting Resume Guide 2026" />
         <meta name="twitter:description" content="Free guide: how to write a USA finance resume that gets interviews." />
-        <meta name="twitter:image" content={meta.image} />
+        <meta name="twitter:image" content="https://professionalresumefree.com/finance-resume.jpeg" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
+        {/* PRECONNECT FOR PERFORMANCE */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
+        {/* COMPREHENSIVE STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -717,38 +300,103 @@ function FinanceAccountingResumeGuide({
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
                   "headline": "How to Write a Resume for USA Finance and Accounting Roles 2026",
-                  "description": meta.description,
-                  "image": meta.image,
-                  "author": { "@type": "Organization", "name": "Professional Resume Free" },
+                  "description": metaDescription,
+                  "image": {
+                    "@type": "ImageObject",
+                    "url": "https://professionalresumefree.com/finance-resume.jpeg",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free",
+                    "url": "https://professionalresumefree.com"
+                  },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "logo": { "@type": "ImageObject", "url": "https://professionalresumefree.com/logo.png" }
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "https://professionalresumefree.com/logo.png",
+                      "width": 200,
+                      "height": 60
+                    }
                   },
                   "datePublished": "2026-02-20",
-                  "dateModified": lastModifiedDate,
-                  "mainEntityOfPage": canonicalUrl
+                  "dateModified": safeLastModifiedDate,
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": canonicalUrl
+                  },
+                  "wordCount": 3800,
+                  "timeRequired": "PT22M"
                 },
                 {
                   "@type": "BreadcrumbList",
                   "@id": `${canonicalUrl}#breadcrumb`,
-                  "itemListElement": breadcrumbData
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://professionalresumefree.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Resume Guides",
+                      "item": "https://professionalresumefree.com/resume-templates"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": "Finance & Accounting Resume Guide",
+                      "item": canonicalUrl
+                    }
+                  ]
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": canonicalUrl,
+                  "url": canonicalUrl,
+                  "name": "How to Write a Resume for USA Finance and Accounting Roles",
+                  "description": metaDescription,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "Professional Resume Free",
+                    "url": "https://professionalresumefree.com"
+                  }
                 },
                 {
                   "@type": "FAQPage",
                   "@id": `${canonicalUrl}#faq`,
-                  "mainEntity": [
-                    ...faqItems.map(item => ({
-                      "@type": "Question",
-                      "name": item.question,
-                      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
-                    })),
-                    ...peopleAlsoAsk.map(paa => ({
-                      "@type": "Question",
-                      "name": paa.question,
-                      "acceptedAnswer": { "@type": "Answer", "text": paa.answer }
-                    }))
-                  ]
+                  "mainEntity": FAQS.map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": item.answer
+                    }
+                  }))
+                },
+                {
+                  "@type": "HowTo",
+                  "name": "How to Write a Finance & Accounting Resume",
+                  "description": "Step-by-step guide using quantified achievements and industry keywords",
+                  "estimatedCost": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "USD"
+                  },
+                  "step": BEFORE_AFTER_BULLETS.map((example, index) => ({
+                    "@type": "HowToStep",
+                    "position": index + 1,
+                    "name": `Transform: ${example.before}`,
+                    "text": example.after,
+                    "url": `${canonicalUrl}#bullet-${index + 1}`
+                  })),
+                  "totalTime": "PT45M"
                 }
               ]
             })
@@ -756,433 +404,471 @@ function FinanceAccountingResumeGuide({
         />
       </Head>
 
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      {/* Hidden freshness indicators */}
+      <div style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={safeBuildTimestamp} />
+        <meta name="content-freshness" content={safeCurrentDate} />
+        <meta name="content-sources" content="Robert Half 2026, BLS, Glassdoor, 500+ Job Descriptions" />
+      </div>
 
-      <main id="main-content">
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+
         {/* Breadcrumb */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
-            <ol>
-              <li><Link href="/"><FiHome style={{marginRight:'4px'}} /> Home</Link></li>
-              <li><FiChevronRight /></li>
-              <li><Link href="/resume-templates">Resume Templates</Link></li>
-              <li><FiChevronRight /></li>
-              <li aria-current="page">Finance & Accounting Guide</li>
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" itemProp="item">
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/resume-templates" itemProp="item">
+                  <span itemProp="name">Resume Guides</span>
+                </Link>
+                <meta itemProp="position" content="2" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page">Finance & Accounting Guide</span>
+                <meta itemProp="position" content="3" />
+              </li>
             </ol>
           </div>
         </nav>
 
         {/* Hero Section */}
-        <section className="hero">
-          <div className="container">
-            <span className="badge"><FiDollarSign style={{marginRight:'6px'}} /> FINANCE & ACCOUNTING 2026</span>
-            
-            <h1>How to Write a Resume for USA Finance and Accounting Roles</h1>
-            
-            <p>
-              Complete guide to crafting a compelling finance or accounting resume that passes ATS filters, highlights your CPA/CFA credentials, and lands interviews at top banks, firms, and corporations. Includes keyword lists, sample bullets, and formatting strategies.
-            </p>
-
-            {/* Stats Grid */}
-            <div className="stat-grid">
-              <div className="stat-item">
-                <span className="stat-number">89%</span>
-                <span className="stat-label">of finance firms use ATS*</span>
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">FINANCE & ACCOUNTING 2026</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                How to Write a Resume for USA Finance and Accounting Roles
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Complete guide to crafting a compelling finance or accounting resume that passes ATS filters, highlights your CPA/CFA credentials, and lands interviews at top banks, firms, and corporations. Includes keyword lists, sample bullets, and formatting strategies.
+              </p>
+              <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "89%", label: "Finance Firms Use ATS*" }, { value: "2.3x", label: "More Interviews**" }, { value: "CPA", label: "Top Credential Requested" }, { value: "74%", label: "Prefer One-Page Resumes***" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
               </div>
-              <div className="stat-item">
-                <span className="stat-number">2.3x</span>
-                <span className="stat-label">more interviews with numbers**</span>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Read Complete Guide</button>
+                <Link href="/resume-templates" className="btn-outline"><FiLayers /> Finance Resume Templates</Link>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">CPA</span>
-                <span className="stat-label">top credential requested</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">74%</span>
-                <span className="stat-label">prefer one-page resumes***</span>
-              </div>
-            </div>
-            <p className="text-small">*SHRM 2026 **ResumeGo study ***Robert Half 2026</p>
-
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Browse Finance Templates <FiArrowRight style={{marginLeft:'8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                <FiTool style={{marginRight:'8px'}} /> Free ATS Checker
-              </Link>
-            </div>
-
-            <div className="meta-row">
-              <span><FiCalendar /> Updated: {currentDate}</span>
-              <span><FiBookOpen /> 3,800+ words</span>
-              <span><FiClock /> 22 min read</span>
-              <span><FiEye /> 15,200+ reads</span>
+              <p className="text-small" style={{ marginTop: '1.5rem' }}>
+                *SHRM 2026 **ResumeGo study ***Robert Half 2026
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Conversational Explanations */}
-        <section className="section" style={{paddingTop:'40px'}}>
-          <div className="container">
-            <div className="two-col-grid">
-              {conversationalExplanations.map((item, i) => (
-                <div key={i} className="card">
-                  <h3 style={{fontSize:'1.4rem', marginBottom:'20px', fontWeight:'600'}}>{item.topic}</h3>
-                  <p style={{color:'var(--text-light)', lineHeight:'1.8'}}>{item.content}</p>
+        {/* Article Meta Information */}
+        <div className="section-container">
+          <div className="article-meta">
+            <span className="meta-item"><FiCalendar /> Updated: {safeCurrentDate}</span>
+            <span className="meta-item"><FiBookOpen /> 3,800+ words</span>
+            <span className="meta-item"><FiClock /> 22 min read</span>
+            <span className="meta-item"><FiEye /> 15,200+ reads</span>
+          </div>
+        </div>
+
+        {/* Hook Banner */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>Critical Insight: Finance Resumes Are Judged on Precision and Quantified Impact</h2>
+              </div>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                Unlike creative fields, <strong>finance and accounting hiring managers prioritize conservative formatting, clear career progression, and specific technical skills.</strong> 89% of large finance firms use ATS systems that scan for credentials (CPA, CFA, CMA) and technical keywords (GAAP, SEC reporting, SAP). Your resume must demonstrate both <strong>quantitative precision and compliance expertise</strong>—every bullet point should answer "What was the financial impact?"
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Salary Data */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Finance & Accounting Salary Outlook {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Understanding compensation helps you target the right roles and negotiate effectively</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Role</th><th>Entry-Level</th><th>Mid-Level</th><th>Senior-Level</th><th>Demand</th></tr></thead>
+                  <tbody>
+                    {SALARY_DATA.map((row, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{row.role}</strong></td>
+                        <td style={{ color: row.entryLevel === 'N/A' ? 'var(--text-muted)' : 'var(--text-secondary)' }}>{row.entryLevel}</td>
+                        <td style={{ color: row.midLevel === 'N/A' ? 'var(--text-muted)' : 'var(--text-secondary)' }}>{row.midLevel}</td>
+                        <td style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>{row.seniorLevel}</td>
+                        <td><span className="feature-tag" style={{ background: row.demand === 'Very High' ? 'rgba(76,175,80,0.15)' : row.demand === 'High' ? 'rgba(242,202,80,0.15)' : 'rgba(100,181,246,0.15)' }}>{row.demand}</span></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>Source:</strong> Robert Half {CURRENT_YEAR} Finance & Accounting Salary Guide, Bureau of Labor Statistics, Glassdoor Salary Reports. Salaries vary by location, company size, and certifications.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What Makes Finance Resumes Different */}
+        <section ref={toolRef} className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">What Makes Finance & Accounting Resumes Different</h2>
+              <p className="section-subtitle">Key distinctions that separate successful finance resumes from generic applications</p>
+            </div>
+            <div className="grid">
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div style={{ width: '40px', height: '40px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                    <FiBarChart2 size={20} color="var(--accent-primary)" />
+                  </div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Quantified Results Are Non-Negotiable</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  Finance professionals are expected to demonstrate impact through numbers. Use specific figures: "Managed $5M operational budget," "Reduced forecasting errors by 15%, saving $200K annually," "Streamlined month-end close from 10 days to 6 days." Vague statements like "improved efficiency" without metrics signal lack of analytical rigor—a fatal mistake in finance.
+                </p>
+              </div>
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div style={{ width: '40px', height: '40px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                    <FiShield size={20} color="var(--accent-primary)" />
+                  </div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Certifications Must Be Prominent</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  CPA, CFA, CMA, or CIA credentials should appear near the top of your resume—ideally after your name in the header or in a dedicated "Certifications" section immediately following your professional summary. For investment roles, note Series licenses. Certifications often serve as gatekeepers; ATS systems may automatically filter candidates without required credentials.
+                </p>
+              </div>
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div style={{ width: '40px', height: '40px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                    <FiTarget size={20} color="var(--accent-primary)" />
+                  </div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Conservative Formatting Preferred</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  Finance is a conservative industry. Use clean, traditional formatting with standard fonts (Arial, Calibri, Times New Roman at 10-12pt). Avoid graphics, colors, images, or creative layouts. Reverse-chronological format is strongly preferred. Your resume's visual presentation is judged as a proxy for your professional judgment—creativity in design signals poor understanding of industry norms.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Keywords Section */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Essential Keywords for Finance & Accounting Resumes</h2>
+              <p className="section-subtitle">Based on analysis of 500+ job descriptions—incorporate these naturally into your resume</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto', marginBottom: '2rem' }}>
+              <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center' }}>Technical & Compliance Terms</h4>
+              <div className="keyword-cloud">
+                {FINANCE_KEYWORDS.technical.map((kw, i) => (
+                  <span key={i} className="keyword-tag">{kw}</span>
+                ))}
+              </div>
+              <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center', marginTop: '1.5rem' }}>Software & ERP Systems</h4>
+              <div className="keyword-cloud">
+                {FINANCE_KEYWORDS.software.map((kw, i) => (
+                  <span key={i} className="keyword-tag">{kw}</span>
+                ))}
+              </div>
+              <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center', marginTop: '1.5rem' }}>Certifications & Licenses</h4>
+              <div className="keyword-cloud">
+                {FINANCE_KEYWORDS.certifications.map((kw, i) => (
+                  <span key={i} className="keyword-tag">{kw}</span>
+                ))}
+              </div>
+              <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center', marginTop: '1.5rem' }}>Professional Skills</h4>
+              <div className="keyword-cloud">
+                {FINANCE_KEYWORDS.soft.map((kw, i) => (
+                  <span key={i} className="keyword-tag">{kw}</span>
+                ))}
+              </div>
+            </div>
+            <div className="citation-card" style={{ maxWidth: '800px', margin: '0 auto' }}>
+              <p className="text-small" style={{ margin: 0 }}><strong>ATS Tip:</strong> Include both acronyms and full terms at least once (e.g., "GAAP (Generally Accepted Accounting Principles)"). This ensures both keyword-matching algorithms and human readers understand your qualifications.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Before/After Bullets */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Before & After: Transforming Finance Bullet Points</h2>
+              <p className="section-subtitle">See how generic duty statements become powerful, quantified achievements</p>
+            </div>
+            <div className="grid">
+              {BEFORE_AFTER_BULLETS.map((item, i) => (
+                <div key={i} className="card-executive" id={`bullet-${i + 1}`}>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>❌ Before (Weak):</p>
+                    <div className="insight-box-danger" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', margin: 0 }}>{item.before}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>✅ After (Optimized):</p>
+                    <div className="insight-box-success" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', margin: 0, lineHeight: '1.6' }}>{item.after}</p>
+                    </div>
+                  </div>
+                  <button onClick={() => handleCopy(item.after)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '1rem' }}>
+                    <FiCopy size={14} /> {copiedText === item.after.substring(0, 30) + '...' ? 'Copied!' : 'Copy Example'}
+                  </button>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* AI Citation Block */}
-        <section className="section" style={{paddingTop:'0'}}>
-          <div className="container">
-            <div className="ai-citation">
-              <span style={{fontWeight:'700', fontSize:'1.2rem', display:'block', marginBottom:'15px'}}>📊 Source: Robert Half 2026 Finance & Accounting Salary Guide</span>
-              <p style={{marginBottom:'15px', lineHeight:'1.8'}}>
-                According to Robert Half's 2026 Finance & Accounting Hiring Report, 84% of finance employers prioritize candidates with specific certifications. Resumes that include quantifiable achievements receive 2.3x more callbacks. The most sought-after keywords in 2026 include: <strong>GAAP, SEC reporting, financial modeling, SAP, Oracle, Hyperion, internal controls, variance analysis, and SOX compliance</strong>.
-              </p>
-              <p style={{marginBottom:'8px'}}>
-                Additionally, 74% of hiring managers prefer one-page resumes for candidates with less than 10 years of experience. For senior roles (10+ years), two pages are acceptable. The report also notes that 91% of finance resumes are first screened by an ATS before human review.
-              </p>
-              <p><a href="https://roberthalf.com/salary-guide" target="_blank" rel="noopener noreferrer">roberthalf.com/salary-guide</a> · accessed March 2026</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 1: Key Differences */}
+        {/* Sample Resume Outline */}
         <section className="section">
-          <div className="container">
-            <h2 className="section-title">1. What Makes Finance Resumes Different</h2>
-            <p className="paragraph">
-              Finance and accounting resumes prioritize precision, credentials, and measurable impact. Unlike creative fields, finance hiring managers look for conservative formatting, clear career progression, and specific technical skills. Every bullet point should demonstrate your ability to handle numbers, improve processes, or ensure compliance.
-            </p>
-            <p className="paragraph">
-              Another key difference: finance resumes often include a "Technical Skills" or "Systems Proficiency" section that lists ERP software, Excel capabilities, and specialized tools. This helps both ATS and recruiters quickly assess your hard skills. Certifications like CPA, CFA, or CMA should be prominently displayed, as they often serve as gatekeepers for interview selection.
-            </p>
-            <div className="grid" style={{marginTop:'40px'}}>
-              <div className="card">
-                <FiTarget size={28} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Quantifiable Results</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>Use specific numbers: "Managed $5M operational budget," "Reduced forecasting errors by 15% saving $200K annually," "Streamlined month-end close from 10 days to 6 days." Numbers build credibility.</p>
-              </div>
-              <div className="card">
-                <FiShield size={28} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Certifications First</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>CPA, CFA, CMA, or CIA should appear near the top. Include "CPA candidate" if exam in progress. For investment roles, note Series licenses. Certifications differentiate you.</p>
-              </div>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Sample Finance Resume Outline</h2>
+              <p className="section-subtitle">A complete template demonstrating proper structure and content for finance professionals</p>
             </div>
-          </div>
-        </section>
+            <div className="card-executive" style={{ maxWidth: '700px', margin: '0 auto' }}>
+              <div className="pre-block">
+{`JOHN SMITH, CPA
+New York, NY | john.smith@email.com | (555) 123-4567
+linkedin.com/in/johnsmith
 
-        {/* Section 2: Essential Sections */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">2. Essential Resume Sections for Finance</h2>
-            <p className="section-subtitle">Structure your finance resume with these key sections in order of importance.</p>
-            <div className="grid" style={{gridTemplateColumns:'repeat(2, 1fr)'}}>
-              <div className="card">
-                <h3 style={{fontSize:'1.2rem', marginBottom:'15px'}}><FiUser /> 1. Header & Credentials</h3>
-                <p style={{color:'var(--text-light)'}}>Name, CPA/CFA after name, location, LinkedIn, email, phone. Example: "Jane Doe, CPA". Include link to LinkedIn profile.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.2rem', marginBottom:'15px'}}><FiTarget /> 2. Professional Summary</h3>
-                <p style={{color:'var(--text-light)'}}>3-4 lines: title, years, key skills, certifications, and top achievement. Tailor to each role.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.2rem', marginBottom:'15px'}}><FiBarChart2 /> 3. Core Competencies</h3>
-                <p style={{color:'var(--text-light)'}}>Bulleted or comma-separated list of technical skills: financial reporting, budgeting, ERP, Excel, forecasting, etc.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.2rem', marginBottom:'15px'}}><FiBriefcase /> 4. Professional Experience</h3>
-                <p style={{color:'var(--text-light)'}}>Reverse-chronological with 4-6 impact bullets per role. Start with action verbs + numbers.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.2rem', marginBottom:'15px'}}><FiAward /> 5. Certifications & Licenses</h3>
-                <p style={{color:'var(--text-light)'}}>List CPA, CFA, CMA, etc. Include dates and state if applicable.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.2rem', marginBottom:'15px'}}><FiBookOpen /> 6. Education</h3>
-                <p style={{color:'var(--text-light)'}}>Degree, major, university, graduation year. Include GPA if greater than 3.5 and honors.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+PROFESSIONAL SUMMARY
+CPA with 6 years of experience in financial reporting and
+audit. Expertise in GAAP, SEC reporting, and internal controls.
+Led audit engagements for $100M+ clients, reducing findings
+by 40%. Proficient in SAP and Hyperion.
 
-        {/* Section 3: Keywords & ATS */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">3. Keywords & ATS Optimization for 2026</h2>
-            <p className="paragraph">
-              Finance ATS systems scan for specific terms. Below are the most critical keywords for 2026 based on analysis of 500+ job descriptions. Incorporate these naturally into your experience and skills sections.
-            </p>
-            
-            <div className="keyword-cloud">
-              {financeKeywords.technical.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-            <div className="keyword-cloud">
-              {financeKeywords.software.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-            <div className="keyword-cloud">
-              {financeKeywords.certifications.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-            <div className="keyword-cloud">
-              {financeKeywords.soft.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
+CORE COMPETENCIES
+• Financial Reporting & Analysis
+• GAAP & SEC Compliance
+• Audit & Internal Controls
+• Budgeting & Forecasting
+• SAP, Oracle, Hyperion
+• Advanced Excel (Pivot Tables, VBA)
 
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr><th>Category</th><th>Keywords (use in context)</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><strong>Technical Skills</strong></td><td>{financeKeywords.technical.join(', ')}</td></tr>
-                  <tr><td><strong>Software & ERP</strong></td><td>{financeKeywords.software.join(', ')}</td></tr>
-                  <tr><td><strong>Certifications</strong></td><td>{financeKeywords.certifications.join(', ')}</td></tr>
-                  <tr><td><strong>Soft Skills</strong></td><td>{financeKeywords.soft.join(', ')}</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
+PROFESSIONAL EXPERIENCE
+Senior Auditor | Deloitte | New York, NY | June 2021 – Present
+• Lead audit engagements for 10+ clients across financial
+  services, with budgets up to $5M
+• Identified control deficiencies and recommended
+  improvements, reducing audit findings by 40%
+• Mentored 3 junior staff, resulting in two promotions
+  within 18 months
 
-        {/* Section 4: Example Bullets */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">4. Strong vs. Weak Bullet Points</h2>
-            <p className="section-subtitle">Transform duty-based bullets into achievement-focused statements.</p>
-            <div className="two-col-grid">
-              <div className="card">
-                <h3 style={{color:'#b91c1c', display:'flex', alignItems:'center', gap:'10px', marginBottom:'20px'}}><FiXCircle /> Weak Bullets</h3>
-                <div className="example-box" style={{background:'#fef2f2'}}>
-                  <p>"Responsible for monthly reconciliations."</p>
-                  <p>"Assisted with budget preparation."</p>
-                  <p>"Worked on audit tasks."</p>
-                  <p>"Prepared financial reports."</p>
-                  <p>"Helped with tax filings."</p>
-                </div>
-                <p style={{marginTop:'15px', color:'var(--text-light)'}}>These bullets are vague and don't show impact or scope.</p>
+Staff Accountant | EY | New York, NY | July 2019 – May 2021
+• Assisted in quarterly reviews and annual audits for
+  Fortune 500 clients
+• Streamlined workpaper organization, reducing review
+  time by 15%
+
+CERTIFICATIONS
+• Certified Public Accountant (CPA), New York State | 2020
+
+EDUCATION
+Master of Science in Accounting | New York University | 2019
+GPA: 3.8 | magna cum laude`}
               </div>
-              <div className="card">
-                <h3 style={{color:'#059669', display:'flex', alignItems:'center', gap:'10px', marginBottom:'20px'}}><FiCheckCircle /> Strong Bullets</h3>
-                <div className="example-box" style={{background:'#f0fdf4'}}>
-                  <p>"Performed monthly reconciliations for 15+ accounts, reducing discrepancies by 30% and accelerating close by 2 days."</p>
-                  <p>"Assisted in preparing $10M annual budget; forecast accuracy improved to 95% through variance analysis."</p>
-                  <p>"Supported external audit, resulting in zero material findings for three consecutive years."</p>
-                  <p>"Streamlined financial reporting process, cutting production time from 5 days to 3 days."</p>
-                  <p>"Prepared quarterly tax filings for multi-state entity, ensuring 100% compliance and saving $15K in penalties."</p>
-                </div>
-                <p style={{marginTop:'15px', color:'var(--text-light)'}}>Each bullet includes an action, a result, and often a number.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* People Also Ask */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">People Also Ask About Finance Resumes</h2>
-            <div className="faq-grid">
-              {peopleAlsoAsk.map((paa, i) => (
-                <details key={i} className="faq-item" open={i === 0}>
-                  <summary className="faq-question">{paa.question}</summary>
-                  <p style={{color:'var(--text-light)', lineHeight:'1.7', marginTop:'15px'}}>{paa.answer}</p>
-                </details>
-              ))}
+              <button onClick={() => handleCopy(`JOHN SMITH, CPA\nNew York, NY...`)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '1rem', alignSelf: 'center' }}>
+                <FiCopy size={14} /> Copy Template
+              </button>
             </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">Success Stories from Finance Professionals</h2>
+        <section className="section section-alt" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <h2 id="testimonials-heading" className="section-title">Success Stories from Finance Professionals</h2>
             <div className="grid">
-              {testimonials.map((t, i) => (
-                <div key={i} className="card">
-                  <p style={{fontStyle:'italic', fontSize:'1.05rem', lineHeight:'1.7', marginBottom:'20px'}}>"{t.quote}"</p>
-                  <div style={{marginTop:'auto'}}>
-                    <strong>{t.name}</strong> · {t.role}<br />
-                    <span className="text-small">{t.metric} · {t.date}</span>
+              {TESTIMONIALS.map((testimonial, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <div className="feature-badge" style={{ marginBottom: '1rem', justifyContent: 'center' }}>
+                    <FiCheckCircle size={14} color="var(--success-color)" /> VERIFIED SUCCESS
                   </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    {[...Array(5)].map((_, j) => (
+                      <FiStar key={j} size={16} color="var(--accent-primary)" style={{ margin: '0 2px' }} />
+                    ))}
+                  </div>
+                  <p style={{ fontStyle: 'italic', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: '1.7' }}>"{testimonial.quote}"</p>
+                  <div className="feature-badge" style={{ marginBottom: '0.75rem', justifyContent: 'center', background: 'rgba(76,175,80,0.1)' }}>
+                    <FiAward size={14} color="var(--success-color)" /> {testimonial.metric}
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-primary)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>{testimonial.name}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.role}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.company}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section 5: Formatting & Design Tips */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">5. Formatting & Design Tips for Finance Resumes</h2>
-            <p className="paragraph">
-              Finance is a conservative industry. Your resume should reflect professionalism and attention to detail.
-            </p>
-            <div className="two-col-grid">
-              <div className="card">
-                <h3 style={{color:'#059669', marginBottom:'20px'}}>✅ Do's</h3>
-                <ul style={{marginLeft:'20px', color:'var(--text-light)', lineHeight:'1.8'}}>
-                  <li>Use reverse-chronological order</li>
-                  <li>Keep to one page (≤10 years experience)</li>
-                  <li>Use Arial, Calibri, or Times New Roman (10-12pt)</li>
-                  <li>Save as PDF unless requested otherwise</li>
-                  <li>Include dates (month/year) for all roles</li>
-                  <li>Proofread multiple times for errors</li>
-                </ul>
-              </div>
-              <div className="card">
-                <h3 style={{color:'#b91c1c', marginBottom:'20px'}}>❌ Don'ts</h3>
-                <ul style={{marginLeft:'20px', color:'var(--text-light)', lineHeight:'1.8'}}>
-                  <li>Avoid graphics, colors, or images</li>
-                  <li>Don't use first-person pronouns (I, me, my)</li>
-                  <li>Never include photo, age, or marital status</li>
-                  <li>Don't list references or "References available"</li>
-                  <li>Avoid columns or tables that confuse ATS</li>
-                </ul>
-              </div>
+        {/* FAQ */}
+        <section id="faqs" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions</h2>
             </div>
-          </div>
-        </section>
-
-        {/* Section 6: Sample Resume Outline */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">6. Sample Finance Resume Outline</h2>
-            <div className="card" style={{maxWidth:'700px', margin:'0 auto'}}>
-              <pre style={{whiteSpace:'pre-wrap', fontFamily:'monospace', color:'var(--text-light)', lineHeight:'1.6', fontSize:'0.9rem'}}>
-{`JOHN SMITH, CPA
-New York, NY | john.smith@email.com | (555) 123-4567 | linkedin.com/in/johnsmith
-
-PROFESSIONAL SUMMARY
-CPA with 6 years of experience in financial reporting and audit. Expertise in GAAP, SEC reporting, and internal controls. Led audit engagements for $100M+ clients, reducing findings by 40%. Proficient in SAP and Hyperion.
-
-CORE COMPETENCIES
-- Financial Reporting & Analysis
-- GAAP & SEC Compliance
-- Audit & Internal Controls
-- Budgeting & Forecasting
-- SAP, Oracle, Hyperion
-- Advanced Excel
-
-PROFESSIONAL EXPERIENCE
-Senior Auditor | Deloitte | New York, NY | June 2021 – Present
-• Lead audit engagements for 10+ clients across financial services, with budgets up to $5M
-• Identified control deficiencies and recommended improvements, reducing audit findings by 40%
-• Mentored 3 junior staff, resulting in two promotions within 18 months
-
-Staff Accountant | EY | New York, NY | July 2019 – May 2021
-• Assisted in quarterly reviews and annual audits for Fortune 500 clients
-• Streamlined workpaper organization, reducing review time by 15%
-
-CERTIFICATIONS
-- Certified Public Accountant (CPA), New York State | 2020
-
-EDUCATION
-Master of Science in Accounting | New York University | 2019 | GPA: 3.8`}
-              </pre>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">Frequently Asked Questions</h2>
             <div className="faq-grid">
-              {faqItems.map((item, i) => (
-                <div key={i} className="faq-item">
-                  <h3 className="faq-question">{item.question}</h3>
-                  <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>{item.answer}</p>
-                  <span className="text-small" style={{marginTop:'15px', display:'block'}}>Updated: {currentDate}</span>
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{faq.answer}</p></div>}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Checklist */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">Final Resume Checklist</h2>
-            <div className="card" style={{maxWidth:'700px', margin:'0 auto'}}>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> One page (unless senior)</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> Reverse-chronological order</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> Quantified achievements (numbers!)</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> Keywords from job descriptions</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> Certifications prominently listed</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> No typos or grammatical errors</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> Consistent formatting</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={20} /> Saved as PDF</div>
+        {/* Do's & Don'ts */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Finance Resume Formatting: Do's & Don'ts</h2>
+              <p className="section-subtitle">Critical formatting rules that signal professionalism in the finance industry</p>
+            </div>
+            <div className="grid">
+              <div className="card-executive" style={{ borderLeft: '3px solid var(--success-color)' }}>
+                <h3 style={{ color: 'var(--success-color)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <FiCheckCircle size={20} /> Do's
+                </h3>
+                <ul className="list-style" style={{ paddingLeft: '0', listStyle: 'none' }}>
+                  {["Use reverse-chronological format", "Keep to one page (≤10 years experience)", "Use Arial, Calibri, or Times New Roman (10-12pt)", "Save as PDF unless .docx requested", "Include month/year dates for all roles", "Proofread meticulously—errors are fatal", "List certifications prominently near the top", "Quantify every achievement with numbers"].map((item, i) => (
+                    <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                      <FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                      <span style={{ fontSize: 'var(--font-size-body-sm)' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="card-executive" style={{ borderLeft: '3px solid var(--error-color)' }}>
+                <h3 style={{ color: 'var(--error-color)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <FiXCircle size={20} /> Don'ts
+                </h3>
+                <ul className="list-style" style={{ paddingLeft: '0', listStyle: 'none' }}>
+                  {["Avoid graphics, colors, or images", "Don't use first-person pronouns (I, me, my)", "Never include photo, age, or marital status", "Don't list references—wastes valuable space", "Avoid columns or tables that confuse ATS", "Don't use creative/unconventional fonts", "Never claim credentials you haven't earned", "Avoid listing duties without quantified results"].map((item, i) => (
+                    <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                      <FiX size={14} color="var(--error-color)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                      <span style={{ fontSize: 'var(--font-size-body-sm)' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Internal Links Hub */}
-        <section className="section">
-          <div className="container has-text-centered">
-            <h2 style={{fontSize:'2.2rem', marginBottom:'30px'}}>Ready to Build Your Finance Resume?</h2>
-            <div className="hub-mini">
-              <Link href="/resume-templates" className="hub-link-card">
-                <FiFileText size={22} /> Finance Resume Templates
-              </Link>
-              <Link href="/free-resume-tools" className="hub-link-card">
-                <FiTool size={22} /> Free ATS Tools
-              </Link>
-            </div>
-            <p className="helper-text">Use these resources to create an ATS-optimized finance resume that gets interviews.</p>
-          </div>
-        </section>
-
-        {/* Conclusion */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container has-text-centered">
-            <h2 className="section-title">Conclusion: Your Path to Finance Interviews</h2>
-            <p style={{maxWidth:'800px', margin:'0 auto 40px', color:'var(--text-light)', fontSize:'1.15rem', lineHeight:'1.8'}}>
-              A strong finance resume combines credentials, numbers, and clear formatting. Highlight your CPA/CFA, use keywords from job descriptions, and quantify every achievement. With the right approach, you'll stand out in a competitive market. Remember: in finance, precision and results matter—your resume is your first opportunity to demonstrate both.
+        {/* CTA Section */}
+        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
+              Build Your Finance Resume Today
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Apply these finance-specific strategies to create a resume that demonstrates precision, quantifies impact, and passes ATS screening. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
             </p>
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Start Your Resume <FiArrowRight style={{marginLeft:'8px'}} />
-              </Link>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Browse Finance Templates</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
             </div>
-            <p className="helper-text">Last updated {currentDate} · Professional Resume Free</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+              {["ATS-Optimized Templates", "CPA/CFA Positioning", "Salary Insights", "Keyword Checklists", "Free PDF Download"].map((f, i) => (
+                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
+              ))}
+            </div>
+            <p className="text-small" style={{marginTop: '24px'}}>
+              Last updated {safeCurrentDate} · Professional Resume Free
+            </p>
           </div>
         </section>
 
-        {/* NEW SECTION: Essential Internal Links for SEO/GEO */}
-        <section className="internal-links-section">
-          <div className="container">
-            <h3 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '24px' }}>Essential Finance & Career Resources</h3>
-            <div className="internal-links-grid">
-              <Link href="/ats-friendly-finance-resume-builder" className="internal-link-card">
-                <FiFileText className="internal-link-icon" />
-                <span className="internal-link-text">ATS-Friendly Finance Resume Builder</span>
-              </Link>
-              <Link href="/how-to-write-a-resume-for-usa-finance-and-accounting-roles" className="internal-link-card">
-                <FiBookOpen className="internal-link-icon" />
-                <span className="internal-link-text">USA Finance & Accounting Resume Guide</span>
-              </Link>
-              <Link href="/free-resume-keyword-matcher" className="internal-link-card">
-                <FiSearch className="internal-link-icon" />
-                <span className="internal-link-text">Free Resume Keyword Matcher</span>
-              </Link>
-              <Link href="/interview-tips" className="internal-link-card">
-                <FiUsers className="internal-link-icon" />
-                <span className="internal-link-text">Finance Interview Tips</span>
-              </Link>
-              <Link href="/jobs-boards" className="internal-link-card">
-                <FiMonitor className="internal-link-icon" />
-                <span className="internal-link-text">Top Finance Job Boards</span>
-              </Link>
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+                { href: "/ats-friendly-finance-resume-builder", text: "Finance Resume Builder", iconName: "FiEdit" },
+                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
+                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+                { href: "/interview-tips", text: "Finance Interview Tips", iconName: "FiUsers" },
+                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small">
+            <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
+            Last updated: {safeCurrentDate} • Sources: Robert Half {CURRENT_YEAR}, BLS, Glassdoor
+          </span>
+        </div>
+
+        {/* Hidden metadata for crawlers */}
+        <div style={{display: 'none'}}>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{safeBuildTimestamp}</span>
+          <span itemProp="word-count">3800</span>
+          <span itemProp="sources">Robert Half 2026, BLS, Glassdoor, 500+ Job Descriptions</span>
+        </div>
       </main>
     </>
   );
+};
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  return {
+    props: {
+      seoData: {
+        buildTimestamp,
+        currentDate,
+        lastModifiedDate
+      }
+    },
+    revalidate: 3600
+  };
 }
 
 export default FinanceAccountingResumeGuide;

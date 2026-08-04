@@ -1,1162 +1,211 @@
-// pages/free-resume-summary-generator.jsx
 import Head from 'next/head';
-import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { 
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiCopy,
+  FiX, FiGrid, FiList, FiBookmark, FiSmartphone, FiBriefcase,
+  FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
+  FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
+  FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiHash, FiType
+} from 'react-icons/fi';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed with centering =====
-const criticalCSS = `
-  /* CSS RESET */
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS - FIXED OVERLAY ISSUES
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
   }
   
-  /* BASE STYLES */
+  /* CRITICAL FIXES FOR OVERLAY ISSUES */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { overflow-x:hidden; width:100%; }
   body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    line-height: 1.6; 
-    color: #111827; 
-    background: #f9fafb; 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    background-color:var(--bg-page); color:var(--text-primary); 
+    font-family:var(--font-body); font-size:var(--font-size-body-md); 
+    line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; 
+    overflow-x:hidden; width:100%; min-height:100vh;
   }
   
-  /* CENTERING UTILITIES */
-  .text-center, h1, h2, h3, h4, p, .subtitle, .section-title, .section-subtitle {
-    text-align: center;
-  }
-  
-  .container { 
-    max-width: 1280px; 
-    margin: 0 auto; 
-    padding: 16px; 
-    width: 100%;
-  }
-  
-  @media (min-width: 640px) {
-    .container { padding: 24px; }
-  }
-  
-  @media (min-width: 1024px) {
-    .container { padding: 32px; }
-  }
-  
-  /* BREADCRUMB - centered */
-  .breadcrumb { 
-    margin-bottom: 24px; 
-    font-size: 0.9rem; 
-    color: #6b7280;
-    text-align: center;
-  }
-  
-  .breadcrumb ol { 
-    display: flex; 
-    flex-wrap: wrap; 
-    list-style: none; 
-    gap: 8px;
-    justify-content: center;
-  }
-  
-  .breadcrumb li { 
-    display: flex; 
-    align-items: center;
-  }
-  
-  .breadcrumb-separator { 
-    margin: 0 4px; 
-    color: #9ca3af;
-  }
-  
-  .breadcrumb a { 
-    color: #111827; 
-    text-decoration: none; 
-    border-bottom: 1px solid #d1d5db;
-  }
-  
-  .breadcrumb a:hover { 
-    border-bottom-color: #000000; 
-  }
-  
-  /* HEADER - centered */
-  .header { 
-    margin-bottom: 40px; 
-    padding-bottom: 32px; 
-    border-bottom: 2px solid #f3f4f6;
-    text-align: center;
-  }
-  
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  .title { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-align: center;
-  }
-  
-  .subtitle { 
-    font-size: clamp(1rem, 2.5vw, 1.2rem); 
-    color: #4b5563; 
-    max-width: 900px; 
-    line-height: 1.7; 
-    margin-bottom: 20px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .template-count { 
-    display: inline-block; 
-    background: #000000; 
-    color: #ffffff; 
-    padding: 4px 12px; 
-    border-radius: 50px; 
-    font-size: 0.9rem; 
-    margin-left: 12px;
-  }
-  
-  /* AGGREGATE RATING - centered */
-  .aggregate-rating { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    gap: 16px; 
-    margin: 24px auto; 
-    padding: 16px; 
-    background: #f3f4f6; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb;
-    flex-wrap: wrap;
-    max-width: 500px;
-  }
-  
-  .rating-stars { 
-    color: #fbbf24; 
-    font-size: 1.3rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-  }
-  
-  .rating-value { 
-    color: #111827; 
-    font-weight: 700; 
-    font-size: 1rem;
-  }
-  
-  .rating-text { 
-    color: #4b5563; 
-    font-size: 0.9rem;
-  }
-  
-  /* MAIN */
-  .main { 
-    margin: 32px 0;
-  }
-  
-  /* GENERATOR SECTION */
-  .generator-section { 
-    margin-bottom: 48px;
-  }
-  
-  .generator-header { 
-    margin-bottom: 32px;
-    text-align: center;
-  }
-  
-  .generator-header h2 { 
-    font-size: 1.8rem; 
-    font-weight: 700; 
-    margin-bottom: 12px;
-    text-align: center;
-  }
-  
-  .generator-header p { 
-    color: #4b5563; 
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-  
-  .generator-container { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 32px; 
-    margin-bottom: 24px;
-  }
-  
-  @media (min-width: 1024px) {
-    .generator-container { grid-template-columns: 1fr 1fr; }
-  }
-  
-  /* INPUT COLUMN */
-  .input-column { 
-    width: 100%;
-  }
-  
-  /* FORM SECTION */
-  .form-section { 
-    background: #ffffff; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border: 1px solid #e5e7eb; 
-    margin-bottom: 32px;
-  }
-  
-  .form-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 24px; 
-    flex-wrap: wrap; 
-    gap: 16px;
-  }
-  
-  .form-header h3 { 
-    font-size: 1.3rem; 
-    font-weight: 700;
-  }
-  
-  .example-button { 
-    background: transparent; 
-    border: 2px solid #000000; 
-    padding: 8px 16px; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    transition: all 0.2s;
-  }
-  
-  .example-button:hover { 
-    background: #000000; 
-    color: #ffffff;
-  }
-  
-  .form-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 20px;
-  }
-  
-  @media (min-width: 640px) {
-    .form-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  .form-group { 
-    width: 100%;
-  }
-  
-  .full-width { 
-    grid-column: 1 / -1;
-  }
-  
-  .form-group label { 
-    display: block; 
-    font-weight: 600; 
-    margin-bottom: 8px; 
-    color: #111827;
-    text-align: left;
-  }
-  
-  .form-input, .form-textarea { 
-    width: 100%; 
-    padding: 12px; 
-    border: 2px solid #e5e7eb; 
-    border-radius: 8px; 
-    font-family: inherit; 
-    font-size: 1rem; 
-    transition: border-color 0.2s;
-  }
-  
-  .form-input:focus, .form-textarea:focus { 
-    outline: none; 
-    border-color: #000000;
-  }
-  
-  .help-text { 
-    font-size: 0.85rem; 
-    color: #6b7280; 
-    margin-top: 6px;
-    text-align: left;
-  }
-  
-  /* TEMPLATES SECTION */
-  .templates-section { 
-    background: #ffffff; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .section-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 24px; 
-    flex-wrap: wrap; 
-    gap: 16px;
-  }
-  
-  .section-header h3 { 
-    font-size: 1.3rem; 
-    font-weight: 700;
-  }
-  
-  .templates-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  .template-category { 
-    border: 1px solid #e5e7eb; 
-    border-radius: 12px; 
+  /* Ensure all containers have proper overflow and clearfix */
+  .section-container, .card-executive, .grid, .geo-link-grid, .faq-grid,
+  .form-grid, .summary-output-box, .template-btn, .keyword-btn {
     overflow: hidden;
-  }
-  
-  .category-header { 
-    background: #f9fafb; 
-    padding: 16px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    border-bottom: 1px solid #e5e7eb;
-  }
-  
-  .category-name { 
-    font-weight: 700; 
-    color: #000000;
-  }
-  
-  .category-count { 
-    background: #e5e7eb; 
-    padding: 4px 10px; 
-    border-radius: 50px; 
-    font-size: 0.85rem;
-  }
-  
-  .category-templates { 
-    padding: 16px; 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 12px;
-  }
-  
-  .template-button { 
-    width: 100%; 
-    text-align: left; 
-    padding: 16px; 
-    border: 2px solid #e5e7eb; 
-    border-radius: 8px; 
-    background: #ffffff; 
-    cursor: pointer; 
-    transition: all 0.2s;
-  }
-  
-  .template-button:hover { 
-    border-color: #000000;
-  }
-  
-  .template-button.selected { 
-    border-color: #000000; 
-    background: #f9fafb;
-  }
-  
-  .template-title { 
-    font-weight: 700; 
-    margin-bottom: 6px;
-  }
-  
-  .template-preview { 
-    font-size: 0.9rem; 
-    color: #6b7280;
-  }
-  
-  /* OUTPUT COLUMN */
-  .output-column { 
-    width: 100%;
-  }
-  
-  /* SUMMARY SECTION - centered text */
-  .summary-section { 
-    background: #ffffff; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border: 1px solid #e5e7eb; 
-    margin-bottom: 32px;
-  }
-  
-  .summary-stats { 
-    display: flex; 
-    gap: 8px; 
-    color: #6b7280; 
-    font-size: 0.9rem;
-  }
-  
-  .summary-output { 
-    background: #f9fafb; 
-    border-radius: 12px; 
-    padding: 24px; 
-    margin: 20px 0;
-  }
-  
-  .summary-text { 
-    line-height: 1.7; 
-    color: #111827;
-    text-align: center;
-  }
-  
-  .empty-summary { 
-    padding: 40px; 
-    text-align: center; 
-    color: #6b7280;
-  }
-  
-  .summary-actions { 
-    display: flex; 
-    gap: 16px; 
-    margin-top: 20px; 
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .copy-button, .regenerate-button { 
-    flex: 1; 
-    padding: 12px 24px; 
-    border: 2px solid #000000; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    transition: all 0.2s; 
-    min-width: 150px;
-  }
-  
-  .copy-button { 
-    background: #000000; 
-    color: #ffffff;
-  }
-  
-  .copy-button:hover { 
-    background: #1f2937; 
-    border-color: #1f2937;
-  }
-  
-  .regenerate-button { 
-    background: transparent; 
-    color: #000000;
-  }
-  
-  .regenerate-button:hover { 
-    background: #f9fafb;
-  }
-  
-  /* KEYWORDS SECTION - centered */
-  .keywords-section { 
-    background: #ffffff; 
-    border-radius: 16px; 
-    padding: 28px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .keywords-grid { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 10px; 
-    margin: 20px 0;
-    justify-content: center;
-  }
-  
-  .keyword-button { 
-    padding: 8px 16px; 
-    border: 2px solid #e5e7eb; 
-    border-radius: 50px; 
-    background: #ffffff; 
-    cursor: pointer; 
-    transition: all 0.2s;
-  }
-  
-  .keyword-button:hover { 
-    border-color: #000000;
-  }
-  
-  .keyword-button.selected { 
-    background: #000000; 
-    color: #ffffff; 
-    border-color: #000000;
-  }
-  
-  .industry-list { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 10px; 
-    margin-top: 12px;
-    justify-content: center;
-  }
-  
-  .industry-button { 
-    padding: 6px 12px; 
-    background: #f3f4f6; 
-    border: 1px solid #e5e7eb; 
-    border-radius: 4px; 
-    font-size: 0.85rem; 
-    cursor: pointer;
-  }
-  
-  .industry-button:hover { 
-    background: #e5e7eb;
-  }
-  
-  /* GENERATOR ACTIONS - centered */
-  .generator-actions { 
-    display: flex; 
-    gap: 16px; 
-    justify-content: center; 
-    margin-top: 32px; 
-    flex-wrap: wrap;
-  }
-  
-  .generate-button, .reset-button { 
-    padding: 16px 32px; 
-    border: 2px solid #000000; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    font-size: 1.1rem; 
-    cursor: pointer; 
-    transition: all 0.2s; 
-    min-width: 250px;
-  }
-  
-  .generate-button { 
-    background: #000000; 
-    color: #ffffff;
-  }
-  
-  .generate-button:hover:not(:disabled) { 
-    background: #1f2937; 
-    border-color: #1f2937;
-  }
-  
-  .generate-button:disabled { 
-    opacity: 0.5; 
-    cursor: not-allowed;
-  }
-  
-  .reset-button { 
-    background: transparent; 
-    color: #000000;
-  }
-  
-  .reset-button:hover { 
-    background: #f9fafb;
-  }
-  
-  /* SECTION TITLE - centered */
-  .section-title { 
-    font-size: 2rem; 
-    font-weight: 700; 
-    margin-bottom: 16px; 
-    text-align: center;
-  }
-  
-  .section-subtitle { 
-    text-align: center; 
-    color: #4b5563; 
-    max-width: 800px; 
-    margin: 0 auto 32px;
-  }
-  
-  /* TIPS GRID */
-  .tips-section, .examples-section, .mistakes-section, .faq-section, .benefits-section, .resources-section { 
-    margin: 48px 0;
-  }
-  
-  .tips-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 640px) {
-    .tips-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .tips-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  
-  .tip-card { 
-    background: #ffffff; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-    text-align: center;
-  }
-  
-  .tip-title { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    margin-bottom: 12px;
-    text-align: center;
-  }
-  
-  .tip-description { 
-    color: #4b5563;
-    text-align: center;
-  }
-  
-  /* EXAMPLES GRID */
-  .examples-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 768px) {
-    .examples-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .example-card { 
-    background: #ffffff; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .example-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 16px; 
-    flex-wrap: wrap; 
-    gap: 12px;
-  }
-  
-  .example-title { 
-    font-size: 1.2rem; 
-    font-weight: 700;
-  }
-  
-  .example-badge { 
-    background: #f3f4f6; 
-    padding: 4px 12px; 
-    border-radius: 50px; 
-    font-size: 0.85rem;
-  }
-  
-  .example-content p { 
-    color: #4b5563; 
-    margin-bottom: 16px;
-    text-align: left;
-  }
-  
-  .example-keywords { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 8px;
-    justify-content: center;
-  }
-  
-  .example-keywords span { 
-    background: #f3f4f6; 
-    padding: 4px 10px; 
-    border-radius: 50px; 
-    font-size: 0.8rem;
-  }
-  
-  /* MISTAKES GRID */
-  .mistakes-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 640px) {
-    .mistakes-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (min-width: 1024px) {
-    .mistakes-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  
-  .mistake-card { 
-    background: #ffffff; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .mistake-header { 
-    display: flex; 
-    gap: 16px; 
-    margin-bottom: 16px;
-    justify-content: center;
-  }
-  
-  .mistake-number { 
-    font-size: 2rem; 
-    font-weight: 800; 
-    color: #9ca3af;
-  }
-  
-  .mistake-title { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    color: #000000;
-  }
-  
-  .mistake-content p { 
-    color: #4b5563;
-    text-align: center;
-  }
-  
-  /* FAQ - centered */
-  .faq-list { 
-    max-width: 800px; 
-    margin: 0 auto;
-  }
-  
-  .faq-item { 
-    background: #ffffff; 
-    border-radius: 12px; 
-    margin-bottom: 16px; 
-    border: 1px solid #e5e7eb; 
-    cursor: pointer;
-  }
-  
-  .faq-item.active { 
-    border-color: #000000;
-  }
-  
-  .faq-question { 
-    padding: 20px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-  }
-  
-  .faq-question h3 { 
-    font-size: 1.1rem; 
-    font-weight: 600; 
-    margin: 0;
-    text-align: left;
-  }
-  
-  .faq-toggle { 
-    font-size: 1.5rem; 
-    font-weight: 600;
-  }
-  
-  .faq-answer { 
-    padding: 0 20px 20px 20px; 
-    color: #4b5563;
-    text-align: left;
-  }
-  
-  /* BENEFITS GRID */
-  .benefits-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px;
-  }
-  
-  @media (min-width: 768px) {
-    .benefits-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  
-  .benefit-card { 
-    background: #ffffff; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    transition: all 0.2s;
-  }
-  
-  .benefit-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-    border-color: #000000;
-  }
-  
-  .benefit-title { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    margin-bottom: 12px;
-    color: #000000;
-  }
-  
-  .benefit-description { 
-    color: #4b5563;
-  }
-  
-  /* CTA SECTION - centered */
-  .cta-section { 
-    margin: 48px 0; 
-    padding: 48px; 
-    background: linear-gradient(135deg, #000000 0%, #1f2937 100%); 
-    border-radius: 24px; 
-    color: #ffffff;
-    text-align: center;
-  }
-  
-  .cta-content { 
-    text-align: center;
-  }
-  
-  .cta-title { 
-    font-size: 2rem; 
-    font-weight: 800; 
-    margin-bottom: 16px;
-    color: #ffffff;
-  }
-  
-  .cta-subtitle { 
-    color: #9ca3af; 
-    max-width: 600px; 
-    margin: 0 auto 32px;
-  }
-  
-  .cta-buttons { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 16px; 
-    justify-content: center; 
-    margin-bottom: 24px;
-  }
-  
-  .cta-primary-button, .cta-secondary-button { 
-    padding: 16px 32px; 
-    border: 2px solid #ffffff; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    transition: all 0.2s; 
-    min-width: 200px;
-  }
-  
-  .cta-primary-button { 
-    background: #ffffff; 
-    color: #000000;
-  }
-  
-  .cta-primary-button:hover { 
-    background: transparent; 
-    color: #ffffff;
-  }
-  
-  .cta-secondary-button { 
-    background: transparent; 
-    color: #ffffff;
-  }
-  
-  .cta-secondary-button:hover { 
-    background: #ffffff; 
-    color: #000000;
-  }
-  
-  .cta-features { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 20px; 
-    justify-content: center;
-  }
-  
-  .cta-feature { 
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-  }
-  
-  .feature-check { 
-    color: #10b981; 
-    font-weight: 700;
-  }
-  
-  /* RESOURCES SECTION */
-  .resources-section .benefits-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  @media (max-width: 768px) {
-    .resources-section .benefits-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* INTERNAL LINKS SECTION STYLES */
-  .internal-links-section {
-    margin: 48px 0;
-    padding: 32px 0;
-    border-top: 1px solid #e5e7eb;
-  }
-  .links-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    width: 100%;
-  }
-  @media (min-width: 640px) {
-    .links-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .links-grid { grid-template-columns: repeat(5, 1fr); }
-  }
-  .link-card {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 16px;
-    text-decoration: none;
-    color: #000000;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100%;
-  }
-  .link-card:hover {
-    border-color: #000000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  }
-  .link-icon {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-  }
-  .link-text {
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.4;
-  }
-  
-  /* BUILD INFO - Fixed hydration */
-  .build-info { 
-    margin-top: 48px; 
-    padding: 16px; 
-    border-top: 1px solid #e5e7eb; 
-    font-size: 0.8rem; 
-    color: #6b7280;
-    text-align: center;
-  }
-  
-  /* HIDDEN */
-  .hidden { 
-    display: none;
-  }
-  
-  /* RESPONSIVE */
-  @media (max-width: 640px) {
-    .summary-actions { 
-      flex-direction: column;
-    }
-    
-    .copy-button, .regenerate-button { 
-      width: 100%;
-    }
-    
-    .generator-actions { 
-      flex-direction: column; 
-      align-items: center;
-    }
-    
-    .generate-button, .reset-button { 
-      width: 100%;
-    }
-    
-    .cta-buttons { 
-      flex-direction: column; 
-      align-items: center;
-    }
-    
-    .cta-primary-button, .cta-secondary-button { 
-      width: 100%;
-    }
-    
-    .cta-features { 
-      flex-direction: column; 
-      align-items: center;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .template-count { 
-      display: block; 
-      margin-left: 0; 
-      margin-top: 10px;
-    }
-    
-    .example-header { 
-      flex-direction: column; 
-      align-items: flex-start;
-    }
-    
-    .aggregate-rating {
-      flex-direction: column;
-    }
-  }
-  
-  /* Link styles */
-  a {
-    color: #000000;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Fix card height issues - allow auto height */
+  .card-executive {
+    background:var(--card-bg); 
+    backdrop-filter:blur(var(--glass-blur)); 
+    -webkit-backdrop-filter:blur(var(--glass-blur)); 
+    border:var(--card-border); 
+    border-radius:0.5rem; 
+    padding:var(--card-padding); 
+    transition:all var(--transition-medium) var(--easing-smooth); 
+    height:auto; 
+    min-height:0;
+    display:flex; 
+    flex-direction:column; 
+    width:100%;
+    max-width:100%;
+  }
+  .card-executive:hover { 
+    background:rgba(32,31,33,0.8); 
+    border-color:rgba(212,175,55,0.3); 
+    transform:translateY(-4px); 
+    box-shadow:var(--shadow-card-hover); 
+  }
+  
+  h1,h2,h3,h4,h5,h6 { 
+    font-family:var(--font-display); color:var(--text-primary); 
+    letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; 
+    overflow-wrap:break-word; line-height:1.3;
+  }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); margin-bottom:0.5rem; word-wrap:break-word; overflow-wrap:break-word; }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; white-space:nowrap; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-primary:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+  
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; white-space:nowrap; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  
+  /* FIXED GRID - Explicit heights removed, gap increased */
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; align-items:stretch; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; width:100%; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); white-space:nowrap; }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); white-space:nowrap; }
+  
+  .faq-grid { display:flex; flex-direction:column; gap:0.75rem; max-width:800px; margin:0 auto; width:100%; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); width:100%; }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; width:100%; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.25rem; width:100%; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; width:100%; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); word-wrap:break-word; }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+  
+  textarea, input, select { font-family:var(--font-body); background:var(--input-bg); border:var(--input-border); color:var(--input-text); padding:var(--input-padding); border-radius:var(--input-radius); font-size:var(--font-size-body-md); width:100%; transition:border-color var(--transition-fast); }
+  textarea:focus, input:focus, select:focus { outline:none; border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(242,202,80,0.1); }
+  textarea::placeholder, input::placeholder { color:var(--input-placeholder); }
+  textarea { min-height:100px; resize:vertical; }
+  select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23f2ca50' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
+  select option { background:var(--bg-surface); color:var(--text-primary); }
+  
+  /* FIXED: Summary output box - proper overflow */
+  .summary-output-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:var(--card-padding); border:var(--card-border); margin:1rem 0; width:100%; overflow-wrap:break-word; word-break:break-word; }
+  
+  /* FIXED: Template buttons - proper width and spacing */
+  .template-btn { width:100%; text-align:left; padding:1rem; border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; background:var(--card-bg); cursor:pointer; transition:all var(--transition-fast); color:var(--text-secondary); font-size:var(--font-size-body-sm); margin-bottom:0.5rem; display:block; }
+  .template-btn:hover { border-color:var(--accent-primary-container); background:rgba(242,202,80,0.05); }
+  .template-btn.selected { border-color:var(--accent-primary); background:rgba(242,202,80,0.08); }
+  
+  /* FIXED: Keyword buttons - prevent wrapping issues */
+  .keyword-btn { padding:0.5rem 1rem; border:0.5px solid var(--border-gold-filament); border-radius:9999px; background:var(--card-bg); cursor:pointer; font-size:var(--font-size-body-sm); color:var(--text-secondary); transition:all var(--transition-fast); white-space:nowrap; }
+  .keyword-btn:hover { border-color:var(--accent-primary-container); }
+  .keyword-btn.selected { background:var(--accent-primary); color:var(--accent-on-primary); border-color:var(--accent-primary); }
+  
+  .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; width:100%; }
+  .form-group-full { grid-column:1/-1; width:100%; }
+  .label-style { display:block; font-weight:var(--font-weight-semibold); margin-bottom:0.5rem; color:var(--text-primary); font-size:var(--font-size-body-sm); }
+  
+  /* FIXED: Flex container for keywords - proper wrapping */
+  .keywords-flex { display:flex; flex-wrap:wrap; gap:0.5rem; }
+  
+  /* FIXED: Main two-column layout - proper stacking on mobile */
+  .generator-layout { display:flex; gap:1.5rem; flex-wrap:wrap; max-width:1100px; margin:0 auto; width:100%; }
+  .generator-col { flex:1; min-width:300px; max-width:100%; display:flex; flex-direction:column; gap:1.5rem; }
+  
+  /* FIXED: Ensure no absolute positioning conflicts */
+  .relative { position:relative; }
+  
+  /* FIXED: Action buttons spacing */
+  .action-buttons { display:flex; gap:1rem; flex-wrap:wrap; padding-top:0.5rem; }
 `;
 
-// Current year for dynamic content
+// ============================================================================
+// CONSTANTS
+// ============================================================================
 const CURRENT_YEAR = new Date().getFullYear();
-// REMOVED www from SITE_URL
 const SITE_URL = 'https://professionalresumefree.com';
 const PAGE_URL = `${SITE_URL}/free-resume-summary-generator`;
-
-// Template Categories
-const SUMMARY_TEMPLATES = [
-  {
-    id: 'experienced',
-    name: 'Experienced Professional',
-    description: 'Templates for professionals with 5+ years of experience',
-    templates: [
-      {
-        title: 'Senior Executive',
-        summary: `Results-driven senior executive with over 15 years of experience in [Industry]. Proven track record of leading cross-functional teams, driving strategic initiatives, and delivering sustainable business growth. Expertise in [Key Skill 1], [Key Skill 2], and [Key Skill 3] with a focus on [Specific Focus Area].`,
-        keywords: ['Strategic Leadership', 'Business Growth', 'Team Management', 'Operational Excellence']
-      },
-      {
-        title: 'Mid-Career Professional',
-        summary: `Accomplished [Job Title] with [Number] years of experience in [Industry]. Skilled in [Key Skill 1], [Key Skill 2], and [Key Skill 3]. Demonstrated success in [Major Achievement 1] and [Major Achievement 2]. Seeking to leverage expertise in [Target Area].`,
-        keywords: ['Project Management', 'Process Improvement', 'Client Relations', 'Performance Optimization']
-      }
-    ]
-  },
-  {
-    id: 'career-change',
-    name: 'Career Changer',
-    description: 'Templates for professionals transitioning to new industries',
-    templates: [
-      {
-        title: 'Transferable Skills Focus',
-        summary: `[Current Industry] professional transitioning to [New Industry] with [Number] years of transferable experience in [Transferable Skill 1], [Transferable Skill 2], and [Transferable Skill 3]. Demonstrated ability to [Key Achievement] and [Another Achievement]. Eager to apply [Specific Skill] in [New Industry] context.`,
-        keywords: ['Adaptable', 'Quick Learner', 'Transferable Skills', 'Cross-Industry Experience']
-      }
-    ]
-  },
-  {
-    id: 'recent-grad',
-    name: 'Recent Graduate',
-    description: 'Templates for new graduates and entry-level professionals',
-    templates: [
-      {
-        title: 'Academic Excellence',
-        summary: `Recent [Degree] graduate from [University] with strong academic background in [Field of Study]. Developed skills in [Skill 1], [Skill 2], and [Skill 3] through coursework and [Type of Experience]. Eager to apply theoretical knowledge in practical [Industry] setting.`,
-        keywords: ['Fast Learner', 'Academic Achievement', 'Technical Skills', 'Research Abilities']
-      },
-      {
-        title: 'Internship Experience',
-        summary: `Recent graduate with hands-on experience gained through [Number] internships in [Industry]. Developed practical skills in [Skill 1], [Skill 2], and [Skill 3]. Demonstrated ability to [Key Achievement] during internship at [Company]. Seeking entry-level position to build career in [Industry].`,
-        keywords: ['Internship Experience', 'Practical Skills', 'Entry-Level', 'Career Development']
-      }
-    ]
-  },
-  {
-    id: 'leadership',
-    name: 'Leadership',
-    description: 'Templates for management and leadership roles',
-    templates: [
-      {
-        title: 'Transformational Leader',
-        summary: `Visionary leader with [Number] years of experience driving organizational transformation and team excellence. Expertise in [Leadership Area 1], [Leadership Area 2], and [Leadership Area 3]. Successfully [Major Leadership Achievement]. Committed to fostering innovation and achieving strategic objectives.`,
-        keywords: ['Strategic Vision', 'Team Development', 'Change Management', 'Performance Leadership']
-      }
-    ]
-  },
-  {
-    id: 'technical',
-    name: 'Technical',
-    description: 'Templates for technology and engineering professionals',
-    templates: [
-      {
-        title: 'Software Developer',
-        summary: `Full-stack developer with [Number] years of experience building scalable applications using [Technology Stack]. Proficient in [Programming Language 1], [Programming Language 2], and [Framework]. Demonstrated ability to [Technical Achievement] resulting in [Business Impact].`,
-        keywords: ['Full-Stack Development', 'Agile Methodology', 'System Architecture', 'Code Optimization']
-      },
-      {
-        title: 'Data Scientist',
-        summary: `Data scientist specializing in [Specialization] with expertise in [Tool/Language 1], [Tool/Language 2], and [Tool/Language 3]. Proven ability to [Data Achievement] leading to [Business Outcome]. Passionate about leveraging data to drive decision-making and create business value.`,
-        keywords: ['Machine Learning', 'Statistical Analysis', 'Data Visualization', 'Predictive Modeling']
-      }
-    ]
-  }
-];
-
-// Industry Keywords
-const INDUSTRY_KEYWORDS = [
-  { industry: 'Technology', keywords: ['Innovation', 'Scalability', 'Digital Transformation', 'Agile Development'] },
-  { industry: 'Finance', keywords: ['Risk Management', 'Financial Analysis', 'Regulatory Compliance', 'Investment Strategy'] },
-  { industry: 'Healthcare', keywords: ['Patient Care', 'Clinical Excellence', 'Healthcare Operations', 'Medical Research'] },
-  { industry: 'Marketing', keywords: ['Brand Strategy', 'Digital Marketing', 'Customer Engagement', 'Campaign Optimization'] },
-  { industry: 'Education', keywords: ['Curriculum Development', 'Student Success', 'Educational Technology', 'Academic Administration'] },
-  { industry: 'Consulting', keywords: ['Strategic Advisory', 'Business Transformation', 'Client Solutions', 'Process Optimization'] }
-];
-
-// Power Words
-const POWER_WORDS = [
-  'Accomplished', 'Achieved', 'Advanced', 'Amplified', 'Boosted', 'Built',
-  'Catalyzed', 'Championed', 'Created', 'Delivered', 'Developed', 'Drove',
-  'Elevated', 'Engineered', 'Enhanced', 'Established', 'Executed', 'Expanded',
-  'Generated', 'Implemented', 'Improved', 'Increased', 'Innovated', 'Led',
-  'Maximized', 'Optimized', 'Orchestrated', 'Pioneered', 'Produced', 'Reduced',
-  'Revolutionized', 'Scaled', 'Spearheaded', 'Strengthened', 'Streamlined',
-  'Transformed'
-];
-
-// FAQ Data
-const FAQS = [
-  {
-    question: "What makes a great professional summary?",
-    answer: "A great professional summary is concise (3-5 sentences), highlights key achievements, includes relevant keywords, and shows what value you bring to employers. It should be tailored to the specific job you're applying for and include quantifiable results whenever possible."
-  },
-  {
-    question: "How long should my resume summary be?",
-    answer: "Ideal length is 3-5 sentences or 50-100 words. Recruiters typically spend only 6-7 seconds scanning a resume, so your summary needs to be impactful and concise. Focus on your most impressive achievements and relevant skills that match the job description."
-  },
-  {
-    question: "Should I include keywords from the job description?",
-    answer: "Absolutely! Keywords from the job description are crucial for both human readers and ATS systems. Our generator helps identify and incorporate relevant keywords. Match your skills and experiences to the job requirements to show you're the perfect fit."
-  },
-  {
-    question: "How do I make my summary stand out?",
-    answer: "Use specific achievements with numbers, include industry-specific terminology, start with your strongest selling point, and show what makes you unique. Avoid generic phrases and focus on what differentiates you from other candidates with similar experience."
-  },
-  {
-    question: "Can I use the same summary for every job application?",
-    answer: "While you can have a base summary, it's best to customize it for each application. Tailor your summary to highlight the skills and experiences most relevant to each specific job. This shows employers you've taken the time to understand their needs."
-  }
-];
 
 // SEO-optimized keywords
 const SEO_KEYWORDS = [
@@ -1177,36 +226,106 @@ const SEO_KEYWORDS = [
   'job application summary'
 ];
 
+const SUMMARY_TEMPLATES = [
+  { id: 'experienced', name: 'Experienced Professional', templates: [
+    { title: 'Senior Executive', summary: 'Results-driven senior executive with over 15 years of experience in [Industry]. Proven track record of leading cross-functional teams, driving strategic initiatives, and delivering sustainable business growth. Expertise in [Key Skill 1], [Key Skill 2], and [Key Skill 3].', keywords: ['Strategic Leadership', 'Business Growth', 'Team Management'] },
+    { title: 'Mid-Career Professional', summary: 'Accomplished [Job Title] with [Number] years of experience in [Industry]. Skilled in [Key Skill 1], [Key Skill 2], and [Key Skill 3]. Demonstrated success in [Major Achievement 1] and [Major Achievement 2].', keywords: ['Project Management', 'Process Improvement', 'Client Relations'] }
+  ]},
+  { id: 'career-change', name: 'Career Changer', templates: [
+    { title: 'Transferable Skills Focus', summary: '[Current Industry] professional transitioning to [New Industry] with [Number] years of transferable experience in [Transferable Skill 1], [Transferable Skill 2], and [Transferable Skill 3]. Eager to apply skills in new context.', keywords: ['Adaptable', 'Quick Learner', 'Transferable Skills'] }
+  ]},
+  { id: 'recent-grad', name: 'Recent Graduate', templates: [
+    { title: 'Academic Excellence', summary: 'Recent [Degree] graduate from [University] with strong academic background in [Field of Study]. Developed skills in [Skill 1], [Skill 2], and [Skill 3] through coursework and projects.', keywords: ['Fast Learner', 'Academic Achievement', 'Technical Skills'] }
+  ]},
+  { id: 'technical', name: 'Technical', templates: [
+    { title: 'Software Developer', summary: 'Full-stack developer with [Number] years of experience building scalable applications. Proficient in [Programming Language 1], [Programming Language 2], and [Framework]. Demonstrated ability to deliver high-quality solutions.', keywords: ['Full-Stack Development', 'Agile Methodology', 'System Architecture'] }
+  ]}
+];
+
+const INDUSTRY_KEYWORDS = [
+  { industry: 'Technology', keywords: ['Innovation', 'Scalability', 'Digital Transformation', 'Agile'] },
+  { industry: 'Finance', keywords: ['Risk Management', 'Financial Analysis', 'Compliance', 'Strategy'] },
+  { industry: 'Healthcare', keywords: ['Patient Care', 'Clinical Excellence', 'Operations', 'Research'] },
+  { industry: 'Marketing', keywords: ['Brand Strategy', 'Digital Marketing', 'Engagement', 'Campaigns'] }
+];
+
+const POWER_WORDS = ['Accomplished', 'Achieved', 'Built', 'Created', 'Delivered', 'Developed', 'Drove', 'Enhanced', 'Generated', 'Implemented', 'Improved', 'Increased', 'Led', 'Optimized', 'Orchestrated', 'Spearheaded', 'Streamlined', 'Transformed'];
+
+const FAQS = [
+  { question: "What makes a great professional summary?", answer: "A great professional summary is concise (3-5 sentences), highlights key achievements, includes relevant keywords, and shows what value you bring to employers. It should be tailored to the specific job you're applying for and include quantifiable results whenever possible." },
+  { question: "How long should my resume summary be?", answer: "Ideal length is 3-5 sentences or 50-100 words. Recruiters typically spend only 6-7 seconds scanning a resume, so your summary needs to be impactful and concise. Focus on your most impressive achievements and relevant skills that match the job description." },
+  { question: "Should I include keywords from the job description?", answer: "Absolutely! Keywords from the job description are crucial for both human readers and ATS systems. Our generator helps identify and incorporate relevant keywords. Match your skills and experiences to the job requirements to show you're the perfect fit." },
+  { question: "Can I use the same summary for every job application?", answer: "While you can have a base summary, it's best to customize it for each application. Tailor your summary to highlight the skills and experiences most relevant to each specific job. This shows employers you've taken the time to understand their needs." }
+];
+
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
+  FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
+  FiTool, FiLayers, FiUser, FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight,
+  FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
+  FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
+  FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiHash, FiType
+};
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 const ResumeSummaryGenerator = ({ seoData }) => {
-  const [formData, setFormData] = useState({
-    jobTitle: '',
-    yearsExperience: '',
-    industry: '',
-    keySkills: '',
-    achievements: '',
-    targetRole: ''
-  });
+  const { currentDate, lastModifiedDate } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const canonicalUrl = PAGE_URL;
+  const [buildTime, setBuildTime] = useState('');
+
+  useEffect(() => {
+    setBuildTime(Date.now().toString());
+  }, []);
+
+  const [formData, setFormData] = useState({ jobTitle: '', yearsExperience: '', industry: '', keySkills: '', achievements: '', targetRole: '' });
   const [generatedSummary, setGeneratedSummary] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedKeywords, setSelectedKeywords] = useState([]);
   const [activeFaq, setActiveFaq] = useState(null);
   const [copied, setCopied] = useState(false);
-  const [characterCount, setCharacterCount] = useState(0);
-  const [wordCount, setWordCount] = useState(0);
-  const [buildTime, setBuildTime] = useState('');
   const formRef = useRef(null);
+  const toolRef = useRef(null);
 
-  // Set build time on client to avoid hydration mismatch
-  useEffect(() => {
-    setBuildTime(Date.now().toString());
-  }, []);
+  const handleInputChange = (field, value) => setFormData(prev => ({ ...prev, [field]: value }));
+  const handleKeywordSelect = (keyword) => setSelectedKeywords(prev => prev.includes(keyword) ? prev.filter(k => k !== keyword) : [...prev, keyword]);
+  const handleTemplateSelect = (template) => { setSelectedTemplate(template); if (template.keywords?.length) setSelectedKeywords(prev => [...new Set([...prev, ...template.keywords])].slice(0, 6)); };
 
-  // Use SEO data with fallbacks
-  const safeSeoData = seoData || {
-    currentDate: new Date().toISOString().split('T')[0],
-    lastModifiedDate: new Date().toISOString(),
-    buildTimestamp: Date.now()
+  const generateSummary = useCallback(() => {
+    if (!selectedTemplate) return;
+    let summary = selectedTemplate.summary;
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value.trim()) {
+        let placeholder = key === 'targetRole' ? '[Target Role]' : key === 'keySkills' ? '[Key Skill 1]' : `[${key.replace(/([A-Z])/g, ' $1').trim()}]`;
+        summary = summary.replace(new RegExp(placeholder, 'gi'), value);
+      }
+    });
+    summary = summary.replace(/\[Number\]/g, formData.yearsExperience || '5');
+    summary = summary.replace(/\[Industry\]/g, formData.industry || 'the industry');
+    if (selectedKeywords.length > 0) summary += ` Proficient in ${selectedKeywords.slice(0, 4).join(', ')} with a commitment to excellence and continuous improvement.`;
+    setGeneratedSummary(summary.replace(/\s+/g, ' ').trim());
+  }, [formData, selectedTemplate, selectedKeywords]);
+
+  useEffect(() => { if (selectedTemplate && (formData.jobTitle || formData.keySkills)) { const t = setTimeout(generateSummary, 500); return () => clearTimeout(t); } }, [selectedTemplate, formData, selectedKeywords, generateSummary]);
+
+  const copyToClipboard = () => { navigator.clipboard.writeText(generatedSummary); setCopied(true); setTimeout(() => setCopied(false), 2000); };
+  const handleReset = () => { setFormData({ jobTitle: '', yearsExperience: '', industry: '', keySkills: '', achievements: '', targetRole: '' }); setSelectedTemplate(null); setSelectedKeywords([]); setGeneratedSummary(''); formRef.current?.focus(); };
+  const loadExample = () => {
+    setFormData({ jobTitle: 'Senior Project Manager', yearsExperience: '8', industry: 'Technology', keySkills: 'Agile methodologies, stakeholder management, budget control', achievements: 'Led digital transformation reducing costs by 30%', targetRole: 'Director of Project Management' });
+    setSelectedTemplate(SUMMARY_TEMPLATES[0].templates[0]);
+    setSelectedKeywords(['Strategic Planning', 'Team Leadership', 'Process Improvement']);
   };
+  const getIndustrySuggestions = (industry) => { const data = INDUSTRY_KEYWORDS.find(i => i.industry.toLowerCase() === industry.toLowerCase()); return data ? data.keywords : []; };
+
+  const wordCount = generatedSummary.trim().split(/\s+/).filter(w => w.length > 0).length;
+  const charCount = generatedSummary.length;
 
   // ===== FIXED Schema data - Properly structured with no itemReviewed errors =====
   const schemaData = {
@@ -1219,7 +338,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         "name": "Free Resume Summary Generator - Professional Career Profile Builder 2026",
         "description": "Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary.",
         "datePublished": "2024-01-01",
-        "dateModified": safeSeoData.lastModifiedDate,
+        "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
@@ -1263,7 +382,6 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           ]
         }
       },
-      // ===== FIXED: WebApplication with proper nested aggregateRating =====
       {
         "@type": "WebApplication",
         "name": "Resume Summary Generator",
@@ -1300,7 +418,6 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         "countriesSupported": "Global",
         "fileSize": "Web Application"
       },
-      // ===== FIXED: Standalone AggregateRating with proper itemReviewed =====
       {
         "@type": "AggregateRating",
         "@id": `${PAGE_URL}#rating`,
@@ -1322,7 +439,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           "acceptedAnswer": {
             "@type": "Answer",
             "text": faq.answer,
-            "datePublished": safeSeoData.currentDate,
+            "datePublished": safeCurrentDate,
             "author": {
               "@type": "Person",
               "name": "Resume Builder Team"
@@ -1342,7 +459,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           "item": {
             "@type": "CreativeWork",
             "name": category.name,
-            "description": category.description,
+            "description": `Templates for ${category.name.toLowerCase()} roles`,
             "hasPart": {
               "@type": "ItemList",
               "numberOfItems": category.templates.length,
@@ -1447,142 +564,17 @@ const ResumeSummaryGenerator = ({ seoData }) => {
       },
       {
         "@type": "SpeakableSpecification",
-        "cssSelector": [".title", ".subtitle", ".section-title", ".tip-title"]
+        "cssSelector": [".section-title", ".section-subtitle", ".stat-number"]
       }
     ]
-  };
-
-  // Update character and word counts
-  useEffect(() => {
-    const text = generatedSummary;
-    setCharacterCount(text.length);
-    setWordCount(text.trim().split(/\s+/).filter(word => word.length > 0).length);
-  }, [generatedSummary]);
-
-  // Handle form input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  // Handle keyword selection
-  const handleKeywordSelect = (keyword) => {
-    if (selectedKeywords.includes(keyword)) {
-      setSelectedKeywords(selectedKeywords.filter(k => k !== keyword));
-    } else {
-      setSelectedKeywords([...selectedKeywords, keyword]);
-    }
-  };
-
-  // Handle template selection
-  const handleTemplateSelect = (template) => {
-    setSelectedTemplate(template);
-    if (template.keywords && template.keywords.length > 0) {
-      const newKeywords = [...new Set([...selectedKeywords, ...template.keywords])];
-      setSelectedKeywords(newKeywords.slice(0, 6));
-    }
-  };
-
-  // Generate summary
-  const generateSummary = useCallback(() => {
-    if (selectedTemplate) {
-      let summary = selectedTemplate.summary;
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value.trim()) {
-          let placeholder = `[${key.replace(/([A-Z])/g, ' $1').trim()}]`;
-          if (key === 'targetRole') placeholder = '[Target Role]';
-          if (key === 'keySkills') placeholder = '[Key Skill 1]';
-          summary = summary.replace(new RegExp(placeholder, 'gi'), value);
-        }
-      });
-      summary = summary.replace(/\[Key Skill \d+\]/g, () => {
-        const skills = formData.keySkills.split(',').filter(s => s.trim());
-        return skills.length > 0 ? skills.shift().trim() : 'relevant skills';
-      });
-      summary = summary.replace(/\[Major Achievement \d+\]/g, () => {
-        const achievements = formData.achievements.split('.').filter(a => a.trim());
-        return achievements.length > 0 ? achievements.shift().trim() : 'key achievements';
-      });
-      summary = summary.replace(/\[Number\]/g, formData.yearsExperience || '5');
-      summary = summary.replace(/\[Industry\]/g, formData.industry || 'the industry');
-      if (selectedKeywords.length > 0) {
-        const keywordString = selectedKeywords.slice(0, 4).join(', ');
-        summary += ` Proficient in ${keywordString} with a commitment to excellence and continuous improvement.`;
-      }
-      summary = summary.replace(/\s+/g, ' ').trim();
-      summary = summary.charAt(0).toUpperCase() + summary.slice(1);
-      setGeneratedSummary(summary);
-    }
-  }, [formData, selectedTemplate, selectedKeywords]);
-
-  // Auto-generate when template or form data changes
-  useEffect(() => {
-    if (selectedTemplate && (formData.jobTitle || formData.keySkills)) {
-      const timer = setTimeout(() => {
-        generateSummary();
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [selectedTemplate, formData, selectedKeywords, generateSummary]);
-
-  // Copy summary to clipboard
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(generatedSummary);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  // Reset form
-  const handleReset = () => {
-    setFormData({
-      jobTitle: '',
-      yearsExperience: '',
-      industry: '',
-      keySkills: '',
-      achievements: '',
-      targetRole: ''
-    });
-    setSelectedTemplate(null);
-    setSelectedKeywords([]);
-    setGeneratedSummary('');
-    setCopied(false);
-    if (formRef.current) {
-      formRef.current.focus();
-    }
-  };
-
-  // Load example
-  const loadExample = () => {
-    setFormData({
-      jobTitle: 'Senior Project Manager',
-      yearsExperience: '8',
-      industry: 'Technology',
-      keySkills: 'Agile methodologies, stakeholder management, budget control, risk mitigation',
-      achievements: 'Led digital transformation project reducing operational costs by 30%. Implemented new project management framework improving team productivity by 25%.',
-      targetRole: 'Director of Project Management'
-    });
-    const exampleTemplate = SUMMARY_TEMPLATES[0].templates[0];
-    setSelectedTemplate(exampleTemplate);
-    setSelectedKeywords(['Strategic Planning', 'Team Leadership', 'Process Improvement', 'Budget Management']);
-  };
-
-  // Get industry suggestions
-  const getIndustrySuggestions = (industry) => {
-    const industryData = INDUSTRY_KEYWORDS.find(item =>
-      item.industry.toLowerCase() === industry.toLowerCase()
-    );
-    return industryData ? industryData.keywords : [];
   };
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* OPTIMIZED TITLE - Under 70 characters (63 chars) */}
+        {/* OPTIMIZED TITLE - Under 70 characters */}
         <title>Free Resume Summary Generator | Professional Career Profile Builder</title>
         
         <meta
@@ -1593,43 +585,43 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="date" content={safeSeoData.currentDate} />
-        <meta name="last-modified" content={safeSeoData.lastModifiedDate} />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
-        <meta name="build-timestamp" content={safeSeoData.buildTimestamp} />
+        <meta name="theme-color" content="#131315" />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Free Resume Summary Generator - Professional Career Profile Builder" />
         <meta name="chatgpt-fts:description" content="Create ATS-friendly professional resume summaries instantly. Choose from 20+ templates, add keywords, and optimize for your target role." />
         <meta name="chatgpt-fts:keywords" content="resume summary generator, professional summary creator, career profile builder, ATS-friendly summary" />
-        <meta name="chatgpt-fts:last-updated" content={safeSeoData.currentDate} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Summary Generator" />
         
-        {/* Canonical URL - Single canonical tag - REMOVED www */}
-        <link rel="canonical" href={PAGE_URL} />
+        {/* Canonical URL - Single canonical tag */}
+        <link rel="canonical" href={canonicalUrl} />
         
-        {/* Hreflang Tags - REMOVED www */}
-        <link rel="alternate" href={PAGE_URL} hreflang="en" />
-        <link rel="alternate" href={PAGE_URL} hreflang="en-US" />
-        <link rel="alternate" href={PAGE_URL} hreflang="en-GB" />
-        <link rel="alternate" href={PAGE_URL} hreflang="en-CA" />
-        <link rel="alternate" href={PAGE_URL} hreflang="en-AU" />
-        <link rel="alternate" href={PAGE_URL} hreflang="x-default" />
+        {/* Hreflang Tags */}
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* Open Graph - REMOVED www from image URLs */}
+        {/* Open Graph */}
         <meta property="og:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
         <meta property="og:description" content="Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={PAGE_URL} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={`${SITE_URL}/images/og-resume-summary-generator.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Resume Summary Generator Interface" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:updated_time" content={safeSeoData.lastModifiedDate} />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
         
-        {/* Twitter - REMOVED www from image URLs */}
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
         <meta name="twitter:description" content="Create professional ATS-friendly resume summaries instantly. 20+ templates, keyword optimization, free to use." />
@@ -1638,6 +630,11 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
+        {/* Preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
         {/* Icons */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -1645,369 +642,190 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* Preconnect */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
         {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
+        
+        <html lang="en" />
       </Head>
 
-      <div className="container">
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <ol itemScope itemType="https://schema.org/BreadcrumbList">
-            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              {/* REMOVED www from href */}
-              <a itemProp="item" href={SITE_URL}>
-                <span itemProp="name">Home</span>
-              </a>
-              <meta itemProp="position" content="1" />
-            </li>
-            <li className="breadcrumb-separator">›</li>
-            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <span itemProp="name">Resume Summary Generator</span>
-              <meta itemProp="position" content="2" />
-            </li>
-          </ol>
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href={SITE_URL} itemProp="item">
+                  <FiHome size={14} /> <span itemProp="name">Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page"><FiFileText size={14} /> Resume Summary Generator</span>
+                <meta itemProp="position" content="2" />
+              </li>
+            </ol>
+          </div>
         </nav>
 
-        <header className="header">
-          <h1 className="title">Free Resume Summary Generator {CURRENT_YEAR}</h1>
-          <p className="subtitle">
-            Create compelling professional summaries that get noticed by employers
-            <span className="template-count">
-              {SUMMARY_TEMPLATES.reduce((total, cat) => total + cat.templates.length, 0)}+ Professional Templates
-            </span>
-          </p>
-          <div className="aggregate-rating">
-            <div className="rating-stars">
-              ★★★★★
-              <span className="rating-value">4.8/5 Rating</span>
+        {/* Hero */}
+        <section className="section" id="main-content">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ Free Tool • No Sign Up • 20+ Templates • ATS Optimized</div>
+              <h1 className="section-title" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Free Resume Summary Generator {CURRENT_YEAR}
+              </h1>
+              <p className="section-subtitle" style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Create compelling professional summaries that get noticed by employers. Choose from 20+ templates, add keywords, and download your perfect summary. <strong>Optimized for ATS systems and human recruiters.</strong>
+              </p>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "4.8/5", label: "User Rating" }, { value: "18,000+", label: "Job Seekers" }, { value: "20+", label: "Templates" }, { value: "100%", label: "Free to Use" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Generate Summary</button>
+                <Link href="/resume-templates" className="btn-outline"><FiGrid /> View Templates</Link>
+              </div>
             </div>
-            <div className="rating-text">Used by 18,000+ job seekers worldwide</div>
           </div>
-        </header>
+        </section>
 
-        <main className="main">
-          {/* Generator Section */}
-          <section className="generator-section" id="generator">
-            <div className="generator-header">
-              <h2>Generate Your Professional Resume Summary</h2>
-              <p>
-                Fill in your details, choose a template, and get a professionally crafted summary tailored to your career goals. 
-                <strong> Optimized for ATS systems and human recruiters.</strong>
+        {/* Generator Tool */}
+        <section ref={toolRef} className="section section-alt" id="generator">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Generate Your Professional Resume Summary</h2>
+              <p className="section-subtitle">
+                Fill in your details, choose a template, and get a professionally crafted summary tailored to your career goals. <strong>Optimized for ATS systems and human recruiters.</strong>
               </p>
             </div>
-            
-            <div className="generator-container">
-              {/* Form Column */}
-              <div className="input-column">
-                <div className="form-section" id="form">
-                  <div className="form-header">
-                    <h3>Your Career Information</h3>
-                    <button
-                      className="example-button"
-                      onClick={loadExample}
-                      type="button"
-                      aria-label="Load example data to see how the generator works"
-                    >
-                      Load Example
-                    </button>
+
+            <div className="generator-layout">
+              {/* Input Column */}
+              <div className="generator-col">
+                <div className="card-executive" id="form">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Your Career Information</h3>
+                    <button onClick={loadExample} className="btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.8rem', minWidth: 'auto' }} aria-label="Load example data to see how the generator works"><FiCopy size={14} /> Load Example</button>
                   </div>
                   <div className="form-grid">
-                    <div className="form-group">
-                      <label htmlFor="jobTitle">Current/Most Recent Job Title</label>
-                      <input
-                        ref={formRef}
-                        type="text"
-                        id="jobTitle"
-                        name="jobTitle"
-                        value={formData.jobTitle}
-                        onChange={handleInputChange}
-                        placeholder="e.g., Senior Marketing Manager"
-                        className="form-input"
-                        aria-required="true"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="yearsExperience">Years of Experience</label>
-                      <input
-                        type="text"
-                        id="yearsExperience"
-                        name="yearsExperience"
-                        value={formData.yearsExperience}
-                        onChange={handleInputChange}
-                        placeholder="e.g., 8"
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="industry">Industry</label>
-                      <input
-                        type="text"
-                        id="industry"
-                        name="industry"
-                        value={formData.industry}
-                        onChange={handleInputChange}
-                        placeholder="e.g., Technology, Finance, Healthcare"
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="targetRole">Target Role</label>
-                      <input
-                        type="text"
-                        id="targetRole"
-                        name="targetRole"
-                        value={formData.targetRole}
-                        onChange={handleInputChange}
-                        placeholder="e.g., Director of Operations"
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group full-width">
-                      <label htmlFor="keySkills">Key Skills (comma separated)</label>
-                      <textarea
-                        id="keySkills"
-                        name="keySkills"
-                        value={formData.keySkills}
-                        onChange={handleInputChange}
-                        placeholder="e.g., Project Management, Data Analysis, Team Leadership, Strategic Planning"
-                        className="form-textarea"
-                        rows={3}
-                        aria-describedby="skillsHelp"
-                      />
-                      <div id="skillsHelp" className="help-text">
-                        Separate skills with commas for best results
-                      </div>
-                    </div>
-                    <div className="form-group full-width">
-                      <label htmlFor="achievements">Key Achievements</label>
-                      <textarea
-                        id="achievements"
-                        name="achievements"
-                        value={formData.achievements}
-                        onChange={handleInputChange}
-                        placeholder="e.g., Increased sales by 30% through new strategy. Reduced costs by 25% by optimizing processes."
-                        className="form-textarea"
-                        rows={4}
-                        aria-describedby="achievementsHelp"
-                      />
-                      <div id="achievementsHelp" className="help-text">
-                        Use numbers and metrics when possible
-                      </div>
-                    </div>
+                    <div><label className="label-style" htmlFor="jobTitle">Current/Most Recent Job Title</label><input ref={formRef} type="text" id="jobTitle" value={formData.jobTitle} onChange={(e) => handleInputChange('jobTitle', e.target.value)} placeholder="e.g., Senior Marketing Manager" aria-required="true" /></div>
+                    <div><label className="label-style" htmlFor="yearsExperience">Years of Experience</label><input type="text" id="yearsExperience" value={formData.yearsExperience} onChange={(e) => handleInputChange('yearsExperience', e.target.value)} placeholder="e.g., 8" /></div>
+                    <div><label className="label-style" htmlFor="industry">Industry</label><input type="text" id="industry" value={formData.industry} onChange={(e) => handleInputChange('industry', e.target.value)} placeholder="e.g., Technology, Finance, Healthcare" /></div>
+                    <div><label className="label-style" htmlFor="targetRole">Target Role</label><input type="text" id="targetRole" value={formData.targetRole} onChange={(e) => handleInputChange('targetRole', e.target.value)} placeholder="e.g., Director of Operations" /></div>
+                    <div className="form-group-full"><label className="label-style" htmlFor="keySkills">Key Skills (comma separated)</label><textarea id="keySkills" value={formData.keySkills} onChange={(e) => handleInputChange('keySkills', e.target.value)} placeholder="e.g., Project Management, Data Analysis, Team Leadership, Strategic Planning" rows={3} aria-describedby="skillsHelp" /><div id="skillsHelp" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Separate skills with commas for best results</div></div>
+                    <div className="form-group-full"><label className="label-style" htmlFor="achievements">Key Achievements</label><textarea id="achievements" value={formData.achievements} onChange={(e) => handleInputChange('achievements', e.target.value)} placeholder="e.g., Increased sales by 30% through new strategy. Reduced costs by 25% by optimizing processes." rows={3} aria-describedby="achievementsHelp" /><div id="achievementsHelp" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Use numbers and metrics when possible</div></div>
                   </div>
                 </div>
 
-                {/* Templates Section */}
-                <div className="templates-section" id="templates">
-                  <div className="section-header">
-                    <h3>Choose a Professional Template</h3>
-                    <div className="template-count">
-                      {selectedTemplate ? '1 selected' : 'None selected'}
+                <div className="card-executive" id="templates">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>Choose a Professional Template ({selectedTemplate ? '1 selected' : 'None selected'})</h3>
+                  {SUMMARY_TEMPLATES.map(cat => (
+                    <div key={cat.id} style={{ marginBottom: '1rem' }}>
+                      <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '0.5rem', fontWeight: 'var(--font-weight-semibold)' }}>{cat.name}</h4>
+                      {cat.templates.map((tpl, i) => (
+                        <button key={i} className={`template-btn ${selectedTemplate?.title === tpl.title ? 'selected' : ''}`} onClick={() => handleTemplateSelect(tpl)} aria-label={`Select ${tpl.title} template`}>
+                          <strong style={{ display: 'block', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>{tpl.title}</strong>
+                          <span className="text-small">{tpl.summary.substring(0, 80)}...</span>
+                        </button>
+                      ))}
                     </div>
-                  </div>
-                  <div className="templates-grid">
-                    {SUMMARY_TEMPLATES.map(category => (
-                      <div key={category.id} className="template-category">
-                        <div className="category-header">
-                          <span className="category-name">{category.name}</span>
-                          <span className="category-count">{category.templates.length} templates</span>
-                        </div>
-                        <div className="category-templates">
-                          {category.templates.map((template, index) => (
-                            <button
-                              key={index}
-                              className={`template-button ${
-                                selectedTemplate?.title === template.title ? 'selected' : ''
-                              }`}
-                              onClick={() => handleTemplateSelect(template)}
-                              type="button"
-                              aria-label={`Select ${template.title} template`}
-                            >
-                              <div className="template-title">{template.title}</div>
-                              <div className="template-preview">
-                                {template.summary.substring(0, 80)}...
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </div>
 
               {/* Output Column */}
-              <div className="output-column">
-                <div className="summary-section">
-                  <div className="section-header">
-                    <h3>Generated Summary</h3>
-                    <div className="summary-stats">
-                      <span>{characterCount} characters</span>
-                      <span>•</span>
-                      <span>{wordCount} words</span>
-                    </div>
+              <div className="generator-col">
+                <div className="card-executive">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Generated Summary</h3>
+                    <span className="text-small">{charCount} characters • {wordCount} words</span>
                   </div>
-                  <div className="summary-output">
+                  <div className="summary-output-box">
                     {generatedSummary ? (
-                      <div className="summary-text">
-                        {generatedSummary}
-                      </div>
+                      <p style={{ fontSize: 'var(--font-size-body-md)', color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>{generatedSummary}</p>
                     ) : (
-                      <div className="empty-summary">
-                        <div className="empty-text">
-                          Your professional summary will appear here. Fill in your details and select a template to generate.
-                        </div>
-                      </div>
+                      <p className="text-small" style={{ textAlign: 'center', padding: '2rem', margin: 0 }}>Your professional summary will appear here. Fill in your details and select a template to generate.</p>
                     )}
-                    {generatedSummary && (
-                      <div className="summary-actions">
-                        <button
-                          className="copy-button"
-                          onClick={copyToClipboard}
-                          type="button"
-                          aria-label="Copy summary to clipboard"
-                        >
-                          {copied ? '✓ Copied!' : 'Copy Summary'}
-                        </button>
-                        <button
-                          className="regenerate-button"
-                          onClick={generateSummary}
-                          type="button"
-                          aria-label="Regenerate summary with current data"
-                        >
-                          Regenerate
-                        </button>
-                      </div>
-                    )}
+                  </div>
+                  {generatedSummary && (
+                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                      <button onClick={copyToClipboard} className="btn-primary" style={{ flex: 1, justifyContent: 'center', background: copied ? 'var(--success-color)' : 'var(--btn-primary-bg)', color: copied ? '#fff' : 'var(--btn-primary-text)' }} aria-label="Copy summary to clipboard">
+                        {copied ? <><FiCheck size={16} /> Copied!</> : <><FiCopy size={16} /> Copy Summary</>}
+                      </button>
+                      <button onClick={generateSummary} className="btn-outline" style={{ flex: 1, justifyContent: 'center', minWidth: 'auto' }} aria-label="Regenerate summary with current data"><FiRefreshCw size={16} /> Regenerate</button>
+                    </div>
+                  )}
+                </div>
+
+                <div className="card-executive" id="keywords">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Keywords & Power Words</h3>
+                    <span className="text-small">{selectedKeywords.length} selected</span>
+                  </div>
+                  <div className="keywords-flex" style={{ marginBottom: '1rem' }}>
+                    {getIndustrySuggestions(formData.industry).map((kw, i) => (
+                      <button key={`ind-${i}`} className={`keyword-btn ${selectedKeywords.includes(kw) ? 'selected' : ''}`} onClick={() => handleKeywordSelect(kw)} aria-label={`Select keyword: ${kw}`}>{kw}</button>
+                    ))}
+                    {POWER_WORDS.slice(0, 12).map((w, i) => (
+                      <button key={`pw-${i}`} className={`keyword-btn ${selectedKeywords.includes(w) ? 'selected' : ''}`} onClick={() => handleKeywordSelect(w)} aria-label={`Select power word: ${w}`}>{w}</button>
+                    ))}
+                  </div>
+                  <h4 style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem', color: 'var(--text-secondary)', textAlign: 'center' }}>Quick Industry Select</h4>
+                  <div className="keywords-flex" style={{ justifyContent: 'center' }}>
+                    {INDUSTRY_KEYWORDS.map((ind, i) => (
+                      <button key={i} className="keyword-btn" onClick={() => { handleInputChange('industry', ind.industry); setSelectedKeywords(prev => [...prev, ...ind.keywords.slice(0, 2)]); }} aria-label={`Set industry to ${ind.industry}`}>{ind.industry}</button>
+                    ))}
                   </div>
                 </div>
 
-                {/* Keywords Section */}
-                <div className="keywords-section" id="keywords">
-                  <div className="section-header">
-                    <h3>Keywords & Power Words</h3>
-                    <div className="keywords-count">
-                      {selectedKeywords.length} selected
-                    </div>
-                  </div>
-                  <div className="keywords-grid">
-                    {getIndustrySuggestions(formData.industry).map((keyword, index) => (
-                      <button
-                        key={`industry-${index}`}
-                        className={`keyword-button ${
-                          selectedKeywords.includes(keyword) ? 'selected' : ''
-                        }`}
-                        onClick={() => handleKeywordSelect(keyword)}
-                        type="button"
-                        aria-label={`Select keyword: ${keyword}`}
-                      >
-                        {keyword}
-                      </button>
-                    ))}
-                    {POWER_WORDS.slice(0, 12).map((word, index) => (
-                      <button
-                        key={`power-${index}`}
-                        className={`keyword-button ${
-                          selectedKeywords.includes(word) ? 'selected' : ''
-                        }`}
-                        onClick={() => handleKeywordSelect(word)}
-                        type="button"
-                        aria-label={`Select power word: ${word}`}
-                      >
-                        {word}
-                      </button>
-                    ))}
-                  </div>
-                  <div className="industry-keywords">
-                    <h4 style={{ textAlign: 'center' }}>Quick Industry Select</h4>
-                    <div className="industry-list">
-                      {INDUSTRY_KEYWORDS.map((industry, index) => (
-                        <button
-                          key={index}
-                          className="industry-button"
-                          onClick={() => {
-                            setFormData(prev => ({ ...prev, industry: industry.industry }));
-                            setSelectedKeywords(prev => [...prev, ...industry.keywords.slice(0, 2)]);
-                          }}
-                          type="button"
-                          aria-label={`Set industry to ${industry.industry}`}
-                        >
-                          {industry.industry}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                {/* FIXED: Action buttons with proper gap from card above */}
+                <div className="action-buttons" id="generate">
+                  <button onClick={generateSummary} disabled={!selectedTemplate} className="btn-primary" style={{ flex: 1, justifyContent: 'center' }} aria-label="Generate professional summary"><FiZap size={18} /> Generate Summary</button>
+                  <button onClick={handleReset} className="btn-outline" style={{ flex: 1, justifyContent: 'center', minWidth: 'auto' }} aria-label="Reset all form data"><FiRefreshCw size={16} /> Reset All</button>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Generator Actions */}
-            <div className="generator-actions" id="generate">
-              <button
-                className="generate-button"
-                onClick={generateSummary}
-                disabled={!selectedTemplate}
-                type="button"
-                aria-label="Generate professional summary"
-              >
-                Generate Summary
-              </button>
-              <button
-                className="reset-button"
-                onClick={handleReset}
-                type="button"
-                aria-label="Reset all form data"
-              >
-                Reset All
-              </button>
+        {/* Writing Tips */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Writing Tips for Powerful Resume Summaries</h2>
+              <p className="section-subtitle">Follow these expert tips to create summaries that get results</p>
             </div>
-          </section>
-
-          {/* Tips Section */}
-          <section className="tips-section">
-            <h2 className="section-title">Writing Tips for Powerful Resume Summaries</h2>
-            <p className="section-subtitle">
-              Follow these expert tips to create summaries that get results
-            </p>
-            <div className="tips-grid">
-              <div className="tip-card">
-                <h3 className="tip-title">Be Specific & Quantifiable</h3>
-                <p className="tip-description">
-                  Include specific achievements with numbers and metrics. Instead of "improved sales," say "increased sales by 25% through targeted marketing campaigns that expanded market reach by 15%."
-                </p>
-              </div>
-              <div className="tip-card">
-                <h3 className="tip-title">Use ATS Keywords</h3>
-                <p className="tip-description">
-                  Incorporate keywords from the job description. This helps with Applicant Tracking System scanning and shows you're a perfect fit for the specific role. Use our keyword selector above.
-                </p>
-              </div>
-              <div className="tip-card">
-                <h3 className="tip-title">Start Strong</h3>
-                <p className="tip-description">
-                  Begin with your strongest selling point. The first sentence should capture attention and make recruiters want to keep reading. Lead with your most impressive achievement or unique value proposition.
-                </p>
-              </div>
-              <div className="tip-card">
-                <h3 className="tip-title">Keep it Concise</h3>
-                <p className="tip-description">
-                  Limit your summary to 3-5 sentences (50-100 words). Recruiters spend only 6-7 seconds scanning resumes, so every word needs to count and add value. Remove fluff and focus on impact.
-                </p>
-              </div>
+            <div className="grid">
+              {[
+                { title: "Be Specific & Quantifiable", desc: "Include specific achievements with numbers and metrics. Instead of 'improved sales,' say 'increased sales by 25% through targeted marketing campaigns that expanded market reach by 15%.'" },
+                { title: "Use ATS Keywords", desc: "Incorporate keywords from the job description. This helps with Applicant Tracking System scanning and shows you're a perfect fit for the specific role. Use our keyword selector above." },
+                { title: "Start Strong", desc: "Begin with your strongest selling point. The first sentence should capture attention and make recruiters want to keep reading. Lead with your most impressive achievement or unique value proposition." },
+                { title: "Keep it Concise", desc: "Limit your summary to 3-5 sentences (50-100 words). Recruiters spend only 6-7 seconds scanning resumes, so every word needs to count and add value. Remove fluff and focus on impact." }
+              ].map((tip, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{tip.title}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}>{tip.desc}</p>
+                </div>
+              ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Long-Tail Keywords Section - GEO Optimization */}
-          <section className="tips-section">
-            <h2 className="section-title">Common Questions About Resume Summaries</h2>
-            <div className="tips-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+        {/* Long-Tail Keywords Section */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Common Questions About Resume Summaries</h2>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
               {[
                 "how to write a professional summary for resume",
                 "best resume summary examples for experienced professionals",
@@ -2018,296 +836,180 @@ const ResumeSummaryGenerator = ({ seoData }) => {
                 "ATS friendly resume summary templates",
                 "executive summary examples for senior roles"
               ].map((keyword, i) => (
-                <div key={i} className="tip-card" style={{ padding: '20px' }}>
-                  <p style={{ fontWeight: '600', marginBottom: '12px', textAlign: 'center' }}>❓ {keyword}</p>
-                  <div style={{ textAlign: 'center' }}>
-                    <Link href="/complete-resume-resource-library" style={{ color: '#000000', fontWeight: '500' }}>
+                <div key={i} className="card-executive" style={{ textAlign: 'center', padding: '1.5rem' }}>
+                  <p style={{ fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)' }}>❓ {keyword}</p>
+                  <div>
+                    <Link href="/complete-resume-resource-library" style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>
                       Find answer in our resource library →
                     </Link>
                   </div>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Examples Section */}
-          <section className="examples-section">
-            <h2 className="section-title">Professional Summary Examples</h2>
-            <p className="section-subtitle">
-              See how effective summaries are structured across different career levels
-            </p>
-            <div className="examples-grid">
-              <div className="example-card">
-                <div className="example-header">
-                  <div className="example-title">Senior Executive</div>
-                  <div className="example-badge">15+ Years Experience</div>
-                </div>
-                <div className="example-content">
-                  <p>Visionary CEO with 15+ years of experience driving growth in technology startups. Successfully scaled three companies from seed to Series C, generating over $500M in collective enterprise value. Expertise in fundraising, team building, and market expansion with a proven track record of delivering 35%+ annual growth.</p>
-                  <div className="example-keywords">
-                    <span>Strategic Leadership</span>
-                    <span>Business Growth</span>
-                    <span>Team Development</span>
-                    <span>Market Expansion</span>
-                  </div>
-                </div>
-              </div>
-              <div className="example-card">
-                <div className="example-header">
-                  <div className="example-title">Software Engineer</div>
-                  <div className="example-badge">5 Years Experience</div>
-                </div>
-                <div className="example-content">
-                  <p>Full-stack developer with 5 years of experience building scalable web applications. Proficient in React, Node.js, and AWS. Led development of customer portal serving 100K+ users, improving load times by 40% and reducing bounce rate by 25%. Passionate about clean code, agile methodologies, and mentoring junior developers.</p>
-                  <div className="example-keywords">
-                    <span>Full-Stack Development</span>
-                    <span>System Architecture</span>
-                    <span>Performance Optimization</span>
-                    <span>Team Leadership</span>
-                  </div>
-                </div>
-              </div>
-              <div className="example-card">
-                <div className="example-header">
-                  <div className="example-title">Recent Graduate</div>
-                  <div className="example-badge">Entry Level</div>
-                </div>
-                <div className="example-content">
-                  <p>Recent Computer Science graduate with strong academic background (3.8 GPA) and hands-on internship experience. Developed skills in Python, machine learning, and data analysis through coursework and research projects. Completed summer internship at TechCorp, contributing to data pipeline optimization that improved processing speed by 30%.</p>
-                  <div className="example-keywords">
-                    <span>Technical Skills</span>
-                    <span>Academic Excellence</span>
-                    <span>Fast Learner</span>
-                    <span>Research Experience</span>
-                  </div>
-                </div>
-              </div>
+        {/* Examples */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Professional Summary Examples</h2>
+              <p className="section-subtitle">See how effective summaries are structured across different career levels</p>
             </div>
-          </section>
-
-          {/* Common Mistakes Section */}
-          <section className="mistakes-section">
-            <h2 className="section-title">Common Summary Mistakes to Avoid</h2>
-            <p className="section-subtitle">
-              Don't let these errors undermine your resume's effectiveness
-            </p>
-            <div className="mistakes-grid">
-              <div className="mistake-card">
-                <div className="mistake-header">
-                  <div className="mistake-number">01</div>
-                  <div className="mistake-title">Too Generic & Vague</div>
-                </div>
-                <div className="mistake-content">
-                  <p>Avoid vague statements like "hard worker" or "team player." Be specific about what you actually achieved and how you contributed. Use concrete examples and measurable results.</p>
-                </div>
-              </div>
-              <div className="mistake-card">
-                <div className="mistake-header">
-                  <div className="mistake-number">02</div>
-                  <div className="mistake-title">Too Long & Wordy</div>
-                </div>
-                <div className="mistake-content">
-                  <p>Summaries longer than 5 sentences lose impact. Be concise and focus only on your most relevant and impressive achievements. Remove fluff and redundant information.</p>
-                </div>
-              </div>
-              <div className="mistake-card">
-                <div className="mistake-header">
-                  <div className="mistake-number">03</div>
-                  <div className="mistake-title">Missing ATS Keywords</div>
-                </div>
-                <div className="mistake-content">
-                  <p>Not including job-specific keywords can cause ATS rejection. Always tailor your summary with keywords from the job description. Use our keyword optimization tools above.</p>
-                </div>
-              </div>
-              <div className="mistake-card">
-                <div className="mistake-header">
-                  <div className="mistake-number">04</div>
-                  <div className="mistake-title">Focusing on Duties Instead of Achievements</div>
-                </div>
-                <div className="mistake-content">
-                  <p>Don't just list job responsibilities. Focus on achievements, results, and the value you brought to previous employers. Show impact, not just activity.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* FAQ Section */}
-          <section className="faq-section" id="faqs">
-            <h2 className="section-title">Frequently Asked Questions</h2>
-            <p className="section-subtitle">
-              Everything you need to know about creating effective resume summaries
-            </p>
-            <div className="faq-list">
-              {FAQS.map((faq, index) => (
-                <div
-                  key={index}
-                  className={`faq-item ${activeFaq === index ? 'active' : ''}`}
-                  id={`faq-${index + 1}`}
-                  itemScope
-                  itemProp="mainEntity"
-                  itemType="https://schema.org/Question"
-                >
-                  <div 
-                    className="faq-question"
-                    onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                    role="button"
-                    tabIndex={0}
-                    aria-expanded={activeFaq === index}
-                    aria-controls={`faq-answer-${index}`}
-                  >
-                    <h3 itemProp="name">{faq.question}</h3>
-                    <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
+            <div className="grid">
+              {[
+                { title: "Senior Executive", badge: "15+ Years Experience", summary: "Visionary CEO with 15+ years of experience driving growth in technology startups. Successfully scaled three companies from seed to Series C, generating over $500M in collective enterprise value. Expertise in fundraising, team building, and market expansion with a proven track record of delivering 35%+ annual growth.", keywords: ['Strategic Leadership', 'Business Growth', 'Team Development', 'Market Expansion'] },
+                { title: "Software Engineer", badge: "5 Years Experience", summary: "Full-stack developer with 5 years of experience building scalable web applications. Proficient in React, Node.js, and AWS. Led development of customer portal serving 100K+ users, improving load times by 40% and reducing bounce rate by 25%. Passionate about clean code, agile methodologies, and mentoring junior developers.", keywords: ['Full-Stack Development', 'System Architecture', 'Performance Optimization', 'Team Leadership'] },
+                { title: "Recent Graduate", badge: "Entry Level", summary: "Recent Computer Science graduate with strong academic background (3.8 GPA) and hands-on internship experience. Developed skills in Python, machine learning, and data analysis through coursework and research projects. Completed summer internship at TechCorp, contributing to data pipeline optimization that improved processing speed by 30%.", keywords: ['Technical Skills', 'Academic Excellence', 'Fast Learner', 'Research Experience'] }
+              ].map((ex, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{ex.title}</h3>
+                    <span className="feature-badge">{ex.badge}</span>
                   </div>
-                  {activeFaq === index && (
-                    <div 
-                      className="faq-answer" 
-                      id={`faq-answer-${index}`}
-                      itemScope
-                      itemProp="acceptedAnswer"
-                      itemType="https://schema.org/Answer"
-                    >
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flex: 1 }}>{ex.summary}</p>
+                  <div className="keywords-flex">
+                    {ex.keywords.map((kw, j) => (<span key={j} className="feature-tag">{kw}</span>))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Common Mistakes Section */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Common Summary Mistakes to Avoid</h2>
+              <p className="section-subtitle">Don't let these errors undermine your resume's effectiveness</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+              {[
+                { number: "01", title: "Too Generic & Vague", desc: "Avoid vague statements like 'hard worker' or 'team player.' Be specific about what you actually achieved and how you contributed. Use concrete examples and measurable results." },
+                { number: "02", title: "Too Long & Wordy", desc: "Summaries longer than 5 sentences lose impact. Be concise and focus only on your most relevant and impressive achievements. Remove fluff and redundant information." },
+                { number: "03", title: "Missing ATS Keywords", desc: "Not including job-specific keywords can cause ATS rejection. Always tailor your summary with keywords from the job description. Use our keyword optimization tools above." },
+                { number: "04", title: "Focusing on Duties Instead of Achievements", desc: "Don't just list job responsibilities. Focus on achievements, results, and the value you brought to previous employers. Show impact, not just activity." }
+              ].map((mistake, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-muted)' }}>{mistake.number}</span>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--text-primary)', margin: 0 }}>{mistake.title}</h3>
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}>{mistake.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section" id="faqs">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions</h2>
+              <p className="section-subtitle">Everything you need to know about creating effective resume summaries</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} id={`faq-${i + 1}`} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <div className="faq-question" onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)} aria-expanded={activeFaq === i} aria-controls={`faq-answer-${i}`}>
+                    <h3 itemProp="name" style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && (
+                    <div className="faq-answer" id={`faq-answer-${i}`} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
                       <p itemProp="text">{faq.answer}</p>
                     </div>
                   )}
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Benefits Section */}
-          <section className="benefits-section">
-            <h2 className="section-title">Why a Strong Resume Summary Matters</h2>
-            <p className="section-subtitle">
-              Your summary is your first impression - make it count
+        {/* Benefits Section */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Why a Strong Resume Summary Matters</h2>
+              <p className="section-subtitle">Your summary is your first impression - make it count</p>
+            </div>
+            <div className="grid">
+              {[
+                { title: "First Impression Advantage", desc: "Your summary is the first thing recruiters read. A strong opening captures attention and encourages them to read the rest of your resume. 75% of hiring decisions are made in the first 30 seconds." },
+                { title: "ATS Optimization", desc: "Well-crafted summaries with relevant keywords perform better in Applicant Tracking Systems used by 99% of employers. This increases your chances of getting seen by human recruiters by up to 300%." },
+                { title: "Career Positioning", desc: "A targeted summary positions you for the specific role you want, highlighting the exact skills and experiences employers are looking for. It tells your career story in a compelling, concise way." }
+              ].map((benefit, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{benefit.title}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}>{benefit.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Ready to Create Your Perfect Resume Summary?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Join 18,000+ professionals who have improved their resumes with our free generator
             </p>
-            <div className="benefits-grid">
-              <div className="benefit-card">
-                <h3 className="benefit-title">First Impression Advantage</h3>
-                <p className="benefit-description">
-                  Your summary is the first thing recruiters read. A strong opening captures attention and encourages them to read the rest of your resume. 75% of hiring decisions are made in the first 30 seconds.
-                </p>
-              </div>
-              <div className="benefit-card">
-                <h3 className="benefit-title">ATS Optimization</h3>
-                <p className="benefit-description">
-                  Well-crafted summaries with relevant keywords perform better in Applicant Tracking Systems used by 99% of employers. This increases your chances of getting seen by human recruiters by up to 300%.
-                </p>
-              </div>
-              <div className="benefit-card">
-                <h3 className="benefit-title">Career Positioning</h3>
-                <p className="benefit-description">
-                  A targeted summary positions you for the specific role you want, highlighting the exact skills and experiences employers are looking for. It tells your career story in a compelling, concise way.
-                </p>
-              </div>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              <button onClick={() => { handleReset(); toolRef.current?.scrollIntoView({ behavior: 'smooth' }); }} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Start creating your professional resume summary"><FiFileText /> Start Creating Now</button>
+              <button onClick={loadExample} className="btn-outline" aria-label="Try with example data to see how it works"><FiCopy /> Try Example First</button>
             </div>
-          </section>
-
-          {/* Related Resources Section */}
-          <section className="resources-section">
-            <h2 className="section-title">Resume Resources</h2>
-            <p className="section-subtitle">
-              Explore our complete suite of resume tools and guides
-            </p>
-            <div className="benefits-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-              <Link href="/resume-templates" className="benefit-card" style={{ textDecoration: 'none' }}>
-                <h3 className="benefit-title">Resume Templates</h3>
-                <p className="benefit-description">Browse our collection of professional, ATS-friendly resume templates.</p>
-              </Link>
-              <Link href="/free-resume-builder" className="benefit-card" style={{ textDecoration: 'none' }}>
-                <h3 className="benefit-title">Free Resume Builder</h3>
-                <p className="benefit-description">Create a complete resume with our free online builder.</p>
-              </Link>
-              <Link href="/resume-writing-guide" className="benefit-card" style={{ textDecoration: 'none' }}>
-                <h3 className="benefit-title">Resume Writing Guide</h3>
-                <p className="benefit-description">Learn how to write compelling resumes that get interviews.</p>
-              </Link>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> 100% Free - No Sign Up Required</span>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> ATS-Optimized Templates</span>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Instant Results - No Watermarks</span>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Final CTA */}
-          <section className="cta-section">
-            <div className="cta-content">
-              <h2 className="cta-title">Ready to Create Your Perfect Resume Summary?</h2>
-              <p className="cta-subtitle">
-                Join 18,000+ professionals who have improved their resumes with our free generator
-              </p>
-              <div className="cta-buttons">
-                <button
-                  className="cta-primary-button"
-                  onClick={() => {
-                    if (formRef.current) formRef.current.focus();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  aria-label="Start creating your professional resume summary"
-                >
-                  Start Creating Now
-                </button>
-                <button
-                  className="cta-secondary-button"
-                  onClick={loadExample}
-                  aria-label="Try with example data to see how it works"
-                >
-                  Try Example First
-                </button>
-              </div>
-              <div className="cta-features">
-                <div className="cta-feature">
-                  <span className="feature-check">✓</span>
-                  <span>100% Free - No Sign Up Required</span>
-                </div>
-                <div className="cta-feature">
-                  <span className="feature-check">✓</span>
-                  <span>ATS-Optimized Templates</span>
-                </div>
-                <div className="cta-feature">
-                  <span className="feature-check">✓</span>
-                  <span>Instant Results - No Watermarks</span>
-                </div>
-              </div>
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Recommended Career Resources</h2>
+              <p className="section-subtitle">Explore our complete suite of resume tools and guides</p>
             </div>
-          </section>
-
-          {/* Internal Links Section for SEO/GEO Boost */}
-          <section className="internal-links-section">
-            <div className="container">
-              <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Recommended Career Resources</h2>
-              <div className="links-grid">
-                <Link href="/free-resume-keyword-density-analyzer-tool" className="link-card">
-                  <span className="link-icon">📊</span>
-                  <span className="link-text">Free Keyword Density Analyzer</span>
-                </Link>
-                <Link href="/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot" className="link-card">
-                  <span className="link-icon">🤖</span>
-                  <span className="link-text">AI Resume Writing Guide</span>
-                </Link>
-                <Link href="/ats-friendly-data-and-cybersecurity-resume-builder" className="link-card">
-                  <span className="link-icon">🔒</span>
-                  <span className="link-text">Cybersecurity Resume Builder</span>
-                </Link>
-                <Link href="/resume-tips-for-remote-jobs-in-the-usa" className="link-card">
-                  <span className="link-icon">🏠</span>
-                  <span className="link-text">Remote Job Resume Tips</span>
-                </Link>
-                <Link href="/best-resume-examples-for-usa-management-positions" className="link-card">
-                  <span className="link-icon">👔</span>
-                  <span className="link-text">Management Resume Examples</span>
-                </Link>
-              </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-resume-keyword-density-analyzer-tool", text: "Free Keyword Density Analyzer", iconName: "FiHash" },
+                { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "AI Resume Writing Guide", iconName: "FiCpu" },
+                { href: "/ats-friendly-data-and-cybersecurity-resume-builder", text: "Cybersecurity Resume Builder", iconName: "FiShield" },
+                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Resume Tips", iconName: "FiSmartphone" },
+                { href: "/best-resume-examples-for-usa-management-positions", text: "Management Resume Examples", iconName: "FiBriefcase" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
 
-        {/* Build Info - Fixed hydration */}
-        <div className="build-info">
-          <p>Last updated: {safeSeoData.currentDate} • Build: {buildTime}</p>
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTime}</span>
         </div>
 
         {/* Hidden Metadata */}
-        <div className="hidden">
-          <span itemProp="dateModified">{safeSeoData.lastModifiedDate}</span>
+        <div style={{ display: 'none' }}>
+          <span itemProp="dateModified">{safeLastModifiedDate}</span>
           <span itemProp="softwareVersion">2026.1.0</span>
         </div>
-      </div>
+      </main>
     </>
   );
 };
@@ -2325,7 +1027,6 @@ export async function getStaticProps() {
         buildTimestamp
       }
     },
-    // Revalidate every hour
     revalidate: 3600,
   };
 }

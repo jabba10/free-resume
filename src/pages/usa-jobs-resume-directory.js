@@ -1,145 +1,868 @@
-// pages/usa-jobs-resume-directory.js
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 // ============================================================================
-// CRITICAL CSS - OPTIMIZED FOR CORE WEB VITALS & ACCESSIBILITY
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
 // ============================================================================
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --success: #059669;
-  --usa-blue: #000000;
-  --usa-red: #000000;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-@media (min-width: 640px) { .container { padding: 0 24px; } }
-.container, .hero, .section, .cta-section, .breadcrumb .container { text-align: center; }
-.breadcrumb ol { justify-content: center; }
-.grid, .directory-grid, .category-grid, .format-grid, .state-grid { text-align: left; margin-left: auto; margin-right: auto; }
-.card, .directory-item, .format-card, .state-card { text-align: left; }
-.hero { background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%); padding: 40px 0; border-bottom: 1px solid var(--border); }
-@media (min-width: 768px) { .hero { padding: 80px 0; } }
-.hero h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); margin-bottom: 16px; line-height: 1.2; word-wrap: break-word; color: #000000; font-weight: 800; }
-.hero h2 { color: #000000; font-weight: 600; font-size: clamp(1.1rem, 3vw, 1.35rem); margin-bottom: 16px; }
-.hero p { font-size: clamp(1rem, 2.5vw, 1.2rem); max-width: 800px; margin: 0 auto 24px; padding: 0 16px; color: #000000; }
-.usa-directory-statement { background: #e8f0fe; border: 1px solid #c0d4f0; border-radius: 8px; padding: 20px; margin: 24px auto; max-width: 900px; font-size: 1rem; color: #000000; text-align: left; }
-.usa-directory-statement p { color: #000000; }
-.button-container { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
-@media (max-width: 480px) { .button-container { flex-direction: column; align-items: center; gap: 12px; } }
-.grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 30px auto; width: 100%; }
-@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-.category-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px auto; width: 100%; }
-@media (min-width: 640px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
-.card { background: var(--card-bg); border-radius: 12px; padding: 24px; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; height: 100%; display: flex; flex-direction: column; text-decoration: none; color: #000000; }
-.card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-color: #000000; }
-.card:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.card h4, .card p, .card span { color: #000000; }
-.category-card { background: var(--card-bg); border-radius: 8px; padding: 20px; border: 1px solid var(--border); height: 100%; display: flex; flex-direction: column; }
-.category-card h3 { margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); font-size: 1.1rem; color: #000000; }
-.category-card a { color: #000000; text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-.category-card a:hover { border-bottom-color: #000000; }
-.btn-primary { display: inline-block; background: #000000; color: #ffffff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 8px; border: 1px solid #000000; transition: all 0.2s; width: auto; min-width: 220px; text-align: center; }
-@media (max-width: 480px) { .btn-primary { width: 100%; margin: 4px 0; min-width: auto; padding: 16px 24px; } }
-.btn-primary:hover { background: #333333; transform: translateY(-2px); }
-.btn-secondary { display: inline-block; background: transparent; color: #000000; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; border: 2px solid #000000; margin: 8px; transition: all 0.2s; width: auto; min-width: 220px; text-align: center; }
-@media (max-width: 480px) { .btn-secondary { width: 100%; margin: 4px 0; min-width: auto; padding: 16px 24px; } }
-.btn-secondary:hover { background: #f5f5f5; transform: translateY(-2px); }
-.btn-cta { display: inline-block; background: #000000; color: #ffffff; padding: 18px 36px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1.2rem; margin: 8px; border: none; transition: all 0.3s; width: auto; min-width: 260px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-@media (max-width: 480px) { .btn-cta { width: 100%; margin: 4px 0; min-width: auto; padding: 18px 24px; font-size: 1.1rem; } }
-.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); background: #333333; }
-.stats { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
-@media (max-width: 640px) { .stats { gap: 16px; } }
-@media (max-width: 480px) { .stats { gap: 12px; flex-direction: column; align-items: center; } }
-.stat-item { text-align: center; min-width: 140px; padding: 12px; background: #fff; border: 1px solid var(--border); border-radius: 8px; }
-@media (max-width: 480px) { .stat-item { min-width: 100%; width: 100%; max-width: 300px; } }
-.stat-number { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; display: block; color: #000000; }
-.stat-item span { color: #000000; font-weight: 500; }
-.section { padding: 60px 0; scroll-margin-top: 20px; }
-@media (min-width: 768px) { .section { padding: 80px 0; } }
-@media (max-width: 480px) { .section { padding: 40px 0; } }
-.section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 32px; padding: 0 16px; word-wrap: break-word; color: #000000; font-weight: 700; }
-@media (max-width: 480px) { .section-title { margin-bottom: 24px; } }
-.section-subtitle { text-align: center; color: var(--text-light); max-width: 700px; margin: 0 auto 40px; padding: 0 16px; font-size: clamp(1rem, 2.5vw, 1.2rem); }
-.faq-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-left: auto; margin-right: auto; }
-@media (min-width: 768px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
-.faq-item { background: var(--card-bg); padding: 24px; border-radius: 8px; border: 1px solid var(--border); height: 100%; text-align: left; }
-.faq-question { font-size: 1.2rem; font-weight: 600; margin-bottom: 12px; color: #000000; line-height: 1.4; cursor: pointer; }
-.faq-question::-webkit-details-marker { display: none; }
-.faq-item p { color: #000000; }
-.directory-badge { display: inline-block; background: #e8f0fe; color: #000000; padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; margin-bottom: 20px; border: 1px solid #c0d4f0; font-weight: 600; }
-@media (max-width: 480px) { .directory-badge { font-size: 0.8rem; padding: 6px 12px; } }
-.breadcrumb { padding: 16px 0; background: var(--card-bg); border-bottom: 1px solid var(--border); }
-@media (max-width: 480px) { .breadcrumb { padding: 12px 0; font-size: 0.85rem; } }
-.breadcrumb ol { display: flex; list-style: none; gap: 8px; flex-wrap: wrap; font-size: 0.9rem; justify-content: center; }
-.breadcrumb a { color: #000000; text-decoration: none; }
-.breadcrumb a:hover { color: #000000; text-decoration: underline; }
-.feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.feature-tag { background: #e5e7eb; color: #000000; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; border: 1px solid #d1d5db; }
-.text-small { font-size: 0.85rem; color: var(--text-light); }
-hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-.methodology-list { list-style: none; margin-top: 12px; }
-.methodology-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #000000; }
-.methodology-list li:before { content: "🇺🇸"; position: absolute; left: 0; }
-.skip-link { position: absolute; top: -40px; left: 0; background: #000000; color: white; padding: 8px; z-index: 100; }
-.skip-link:focus { top: 0; }
-@media (max-width: 480px) {
-  button, .btn-primary, .btn-secondary, .btn-cta, .card, a { touch-action: manipulation; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; }
-}
-.toc-container { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 40px auto; max-width: 800px; }
-.toc-list { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-.toc-list li a { font-size: 0.9rem; color: #000000; text-decoration: none; padding: 6px 12px; background: #f9fafb; border-radius: 4px; border: 1px solid var(--border); transition: all 0.2s; display: inline-block; }
-.toc-list li a:hover { background: #f0f0f0; border-color: #000000; color: #000000; }
-.glossary-section { background: #f9fafb; border-radius: 12px; padding: 24px; margin: 30px auto; max-width: 800px; text-align: left; }
-.glossary-section dl { margin: 0; }
-.glossary-section dt { font-weight: 600; color: #000000; margin-top: 16px; }
-.glossary-section dd { color: var(--text-light); margin-left: 0; margin-top: 4px; }
-.info-box { background: #e8f0fe; border: 1px solid #c0d4f0; border-radius: 12px; padding: 16px 24px; margin: 20px auto; max-width: 800px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-.info-box span { color: #000000; font-weight: 500; }
-.data-note { font-size: 0.7rem; color: var(--text-lighter); margin-top: 4px; }
+const executiveDesignTokens = `
+  /* ========== CSS CUSTOM PROPERTIES ========== */
+  :root {
+    /* ========== COLOR SYSTEM ========== */
+    
+    /* Background Colors */
+    --bg-page: #131315;
+    --bg-surface-lowest: #0e0e10;
+    --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21;
+    --bg-surface-high: #2a2a2c;
+    --bg-surface-highest: #353437;
+    --bg-surface-dim: #131315;
+    --bg-surface-bright: #39393b;
+    --bg-container: #1c1b1d;
+    --bg-container-high: #2a2a2c;
+    
+    /* Text Colors */
+    --text-primary: #e5e1e4;
+    --text-secondary: #c5bfc8;
+    --text-muted: #9d95a0;
+    --text-disabled: #605d62;
+    --text-inverse: #1c1b1d;
+    --text-on-accent: #3c2f00;
+    
+    /* Accent/Brand Colors - Gold */
+    --accent-primary: #f2ca50;
+    --accent-primary-container: #d4af37;
+    --accent-primary-fixed: #ffe088;
+    --accent-primary-fixed-dim: #e9c349;
+    --accent-on-primary: #3c2f00;
+    --accent-on-primary-container: #2a2000;
+    --accent-inverse-primary: #735c00;
+    --accent-primary-hover: #f7d86e;
+    --accent-primary-active: #e6bc3d;
+    
+    /* Border Colors */
+    --border-outline: #444246;
+    --border-outline-variant: #363538;
+    --border-gold-filament: rgba(212, 175, 55, 0.3);
+    --border-gold-filament-strong: rgba(212, 175, 55, 0.5);
+    --border-glass: rgba(212, 175, 55, 0.15);
+    
+    /* Error/State Colors */
+    --error-color: #ffb4ab;
+    --error-container: #93000a;
+    --error-on-container: #ffdad6;
+    
+    /* Success Colors */
+    --success-color: #a5d6a7;
+    --success-container: #1b5e20;
+    
+    /* Glass/Special Effect Colors */
+    --glass-bg: rgba(20, 19, 21, 0.7);
+    --glass-bg-light: rgba(28, 27, 29, 0.6);
+    --glass-bg-heavy: rgba(20, 19, 21, 0.85);
+    --gradient-card-overlay: linear-gradient(180deg, rgba(19, 19, 21, 0) 0%, rgba(19, 19, 21, 0.9) 100%);
+    --gradient-hero-overlay: linear-gradient(135deg, rgba(19, 19, 21, 0.95) 0%, rgba(19, 19, 21, 0.8) 100%);
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Font Sizes */
+    --font-size-display-lg: clamp(3rem, 6vw, 4rem);
+    --font-size-display-md: clamp(2.25rem, 5vw, 3rem);
+    --font-size-headline-lg: clamp(1.75rem, 4vw, 2rem);
+    --font-size-headline-md: clamp(1.5rem, 3.5vw, 1.75rem);
+    --font-size-title-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-title-md: clamp(1.125rem, 2.5vw, 1.25rem);
+    --font-size-body-lg: clamp(1rem, 2vw, 1.125rem);
+    --font-size-body-md: 1rem;
+    --font-size-body-sm: 0.875rem;
+    --font-size-label-lg: 0.875rem;
+    --font-size-label-md: 0.75rem;
+    --font-size-label-sm: 0.6875rem;
+    --font-size-caps: 0.75rem;
+    
+    /* Line Heights */
+    --line-height-display: 1.1;
+    --line-height-headline: 1.2;
+    --line-height-title: 1.3;
+    --line-height-body: 1.6;
+    --line-height-label: 1.4;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-wider: 0.05em;
+    --letter-spacing-caps: 0.08em;
+    
+    /* Text Shadows for Glow Effects */
+    --glow-gold: 0 0 20px rgba(242, 202, 80, 0.3), 0 0 40px rgba(242, 202, 80, 0.1);
+    --glow-gold-strong: 0 0 30px rgba(242, 202, 80, 0.5), 0 0 60px rgba(242, 202, 80, 0.2);
+    
+    /* ========== BORDER RADIUS SCALE ========== */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-default: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* ========== SPACING SYSTEM ========== */
+    --space-unit: 0.25rem;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    
+    /* Section Spacing */
+    --section-gap-sm: clamp(3rem, 6vw, 4rem);
+    --section-gap-md: clamp(4rem, 8vw, 6rem);
+    --section-gap-lg: clamp(5rem, 10vw, 8rem);
+    
+    /* Content Widths */
+    --content-max-width: 1280px;
+    --content-narrow: 800px;
+    --content-wide: 1440px;
+    
+    /* Gutters */
+    --gutter-desktop: clamp(1.5rem, 5vw, 2.5rem);
+    --gutter-mobile: clamp(1rem, 4vw, 1.5rem);
+    
+    /* ========== SHADOW / ELEVATION TOKENS ========== */
+    --shadow-nav: 0px 24px 48px rgba(0, 0, 0, 0.8), 0px 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-gold-glow: 0 0 20px rgba(242, 202, 80, 0.4), 0 0 60px rgba(242, 202, 80, 0.1);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242, 202, 80, 0.3);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-deep: 0 20px 40px rgba(0, 0, 0, 0.5);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* ========== ANIMATION / TRANSITION TOKENS ========== */
+    --transition-fast: 150ms;
+    --transition-medium: 250ms;
+    --transition-slow: 350ms;
+    --transition-very-slow: 500ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --hover-transform: translateY(-2px);
+    --hover-transform-lg: translateY(-4px);
+    
+    /* ========== GLASS PANEL EFFECT ========== */
+    --glass-blur: 20px;
+    --glass-blur-heavy: 40px;
+    --glass-border-width: 0.5px;
+    --glass-padding: clamp(1.5rem, 4vw, 2.5rem);
+    
+    /* ========== BUTTON STYLE VARIABLES ========== */
+    --btn-primary-bg: #f2ca50;
+    --btn-primary-text: #3c2f00;
+    --btn-primary-padding: 0.875rem 2rem;
+    --btn-primary-radius: 0.25rem;
+    --btn-primary-font-size: 0.875rem;
+    --btn-primary-font-weight: 600;
+    --btn-primary-letter-spacing: 0.02em;
+    --btn-primary-transform: none;
+    --btn-primary-hover-bg: #f7d86e;
+    --btn-primary-hover-transform: translateY(-1px);
+    --btn-primary-hover-shadow: 0 4px 12px rgba(242, 202, 80, 0.3);
+    
+    --btn-outline-border: rgba(212, 175, 55, 0.5);
+    --btn-outline-text: #f2ca50;
+    --btn-outline-hover-bg: rgba(242, 202, 80, 0.08);
+    --btn-outline-hover-border: rgba(212, 175, 55, 0.8);
+    
+    /* ========== CARD STYLE VARIABLES ========== */
+    --card-bg: rgba(28, 27, 29, 0.6);
+    --card-bg-hover: rgba(32, 31, 33, 0.8);
+    --card-border: 0.5px solid rgba(212, 175, 55, 0.15);
+    --card-border-hover: 0.5px solid rgba(212, 175, 55, 0.3);
+    --card-padding: clamp(1.5rem, 4vw, 2.5rem);
+    --card-radius: 0.5rem;
+    --card-hover-transform: translateY(-4px);
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05);
+    
+    /* ========== GOLD ACCENT VALUES ========== */
+    --gold-filament-color: rgba(212, 175, 55, 0.3);
+    --gold-filament-width: 0.5px;
+    --gold-filament-opacity: 0.3;
+    --gold-divider-width: 60px;
+    --gold-divider-height: 1px;
+    --gold-divider-opacity: 0.4;
+  }
+  
+  /* ========== BASE RESET ========== */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-tight);
+    word-wrap: break-word;
+  }
+  
+  h1 {
+    font-size: var(--font-size-display-lg);
+    line-height: var(--line-height-display);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: var(--font-size-display-md);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  h3 {
+    font-size: var(--font-size-headline-lg);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-body);
+  }
+  
+  h4 {
+    font-size: var(--font-size-headline-md);
+    line-height: var(--line-height-title);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-body);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-body);
+  }
+  
+  strong {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  a {
+    color: var(--accent-primary);
+    transition: color var(--transition-fast) var(--easing-default);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--accent-primary-hover);
+  }
+  
+  img, svg { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+  }
+  
+  /* ========== UTILITY CLASSES ========== */
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--glass-border-width) solid var(--border-glass);
+  }
+  
+  .glass-panel-heavy {
+    background: var(--glass-bg-heavy);
+    backdrop-filter: blur(var(--glass-blur-heavy));
+    -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
+    border: var(--glass-border-width) solid var(--border-glass);
+  }
+  
+  .text-glow-gold {
+    text-shadow: var(--glow-gold);
+  }
+  
+  .text-glow-gold-strong {
+    text-shadow: var(--glow-gold-strong);
+  }
+  
+  .gold-filament-border {
+    border: var(--gold-filament-width) solid var(--gold-filament-color);
+  }
+  
+  .gold-divider {
+    width: var(--gold-divider-width);
+    height: var(--gold-divider-height);
+    background: var(--accent-primary);
+    opacity: var(--gold-divider-opacity);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #f2ca50 0%, #d4af37 50%, #ffe088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    text-transform: var(--btn-primary-transform);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    text-decoration: none;
+    min-width: 200px;
+  }
+  
+  .btn-primary:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--btn-primary-hover-shadow);
+    color: var(--btn-primary-text);
+  }
+  
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: transparent;
+    color: var(--btn-outline-text);
+    border: 0.5px solid var(--btn-outline-border);
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 200px;
+  }
+  
+  .btn-outline:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--shadow-gold-glow-sm);
+    color: var(--btn-outline-text);
+  }
+  
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.125rem 2.25rem;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-gold-glow);
+    text-decoration: none;
+    min-width: 260px;
+  }
+  
+  .btn-cta:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--shadow-gold-glow-strong);
+    color: var(--btn-primary-text);
+  }
+  
+  .card-executive {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card-executive:hover {
+    background: var(--card-bg-hover);
+    border: var(--card-border-hover);
+    transform: var(--card-hover-transform);
+    box-shadow: var(--card-hover-shadow);
+  }
+  
+  .section-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter-desktop);
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .section-container {
+      padding: 0 var(--gutter-mobile);
+    }
+    
+    .btn-primary,
+    .btn-outline,
+    .btn-cta {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .skip-link:focus { 
+    top: 0; 
+  }
 
-/* AI & ChatGPT Optimized Content - Visible to crawlers, hidden from users */
-.ai-optimized-content {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-.ai-optimized-content h2, .ai-optimized-content h3, .ai-optimized-content p {
-  margin: 0;
-  padding: 0;
-}
+  /* ========== DIRECTORY PAGE SPECIFIC STYLES ========== */
+  
+  .breadcrumb {
+    padding: 1rem 0;
+    background: var(--bg-surface-lowest);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .breadcrumb ol {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast) var(--easing-default);
+  }
+  
+  .breadcrumb a:hover {
+    color: var(--accent-primary);
+  }
+  
+  .breadcrumb [aria-current="page"] {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .breadcrumb li[aria-hidden="true"] {
+    color: var(--text-muted);
+  }
+  
+  .directory-badge {
+    display: inline-block;
+    background: rgba(242, 202, 80, 0.1);
+    color: var(--accent-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-caps);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    border: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .info-box {
+    background: rgba(242, 202, 80, 0.05);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: var(--radius-xl);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem auto;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+  
+  .info-box span {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .directory-statement {
+    background: rgba(242, 202, 80, 0.05);
+    border: 0.5px solid var(--border-gold-filament-strong);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    max-width: 900px;
+    font-size: var(--font-size-body-md);
+    color: var(--text-secondary);
+  }
+  
+  .directory-statement p {
+    color: var(--text-secondary);
+  }
+  
+  .stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .stat-item {
+    text-align: center;
+    min-width: 130px;
+    padding: 1rem 1.25rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-lg);
+    flex: 1;
+  }
+  
+  .stat-number {
+    font-size: var(--font-size-headline-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-primary);
+    display: block;
+    font-family: var(--font-display);
+    margin-bottom: 0.25rem;
+  }
+  
+  .stat-item span {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .data-note {
+    font-size: var(--font-size-label-sm);
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.5rem auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .category-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .category-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    border: var(--card-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-medium) var(--easing-smooth);
+  }
+  
+  .category-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-primary-container);
+    box-shadow: var(--card-hover-shadow);
+  }
+  
+  .category-card h3 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-gold-filament);
+    font-size: var(--font-size-body-lg);
+    color: var(--text-primary);
+  }
+  
+  .category-card a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-body-sm);
+    border-bottom: 1px solid transparent;
+    transition: all var(--transition-fast) var(--easing-default);
+    display: block;
+    padding: 0.5rem 0;
+  }
+  
+  .category-card a:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary-container);
+  }
+  
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: var(--content-narrow);
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .faq-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  .faq-item {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: var(--card-border);
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .faq-question {
+    font-size: var(--font-size-body-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .faq-item p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-md);
+  }
+  
+  .feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    justify-content: center;
+  }
+  
+  .feature-tag {
+    background: rgba(242, 202, 80, 0.1);
+    color: var(--accent-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-label-sm);
+    border: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .text-small {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-muted);
+  }
+  
+  .toc-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    margin: 2.5rem auto;
+    max-width: 800px;
+  }
+  
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  
+  .toc-list li a {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    background: rgba(242, 202, 80, 0.05);
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border-gold-filament);
+    transition: all var(--transition-fast) var(--easing-default);
+    display: inline-block;
+  }
+  
+  .toc-list li a:hover {
+    background: rgba(242, 202, 80, 0.1);
+    border-color: var(--accent-primary-container);
+    color: var(--accent-primary);
+  }
+  
+  .glossary-section {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    border: var(--card-border);
+  }
+  
+  .glossary-section dl {
+    margin: 0;
+  }
+  
+  .glossary-section dt {
+    font-weight: var(--font-weight-semibold);
+    color: var(--accent-primary);
+    margin-top: 1rem;
+    font-size: var(--font-size-body-md);
+  }
+  
+  .glossary-section dd {
+    color: var(--text-secondary);
+    margin-left: 0;
+    margin-top: 0.25rem;
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .methodology-list {
+    list-style: none;
+    margin-top: 0.75rem;
+  }
+  
+  .methodology-list li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .methodology-list li:before {
+    content: "✦";
+    color: var(--accent-primary);
+    position: absolute;
+    left: 0;
+    font-size: 0.75rem;
+  }
+  
+  .ai-optimized-content {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  @media (max-width: 480px) {
+    button, .btn-primary, .btn-outline, .btn-cta, .card-executive, a {
+      touch-action: manipulation;
+    }
+    
+    .stats-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .stat-item {
+      min-width: 100%;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .info-box {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
 `;
 
 // ============================================================================
@@ -204,22 +927,22 @@ const usaStates = [
 // ============================================================================
 
 const industryGuidance = [
-  { title: "🇺🇸 Medical & Healthcare Resumes", description: "Tips for highlighting clinical certifications (RN, LPN, NP), EHR systems experience, and patient outcome metrics. Include state license information where applicable for USA jobs." },
-  { title: "🇺🇸 Technology & IT Resumes", description: "Ideas for showcasing programming languages, frameworks, cloud platforms (AWS, Azure), and quantifiable project impacts based on US tech company requirements." },
-  { title: "🇺🇸 Finance & Accounting Resumes", description: "Guidance on featuring CPA, CFA, or Series licenses, regulatory compliance experience (SOX, GAAP), and financial metrics for Wall Street and US financial institutions." },
-  { title: "🇺🇸 Federal & Government Resumes (USAJOBS)", description: "Complete guide to federal applications including USAJOBS formatting, KSA statements, GS grade equivalents, and security clearance requirements." },
-  { title: "🇺🇸 Manufacturing & Industrial Resumes", description: "Suggestions for including OSHA safety certifications, equipment expertise, lean manufacturing experience, and production metrics for US factories." },
-  { title: "🇺🇸 Retail & Customer Service Resumes", description: "Ideas for presenting sales metrics, customer satisfaction scores, team leadership, and POS system proficiency for American retailers." },
-  { title: "🇺🇸 Education & Teaching Resumes", description: "Tips for including state teaching certifications, curriculum development experience, and student achievement data for US schools." },
-  { title: "🇺🇸 Skilled Trades Resumes", description: "Guidance on listing journeyman/master licenses, union affiliations, specialized equipment certifications, and project completion records." }
+  { title: "Medical & Healthcare Resumes", description: "Tips for highlighting clinical certifications (RN, LPN, NP), EHR systems experience, and patient outcome metrics. Include state license information where applicable for USA jobs." },
+  { title: "Technology & IT Resumes", description: "Ideas for showcasing programming languages, frameworks, cloud platforms (AWS, Azure), and quantifiable project impacts based on US tech company requirements." },
+  { title: "Finance & Accounting Resumes", description: "Guidance on featuring CPA, CFA, or Series licenses, regulatory compliance experience (SOX, GAAP), and financial metrics for Wall Street and US financial institutions." },
+  { title: "Federal & Government Resumes (USAJOBS)", description: "Complete guide to federal applications including USAJOBS formatting, KSA statements, GS grade equivalents, and security clearance requirements." },
+  { title: "Manufacturing & Industrial Resumes", description: "Suggestions for including OSHA safety certifications, equipment expertise, lean manufacturing experience, and production metrics for US factories." },
+  { title: "Retail & Customer Service Resumes", description: "Ideas for presenting sales metrics, customer satisfaction scores, team leadership, and POS system proficiency for American retailers." },
+  { title: "Education & Teaching Resumes", description: "Tips for including state teaching certifications, curriculum development experience, and student achievement data for US schools." },
+  { title: "Skilled Trades Resumes", description: "Guidance on listing journeyman/master licenses, union affiliations, specialized equipment certifications, and project completion records." }
 ];
 
 const corePrinciples = [
-  { title: "🇺🇸 ATS Optimization for US Employers", description: "98% of Fortune 500 companies use Applicant Tracking Systems. Use standard section headings, avoid tables/graphics, and incorporate keywords from job descriptions naturally." },
-  { title: "🇺🇸 Quantifiable Achievements", description: "US recruiters prefer metrics: 'Increased sales by 27%' outperforms 'Responsible for sales'. Use $, %, and time metrics wherever possible." },
-  { title: "🇺🇸 Skills-First Hybrid Format", description: "2026 data shows skills-first resumes with reverse-chronological experience increase interview rates by 34% for US job seekers." },
-  { title: "🇺🇸 Federal Resume Specifics (USAJOBS)", description: "USAJOBS requires detailed narratives: duties, accomplishments, hours/week, salary, supervisor contact. Never abbreviate; spell out all acronyms on first use." },
-  { title: "🇺🇸 State License & Certification Display", description: "For licensed professions (nursing, engineering, teaching), prominently display state license number, expiration date, and issuing board per US state requirements." }
+  { title: "ATS Optimization for US Employers", description: "98% of Fortune 500 companies use Applicant Tracking Systems. Use standard section headings, avoid tables/graphics, and incorporate keywords from job descriptions naturally." },
+  { title: "Quantifiable Achievements", description: "US recruiters prefer metrics: 'Increased sales by 27%' outperforms 'Responsible for sales'. Use $, %, and time metrics wherever possible." },
+  { title: "Skills-First Hybrid Format", description: "2026 data shows skills-first resumes with reverse-chronological experience increase interview rates by 34% for US job seekers." },
+  { title: "Federal Resume Specifics (USAJOBS)", description: "USAJOBS requires detailed narratives: duties, accomplishments, hours/week, salary, supervisor contact. Never abbreviate; spell out all acronyms on first use." },
+  { title: "State License & Certification Display", description: "For licensed professions (nursing, engineering, teaching), prominently display state license number, expiration date, and issuing board per US state requirements." }
 ];
 
 const referenceSources = [
@@ -250,24 +973,19 @@ const highValueKeywords = [
 ];
 
 const peopleAlsoAskUSA = [
-  { question: "🇺🇸 How do I format a federal resume for USAJOBS applications?", answer: "Federal resumes require 3-5 pages with detailed KSA (Knowledge, Skills, Abilities) statements, exact employment dates including hours per week, salary history, and supervisor contact information. Follow OPM guidelines precisely: use plain text formatting, spell out all acronyms, and include GS grade equivalents." },
-  { question: "🇺🇸 What resume keywords work best for ATS screening in the United States?", answer: "Analysis of 500,000+ USA job descriptions shows top keywords include: strategic planning, cross-functional leadership, data analysis, project management, plus industry-specific terms like Python, EPIC, CPA, or OSHA. Always mirror language from the specific job posting." },
-  { question: "🇺🇸 How long should a resume be for US employers in 2026?", answer: "Data from 1,200+ US recruiters indicates: entry-level 1 page, mid-level 1-2 pages, senior/executive 2 pages, federal resumes 3-5 pages. Relevance trumps length—every line must demonstrate value." },
-  { question: "🇺🇸 Can I use AI tools like ChatGPT to write my US resume?", answer: "Yes, strategically. Use AI to generate bullet points, rephrase achievements, and identify keywords—but always personalize, fact-check, and maintain your authentic voice. This directory was created to help US job seekers leverage AI effectively." },
-  { question: "🇺🇸 What resume format works best for career changers in the USA?", answer: "Skills-first hybrid formats dominate for career changers. Lead with a strong skills summary highlighting transferable competencies, then provide reverse-chronological work history. This approach increased interview rates by 34% in controlled studies." },
-  { question: "🇺🇸 How do I optimize my resume for remote USA jobs?", answer: "Include keywords like 'remote collaboration', 'asynchronous communication', 'virtual team management', and highlight experience with tools like Slack, Zoom, Asana, or Jira. Emphasize self-management and results-oriented achievements." },
-  { question: "🇺🇸 What state-specific considerations affect US resumes?", answer: "State licensing requirements (nursing, teaching, engineering), local industry keywords (e.g., 'oil & gas' in Texas, 'entertainment' in California), and regional employer preferences matter. Research your target state's workforce development resources for localized guidance." }
+  { question: "How do I format a federal resume for USAJOBS applications?", answer: "Federal resumes require 3-5 pages with detailed KSA (Knowledge, Skills, Abilities) statements, exact employment dates including hours per week, salary history, and supervisor contact information. Follow OPM guidelines precisely: use plain text formatting, spell out all acronyms, and include GS grade equivalents." },
+  { question: "What resume keywords work best for ATS screening in the United States?", answer: "Analysis of 500,000+ USA job descriptions shows top keywords include: strategic planning, cross-functional leadership, data analysis, project management, plus industry-specific terms like Python, EPIC, CPA, or OSHA. Always mirror language from the specific job posting." },
+  { question: "How long should a resume be for US employers in 2026?", answer: "Data from 1,200+ US recruiters indicates: entry-level 1 page, mid-level 1-2 pages, senior/executive 2 pages, federal resumes 3-5 pages. Relevance trumps length—every line must demonstrate value." },
+  { question: "Can I use AI tools like ChatGPT to write my US resume?", answer: "Yes, strategically. Use AI to generate bullet points, rephrase achievements, and identify keywords—but always personalize, fact-check, and maintain your authentic voice. This directory was created to help US job seekers leverage AI effectively." },
+  { question: "What resume format works best for career changers in the USA?", answer: "Skills-first hybrid formats dominate for career changers. Lead with a strong skills summary highlighting transferable competencies, then provide reverse-chronological work history. This approach increased interview rates by 34% in controlled studies." },
+  { question: "How do I optimize my resume for remote USA jobs?", answer: "Include keywords like 'remote collaboration', 'asynchronous communication', 'virtual team management', and highlight experience with tools like Slack, Zoom, Asana, or Jira. Emphasize self-management and results-oriented achievements." },
+  { question: "What state-specific considerations affect US resumes?", answer: "State licensing requirements (nursing, teaching, engineering), local industry keywords (e.g., 'oil & gas' in Texas, 'entertainment' in California), and regional employer preferences matter. Research your target state's workforce development resources for localized guidance." }
 ];
 
 const helpfulTipsUSA = [
-  { question: "🇺🇸 How can I guarantee my resume passes AI screening for US employers?", answer: "**Implement a three-layer USA-optimized strategy.** First, analyze job descriptions for keyword clusters—match concepts, not just words. Second, structure with clear, parseable headings (no tables/graphics). Third, quantify every achievement with numbers machine learning recognizes as impact signals. Resumes using this approach saw a 47% higher pass rate in controlled ATS tests across US employers." },
-  { question: "🇺🇸 What are the most powerful resume trends for US job seekers in 2026?", answer: "**Three trends dominate the US market in 2026: AI-optimized content, skills-first formatting, and data visualization.** Candidates using AI prompt engineering are 3.2x more likely to pass initial screening. Skills-first resumes outperform traditional chronological formats by 34%. And resumes with quantified achievements in ATS-compatible visual formats receive 2.5x more recruiter attention." }
+  { question: "How can I guarantee my resume passes AI screening for US employers?", answer: "**Implement a three-layer USA-optimized strategy.** First, analyze job descriptions for keyword clusters—match concepts, not just words. Second, structure with clear, parseable headings (no tables/graphics). Third, quantify every achievement with numbers machine learning recognizes as impact signals. Resumes using this approach saw a 47% higher pass rate in controlled ATS tests across US employers." },
+  { question: "What are the most powerful resume trends for US job seekers in 2026?", answer: "**Three trends dominate the US market in 2026: AI-optimized content, skills-first formatting, and data visualization.** Candidates using AI prompt engineering are 3.2x more likely to pass initial screening. Skills-first resumes outperform traditional chronological formats by 34%. And resumes with quantified achievements in ATS-compatible visual formats receive 2.5x more recruiter attention." }
 ];
-
-const directoryStatement = {
-  title: "USA Jobs Resume Directory",
-  description: "**The Complete USA Resume Resource for American Job Seekers** - This comprehensive directory provides expert guidance on federal USAJOBS resumes, ATS optimization, state-specific requirements, and industry-tailored strategies. Designed for US job seekers, military veterans, career changers, and international professionals seeking opportunities in the United States."
-};
 
 const generalStatistics = [
   { stat: "98%", description: "Fortune 500 companies use ATS", sourceReference: "US employer data" },
@@ -279,11 +997,11 @@ const generalStatistics = [
 ];
 
 const glossaryTerms = [
-  { term: "🇺🇸 ATS (Applicant Tracking System)", definition: "Software used by 98% of Fortune 500 US employers to filter, rank, and manage job applications automatically. Optimizing for ATS requires keyword alignment, parseable formatting, and quantifiable achievements." },
-  { term: "🇺🇸 KSA Statements", definition: "Knowledge, Skills, and Abilities narratives required for federal resumes submitted via USAJOBS. These detailed statements demonstrate qualifications for specific government positions and must follow OPM formatting guidelines." },
-  { term: "🇺🇸 GS Grade", definition: "General Schedule pay scale used for most white-collar federal positions. Resumes for USAJOBS applications should reference target GS grades (e.g., GS-9, GS-12) and equivalent experience." },
-  { term: "🇺🇸 State Professional License", definition: "Credential issued by a US state licensing board (e.g., RN license from California BRN, PE license from Texas Board). Resumes for licensed professions must display license number, state, and expiration date prominently." },
-  { term: "🇺🇸 Skills-First Resume", definition: "A resume format prioritizing competencies and achievements over chronological work history. Increasingly preferred by US employers in 2026 for career changers and roles emphasizing transferable skills." }
+  { term: "ATS (Applicant Tracking System)", definition: "Software used by 98% of Fortune 500 US employers to filter, rank, and manage job applications automatically. Optimizing for ATS requires keyword alignment, parseable formatting, and quantifiable achievements." },
+  { term: "KSA Statements", definition: "Knowledge, Skills, and Abilities narratives required for federal resumes submitted via USAJOBS. These detailed statements demonstrate qualifications for specific government positions and must follow OPM formatting guidelines." },
+  { term: "GS Grade", definition: "General Schedule pay scale used for most white-collar federal positions. Resumes for USAJOBS applications should reference target GS grades (e.g., GS-9, GS-12) and equivalent experience." },
+  { term: "State Professional License", definition: "Credential issued by a US state licensing board (e.g., RN license from California BRN, PE license from Texas Board). Resumes for licensed professions must display license number, state, and expiration date prominently." },
+  { term: "Skills-First Resume", definition: "A resume format prioritizing competencies and achievements over chronological work history. Increasingly preferred by US employers in 2026 for career changers and roles emphasizing transferable skills." }
 ];
 
 // ============================================================================
@@ -358,12 +1076,19 @@ const LazySection = ({ children, threshold = 0.1 }) => {
     observer.observe(ref);
     return () => observer.disconnect();
   }, [ref, threshold]);
-  return <div ref={setRef}>{isVisible ? children : <div className="skeleton" />}</div>;
+  return <div ref={setRef}>{isVisible ? children : <div style={{ minHeight: '200px' }} />}</div>;
 };
 
 const TableOfContents = ({ categories }) => (
   <nav className="toc-container" aria-label="Table of Contents">
-    <h2 style={{ marginBottom: '16px', fontSize: '1.1rem', color: '#000000' }}>📑 On This Page</h2>
+    <h2 style={{ 
+      marginBottom: '1rem', 
+      fontSize: 'var(--font-size-title-md)', 
+      color: 'var(--text-primary)',
+      fontFamily: 'var(--font-display)'
+    }}>
+      On This Page
+    </h2>
     <ul className="toc-list">
       {categories.slice(0, 8).map((cat) => (
         <li key={cat.id}>
@@ -375,15 +1100,38 @@ const TableOfContents = ({ categories }) => (
 );
 
 const PeopleAlsoAskSection = ({ questions }) => (
-  <section className="section" aria-labelledby="paa-heading">
-    <div className="container">
-      <h2 id="paa-heading" className="section-title">🇺🇸 People Also Ask: US Job Seeker Questions</h2>
-      <p className="section-subtitle">Answers to the most common questions American job seekers ask</p>
+  <section style={{
+    padding: 'var(--section-gap-md) 0'
+  }} aria-labelledby="paa-heading">
+    <div className="section-container">
+      <h2 id="paa-heading" style={{
+        textAlign: 'center',
+        fontSize: 'var(--font-size-display-md)',
+        fontFamily: 'var(--font-display)',
+        fontWeight: 'var(--font-weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: '1rem',
+        padding: '0 1rem'
+      }}>
+        People Also Ask: US Job Seeker Questions
+      </h2>
+      <p style={{
+        textAlign: 'center',
+        color: 'var(--text-secondary)',
+        fontSize: 'var(--font-size-body-lg)',
+        marginBottom: '2.5rem',
+        padding: '0 1rem'
+      }}>
+        Answers to the most common questions American job seekers ask
+      </p>
       <div className="faq-grid">
         {questions.map((paa, i) => (
           <details key={i} className="faq-item" open={i === 0}>
-            <summary className="faq-question">{paa.question}</summary>
-            <p style={{ marginTop: '12px' }}>{paa.answer}</p>
+            <summary className="faq-question">
+              <span style={{ color: 'var(--accent-primary)' }}>✦</span>
+              {paa.question}
+            </summary>
+            <p style={{ marginTop: '0.75rem' }}>{paa.answer}</p>
           </details>
         ))}
       </div>
@@ -392,15 +1140,43 @@ const PeopleAlsoAskSection = ({ questions }) => (
 );
 
 const HelpfulTipsSection = ({ tips, displayDate }) => (
-  <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="tips-heading">
-    <div className="container">
-      <h2 id="tips-heading" className="section-title">🇺🇸 Expert Tips for US Job Seekers</h2>
-      <p className="section-subtitle">Data-backed strategies that work for American employers</p>
+  <section style={{
+    padding: 'var(--section-gap-md) 0',
+    background: 'var(--bg-surface-lowest)'
+  }} aria-labelledby="tips-heading">
+    <div className="section-container">
+      <h2 id="tips-heading" style={{
+        textAlign: 'center',
+        fontSize: 'var(--font-size-display-md)',
+        fontFamily: 'var(--font-display)',
+        fontWeight: 'var(--font-weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: '1rem',
+        padding: '0 1rem'
+      }}>
+        Expert Tips for US Job Seekers
+      </h2>
+      <p style={{
+        textAlign: 'center',
+        color: 'var(--text-secondary)',
+        fontSize: 'var(--font-size-body-lg)',
+        marginBottom: '2.5rem',
+        padding: '0 1rem'
+      }}>
+        Data-backed strategies that work for American employers
+      </p>
       <div className="grid">
         {tips.map((item, i) => (
-          <article key={i} className="card">
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '12px', color: '#000000' }}>{item.question}</h3>
-            <p style={{ marginBottom: '16px', flex: 1 }} dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+          <article key={i} className="card-executive">
+            <h3 style={{ 
+              fontSize: 'var(--font-size-title-md)', 
+              marginBottom: '0.75rem', 
+              color: 'var(--text-primary)',
+              fontFamily: 'var(--font-body)'
+            }}>
+              {item.question}
+            </h3>
+            <p style={{ marginBottom: '1rem', flex: 1, color: 'var(--text-secondary)' }} dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
             <small className="text-small">Updated {displayDate}</small>
           </article>
         ))}
@@ -410,16 +1186,42 @@ const HelpfulTipsSection = ({ tips, displayDate }) => (
 );
 
 const HighValueKeywordsSection = ({ keywords }) => (
-  <section className="section" aria-labelledby="keywords-heading">
-    <div className="container">
-      <h2 id="keywords-heading" className="section-title">🇺🇸 High-Value Keywords for US Job Search</h2>
-      <p className="section-subtitle">Terms US employers and AI screening systems prioritize</p>
+  <section style={{
+    padding: 'var(--section-gap-md) 0'
+  }} aria-labelledby="keywords-heading">
+    <div className="section-container">
+      <h2 id="keywords-heading" style={{
+        textAlign: 'center',
+        fontSize: 'var(--font-size-display-md)',
+        fontFamily: 'var(--font-display)',
+        fontWeight: 'var(--font-weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: '1rem',
+        padding: '0 1rem'
+      }}>
+        High-Value Keywords for US Job Search
+      </h2>
+      <p style={{
+        textAlign: 'center',
+        color: 'var(--text-secondary)',
+        fontSize: 'var(--font-size-body-lg)',
+        marginBottom: '2.5rem',
+        padding: '0 1rem'
+      }}>
+        Terms US employers and AI screening systems prioritize
+      </p>
       <div className="grid">
         {keywords.map((keyword, i) => (
-          <div key={i} className="card" style={{ textAlign: 'center' }}>
-            <p style={{ fontWeight: '500', fontSize: '1rem', color: '#000000' }}>{keyword}</p>
-            <div className="feature-tags" style={{ justifyContent: 'center' }}>
-              <span className="feature-tag">🇺🇸 USA Focus</span>
+          <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+            <p style={{ 
+              fontWeight: 'var(--font-weight-medium)', 
+              fontSize: 'var(--font-size-body-md)', 
+              color: 'var(--text-primary)' 
+            }}>
+              {keyword}
+            </p>
+            <div className="feature-tags">
+              <span className="feature-tag">USA Focus</span>
               <span className="feature-tag">ATS Optimized</span>
             </div>
           </div>
@@ -430,10 +1232,31 @@ const HighValueKeywordsSection = ({ keywords }) => (
 );
 
 const GlossarySection = ({ terms }) => (
-  <section className="section" aria-labelledby="glossary-heading">
-    <div className="container">
-      <h2 id="glossary-heading" className="section-title">🇺🇸 US Resume Terminology Glossary</h2>
-      <p className="section-subtitle">Key terms every American job seeker should know</p>
+  <section style={{
+    padding: 'var(--section-gap-md) 0',
+    background: 'var(--bg-surface-lowest)'
+  }} aria-labelledby="glossary-heading">
+    <div className="section-container">
+      <h2 id="glossary-heading" style={{
+        textAlign: 'center',
+        fontSize: 'var(--font-size-display-md)',
+        fontFamily: 'var(--font-display)',
+        fontWeight: 'var(--font-weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: '1rem',
+        padding: '0 1rem'
+      }}>
+        US Resume Terminology Glossary
+      </h2>
+      <p style={{
+        textAlign: 'center',
+        color: 'var(--text-secondary)',
+        fontSize: 'var(--font-size-body-lg)',
+        marginBottom: '2.5rem',
+        padding: '0 1rem'
+      }}>
+        Key terms every American job seeker should know
+      </p>
       <div className="glossary-section">
         <dl>
           {terms.map((term, i) => (
@@ -449,15 +1272,42 @@ const GlossarySection = ({ terms }) => (
 );
 
 const IndustryGuidanceSection = ({ guidance }) => (
-  <section className="section" aria-labelledby="industry-heading">
-    <div className="container">
-      <h2 id="industry-heading" className="section-title">🇺🇸 Industry-Specific Resume Strategies</h2>
-      <p className="section-subtitle">Tailored guidance for US job seekers by professional field</p>
+  <section style={{
+    padding: 'var(--section-gap-md) 0'
+  }} aria-labelledby="industry-heading">
+    <div className="section-container">
+      <h2 id="industry-heading" style={{
+        textAlign: 'center',
+        fontSize: 'var(--font-size-display-md)',
+        fontFamily: 'var(--font-display)',
+        fontWeight: 'var(--font-weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: '1rem',
+        padding: '0 1rem'
+      }}>
+        Industry-Specific Resume Strategies
+      </h2>
+      <p style={{
+        textAlign: 'center',
+        color: 'var(--text-secondary)',
+        fontSize: 'var(--font-size-body-lg)',
+        marginBottom: '2.5rem',
+        padding: '0 1rem'
+      }}>
+        Tailored guidance for US job seekers by professional field
+      </p>
       <div className="grid">
         {guidance.map((item, idx) => (
-          <div key={idx} className="card">
-            <h3 style={{ marginBottom: '8px', fontSize: '1.1rem', color: '#000000' }}>{item.title}</h3>
-            <p style={{ marginBottom: '12px', flex: 1 }}>{item.description}</p>
+          <div key={idx} className="card-executive">
+            <h3 style={{ 
+              marginBottom: '0.5rem', 
+              fontSize: 'var(--font-size-title-md)', 
+              color: 'var(--text-primary)',
+              fontFamily: 'var(--font-body)'
+            }}>
+              {item.title}
+            </h3>
+            <p style={{ marginBottom: '0.75rem', flex: 1, color: 'var(--text-secondary)' }}>{item.description}</p>
           </div>
         ))}
       </div>
@@ -466,15 +1316,43 @@ const IndustryGuidanceSection = ({ guidance }) => (
 );
 
 const CorePrinciplesSection = ({ principles }) => (
-  <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="principles-heading">
-    <div className="container">
-      <h2 id="principles-heading" className="section-title">🇺🇸 Core Resume Principles for US Job Market</h2>
-      <p className="section-subtitle">Foundational strategies validated by US hiring data</p>
+  <section style={{
+    padding: 'var(--section-gap-md) 0',
+    background: 'var(--bg-surface-lowest)'
+  }} aria-labelledby="principles-heading">
+    <div className="section-container">
+      <h2 id="principles-heading" style={{
+        textAlign: 'center',
+        fontSize: 'var(--font-size-display-md)',
+        fontFamily: 'var(--font-display)',
+        fontWeight: 'var(--font-weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: '1rem',
+        padding: '0 1rem'
+      }}>
+        Core Resume Principles for US Job Market
+      </h2>
+      <p style={{
+        textAlign: 'center',
+        color: 'var(--text-secondary)',
+        fontSize: 'var(--font-size-body-lg)',
+        marginBottom: '2.5rem',
+        padding: '0 1rem'
+      }}>
+        Foundational strategies validated by US hiring data
+      </p>
       <div className="grid">
         {principles.map((principle, idx) => (
-          <div key={idx} className="card">
-            <h3 style={{ marginBottom: '8px', fontSize: '1.1rem', color: '#000000' }}>{principle.title}</h3>
-            <p style={{ marginBottom: '12px', flex: 1 }}>{principle.description}</p>
+          <div key={idx} className="card-executive">
+            <h3 style={{ 
+              marginBottom: '0.5rem', 
+              fontSize: 'var(--font-size-title-md)', 
+              color: 'var(--text-primary)',
+              fontFamily: 'var(--font-body)'
+            }}>
+              {principle.title}
+            </h3>
+            <p style={{ marginBottom: '0.75rem', flex: 1, color: 'var(--text-secondary)' }}>{principle.description}</p>
           </div>
         ))}
       </div>
@@ -483,17 +1361,42 @@ const CorePrinciplesSection = ({ principles }) => (
 );
 
 const ReferenceSourcesSection = ({ sources }) => (
-  <section className="section" aria-labelledby="sources-heading">
-    <div className="container">
-      <h2 id="sources-heading" className="section-title">🇺🇸 Reference Sources Consulted</h2>
-      <p className="section-subtitle">Publicly available US government and industry resources</p>
-      <div className="card" style={{ textAlign: 'left', maxWidth: '800px', margin: '0 auto' }}>
+  <section style={{
+    padding: 'var(--section-gap-md) 0'
+  }} aria-labelledby="sources-heading">
+    <div className="section-container">
+      <h2 id="sources-heading" style={{
+        textAlign: 'center',
+        fontSize: 'var(--font-size-display-md)',
+        fontFamily: 'var(--font-display)',
+        fontWeight: 'var(--font-weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: '1rem',
+        padding: '0 1rem'
+      }}>
+        Reference Sources Consulted
+      </h2>
+      <p style={{
+        textAlign: 'center',
+        color: 'var(--text-secondary)',
+        fontSize: 'var(--font-size-body-lg)',
+        marginBottom: '2.5rem',
+        padding: '0 1rem'
+      }}>
+        Publicly available US government and industry resources
+      </p>
+      <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto' }}>
         <ul className="methodology-list">
           {sources.map((source, idx) => (
             <li key={idx}>{source}</li>
           ))}
         </ul>
-        <p style={{ marginTop: '16px', fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
+        <p style={{ 
+          marginTop: '1rem', 
+          fontSize: 'var(--font-size-body-sm)', 
+          color: 'var(--text-muted)', 
+          fontStyle: 'italic' 
+        }}>
           This independent directory compiles publicly available information. Not affiliated with any government agency.
         </p>
       </div>
@@ -508,19 +1411,55 @@ const ResourceLinksSection = () => {
   const strategyLinks = uniqueResourceLinks.filter(link => link.category === "strategy");
 
   return (
-    <section className="section" aria-labelledby="resources-heading">
-      <div className="container">
-        <h2 id="resources-heading" className="section-title">🇺🇸 Complete Resume Guide Library</h2>
-        <p className="section-subtitle">33 curated guides for US job seekers — all unique, no duplicates</p>
+    <section style={{
+      padding: 'var(--section-gap-md) 0'
+    }} aria-labelledby="resources-heading">
+      <div className="section-container">
+        <h2 id="resources-heading" style={{
+          textAlign: 'center',
+          fontSize: 'var(--font-size-display-md)',
+          fontFamily: 'var(--font-display)',
+          fontWeight: 'var(--font-weight-bold)',
+          color: 'var(--text-primary)',
+          marginBottom: '1rem',
+          padding: '0 1rem'
+        }}>
+          Complete Resume Guide Library
+        </h2>
+        <p style={{
+          textAlign: 'center',
+          color: 'var(--text-secondary)',
+          fontSize: 'var(--font-size-body-lg)',
+          marginBottom: '2.5rem',
+          padding: '0 1rem'
+        }}>
+          33 curated guides for US job seekers — all unique, no duplicates
+        </p>
         
         {trendingLinks.length > 0 && (
           <>
-            <h3 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '20px', color: '#000000' }}>🔥 Trending & Most Popular</h3>
+            <h3 style={{ 
+              textAlign: 'center', 
+              marginBottom: '1.25rem', 
+              marginTop: '1.25rem', 
+              color: 'var(--accent-primary)',
+              fontSize: 'var(--font-size-headline-md)',
+              fontFamily: 'var(--font-display)'
+            }}>
+              Trending & Most Popular
+            </h3>
             <div className="category-grid">
               {trendingLinks.map((link, idx) => (
                 <div key={`trending-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
+                    <span style={{ 
+                      fontSize: 'var(--font-size-body-sm)', 
+                      marginBottom: '0.5rem', 
+                      display: 'block',
+                      color: 'var(--text-secondary)'
+                    }}>
+                      {link.name}
+                    </span>
                   </Link>
                 </div>
               ))}
@@ -530,12 +1469,28 @@ const ResourceLinksSection = () => {
 
         {exampleLinks.length > 0 && (
           <>
-            <h3 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '40px', color: '#000000' }}>📄 Resume Examples by Industry</h3>
+            <h3 style={{ 
+              textAlign: 'center', 
+              marginBottom: '1.25rem', 
+              marginTop: '2.5rem', 
+              color: 'var(--accent-primary)',
+              fontSize: 'var(--font-size-headline-md)',
+              fontFamily: 'var(--font-display)'
+            }}>
+              Resume Examples by Industry
+            </h3>
             <div className="category-grid">
               {exampleLinks.map((link, idx) => (
                 <div key={`examples-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
+                    <span style={{ 
+                      fontSize: 'var(--font-size-body-sm)', 
+                      marginBottom: '0.5rem', 
+                      display: 'block',
+                      color: 'var(--text-secondary)'
+                    }}>
+                      {link.name}
+                    </span>
                   </Link>
                 </div>
               ))}
@@ -545,12 +1500,28 @@ const ResourceLinksSection = () => {
 
         {howtoLinks.length > 0 && (
           <>
-            <h3 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '40px', color: '#000000' }}>📝 How-To Guides & Tutorials</h3>
+            <h3 style={{ 
+              textAlign: 'center', 
+              marginBottom: '1.25rem', 
+              marginTop: '2.5rem', 
+              color: 'var(--accent-primary)',
+              fontSize: 'var(--font-size-headline-md)',
+              fontFamily: 'var(--font-display)'
+            }}>
+              How-To Guides & Tutorials
+            </h3>
             <div className="category-grid">
               {howtoLinks.map((link, idx) => (
                 <div key={`howto-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
+                    <span style={{ 
+                      fontSize: 'var(--font-size-body-sm)', 
+                      marginBottom: '0.5rem', 
+                      display: 'block',
+                      color: 'var(--text-secondary)'
+                    }}>
+                      {link.name}
+                    </span>
                   </Link>
                 </div>
               ))}
@@ -560,12 +1531,28 @@ const ResourceLinksSection = () => {
 
         {strategyLinks.length > 0 && (
           <>
-            <h3 style={{ textAlign: 'center', marginBottom: '20px', marginTop: '40px', color: '#000000' }}>📈 Strategy & Industry Trends</h3>
+            <h3 style={{ 
+              textAlign: 'center', 
+              marginBottom: '1.25rem', 
+              marginTop: '2.5rem', 
+              color: 'var(--accent-primary)',
+              fontSize: 'var(--font-size-headline-md)',
+              fontFamily: 'var(--font-display)'
+            }}>
+              Strategy & Industry Trends
+            </h3>
             <div className="category-grid">
               {strategyLinks.map((link, idx) => (
                 <div key={`strategy-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ fontSize: '0.95rem', marginBottom: '8px', display: 'block' }}>{link.name}</span>
+                    <span style={{ 
+                      fontSize: 'var(--font-size-body-sm)', 
+                      marginBottom: '0.5rem', 
+                      display: 'block',
+                      color: 'var(--text-secondary)'
+                    }}>
+                      {link.name}
+                    </span>
                   </Link>
                 </div>
               ))}
@@ -573,8 +1560,13 @@ const ResourceLinksSection = () => {
           </>
         )}
 
-        <p style={{ marginTop: '30px', fontSize: '0.85rem', color: '#6b7280', textAlign: 'center' }}>
-          ✓ {uniqueResourceLinks.length} unique resources • No duplicate content • Updated for US job seekers
+        <p style={{ 
+          marginTop: '2rem', 
+          fontSize: 'var(--font-size-body-sm)', 
+          color: 'var(--text-muted)', 
+          textAlign: 'center' 
+        }}>
+          {uniqueResourceLinks.length} unique resources — No duplicate content — Updated for US job seekers
         </p>
       </div>
     </section>
@@ -610,18 +1602,6 @@ const AIOptimizedContent = ({ states, displayDate }) => (
     <h2>Popular ChatGPT Prompts for US Resume Help</h2>
     <p>ChatGPT users frequently ask: "How to write a federal resume for USAJOBS", "ATS-friendly resume templates USA", "Best resume format for US tech companies", "Military to civilian resume translation USA", "Entry-level resume no experience USA", "How long should a resume be USA", "Remote work resume keywords USA", "Nursing resume examples USA", and "Career change resume examples American market".</p>
     
-    <h2>US Industry-Specific Resume Guidance</h2>
-    <p>For technology resumes in the US market, highlight programming languages, cloud platforms (AWS, Azure), and quantifiable project impacts. For healthcare resumes, include HIPAA compliance keywords, clinical certifications (RN, LPN, NP), and EHR systems experience. For finance resumes, emphasize CPA/CFA licenses, regulatory compliance (SOX, GAAP), and financial metrics.</p>
-    
-    <h2>Military to Civilian Resume Translation</h2>
-    <p>US veterans should translate military experience into civilian terms. Replace military jargon with corporate language, highlight leadership experience, security clearances, and quantifiable achievements. Use resources like the US Department of Labor's Veterans Employment and Training Service (VETS) for guidance.</p>
-    
-    <h2>State Licensing Requirements</h2>
-    <p>Licensed professions (nursing, teaching, engineering, real estate, law) require state-specific credentials. Resumes must display license number, issuing state, and expiration date. Each state has its own licensing board with specific requirements.</p>
-    
-    <h2>Remote Work Resumes for US Jobs</h2>
-    <p>US remote job applications should include keywords like "remote collaboration", "asynchronous communication", "virtual team management", and highlight experience with tools like Slack, Zoom, Asana, Jira, and Microsoft Teams.</p>
-    
     <p>Last updated: {displayDate} | Independent USA resume resource directory</p>
   </div>
 );
@@ -630,20 +1610,56 @@ const AIOptimizedContent = ({ states, displayDate }) => (
 // MAIN PAGE COMPONENT
 // ============================================================================
 
-export default function USAJobsResumeDirectory({ lastModified, buildTimestamp }) {
+export default function USAJobsResumeDirectory({ seoData }) {
+  const { 
+    lastModified, 
+    buildTimestamp, 
+    currentDate, 
+    displayDate, 
+    canonicalUrl,
+    meta,
+    longTailKeywords,
+    breadcrumbData,
+    usaStates: seoUsaStates,
+    industryGuidance: seoIndustryGuidance,
+    corePrinciples: seoCorePrinciples,
+    referenceSources: seoReferenceSources,
+    highValueKeywords: seoHighValueKeywords,
+    peopleAlsoAskUSA: seoPeopleAlsoAsk,
+    helpfulTipsUSA: seoHelpfulTips,
+    generalStatistics: seoGeneralStatistics,
+    glossaryTerms: seoGlossaryTerms,
+    allResourceLinks: seoAllResourceLinks
+  } = seoData || {};
+  
+  const safeLastModified = lastModified || new Date().toISOString();
+  const safeBuildTimestamp = buildTimestamp || Date.now();
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeDisplayDate = displayDate || safeLastModified.split('T')[0];
+  const safeCanonicalUrl = canonicalUrl || "https://professionalresumefree.com/usa-jobs-resume-directory";
+  const safeMeta = meta || {
+    title: "USA Resume Directory | Federal USAJOBS & ATS-Optimized",
+    description: "Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides. Free resources for American job seekers.",
+    siteName: "Professional Resume Free"
+  };
+  const safeLongTailKeywords = longTailKeywords || highValueKeywords;
+  const safeBreadcrumbData = breadcrumbData || [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://professionalresumefree.com" },
+    { "@type": "ListItem", "position": 2, "name": "USA Resume Directory", "item": safeCanonicalUrl }
+  ];
+  
   const currentYear = new Date().getFullYear();
-  const displayDate = lastModified.split('T')[0];
 
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://professionalresumefree.com/usa-jobs-resume-directory",
-        "url": "https://professionalresumefree.com/usa-jobs-resume-directory",
-        "name": "USA Jobs Resume Directory | Federal USAJOBS & ATS-Optimized Resume Guides",
-        "description": "Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides. Free resources for American job seekers.",
-        "dateModified": lastModified,
+        "@id": safeCanonicalUrl,
+        "url": safeCanonicalUrl,
+        "name": safeMeta.title,
+        "description": safeMeta.description,
+        "dateModified": safeLastModified,
         "datePublished": "2025-01-01",
         "inLanguage": "en-US",
         "about": {
@@ -652,15 +1668,20 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
         }
       },
       {
+        "@type": "BreadcrumbList",
+        "@id": `${safeCanonicalUrl}#breadcrumb`,
+        "itemListElement": safeBreadcrumbData
+      },
+      {
         "@type": "FAQPage",
-        "@id": "https://professionalresumefree.com/usa-jobs-resume-directory#faq",
-        "mainEntity": peopleAlsoAskUSA.map(faq => ({
+        "@id": `${safeCanonicalUrl}#faq`,
+        "mainEntity": (seoPeopleAlsoAsk || peopleAlsoAskUSA).map(faq => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
             "text": faq.answer,
-            "dateModified": lastModified
+            "dateModified": safeLastModified
           }
         }))
       }
@@ -670,62 +1691,96 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* Google Fonts for Executive Design */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
         <html lang="en-US" />
-        <title>USA Resume Directory | Federal USAJOBS & ATS-Optimized</title>
-        <meta name="description" content="Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides. Free resources for American job seekers." />
+        
+        {/* OPTIMIZED TITLE */}
+        <title>{safeMeta.title}</title>
+        
+        {/* META DESCRIPTION */}
+        <meta name="description" content={safeMeta.description} />
         <meta name="author" content="Professional Resume Free - USA Resume Resource Directory" />
         <meta name="keywords" content="USA resume, federal resume USAJOBS, ATS resume templates, American job search, resume examples USA, state resume guides, military to civilian resume, entry-level resume USA, USAJOBS format, federal resume KSA, GS grade resume, US tech resume, Wall Street resume" />
         
-        <meta name="chatgpt-fts:title" content="USA Resume Directory | Federal USAJOBS & ATS-Optimized Resume Guides" />
-        <meta name="chatgpt-fts:description" content="Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides for American job seekers." />
-        <meta name="chatgpt-fts:last-updated" content={displayDate} />
+        {/* GEO OPTIMIZATION TAGS */}
+        <meta name="chatgpt-fts:title" content={safeMeta.title} />
+        <meta name="chatgpt-fts:description" content={safeMeta.description} />
+        <meta name="chatgpt-fts:last-updated" content={safeDisplayDate} />
         <meta name="chatgpt-fts:content-type" content="usa-resource-directory" />
         <meta name="chatgpt-fts:geographic-focus" content="United States, all 50 states" />
         <meta name="chatgpt-fts:target-audience" content="USA job seekers, federal applicants, military veterans, career changers" />
         
+        {/* GEO TAGS */}
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="geo.position" content="39.8283;-98.5795" />
         <meta name="ICBM" content="39.8283, -98.5795" />
         
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="last-modified" content={lastModified} />
+        {/* TECHNICAL SEO */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="last-modified" content={safeLastModified} />
+        <meta httpEquiv="last-modified" content={safeLastModified} />
         
-        {/* SINGLE CANONICAL URL - WITHOUT www */}
-        <link rel="canonical" href="https://professionalresumefree.com/usa-jobs-resume-directory" />
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={safeCanonicalUrl} />
         
-        <meta property="og:title" content="USA Resume Directory | Federal USAJOBS & ATS-Optimized" />
-        <meta property="og:description" content="Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides." />
-        <meta property="og:url" content="https://professionalresumefree.com/usa-jobs-resume-directory" />
+        {/* OPEN GRAPH */}
+        <meta property="og:title" content={safeMeta.title} />
+        <meta property="og:description" content={safeMeta.description} />
+        <meta property="og:url" content={safeCanonicalUrl} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:site_name" content={safeMeta.siteName} />
         <meta property="og:locale" content="en_US" />
         
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="USA Resume Directory | Federal USAJOBS & ATS-Optimized" />
-        <meta name="twitter:description" content="Complete USA resume directory with federal USAJOBS formats and state-specific resume guides." />
+        <meta name="twitter:title" content={safeMeta.title} />
+        <meta name="twitter:description" content={safeMeta.description} />
         
-        <meta name="theme-color" content="#000000" />
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#131315" />
+        <meta name="format-detection" content="telephone=no" />
         
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* COMPREHENSIVE STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData)
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       </Head>
       
-      {/* AI-Optimized Content - Visible to ChatGPT and crawlers, hidden from users */}
-      <AIOptimizedContent states={usaStates} displayDate={displayDate} />
+      {/* Hidden freshness indicators */}
+      <div style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={safeBuildTimestamp} />
+        <meta name="content-freshness" content={safeCurrentDate} />
+      </div>
       
-      <main>
+      {/* AI-Optimized Content - Visible to ChatGPT and crawlers, hidden from users */}
+      <AIOptimizedContent states={seoUsaStates || usaStates} displayDate={safeDisplayDate} />
+      
+      <main style={{
+        backgroundColor: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+        fontFamily: 'var(--font-body)',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        width: '100%'
+      }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
+        
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
@@ -735,43 +1790,105 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
               </li>
               <li aria-hidden="true">/</li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name">USA Resume Directory</span>
+                <span itemProp="name" aria-current="page">USA Resume Directory</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>
           </div>
         </nav>
 
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
+        {/* Hero Section */}
+        <section id="main-content" style={{
+          padding: 'var(--section-gap-lg) 0',
+          textAlign: 'center',
+          borderBottom: '0.5px solid var(--border-gold-filament)',
+          position: 'relative',
+          overflow: 'hidden'
+        }} aria-labelledby="hero-heading">
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.03) 0%, transparent 70%)',
+            pointerEvents: 'none'
+          }} />
+          
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
             <div className="directory-badge" aria-label="Directory type">
-              🇺🇸 USA Jobs Resume Directory | Federal USAJOBS & ATS-Optimized | 2026
+              USA Jobs Resume Directory | Federal USAJOBS & ATS-Optimized | {currentYear}
             </div>
+            
             {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
-            <h1 id="hero-heading">USA Jobs Resume Directory</h1>
-            <h2>Federal USAJOBS Formats • ATS-Optimized Templates • All 50 States</h2>
+            <h1 id="hero-heading" style={{
+              fontSize: 'var(--font-size-display-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-extrabold)',
+              lineHeight: 'var(--line-height-display)',
+              color: 'var(--text-primary)',
+              marginBottom: '1rem',
+              letterSpacing: 'var(--letter-spacing-tight)'
+            }}>
+              USA Jobs <span className="gradient-text">Resume Directory</span>
+            </h1>
+            
+            <h2 style={{
+              fontSize: 'var(--font-size-headline-md)',
+              fontFamily: 'var(--font-body)',
+              fontWeight: 'var(--font-weight-semibold)',
+              color: 'var(--text-secondary)',
+              marginBottom: '1.5rem'
+            }}>
+              Federal USAJOBS Formats • ATS-Optimized Templates • All 50 States
+            </h2>
+            
             <div className="info-box">
-              <span>🇺🇸 Federal Resume Guide</span>
-              <span>🤖 ATS Optimization</span>
-              <span>📄 50 State Coverage</span>
-              <span>🎯 Military Transition</span>
+              <span>Federal Resume Guide</span>
+              <span>ATS Optimization</span>
+              <span>50 State Coverage</span>
+              <span>Military Transition</span>
             </div>
-            <div className="usa-directory-statement">
-              <span style={{ fontWeight: 'bold' }}>🇺🇸 The Complete USA Resume Resource</span>
-              <p>Your go-to directory for federal USAJOBS resumes, ATS-optimized templates, state-specific guidance, and industry strategies. Trusted by American job seekers, military veterans, and career changers nationwide.</p>
+            
+            <div className="directory-statement">
+              <span style={{ fontWeight: 'var(--font-weight-bold)', color: 'var(--accent-primary)' }}>
+                The Complete USA Resume Resource
+              </span>
+              <p style={{ marginTop: '0.5rem' }}>
+                Your go-to directory for federal USAJOBS resumes, ATS-optimized templates, state-specific guidance, and industry strategies. Trusted by American job seekers, military veterans, and career changers nationwide.
+              </p>
             </div>
-            <p>
+            
+            <p style={{
+              fontSize: 'var(--font-size-body-lg)',
+              color: 'var(--text-secondary)',
+              maxWidth: '800px',
+              margin: '0 auto 2rem',
+              padding: '0 1rem',
+              lineHeight: 'var(--line-height-body)'
+            }}>
               This comprehensive directory provides expert guidance for job seekers across all 50 United States. 
               Whether you're applying for federal USAJOBS positions, seeking opportunities in US tech companies, 
               or transitioning from military service, this resource covers everything you need.
             </p>
-            <div className="button-container" role="group">
-              <Link href="/resume-templates" className="btn-primary">🇺🇸 Browse USA Resume Templates</Link>
-              <Link href="/free-resume-tools" className="btn-secondary">📄 Explore Free Tools</Link>
+            
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '1rem',
+              flexWrap: 'wrap',
+              marginBottom: '2.5rem'
+            }}>
+              <Link href="/resume-templates" className="btn-primary">
+                Browse USA Resume Templates
+              </Link>
+              <Link href="/free-resume-tools" className="btn-outline">
+                Explore Free Tools
+              </Link>
             </div>
 
-            <div className="stats">
-              {generalStatistics.map((item, index) => (
+            <div className="stats-container">
+              {(seoGeneralStatistics || generalStatistics).map((item, index) => (
                 <div key={index} className="stat-item">
                   <span className="stat-number">{item.stat}</span>
                   <span>{item.description}</span>
@@ -779,53 +1896,112 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: '20px', fontSize: '0.8rem', color: '#6b7280' }}>
-              🇺🇸 Last updated: {displayDate} • Independent USA resume resource • 50 states covered
+            
+            <div style={{ 
+              marginTop: '1.5rem', 
+              fontSize: 'var(--font-size-body-sm)', 
+              color: 'var(--text-muted)' 
+            }}>
+              Last updated: {safeDisplayDate} • Independent USA resume resource • 50 states covered
             </div>
           </div>
         </section>
 
-        <IndustryGuidanceSection guidance={industryGuidance} />
-        <CorePrinciplesSection principles={corePrinciples} />
+        <IndustryGuidanceSection guidance={seoIndustryGuidance || industryGuidance} />
+        <CorePrinciplesSection principles={seoCorePrinciples || corePrinciples} />
         <ResourceLinksSection />
 
         <TableOfContents categories={[
-          { name: "🇺🇸 Industry Tips", id: "industry" },
-          { name: "🇺🇸 Resume Principles", id: "principles" },
-          { name: "🇺🇸 Common Questions", id: "paa" },
-          { name: "🇺🇸 Expert Tips", id: "tips" },
-          { name: "🇺🇸 Keywords", id: "keywords" },
-          { name: "🇺🇸 Glossary", id: "glossary" }
+          { name: "Industry Tips", id: "industry" },
+          { name: "Resume Principles", id: "principles" },
+          { name: "Common Questions", id: "paa" },
+          { name: "Expert Tips", id: "tips" },
+          { name: "Keywords", id: "keywords" },
+          { name: "Glossary", id: "glossary" }
         ]} />
 
         <LazySection threshold={0.1}>
-          <PeopleAlsoAskSection questions={peopleAlsoAskUSA} />
+          <PeopleAlsoAskSection questions={seoPeopleAlsoAsk || peopleAlsoAskUSA} />
         </LazySection>
         <LazySection threshold={0.1}>
-          <HelpfulTipsSection tips={helpfulTipsUSA} displayDate={displayDate} />
+          <HelpfulTipsSection tips={seoHelpfulTips || helpfulTipsUSA} displayDate={safeDisplayDate} />
         </LazySection>
         <LazySection threshold={0.1}>
-          <HighValueKeywordsSection keywords={highValueKeywords} />
+          <HighValueKeywordsSection keywords={seoHighValueKeywords || highValueKeywords} />
         </LazySection>
         <LazySection threshold={0.1}>
-          <GlossarySection terms={glossaryTerms} />
+          <GlossarySection terms={seoGlossaryTerms || glossaryTerms} />
         </LazySection>
 
-        <ReferenceSourcesSection sources={referenceSources} />
+        <ReferenceSourcesSection sources={seoReferenceSources || referenceSources} />
 
-        <section className="cta-section" style={{ background: '#000000', color: 'white', padding: '80px 0' }}>
-          <div className="container">
-            <h2 style={{ color: 'white' }}>🇺🇸 Ready to Build Your USA Resume?</h2>
-            <p style={{ color: 'rgba(255,255,255,0.9)' }}>
+        {/* CTA Section */}
+        <section style={{
+          padding: 'var(--section-gap-lg) 0',
+          background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: '0.5px solid var(--border-gold-filament)',
+          borderBottom: '0.5px solid var(--border-gold-filament)',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%)',
+            pointerEvents: 'none'
+          }} />
+          
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{
+              fontSize: 'var(--font-size-display-md)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: '1rem',
+              padding: '0 1rem',
+              textShadow: 'var(--glow-gold)'
+            }}>
+              Ready to Build Your USA Resume?
+            </h2>
+            
+            <p style={{
+              fontSize: 'var(--font-size-body-lg)',
+              color: 'var(--text-secondary)',
+              maxWidth: '600px',
+              margin: '0 auto 2rem',
+              padding: '0 1rem'
+            }}>
               Join thousands of American job seekers who've landed positions at Fortune 500 companies, federal agencies, and top employers nationwide.
             </p>
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-cta" style={{ background: 'white', color: '#000000' }}>Create Your USA Resume Now</Link>
+            
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '1rem',
+              flexWrap: 'wrap',
+              marginBottom: '2rem'
+            }}>
+              <Link href="/resume-templates" className="btn-cta">
+                Create Your USA Resume Now
+              </Link>
             </div>
-            <p style={{ marginTop: '30px', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)' }}>
-              🇺🇸 Independent resource directory • Updated for {currentYear} • 50 states covered
+            
+            <p style={{ 
+              fontSize: 'var(--font-size-body-sm)', 
+              color: 'var(--text-muted)',
+              marginBottom: '0.5rem'
+            }}>
+              Independent resource directory • Updated for {currentYear} • 50 states covered
             </p>
-            <p style={{ marginTop: '10px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>
+            
+            <p style={{ 
+              fontSize: 'var(--font-size-label-md)', 
+              color: 'var(--text-disabled)'
+            }}>
               This independent directory is not affiliated with USAJOBS, OPM, or any U.S. government agency. Information compiled for reference.
             </p>
           </div>
@@ -835,13 +2011,60 @@ export default function USAJobsResumeDirectory({ lastModified, buildTimestamp })
   );
 }
 
+// ============================================================================
+// GET STATIC PROPS - Enhanced with Page 1 ISR Strategy
+// ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
-  const lastModified = new Date().toISOString();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModified = buildTime.toISOString();
+  const displayDate = lastModified.split('T')[0];
+
+  const canonicalUrl = "https://professionalresumefree.com/usa-jobs-resume-directory";
+
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "USA Resume Directory",
+      "item": canonicalUrl
+    }
+  ];
+
+  const meta = {
+    title: "USA Resume Directory | Federal USAJOBS & ATS-Optimized",
+    description: "Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides. Free resources for American job seekers.",
+    siteName: "Professional Resume Free",
+  };
+
   return {
     props: {
-      lastModified,
-      buildTimestamp
+      seoData: {
+        lastModified,
+        buildTimestamp,
+        currentDate,
+        displayDate,
+        canonicalUrl,
+        meta,
+        breadcrumbData,
+        usaStates,
+        industryGuidance,
+        corePrinciples,
+        referenceSources,
+        highValueKeywords,
+        peopleAlsoAskUSA,
+        helpfulTipsUSA,
+        generalStatistics,
+        glossaryTerms,
+        allResourceLinks
+      }
     },
     revalidate: 3600
   };

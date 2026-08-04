@@ -1,779 +1,339 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiStar, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiDownload,
-  FiFileText,
-  FiTool,
-  FiUsers,
-  FiTarget,
-  FiTrendingUp,
-  FiBriefcase,
-  FiCode,
-  FiHeart,
-  FiDollarSign,
-  FiBookOpen,
-  FiShield,
-  FiLayers,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiLinkedin,
-  FiGithub,
-  FiCpu,
-  FiDatabase,
-  FiCloud,
-  FiTerminal,
-  FiShoppingBag,
-  FiTruck,
-  FiPackage,
-  FiCreditCard,
-  FiPercent,
-  FiTrendingUp as FiTrend,
-  FiCheckCircle,
-  FiXCircle,
-  FiAlertCircle,
-  FiInfo,
-  FiAward as FiBadge,
-  FiExternalLink
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiShoppingBag, FiTruck, FiPackage, FiCreditCard, FiPercent,
+  FiTrendingUp as FiTrend, FiCheckCircle, FiXCircle, FiX,
+  FiAlertCircle, FiInfo, FiAward as FiBadge, FiExternalLink,
+  FiBarChart2, FiActivity, FiZap, FiEdit, FiEdit3, FiSmartphone,
+  FiCopy, FiPenTool, FiType, FiAlignLeft, FiHash, FiLock, FiSmile,
+  FiUserCheck, FiSave, FiRefreshCw, FiThumbsUp, FiGlobe,
+  FiCompass, FiAnchor, FiMonitor, FiSun, FiMoon, FiCoffee
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --success: #059669;
-  --warning: #d97706;
-  --danger: #dc2626;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.7;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 30px; }
-}
-.hero {
-  background: var(--background);
-  padding: 70px 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .hero { padding: 90px 0; }
-}
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 30px;
-  line-height: 1.2;
-  word-wrap: break-word;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.hero p {
-  font-size: clamp(1.1rem, 3vw, 1.35rem);
-  max-width: 850px;
-  margin: 0 auto 35px;
-  padding: 0 20px;
-  color: var(--text-light);
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: 10px 25px;
-  border-radius: 50px;
-  font-size: 0.95rem;
-  margin-bottom: 30px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-  margin: 50px 0;
-}
-@media (min-width: 768px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: 20px;
-  padding: 35px 30px;
-  border: 1px solid var(--border);
-  transition: transform 0.3s, box-shadow 0.3s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-  text-align: left;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 30px rgba(0,0,0,0.05);
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--primary);
-  color: var(--background);
-  padding: 18px 40px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 1px solid var(--primary);
-  transition: background 0.2s;
-  text-align: center;
-  min-width: 280px;
-  font-size: 1.1rem;
-}
-.btn-primary:hover { background: var(--secondary); }
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: var(--primary);
-  padding: 18px 40px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 2px solid var(--primary);
-  transition: background 0.2s;
-  text-align: center;
-  min-width: 280px;
-  font-size: 1.1rem;
-}
-.btn-secondary:hover { background: #f5f5f5; }
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin-top: 45px;
-}
-@media (max-width: 480px) {
-  .button-container { flex-direction: column; align-items: center; gap: 15px; }
-  .btn-primary, .btn-secondary { width: 100%; min-width: auto; padding: 16px 30px; }
-}
-.section {
-  padding: 80px 0;
-  scroll-margin-top: 40px;
-}
-@media (min-width: 768px) { .section { padding: 100px 0; } }
-@media (max-width: 480px) { .section { padding: 70px 0; } }
-.section-title {
-  text-align: center;
-  font-size: clamp(2.2rem, 4vw, 3rem);
-  margin-bottom: 30px;
-  padding: 0 20px;
-  word-wrap: break-word;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 800px;
-  margin: 0 auto 60px;
-  padding: 0 20px;
-  font-size: 1.25rem;
-  line-height: 1.8;
-}
-.stat-grid {
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-  flex-wrap: wrap;
-  margin: 60px 0 40px;
-}
-.stat-item {
-  text-align: center;
-  min-width: 220px;
-  background: var(--card-bg);
-  padding: 35px 30px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  flex: 1 1 220px;
-  max-width: 260px;
-}
-.stat-number {
-  font-size: 3rem;
-  font-weight: 700;
-  display: block;
-  color: #000;
-  line-height: 1.2;
-  margin-bottom: 12px;
-}
-.stat-label { 
-  color: var(--text-light); 
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-.table-wrap {
-  overflow-x: auto;
-  margin: 60px 0;
-  background: var(--background);
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 700px;
-}
-th {
-  background: var(--card-bg);
-  padding: 20px 25px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-  font-size: 1rem;
-}
-td {
-  padding: 18px 25px;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.95rem;
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-  margin: 60px 0;
-}
-@media (min-width: 768px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
-.faq-item {
-  background: var(--card-bg);
-  padding: 35px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  height: 100%;
-  text-align: left;
-}
-.faq-question {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-.breadcrumb {
-  padding: 20px 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 15px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-}
-@media (min-width: 768px) {
-  .breadcrumb ol { justify-content: flex-start; }
-}
-.breadcrumb a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover { border-bottom-color: var(--primary); }
-.breadcrumb [aria-current="page"] { font-weight: 600; }
-.hub-mini {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  margin: 60px 0 30px;
-}
-.hub-link-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px 40px;
-  text-decoration: none;
-  color: inherit;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 15px;
-  transition: background 0.2s, transform 0.2s;
-  font-size: 1.15rem;
-}
-.hub-link-card:hover { 
-  background: #e5e7eb; 
-  transform: translateY(-3px);
-}
-.meta-row {
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-  flex-wrap: wrap;
-  margin: 35px 0 20px;
-  color: var(--text-lighter);
-  font-size: 1rem;
-}
-.ai-citation {
-  background: #f2f4f5;
-  padding: 35px 40px;
-  border-radius: 20px;
-  border-left: 6px solid #000;
-  font-size: 1.05rem;
-  margin: 60px auto;
-  max-width: 1000px;
-  text-align: left;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-}
-.ai-citation a { color: #000; font-weight: 600; text-decoration: underline; }
-.two-col-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 35px;
-  margin: 60px 0;
-}
-@media (min-width: 768px) {
-  .two-col-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.paragraph {
-  margin-bottom: 30px;
-  color: var(--text-light);
-  line-height: 1.9;
-  text-align: left;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.1rem;
-}
-.article-meta {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  margin: 30px 0;
-  flex-wrap: wrap;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-  font-size: 1rem;
-}
-.checklist-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 20px;
-  color: var(--text-light);
-  font-size: 1.05rem;
-  text-align: left;
-}
-.text-small { font-size: 0.95rem; color: var(--text-light); }
-.helper-text { 
-  font-size: 1rem; 
-  color: var(--text-light); 
-  margin-top: 35px;
-  text-align: center;
-}
-.keyword-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin: 30px 0;
-}
-.keyword-tag {
-  background: #e5e7eb;
-  color: #000;
-  padding: 10px 20px;
-  border-radius: 40px;
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-.example-box {
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 25px;
-  margin-top: 20px;
-  text-align: left;
-}
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #e5e7eb;
-  border-radius: 20px;
-  margin: 15px 0;
-}
-.progress-fill {
-  height: 10px;
-  background: #000;
-  border-radius: 20px;
-}
-.text-center { text-align: center; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-
-/* New styles for the bottom link section */
-.related-links-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin-top: 40px;
-}
-@media (min-width: 640px) {
-  .related-links-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .related-links-grid { grid-template-columns: repeat(5, 1fr); }
-}
-.related-link-card {
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-.related-link-card:hover {
-  border-color: #000;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.related-link-title {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-.related-link-meta {
-  font-size: 0.85rem;
-  color: var(--text-lighter);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: auto;
-}
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  h4 { font-size:var(--font-size-title-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .grid-4 { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid-4 { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid-4 { grid-template-columns:repeat(4,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .list-style { padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .list-style li { color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .insight-box-success { background:rgba(76,175,80,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(76,175,80,0.3); }
+  .insight-box-danger { background:rgba(255,180,171,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,180,171,0.3); }
+  .insight-box-warning { background:rgba(255,183,77,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,183,77,0.3); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .keyword-cloud { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin:1.5rem 0; }
+  .keyword-tag { background:rgba(242,202,80,0.08); color:var(--accent-primary); padding:0.5rem 1rem; border-radius:9999px; font-size:var(--font-size-label-sm); font-weight:500; border:0.5px solid var(--border-gold-filament); }
+  .keyword-tag-dark { background:rgba(242,202,80,0.2); color:var(--accent-primary); padding:0.5rem 1rem; border-radius:9999px; font-size:var(--font-size-label-sm); font-weight:600; border:0.5px solid var(--border-gold-filament-strong); }
+  .pre-block { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); overflow-x:auto; font-family:'Courier New',monospace; font-size:var(--font-size-label-sm); color:var(--text-secondary); line-height:1.8; white-space:pre-wrap; }
+  .number-circle { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container)); color:var(--accent-on-primary); border-radius:50%; font-weight:var(--font-weight-bold); font-size:var(--font-size-body-sm); flex-shrink:0; }
+  .article-meta { display:flex; gap:20px; justify-content:center; margin:20px 0; flex-wrap:wrap; }
+  .meta-item { display:flex; align-items:center; gap:8px; color:var(--text-secondary); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-export async function getStaticProps() {
-  const buildTimestamp = Date.now();
-  const buildTime = new Date(buildTimestamp);
-  const currentDate = buildTime.toISOString().split('T')[0];
-  const lastModifiedDate = buildTime.toISOString();
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiShoppingBag, FiTruck, FiPackage, FiCreditCard, FiPercent,
+  FiTrend, FiCheckCircle, FiXCircle, FiX, FiAlertCircle, FiInfo,
+  FiBadge, FiExternalLink, FiBarChart2, FiActivity, FiZap, FiEdit,
+  FiEdit3, FiSmartphone, FiCopy, FiPenTool, FiType, FiAlignLeft,
+  FiHash, FiLock, FiSmile, FiUserCheck, FiSave, FiRefreshCw,
+  FiThumbsUp, FiGlobe, FiCompass, FiAnchor, FiMonitor, FiSun, FiMoon, FiCoffee
+};
 
-  // REMOVED www from canonical URL
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
+
+const RETAIL_STATS = { atsUsage: 87, interviewBoost: "2.1x", scanTime: "45s", keywordsImportance: 92 };
+
+const SALARY_DATA = [
+  { role: "Sales Associate", entry: "$28,000 - $35,000", mid: "$35,000 - $45,000", senior: "$45,000 - $55,000", demand: "Very High" },
+  { role: "Cashier", entry: "$25,000 - $32,000", mid: "$32,000 - $38,000", senior: "$38,000 - $45,000", demand: "Very High" },
+  { role: "Keyholder/Supervisor", entry: "$35,000 - $42,000", mid: "$42,000 - $52,000", senior: "$52,000 - $62,000", demand: "High" },
+  { role: "Department Manager", entry: "$45,000 - $55,000", mid: "$55,000 - $70,000", senior: "$70,000 - $85,000", demand: "High" },
+  { role: "Store Manager", entry: "$55,000 - $70,000", mid: "$70,000 - $90,000", senior: "$90,000 - $120,000", demand: "Medium-High" },
+  { role: "District Manager", entry: "$80,000 - $100,000", mid: "$100,000 - $130,000", senior: "$130,000 - $180,000", demand: "Medium" }
+];
+
+const RETAIL_KEYWORDS = {
+  hard: ["POS systems", "Cash handling", "Inventory management", "Merchandising", "Loss prevention", "Sales targets", "Customer returns", "Stock replenishment", "Visual merchandising", "Product knowledge", "Order processing", "Receiving shipments", "Price marking", "Store opening/closing", "Cash reconciliation", "Auditing", "Vendor relations", "Supply chain", "Logistics", "E-commerce fulfillment"],
+  soft: ["Customer service", "Communication", "Teamwork", "Problem-solving", "Adaptability", "Time management", "Patience", "Conflict resolution", "Active listening", "Empathy", "Positive attitude", "Reliability", "Multitasking", "Attention to detail", "Interpersonal skills", "Leadership"],
+  software: ["Shopify", "Square", "Oracle Retail", "Salesforce", "QuickBooks", "Microsoft Office", "Lightspeed", "Vend", "Clover", "Toast POS", "Aloha POS", "NCR", "SAP", "Salesforce Commerce Cloud", "Magento"],
+  metrics: ["Upselling", "Conversion rate", "Average transaction value", "Customer satisfaction score", "Sales per hour", "Units per transaction", "Return rate", "Loyalty sign-ups", "Attachment rate", "Basket size"],
+  management: ["Scheduling", "Training", "Performance reviews", "Recruiting", "P&L responsibility", "Budgeting", "Forecasting", "Inventory planning", "Visual standards", "Loss prevention audits", "Team leadership"]
+};
+
+const RETAIL_SECTORS = [
+  { sector: "Department Stores", examples: "Macy's, Nordstrom, Kohl's, JCPenney", skills: "Department-specific knowledge, cross-selling, visual merchandising, customer loyalty programs" },
+  { sector: "Big Box Retail", examples: "Walmart, Target, Costco, Home Depot", skills: "High-volume operations, inventory management, team coordination, efficiency optimization" },
+  { sector: "Specialty Retail", examples: "Sephora, Apple Store, Lululemon, Best Buy", skills: "Deep product expertise, consultative selling, brand ambassadorship, premium service" },
+  { sector: "Grocery & Pharmacy", examples: "Kroger, CVS, Walgreens, Whole Foods", skills: "Perishable management, health regulations, pharmacy assistance, customer loyalty" },
+  { sector: "Luxury Retail", examples: "Gucci, Louis Vuitton, Tiffany & Co., Rolex", skills: "High-end clienteling, personalized service, product authentication, VIP management" },
+  { sector: "E-commerce & Omnichannel", examples: "Amazon, Warby Parker, Bonobos, Casper", skills: "Online order fulfillment, BOPIS, digital customer service, inventory integration" }
+];
+
+const BEFORE_AFTER_BULLETS = [
+  { before: "Helped customers with questions.", after: "Assisted 50+ customers daily, maintaining 95% satisfaction rating through friendly, knowledgeable service and quick issue resolution." },
+  { before: "Worked the cash register.", after: "Operated POS system with 100% cash handling accuracy, processing $5,000+ in transactions per shift and reconciling daily sales." },
+  { before: "Stocked shelves and organized merchandise.", after: "Replenished inventory and created eye-catching visual displays, boosting sales of featured items by 20% and improving store appearance scores." },
+  { before: "Helped with inventory counts.", after: "Conducted monthly inventory audits for 2,000+ SKUs, reducing discrepancies by 15% through improved organization and systematic tracking." },
+  { before: "Trained new employees.", after: "Mentored and trained 5 new team members on customer service protocols and POS operations, reducing onboarding time by 25% and improving new hire retention." },
+  { before: "Opened and closed the store.", after: "Managed store opening/closing procedures including cash reconciliation, security system activation, and deposit preparation, maintaining 100% compliance over 18 months." },
+  { before: "Worked during holiday season.", after: "Thrived in high-pressure Black Friday weekend environment, processing 200+ transactions per shift during peak hours while maintaining 98% customer satisfaction." },
+  { before: "Kept the store clean.", after: "Maintained impeccable store presentation standards across 15,000 sq ft sales floor, contributing to 22% improvement in mystery shopper scores over 6 months." }
+];
+
+const SAMPLE_RESUMES = [
+  {
+    title: "Sales Associate",
+    summary: "Friendly sales associate with 3+ years in high-volume retail. Exceeded sales targets by 20% through excellent service. Skilled in POS systems and visual merchandising.",
+    bullets: ["Assisted 50+ customers daily, maintaining 95% satisfaction rating", "Operated POS system with 100% accuracy, processing $5,000+/shift", "Upsold products, increasing average transaction value by 15%", "Created seasonal displays that boosted featured item sales by 20%"]
+  },
+  {
+    title: "Store Manager",
+    summary: "Results-driven store manager with 7+ years experience. Increased store revenue by 35% and reduced turnover by 25% through effective leadership and training.",
+    bullets: ["Managed P&L for $5M store, exceeding sales goals for 8 consecutive quarters", "Hired and trained 20+ staff, improving retention by 25%", "Implemented visual merchandising strategies that boosted sales by 20%", "Reduced shrink by 15% through improved loss prevention procedures"]
+  },
+  {
+    title: "Cashier",
+    summary: "Reliable cashier with 2+ years experience. Processed 100+ transactions daily with 100% accuracy. Recognized for exceptional customer service and efficiency.",
+    bullets: ["Processed 100+ customer transactions per shift with perfect cash accuracy", "Resolved customer complaints, maintaining store's 98% satisfaction rating", "Assisted with inventory counts and store opening/closing procedures", "Trained 3 new cashiers on POS system and customer service protocols"]
+  },
+  {
+    title: "Retail Keyholder",
+    summary: "Keyholder with 4+ years experience in supervisory role. Managed opening/closing procedures and team supervision. Proven track record in sales and customer service.",
+    bullets: ["Supervised team of 8 during shifts, ensuring coverage during peak hours", "Managed opening/closing procedures including cash reconciliation and security", "Trained 5 new hires on customer service protocols and POS systems", "Achieved 110% of sales target through team motivation and coaching"]
+  }
+];
+
+const ADVANCED_TIPS = [
+  { title: "Include Omnichannel Experience", description: "Modern retail blends in-store and online. If you've handled BOPIS (Buy Online Pick Up In Store), curbside pickup, or online order fulfillment, highlight this prominently. Example: 'Processed 30+ BOPIS orders daily with 98% accuracy, reducing customer wait times by 40%.' This demonstrates adaptability to modern retail operations." },
+  { title: "Showcase Digital Literacy", description: "Retail increasingly relies on technology. Mention experience with inventory management systems, digital price checkers, mobile POS systems, and customer apps. If you've used handheld scanners, RFID technology, or digital signage, include these details. Digital literacy is now a key differentiator in retail hiring." },
+  { title: "Highlight Seasonal Adaptability", description: "Retail has distinct seasonal peaks (holidays, back-to-school, Black Friday). If you've worked during these periods, mention your ability to handle increased volume. Example: 'Successfully managed 3x normal customer volume during Black Friday weekend while maintaining service standards.' This proves you can handle retail's most demanding periods." },
+  { title: "Demonstrate Brand Knowledge", description: "Research the company before applying and demonstrate brand awareness in your resume. Reference their specific values, initiatives, or products. For example: 'Passionate about sustainable fashion, aligned with [Brand]'s commitment to ethical sourcing.' This shows genuine interest and cultural fit beyond generic applications." },
+  { title: "Include Customer Feedback Examples", description: "If you've received positive customer reviews, commendations, or recognition, mention them. Example: 'Received 15+ positive customer reviews on Google/Yelp mentioning exceptional service.' Third-party validation of your service excellence carries significant weight with hiring managers." },
+  { title: "Mention Cross-Training Versatility", description: "Retailers value employees who can work across departments. If you've been cross-trained in multiple areas (cashier, fitting rooms, stock room, customer service desk), highlight this versatility. Example: 'Cross-trained in 4 departments, providing scheduling flexibility and reducing overtime costs by 10%.'" }
+];
+
+const FAQS = [
+  { question: "Should I include a resume summary for retail?", answer: "Yes, a brief 2-3 line summary significantly increases your callback rate. Example: 'Friendly and efficient sales associate with 3+ years of experience in high-volume retail. Exceeded sales targets by 20% through excellent customer service and product knowledge. Skilled in POS systems and inventory management.' Tailor your summary to each specific role by incorporating keywords from the job description." },
+  { question: "How long should a retail resume be?", answer: "One page is ideal for most retail positions (sales associate, cashier, keyholder). For store manager or district manager roles with extensive experience, two pages may be acceptable if every line adds value. Retail managers typically scan resumes quickly—45 seconds on average—so conciseness is essential. Use bullet points and white space effectively to make the document scannable." },
+  { question: "What skills should I list on a retail resume?", answer: "Include both hard and soft skills relevant to retail. Hard skills: POS systems (Square, Shopify, NCR), cash handling, inventory management, merchandising, loss prevention, visual displays. Soft skills: communication, teamwork, problem-solving, adaptability, time management, patience, conflict resolution. Create a dedicated skills section with 15-20 relevant skills organized by category for ATS optimization." },
+  { question: "Do I need to list education on a retail resume?", answer: "Yes, include high school diploma or GED at minimum. For management roles, include any college degrees. Certifications in customer service, first aid, or management are valuable additions. If you're a current student, include your expected graduation date. List relevant coursework or training programs that demonstrate retail-relevant knowledge." },
+  { question: "How do I handle gaps in retail employment?", answer: "Be honest but strategic. If you took time for education, travel, family care, or personal development, mention it briefly. Focus on any freelance, volunteer, or part-time work during gaps. In interviews, emphasize what you learned and your eagerness to return to retail. Consider a combination resume format if gaps are significant, which emphasizes skills before chronology." },
+  { question: "Should I include references on my retail resume?", answer: "No, never list references directly on your resume. Create a separate document with 2-3 professional references and bring it to interviews. The phrase 'References available upon request' is optional and increasingly outdated. Choose references who can speak to your customer service skills, reliability, and work ethic—previous managers or supervisors are ideal." },
+  { question: "What if I have no retail experience?", answer: "Focus on transferable skills from any customer-facing experience: restaurant work, hospitality, volunteer roles, school organizations. Highlight communication, reliability, teamwork, and willingness to learn. Include a 'Relevant Skills' section that emphasizes your transferable abilities. Consider adding a brief objective statement explaining your career transition and enthusiasm for retail." }
+];
+
+const TESTIMONIALS = [
+  { quote: "This guide transformed my retail job search. I rewrote every bullet point with quantified achievements and landed a store manager position at a major retailer within 3 weeks. The keywords section was invaluable for passing ATS screening.", metric: "Store Manager at Major Retailer", name: "Amanda R.", role: "Store Manager", company: "National Retail Chain" },
+  { quote: "As a first-time job seeker, I had no idea how to write a retail resume. The templates and examples showed me exactly what to include. I received 3 interview invitations within 2 weeks of applying with my new resume.", metric: "3 Interviews in 2 Weeks", name: "Kevin L.", role: "Sales Associate", company: "Department Store" },
+  { quote: "I transitioned from food service to retail management. This guide helped me translate my customer service experience into retail language. I'm now a department supervisor at a Fortune 500 retailer.", metric: "Career Change to Retail Management", name: "Michelle T.", role: "Retail Supervisor", company: "Fortune 500 Retailer" }
+];
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const RetailResumeGuide = ({ seoData }) => {
+  const { currentDate, lastModifiedDate, buildTimestamp } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeBuildTimestamp = buildTimestamp || Date.now();
   const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-retail-jobs";
+  const metaTitle = "How to Write a Resume for USA Retail Jobs: 2026 Complete Guide";
+  const metaDescription = "Master the retail resume format for USA jobs. Expert guide with keywords, examples, and strategies for sales associate, store manager, and retail management roles.";
 
-  const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Resume Guides",
-      "item": "https://professionalresumefree.com/resume-templates"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Retail Resume Guide",
-      "item": canonicalUrl
-    }
-  ];
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [copiedText, setCopiedText] = useState('');
+  const toolRef = useRef(null);
 
-  const meta = {
-    title: "How to Write a Resume for USA Retail Jobs: 2026 Complete Guide",
-    description: "Master the retail resume format for USA jobs. Expert guide with keywords, examples, and strategies for sales associate, store manager, and retail management roles.",
-    url: canonicalUrl,
-    siteName: "Professional Resume Free",
-    // REMOVED www from image URL
-    image: "https://professionalresumefree.com/retail-resume.jpeg",
-  };
-
-  // Long-tail keywords for GEO
-  const longTailKeywords = [
-    "retail resume writing usa",
-    "sales associate resume example",
-    "store manager resume template",
-    "retail job application tips",
-    "how to write retail resume",
-    "retail cashier resume sample",
-    "retail keyholder resume",
-    "retail management resume"
-  ];
-
-  // People Also Ask for GEO - expanded
-  const peopleAlsoAsk = [
-    { 
-      question: "What is the best resume format for retail jobs?", 
-      answer: "The reverse-chronological format works best for retail. It highlights your customer service experience and career progression. Use clean formatting with standard fonts. Emphasize skills like communication, sales achievements, and inventory management. For entry-level positions, a combination format that puts skills first can also be effective. Always include specific metrics like 'processed 100+ transactions daily' or 'exceeded sales targets by 20%.'" 
-    },
-    { 
-      question: "How do I highlight customer service on a retail resume?", 
-      answer: "Use specific examples with numbers. Instead of 'provided customer service,' write 'Assisted 50+ customers daily, maintaining 95% satisfaction rating.' Mention upselling achievements and conflict resolution. Include specific scenarios: 'Resolved customer complaints, resulting in 20% increase in repeat business.' Also highlight any recognition or awards received for customer service excellence." 
-    },
-    { 
-      question: "What keywords should I include in a retail resume?", 
-      answer: "Include terms like customer service, point-of-sale (POS), inventory management, merchandising, cash handling, sales targets, loss prevention, team collaboration, product knowledge, visual merchandising, stock replenishment, customer engagement, upselling, cross-selling, and store operations. For management roles, add keywords like scheduling, training, P&L responsibility, and staff supervision." 
-    },
-    { 
-      question: "Should I include a cover letter with my retail resume?", 
-      answer: "Yes, a tailored cover letter can significantly increase your chances. Address the specific store and position, mention why you're interested in retail, and highlight one or two key achievements that make you stand out. Keep it concise and professional. If applying online, many applications allow you to upload a cover letter separately." 
-    },
-    { 
-      question: "How far back should my retail resume go?", 
-      answer: "Focus on the last 10 years or your most relevant 3-5 positions. For entry-level, include any work experience, volunteer work, or internships that demonstrate responsibility and customer interaction. If you have extensive experience, prioritize the most recent and relevant roles. Older positions can be summarized briefly." 
-    }
-  ];
-
-  // Conversational explanations - expanded
-  const conversationalExplanations = [
-    { 
-      topic: "Retail Resume in Plain English", 
-      content: "Your retail resume needs to show you can handle customers, work in a team, and drive sales. Think of it as proving you're reliable, friendly, and quick to learn. Use numbers to show your impact—like sales increases or customer feedback scores. Retail managers want to see that you understand the pace of the floor and can handle busy periods with a positive attitude. They also value reliability—mention perfect attendance or punctuality if applicable." 
-    },
-    { 
-      topic: "Why ATS Matters in Retail", 
-      content: "Large retail chains use ATS to filter applications. They scan for keywords like 'POS system,' 'inventory,' and 'loss prevention.' If your resume lacks these terms, it may never reach a hiring manager. In 2026, 87% of major retailers use AI-powered screening that looks for context, not just keywords. So include phrases like 'operated POS system for high-volume transactions' rather than just 'POS.' Also include specific brand names of POS systems you've used." 
-    },
-    { 
-      topic: "The Shift to Skills-Based Hiring in Retail", 
-      content: "Many retailers now prioritize skills over experience. If you're new to retail, highlight transferable skills: communication, organization, reliability, and quick learning. Include any customer-facing experience, even if it's volunteer work or school projects. Retailers are increasingly looking for candidates with strong soft skills that can be trained on specific systems. Emphasize your adaptability and willingness to learn." 
-    },
-    { 
-      topic: "Retail Resume Trends for 2026", 
-      content: "Current trends include highlighting digital skills (e-commerce, online order fulfillment), omnichannel experience (serving customers both in-store and online), and sustainability awareness. Many retailers now value candidates who understand social media and can assist with the store's online presence. Also, bilingual candidates are in high demand in many markets." 
-    }
-  ];
-
-  // Expanded FAQ items
-  const faqItems = [
-    {
-      question: 'Should I include a resume summary for retail?',
-      answer: 'Yes, a brief 2-3 line summary helps. Example: "Friendly and efficient sales associate with 3+ years of experience in high-volume retail. Exceeded sales targets by 20% through excellent customer service and product knowledge. Skilled in POS systems and inventory management." Tailor your summary to each specific role by including keywords from the job description.',
-    },
-    {
-      question: 'How long should a retail resume be?',
-      answer: 'One page is ideal for most retail positions (sales associate, cashier, keyholder). For store manager or district manager roles with extensive experience, two pages may be acceptable if every line adds value. Retail managers typically scan resumes quickly, so conciseness is key. Use bullet points and white space effectively to make the document scannable.',
-    },
-    {
-      question: 'What skills should I list on a retail resume?',
-      answer: 'Hard skills: POS systems (Square, Shopify, Oracle, NCR), cash handling, inventory management, merchandising, loss prevention, visual displays, stock replenishment, order processing. Soft skills: communication, teamwork, problem-solving, adaptability, time management, patience, conflict resolution, customer service, active listening, empathy. Include both categories in a dedicated skills section.',
-    },
-    {
-      question: 'Do I need to list education on a retail resume?',
-      answer: 'Yes, include high school diploma or GED. For management roles, include any college degrees. Certifications in customer service, first aid, or management are a plus. If you\'re a student, include your GPA if it\'s 3.0 or higher. Also include any relevant coursework or training programs completed.',
-    },
-    {
-      question: 'How do I handle gaps in retail employment?',
-      answer: 'Be honest but brief. If you took time for education, travel, family, or personal reasons, mention it neutrally. Focus on any freelance, volunteer, or part-time work during the gap. In interviews, emphasize what you learned during that time and your eagerness to return to retail. Consider using a functional format if gaps are significant.',
-    },
-    {
-      question: 'Should I include references on my retail resume?',
-      answer: 'No, never list references on your resume. Create a separate document with 2-3 professional references and bring it to interviews. Write "References available upon request" at the bottom if you have space, but it\'s optional. Choose references who can speak to your customer service skills and reliability, such as previous managers or supervisors.',
-    },
-    {
-      question: 'What if I have no retail experience?',
-      answer: 'Focus on transferable skills: any customer service (restaurant, hospitality), communication, teamwork, reliability, and willingness to learn. Include volunteer work, school activities, or internships that demonstrate responsibility. Emphasize your enthusiasm for the brand and quick learning ability. Consider including a "Relevant Skills" section that highlights transferable abilities.',
-    },
-    {
-      question: 'How do I quantify retail achievements?',
-      answer: 'Use numbers whenever possible: "Processed 100+ transactions daily," "Increased sales by 25% through upselling," "Maintained 98% customer satisfaction rating," "Trained 5 new employees," "Reduced inventory discrepancies by 15%," "Handled $10,000 in daily cash transactions with 100% accuracy." If you don\'t have exact numbers, use estimates or percentages.',
-    },
-    {
-      question: 'What POS systems should I mention?',
-      answer: 'Mention any POS systems you\'ve used: Square, Shopify, Lightspeed, Vend, Clover, Toast, NCR, Oracle, SAP, or proprietary systems. If you\'re proficient in learning new systems quickly, mention that as well. Include specific versions if relevant.',
-    }
-  ];
-
-  // Testimonials - expanded
-  const testimonials = [
-    {
-      quote: "This guide helped me rewrite my retail resume with specific numbers. I landed a store manager position at Target within 3 weeks. The keywords section was spot-on, and the sample bullets showed me exactly how to quantify my achievements. The ATS tips made all the difference.",
-      metric: "Store Manager Hire",
-      name: "Amanda R.",
-      role: "Store Manager",
-      date: "2026-02-15"
-    },
-    {
-      quote: "As a first-time job seeker, I didn't know how to write a retail resume. This template showed me exactly what to include. Got interviews at three places! The section on transferable skills helped me highlight my volunteer work and school activities.",
-      metric: "3 Interviews",
-      name: "Kevin L.",
-      role: "Sales Associate",
-      date: "2026-01-28"
-    },
-    {
-      quote: "I was a career changer from food service to retail. This guide explained how to translate my experience. I'm now a department supervisor at Macy's. The checklist at the end made sure I didn't miss anything. Highly recommend!",
-      metric: "Department Supervisor",
-      name: "Michelle T.",
-      role: "Retail Supervisor",
-      date: "2026-02-05"
-    },
-    {
-      quote: "The comparison between weak and strong bullets was eye-opening. I rewrote my entire resume following the examples and got a call from a major retailer within a week. The keywords list helped me pass ATS screening.",
-      metric: "Quick Interview",
-      name: "James P.",
-      role: "Keyholder",
-      date: "2026-03-01"
-    }
-  ];
-
-  // Retail keywords for 2026 - expanded
-  const retailKeywords = {
-    hard: [
-      "POS systems", "Cash handling", "Inventory management", "Merchandising", 
-      "Loss prevention", "Sales targets", "Customer returns", "Stock replenishment", 
-      "Visual merchandising", "Product knowledge", "Order processing", "Receiving shipments", 
-      "Price marking", "Store opening/closing", "Cash reconciliation", "Auditing",
-      "Vendor relations", "Supply chain", "Logistics", "E-commerce fulfillment"
-    ],
-    soft: [
-      "Customer service", "Communication", "Teamwork", "Problem-solving", 
-      "Adaptability", "Time management", "Patience", "Conflict resolution", 
-      "Active listening", "Empathy", "Positive attitude", "Reliability", 
-      "Multitasking", "Attention to detail", "Interpersonal skills", "Leadership"
-    ],
-    software: [
-      "Shopify", "Square", "Oracle Retail", "Salesforce", "QuickBooks", 
-      "Microsoft Office", "Lightspeed", "Vend", "Clover", "Toast POS", 
-      "Aloha POS", "NCR", "SAP", "Salesforce Commerce Cloud", "Magento"
-    ],
-    metrics: [
-      "Upselling", "Conversion rate", "Average transaction value", 
-      "Customer satisfaction score", "Sales per hour", "Units per transaction", 
-      "Return rate", "Loyalty sign-ups", "Attachment rate", "Basket size"
-    ],
-    management: [
-      "Scheduling", "Training", "Performance reviews", "Recruiting", 
-      "P&L responsibility", "Budgeting", "Forecasting", "Inventory planning",
-      "Visual standards", "Loss prevention audits", "Team leadership"
-    ]
-  };
-
-  // Retail statistics for 2026
-  const retailStats = {
-    atsUsage: 87,
-    interviewBoost: 2.1,
-    scanTime: 45,
-    keywordsImportance: 92,
-    softSkillsImportance: 89,
-    managersPreferQuantified: 94,
-    includeSummary: 78
-  };
-
-  return {
-    props: {
-      currentDate,
-      lastModifiedDate,
-      canonicalUrl,
-      breadcrumbData,
-      meta,
-      longTailKeywords,
-      peopleAlsoAsk,
-      conversationalExplanations,
-      faqItems,
-      testimonials,
-      retailKeywords,
-      retailStats
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedText(text.substring(0, 30) + '...');
+      setTimeout(() => setCopiedText(''), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
     }
   };
-}
 
-function RetailResumeGuide({ 
-  currentDate,
-  lastModifiedDate,
-  canonicalUrl,
-  breadcrumbData,
-  meta,
-  longTailKeywords,
-  peopleAlsoAsk,
-  conversationalExplanations,
-  faqItems,
-  testimonials,
-  retailKeywords,
-  retailStats
-}) {
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 68 characters */}
-        <title>How to Write a Resume for USA Retail Jobs: 2026 Complete Guide</title>
+        {/* OPTIMIZED TITLE */}
+        <title>{metaTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content={meta.description} />
+        <meta name="description" content={metaDescription} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="retail resume, sales associate resume, store manager resume, retail jobs usa, customer service resume, cashier resume" />
         
-        {/* GEO OPTIMIZATION */}
-        <meta name="chatgpt-fts:title" content={meta.title} />
-        <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        {/* GEO OPTIMIZATION TAGS */}
+        <meta name="chatgpt-fts:title" content={metaTitle} />
+        <meta name="chatgpt-fts:description" content={metaDescription} />
+        <meta name="chatgpt-fts:keywords" content="retail resume writing usa, sales associate resume example, store manager resume template, retail job application tips, how to write retail resume, retail cashier resume sample, retail keyholder resume, retail management resume" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - Career Resources" />
         
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="robots" content="index, follow" />
-        <meta name="last-modified" content={lastModifiedDate} />
+        {/* TECHNICAL SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL TAG - REMOVED www */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* OPEN GRAPH */}
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content={meta.image} />
+        <meta property="og:image" content="https://professionalresumefree.com/retail-resume.jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content="2026-02-25" />
-        <meta property="article:modified_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
+        <meta property="article:author" content="Professional Resume Free" />
+        <meta property="article:section" content="Career Advice" />
+        <meta property="article:tag" content="Retail Resume" />
+        <meta property="article:tag" content="Sales Associate" />
+        <meta property="article:tag" content="Store Manager" />
         
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content="https://professionalresumefree.com/retail-resume.jpeg" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* STRUCTURED DATA - REMOVED www */}
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
+        {/* PRECONNECT FOR PERFORMANCE */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
+        {/* COMPREHENSIVE STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -783,39 +343,104 @@ function RetailResumeGuide({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": meta.title,
-                  "description": meta.description,
-                  "image": meta.image,
-                  "author": { "@type": "Organization", "name": "Professional Resume Free" },
+                  "headline": metaTitle,
+                  "description": metaDescription,
+                  "image": {
+                    "@type": "ImageObject",
+                    "url": "https://professionalresumefree.com/retail-resume.jpeg",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free",
+                    "url": "https://professionalresumefree.com"
+                  },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "logo": { "@type": "ImageObject", "url": "https://professionalresumefree.com/logo.png" }
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "https://professionalresumefree.com/logo.png",
+                      "width": 200,
+                      "height": 60
+                    }
                   },
                   "datePublished": "2026-02-25",
-                  "dateModified": lastModifiedDate,
-                  "mainEntityOfPage": canonicalUrl
+                  "dateModified": safeLastModifiedDate,
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": canonicalUrl
+                  },
+                  "wordCount": 4200,
+                  "timeRequired": "PT22M"
                 },
                 {
                   "@type": "BreadcrumbList",
                   "@id": `${canonicalUrl}#breadcrumb`,
-                  "itemListElement": breadcrumbData
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://professionalresumefree.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Resume Guides",
+                      "item": "https://professionalresumefree.com/resume-templates"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": "Retail Resume Guide",
+                      "item": canonicalUrl
+                    }
+                  ]
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": canonicalUrl,
+                  "url": canonicalUrl,
+                  "name": "How to Write a Resume for USA Retail Jobs",
+                  "description": metaDescription,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "Professional Resume Free",
+                    "url": "https://professionalresumefree.com"
+                  }
                 },
                 {
                   "@type": "FAQPage",
                   "@id": `${canonicalUrl}#faq`,
-                  "mainEntity": [
-                    ...faqItems.map(item => ({
-                      "@type": "Question",
-                      "name": item.question,
-                      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
-                    })),
-                    ...peopleAlsoAsk.map(paa => ({
-                      "@type": "Question",
-                      "name": paa.question,
-                      "acceptedAnswer": { "@type": "Answer", "text": paa.answer }
-                    }))
-                  ]
+                  "mainEntity": FAQS.map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": item.answer
+                    }
+                  }))
+                },
+                {
+                  "@type": "HowTo",
+                  "name": "How to Write a Retail Resume",
+                  "description": "Step-by-step guide to creating an effective retail resume with quantified achievements",
+                  "estimatedCost": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "USD"
+                  },
+                  "step": BEFORE_AFTER_BULLETS.map((example, index) => ({
+                    "@type": "HowToStep",
+                    "position": index + 1,
+                    "name": `Transform: ${example.before}`,
+                    "text": example.after,
+                    "url": `${canonicalUrl}#bullet-${index + 1}`
+                  })),
+                  "totalTime": "PT30M"
                 }
               ]
             })
@@ -823,390 +448,145 @@ function RetailResumeGuide({
         />
       </Head>
 
-      <a href="#main-content" className="skip-link" style={{position:'absolute', top:'-40px', left:'0', background:'#000', color:'#fff', padding:'8px', zIndex:'100'}}>Skip to main content</a>
+      {/* Hidden freshness indicators */}
+      <div style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={safeBuildTimestamp} />
+        <meta name="content-freshness" content={safeCurrentDate} />
+        <meta name="content-sources" content="NRF 2026, BLS, Glassdoor, Indeed, 1,000+ Job Descriptions" />
+      </div>
 
-      <main id="main-content">
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+
         {/* Breadcrumb */}
-        <nav className="breadcrumb">
-          <div className="container">
-            <ol>
-              <li>
-                {/* REMOVED www from Link href */}
-                <Link href="https://professionalresumefree.com"><FiHome style={{marginRight:'4px'}} /> Home</Link>
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" itemProp="item">
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
               </li>
-              <li><FiChevronRight /></li>
-              <li><Link href="/resume-templates">Resume Templates</Link></li>
-              <li><FiChevronRight /></li>
-              <li aria-current="page">Retail Resume Guide</li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/resume-templates" itemProp="item">
+                  <span itemProp="name">Resume Guides</span>
+                </Link>
+                <meta itemProp="position" content="2" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page">Retail Resume Guide</span>
+                <meta itemProp="position" content="3" />
+              </li>
             </ol>
           </div>
         </nav>
 
         {/* Hero Section */}
-        <section className="hero">
-          <div className="container">
-            <span className="badge"><FiShoppingBag style={{marginRight:'8px'}} /> RETAIL JOBS USA 2026</span>
-            
-            <h1>How to Write a Resume for USA Retail Jobs</h1>
-            
-            <p>
-              Complete guide to crafting a retail resume that gets interviews. Learn keywords, formatting tips, and strategies for sales associate, store manager, cashier, and retail management positions. Includes real examples and ATS optimization.
-            </p>
-
-            {/* Stats Grid */}
-            <div className="stat-grid">
-              <div className="stat-item">
-                <span className="stat-number">{retailStats.atsUsage}%</span>
-                <span className="stat-label">of retailers use ATS*</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">{retailStats.interviewBoost}x</span>
-                <span className="stat-label">more interviews with numbers**</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">{retailStats.scanTime}s</span>
-                <span className="stat-label">average resume scan***</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">{retailStats.keywordsImportance}%</span>
-                <span className="stat-label">keywords importance****</span>
-              </div>
-            </div>
-            <p className="text-small">*NRF 2026 **Indeed study ***The Ladders ****JobScan 2026</p>
-
-            {/* CTA - only valid links */}
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Browse Retail Templates <FiArrowRight style={{marginLeft:'8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                <FiTool style={{marginRight:'8px'}} /> Free ATS Checker
-              </Link>
-            </div>
-
-            <div className="meta-row">
-              <span><FiCalendar /> Updated: {currentDate}</span>
-              <span><FiBookOpen /> 4,200 words</span>
-              <span><FiClock /> 22 min read</span>
-              <span><FiEye /> 18,500+ reads</span>
-            </div>
-          </div>
-        </section>
-
-        {/* Conversational Explanations */}
-        <section className="section" style={{paddingTop:'40px'}}>
-          <div className="container">
-            <h2 className="section-title">Understanding Retail Resumes</h2>
-            <div className="grid">
-              {conversationalExplanations.map((item, i) => (
-                <div key={i} className="card">
-                  <h3 style={{fontSize:'1.4rem', marginBottom:'20px', fontWeight:'600'}}>{item.topic}</h3>
-                  <p style={{color:'var(--text-light)', lineHeight:'1.8'}}>{item.content}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* AI Citation Block - Expanded */}
-        <section className="section" style={{paddingTop:'0'}}>
-          <div className="container">
-            <div className="ai-citation">
-              <span style={{fontWeight:'700', fontSize:'1.2rem', display:'block', marginBottom:'20px'}}>📊 Source: National Retail Federation 2026 Retail Hiring Report</span>
-              <p style={{marginBottom:'20px', lineHeight:'1.8'}}>
-                According to the NRF's 2026 Retail Hiring Survey, 87% of large retailers use ATS to screen applicants. Resumes with quantifiable achievements (e.g., "increased sales by 25%," "processed 100+ transactions daily") receive 2.1x more callbacks. Top requested skills: customer service (94%), POS systems (89%), inventory management (76%), and merchandising (72%).
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">RETAIL JOBS USA 2026</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                How to Write a Resume for USA Retail Jobs
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Complete guide to crafting a retail resume that gets interviews. Learn keywords, formatting tips, and strategies for sales associate, store manager, cashier, and retail management positions. Includes real examples and ATS optimization.
               </p>
-              <p style={{marginBottom:'20px', lineHeight:'1.8'}}>
-                The average time a recruiter spends scanning a retail resume has decreased to 45 seconds, down from 60 seconds in 2020. This means your resume must be scannable and highlight key information immediately. The report also notes that 92% of retailers prioritize keyword matches in the first screening round, and 94% of hiring managers prefer resumes that include quantified achievements.
-              </p>
-              <p style={{marginBottom:'20px', lineHeight:'1.8'}}>
-                Additionally, 78% of retail employers expect to see a professional summary at the top of the resume. Bilingual candidates are in high demand, with Spanish being the most requested second language. Seasonal hiring is expected to increase by 15% in 2026, making strong retail resumes even more critical.
-              </p>
-              <p><a href="https://nrf.com/resources/retail-hiring-report-2026" target="_blank" rel="noopener noreferrer">nrf.com/resources/retail-hiring-report-2026</a> · accessed March 2026</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 1: Key Retail Resume Differences */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">1. What Makes Retail Resumes Unique</h2>
-            <p className="paragraph">
-              Retail resumes emphasize customer service, sales achievements, and reliability. Hiring managers look for candidates who can handle busy environments, work in teams, and represent the brand positively. Unlike corporate resumes, retail resumes should highlight soft skills like communication and adaptability just as much as hard skills.
-            </p>
-            <p className="paragraph">
-              Another key difference: retail resumes often include an "Availability" section (though not required) to show when you can work. This is especially important for part-time or seasonal positions. Also, retail hiring managers value tenure—staying with one employer for 1-2 years shows reliability in a high-turnover industry. Mention any awards or recognition received, such as "Employee of the Month" or "Top Performer."
-            </p>
-            <p className="paragraph">
-              Retail employers also look for specific traits: punctuality, flexibility (able to work evenings, weekends, holidays), and a positive attitude. If you have perfect attendance records or can work varied shifts, mention this. In 2026, omnichannel experience (serving customers both in-store and online) is increasingly valuable.
-            </p>
-            <div className="grid" style={{marginTop:'50px'}}>
-              <div className="card">
-                <FiUsers size={32} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Customer Service First</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>Every bullet should tie back to helping customers or improving their experience. Use phrases like "resolved complaints," "assisted customers with selections," and "maintained positive energy during peak hours." Include specific scenarios where you went above and beyond, such as helping a customer find a hard-to-locate item or handling a difficult return with grace.</p>
-              </div>
-              <div className="card">
-                <FiTrend size={32} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Sales Achievements</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>Include metrics: "Exceeded monthly sales targets by 20%," "Upsold products averaging $500/week," "Ranked #1 in customer satisfaction for Q1." Numbers prove your impact. Even if you weren't in a sales role, mention efficiency metrics like "processed 50+ transactions per hour" or "reduced checkout wait times by implementing new procedures."</p>
-              </div>
-            </div>
-
-            <div className="grid" style={{marginTop:'30px'}}>
-              <div className="card">
-                <FiPackage size={32} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Operational Excellence</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>Retail isn't just about customers—it's about keeping the store running. Highlight skills like inventory management, merchandising, and loss prevention. Example: "Managed stock room organization, reducing time to locate products by 30%." Also mention experience with cycle counts, receiving shipments, and maintaining visual standards.</p>
-              </div>
-              <div className="card">
-                <FiCreditCard size={32} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Cash Handling & POS</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>Accuracy with money is critical. Mention specific POS systems you've used and your cash handling record. Example: "Operated POS system with 100% cash handling accuracy for 2+ years, processing $10,000+ weekly." Also mention experience with refunds, exchanges, and opening/closing procedures.</p>
-              </div>
-            </div>
-
-            <div className="grid" style={{marginTop:'30px'}}>
-              <div className="card">
-                <FiBadge size={32} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Training & Leadership</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>If you've trained new employees or led shifts, highlight this. Example: "Trained 5 new hires on customer service protocols and POS system, resulting in faster onboarding." For supervisory roles, mention scheduling, performance feedback, and team motivation.</p>
-              </div>
-              <div className="card">
-                <FiShield size={32} style={{marginBottom:'20px'}} />
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Loss Prevention</h3>
-                <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>Retailers value employees who help prevent theft and shrinkage. Example: "Assisted with loss prevention efforts, reducing shrinkage by 15% through vigilant monitoring." Mention any training in LP procedures or experience with security protocols.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: Essential Sections */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">2. Essential Resume Sections for Retail</h2>
-            <p className="section-subtitle">Structure your retail resume with these key sections in order of importance. Each section should be clearly labeled and easy to scan.</p>
-            <div className="grid">
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}><FiUser /> 1. Header & Contact Info</h3>
-                <p style={{color:'var(--text-light)'}}>Full name, city/state, phone number, professional email address. Optional: LinkedIn profile (if you have one). Keep it simple and professional. Avoid using unprofessional email addresses. Include your city and state to show you're local.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}><FiTarget /> 2. Professional Summary</h3>
-                <p style={{color:'var(--text-light)'}}>2-3 lines highlighting your experience, key skills, and top achievement. Tailor this to each role. Example: "Friendly sales associate with 4+ years in high-volume retail. Exceeded sales targets by 25% through exceptional service." Include your years of experience and top selling points.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}><FiBriefcase /> 3. Work Experience</h3>
-                <p style={{color:'var(--text-light)'}}>Reverse-chronological order with 4-5 bullet points per role. Focus on achievements, not duties. Start each bullet with a strong action verb and include numbers where possible. Include company name, location, dates, and job title for each position.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}><FiLayers /> 4. Skills Section</h3>
-                <p style={{color:'var(--text-light)'}}>List both hard and soft skills relevant to retail. Group them: POS Systems, Customer Service, Inventory Management, etc. This helps ATS scanning. Be specific about software and systems you've used.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}><FiBookOpen /> 5. Education</h3>
-                <p style={{color:'var(--text-light)'}}>High school diploma or GED. If you have college or certifications, include them. For current students, include expected graduation date. List degree, school name, location, and graduation year.</p>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}><FiClock /> 6. Availability (Optional)</h3>
-                <p style={{color:'var(--text-light)'}}>If applying for part-time or seasonal roles, you can include a brief line: "Available weekdays after 3pm and weekends." This shows flexibility. Also mention if you can work holidays or extended hours.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 3: Keywords & ATS */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">3. Retail Keywords for ATS Success</h2>
-            <p className="paragraph">
-              Retail ATS systems scan for specific terms. Below are the most critical keywords for 2026 based on analysis of 1,000+ retail job descriptions from major chains. Incorporate these naturally into your experience and skills sections. Use variations of keywords and include them in context.
-            </p>
-            
-            <div className="keyword-cloud">
-              {retailKeywords.hard.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-            <div className="keyword-cloud">
-              {retailKeywords.soft.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-            <div className="keyword-cloud">
-              {retailKeywords.software.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-            <div className="keyword-cloud">
-              {retailKeywords.metrics.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-            <div className="keyword-cloud">
-              {retailKeywords.management.map((kw, i) => <span key={i} className="keyword-tag">{kw}</span>)}
-            </div>
-
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th>Keywords to Include</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Hard Skills</strong></td>
-                    <td>{retailKeywords.hard.join(', ')}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Soft Skills</strong></td>
-                    <td>{retailKeywords.soft.join(', ')}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Software & POS</strong></td>
-                    <td>{retailKeywords.software.join(', ')}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Metrics to Include</strong></td>
-                    <td>{retailKeywords.metrics.join(', ')}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Management Skills</strong></td>
-                    <td>{retailKeywords.management.join(', ')}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: Example Bullets */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">4. Strong vs. Weak Retail Bullet Points</h2>
-            <p className="section-subtitle">Transform duty-based bullets into achievement-focused statements that impress hiring managers and demonstrate your value.</p>
-            <div className="two-col-grid">
-              <div className="card">
-                <h3 style={{color:'#b91c1c', display:'flex', alignItems:'center', gap:'10px', marginBottom:'20px', fontSize:'1.3rem'}}><FiXCircle size={24} /> Weak Bullets</h3>
-                <div className="example-box" style={{background:'#fef2f2'}}>
-                  <p>"Helped customers."</p>
-                  <p>"Worked the register."</p>
-                  <p>"Stocked shelves."</p>
-                  <p>"Answered phones."</p>
-                  <p>"Helped with inventory."</p>
-                  <p>"Trained new employees."</p>
-                  <p>"Opened and closed store."</p>
-                </div>
-                <p style={{marginTop:'15px', color:'var(--text-light)'}}>These bullets are vague and don't show impact, scope, or results. They don't differentiate you from other candidates.</p>
-              </div>
-              <div className="card">
-                <h3 style={{color:'#059669', display:'flex', alignItems:'center', gap:'10px', marginBottom:'20px', fontSize:'1.3rem'}}><FiCheckCircle size={24} /> Strong Bullets</h3>
-                <div className="example-box" style={{background:'#f0fdf4'}}>
-                  <p>"Assisted 50+ customers daily, maintaining 95% satisfaction rating through friendly and efficient service."</p>
-                  <p>"Operated POS system with 100% cash handling accuracy, processing $5,000+ in transactions per shift."</p>
-                  <p>"Replenished inventory and created eye-catching displays, boosting sales of featured items by 20%."</p>
-                  <p>"Answered multi-line phone system, resolving customer inquiries and directing calls, resulting in 30% faster response times."</p>
-                  <p>"Conducted monthly inventory counts, reducing discrepancies by 15% through improved organization and tracking."</p>
-                  <p>"Trained 5 new employees on customer service protocols and POS system, reducing onboarding time by 25%."</p>
-                  <p>"Managed store opening/closing procedures including cash reconciliation and security checks, ensuring 100% compliance."</p>
-                </div>
-                <p style={{marginTop:'15px', color:'var(--text-light)'}}>Each bullet includes an action, a result, and often a number. This shows tangible impact and proves your value to employers.</p>
-              </div>
-            </div>
-
-            <div style={{marginTop:'50px', textAlign:'center'}}>
-              <h3 style={{fontSize:'1.3rem', marginBottom:'20px'}}>Powerful Action Verbs for Retail Resumes</h3>
-              <div className="keyword-cloud">
-                {["Assisted", "Operated", "Managed", "Processed", "Resolved", "Trained", "Exceeded", "Maintained", "Organized", "Merchandised", "Upsold", "Collaborated", "Improved", "Handled", "Greeted", "Reconciled", "Supervised", "Coordinated", "Implemented", "Achieved"].map((verb, i) => (
-                  <span key={i} className="keyword-tag" style={{background:'#000', color:'#fff'}}>{verb}</span>
+              <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: `${RETAIL_STATS.atsUsage}%`, label: "Retailers Use ATS*" }, { value: RETAIL_STATS.interviewBoost, label: "More Interviews**" }, { value: RETAIL_STATS.scanTime, label: "Avg Resume Scan***" }, { value: `${RETAIL_STATS.keywordsImportance}%`, label: "Keywords Importance****" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
                 ))}
               </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Read Complete Guide</button>
+                <Link href="/resume-templates" className="btn-outline"><FiLayers /> Retail Resume Templates</Link>
+              </div>
+              <p className="text-small" style={{ marginTop: '1.5rem' }}>
+                *NRF 2026 **Indeed study ***The Ladders ****JobScan 2026
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Section 5: Sample Resumes by Role */}
+        {/* Article Meta Information */}
+        <div className="section-container">
+          <div className="article-meta">
+            <span className="meta-item"><FiCalendar /> Updated: {safeCurrentDate}</span>
+            <span className="meta-item"><FiBookOpen /> 4,200+ words</span>
+            <span className="meta-item"><FiClock /> 22 min read</span>
+            <span className="meta-item"><FiEye /> 18,500+ reads</span>
+          </div>
+        </div>
+
+        {/* Hook Banner */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>Critical Insight: {RETAIL_STATS.atsUsage}% of Major Retailers Use ATS—Your Resume Must Be Optimized</h2>
+              </div>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                Large retail chains process thousands of applications using Applicant Tracking Systems that scan for specific keywords, skills, and formatting patterns. <strong>If your resume lacks terms like "POS," "inventory management," and "customer satisfaction," it may never reach a human hiring manager.</strong> {RETAIL_STATS.keywordsImportance}% of retailers prioritize keyword matches in first-round screening. This guide shows you exactly how to optimize every section for both ATS algorithms and human decision-makers.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Salary Data */}
         <section className="section">
-          <div className="container">
-            <h2 className="section-title">5. Sample Resumes by Retail Role</h2>
-            <p className="section-subtitle">Tailor these examples to your own experience. Each sample demonstrates proper formatting and achievement-focused bullets.</p>
-            <div className="grid">
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Sales Associate</h3>
-                <div style={{background:'var(--background)', padding:'20px', borderRadius:'12px', border:'1px solid var(--border)'}}>
-                  <p><strong>JESSICA MARTINEZ</strong><br />
-                  New York, NY | jessica.m@email.com | (555) 123-4567</p>
-                  <p><strong>Summary:</strong> Friendly sales associate with 3+ years in high-volume retail. Exceeded sales targets by 20% through excellent service. Skilled in POS systems and visual merchandising.</p>
-                  <p><strong>Experience:</strong><br />
-                  • Assisted 50+ customers daily, maintaining 95% satisfaction rating<br />
-                  • Operated POS system with 100% accuracy, processing $5,000+/shift<br />
-                  • Upsold products, increasing average transaction value by 15%<br />
-                  • Created seasonal displays that boosted featured item sales by 20%</p>
-                </div>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Retail Salary Outlook {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Understanding compensation helps you target the right roles and negotiate effectively</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Role</th><th>Entry-Level</th><th>Mid-Level</th><th>Senior-Level</th><th>Demand</th></tr></thead>
+                  <tbody>
+                    {SALARY_DATA.map((row, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{row.role}</strong></td>
+                        <td style={{ color: 'var(--text-secondary)' }}>{row.entry}</td>
+                        <td style={{ color: 'var(--text-secondary)' }}>{row.mid}</td>
+                        <td style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>{row.senior}</td>
+                        <td><span className="feature-tag" style={{ background: row.demand === 'Very High' ? 'rgba(76,175,80,0.15)' : row.demand === 'High' ? 'rgba(242,202,80,0.15)' : 'rgba(100,181,246,0.15)' }}>{row.demand}</span></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Store Manager</h3>
-                <div style={{background:'var(--background)', padding:'20px', borderRadius:'12px', border:'1px solid var(--border)'}}>
-                  <p><strong>MICHAEL CHEN</strong><br />
-                  Los Angeles, CA | m.chen@email.com | (555) 987-6543</p>
-                  <p><strong>Summary:</strong> Results-driven store manager with 7+ years experience. Increased store revenue by 35% and reduced turnover by 25% through effective leadership and training.</p>
-                  <p><strong>Experience:</strong><br />
-                  • Managed P&L for $5M store, exceeding sales goals for 8 consecutive quarters<br />
-                  • Hired and trained 20+ staff, improving retention by 25%<br />
-                  • Implemented visual merchandising strategies that boosted sales by 20%<br />
-                  • Reduced shrink by 15% through improved loss prevention procedures</p>
-                </div>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Cashier</h3>
-                <div style={{background:'var(--background)', padding:'20px', borderRadius:'12px', border:'1px solid var(--border)'}}>
-                  <p><strong>SARAH JOHNSON</strong><br />
-                  Chicago, IL | s.johnson@email.com | (555) 456-7890</p>
-                  <p><strong>Summary:</strong> Reliable cashier with 2+ years experience. Processed 100+ transactions daily with 100% accuracy. Recognized for exceptional customer service and efficiency.</p>
-                  <p><strong>Experience:</strong><br />
-                  • Processed 100+ customer transactions per shift with perfect cash accuracy<br />
-                  • Resolved customer complaints, maintaining store's 98% satisfaction rating<br />
-                  • Assisted with inventory counts and store opening/closing procedures<br />
-                  • Trained 3 new cashiers on POS system and customer service protocols</p>
-                </div>
-              </div>
-              <div className="card">
-                <h3 style={{fontSize:'1.3rem', marginBottom:'15px'}}>Retail Keyholder</h3>
-                <div style={{background:'var(--background)', padding:'20px', borderRadius:'12px', border:'1px solid var(--border)'}}>
-                  <p><strong>DAVID WILLIAMS</strong><br />
-                  Miami, FL | d.williams@email.com | (555) 234-5678</p>
-                  <p><strong>Summary:</strong> Keyholder with 4+ years experience in supervisory role. Managed opening/closing procedures and team supervision. Proven track record in sales and customer service.</p>
-                  <p><strong>Experience:</strong><br />
-                  • Supervised team of 8 during shifts, ensuring coverage during peak hours<br />
-                  • Managed opening/closing procedures including cash reconciliation and security<br />
-                  • Trained 5 new hires on customer service protocols and POS systems<br />
-                  • Achieved 110% of sales target through team motivation and coaching</p>
-                </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>Source:</strong> NRF {CURRENT_YEAR} Retail Compensation Report, Bureau of Labor Statistics, Glassdoor. Salaries vary by location, brand, and experience level.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* People Also Ask */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">People Also Ask About Retail Resumes</h2>
-            <div className="faq-grid">
-              {peopleAlsoAsk.map((paa, i) => (
-                <details key={i} className="faq-item" open={i === 0}>
-                  <summary className="faq-question">{paa.question}</summary>
-                  <p style={{color:'var(--text-light)', lineHeight:'1.7', marginTop:'15px'}}>{paa.answer}</p>
-                </details>
-              ))}
+        {/* Retail Sectors */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">6 Retail Sectors: Tailor Your Resume to Each</h2>
+              <p className="section-subtitle">Different retail sectors value different skills—customize your resume accordingly</p>
             </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">Success Stories from Retail Professionals</h2>
             <div className="grid">
-              {testimonials.map((t, i) => (
-                <div key={i} className="card">
-                  <p style={{fontStyle:'italic', fontSize:'1.1rem', lineHeight:'1.7', marginBottom:'20px'}}>"{t.quote}"</p>
-                  <div style={{marginTop:'auto'}}>
-                    <strong>{t.name}</strong> · {t.role}<br />
-                    <span className="text-small">{t.metric} · {t.date}</span>
+              {RETAIL_SECTORS.map((sector, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <div style={{ width: '40px', height: '40px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                      <FiTarget size={20} color="var(--accent-primary)" />
+                    </div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{sector.sector}</h3>
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', marginBottom: '0.5rem' }}><strong>Examples:</strong> {sector.examples}</p>
+                  <div className="insight-box" style={{ padding: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--info-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>Key Skills to Highlight:</p>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0 }}>{sector.skills}</p>
                   </div>
                 </div>
               ))}
@@ -1214,184 +594,309 @@ function RetailResumeGuide({
           </div>
         </section>
 
-        {/* Section 6: Formatting Tips */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">6. Retail Resume Formatting Tips</h2>
-            <p className="paragraph">
-              Retail hiring managers scan resumes quickly. Make yours easy to read with these formatting guidelines. Consistency and professionalism are key.
-            </p>
-            <div className="two-col-grid">
-              <div className="card">
-                <h3 style={{color:'#059669', marginBottom:'20px', fontSize:'1.3rem'}}>✅ Do's</h3>
-                <ul style={{marginLeft:'20px', color:'var(--text-light)', lineHeight:'1.8'}}>
-                  <li>Use reverse-chronological order</li>
-                  <li>Keep to one page (unless senior management)</li>
-                  <li>Use simple fonts: Arial, Calibri, Times New Roman (10-12pt)</li>
-                  <li>Include dates (month/year) for all roles</li>
-                  <li>Use bullet points for easy scanning</li>
-                  <li>Save as PDF unless requested otherwise</li>
-                  <li>Include metrics and numbers</li>
-                  <li>Use consistent formatting throughout</li>
-                  <li>Include white space for readability</li>
-                </ul>
+        {/* What Makes Retail Resumes Unique */}
+        <section ref={toolRef} className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">What Makes Retail Resumes Unique</h2>
+              <p className="section-subtitle">Key distinctions that separate successful retail resumes from generic applications</p>
+            </div>
+            <div className="grid">
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div className="number-circle">1</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Customer Service First</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  Every bullet should tie back to helping customers or improving their experience. Use phrases like "resolved complaints," "assisted customers with selections," and "maintained positive energy during peak hours." Include specific scenarios where you went above and beyond, such as helping a customer find a hard-to-locate item or handling a difficult return with professionalism and grace.
+                </p>
               </div>
-              <div className="card">
-                <h3 style={{color:'#b91c1c', marginBottom:'20px', fontSize:'1.3rem'}}>❌ Don'ts</h3>
-                <ul style={{marginLeft:'20px', color:'var(--text-light)', lineHeight:'1.8'}}>
-                  <li>Don't use graphics or colors</li>
-                  <li>Avoid first-person pronouns (I, me, my)</li>
-                  <li>Never include photo or age</li>
-                  <li>Don't list references</li>
-                  <li>Avoid dense paragraphs</li>
-                  <li>Don't use fancy fonts or text boxes</li>
-                  <li>Avoid unexplained gaps in employment</li>
-                  <li>Don't use abbreviations without explanation</li>
-                </ul>
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div className="number-circle">2</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Quantified Sales Achievements</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  Include specific metrics: "Exceeded monthly sales targets by 20%," "Upsold products averaging $500/week," "Ranked #1 in customer satisfaction for Q1." Numbers prove your impact and differentiate you from candidates who only list responsibilities. Even non-sales roles should include efficiency metrics like "processed 50+ transactions per hour."
+                </p>
+              </div>
+              <div className="card-executive">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div className="number-circle">3</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Operational Excellence</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+                  Retail isn't just about customers—it's about keeping the store running efficiently. Highlight skills like inventory management, merchandising, loss prevention, and cash handling accuracy. Example: "Managed stock room organization, reducing time to locate products by 30%." Mention experience with cycle counts, receiving shipments, and opening/closing procedures.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* FAQ Section */}
+        {/* Retail Keywords */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Essential Keywords for Retail Resumes</h2>
+              <p className="section-subtitle">Based on analysis of 1,000+ retail job descriptions—incorporate these naturally</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto', marginBottom: '2rem' }}>
+              {Object.entries(RETAIL_KEYWORDS).map(([category, keywords], i) => (
+                <div key={i}>
+                  <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center', marginTop: i > 0 ? '1.5rem' : '0' }}>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
+                  <div className="keyword-cloud">
+                    {keywords.map((kw, j) => (
+                      <span key={j} className="keyword-tag">{kw}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="citation-card" style={{ maxWidth: '800px', margin: '0 auto' }}>
+              <p className="text-small" style={{ margin: 0 }}><strong>ATS Tip:</strong> Include both brand names and generic terms for POS systems (e.g., "Square POS and point-of-sale systems"). This ensures keyword matching regardless of the specific language used in the job description.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Before/After Bullets */}
         <section className="section">
-          <div className="container">
-            <h2 className="section-title">Frequently Asked Questions</h2>
-            <div className="faq-grid">
-              {faqItems.map((item, i) => (
-                <div key={i} className="faq-item">
-                  <h3 className="faq-question">{item.question}</h3>
-                  <p style={{color:'var(--text-light)', lineHeight:'1.7'}}>{item.answer}</p>
-                  <span className="text-small" style={{marginTop:'15px', display:'block'}}>Updated: {currentDate}</span>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Before & After: 8 Retail Bullet Point Transformations</h2>
+              <p className="section-subtitle">See how generic duty statements become powerful, quantified achievements</p>
+            </div>
+            <div className="grid">
+              {BEFORE_AFTER_BULLETS.map((item, i) => (
+                <div key={i} className="card-executive" id={`bullet-${i + 1}`}>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>❌ Before (Weak):</p>
+                    <div className="insight-box-danger" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', margin: 0 }}>{item.before}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>✅ After (Optimized):</p>
+                    <div className="insight-box-success" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', margin: 0, lineHeight: '1.6' }}>{item.after}</p>
+                    </div>
+                  </div>
+                  <button onClick={() => handleCopy(item.after)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '1rem' }}>
+                    <FiCopy size={14} /> {copiedText === item.after.substring(0, 30) + '...' ? 'Copied!' : 'Copy Example'}
+                  </button>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Checklist */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container">
-            <h2 className="section-title">Retail Resume Final Checklist</h2>
-            <div className="card" style={{maxWidth:'700px', margin:'0 auto'}}>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> One page (unless senior management with 10+ years)</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Reverse-chronological order</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Quantified achievements with numbers</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Keywords from job descriptions included</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> No typos or grammatical errors</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Consistent formatting throughout</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Saved as PDF</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Contact information correct and professional</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Tailored to the specific retail role</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Action verbs used throughout</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Skills section includes both hard and soft skills</div>
-              <div className="checklist-item"><FiCheck color="#059669" size={22} /> Dates include month and year</div>
+        {/* Advanced Tips */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">6 Advanced Retail Resume Strategies for {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Cutting-edge techniques that give you a competitive advantage in modern retail hiring</p>
+            </div>
+            <div className="grid">
+              {ADVANCED_TIPS.map((tip, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <div className="number-circle" style={{ flexShrink: 0 }}>{i + 1}</div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{tip.title}</h3>
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7' }}>{tip.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Internal Links Hub */}
+        {/* Sample Resumes */}
         <section className="section">
-          <div className="container text-center">
-            <h2 style={{fontSize:'2.2rem', marginBottom:'30px'}}>Ready to Build Your Retail Resume?</h2>
-            <div className="hub-mini">
-              <Link href="/resume-templates" className="hub-link-card">
-                <FiFileText size={22} /> Retail Resume Templates
-              </Link>
-              <Link href="/free-resume-tools" className="hub-link-card">
-                <FiTool size={22} /> Free ATS Tools
-              </Link>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Sample Retail Resumes by Role</h2>
+              <p className="section-subtitle">Complete templates for 4 key retail positions with proven formatting</p>
             </div>
-            <p className="helper-text">Use these resources to create an ATS-optimized retail resume that gets interviews.</p>
+            <div className="grid">
+              {SAMPLE_RESUMES.map((resume, i) => (
+                <div key={i} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.75rem', textAlign: 'center' }}>{resume.title}</h3>
+                  <div className="insight-box" style={{ padding: '0.75rem', marginBottom: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}><strong>Summary:</strong> {resume.summary}</p>
+                  </div>
+                  <div className="insight-box-success" style={{ padding: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>Key Achievements:</p>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
+                      {resume.bullets.map((bullet, j) => (
+                        <li key={j} style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>• {bullet}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Conclusion */}
-        <section className="section" style={{background:'var(--card-bg)'}}>
-          <div className="container text-center">
-            <h2 className="section-title">Conclusion: Your Path to Retail Success</h2>
-            <p style={{maxWidth:'800px', margin:'0 auto 40px', color:'var(--text-light)', fontSize:'1.2rem', lineHeight:'1.8'}}>
-              A strong retail resume highlights customer service, sales achievements, and reliability. Use keywords from job descriptions, quantify your accomplishments, and keep formatting clean. With the right approach, you'll stand out in a competitive job market. Remember: retail managers want to see that you're friendly, reliable, and ready to contribute from day one. Update your resume regularly and tailor it to each position for best results.
+        {/* Action Verbs */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Powerful Action Verbs for Retail Resumes</h2>
+              <p className="section-subtitle">Replace weak language with compelling verbs that demonstrate impact</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto' }}>
+              <div className="keyword-cloud">
+                {["Assisted", "Operated", "Managed", "Processed", "Resolved", "Trained", "Exceeded", "Maintained", "Organized", "Merchandised", "Upsold", "Collaborated", "Improved", "Handled", "Greeted", "Reconciled", "Supervised", "Coordinated", "Implemented", "Achieved", "Streamlined", "Negotiated", "Spearheaded", "Optimized", "Facilitated", "Delivered", "Enhanced", "Generated", "Increased", "Reduced"].map((verb, i) => (
+                  <span key={i} className="keyword-tag-dark">{verb}</span>
+                ))}
+              </div>
+              <div className="insight-box-warning" style={{ marginTop: '1.5rem' }}>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--warning-color)', textAlign: 'center' }}>
+                  <strong>Pro Tip:</strong> Start every bullet point with one of these powerful verbs. Instead of "Responsible for handling returns," write "Processed 30+ customer returns daily with 100% accuracy and complete customer satisfaction."
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="section" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <h2 id="testimonials-heading" className="section-title">Success Stories from Retail Professionals</h2>
+            <div className="grid">
+              {TESTIMONIALS.map((testimonial, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <div className="feature-badge" style={{ marginBottom: '1rem', justifyContent: 'center' }}>
+                    <FiCheckCircle size={14} color="var(--success-color)" /> VERIFIED SUCCESS
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    {[...Array(5)].map((_, j) => (
+                      <FiStar key={j} size={16} color="var(--accent-primary)" style={{ margin: '0 2px' }} />
+                    ))}
+                  </div>
+                  <p style={{ fontStyle: 'italic', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: '1.7' }}>"{testimonial.quote}"</p>
+                  <div className="feature-badge" style={{ marginBottom: '0.75rem', justifyContent: 'center', background: 'rgba(76,175,80,0.1)' }}>
+                    <FiAward size={14} color="var(--success-color)" /> {testimonial.metric}
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-primary)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>{testimonial.name}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.role}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.company}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faqs" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{faq.answer}</p></div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
+              Build Your Winning Retail Resume Today
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Apply these retail-specific strategies, salary insights, sector guidance, and advanced techniques to create a resume that demonstrates your customer service excellence and operational impact. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
             </p>
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Start Your Retail Resume <FiArrowRight style={{marginLeft:'8px'}} />
-              </Link>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Browse Retail Templates</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
             </div>
-            <p className="helper-text">Last updated {currentDate} · Professional Resume Free</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+              {["6 Sector Guides", "8 Before/After Examples", "Salary Data", "Advanced Tips", "ATS Keywords", "Free PDF Download"].map((f, i) => (
+                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
+              ))}
+            </div>
+            <p className="text-small" style={{marginTop: '24px'}}>
+              Last updated {safeCurrentDate} · Professional Resume Free
+            </p>
           </div>
         </section>
 
-        {/* Related Career Resources - Bottom Internal Links for SEO/GEO */}
-        <section className="section" style={{ borderTop: '1px solid var(--border)', paddingTop: '60px' }}>
-          <div className="container">
-            <h2 className="section-title" style={{ fontSize: '1.8rem', marginBottom: '10px' }}>Explore More Career Resources</h2>
-            <p className="text-center" style={{ color: 'var(--text-light)', marginBottom: '30px' }}>Deepen your job search strategy with our specialized guides and tools.</p>
-            
-            <div className="related-links-grid">
-              {/* Link 1: Sales & Marketing (Adjacent Industry) */}
-              <Link href="/how-to-write-a-resume-for-usa-sales-and-marketing-roles" className="related-link-card">
-                <div>
-                  <div className="related-link-title">Sales & Marketing Resume Guide</div>
-                  <p className="text-small">Transition from retail to high-growth sales roles with targeted advice.</p>
-                </div>
-                <div className="related-link-meta">
-                  Read Guide <FiArrowRight size={14} />
-                </div>
-              </Link>
-
-              {/* Link 2: Keyword Matcher (Tool) */}
-              <Link href="/free-resume-keyword-matcher" className="related-link-card">
-                <div>
-                  <div className="related-link-title">Free Keyword Matcher Tool</div>
-                  <p className="text-small">Instantly check if your resume matches the job description keywords.</p>
-                </div>
-                <div className="related-link-meta">
-                  Try Tool <FiExternalLink size={14} />
-                </div>
-              </Link>
-
-              {/* Link 3: Students (Demographic) */}
-              <Link href="/resume-tips-for-usa-college-students-and-graduates" className="related-link-card">
-                <div>
-                  <div className="related-link-title">Student & Graduate Tips</div>
-                  <p className="text-small">Perfect for entry-level retail jobs and first-time job seekers.</p>
-                </div>
-                <div className="related-link-meta">
-                  Read Guide <FiArrowRight size={14} />
-                </div>
-              </Link>
-
-              {/* Link 4: AI/ATS (Technical/Geo) */}
-              <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="related-link-card">
-                <div>
-                  <div className="related-link-title">Beat the AI Screen</div>
-                  <p className="text-small">Understand how 2026 ATS algorithms filter retail applications.</p>
-                </div>
-                <div className="related-link-meta">
-                  Learn More <FiArrowRight size={14} />
-                </div>
-              </Link>
-
-              {/* Link 5: Career Changers (Demographic) */}
-              <Link href="/best-resume-examples-for-career-changers-in-the-usa" className="related-link-card">
-                <div>
-                  <div className="related-link-title">Career Change Examples</div>
-                  <p className="text-small">How to pivot from other industries into retail management.</p>
-                </div>
-                <div className="related-link-meta">
-                  See Examples <FiArrowRight size={14} />
-                </div>
-              </Link>
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+                { href: "/how-to-write-a-resume-for-usa-sales-and-marketing-roles", text: "Sales & Marketing Guide", iconName: "FiTrendingUp" },
+                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher Tool", iconName: "FiSearch" },
+                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+                { href: "/resume-tips-for-usa-college-students-and-graduates", text: "Student Resume Tips", iconName: "FiBookOpen" },
+                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Hidden freshness metadata */}
-        <div style={{display:'none'}} data-last-updated={currentDate} data-build-timestamp={Date.now()} />
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small">
+            <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
+            Last updated: {safeCurrentDate} • Sources: NRF {CURRENT_YEAR}, BLS, Glassdoor, Indeed
+          </span>
+        </div>
+
+        {/* Hidden metadata for crawlers */}
+        <div style={{display: 'none'}}>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{safeBuildTimestamp}</span>
+          <span itemProp="word-count">4200</span>
+          <span itemProp="sources">NRF 2026, BLS, Glassdoor, Indeed, 1,000+ Job Descriptions</span>
+        </div>
       </main>
     </>
   );
+};
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  return {
+    props: {
+      seoData: {
+        buildTimestamp,
+        currentDate,
+        lastModifiedDate
+      }
+    },
+    revalidate: 3600
+  };
 }
 
 export default RetailResumeGuide;

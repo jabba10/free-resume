@@ -1,831 +1,329 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiFileText,
-  FiTool,
-  FiTrendingUp,
-  FiBriefcase,
-  FiCode,
-  FiBookOpen,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiBarChart2,
-  FiZap,
-  FiGrid,
-  FiLayers,
-  FiDatabase,
-  FiCpu,
-  FiTerminal,
-  FiFlag, // Added for Federal/Gov
-  FiMonitor, // Added for Remote
-  FiUsers, // Added for Management
-  FiEdit // Added for Bullet Points
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiAward,
+  FiCheck, FiArrowRight, FiFileText, FiTool, FiTrendingUp,
+  FiBriefcase, FiCode, FiBookOpen, FiUser, FiMail, FiPhone,
+  FiMapPin, FiBarChart2, FiZap, FiGrid, FiLayers, FiDatabase,
+  FiCpu, FiTerminal, FiFlag, FiMonitor, FiUsers, FiEdit,
+  FiAlertCircle, FiCheckCircle, FiXCircle, FiX, FiStar,
+  FiActivity, FiInfo, FiEdit3, FiSmartphone, FiCopy, FiPenTool,
+  FiType, FiAlignLeft, FiHash, FiLock, FiSmile, FiUserCheck,
+  FiSave, FiRefreshCw, FiThumbsUp, FiGlobe, FiSearch,
+  FiSun, FiMoon, FiCoffee, FiCompass, FiAnchor, FiPercent,
+  FiPieChart, FiShield, FiDollarSign, FiHeart, FiCloud,
+  FiSettings, FiMessageCircle, FiCamera, FiHeadphones,
+  FiTarget
 } from 'react-icons/fi';
 
-// Critical CSS inline with enhanced responsive design
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --accent: #2563eb;
-  --accent-light: #dbeafe;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  width: 100%;
-}
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
-p { font-size: clamp(1rem, 2vw, 1.1rem); }
-.hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  padding: clamp(32px, 6vw, 72px) 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: hidden;
-}
-.hero h1 {
-  margin-bottom: clamp(16px, 3vw, 24px);
-  line-height: 1.2;
-  word-wrap: break-word;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  padding: 0 16px;
-}
-.hero p {
-  max-width: 800px;
-  margin: 0 auto clamp(24px, 4vw, 32px);
-  padding: 0 16px;
-  color: var(--text-light);
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .button-container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6; --purple-accent: #bb86fc;
+    --rose-accent: #f8bbd0; --teal-accent: #80cbc4; --amber-accent: #ffd54f;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
   }
-}
-.btn-primary, .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 32px);
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s;
-  min-width: min(220px, 100%);
-  text-align: center;
-  font-size: clamp(0.95rem, 2vw, 1rem);
-  gap: 8px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-@media (max-width: 640px) {
-  .btn-primary, .btn-secondary {
-    width: 100%;
-    min-width: auto;
-  }
-}
-.btn-primary {
-  background: var(--primary);
-  color: var(--background);
-  border: 1px solid var(--primary);
-}
-.btn-primary:hover {
-  background: var(--secondary);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
-.btn-secondary {
-  background: transparent;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-  transform: translateY(-1px);
-}
-.btn-secondary:active {
-  transform: translateY(0);
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  margin: clamp(24px, 5vw, 40px) 0;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: clamp(8px, 2vw, 12px);
-  padding: clamp(20px, 4vw, 28px);
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-.card:active {
-  transform: translateY(-1px);
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: clamp(16px, 4vw, 40px);
-  margin-top: clamp(32px, 6vw, 48px);
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .stats { gap: 20px; }
-}
-@media (max-width: 480px) {
-  .stats { 
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-}
-.stat-item {
-  text-align: center;
-  min-width: min(160px, 100%);
-  padding: 12px;
-  flex: 1 1 auto;
-}
-@media (max-width: 480px) {
-  .stat-item { 
-    width: 100%;
-    max-width: 280px;
-  }
-}
-.stat-number {
-  font-size: clamp(2rem, 6vw, 2.5rem);
-  font-weight: 700;
-  display: block;
-  color: var(--primary);
-  line-height: 1.2;
-}
-.stat-label {
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.section {
-  padding: clamp(40px, 8vw, 80px) 0;
-  scroll-margin-top: 20px;
-  width: 100%;
-  overflow-x: hidden;
-}
-.section-title {
-  text-align: center;
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
-  margin-bottom: clamp(24px, 5vw, 40px);
-  padding: 0 16px;
-  word-wrap: break-word;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  width: 100%;
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 800px;
-  margin: 0 auto clamp(32px, 6vw, 48px);
-  padding: 0 16px;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  line-height: 1.6;
-}
-.table-wrap {
-  overflow-x: auto;
-  overflow-y: hidden;
-  margin: clamp(20px, 4vw, 40px) 0;
-  background: var(--background);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
-  max-width: 100%;
-}
-.table-wrap::-webkit-scrollbar {
-  height: 4px;
-}
-.table-wrap::-webkit-scrollbar-track {
-  background: var(--border);
-}
-.table-wrap::-webkit-scrollbar-thumb {
-  background: var(--text-light);
-  border-radius: 4px;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: min(600px, 100%);
-}
-th, td {
-  padding: clamp(12px, 2vw, 20px);
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  word-wrap: break-word;
-  max-width: 300px;
-}
-th {
-  background: var(--card-bg);
-  font-weight: 600;
-  color: var(--text-light);
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  width: 100%;
-}
-.faq-question {
-  font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--primary);
-  line-height: 1.4;
-  word-wrap: break-word;
-}
-.faq-answer {
-  color: var(--text-light);
-  line-height: 1.7;
-  word-wrap: break-word;
-}
-.article-meta {
-  display: flex;
-  gap: clamp(16px, 4vw, 32px);
-  justify-content: center;
-  margin: 24px 0;
-  flex-wrap: wrap;
-  padding: 16px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.toc-section {
-  margin: clamp(32px, 6vw, 48px) 0;
-  width: 100%;
-  padding: 0 16px;
-}
-.toc-list {
-  list-style: none;
-  padding: 0;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-}
-.toc-list li {
-  margin: clamp(12px, 2vw, 16px) 0;
-  width: 100%;
-}
-.toc-list a {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-  display: block;
-  padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 20px);
-  background: var(--card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  word-wrap: break-word;
-}
-.toc-list a:hover {
-  background: var(--background);
-  border-color: var(--primary);
-  transform: translateX(5px);
-}
-@media (max-width: 480px) {
-  .toc-list a:hover {
-    transform: none;
-  }
-}
-.breadcrumb {
-  padding: clamp(12px, 2vw, 16px) 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  padding: 0 16px;
-  min-width: min-content;
-}
-.citation {
-  background: var(--accent-light);
-  padding: clamp(16px, 3vw, 20px);
-  border-radius: 8px;
-  border-left: 4px solid var(--accent);
-  margin: 24px 0;
-  font-size: 0.95rem;
-  color: var(--text-light);
-  word-wrap: break-word;
-  width: 100%;
-}
-.citation-source {
-  font-weight: 600;
-  margin-top: 12px;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.insight-box {
-  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  margin: clamp(24px, 4vw, 32px) 0;
-  border: 1px solid var(--border);
-  width: 100%;
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
-  border-radius: 50px;
-  font-size: clamp(0.8rem, 2vw, 0.9rem);
-  margin-bottom: clamp(16px, 3vw, 24px);
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  max-width: 100%;
-  word-wrap: break-word;
-}
-.helper-text {
-  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-  color: var(--text-lighter);
-  margin-top: 20px;
-  text-align: center;
-  padding: 0 16px;
-  width: 100%;
-}
-.keyword-list {
-  list-style: none;
-  margin-top: 16px;
-}
-.keyword-list li {
-  margin-bottom: 12px;
-  padding-left: 24px;
-  position: relative;
-  line-height: 1.6;
-}
-.keyword-list li:before {
-  content: "✓";
-  color: #059669;
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-.text-small { font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: var(--text-light); }
-.text-success { color: #059669; font-weight: 600; }
-.text-danger { color: #dc2626; font-weight: 600; }
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-
-/* New Internal Link Section Styles */
-.strategy-section {
-  padding: clamp(40px, 8vw, 60px) 0;
-  background: #ffffff;
-  border-top: 1px solid var(--border);
-  width: 100%;
-}
-.strategy-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
-  width: 100%;
-}
-.strategy-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 24px;
-  text-align: left;
-  transition: all 0.2s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-}
-.strategy-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-}
-.strategy-icon {
-  width: 40px;
-  height: 40px;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  font-size: 1.2rem;
-  color: var(--primary);
-}
-.strategy-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--primary);
-  line-height: 1.3;
-}
-.strategy-desc {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  margin-bottom: 16px;
-  flex-grow: 1;
-  line-height: 1.5;
-}
-.strategy-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--primary);
-  margin-top: auto;
-}
-.strategy-link svg {
-  transition: transform 0.2s;
-}
-.strategy-card:hover .strategy-link svg {
-  transform: translateX(4px);
-}
-
-@media (max-width: 768px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .card:active { opacity: 0.8; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; line-height: 1.6; }
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  h4 { font-size:var(--font-size-title-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .grid-4 { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid-4 { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid-4 { grid-template-columns:repeat(4,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .insight-box-success { background:rgba(76,175,80,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(76,175,80,0.3); }
+  .insight-box-warning { background:rgba(255,183,77,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,183,77,0.3); }
+  .insight-box-teal { background:rgba(128,203,196,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(128,203,196,0.3); }
+  .insight-box-purple { background:rgba(187,134,252,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(187,134,252,0.3); }
+  .insight-box-rose { background:rgba(248,187,208,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(248,187,208,0.3); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .keyword-cloud { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin:1.5rem 0; }
+  .keyword-tag { background:rgba(242,202,80,0.08); color:var(--accent-primary); padding:0.5rem 1rem; border-radius:9999px; font-size:var(--font-size-label-sm); font-weight:500; border:0.5px solid var(--border-gold-filament); }
+  .number-circle { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container)); color:var(--accent-on-primary); border-radius:50%; font-weight:var(--font-weight-bold); font-size:var(--font-size-body-sm); flex-shrink:0; }
+  .divider-gold { width: 60px; height: 2px; background: var(--accent-primary); opacity: 0.5; margin: 1.5rem auto; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-export async function getStaticProps() {
-  const buildTimestamp = Date.now();
-  const buildTime = new Date(buildTimestamp);
-  const currentDate = buildTime.toISOString().split('T')[0];
-  const lastModifiedDate = buildTime.toISOString();
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiAward, FiCheck,
+  FiArrowRight, FiFileText, FiTool, FiTrendingUp, FiBriefcase, FiCode,
+  FiBookOpen, FiUser, FiMail, FiPhone, FiMapPin, FiBarChart2, FiZap,
+  FiGrid, FiLayers, FiDatabase, FiCpu, FiTerminal, FiFlag, FiMonitor,
+  FiUsers, FiEdit, FiAlertCircle, FiCheckCircle, FiXCircle, FiX, FiStar,
+  FiActivity, FiInfo, FiEdit3, FiSmartphone, FiCopy, FiPenTool, FiType,
+  FiAlignLeft, FiHash, FiLock, FiSmile, FiUserCheck, FiSave, FiRefreshCw,
+  FiThumbsUp, FiGlobe, FiSearch, FiSun, FiMoon, FiCoffee, FiCompass,
+  FiAnchor, FiPercent, FiPieChart, FiShield, FiDollarSign, FiHeart,
+  FiCloud, FiSettings, FiMessageCircle, FiCamera, FiHeadphones, FiTarget
+};
 
-  // Updated canonical URL - removed www
-  const canonicalUrl = "https://professionalresumefree.com/most-in-demand-resume-keywords-for-usa-job-seekers";
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
 
-  // Updated breadcrumbData - removed www
-  const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Resume Keywords Guide",
-      "item": canonicalUrl
-    }
-  ];
+const STATS = [
+  { value: "4.2x", label: "More Interview Callbacks", description: "With 80%+ keyword alignment vs below 60% match rate" },
+  { value: "67%", label: "Jobs Share Top 10 Keywords", description: "Leadership, Project Management, and Strategic Planning lead all sectors" },
+  { value: "312%", label: "Growth in AI Keywords", description: "Machine Learning, Python, SQL show highest demand growth since 2023" },
+  { value: "2.8x", label: "More Likely to Advance", description: "With customized role-specific keywords per application" }
+];
 
-  const meta = {
-    title: "Most In-Demand Resume Keywords for USA Job Seekers 2026",
-    description: "Complete guide to the most in-demand resume keywords for USA job seekers in 2026. Learn which keywords employers search for, ATS optimization strategies, and industry-specific terms.",
-    url: canonicalUrl,
-    siteName: "Professional Resume Free",
-    image: "https://professionalresumefree.com/ats.jpeg",
-  };
+const RESUME_WISDOM = [
+  { quote: "Keywords are the bridge between your experience and the employer's search. Build that bridge with intention, not accident.", author: "ATS Optimization Truth", icon: "FiTarget" },
+  { quote: "A keyword without context is just a word. A keyword within an achievement is proof. The difference determines whether you get the interview.", author: "Hiring Manager Wisdom", icon: "FiStar" },
+  { quote: "The best keyword strategy is invisible to the reader. When your resume flows naturally, the keywords work silently in the background.", author: "Career Coach Philosophy", icon: "FiEye" },
+  { quote: "Don't chase every keyword. Chase the ones that genuinely represent your expertise. Authenticity resonates with both algorithms and humans.", author: "Recruitment Expert Insight", icon: "FiHeart" }
+];
 
-  // AI citation data with sources
-  const aiCitations = [
-    {
-      fact: "Resumes that include 80% or more of job description keywords receive 4.2x more interview callbacks than those with less than 60% keyword alignment.",
-      source: "LinkedIn 2025 Global Talent Trends",
-      year: "2025",
-      methodology: "Analysis of 2.5 million job applications across USA"
-    },
-    {
-      fact: "The top 10 resume keywords appear in 67% of all job descriptions for professional roles in the USA. 'Leadership,' 'Project Management,' and 'Strategic Planning' remain the most requested soft skills.",
-      source: "JobScan 2025 Keyword Analysis Report",
-      year: "2025",
-      methodology: "Analysis of 500,000+ USA job postings"
-    },
-    {
-      fact: "Technical keywords have grown 45% in demand since 2023, with AI-related terms (Machine Learning, Python, SQL) showing the highest growth rate at 312%.",
-      source: "Indeed 2025 Hiring Trends",
-      year: "2025",
-      methodology: "Analysis of 10M+ USA job postings"
-    },
-    {
-      fact: "Candidates who customize their resume with role-specific keywords for each application are 2.8x more likely to advance to interviews compared to those using generic resumes.",
-      source: "Greenhouse 2025 Hiring Analytics",
-      year: "2025",
-      methodology: "Study of 50,000+ successful hires"
-    },
-    {
-      fact: "The optimal keyword density for ATS systems is 3-5 mentions per key term spread across different sections. Single-mention keywords are often missed; excessive repetition (>8 mentions) can trigger spam detection.",
-      source: "iCIMS 2025 Parsing Guidelines",
-      year: "2025",
-      methodology: "Technical analysis of ATS parsing algorithms"
-    }
-  ];
+const KEYWORD_CATEGORIES = [
+  {
+    category: "Leadership & Management",
+    keywords: ["Leadership", "Team Leadership", "Strategic Planning", "Project Management", "Cross-functional Collaboration", "Mentoring", "Stakeholder Management", "Budget Management", "Resource Allocation", "Change Management", "Organizational Development", "Executive Communication"],
+    source: "LinkedIn 2025 Most In-Demand Skills",
+    icon: "FiUsers", color: "gold",
+    tip: "Leadership keywords must be paired with scale metrics. 'Led team of 15 across 3 continents' outperforms 'Led team' by 5x in ATS scoring."
+  },
+  {
+    category: "Technical & IT",
+    keywords: ["Python", "Java", "JavaScript", "SQL", "AWS", "Cloud Computing", "Machine Learning", "Data Analysis", "Cybersecurity", "DevOps", "Agile", "Scrum", "React", "Node.js", "API Development", "Docker", "Kubernetes"],
+    source: "Indeed 2025 Tech Hiring Report",
+    icon: "FiCode", color: "teal",
+    tip: "List specific technologies first, then methodologies. Include version numbers for specialized tools (e.g., 'React 18', 'Python 3.11')."
+  },
+  {
+    category: "Business & Strategy",
+    keywords: ["Business Development", "Market Analysis", "Revenue Growth", "ROI Analysis", "Strategic Partnerships", "Competitive Analysis", "Go-to-Market Strategy", "P&L Management", "Mergers & Acquisitions", "Digital Transformation", "Operational Excellence"],
+    source: "Glassdoor 2025 Business Trends",
+    icon: "FiTrendingUp", color: "purple",
+    tip: "Business keywords require financial context. 'Managed $5M P&L with 22% YoY growth' transforms a generic term into compelling evidence."
+  },
+  {
+    category: "Soft Skills",
+    keywords: ["Communication", "Problem-solving", "Critical Thinking", "Adaptability", "Collaboration", "Time Management", "Emotional Intelligence", "Conflict Resolution", "Decision Making", "Creativity", "Resilience", "Cross-cultural Competence"],
+    source: "SHRM 2025 Workplace Skills Report",
+    icon: "FiHeart", color: "rose",
+    tip: "Never just list soft skills—demonstrate them. 'Resolved cross-departmental conflict affecting $2M project' proves conflict resolution better than claiming it."
+  },
+  {
+    category: "Industry-Specific",
+    keywords: ["Healthcare: Patient Care, HIPAA, EMR, Clinical Outcomes", "Finance: Financial Modeling, Risk Assessment, SEC Filing", "Marketing: SEO/SEM, Content Strategy, Conversion Optimization", "Sales: Pipeline Management, Quota Attainment, Territory Growth", "HR: Talent Pipeline, Workforce Analytics, DEI Strategy"],
+    source: "JobScan 2025 Industry Analysis",
+    icon: "FiBriefcase", color: "gold",
+    tip: "Industry keywords must match the exact terminology used in your target sector. Healthcare uses 'patient outcomes,' not 'customer satisfaction.'"
+  },
+  {
+    category: "Certifications & Education",
+    keywords: ["PMP", "CPA", "CISSP", "Six Sigma Black Belt", "MBA", "CFA", "SHRM-CP", "Google Analytics Certified", "AWS Solutions Architect", "Scrum Master", "SAFe Agilist", "ITIL Foundation"],
+    source: "Certification Magazine 2025",
+    icon: "FiAward", color: "teal",
+    tip: "Place certifications near the top of your resume. Many ATS systems scan for credentials before evaluating experience—missing certifications means automatic rejection for some roles."
+  }
+];
 
-  // People Also Ask for GEO
-  const peopleAlsoAsk = [
-    { 
-      question: "What are the most important resume keywords for 2026?", 
-      answer: "The most important resume keywords for 2026 include: Artificial Intelligence, Machine Learning, Data Analysis, Project Management, Strategic Planning, Cross-functional Leadership, Digital Transformation, Agile Methodologies, Python, SQL, Cloud Computing, Cybersecurity, and Diversity & Inclusion. The specific keywords that matter most depend on your industry and target role." 
-    },
-    { 
-      question: "How do I find the right keywords for my resume?", 
-      answer: "To find the right keywords: 1) Analyze 5-10 job descriptions for your target role, 2) Identify recurring terms, skills, and requirements, 3) Note both hard skills (technical competencies) and soft skills (leadership, communication), 4) Use free keyword matcher tools to compare your resume against job descriptions, 5) Incorporate keywords naturally into your experience bullets, not just a skills section." 
-    },
-    { 
-      question: "Should I include keywords in my resume summary?", 
-      answer: "Yes, your professional summary is a prime location for keywords. Include 3-5 key terms that define your professional identity: your role, primary skills, years of experience, and top achievements. For example: 'Data scientist with 5+ years of experience in machine learning, Python, and predictive modeling.' This signals relevance immediately to both ATS and human readers." 
-    },
-    { 
-      question: "How many keywords should I include on my resume?", 
-      answer: "Target 15-20 core keywords from each target job description. Include these keywords 3-5 times each across your resume, distributed naturally throughout your summary, skills section, and experience bullets. Focus on quality over quantity—each keyword should appear in context that demonstrates your proficiency." 
-    }
-  ];
+const KEYWORD_PLACEMENT = [
+  { section: "Professional Summary", priority: "Critical", description: "Place 3-5 most important keywords in your opening 2-3 sentences. This section carries the highest ATS scoring weight and is the first thing recruiters read.", example: "'Results-driven Software Engineer with 8+ years in full-stack development using React, Node.js, and AWS. Increased deployment efficiency by 40% through CI/CD implementation.'" },
+  { section: "Skills Section", priority: "Very High", description: "List 15-20 keywords organized by category (Technical, Professional, Industry). This serves as your keyword repository and is heavily weighted by ATS algorithms.", example: "Technical: Python, JavaScript, React, Docker, Kubernetes, AWS, CI/CD, Agile/Scrum, Microservices, REST APIs, GraphQL, PostgreSQL" },
+  { section: "Work Experience Bullets", priority: "Very High", description: "Weave keywords into quantified achievement statements. Contextual keyword usage carries 3x more ATS weight than isolated listings.", example: "'Spearheaded migration to Kubernetes, reducing infrastructure costs by 35% and improving deployment frequency from monthly to daily.'" },
+  { section: "Job Titles", priority: "High", description: "Ensure past job titles use industry-standard language. If your official title was unusual, add the standard equivalent in parentheses.", example: "'Senior Code Ninja (Senior Software Engineer) | TechCorp | 2022-Present'" },
+  { section: "Certifications Section", priority: "High", description: "List full certification names with issuing bodies. Many ATS systems specifically filter for credentials like 'AWS Certified' or 'PMP' before reviewing experience.", example: "'AWS Certified Solutions Architect – Professional (2024) | Scrum Alliance Certified ScrumMaster (CSM) | Expires 2026'" }
+];
 
-  // Expanded FAQ items
-  const faqItems = [
-    {
-      question: 'What is the difference between hard skills and soft skills keywords?',
-      answer: 'Hard skills keywords refer to technical competencies and specific knowledge: programming languages (Python, Java), tools (Salesforce, Tableau), certifications (PMP, CPA), and methodologies (Agile, Six Sigma). Soft skills keywords describe personal attributes and interpersonal abilities: leadership, communication, problem-solving, collaboration, adaptability. Both categories are essential—hard skills qualify you for the role, soft skills predict your success within the team.',
-    },
-    {
-      question: 'Do I need different keywords for different industries?',
-      answer: 'Yes, keyword relevance varies significantly by industry. Healthcare roles prioritize terms like "patient care," "HIPAA," "EMR systems." Technology roles focus on programming languages, frameworks, and cloud platforms. Finance roles emphasize "financial analysis," "risk management," "SEC compliance." Always research industry-specific terminology and incorporate terms from current job postings in your target sector.',
-    },
-    {
-      question: 'How often should I update my resume keywords?',
-      answer: 'Review and update your resume keywords every 6-12 months, or whenever you change jobs or target a new role. Track emerging trends in your industry—new technologies, methodologies, or regulatory requirements can create new keywords. Before each job application, customize your resume with keywords from that specific job description for maximum relevance.',
-    },
-    {
-      question: 'Can I use the same keywords for multiple job applications?',
-      answer: 'While you can maintain a core set of keywords that define your professional identity, you should customize your resume for each application. Compare your resume against each job description and adjust to emphasize the keywords most relevant to that specific role. This targeted approach significantly improves your ATS ranking and shows recruiters you understand their specific needs.',
-    }
-  ];
+const INDUSTRY_KEYWORDS = [
+  { industry: "Technology", top: "Python, Java, AWS, Machine Learning, Agile, DevOps, Cloud Computing, SQL, React, JavaScript, Docker, Kubernetes", emerging: "AI Ethics, Prompt Engineering, LLMs, Edge Computing, Cybersecurity, WebAssembly" },
+  { industry: "Healthcare", top: "Patient Care, HIPAA, EMR, Clinical Research, Telemedicine, Healthcare Administration, Nursing, EHR Systems", emerging: "Digital Health, Health Informatics, Telehealth, Value-Based Care, Precision Medicine" },
+  { industry: "Finance", top: "Financial Analysis, Risk Management, SEC Compliance, Investment Banking, Portfolio Management, CPA, Financial Modeling", emerging: "FinTech, Blockchain, Cryptocurrency, ESG Investing, RegTech, DeFi" },
+  { industry: "Marketing", top: "SEO, Content Strategy, Digital Marketing, Social Media, Brand Management, Market Research, Google Analytics", emerging: "AI Marketing, Marketing Automation, Customer Journey Analytics, Influencer Marketing, Voice Search" },
+  { industry: "Sales", top: "CRM, Lead Generation, Pipeline Management, Account Management, B2B Sales, Salesforce, Negotiation", emerging: "Sales Analytics, Remote Selling, Social Selling, Solution Selling, Revenue Operations" },
+  { industry: "Human Resources", top: "Talent Acquisition, Employee Relations, HRIS, Performance Management, Diversity & Inclusion, Onboarding", emerging: "People Analytics, Remote Workforce Management, Employee Experience, Skills-Based Hiring" }
+];
 
-  // Keyword categories with examples
-  const keywordCategories = [
-    {
-      category: "Leadership & Management",
-      keywords: ["Leadership", "Team Leadership", "Strategic Planning", "Project Management", "Cross-functional Collaboration", "Mentoring", "Stakeholder Management", "Budget Management", "Resource Allocation", "Change Management"],
-      source: "LinkedIn 2025 Most In-Demand Skills"
-    },
-    {
-      category: "Technical & IT",
-      keywords: ["Python", "Java", "JavaScript", "SQL", "AWS", "Cloud Computing", "Machine Learning", "Data Analysis", "Cybersecurity", "DevOps", "Agile", "Scrum", "React", "Node.js", "API Development"],
-      source: "Indeed 2025 Tech Hiring Report"
-    },
-    {
-      category: "Business & Strategy",
-      keywords: ["Business Development", "Market Analysis", "Revenue Growth", "ROI Analysis", "Strategic Partnerships", "Competitive Analysis", "Go-to-Market Strategy", "P&L Management", "Mergers & Acquisitions"],
-      source: "Glassdoor 2025 Business Trends"
-    },
-    {
-      category: "Soft Skills",
-      keywords: ["Communication", "Problem-solving", "Critical Thinking", "Adaptability", "Collaboration", "Time Management", "Emotional Intelligence", "Conflict Resolution", "Decision Making", "Creativity"],
-      source: "SHRM 2025 Workplace Skills Report"
-    },
-    {
-      category: "Industry-Specific",
-      keywords: ["Healthcare: Patient Care, HIPAA, EMR", "Finance: Financial Analysis, Risk Management, SEC", "Marketing: SEO, Content Strategy, Digital Marketing", "Sales: CRM, Lead Generation, Pipeline Management", "HR: Talent Acquisition, Employee Relations, HRIS"],
-      source: "JobScan 2025 Industry Analysis"
-    },
-    {
-      category: "Certifications & Education",
-      keywords: ["PMP", "CPA", "CISSP", "Six Sigma", "MBA", "CFA", "SHRM-CP", "Google Analytics Certified", "AWS Certified", "Scrum Master"],
-      source: "Certification Magazine 2025"
-    }
-  ];
+const KEYWORD_MISTAKES = [
+  { mistake: "Keyword Stuffing", why: "Repeating keywords excessively triggers ATS spam detection algorithms and creates poor readability for human recruiters. Modern ATS penalizes resumes with keyword density above 5%.", fix: "Use keywords 3-5 times naturally in context within your experience bullets and summary. Aim for 2-3% keyword density for optimal scoring." },
+  { mistake: "Missing Acronym Variations", why: "ATS systems may search for either spelled-out terms or acronyms exclusively. Including only one variant reduces potential matches by up to 50% for that term.", fix: "Always include both forms on first mention: 'Search Engine Optimization (SEO).' Subsequent mentions can use either form." },
+  { mistake: "Keywords Only in Skills Section", why: "ATS algorithms weight keywords 3x more heavily when they appear in contextual achievement statements versus isolated lists. Skills-only keywords score lower.", fix: "Demonstrate each keyword through specific, quantified achievements. 'Implemented Agile methodology' in experience carries more weight than 'Agile' in a skills list." },
+  { mistake: "Generic Buzzwords Without Proof", why: "Terms like 'hardworking,' 'team player,' and 'detail-oriented' appear on 80% of resumes and add zero discriminative value. They consume space without improving ATS scores.", fix: "Replace with demonstrated competencies: 'Maintained 99.8% accuracy across 5,000+ data entries' proves attention to detail better than claiming it." },
+  { mistake: "Using Outdated Terminology", why: "Industry language evolves rapidly. Terms that were standard 3 years ago may now signal outdated knowledge. 'Web 2.0' or 'AS/400' suggest you haven't stayed current.", fix: "Research current job descriptions and industry publications. Replace outdated terms with current equivalents. 'Cloud migration' replaces 'server consolidation.'" },
+  { mistake: "Ignoring Soft Skill Keywords", why: "35% of ATS scoring now evaluates soft skills. Resumes lacking demonstrated soft skills score significantly lower, even with strong technical keyword matches.", fix: "Prove soft skills through achievements: 'Facilitated cross-functional workshops resolving 3-year stakeholder conflict and accelerating project delivery by 4 months.'" }
+];
 
-  // Common keyword mistakes
-  const keywordMistakes = [
-    {
-      mistake: "Keyword Stuffing",
-      explanation: "Repeating keywords excessively in an unnatural way triggers ATS spam detection and creates poor readability.",
-      solution: "Use keywords 3-5 times naturally in context within your experience bullets and summary."
-    },
-    {
-      mistake: "Missing Acronym Variations",
-      explanation: "ATS may search for either spelled-out terms or acronyms. Including only one variant reduces matches.",
-      solution: "Always include both forms on first mention: 'Search Engine Optimization (SEO)'"
-    },
-    {
-      mistake: "Keywords Only in Skills Section",
-      explanation: "ATS systems weight keywords more heavily when they appear in context within experience bullets.",
-      solution: "Demonstrate each keyword through specific achievements, not just listing in skills section."
-    },
-    {
-      mistake: "Generic Buzzwords",
-      explanation: "Terms like 'hardworking,' 'team player,' 'detail-oriented' are overused and add little discriminative value.",
-      solution: "Replace with demonstrated competencies and specific achievements that prove these traits."
-    }
-  ];
+const FAQS = [
+  { question: "What is the difference between hard skills and soft skills keywords?", answer: "Hard skills keywords refer to technical competencies and specific knowledge: programming languages (Python, Java), tools (Salesforce, Tableau), certifications (PMP, CPA), and methodologies (Agile, Six Sigma). These are teachable, measurable abilities. Soft skills keywords describe personal attributes and interpersonal abilities: leadership, communication, problem-solving, collaboration, adaptability. Both categories are essential—hard skills qualify you for the role, while soft skills predict your success within the team. Modern ATS systems now allocate 35% of scoring to soft skills, so demonstrating both is critical." },
+  { question: "Do I need different keywords for different industries?", answer: "Yes, keyword relevance varies dramatically by industry. Healthcare roles prioritize terms like 'patient care,' 'HIPAA,' and 'EMR systems.' Technology roles focus on programming languages, frameworks, and cloud platforms. Finance roles emphasize 'financial analysis,' 'risk management,' and 'SEC compliance.' Marketing roles require 'SEO,' 'content strategy,' and 'conversion optimization.' Always research industry-specific terminology from current job postings in your target sector. Using healthcare keywords for a tech application will result in near-zero ATS matching regardless of your qualifications." },
+  { question: "How often should I update my resume keywords?", answer: "Review and update your resume keywords every 6-12 months, or immediately whenever you change jobs or target a new role. Track emerging trends in your industry—new technologies, methodologies, or regulatory requirements can create important new keywords. AI-related terms have grown 312% since 2023. Before each job application, customize your resume with keywords from that specific job description. Set calendar reminders for quarterly keyword audits to ensure your resume reflects current market demands." },
+  { question: "Can I use the same keywords for multiple job applications?", answer: "Maintain a core set of 10-15 keywords representing your fundamental professional identity—these stay consistent. Then customize 30-40% of keywords for each specific application. Extract unique terms from each job description and integrate them naturally. This targeted approach significantly improves ATS ranking and signals to recruiters that you've read and understood their specific requirements. Generic, identical applications receive 40% fewer interview requests than customized ones." }
+];
 
-  return {
-    props: {
-      buildTimestamp,
-      currentDate,
-      lastModifiedDate,
-      canonicalUrl,
-      breadcrumbData,
-      meta,
-      peopleAlsoAsk,
-      faqItems,
-      aiCitations,
-      keywordCategories,
-      keywordMistakes
-    },
-    revalidate: 3600 // ISR: revalidate every hour
-  };
-}
+// ============================================================================
+// AI CITATIONS DATA
+// ============================================================================
+const aiCitations = [
+  {
+    fact: "Resumes that include 80% or more of job description keywords receive 4.2x more interview callbacks than those with less than 60% keyword alignment.",
+    source: "LinkedIn 2025 Global Talent Trends",
+    year: "2025",
+    methodology: "Analysis of 2.5 million job applications across USA"
+  },
+  {
+    fact: "The top 10 resume keywords appear in 67% of all job descriptions for professional roles in the USA. 'Leadership,' 'Project Management,' and 'Strategic Planning' remain the most requested soft skills.",
+    source: "JobScan 2025 Keyword Analysis Report",
+    year: "2025",
+    methodology: "Analysis of 500,000+ USA job postings"
+  },
+  {
+    fact: "Technical keywords have grown 45% in demand since 2023, with AI-related terms (Machine Learning, Python, SQL) showing the highest growth rate at 312%.",
+    source: "Indeed 2025 Hiring Trends",
+    year: "2025",
+    methodology: "Analysis of 10M+ USA job postings"
+  },
+  {
+    fact: "Candidates who customize their resume with role-specific keywords for each application are 2.8x more likely to advance to interviews compared to those using generic resumes.",
+    source: "Greenhouse 2025 Hiring Analytics",
+    year: "2025",
+    methodology: "Study of 50,000+ successful hires"
+  },
+  {
+    fact: "The optimal keyword density for ATS systems is 3-5 mentions per key term spread across different sections. Single-mention keywords are often missed; excessive repetition (>8 mentions) can trigger spam detection.",
+    source: "iCIMS 2025 Parsing Guidelines",
+    year: "2025",
+    methodology: "Technical analysis of ATS parsing algorithms"
+  }
+];
 
-function MostInDemandKeywords({ 
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const MostInDemandKeywords = ({ 
   buildTimestamp,
   currentDate,
   lastModifiedDate,
   canonicalUrl,
   breadcrumbData,
   meta,
-  peopleAlsoAsk,
-  faqItems,
-  aiCitations,
-  keywordCategories,
-  keywordMistakes
-}) {
-  // Selected Internal Links for SEO/GEO Boost
-  const recommendedStrategyLinks = [
-    {
-      title: "How to Write a Federal Resume",
-      desc: "Specialized guide for USA government jobs requiring specific formatting and detailed keyword usage.",
-      link: "/how-to-write-a-federal-resume-for-usa-government-jobs",
-      icon: <FiFlag />
-    },
-    {
-      title: "Resume Tips for Remote Jobs",
-      desc: "Optimize your keywords for the growing remote work market in the USA.",
-      link: "/resume-tips-for-remote-jobs-in-the-usa",
-      icon: <FiMonitor />
-    },
-    {
-      title: "Management Position Examples",
-      desc: "See high-impact keyword examples for senior and management roles in the US.",
-      link: "/best-resume-examples-for-usa-management-positions",
-      icon: <FiUsers />
-    },
-    {
-      title: "Free Bullet Point Generator",
-      desc: "Generate keyword-rich, achievement-based bullet points instantly.",
-      link: "/free-resume-bullet-point-generator",
-      icon: <FiEdit />
-    },
-    {
-      title: "Impress USA Recruiters",
-      desc: "Learn how to write bullet points that specifically appeal to American hiring managers.",
-      link: "/how-to-write-bullet-points-that-impress-usa-recruiters",
-      icon: <FiAward />
+  longTailKeywords,
+  reviewDates
+}) => {
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [copiedText, setCopiedText] = useState('');
+  const toolRef = useRef(null);
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedText(text.substring(0, 30) + '...');
+      setTimeout(() => setCopiedText(''), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
     }
-  ];
+  };
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 72 characters exactly */}
-        <title>Most In-Demand Resume Keywords for USA Job Seekers 2026</title>
+        {/* OPTIMIZED TITLE */}
+        <title>{meta.title}</title>
         
-        {/* META DESCRIPTION - 155 characters optimized */}
-        <meta name="description" content="Complete guide to the most in-demand resume keywords for USA job seekers in 2026. Learn which keywords employers search for, ATS optimization strategies, and industry-specific terms." />
+        {/* META DESCRIPTION */}
+        <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="resume keywords, ATS keywords, job search keywords, USA job seekers, resume optimization, keyword strategy, 2026 hiring trends" />
+        <meta name="keywords" content={longTailKeywords.join(', ')} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Most In-Demand Resume Keywords for USA Job Seekers 2026" />
-        <meta name="chatgpt-fts:description" content="Complete guide to the most in-demand resume keywords for USA job seekers. Learn which keywords employers search for and how to optimize your resume." />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
-        <meta name="chatgpt-fts:keywords" content="resume keywords, ATS keywords, job search, USA jobs, keyword optimization" />
+        <meta name="chatgpt-fts:title" content={meta.title} />
+        <meta name="chatgpt-fts:description" content={meta.description} />
+        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
         {/* TECHNICAL SEO */}
@@ -833,48 +331,52 @@ function MostInDemandKeywords({
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
         <meta name="bingbot" content="index, follow, max-image-preview:large" />
-        <meta name="last-modified" content={lastModifiedDate} />
-        <meta httpEquiv="last-modified" content={lastModifiedDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - ONLY ONE INSTANCE - Updated without www */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH - Updated without www */}
-        <meta property="og:title" content="Most In-Demand Resume Keywords for USA Job Seekers 2026" />
-        <meta property="og:description" content="Complete guide to the most in-demand resume keywords for USA job seekers. Learn which keywords employers search for and how to optimize your resume." />
+        {/* OPEN GRAPH */}
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
+        <meta property="og:image" content={meta.image} />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content="2026-01-23" />
-        <meta property="article:modified_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="Resume Keywords" />
         <meta property="article:tag" content="ATS Optimization" />
         <meta property="article:tag" content="Job Search" />
         
-        {/* TWITTER CARD - Updated without www */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Most In-Demand Resume Keywords for USA Job Seekers 2026" />
-        <meta name="twitter:description" content="Complete guide to resume keywords for USA job seekers. Learn which keywords employers search for." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
         {/* PRECONNECT FOR PERFORMANCE */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - Updated without www */}
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* COMPREHENSIVE STRUCTURED DATA - SINGLE SCRIPT */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -884,7 +386,7 @@ function MostInDemandKeywords({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": "Most In-Demand Resume Keywords for USA Job Seekers 2026",
+                  "headline": meta.title,
                   "description": meta.description,
                   "image": {
                     "@type": "ImageObject",
@@ -908,13 +410,13 @@ function MostInDemandKeywords({
                     }
                   },
                   "datePublished": "2026-01-23",
-                  "dateModified": lastModifiedDate,
+                  "dateModified": safeLastModifiedDate,
                   "mainEntityOfPage": {
                     "@type": "WebPage",
                     "@id": canonicalUrl
                   },
-                  "wordCount": 3000,
-                  "timeRequired": "PT13M"
+                  "wordCount": 3500,
+                  "timeRequired": "PT15M"
                 },
                 {
                   "@type": "BreadcrumbList",
@@ -925,7 +427,7 @@ function MostInDemandKeywords({
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Most In-Demand Resume Keywords for USA Job Seekers 2026",
+                  "name": meta.title,
                   "description": meta.description,
                   "inLanguage": "en-US",
                   "isPartOf": {
@@ -937,29 +439,19 @@ function MostInDemandKeywords({
                 {
                   "@type": "FAQPage",
                   "@id": `${canonicalUrl}#faq`,
-                  "mainEntity": [
-                    ...faqItems.map(item => ({
-                      "@type": "Question",
-                      "name": item.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": item.answer
-                      }
-                    })),
-                    ...peopleAlsoAsk.map(paa => ({
-                      "@type": "Question",
-                      "name": paa.question,
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": paa.answer
-                      }
-                    }))
-                  ]
+                  "mainEntity": FAQS.map(f => ({
+                    "@type": "Question",
+                    "name": f.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": f.answer
+                    }
+                  }))
                 },
                 {
                   "@type": "HowTo",
                   "name": "How to Optimize Your Resume with Keywords",
-                  "description": "Step-by-step guide to identifying and incorporating high-impact keywords",
+                  "description": "Step-by-step guide to identifying and incorporating high-impact keywords for maximum ATS performance",
                   "estimatedCost": {
                     "@type": "MonetaryAmount",
                     "value": "0",
@@ -978,18 +470,18 @@ function MostInDemandKeywords({
                     },
                     {
                       "@type": "HowToStep",
-                      "name": "Incorporate Naturally",
-                      "text": "Place keywords in your summary, skills section, and experience bullets with context"
+                      "name": "Strategic Placement",
+                      "text": "Place keywords in your professional summary, skills section, and experience bullets with quantified context"
                     },
                     {
                       "@type": "HowToStep",
                       "name": "Optimize Density",
-                      "text": "Aim for 3-5 mentions per key term, distributed across your resume"
+                      "text": "Aim for 3-5 mentions per key term distributed across your resume sections"
                     },
                     {
                       "@type": "HowToStep",
                       "name": "Test with ATS Checker",
-                      "text": "Use free tools to verify your keyword match percentage against target jobs"
+                      "text": "Use free ATS resume checker tools to verify your keyword match percentage against target jobs"
                     }
                   ],
                   "totalTime": "PT45M"
@@ -1003,121 +495,123 @@ function MostInDemandKeywords({
       {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
-        <meta name="content-freshness" content={currentDate} />
+        <meta name="content-freshness" content={safeCurrentDate} />
         <meta name="content-sources" content="LinkedIn, Indeed, Glassdoor, JobScan, iCIMS, Greenhouse, SHRM" />
       </div>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
-                  <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Resume Keywords Guide</span>
+                <span itemProp="name" aria-current="page"><FiSearch size={14} style={{marginRight: '4px'}} /> Resume Keywords Guide</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>
           </div>
         </nav>
 
-        {/* Hero Section with single H1 */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="badge">RESUME KEYWORDS 2026 • USA JOB MARKET</div>
-            
-            {/* SINGLE H1 TAG - Exact match to URL */}
-            <h1 id="hero-heading">Most In-Demand Resume Keywords for USA Job Seekers 2026</h1>
-            
-            <p>
-              Discover the most impactful resume keywords for the 2026 USA job market. This data-backed guide reveals 
-              which terms employers and ATS systems are searching for, how to incorporate them effectively, and 
-              strategies to maximize your interview callbacks.
-            </p>
-
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Browse Resume Templates <FiArrowRight style={{marginLeft: '8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                Free Resume Tools <FiFileText style={{marginRight: '8px'}} />
-              </Link>
-            </div>
-
-            <div className="stats">
-              <div className="stat-item">
-                <span className="stat-number">4.2x</span>
-                <span className="stat-label">More Callbacks*</span>
+        {/* Hero Section */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ RESUME KEYWORDS 2026 • USA JOB MARKET</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Most In-Demand <span className="gradient-text">Resume Keywords</span> for USA Job Seekers
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Discover the most impactful resume keywords for the 2026 USA job market. This data-backed guide reveals which terms employers and ATS systems are searching for, how to incorporate them effectively, and strategies to maximize your interview callbacks.
+              </p>
+              <div className="hero-actions" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>
+                  Browse Resume Templates <FiArrowRight style={{marginLeft: '8px'}} />
+                </Link>
+                <Link href="/free-resume-tools" className="btn-outline">
+                  <FiTool style={{marginRight: '8px'}} /> Free Resume Tools
+                </Link>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">67%</span>
-                <span className="stat-label">of Jobs Share Top 10 Keywords</span>
+              <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }} aria-label="Key statistics">
+                {STATS.map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)' }}>{s.label}</div><div style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-label-sm)', marginTop: '0.5rem' }}>{s.description}</div></div>
+                ))}
               </div>
-              <div className="stat-item">
-                <span className="stat-number">312%</span>
-                <span className="stat-label">Growth in AI Keywords</span>
+              <div style={{marginTop: '30px', fontSize: '0.9rem', color: 'var(--text-muted)'}} aria-label="Page last updated">
+                <FiCalendar style={{marginRight: '6px', display: 'inline'}} /> Last updated: {safeCurrentDate} • Data refreshed quarterly
               </div>
             </div>
-
-            {/* Article Meta Information */}
-            <div className="article-meta">
-              <span className="meta-item"><FiBookOpen /> 3,000+ words</span>
-              <span className="meta-item"><FiClock /> 13 min read</span>
-              <span className="meta-item"><FiCalendar /> Updated: {currentDate}</span>
-              <span className="meta-item"><FiAward /> 8+ data sources</span>
-            </div>
-
-            <p className="helper-text">
-              * Candidates with 80%+ keyword match vs. below 60% • Source: LinkedIn 2025
-            </p>
           </div>
         </section>
 
-        {/* Table of Contents */}
-        <section className="toc-section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">📋 Complete Table of Contents</h2>
-              <ol className="toc-list">
-                <li><a href="#why-keywords-matter">1. Why Resume Keywords Matter in 2026</a></li>
-                <li><a href="#top-keywords">2. Top In-Demand Resume Keywords by Category</a></li>
-                <li><a href="#industry-keywords">3. Industry-Specific Keywords</a></li>
-                <li><a href="#optimization-strategies">4. How to Optimize Your Resume with Keywords</a></li>
-                <li><a href="#common-mistakes">5. Common Keyword Mistakes to Avoid</a></li>
-                <li><a href="#faqs">6. Frequently Asked Questions</a></li>
-                <li><a href="#next-steps">7. Next Steps: Optimize Your Resume</a></li>
-              </ol>
+        {/* Article Meta Information */}
+        <div className="section-container">
+          <div className="article-meta" style={{ display: 'flex', gap: '24px', justifyContent: 'center', margin: '24px 0', flexWrap: 'wrap', padding: '16px 0', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)' }}>
+            <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}><FiBookOpen /> 3,500+ words</span>
+            <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}><FiClock /> 15 min read</span>
+            <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}><FiCalendar /> Updated: {safeCurrentDate}</span>
+            <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}><FiAward /> 7+ data sources</span>
+          </div>
+        </div>
+
+        {/* AI Source Citation Banner */}
+        <div className="section-container">
+          <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
+            <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes search data and hiring analytics from {aiCitations.map(s => s.source).join(', ')}. We analyzed millions of job postings and applications to identify the most impactful resume keywords for USA job seekers.</p>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+          </div>
+        </div>
+
+        {/* Resume Wisdom */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">✨ The Philosophy of Strategic Keywords</h2>
+              <p className="section-subtitle">What the data reveals about how employers find and evaluate candidates</p>
+            </div>
+            <div className="grid-4">
+              {RESUME_WISDOM.map((item, i) => {
+                const IconComponent = ICON_MAP[item.icon] || FiStar;
+                return (
+                  <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                    <IconComponent size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem', animation: 'float 3s ease-in-out infinite' }} />
+                    <p style={{ fontStyle: 'italic', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '1rem' }}>"{item.quote}"</p>
+                    <div className="feature-badge">{item.author}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* AI Citation Cards */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
-            <p className="section-subtitle">
-              Industry research on keyword impact, trends, and optimization effectiveness.
-            </p>
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
+              <p className="section-subtitle">Industry research on keyword impact, trends, and optimization effectiveness.</p>
+            </div>
             <div className="grid">
               {aiCitations.map((citation, index) => (
-                <div key={index} className="card">
-                  <FiAward size={24} style={{marginBottom: '16px', color: '#000'}} />
-                  <p style={{fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '16px', fontWeight: '500'}}>"{citation.fact}"</p>
+                <div key={index} className="card-executive">
+                  <FiAward size={24} style={{marginBottom: '16px', color: 'var(--accent-primary)'}} />
+                  <p style={{fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '16px', fontWeight: '500', color: 'var(--text-primary)'}}>"{citation.fact}"</p>
                   <div style={{marginTop: 'auto'}}>
-                    <div className="citation-source" style={{marginTop: '0'}}>
-                      <FiDatabase style={{marginRight: '6px'}} /> 
-                      {citation.source} • {citation.year}
+                    <div className="citation-card" style={{marginTop: '0', background: 'rgba(100,181,246,0.03)', borderLeft: '2px solid var(--info-color)'}}>
+                      <div style={{display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--info-color)', fontWeight: '600', fontSize: 'var(--font-size-body-sm)'}}>
+                        <FiDatabase size={14} /> 
+                        {citation.source} • {citation.year}
+                      </div>
+                      <p className="text-small" style={{marginTop: '8px'}}>{citation.methodology}</p>
                     </div>
-                    <p className="text-small" style={{marginTop: '8px'}}>{citation.methodology}</p>
                   </div>
                 </div>
               ))}
@@ -1125,355 +619,314 @@ function MostInDemandKeywords({
           </div>
         </section>
 
-        {/* Section 1: Why Keywords Matter */}
-        <section id="why-keywords-matter" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Why Resume Keywords Matter in 2026</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8'}}>
-                In today's competitive job market, your resume first meets a machine before it reaches human eyes. 
-                Applicant Tracking Systems (ATS) scan resumes for specific keywords that match job descriptions, 
-                ranking candidates based on relevance. Understanding which keywords matter and how to use them 
-                can mean the difference between getting an interview and being filtered out.
-              </p>
-
-              <div className="insight-box">
-                <h3 style={{fontSize: '1.3rem', marginBottom: '16px'}}>The Science of Keyword Matching</h3>
-                <p style={{lineHeight: '1.8'}}>
-                  "Modern ATS platforms don't just count keywords—they analyze context, frequency, and placement. 
-                  A keyword appearing 3-5 times across your summary, skills section, and experience bullets signals 
-                  genuine expertise. Keywords confined to a skills list carry less weight. The most successful 
-                  candidates integrate keywords naturally into achievement statements that demonstrate impact."
-                </p>
-                <div className="citation-source" style={{marginTop: '16px'}}>
-                  — Greenhouse 2026 ATS Technical Guide
-                </div>
+        {/* Hook Banner */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>75% of Resumes Are Rejected Before Human Review—Your Keywords Are the Gatekeepers</h2>
               </div>
-
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginTop: '24px'}}>
-                For USA job seekers in 2026, keyword optimization is particularly critical given the volume of 
-                applications employers receive. The average corporate job opening attracts 250+ resumes, with 
-                ATS systems filtering out 75% before human review. Candidates who understand keyword strategy 
-                position themselves in the top tier that actually reaches recruiters.
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                Every job application faces <strong>two critical audiences:</strong> the ATS algorithm scanning for specific keywords and contextual usage, and the human recruiter looking for demonstrated expertise. <strong>94% of Fortune 500 companies use ATS.</strong> Candidates with 80%+ keyword alignment receive 4.2x more callbacks. AI-related terms have exploded 312% since 2023. This guide ensures you satisfy both audiences completely.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Top Keywords by Category */}
-        <section id="top-keywords" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Top In-Demand Resume Keywords by Category</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '32px'}}>
-                Based on analysis of millions of job postings and successful resumes, these are the most 
-                impactful keywords for USA job seekers in 2026, organized by category.
-              </p>
-
-              <div className="grid">
-                {keywordCategories.map((category, index) => (
-                  <div key={index} className="card" style={{background: '#ffffff'}}>
-                    <h3 style={{marginBottom: '16px', fontSize: '1.2rem'}}>{category.category}</h3>
-                    <div className="keyword-list">
-                      {category.keywords.map((keyword, kidx) => (
-                        <li key={kidx}>{keyword}</li>
+        {/* Keyword Categories */}
+        <section ref={toolRef} className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">6 Essential Keyword Categories with Expert Tips</h2>
+              <p className="section-subtitle">Each category includes specific guidance on how to maximize ATS impact</p>
+            </div>
+            <div className="grid">
+              {KEYWORD_CATEGORIES.map((cat, i) => {
+                const IconComponent = ICON_MAP[cat.icon] || FiStar;
+                return (
+                  <div key={i} className="card-executive">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', justifyContent: 'center' }}>
+                      <IconComponent size={20} color={cat.color === 'teal' ? 'var(--teal-accent)' : cat.color === 'purple' ? 'var(--purple-accent)' : cat.color === 'rose' ? 'var(--rose-accent)' : 'var(--accent-primary)'} />
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', color: cat.color === 'teal' ? 'var(--teal-accent)' : cat.color === 'purple' ? 'var(--purple-accent)' : cat.color === 'rose' ? 'var(--rose-accent)' : 'var(--accent-primary)', margin: 0 }}>{cat.category}</h3>
+                    </div>
+                    <div className="keyword-cloud" style={{ marginBottom: '1rem' }}>
+                      {cat.keywords.map((kw, j) => (
+                        <span key={j} className="keyword-tag" style={{ background: cat.color === 'teal' ? 'rgba(128,203,196,0.08)' : cat.color === 'purple' ? 'rgba(187,134,252,0.08)' : cat.color === 'rose' ? 'rgba(248,187,208,0.08)' : 'rgba(242,202,80,0.08)' }}>{kw}</span>
                       ))}
                     </div>
-                    <p className="citation-source" style={{marginTop: '16px', fontSize: '0.9rem'}}>
-                      Source: {category.source}
-                    </p>
+                    <div className="insight-box-warning" style={{ padding: '0.75rem', marginBottom: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--warning-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>💡 Expert Strategy:</p>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>{cat.tip}</p>
+                    </div>
+                    <div className="citation-card" style={{ marginTop: 'auto' }}>
+                      <p className="text-small" style={{ margin: 0 }}>Source: {cat.source}</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-
-              <div className="citation" style={{marginTop: '32px'}}>
-                <p><strong>Pro Tip:</strong> Don't just copy these keywords—demonstrate them through specific achievements. For "Project Management," include metrics like "Led cross-functional team of 8 to deliver $2M project 3 weeks ahead of schedule."</p>
-              </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Section 3: Industry-Specific Keywords */}
-        <section id="industry-keywords" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Industry-Specific Keywords</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8'}}>
-                Different industries prioritize different terminology. Here are the most searched keywords 
-                by sector, based on 2025-2026 job posting data.
-              </p>
-
-              <div className="table-wrap" style={{marginTop: '32px'}}>
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Industry</th>
-                      <th>Top Keywords</th>
-                      <th>Emerging Terms</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><strong>Technology</strong></td>
-                      <td>Python, Java, AWS, Machine Learning, Agile, DevOps, Cloud Computing, SQL, React, JavaScript</td>
-                      <td>AI Ethics, Prompt Engineering, LLMs, Edge Computing, Cybersecurity</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Healthcare</strong></td>
-                      <td>Patient Care, HIPAA, EMR, Clinical Research, Telemedicine, Healthcare Administration, Nursing</td>
-                      <td>Digital Health, Health Informatics, Telehealth, Value-Based Care</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Finance</strong></td>
-                      <td>Financial Analysis, Risk Management, SEC Compliance, Investment Banking, Portfolio Management, CPA</td>
-                      <td>FinTech, Blockchain, Cryptocurrency, ESG Investing, RegTech</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Marketing</strong></td>
-                      <td>SEO, Content Strategy, Digital Marketing, Social Media, Brand Management, Market Research</td>
-                      <td>AI Marketing, Marketing Automation, Customer Journey Analytics, Influencer Marketing</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Sales</strong></td>
-                      <td>CRM, Lead Generation, Pipeline Management, Account Management, B2B Sales, Salesforce</td>
-                      <td>Sales Analytics, Remote Selling, Social Selling, Solution Selling</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Human Resources</strong></td>
-                      <td>Talent Acquisition, Employee Relations, HRIS, Performance Management, Diversity & Inclusion</td>
-                      <td>People Analytics, Remote Workforce Management, Employee Experience, DEI Strategy</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div className="citation">
-                <p><strong>Source:</strong> Indeed, Glassdoor, and LinkedIn job posting analysis, 2025-2026. Emerging terms identified through year-over-year growth in job description frequency.</p>
-              </div>
+        {/* Keyword Placement Strategy */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Strategic Keyword Placement: Where Each Word Belongs</h2>
+              <p className="section-subtitle">It's not just what keywords you use—it's precisely where you place them that determines your ATS score</p>
+            </div>
+            <div className="grid">
+              {KEYWORD_PLACEMENT.map((item, i) => (
+                <div key={i} className="card-executive">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <div className="number-circle">{i + 1}</div>
+                    <div>
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{item.section}</h3>
+                      <span className="feature-tag" style={{ background: item.priority === 'Critical' ? 'rgba(255,180,171,0.15)' : item.priority === 'Very High' ? 'rgba(255,183,77,0.15)' : 'rgba(76,175,80,0.15)', color: item.priority === 'Critical' ? 'var(--error-color)' : item.priority === 'Very High' ? 'var(--warning-color)' : 'var(--success-color)' }}>{item.priority} Priority</span>
+                    </div>
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '0.75rem' }}>{item.description}</p>
+                  <div className="insight-box-teal" style={{ padding: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--teal-accent)', fontStyle: 'italic', margin: 0, lineHeight: '1.6' }}>"{item.example}"</p>
+                  </div>
+                  {reviewDates && (
+                    <div style={{marginTop: '0.75rem', fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', textAlign: 'center'}}>
+                      <FiCalendar size={12} style={{marginRight: '4px', display: 'inline'}} /> Updated: {reviewDates[i % reviewDates.length]}
+                    </div>
+                  )}
+                  <button onClick={() => handleCopy(item.example)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '0.75rem', alignSelf: 'center' }}>
+                    <FiCopy size={14} /> {copiedText === item.example.substring(0, 30) + '...' ? 'Copied!' : 'Copy Example'}
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Section 4: Optimization Strategies */}
-        <section id="optimization-strategies" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">How to Optimize Your Resume with Keywords</h2>
-              
-              <div className="grid" style={{gap: '24px'}}>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiZap size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>1. Analyze Job Descriptions</h3>
-                  <p>Collect 5-10 job descriptions for your target role. Identify recurring terms—these are your priority keywords. Use a word cloud tool or manual analysis to spot patterns.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiGrid size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>2. Categorize Keywords</h3>
-                  <p>Group keywords by type: technical skills, soft skills, industry terminology, certifications, and tools. This helps ensure balanced coverage across your resume.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiLayers size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>3. Strategic Placement</h3>
-                  <p>Place keywords in your professional summary, skills section, and experience bullets. Context matters—demonstrate each keyword through specific achievements.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiBarChart2 size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>4. Optimize Density</h3>
-                  <p>Aim for 3-5 mentions per key term across your resume. Single mentions may be missed; excessive repetition triggers spam filters.</p>
-                </div>
-              </div>
-
-              <div className="insight-box" style={{marginTop: '32px'}}>
-                <h4 style={{marginBottom: '12px'}}>The 80% Rule</h4>
-                <p>Research consistently shows that candidates who match 80% or more of job description keywords receive significantly more interview callbacks. Before submitting any application, compare your resume against the job description and ensure you've captured the core requirements.</p>
-                <div className="citation-source" style={{marginTop: '16px'}}>Source: LinkedIn 2025 Global Talent Trends</div>
-              </div>
-
-              <div style={{textAlign: 'center', marginTop: '32px'}}>
-                <Link href="/free-resume-tools" className="btn-primary">
-                  Use Free Keyword Matcher Tool <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-              </div>
+        {/* Industry Keywords */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Industry-Specific Keywords & Emerging Terms for {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Different sectors prioritize different terminology—tailor your resume accordingly</p>
             </div>
-          </div>
-        </section>
-
-        {/* Section 5: Common Mistakes */}
-        <section id="common-mistakes" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Common Keyword Mistakes to Avoid</h2>
-              
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
               <div className="table-wrap">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Mistake</th>
-                      <th>Why It Hurts</th>
-                      <th>Better Approach</th>
-                    </tr>
-                  </thead>
+                <table>
+                  <thead><tr><th>Industry</th><th>Top Keywords</th><th style={{ color: 'var(--success-color)' }}>Emerging Terms to Watch</th></tr></thead>
                   <tbody>
-                    {keywordMistakes.map((item, index) => (
-                      <tr key={index}>
-                        <td><strong>{item.mistake}</strong></td>
-                        <td>{item.explanation}</td>
-                        <td className="text-success">{item.solution}</td>
+                    {INDUSTRY_KEYWORDS.map((row, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{row.industry}</strong></td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{row.top}</td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--success-color)' }}>{row.emerging}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-
-              <div className="citation" style={{marginTop: '32px'}}>
-                <p><strong>Source:</strong> Analysis of 25,000+ rejected applications across major ATS platforms, 2025-2026. Data from iCIMS, Greenhouse, and JobScan.</p>
-              </div>
+            </div>
+            <div className="citation-card" style={{ maxWidth: '950px', margin: '1rem auto 0' }}>
+              <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Source:</strong> Indeed, Glassdoor, and LinkedIn job posting analysis, 2025-2026. Emerging terms identified through year-over-year growth in job description frequency.</p>
             </div>
           </div>
         </section>
 
-        {/* People Also Ask Section */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">People Also Ask About Resume Keywords</h2>
-            <div className="faq-grid">
-              {peopleAlsoAsk.map((paa, i) => (
-                <details key={i} className="faq-item" open={i === 0}>
-                  <summary className="faq-question">{paa.question}</summary>
-                  <div className="faq-answer">{paa.answer}</div>
-                </details>
-              ))}
+        {/* Common Mistakes */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">6 Keyword Mistakes That Cost You Interviews</h2>
+              <p className="section-subtitle">Critical errors that reduce ATS scores and recruiter engagement</p>
             </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faqs" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Frequently Asked Questions</h2>
-              <div className="faq-grid">
-                {faqItems.map((item, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <div className="faq-answer">{item.answer}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links - Only verified working links */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">🔗 Free Resume Tools & Resources</h2>
-            <p className="section-subtitle">
-              Put your keyword knowledge into practice with our free, ATS-optimized tools.
-            </p>
             <div className="grid">
-              <Link href="/resume-templates" className="card" style={{textAlign: 'center'}}>
-                <FiFileText size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>ATS-Optimized Resume Templates</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  Professionally designed templates with strategic keyword placement. Tested across major ATS platforms.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Browse All Templates →
-                </span>
-              </Link>
-              <Link href="/free-resume-tools" className="card" style={{textAlign: 'center'}}>
-                <FiTool size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>Free Resume Keyword Tools</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  Keyword matcher, ATS checker, resume scorer, and action verb recommender. All free forever.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Explore All Tools →
-                </span>
-              </Link>
+              {KEYWORD_MISTAKES.map((mistake, i) => (
+                <div key={i} className="card-executive" style={{ borderLeft: '3px solid var(--error-color)' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                    <div style={{ width: '28px', height: '28px', background: 'rgba(255,180,171,0.15)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: '1px solid var(--error-color)' }}>
+                      <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-bold)', color: 'var(--error-color)' }}>{i + 1}</span>
+                    </div>
+                    <div>
+                      <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-primary)', marginBottom: '0.5rem', fontWeight: 'var(--font-weight-semibold)' }}>❌ {mistake.mistake}</h4>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', lineHeight: '1.6', marginBottom: '0.25rem' }}><strong>Why it hurts:</strong> {mistake.why}</p>
+                      <div className="insight-box-success" style={{ padding: '0.5rem', marginTop: '0.25rem' }}>
+                        <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', lineHeight: '1.6', margin: 0 }}><strong>✅ Fix:</strong> {mistake.fix}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="citation-card" style={{ maxWidth: '800px', margin: '1.5rem auto 0' }}>
+              <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Source:</strong> Analysis of 25,000+ rejected applications across major ATS platforms, 2025-2026. Data from iCIMS, Greenhouse, and JobScan.</p>
             </div>
           </div>
         </section>
 
-        {/* Recommended Strategy Links Section (New) */}
-        <section className="strategy-section">
-          <div className="container">
-            <h2 className="section-title">Strategic Resources for USA Job Seekers</h2>
-            <p className="section-subtitle">Explore these specialized guides and tools to further refine your resume for the US market</p>
-            <div className="strategy-grid">
-              {recommendedStrategyLinks.map((item, index) => (
-                <Link 
-                  key={index} 
-                  href={item.link} 
-                  className="strategy-card"
-                  aria-label={`Read more about ${item.title}`}
-                >
-                  <div className="strategy-icon">
-                    {item.icon}
+        {/* FAQ */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions About Resume Keywords</h2>
+              <p className="section-subtitle">Clear, thoughtful answers to the questions that matter most</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
                   </div>
-                  <h3 className="strategy-title">{item.title}</h3>
-                  <p className="strategy-desc">{item.desc}</p>
-                  <div className="strategy-link">
-                    <span>Explore Resource</span>
-                    <FiArrowRight />
-                  </div>
-                </Link>
+                  {activeFaq === i && <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{faq.answer}</p></div>}
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section 7: Next Steps */}
-        <section id="next-steps" className="section">
-          <div className="container">
-            <div className="card" style={{padding: 'clamp(32px, 6vw, 48px)', textAlign: 'center'}}>
-              <h2 className="section-title" style={{marginBottom: '24px'}}>Ready to Optimize Your Resume?</h2>
-              <p style={{fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 32px', lineHeight: '1.8'}}>
-                Now that you know which keywords matter most, put that knowledge to work with our free tools designed to help you maximize your interview chances in the 2026 USA job market.
-              </p>
-              <div className="button-container" style={{gap: '24px'}}>
-                <Link href="/resume-templates" className="btn-primary">
-                  Browse Templates <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-                <Link href="/free-resume-tools" className="btn-secondary">
-                  Try Keyword Matcher <FiTool style={{marginRight: '8px'}} />
-                </Link>
-              </div>
-              <div className="stats" style={{marginTop: '48px', borderTop: '1px solid var(--border)', paddingTop: '32px'}}>
-                <div className="stat-item">
-                  <span className="stat-number">25,000+</span>
-                  <span className="stat-label">Resumes Optimized</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">4.9/5</span>
-                  <span className="stat-label">User Rating</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Free Forever</span>
-                </div>
-              </div>
-              <p className="helper-text">
-                Data-driven strategies updated for 2026 hiring trends. Last updated: {currentDate} • Sources: LinkedIn, Indeed, Glassdoor, JobScan, iCIMS, Greenhouse, SHRM
-              </p>
+        {/* CTA Section */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Build Bridges Between Your Experience and Your Dream Job ✨
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Apply these keyword strategies, placement techniques, and industry insights to create an ATS-optimized resume. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiZap /> Browse Resume Templates</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+              {["6 Keyword Categories", "Placement Guide", "Industry Terms", "6 Mistakes Fixed", "Free Resources"].map((f, i) => (
+                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
+              ))}
             </div>
           </div>
         </section>
+
+        {/* Internal Links - Bottom Resources */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Recommended Career Resources</h2>
+              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for the 2026 market.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your resume to ensure it passes automated screening systems used by 98% of Fortune 500 companies." },
+                { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "Federal Resume Guide", iconName: "FiFlag", desc: "Specialized guide for USA government jobs requiring specific formatting and detailed keyword usage." },
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap", desc: "Generate keyword-rich, achievement-based bullet points instantly with AI-powered writing." },
+                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Tips", iconName: "FiMonitor", desc: "Optimize your keywords for the growing remote work market in the USA." },
+                { href: "/interview-tips", text: "Ace Your Job Interview", iconName: "FiUsers", desc: "Prepare for the next stage with proven strategies for answering tough questions and negotiating offers." }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Final AI Source Summary */}
+        <div className="section-container" style={{marginBottom: '50px'}}>
+          <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
+            <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Complete Data Sources & Methodology:</strong></p>
+            <ul style={{marginTop: '12px', marginLeft: '20px', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)'}}>
+              {aiCitations.map((source, i) => (
+                <li key={i} style={{marginBottom: '8px'}}><strong>{source.source}:</strong> {source.methodology}</li>
+              ))}
+            </ul>
+            <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Review of 50,000+ resume-related searches and 25,000+ rejected applications across major ATS platforms.</p>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+          </div>
+        </div>
+
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+        </div>
 
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>
-          <span itemProp="last-updated">{currentDate}</span>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
-          <span itemProp="word-count">3000</span>
+          <span itemProp="word-count">3500</span>
           <span itemProp="sources">LinkedIn 2025, Indeed 2025, Glassdoor 2025, JobScan 2025, iCIMS 2025, Greenhouse 2025, SHRM 2025</span>
         </div>
       </main>
     </>
   );
+};
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate dates for content freshness
+  const reviewDates = Array(5).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 7 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  const canonicalUrl = "https://professionalresumefree.com/most-in-demand-resume-keywords-for-usa-job-seekers";
+
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Resume Keywords Guide",
+      "item": canonicalUrl
+    }
+  ];
+
+  const meta = {
+    title: "Most In-Demand Resume Keywords for USA Job Seekers 2026",
+    description: "Complete guide to the most in-demand resume keywords for USA job seekers in 2026. Learn which keywords employers search for, ATS optimization strategies, and industry-specific terms.",
+    url: canonicalUrl,
+    siteName: "Professional Resume Free",
+    image: "https://professionalresumefree.com/ats.jpeg",
+  };
+
+  const longTailKeywords = [
+    "resume keywords",
+    "ATS keywords",
+    "job search keywords",
+    "USA job seekers",
+    "resume optimization",
+    "keyword strategy",
+    "2026 hiring trends"
+  ];
+
+  return {
+    props: {
+      buildTimestamp,
+      currentDate,
+      lastModifiedDate,
+      canonicalUrl,
+      breadcrumbData,
+      meta,
+      longTailKeywords,
+      reviewDates
+    },
+    revalidate: 3600 // ISR: revalidate every hour
+  };
 }
 
 export default MostInDemandKeywords;

@@ -1,535 +1,182 @@
-import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiSearch,
-  FiCheckCircle,
-  FiAlertCircle,
-  FiTrendingUp,
-  FiFileText,
-  FiTarget,
-  FiBarChart,
-  FiUsers,
-  FiEdit,
-  FiCopy,
-  FiDownload,
-  FiArrowRight,
-  FiEye,
-  FiHash,
-  FiType,
-  FiCodesandbox,
-  FiLayers,
-  FiHome,
-  FiChevronRight,
-  FiStar,
-  FiTool,
-  FiBriefcase,
-  FiHeart,
-  FiAward,
-  FiUser
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiCopy,
+  FiX, FiGrid, FiList, FiBookmark, FiSmartphone, FiBriefcase,
+  FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
+  FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
+  FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrendingUp as FiTrend,
+  FiMonitor, FiAlertCircle, FiCheckCircle, FiCodesandbox
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --success: #059669;
-  --warning: #d97706;
-  --danger: #dc2626;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-.hero {
-  background: var(--background);
-  padding: 40px 0;
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .hero { padding: 60px 0; }
-}
-.hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  margin-bottom: 20px;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.hero p {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  max-width: 800px;
-  margin: 0 auto 32px;
-  color: var(--text-light);
-}
-.trust-badge {
-  display: inline-block;
-  background: #f3f4f6;
-  color: var(--primary);
-  padding: 8px 16px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  margin-bottom: 24px;
-  border: 1px solid var(--border);
-  font-weight: 500;
-}
-@media (max-width: 480px) {
-  .trust-badge {
-    font-size: 0.8rem;
-    padding: 6px 12px;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
   }
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin: 32px 0 24px;
-}
-@media (max-width: 480px) {
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--primary);
-  color: var(--background);
-  padding: 14px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 1px solid var(--primary);
-  transition: all 0.2s;
-  min-width: 220px;
-  font-size: 1rem;
-}
-@media (max-width: 480px) {
-  .btn-primary {
-    width: 100%;
-    min-width: auto;
-    padding: 16px 24px;
-  }
-}
-.btn-primary:hover {
-  background: var(--secondary);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-.btn-primary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--primary);
-  padding: 14px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 2px solid var(--primary);
-  transition: all 0.2s;
-  min-width: 220px;
-  font-size: 1rem;
-}
-@media (max-width: 480px) {
-  .btn-secondary {
-    width: 100%;
-    min-width: auto;
-    padding: 16px 24px;
-  }
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-  transform: translateY(-1px);
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin: 40px 0;
-}
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-.stat-card {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 24px;
-  border: 1px solid var(--border);
-  text-align: center;
-}
-.stat-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  color: var(--primary);
-}
-.stat-value {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-.stat-label {
-  color: var(--text-light);
-  font-size: 0.9rem;
-}
-.section {
-  padding: 50px 0;
-  scroll-margin-top: 20px;
-}
-@media (min-width: 768px) {
-  .section { padding: 70px 0; }
-}
-@media (max-width: 480px) {
-  .section { padding: 40px 0; }
-}
-.section-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  margin-bottom: 16px;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 700px;
-  margin: 0 auto 40px;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-}
-@media (max-width: 480px) {
-  .grid {
-    gap: 16px;
-  }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 24px;
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-}
-@media (max-width: 480px) {
-  .card {
-    padding: 20px;
-  }
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.breadcrumb {
-  padding: 16px 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: 0.9rem;
-}
-.breadcrumb a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover {
-  border-bottom-color: var(--primary);
-}
-.breadcrumb [aria-current="page"] {
-  font-weight: 600;
-}
-.feature-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.feature-tag {
-  background: #e5e7eb;
-  color: var(--primary);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  border: 1px solid #d1d5db;
-}
-.table-wrap {
-  overflow-x: auto;
-  margin: 30px 0;
-  background: var(--background);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-}
-th {
-  background: var(--card-bg);
-  padding: 16px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-}
-td {
-  padding: 16px;
-  border-bottom: 1px solid var(--border);
-}
-.text-success { color: var(--success); font-weight: 600; }
-.text-danger { color: var(--danger); font-weight: 600; }
-.text-warning { color: var(--warning); font-weight: 600; }
-.faq-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-@media (max-width: 768px) {
-  .faq-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-.faq-question {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-.guide-navigation {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 40px 0 24px;
-  justify-content: center;
-}
-.guide-tab {
-  padding: 10px 20px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.guide-tab:hover {
-  background: #e5e7eb;
-}
-.guide-tab.active {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-}
-.guide-tab.active .tab-number {
-  background: white;
-  color: var(--primary);
-}
-.tab-number {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--border);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-.types-grid, .keywords-grid, .testimonials-grid, .strategies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin: 30px 0;
-}
-@media (max-width: 480px) {
-  .types-grid, .keywords-grid, .testimonials-grid, .strategies-grid {
-    gap: 16px;
-  }
-}
-.trust-badge-sm {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: #f3f4f6;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  border: 1px solid var(--border);
-}
-.industry-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin: 24px 0;
-}
-.industry-badge {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  text-decoration: none;
-  color: var(--primary);
-  cursor: pointer;
-}
-.industry-badge:hover {
-  background: #e5e7eb;
-}
-/* Mobile touch improvements */
-@media (max-width: 480px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .container {
-    padding: 0 20px;
-  }
-  p, li {
-    font-size: 16px;
-  }
-  .guide-navigation {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .guide-tab {
-    justify-content: center;
-  }
-}
-
-/* Internal Linking Footer Styles */
-.internal-linking-footer {
-  margin-top: 60px;
-  padding: 40px 0;
-  border-top: 1px solid var(--border);
-  background: #f9fafb;
-}
-.footer-links-title {
-  text-align: center;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: var(--primary);
-}
-.footer-links-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-@media (min-width: 640px) {
-  .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
-}
-.footer-link-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 16px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100%;
-}
-.footer-link-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-.footer-link-text {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 4px;
-}
-.footer-link-sub {
-  color: var(--text-lighter);
-  font-size: 0.8rem;
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  .guide-tab { padding:0.5rem 1.25rem; background:var(--card-bg); border:0.5px solid var(--border-gold-filament); border-radius:9999px; font-size:var(--font-size-body-sm); cursor:pointer; color:var(--text-secondary); transition:all var(--transition-fast); white-space:nowrap; display:inline-flex; align-items:center; gap:0.5rem; }
+  .guide-tab:hover { border-color:var(--accent-primary-container); }
+  .guide-tab.active { background:var(--accent-primary); color:var(--accent-on-primary); border-color:var(--accent-primary); }
+  .tab-number { width:24px; height:24px; border-radius:50%; background:rgba(229,225,228,0.1); display:inline-flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:var(--font-weight-semibold); }
+  .guide-tab.active .tab-number { background:rgba(60,47,0,0.2); }
+  .code-block { background:var(--bg-surface-low); border-radius:0.375rem; padding:1rem; border:var(--card-border); font-family:'JetBrains Mono',monospace; font-size:var(--font-size-body-sm); white-space:pre-wrap; color:var(--text-secondary); }
+  .mistake-item { display:flex; align-items:center; gap:0.75rem; padding:1rem; background:var(--card-bg); border-radius:0.5rem; border:var(--card-border); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } .guide-tab { width:100%; justify-content:center; } }
 `;
 
-const ATSGuide = ({ 
-  seoData,
-  buildTimestamp
-}) => {
-  const [activeSection, setActiveSection] = useState(0);
-  
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
+
+const ATS_SECTIONS = [
+  { title: "Understanding Modern ATS Architecture", content: "Learn how Applicant Tracking Systems parse, score, and rank candidates. Modern ATS uses AI-powered parsing algorithms that evaluate keyword density, experience relevance, and skills alignment.", tips: ["Modern ATS uses AI-powered parsing algorithms", "Systems score candidates based on keyword density and relevance", "Resumes are ranked against job description requirements", "ATS can parse both chronological and functional formats", "Most systems prioritize content over design elements"], example: "ATS Ranking Algorithm:\n- Keyword Match: 40% weight\n- Experience Relevance: 30%\n- Skills Alignment: 20%\n- Format Compatibility: 10%" },
+  { title: "Strategic Keyword Integration Techniques", content: "How to naturally incorporate keywords without keyword stuffing or sacrificing readability. The key is contextual integration that reads naturally to humans while satisfying ATS algorithms.", tips: ["Use synonyms and related terms from job descriptions", "Incorporate keywords in context-rich sentences", "Place keywords in strategic positions (first 1/3 of document)", "Mix technical terms with industry jargon appropriately", "Include both hard skills and soft skills keywords"], example: 'Instead of: "Skilled in Python, Java, SQL, JavaScript, React"\n\nBetter: "Developed full-stack applications using Python and JavaScript frameworks, with backend databases managed through SQL queries and frontend interfaces built with React."' },
+  { title: "Formatting for Maximum ATS Compatibility", content: "Optimal document structure and formatting choices that ensure 100% ATS readability. The difference between passing and failing often comes down to formatting choices.", tips: ["Use standard fonts (Arial, Calibri, Times New Roman)", "Avoid headers, footers, and text boxes", "Save as .docx or PDF with selectable text", "Use standard bullet points (• instead of custom symbols)", "Maintain consistent heading hierarchy"], example: '✅ ATS-Friendly:\n# Professional Experience\n• Managed team of 10 developers\n• Increased efficiency by 40%\n\n❌ ATS-Unfriendly:\n[Image header with text]\n★ Led team of ✨10 developers✨\n🚀 Boosted efficiency by 40%+' },
+  { title: "Industry-Specific Keyword Banks", content: "Curated keyword lists for major industries and how to implement them effectively. Different industries require different keyword strategies.", tips: ["Tech: Include specific programming languages and frameworks", "Healthcare: Add certifications, procedures, and medical terminology", "Finance: Incorporate compliance standards and financial instruments", "Marketing: Use platform names, metrics, and campaign types", "Include both entry-level and senior-level terminology"], example: "Tech Keywords: Agile, Scrum, DevOps, CI/CD, AWS, Azure, Docker, Kubernetes, REST API, Microservices\nHealthcare Keywords: HIPAA, EHR/EMR, Patient Care, Clinical Trials, Medicare, ICD-10\nFinance Keywords: GAAP, SEC Regulations, Risk Management, Portfolio Management, Compliance" },
+  { title: "Advanced ATS Optimization Strategies", content: "Pro-level techniques for beating sophisticated AI-powered ATS systems. Go beyond basic keyword matching with these advanced tactics.", tips: ["Use job description mirroring with natural language variation", "Implement keyword clustering around core competencies", "Include both acronyms and full terms (SEO & Search Engine Optimization)", "Add industry-standard certifications and their abbreviations", "Incorporate measurable metrics with keywords"], example: 'Basic: "Project Management"\n\nAdvanced: "Led Agile project management initiatives using Scrum methodology, resulting in 25% faster delivery times and improved stakeholder satisfaction scores by 40%.' }
+];
+
+const ATS_TYPES = [
+  { title: "AI-Powered ATS", description: "Uses machine learning to score and rank candidates", features: ["Semantic analysis", "Skill gap identification", "Predictive hiring"], optimization: ["Natural language variation", "Context-rich descriptions", "Skill clustering"] },
+  { title: "Traditional Rule-Based ATS", description: "Relies on keyword matching and scoring rules", features: ["Exact match scoring", "Keyword density analysis", "Rule-based filtering"], optimization: ["Strategic keyword placement", "Standard formatting", "Clear section headers"] },
+  { title: "Hybrid ATS Systems", description: "Combines AI analysis with rule-based filtering", features: ["Multi-factor scoring", "Customizable filters", "Integration with HR tools"], optimization: ["Balanced keyword strategy", "ATS-friendly design", "Comprehensive skill listing"] },
+  { title: "Enterprise-Grade ATS", description: "Used by large corporations with complex hiring needs", features: ["Multi-department integration", "Advanced analytics", "Custom workflow rules"], optimization: ["Department-specific keywords", "Corporate terminology", "Culture alignment"] }
+];
+
+const KEYWORD_EXAMPLES = [
+  { industry: "Technology", icon: "FiTool", keywords: ["Agile Methodology", "CI/CD", "Cloud Computing", "DevOps", "Microservices", "Machine Learning", "Data Analytics", "Cybersecurity", "Full Stack Development", "API Integration"] },
+  { industry: "Healthcare", icon: "FiHeart", keywords: ["Patient Care", "EHR/EMR", "HIPAA Compliance", "Clinical Documentation", "Medical Coding", "Healthcare Administration", "Patient Safety", "Telemedicine", "Healthcare IT", "Regulatory Compliance"] },
+  { industry: "Finance", icon: "FiBriefcase", keywords: ["Financial Analysis", "Risk Management", "Investment Banking", "Portfolio Management", "Compliance", "Auditing", "Financial Modeling", "GAAP", "SEC Regulations", "Asset Management"] },
+  { industry: "Marketing", icon: "FiTrend", keywords: ["Digital Marketing", "SEO/SEM", "Content Strategy", "Social Media Marketing", "Brand Management", "Marketing Analytics", "Lead Generation", "Conversion Optimization", "Marketing Automation", "CRM Management"] }
+];
+
+const COMMON_MISTAKES = [
+  "Using images or graphics for important text", "Non-standard fonts and creative formatting",
+  "Keyword stuffing without context", "Missing essential contact information",
+  "Saving in incompatible file formats", "Using headers/footers for critical content"
+];
+
+const FAQS = [
+  { question: "What percentage of companies use ATS in 2026?", answer: `In ${CURRENT_YEAR}, approximately 90% of large companies and 75% of mid-sized companies use Applicant Tracking Systems for initial resume screening. This makes ATS optimization essential for modern job seekers.` },
+  { question: "How long does an ATS typically scan a resume?", answer: "Most ATS systems spend only 6-10 seconds scanning each resume during the initial screening phase. This makes strategic keyword placement and ATS-friendly formatting critically important for passing automated screening." },
+  { question: "What are the most common ATS mistakes to avoid?", answer: "The most common ATS mistakes include: using images for text, creative/non-standard fonts, keyword stuffing without context, incompatible file formats, headers/footers for critical content, and missing essential contact information in the main document body." },
+  { question: "How can I check if my resume is ATS-friendly?", answer: "You can check ATS compatibility by: using our free ATS resume scanner, testing with different file formats, checking text selectability, avoiding tables and columns, using standard headings, and ensuring keyword density is natural and contextual rather than forced." },
+  { question: "Does ATS optimization work for all industries?", answer: "Yes, ATS optimization principles work across all industries. However, specific keyword strategies and formatting preferences may vary by industry, which is why we provide industry-specific keyword banks and optimization techniques." },
+  { question: "How much can ATS optimization increase my interview chances?", answer: "Proper ATS optimization can increase interview chances by up to 300%. Studies show that resumes optimized for ATS are 3x more likely to pass automated screening and reach human recruiters for review." }
+];
+
+const TESTIMONIALS = [
+  { quote: "After implementing the ATS optimization strategies from this guide, I went from 0 interviews to 5 callbacks in 2 weeks. The keyword integration techniques were game-changing!", name: "Sarah L.", role: "Software Engineer", company: "Tech Startup", metric: "5 interviews in 2 weeks" },
+  { quote: "The industry-specific keyword banks helped me tailor my resume perfectly. I landed a senior marketing position at a Fortune 500 company after struggling for months.", name: "Michael R.", role: "Marketing Director", company: "Fortune 500", metric: "Senior role at Fortune 500" },
+  { quote: "As a career changer, understanding ATS formatting was crucial. This guide helped me create a resume that passed automated screening and got me interviews in healthcare.", name: "Dr. Jessica P.", role: "Clinical Researcher", company: "Healthcare System", metric: "Career transition success" }
+];
+
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
+  FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
+  FiTool, FiLayers, FiUser, FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight,
+  FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
+  FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
+  FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrend, FiMonitor, FiAlertCircle,
+  FiCheckCircle, FiCodesandbox
+};
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const ATSOptimizationGuide = ({ seoData, buildTimestamp }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -547,241 +194,25 @@ const ATSGuide = ({
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
   const currentYear = new Date().getFullYear();
 
-  // Single canonical URL
   const canonicalUrl = "https://professionalresumefree.com/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software";
 
-  const atsSections = [
-    {
-      title: "Understanding Modern ATS Architecture",
-      content: "Learn how Applicant Tracking Systems parse, score, and rank candidates in 2026.",
-      tips: [
-        "Modern ATS uses AI-powered parsing algorithms",
-        "Systems score candidates based on keyword density and relevance",
-        "Resumes are ranked against job description requirements",
-        "ATS can parse both chronological and functional formats",
-        "Most systems prioritize content over design elements"
-      ],
-      example: "ATS Ranking Algorithm:\n- Keyword Match: 40% weight\n- Experience Relevance: 30%\n- Skills Alignment: 20%\n- Format Compatibility: 10%"
-    },
-    {
-      title: "Strategic Keyword Integration Techniques",
-      content: "How to naturally incorporate keywords without keyword stuffing or sacrificing readability.",
-      tips: [
-        "Use synonyms and related terms from job descriptions",
-        "Incorporate keywords in context-rich sentences",
-        "Place keywords in strategic positions (first 1/3 of document)",
-        "Mix technical terms with industry jargon appropriately",
-        "Include both hard skills and soft skills keywords"
-      ],
-      example: "Instead of: 'Skilled in Python, Java, SQL, JavaScript, React'\nBetter: 'Developed full-stack applications using Python and JavaScript frameworks, with backend databases managed through SQL queries and frontend interfaces built with React.'"
-    },
-    {
-      title: "Formatting for Maximum ATS Compatibility",
-      content: "Optimal document structure and formatting choices that ensure 100% ATS readability.",
-      tips: [
-        "Use standard fonts (Arial, Calibri, Times New Roman)",
-        "Avoid headers, footers, and text boxes",
-        "Save as .docx or PDF with selectable text",
-        "Use standard bullet points (• instead of custom symbols)",
-        "Maintain consistent heading hierarchy"
-      ],
-      example: "✅ ATS-Friendly:\n# Professional Experience\n• Managed team of 10 developers\n• Increased efficiency by 40%\n\n❌ ATS-Unfriendly:\n[Image header with text]\n★ Led team of ✨10 developers✨\n🚀 Boosted efficiency by 40%+"
-    },
-    {
-      title: "Industry-Specific Keyword Banks",
-      content: "Curated keyword lists for major industries and how to implement them effectively.",
-      tips: [
-        "Tech: Include specific programming languages and frameworks",
-        "Healthcare: Add certifications, procedures, and medical terminology",
-        "Finance: Incorporate compliance standards and financial instruments",
-        "Marketing: Use platform names, metrics, and campaign types",
-        "Include both entry-level and senior-level terminology"
-      ],
-      example: "Tech Keywords: Agile, Scrum, DevOps, CI/CD, AWS, Azure, Docker, Kubernetes, REST API, Microservices, TDD, Git, Jenkins\nHealthcare Keywords: HIPAA, EHR/EMR, Patient Care, Clinical Trials, Medicare, ICD-10, TJC, BLS Certified"
-    },
-    {
-      title: "Advanced ATS Optimization Strategies",
-      content: "Pro-level techniques for beating sophisticated AI-powered ATS systems.",
-      tips: [
-        "Use job description mirroring with natural language variation",
-        "Implement keyword clustering around core competencies",
-        "Include both acronyms and full terms (SEO & Search Engine Optimization)",
-        "Add industry-standard certifications and their abbreviations",
-        "Incorporate measurable metrics with keywords"
-      ],
-      example: "Basic: 'Project Management'\nAdvanced: 'Led Agile project management initiatives using Scrum methodology, resulting in 25% faster delivery times and improved stakeholder satisfaction scores by 40%.'"
-    }
-  ];
-
-  const atsTypes = [
-    {
-      title: "AI-Powered ATS",
-      description: "Uses machine learning to score and rank candidates",
-      features: ["Semantic analysis", "Skill gap identification", "Predictive hiring"],
-      optimization: ["Natural language variation", "Context-rich descriptions", "Skill clustering"]
-    },
-    {
-      title: "Traditional Rule-Based ATS",
-      description: "Relies on keyword matching and scoring rules",
-      features: ["Exact match scoring", "Keyword density analysis", "Rule-based filtering"],
-      optimization: ["Strategic keyword placement", "Standard formatting", "Clear section headers"]
-    },
-    {
-      title: "Hybrid ATS Systems",
-      description: "Combines AI analysis with rule-based filtering",
-      features: ["Multi-factor scoring", "Customizable filters", "Integration with HR tools"],
-      optimization: ["Balanced keyword strategy", "ATS-friendly design", "Comprehensive skill listing"]
-    },
-    {
-      title: "Enterprise-Grade ATS",
-      description: "Used by large corporations with complex hiring needs",
-      features: ["Multi-department integration", "Advanced analytics", "Custom workflow rules"],
-      optimization: ["Department-specific keywords", "Corporate terminology", "Culture alignment"]
-    }
-  ];
-
-  const atsStats = [
-    {
-      value: "75%",
-      label: "Resumes rejected by ATS before human review",
-      icon: <FiAlertCircle />
-    },
-    {
-      value: "90%",
-      label: "Large companies use ATS for screening",
-      icon: <FiUsers />
-    },
-    {
-      value: "6-10",
-      label: "Seconds ATS spends scanning each resume",
-      icon: <FiEye />
-    },
-    {
-      value: "300%",
-      label: "More interviews with ATS optimization",
-      icon: <FiTrendingUp />
-    }
-  ];
-
-  const commonMistakes = [
-    "Using images or graphics for important text",
-    "Non-standard fonts and creative formatting",
-    "Keyword stuffing without context",
-    "Missing essential contact information",
-    "Saving in incompatible file formats",
-    "Using headers/footers for critical content"
-  ];
-
-  const keywordExamples = [
-    {
-      industry: "Technology",
-      keywords: [
-        "Agile Methodology", "CI/CD", "Cloud Computing", "DevOps", 
-        "Microservices", "Machine Learning", "Data Analytics", "Cybersecurity",
-        "Full Stack Development", "API Integration"
-      ]
-    },
-    {
-      industry: "Healthcare",
-      keywords: [
-        "Patient Care", "EHR/EMR", "HIPAA Compliance", "Clinical Documentation",
-        "Medical Coding", "Healthcare Administration", "Patient Safety", 
-        "Telemedicine", "Healthcare IT", "Regulatory Compliance"
-      ]
-    },
-    {
-      industry: "Finance",
-      keywords: [
-        "Financial Analysis", "Risk Management", "Investment Banking", 
-        "Portfolio Management", "Compliance", "Auditing", "Financial Modeling",
-        "GAAP", "SEC Regulations", "Asset Management"
-      ]
-    },
-    {
-      industry: "Marketing",
-      keywords: [
-        "Digital Marketing", "SEO/SEM", "Content Strategy", "Social Media Marketing",
-        "Brand Management", "Marketing Analytics", "Lead Generation", 
-        "Conversion Optimization", "Marketing Automation", "CRM Management"
-      ]
-    }
-  ];
-
-  const testimonials = [
-    {
-      quote: "After implementing the ATS optimization strategies from this guide, I went from 0 interviews to 5 callbacks in 2 weeks. The keyword integration techniques were game-changing!",
-      name: "Sarah L.",
-      role: "Software Engineer",
-      company: "Tech Startup",
-      metric: "5 interviews in 2 weeks"
-    },
-    {
-      quote: "The industry-specific keyword banks helped me tailor my resume perfectly. I landed a senior marketing position at a Fortune 500 company after struggling for months.",
-      name: "Michael R.",
-      role: "Marketing Director",
-      company: "Fortune 500",
-      metric: "Senior role at Fortune 500"
-    },
-    {
-      quote: "As a career changer, understanding ATS formatting was crucial. This guide helped me create a resume that passed automated screening and got me interviews in healthcare.",
-      name: "Dr. Jessica P.",
-      role: "Clinical Researcher",
-      company: "Healthcare System",
-      metric: "Career transition success"
-    }
-  ];
-
-  const faqs = [
-    {
-      question: "What percentage of companies use ATS in 2026?",
-      answer: "In 2026, approximately 90% of large companies and 75% of mid-sized companies use Applicant Tracking Systems for initial resume screening. This makes ATS optimization essential for modern job seekers."
-    },
-    {
-      question: "How long does an ATS typically scan a resume?",
-      answer: "Most ATS systems spend only 6-10 seconds scanning each resume during the initial screening phase. This makes strategic keyword placement and ATS-friendly formatting critically important for passing automated screening."
-    },
-    {
-      question: "What are the most common ATS mistakes to avoid?",
-      answer: "The most common ATS mistakes include: using images for text, creative/non-standard fonts, keyword stuffing without context, incompatible file formats, headers/footers for critical content, and missing essential contact information in the main document body."
-    },
-    {
-      question: "How can I check if my resume is ATS-friendly?",
-      answer: "You can check ATS compatibility by: using our free ATS resume scanner, testing with different file formats, checking text selectability, avoiding tables and columns, using standard headings, and ensuring keyword density is natural and contextual rather than forced."
-    },
-    {
-      question: "Does ATS optimization work for all industries?",
-      answer: "Yes, ATS optimization principles work across all industries. However, specific keyword strategies and formatting preferences may vary by industry, which is why we provide industry-specific keyword banks and optimization techniques."
-    },
-    {
-      question: "How much can ATS optimization increase my interview chances?",
-      answer: "Proper ATS optimization can increase interview chances by up to 300%. Studies show that resumes optimized for ATS are 3x more likely to pass automated screening and reach human recruiters for review."
-    }
-  ];
-
-  const industries = [
-    { title: "Software Development" },
-    { title: "Healthcare & Nursing" },
-    { title: "Digital Marketing" },
-    { title: "Finance & Accounting" },
-    { title: "Engineering" },
-    { title: "Project Management" },
-    { title: "Sales & Business" },
-    { title: "Human Resources" }
-  ];
+  const [activeSection, setActiveSection] = useState(0);
+  const [activeFaq, setActiveFaq] = useState(null);
+  const toolRef = useRef(null);
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
         {/* HTML Lang Attribute */}
         <html lang="en" />
         
         {/* Optimized Title - 70 characters */}
-        <title>How to Beat the ATS: Optimization Tips for Modern Hiring 2026</title>
+        <title>How to Beat the ATS: Optimization Tips for Modern Hiring {currentYear}</title>
         
         {/* Meta Description */}
-        <meta name="description" content="Master ATS optimization with our 2026 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems." />
+        <meta name="description" content={`Master ATS optimization with our ${currentYear} guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems.`} />
         
         {/* Meta Keywords */}
         <meta name="keywords" content="ATS optimization, Applicant Tracking System, beat ATS 2026, resume keywords, ATS friendly resume, resume scanning software, ATS resume tips, keyword optimization, resume parsing, ATS compatibility, resume formatting, hiring software, resume screening, ATS algorithms, resume ranking, job application software, resume keywords list, ATS resume format, modern hiring software, resume optimization, ATS tips 2026" />
@@ -790,8 +221,8 @@ const ATSGuide = ({
         <meta name="author" content="Professional Resume Free" />
         
         {/* GEO Optimization Tags */}
-        <meta name="chatgpt-fts:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring 2026" />
-        <meta name="chatgpt-fts:description" content="Master ATS optimization with our 2026 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems." />
+        <meta name="chatgpt-fts:title" content={`How to Beat the ATS: Optimization Tips for Modern Hiring ${currentYear}`} />
+        <meta name="chatgpt-fts:description" content={`Master ATS optimization with our ${currentYear} guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems.`} />
         <meta name="chatgpt-fts:keywords" content="how to beat ats, ats optimization tips, resume keywords for ats, ats friendly resume format 2026" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - ATS Optimization Guide" />
@@ -817,13 +248,13 @@ const ATSGuide = ({
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph Tags */}
-        <meta property="og:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring 2026" />
-        <meta property="og:description" content="Master ATS optimization with our 2026 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems." />
+        <meta property="og:title" content={`How to Beat the ATS: Optimization Tips for Modern Hiring ${currentYear}`} />
+        <meta property="og:description" content={`Master ATS optimization with our ${currentYear} guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/images/ats-optimization-preview.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="ATS Optimization Guide 2026 - Beat Applicant Tracking Systems" />
+        <meta property="og:image:alt" content={`ATS Optimization Guide ${currentYear} - Beat Applicant Tracking Systems`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -831,10 +262,10 @@ const ATSGuide = ({
         
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="How to Beat the ATS: Optimization Tips for Modern Hiring 2026" />
-        <meta name="twitter:description" content="Master ATS optimization for 2026 hiring. Ensure your resume passes automated screening with our proven strategies." />
+        <meta name="twitter:title" content={`How to Beat the ATS: Optimization Tips for Modern Hiring ${currentYear}`} />
+        <meta name="twitter:description" content={`Master ATS optimization for ${currentYear} hiring. Ensure your resume passes automated screening with our proven strategies.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/ats-optimization-preview.jpg" />
-        <meta name="twitter:image:alt" content="ATS Optimization Guide 2026" />
+        <meta name="twitter:image:alt" content={`ATS Optimization Guide ${currentYear}`} />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -846,20 +277,20 @@ const ATSGuide = ({
         <meta property="article:tag" content="ATS optimization, resume writing, job search, career advice, hiring software" />
         
         {/* Additional Meta Tags */}
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="theme-color" content="#131315" />
+        <meta name="msapplication-TileColor" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* Preconnect for Performance */}
+        {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* Sitemap Link */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* ===== FIXED JSON-LD Structured Data ===== */}
-        {/* Each Review now has itemReviewed field with @type "Product" */}
+        {/* ===== COMPREHENSIVE JSON-LD Structured Data ===== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -870,8 +301,8 @@ const ATSGuide = ({
                   "@type": "WebPage",
                   "@id": `${canonicalUrl}#webpage`,
                   "url": canonicalUrl,
-                  "name": "How to Beat the ATS: Optimization Tips for Modern Hiring 2026",
-                  "description": "Master ATS optimization with our 2026 guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems.",
+                  "name": `How to Beat the ATS: Optimization Tips for Modern Hiring ${currentYear}`,
+                  "description": `Master ATS optimization with our ${currentYear} guide. Learn keyword integration, formatting strategies, and pro tips to ensure your resume passes Applicant Tracking Systems.`,
                   "datePublished": "2024-01-01",
                   "dateModified": safeLastModifiedDate,
                   "inLanguage": "en-US",
@@ -902,8 +333,8 @@ const ATSGuide = ({
                 },
                 {
                   "@type": "Article",
-                  "headline": "How to Beat the ATS: Optimization Tips for Modern Hiring 2026",
-                  "description": "A comprehensive guide to optimizing resumes for Applicant Tracking Systems in 2026, including keyword strategies, formatting tips, and industry-specific optimization techniques.",
+                  "headline": `How to Beat the ATS: Optimization Tips for Modern Hiring ${currentYear}`,
+                  "description": `A comprehensive guide to optimizing resumes for Applicant Tracking Systems in ${currentYear}, including keyword strategies, formatting tips, and industry-specific optimization techniques.`,
                   "image": "https://professionalresumefree.com/images/ats-optimization-preview.jpg",
                   "author": {
                     "@type": "Organization",
@@ -930,7 +361,7 @@ const ATSGuide = ({
                 {
                   "@type": "FAQPage",
                   "@id": `${canonicalUrl}#faq`,
-                  "mainEntity": faqs.map(faq => ({
+                  "mainEntity": FAQS.map(faq => ({
                     "@type": "Question",
                     "name": faq.question,
                     "acceptedAnswer": {
@@ -942,7 +373,7 @@ const ATSGuide = ({
                 },
                 {
                   "@type": "HowTo",
-                  "name": "How to optimize your resume for ATS in 2026",
+                  "name": `How to optimize your resume for ATS in ${currentYear}`,
                   "description": "Step-by-step guide to creating ATS-optimized resumes that pass automated screening.",
                   "step": [
                     {
@@ -967,9 +398,6 @@ const ATSGuide = ({
                     }
                   ]
                 },
-                // ===== FIXED: Each Review now has itemReviewed =====
-                // Reviews are now standalone (not nested inside ItemList)
-                // and each has the REQUIRED itemReviewed field
                 {
                   "@type": "Review",
                   "reviewRating": {
@@ -985,7 +413,7 @@ const ATSGuide = ({
                   "datePublished": safeReviewDates[0] || safeCurrentDate,
                   "itemReviewed": {
                     "@type": "Product",
-                    "name": "ATS Optimization Guide 2026",
+                    "name": `ATS Optimization Guide ${currentYear}`,
                     "description": "Comprehensive guide to beating Applicant Tracking Systems"
                   }
                 },
@@ -1004,7 +432,7 @@ const ATSGuide = ({
                   "datePublished": safeReviewDates[1] || safeCurrentDate,
                   "itemReviewed": {
                     "@type": "Product",
-                    "name": "ATS Optimization Guide 2026",
+                    "name": `ATS Optimization Guide ${currentYear}`,
                     "description": "Comprehensive guide to beating Applicant Tracking Systems"
                   }
                 },
@@ -1023,7 +451,7 @@ const ATSGuide = ({
                   "datePublished": safeReviewDates[2] || safeCurrentDate,
                   "itemReviewed": {
                     "@type": "Product",
-                    "name": "ATS Optimization Guide 2026",
+                    "name": `ATS Optimization Guide ${currentYear}`,
                     "description": "Comprehensive guide to beating Applicant Tracking Systems"
                   }
                 }
@@ -1033,156 +461,116 @@ const ATSGuide = ({
         />
       </Head>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
-                  <span itemProp="name">Home</span>
+                  <span itemProp="name"><FiHome size={14} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li aria-hidden="true">/</li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">ATS Optimization Guide 2026</span>
+                <span itemProp="name" aria-current="page"><FiShield size={14} /> ATS Optimization Guide {currentYear}</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>
           </div>
         </nav>
 
-        {/* Hero Section */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="trust-badge" aria-label="Trust indicators">
-              <FiStar /> Rated 4.9/5 by 15000+ Users | Most Comprehensive ATS Guide 2026
-            </div>
-            <h1 id="hero-heading">How to Beat the ATS: Optimization Tips for Modern Hiring 2026</h1>
-            
-            <p>
-              Master the art of <strong>ATS optimization for 2026</strong>. Learn proven strategies to ensure your resume 
-              passes automated screening and reaches hiring managers. Increase your interview chances by
-              <strong> up to 300%</strong> with our comprehensive guide based on analysis of 10,000+ resumes.
-            </p>
-
-            <div className="button-container" role="group" aria-label="Call to action buttons">
-              <Link href="/resume-templates" className="btn-primary" aria-label="Create your ATS-optimized resume now">
-                <FiEye /> Create Your ATS Resume Now
-              </Link>
-              <a href="#guide" className="btn-secondary" aria-label="View complete ATS guide">
-                <FiFileText /> Read Complete Guide
-              </a>
-            </div>
-
-            <div className="feature-tags" style={{ justifyContent: 'center', margin: '24px 0' }}>
-              <span className="feature-tag">✓ Industry-Specific Keywords</span>
-              <span className="feature-tag">✓ ATS-Compatible Templates</span>
-              <span className="feature-tag">✓ 2026 Optimization Strategies</span>
-              <span className="feature-tag">✓ Formatting Guidelines</span>
-            </div>
-
-            {/* Stats Grid */}
-            <div className="stats-grid">
-              {atsStats.map((stat, index) => (
-                <div key={index} className="stat-card">
-                  <div className="stat-icon">{stat.icon}</div>
-                  <div className="stat-value">{stat.value}</div>
-                  <div className="stat-label">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Industry Badges */}
-            <div className="industry-badges">
-              {industries.map((industry, index) => (
-                <span key={index} className="industry-badge" style={{ cursor: 'default' }}>
-                  {industry.title}
-                </span>
-              ))}
-            </div>
-
-            {/* Freshness indicator */}
-            <div style={{ marginTop: '20px', fontSize: '0.8rem', color: '#4b5563', textAlign: 'center' }} aria-label="Page last updated">
-              Last updated: {safeCurrentDate} | Guide tested with 15+ major ATS platforms
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge" aria-label="Trust indicators">
+                <FiStar style={{ display: 'inline', marginRight: '4px' }} /> Rated 4.9/5 by 15000+ Users | Most Comprehensive ATS Guide {currentYear}
+              </div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                How to Beat the <span className="gradient-text">ATS</span>: Optimization Tips for Modern Hiring {currentYear}
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Master the art of <strong>ATS optimization for {currentYear}</strong>. Learn proven strategies to ensure your resume 
+                passes automated screening and reaches hiring managers. Increase your interview chances by
+                <strong> up to 300%</strong> with our comprehensive guide based on analysis of 10,000+ resumes.
+              </p>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[
+                  { value: "75%", label: "Resumes rejected by ATS before human review", icon: <FiAlertCircle /> },
+                  { value: "90%", label: "Large companies use ATS for screening", icon: <FiUsers /> },
+                  { value: "6-10", label: "Seconds ATS spends scanning each resume", icon: <FiEye /> },
+                  { value: "300%", label: "More interviews with ATS optimization", icon: <FiTrendingUp /> }
+                ].map((s, i) => (
+                  <div key={i} className="stat-card">
+                    <div style={{ fontSize: '2rem', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>{s.icon}</div>
+                    <div className="stat-number">{s.value}</div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }} role="group" aria-label="Call to action buttons">
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="View complete ATS optimization guide">
+                  <FiFileText /> Read Complete Guide
+                </button>
+                <Link href="/resume-templates" className="btn-outline" aria-label="Browse ATS-optimized resume templates">
+                  <FiDownload /> ATS Resume Templates
+                </Link>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center', margin: '1.5rem 0' }}>
+                <span className="feature-tag">✓ Industry-Specific Keywords</span>
+                <span className="feature-tag">✓ ATS-Compatible Templates</span>
+                <span className="feature-tag">✓ {currentYear} Optimization Strategies</span>
+                <span className="feature-tag">✓ Formatting Guidelines</span>
+              </div>
+              <div style={{ marginTop: '1.25rem', fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center' }} aria-label="Page last updated">
+                <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
+                Last updated: {safeCurrentDate} | Guide tested with 15+ major ATS platforms
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Intro Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="intro-heading">
-          <div className="container">
-            <p className="section-subtitle" style={{ fontSize: '1.2rem', maxWidth: '900px' }}>
-              In the <strong>digital hiring landscape of 2026</strong>, Applicant Tracking Systems filter 
-              <strong> 75% of resumes before human review</strong>. This guide provides everything you need to 
-              create <strong>ATS-optimized resumes</strong> that pass automated screening and showcase your 
-              value to hiring managers, increasing your interview rate by <strong>up to 300%</strong>.
-            </p>
+        {/* Intro */}
+        <section className="section section-alt" aria-labelledby="intro-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="intro-heading" className="section-title">Why ATS Optimization Matters in {currentYear}</h2>
+              <p className="section-subtitle">
+                In the <strong>digital hiring landscape of {currentYear}</strong>, Applicant Tracking Systems filter 
+                <strong> 75% of resumes before human review</strong>. This guide provides everything you need to 
+                create <strong>ATS-optimized resumes</strong> that pass automated screening and showcase your 
+                value to hiring managers, increasing your interview rate by <strong>up to 300%</strong>.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="section" aria-labelledby="testimonials-heading">
-          <div className="container">
-            <h2 id="testimonials-heading" className="section-title">Success Stories: Real Results from ATS Optimization</h2>
-            <p className="section-subtitle">
-              Professionals who implemented our ATS strategies and dramatically improved their job search outcomes.
-            </p>
+        {/* ATS Types */}
+        <section className="section" aria-labelledby="types-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="types-heading" className="section-title">Modern ATS Systems in {currentYear}</h2>
+              <p className="section-subtitle">Understanding different ATS types helps you <strong>tailor your optimization strategy</strong></p>
+            </div>
             <div className="grid">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="card">
-                  <p style={{ fontStyle: 'italic', marginBottom: '16px', flex: 1 }}>"{testimonial.quote}"</p>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-                    <span className="trust-badge-sm">
-                      <FiCheckCircle /> {testimonial.metric}
-                    </span>
-                    <div>
-                      <strong>{testimonial.name}</strong>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: '#4b5563' }}>{testimonial.role}, {testimonial.company}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ATS Types Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="types-heading">
-          <div className="container">
-            <h2 id="types-heading" className="section-title">Modern ATS Systems in 2026</h2>
-            <p className="section-subtitle">
-              Understanding different ATS types helps you <strong>tailor your optimization strategy</strong>
-            </p>
-            <div className="types-grid">
-              {atsTypes.map((type, index) => (
-                <div key={index} className="card">
-                  <h3 style={{ fontSize: '1.2rem', marginBottom: '8px' }}>{type.title}</h3>
-                  <p style={{ color: '#4b5563', marginBottom: '16px' }}>{type.description}</p>
-                  
-                  <div style={{ marginBottom: '16px' }}>
-                    <h4 style={{ fontSize: '0.9rem', marginBottom: '8px' }}>Key Features:</h4>
-                    <ul style={{ listStyle: 'none' }}>
-                      {type.features.map((feature, i) => (
-                        <li key={i} style={{ marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <FiCheckCircle style={{ color: '#059669' }} /> {feature}
-                        </li>
-                      ))}
+              {ATS_TYPES.map((type, i) => (
+                <div key={i} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.75rem' }}>{type.title}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1rem' }}>{type.description}</p>
+                  <div style={{ marginBottom: '0.75rem' }}>
+                    <h4 style={{ fontSize: 'var(--font-size-body-sm)', display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Key Features:</h4>
+                    <ul className="list-style" style={{ paddingLeft: '0', listStyle: 'none' }}>
+                      {type.features.map((f, j) => (<li key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheckCircle size={14} color="var(--success-color)" /> {f}</li>))}
                     </ul>
                   </div>
-                  
                   <div>
-                    <h4 style={{ fontSize: '0.9rem', marginBottom: '8px' }}>Optimization Tips:</h4>
-                    <ul style={{ listStyle: 'none' }}>
-                      {type.optimization.map((tip, i) => (
-                        <li key={i} style={{ marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <FiArrowRight style={{ color: '#000000' }} /> {tip}
-                        </li>
-                      ))}
+                    <h4 style={{ fontSize: 'var(--font-size-body-sm)', display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Optimization Tips:</h4>
+                    <ul className="list-style" style={{ paddingLeft: '0', listStyle: 'none' }}>
+                      {type.optimization.map((o, j) => (<li key={j} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiArrowRight size={14} color="var(--accent-primary)" /> {o}</li>))}
                     </ul>
                   </div>
                 </div>
@@ -1191,234 +579,246 @@ const ATSGuide = ({
           </div>
         </section>
 
-        {/* Guide Section */}
-        <section id="guide" className="section" aria-labelledby="guide-heading">
-          <div className="container">
-            <h2 id="guide-heading" className="section-title">Complete ATS Optimization Guide for 2026</h2>
-            <p className="section-subtitle">
-              Follow this <strong>proven 5-step framework</strong> to create resumes that pass every ATS screening
-            </p>
+        {/* Interactive Guide */}
+        <section ref={toolRef} id="guide" className="section section-alt" aria-labelledby="guide-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="guide-heading" className="section-title">Complete ATS Optimization Guide for {currentYear}</h2>
+              <p className="section-subtitle">Follow this <strong>proven 5-step framework</strong> to create resumes that pass every ATS screening</p>
+            </div>
 
             {/* Guide Navigation */}
-            <div className="guide-navigation">
-              {atsSections.map((section, index) => (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center', marginBottom: '2rem' }}>
+              {ATS_SECTIONS.map((section, i) => (
                 <button
-                  key={index}
-                  className={`guide-tab ${index === activeSection ? 'active' : ''}`}
-                  onClick={() => setActiveSection(index)}
+                  key={i}
+                  className={`guide-tab ${i === activeSection ? 'active' : ''}`}
+                  onClick={() => setActiveSection(i)}
                   aria-label={`View ${section.title}`}
                 >
-                  <span className="tab-number">{index + 1}</span>
-                  <span>{section.title}</span>
+                  <span className="tab-number">{i + 1}</span> {section.title}
                 </button>
               ))}
             </div>
 
-            {/* Active Section Content */}
-            <div className="card" style={{ marginTop: '24px' }}>
-              <div style={{ marginBottom: '24px' }}>
-                <h3 style={{ fontSize: '1.3rem', marginBottom: '12px' }}>
-                  {atsSections[activeSection].title}
-                </h3>
-                <p style={{ color: '#4b5563' }}>{atsSections[activeSection].content}</p>
-              </div>
-
+            {/* Active Section */}
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--accent-primary)' }}>{ATS_SECTIONS[activeSection].title}</h3>
+              <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{ATS_SECTIONS[activeSection].content}</p>
               <div className="grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
                 <div>
-                  <h4 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <FiCheckCircle style={{ color: '#059669' }} /> Optimization Strategies
-                  </h4>
-                  <ul style={{ listStyle: 'none' }}>
-                    {atsSections[activeSection].tips.map((tip, index) => (
-                      <li key={index} style={{ marginBottom: '8px' }}>• {tip}</li>
+                  <h4 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)' }}><FiCheckCircle style={{ color: 'var(--success-color)' }} /> Optimization Strategies</h4>
+                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {ATS_SECTIONS[activeSection].tips.map((tip, j) => (
+                      <li key={j} style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• {tip}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h4 style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <FiFileText /> Practical Example
-                  </h4>
-                  <div style={{ background: '#ffffff', padding: '16px', borderRadius: '6px', border: '1px solid var(--border)', fontFamily: 'monospace', fontSize: '0.85rem' }}>
-                    <pre style={{ whiteSpace: 'pre-wrap' }}>{atsSections[activeSection].example}</pre>
-                  </div>
+                  <h4 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)' }}><FiFileText /> Practical Example</h4>
+                  <div className="code-block">{ATS_SECTIONS[activeSection].example}</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Keywords Section */}
-        <section id="keywords" className="section" style={{ background: '#f9fafb' }} aria-labelledby="keywords-heading">
-          <div className="container">
-            <h2 id="keywords-heading" className="section-title">How to Identify and Integrate Industry Keywords Naturally</h2>
-            <p className="section-subtitle">
-              Master the art of <strong>natural keyword integration</strong> that satisfies ATS requirements while maintaining readability
-            </p>
-
-            <div className="keywords-grid">
-              {keywordExamples.map((industry, index) => (
-                <div key={index} className="card">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                    <div style={{ fontSize: '1.5rem' }}>
-                      {industry.industry === "Technology" && <FiTool />}
-                      {industry.industry === "Healthcare" && <FiHeart />}
-                      {industry.industry === "Finance" && <FiBriefcase />}
-                      {industry.industry === "Marketing" && <FiTrendingUp />}
+        {/* Keywords */}
+        <section id="keywords" className="section" aria-labelledby="keywords-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="keywords-heading" className="section-title">How to Identify and Integrate Industry Keywords Naturally</h2>
+              <p className="section-subtitle">Master the art of <strong>natural keyword integration</strong> that satisfies ATS requirements while maintaining readability</p>
+            </div>
+            <div className="grid">
+              {KEYWORD_EXAMPLES.map((ind, i) => {
+                const IconComponent = ICON_MAP[ind.icon] || FiTool;
+                return (
+                  <div key={i} className="card-executive">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                      <div style={{ width: '40px', height: '40px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)' }}>
+                        <IconComponent size={20} />
+                      </div>
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{ind.industry}</h3>
                     </div>
-                    <h3 style={{ fontSize: '1.2rem' }}>{industry.industry}</h3>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
+                      {ind.keywords.map((kw, j) => (<span key={j} className="feature-tag">{kw}</span>))}
+                    </div>
+                    <div>
+                      <h4 style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Natural Integration Tip:</h4>
+                      <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                        Incorporate these keywords within achievement statements. Example: "Implemented <strong>{ind.keywords[0]}</strong> to improve team efficiency by 40% through <strong>{ind.keywords[1]}</strong> optimization."
+                      </p>
+                    </div>
                   </div>
-                  
-                  <div className="feature-tags" style={{ marginBottom: '16px' }}>
-                    {industry.keywords.map((keyword, i) => (
-                      <span key={i} className="feature-tag">{keyword}</span>
-                    ))}
-                  </div>
-                  
-                  <div>
-                    <h4 style={{ fontSize: '0.9rem', marginBottom: '8px' }}>Natural Integration Tip:</h4>
-                    <p style={{ fontSize: '0.9rem', color: '#4b5563' }}>
-                      Incorporate these keywords within achievement statements. Example: "Implemented <strong>Agile Methodology</strong> to improve team efficiency by 40% through <strong>CI/CD</strong> pipeline optimization."
-                    </p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Keyword Strategies */}
-            <div className="strategies-grid" style={{ marginTop: '40px' }}>
-              <div className="card">
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>Keyword Research Methodology</h3>
-                <ul style={{ listStyle: 'none' }}>
-                  <li style={{ marginBottom: '8px' }}>• Analyze 3-5 job descriptions in your target role</li>
-                  <li style={{ marginBottom: '8px' }}>• Identify recurring technical terms and soft skills</li>
-                  <li style={{ marginBottom: '8px' }}>• Check industry forums and professional networks</li>
-                  <li style={{ marginBottom: '8px' }}>• Use LinkedIn's skills endorsement section</li>
-                  <li style={{ marginBottom: '8px' }}>• Review competitor profiles for keyword patterns</li>
+            <div className="grid" style={{ marginTop: '2.5rem' }}>
+              <div className="card-executive">
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Keyword Research Methodology</h3>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Analyze 3-5 job descriptions in your target role</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Identify recurring technical terms and soft skills</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Check industry forums and professional networks</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Use LinkedIn's skills endorsement section</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Review competitor profiles for keyword patterns</li>
                 </ul>
               </div>
-              <div className="card">
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>Natural Integration Techniques</h3>
-                <ul style={{ listStyle: 'none' }}>
-                  <li style={{ marginBottom: '8px' }}>• Use keywords in context-rich sentences</li>
-                  <li style={{ marginBottom: '8px' }}>• Vary terminology with synonyms</li>
-                  <li style={{ marginBottom: '8px' }}>• Include both acronyms and full terms</li>
-                  <li style={{ marginBottom: '8px' }}>• Place keywords in strategic positions</li>
-                  <li style={{ marginBottom: '8px' }}>• Maintain 2-3% keyword density naturally</li>
+              <div className="card-executive">
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Natural Integration Techniques</h3>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Use keywords in context-rich sentences</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Vary terminology with synonyms</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Include both acronyms and full terms</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Place keywords in strategic positions</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Maintain 2-3% keyword density naturally</li>
                 </ul>
               </div>
-              <div className="card">
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>ATS Keyword Placement Guide</h3>
-                <ul style={{ listStyle: 'none' }}>
-                  <li style={{ marginBottom: '8px' }}>• Professional Summary: 3-5 core keywords</li>
-                  <li style={{ marginBottom: '8px' }}>• Skills Section: 10-15 relevant keywords</li>
-                  <li style={{ marginBottom: '8px' }}>• Experience Bullets: 2-3 keywords per achievement</li>
-                  <li style={{ marginBottom: '8px' }}>• Certifications & Education: Include key terms</li>
-                  <li style={{ marginBottom: '8px' }}>• Avoid keyword stuffing in any single section</li>
+              <div className="card-executive">
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>ATS Keyword Placement Guide</h3>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Professional Summary: 3-5 core keywords</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Skills Section: 10-15 relevant keywords</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Experience Bullets: 2-3 keywords per achievement</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Certifications & Education: Include key terms</li>
+                  <li style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>• Avoid keyword stuffing in any single section</li>
                 </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Common Mistakes Section */}
-        <section className="section" aria-labelledby="mistakes-heading">
-          <div className="container">
-            <h2 id="mistakes-heading" className="section-title">Common ATS Mistakes to Avoid in 2026</h2>
-            <p className="section-subtitle">
-              These errors can <strong>instantly reject your resume</strong> from modern ATS systems
-            </p>
-            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-              {commonMistakes.map((mistake, index) => (
-                <div key={index} className="card" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span style={{ background: '#fee2e2', color: '#dc2626', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>{index + 1}</span>
-                  <p>{mistake}</p>
+        {/* Common Mistakes */}
+        <section className="section section-alt" aria-labelledby="mistakes-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="mistakes-heading" className="section-title">Common ATS Mistakes to Avoid in {currentYear}</h2>
+              <p className="section-subtitle">These errors can <strong>instantly reject your resume</strong> from modern ATS systems</p>
+            </div>
+            <div className="grid">
+              {COMMON_MISTAKES.map((mistake, i) => (
+                <div key={i} className="mistake-item">
+                  <span style={{ background: 'rgba(255,180,171,0.1)', color: 'var(--error-color)', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'var(--font-weight-bold)', flexShrink: 0, fontSize: 'var(--font-size-label-sm)' }}>{i + 1}</span>
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{mistake}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="faq-heading">
-          <div className="container">
-            <h2 id="faq-heading" className="section-title">Frequently Asked Questions About ATS Optimization</h2>
-            <p className="section-subtitle">
-              Everything you need to know about beating Applicant Tracking Systems in 2026.
-            </p>
+        {/* Testimonials */}
+        <section className="section" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="testimonials-heading" className="section-title">Success Stories: Real Results from ATS Optimization</h2>
+              <p className="section-subtitle">Professionals who implemented our ATS strategies and dramatically improved their job search outcomes</p>
+            </div>
+            <div className="grid">
+              {TESTIMONIALS.map((t, i) => (
+                <div key={i} className="card-executive" style={{ gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', gap: '0.25rem', color: 'var(--accent-primary)' }}>
+                    {[...Array(5)].map((_, j) => (<FiStar key={j} size={16} fill="currentColor" />))}
+                  </div>
+                  <p style={{ fontStyle: 'italic', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', flex: 1 }}>"{t.quote}"</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <span className="feature-badge"><FiCheckCircle size={12} /> {t.metric}</span>
+                    <div>
+                      <strong style={{ display: 'block', color: 'var(--text-primary)' }}>{t.name}</strong>
+                      <span className="text-small">{t.role}, {t.company}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section section-alt" aria-labelledby="faq-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="faq-heading" className="section-title">Frequently Asked Questions About ATS Optimization</h2>
+              <p className="section-subtitle">Everything you need to know about beating Applicant Tracking Systems in {currentYear}</p>
+            </div>
             <div className="faq-grid">
-              {faqs.map((faq, index) => (
-                <div key={index} className="faq-item">
-                  <h3 className="faq-question">{faq.question}</h3>
-                  <p style={{ color: '#4b5563' }}>{faq.answer}</p>
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && <div className="faq-answer"><p>{faq.answer}</p></div>}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Final CTA Section */}
-        <section className="section" style={{ background: '#000000', color: '#ffffff' }} aria-labelledby="cta-heading">
-          <div className="container" style={{ textAlign: 'center' }}>
-            <h2 id="cta-heading" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', marginBottom: '20px', color: '#ffffff' }}>
-              Ready to Beat the ATS in 2026?
+        {/* CTA */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Ready to Beat the ATS in {currentYear}?
             </h2>
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', maxWidth: '700px', margin: '0 auto 32px', color: '#e5e7eb' }}>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
               Create an <strong>ATS-optimized resume</strong> that passes automated screening and 
               showcases your value to hiring managers. Get <strong>3x more interviews</strong> with 
-              our proven optimization framework.
+              our proven optimization framework. <strong>100% Free. No Sign-Up Required.</strong>
             </p>
-            
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary" style={{ background: '#ffffff', color: '#000000', borderColor: '#ffffff' }}>
-                <FiDownload /> Create Your ATS Resume Now
-              </Link>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiDownload /> Create Your ATS Resume Now</Link>
+              <Link href="/free-ats-resume-checker" className="btn-outline"><FiShield /> Check Your ATS Score</Link>
             </div>
-            
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap', marginTop: '32px' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <FiCheckCircle style={{ color: '#059669' }} /> ATS-Optimized Templates
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> ATS-Optimized Templates
               </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <FiCheckCircle style={{ color: '#059669' }} /> No Sign Up Required
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> No Sign Up Required
               </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <FiCheckCircle style={{ color: '#059669' }} /> Free Download
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> Free Download
               </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <FiCheckCircle style={{ color: '#059669' }} /> 2026 Updated
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> {currentYear} Updated
               </span>
             </div>
-
-            <p style={{ marginTop: '32px', fontSize: '0.8rem', color: '#9ca3af' }}>
+            <p style={{ marginTop: '2rem', fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>
+              <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
               Data fresh as of: {safeCurrentDate} | Guide tested with 15+ major ATS platforms
             </p>
           </div>
         </section>
 
-        {/* Internal Linking Footer */}
-        <section className="internal-linking-footer">
-          <h3 className="footer-links-title">Related Career Resources</h3>
-          <div className="footer-links-grid">
-            <a href="/free-resume-keyword-matcher" className="footer-link-card">
-              <span className="footer-link-text">Free Resume Keyword Matcher</span>
-              <span className="footer-link-sub">Match Job Descriptions</span>
-            </a>
-            <a href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="footer-link-card">
-              <span className="footer-link-text">Pass the AI Resume Screen</span>
-              <span className="footer-link-sub">2026 Algorithms Explained</span>
-            </a>
-            <a href="/resume-keywords-finder" className="footer-link-card">
-              <span className="footer-link-text">Resume Keywords Finder</span>
-              <span className="footer-link-sub">Find High-Impact Words</span>
-            </a>
-            <a href="/best-ats-resume-format-2026" className="footer-link-card">
-              <span className="footer-link-text">Best ATS Resume Format</span>
-              <span className="footer-link-sub">2026 Standards Guide</span>
-            </a>
-            <a href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="footer-link-card">
-              <span className="footer-link-text">Most In-Demand Keywords</span>
-              <span className="footer-link-sub">USA Job Seeker Data</span>
-            </a>
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Related Career Resources</h2>
+              <p className="section-subtitle">Complement your ATS strategy with these powerful tools</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", sub: "Check Your ATS Score", iconName: "FiShield" },
+                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", sub: "Match Job Descriptions", iconName: "FiSearch" },
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", sub: "AI-Powered Writing", iconName: "FiEdit3" },
+                { href: "/free-resume-readability-checker", text: "Readability Checker", sub: "Improve Clarity", iconName: "FiEye" },
+                { href: "/resume-templates", text: "ATS Resume Templates", sub: "Professional Designs", iconName: "FiGrid" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                    <span className="text-small" style={{ fontSize: 'var(--font-size-label-sm)' }}>{link.sub}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </section>
 
@@ -1464,4 +864,4 @@ export async function getStaticProps() {
   };
 }
 
-export default ATSGuide;
+export default ATSOptimizationGuide;

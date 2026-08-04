@@ -1,569 +1,116 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiFileText,
-  FiTool,
-  FiTrendingUp,
-  FiBriefcase,
-  FiBookOpen,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiBarChart2,
-  FiZap,
-  FiLayers,
-  FiHeart,
-  FiShield,
-  FiUsers,
-  FiDatabase,
-  FiExternalLink // Added for visual cue on external/internal resources
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiAward,
+  FiCheck, FiArrowRight, FiFileText, FiTool, FiTrendingUp,
+  FiBriefcase, FiBookOpen, FiUser, FiMail, FiPhone, FiMapPin,
+  FiBarChart2, FiZap, FiLayers, FiHeart, FiShield, FiUsers,
+  FiDatabase, FiExternalLink
 } from 'react-icons/fi';
 
-// Critical CSS inline with enhanced responsive design
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --accent: #2563eb;
-  --accent-light: #dbeafe;
-  --success: #059669;
-  --warning: #d97706;
-  --error: #dc2626;
-  --healthcare: #0b7b7a;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  width: 100%;
-}
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
-p { font-size: clamp(1rem, 2vw, 1.1rem); }
-.hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  padding: clamp(32px, 6vw, 72px) 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: hidden;
-}
-.hero h1 {
-  margin-bottom: clamp(16px, 3vw, 24px);
-  line-height: 1.2;
-  word-wrap: break-word;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  padding: 0 16px;
-}
-.hero p {
-  max-width: 800px;
-  margin: 0 auto clamp(24px, 4vw, 32px);
-  padding: 0 16px;
-  color: var(--text-light);
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .button-container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS (UNCHANGED)
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
   }
-}
-.btn-primary, .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 32px);
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s;
-  min-width: min(220px, 100%);
-  text-align: center;
-  font-size: clamp(0.95rem, 2vw, 1rem);
-  gap: 8px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-@media (max-width: 640px) {
-  .btn-primary, .btn-secondary {
-    width: 100%;
-    min-width: auto;
-  }
-}
-.btn-primary {
-  background: var(--primary);
-  color: var(--background);
-  border: 1px solid var(--primary);
-}
-.btn-primary:hover {
-  background: var(--secondary);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
-.btn-secondary {
-  background: transparent;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-  transform: translateY(-1px);
-}
-.btn-secondary:active {
-  transform: translateY(0);
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  margin: clamp(24px, 5vw, 40px) 0;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: clamp(8px, 2vw, 12px);
-  padding: clamp(20px, 4vw, 28px);
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-.card:active {
-  transform: translateY(-1px);
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: clamp(16px, 4vw, 40px);
-  margin-top: clamp(32px, 6vw, 48px);
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .stats { gap: 20px; }
-}
-@media (max-width: 480px) {
-  .stats { 
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-}
-.stat-item {
-  text-align: center;
-  min-width: min(160px, 100%);
-  padding: 12px;
-  flex: 1 1 auto;
-}
-@media (max-width: 480px) {
-  .stat-item { 
-    width: 100%;
-    max-width: 280px;
-  }
-}
-.stat-number {
-  font-size: clamp(2rem, 6vw, 2.5rem);
-  font-weight: 700;
-  display: block;
-  color: var(--primary);
-  line-height: 1.2;
-}
-.stat-label {
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.section {
-  padding: clamp(40px, 8vw, 80px) 0;
-  scroll-margin-top: 20px;
-  width: 100%;
-  overflow-x: hidden;
-}
-.section-title {
-  text-align: center;
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
-  margin-bottom: clamp(24px, 5vw, 40px);
-  padding: 0 16px;
-  word-wrap: break-word;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  width: 100%;
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 800px;
-  margin: 0 auto clamp(32px, 6vw, 48px);
-  padding: 0 16px;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  line-height: 1.6;
-}
-.table-wrap {
-  overflow-x: auto;
-  overflow-y: hidden;
-  margin: clamp(20px, 4vw, 40px) 0;
-  background: var(--background);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
-  max-width: 100%;
-}
-.table-wrap::-webkit-scrollbar {
-  height: 4px;
-}
-.table-wrap::-webkit-scrollbar-track {
-  background: var(--border);
-}
-.table-wrap::-webkit-scrollbar-thumb {
-  background: var(--text-light);
-  border-radius: 4px;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: min(600px, 100%);
-}
-th, td {
-  padding: clamp(12px, 2vw, 20px);
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  word-wrap: break-word;
-  max-width: 300px;
-}
-th {
-  background: var(--card-bg);
-  font-weight: 600;
-  color: var(--text-light);
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  width: 100%;
-}
-.faq-question {
-  font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--primary);
-  line-height: 1.4;
-  word-wrap: break-word;
-}
-.faq-answer {
-  color: var(--text-light);
-  line-height: 1.7;
-  word-wrap: break-word;
-}
-.article-meta {
-  display: flex;
-  gap: clamp(16px, 4vw, 32px);
-  justify-content: center;
-  margin: 24px 0;
-  flex-wrap: wrap;
-  padding: 16px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.toc-section {
-  margin: clamp(32px, 6vw, 48px) 0;
-  width: 100%;
-  padding: 0 16px;
-}
-.toc-list {
-  list-style: none;
-  padding: 0;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-}
-.toc-list li {
-  margin: clamp(12px, 2vw, 16px) 0;
-  width: 100%;
-}
-.toc-list a {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-  display: block;
-  padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 20px);
-  background: var(--card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  word-wrap: break-word;
-}
-.toc-list a:hover {
-  background: var(--background);
-  border-color: var(--primary);
-  transform: translateX(5px);
-}
-@media (max-width: 480px) {
-  .toc-list a:hover {
-    transform: none;
-  }
-}
-.breadcrumb {
-  padding: clamp(12px, 2vw, 16px) 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  padding: 0 16px;
-  min-width: min-content;
-}
-.citation {
-  background: var(--accent-light);
-  padding: clamp(16px, 3vw, 20px);
-  border-radius: 8px;
-  border-left: 4px solid var(--accent);
-  margin: 24px 0;
-  font-size: 0.95rem;
-  color: var(--text-light);
-  word-wrap: break-word;
-  width: 100%;
-}
-.citation-source {
-  font-weight: 600;
-  margin-top: 12px;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.insight-box {
-  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  margin: clamp(24px, 4vw, 32px) 0;
-  border: 1px solid var(--border);
-  width: 100%;
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
-  border-radius: 50px;
-  font-size: clamp(0.8rem, 2vw, 0.9rem);
-  margin-bottom: clamp(16px, 3vw, 24px);
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  max-width: 100%;
-  word-wrap: break-word;
-}
-.helper-text {
-  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-  color: var(--text-lighter);
-  margin-top: 20px;
-  text-align: center;
-  padding: 0 16px;
-  width: 100%;
-}
-.responsibility-list {
-  list-style: none;
-  margin-top: 16px;
-}
-.responsibility-list li {
-  margin-bottom: 12px;
-  padding-left: 24px;
-  position: relative;
-  line-height: 1.6;
-}
-.responsibility-list li:before {
-  content: "✓";
-  color: var(--success);
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-.healthcare-highlight {
-  border-left: 4px solid var(--healthcare);
-  background: rgba(11, 123, 122, 0.05);
-}
-.text-small { font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: var(--text-light); }
-.text-success { color: var(--success); font-weight: 600; }
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-
-/* NEW CSS FOR BOTTOM LINKS SECTION */
-.bottom-links-section {
-  background: #f3f4f6;
-  border-top: 1px solid var(--border);
-  padding: clamp(30px, 5vw, 50px) 0;
-  margin-top: 40px;
-}
-.link-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  width: 100%;
-}
-.link-card {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: var(--primary);
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.link-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.link-card-title {
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.link-card-desc {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  line-height: 1.5;
-}
-.link-arrow {
-  margin-top: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-@media (max-width: 768px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .card:active { opacity: 0.8; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; line-height: 1.6; }
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color 150ms; text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:100%; display:flex; flex-direction:column; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.25rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-item { text-align:center; min-width:140px; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .article-meta { display:flex; gap:1.5rem; justify-content:center; margin:1.25rem 0; flex-wrap:wrap; color:var(--text-muted); font-size:var(--font-size-body-sm); }
+  .meta-item { display:flex; align-items:center; gap:0.375rem; }
+  .table-wrap { overflow-x:auto; margin:2rem 0; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border-radius:0.75rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:500px; }
+  th { background:rgba(242,202,80,0.05); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); color:var(--accent-primary); border-bottom:1px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  td { padding:1rem; border-bottom:0.5px solid var(--border-gold-filament); color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .faq-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
+  @media (min-width:768px) { .faq-grid { grid-template-columns:repeat(2,1fr); } }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.75rem; padding:1.5rem; height:100%; cursor:pointer; }
+  .faq-question { font-size:var(--font-size-title-md); font-weight:var(--font-weight-semibold); color:var(--text-primary); margin-bottom:0.75rem; }
+  .toc-list { list-style:none; padding:0; }
+  .toc-list li { margin:0.5rem 0; }
+  .toc-list a { color:var(--text-secondary); font-size:var(--font-size-body-sm); transition:color 150ms; }
+  .toc-list a:hover { color:var(--accent-primary); }
+  .citation-box { background:rgba(242,202,80,0.03); border-left:3px solid var(--accent-primary); padding:1.25rem; margin:1.5rem 0; border-radius:0 0.5rem 0.5rem 0; }
+  .responsibility-list { list-style:none; margin-top:1rem; }
+  .responsibility-list li { margin-bottom:0.75rem; padding-left:1.5rem; position:relative; color:var(--text-secondary); font-size:var(--font-size-body-sm); line-height:1.6; }
+  .responsibility-list li:before { content:"✦"; color:var(--accent-primary); position:absolute; left:0; }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; }
+  .geo-link-card { display:flex; flex-direction:column; padding:1.25rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); height:100%; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .text-success { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
+// ============================================================================
+// SEO-ENHANCED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
+// ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
-
   const canonicalUrl = "https://professionalresumefree.com/best-resume-examples-for-usa-healthcare-jobs";
 
   const breadcrumbData = [
@@ -589,41 +136,14 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/ats.jpeg",
   };
 
-  // AI citation data with sources
   const aiCitations = [
-    {
-      fact: "The healthcare sector in the USA is projected to add 2.1 million new jobs by 2026, making it the fastest-growing industry with 15% growth rate—significantly above the national average.",
-      source: "U.S. Bureau of Labor Statistics 2026 Outlook",
-      year: "2026",
-      methodology: "Employment projections for healthcare occupations 2026-2036"
-    },
-    {
-      fact: "87% of healthcare employers now use ATS systems to screen resumes, with keywords like 'patient care,' 'HIPAA compliance,' and 'EMR/EHR systems' being the most frequently searched terms.",
-      source: "Healthcare Recruitment Consortium 2025",
-      year: "2025",
-      methodology: "Survey of 2,500 healthcare HR professionals"
-    },
-    {
-      fact: "Nurses who quantify their patient impact (e.g., 'managed 15+ patients per shift') receive 3.2x more interview callbacks than those who only list responsibilities without metrics.",
-      source: "American Nurses Association 2025 Career Study",
-      year: "2025",
-      methodology: "Analysis of 50,000+ nursing applications"
-    },
-    {
-      fact: "Healthcare resumes that include specific certifications (BLS, ACLS, PALS, CCRN) in both the skills section AND within experience bullets have a 78% higher ATS ranking than those listing certifications only once.",
-      source: "JobScan 2025 Healthcare Analysis",
-      year: "2025",
-      methodology: "Analysis of 25,000+ healthcare resume screenings"
-    },
-    {
-      fact: "Travel nurses and allied health professionals who tailor their resumes to each assignment see a 40% higher placement rate compared to those using generic resumes.",
-      source: "Travel Healthcare Association 2025 Report",
-      year: "2025",
-      methodology: "Survey of 5,000 travel healthcare professionals"
-    }
+    { fact: "The healthcare sector is projected to add 2.1 million new jobs by 2026, making it the fastest-growing industry with 15% growth rate—significantly above the national average.", source: "U.S. Bureau of Labor Statistics 2026 Outlook", year: "2026", methodology: "Employment projections for healthcare occupations 2026-2036" },
+    { fact: "87% of healthcare employers now use ATS systems to screen resumes, with keywords like 'patient care,' 'HIPAA compliance,' and 'EMR/EHR systems' being the most frequently searched terms.", source: "Healthcare Recruitment Consortium 2025", year: "2025", methodology: "Survey of 2,500 healthcare HR professionals" },
+    { fact: "Nurses who quantify their patient impact (e.g., 'managed 15+ patients per shift') receive 3.2x more interview callbacks than those who only list responsibilities without metrics.", source: "American Nurses Association 2025 Career Study", year: "2025", methodology: "Analysis of 50,000+ nursing applications" },
+    { fact: "Healthcare resumes that include specific certifications (BLS, ACLS, PALS, CCRN) in both the skills section AND within experience bullets have a 78% higher ATS ranking than those listing certifications only once.", source: "JobScan 2025 Healthcare Analysis", year: "2025", methodology: "Analysis of 25,000+ healthcare resume screenings" },
+    { fact: "Travel nurses and allied health professionals who tailor their resumes to each assignment see a 40% higher placement rate compared to those using generic resumes.", source: "Travel Healthcare Association 2025 Report", year: "2025", methodology: "Survey of 5,000 travel healthcare professionals" }
   ];
 
-  // People Also Ask for GEO
   const peopleAlsoAsk = [
     { 
       question: "What should a healthcare resume include?", 
@@ -643,7 +163,6 @@ export async function getStaticProps() {
     }
   ];
 
-  // Expanded FAQ items
   const faqItems = [
     {
       question: 'Should I include my nursing license number on my resume?',
@@ -671,51 +190,29 @@ export async function getStaticProps() {
     }
   ];
 
-  // Healthcare resume examples by role
   const healthcareExamples = [
     {
       role: "Registered Nurse (RN) - Medical-Surgical",
       summary: "Compassionate and dedicated Registered Nurse with 5+ years of experience in medical-surgical nursing. Skilled in patient assessment, medication administration, wound care, and interdisciplinary collaboration. BLS and ACLS certified with proven ability to manage high patient loads while maintaining quality care standards.",
-      keyAchievements: [
-        "Managed care for 15-20 patients per shift in a fast-paced 40-bed medical-surgical unit",
-        "Achieved 98% patient satisfaction score through compassionate communication and timely response",
-        "Mentored 12 new graduate nurses during their orientation period",
-        "Implemented bedside shift reporting that improved care continuity and reduced errors"
-      ]
+      achievements: ["Managed care for 15-20 patients per shift in a fast-paced 40-bed medical-surgical unit", "Achieved 98% patient satisfaction score through compassionate communication and timely response", "Mentored 12 new graduate nurses during their orientation period", "Implemented bedside shift reporting that improved care continuity and reduced errors"]
     },
     {
       role: "Physician Assistant (PA) - Emergency Medicine",
       summary: "Board-certified Physician Assistant with 8 years of emergency medicine experience. Skilled in rapid assessment, diagnostic interpretation, and emergency procedures. Proven ability to manage high-acuity patients in a Level 1 trauma center with efficiency and composure.",
-      keyAchievements: [
-        "Evaluated and treated 30+ patients per shift in a busy urban emergency department",
-        "Performed 200+ laceration repairs, I&Ds, and other minor procedures annually",
-        "Reduced ED length of stay by 45 minutes through streamlined workup protocols",
-        "Supervised and taught 25+ PA and medical students during clinical rotations"
-      ]
+      achievements: ["Evaluated and treated 30+ patients per shift in a busy urban emergency department", "Performed 200+ laceration repairs, I&Ds, and other minor procedures annually", "Reduced ED length of stay by 45 minutes through streamlined workup protocols", "Supervised and taught 25+ PA and medical students during clinical rotations"]
     },
     {
       role: "Healthcare Administrator - Hospital Operations",
       summary: "Results-driven healthcare administrator with 10+ years of experience in hospital operations, strategic planning, and quality improvement. MBA with expertise in budget management, regulatory compliance, and process optimization.",
-      keyAchievements: [
-        "Managed $50M annual operating budget for 200-bed community hospital",
-        "Led quality improvement initiative that reduced hospital-acquired infections by 35%",
-        "Implemented new scheduling system that increased OR utilization by 22%",
-        "Successfully navigated three Joint Commission surveys with zero deficiencies"
-      ]
+      achievements: ["Managed $50M annual operating budget for 200-bed community hospital", "Led quality improvement initiative that reduced hospital-acquired infections by 35%", "Implemented new scheduling system that increased OR utilization by 22%", "Successfully navigated three Joint Commission surveys with zero deficiencies"]
     },
     {
       role: "Medical Assistant (MA) - Primary Care",
       summary: "Certified Medical Assistant with 4 years of experience in busy primary care practices. Proficient in clinical procedures, patient intake, and EMR documentation. Known for warm patient interactions and efficient workflow management.",
-      keyAchievements: [
-        "Roomed 25-30 patients daily, obtaining vital signs and medical histories",
-        "Assisted physicians with 50+ minor procedures including suturing and casting",
-        "Trained 8 new MAs on clinical protocols and EMR documentation",
-        "Implemented supply inventory system that reduced waste by 20%"
-      ]
+      achievements: ["Roomed 25-30 patients daily, obtaining vital signs and medical histories", "Assisted physicians with 50+ minor procedures including suturing and casting", "Trained 8 new MAs on clinical protocols and EMR documentation", "Implemented supply inventory system that reduced waste by 20%"]
     }
   ];
 
-  // Healthcare keywords by specialty
   const healthcareKeywords = [
     {
       specialty: "Nursing",
@@ -735,6 +232,34 @@ export async function getStaticProps() {
     }
   ];
 
+  const internalLinks = [
+    {
+      href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot",
+      title: "How to Use AI Without Sounding Like a Robot",
+      desc: "Master prompt engineering to write authentic, human-sounding healthcare resume bullets that pass AI screening."
+    },
+    {
+      href: "/free-cover-letter-generator",
+      title: "Free Cover Letter Generator",
+      desc: "Create matching cover letters instantly. Perfect companion to your new healthcare resume."
+    },
+    {
+      href: "/best-ats-resume-format-2026",
+      title: "Best ATS Resume Formats for 2026",
+      desc: "Ensure your layout is parsed correctly by modern Applicant Tracking Systems."
+    },
+    {
+      href: "/resume-tips-for-remote-jobs-in-the-usa",
+      title: "Resume Tips for Remote Healthcare Jobs",
+      desc: "Highlight telehealth and remote collaboration skills for the growing virtual care market."
+    },
+    {
+      href: "/complete-resume-resource-library",
+      title: "Complete Resume Resource Library",
+      desc: "Access our full database of templates, examples, and career guides for every industry."
+    }
+  ];
+
   return {
     props: {
       buildTimestamp,
@@ -743,16 +268,20 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
+      aiCitations,
       peopleAlsoAsk,
       faqItems,
-      aiCitations,
       healthcareExamples,
-      healthcareKeywords
+      healthcareKeywords,
+      internalLinks
     },
-    revalidate: 3600 // ISR: revalidate every hour
+    revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint)
   };
 }
 
+// ============================================================================
+// SEO-ENHANCED PAGE COMPONENT
+// ============================================================================
 function HealthcareResumeExamples({ 
   buildTimestamp,
   currentDate,
@@ -760,34 +289,44 @@ function HealthcareResumeExamples({
   canonicalUrl,
   breadcrumbData,
   meta,
+  aiCitations,
   peopleAlsoAsk,
   faqItems,
-  aiCitations,
   healthcareExamples,
-  healthcareKeywords
+  healthcareKeywords,
+  internalLinks 
 }) {
   return (
     <>
+      {/* ======================================================================== */}
+      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* ======================================================================== */}
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 72 characters exactly */}
+        {/* ===== SEO TITLE (from Page 1) ===== */}
         <title>Best Resume Examples for USA Healthcare Jobs 2026</title>
         
-        {/* META DESCRIPTION - 155 characters optimized */}
+        {/* ===== META DESCRIPTION (from Page 1) ===== */}
         <meta name="description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals with ATS-optimized templates." />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="healthcare resume, nursing resume, medical resume, hospital jobs, healthcare careers, USA healthcare jobs, resume examples, ATS friendly resume" />
         
-        {/* GEO OPTIMIZATION TAGS */}
+        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
         <meta name="chatgpt-fts:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
         <meta name="chatgpt-fts:description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals." />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="chatgpt-fts:keywords" content="healthcare resume, nursing resume, medical resume, hospital jobs, USA healthcare" />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
-        {/* TECHNICAL SEO */}
+        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -795,10 +334,10 @@ function HealthcareResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL (www REMOVED) */}
+        {/* ===== CANONICAL URL (from Page 1) ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH (www REMOVED) */}
+        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
         <meta property="og:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
         <meta property="og:description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals." />
         <meta property="og:url" content={canonicalUrl} />
@@ -806,7 +345,7 @@ function HealthcareResumeExamples({
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:site_name" content={meta.siteName} />
         <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content="2026-01-23" />
         <meta property="article:modified_time" content={lastModifiedDate} />
@@ -816,7 +355,7 @@ function HealthcareResumeExamples({
         <meta property="article:tag" content="Nursing Jobs" />
         <meta property="article:tag" content="Medical Careers" />
         
-        {/* TWITTER CARD (www REMOVED) */}
+        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
         <meta name="twitter:description" content="Complete guide to healthcare resume examples. Expert tips for nurses, doctors, and administrators." />
@@ -824,16 +363,17 @@ function HealthcareResumeExamples({
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* ADDITIONAL META */}
-        <meta name="theme-color" content="#000000" />
+        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* PRECONNECT FOR PERFORMANCE */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        {/* ===== SITEMAP (from Page 1 blueprint) ===== */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA (www REMOVED) */}
+        {/* ======================================================================== */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ======================================================================== */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -954,28 +494,30 @@ function HealthcareResumeExamples({
         />
       </Head>
 
-      {/* Hidden freshness indicators */}
+      {/* Hidden freshness indicators (from Page 1) */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={currentDate} />
         <meta name="content-sources" content="BLS, Healthcare Recruitment Consortium, ANA, JobScan" />
       </div>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      {/* ======================================================================== */}
+      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* ======================================================================== */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
-                  <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
+                  <span itemProp="name"><FiHome size={14} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <span itemProp="name" aria-current="page">Healthcare Resume Examples</span>
                 <meta itemProp="position" content="2" />
@@ -984,94 +526,76 @@ function HealthcareResumeExamples({
           </div>
         </nav>
 
-        {/* Hero Section with single H1 */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="badge">HEALTHCARE RESUME GUIDE 2026 • USA JOBS</div>
-            
-            {/* SINGLE H1 TAG - Exact match to URL */}
-            <h1 id="hero-heading">Best Resume Examples for USA Healthcare Jobs 2026</h1>
-            
-            <p>
-              Discover the most effective resume examples for healthcare professionals in the USA. 
-              Whether you're a nurse, physician, administrator, or allied health professional, 
-              these expert-crafted templates and strategies will help you stand out in a competitive market.
-            </p>
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">HEALTHCARE RESUME GUIDE 2026 • USA JOBS</div>
+              
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Best Resume Examples for USA{' '}
+                <span className="gradient-text">Healthcare Jobs 2026</span>
+              </h1>
+              
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Discover the most effective resume examples for healthcare professionals in the USA. Whether you're a nurse, physician, administrator, or allied health professional, these expert-crafted templates and strategies will help you stand out in a competitive market.
+              </p>
 
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Browse Resume Templates <FiArrowRight style={{marginLeft: '8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                Free Resume Tools <FiFileText style={{marginRight: '8px'}} />
-              </Link>
-            </div>
-
-            <div className="stats">
-              <div className="stat-item">
-                <span className="stat-number">2.1M</span>
-                <span className="stat-label">New Healthcare Jobs*</span>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }} role="group" aria-label="Call to action buttons">
+                <Link href="/resume-templates" className="btn-primary">Browse Resume Templates <FiArrowRight /></Link>
+                <Link href="/free-resume-tools" className="btn-outline"><FiFileText /> Free Resume Tools</Link>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">87%</span>
-                <span className="stat-label">Use ATS Screening</span>
+
+              {/* Stats */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', borderTop: '0.5px solid var(--border-gold-filament)', paddingTop: '2rem' }} aria-label="Key statistics">
+                <div className="stat-item"><span className="stat-number">2.1M</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>New Healthcare Jobs*</span></div>
+                <div className="stat-item"><span className="stat-number">87%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Use ATS Screening</span></div>
+                <div className="stat-item"><span className="stat-number">3.2x</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>More Callbacks**</span></div>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">3.2x</span>
-                <span className="stat-label">More Callbacks**</span>
+              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Source citations">* U.S. Bureau of Labor Statistics 2026 • ** Nurses with quantified achievements</p>
+
+              {/* Article Meta */}
+              <div className="article-meta" style={{ marginTop: '1.5rem' }}>
+                <span className="meta-item"><FiBookOpen size={14} /> 3,300+ words</span>
+                <span className="meta-item"><FiClock size={14} /> 15 min read</span>
+                <span className="meta-item"><FiCalendar size={14} /> Updated: {currentDate}</span>
+                <span className="meta-item"><FiAward size={14} /> 8+ data sources</span>
               </div>
             </div>
-
-            {/* Article Meta Information */}
-            <div className="article-meta">
-              <span className="meta-item"><FiBookOpen /> 3,300+ words</span>
-              <span className="meta-item"><FiClock /> 15 min read</span>
-              <span className="meta-item"><FiCalendar /> Updated: {currentDate}</span>
-              <span className="meta-item"><FiAward /> 8+ data sources</span>
-            </div>
-
-            <p className="helper-text">
-              * U.S. Bureau of Labor Statistics 2026 • ** Nurses with quantified achievements
-            </p>
           </div>
         </section>
 
-        {/* Table of Contents */}
-        <section className="toc-section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">📋 Complete Table of Contents</h2>
+        {/* TOC */}
+        <section className="section section-alt" aria-labelledby="toc-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="toc-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>✦ Complete Table of Contents</h2>
               <ol className="toc-list">
-                <li><a href="#healthcare-landscape">1. The 2026 Healthcare Job Landscape</a></li>
-                <li><a href="#key-elements">2. Key Elements of a Winning Healthcare Resume</a></li>
-                <li><a href="#role-examples">3. Resume Examples by Healthcare Role</a></li>
-                <li><a href="#keywords">4. Essential Healthcare Keywords by Specialty</a></li>
-                <li><a href="#common-mistakes">5. Common Healthcare Resume Mistakes</a></li>
-                <li><a href="#faqs">6. Frequently Asked Questions</a></li>
-                <li><a href="#next-steps">7. Next Steps: Create Your Healthcare Resume</a></li>
+                {["Healthcare Job Landscape", "Key Elements of Winning Resumes", "Resume Examples by Role", "Essential Keywords by Specialty", "Common Resume Mistakes", "Frequently Asked Questions", "Next Steps"].map((item, i) => (
+                  <li key={i}><a href={`#section-${i+1}`}>{i+1}. {item}</a></li>
+                ))}
               </ol>
             </div>
           </div>
         </section>
 
-        {/* AI Citation Cards */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">📊 Key Statistics (2026 Data)</h2>
-            <p className="section-subtitle">
-              Industry research on healthcare job growth, hiring trends, and resume effectiveness.
-            </p>
+        {/* Research Citations */}
+        <section className="section" aria-labelledby="stats-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="stats-heading">Key Statistics (2026 Data)</h2>
+              <p className="section-subtitle">Industry research on healthcare job growth, hiring trends, and resume effectiveness</p>
+            </div>
             <div className="grid">
               {aiCitations.map((citation, index) => (
-                <div key={index} className="card">
-                  <FiAward size={24} style={{marginBottom: '16px', color: '#000'}} />
-                  <p style={{fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '16px', fontWeight: '500'}}>"{citation.fact}"</p>
-                  <div style={{marginTop: 'auto'}}>
-                    <div className="citation-source" style={{marginTop: '0'}}>
-                      <FiDatabase style={{marginRight: '6px'}} /> 
-                      {citation.source} • {citation.year}
+                <div key={index} className="card-executive">
+                  <FiAward size={24} style={{ marginBottom: '1rem', color: 'var(--accent-primary)' }} />
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', lineHeight: '1.7', marginBottom: '1rem', flex: 1 }}>"{citation.fact}"</p>
+                  <div style={{ marginTop: 'auto' }}>
+                    <div style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem' }}>
+                      <FiDatabase style={{ display: 'inline', marginRight: '0.375rem' }} /> {citation.source} • {citation.year}
                     </div>
-                    <p className="text-small" style={{marginTop: '8px'}}>{citation.methodology}</p>
+                    <p className="text-small">{citation.methodology}</p>
                   </div>
                 </div>
               ))}
@@ -1079,371 +603,198 @@ function HealthcareResumeExamples({
           </div>
         </section>
 
-        {/* Section 1: Healthcare Landscape */}
-        <section id="healthcare-landscape" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">The 2026 Healthcare Job Landscape</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8'}}>
-                The healthcare industry in the United States is experiencing unprecedented growth. 
-                With an aging population, advances in medical technology, and expanded access to care, 
-                healthcare employers are competing fiercely for qualified professionals. Understanding 
-                this landscape is the first step to crafting a resume that gets results.
-              </p>
-
-              <div className="insight-box">
-                <h3 style={{fontSize: '1.3rem', marginBottom: '16px'}}>Why Healthcare Resumes Are Different</h3>
-                <p style={{lineHeight: '1.8'}}>
-                  "Healthcare resumes require a unique approach. Unlike other industries, healthcare employers 
-                  prioritize credentials, certifications, and regulatory compliance above all else. Your license 
-                  number, certifications, and clinical experience must be immediately visible. But equally important 
-                  is demonstrating your patient impact—the difference you make in people's lives through compassionate, 
-                  skilled care. The best healthcare resumes balance clinical competency with human connection."
-                </p>
-                <div className="citation-source" style={{marginTop: '16px'}}>
-                  — American Healthcare Recruitment Association 2026
-                </div>
+        {/* Healthcare Landscape */}
+        <section id="section-1" className="section section-alt" aria-labelledby="section1-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section1-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>The 2026 Healthcare Job Landscape</h2>
+              <p style={{ marginBottom: '1.5rem', textAlign: 'center' }}>The healthcare industry in the United States is experiencing unprecedented growth. With an aging population, advances in medical technology, and expanded access to care, healthcare employers are competing fiercely for qualified professionals. Understanding this landscape is the first step to crafting a resume that gets results.</p>
+              <div className="citation-box">
+                <p style={{ fontSize: 'var(--font-size-body-sm)', fontStyle: 'italic' }}>"Healthcare resumes require a unique approach. Unlike other industries, healthcare employers prioritize credentials, certifications, and regulatory compliance above all else. Your license number, certifications, and clinical experience must be immediately visible. But equally important is demonstrating your patient impact—the difference you make in people's lives through compassionate, skilled care."</p>
+                <p className="text-small" style={{ color: 'var(--accent-primary)', marginTop: '0.75rem' }}>— American Healthcare Recruitment Association 2026</p>
               </div>
-
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginTop: '24px'}}>
-                With 87% of healthcare employers now using ATS systems, your resume must be optimized for both 
-                machines and humans. This means strategic keyword placement, clear formatting, and quantifiable 
-                achievements that demonstrate your value to healthcare organizations.
-              </p>
+              <p style={{ textAlign: 'center' }}>With 87% of healthcare employers now using ATS systems, your resume must be optimized for both machines and humans. This means strategic keyword placement, clear formatting, and quantifiable achievements that demonstrate your value to healthcare organizations.</p>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Key Elements */}
-        <section id="key-elements" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Key Elements of a Winning Healthcare Resume</h2>
-              
-              <div className="grid" style={{gap: '24px'}}>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiShield size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Licenses & Certifications</h3>
-                  <p>Place all credentials prominently at the top. Include license numbers, states, and expiration dates. List certifications (BLS, ACLS, PALS, CCRN) with issuing organizations.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiHeart size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Quantified Patient Impact</h3>
-                  <p>Use metrics to show your effectiveness: patient loads, quality improvements, satisfaction scores, reduced complications, or efficiency gains.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiLayers size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>EMR/EHR Proficiency</h3>
-                  <p>List specific electronic medical record systems (Epic, Cerner, Meditech, Allscripts). Healthcare employers prioritize candidates who can hit the ground running.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiBriefcase size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Clinical Experience</h3>
-                  <p>Detail your clinical experience with specific patient populations, conditions, procedures, and unit types. Show depth and breadth of practice.</p>
-                </div>
+        {/* Key Elements */}
+        <section id="section-2" className="section" aria-labelledby="section2-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section2-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Key Elements of a Winning Healthcare Resume</h2>
+              <div className="grid">
+                {[
+                  { icon: <FiShield size={24} />, title: "Licenses & Certifications", desc: "Place all credentials prominently at the top. Include license numbers, states, and expiration dates. List certifications (BLS, ACLS, PALS, CCRN) with issuing organizations." },
+                  { icon: <FiHeart size={24} />, title: "Quantified Patient Impact", desc: "Use metrics to show your effectiveness: patient loads, quality improvements, satisfaction scores, reduced complications, or efficiency gains." },
+                  { icon: <FiLayers size={24} />, title: "EMR/EHR Proficiency", desc: "List specific electronic medical record systems (Epic, Cerner, Meditech, Allscripts). Healthcare employers prioritize candidates who can hit the ground running." },
+                  { icon: <FiBriefcase size={24} />, title: "Clinical Experience", desc: "Detail your clinical experience with specific patient populations, conditions, procedures, and unit types. Show depth and breadth of practice." }
+                ].map((item, i) => (
+                  <div key={i} className="card-executive">
+                    <div style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>{item.icon}</div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{item.title}</h3>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)' }}>{item.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 3: Role Examples */}
-        <section id="role-examples" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Resume Examples by Healthcare Role</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '32px'}}>
-                These real-world examples show how successful healthcare professionals structure their resumes 
-                and highlight their achievements. Use them as inspiration for your own resume.
-              </p>
-
+        {/* Role Examples */}
+        <section id="section-3" className="section section-alt" aria-labelledby="section3-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="section3-heading" className="section-title">Resume Examples by Healthcare Role</h2>
+              <p className="section-subtitle">Real-world examples showing how successful healthcare professionals structure their resumes and highlight achievements</p>
+            </div>
+            <div className="grid">
               {healthcareExamples.map((example, index) => (
-                <div key={index} className="card healthcare-highlight" style={{marginBottom: '24px', background: '#ffffff'}}>
-                  <h3 style={{marginBottom: '16px', fontSize: '1.3rem'}}>{example.role}</h3>
-                  <p><strong>Professional Summary:</strong> {example.summary}</p>
-                  <div style={{marginTop: '16px'}}>
-                    <strong>Key Achievements:</strong>
+                <div key={index} className="card-executive" style={{ borderLeft: '3px solid var(--accent-primary)' }}>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '0.75rem' }}>{example.role}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '1rem' }}><strong>Professional Summary:</strong> {example.summary}</p>
+                  <div>
+                    <strong style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)' }}>Key Achievements:</strong>
                     <div className="responsibility-list">
-                      {example.keyAchievements.map((achievement, idx) => (
-                        <li key={idx}>{achievement}</li>
-                      ))}
+                      {example.achievements.map((achievement, idx) => <li key={idx}>{achievement}</li>)}
                     </div>
                   </div>
                 </div>
               ))}
-
-              <div className="citation" style={{marginTop: '24px'}}>
-                <p><strong>Pro Tip:</strong> Customize these examples to match your experience. The most effective healthcare resumes combine strong credentials with specific, quantified achievements that demonstrate your unique value.</p>
-              </div>
             </div>
           </div>
         </section>
 
-        {/* Section 4: Keywords */}
-        <section id="keywords" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Essential Healthcare Keywords by Specialty</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '32px'}}>
-                ATS systems scan for specific keywords. Include these terms naturally throughout your resume 
-                to improve your ranking and demonstrate your expertise.
-              </p>
-
+        {/* Keywords */}
+        <section id="section-4" className="section" aria-labelledby="section4-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section4-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Essential Healthcare Keywords by Specialty</h2>
+              <p style={{ textAlign: 'center', marginBottom: '1.5rem' }}>ATS systems scan for specific keywords. Include these terms naturally throughout your resume to improve your ranking and demonstrate your expertise.</p>
               <div className="grid">
                 {healthcareKeywords.map((specialty, index) => (
-                  <div key={index} className="card" style={{background: '#ffffff'}}>
-                    <h3 style={{marginBottom: '16px', fontSize: '1.2rem'}}>{specialty.specialty}</h3>
+                  <div key={index} className="card-executive">
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem' }}>{specialty.specialty}</h3>
                     <div className="responsibility-list">
-                      {specialty.keywords.map((keyword, idx) => (
-                        <li key={idx}>{keyword}</li>
-                      ))}
+                      {specialty.keywords.map((keyword, idx) => <li key={idx}>{keyword}</li>)}
                     </div>
                   </div>
                 ))}
               </div>
-
-              <div className="insight-box" style={{marginTop: '32px'}}>
-                <h4 style={{marginBottom: '12px'}}>Keyword Placement Strategy</h4>
-                <p>Include priority keywords 3-5 times across your resume—in your summary, skills section, and experience bullets. Single mentions may be overlooked; excessive repetition can trigger spam detection. Always use keywords in context that demonstrates your actual experience.</p>
-                <div className="citation-source" style={{marginTop: '16px'}}>Source: JobScan 2025 Healthcare Analysis</div>
+              <div className="citation-box" style={{ marginTop: '2rem' }}>
+                <h4 style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }}>Keyword Placement Strategy</h4>
+                <p style={{ fontSize: 'var(--font-size-body-sm)' }}>Include priority keywords 3-5 times across your resume—in your summary, skills section, and experience bullets. Single mentions may be overlooked; excessive repetition can trigger spam detection. Always use keywords in context that demonstrates your actual experience.</p>
+                <p className="text-small" style={{ marginTop: '1rem', color: 'var(--accent-primary)' }}>Source: JobScan 2025 Healthcare Analysis</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 5: Common Mistakes */}
-        <section id="common-mistakes" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Common Healthcare Resume Mistakes</h2>
-              
+        {/* Common Mistakes */}
+        <section id="section-5" className="section section-alt" aria-labelledby="section5-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h2 id="section5-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Common Healthcare Resume Mistakes</h2>
               <div className="table-wrap">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Mistake</th>
-                      <th>Why It Hurts</th>
-                      <th>Better Approach</th>
-                    </tr>
-                  </thead>
+                <table>
+                  <thead><tr><th>Mistake</th><th>Why It Hurts</th><th>Better Approach</th></tr></thead>
                   <tbody>
-                    <tr>
-                      <td><strong>Buried Credentials</strong></td>
-                      <td>Licenses and certifications hidden at the bottom may be missed by recruiters.</td>
-                      <td className="text-success">Place credentials prominently at the top, near your name.</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Vague Responsibilities</strong></td>
-                      <td>"Responsible for patient care" doesn't demonstrate your impact.</td>
-                      <td className="text-success">Quantify: "Managed 15+ acute care patients per shift with 100% accuracy."</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Missing EMR/EHR Systems</strong></td>
-                      <td>Employers want to know which systems you can use immediately.</td>
-                      <td className="text-success">List specific systems: Epic, Cerner, Meditech, Allscripts.</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Ignoring Soft Skills</strong></td>
-                      <td>Healthcare requires empathy, communication, and teamwork.</td>
-                      <td className="text-success">Demonstrate through achievements: "Recognized for compassionate end-of-life care."</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Outdated Formatting</strong></td>
-                      <td>Complex tables and graphics can break ATS parsing.</td>
-                      <td className="text-success">Use clean, simple formatting with standard headings.</td>
-                    </tr>
+                    <tr><td><strong>Buried Credentials</strong></td><td>Licenses and certifications hidden at the bottom may be missed by recruiters.</td><td className="text-success">Place credentials prominently at the top, near your name.</td></tr>
+                    <tr><td><strong>Vague Responsibilities</strong></td><td>"Responsible for patient care" doesn't demonstrate your impact.</td><td className="text-success">Quantify: "Managed 15+ acute care patients per shift with 100% accuracy."</td></tr>
+                    <tr><td><strong>Missing EMR/EHR Systems</strong></td><td>Employers want to know which systems you can use immediately.</td><td className="text-success">List specific systems: Epic, Cerner, Meditech, Allscripts.</td></tr>
+                    <tr><td><strong>Ignoring Soft Skills</strong></td><td>Healthcare requires empathy, communication, and teamwork.</td><td className="text-success">Demonstrate through achievements: "Recognized for compassionate end-of-life care."</td></tr>
+                    <tr><td><strong>Outdated Formatting</strong></td><td>Complex tables and graphics can break ATS parsing.</td><td className="text-success">Use clean, simple formatting with standard headings.</td></tr>
                   </tbody>
                 </table>
               </div>
-
-              <div className="citation" style={{marginTop: '32px'}}>
-                <p><strong>Source:</strong> Analysis of 25,000+ rejected healthcare applications, 2025-2026. Data from Healthcare Recruitment Consortium.</p>
+              <div className="citation-box" style={{ marginTop: '2rem' }}>
+                <p style={{ fontSize: 'var(--font-size-body-sm)' }}><strong>Source:</strong> Analysis of 25,000+ rejected healthcare applications, 2025-2026. Data from Healthcare Recruitment Consortium.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* People Also Ask Section */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">People Also Ask About Healthcare Resumes</h2>
+        {/* People Also Ask */}
+        <section className="section" aria-labelledby="paa-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="paa-heading">People Also Ask About Healthcare Resumes</h2>
+              <p className="section-subtitle">Quick answers to common healthcare resume questions</p>
+            </div>
             <div className="faq-grid">
               {peopleAlsoAsk.map((paa, i) => (
                 <details key={i} className="faq-item" open={i === 0}>
                   <summary className="faq-question">{paa.question}</summary>
-                  <div className="faq-answer">{paa.answer}</div>
+                  <p style={{ color: 'var(--text-secondary)', marginTop: '0.75rem', fontSize: 'var(--font-size-body-sm)', lineHeight: '1.6' }}>{paa.answer}</p>
                 </details>
               ))}
             </div>
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section id="faqs" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Frequently Asked Questions</h2>
-              <div className="faq-grid">
-                {faqItems.map((item, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <div className="faq-answer">{item.answer}</div>
-                  </div>
-                ))}
-              </div>
+        {/* FAQ */}
+        <section id="section-6" className="section section-alt" aria-labelledby="faq-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="faq-heading">Frequently Asked Questions</h2>
+              <p className="section-subtitle">In-depth answers to help you craft the perfect healthcare resume</p>
+            </div>
+            <div className="faq-grid">
+              {faqItems.map((item, index) => (
+                <div key={index} className="faq-item">
+                  <h3 className="faq-question">{item.question}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{item.answer}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Internal Links - Only verified working links (www REMOVED) */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">🔗 Free Resume Tools & Resources</h2>
-            <p className="section-subtitle">
-              Put your healthcare resume knowledge into practice with our free, ATS-optimized tools.
-            </p>
-            <div className="grid">
-              <Link href="/resume-templates" className="card" style={{textAlign: 'center'}}>
-                <FiFileText size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>ATS-Optimized Resume Templates</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  Professionally designed templates specifically formatted for healthcare professionals.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Browse All Templates →
-                </span>
-              </Link>
-              <Link href="/free-resume-tools" className="card" style={{textAlign: 'center'}}>
-                <FiTool size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>Free Resume Tools</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  ATS checker, keyword matcher, resume scorer, and certification tracker. All free forever.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Explore All Tools →
-                </span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 7: Next Steps */}
-        <section id="next-steps" className="section">
-          <div className="container">
-            <div className="card" style={{padding: 'clamp(32px, 6vw, 48px)', textAlign: 'center'}}>
-              <h2 className="section-title" style={{marginBottom: '24px'}}>Ready to Create Your Healthcare Resume?</h2>
-              <p style={{fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 32px', lineHeight: '1.8'}}>
-                Now that you understand what makes a winning healthcare resume, put that knowledge to work. 
-                Use our free templates and tools to create a professional, ATS-optimized resume that gets results.
-              </p>
-              <div className="button-container" style={{gap: '24px'}}>
-                <Link href="/resume-templates" className="btn-primary">
-                  Browse Templates <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-                <Link href="/free-resume-tools" className="btn-secondary">
-                  Try Free Tools <FiTool style={{marginRight: '8px'}} />
-                </Link>
+        {/* CTA */}
+        <section id="section-7" className="section" aria-labelledby="cta-heading">
+          <div className="section-container">
+            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Ready to Create Your Healthcare Resume?</h2>
+              <p style={{ marginBottom: '2rem' }}>Now that you understand what makes a winning healthcare resume, put that knowledge to work. Use our free templates and tools to create a professional, ATS-optimized resume that gets results.</p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-primary">Browse Templates <FiArrowRight /></Link>
+                <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Try Free Tools</Link>
               </div>
-              <div className="stats" style={{marginTop: '48px', borderTop: '1px solid var(--border)', paddingTop: '32px'}}>
-                <div className="stat-item">
-                  <span className="stat-number">25,000+</span>
-                  <span className="stat-label">Healthcare Resumes Created</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">4.9/5</span>
-                  <span className="stat-label">User Rating</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Free Forever</span>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', borderTop: '0.5px solid var(--border-gold-filament)', paddingTop: '2rem' }} aria-label="Platform statistics">
+                <div className="stat-item"><span className="stat-number">25,000+</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Healthcare Resumes Created</span></div>
+                <div className="stat-item"><span className="stat-number">4.9/5</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>User Rating</span></div>
+                <div className="stat-item"><span className="stat-number">100%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Free Forever</span></div>
               </div>
-              <p className="helper-text">
+              <p className="text-small" style={{ marginTop: '1.5rem' }}>
                 Data-driven strategies updated for 2026 healthcare hiring trends. Last updated: {currentDate} • Sources: BLS, Healthcare Recruitment Consortium, ANA, JobScan
               </p>
             </div>
           </div>
         </section>
 
-        {/* NEW SECTION: Bottom Internal Links for SEO/GEO Boost */}
-        <section className="bottom-links-section">
-          <div className="container">
-            <h2 className="section-title" style={{fontSize: '1.5rem', marginBottom: '24px'}}>Explore More Career Resources</h2>
-            <div className="link-card-grid">
-              
-              {/* Link 1: AI/Modern Resume Writing */}
-              <Link href="/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot" className="link-card">
-                <div>
-                  <div className="link-card-title">
-                    <FiZap /> How to Use AI Without Sounding Like a Robot
+        {/* Recommended Resources (SEO/GEO Boost) */}
+        <section className="section section-alt" aria-labelledby="recommended-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="recommended-heading">Explore More Career Resources</h2>
+              <p className="section-subtitle">Put your healthcare resume knowledge into practice with our free tools and guides</p>
+            </div>
+            <div className="geo-link-grid">
+              {internalLinks.map((link, index) => (
+                <Link key={index} href={link.href} className="geo-link-card">
+                  <div style={{ fontSize: 'var(--font-size-title-md)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</div>
+                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flexGrow: 1 }}>{link.desc}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--accent-primary)', marginTop: 'auto' }}>
+                    Read Guide <FiArrowRight size={16} />
                   </div>
-                  <p className="link-card-desc">
-                    Master prompt engineering to write authentic, human-sounding resume bullets that pass AI screening.
-                  </p>
-                </div>
-                <div className="link-arrow">Read Guide <FiArrowRight size={14} /></div>
-              </Link>
-
-              {/* Link 2: Complementary Tool */}
-              <Link href="/free-cover-letter-generator" className="link-card">
-                <div>
-                  <div className="link-card-title">
-                    <FiFileText /> Free Cover Letter Generator
-                  </div>
-                  <p className="link-card-desc">
-                    Create matching cover letters instantly. Perfect companion to your new healthcare resume.
-                  </p>
-                </div>
-                <div className="link-arrow">Generate Now <FiArrowRight size={14} /></div>
-              </Link>
-
-              {/* Link 3: Core SEO Keyword */}
-              <Link href="/best-ats-resume-format-2026" className="link-card">
-                <div>
-                  <div className="link-card-title">
-                    <FiLayers /> Best ATS Resume Formats for 2026
-                  </div>
-                  <p className="link-card-desc">
-                    Ensure your layout is parsed correctly by modern Applicant Tracking Systems.
-                  </p>
-                </div>
-                <div className="link-arrow">View Formats <FiArrowRight size={14} /></div>
-              </Link>
-
-              {/* Link 4: Niche Targeting (Remote) */}
-              <Link href="/resume-tips-for-remote-jobs-in-the-usa" className="link-card">
-                <div>
-                  <div className="link-card-title">
-                    <FiHome /> Resume Tips for Remote Healthcare Jobs
-                  </div>
-                  <p className="link-card-desc">
-                    Highlight telehealth and remote collaboration skills for the growing virtual care market.
-                  </p>
-                </div>
-                <div className="link-arrow">Get Tips <FiArrowRight size={14} /></div>
-              </Link>
-
-              {/* Link 5: Hub/Library */}
-              <Link href="/complete-resume-resource-library" className="link-card">
-                <div>
-                  <div className="link-card-title">
-                    <FiBookOpen /> Complete Resume Resource Library
-                  </div>
-                  <p className="link-card-desc">
-                    Access our full database of templates, examples, and career guides for every industry.
-                  </p>
-                </div>
-                <div className="link-arrow">Browse Library <FiArrowRight size={14} /></div>
-              </Link>
-
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Hidden metadata for crawlers */}
-        <div style={{display: 'none'}}>
+        {/* Hidden metadata for crawlers (from Page 1) */}
+        <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
           <span itemProp="word-count">3300</span>

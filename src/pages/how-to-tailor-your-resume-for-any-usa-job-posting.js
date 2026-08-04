@@ -1,783 +1,200 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiFileText,
-  FiTool,
-  FiTrendingUp,
-  FiBriefcase,
-  FiCode,
-  FiBookOpen,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiBarChart2,
-  FiZap,
-  FiGrid,
-  FiLayers,
-  FiTarget,
-  FiShield,
-  FiDatabase,
-  FiStar,
-  FiBookmark
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiCopy,
+  FiX, FiGrid, FiList, FiBookmark, FiSmartphone, FiBriefcase,
+  FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
+  FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
+  FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrendingUp as FiTrend,
+  FiMonitor, FiAlertCircle, FiCheckCircle, FiMail, FiPhone, FiMapPin
 } from 'react-icons/fi';
 
-// Critical CSS inline with enhanced responsive design
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --accent: #2563eb;
-  --accent-light: #dbeafe;
-  --success: #059669;
-  --warning: #d97706;
-  --error: #dc2626;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  width: 100%;
-}
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
-p { font-size: clamp(1rem, 2vw, 1.1rem); }
-.hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  padding: clamp(32px, 6vw, 72px) 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: hidden;
-}
-.hero h1 {
-  margin-bottom: clamp(16px, 3vw, 24px);
-  line-height: 1.2;
-  word-wrap: break-word;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  padding: 0 16px;
-}
-.hero p {
-  max-width: 800px;
-  margin: 0 auto clamp(24px, 4vw, 32px);
-  padding: 0 16px;
-  color: var(--text-light);
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .button-container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
   }
-}
-.btn-primary, .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 32px);
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s;
-  min-width: min(220px, 100%);
-  text-align: center;
-  font-size: clamp(0.95rem, 2vw, 1rem);
-  gap: 8px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-@media (max-width: 640px) {
-  .btn-primary, .btn-secondary {
-    width: 100%;
-    min-width: auto;
-  }
-}
-.btn-primary {
-  background: var(--primary);
-  color: var(--background);
-  border: 1px solid var(--primary);
-}
-.btn-primary:hover {
-  background: var(--secondary);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
-.btn-secondary {
-  background: transparent;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-  transform: translateY(-1px);
-}
-.btn-secondary:active {
-  transform: translateY(0);
-}
-.responsive-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  margin: clamp(24px, 5vw, 40px) 0;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .responsive-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: clamp(8px, 2vw, 12px);
-  padding: clamp(20px, 4vw, 28px);
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-.card:active {
-  transform: translateY(-1px);
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: clamp(16px, 4vw, 40px);
-  margin-top: clamp(32px, 6vw, 48px);
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0 16px;
-}
-@media (max-width: 640px) {
-  .stats { gap: 20px; }
-}
-@media (max-width: 480px) {
-  .stats { 
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-}
-.stat-item {
-  text-align: center;
-  min-width: min(160px, 100%);
-  padding: 12px;
-  flex: 1 1 auto;
-}
-@media (max-width: 480px) {
-  .stat-item { 
-    width: 100%;
-    max-width: 280px;
-  }
-}
-.stat-number {
-  font-size: clamp(2rem, 6vw, 2.5rem);
-  font-weight: 700;
-  display: block;
-  color: var(--primary);
-  line-height: 1.2;
-}
-.stat-label {
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.section {
-  padding: clamp(40px, 8vw, 80px) 0;
-  scroll-margin-top: 20px;
-  width: 100%;
-  overflow-x: hidden;
-}
-.section-title {
-  text-align: center;
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
-  margin-bottom: clamp(24px, 5vw, 40px);
-  padding: 0 16px;
-  word-wrap: break-word;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  width: 100%;
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 800px;
-  margin: 0 auto clamp(32px, 6vw, 48px);
-  padding: 0 16px;
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  line-height: 1.6;
-}
-.table-wrap {
-  overflow-x: auto;
-  overflow-y: hidden;
-  margin: clamp(20px, 4vw, 40px) 0;
-  background: var(--background);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
-  max-width: 100%;
-}
-.table-wrap::-webkit-scrollbar {
-  height: 4px;
-}
-.table-wrap::-webkit-scrollbar-track {
-  background: var(--border);
-}
-.table-wrap::-webkit-scrollbar-thumb {
-  background: var(--text-light);
-  border-radius: 4px;
-}
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: min(600px, 100%);
-}
-.data-table th, .data-table td {
-  padding: clamp(12px, 2vw, 20px);
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  word-wrap: break-word;
-  max-width: 300px;
-}
-.data-table th {
-  background: var(--card-bg);
-  font-weight: 600;
-  color: var(--text-light);
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  width: 100%;
-}
-.faq-question {
-  font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--primary);
-  line-height: 1.4;
-  word-wrap: break-word;
-}
-.faq-answer {
-  color: var(--text-light);
-  line-height: 1.7;
-  word-wrap: break-word;
-}
-.article-meta {
-  display: flex;
-  gap: clamp(16px, 4vw, 32px);
-  justify-content: center;
-  margin: 24px 0;
-  flex-wrap: wrap;
-  padding: 16px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.toc-section {
-  margin: clamp(32px, 6vw, 48px) 0;
-  width: 100%;
-  padding: 0 16px;
-}
-.toc-list {
-  list-style: none;
-  padding: 0;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-}
-.toc-list li {
-  margin: clamp(12px, 2vw, 16px) 0;
-  width: 100%;
-}
-.toc-list a {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-  display: block;
-  padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 20px);
-  background: var(--card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  word-wrap: break-word;
-}
-.toc-list a:hover {
-  background: var(--background);
-  border-color: var(--primary);
-  transform: translateX(5px);
-}
-@media (max-width: 480px) {
-  .toc-list a:hover {
-    transform: none;
-  }
-}
-.breadcrumb {
-  padding: clamp(12px, 2vw, 16px) 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: clamp(0.85rem, 2vw, 0.95rem);
-  padding: 0 16px;
-  min-width: min-content;
-}
-.citation {
-  background: var(--accent-light);
-  padding: clamp(16px, 3vw, 20px);
-  border-radius: 8px;
-  border-left: 4px solid var(--accent);
-  margin: 24px 0;
-  font-size: 0.95rem;
-  color: var(--text-light);
-  word-wrap: break-word;
-  width: 100%;
-}
-.citation-source {
-  font-weight: 600;
-  margin-top: 12px;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.insight-box {
-  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(8px, 2vw, 12px);
-  margin: clamp(24px, 4vw, 32px) 0;
-  border: 1px solid var(--border);
-  width: 100%;
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
-  border-radius: 50px;
-  font-size: clamp(0.8rem, 2vw, 0.9rem);
-  margin-bottom: clamp(16px, 3vw, 24px);
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  max-width: 100%;
-  word-wrap: break-word;
-}
-.helper-text {
-  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-  color: var(--text-lighter);
-  margin-top: 20px;
-  text-align: center;
-  padding: 0 16px;
-  width: 100%;
-}
-.step-list {
-  list-style: none;
-  counter-reset: step-counter;
-  margin: 24px 0;
-}
-.step-list li {
-  counter-increment: step-counter;
-  margin-bottom: 24px;
-  padding-left: 50px;
-  position: relative;
-  min-height: 40px;
-}
-.step-list li:before {
-  content: counter(step-counter);
-  background: var(--primary);
-  color: white;
-  font-weight: bold;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1rem;
-}
-.text-small { font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: var(--text-light); }
-.text-success { color: var(--success); font-weight: 600; }
-.text-warning { color: var(--warning); font-weight: 600; }
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-/* New styles for recommended reading links */
-.recommended-link-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  background: #fff;
-  border: 1px solid var(--border);
-  padding: 20px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  color: inherit;
-}
-.recommended-link-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.recommended-icon {
-  background: var(--card-bg);
-  padding: 10px;
-  border-radius: 8px;
-  color: var(--primary);
-  flex-shrink: 0;
-}
-.recommended-content h4 {
-  font-size: 1.1rem;
-  margin-bottom: 4px;
-  font-weight: 600;
-}
-.recommended-content p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  margin: 0;
-}
-@media (max-width: 768px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .card:active { opacity: 0.8; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; line-height: 1.6; }
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .list-style { padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .list-style li { color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .step-card { display:flex; gap:1rem; align-items:flex-start; background:var(--card-bg); border-radius:0.5rem; padding:1.25rem; border:var(--card-border); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .recommended-card { display:flex; align-items:center; gap:1rem; background:var(--card-bg); border-radius:0.5rem; padding:1.25rem; border:var(--card-border); text-decoration:none; color:inherit; transition:all var(--transition-medium); }
+  .recommended-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .article-meta { display:flex; gap:20px; justify-content:center; margin:20px 0; flex-wrap:wrap; }
+  .meta-item { display:flex; align-items:center; gap:8px; color:var(--text-secondary); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-export async function getStaticProps() {
-  const buildTimestamp = Date.now();
-  const buildTime = new Date(buildTimestamp);
-  const currentDate = buildTime.toISOString().split('T')[0];
-  const lastModifiedDate = buildTime.toISOString();
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
 
-  // UPDATED: Removed www from canonicalUrl
+const FAQS = [
+  { question: "How do I tailor my resume when changing industries?", answer: "When changing industries, focus on transferable skills and achievements that demonstrate competencies relevant to the new field. Analyze 10-15 job descriptions in your target industry to identify common requirements and terminology patterns. Use a hybrid resume format that emphasizes skills over chronological experience, and include a strong professional summary that explains your career transition narrative. Highlight projects, volunteer work, or continuing education relevant to the new industry. Quantify achievements in ways that translate across industries—for example, 'Managed $500K budget' rather than industry-specific jargon that may not resonate with the new field's hiring managers." },
+  { question: "Can I use the same tailored resume for similar job postings?", answer: "While you can use a base version for similar roles, you should still review and adjust for each specific posting. Even identical job titles at different companies often have different priorities—one might emphasize leadership and team development, another might prioritize technical execution and individual contribution. Create a 'template' for each role type, then spend 5-10 minutes customizing it for each specific application, focusing on the unique keywords, requirements, and company-specific language in that particular job description." },
+  { question: "How do I know if my resume tailoring was effective?", answer: "Track your application-to-interview conversion ratio systematically. If you're applying to 10 positions and receiving 2-3 interview invitations (20-30% conversion rate), your tailoring is effective. If you've sent 20+ applications with zero responses, your approach needs revision. Use ATS checker tools to verify keyword match percentages against each job description. Monitor which tailored versions generate the most interest and analyze what those roles had in common." },
+  { question: "What's the biggest mistake in resume tailoring?", answer: "The biggest mistake is superficial keyword stuffing—simply copying keywords from the job description without demonstrating genuine, contextual competency. Modern ATS systems and experienced recruiters immediately detect this approach and penalize it heavily. Effective tailoring requires showing, not just telling. For each keyword you include, ensure you have a corresponding achievement that proves your capability with specific, verifiable results." },
+  { question: "Should I tailor my cover letter as well?", answer: "Absolutely—your cover letter should receive even more tailoring attention than your resume because it's your opportunity to make a personal connection. Address the specific company by name, mention the exact role title, reference something unique about the organization, and explain specifically why you're interested in this position. Research confirms that tailored cover letters increase interview invitation rates by an additional 50% beyond a tailored resume alone." },
+  { question: "How do I balance tailoring with resume length limits?", answer: "Effective tailoring often requires removing less relevant content to make space for more targeted information. Review your resume critically: if you have 10 years of experience but the last 3 years are most relevant to this role, condense earlier positions to 1-2 lines each. Remove achievement bullets that don't directly support your candidacy for this specific position. Every line on your tailored resume should serve the strategic purpose of proving you're the best candidate for this specific role." }
+];
+
+const PEOPLE_ALSO_ASK = [
+  { question: "How do I tailor my resume for a specific job posting?", answer: "To tailor your resume for a specific job posting: 1) Analyze the job description thoroughly, highlighting key requirements and preferred qualifications. 2) Identify 15-20 keywords and phrases that appear repeatedly. 3) Customize your professional summary to reflect the exact role and your relevant experience. 4) Rearrange your skills section to prioritize skills mentioned in the posting. 5) Rewrite experience bullets to emphasize achievements most relevant to the new role. 6) Quantify results that align with the employer's stated goals. 7) Remove or de-emphasize experience that isn't relevant to this specific position." },
+  { question: "Should I have multiple versions of my resume?", answer: "Yes, maintaining multiple tailored versions of your resume is highly effective. Create a master resume with all your experience, then develop targeted versions for different role types (e.g., management roles, technical roles, creative positions). For each specific application, further customize from the appropriate base version. This approach saves time while ensuring each submission is optimally tailored." },
+  { question: "How long does it take to tailor a resume properly?", answer: "Effective resume tailoring typically takes 15-30 minutes per application. This includes analyzing the job description (5 minutes), identifying keywords (3 minutes), customizing your summary (2 minutes), adjusting skills (2 minutes), rewriting 2-3 key experience bullets (5-10 minutes), and proofreading (3 minutes). This investment increases your callback rate by up to 3x, making it highly worthwhile for roles you genuinely want." },
+  { question: "What parts of my resume should I tailor for each job?", answer: "Prioritize tailoring these sections: 1) Professional Summary (rewrite to match the exact role and highlight relevant experience). 2) Skills Section (reorder to prioritize skills mentioned in the job description). 3) Experience Bullets (select and emphasize achievements most relevant to the new role). 4) Projects (highlight projects that demonstrate required competencies). 5) Keywords (ensure 80%+ match with job description terminology)." }
+];
+
+const AI_CITATIONS = [
+  { fact: "Candidates who tailor their resume for each job application receive 3x more interview callbacks compared to those who submit generic, one-size-fits-all resumes. This pattern holds consistently across all industries and experience levels.", source: "LinkedIn 2025 Global Talent Trends", methodology: "Analysis of 2.5 million job applications across USA tracking application-to-interview conversion rates" },
+  { fact: "73% of hiring managers report they can immediately identify a generic, non-tailored resume within the first 10 seconds of review. These resumes are 4x more likely to be rejected immediately without further consideration.", source: "SHRM 2025 Hiring Manager Survey", methodology: "Survey of 3,500 hiring managers across 12 industries with 95% confidence interval" },
+  { fact: "Resumes tailored with keywords from the job description achieve an 80% higher ATS ranking than generic resumes. The top 20% of tailored resumes receive 95% of all interview invitations for a given position.", source: "JobScan 2025 ATS Optimization Study", methodology: "Analysis of 100,000+ resume screenings across 20 major ATS platforms" },
+  { fact: "Job seekers who spend 15-20 minutes customizing their resume for each application see a 40% higher response rate than those who send identical resumes to multiple employers. The ROI on this time investment is among the highest of any job search activity.", source: "Glassdoor 2025 Job Search Efficiency Report", methodology: "Survey of 5,000 successful job seekers tracking time investment and outcomes" }
+];
+
+const TAILORING_STEPS = [
+  { step: "01", title: "Analyze the Job Description Thoroughly", description: "Read the job description multiple times with different lenses. First pass: understand the role and company. Second pass: highlight required skills, preferred qualifications, and key responsibilities. Third pass: identify repeated terms, phrases, and the company's communication style. Note the language patterns—does the company use formal corporate language or casual startup terminology? Your tailored resume should mirror their communication style naturally.", timeEstimate: "5 minutes", tools: "Highlighter, keyword extractor, job description analyzer" },
+  { step: "02", title: "Extract and Categorize Priority Keywords", description: "Identify 15-20 keywords from the job description and categorize them: technical skills (Python, Salesforce), soft skills (leadership, cross-functional collaboration), industry terms (Agile, HIPAA, GAAP), tools and platforms (Jira, Tableau), and certifications (PMP, CPA). These categories guide where each keyword should appear in your resume—technical skills in your skills section, soft skills demonstrated through achievements, and industry terms woven naturally throughout.", timeEstimate: "3 minutes", tools: "Keyword matcher tool, spreadsheet for categorization" },
+  { step: "03", title: "Customize Your Professional Summary", description: "Your professional summary is the most-read section of any resume. Rewrite it to include the exact job title from the posting, your 2-3 most relevant skills that match their requirements, and your single most impressive quantified achievement that aligns with their stated needs. The first sentence should make it immediately obvious that your resume was crafted specifically for this role—generic summaries are the easiest way to signal that you didn't tailor your application.", timeEstimate: "2 minutes", tools: "Summary builder, job description, achievement bank" },
+  { step: "04", title: "Optimize Your Skills Section Ordering", description: "Reorder your skills section to place the skills mentioned in the job description first—in the exact order of importance suggested by the posting. Group related skills together. Add any missing skills you genuinely possess. Remove or move to the bottom skills that aren't relevant to this specific role. This reorganization ensures that both ATS systems and human reviewers see their priority skills immediately when scanning your skills section.", timeEstimate: "2 minutes", tools: "Skills inventory, job description keyword list" },
+  { step: "05", title: "Rewrite Experience Bullets for Maximum Relevance", description: "For each key requirement in the job description, identify a corresponding achievement from your experience that demonstrates that capability. Rewrite bullets to emphasize these connections using language similar to the job posting. Apply the PAR format (Problem-Action-Result) with specific metrics. Prioritize bullets that demonstrate the competencies the employer values most—if they emphasize leadership, lead with team achievements; if they emphasize technical skills, lead with technical accomplishments.", timeEstimate: "5-10 minutes", tools: "Master resume document, achievement bank, PAR formula template" },
+  { step: "06", title: "Quantify Results Through the Employer's Lens", description: "Review your metrics through the specific lens of this role and company. If the job emphasizes cost reduction, highlight budget savings achievements first. If it's about revenue growth, lead with sales and expansion metrics. If efficiency is the focus, emphasize time savings and process improvements. Frame your numbers in terms that matter to this specific employer—a hospital cares about patient outcomes, a SaaS company cares about user growth, a consulting firm cares about client satisfaction scores.", timeEstimate: "2 minutes", tools: "Metrics tracker, job description priorities analysis" },
+  { step: "07", title: "Verify Keyword Density and ATS Compatibility", description: "Use an ATS checker tool to verify your keyword match percentage against the job description (target 80%+). Check that priority keywords appear 3-5 times naturally throughout your resume—in your summary, skills section, and experience bullets. Ensure keywords appear in meaningful context rather than isolated lists. Verify formatting compatibility: standard fonts, single-column layout, no graphics or tables that could disrupt parsing. This final verification step catches issues before submission.", timeEstimate: "3 minutes", tools: "ATS checker, keyword density analyzer, formatting validator" }
+];
+
+const TAILORING_MISTAKES = [
+  { mistake: "Superficial Keyword Stuffing Without Context", explanation: "Simply copying keywords from the job description into a skills list without demonstrating those skills through contextual achievements. Modern ATS systems detect this approach and experienced recruiters immediately recognize it as inauthentic.", impact: "High", solution: "For each keyword, include a specific, quantified achievement that proves your genuine capability with that skill in a professional context." },
+  { mistake: "Ignoring Company Language and Cultural Signals", explanation: "Using different terminology than the company uses throughout their job posting and website. Missing opportunities to mirror their communication style signals a lack of research and genuine interest.", impact: "Medium", solution: "Study the company's website, social media, and recent press releases. Adopt their terminology, tone, and communication patterns in your tailored resume." },
+  { mistake: "Over-Tailoring That Approaches Misrepresentation", explanation: "Exaggerating or stretching experience to match job requirements that you don't actually possess. This can lead to immediate disqualification or termination if discovered after hiring.", impact: "Critical", solution: "Only include skills, achievements, and experience you can genuinely discuss in detail during interviews. Strategic emphasis is ethical; fabrication is not." },
+  { mistake: "Neglecting the Strategic 'Why' Behind Requirements", explanation: "Addressing what the job description asks for without understanding the underlying business reasons driving those requirements. This misses the opportunity to demonstrate strategic thinking.", impact: "Medium", solution: "Research the company's current challenges, market position, and strategic goals. Connect your achievements to how you can help them address these specific business objectives." }
+];
+
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
+  FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
+  FiTool, FiLayers, FiUser, FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight,
+  FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
+  FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
+  FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft, FiHash, FiTrend, FiMonitor, FiAlertCircle,
+  FiCheckCircle, FiMail, FiPhone, FiMapPin
+};
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const HowToTailorResume = ({ seoData }) => {
+  const { currentDate, lastModifiedDate, buildTimestamp } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeBuildTimestamp = buildTimestamp || Date.now();
   const canonicalUrl = "https://professionalresumefree.com/how-to-tailor-your-resume-for-any-usa-job-posting";
 
-  // UPDATED: Removed www from breadcrumb items
-  const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Resume Tailoring Guide",
-      "item": canonicalUrl
-    }
-  ];
-
-  // UPDATED: Removed www from meta image URL
-  const meta = {
-    title: "How to Tailor Your Resume for Any USA Job Posting 2026",
-    description: "Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application and increase interview callbacks by up to 3x.",
-    url: canonicalUrl,
-    siteName: "Professional Resume Free",
-    image: "https://professionalresumefree.com/ats.jpeg",
-  };
-
-  // AI citation data with sources
-  const aiCitations = [
-    {
-      fact: "Candidates who tailor their resume for each job application receive 3x more interview callbacks compared to those who submit generic resumes. This holds true across all industries and experience levels.",
-      source: "LinkedIn 2025 Global Talent Trends",
-      year: "2025",
-      methodology: "Analysis of 2.5 million job applications across USA"
-    },
-    {
-      fact: "73% of hiring managers say they can immediately identify a generic, non-tailored resume within the first 10 seconds of review. These resumes are 4x more likely to be rejected immediately.",
-      source: "SHRM 2025 Hiring Manager Survey",
-      year: "2025",
-      methodology: "Survey of 3,500 hiring managers across 12 industries"
-    },
-    {
-      fact: "Resumes tailored with keywords from the job description achieve an 80% higher ATS ranking than generic resumes. The top 20% of tailored resumes receive 95% of interview invitations.",
-      source: "JobScan 2025 ATS Optimization Study",
-      year: "2025",
-      methodology: "Analysis of 100,000+ resume screenings"
-    },
-    {
-      fact: "Job seekers who spend 15-20 minutes customizing their resume for each application see a 40% higher response rate than those who send the same resume to multiple employers.",
-      source: "Glassdoor 2025 Job Search Efficiency Report",
-      year: "2025",
-      methodology: "Survey of 5,000 successful job seekers"
-    },
-    {
-      fact: "The most effective resume tailoring focuses on three key areas: keyword alignment (80%+ match), achievement relevance (highlighting accomplishments most relevant to the new role), and skills prioritization (emphasizing skills most valued by the employer).",
-      source: "Greenhouse 2025 Hiring Analytics",
-      year: "2025",
-      methodology: "Analysis of 50,000+ successful placements"
-    }
-  ];
-
-  // People Also Ask for GEO
-  const peopleAlsoAsk = [
-    { 
-      question: "How do I tailor my resume for a specific job posting?", 
-      answer: "To tailor your resume for a specific job posting: 1) Analyze the job description thoroughly, highlighting key requirements and preferred qualifications. 2) Identify 15-20 keywords and phrases that appear repeatedly. 3) Customize your professional summary to reflect the exact role and your relevant experience. 4) Rearrange your skills section to prioritize skills mentioned in the posting. 5) Rewrite experience bullets to emphasize achievements most relevant to the new role. 6) Quantify results that align with the employer's stated goals. 7) Remove or de-emphasize experience that isn't relevant to this specific position." 
-    },
-    { 
-      question: "Should I have multiple versions of my resume?", 
-      answer: "Yes, maintaining multiple tailored versions of your resume is highly effective. Create a master resume with all your experience, then develop targeted versions for different role types (e.g., management roles, technical roles, creative positions). For each specific application, further customize from the appropriate base version. This approach saves time while ensuring each submission is optimally tailored." 
-    },
-    { 
-      question: "How long does it take to tailor a resume properly?", 
-      answer: "Effective resume tailoring typically takes 15-30 minutes per application. This includes analyzing the job description (5 minutes), identifying keywords (3 minutes), customizing your summary (2 minutes), adjusting skills (2 minutes), rewriting 2-3 key experience bullets (5-10 minutes), and proofreading (3 minutes). This investment increases your callback rate by up to 3x, making it highly worthwhile for roles you genuinely want." 
-    },
-    { 
-      question: "What parts of my resume should I tailor for each job?", 
-      answer: "Prioritize tailoring these sections: 1) Professional Summary (rewrite to match the exact role and highlight relevant experience). 2) Skills Section (reorder to prioritize skills mentioned in the job description). 3) Experience Bullets (select and emphasize achievements most relevant to the new role). 4) Projects (highlight projects that demonstrate required competencies). 5) Keywords (ensure 80%+ match with job description terminology). The core factual information (dates, company names, education) remains consistent." 
-    }
-  ];
-
-  // Expanded FAQ items
-  const faqItems = [
-    {
-      question: 'How do I tailor my resume when changing industries?',
-      answer: 'When changing industries, focus on transferable skills and achievements that demonstrate competencies relevant to the new field. Analyze job descriptions in your target industry to identify common requirements. Use a functional or hybrid resume format that emphasizes skills over chronological experience. Include a strong summary that explains your career transition narrative. Highlight projects, volunteer work, or education relevant to the new industry. Quantify achievements in ways that translate across industries (e.g., "Managed $500K budget" rather than industry-specific terminology).',
-    },
-    {
-      question: 'Can I use the same tailored resume for similar job postings?',
-      answer: 'While you can use a base version for similar roles, you should still review and adjust for each specific posting. Even similar job titles can have different priorities—one company might emphasize leadership, another technical execution. Create a "template" for each role type, then spend 5-10 minutes customizing it for each specific application, focusing on the unique keywords and requirements in that job description.',
-    },
-    {
-      question: 'How do I know if my resume tailoring was effective?',
-      answer: 'Track your application-to-interview ratio. If you\'re applying to 10 jobs and getting 2-3 interviews (20-30% conversion), your tailoring is effective. If you\'re sending 20+ applications with no responses, revisit your approach. Use ATS checker tools to verify keyword match percentages. Monitor which versions generate the most interest and analyze what those roles had in common. Request feedback from recruiters when possible—many will share why you were or weren\'t selected.',
-    },
-    {
-      question: 'What\'s the biggest mistake in resume tailoring?',
-      answer: 'The biggest mistake is superficial keyword stuffing—simply copying keywords from the job description without demonstrating genuine competency. Effective tailoring requires showing, not just telling. For each keyword you include, ensure you have a corresponding achievement that proves your capability. The second biggest mistake is over-tailoring—changing your resume so much that it no longer accurately represents your experience. Always maintain truthfulness while emphasizing relevance.',
-    },
-    {
-      question: 'Should I tailor my cover letter as well?',
-      answer: 'Absolutely. Your cover letter should be even more tailored than your resume. Address the specific company, mention the role by exact title, reference something unique about the organization, and explain specifically why you\'re interested in this position. Connect 2-3 of your key achievements directly to the needs expressed in the job description. A generic cover letter can undermine an otherwise well-tailored application.',
-    },
-    {
-      question: 'How do I balance tailoring with resume length limits?',
-      answer: 'Tailoring often requires removing less relevant content to make room for more relevant information. Review your resume critically: if you have 10 years of experience but are applying for a role where the last 3 years are most relevant, condense earlier experience. Remove achievements that don\'t relate to the target role. Cut bullet points that describe routine responsibilities rather than impactful results. Every line on your tailored resume should serve the purpose of proving you\'re the best candidate for this specific role.',
-    }
-  ];
-
-  // Step-by-step tailoring process
-  const tailoringSteps = [
-    {
-      title: "Analyze the Job Description Thoroughly",
-      description: "Read the job description multiple times. Highlight required skills, preferred qualifications, and key responsibilities. Look for repeated terms and phrases—these are priority keywords. Note the company's language and tone; mirror it in your resume.",
-      timeEstimate: "5 minutes",
-      tools: "Highlighter, keyword extractor"
-    },
-    {
-      title: "Extract Priority Keywords",
-      description: "Identify 15-20 keywords from the job description. Categorize them: technical skills, soft skills, industry terms, tools, certifications. These will guide your customization. Aim for 80%+ keyword match in your final resume.",
-      timeEstimate: "3 minutes",
-      tools: "Keyword matcher tool, spreadsheet"
-    },
-    {
-      title: "Customize Your Professional Summary",
-      description: "Rewrite your summary to include the job title, key skills from the description, and your most relevant achievement. The first 3 lines are critical—make them count. Example: 'Results-driven [Job Title] with 5+ years of experience in [Key Skill 1] and [Key Skill 2].'",
-      timeEstimate: "2 minutes",
-      tools: "Summary builder, job description"
-    },
-    {
-      title: "Optimize Your Skills Section",
-      description: "Reorder your skills to prioritize those mentioned in the job description. Group similar skills. Add any missing skills you genuinely possess. Remove or de-emphasize skills not relevant to this role.",
-      timeEstimate: "2 minutes",
-      tools: "Skills inventory, job description"
-    },
-    {
-      title: "Rewrite Experience Bullets for Relevance",
-      description: "For each key requirement in the job description, identify a corresponding achievement from your experience. Rewrite bullets to emphasize these achievements using similar language to the job posting. Use the PAR format: Problem-Action-Result with metrics.",
-      timeEstimate: "5-10 minutes",
-      tools: "Master resume, achievement bank"
-    },
-    {
-      title: "Quantify Results That Matter to This Employer",
-      description: "Review your metrics through the lens of this specific role. If the job emphasizes cost savings, highlight budget achievements. If it's about growth, emphasize revenue increases. If it's about efficiency, highlight time saved.",
-      timeEstimate: "2 minutes",
-      tools: "Metrics tracker, job description"
-    },
-    {
-      title: "Review and Verify Keyword Density",
-      description: "Check that priority keywords appear 3-5 times naturally throughout your resume. Use an ATS checker tool to verify match percentage. Ensure keywords appear in context within experience bullets, not just in a list.",
-      timeEstimate: "3 minutes",
-      tools: "ATS checker, keyword analyzer"
-    }
-  ];
-
-  // Common tailoring mistakes
-  const tailoringMistakes = [
-    {
-      mistake: "Superficial Keyword Stuffing",
-      explanation: "Simply copying keywords from the job description without demonstrating competency through achievements.",
-      impact: "High - Appears inauthentic to recruiters",
-      solution: "For each keyword, include a specific achievement that proves your capability."
-    },
-    {
-      mistake: "Ignoring Company Culture and Language",
-      explanation: "Using different terminology than the company uses, missing opportunities to mirror their communication style.",
-      impact: "Medium - Missed connection with reviewer",
-      solution: "Adopt the company's language and terminology from their website, job description, and materials."
-    },
-    {
-      mistake: "Over-Tailoring (Misrepresentation)",
-      explanation: "Exaggerating or misrepresenting experience to match the job description.",
-      impact: "Critical - Can lead to immediate disqualification",
-      solution: "Only include skills and achievements you can genuinely discuss in interviews."
-    },
-    {
-      mistake: "Neglecting the 'Why' Behind Requirements",
-      explanation: "Addressing what the job description asks for without understanding why it matters to the employer.",
-      impact: "Medium - Misses opportunity to show strategic thinking",
-      solution: "Research the company's goals and connect your achievements to their business objectives."
-    },
-    {
-      mistake: "Inconsistent Formatting After Changes",
-      explanation: "Making content changes that break formatting consistency, creating a messy appearance.",
-      impact: "Medium - Unprofessional appearance",
-      solution: "Review formatting after each change; use templates that maintain consistency."
-    }
-  ];
-
-  return {
-    props: {
-      buildTimestamp,
-      currentDate,
-      lastModifiedDate,
-      canonicalUrl,
-      breadcrumbData,
-      meta,
-      peopleAlsoAsk,
-      faqItems,
-      aiCitations,
-      tailoringSteps,
-      tailoringMistakes
-    },
-    revalidate: 3600 // ISR: revalidate every hour
-  };
-}
-
-function HowToTailorResume({ 
-  buildTimestamp,
-  currentDate,
-  lastModifiedDate,
-  canonicalUrl,
-  breadcrumbData,
-  meta,
-  peopleAlsoAsk,
-  faqItems,
-  aiCitations,
-  tailoringSteps,
-  tailoringMistakes
-}) {
-  const siteUrl = 'https://professionalresumefree.com';
+  const [activeFaq, setActiveFaq] = useState(null);
+  const toolRef = useRef(null);
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
         {/* OPTIMIZED TITLE */}
@@ -791,7 +208,7 @@ function HowToTailorResume({
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content="How to Tailor Your Resume for Any USA Job Posting 2026" />
         <meta name="chatgpt-fts:description" content="Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application and increase interview callbacks." />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="chatgpt-fts:keywords" content="resume tailoring, customize resume, job application, USA jobs, interview tips" />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
@@ -800,13 +217,13 @@ function HowToTailorResume({
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
         <meta name="bingbot" content="index, follow, max-image-preview:large" />
-        <meta name="last-modified" content={lastModifiedDate} />
-        <meta httpEquiv="last-modified" content={lastModifiedDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* SINGLE CANONICAL URL - UPDATED without www */}
+        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* OPEN GRAPH - UPDATED without www */}
+        {/* OPEN GRAPH */}
         <meta property="og:title" content="How to Tailor Your Resume for Any USA Job Posting 2026" />
         <meta property="og:description" content="Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application." />
         <meta property="og:url" content={canonicalUrl} />
@@ -817,14 +234,14 @@ function HowToTailorResume({
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="article:published_time" content="2026-01-23" />
-        <meta property="article:modified_time" content={lastModifiedDate} />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="Career Advice" />
         <meta property="article:tag" content="Resume Tailoring" />
         <meta property="article:tag" content="Job Search" />
         <meta property="article:tag" content="Interview Tips" />
         
-        {/* TWITTER CARD - UPDATED without www */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="How to Tailor Your Resume for Any USA Job Posting 2026" />
         <meta name="twitter:description" content="Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume." />
@@ -840,8 +257,9 @@ function HowToTailorResume({
         {/* PRECONNECT FOR PERFORMANCE */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA - UPDATED without www */}
+        {/* COMPREHENSIVE STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -852,30 +270,30 @@ function HowToTailorResume({
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
                   "headline": "How to Tailor Your Resume for Any USA Job Posting 2026",
-                  "description": meta.description,
+                  "description": "Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application and increase interview callbacks by up to 3x.",
                   "image": {
                     "@type": "ImageObject",
-                    "url": meta.image,
+                    "url": "https://professionalresumefree.com/ats.jpeg",
                     "width": 800,
                     "height": 450
                   },
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
-                    "url": siteUrl
+                    "url": "https://professionalresumefree.com"
                   },
                   "publisher": {
                     "@type": "Organization",
                     "name": "Professional Resume Free",
                     "logo": {
                       "@type": "ImageObject",
-                      "url": `${siteUrl}/logo.png`,
+                      "url": "https://professionalresumefree.com/logo.png",
                       "width": 200,
                       "height": 60
                     }
                   },
                   "datePublished": "2026-01-23",
-                  "dateModified": lastModifiedDate,
+                  "dateModified": safeLastModifiedDate,
                   "mainEntityOfPage": {
                     "@type": "WebPage",
                     "@id": canonicalUrl
@@ -886,26 +304,39 @@ function HowToTailorResume({
                 {
                   "@type": "BreadcrumbList",
                   "@id": `${canonicalUrl}#breadcrumb`,
-                  "itemListElement": breadcrumbData
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://professionalresumefree.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Resume Tailoring Guide",
+                      "item": canonicalUrl
+                    }
+                  ]
                 },
                 {
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
                   "name": "How to Tailor Your Resume for Any USA Job Posting 2026",
-                  "description": meta.description,
+                  "description": "Complete guide to tailoring your resume for any USA job posting. Learn proven strategies to customize your resume for each application and increase interview callbacks by up to 3x.",
                   "inLanguage": "en-US",
                   "isPartOf": {
                     "@type": "WebSite",
                     "name": "Professional Resume Free",
-                    "url": siteUrl
+                    "url": "https://professionalresumefree.com"
                   }
                 },
                 {
                   "@type": "FAQPage",
                   "@id": `${canonicalUrl}#faq`,
                   "mainEntity": [
-                    ...faqItems.map(item => ({
+                    ...FAQS.map(item => ({
                       "@type": "Question",
                       "name": item.question,
                       "acceptedAnswer": {
@@ -913,7 +344,7 @@ function HowToTailorResume({
                         "text": item.answer
                       }
                     })),
-                    ...peopleAlsoAsk.map(paa => ({
+                    ...PEOPLE_ALSO_ASK.map(paa => ({
                       "@type": "Question",
                       "name": paa.question,
                       "acceptedAnswer": {
@@ -979,26 +410,25 @@ function HowToTailorResume({
 
       {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
-        <meta name="build-timestamp" content={buildTimestamp} />
-        <meta name="content-freshness" content={currentDate} />
+        <meta name="build-timestamp" content={safeBuildTimestamp} />
+        <meta name="content-freshness" content={safeCurrentDate} />
         <meta name="content-sources" content="LinkedIn, SHRM, JobScan, Glassdoor, Greenhouse" />
       </div>
 
-      <main>
-        {/* Skip to main content for accessibility */}
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item">
-                  <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
                 </Link>
                 <meta itemProp="position" content="1" />
               </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <span itemProp="name" aria-current="page">Resume Tailoring Guide</span>
                 <meta itemProp="position" content="2" />
@@ -1007,94 +437,78 @@ function HowToTailorResume({
           </div>
         </nav>
 
-        {/* Hero Section with single H1 */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="badge">RESUME TAILORING GUIDE 2026 • USA JOB MARKET</div>
-            
-            {/* SINGLE H1 TAG */}
-            <h1 id="hero-heading">How to Tailor Your Resume for Any USA Job Posting 2026</h1>
-            
-            <p>
-              Master the art of resume tailoring with this comprehensive, data-backed guide. Learn the exact 
-              step-by-step process to customize your resume for any job posting, increase your ATS ranking, 
-              and land up to 3x more interviews in the competitive USA job market.
-            </p>
-
-            <div className="button-container">
-              <Link href="/resume-templates" className="btn-primary">
-                Browse Resume Templates <FiArrowRight style={{marginLeft: '8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                Free Resume Tools <FiFileText style={{marginRight: '8px'}} />
-              </Link>
-            </div>
-
-            <div className="stats">
-              <div className="stat-item">
-                <span className="stat-number">3x</span>
-                <span className="stat-label">More Callbacks*</span>
+        {/* Hero */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">RESUME TAILORING GUIDE 2026 • USA JOB MARKET</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                How to Tailor Your Resume for Any USA Job Posting 2026
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Master the art of resume tailoring with this comprehensive, data-backed guide. Learn the exact 
+                step-by-step process to customize your resume for any job posting, increase your ATS ranking, 
+                and land up to 3x more interviews in the competitive USA job market.
+              </p>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "3x", label: "More Callbacks*" }, { value: "80%", label: "Higher ATS Rank**" }, { value: "15-30", label: "Minutes per Application" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
               </div>
-              <div className="stat-item">
-                <span className="stat-number">80%</span>
-                <span className="stat-label">Higher ATS Rank**</span>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiTarget /> Read Complete Guide</button>
+                <Link href="/resume-templates" className="btn-outline"><FiFileText /> Browse Templates</Link>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">15-30</span>
-                <span className="stat-label">Minutes per Application</span>
-              </div>
-            </div>
-
-            {/* Article Meta Information */}
-            <div className="article-meta">
-              <span className="meta-item"><FiBookOpen /> 3,200+ words</span>
-              <span className="meta-item"><FiClock /> 14 min read</span>
-              <span className="meta-item"><FiCalendar /> Updated: {currentDate}</span>
-              <span className="meta-item"><FiAward /> 8+ data sources</span>
-            </div>
-
-            <p className="helper-text">
-              * Compared to generic, non-tailored resumes • Source: LinkedIn 2025
-            </p>
-          </div>
-        </section>
-
-        {/* Table of Contents */}
-        <section className="toc-section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">📋 Complete Table of Contents</h2>
-              <ol className="toc-list">
-                <li><a href="#why-tailoring-matters">1. Why Resume Tailoring Matters in 2026</a></li>
-                <li><a href="#7-step-process">2. The 7-Step Resume Tailoring Process</a></li>
-                <li><a href="#keyword-strategy">3. Advanced Keyword Strategy for Tailoring</a></li>
-                <li><a href="#common-mistakes">4. Common Tailoring Mistakes to Avoid</a></li>
-                <li><a href="#industry-examples">5. Industry-Specific Tailoring Examples</a></li>
-                <li><a href="#faqs">6. Frequently Asked Questions</a></li>
-                <li><a href="#next-steps">7. Next Steps: Start Tailoring Today</a></li>
-              </ol>
+              <p className="text-small" style={{ marginTop: '1.5rem' }}>
+                * Compared to generic, non-tailored resumes • Source: LinkedIn 2025
+              </p>
             </div>
           </div>
         </section>
 
-        {/* AI Citation Cards */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
-            <p className="section-subtitle">
-              Industry research on the impact of resume tailoring on interview success rates.
-            </p>
-            <div className="responsive-grid">
-              {aiCitations.map((citation, index) => (
-                <div key={index} className="card">
-                  <FiAward size={24} style={{marginBottom: '16px', color: '#000'}} />
-                  <p style={{fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '16px', fontWeight: '500'}}>"{citation.fact}"</p>
-                  <div style={{marginTop: 'auto'}}>
-                    <div className="citation-source" style={{marginTop: '0'}}>
-                      <FiDatabase style={{marginRight: '6px'}} /> 
-                      {citation.source} • {citation.year}
+        {/* Article Meta Information */}
+        <div className="section-container">
+          <div className="article-meta">
+            <span className="meta-item"><FiBookOpen /> 3,200+ words</span>
+            <span className="meta-item"><FiClock /> 14 min read</span>
+            <span className="meta-item"><FiCalendar /> Updated: {safeCurrentDate}</span>
+            <span className="meta-item"><FiAward /> 8+ data sources</span>
+          </div>
+        </div>
+
+        {/* Hook Banner */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>The #1 Reason Qualified Candidates Get Rejected</h2>
+              </div>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                <strong>73% of hiring managers can spot a generic resume in under 10 seconds</strong>—and those resumes are 4x more likely to be rejected immediately. The solution isn't applying to more jobs; it's applying smarter by tailoring every submission.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Key Statistics */}
+        <section ref={toolRef} className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
+              <p className="section-subtitle">Industry research on the impact of resume tailoring on interview success rates.</p>
+            </div>
+            <div className="grid">
+              {AI_CITATIONS.map((citation, i) => (
+                <div key={i} className="card-executive">
+                  <FiAward size={24} style={{marginBottom: '16px', color: 'var(--accent-primary)'}} />
+                  <p style={{ fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '16px', fontWeight: '500', color: 'var(--text-secondary)' }}>"{citation.fact}"</p>
+                  <div style={{ marginTop: 'auto' }}>
+                    <div style={{ marginTop: '0', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--accent-primary)', fontWeight: '600', marginBottom: '8px' }}>
+                      <FiDatabase size={14} /> 
+                      {citation.source} • 2025
                     </div>
-                    <p className="text-small" style={{marginTop: '8px'}}>{citation.methodology}</p>
+                    <p className="text-small">{citation.methodology}</p>
                   </div>
                 </div>
               ))}
@@ -1102,366 +516,224 @@ function HowToTailorResume({
           </div>
         </section>
 
-        {/* Section 1: Why Tailoring Matters */}
-        <section id="why-tailoring-matters" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Why Resume Tailoring Matters in 2026</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8'}}>
-                In today's hyper-competitive USA job market, sending the same generic resume to multiple employers 
-                is the fastest way to have your application ignored. With the average corporate job opening receiving 
-                250+ applications and ATS systems filtering out 75% before human review, standing out requires a 
-                strategic, targeted approach.
-              </p>
-
-              <div className="insight-box">
-                <h3 style={{fontSize: '1.3rem', marginBottom: '16px'}}>The ROI of Resume Tailoring</h3>
-                <p style={{lineHeight: '1.8'}}>
-                  "Our research consistently shows that candidates who tailor their resumes for each application 
-                  receive 3x more interview callbacks than those who use a one-size-fits-all approach. The reason 
-                  is simple: tailored resumes demonstrate to employers that you've taken the time to understand 
-                  their specific needs and have positioned yourself as the solution to their problems. This level 
-                  of effort signals genuine interest and professionalism."
-                </p>
-                <div className="citation-source" style={{marginTop: '16px'}}>
-                  — LinkedIn 2026 Career Success Report
-                </div>
-              </div>
-
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginTop: '24px'}}>
-                Resume tailoring is not about fabricating experience—it's about strategically presenting your 
-                genuine qualifications in the way that most resonates with each specific employer. It's the 
-                difference between shouting into a crowded room and having a meaningful conversation with 
-                someone who's specifically looking for what you offer.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: 7-Step Process */}
-        <section id="7-step-process" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
+        {/* 7-Step Process */}
+        <section id="7-step-process" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
               <h2 className="section-title">The 7-Step Resume Tailoring Process</h2>
-              
-              <p style={{fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '32px'}}>
-                Follow this proven 7-step process to tailor your resume effectively for any job posting. 
-                Each step takes just a few minutes but collectively can triple your interview success rate.
-              </p>
-
-              <div className="step-list">
-                {tailoringSteps.map((step, index) => (
-                  <li key={index} style={{marginBottom: '28px'}}>
-                    <h3 style={{marginBottom: '8px', fontSize: '1.2rem'}}>{step.title}</h3>
-                    <p style={{color: 'var(--text-light)', marginBottom: '8px', lineHeight: '1.7'}}>{step.description}</p>
-                    <div style={{display: 'flex', gap: '16px', flexWrap: 'wrap'}}>
-                      <span className="text-small"><FiClock style={{marginRight: '4px'}} /> {step.timeEstimate}</span>
-                      <span className="text-small"><FiTool style={{marginRight: '4px'}} /> {step.tools}</span>
+              <p className="section-subtitle">Follow this proven methodology to customize your resume for maximum impact on every application</p>
+            </div>
+            <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {TAILORING_STEPS.map((step, i) => (
+                <div key={i} className="step-card">
+                  <div style={{ fontSize: '1.5rem', fontWeight: 'var(--font-weight-bold)', color: 'var(--accent-primary)', fontFamily: 'var(--font-display)', minWidth: '40px', textAlign: 'center' }}>{step.step}</div>
+                  <div style={{ flex: 1 }}>
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{step.title}</h3>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.7' }}>{step.description}</p>
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+                      <span className="feature-tag"><FiClock size={12} style={{ display: 'inline', marginRight: '0.25rem' }} /> {step.timeEstimate}</span>
+                      <span className="feature-tag"><FiTool size={12} style={{ display: 'inline', marginRight: '0.25rem' }} /> {step.tools}</span>
                     </div>
-                  </li>
-                ))}
-              </div>
-
-              <div className="citation" style={{marginTop: '24px'}}>
-                <p><strong>Pro Tip:</strong> Create a master resume document with all your experience, achievements, and metrics. Then use this as a source document to pull relevant content for each tailored version, saving significant time while ensuring consistency.</p>
-              </div>
-
-              <div style={{textAlign: 'center', marginTop: '32px'}}>
-                <Link href="/free-resume-tools" className="btn-primary">
-                  Try Free Resume Tailoring Tools <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-              </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <Link href="/free-resume-keyword-matcher" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiSearch size={16} /> Try Free Keyword Matcher Tool</Link>
             </div>
           </div>
         </section>
 
-        {/* Section 3: Advanced Keyword Strategy */}
-        <section id="keyword-strategy" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Advanced Keyword Strategy for Tailoring</h2>
-              
-              <div className="responsive-grid" style={{gap: '24px'}}>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiZap size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Primary Keywords</h3>
-                  <p>These are the non-negotiable terms that appear in the "Requirements" or "Qualifications" section. They include specific skills, tools, certifications, and years of experience. These should appear 3-5 times in your tailored resume.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiGrid size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Secondary Keywords</h3>
-                  <p>These appear in the "Responsibilities" or "Nice-to-Have" sections. They indicate what the employer values but may be flexible on. Include these 2-3 times to demonstrate alignment with their priorities.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiLayers size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Contextual Keywords</h3>
-                  <p>These are industry terms, company-specific language, and phrases from their mission/values. Mirroring this language shows you've done your research and understand their culture.</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiBarChart2 size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Achievement Keywords</h3>
-                  <p>Words like "increased," "reduced," "saved," "improved," "led," "developed" paired with metrics. These demonstrate impact and should be tailored to emphasize results most relevant to the target role.</p>
-                </div>
-              </div>
-
-              <div className="insight-box" style={{marginTop: '32px'}}>
-                <h4 style={{marginBottom: '12px'}}>Keyword Density Sweet Spot</h4>
-                <p>Aim for 3-5 mentions of each priority keyword across your resume. Single mentions may be overlooked by ATS; excessive repetition (&gt;8 mentions) can trigger spam detection. Keywords should appear naturally in context within your summary, skills section, and experience bullets—never just listed without context.</p>
-                <div className="citation-source" style={{marginTop: '16px'}}>Source: iCIMS 2025 Parsing Guidelines</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: Common Mistakes */}
-        <section id="common-mistakes" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card">
+        {/* Common Mistakes */}
+        <section id="common-mistakes" className="section">
+          <div className="section-container">
+            <div className="section-header">
               <h2 className="section-title">Common Tailoring Mistakes to Avoid</h2>
-              
+              <p className="section-subtitle">Avoid these errors that undermine even well-intentioned tailoring efforts</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
               <div className="table-wrap">
-                <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Mistake</th>
-                      <th>Why It Hurts</th>
-                      <th>Better Approach</th>
-                    </tr>
-                  </thead>
+                <table>
+                  <thead><tr><th>Mistake</th><th>Impact</th><th>Solution</th></tr></thead>
                   <tbody>
-                    {tailoringMistakes.map((item, index) => (
-                      <tr key={index}>
-                        <td><strong>{item.mistake}</strong></td>
-                        <td>{item.explanation}</td>
-                        <td className="text-success">{item.solution}</td>
+                    {TAILORING_MISTAKES.map((item, i) => (
+                      <tr key={i}>
+                        <td>
+                          <strong style={{ color: 'var(--text-primary)' }}>{item.mistake}</strong>
+                          <p className="text-small" style={{ marginTop: '0.25rem', lineHeight: '1.5' }}>{item.explanation}</p>
+                        </td>
+                        <td style={{ color: 'var(--error-color)', fontWeight: 'var(--font-weight-semibold)', whiteSpace: 'nowrap' }}>{item.impact} Risk</td>
+                        <td style={{ color: 'var(--success-color)', fontSize: 'var(--font-size-body-sm)' }}>{item.solution}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-
-              <div className="citation" style={{marginTop: '32px'}}>
-                <p><strong>Source:</strong> Analysis of 25,000+ rejected applications and recruiter feedback, 2025-2026. Data compiled from SHRM and Greenhouse analytics.</p>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--info-color)', fontWeight: '600' }}>Source: Analysis of 25,000+ rejected applications and recruiter feedback, 2025-2026.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 5: Industry Examples */}
-        <section id="industry-examples" className="section">
-          <div className="container">
-            <div className="card">
-              <h2 className="section-title">Industry-Specific Tailoring Examples</h2>
-              
-              <div className="responsive-grid" style={{gap: '24px'}}>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiBriefcase size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Technology Role</h3>
-                  <p><strong>Generic Bullet:</strong> "Developed software applications using various programming languages."</p>
-                  <p className="text-success" style={{marginTop: '8px'}}><strong>Tailored Bullet:</strong> "Engineered scalable web applications using React and Node.js, handling 50,000+ daily users and reducing page load time by 40%—directly addressing the job requirement for high-performance full-stack development."</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiTrendingUp size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Marketing Role</h3>
-                  <p><strong>Generic Bullet:</strong> "Managed social media accounts and created content."</p>
-                  <p className="text-success" style={{marginTop: '8px'}}><strong>Tailored Bullet:</strong> "Developed and executed content strategy that increased engagement by 150% and generated 10,000+ qualified leads—aligning with the job's emphasis on measurable marketing ROI."</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiTarget size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Sales Role</h3>
-                  <p><strong>Generic Bullet:</strong> "Met sales targets and managed client relationships."</p>
-                  <p className="text-success" style={{marginTop: '8px'}}><strong>Tailored Bullet:</strong> "Consistently exceeded quarterly sales targets by 25-30%, grew territory revenue from $2M to $3.5M in 18 months, and maintained 95% client retention—directly matching the job's focus on revenue growth and relationship management."</p>
-                </div>
-                <div className="card" style={{background: '#ffffff'}}>
-                  <FiShield size={24} style={{marginBottom: '16px'}} />
-                  <h3 style={{marginBottom: '12px'}}>Management Role</h3>
-                  <p><strong>Generic Bullet:</strong> "Led a team and managed projects."</p>
-                  <p className="text-success" style={{marginTop: '8px'}}><strong>Tailored Bullet:</strong> "Led cross-functional team of 12 engineers and designers to deliver $5M enterprise software project 3 weeks ahead of schedule—demonstrating the strategic leadership and project execution skills emphasized in the job description."</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* People Also Ask Section */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">People Also Ask About Resume Tailoring</h2>
+        {/* People Also Ask */}
+        <section className="section section-alt" aria-labelledby="paa-heading">
+          <div className="section-container">
+            <h2 id="paa-heading" className="section-title">People Also Ask About Resume Tailoring</h2>
             <div className="faq-grid">
-              {peopleAlsoAsk.map((paa, i) => (
-                <details key={i} className="faq-item" open={i === 0}>
-                  <summary className="faq-question">{paa.question}</summary>
-                  <div className="faq-answer">{paa.answer}</div>
+              {PEOPLE_ALSO_ASK.map((paa, i) => (
+                <details key={i} className="faq-item" open={i === 0} style={{ cursor: 'pointer' }}>
+                  <summary className="faq-question" style={{ listStyle: 'none' }}>{paa.question}</summary>
+                  <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{paa.answer}</p></div>
                 </details>
               ))}
             </div>
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section id="faqs" className="section">
-          <div className="container">
-            <div className="card">
+        {/* Quick Tools Hook */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Start Tailoring Right Now With Free Tools</h2>
+              <p className="section-subtitle">Apply the 7-step process immediately using our free, no-signup-required tools</p>
+            </div>
+            <div className="grid">
+              <Link href="/free-resume-keyword-matcher" className="card-executive" style={{ textDecoration: 'none', color: 'inherit', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                  <FiSearch size={24} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>Keyword Matcher</h3>
+                  <p className="text-small" style={{ margin: 0 }}>Match your resume keywords against any job description instantly</p>
+                </div>
+                <FiArrowRight size={16} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
+              </Link>
+              <Link href="/free-ats-resume-checker" className="card-executive" style={{ textDecoration: 'none', color: 'inherit', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                  <FiShield size={24} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>ATS Resume Checker</h3>
+                  <p className="text-small" style={{ margin: 0 }}>Verify your tailored resume passes automated screening</p>
+                </div>
+                <FiArrowRight size={16} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
+              </Link>
+              <Link href="/free-resume-score-checker" className="card-executive" style={{ textDecoration: 'none', color: 'inherit', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                  <FiAward size={24} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>Resume Score Checker</h3>
+                  <p className="text-small" style={{ margin: 0 }}>Get an instant score showing your resume's optimization level</p>
+                </div>
+                <FiArrowRight size={16} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faqs" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
               <h2 className="section-title">Frequently Asked Questions</h2>
-              <div className="faq-grid">
-                {faqItems.map((item, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <div className="faq-answer">{item.answer}</div>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
                   </div>
-                ))}
-              </div>
+                  {activeFaq === i && <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{faq.answer}</p></div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
+              Ready to Start Tailoring Your Resume?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Now that you understand the power of resume tailoring, put that knowledge to work. Use our free tools to analyze job descriptions, match keywords, and create tailored versions that get results.
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiTarget /> Start Tailoring Now</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
             </div>
           </div>
         </section>
 
         {/* Internal Links */}
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">🔗 Free Resume Tools & Resources</h2>
-            <p className="section-subtitle">
-              Put your tailoring knowledge into practice with our free, ATS-optimized tools.
-            </p>
-            <div className="responsive-grid">
-              <Link href="/resume-templates" className="card" style={{textAlign: 'center'}}>
-                <FiFileText size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>ATS-Optimized Resume Templates</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  Professionally designed templates that make tailoring easy. Start with a strong foundation.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Browse All Templates →
-                </span>
-              </Link>
-              <Link href="/free-resume-tools" className="card" style={{textAlign: 'center'}}>
-                <FiTool size={32} style={{marginBottom: '20px', margin: '0 auto 20px'}} />
-                <h3 style={{marginBottom: '12px', fontSize: '1.3rem'}}>Free Resume Tailoring Tools</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '20px', lineHeight: '1.7'}}>
-                  ATS checker, keyword matcher, resume scorer, and achievement builder. All free forever.
-                </p>
-                <span style={{color: '#000', fontWeight: '600', fontSize: '1.1rem'}}>
-                  Explore All Tools →
-                </span>
-              </Link>
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
+                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+                { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
+                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* NEW SECTION: Recommended Reading (Randomly Selected Links) */}
-        <section className="section" style={{background: '#ffffff', borderTop: '1px solid var(--border)'}}>
-          <div className="container">
-            <h2 className="section-title">📚 Recommended Reading for Job Seekers</h2>
-            <p className="section-subtitle">
-              Deepen your knowledge with these specialized guides to complement your resume tailoring strategy.
-            </p>
-            
-            <div className="responsive-grid" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'}}>
-              {/* Link 1: ATS Optimization */}
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="recommended-link-card">
-                <div className="recommended-icon">
-                  <FiZap size={24} />
-                </div>
-                <div className="recommended-content">
-                  <h4>Beat ATS Optimization Tips</h4>
-                  <p>Learn how modern hiring software parses your resume and how to structure your content for maximum visibility.</p>
-                </div>
-              </Link>
-
-              {/* Link 2: AI Resume Builders */}
-              <Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="recommended-link-card">
-                <div className="recommended-icon">
-                  <FiCode size={24} />
-                </div>
-                <div className="recommended-content">
-                  <h4>AI Resume Writing Guide</h4>
-                  <p>Discover how to leverage artificial intelligence to draft compelling bullet points without sounding robotic.</p>
-                </div>
-              </Link>
-
-              {/* Link 3: Best ATS Format 2026 */}
-              <Link href="/best-ats-resume-format-2026" className="recommended-link-card">
-                <div className="recommended-icon">
-                  <FiFileText size={24} />
-                </div>
-                <div className="recommended-content">
-                  <h4>Best ATS Resume Format 2026</h4>
-                  <p>The definitive guide to file formats, fonts, and layouts that pass automated screening in 2026.</p>
-                </div>
-              </Link>
-
-              {/* Link 4: Professional Summary */}
-              <Link href="/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" className="recommended-link-card">
-                <div className="recommended-icon">
-                  <FiEye size={24} />
-                </div>
-                <div className="recommended-content">
-                  <h4>Write a Hooking Professional Summary</h4>
-                  <p>Master the art of the 6-second hook. Learn to write summaries that grab recruiter attention instantly.</p>
-                </div>
-              </Link>
-
-              {/* Link 5: In-Demand Keywords */}
-              <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="recommended-link-card">
-                <div className="recommended-icon">
-                  <FiBarChart2 size={24} />
-                </div>
-                <div className="recommended-content">
-                  <h4>Most In-Demand USA Resume Keywords</h4>
-                  <p>Data-driven analysis of the highest-value keywords currently trending in the US job market.</p>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 7: Next Steps */}
-        <section id="next-steps" className="section">
-          <div className="container">
-            <div className="card" style={{padding: 'clamp(32px, 6vw, 48px)', textAlign: 'center'}}>
-              <h2 className="section-title" style={{marginBottom: '24px'}}>Ready to Start Tailoring Your Resume?</h2>
-              <p style={{fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 32px', lineHeight: '1.8'}}>
-                Now that you understand the power of resume tailoring, put that knowledge to work. Use our free tools to analyze job descriptions, match keywords, and create tailored versions that get results.
-              </p>
-              <div className="button-container" style={{gap: '24px'}}>
-                <Link href="/resume-templates" className="btn-primary">
-                  Browse Templates <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-                <Link href="/free-resume-tools" className="btn-secondary">
-                  Try Keyword Matcher <FiTool style={{marginRight: '8px'}} />
-                </Link>
-              </div>
-              <div className="stats" style={{marginTop: '48px', borderTop: '1px solid var(--border)', paddingTop: '32px'}}>
-                <div className="stat-item">
-                  <span className="stat-number">30,000+</span>
-                  <span className="stat-label">Resumes Tailored</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">4.9/5</span>
-                  <span className="stat-label">User Rating</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Free Forever</span>
-                </div>
-              </div>
-              <p className="helper-text">
-                Data-driven strategies updated for 2026 hiring trends. Last updated: {currentDate} • Sources: LinkedIn, SHRM, JobScan, Glassdoor, Greenhouse
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small">
+            <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
+            Last updated: {safeCurrentDate} • Sources: LinkedIn, SHRM, JobScan, Glassdoor, Greenhouse
+          </span>
+        </div>
 
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>
-          <span itemProp="last-updated">{currentDate}</span>
-          <span itemProp="build-timestamp">{buildTimestamp}</span>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{safeBuildTimestamp}</span>
           <span itemProp="word-count">3200</span>
           <span itemProp="sources">LinkedIn 2025, SHRM 2025, JobScan 2025, Glassdoor 2025, Greenhouse 2025</span>
         </div>
       </main>
     </>
   );
+};
+
+export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  return {
+    props: {
+      seoData: {
+        buildTimestamp,
+        currentDate,
+        lastModifiedDate
+      }
+    },
+    revalidate: 3600 // ISR: revalidate every hour
+  };
 }
 
 export default HowToTailorResume;

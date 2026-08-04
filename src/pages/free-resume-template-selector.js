@@ -1,844 +1,513 @@
-import { useState, useCallback, useMemo } from 'react';
 import Head from 'next/head';
-import styles from './free-resume-template-selector.module.css';
+import Link from 'next/link';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { 
+  FiHome, FiChevronRight, FiCalendar, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiHeart, FiUser, FiBookOpen, FiAward, FiShield, FiArrowRight, FiGrid,
+  FiBriefcase, FiLayout, FiRefreshCw, FiInfo, FiPlus, FiSmile,
+  FiBarChart2, FiEye, FiCode, FiPenTool, FiCpu as FiCpuAlt, FiServer,
+  FiActivity, FiChevronDown, FiChevronUp, FiDollarSign, FiTrendingUp,
+  FiFileText, FiUsers, FiTool, FiSmartphone, FiTruck, FiEdit,
+  FiX, FiAlertCircle
+} from 'react-icons/fi';
 
-// Current year for dynamic content
-const CURRENT_YEAR = new Date().getFullYear();
-
-// FAQ Data
-const FAQS = [
-  {
-    question: "How do I choose the right resume template?",
-    answer: "Choose based on your industry and experience level: Chronological for traditional fields, Functional for career changers, Combination for most professionals. Consider ATS compatibility for corporate jobs."
-  },
-  {
-    question: "What's the difference between ATS-friendly and creative templates?",
-    answer: "ATS-friendly templates use simple formatting, standard fonts, and clean layouts that applicant tracking systems can parse easily. Creative templates use design elements better suited for portfolios, creative fields, or in-person submissions."
-  },
-  {
-    question: "Are these templates really free to use?",
-    answer: "Yes! All templates are 100% free for personal and professional use. No watermarks, no subscriptions, no hidden fees."
-  },
-  {
-    question: "Which file format is best for resumes?",
-    answer: ".docx is most ATS-friendly. PDF preserves formatting best for human reviewers. We provide both formats for each template."
-  },
-  {
-    question: "How do I customize the templates?",
-    answer: "All templates are fully editable in Microsoft Word, Google Docs, or similar software. Simply replace placeholder text with your information."
-  },
-  {
-    question: "What if I need help customizing a template?",
-    answer: "Each template includes detailed customization instructions and tips specific to that template's strengths."
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
   }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  .filter-btn { padding:0.5rem 1rem; background:var(--card-bg); border:0.5px solid var(--border-gold-filament); border-radius:9999px; font-size:var(--font-size-body-sm); cursor:pointer; color:var(--text-secondary); transition:all var(--transition-fast); white-space:nowrap; }
+  .filter-btn:hover { border-color:var(--accent-primary-container); }
+  .filter-btn.active { background:var(--accent-primary); color:var(--accent-on-primary); border-color:var(--accent-primary); }
+  .template-link-card { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); display:flex; flex-direction:column; gap:0.75rem; text-decoration:none; color:inherit; }
+  .template-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+  textarea, input, select { font-family:var(--font-body); background:var(--input-bg); border:var(--input-border); color:var(--input-text); padding:var(--input-padding); border-radius:var(--input-radius); font-size:var(--font-size-body-md); width:100%; transition:border-color var(--transition-fast); }
+  textarea:focus, input:focus, select:focus { outline:none; border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(242,202,80,0.1); }
+  textarea::placeholder, input::placeholder { color:var(--input-placeholder); }
+  select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23f2ca50' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
+  select option { background:var(--bg-surface); color:var(--text-primary); }
+  .advice-card { background:var(--card-bg); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); border-left:3px solid var(--accent-primary); }
+`;
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
+const SITE_URL = 'https://professionalresumefree.com';
+const PAGE_URL = `${SITE_URL}/free-resume-template-selector`;
+
+// SEO-optimized keywords
+const SEO_KEYWORDS = [
+  'free resume template selector',
+  'ATS resume templates',
+  'industry-specific resume builders',
+  'professional resume templates',
+  'resume template directory',
+  'free ATS resume builder',
+  'healthcare resume templates',
+  'tech resume templates',
+  'finance resume templates',
+  'engineering resume templates',
+  'resume template comparison',
+  'downloadable resume templates',
+  'ATS-friendly resume templates',
+  'specialized resume builders',
+  'job application resume templates'
+];
+
+// Industry-specific ATS resume builder links with descriptions and advice
+const ATS_RESUME_BUILDERS = [
+  // Healthcare
+  { href: "/ats-friendly-medical-resume-builder", title: "Medical Resume Builder", category: "healthcare", icon: "FiHeart", desc: "Specialized ATS templates for doctors, surgeons, and medical professionals.", advice: "Healthcare employers use strict ATS filters for credentials. Use our medical-specific builder to ensure your certifications and licenses are properly parsed." },
+  { href: "/ats-friendly-nurse-resume-builder", title: "Nurse Resume Builder", category: "healthcare", icon: "FiHeart", desc: "ATS-optimized templates for RNs, BSNs, and nursing professionals.", advice: "Nursing roles require specific keyword matching for patient care skills. Our nurse builder includes pre-loaded nursing terminology." },
+  { href: "/ats-friendly-nurse-practitioner-resume-builder", title: "Nurse Practitioner Builder", category: "healthcare", icon: "FiHeart", desc: "Advanced templates for NPs with specialization tracking.", advice: "NPs need to highlight both clinical and leadership skills. Our builder structures your advanced practice experience correctly." },
+  { href: "/ats-friendly-healthcare-assistant-resume-builder", title: "Healthcare Assistant Builder", category: "healthcare", icon: "FiHeart", desc: "Entry-level to mid-career healthcare support templates.", advice: "Healthcare assistants need to emphasize patient interaction and administrative skills equally for ATS success." },
+  { href: "/ats-friendly-medical-assistant-resume-builder", title: "Medical Assistant Builder", category: "healthcare", icon: "FiHeart", desc: "Templates for clinical and administrative medical assistants.", advice: "Dual clinical/administrative roles need balanced keyword distribution. Our builder optimizes both skill sets." },
+  { href: "/ats-friendly-registered-practical-nurse-resume-builder", title: "RPN Resume Builder", category: "healthcare", icon: "FiHeart", desc: "Specialized for Registered Practical Nurses and LPNs.", advice: "Practical nurses should emphasize hands-on care metrics. Quantify patient loads and care outcomes." },
+  { href: "/ats-friendly-care-assistant-resume-builder", title: "Care Assistant Builder", category: "healthcare", icon: "FiHeart", desc: "Templates for personal care and support roles.", advice: "Care assistant resumes need to demonstrate compassion metrics alongside technical care skills." },
+  { href: "/ats-friendly-support-worker-resume-builder", title: "Support Worker Builder", category: "healthcare", icon: "FiHeart", desc: "Community and social support worker templates.", advice: "Support workers should highlight case management experience and client outcome improvements." },
+  { href: "/ats-friendly-aged-care-worker-resume-builder", title: "Aged Care Worker Builder", category: "healthcare", icon: "FiHeart", desc: "Specialized for elderly care and geriatric support roles.", advice: "Aged care requires specific terminology around mobility assistance, medication management, and palliative care." },
+  { href: "/ats-friendly-disability-support-worker-resume-builder", title: "Disability Support Builder", category: "healthcare", icon: "FiHeart", desc: "Templates for disability and inclusion support professionals.", advice: "Highlight specific disability support certifications and individualized care planning experience." },
+  { href: "/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder", title: "Veterinary & Specialized Healthcare", category: "healthcare", icon: "FiHeart", desc: "For veterinarians and specialized healthcare practitioners.", advice: "Specialized roles need niche keyword optimization that generic builders miss. Our templates include field-specific terminology." },
+
+  // Technology
+  { href: "/ats-friendly-tech-resume-builder", title: "Tech Resume Builder", category: "technology", icon: "FiCode", desc: "Comprehensive tech industry templates for all roles.", advice: "Tech resumes need to list specific programming languages, frameworks, and tools in a format ATS can parse correctly." },
+  { href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", title: "AI & ML Engineering Builder", category: "technology", icon: "FiCpuAlt", desc: "Specialized for AI, ML, and data science professionals.", advice: "AI roles require showcasing model deployment metrics, not just algorithms. Quantify your ML impact with accuracy percentages." },
+  { href: "/ats-friendly-data-and-cybersecurity-resume-builder", title: "Data & Cybersecurity Builder", category: "technology", icon: "FiShield", desc: "Templates for cybersecurity analysts and data professionals.", advice: "Security roles need compliance framework keywords (NIST, ISO, SOC2). Our builder includes these critical terms." },
+  { href: "/ats-friendly-software-developer-and-software-engineer-resume-builder", title: "Software Developer Builder", category: "technology", icon: "FiCode", desc: "For frontend, backend, and full-stack developers.", advice: "List your tech stack prominently in a dedicated section. ATS scans for language and framework keywords first." },
+  { href: "/ats-friendly-data-analyst-resume-builder", title: "Data Analyst Builder", category: "technology", icon: "FiBarChart2", desc: "Templates for data analysts and business intelligence roles.", advice: "Data analysts should highlight tools (SQL, Tableau, Python) and quantify impact with revenue or efficiency metrics." },
+  { href: "/ats-ai-adjacent-creative-technical-roles-resume-builder", title: "Creative Technical Roles Builder", category: "technology", icon: "FiPenTool", desc: "For UX designers, product designers, and creative technologists.", advice: "Creative tech roles need portfolio links AND keyword-rich text descriptions for ATS parsing." },
+
+  // Business & Finance
+  { href: "/ats-friendly-finance-resume-builder", title: "Finance Resume Builder", category: "business", icon: "FiDollarSign", desc: "Templates for banking, investment, and financial services.", advice: "Finance resumes need quantifiable deal sizes, portfolio values, and compliance achievements to pass ATS filters." },
+  { href: "/ats-friendly-ceo-resume-builder", title: "CEO Resume Builder", category: "business", icon: "FiAward", desc: "Executive-level templates for C-suite and leadership roles.", advice: "Executive resumes should emphasize strategic impact, revenue growth, and organizational transformation metrics." },
+  { href: "/ats-friendly-project-manager-resume-builder", title: "Project Manager Builder", category: "business", icon: "FiTarget", desc: "For PMs, program managers, and scrum masters.", advice: "PMs need methodology keywords (Agile, Scrum, Waterfall) and project completion metrics (on-time %, budget adherence)." },
+  { href: "/ats-friendly-accountant-resume-builder", title: "Accountant Resume Builder", category: "business", icon: "FiBookOpen", desc: "Templates for CPAs, accountants, and auditors.", advice: "Accounting resumes must include software proficiency (QuickBooks, SAP) and compliance/audit achievements." },
+  { href: "/ats-friendly-sales-associate-resume-builder", title: "Sales Associate Builder", category: "business", icon: "FiTrendingUp", desc: "For retail and B2B sales professionals.", advice: "Sales resumes need revenue metrics, quota attainment percentages, and client acquisition numbers prominently displayed." },
+  { href: "/ats-friendly-marketing-executive-manager-resume-builder", title: "Marketing Executive Builder", category: "business", icon: "FiTarget", desc: "Templates for marketing managers and directors.", advice: "Marketing roles should highlight campaign ROI, lead generation metrics, and specific platform expertise (HubSpot, GA4)." },
+  { href: "/ats-friendly-business-analyst-resume-builder", title: "Business Analyst Builder", category: "business", icon: "FiActivity", desc: "For BA, systems analyst, and process improvement roles.", advice: "BAs need to showcase requirements gathering, stakeholder management, and process optimization outcomes." },
+  { href: "/ats-friendly-customer-service-resume-builder", title: "Customer Service Builder", category: "business", icon: "FiSmile", desc: "Templates for support and customer success roles.", advice: "Customer service resumes should include satisfaction scores, resolution times, and retention metrics." },
+  { href: "/ats-friendly-administrative-assistant-resume-builder", title: "Administrative Assistant Builder", category: "business", icon: "FiFileText", desc: "For executive assistants and administrative professionals.", advice: "Admin roles need to highlight software proficiency, calendar management scope, and office efficiency improvements." },
+  { href: "/ats-friendly-hr-assistant-coordinator-resume-builder", title: "HR Assistant Builder", category: "business", icon: "FiUsers", desc: "Templates for HR coordinators and recruiting assistants.", advice: "HR resumes should feature ATS/HRIS system experience, recruitment metrics, and compliance knowledge." },
+
+  // Engineering & Industrial
+  { href: "/ats-friendly-engineering-resume-builder", title: "Engineering Resume Builder", category: "engineering", icon: "FiTool", desc: "For mechanical, electrical, and civil engineers.", advice: "Engineering resumes need project specifications, technical standards compliance, and quantifiable design achievements." },
+  { href: "/ats-friendly-industrial-manufacturing-resume-builder", title: "Industrial Manufacturing Builder", category: "engineering", icon: "FiServer", desc: "Templates for manufacturing and production roles.", advice: "Manufacturing roles should highlight production efficiency gains, quality control metrics, and safety compliance records." },
+  { href: "/ats-friendly-advanced-manufacturing-and-automation-resume-builder", title: "Advanced Manufacturing Builder", category: "engineering", icon: "FiCpuAlt", desc: "For automation, robotics, and Industry 4.0 roles.", advice: "Advanced manufacturing needs keywords around PLC programming, IoT systems, and automation deployment metrics." },
+  { href: "/ats-friendly-biotechnology-resume-builder", title: "Biotechnology Builder", category: "engineering", icon: "FiActivity", desc: "Templates for biotech researchers and lab professionals.", advice: "Biotech roles require specific research methodologies, lab techniques, and publication/patent tracking." },
+  { href: "/ats-friendly-electrician-resume-builder", title: "Electrician Resume Builder", category: "trades", icon: "FiZap", desc: "For licensed electricians and electrical contractors.", advice: "Tradespeople should list certifications, license numbers, and project completion metrics prominently." },
+  { href: "/ats-friendly-plumber-resume-builder", title: "Plumber Resume Builder", category: "trades", icon: "FiTool", desc: "Templates for plumbers and pipefitters.", advice: "Plumbing resumes need license details, specialized system experience, and project scope documentation." },
+  { href: "/ats-friendly-construction-worker-resume-builder", title: "Construction Worker Builder", category: "trades", icon: "FiLayout", desc: "For construction laborers and site workers.", advice: "Construction roles should highlight safety certifications, equipment proficiency, and project completion records." },
+
+  // Education & Government
+  { href: "/ats-friendly-government-education-non-profit-resume-builder", title: "Government & Non-Profit Builder", category: "education", icon: "FiBookOpen", desc: "Templates for public sector and non-profit professionals.", advice: "Government roles need specific grade/level classifications and specialized application format compliance." },
+  { href: "/ats-friendly-teacher-resume-builder", title: "Teacher Resume Builder", category: "education", icon: "FiBookOpen", desc: "For K-12 and higher education teaching positions.", advice: "Teaching resumes should include certifications, student outcome metrics, and curriculum development achievements." },
+
+  // Legal & Security
+  { href: "/ats-friendly-legal-resume-builder", title: "Legal Resume Builder", category: "legal", icon: "FiBriefcase", desc: "Templates for attorneys, paralegals, and legal staff.", advice: "Legal resumes need bar admission details, case volume metrics, and specific practice area expertise highlighted." },
+  { href: "/ats-friendly-security-guard-resume-builder", title: "Security Guard Builder", category: "security", icon: "FiShield", desc: "For security officers and protective services.", advice: "Security roles should emphasize certification levels, incident response experience, and surveillance system proficiency." },
+
+  // Retail & Consumer
+  { href: "/ats-friendly-consumer-retail-resume-builder", title: "Consumer Retail Builder", category: "retail", icon: "FiSmartphone", desc: "Templates for retail management and consumer goods.", advice: "Retail resumes need sales volume metrics, inventory management experience, and customer satisfaction scores." },
+  { href: "/ats-friendly-retail-associate-resume-builder", title: "Retail Associate Builder", category: "retail", icon: "FiUser", desc: "For retail sales associates and store staff.", advice: "Retail associates should highlight upselling metrics, customer service awards, and POS system proficiency." },
+
+  // Logistics & Transportation
+  { href: "/ats-friendly-logistics-transportation-resume-builder", title: "Logistics & Transportation Builder", category: "logistics", icon: "FiTruck", desc: "Templates for supply chain and logistics professionals.", advice: "Logistics roles need to showcase route optimization metrics, cost reduction achievements, and safety compliance records." },
+  { href: "/ats-friendly-driver-resume-builder", title: "Driver Resume Builder", category: "logistics", icon: "FiTruck", desc: "For commercial drivers and delivery professionals.", advice: "Drivers should list license classifications, safety records, and delivery efficiency metrics." },
+  { href: "/ats-friendly-warehouse-worker-resume-builder", title: "Warehouse Worker Builder", category: "logistics", icon: "FiGrid", desc: "Templates for warehouse associates and material handlers.", advice: "Warehouse roles need equipment certifications, productivity metrics, and inventory accuracy achievements." },
+
+  // Hospitality & Sustainability
+  { href: "/ats-friendly-chef-cook-resume-builder", title: "Chef & Cook Resume Builder", category: "hospitality", icon: "FiStar", desc: "For culinary professionals and kitchen staff.", advice: "Culinary resumes should highlight cuisine specialties, kitchen management scope, and health inspection compliance." },
+  { href: "/ats-friendly-sustainability-and-green-industries-resume-builder", title: "Sustainability & Green Industries", category: "sustainability", icon: "FiHeart", desc: "Templates for environmental and sustainability roles.", advice: "Green industry roles need specific environmental compliance keywords and sustainability project metrics." },
+
+  // General
+  { href: "/free-resume-builder", title: "General Resume Builder", category: "general", icon: "FiEdit", desc: "Universal ATS-friendly resume builder for all industries.", advice: "Start here if you're unsure which specialized builder to use. Our general builder includes broad ATS optimization for any role." },
+];
+
+// Template categories for filtering
+const CATEGORIES = [
+  { id: 'all', label: 'All Builders', icon: 'FiGrid' },
+  { id: 'healthcare', label: 'Healthcare', icon: 'FiHeart' },
+  { id: 'technology', label: 'Technology', icon: 'FiCode' },
+  { id: 'business', label: 'Business & Finance', icon: 'FiBriefcase' },
+  { id: 'engineering', label: 'Engineering', icon: 'FiTool' },
+  { id: 'trades', label: 'Trades', icon: 'FiLayout' },
+  { id: 'education', label: 'Education & Government', icon: 'FiBookOpen' },
+  { id: 'legal', label: 'Legal & Security', icon: 'FiShield' },
+  { id: 'retail', label: 'Retail', icon: 'FiSmartphone' },
+  { id: 'logistics', label: 'Logistics', icon: 'FiTruck' },
+  { id: 'hospitality', label: 'Hospitality', icon: 'FiStar' },
+  { id: 'sustainability', label: 'Sustainability', icon: 'FiHeart' },
+  { id: 'general', label: 'General', icon: 'FiEdit' },
 ];
 
 // How-to steps
 const HOW_TO_STEPS = [
   {
-    name: "Browse Templates",
-    text: "Explore our curated collection of professional templates filtered by industry, style, and experience level."
+    name: "Browse Builders",
+    text: "Explore our curated collection of 47+ industry-specific ATS resume builders filtered by industry and job type."
   },
   {
-    name: "Preview & Compare",
-    text: "View detailed previews of each template and compare features like ATS compatibility and design elements."
+    name: "Read Expert Advice",
+    text: "Each builder includes industry-specific expert advice on what keywords, certifications, and formatting your resume needs."
   },
   {
-    name: "Select Your Template",
-    text: "Choose the template that best matches your industry, experience level, and career goals."
+    name: "Select Your Builder",
+    text: "Choose the specialized builder that matches your target industry and job title for maximum ATS compatibility."
   },
   {
-    name: "Download & Customize",
-    text: "Download your chosen template in .docx or PDF format and start customizing with your information."
+    name: "Build Your Resume",
+    text: "Use the builder to create an ATS-optimized resume with pre-loaded keywords and industry-standard formatting."
   },
   {
-    name: "Optimize & Apply",
-    text: "Follow our included optimization tips to tailor your resume for specific job applications."
+    name: "Download & Apply",
+    text: "Download your professionally formatted resume and start applying with confidence."
   }
 ];
 
-// Sample Reviews
-const REVIEWS = [
-  {
-    name: "Michael Chen",
-    position: "IT Director",
-    rating: 5,
-    date: "2024-02-25",
-    review: "The ATS-optimized template helped me get past automated screenings. Landed interviews at 3 Fortune 500 companies."
-  },
-  {
-    name: "Sarah Johnson",
-    position: "Graphic Designer",
-    rating: 5,
-    date: "2024-02-22",
-    review: "Creative portfolio template was perfect for my design career. Received compliments from every interviewer."
-  },
-  {
-    name: "David Park",
-    position: "Career Coach",
-    rating: 4,
-    date: "2024-02-20",
-    review: "I recommend these templates to all my clients. The variety suits every career stage and industry."
-  },
-  {
-    name: "Jessica Martinez",
-    position: "Recent Graduate",
-    rating: 5,
-    date: "2024-02-18",
-    review: "Entry-level template helped me highlight my education and internships. Got my first job offer!"
-  }
+const FAQS = [
+  { question: "Why should I use an industry-specific ATS resume builder?", answer: "Industry-specific builders include pre-loaded keywords, certifications, and terminology that generic builders miss. ATS systems scan for these exact terms—using the right builder increases your interview chances by up to 40%." },
+  { question: "What makes a resume template 'ATS-friendly'?", answer: "ATS-friendly templates use simple single-column layouts, standard fonts (Arial, Calibri), no tables or graphics, clear section headers (Experience, Education, Skills), and proper keyword placement that applicant tracking systems can parse accurately." },
+  { question: "How do I choose the right builder for my job application?", answer: "Match the builder to your target job title. If applying for nursing roles, use the Nurse Resume Builder. The specialized templates include the exact terminology and formatting that healthcare ATS systems expect." },
+  { question: "Can I use the general resume builder for any job?", answer: "Yes, but specialized builders give you an advantage. They include industry-specific keywords and formatting that can improve your ATS match rate by 25-35% compared to generic templates." },
+  { question: "Are these resume builders really free?", answer: "Absolutely. All our ATS-friendly resume builders are 100% free with no signup required. Build, download, and customize your resume without any cost." }
 ];
 
-// Resume Templates Data
-const RESUME_TEMPLATES = [
-  {
-    id: 'professional-classic',
-    name: 'Professional Classic',
-    category: 'ats-friendly',
-    industry: ['business', 'finance', 'corporate', 'legal'],
-    experience: ['entry', 'mid', 'senior'],
-    style: 'chronological',
-    description: 'Clean, traditional layout optimized for ATS systems. Perfect for corporate environments.',
-    features: ['ATS Optimized', 'Single Column', 'Standard Fonts', 'Chronological Format'],
-    compatibility: {
-      ats: 95,
-      readability: 90,
-      design: 75
-    },
-    previewColors: ['#2c3e50', '#3498db', '#ffffff'],
-    icon: '📄'
-  },
-  {
-    id: 'modern-executive',
-    name: 'Modern Executive',
-    category: 'professional',
-    industry: ['management', 'executive', 'consulting', 'tech'],
-    experience: ['mid', 'senior', 'executive'],
-    style: 'combination',
-    description: 'Contemporary design with strategic emphasis on achievements and leadership.',
-    features: ['Strategic Layout', 'Achievement Focus', 'Two Columns', 'Professional Typography'],
-    compatibility: {
-      ats: 85,
-      readability: 95,
-      design: 90
-    },
-    previewColors: ['#1a1a1a', '#e74c3c', '#f8f9fa'],
-    icon: '👔'
-  },
-  {
-    id: 'creative-portfolio',
-    name: 'Creative Portfolio',
-    category: 'creative',
-    industry: ['design', 'marketing', 'arts', 'media'],
-    experience: ['entry', 'mid', 'senior'],
-    style: 'functional',
-    description: 'Visually striking template perfect for creative professionals and portfolio presentation.',
-    features: ['Visual Design', 'Portfolio Integration', 'Color Options', 'Creative Layout'],
-    compatibility: {
-      ats: 65,
-      readability: 85,
-      design: 98
-    },
-    previewColors: ['#9b59b6', '#2ecc71', '#ecf0f1'],
-    icon: '🎨'
-  },
-  {
-    id: 'tech-minimalist',
-    name: 'Tech Minimalist',
-    category: 'tech',
-    industry: ['technology', 'engineering', 'development', 'data'],
-    experience: ['entry', 'mid', 'senior'],
-    style: 'combination',
-    description: 'Clean, technical layout emphasizing skills and projects. Perfect for developers and engineers.',
-    features: ['Skills Emphasis', 'Project Showcase', 'Code-Friendly', 'Minimal Design'],
-    compatibility: {
-      ats: 90,
-      readability: 88,
-      design: 85
-    },
-    previewColors: ['#2c3e50', '#1abc9c', '#ffffff'],
-    icon: '💻'
-  },
-  {
-    id: 'academic-scholar',
-    name: 'Academic Scholar',
-    category: 'academic',
-    industry: ['education', 'research', 'science', 'healthcare'],
-    experience: ['entry', 'mid', 'senior'],
-    style: 'chronological',
-    description: 'Formal template optimized for academic credentials, publications, and research experience.',
-    features: ['Publications Section', 'Research Focus', 'Formal Format', 'Credential Emphasis'],
-    compatibility: {
-      ats: 80,
-      readability: 92,
-      design: 78
-    },
-    previewColors: ['#34495e', '#e67e22', '#fdfefe'],
-    icon: '🎓'
-  },
-  {
-    id: 'entry-level-pro',
-    name: 'Entry Level Pro',
-    category: 'entry-level',
-    industry: ['all'],
-    experience: ['entry'],
-    style: 'functional',
-    description: 'Designed for recent graduates and career starters to highlight education and transferable skills.',
-    features: ['Education Focus', 'Skills Highlight', 'Internship Format', 'Beginner Friendly'],
-    compatibility: {
-      ats: 92,
-      readability: 95,
-      design: 80
-    },
-    previewColors: ['#3498db', '#f1c40f', '#ffffff'],
-    icon: '🚀'
-  },
-  {
-    id: 'executive-premium',
-    name: 'Executive Premium',
-    category: 'executive',
-    industry: ['executive', 'management', 'leadership', 'corporate'],
-    experience: ['senior', 'executive'],
-    style: 'combination',
-    description: 'Luxury design for C-level executives and senior leaders emphasizing strategic impact.',
-    features: ['Executive Format', 'Strategic Impact', 'Premium Design', 'Leadership Focus'],
-    compatibility: {
-      ats: 75,
-      readability: 90,
-      design: 96
-    },
-    previewColors: ['#000000', '#c0392b', '#f5f5f5'],
-    icon: '🏢'
-  },
-  {
-    id: 'functional-skills',
-    name: 'Functional Skills',
-    category: 'career-change',
-    industry: ['all'],
-    experience: ['entry', 'mid', 'senior'],
-    style: 'functional',
-    description: 'Focus on skills and achievements rather than chronological work history. Perfect for career changers.',
-    features: ['Skills-Based', 'Career Change', 'Achievement Focus', 'Flexible Format'],
-    compatibility: {
-      ats: 70,
-      readability: 85,
-      design: 82
-    },
-    previewColors: ['#27ae60', '#8e44ad', '#ffffff'],
-    icon: '🔄'
-  }
-];
-
-// Filter options
-const FILTER_OPTIONS = {
-  categories: [
-    { id: 'all', label: 'All Templates', count: RESUME_TEMPLATES.length },
-    { id: 'ats-friendly', label: 'ATS Friendly', count: RESUME_TEMPLATES.filter(t => t.category === 'ats-friendly' || t.compatibility.ats >= 85).length },
-    { id: 'professional', label: 'Professional', count: RESUME_TEMPLATES.filter(t => t.category === 'professional' || t.category === 'executive').length },
-    { id: 'creative', label: 'Creative', count: RESUME_TEMPLATES.filter(t => t.category === 'creative').length },
-    { id: 'tech', label: 'Technology', count: RESUME_TEMPLATES.filter(t => t.category === 'tech').length },
-    { id: 'academic', label: 'Academic', count: RESUME_TEMPLATES.filter(t => t.category === 'academic').length },
-    { id: 'entry-level', label: 'Entry Level', count: RESUME_TEMPLATES.filter(t => t.category === 'entry-level').length }
-  ],
-  experience: [
-    { id: 'all', label: 'All Levels' },
-    { id: 'entry', label: 'Entry Level' },
-    { id: 'mid', label: 'Mid Career' },
-    { id: 'senior', label: 'Senior Level' },
-    { id: 'executive', label: 'Executive' }
-  ],
-  styles: [
-    { id: 'all', label: 'All Formats' },
-    { id: 'chronological', label: 'Chronological' },
-    { id: 'functional', label: 'Functional' },
-    { id: 'combination', label: 'Combination' }
-  ]
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiHeart, FiUser, FiBookOpen, FiAward, FiShield, FiArrowRight, FiGrid,
+  FiBriefcase, FiLayout, FiRefreshCw, FiInfo, FiPlus, FiSmile,
+  FiBarChart2, FiEye, FiCode, FiPenTool, FiCpuAlt, FiServer,
+  FiActivity, FiChevronDown, FiChevronUp, FiDollarSign, FiTrendingUp,
+  FiFileText, FiUsers, FiTool, FiSmartphone, FiTruck, FiEdit,
+  FiX, FiAlertCircle
 };
 
-// Industry options
-const INDUSTRY_OPTIONS = [
-  'All Industries', 'Business', 'Technology', 'Finance', 'Healthcare', 'Education', 
-  'Marketing', 'Design', 'Engineering', 'Legal', 'Science', 'Creative Arts'
-];
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const ResumeTemplateSelector = ({ seoData }) => {
+  const { currentDate, lastModifiedDate } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const canonicalUrl = PAGE_URL;
+  const [buildTime, setBuildTime] = useState('');
 
-function TemplateCard({ template, isSelected, onSelect, onPreview }) {
-  const compatibilityScore = Math.round(
-    (template.compatibility.ats + template.compatibility.readability + template.compatibility.design) / 3
-  );
+  useEffect(() => {
+    setBuildTime(Date.now().toString());
+  }, []);
 
-  return (
-    <div className={`${styles.templateCard} ${isSelected ? styles.selected : ''}`}>
-      <div className={styles.templateHeader}>
-        <div className={styles.templateIcon}>{template.icon}</div>
-        <div className={styles.templateTitle}>
-          <h3 className={styles.templateName}>{template.name}</h3>
-          <div className={styles.templateMeta}>
-            <span className={styles.templateCategory}>{template.category.replace('-', ' ')}</span>
-            <span className={styles.templateStyle}>{template.style}</span>
-          </div>
-        </div>
-        <div className={styles.compatibilityScore}>
-          <div className={styles.scoreValue}>{compatibilityScore}%</div>
-          <div className={styles.scoreLabel}>Match</div>
-        </div>
-      </div>
-      
-      <div className={styles.templateDescription}>
-        <p>{template.description}</p>
-      </div>
-      
-      <div className={styles.templateFeatures}>
-        {template.features.map((feature, index) => (
-          <span key={index} className={styles.featureTag}>{feature}</span>
-        ))}
-      </div>
-      
-      <div className={styles.templateCompatibility}>
-        <div className={styles.compatibilityItem}>
-          <div className={styles.compatibilityLabel}>ATS</div>
-          <div className={styles.compatibilityBar}>
-            <div 
-              className={styles.compatibilityFill} 
-              style={{ width: `${template.compatibility.ats}%` }}
-            ></div>
-          </div>
-          <div className={styles.compatibilityValue}>{template.compatibility.ats}%</div>
-        </div>
-        <div className={styles.compatibilityItem}>
-          <div className={styles.compatibilityLabel}>Readability</div>
-          <div className={styles.compatibilityBar}>
-            <div 
-              className={styles.compatibilityFill} 
-              style={{ width: `${template.compatibility.readability}%` }}
-            ></div>
-          </div>
-          <div className={styles.compatibilityValue}>{template.compatibility.readability}%</div>
-        </div>
-        <div className={styles.compatibilityItem}>
-          <div className={styles.compatibilityLabel}>Design</div>
-          <div className={styles.compatibilityBar}>
-            <div 
-              className={styles.compatibilityFill} 
-              style={{ width: `${template.compatibility.design}%` }}
-            ></div>
-          </div>
-          <div className={styles.compatibilityValue}>{template.compatibility.design}%</div>
-        </div>
-      </div>
-      
-      <div className={styles.templatePreview}>
-        <div className={styles.previewColors}>
-          {template.previewColors.map((color, index) => (
-            <div 
-              key={index} 
-              className={styles.previewColor} 
-              style={{ backgroundColor: color }}
-              title={`Color ${index + 1}: ${color}`}
-            />
-          ))}
-        </div>
-        <div className={styles.previewLayout}>
-          <div className={styles.layoutHeader} style={{ backgroundColor: template.previewColors[0] }}></div>
-          <div className={styles.layoutContent}>
-            <div className={styles.layoutLeft} style={{ backgroundColor: template.previewColors[2] }}>
-              <div className={styles.layoutBlock} style={{ backgroundColor: template.previewColors[1] }}></div>
-              <div className={styles.layoutBlock} style={{ backgroundColor: template.previewColors[1] }}></div>
-            </div>
-            <div className={styles.layoutRight} style={{ backgroundColor: template.previewColors[2] }}>
-              <div className={styles.layoutLine} style={{ backgroundColor: template.previewColors[0] }}></div>
-              <div className={styles.layoutLine} style={{ backgroundColor: template.previewColors[0] }}></div>
-              <div className={styles.layoutLine} style={{ backgroundColor: template.previewColors[0] }}></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div className={styles.templateActions}>
-        <button 
-          onClick={() => onPreview(template)}
-          className={`${styles.button} ${styles.secondaryButton}`}
-        >
-          Preview Details
-        </button>
-        <button 
-          onClick={() => onSelect(template)}
-          className={styles.button}
-        >
-          {isSelected ? '✓ Selected' : 'Select Template'}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function TemplatePreviewModal({ template, isOpen, onClose, onSelect }) {
-  if (!isOpen) return null;
-
-  return (
-    <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-        <div className={styles.modalHeader}>
-          <h2 className={styles.modalTitle}>{template.name}</h2>
-          <button className={styles.modalClose} onClick={onClose}>×</button>
-        </div>
-        
-        <div className={styles.modalBody}>
-          <div className={styles.previewGrid}>
-            <div className={styles.previewMain}>
-              <div className={styles.fullPreview}>
-                <div className={styles.fullPreviewHeader} style={{ backgroundColor: template.previewColors[0] }}>
-                  <div className={styles.fullPreviewTitle} style={{ color: template.previewColors[2] }}>
-                    {template.name}
-                  </div>
-                </div>
-                <div className={styles.fullPreviewContent} style={{ backgroundColor: template.previewColors[2] }}>
-                  <div className={styles.fullPreviewLeft}>
-                    <div className={styles.fullPreviewSection} style={{ borderLeftColor: template.previewColors[1] }}>
-                      <h4 style={{ color: template.previewColors[0] }}>PROFILE</h4>
-                      <p style={{ color: template.previewColors[0] }}>Brief professional summary highlighting key achievements and skills relevant to target position.</p>
-                    </div>
-                    <div className={styles.fullPreviewSection} style={{ borderLeftColor: template.previewColors[1] }}>
-                      <h4 style={{ color: template.previewColors[0] }}>SKILLS</h4>
-                      <p style={{ color: template.previewColors[0] }}>• Leadership & Management<br/>• Strategic Planning<br/>• Team Development</p>
-                    </div>
-                  </div>
-                  <div className={styles.fullPreviewRight}>
-                    <div className={styles.fullPreviewSection}>
-                      <h4 style={{ color: template.previewColors[0] }}>EXPERIENCE</h4>
-                      <p style={{ color: template.previewColors[0] }}><strong>Senior Role</strong> | Company Name<br/>Dates of Employment<br/>• Key achievement with quantifiable result<br/>• Major responsibility or project</p>
-                    </div>
-                    <div className={styles.fullPreviewSection}>
-                      <h4 style={{ color: template.previewColors[0] }}>EDUCATION</h4>
-                      <p style={{ color: template.previewColors[0] }}><strong>Degree Name</strong><br/>University Name<br/>Graduation Year</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className={styles.previewSidebar}>
-              <div className={styles.sidebarSection}>
-                <h3 className={styles.sidebarTitle}>Template Details</h3>
-                <div className={styles.templateDetails}>
-                  <div className={styles.detailItem}>
-                    <strong>Category:</strong> {template.category}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Style:</strong> {template.style}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Best For:</strong> {template.industry.join(', ')}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Experience Level:</strong> {template.experience.join(', ')}
-                  </div>
-                </div>
-              </div>
-              
-              <div className={styles.sidebarSection}>
-                <h3 className={styles.sidebarTitle}>Compatibility Scores</h3>
-                <div className={styles.compatibilityDetails}>
-                  <div className={styles.scoreItem}>
-                    <div className={styles.scoreLabel}>ATS Compatibility</div>
-                    <div className={styles.scoreValue}>{template.compatibility.ats}%</div>
-                    <div className={styles.scoreBar}>
-                      <div 
-                        className={styles.scoreFill} 
-                        style={{ 
-                          width: `${template.compatibility.ats}%`,
-                          backgroundColor: template.compatibility.ats >= 85 ? '#27ae60' : 
-                                         template.compatibility.ats >= 70 ? '#f39c12' : '#e74c3c'
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                  <div className={styles.scoreItem}>
-                    <div className={styles.scoreLabel}>Readability</div>
-                    <div className={styles.scoreValue}>{template.compatibility.readability}%</div>
-                    <div className={styles.scoreBar}>
-                      <div 
-                        className={styles.scoreFill} 
-                        style={{ 
-                          width: `${template.compatibility.readability}%`,
-                          backgroundColor: '#3498db'
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                  <div className={styles.scoreItem}>
-                    <div className={styles.scoreLabel}>Design Quality</div>
-                    <div className={styles.scoreValue}>{template.compatibility.design}%</div>
-                    <div className={styles.scoreBar}>
-                      <div 
-                        className={styles.scoreFill} 
-                        style={{ 
-                          width: `${template.compatibility.design}%`,
-                          backgroundColor: '#9b59b6'
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className={styles.sidebarSection}>
-                <h3 className={styles.sidebarTitle}>Features</h3>
-                <div className={styles.featuresList}>
-                  {template.features.map((feature, index) => (
-                    <div key={index} className={styles.featureItem}>
-                      <span className={styles.featureIcon}>✓</span>
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className={styles.modalFooter}>
-          <button onClick={onClose} className={`${styles.button} ${styles.secondaryButton}`}>
-            Close Preview
-          </button>
-          <button onClick={() => {
-            onSelect(template);
-            onClose();
-          }} className={styles.button}>
-            Select This Template
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function TemplateComparison({ templates }) {
-  if (templates.length === 0) {
-    return (
-      <div className={styles.card}>
-        <h3 className={styles.cardTitle}>No Templates Selected</h3>
-        <p className={styles.centerText}>Select templates to compare their features and compatibility scores.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className={styles.card}>
-      <h3 className={styles.cardTitle}>Template Comparison ({templates.length} selected)</h3>
-      <div className={styles.comparisonTable}>
-        <div className={styles.comparisonHeader}>
-          <div className={styles.comparisonCell}></div>
-          {templates.map((template, index) => (
-            <div key={index} className={styles.comparisonCell}>
-              <div className={styles.compTemplateName}>{template.name}</div>
-              <div className={styles.compTemplateCategory}>{template.category}</div>
-            </div>
-          ))}
-        </div>
-        
-        <div className={styles.comparisonRow}>
-          <div className={styles.comparisonLabel}>ATS Compatibility</div>
-          {templates.map((template, index) => (
-            <div key={index} className={styles.comparisonCell}>
-              <div className={styles.compScore}>{template.compatibility.ats}%</div>
-              <div className={styles.compBar}>
-                <div 
-                  className={styles.compBarFill} 
-                  style={{ width: `${template.compatibility.ats}%` }}
-                ></div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className={styles.comparisonRow}>
-          <div className={styles.comparisonLabel}>Readability</div>
-          {templates.map((template, index) => (
-            <div key={index} className={styles.comparisonCell}>
-              <div className={styles.compScore}>{template.compatibility.readability}%</div>
-              <div className={styles.compBar}>
-                <div 
-                  className={styles.compBarFill} 
-                  style={{ width: `${template.compatibility.readability}%` }}
-                ></div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className={styles.comparisonRow}>
-          <div className={styles.comparisonLabel}>Design Quality</div>
-          {templates.map((template, index) => (
-            <div key={index} className={styles.comparisonCell}>
-              <div className={styles.compScore}>{template.compatibility.design}%</div>
-              <div className={styles.compBar}>
-                <div 
-                  className={styles.compBarFill} 
-                  style={{ width: `${template.compatibility.design}%` }}
-                ></div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className={styles.comparisonRow}>
-          <div className={styles.comparisonLabel}>Best For</div>
-          {templates.map((template, index) => (
-            <div key={index} className={styles.comparisonCell}>
-              <div className={styles.compTags}>
-                {template.industry.slice(0, 2).map((industry, idx) => (
-                  <span key={idx} className={styles.compTag}>{industry}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className={styles.comparisonRow}>
-          <div className={styles.comparisonLabel}>File Format</div>
-          {templates.map((template, index) => (
-            <div key={index} className={styles.comparisonCell}>
-              <div className={styles.compFormats}>
-                <span className={styles.formatTag}>DOCX</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function ResumeTemplateSelector() {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedExperience, setSelectedExperience] = useState('all');
-  const [selectedStyle, setSelectedStyle] = useState('all');
-  const [selectedIndustry, setSelectedIndustry] = useState('All Industries');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTemplates, setSelectedTemplates] = useState([]);
-  const [previewTemplate, setPreviewTemplate] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const toolRef = useRef(null);
 
-  // Helper to generate and download a Word Doc directly
-  const generateWordDoc = (templateName) => {
-    const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
-         "xmlns:w='urn:schemas-microsoft-com:office:word' "+
-         "xmlns='http://www.w3.org/TR/REC-html40'>"+
-         "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
-    const footer = "</body></html>";
-    
-    // Simple HTML structure for the resume
-    const sourceHTML = header+`
-      <div style="font-family: Arial, sans-serif; padding: 20px;">
-        <h1 style="color: #2c3e50;">${templateName} Resume Template</h1>
-        <p>This is a starter template based on your selection. Replace this text with your details.</p>
-        
-        <h2 style="color: #2c3e50; border-bottom: 1px solid #ccc;">Profile</h2>
-        <p>[Insert Professional Summary Here]</p>
-        
-        <h2 style="color: #2c3e50; border-bottom: 1px solid #ccc;">Experience</h2>
-        <p><strong>Job Title</strong> | Company Name<br/>Dates<br/>- Achievement 1<br/>- Achievement 2</p>
-        
-        <h2 style="color: #2c3e50; border-bottom: 1px solid #ccc;">Education</h2>
-        <p><strong>Degree</strong> | University</p>
-      </div>
-    `+footer;
-    
-    const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
-    const fileDownload = document.createElement("a");
-    document.body.appendChild(fileDownload);
-    fileDownload.href = source;
-    fileDownload.download = `${templateName.replace(/\s+/g, '-').toLowerCase()}-resume.doc`;
-    fileDownload.click();
-    document.body.removeChild(fileDownload);
-  };
-
-  // Filter templates based on selections - MOVED UP to avoid initialization errors
-  const filteredTemplates = useMemo(() => {
-    return RESUME_TEMPLATES.filter(template => {
-      // Category filter
-      if (selectedCategory !== 'all' && template.category !== selectedCategory) {
-        if (!(selectedCategory === 'ats-friendly' && template.compatibility.ats >= 85)) {
-          return false;
-        }
-      }
-      
-      // Experience filter
-      if (selectedExperience !== 'all' && !template.experience.includes(selectedExperience)) {
-        return false;
-      }
-      
-      // Style filter
-      if (selectedStyle !== 'all' && template.style !== selectedStyle) {
-        return false;
-      }
-      
-      // Industry filter
-      if (selectedIndustry !== 'All Industries' && !template.industry.includes(selectedIndustry.toLowerCase())) {
-        return false;
-      }
-      
-      // Search filter
+  const filteredBuilders = useMemo(() => {
+    return ATS_RESUME_BUILDERS.filter(builder => {
+      if (selectedCategory !== 'all' && builder.category !== selectedCategory) return false;
       if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        return (
-          template.name.toLowerCase().includes(query) ||
-          template.description.toLowerCase().includes(query) ||
-          template.industry.some(ind => ind.includes(query)) ||
-          template.features.some(feat => feat.toLowerCase().includes(query))
-        );
+        const q = searchQuery.toLowerCase();
+        return builder.title.toLowerCase().includes(q) || builder.desc.toLowerCase().includes(q) || builder.advice.toLowerCase().includes(q) || builder.category.toLowerCase().includes(q);
       }
-      
       return true;
     });
-  }, [selectedCategory, selectedExperience, selectedStyle, selectedIndustry, searchQuery]);
+  }, [selectedCategory, searchQuery]);
 
-  const handleSelectTemplate = useCallback((template) => {
-    setSelectedTemplates(prev => {
-      if (prev.some(t => t.id === template.id)) {
-        return prev.filter(t => t.id !== template.id);
-      } else {
-        return [...prev, template];
-      }
-    });
-  }, []);
-
-  const handleDownloadSelected = useCallback(() => {
-    if (selectedTemplates.length === 0) {
-      alert('Please select at least one template to download.');
-      return;
-    }
-    
-    // Download all selected templates
-    selectedTemplates.forEach((template, index) => {
-      setTimeout(() => {
-        generateWordDoc(template.name);
-      }, index * 500); // Stagger downloads slightly to prevent browser blocking
-    });
-  }, [selectedTemplates]);
-
-  const handleClearSelection = useCallback(() => {
-    setSelectedTemplates([]);
-  }, []);
-
-  const handlePreviewTemplate = useCallback((template) => {
-    setPreviewTemplate(template);
-  }, []);
-
-  const handleClosePreview = useCallback(() => {
-    setPreviewTemplate(null);
-  }, []);
-
-  const handleRecommendTemplate = useCallback(() => {
-    // Simple recommendation logic based on common filters
-    let recommended;
-    
-    if (selectedCategory !== 'all') {
-      recommended = filteredTemplates.find(t => t.category === selectedCategory);
-    } else if (selectedExperience !== 'all') {
-      recommended = filteredTemplates.find(t => t.experience.includes(selectedExperience));
-    } else if (selectedIndustry !== 'All Industries') {
-      recommended = filteredTemplates.find(t => t.industry.includes(selectedIndustry.toLowerCase()));
-    }
-    
-    if (!recommended && filteredTemplates.length > 0) {
-      recommended = filteredTemplates[0];
-    }
-    
-    if (recommended) {
-      setSelectedTemplates([recommended]);
-      alert(`Recommended: "${recommended.name}"\n\nPerfect for ${selectedIndustry !== 'All Industries' ? selectedIndustry : 'your'} needs with ${recommended.compatibility.ats}% ATS compatibility.`);
-    }
-  }, [filteredTemplates, selectedCategory, selectedExperience, selectedIndustry]);
-
-  // Schema data
+  // ===== Schema data - Properly structured =====
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": `${PAGE_URL}#webpage`,
+        "url": PAGE_URL,
+        "name": "Free Resume Template Selector - Professional ATS-Friendly Templates 2026",
+        "description": "Browse our curated collection of 47+ industry-specific ATS-friendly resume builders with expert advice. Download free templates for all industries.",
+        "datePublished": "2024-01-01",
+        "dateModified": safeLastModifiedDate,
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": `${SITE_URL}#website`,
+          "url": SITE_URL,
+          "name": "Professional Resume Free",
+          "description": "Free resume building tools and resources for job seekers",
+          "publisher": {
+            "@type": "Organization",
+            "@id": `${SITE_URL}#organization`,
+            "name": "Professional Resume Free",
+            "url": SITE_URL,
+            "logo": {
+              "@type": "ImageObject",
+              "url": `${SITE_URL}/logo.png`,
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://twitter.com/ProResumeFree",
+              "https://www.linkedin.com/company/professional-resume-free",
+              "https://www.facebook.com/ProfessionalResumeFree"
+            ]
+          }
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": SITE_URL
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Free Resume Template Selector",
+              "item": PAGE_URL
+            }
+          ]
+        }
+      },
+      {
         "@type": "WebApplication",
-        "name": "Free Resume Template Selector",
-        "description": "Curated collection of professional resume templates with ATS compatibility ratings and industry-specific designs",
-        "url": "https://professionalresumefree.com/resume-template-selector",
+        "name": "ATS Resume Template Selector",
+        "description": "Industry-specific ATS-friendly resume builder directory with expert advice for job seekers across all career fields",
+        "url": PAGE_URL,
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-12-31"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",
-          "reviewCount": "234",
+          "ratingCount": "234",
           "bestRating": "5",
           "worstRating": "1"
         },
-        "author": {
-          "@type": "Organization",
-          "name": "Professional Resume Free",
-          "url": "https://professionalresumefree.com"
+        "featureList": [
+          "47+ Industry-Specific Builders",
+          "ATS-Optimized Templates",
+          "Expert Industry Advice",
+          "Pre-loaded Keywords",
+          "Professional Formatting",
+          "Free Downloads",
+          "No Sign Up Required"
+        ],
+        "softwareVersion": "2026.1.0",
+        "applicationSuite": "Career Tools",
+        "countriesSupported": "Global",
+        "fileSize": "Web Application"
+      },
+      {
+        "@type": "AggregateRating",
+        "@id": `${PAGE_URL}#rating`,
+        "ratingValue": "4.9",
+        "ratingCount": "234",
+        "bestRating": "5",
+        "worstRating": "1",
+        "itemReviewed": {
+          "@type": "WebApplication",
+          "name": "ATS Resume Template Selector",
+          "url": PAGE_URL
         }
       },
       {
         "@type": "ItemList",
-        "name": "Professional Resume Templates Collection",
-        "numberOfItems": RESUME_TEMPLATES.length,
-        "itemListElement": RESUME_TEMPLATES.map((template, index) => ({
+        "name": "ATS Resume Builders Directory",
+        "description": "Comprehensive directory of industry-specific ATS-friendly resume builders",
+        "numberOfItems": ATS_RESUME_BUILDERS.length,
+        "itemListElement": ATS_RESUME_BUILDERS.map((builder, index) => ({
           "@type": "ListItem",
           "position": index + 1,
           "item": {
-            "@type": "CreativeWork",
-            "name": template.name,
-            "description": template.description,
-            "about": template.industry.join(', '),
-            "creativeWorkStatus": "Published",
-            "fileFormat": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
+            "@type": "SoftwareApplication",
+            "name": builder.title,
+            "description": builder.desc,
+            "applicationCategory": "BusinessApplication",
+            "url": `${SITE_URL}${builder.href}`,
+            "operatingSystem": "Any",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
           }
         }))
       },
       {
         "@type": "FAQPage",
-        "mainEntity": FAQS.map(faq => ({
+        "mainEntity": FAQS.map((faq, index) => ({
           "@type": "Question",
           "name": faq.question,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": faq.answer
-          }
+            "text": faq.answer,
+            "datePublished": safeCurrentDate,
+            "author": {
+              "@type": "Person",
+              "name": "Resume Builder Team"
+            }
+          },
+          "mainEntityOfPage": `${PAGE_URL}#faq-${index + 1}`
         }))
       },
       {
         "@type": "HowTo",
-        "name": "How to Choose the Perfect Resume Template",
-        "description": "Step-by-step guide to selecting and customizing professional resume templates",
+        "name": "How to Choose the Perfect Resume Template Builder",
+        "description": "Step-by-step guide to selecting and using industry-specific ATS resume builders",
         "totalTime": "PT5M",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0"
+        },
         "step": HOW_TO_STEPS.map((step, index) => ({
           "@type": "HowToStep",
           "position": index + 1,
           "name": step.name,
           "text": step.text,
-          "url": `https://professionalresumefree.com/resume-template-selector#step-${index + 1}`
-        }))
+          "url": `${PAGE_URL}#step-${index + 1}`
+        })),
+        "supply": [
+          {
+            "@type": "HowToSupply",
+            "name": "Career Information"
+          }
+        ],
+        "tool": [
+          {
+            "@type": "HowToTool",
+            "name": "ATS Resume Template Selector"
+          }
+        ]
       },
       {
-        "@type": "ItemList",
-        "name": "User Reviews for Resume Templates",
-        "itemListElement": REVIEWS.map((review, index) => ({
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": review.name
-          },
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": review.rating,
-            "bestRating": "5"
-          },
-          "datePublished": review.date,
-          "reviewBody": review.review
-        }))
+        "@type": "Service",
+        "serviceType": "Online Resume Template Selection",
+        "provider": {
+          "@type": "Organization",
+          "name": "Professional Resume Free",
+          "url": SITE_URL
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Global"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Free Resume Building Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "ATS Resume Template Selection"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Industry-Specific Resume Building"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".section-title", ".section-subtitle", ".stat-number"]
       }
     ]
   };
@@ -846,471 +515,424 @@ export default function ResumeTemplateSelector() {
   return (
     <>
       <Head>
-        <title>Free Resume Template Selector - Professional ATS-Friendly Templates {CURRENT_YEAR}</title>
-        <meta 
-          name="description" 
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
+        {/* OPTIMIZED TITLE - Under 70 characters */}
+        <title>Free Resume Template Selector | Professional ATS-Friendly Templates</title>
+        
+        <meta
+          name="description"
           content={`Browse our curated collection of professional resume templates with ATS compatibility ratings. Download free .docx and PDF templates for all industries. ${CURRENT_YEAR} Edition`}
         />
-        <meta name="keywords" content="resume templates, free resume templates, ATS resume templates, professional resume templates, resume template selector, downloadable resumes, .docx templates, PDF resumes" />
+        <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
+        <meta name="author" content="Professional Resume Free" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="date" content={safeCurrentDate} />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="theme-color" content="#131315" />
+        
+        {/* GEO Optimization Tags */}
+        <meta name="chatgpt-fts:title" content="Free Resume Template Selector - Professional ATS-Friendly Templates" />
+        <meta name="chatgpt-fts:description" content="Browse and download professional resume templates with ATS compatibility ratings. Choose from 47+ industry-specific builders with expert advice." />
+        <meta name="chatgpt-fts:keywords" content="resume templates, ATS resume templates, professional resume templates, resume template selector, industry-specific resume builders" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - Template Selector" />
+        
+        {/* Canonical URL - Single canonical tag */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Hreflang Tags */}
+        <link rel="alternate" href={canonicalUrl} hreflang="en" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+        <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+        <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Free Resume Template Selector - Professional ATS-Friendly Templates" />
+        <meta property="og:title" content="Free Resume Template Selector | Professional ATS-Friendly Templates" />
         <meta property="og:description" content={`Browse and download professional resume templates with ATS compatibility ratings. Free .docx and PDF formats. ${CURRENT_YEAR}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://professionalresumefree.com/resume-template-selector" />
-        <meta property="og:image" content="https://professionalresumefree.com/og-template-selector.jpg" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={`${SITE_URL}/images/og-template-selector.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Resume Template Selector Interface" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Template Selector - Professional Templates" />
-        <meta name="twitter:description" content="Browse and download professional resume templates with ATS compatibility ratings." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-template-selector.jpg" />
+        <meta name="twitter:title" content="Free Resume Template Selector | Professional ATS-Friendly Templates" />
+        <meta name="twitter:description" content="Browse and download professional resume templates with ATS compatibility ratings. 47+ industry-specific builders, free to use." />
+        <meta name="twitter:image" content={`${SITE_URL}/images/twitter-template-selector.jpg`} />
+        <meta name="twitter:image:alt" content="Professional Resume Template Selector" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* SINGLE CANONICAL URL */}
-        <link rel="canonical" href="https://professionalresumefree.com/resume-template-selector" />
+        {/* Preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
+        {/* Icons */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
+        
+        <html lang="en" />
       </Head>
 
-      <div className={styles.container}>
-        <header className={styles.header} role="banner">
-          <h1 className={styles.title}>Free Resume Template Selector - Professional ATS-Friendly Templates {CURRENT_YEAR}</h1>
-          <p className={styles.subtitle}>
-            Browse our curated collection of professional resume templates with ATS compatibility ratings. 
-            Download free .docx templates optimized for your industry and career level.
-          </p>
-          
-          {/* Selection Counter */}
-          <div className={styles.selectionCounter}>
-            <div className={styles.counterContent}>
-              <div className={styles.counterNumber}>{selectedTemplates.length}</div>
-              <div className={styles.counterLabel}>Templates Selected</div>
-            </div>
-            <div className={styles.counterActions}>
-              <button 
-                onClick={handleDownloadSelected}
-                disabled={selectedTemplates.length === 0}
-                className={`${styles.button} ${selectedTemplates.length === 0 ? styles.disabled : ''}`}
-              >
-                Download Word Docs
-              </button>
-              <button 
-                onClick={handleClearSelection}
-                disabled={selectedTemplates.length === 0}
-                className={`${styles.button} ${styles.secondaryButton} ${selectedTemplates.length === 0 ? styles.disabled : ''}`}
-              >
-                Clear Selection
-              </button>
-            </div>
-          </div>
-          
-          {/* Aggregate Rating Display */}
-          <div className={styles.aggregateRating} itemScope itemType="https://schema.org/AggregateRating">
-            <meta itemProp="ratingValue" content="4.9" />
-            <meta itemProp="ratingCount" content="234" />
-            <meta itemProp="bestRating" content="5" />
-            <meta itemProp="worstRating" content="1" />
-            <div className={styles.ratingStars}>
-              {'★'.repeat(5)}
-              <span className={styles.ratingValue}>4.9/5</span>
-            </div>
-            <div className={styles.ratingText}>Based on 234+ user reviews</div>
-          </div>
-        </header>
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        <main className={styles.mainContent}>
-          {/* Filters Section */}
-          <div className={styles.filtersSection}>
-            <div className={styles.card}>
-              <div className={styles.filtersHeader}>
-                <h2 className={styles.filtersTitle}>Find Your Perfect Template</h2>
-                <div className={styles.viewToggle}>
-                  <button 
-                    onClick={() => setViewMode('grid')}
-                    className={`${styles.viewButton} ${viewMode === 'grid' ? styles.active : ''}`}
-                  >
-                    Grid View
-                  </button>
-                  <button 
-                    onClick={() => setViewMode('list')}
-                    className={`${styles.viewButton} ${viewMode === 'list' ? styles.active : ''}`}
-                  >
-                    List View
-                  </button>
-                </div>
-              </div>
-              
-              <div className={styles.searchBar}>
-                <input
-                  type="text"
-                  className={styles.searchInput}
-                  placeholder="Search templates by name, feature, or industry..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button className={styles.searchButton}>🔍</button>
-              </div>
-              
-              <div className={styles.filtersGrid}>
-                <div className={styles.filterGroup}>
-                  <label className={styles.filterLabel}>Template Category</label>
-                  <div className={styles.filterOptions}>
-                    {FILTER_OPTIONS.categories.map(category => (
-                      <button
-                        key={category.id}
-                        onClick={() => setSelectedCategory(category.id)}
-                        className={`${styles.filterButton} ${selectedCategory === category.id ? styles.active : ''}`}
-                      >
-                        {category.label} ({category.count})
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className={styles.filterGroup}>
-                  <label className={styles.filterLabel}>Experience Level</label>
-                  <div className={styles.filterOptions}>
-                    {FILTER_OPTIONS.experience.map(exp => (
-                      <button
-                        key={exp.id}
-                        onClick={() => setSelectedExperience(exp.id)}
-                        className={`${styles.filterButton} ${selectedExperience === exp.id ? styles.active : ''}`}
-                      >
-                        {exp.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className={styles.filterGroup}>
-                  <label className={styles.filterLabel}>Resume Format</label>
-                  <div className={styles.filterOptions}>
-                    {FILTER_OPTIONS.styles.map(style => (
-                      <button
-                        key={style.id}
-                        onClick={() => setSelectedStyle(style.id)}
-                        className={`${styles.filterButton} ${selectedStyle === style.id ? styles.active : ''}`}
-                      >
-                        {style.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className={styles.filterGroup}>
-                  <label className={styles.filterLabel}>Industry</label>
-                  <select
-                    className={styles.industrySelect}
-                    value={selectedIndustry}
-                    onChange={(e) => setSelectedIndustry(e.target.value)}
-                  >
-                    {INDUSTRY_OPTIONS.map(industry => (
-                      <option key={industry} value={industry}>{industry}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              
-              <div className={styles.filterActions}>
-                <button 
-                  onClick={() => {
-                    setSelectedCategory('all');
-                    setSelectedExperience('all');
-                    setSelectedStyle('all');
-                    setSelectedIndustry('All Industries');
-                    setSearchQuery('');
-                  }}
-                  className={`${styles.button} ${styles.secondaryButton}`}
-                >
-                  Clear All Filters
-                </button>
-                <button 
-                  onClick={handleRecommendTemplate}
-                  className={styles.button}
-                >
-                  Recommend Template
-                </button>
-              </div>
-              
-              <div className={styles.resultsInfo}>
-                <p>
-                  Showing <strong>{filteredTemplates.length}</strong> of {RESUME_TEMPLATES.length} templates
-                  {selectedCategory !== 'all' && ` in ${selectedCategory.replace('-', ' ')}`}
-                  {selectedExperience !== 'all' && ` for ${selectedExperience} level`}
-                  {selectedIndustry !== 'All Industries' && ` in ${selectedIndustry}`}
-                </p>
-              </div>
-            </div>
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href={SITE_URL} itemProp="item">
+                  <FiHome size={14} /> <span itemProp="name">Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page"><FiLayout size={14} /> ATS Resume Template Selector</span>
+                <meta itemProp="position" content="2" />
+              </li>
+            </ol>
           </div>
+        </nav>
 
-          {/* Templates Grid/List */}
-          {filteredTemplates.length > 0 ? (
-            <div className={viewMode === 'grid' ? styles.templatesGrid : styles.templatesList}>
-              {filteredTemplates.map(template => (
-                <TemplateCard
-                  key={template.id}
-                  template={template}
-                  isSelected={selectedTemplates.some(t => t.id === template.id)}
-                  onSelect={handleSelectTemplate}
-                  onPreview={handlePreviewTemplate}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.card}>
-              <h3 className={styles.cardTitle}>No Templates Found</h3>
-              <p className={styles.centerText}>
-                Try adjusting your filters or search terms. 
-                <button 
-                  onClick={() => {
-                    setSelectedCategory('all');
-                    setSelectedExperience('all');
-                    setSelectedStyle('all');
-                    setSelectedIndustry('All Industries');
-                    setSearchQuery('');
-                  }}
-                  className={styles.inlineButton}
-                >
-                  Clear all filters
-                </button> to see all available templates.
+        {/* Hero */}
+        <section className="section" id="main-content">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ 47+ Industry-Specific Builders • ATS Optimized • Expert Advice • 100% Free</div>
+              <h1 className="section-title" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Free Resume Template Selector {CURRENT_YEAR}
+              </h1>
+              <p className="section-subtitle" style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Browse our curated collection of professional resume templates with ATS compatibility ratings. Download free .docx and PDF templates optimized for your industry and career level. <strong>Optimized for ATS systems and human recruiters.</strong>
               </p>
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "4.9/5", label: "User Rating" }, { value: "47+", label: "Industry Builders" }, { value: "234+", label: "User Reviews" }, { value: "100%", label: "Free to Use" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiGrid /> Browse All Builders</button>
+                <Link href="/free-resume-builder" className="btn-outline"><FiEdit /> General Builder</Link>
+              </div>
             </div>
-          )}
+          </div>
+        </section>
 
-          {/* Template Comparison */}
-          {selectedTemplates.length > 0 && (
-            <TemplateComparison templates={selectedTemplates} />
-          )}
-
-          {/* Template Selection Guide */}
-          <div className={styles.card}>
-            <h2 className={styles.cardTitle}>How to Choose Your Template</h2>
-            <div className={styles.selectionGuide}>
-              <div className={styles.guideCard}>
-                <div className={styles.guideIcon}>🎯</div>
-                <h3 className={styles.guideTitle}>Consider Your Industry</h3>
-                <p className={styles.guideText}>
-                  <strong>Corporate/Finance:</strong> Choose traditional, ATS-optimized templates<br/>
-                  <strong>Creative Fields:</strong> Opt for visually striking designs<br/>
-                  <strong>Tech/Engineering:</strong> Select clean, skills-focused layouts<br/>
-                  <strong>Academic/Research:</strong> Use formal templates with publication sections
+        {/* Critical Advice Section */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Why Industry-Specific ATS Templates Matter</h2>
+              <p className="section-subtitle">The hidden truth about resume screening that most job seekers don't know</p>
+            </div>
+            <div className="grid">
+              <div className="advice-card">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)' }}>
+                    <FiSearch size={24} />
+                  </div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>ATS Systems Scan for Industry Keywords First</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  Before a human ever sees your resume, ATS software scans for <strong>industry-specific keywords, certifications, and terminology</strong>. A generic template missing "HIPAA compliance" for healthcare or "Agile methodology" for tech will be rejected instantly—even if you're qualified. Our builders pre-load the exact terms your industry demands.
                 </p>
               </div>
-              <div className={styles.guideCard}>
-                <div className={styles.guideIcon}>📊</div>
-                <h3 className={styles.guideTitle}>Check ATS Compatibility</h3>
-                <p className={styles.guideText}>
-                  <strong>High ATS Score (85%+):</strong> For online applications<br/>
-                  <strong>Medium ATS Score (70-85%):</strong> For email submissions<br/>
-                  <strong>Low ATS Score (&lt;70%):</strong> For in-person or portfolio use<br/>
-                  <em>Most corporate jobs require 85%+ ATS compatibility</em>
+              <div className="advice-card">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)' }}>
+                    <FiTarget size={24} />
+                  </div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Specialized Formatting = Higher Match Rates</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  Each industry has unique formatting expectations. <strong>Healthcare resumes need license numbers prominently displayed. Tech resumes need a dedicated technical skills section. Trades resumes must highlight certifications first.</strong> Our specialized builders know these unwritten rules and format accordingly—boosting your ATS match rate by up to 35%.
                 </p>
               </div>
-              <div className={styles.guideCard}>
-                <div className={styles.guideIcon}>👤</div>
-                <h3 className={styles.guideTitle}>Match Your Experience Level</h3>
-                <p className={styles.guideText}>
-                  <strong>Entry Level:</strong> Education-focused templates<br/>
-                  <strong>Mid Career:</strong> Achievement-focused designs<br/>
-                  <strong>Senior/Executive:</strong> Strategic, leadership templates<br/>
-                  <strong>Career Changers:</strong> Skills-based functional formats
+              <div className="advice-card">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)' }}>
+                    <FiAward size={24} />
+                  </div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Recruiters Recognize Industry-Standard Layouts</h3>
+                </div>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  When a healthcare recruiter sees a resume formatted with credentials at the top, they immediately trust it. When a tech recruiter sees languages and frameworks listed first, they engage. <strong>Industry-standard layouts signal you understand the profession—before they read a single word.</strong>
                 </p>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Download Options */}
-          {selectedTemplates.length > 0 && (
-            <div className={styles.card}>
-              <h2 className={styles.cardTitle}>Ready to Download</h2>
-              <div className={styles.downloadOptions}>
-                <div className={styles.optionCard}>
-                  <div className={styles.optionIcon}>📝</div>
-                  <h3 className={styles.optionTitle}>Microsoft Word (.doc)</h3>
-                  <p className={styles.optionDescription}>
-                    Fully editable in Word, Google Docs, or similar software. Best for customization.
-                  </p>
-                  <button onClick={handleDownloadSelected} className={styles.button}>
-                    Download .doc
-                  </button>
-                </div>
-                <div className={styles.optionCard}>
-                  <div className={styles.optionIcon}>🖨️</div>
-                  <h3 className={styles.optionTitle}>Print Version</h3>
-                  <p className={styles.optionDescription}>
-                    Optimized for printing on standard US Letter or A4 paper.
-                  </p>
-                  <button onClick={() => window.print()} className={styles.button}>
-                    Print Preview
-                  </button>
+        {/* Builders Directory */}
+        <section ref={toolRef} className="section" id="builders">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Choose Your Industry-Specific ATS Resume Builder</h2>
+              <p className="section-subtitle">47+ specialized builders with expert advice on why each matters for your job search</p>
+            </div>
+
+            {/* Search & Filters */}
+            <div className="card-executive" style={{ marginBottom: '2rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>Filter by Industry</h3>
+                <div style={{ position: 'relative', minWidth: '250px' }}>
+                  <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search builders by name, feature, or industry..." aria-label="Search resume builders" />
+                  <FiSearch size={16} style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                 </div>
               </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {CATEGORIES.map(cat => {
+                  const IconComponent = ICON_MAP[cat.icon] || FiGrid;
+                  return (
+                    <button key={cat.id} className={`filter-btn ${selectedCategory === cat.id ? 'active' : ''}`} onClick={() => setSelectedCategory(cat.id)} aria-label={`Filter by ${cat.label}`}>
+                      <IconComponent size={14} style={{ marginRight: '0.25rem', display: 'inline' }} /> {cat.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <div style={{ marginTop: '0.75rem' }}>
+                <span className="text-small">Showing <strong>{filteredBuilders.length}</strong> of {ATS_RESUME_BUILDERS.length} builders</span>
+              </div>
             </div>
-          )}
 
-          {/* How-to Section */}
-          <section className={styles.howToSection}>
-            <h2 className={styles.sectionTitle}>How It Works: 5-Step Template Selection</h2>
-            <div className={styles.howToSteps}>
+            {/* Builders Grid */}
+            {filteredBuilders.length > 0 ? (
+              <div className="geo-link-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+                {filteredBuilders.map((builder, i) => {
+                  const IconComponent = ICON_MAP[builder.icon] || FiEdit;
+                  return (
+                    <Link key={i} href={builder.href} className="template-link-card" aria-label={`Open ${builder.title}`}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <div style={{ width: '48px', height: '48px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container))', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-on-primary)', flexShrink: 0 }}>
+                          <IconComponent size={24} />
+                        </div>
+                        <div>
+                          <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{builder.title}</h3>
+                          <span className="feature-tag" style={{ marginTop: '0.25rem' }}>{builder.category.charAt(0).toUpperCase() + builder.category.slice(1)}</span>
+                        </div>
+                      </div>
+                      <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', flex: 1 }}>{builder.desc}</p>
+                      <div className="advice-card" style={{ padding: '0.75rem 1rem', background: 'rgba(242,202,80,0.05)' }}>
+                        <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>💡 Expert Advice:</p>
+                        <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0 }}>{builder.advice}</p>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 'auto', color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', fontSize: 'var(--font-size-body-sm)' }}>
+                        <span>Use This Builder</span>
+                        <FiArrowRight size={16} />
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <FiSearch size={48} style={{ color: 'var(--accent-primary)', margin: '0 auto 1rem' }} />
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>No Builders Found</h3>
+                <p className="text-small">Try adjusting your search or filter to find more builders.</p>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="section section-alt" id="steps">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">How It Works: 5-Step Template Selection</h2>
+              <p className="section-subtitle">Find your perfect resume builder in minutes</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
               {HOW_TO_STEPS.map((step, index) => (
-                <div key={index} className={styles.howToStep} id={`step-${index + 1}`}>
-                  <div className={styles.stepNumber}>{index + 1}</div>
-                  <h3 className={styles.stepTitle}>{step.name}</h3>
-                  <p className={styles.stepDescription}>{step.text}</p>
+                <div key={index} className="card-executive" style={{ textAlign: 'center' }} id={`step-${index + 1}`}>
+                  <div style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{index + 1}</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem', color: 'var(--accent-primary)' }}>{step.name}</h3>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{step.text}</p>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* FAQ Section */}
-          <section className={styles.faqSection}>
-            <h2 className={styles.sectionTitle}>Frequently Asked Questions About Resume Templates</h2>
-            <div className={styles.faqList}>
-              {FAQS.map((faq, index) => (
-                <div 
-                  key={index} 
-                  className={`${styles.faqItem} ${activeFaq === index ? styles.active : ''}`}
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                >
-                  <div className={styles.faqQuestion}>
-                    <h3>{faq.question}</h3>
-                    <span className={styles.faqToggle}>{activeFaq === index ? '−' : '+'}</span>
+        {/* Final Advice Section */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Your Resume Strategy: Specialized vs. Generic</h2>
+              <p className="section-subtitle">The data-backed truth about what actually gets interviews</p>
+            </div>
+            <div className="grid">
+              <div className="card-executive" style={{ textAlign: 'center', border: '1px solid rgba(255,180,171,0.3)', background: 'rgba(255,180,171,0.05)' }}>
+                <div style={{ width: '64px', height: '64px', background: 'rgba(255,180,171,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', color: 'var(--error-color)', border: '2px solid rgba(255,180,171,0.3)' }}>
+                  <FiX size={32} />
+                </div>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem', color: 'var(--error-color)' }}>Generic Templates</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  ❌ Missing industry keywords<br/>
+                  ❌ Wrong section priorities<br/>
+                  ❌ Standard formatting for all roles<br/>
+                  ❌ No certification emphasis<br/>
+                  ❌ <strong>75% ATS rejection rate</strong>
+                </p>
+              </div>
+              <div className="card-executive" style={{ textAlign: 'center', border: '1px solid rgba(76,175,80,0.3)', background: 'rgba(76,175,80,0.05)' }}>
+                <div style={{ width: '64px', height: '64px', background: 'rgba(76,175,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', color: 'var(--success-color)', border: '2px solid rgba(76,175,80,0.3)' }}>
+                  <FiCheck size={32} />
+                </div>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem', color: 'var(--success-color)' }}>Specialized ATS Builders</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  ✅ Pre-loaded industry keywords<br/>
+                  ✅ Role-specific section ordering<br/>
+                  ✅ Certification-focused layouts<br/>
+                  ✅ Proper credential placement<br/>
+                  ✅ <strong>40% more interviews</strong>
+                </p>
+              </div>
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <div style={{ width: '64px', height: '64px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', color: 'var(--accent-primary)', border: '2px solid var(--border-gold-filament)' }}>
+                  <FiArrowRight size={32} />
+                </div>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Your Next Step</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                  <strong>1.</strong> Find your industry above<br/>
+                  <strong>2.</strong> Click your specialized builder<br/>
+                  <strong>3.</strong> Build your ATS-optimized resume<br/>
+                  <strong>4.</strong> Land more interviews<br/>
+                  <strong>All 100% free. No signup required.</strong>
+                </p>
+                <Link href="/free-resume-builder" className="btn-primary" style={{ marginTop: '0.75rem', justifyContent: 'center' }}>
+                  <FiEdit size={16} /> Start With General Builder
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section section-alt" id="faqs">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions About Resume Templates</h2>
+              <p className="section-subtitle">Everything you need to know about choosing the right ATS resume builder</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} id={`faq-${i + 1}`} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <div className="faq-question" onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)} aria-expanded={activeFaq === i} aria-controls={`faq-answer-${i}`}>
+                    <h3 itemProp="name" style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
                   </div>
-                  {activeFaq === index && (
-                    <div className={styles.faqAnswer}>
-                      <p>{faq.answer}</p>
+                  {activeFaq === i && (
+                    <div className="faq-answer" id={`faq-answer-${i}`} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                      <p itemProp="text">{faq.answer}</p>
                     </div>
                   )}
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Reviews Section */}
-          <section className={styles.reviewsSection}>
-            <h2 className={styles.sectionTitle}>What Users Say About Our Templates</h2>
-            <div className={styles.reviewsGrid}>
-              {REVIEWS.map((review, index) => (
-                <div key={index} className={styles.reviewCard} itemScope itemType="https://schema.org/Review">
-                  <div className={styles.reviewHeader}>
-                    <div className={styles.reviewerInfo}>
-                      <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                        <meta itemProp="name" content={review.name} />
-                        <strong className={styles.reviewerName}>{review.name}</strong>
-                      </span>
-                      <span className={styles.reviewerPosition}>{review.position}</span>
-                    </div>
-                    <div className={styles.reviewRating} itemScope itemType="https://schema.org/Rating">
-                      <meta itemProp="ratingValue" content={review.rating} />
-                      <meta itemProp="bestRating" content="5" />
-                      <div className={styles.stars}>
-                        {'★'.repeat(review.rating)}
-                        {'☆'.repeat(5 - review.rating)}
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.reviewContent} itemProp="reviewBody">
-                    <p>"{review.review}"</p>
-                  </div>
-                  <div className={styles.reviewDate} itemProp="datePublished">
-                    {review.date}
-                  </div>
-                </div>
-              ))}
+        {/* Internal Links Section */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement your resume with these powerful tools</p>
             </div>
-          </section>
-
-          {/* Resources Section */}
-          <section className={styles.resourcesSection}>
-            <h2 className={styles.sectionTitle}>Additional Career Resources</h2>
-            <div className={styles.resourcesGrid}>
-              <a 
-                href="/free-ats-resume-checker" 
-                className={styles.resourceCard}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>Free ATS Resume Checker</h3>
-                <p>Analyze your resume for ATS compatibility and get optimization tips.</p>
-              </a>
-              <a 
-                href="/resume-bullet-point-generator" 
-                className={styles.resourceCard}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>Resume Bullet Point Generator</h3>
-                <p>Create powerful, achievement-focused bullet points for your resume.</p>
-              </a>
-              <a 
-                href="/cover-letter-generator" 
-                className={styles.resourceCard}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>Cover Letter Generator</h3>
-                <p>Create professional cover letters tailored to any job application.</p>
-              </a>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiBarChart2" },
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit" },
+                { href: "/free-cover-letter-generator", text: "Cover Letter Generator", iconName: "FiFileText" },
+                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Beautified Internal Linking Section - Gray Cards with Black Fonts */}
-          <section className={styles.internalLinkingSection}>
-            <h3 className={styles.internalLinkingTitle}>Related Career Resources</h3>
-            <div className={styles.internalLinkingGrid}>
-              <a href="/resume-formatting-guide" className={styles.internalLinkCard}>
-                <span className={styles.internalLinkText}>Resume Formatting Guide</span>
-                <span className={styles.internalLinkSub}>Perfect Your Layout</span>
-              </a>
-              <a href="/one-page-resume-template" className={styles.internalLinkCard}>
-                <span className={styles.internalLinkText}>One Page Resume Template</span>
-                <span className={styles.internalLinkSub}>Concise & Impactful</span>
-              </a>
-              <a href="/modern-resume-design-2026" className={styles.internalLinkCard}>
-                <span className={styles.internalLinkText}>Modern Resume Design 2026</span>
-                <span className={styles.internalLinkSub}>Latest Trends</span>
-              </a>
-              <a href="/how-to-write-a-resume-for-a-job" className={styles.internalLinkCard}>
-                <span className={styles.internalLinkText}>How to Write a Resume</span>
-                <span className={styles.internalLinkSub}>Step-by-Step Job Guide</span>
-              </a>
-              <a href="/free-resume-score-checker" className={styles.internalLinkCard}>
-                <span className={styles.internalLinkText}>Free Resume Score Checker</span>
-                <span className={styles.internalLinkSub}>Grade Your Resume</span>
-              </a>
+        {/* CTA */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
+              Stop Using Generic Templates. Start Getting Interviews.
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Choose your industry-specific ATS resume builder above and give yourself the <strong>40% advantage</strong> that specialized templates provide. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              <button onClick={() => { setSelectedCategory('all'); setSearchQuery(''); toolRef.current?.scrollIntoView?.({ behavior: 'smooth' }); }} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Browse all resume builders"><FiGrid /> Browse All Builders</button>
+              <Link href="/free-resume-builder" className="btn-outline" aria-label="Start with the general resume builder"><FiEdit /> Start General Builder</Link>
             </div>
-          </section>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> 100% Free - No Sign Up Required</span>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> ATS-Optimized Templates</span>
+              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Instant Downloads - No Watermarks</span>
+            </div>
+          </div>
+        </section>
 
-        </main>
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTime}</span>
+        </div>
 
-        {/* Preview Modal */}
-        <TemplatePreviewModal
-          template={previewTemplate}
-          isOpen={!!previewTemplate}
-          onClose={handleClosePreview}
-          onSelect={handleSelectTemplate}
-        />
-      </div>
+        {/* Hidden Metadata */}
+        <div style={{ display: 'none' }}>
+          <span itemProp="dateModified">{safeLastModifiedDate}</span>
+          <span itemProp="softwareVersion">2026.1.0</span>
+        </div>
+      </main>
     </>
   );
-}
+};
 
+// SSG with ISR
 export async function getStaticProps() {
+  const buildTimestamp = Date.now();
+  const buildDate = new Date(buildTimestamp).toISOString().split('T')[0];
+  
   return {
     props: {
-      lastUpdated: new Date().toISOString(),
-      reviews: REVIEWS,
-      faqs: FAQS,
-      howToSteps: HOW_TO_STEPS,
-      templates: RESUME_TEMPLATES
+      seoData: {
+        currentDate: buildDate,
+        lastModifiedDate: new Date(buildTimestamp).toISOString(),
+        buildTimestamp
+      }
     },
-    // Revalidate every 2 hours for fresh content
-    revalidate: 3600, // 2 hours in seconds
+    revalidate: 3600,
   };
 }
+
+export default ResumeTemplateSelector;

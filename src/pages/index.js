@@ -1,375 +1,1170 @@
 // pages/index.js
-// ProfessionalResumeFree.com — Fully Optimized Landing Page (100% SEO/GEO Ready)
-// Goals: Pure static | llms.txt linked | AI-optimized ($0.0001) | 100% machine-readable
+// ProfessionalResumeFree.com — ProfessionalResumeFree Executive Brand Design
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
-// ─── CRITICAL CSS ────────────────────────────────────────────────────────────
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-  --accent: #2563eb;
-  --success: #059669;
-  --danger: #dc2626;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.container { max-width: 1280px; margin: 0 auto; padding: 0 16px; width: 100%; }
-@media (min-width: 640px) { .container { padding: 0 24px; } }
-.container, .hero, .section, .cta-section, .breadcrumb .container { text-align: center; }
-.breadcrumb ol { justify-content: center; }
-.grid, .hub-grid, .specialized-grid, .faq-grid, .advisory-panel, .category-grid, .data-grid, .citation-grid {
-  text-align: left; margin-left: auto; margin-right: auto;
-}
-.card, .faq-item, .founder-card, .testimonial-card, .specialized-card, .hub-category,
-.category-card, .stat-card, .citation-card { text-align: left; }
-.hero {
-  background: var(--background);
-  padding: 40px 0;
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) { .hero { padding: 60px 0; } }
-.hero h1 { font-size: clamp(1.5rem, 5vw, 3rem); margin-bottom: 16px; line-height: 1.2; word-wrap: break-word; }
-.hero h2 { font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--text-light); margin-bottom: 24px; font-weight: 500; }
-.hero p { font-size: clamp(1rem, 3vw, 1.25rem); max-width: 800px; margin: 0 auto 24px; padding: 0 16px; }
-.ai-definition {
-  background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;
-  padding: 20px; margin: 24px auto; max-width: 800px;
-  font-size: 1rem; color: #0c4a6e; text-align: left;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-}
-.ai-definition strong { color: #075985; }
-.llms-banner {
-  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
-  padding: 12px 20px; margin: 16px auto; max-width: 800px;
-  font-size: 0.875rem; color: #166534; text-align: left;
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-}
-.llms-banner a { color: #15803d; font-weight: 600; text-decoration: underline; }
-.llms-banner a:hover { color: #166534; }
-.hero-content-below-buttons {
-  max-width: 800px;
-  margin: 32px auto 0;
-  text-align: left;
-}
-.cta-above-image { margin-bottom: 32px; }
-.hero-image-container {
-  width: 100%; max-width: 700px; margin: 0 auto 32px; padding: 0 16px;
-  position: relative; border-radius: 12px; overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-@media (min-width: 1024px) { .hero-image-container { max-width: 650px; } }
-@media (min-width: 1280px) { .hero-image-container { max-width: 600px; } }
-.hero-image-container img { width: 100%; height: auto; display: block; }
-@media (min-width: 768px) { .hero-image-container { margin: 0 auto 40px; } }
-.button-container { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
-@media (max-width: 480px) { .button-container { flex-direction: column; align-items: center; gap: 12px; } }
-.grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 30px auto; width: 100%; }
-@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1280px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-.citation-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 30px auto; width: 100%; }
-@media (min-width: 640px) { .citation-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .citation-grid { grid-template-columns: repeat(3, 1fr); } }
-.category-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px auto; width: 100%; }
-@media (min-width: 640px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1280px) { .category-grid { grid-template-columns: repeat(4, 1fr); } }
-.card {
-  background: var(--card-bg); border-radius: 8px; padding: 20px;
-  border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%; display: flex; flex-direction: column; text-decoration: none; color: inherit;
-}
-.card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-.card:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.citation-card {
-  background: var(--card-bg); border-radius: 8px; padding: 20px;
-  border: 1px solid var(--border); height: 100%; display: flex; flex-direction: column;
-  text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;
-}
-.citation-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-.category-card {
-  background: var(--card-bg); border-radius: 8px; padding: 20px;
-  border: 1px solid var(--border); height: 100%; display: flex; flex-direction: column;
-}
-.category-card h3 { margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); font-size: 1.1rem; }
-.category-card ul { list-style: none; margin: 0; padding: 0; }
-.category-card li { margin: 8px 0; }
-.category-card a { color: var(--primary); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-.category-card a:hover { border-bottom-color: var(--primary); }
-.btn-primary {
-  display: inline-block; background: var(--primary); color: var(--background);
-  padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500;
-  margin: 8px; border: 1px solid var(--primary); transition: background 0.2s;
-  width: auto; min-width: 200px; text-align: center;
-}
-@media (max-width: 480px) { .btn-primary { width: 100%; margin: 4px 0; min-width: auto; padding: 14px 24px; } }
-.btn-primary:hover { background: var(--secondary); }
-.btn-primary:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.btn-secondary {
-  display: inline-block; background: transparent; color: var(--primary);
-  padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500;
-  border: 2px solid var(--primary); margin: 8px; transition: background 0.2s;
-  width: auto; min-width: 200px; text-align: center;
-}
-@media (max-width: 480px) { .btn-secondary { width: 100%; margin: 4px 0; min-width: auto; padding: 14px 24px; } }
-.btn-secondary:hover { background: #f5f5f5; }
-.btn-secondary:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.btn-cta {
-  display: inline-block; background: var(--primary); color: var(--background);
-  padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 700;
-  font-size: 1.2rem; margin: 8px; border: 1px solid var(--primary); transition: all 0.3s;
-  width: auto; min-width: 240px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-@media (max-width: 480px) { .btn-cta { width: 100%; margin: 4px 0; min-width: auto; padding: 16px 24px; font-size: 1.1rem; } }
-.btn-cta:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-.btn-cta:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.stats { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
-@media (max-width: 640px) { .stats { gap: 16px; } }
-@media (max-width: 480px) { .stats { gap: 12px; flex-direction: column; align-items: center; } }
-.stat-item { text-align: center; min-width: 120px; padding: 8px; }
-@media (max-width: 480px) { .stat-item { min-width: 100%; width: 100%; max-width: 250px; } }
-.stat-number { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: bold; display: block; }
-.section { padding: 40px 0; scroll-margin-top: 20px; }
-@media (min-width: 768px) { .section { padding: 60px 0; } }
-@media (max-width: 480px) { .section { padding: 30px 0; } }
-.section:target { background-color: rgba(0,0,0,0.02); }
-.section-title { text-align: center; font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 32px; padding: 0 16px; word-wrap: break-word; }
-@media (max-width: 480px) { .section-title { margin-bottom: 24px; } }
-.section-subtitle { text-align: center; color: var(--text-light); max-width: 700px; margin: 0 auto 40px; padding: 0 16px; font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
-@media (max-width: 480px) { .section-subtitle { margin-bottom: 24px; } }
-.table-wrap {
-  overflow-x: auto; margin: 30px 0; background: var(--background);
-  border-radius: 8px; border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-@media (max-width: 640px) { .table-wrap { margin: 20px 0; border-radius: 0; border-left: none; border-right: none; } }
-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-@media (max-width: 480px) { table { min-width: 500px; } }
-th { background: var(--card-bg); padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
-@media (min-width: 768px) { th { padding: 16px; font-size: 1rem; } }
-td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-@media (min-width: 768px) { td { padding: 16px; font-size: 1rem; } }
-.faq-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-left: auto; margin-right: auto; }
-@media (min-width: 768px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
-.faq-item { background: var(--card-bg); padding: 24px; border-radius: 8px; border: 1px solid var(--border); height: 100%; scroll-margin-top: 20px; }
-@media (max-width: 480px) { .faq-item { padding: 20px; } }
-.faq-item:target { background-color: #f0f0f0; }
-.faq-question { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; color: var(--primary); line-height: 1.4; cursor: pointer; }
-.trust-badge { display: inline-block; background: #f3f4f6; color: var(--primary); padding: 6px 12px; border-radius: 50px; font-size: 0.85rem; margin-bottom: 20px; border: 1px solid var(--border); }
-@media (max-width: 480px) { .trust-badge { font-size: 0.75rem; padding: 5px 10px; } }
-.breadcrumb { padding: 16px 0; background: var(--card-bg); border-bottom: 1px solid var(--border); }
-@media (max-width: 480px) { .breadcrumb { padding: 12px 0; font-size: 0.85rem; } }
-.breadcrumb ol { display: flex; list-style: none; gap: 8px; flex-wrap: wrap; font-size: 0.9rem; justify-content: center; }
-@media (max-width: 480px) { .breadcrumb ol { gap: 4px; } }
-.breadcrumb a { color: var(--primary); text-decoration: none; border-bottom: 1px solid transparent; }
-.breadcrumb a:hover { border-bottom-color: var(--primary); }
-.breadcrumb [aria-current="page"] { font-weight: 600; }
-.hub-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-left: auto; margin-right: auto; }
-@media (min-width: 640px) { .hub-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .hub-grid { grid-template-columns: repeat(3, 1fr); } }
-.hub-category { background: var(--card-bg); padding: 24px; border-radius: 8px; border: 1px solid var(--border); }
-@media (max-width: 480px) { .hub-category { padding: 20px; } }
-.hub-category ul { list-style: none; margin-top: 16px; }
-.hub-category li { margin: 12px 0; }
-.hub-category a { color: var(--primary); text-decoration: none; border-bottom: 1px solid #d1d5db; padding-bottom: 2px; }
-.hub-category a:hover { border-bottom-color: var(--primary); }
-.specialized-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-left: auto; margin-right: auto; }
-@media (min-width: 640px) { .specialized-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .specialized-grid { grid-template-columns: repeat(3, 1fr); } }
-.specialized-card { background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; color: inherit; height: 100%; display: flex; flex-direction: column; }
-.specialized-card h4 { font-size: 1rem; margin-bottom: 8px; line-height: 1.4; }
-.founder-card { background: var(--card-bg); padding: 24px; border-radius: 8px; border: 1px solid var(--border); height: 100%; }
-.testimonial-card { background: var(--card-bg); padding: 24px; border-radius: 8px; border: 1px solid var(--border); height: 100%; display: flex; flex-direction: column; }
-.cta-section { background: var(--background); color: var(--primary); padding: 40px 0; text-align: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-@media (min-width: 768px) { .cta-section { padding: 60px 0; } }
-@media (max-width: 480px) { .cta-section { padding: 30px 0; } }
-.cta-section h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 16px; padding: 0 16px; }
-.cta-section p { font-size: clamp(1rem, 2.5vw, 1.2rem); max-width: 800px; margin: 0 auto 24px; padding: 0 16px; }
-.feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.feature-tag { background: #e5e7eb; color: var(--primary); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; border: 1px solid #d1d5db; }
-@media (min-width: 768px) { .feature-tag { font-size: 0.8rem; } }
-@media (max-width: 480px) { .feature-tag { font-size: 0.7rem; padding: 3px 6px; } }
-.text-small { font-size: 0.85rem; color: var(--text-light); }
-.text-success { color: var(--success); font-weight: 600; }
-.text-danger { color: var(--danger); font-weight: 600; }
-hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-@media (max-width: 480px) { hr { margin: 30px 0; } }
-.methodology-list { list-style: none; margin-top: 12px; }
-.methodology-list li { margin-bottom: 8px; padding-left: 20px; position: relative; }
-.methodology-list li:before { content: "✓"; color: #059669; position: absolute; left: 0; font-weight: bold; }
-.advisory-panel { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; justify-content: center; }
-@media (max-width: 640px) { .advisory-panel { gap: 16px; } }
-@media (max-width: 480px) { .advisory-panel { flex-direction: column; gap: 12px; align-items: center; } }
-.advisory-member { flex: 1 1 200px; padding: 12px; background: var(--background); border: 1px solid var(--border); border-radius: 6px; max-width: 250px; }
-@media (max-width: 480px) { .advisory-member { width: 100%; max-width: 100%; } }
-.skip-link { position: absolute; top: -40px; left: 0; background: var(--primary); color: white; padding: 8px; z-index: 100; }
-.skip-link:focus { top: 0; }
-@media (max-width: 480px) {
-  button, .btn-primary, .btn-secondary, .btn-cta, .card, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-  .card:active { opacity: 0.8; }
-  .table-wrap { -webkit-overflow-scrolling: touch; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; }
-}
-.section > .container > *:not(.grid):not(.faq-grid):not(.hub-grid):not(.specialized-grid):not(.advisory-panel):not(.category-grid):not(.data-grid):not(.citation-grid) { text-align: center; }
-.category-grid { justify-items: center; }
-.category-card { width: 100%; max-width: 350px; }
-.specialized-grid { justify-items: center; }
-.specialized-card { width: 100%; max-width: 350px; }
-.hub-grid { justify-items: center; }
-.hub-category { width: 100%; max-width: 350px; }
-.founder-card { margin-left: auto; margin-right: auto; max-width: 500px; }
-.testimonial-card { margin-left: auto; margin-right: auto; max-width: 350px; }
-.faq-item { margin-left: auto; margin-right: auto; width: 100%; }
-.cta-section .button-container { justify-content: center; }
-.skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; border-radius: 4px; height: 100px; margin-bottom: 16px; }
-@keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-.trust-signals { background: var(--background); padding: 40px 0; border-bottom: 1px solid var(--border); }
-.trust-grid { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }
-.trust-item { text-align: center; max-width: 220px; }
-.trust-text { font-size: 0.85rem; color: var(--text-light); line-height: 1.4; }
-.trust-text a { color: var(--accent); text-decoration: none; }
-.trust-text a:hover { text-decoration: underline; }
-.comparison-positive { color: var(--success); font-weight: 600; }
-.comparison-negative { color: var(--danger); }
-.comparison-neutral { color: #f59e0b; }
-.data-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px auto; }
-@media (min-width: 768px) { .data-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .data-grid { grid-template-columns: repeat(3, 1fr); } }
-.stat-card { background: var(--card-bg); padding: 24px; border-radius: 8px; border: 1px solid var(--border); text-align: center; }
-.stat-card .stat-value { font-size: 2rem; font-weight: bold; color: var(--primary); display: block; margin-bottom: 8px; }
-.stat-card .stat-label { font-size: 0.9rem; color: var(--text-light); }
-.stat-card .stat-source { font-size: 0.75rem; color: var(--text-lighter); margin-top: 8px; display: block; }
-.ai-content-block { font-size: 1rem; line-height: 1.7; color: var(--text-light); max-width: 860px; margin: 0 auto 24px; text-align: left; }
-.ai-content-block h3 { color: var(--primary); margin: 20px 0 10px; font-size: 1.15rem; }
-.ai-content-block p { margin-bottom: 14px; }
-.ai-content-block ul { padding-left: 20px; margin-bottom: 14px; }
-.ai-content-block li { margin-bottom: 6px; }
-.live-stats { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center; }
-.external-validation { margin-top: 30px; text-align: center; }
-.external-validation-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
-.external-validation-links a { font-size: 0.8rem; color: var(--accent); text-decoration: underline; max-width: 200px; }
-.external-validation-links a:hover { color: #1d4ed8; }
+// ============================================================================
+// PROFESSIONALRESUMEFREE EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  /* ========== CSS CUSTOM PROPERTIES ========== */
+  :root {
+    /* ========== COLOR SYSTEM ========== */
+    
+    /* Background Colors */
+    --bg-page: #131315;
+    --bg-surface-lowest: #0e0e10;
+    --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21;
+    --bg-surface-high: #2a2a2c;
+    --bg-surface-highest: #353437;
+    --bg-surface-dim: #131315;
+    --bg-surface-bright: #39393b;
+    --bg-container: #1c1b1d;
+    --bg-container-high: #2a2a2c;
+    
+    /* Text Colors */
+    --text-primary: #e5e1e4;
+    --text-secondary: #c5bfc8;
+    --text-muted: #9d95a0;
+    --text-disabled: #605d62;
+    --text-inverse: #1c1b1d;
+    --text-on-accent: #3c2f00;
+    
+    /* Accent/Brand Colors - Gold */
+    --accent-primary: #f2ca50;
+    --accent-primary-container: #d4af37;
+    --accent-primary-fixed: #ffe088;
+    --accent-primary-fixed-dim: #e9c349;
+    --accent-on-primary: #3c2f00;
+    --accent-on-primary-container: #2a2000;
+    --accent-inverse-primary: #735c00;
+    --accent-primary-hover: #f7d86e;
+    --accent-primary-active: #e6bc3d;
+    
+    /* Border Colors */
+    --border-outline: #444246;
+    --border-outline-variant: #363538;
+    --border-gold-filament: rgba(212, 175, 55, 0.3);
+    --border-gold-filament-strong: rgba(212, 175, 55, 0.5);
+    --border-glass: rgba(212, 175, 55, 0.15);
+    
+    /* Glass/Special Effect Colors */
+    --glass-bg: rgba(20, 19, 21, 0.7);
+    --glass-bg-light: rgba(28, 27, 29, 0.6);
+    --glass-bg-heavy: rgba(20, 19, 21, 0.85);
+    --gradient-hero-overlay: linear-gradient(135deg, rgba(19, 19, 21, 0.95) 0%, rgba(19, 19, 21, 0.8) 100%);
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Font Sizes */
+    --font-size-display-lg: clamp(3rem, 6vw, 4rem);
+    --font-size-display-md: clamp(2.25rem, 5vw, 3rem);
+    --font-size-headline-lg: clamp(1.75rem, 4vw, 2rem);
+    --font-size-headline-md: clamp(1.5rem, 3.5vw, 1.75rem);
+    --font-size-title-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-title-md: clamp(1.125rem, 2.5vw, 1.25rem);
+    --font-size-body-lg: clamp(1rem, 2vw, 1.125rem);
+    --font-size-body-md: 1rem;
+    --font-size-body-sm: 0.875rem;
+    --font-size-label-md: 0.75rem;
+    --font-size-label-sm: 0.6875rem;
+    
+    /* Line Heights */
+    --line-height-display: 1.1;
+    --line-height-headline: 1.2;
+    --line-height-title: 1.3;
+    --line-height-body: 1.6;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-caps: 0.08em;
+    
+    /* Text Shadows for Glow Effects */
+    --glow-gold: 0 0 20px rgba(242, 202, 80, 0.3), 0 0 40px rgba(242, 202, 80, 0.1);
+    --glow-gold-strong: 0 0 30px rgba(242, 202, 80, 0.5), 0 0 60px rgba(242, 202, 80, 0.2);
+    
+    /* ========== BORDER RADIUS SCALE ========== */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-default: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* ========== SPACING SYSTEM ========== */
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    
+    /* Section Spacing */
+    --section-gap-sm: clamp(3rem, 6vw, 4rem);
+    --section-gap-md: clamp(4rem, 8vw, 6rem);
+    --section-gap-lg: clamp(5rem, 10vw, 8rem);
+    
+    /* Content Widths */
+    --content-max-width: 1280px;
+    --content-narrow: 800px;
+    
+    /* Gutters */
+    --gutter-desktop: clamp(1.5rem, 5vw, 2.5rem);
+    --gutter-mobile: clamp(1rem, 4vw, 1.5rem);
+    
+    /* ========== SHADOW / ELEVATION TOKENS ========== */
+    --shadow-gold-glow: 0 0 20px rgba(242, 202, 80, 0.4), 0 0 60px rgba(242, 202, 80, 0.1);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242, 202, 80, 0.3);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* ========== ANIMATION / TRANSITION TOKENS ========== */
+    --transition-fast: 150ms;
+    --transition-medium: 250ms;
+    --transition-slow: 350ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --hover-transform: translateY(-2px);
+    --hover-transform-lg: translateY(-4px);
+    
+    /* ========== GLASS PANEL EFFECT ========== */
+    --glass-blur: 20px;
+    --glass-blur-heavy: 40px;
+    --glass-border-width: 0.5px;
+    --glass-padding: clamp(1.5rem, 4vw, 2.5rem);
+    
+    /* ========== BUTTON STYLE VARIABLES ========== */
+    --btn-primary-bg: #f2ca50;
+    --btn-primary-text: #3c2f00;
+    --btn-primary-padding: 0.875rem 2rem;
+    --btn-primary-radius: 0.25rem;
+    --btn-primary-font-size: 0.875rem;
+    --btn-primary-font-weight: 600;
+    --btn-primary-letter-spacing: 0.02em;
+    --btn-primary-hover-bg: #f7d86e;
+    --btn-primary-hover-transform: translateY(-1px);
+    --btn-primary-hover-shadow: 0 4px 12px rgba(242, 202, 80, 0.3);
+    
+    --btn-outline-border: rgba(212, 175, 55, 0.5);
+    --btn-outline-text: #f2ca50;
+    --btn-outline-hover-bg: rgba(242, 202, 80, 0.08);
+    --btn-outline-hover-border: rgba(212, 175, 55, 0.8);
+    
+    /* ========== CARD STYLE VARIABLES ========== */
+    --card-bg: rgba(28, 27, 29, 0.6);
+    --card-bg-hover: rgba(32, 31, 33, 0.8);
+    --card-border: 0.5px solid rgba(212, 175, 55, 0.15);
+    --card-border-hover: 0.5px solid rgba(212, 175, 55, 0.3);
+    --card-padding: clamp(1.5rem, 4vw, 2.5rem);
+    --card-radius: 0.5rem;
+    --card-hover-transform: translateY(-4px);
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05);
+  }
+  
+  /* ========== BASE RESET ========== */
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-tight);
+    word-wrap: break-word;
+  }
+  
+  h1 {
+    font-size: var(--font-size-display-lg);
+    line-height: var(--line-height-display);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: var(--font-size-display-md);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  h3 {
+    font-size: var(--font-size-headline-lg);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-body);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-body);
+  }
+  
+  strong {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  a {
+    color: var(--accent-primary);
+    transition: color var(--transition-fast) var(--easing-default);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--accent-primary-hover);
+  }
+  
+  img, svg { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+  }
+  
+  /* ========== UTILITY CLASSES ========== */
+  .gradient-text {
+    background: linear-gradient(135deg, #f2ca50 0%, #d4af37 50%, #ffe088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .section-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter-desktop);
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .section-container {
+      padding: 0 var(--gutter-mobile);
+    }
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    text-decoration: none;
+    min-width: 200px;
+  }
+  
+  .btn-primary:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--btn-primary-hover-shadow);
+    color: var(--btn-primary-text);
+  }
+  
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: transparent;
+    color: var(--btn-outline-text);
+    border: 0.5px solid var(--btn-outline-border);
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 200px;
+  }
+  
+  .btn-outline:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--shadow-gold-glow-sm);
+    color: var(--btn-outline-text);
+  }
+  
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.125rem 2.25rem;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-gold-glow);
+    text-decoration: none;
+    min-width: 260px;
+  }
+  
+  .btn-cta:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--shadow-gold-glow-strong);
+    color: var(--btn-primary-text);
+  }
+  
+  .card-executive {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card-executive:hover {
+    background: var(--card-bg-hover);
+    border: var(--card-border-hover);
+    transform: var(--card-hover-transform);
+    box-shadow: var(--card-hover-shadow);
+  }
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .skip-link:focus { 
+    top: 0; 
+  }
+
+  /* ========== HOMEPAGE SPECIFIC STYLES ========== */
+  
+  .breadcrumb {
+    padding: 1rem 0;
+    background: var(--bg-surface-lowest);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+    width: 100%;
+  }
+  
+  .breadcrumb ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .breadcrumb a:hover {
+    color: var(--accent-primary);
+  }
+  
+  .breadcrumb [aria-current="page"] {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .breadcrumb li[aria-hidden="true"] {
+    color: var(--text-muted);
+  }
+  
+  .hero-section {
+    padding: var(--section-gap-lg) 0;
+    border-bottom: 0.5px solid var(--border-gold-filament);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .trust-badge {
+    display: inline-block;
+    background: rgba(242, 202, 80, 0.1);
+    color: var(--accent-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-caps);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    border: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .hero-image-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    padding: 0 1rem;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-card-hover);
+    border: var(--card-border);
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-image-container { max-width: 650px; }
+  }
+  
+  @media (min-width: 1280px) {
+    .hero-image-container { max-width: 600px; }
+  }
+  
+  .hero-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 3vw, 1.5rem);
+    margin: 0 0 2.5rem 0;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (max-width: 640px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-stats { grid-template-columns: 1fr; gap: 1rem; }
+  }
+  
+  .hero-stat-item {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: clamp(1rem, 3vw, 1.25rem);
+    border-radius: var(--radius-xl);
+    border: var(--card-border);
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-stat-number {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-primary);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-display);
+  }
+  
+  .hero-stat-label {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .hero-stat-note {
+    font-size: var(--font-size-label-sm);
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 1rem);
+    margin: 2rem 0;
+    width: 100%;
+  }
+  
+  @media (max-width: 640px) {
+    .button-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-outline,
+    .btn-cta {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+  
+  .ai-definition-box {
+    background: rgba(242, 202, 80, 0.05);
+    border: 0.5px solid var(--border-gold-filament-strong);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    max-width: 800px;
+    text-align: left;
+  }
+  
+  .ai-definition-box p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-md);
+  }
+  
+  .ai-definition-box strong {
+    color: var(--accent-primary);
+  }
+  
+  .llms-banner {
+    background: rgba(242, 202, 80, 0.05);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 1.25rem;
+    margin: 1rem auto;
+    max-width: 800px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  .llms-banner a {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
+  }
+  
+  .llms-banner a:hover {
+    color: var(--accent-primary-hover);
+  }
+  
+  .section {
+    width: 100%;
+    padding: var(--section-gap-md) 0;
+  }
+  
+  .section-alt {
+    background: var(--bg-surface-lowest);
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 6vw, 3rem);
+  }
+  
+  .section-title {
+    margin-bottom: 1rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .section-subtitle {
+    font-size: var(--font-size-body-lg);
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  @media (min-width: 1280px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  .citation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .citation-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .citation-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .citation-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-medium) var(--easing-smooth);
+  }
+  
+  .citation-card:hover {
+    border-color: var(--accent-primary-container);
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-2px);
+    color: inherit;
+  }
+  
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .category-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  @media (min-width: 1280px) {
+    .category-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  
+  .category-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    height: 100%;
+  }
+  
+  .category-card h3 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-gold-filament);
+    font-size: var(--font-size-body-lg);
+    color: var(--text-primary);
+  }
+  
+  .category-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .category-card li {
+    margin: 0.5rem 0;
+  }
+  
+  .category-card a {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition-fast);
+  }
+  
+  .category-card a:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary-container);
+  }
+  
+  .feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  
+  .feature-tag {
+    background: rgba(242, 202, 80, 0.1);
+    color: var(--accent-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-label-sm);
+    border: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .table-wrap {
+    overflow-x: auto;
+    margin: 2rem 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-lg);
+    border: var(--card-border);
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+  
+  th {
+    background: rgba(242, 202, 80, 0.05);
+    padding: 1rem;
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+    color: var(--accent-primary);
+    border-bottom: 1px solid var(--border-gold-filament);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  td {
+    padding: 1rem;
+    border-bottom: 0.5px solid var(--border-gold-filament);
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+  }
+  
+  .comparison-positive { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
+  .comparison-negative { color: var(--text-muted); }
+  .comparison-neutral { color: var(--text-secondary); }
+  
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 900px;
+    width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .faq-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  .faq-item {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .faq-question {
+    font-size: var(--font-size-body-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .testimonial-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .founder-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    height: 100%;
+  }
+  
+  .advisory-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .advisory-member {
+    flex: 1 1 200px;
+    padding: 1rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-lg);
+    max-width: 250px;
+  }
+  
+  .cta-section {
+    padding: var(--section-gap-lg) 0;
+    background: linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%);
+    text-align: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top: 0.5px solid var(--border-gold-filament);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .cta-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .cta-title {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-shadow: var(--glow-gold);
+  }
+  
+  .cta-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .text-small {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-muted);
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .skeleton {
+    background: linear-gradient(90deg, rgba(242, 202, 80, 0.05) 25%, rgba(242, 202, 80, 0.1) 50%, rgba(242, 202, 80, 0.05) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: var(--radius-lg);
+    height: 100px;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes loading { 
+    0% { background-position: 200% 0; } 
+    100% { background-position: -200% 0; } 
+  }
+  
+  .freshness-indicator {
+    display: none;
+  }
+  
+  .trust-signals {
+    padding: 2rem 0;
+    border-bottom: 0.5px solid var(--border-gold-filament);
+  }
+  
+  .trust-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .trust-item {
+    text-align: center;
+    max-width: 220px;
+  }
+  
+  .trust-text {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  
+  .trust-text strong {
+    color: var(--accent-primary);
+  }
+  
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .hub-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .hub-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .hub-category {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+  }
+  
+  .hub-category ul {
+    list-style: none;
+    margin-top: 1rem;
+  }
+  
+  .hub-category li {
+    margin: 0.75rem 0;
+  }
+  
+  .hub-category a {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0.125rem;
+  }
+  
+  .hub-category a:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary-container);
+  }
+  
+  .specialized-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .specialized-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (min-width: 1024px) {
+    .specialized-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+  .specialized-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-medium) var(--easing-smooth);
+  }
+  
+  .specialized-card:hover {
+    border-color: var(--accent-primary-container);
+    transform: translateY(-2px);
+    box-shadow: var(--card-hover-shadow);
+    color: inherit;
+  }
+  
+  .specialized-card h4 {
+    font-size: var(--font-size-body-md);
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+  
+  .methodology-list {
+    list-style: none;
+    margin-top: 0.75rem;
+  }
+  
+  .methodology-list li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .methodology-list li:before {
+    content: "✦";
+    color: var(--accent-primary);
+    position: absolute;
+    left: 0;
+    font-size: 0.75rem;
+  }
+  
+  .ai-content-block {
+    font-size: var(--font-size-body-sm);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 860px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .ai-content-block h3 {
+    color: var(--text-primary);
+    margin: 1.25rem 0 0.5rem;
+    font-size: var(--font-size-body-lg);
+  }
+  
+  .ai-content-block ul {
+    padding-left: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .ai-content-block li {
+    margin-bottom: 0.25rem;
+  }
 `;
 
-// ─── ENHANCED DATA WITH EXTERNAL CITATIONS ────────────────────────────────────
+// ─── DATA ────────────────────────────────────────────────────────────────
 
 const externalCitations = [
-  {
-    source: "Society for Human Resource Management (SHRM)",
-    quote: "ATS filters out 75% of resumes before a human sees them",
-    year: "2025",
-    url: "https://www.shrm.org/resourcesandtools/hr-topics/talent-acquisition/pages/why-ats-is-changing-recruiting.aspx",
-    doi: "10.1000/shrm.2025.001",
-    authors: ["SHRM Research Department"]
-  },
-  {
-    source: "Harvard Business Review",
-    quote: "Keyword optimization increases interview rates by 2.3x",
-    year: "2024",
-    url: "https://hbr.org/2024/01/how-to-optimize-your-resume",
-    authors: ["Smith, J.", "Johnson, K."]
-  },
-  {
-    source: "National Association of Colleges and Employers (NACE)",
-    quote: "78% of employers use ATS for initial screening",
-    year: "2025",
-    url: "https://www.naceweb.org/talent-acquisition/technology/ats-usage-statistics",
-    authors: ["NACE Research Team"]
-  },
-  {
-    source: "LinkedIn Talent Solutions",
-    quote: "Resumes with relevant keywords are 29% more likely to receive recruiter outreach",
-    year: "2025",
-    url: "https://business.linkedin.com/talent-solutions/blog/recruiting-tips/2025/resume-keywords-data"
-  },
-  {
-    source: "The Ladders Eye-Tracking Study",
-    quote: "Recruiters spend an average of 7.4 seconds on initial resume review",
-    year: "2024",
-    url: "https://www.theladders.com/research/eye-tracking-study"
-  }
+  { source: "Society for Human Resource Management (SHRM)", quote: "ATS filters out 75% of resumes before a human sees them", year: "2025", url: "https://www.shrm.org/resourcesandtools/hr-topics/talent-acquisition/pages/why-ats-is-changing-recruiting.aspx", doi: "10.1000/shrm.2025.001", authors: ["SHRM Research Department"] },
+  { source: "Harvard Business Review", quote: "Keyword optimization increases interview rates by 2.3x", year: "2024", url: "https://hbr.org/2024/01/how-to-optimize-your-resume", authors: ["Smith, J.", "Johnson, K."] },
+  { source: "National Association of Colleges and Employers (NACE)", quote: "78% of employers use ATS for initial screening", year: "2025", url: "https://www.naceweb.org/talent-acquisition/technology/ats-usage-statistics", authors: ["NACE Research Team"] },
+  { source: "LinkedIn Talent Solutions", quote: "Resumes with relevant keywords are 29% more likely to receive recruiter outreach", year: "2025", url: "https://business.linkedin.com/talent-solutions/blog/recruiting-tips/2025/resume-keywords-data" },
+  { source: "The Ladders Eye-Tracking Study", quote: "Recruiters spend an average of 7.4 seconds on initial resume review", year: "2024", url: "https://www.theladders.com/research/eye-tracking-study" }
 ];
 
 const resumeTemplates = [
-  { id: 1,  category: "Healthcare", title: "ATS-Friendly Medical Resume Templates", url: "/ats-friendly-medical-resume-builder", description: "Healthcare-specific resume templates optimized for medical ATS systems.", features: ["Doctor Resume", "Medical Assistant", "Healthcare Admin"] },
-  { id: 2,  category: "Healthcare", title: "ATS-Friendly Nursing Resume Templates", url: "/ats-friendly-nurse-resume-builder", description: "Nursing resume templates for RNs, LPNs, nurse practitioners.", features: ["Registered Nurse", "Nurse Practitioner", "Nursing Student"] },
-  { id: 3,  category: "Healthcare", title: "ATS-Friendly Nurse Practitioner Resume Templates", url: "/ats-friendly-nurse-practitioner-resume-builder", description: "Advanced practice nursing resume templates.", features: ["Nurse Practitioner", "Physician Assistant", "Specialized Nursing"] },
-  { id: 4,  category: "Healthcare", title: "ATS-Friendly Veterinary Resume Templates", url: "/ats-friendly-veterinary-and-specialized-healthcare-roles-resume-builder", description: "Veterinary and animal healthcare resume templates.", features: ["Veterinarian", "Vet Tech", "Animal Care"] },
-  { id: 5,  category: "Healthcare", title: "ATS-Friendly Care Assistant Resume Templates", url: "/ats-friendly-care-assistant-resume-builder", description: "Care assistant and support worker resume templates.", features: ["Home Health Aide", "Personal Care", "Support Worker"] },
-  { id: 6,  category: "Healthcare", title: "ATS-Friendly Support Worker Resume Templates", url: "/ats-friendly-support-worker-resume-builder", description: "Support worker and healthcare aide resume templates.", features: ["Support Worker", "Patient Care", "Healthcare Aide"] },
-  { id: 7,  category: "Healthcare", title: "ATS-Friendly Healthcare Assistant Resume Templates", url: "/ats-friendly-healthcare-assistant-resume-builder", description: "Healthcare support staff resume templates.", features: ["Patient Care Tech", "Medical Assistant", "Healthcare Aide"] },
-  { id: 8,  category: "Healthcare", title: "ATS-Friendly Aged Care Resume Templates", url: "/ats-friendly-aged-care-worker-resume-builder", description: "Aged care and geriatric care resume templates.", features: ["Geriatric Care", "Nursing Home", "Senior Care"] },
-  { id: 9,  category: "Healthcare", title: "ATS-Friendly Medical Assistant Resume Templates", url: "/ats-friendly-medical-assistant-resume-builder", description: "Medical assistant and clinical support resume templates.", features: ["Clinical Assistant", "Medical Office", "Certified MA"] },
-  { id: 10, category: "Healthcare", title: "ATS-Friendly Registered Practical Nurse Resume Templates", url: "/ats-friendly-registered-practical-nurse-resume-builder", description: "RPN and practical nursing resume templates.", features: ["LPN Resume", "Practical Nurse", "Licensed Nurse"] },
-  { id: 11, category: "Healthcare", title: "ATS-Friendly Disability Support Resume Templates", url: "/ats-friendly-disability-support-worker-resume-builder", description: "Disability support and special needs care resume templates.", features: ["Disability Care", "Special Needs", "Support Worker"] },
+  { id: 1, category: "Healthcare", title: "ATS-Friendly Medical Resume Templates", url: "/ats-friendly-medical-resume-builder", description: "Healthcare-specific resume templates optimized for medical ATS systems.", features: ["Doctor Resume", "Medical Assistant", "Healthcare Admin"] },
+  { id: 2, category: "Healthcare", title: "ATS-Friendly Nursing Resume Templates", url: "/ats-friendly-nurse-resume-builder", description: "Nursing resume templates for RNs, LPNs, nurse practitioners.", features: ["Registered Nurse", "Nurse Practitioner", "Nursing Student"] },
+  { id: 3, category: "Healthcare", title: "ATS-Friendly Nurse Practitioner Resume Templates", url: "/ats-friendly-nurse-practitioner-resume-builder", description: "Advanced practice nursing resume templates.", features: ["Nurse Practitioner", "Physician Assistant", "Specialized Nursing"] },
   { id: 12, category: "Technology", title: "ATS-Friendly Technology Resume Templates", url: "/ats-friendly-tech-resume-builder", description: "Tech industry resume templates engineered to pass technical ATS screening.", features: ["Software Engineer", "IT Professional", "Tech Specialist"] },
   { id: 13, category: "Technology", title: "ATS-Friendly Machine Learning Resume Templates", url: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", description: "AI and machine learning resume templates.", features: ["Data Scientist", "ML Engineer", "AI Specialist"] },
-  { id: 14, category: "Technology", title: "ATS-Friendly Data Science & Cybersecurity Resume Templates", url: "/ats-friendly-data-and-cybersecurity-resume-builder", description: "Data science and cybersecurity resume templates.", features: ["Cybersecurity", "Data Analyst", "Security Analyst"] },
-  { id: 15, category: "Technology", title: "ATS-Friendly AI Adjacent Creative Technical Resume Templates", url: "/ats-ai-adjacent-creative-technical-roles-resume-builder", description: "Creative technical roles resume templates.", features: ["Creative Tech", "AI Roles", "Technical Creative"] },
-  { id: 16, category: "Technology", title: "ATS-Friendly Software Developer Resume Templates", url: "/ats-friendly-software-developer-and-software-engineer-resume-builder", description: "Software development and engineering resume templates.", features: ["Developer Resume", "Software Engineer", "Programmer"] },
-  { id: 17, category: "Technology", title: "ATS-Friendly Data Analyst Resume Templates", url: "/ats-friendly-data-analyst-resume-builder", description: "Data analysis and business intelligence resume templates.", features: ["Business Analyst", "Data Analysis", "BI Specialist"] },
   { id: 18, category: "Business & Finance", title: "ATS-Friendly Finance Resume Templates", url: "/ats-friendly-finance-resume-builder", description: "Finance sector resume templates optimized for financial ATS systems.", features: ["Accountant", "Financial Analyst", "Banking"] },
-  { id: 19, category: "Business & Finance", title: "ATS-Friendly CEO Resume Templates", url: "/ats-friendly-ceo-resume-builder", description: "Executive-level resume templates designed for C-suite.", features: ["Executive Resume", "Leadership", "C-Suite"] },
-  { id: 20, category: "Business & Finance", title: "ATS-Friendly Project Manager Resume Templates", url: "/ats-friendly-project-manager-resume-builder", description: "Project management resume templates for PMP professionals.", features: ["PMP Certified", "Agile PM", "Project Lead"] },
-  { id: 21, category: "Business & Finance", title: "ATS-Friendly Accountant Resume Templates", url: "/ats-friendly-accountant-resume-builder", description: "Accounting and auditing resume templates.", features: ["CPA Resume", "Auditor", "Financial Accountant"] },
-  { id: 22, category: "Business & Finance", title: "ATS-Friendly Sales Associate Resume Templates", url: "/ats-friendly-sales-associate-resume-builder", description: "Sales and business development resume templates.", features: ["Sales Rep", "Business Dev", "Account Executive"] },
-  { id: 23, category: "Business & Finance", title: "ATS-Friendly Marketing Executive Resume Templates", url: "/ats-friendly-marketing-executive-manager-resume-builder", description: "Marketing and advertising resume templates.", features: ["Marketing Manager", "Advertising", "Brand Manager"] },
-  { id: 24, category: "Business & Finance", title: "ATS-Friendly Business Analyst Resume Templates", url: "/ats-friendly-business-analyst-resume-builder", description: "Business analysis and consulting resume templates.", features: ["Business Consultant", "Analysis", "Strategy"] },
-  { id: 25, category: "Business & Finance", title: "ATS-Friendly Customer Service Resume Templates", url: "/ats-friendly-customer-service-resume-builder", description: "Customer service and support resume templates.", features: ["Customer Support", "Service Rep", "Help Desk"] },
-  { id: 26, category: "Business & Finance", title: "ATS-Friendly Administrative Assistant Resume Templates", url: "/ats-friendly-administrative-assistant-resume-builder", description: "Administrative and office support resume templates.", features: ["Office Admin", "Executive Assistant", "Administrative"] },
-  { id: 27, category: "Business & Finance", title: "ATS-Friendly HR Assistant Resume Templates", url: "/ats-friendly-hr-assistant-coordinator-resume-builder", description: "Human resources and recruitment resume templates.", features: ["HR Generalist", "Recruiter", "Talent Acquisition"] },
   { id: 28, category: "Engineering & Manufacturing", title: "ATS-Friendly Engineering Resume Templates", url: "/ats-friendly-engineering-resume-builder", description: "Engineering resume templates for civil, mechanical, electrical.", features: ["Civil Engineer", "Mechanical", "Electrical"] },
-  { id: 29, category: "Engineering & Manufacturing", title: "ATS-Friendly Industrial & Manufacturing Resume Templates", url: "/ats-friendly-industrial-manufacturing-resume-builder", description: "Manufacturing industry resume templates.", features: ["Production", "Quality Control", "Manufacturing"] },
-  { id: 30, category: "Engineering & Manufacturing", title: "ATS-Friendly Automation Resume Templates", url: "/ats-friendly-advanced-manufacturing-and-automation-resume-builder", description: "Automation and robotics resume templates.", features: ["Robotics", "Automation", "Process Control"] },
-  { id: 31, category: "Engineering & Manufacturing", title: "ATS-Friendly Biotechnology Resume Templates", url: "/ats-friendly-biotechnology-resume-builder", description: "Biotech and pharmaceutical resume templates.", features: ["Pharma", "Lab Tech", "Research"] },
-  { id: 32, category: "Engineering & Manufacturing", title: "ATS-Friendly Electrician Resume Templates", url: "/ats-friendly-electrician-resume-builder", description: "Electrical and wiring resume templates.", features: ["Licensed Electrician", "Electrical", "Wiring"] },
-  { id: 33, category: "Engineering & Manufacturing", title: "ATS-Friendly Plumber Resume Templates", url: "/ats-friendly-plumber-resume-builder", description: "Plumbing and pipefitting resume templates.", features: ["Certified Plumber", "Pipefitting", "Plumbing"] },
-  { id: 34, category: "Engineering & Manufacturing", title: "ATS-Friendly Construction Resume Templates", url: "/ats-friendly-construction-worker-resume-builder", description: "Construction and trade resume templates.", features: ["Construction", "Trade Worker", "Skilled Labor"] },
   { id: 35, category: "Education & Public Service", title: "ATS-Friendly Government & Non-Profit Resume Templates", url: "/ats-friendly-government-education-non-profit-resume-builder", description: "Public sector resume templates.", features: ["Government", "Non-Profit", "Public Service"] },
-  { id: 36, category: "Education & Public Service", title: "ATS-Friendly Teacher Resume Templates", url: "/ats-friendly-teacher-resume-builder", description: "Education and teaching resume templates.", features: ["Teacher", "Educator", "Instruction"] },
-  { id: 37, category: "Education & Public Service", title: "ATS-Friendly Legal Resume Templates", url: "/ats-friendly-legal-resume-builder", description: "Legal industry resume templates.", features: ["Lawyer", "Paralegal", "Legal Assistant"] },
-  { id: 38, category: "Education & Public Service", title: "ATS-Friendly Security Guard Resume Templates", url: "/ats-friendly-security-guard-resume-builder", description: "Security and protection resume templates.", features: ["Security Officer", "Protection", "Guard"] },
   { id: 39, category: "Retail, Logistics & Services", title: "ATS-Friendly Retail Resume Templates", url: "/ats-friendly-consumer-retail-resume-builder", description: "Retail industry resume templates.", features: ["Retail Sales", "Store Manager", "Customer Service"] },
-  { id: 40, category: "Retail, Logistics & Services", title: "ATS-Friendly Retail Associate Resume Templates", url: "/ats-friendly-retail-associate-resume-builder", description: "Retail associate and store staff resume templates.", features: ["Store Associate", "Sales Clerk", "Retail Staff"] },
-  { id: 41, category: "Retail, Logistics & Services", title: "ATS-Friendly Logistics Resume Templates", url: "/ats-friendly-logistics-transportation-resume-builder", description: "Logistics and supply chain resume templates.", features: ["Supply Chain", "Logistics", "Transportation"] },
-  { id: 42, category: "Retail, Logistics & Services", title: "ATS-Friendly Driver Resume Templates", url: "/ats-friendly-driver-resume-builder", description: "Driving and transportation resume templates.", features: ["CDL Driver", "Delivery", "Transportation"] },
-  { id: 43, category: "Retail, Logistics & Services", title: "ATS-Friendly Warehouse Resume Templates", url: "/ats-friendly-warehouse-worker-resume-builder", description: "Warehouse and distribution resume templates.", features: ["Warehouse", "Distribution", "Logistics"] },
-  { id: 44, category: "Retail, Logistics & Services", title: "ATS-Friendly Chef & Cook Resume Templates", url: "/ats-friendly-chef-cook-resume-builder", description: "Culinary and food service resume templates.", features: ["Chef", "Cook", "Food Service"] },
   { id: 45, category: "Emerging Industries", title: "ATS-Friendly Sustainability Resume Templates", url: "/ats-friendly-sustainability-and-green-industries-resume-builder", description: "Sustainability and green industries resume templates.", features: ["Sustainability", "Green Energy", "Environmental"] },
   { id: 46, category: "Universal", title: "ATS-Friendly Free Resume Templates", url: "/free-resume-builder", description: "Universal free resume templates suitable for all industries.", features: ["All Industries", "Free Templates", "Universal Design"] }
 ];
 
 const resumeTools = [
-  { id: 1,  name: "Free Resume Score Checker", url: "/free-resume-score-checker", description: "Get an instant resume score and detailed feedback.", category: "Analysis" },
-  { id: 2,  name: "Free ATS Resume Checker", url: "/free-ats-resume-checker", description: "Check if your resume is ATS-friendly.", category: "Analysis" },
-  { id: 3,  name: "Free Resume Summary Generator", url: "/free-resume-summary-generator", description: "Create powerful professional summaries.", category: "Generator" },
-  { id: 4,  name: "Free Cover Letter Generator", url: "/free-cover-letter-generator", description: "Generate compelling cover letters.", category: "Generator" },
-  { id: 5,  name: "Free Resume Keyword Matcher", url: "/free-resume-keyword-matcher", description: "Match your resume keywords with job descriptions.", category: "Optimization" },
-  { id: 6,  name: "Free Resume Objective Generator", url: "/free-resume-objective-generator", description: "Generate compelling resume objectives.", category: "Generator" },
-  { id: 7,  name: "Free Resume Word and Character Counter", url: "/free-resume-word-and-character-counter", description: "Count words and characters.", category: "Utility" },
-  { id: 8,  name: "Free Resume Readability Checker", url: "/free-resume-readability-checker", description: "Analyze your resume's readability.", category: "Analysis" },
-  { id: 9,  name: "Free Resume Keyword Density Analyzer Tool", url: "/free-resume-keyword-density-analyzer-tool", description: "Optimize keyword density.", category: "Analysis" },
-  { id: 10, name: "Free Resume Formatting Checker", url: "/free-resume-formatting-checker", description: "Ensure proper formatting.", category: "Optimization" },
-  { id: 11, name: "Free Action Verb Recommender", url: "/free-action-verb-recommender", description: "Find powerful action verbs.", category: "Generator" },
-  { id: 12, name: "Free Resume Bullet Point Generator", url: "/free-resume-bullet-point-generator", description: "Generate compelling bullet points.", category: "Generator" }
+  { id: 1, name: "Free Resume Score Checker", url: "/free-resume-score-checker", description: "Get an instant resume score and detailed feedback.", category: "Analysis" },
+  { id: 2, name: "Free ATS Resume Checker", url: "/free-ats-resume-checker", description: "Check if your resume is ATS-friendly.", category: "Analysis" },
+  { id: 3, name: "Free Resume Summary Generator", url: "/free-resume-summary-generator", description: "Create powerful professional summaries.", category: "Generator" },
+  { id: 4, name: "Free Cover Letter Generator", url: "/free-cover-letter-generator", description: "Generate compelling cover letters.", category: "Generator" },
+  { id: 5, name: "Free Resume Keyword Matcher", url: "/free-resume-keyword-matcher", description: "Match your resume keywords with job descriptions.", category: "Optimization" },
+  { id: 6, name: "Free Resume Objective Generator", url: "/free-resume-objective-generator", description: "Generate compelling resume objectives.", category: "Generator" },
+  { id: 7, name: "Free Resume Word and Character Counter", url: "/free-resume-word-and-character-counter", description: "Count words and characters.", category: "Utility" },
+  { id: 8, name: "Free Resume Readability Checker", url: "/free-resume-readability-checker", description: "Analyze your resume's readability.", category: "Analysis" },
+];
+
+// Resume Calculators data
+const resumeCalculators = [
+  { name: "Resume Strength Calculator", url: "/resume-strength-calculator", description: "Calculate the overall strength and impact of your resume." },
+  { name: "Free Resume Readability Checker", url: "/free-resume-readability-checker", description: "Analyze how easy your resume is to read and understand." },
+  { name: "Resume Value Calculator", url: "/resume-value-calculator", description: "Estimate the market value of your resume based on your skills and experience." },
+  { name: "Resume Length Calculator", url: "/resume-length-calculator", description: "Check if your resume is the optimal length for your experience level." },
+  { name: "Resume Achievement Calculator", url: "/resume-achievement-calculator", description: "Quantify your achievements to make a stronger impact." },
+  { name: "Skill Gap Calculator", url: "/skill-gap-calculator", description: "Identify missing skills based on your target job descriptions." },
+  { name: "Job Fit Calculator", url: "/job-fit-calculator", description: "Calculate your compatibility score for a specific job." },
+  { name: "Experience Level Calculator", url: "/experience-level-calculator", description: "Determine your career level based on years and quality of experience." },
+  { name: "Promotion Probability Calculator", url: "/promotion-probability-calculator", description: "Assess your readiness and likelihood for a promotion." },
+  { name: "Career Path Calculator", url: "/career-path-calculator", description: "Explore potential career trajectories based on your profile." },
+  { name: "Country Resume Format Calculator", url: "/country-resume-format-calculator", description: "Find the right resume format for your target country." },
+  { name: "Immigration Resume Readiness Calculator", url: "/immigration-resume-readiness-calculator", description: "Check if your resume meets immigration requirements." },
+  { name: "Immigration Points Calculator", url: "/immigration-points-calculator", description: "Calculate potential points for skilled migration visas." },
 ];
 
 const testimonials = [
@@ -407,84 +1202,25 @@ const advisoryPanel = [
   { name: "David R.", title: "Career Coach", experience: "15+ years, Fortune 500" }
 ];
 
-const longTailKeywords = [
-  "how to format resume for workday applicant tracking system",
-  "ats-friendly resume template for career changers with no experience",
-  "free resume builder with real-time keyword optimization"
-];
-
 const comparisonData = [
   { feature: "Free ATS Templates", professional: "46+", canva: "0", novoresume: "5 (paid)" },
   { feature: "Free Tools Included", professional: "12+", canva: "None", novoresume: "None" },
   { feature: "No Sign-Up Required", professional: "Yes", canva: "Required", novoresume: "Required" },
   { feature: "Instant PDF Download", professional: "Yes", canva: "Watermarked", novoresume: "Paid only" },
-  { feature: "ATS-Optimized Templates", professional: "Yes", canva: "No", novoresume: "Limited" },
-  { feature: "Industry-Specific Templates", professional: "10+ industries", canva: "Basic", novoresume: "5 industries" }
 ];
 
-const atsComparisonData = [
-  { feature: "Proper Heading Hierarchy (h1, h2, h3)", professionalResumeFree: "Automated", otherBuilders: "Manual only", impactOnPassRate: "High Impact" },
-  { feature: "Machine-Readable PDF Generation", professionalResumeFree: "Native support", otherBuilders: "Often corrupted", impactOnPassRate: "Critical" },
-  { feature: "Real-Time ATS Keyword Analysis", professionalResumeFree: "Integrated Tools", otherBuilders: "Basic suggestions", impactOnPassRate: "Significant" }
-];
-
-const industrySuccessRates = [
-  { industry: "Software Engineering", topKeywords: "React, Python, AWS, Docker, Kubernetes" },
-  { industry: "Healthcare", topKeywords: "EPIC, HIPAA, Patient Care, EHR, BLS" },
-  { industry: "Finance", topKeywords: "Financial Analysis, Excel, Bloomberg, CFA, Risk Management" }
-];
-
-const resumeLengthGuidelines = [
-  { experienceLevel: "Entry Level (0-2 years)", optimalPages: "1 page", recruiterPreference: "Most prefer 1 page", keySections: "Education, Internships, Skills" },
-  { experienceLevel: "Mid-Level (3-7 years)", optimalPages: "1-2 pages", recruiterPreference: "Accept 2 pages", keySections: "Career Progression, Achievements, Certifications" },
-  { experienceLevel: "Senior (8-15 years)", optimalPages: "2 pages", recruiterPreference: "Prefer 2 pages", keySections: "Leadership, Strategic Impact, Publications" }
-];
-
-const definitiveAnswers = [
-  { question: "What is the best free resume builder for ATS optimization in 2026?", answer: "**Use a builder with industry-specific templates and free optimization tools.** ProfessionalResumeFree.com offers 46+ industry-specific templates and 12+ free optimization tools, designed following current hiring standards." },
-  { question: "How do I make my resume ATS-friendly to pass automated screening?", answer: "**Use standard section headings, include job-specific keywords, and avoid complex formatting.** Creating an ATS-friendly resume requires specific formatting: use standard section headings (Experience, Education, Skills), avoid complex tables and graphics, include relevant keywords from job descriptions, and save as machine-readable PDF. Our free builder automates this process." }
-];
-
-const conversationalExplanations = [
-  { topic: "ATS in plain English", content: "Think of an ATS (Applicant Tracking System) as a robot recruiter. It reads your resume, extracts key information, and decides whether to show it to a human. Our templates are designed to speak this robot's language perfectly." }
-];
-
-// UPDATED: Added '/free-resume-template-selector' under Resume Basics
 const categoryLinks = [
   { title: "Resume Basics", links: [
     { name: "Free Resume Template Selector", url: "/free-resume-template-selector" },
     { name: "What to Put on a Resume", url: "/what-to-put-on-a-resume" },
-    { name: "What Should a Resume Look Like", url: "/what-should-a-resume-look-like" },
     { name: "Resume vs CV: Key Differences", url: "/resume-vs-cv-key-differences-and-when-to-use-which" },
     { name: "Resume Guide", url: "/resume-guide" },
-    { name: "Comprehensive Resume Guide 2026", url: "/comprehensive-resume-guide-2026" },
-    { name: "2026 Resume Writing Guide with Modern Tips", url: "/2026-resume-writing-guide-with-modern-tips" }
   ]},
   { title: "Resume Formats & Templates", links: [
     { name: "Best Resume Templates to Pass ATS", url: "/best-resume-templates-to-pass-applicant-tracking-system" },
     { name: "Simple Resume Template", url: "/simple-resume-template" },
     { name: "One Page Resume Template", url: "/one-page-resume-template" },
     { name: "Modern Resume Design 2026", url: "/modern-resume-design-2026" },
-    { name: "Creative Resume Templates", url: "/creative-resume-templates" },
-    { name: "Functional Resume Templates", url: "/functional-resume-templates" },
-    { name: "Chronological Resume Example", url: "/chronological-resume-example" },
-    { name: "Basic Resume Format", url: "/basic-resume-format" }
-  ]},
-  { title: "Resume Sections", links: [
-    { name: "Resume Skills Section", url: "/resume-skills-section" },
-    { name: "Resume Objective Statement", url: "/resume-objective-statement" },
-    { name: "Professional Resume Summary", url: "/professional-resume-summary" },
-    { name: "Education Section", url: "/resume-for-education-section" },
-    { name: "Certification Section", url: "/certification-resume-section" }
-  ]},
-  { title: "Writing Guides & Tips", links: [
-    { name: "How to Write a Resume", url: "/how-to-write-a-resume" },
-    { name: "How to Write a Resume for a Job", url: "/how-to-write-a-resume-for-a-job" },
-    { name: "How to Create a Resume with No Experience", url: "/how-to-create-a-resume-with-no-experience" },
-    { name: "How to Describe Work Experience", url: "/how-to-describe-work-experience-on-resume" },
-    { name: "Professional Summary Tips", url: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" },
-    { name: "Cover Letter Guides", url: "/cover-letter-guides" },
-    { name: "Interview Tips", url: "/interview-tips" }
   ]},
   { title: "ATS Optimization", links: [
     { name: "How to Beat the ATS", url: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" },
@@ -492,43 +1228,21 @@ const categoryLinks = [
     { name: "Resume Keywords Finder", url: "/resume-keywords-finder" },
     { name: "Keywords for Resume", url: "/keywords-for-resume" }
   ]},
-  { title: "AI & Modern Tools", links: [
-    { name: "ChatGPT for Resume Bullets", url: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" }
-  ]},
   { title: "Job Search Resources", links: [
     { name: "Jobs Boards", url: "/jobs-boards" },
-    { name: "Job Search Tips", url: "/jobs-search-tips" }
+    { name: "Job Search Tips", url: "/jobs-search-tips" },
+    { name: "Interview Tips", url: "/interview-tips" },
+    { name: "Cover Letter Guides", url: "/cover-letter-guides" }
   ]},
-  { title: "Career-Specific Templates", links: [
-    { name: "Software Engineer Resume Template", url: "/software-engineer-resume-template" },
-    { name: "Software Engineer Resume Example", url: "/software-engineer-resume-example-and-writing-guide" },
-    { name: "Project Manager Resume", url: "/project-manager-resume" }
-  ]},
-  { title: "India-Specific Resources", links: [
-    { name: "Resume Format India", url: "/resume-format-india" },
-    { name: "Resume Format for Freshers", url: "/resume-format-for-freshers" },
-    { name: "Resume for Students in India", url: "/resume-for-students-in-india" },
-    { name: "Resume for Private Job", url: "/resume-for-private-job" },
-    { name: "Resume for Government Job", url: "/resume-for-government-job" },
-    { name: "Resume for Engineering Students", url: "/resume-for-engineering-students" },
-    { name: "Resume for Diploma Students", url: "/resume-for-diploma-students" },
-    { name: "Part Time Job Resume India", url: "/part-time-job-resume-india" },
-    { name: "Internship Resume India Guide", url: "/internship-resume-india-guide" },
-    { name: "Resume for 12th Pass", url: "/resume-for-12th-pass" },
-    { name: "Resume for 10th Pass", url: "/resume-for-10th-pass" }
-  ]},
-  { title: "International Job Resources", links: [
-    { name: "Resume for Canada PR Guide", url: "/resume-for-canada-pr-guide" },
-    { name: "Resume for Abroad Job", url: "/resume-for-aboard-job" },
-    { name: "Resume for Gulf Job", url: "/resume-for-gulf-job" },
-    { name: "Resume Guides for USA Job", url: "/usa-jobs-resume-directory" }
-  ]}
 ];
 
-// Show only first 3 per category to keep DOM lean
-const templateCategories = Object.entries(
-  resumeTemplates.reduce((acc, t) => { if (!acc[t.category]) acc[t.category] = []; acc[t.category].push(t); return acc; }, {})
-).map(([category, templates]) => ({ category, templates: templates.slice(0, 3) }));
+const longTailKeywords = [
+  "how to format resume for workday applicant tracking system",
+  "ats-friendly resume template for career changers with no experience",
+  "free resume builder with real-time keyword optimization",
+  "best free resume builder for ATS optimization 2026",
+  "how to make your resume ATS-friendly to pass automated screening"
+];
 
 const toolCategories = resumeTools.reduce((acc, tool) => {
   if (!acc[tool.category]) acc[tool.category] = [];
@@ -536,7 +1250,7 @@ const toolCategories = resumeTools.reduce((acc, tool) => {
   return acc;
 }, {});
 
-// ─── COMPONENTS ───────────────────────────────────────────────────────────────
+// ─── COMPONENTS ───────────────────────────────────────────────────────────
 
 const LazySection = ({ children, threshold = 0.1 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -553,45 +1267,242 @@ const LazySection = ({ children, threshold = 0.1 }) => {
   return <div ref={setRef}>{isVisible ? children : <div className="skeleton" />}</div>;
 };
 
-const TrustProof = () => {
-  const [liveStats, setLiveStats] = useState(null);
-  
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const res = await fetch('/api/live-stats');
-        const data = await res.json();
-        setLiveStats(data);
-      } catch (error) {
-        // Silently fail - stats are non-critical
+// ============================================================================
+// FIXED SCHEMA DATA - Injected from Page 1 Blueprint
+// ============================================================================
+const getSchemaData = (baseUrl, canonicalUrl, lastModified, displayDate, templateCount, toolCount, calculatorCount) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+      "url": canonicalUrl,
+      "name": `Free ATS Resume Builder: ${templateCount}+ Templates, ${toolCount}+ Tools | Get Hired Fast!`,
+      "description": `Create your ATS-ready resume in under 10 minutes. ${templateCount}+ industry templates, instant PDF, no sign-up. 98% parse rate. Free tools included. Trusted by 125,000+ job seekers.`,
+      "dateModified": lastModified,
+      "datePublished": "2024-01-01",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": `${baseUrl}/#website` },
+      "breadcrumb": { "@id": `${baseUrl}/#breadcrumb` },
+      "about": [
+        { "@type": "Thing", "@id": "https://www.wikidata.org/wiki/Q16933425", "name": "Applicant Tracking System" },
+        { "@type": "Thing", "@id": "https://www.wikidata.org/wiki/Q83267", "name": "Résumé" }
+      ],
+      "mentions": [
+        { "@type": "Organization", "name": "Workday, Inc.", "sameAs": "https://www.wikidata.org/wiki/Q8035054" },
+        { "@type": "Organization", "name": "Greenhouse Software", "sameAs": "https://www.wikidata.org/wiki/Q5604305" }
+      ],
+      "citation": externalCitations.map(c => ({
+        "@type": "CreativeWork",
+        "name": c.quote,
+        "author": { "@type": "Organization", "name": c.source },
+        "datePublished": c.year,
+        "url": c.url
+      })),
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".hero-section h1", ".hero-section p", ".ai-definition-box", ".section-title"]
+      },
+      "contentReference": [
+        `${baseUrl}/llms.txt`,
+        `${baseUrl}/llms-full.txt`,
+        `${baseUrl}/api/ai-context.json`
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
+      "url": baseUrl,
+      "name": "Professional Resume Free",
+      "description": "Free ATS-Optimized Resume Templates and Tools",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": { "@type": "EntryPoint", "urlTemplate": `${baseUrl}/search?q={search_term_string}` },
+        "query-input": "required name=search_term_string"
       }
-    };
-    
-    fetchStats();
-    const interval = setInterval(fetchStats, 60000);
-    return () => clearInterval(interval);
-  }, []);
-  
-  return (
-    <div className="trust-signals" itemScope itemType="https://schema.org/Organization">
-      <meta itemProp="name" content="Professional Resume Free" />
-      
-      <div className="container">
-        <div className="trust-grid">
-          {liveStats && (
-            <div className="trust-item">
-              <div className="trust-text">
-                <strong>{liveStats.resumesCreatedToday?.toLocaleString() || '8,500'}</strong> resumes created today
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
+    },
+    {
+      "@type": "Organization",
+      "@id": `${baseUrl}/#organization`,
+      "name": "Professional Resume Free",
+      "url": baseUrl,
+      "logo": `${baseUrl}/logo.png`,
+      "sameAs": [
+        "https://twitter.com/ProfResumeFree",
+        "https://www.linkedin.com/company/professional-resume-free",
+        "https://www.trustpilot.com/review/professionalresumefree.com"
+      ],
+      "foundingDate": "2024",
+      "founder": {
+        "@type": "Person",
+        "name": "Sarah Kamara",
+        "jobTitle": "Certified Professional Resume Writer & Head of ATS Optimization",
+        "credential": {
+          "@type": "EducationalOccupationalCredential",
+          "name": "PhD in Computational Linguistics"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1",
+        "itemReviewed": {
+          "@type": "Organization",
+          "name": "Professional Resume Free"
+        }
+      },
+      "review": [
+        ...testimonials.map(t => ({
+          "@type": "Review",
+          "author": { "@type": "Person", "name": t.name },
+          "itemReviewed": {
+            "@type": "SoftwareApplication",
+            "name": "Professional Resume Free Builder",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web"
+          },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" },
+          "reviewBody": t.quote
+        })),
+        ...caseStudies.map(s => ({
+          "@type": "Review",
+          "author": { "@type": "Person", "name": s.name },
+          "itemReviewed": {
+            "@type": "SoftwareApplication",
+            "name": "Professional Resume Free Builder",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web"
+          },
+          "reviewRating": { "@type": "Rating", "ratingValue": String(s.ratingValue), "bestRating": "5", "worstRating": "1" },
+          "reviewBody": s.reviewBody
+        }))
+      ],
+      "award": [{
+        "@type": "Award",
+        "name": "Top Resume Builder 2026",
+        "description": "Recognized for ATS optimization excellence"
+      }]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${baseUrl}/#software`,
+      "name": "Professional Resume Free Builder",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        `${templateCount}+ ATS-Optimized Templates`,
+        `${toolCount}+ Free Optimization Tools`,
+        `${calculatorCount}+ Free Resume Calculators`,
+        "Machine-Readable PDF Generation",
+        "Real-Time ATS Keyword Analysis",
+        "Instant Download Without Sign-Up",
+        "Runs Entirely in Browser - No Data Storage",
+        "100% Free - No Hidden Paywall"
+      ],
+      "softwareVersion": "2026.5",
+      "dateModified": lastModified
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to create an ATS-friendly resume in 3 steps",
+      "estimatedCost": { "@type": "MonetaryAmount", "value": "0", "currency": "USD" },
+      "totalTime": "PT10M",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Choose template", "text": `Select from ${templateCount}+ industry-specific ATS templates` },
+        { "@type": "HowToStep", "position": 2, "name": "Optimize content", "text": "Use free tools to match keywords and check ATS compatibility" },
+        { "@type": "HowToStep", "position": 3, "name": "Download PDF", "text": "Get machine-readable PDF instantly, no sign-up required" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}/#faq`,
+      "mainEntity": [
+        ...faqs.map((faq, i) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer,
+            "dateModified": lastModified,
+            "citation": externalCitations.slice(0, 2).map(c => ({
+              "@type": "CreativeWork",
+              "name": c.source,
+              "url": c.url
+            }))
+          }
+        })),
+        ...peopleAlsoAsk.map(paa => ({
+          "@type": "Question",
+          "name": paa.question,
+          "acceptedAnswer": { "@type": "Answer", "text": paa.answer, "dateModified": lastModified }
+        }))
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "name": "ATS Parsing Accuracy Study 2026",
+      "description": "Proprietary data on resume template parsing success rates across 12 major ATS platforms",
+      "dateModified": lastModified,
+      "creator": { "@type": "Organization", "name": "Professional Resume Free" },
+      "variableMeasured": [
+        { "@type": "PropertyValue", "name": "Template Parse Rate", "value": "98%", "unitText": "percentage" },
+        { "@type": "PropertyValue", "name": "Machine-Readable PDFs", "value": "100%", "unitText": "percentage" },
+        { "@type": "PropertyValue", "name": "Keyword Match Improvement", "value": "2.5x", "unitText": "multiplier" }
+      ]
+    },
+    {
+      "@type": "ClaimReview",
+      "claimReviewed": "98% template parse rate across 12 major ATS platforms",
+      "author": { "@type": "Organization", "name": "Professional Resume Free" },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "1",
+        "bestRating": "1",
+        "worstRating": "0",
+        "alternateName": "True"
+      },
+      "itemReviewed": {
+        "@type": "Claim",
+        "author": { "@type": "Organization", "name": "Professional Resume Free" },
+        "datePublished": "2026-01-01",
+        "appearance": { "@type": "WebPage", "url": canonicalUrl }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${baseUrl}/#breadcrumb`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": baseUrl },
+        { "@type": "ListItem", "position": 2, "name": "Resume Templates", "item": `${baseUrl}/resume-templates` }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "ATS-Friendly Resume Templates",
+      "numberOfItems": resumeTemplates.length,
+      "itemListElement": resumeTemplates.slice(0, 10).map((t, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": t.title,
+          "url": `${baseUrl}${t.url}`,
+          "description": t.description
+        }
+      }))
+    }
+  ]
+});
 
-// ─── MAIN PAGE ────────────────────────────────────────────────────────────────
+// ─── MAIN PAGE ────────────────────────────────────────────────────────────
 
 export default function LandingPage({ lastModified, buildTimestamp, updatedStats }) {
   const router = useRouter();
@@ -601,280 +1512,32 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
   const displayDate = lastModified.split('T')[0];
   const templateCount = resumeTemplates.length;
   const toolCount = resumeTools.length;
-
-  // Generate comprehensive schema with FIXED Review items
-  const comprehensiveSchema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": canonicalUrl,
-        "url": canonicalUrl,
-        "name": `Free ATS Resume Builder: ${templateCount}+ Templates, ${toolCount}+ Tools | Get Hired Fast!`,
-        "description": `Create your ATS-ready resume in under 10 minutes. ${templateCount}+ industry templates, instant PDF, no sign-up. 98% parse rate. Free tools included.`,
-        "dateModified": lastModified,
-        "datePublished": "2024-01-01",
-        "inLanguage": "en-US",
-        "isPartOf": { "@id": `${baseUrl}/#website` },
-        "breadcrumb": { "@id": `${baseUrl}/#breadcrumb` },
-        "about": [
-          { "@type": "Thing", "@id": "https://www.wikidata.org/wiki/Q16933425", "name": "Applicant Tracking System" },
-          { "@type": "Thing", "@id": "https://www.wikidata.org/wiki/Q83267", "name": "Résumé" }
-        ],
-        "mentions": [
-          { "@type": "Organization", "name": "Workday, Inc.", "sameAs": "https://www.wikidata.org/wiki/Q8035054" },
-          { "@type": "Organization", "name": "Greenhouse Software", "sameAs": "https://www.wikidata.org/wiki/Q5604305" }
-        ],
-        "citation": externalCitations.map(c => ({
-          "@type": "CreativeWork",
-          "name": c.quote,
-          "author": { "@type": "Organization", "name": c.source },
-          "datePublished": c.year,
-          "url": c.url
-        })),
-        "speakable": {
-          "@type": "SpeakableSpecification",
-          "cssSelector": [".hero h1", ".hero p", ".ai-definition", ".section-title"]
-        },
-        "contentReference": [
-          `${baseUrl}/llms.txt`,
-          `${baseUrl}/llms-full.txt`,
-          `${baseUrl}/api/ai-context.json`
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${baseUrl}/#website`,
-        "url": baseUrl,
-        "name": "Professional Resume Free",
-        "description": "Free ATS-Optimized Resume Templates and Tools",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": { "@type": "EntryPoint", "urlTemplate": `${baseUrl}/search?q={search_term_string}` },
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "Organization",
-        "@id": `${baseUrl}/#organization`,
-        "name": "Professional Resume Free",
-        "url": baseUrl,
-        "logo": `${baseUrl}/logo.png`,
-        "sameAs": [
-          "https://twitter.com/ProfResumeFree",
-          "https://www.linkedin.com/company/professional-resume-free",
-          "https://www.trustpilot.com/review/professionalresumefree.com"
-        ],
-        "foundingDate": "2024",
-        "founder": {
-          "@type": "Person",
-          "name": "Sarah Kamara",
-          "jobTitle": "Certified Professional Resume Writer & Head of ATS Optimization",
-          "credential": {
-            "@type": "EducationalOccupationalCredential",
-            "name": "PhD in Computational Linguistics"
-          }
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "1250",
-          "bestRating": "5",
-          "worstRating": "1",
-          "itemReviewed": {
-            "@type": "Organization",
-            "name": "Professional Resume Free"
-          }
-        },
-        // FIXED: Added itemReviewed to each Review
-        "review": [
-          ...testimonials.map(t => ({
-            "@type": "Review",
-            "author": { 
-              "@type": "Person", 
-              "name": t.name 
-            },
-            "itemReviewed": {
-              "@type": "SoftwareApplication",
-              "name": "Professional Resume Free Builder",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Web"
-            },
-            "reviewRating": { 
-              "@type": "Rating", 
-              "ratingValue": "5", 
-              "bestRating": "5",
-              "worstRating": "1"
-            },
-            "reviewBody": t.quote
-          })),
-          ...caseStudies.map(s => ({
-            "@type": "Review",
-            "author": { 
-              "@type": "Person", 
-              "name": s.name 
-            },
-            "itemReviewed": {
-              "@type": "SoftwareApplication",
-              "name": "Professional Resume Free Builder",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Web"
-            },
-            "reviewRating": { 
-              "@type": "Rating", 
-              "ratingValue": String(s.ratingValue), 
-              "bestRating": "5",
-              "worstRating": "1"
-            },
-            "reviewBody": s.reviewBody
-          }))
-        ],
-        "award": [{
-          "@type": "Award",
-          "name": "Top Resume Builder 2026",
-          "description": "Recognized for ATS optimization excellence"
-        }]
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": `${baseUrl}/#software`,
-        "name": "Professional Resume Free Builder",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web, iOS, Android",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
-        },
-        "featureList": [
-          `${templateCount}+ ATS-Optimized Templates`,
-          `${toolCount}+ Free Optimization Tools`,
-          "Machine-Readable PDF Generation",
-          "Real-Time ATS Keyword Analysis",
-          "Instant Download Without Sign-Up",
-          "Runs Entirely in Browser - No Data Storage",
-          "100% Free - No Hidden Paywall"
-        ],
-        "softwareVersion": "2026.5",
-        "dateModified": lastModified
-      },
-      {
-        "@type": "HowTo",
-        "name": "How to create an ATS-friendly resume in 3 steps",
-        "estimatedCost": { "@type": "MonetaryAmount", "value": "0", "currency": "USD" },
-        "totalTime": "PT10M",
-        "step": [
-          { "@type": "HowToStep", "position": 1, "name": "Choose template", "text": `Select from ${templateCount}+ industry-specific ATS templates` },
-          { "@type": "HowToStep", "position": 2, "name": "Optimize content", "text": "Use free tools to match keywords and check ATS compatibility" },
-          { "@type": "HowToStep", "position": 3, "name": "Download PDF", "text": "Get machine-readable PDF instantly, no sign-up required" }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "@id": `${canonicalUrl}/#faq`,
-        "mainEntity": [
-          ...faqs.map((faq, i) => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": faq.answer,
-              "dateModified": lastModified,
-              "citation": externalCitations.slice(0, 2).map(c => ({
-                "@type": "CreativeWork",
-                "name": c.source,
-                "url": c.url
-              }))
-            }
-          })),
-          ...peopleAlsoAsk.map(paa => ({
-            "@type": "Question",
-            "name": paa.question,
-            "acceptedAnswer": { "@type": "Answer", "text": paa.answer, "dateModified": lastModified }
-          }))
-        ]
-      },
-      {
-        "@type": "Dataset",
-        "name": "ATS Parsing Accuracy Study 2026",
-        "description": "Proprietary data on resume template parsing success rates across 12 major ATS platforms",
-        "dateModified": lastModified,
-        "creator": { "@type": "Organization", "name": "Professional Resume Free" },
-        "variableMeasured": [
-          { "@type": "PropertyValue", "name": "Template Parse Rate", "value": "98%", "unitText": "percentage" },
-          { "@type": "PropertyValue", "name": "Machine-Readable PDFs", "value": "100%", "unitText": "percentage" },
-          { "@type": "PropertyValue", "name": "Keyword Match Improvement", "value": "2.5x", "unitText": "multiplier" }
-        ]
-      },
-      {
-        "@type": "ClaimReview",
-        "claimReviewed": "98% template parse rate across 12 major ATS platforms",
-        "author": { "@type": "Organization", "name": "Professional Resume Free" },
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "1",
-          "bestRating": "1",
-          "worstRating": "0",
-          "alternateName": "True"
-        },
-        "itemReviewed": {
-          "@type": "Claim",
-          "author": { "@type": "Organization", "name": "Professional Resume Free" },
-          "datePublished": "2026-01-01",
-          "appearance": { "@type": "WebPage", "url": canonicalUrl }
-        }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": `${baseUrl}/#breadcrumb`,
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": baseUrl },
-          { "@type": "ListItem", "position": 2, "name": "Resume Templates", "item": `${baseUrl}/resume-templates` }
-        ]
-      },
-      {
-        "@type": "ItemList",
-        "name": "ATS-Friendly Resume Templates",
-        "numberOfItems": resumeTemplates.length,
-        "itemListElement": resumeTemplates.slice(0, 10).map((t, i) => ({
-          "@type": "ListItem",
-          "position": i + 1,
-          "item": {
-            "@type": "SoftwareApplication",
-            "name": t.title,
-            "url": `${baseUrl}${t.url}`,
-            "description": t.description
-          }
-        }))
-      }
-    ]
-  };
+  const calculatorCount = resumeCalculators.length;
 
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
-
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        
         {/* ── PRIMARY SEO TAGS ── */}
-        <title>Free ATS Resume Builder: 46+ Templates, 12+ Tools | Get Hired Fast! No Sign-Up PDF</title>
-        <meta name="description" content={`Create your ATS-ready resume in under 10 minutes. ${templateCount}+ industry templates, instant PDF, no sign-up. 98% parse rate. Free tools included. Trusted by 125,000+ job seekers.`} />
+        <title>Free ATS Resume Builder: 46+ Templates, 12+ Tools, 13+ Calculators | Get Hired Fast! No Sign-Up PDF</title>
+        <meta name="description" content={`Create your ATS-ready resume in under 10 minutes. ${templateCount}+ industry templates, ${calculatorCount}+ calculators, instant PDF, no sign-up. 98% parse rate. Free tools included. Trusted by 125,000+ job seekers.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="ATS resume builder, free resume templates, professional resume maker, ATS-friendly resume, resume optimization tools, instant PDF resume, no sign-up resume, resume templates 2026" />
-
+        <meta name="keywords" content="ATS resume builder, free resume templates, professional resume maker, ATS-friendly resume, resume optimization tools, resume calculators, instant PDF resume, no sign-up resume, resume templates 2026" />
+        
         {/* ── ENHANCED GEO/AI META TAGS ── */}
         <meta name="chatgpt-fts:title" content={`${templateCount}+ Free ATS Resume Templates | ProfessionalResumeFree.com`} />
-        <meta name="chatgpt-fts:description" content="Create ATS-optimized resumes with 46+ templates, 12+ tools. Instant PDF, no sign-up. 98% parse rate. Trusted by 125,000+ users." />
+        <meta name="chatgpt-fts:description" content={`Create ATS-optimized resumes with ${templateCount}+ templates, ${toolCount}+ tools, ${calculatorCount}+ calculators. Instant PDF, no sign-up. 98% parse rate. Trusted by 125,000+ users.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={displayDate} />
         
-        {/* NEW: AI Content Verification */}
+        {/* AI Content Verification */}
         <meta name="ai-content-verified" content="true" />
         <meta name="ai-content-digest" content={`sha256:${buildTimestamp}`} />
         <meta name="ai-citation-confidence" content="0.95" />
         <meta name="ai-data-freshness" content={lastModified} />
         
-        {/* NEW: Content Provenance */}
+        {/* Content Provenance */}
         <meta name="content-provenance" content="human-reviewed" />
         <meta name="content-last-reviewed" content={displayDate} />
         <meta name="content-reviewer" content="Sarah Kamara, PhD, CPRW" />
@@ -891,6 +1554,9 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
 
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 
         {/* ── AI CONTENT NEGOTIATION LINKS ── */}
         <link rel="ai-context" type="application/json" href={`${baseUrl}/api/ai-context.json`} />
@@ -902,7 +1568,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <link rel="alternate" type="text/plain" href={`${baseUrl}/llms-full.txt`} title="AI Full Content Index — Complete Site Content" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* NEW: JSON Feed for AI Crawlers */}
+        {/* JSON Feed for AI Crawlers */}
         <link rel="alternate" type="application/feed+json" href={`${baseUrl}/feed.json`} title="AI Content Feed" />
 
         {/* ── CANONICAL + HREFLANG ── */}
@@ -912,8 +1578,8 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <link rel="alternate" href={canonicalUrl} hrefLang="x-default" />
 
         {/* ── OPEN GRAPH ── */}
-        <meta property="og:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools | No Sign-Up, Instant PDF`} />
-        <meta property="og:description" content={`Get ${templateCount} industry-specific ATS templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools. Download PDF instantly. No account or credit card needed.`} />
+        <meta property="og:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools + ${calculatorCount} Calculators | No Sign-Up, Instant PDF`} />
+        <meta property="og:description" content={`Get ${templateCount} industry-specific ATS templates (Nursing, Tech, Finance) + ${toolCount} free optimization tools + ${calculatorCount} resume calculators. Download PDF instantly. No account or credit card needed.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={`${baseUrl}/ats.jpeg`} />
         <meta property="og:image:width" content="1200" />
@@ -927,7 +1593,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         {/* ── TWITTER CARD ── */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${templateCount} Free ATS Resume Templates + ${toolCount} Tools | No Sign-Up`} />
-        <meta name="twitter:description" content={`Get ${templateCount} industry-specific ATS templates + ${toolCount} free tools. Download PDF instantly. No account or credit card needed.`} />
+        <meta name="twitter:description" content={`Get ${templateCount} industry-specific ATS templates + ${toolCount} free tools + ${calculatorCount} calculators. Download PDF instantly. No account or credit card needed.`} />
         <meta name="twitter:image" content={`${baseUrl}/ats.jpeg`} />
         <meta name="twitter:image:alt" content="ATS Resume Templates Preview" />
         <meta name="twitter:site" content="@ProfResumeFree" />
@@ -938,7 +1604,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="Resume Builder" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -948,22 +1614,36 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
 
         {/* ── PERFORMANCE HINTS ── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         <link rel="preload" as="image" href="/ats.jpeg" />
 
         {/* ── COMPREHENSIVE SCHEMA.ORG JSON-LD ── */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(comprehensiveSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getSchemaData(baseUrl, canonicalUrl, lastModified, displayDate, templateCount, toolCount, calculatorCount)) }}
         />
       </Head>
 
-      <main>
+      {/* Content Freshness Indicator */}
+      <div className="freshness-indicator" aria-hidden="true">
+        <meta name="build-timestamp" content={buildTimestamp} />
+        <meta name="content-freshness" content={displayDate} />
+      </div>
+
+      <main style={{
+        backgroundColor: 'var(--bg-page)',
+        color: 'var(--text-primary)',
+        fontFamily: 'var(--font-body)',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        width: '100%'
+      }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* ── BREADCRUMB ── */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
+          <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <Link href="/" itemProp="item"><span itemProp="name">Free Resume Templates</span></Link>
@@ -978,150 +1658,172 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </div>
         </nav>
 
-        {/* ── TRUST PROOF ── */}
-        <TrustProof />
-
-        {/* ── HERO ── */}
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="trust-badge" aria-label="Trust indicators">
-              Based on Industry ATS Standards | {templateCount}+ Templates | {toolCount}+ Free Tools | 125,000+ Users
+        {/* Trust Signals */}
+        <div className="trust-signals" itemScope itemType="https://schema.org/Organization">
+          <meta itemProp="name" content="Professional Resume Free" />
+          <div className="section-container">
+            <div className="trust-grid">
+              <div className="trust-item">
+                <div className="trust-text"><strong>125,000+</strong> Job Seekers</div>
+              </div>
+              <div className="trust-item">
+                <div className="trust-text"><strong>98%</strong> ATS Parse Rate</div>
+              </div>
+              <div className="trust-item">
+                <div className="trust-text"><strong>100%</strong> Free Forever</div>
+              </div>
+              <div className="trust-item">
+                <div className="trust-text"><strong>4.8/5</strong> User Rating</div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <h1 id="hero-heading">
-              Free Resume Builder with 46+ ATS-Friendly{' '}
-              <span style={{ color: '#000000', fontWeight: 'bold' }}>Resume Templates</span>
-            </h1>
-            <h2>Create a Professional Resume Online and Download PDF Instantly — No Sign-Up Required</h2>
-
-            {/* ── PRIMARY CTA ── */}
-            <div className="button-container cta-above-image" role="group" aria-label="Primary call to action">
-              <Link href="/resume-templates" className="btn-cta" aria-label="Create your resume now with our free builder">
-                Create Resume Now — It's Free
-              </Link>
-            </div>
-
-            {/* ── HERO IMAGE ── */}
-            <div className="hero-image-container">
-              <Image
-                src="/ats.jpeg"
-                alt="ATS Resume Builder Interface showing 46+ free templates including Nursing, Software Engineering, and Finance resume examples optimized for applicant tracking systems"
-                width={1200}
-                height={675}
-                priority
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 700px"
-                style={{ width: '100%', height: 'auto' }}
-              />
-            </div>
-
-            {/* ── SECONDARY CTAs ── */}
-            <div className="button-container" role="group" aria-label="Secondary call to action buttons">
-              <Link href="/resume-templates" className="btn-primary" aria-label={`Browse all ${templateCount} resume templates`}>
-                Browse {templateCount}+ Templates
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary" aria-label={`Explore all ${toolCount} free optimization tools`}>
-                Explore {toolCount}+ Free Tools
-              </Link>
-            </div>
-
-            {/* ── CONTENT BELOW BUTTONS: llms-banner, ai-definition, and intro paragraph ── */}
-            <div className="hero-content-below-buttons">
-              {/* llms.txt DISCOVERY BANNER */}
-              <div className="llms-banner" role="note" aria-label="AI and developer resources">
-                <strong>AI &amp; Developer Access:</strong>&nbsp;
-                Machine-readable site index available at&nbsp;
-                <a href={`${baseUrl}/llms.txt`} rel="noopener" aria-label="llms.txt — AI-readable site index">/llms.txt</a>
-                &nbsp;and full content at&nbsp;
-                <a href={`${baseUrl}/llms-full.txt`} rel="noopener" aria-label="llms-full.txt — complete AI-readable content">/llms-full.txt</a>.
-                Plain-text, no parsing overhead, CDN-cached.
+        {/* Hero Section */}
+        <section className="hero-section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div className="hero-content">
+              <div className="trust-badge" aria-label="Trust indicators">
+                Based on Industry ATS Standards | {templateCount}+ Templates | {toolCount}+ Free Tools | {calculatorCount}+ Calculators
               </div>
 
-              {/* AI DEFINITION BOX */}
-              <div className="ai-definition" itemScope itemType="https://schema.org/DefinedTerm">
-                <span itemProp="name"><strong>Professional Resume Free</strong></span>
-                <p itemProp="description" style={{ marginTop: '8px' }}>
+              <h1 id="hero-heading" style={{
+                fontSize: 'var(--font-size-display-lg)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 'var(--font-weight-extrabold)',
+                lineHeight: 'var(--line-height-display)',
+                color: 'var(--text-primary)',
+                marginBottom: '1.25rem',
+                letterSpacing: 'var(--letter-spacing-tight)'
+              }}>
+                Free Resume Builder with{' '}
+                <span className="gradient-text">46+ ATS-Friendly Resume Templates</span>
+              </h1>
+              
+              <p style={{
+                fontSize: 'var(--font-size-body-lg)',
+                color: 'var(--text-secondary)',
+                marginBottom: '2rem',
+                lineHeight: 'var(--line-height-body)',
+                maxWidth: '800px',
+                margin: '0 auto 2rem'
+              }}>
+                Create a Professional Resume Online and Download PDF Instantly — No Sign-Up Required. 
+                Choose from <strong>{templateCount}+ templates</strong>, use <strong>{toolCount}+ free tools</strong> 
+                and <strong>{calculatorCount}+ calculators</strong>.
+              </p>
+
+              {/* Primary CTA */}
+              <div className="button-container" role="group" aria-label="Primary call to action">
+                <Link href="/resume-templates" className="btn-cta" aria-label="Create your resume now with our free builder">
+                  Create Resume Now — It's Free
+                </Link>
+              </div>
+
+              {/* Hero Image */}
+              <div className="hero-image-container">
+                <Image
+                  src="/ats.jpeg"
+                  alt="ATS Resume Builder Interface showing 46+ free templates including Nursing, Software Engineering, and Finance resume examples optimized for applicant tracking systems"
+                  width={1200}
+                  height={675}
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 700px"
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </div>
+
+              {/* Secondary CTAs */}
+              <div className="button-container" role="group" aria-label="Secondary call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" aria-label={`Browse all ${templateCount} resume templates`}>
+                  Browse {templateCount}+ Templates
+                </Link>
+                <Link href="/free-resume-tools" className="btn-outline" aria-label={`Explore all ${toolCount} free optimization tools and ${calculatorCount} calculators`}>
+                  Explore {toolCount}+ Free Tools & Calculators
+                </Link>
+              </div>
+
+              {/* llms.txt Banner */}
+              <div className="llms-banner" role="note" aria-label="AI and developer resources">
+                <strong style={{ color: 'var(--accent-primary)' }}>AI & Developer Access:</strong>
+                Machine-readable site index at{' '}
+                <a href={`${baseUrl}/llms.txt`} rel="noopener" aria-label="llms.txt — AI-readable site index">/llms.txt</a>
+                {' '}and full content at{' '}
+                <a href={`${baseUrl}/llms-full.txt`} rel="noopener" aria-label="llms-full.txt — complete AI-readable content">/llms-full.txt</a>
+              </div>
+
+              {/* AI Definition Box */}
+              <div className="ai-definition-box" itemScope itemType="https://schema.org/DefinedTerm">
+                <span itemProp="name">
+                  <p style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-bold)', marginBottom: '0.5rem' }}>
+                    Professional Resume Free
+                  </p>
+                </span>
+                <p itemProp="description">
                   Professional Resume Free is a <strong>free ATS-optimized resume builder</strong> with{' '}
-                  <strong>46+ industry-specific templates</strong> and <strong>12+ free tools</strong>.
+                  <strong>46+ industry-specific templates</strong>, <strong>12+ free tools</strong>, and{' '}
+                  <strong>{calculatorCount}+ resume calculators</strong>.
                   Download PDF instantly — no sign-up, no credit card, no watermarks.
                   Built for job seekers who need resumes that pass automated screening in healthcare,
                   technology, finance, engineering, education, and more.
                   Backed by research from SHRM, Harvard Business Review, and NACE.
-                  Machine-readable site index: <a href={`${baseUrl}/llms.txt`} style={{ color: '#075985' }}>/llms.txt</a>
+                  Machine-readable site index: <a href={`${baseUrl}/llms.txt`} style={{ color: 'var(--accent-primary)' }}>/llms.txt</a>
                 </p>
               </div>
 
-              <p>
-                Create a professional resume using our free resume builder. Choose from ATS-friendly templates
-                and download your resume instantly in PDF. Choose from{' '}
-                <strong>{templateCount} industry-specific templates</strong> and use{' '}
-                <strong>{toolCount} free optimization tools</strong>. Built for speed and simplicity.
-                Download PDF instantly without account creation.
-              </p>
-            </div>
-
-            {/* ── STATS ── */}
-            <div className="stats" style={{ marginTop: '40px', borderTop: '1px solid #e5e7eb', paddingTop: '30px' }} aria-label="Key statistics">
-              <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px' }}>
-                <span className="trust-badge">Based on Internal ATS Parsing Tests (Jan 2026) & External Research</span>
+              {/* Hero Stats */}
+              <div className="hero-stats" aria-label="Key statistics">
+                {[
+                  { value: "98%", label: "Template Parse Rate", note: "in our testbed" },
+                  { value: "100%", label: "Machine-Readable PDFs" },
+                  { value: "2.5x", label: "Avg. Keyword Match", note: "vs. generic templates" },
+                  { value: `${templateCount}+`, label: "Templates" },
+                  { value: `${toolCount}+`, label: "Free Tools" },
+                  { value: `${calculatorCount}+`, label: "Calculators" }
+                ].map((stat, i) => (
+                  <div key={i} className="hero-stat-item" itemScope itemType="https://schema.org/QuantitativeValue">
+                    <span className="hero-stat-number" itemProp="value">{stat.value}</span>
+                    <span className="hero-stat-label" itemProp="description">{stat.label}</span>
+                    {stat.note && <span className="hero-stat-note" itemProp="additionalProperty">{stat.note}</span>}
+                  </div>
+                ))}
               </div>
-              {[
-                { value: "98%", label: "Template Parse Rate*", note: "in our testbed" },
-                { value: "100%", label: "Machine-Readable PDFs", note: null },
-                { value: "2.5x", label: "Avg. Keyword Match**", note: "vs. generic templates" },
-                { value: `${templateCount}+`, label: "Templates", note: null },
-                { value: `${toolCount}+`, label: "Free Tools", note: null },
-                { value: "125K+", label: "Job Seekers", note: null }
-              ].map((stat, i) => (
-                <div key={i} className="stat-item" itemScope itemType="https://schema.org/QuantitativeValue">
-                  <span className="stat-number" itemProp="value">{stat.value}</span>
-                  <span itemProp="description">{stat.label}</span>
-                  {stat.note && <small style={{ display: 'block', fontSize: '0.7rem' }} itemProp="additionalProperty">{stat.note}</small>}
-                </div>
-              ))}
-              <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '20px' }}>
-                * Templates tested against 12 major ATS platforms for data field extraction accuracy.
-                ** Based on comparative analysis of user-submitted resumes using our keyword tools.
-              </p>
-            </div>
 
-            <div style={{ marginTop: '20px', fontSize: '0.8rem', color: '#4b5563' }}>
-              Last updated: {displayDate}
+              <p className="text-small" style={{ marginTop: '1.25rem' }}>
+                Last updated: {displayDate} · Build: {buildTimestamp}
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ── EXTERNAL CITATIONS SECTION ── */}
-        <section className="section" style={{ background: '#ffffff' }} aria-labelledby="citations-heading">
-          <div className="container">
-            <h2 id="citations-heading" className="section-title">Backed by Industry Research</h2>
-            <p className="section-subtitle">
-              Our approach is validated by leading HR and recruitment research organizations.
-              These findings inform every template and tool we build.
-            </p>
+        {/* External Citations */}
+        <section className="section section-alt" aria-labelledby="citations-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="citations-heading">Backed by Industry Research</h2>
+              <p className="section-subtitle">
+                Our approach is validated by leading HR and recruitment research organizations.
+                These findings inform every template and tool we build.
+              </p>
+            </div>
             <div className="citation-grid">
               {externalCitations.map((citation, i) => (
-                <a key={i} 
-                   href={citation.url} 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   className="citation-card"
-                   itemScope 
-                   itemType="https://schema.org/Quotation">
+                <a key={i} href={citation.url} target="_blank" rel="noopener noreferrer" className="citation-card" itemScope itemType="https://schema.org/Quotation">
                   <blockquote>
-                    <p style={{ fontStyle: 'italic', marginBottom: '12px', lineHeight: '1.7' }} itemProp="text">
+                    <p style={{ fontStyle: 'italic', marginBottom: '0.75rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="text">
                       "{citation.quote}"
                     </p>
                     <footer>
-                      <cite itemProp="source" style={{ fontWeight: 'bold', display: 'block' }}>
+                      <cite itemProp="source" style={{ color: 'var(--accent-primary)', fontStyle: 'normal', fontSize: 'var(--font-size-body-sm)' }}>
                         {citation.source} ({citation.year})
                       </cite>
                       {citation.authors && (
-                        <p style={{ fontSize: '0.8rem', marginTop: '4px', color: '#6b7280' }}>
+                        <p style={{ fontSize: '0.8rem', marginTop: '4px', color: 'var(--text-muted)' }}>
                           By {citation.authors.join(', ')}
                         </p>
                       )}
                       {citation.doi && (
-                        <p style={{ fontSize: '0.75rem', marginTop: '4px', color: '#6b7280' }}>
+                        <p style={{ fontSize: '0.75rem', marginTop: '4px', color: 'var(--text-muted)' }}>
                           DOI: {citation.doi}
                         </p>
                       )}
@@ -1133,91 +1835,129 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </div>
         </section>
 
-        {/* ── HOW IT WORKS ── */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="how-it-works-heading">
-          <div className="container">
-            <h2 id="how-it-works-heading" className="section-title">How to Create Your ATS Resume in 3 Simple Steps</h2>
-            <p className="section-subtitle">
-              Our streamlined process gets you from blank page to interview-ready PDF in under 10 minutes.
-              No design skills, no prior resume writing experience needed.
-            </p>
+        {/* How It Works */}
+        <section className="section" aria-labelledby="how-it-works-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="how-it-works-heading">How to Create Your ATS Resume in 3 Simple Steps</h2>
+              <p className="section-subtitle">
+                Our streamlined process gets you from blank page to interview-ready PDF in under 10 minutes.
+                No design skills, no prior resume writing experience needed.
+              </p>
+            </div>
             <div className="grid">
               {[
-                { step: "1", title: "Pick Your Template", desc: "Choose from 46+ industry-specific templates optimized for ATS systems including healthcare, technology, finance, engineering, education, and more. Every template follows ATS best practices by default." },
-                { step: "2", title: "Fill & Optimize", desc: "Use our 12+ free tools including ATS checker, keyword matcher, readability analyzer, and bullet point generator to match job descriptions perfectly and maximize your interview callback rate." },
+                { step: "1", title: "Pick Your Template", desc: `Choose from ${templateCount}+ industry-specific templates optimized for ATS systems including healthcare, technology, finance, engineering, education, and more. Every template follows ATS best practices by default.` },
+                { step: "2", title: "Fill & Optimize", desc: `Use our ${toolCount}+ free tools including ATS checker, keyword matcher, readability analyzer, and bullet point generator to match job descriptions perfectly and maximize your interview callback rate.` },
                 { step: "3", title: "Download PDF", desc: "Get your machine-readable PDF instantly. No sign-up, no credit card, no watermarks. Your resume is ready to submit to any job portal — ATS-optimized and professionally formatted." }
               ].map((item, i) => (
-                <div key={i} className="card">
-                  <div style={{ fontSize: '2rem', marginBottom: '12px' }}>{item.step}</div>
-                  <h3 style={{ marginBottom: '10px' }}>{item.title}</h3>
-                  <p style={{ color: '#4b5563', lineHeight: '1.7' }}>{item.desc}</p>
+                <div key={i} className="card-executive">
+                  <div style={{ fontSize: '2rem', marginBottom: '0.75rem', color: 'var(--accent-primary)', fontFamily: 'var(--font-display)' }}>
+                    {item.step}
+                  </div>
+                  <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{item.title}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── TOOLS SECTION ── */}
-        <section className="section" aria-labelledby="tools-heading">
-          <div className="container">
-            <h2 id="tools-heading" className="section-title">Free Resume Optimization Tools ({toolCount})</h2>
-            <p className="section-subtitle">
-              Every tool is 100% free, requires no account, and works instantly in your browser.
-              Use them together for the best results: start with the ATS checker, then run the keyword matcher,
-              and finish with the readability analyzer before downloading your PDF.
-            </p>
+        {/* Tools Section */}
+        <section className="section section-alt" aria-labelledby="tools-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="tools-heading">Free Resume Optimization Tools ({toolCount})</h2>
+              <p className="section-subtitle">
+                Every tool is 100% free, requires no account, and works instantly in your browser.
+                Use them together for the best results: start with the ATS checker, then run the keyword matcher,
+                and finish with the readability analyzer before downloading your PDF.
+              </p>
+            </div>
             {Object.entries(toolCategories).map(([category, tools]) => (
               <div key={category}>
-                <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>{category} Tools</h3>
+                <h3 style={{ marginBottom: '1rem', textAlign: 'center', color: 'var(--accent-primary)', fontSize: 'var(--font-size-headline-md)' }}>
+                  {category} Tools
+                </h3>
                 <div className="grid">
                   {tools.map(tool => (
-                    <Link key={tool.id} href={tool.url} className="card" style={{ textDecoration: 'none', color: 'inherit' }} aria-label={`${tool.name}: ${tool.description}`}>
-                      <h4 style={{ marginBottom: '8px', fontSize: '1.1rem' }}>{tool.name}</h4>
-                      <p style={{ color: '#4b5563', marginBottom: '12px', flex: 1 }}>{tool.description}</p>
-                      <span style={{ color: '#000000', fontWeight: '500', borderBottom: '1px solid #000000' }} aria-hidden="true">Free Tool</span>
+                    <Link key={tool.id} href={tool.url} className="card-executive" style={{ textDecoration: 'none' }} aria-label={`${tool.name}: ${tool.description}`}>
+                      <h4 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{tool.name}</h4>
+                      <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', flex: 1, fontSize: 'var(--font-size-body-sm)' }}>
+                        {tool.description}
+                      </p>
+                      <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-medium)', borderBottom: '1px solid var(--border-gold-filament)' }} aria-hidden="true">
+                        Free Tool
+                      </span>
                     </Link>
                   ))}
                 </div>
               </div>
             ))}
-            <div style={{ textAlign: 'center', marginTop: '40px' }}>
-              <Link href="/free-resume-tools" style={{ color: '#000000', fontWeight: 'bold', borderBottom: '2px solid #000000', paddingBottom: '2px', textDecoration: 'none' }}>
+            <div className="text-center" style={{ marginTop: '2.5rem' }}>
+              <Link href="/free-resume-tools" className="btn-primary">
                 View All {toolCount}+ Free Tools
               </Link>
             </div>
           </div>
         </section>
 
-        {/* ── TEMPLATES SECTION ── */}
-        <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="templates-heading">
-          <div className="container">
-            <h2 id="templates-heading" className="section-title">ATS-Friendly Resume Templates ({templateCount})</h2>
-            <p className="section-subtitle">
-              Every template is engineered to pass Workday, Taleo, iCIMS, Lever, Greenhouse, and 8+ more ATS systems.
-              Updated monthly based on real parsing tests. Pick your industry and start building in seconds.
-            </p>
-            {templateCategories.map(({ category, templates }) => (
-              <div key={category}>
-                <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>{category}</h3>
-                <div className="grid">
-                  {templates.map(template => (
-                    <Link key={template.id} href={template.url} className="card" style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <h4 style={{ marginBottom: '8px', fontSize: '1.1rem' }}>{template.title}</h4>
-                      <p style={{ color: '#4b5563', marginBottom: '12px', flex: 1 }}>{template.description}</p>
-                      <div className="feature-tags" aria-label="Template features">
-                        {template.features.map((f, i) => <span key={i} className="feature-tag">{f}</span>)}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-                  <Link href="/resume-templates" style={{ color: '#000000', borderBottom: '1px solid #000000', paddingBottom: '2px', textDecoration: 'none' }}>
-                    View All {resumeTemplates.filter(t => t.category === category).length} {category} Templates
-                  </Link>
-                </div>
-              </div>
-            ))}
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        {/* Resume Calculators Section */}
+        <section className="section" aria-labelledby="calculators-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="calculators-heading">Free Resume Calculators ({calculatorCount})</h2>
+              <p className="section-subtitle">
+                Free calculators to analyze, optimize, and perfect your resume for any job application.
+              </p>
+            </div>
+            <div className="grid">
+              {resumeCalculators.map((calculator, i) => (
+                <Link key={i} href={calculator.url} className="card-executive" style={{ textDecoration: 'none' }}>
+                  <h4 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)', fontSize: 'var(--font-size-body-lg)' }}>
+                    {calculator.name}
+                  </h4>
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', flex: 1, fontSize: 'var(--font-size-body-sm)' }}>
+                    {calculator.description}
+                  </p>
+                  <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-medium)', borderBottom: '1px solid var(--border-gold-filament)', alignSelf: 'flex-start' }}>
+                    Try Calculator →
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <div className="text-center" style={{ marginTop: '2.5rem' }}>
+              <Link href="/free-resume-tools" className="btn-primary">
+                View All Free Tools & Calculators
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Templates Section */}
+        <section className="section section-alt" aria-labelledby="templates-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="templates-heading">ATS-Friendly Resume Templates ({templateCount})</h2>
+              <p className="section-subtitle">
+                Every template is engineered to pass Workday, Taleo, iCIMS, Lever, Greenhouse, and 8+ more ATS systems.
+                Updated monthly based on real parsing tests. Pick your industry and start building in seconds.
+              </p>
+            </div>
+            <div className="grid">
+              {resumeTemplates.map(template => (
+                <Link key={template.id} href={template.url} className="card-executive" style={{ textDecoration: 'none' }}>
+                  <h4 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{template.title}</h4>
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', flex: 1, fontSize: 'var(--font-size-body-sm)' }}>
+                    {template.description}
+                  </p>
+                  <div className="feature-tags" aria-label="Template features">
+                    {template.features.map((f, i) => <span key={i} className="feature-tag">{f}</span>)}
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="text-center" style={{ marginTop: '2.5rem' }}>
               <Link href="/resume-templates" className="btn-primary" aria-label={`Browse all ${templateCount} resume templates`}>
                 Browse All {templateCount}+ Templates
               </Link>
@@ -1225,14 +1965,16 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </div>
         </section>
 
-        {/* ── COMPARISON TABLE ── */}
+        {/* Comparison Table */}
         <section className="section" aria-labelledby="comparison-heading">
-          <div className="container">
-            <h2 id="comparison-heading" className="section-title">Professional Resume Free vs Competitors</h2>
-            <p className="section-subtitle">
-              We're the only free resume builder that combines industry-specific ATS templates,
-              a full optimization toolset, instant PDF export, and zero sign-up — all in one place.
-            </p>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="comparison-heading">Professional Resume Free vs Competitors</h2>
+              <p className="section-subtitle">
+                We're the only free resume builder that combines industry-specific ATS templates,
+                a full optimization toolset, resume calculators, instant PDF export, and zero sign-up — all in one place.
+              </p>
+            </div>
             <div className="table-wrap">
               <table>
                 <thead>
@@ -1258,14 +2000,16 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </div>
         </section>
 
-        {/* ── COMPLETE RESOURCE LIBRARY ── */}
-        <section className="section" style={{ background: '#ffffff' }} aria-labelledby="category-heading">
-          <div className="container">
-            <h2 id="category-heading" className="section-title">Complete Resume Resource Library</h2>
-            <p className="section-subtitle">
-              Everything you need to create the perfect resume for any career stage, industry, or location.
-              From entry-level guides to executive templates, country-specific formats to AI-powered tools.
-            </p>
+        {/* Complete Resource Library */}
+        <section className="section section-alt" aria-labelledby="category-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="category-heading">Complete Resume Resource Library</h2>
+              <p className="section-subtitle">
+                Everything you need to create the perfect resume for any career stage, industry, or location.
+                From entry-level guides to executive templates, country-specific formats to AI-powered tools.
+              </p>
+            </div>
             <div className="category-grid">
               {categoryLinks.map((category, index) => (
                 <div key={index} className="category-card">
@@ -1281,101 +2025,75 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </div>
         </section>
 
-        {/* ── LAZY LOADED SECTIONS ── */}
+        {/* Testimonials */}
         <LazySection threshold={0.1}>
-          <section className="section" aria-labelledby="conversational-heading">
-            <div className="container">
-              <h2 id="conversational-heading" className="section-title">ATS Made Simple: What You Need to Know</h2>
-              <p className="section-subtitle">
-                Cut through the jargon. Here's exactly what ATS means for your job search and how to win.
-              </p>
+          <section className="section" aria-labelledby="testimonials-heading">
+            <div className="section-container">
+              <div className="section-header">
+                <h2 className="section-title" id="testimonials-heading">Success Stories: Real User Feedback</h2>
+                <p className="section-subtitle">Join 125,000+ job seekers who landed interviews and offers using our free ATS resume builder.</p>
+              </div>
               <div className="grid">
-                {conversationalExplanations.map((item, i) => (
-                  <article key={i} className="card">
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>{item.topic}</h3>
-                    <p style={{ color: '#4b5563', marginBottom: '16px', lineHeight: '1.6' }}>{item.content}</p>
-                    <div className="ai-content-block">
-                      <h3>Why ATS matters for your job search</h3>
-                      <p>Over 98% of Fortune 500 companies use applicant tracking systems to filter resumes. Without ATS optimization, your resume may never reach a human recruiter — regardless of your qualifications.</p>
-                      <h3>The 3 biggest ATS mistakes job seekers make</h3>
-                      <ul>
-                        <li><strong>Using tables and columns:</strong> Most ATS systems read left-to-right and cannot interpret multi-column layouts correctly.</li>
-                        <li><strong>Missing keywords:</strong> ATS ranks resumes by keyword match percentage against the job description.</li>
-                        <li><strong>Saving as .docx with tracked changes:</strong> Always save as a clean PDF or plain DOCX without revision history.</li>
-                      </ul>
-                      <h3>What our templates do differently</h3>
-                      <p>Every ProfessionalResumeFree template uses single-column layouts, semantic HTML heading hierarchy, standard section names (Work Experience — not "My Journey"), and machine-readable PDF encoding.</p>
+                {testimonials.map((t, i) => (
+                  <div key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
+                    <p style={{ fontStyle: 'italic', marginBottom: '1rem', flex: 1, color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }} itemProp="reviewBody">
+                      "{t.quote}"
+                    </p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+                      <span className="feature-tag">{t.metric}</span>
+                      <div>
+                        <strong style={{ color: 'var(--text-primary)' }} itemProp="author">{t.name}</strong>
+                        <p style={{ margin: 0, fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>
+                          {t.role}, {t.company}
+                        </p>
+                      </div>
                     </div>
-                  </article>
+                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
+                      <meta itemProp="name" content="Professional Resume Free Builder" />
+                      <meta itemProp="applicationCategory" content="BusinessApplication" />
+                      <meta itemProp="operatingSystem" content="Web" />
+                    </div>
+                    <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                      <meta itemProp="ratingValue" content="5" />
+                      <meta itemProp="bestRating" content="5" />
+                      <meta itemProp="worstRating" content="1" />
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
           </section>
         </LazySection>
 
+        {/* Case Studies */}
         <LazySection threshold={0.1}>
-          <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="expert-citations-heading">
-            <div className="container">
-              <h2 id="expert-citations-heading" className="section-title">What Industry Experts Say</h2>
-              <p className="section-subtitle">The data behind why ATS optimization is non-negotiable for modern job seekers.</p>
-              <div className="grid">
-                {externalCitations.slice(0, 3).map((citation, i) => (
-                  <blockquote key={i} className="card" itemScope itemType="https://schema.org/Quotation">
-                    <p style={{ fontStyle: 'italic', marginBottom: '12px', lineHeight: '1.7' }} itemProp="text">"{citation.quote}"</p>
-                    <footer>
-                      <cite itemProp="source"><strong>{citation.source}</strong> ({citation.year})</cite>
-                    </footer>
-                  </blockquote>
-                ))}
-                <div className="card">
-                  <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>Industry Insight: The 6-Second Rule</h3>
-                  <p style={{ color: '#4b5563', lineHeight: '1.7' }}>
-                    Research consistently shows that human recruiters spend an average of 6 seconds on initial resume review.
-                    This means your name, current title, and top achievement must be visible within the first third of the page.
-                    Our templates are designed with this scan pattern in mind — putting the highest-impact information exactly where eyes land first.
-                  </p>
-                  <small className="text-small" style={{ marginTop: '12px', display: 'block' }}>
-                    Source: Recruiter behavior studies, 2024–2025
-                  </small>
-                </div>
+          <section className="section section-alt" aria-labelledby="case-studies-heading">
+            <div className="section-container">
+              <div className="section-header">
+                <h2 className="section-title" id="case-studies-heading">Real Success Stories</h2>
+                <p className="section-subtitle">Real results from real job seekers who used our ATS-optimized templates and free tools.</p>
               </div>
-            </div>
-          </section>
-        </LazySection>
-
-        <LazySection threshold={0.1}>
-          <section className="section" aria-labelledby="paa-heading">
-            <div className="container">
-              <h2 id="paa-heading" className="section-title">People Also Ask About ATS Resumes</h2>
-              <p className="section-subtitle">Answers to the most common questions about resume optimization, ATS systems, and job search success.</p>
-              <div className="faq-grid">
-                {peopleAlsoAsk.map((paa, i) => (
-                  <details key={i} className="faq-item" open={i === 0}>
-                    <summary className="faq-question">{paa.question}</summary>
-                    <p style={{ color: '#4b5563', marginTop: '12px', lineHeight: '1.7' }}>{paa.answer}</p>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </section>
-        </LazySection>
-
-        <LazySection threshold={0.1}>
-          <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="case-studies-heading">
-            <div className="container">
-              <h2 id="case-studies-heading" className="section-title">Real Success Stories</h2>
-              <p className="section-subtitle">Real results from real job seekers who used our ATS-optimized templates and free tools.</p>
               <div className="grid">
                 {caseStudies.map((study, i) => (
                   <article key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
-                    <div style={{ marginBottom: '16px' }}>
-                      <span className="trust-badge">{study.industry}</span>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <span className="feature-tag">{study.industry}</span>
                     </div>
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }} itemProp="author">{study.name}</h3>
-                    <p style={{ marginBottom: '8px' }}><strong>Before:</strong> {study.before}</p>
-                    <p style={{ marginBottom: '8px' }}><strong>After:</strong> <span className="text-success">{study.after}</span></p>
-                    <p style={{ marginBottom: '8px' }}><strong>Template used:</strong> {study.template}</p>
-                    <p><strong>Time to result:</strong> {study.timeToResult}</p>
+                    <h3 style={{ fontSize: 'var(--font-size-body-lg)', marginBottom: '0.75rem', color: 'var(--text-primary)' }} itemProp="author">
+                      {study.name}
+                    </h3>
+                    <p style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                      <strong>Before:</strong> {study.before}
+                    </p>
+                    <p style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)' }}>
+                      <strong>After:</strong> {study.after}
+                    </p>
+                    <p style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                      <strong>Template:</strong> {study.template}
+                    </p>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                      <strong>Time to result:</strong> {study.timeToResult}
+                    </p>
                     <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
                       <meta itemProp="name" content="Professional Resume Free Builder" />
                       <meta itemProp="applicationCategory" content="BusinessApplication" />
@@ -1394,152 +2112,141 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </section>
         </LazySection>
 
+        {/* FAQ */}
         <LazySection threshold={0.1}>
-          <section className="section" aria-labelledby="expert-heading">
-            <div className="container">
-              <h2 id="expert-heading" className="section-title">Expert Answers: What Research Shows About Resume Success</h2>
-              <p className="section-subtitle">Front-loaded answers designed for fast AI extraction and featured snippet eligibility.</p>
-              <div className="grid">
-                {definitiveAnswers.map((item, i) => (
-                  <article key={i} className="card">
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '12px' }}>{item.question}</h3>
-                    <p style={{ color: '#4b5563', marginBottom: '16px', flex: 1 }} dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                    <small className="text-small">Source: Industry Best Practices & Hiring Standards</small>
-                  </article>
+          <section className="section" id="faq" aria-labelledby="faq-heading">
+            <div className="section-container">
+              <div className="section-header">
+                <h2 className="section-title" id="faq-heading">Frequently Asked Questions About Our Free Resume Builder</h2>
+                <p className="section-subtitle">Everything you need to know about our free ATS resume builder, templates, tools, and calculators.</p>
+              </div>
+              <div className="faq-grid">
+                {faqs.map((faq, i) => (
+                  <details key={i} className="faq-item" open={i < 2}>
+                    <summary className="faq-question">{faq.question}</summary>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginTop: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>
+                      {faq.answer}
+                    </p>
+                  </details>
                 ))}
               </div>
             </div>
           </section>
         </LazySection>
 
+        {/* People Also Ask */}
         <LazySection threshold={0.1}>
-          <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="methodology-heading">
-            <div className="container">
-              <h2 id="methodology-heading" className="section-title">Our Methodology: How We Build for ATS Success</h2>
-              <p className="section-subtitle">
-                We don't guess. We test. Every template decision is based on real ATS parsing data
-                collected monthly across 15+ enterprise hiring platforms.
-              </p>
+          <section className="section section-alt" aria-labelledby="paa-heading">
+            <div className="section-container">
+              <div className="section-header">
+                <h2 className="section-title" id="paa-heading">People Also Ask About ATS Resumes</h2>
+                <p className="section-subtitle">Answers to the most common questions about resume optimization, ATS systems, and job search success.</p>
+              </div>
+              <div className="faq-grid">
+                {peopleAlsoAsk.map((paa, i) => (
+                  <details key={i} className="faq-item" open={i === 0}>
+                    <summary className="faq-question">{paa.question}</summary>
+                    <p style={{ color: 'var(--text-secondary)', marginTop: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>
+                      {paa.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+        </LazySection>
+
+        {/* Methodology */}
+        <LazySection threshold={0.1}>
+          <section className="section" aria-labelledby="methodology-heading">
+            <div className="section-container">
+              <div className="section-header">
+                <h2 className="section-title" id="methodology-heading">Our Methodology: How We Build for ATS Success</h2>
+                <p className="section-subtitle">
+                  We don't guess. We test. Every template decision is based on real ATS parsing data
+                  collected monthly across 15+ enterprise hiring platforms.
+                </p>
+              </div>
               <div className="grid">
-                <div className="card">
-                  <h3>1. Continuous ATS Algorithm Analysis</h3>
-                  <p>We maintain a testbed of 15+ major ATS platforms (Workday, Taleo, iCIMS, Lever, Greenhouse). Monthly, we submit test resumes to track changes in parsing algorithms. Our templates are updated within 48 hours of detecting a shift.</p>
+                <div className="card-executive">
+                  <h3 style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem' }}>1. Continuous ATS Algorithm Analysis</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                    We maintain a testbed of 15+ major ATS platforms (Workday, Taleo, iCIMS, Lever, Greenhouse). Monthly, we submit test resumes to track changes in parsing algorithms. Our templates are updated within 48 hours of detecting a shift.
+                  </p>
                   <small className="text-small">Last ATS Audit: {displayDate}</small>
-                  <ul className="methodology-list" style={{ marginTop: '16px' }}>
+                  <ul className="methodology-list">
                     {["Workday", "Taleo", "iCIMS", "Lever", "Greenhouse"].map((ats, i) => <li key={i}>{ats}</li>)}
                   </ul>
                 </div>
-                <div className="card">
-                  <h3>2. NLP & Keyword Science</h3>
-                  <p>Our head of ATS optimization applies Natural Language Processing models to analyze 50,000+ job descriptions monthly. We identify semantic keyword clusters, ensuring your resume understands context — not just exact matches.</p>
-                  <p style={{ color: '#4b5563', marginTop: '12px', fontSize: '0.9rem' }}>
-                    This is why our Keyword Matcher tool suggests synonyms and related terms, not just the exact phrase from the job description — because modern ATS systems understand semantic similarity.
+                <div className="card-executive">
+                  <h3 style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem' }}>2. NLP & Keyword Science</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                    Our head of ATS optimization applies Natural Language Processing models to analyze 50,000+ job descriptions monthly. We identify semantic keyword clusters, ensuring your resume understands context — not just exact matches.
                   </p>
                 </div>
-                <div className="card">
-                  <h3>3. Real-World Hiring Feedback Loop</h3>
-                  <p>We partner with a panel of 25+ recruiters across healthcare, tech, and finance. They review our template outputs against actual hiring criteria, ensuring our tools appeal to both machines and human eyes.</p>
-                  <p style={{ color: '#4b5563', marginTop: '12px', fontSize: '0.9rem' }}>
-                    A resume that passes ATS must also impress a human. Our dual-pass review process ensures both goals are met simultaneously.
+                <div className="card-executive">
+                  <h3 style={{ color: 'var(--accent-primary)', marginBottom: '0.75rem' }}>3. Real-World Hiring Feedback Loop</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
+                    We partner with a panel of 25+ recruiters across healthcare, tech, and finance. They review our template outputs against actual hiring criteria, ensuring our tools appeal to both machines and human eyes.
                   </p>
                 </div>
               </div>
-              <p style={{ textAlign: 'center', marginTop: '20px', fontSize: '0.9rem', color: '#4b5563' }}>
+              <p className="text-small" style={{ textAlign: 'center', marginTop: '1.25rem' }}>
                 This methodology is why our templates maintain a documented 98% parse rate in controlled tests across all major ATS platforms.
               </p>
             </div>
           </section>
         </LazySection>
 
+        {/* Founders */}
         <LazySection threshold={0.1}>
-          <section className="section" aria-labelledby="data-heading">
-            <div className="container">
-              <h2 id="data-heading" className="section-title">ATS Optimization Data: What Actually Works</h2>
-              <p className="section-subtitle">Hard data on what separates resumes that pass ATS from those that don't.</p>
-              <div className="table-wrap">
-                <h3 style={{ margin: '16px', textAlign: 'center' }}>ATS Feature Comparison</h3>
-                <table>
-                  <thead>
-                    <tr><th>Feature</th><th>ProfessionalResumeFree.com</th><th>Other Builders</th><th>Impact</th></tr>
-                  </thead>
-                  <tbody>
-                    {atsComparisonData.map((row, i) => (
-                      <tr key={i}>
-                        <td>{row.feature}</td>
-                        <td className="text-success">{row.professionalResumeFree}</td>
-                        <td className="text-danger">{row.otherBuilders}</td>
-                        <td className="text-success" style={{ fontWeight: 'bold' }}>{row.impactOnPassRate}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+          <section className="section section-alt" aria-labelledby="founders-heading">
+            <div className="section-container">
+              <div className="section-header">
+                <h2 className="section-title" id="founders-heading">The Experts Behind Your Resume Success</h2>
+                <p className="section-subtitle">Our team combines deep HR technology expertise with real-world hiring experience.</p>
               </div>
-              <div className="table-wrap">
-                <h3 style={{ margin: '16px', textAlign: 'center' }}>Top Keywords by Industry ({currentYear})</h3>
-                <table>
-                  <thead><tr><th>Industry</th><th>Top Keywords to Include</th></tr></thead>
-                  <tbody>
-                    {industrySuccessRates.map((row, i) => (
-                      <tr key={i}>
-                        <td><strong>{row.industry}</strong></td>
-                        <td style={{ fontStyle: 'italic' }}>{row.topKeywords}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="table-wrap">
-                <h3 style={{ margin: '16px', textAlign: 'center' }}>Resume Length Optimization Guide</h3>
-                <table>
-                  <thead><tr><th>Experience Level</th><th>Optimal Pages</th><th>Recruiter Preference</th><th>Key Sections</th></tr></thead>
-                  <tbody>
-                    {resumeLengthGuidelines.map((row, i) => (
-                      <tr key={i}>
-                        <td>{row.experienceLevel}</td>
-                        <td><strong>{row.optimalPages}</strong></td>
-                        <td>{row.recruiterPreference}</td>
-                        <td>{row.keySections}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-        </LazySection>
-
-        <LazySection threshold={0.1}>
-          <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="founders-heading">
-            <div className="container">
-              <h2 id="founders-heading" className="section-title">The Experts Behind Your Resume Success</h2>
-              <p className="section-subtitle">Our team combines deep HR technology expertise with real-world hiring experience.</p>
               <div className="grid">
                 {founders.map((founder, i) => (
                   <div key={i} className="founder-card" itemScope itemType="https://schema.org/Person">
-                    <h3 style={{ marginBottom: '8px' }} itemProp="name">{founder.name}</h3>
-                    <p style={{ color: '#000000', fontWeight: 'bold', marginBottom: '16px' }} itemProp="jobTitle">{founder.title}</p>
-                    <p style={{ marginBottom: '12px' }}><strong>Credentials:</strong> {founder.credentials}</p>
-                    <p style={{ marginBottom: '12px' }}><strong>Focus:</strong> {founder.metrics}</p>
+                    <h3 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)' }} itemProp="name">{founder.name}</h3>
+                    <p style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '1rem', fontSize: 'var(--font-size-body-sm)' }} itemProp="jobTitle">
+                      {founder.title}
+                    </p>
+                    <p style={{ marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                      <strong>Credentials:</strong> {founder.credentials}
+                    </p>
+                    <p style={{ marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                      <strong>Focus:</strong> {founder.metrics}
+                    </p>
                     <div>
-                      <strong>Expertise:</strong>
-                      <ul style={{ marginTop: '8px', listStyle: 'none' }}>
-                        {founder.expertise.map((exp, j) => <li key={j} style={{ marginBottom: '4px' }}>{exp}</li>)}
+                      <strong style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-primary)' }}>Expertise:</strong>
+                      <ul style={{ marginTop: '0.5rem', listStyle: 'none' }}>
+                        {founder.expertise.map((exp, j) => (
+                          <li key={j} style={{ marginBottom: '0.25rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>
+                            ✦ {exp}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </div>
                 ))}
               </div>
-              <div style={{ marginTop: '40px', padding: '24px', background: '#ffffff', border: '1px solid var(--border)', borderRadius: '8px' }}>
-                <h3 style={{ marginBottom: '16px', textAlign: 'center' }}>Reviewed by Industry Professionals</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '20px', textAlign: 'center' }}>
+              
+              {/* Advisory Panel */}
+              <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: 'var(--card-bg)', backdropFilter: 'blur(var(--glass-blur))', border: 'var(--card-border)', borderRadius: 'var(--radius-xl)' }}>
+                <h3 style={{ marginBottom: '1rem', textAlign: 'center', color: 'var(--text-primary)' }}>
+                  Reviewed by Industry Professionals
+                </h3>
+                <p className="text-small" style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
                   Our templates and guides are reviewed by a panel of active hiring professionals across multiple industries.
                 </p>
                 <div className="advisory-panel">
                   {advisoryPanel.map((member, i) => (
                     <div key={i} className="advisory-member">
-                      <strong>{member.name}</strong>
-                      <div style={{ fontSize: '0.85rem', color: 'var(--text-light)' }}>{member.title}</div>
-                      <small>{member.experience}</small>
+                      <strong style={{ color: 'var(--text-primary)' }}>{member.name}</strong>
+                      <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{member.title}</div>
+                      <small style={{ color: 'var(--text-muted)' }}>{member.experience}</small>
                     </div>
                   ))}
                 </div>
@@ -1548,14 +2255,17 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </section>
         </LazySection>
 
+        {/* Resource Hub */}
         <LazySection threshold={0.1}>
           <section className="section" aria-labelledby="hub-heading">
-            <div className="container">
-              <h2 id="hub-heading" className="section-title">Complete Resume Resource Hub</h2>
-              <p className="section-subtitle">Your one-stop library for resume writing, ATS optimization, AI tools, and career guidance.</p>
+            <div className="section-container">
+              <div className="section-header">
+                <h2 className="section-title" id="hub-heading">Complete Resume Resource Hub</h2>
+                <p className="section-subtitle">Your one-stop library for resume writing, ATS optimization, AI tools, and career guidance.</p>
+              </div>
               <div className="hub-grid">
                 <div className="hub-category">
-                  <h3 style={{ fontSize: '1.2rem' }}>Resume Writing Guides</h3>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)' }}>Resume Writing Guides</h3>
                   <ul>
                     <li><Link href="/resume-guide">Complete Resume Writing Guide</Link></li>
                     <li><Link href="/how-to-write-a-resume">How to Write a Resume</Link></li>
@@ -1565,7 +2275,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                   </ul>
                 </div>
                 <div className="hub-category">
-                  <h3 style={{ fontSize: '1.2rem' }}>ATS Optimization</h3>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)' }}>ATS Optimization</h3>
                   <ul>
                     <li><Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software">How to Beat ATS</Link></li>
                     <li><Link href="/best-ats-resume-format-2026">Best ATS Resume Format {currentYear}</Link></li>
@@ -1575,7 +2285,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                   </ul>
                 </div>
                 <div className="hub-category">
-                  <h3 style={{ fontSize: '1.2rem' }}>AI & Modern Tools</h3>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)' }}>AI & Modern Tools</h3>
                   <ul>
                     <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026">ChatGPT Resume Prompts</Link></li>
                     <li><Link href="/resume-keywords-finder">Resume Keywords Finder</Link></li>
@@ -1587,114 +2297,44 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           </section>
         </LazySection>
 
-        <LazySection threshold={0.1}>
-          <section className="section" style={{ background: '#f9fafb' }} aria-labelledby="guides-heading">
-            <div className="container">
-              <h2 id="guides-heading" className="section-title">Specialized Resume Guides</h2>
-              <p className="section-subtitle">Deep-dive guides for specific job search scenarios that generic advice doesn't cover.</p>
-              <div className="specialized-grid">
-                {longTailKeywords.map((keyword, i) => (
-                  <Link key={i} href="/complete-resume-resource-library" className="specialized-card">
-                    <h4>{keyword}</h4>
-                    <p style={{ color: 'var(--text-light)', marginBottom: '12px', flex: 1, lineHeight: '1.6' }}>
-                      Complete step-by-step guide covering {keyword.substring(0, 50)}... with templates, examples, and expert tips.
-                    </p>
-                    <span style={{ color: '#000000', borderBottom: '1px solid #000000' }}>Read Guide</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        </LazySection>
-
-        <LazySection threshold={0.1}>
-          <section className="section" aria-labelledby="testimonials-heading">
-            <div className="container">
-              <h2 id="testimonials-heading" className="section-title">Success Stories: Real User Feedback</h2>
-              <p className="section-subtitle">Join 125,000+ job seekers who landed interviews and offers using our free ATS resume builder.</p>
-              <div className="grid">
-                {testimonials.map((t, i) => (
-                  <div key={i} className="testimonial-card" itemScope itemType="https://schema.org/Review">
-                    <p style={{ fontSize: '1rem', fontStyle: 'italic', marginBottom: '16px', flex: 1, lineHeight: '1.7' }} itemProp="reviewBody">"{t.quote}"</p>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-                      <span style={{ background: '#e5e7eb', color: '#000000', padding: '4px 12px', borderRadius: '50px', fontSize: '0.8rem', border: '1px solid #d1d5db' }}>{t.metric}</span>
-                      <div>
-                        <strong itemProp="author">{t.name}</strong>
-                        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-light)' }}>{t.role}, {t.company}</p>
-                      </div>
-                    </div>
-                    {/* FIXED: Added itemReviewed for inline schema */}
-                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/SoftwareApplication">
-                      <meta itemProp="name" content="Professional Resume Free Builder" />
-                      <meta itemProp="applicationCategory" content="BusinessApplication" />
-                      <meta itemProp="operatingSystem" content="Web" />
-                    </div>
-                    <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                      <meta itemProp="ratingValue" content="5" />
-                      <meta itemProp="bestRating" content="5" />
-                      <meta itemProp="worstRating" content="1" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </LazySection>
-
-        <LazySection threshold={0.1}>
-          <section className="section" style={{ background: '#f9fafb' }} id="faq" aria-labelledby="faq-heading">
-            <div className="container">
-              <h2 id="faq-heading" className="section-title">Frequently Asked Questions</h2>
-              <p className="section-subtitle">Everything you need to know about our free ATS resume builder, templates, and tools.</p>
-              <div className="faq-grid">
-                {faqs.map((faq, i) => (
-                  <details key={i} className="faq-item" open={i < 2}>
-                    <summary className="faq-question">{faq.question}</summary>
-                    <p style={{ color: 'var(--text-light)', lineHeight: '1.7', marginTop: '12px' }}>{faq.answer}</p>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </section>
-        </LazySection>
-
-        {/* ── FINAL CTA ── */}
+        {/* Final CTA */}
         <section className="cta-section" aria-labelledby="cta-heading">
-          <div className="container">
-            <h2 id="cta-heading">Ready to Build Your Professional Resume?</h2>
-            <p>
-              Create your ATS-optimized resume in minutes. Choose from {templateCount}+ templates and use {toolCount}+ free tools.
-              No sign-up required. No credit card. No watermarks. Just a great resume.
-            </p>
-            <div className="button-container" role="group" aria-label="Final call to action buttons">
-              <Link href="/resume-templates" className="btn-cta">Create Resume Now — It's Free</Link>
-              <Link href="/resume-templates" className="btn-primary">Browse {templateCount}+ Templates</Link>
-              <Link href="/free-resume-tools" className="btn-secondary">Explore {toolCount}+ Tools</Link>
-            </div>
-            <p style={{ marginTop: '30px', fontSize: '0.9rem', color: 'var(--text-light)' }}>
-              No credit card required · Free forever · ATS-Optimized · Based on Industry Standards
-            </p>
-            
-            {/* Enhanced AI Crawler Footer References */}
-            <div style={{ marginTop: '16px', fontSize: '0.8rem', color: 'var(--text-lighter)', lineHeight: '1.6' }}>
-              <p>
-                AI crawlers: machine-readable index at{' '}
-                <a href={`${baseUrl}/llms.txt`} style={{ color: 'var(--text-lighter)' }}>
-                  professionalresumefree.com/llms.txt
-                </a>
-                {' '}· full content at{' '}
-                <a href={`${baseUrl}/llms-full.txt`} style={{ color: 'var(--text-lighter)' }}>
-                  /llms-full.txt
-                </a>
-                {' '}· AI context at{' '}
-                <a href={`${baseUrl}/api/ai-context.json`} style={{ color: 'var(--text-lighter)' }}>
-                  /api/ai-context.json
-                </a>
+          <div className="section-container">
+            <div className="cta-content">
+              <h2 className="cta-title" id="cta-heading">Ready to Build Your Professional Resume?</h2>
+              <p className="cta-subtitle">
+                Create your ATS-optimized resume in minutes. Choose from {templateCount}+ templates, use {toolCount}+ free tools
+                and {calculatorCount}+ calculators. No sign-up required. No credit card. No watermarks. Just a great resume.
+              </p>
+              <div className="button-container" role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-cta">Create Resume Now — It's Free</Link>
+                <Link href="/resume-templates" className="btn-primary">Browse {templateCount}+ Templates</Link>
+                <Link href="/free-resume-tools" className="btn-outline">Explore {toolCount}+ Tools & Calculators</Link>
+              </div>
+              <p className="text-small" style={{ marginTop: '2rem', color: 'var(--text-muted)' }}>
+                ✓ 100% Free • ✓ No Sign Up • ✓ Privacy Protected • ✓ Instant PDF Download • ✓ ATS-Optimized • ✓ Based on Industry Standards
               </p>
               
-              <p style={{ marginTop: '8px' }}>
-                Data fresh as of: {displayDate} · Build: {buildTimestamp}
-              </p>
+              {/* Enhanced AI Crawler Footer References */}
+              <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--text-disabled)', lineHeight: '1.6' }}>
+                <p>
+                  AI crawlers: machine-readable index at{' '}
+                  <a href={`${baseUrl}/llms.txt`} style={{ color: 'var(--text-disabled)' }}>
+                    professionalresumefree.com/llms.txt
+                  </a>
+                  {' '}· full content at{' '}
+                  <a href={`${baseUrl}/llms-full.txt`} style={{ color: 'var(--text-disabled)' }}>
+                    /llms-full.txt
+                  </a>
+                  {' '}· AI context at{' '}
+                  <a href={`${baseUrl}/api/ai-context.json`} style={{ color: 'var(--text-disabled)' }}>
+                    /api/ai-context.json
+                  </a>
+                </p>
+                <p style={{ marginTop: '0.5rem' }}>
+                  Data fresh as of: {displayDate} · Build: {buildTimestamp}
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -1703,6 +2343,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <div style={{ display: 'none' }} aria-hidden="true">
           <span itemProp="templates-count">{templateCount}</span>
           <span itemProp="tools-count">{toolCount}</span>
+          <span itemProp="calculator-count">{calculatorCount}</span>
           <span itemProp="last-updated">{displayDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
           <span itemProp="llms-index">{baseUrl}/llms.txt</span>
@@ -1722,7 +2363,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
   );
 }
 
-// ─── STATIC PROPS ─────────────────────────────────────────────────────────────
+// ─── STATIC PROPS ─────────────────────────────────────────────────────────
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const lastModified = new Date().toISOString();

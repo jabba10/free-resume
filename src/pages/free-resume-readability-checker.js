@@ -1,874 +1,131 @@
-// pages/free-resume-readability-checker.js
-import { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { 
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp,
+  FiFileText, FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap,
+  FiDatabase, FiCpu, FiHeart, FiDollarSign, FiTool, FiLayers, FiUser,
+  FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight, FiCopy,
+  FiX, FiGrid, FiList, FiBookmark, FiSmartphone, FiBriefcase,
+  FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
+  FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
+  FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft
+} from 'react-icons/fi';
 
-// Critical inline CSS for maximum speed
-const criticalCSS = `
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { overflow-x: hidden; width: 100%; }
-  body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    line-height: 1.5; 
-    color: #000000; 
-    background: #ffffff; 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    width: 100%;
-    position: relative;
-  }
-  .container { 
-    max-width: 1280px; 
-    margin: 0 auto; 
-    padding: 0 16px; 
-    width: 100%;
-  }
-  @media (min-width: 640px) {
-    .container { padding: 0 24px; }
-  }
-  .header { 
-    background: #ffffff; 
-    padding: 30px 0 20px; 
-    text-align: center; 
-    border-bottom: 1px solid #e5e7eb;
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .header { padding: 40px 0 30px; }
-  }
-  .header h1 { 
-    font-size: clamp(1.5rem, 5vw, 2.5rem); 
-    margin-bottom: 16px; 
-    line-height: 1.2;
-    word-wrap: break-word;
-    padding: 0 16px;
-    max-width: 100%;
-  }
-  .header p { 
-    font-size: clamp(0.9rem, 3vw, 1.1rem); 
-    max-width: 800px; 
-    margin: 0 auto 24px; 
-    padding: 0 16px;
-    color: #4b5563;
-    word-wrap: break-word;
-  }
-  .trust-badge {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: #f9fafb;
-    padding: 6px 12px;
-    border-radius: 50px;
-    border: 1px solid #e5e7eb;
-    font-size: 0.85rem;
-  }
-  .trust-icon {
-    color: #10b981;
-    font-weight: bold;
-  }
-  .grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 16px; 
-    margin: 30px 0; 
-    width: 100%;
-  }
-  @media (min-width: 640px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .card { 
-    background: #f9fafb; 
-    border-radius: 8px; 
-    padding: 20px; 
-    border: 1px solid #e5e7eb;
-    transition: transform 0.2s, box-shadow 0.2s;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow: hidden;
-  }
-  .card:hover { 
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-  }
-  .btn-primary { 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #000000; 
-    color: #ffffff; 
-    padding: 12px 24px; 
-    border-radius: 6px; 
-    text-decoration: none; 
-    font-weight: 500; 
-    border: 1px solid #000000;
-    transition: background 0.2s;
-    width: auto;
-    min-width: 200px;
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-    border: none;
-  }
-  @media (max-width: 480px) {
-    .btn-primary { 
-      width: 100%; 
-      min-width: auto;
-    }
-  }
-  .btn-primary:hover { 
-    background: #333333; 
-  }
-  .btn-primary:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  .btn-secondary { 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: transparent; 
-    color: #000000; 
-    padding: 12px 24px; 
-    border-radius: 6px; 
-    text-decoration: none; 
-    font-weight: 500; 
-    border: 2px solid #000000; 
-    transition: background 0.2s;
-    width: auto;
-    min-width: 200px;
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-  }
-  @media (max-width: 480px) {
-    .btn-secondary { 
-      width: 100%; 
-      min-width: auto;
-    }
-  }
-  .btn-secondary:hover { 
-    background: #f5f5f5; 
-  }
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background: transparent;
-    color: #000000;
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: 1px solid #d1d5db;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .btn-outline:hover {
-    background: #f3f4f6;
-  }
-  .section { 
-    padding: 40px 0; 
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .section { padding: 60px 0; }
-  }
-  .section-title { 
-    text-align: center; 
-    font-size: clamp(1.3rem, 4vw, 1.8rem); 
-    margin-bottom: 16px; 
-    padding: 0 16px;
-    word-wrap: break-word;
-    line-height: 1.3;
-  }
-  .section-subtitle { 
-    text-align: center; 
-    color: #4b5563; 
-    max-width: 700px; 
-    margin: 0 auto 32px; 
-    padding: 0 16px;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-    word-wrap: break-word;
-  }
-  .breadcrumb { 
-    padding: 12px 0; 
-    background: #f9fafb; 
-    border-bottom: 1px solid #e5e7eb;
-    width: 100%;
-  }
-  .breadcrumb ol { 
-    display: flex; 
-    list-style: none; 
-    gap: 8px; 
-    flex-wrap: wrap;
-    font-size: 0.85rem;
-  }
-  .breadcrumb a { 
-    color: #000000; 
-    text-decoration: none; 
-    border-bottom: 1px solid transparent;
-  }
-  .breadcrumb a:hover { 
-    border-bottom-color: #000000; 
-  }
-  .breadcrumb-current {
-    color: #4b5563;
-  }
-  .breadcrumb-separator {
-    color: #9ca3af;
-  }
-  .rating-stars {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    color: #fbbf24;
-    font-size: 1.1rem;
-  }
-  .rating-value {
-    margin-left: 8px;
-    font-weight: 600;
-    color: #000000;
-  }
-  .rating-text {
-    font-size: 0.85rem;
-    color: #4b5563;
-    margin-top: 4px;
-  }
-  .editor-section {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid #e5e7eb;
-    margin: 30px 0;
-    width: 100%;
-  }
-  .editor-header {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .editor-header h2 {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    margin-bottom: 8px;
-  }
-  .editor-header p {
-    color: #4b5563;
-    font-size: 0.95rem;
-  }
-  .textarea-container {
-    width: 100%;
-  }
-  .textarea {
-    width: 100%;
-    padding: 16px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    resize: vertical;
-    background: #ffffff;
-    transition: border-color 0.2s;
-  }
-  .textarea:focus {
-    outline: none;
-    border-color: #000000;
-  }
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 16px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .reset-button {
-    padding: 8px 16px;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .reset-button:hover {
-    background: #e5e7eb;
-  }
-  .word-count-display {
-    font-size: 0.9rem;
-    color: #4b5563;
-  }
-  .score-section {
-    background: #f9fafb;
-    border-radius: 12px;
-    padding: 30px;
-    border: 1px solid #e5e7eb;
-    margin: 30px 0;
-    width: 100%;
-  }
-  .score-header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .score-header h2 {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    margin-bottom: 8px;
-  }
-  .score-subtitle {
-    color: #4b5563;
-    font-size: 0.9rem;
-  }
-  .score-container {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .score-circle {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .score-inner {
-    width: 140px;
-    height: 140px;
-    background: #ffffff;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
-  .score-value {
-    font-size: 2.5rem;
-    font-weight: bold;
-    line-height: 1;
-  }
-  .score-label {
-    font-size: 1rem;
-    color: #4b5563;
-  }
-  .score-breakdown {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    min-width: 280px;
-  }
-  .score-category {
-    text-align: center;
-    padding: 12px;
-    background: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-  }
-  .category-label {
-    font-size: 0.8rem;
-    color: #4b5563;
-    margin-bottom: 4px;
-  }
-  .category-score {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 4px;
-  }
-  .category-status {
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    border-radius: 50px;
-    display: inline-block;
-  }
-  .scoregood { color: #10b981; }
-  .scorewarning { color: #f59e0b; }
-  .scoreneutral { color: #6b7280; }
-  .statusgood { background: #d1fae5; color: #065f46; }
-  .statuswarning { background: #fef3c7; color: #92400e; }
-  .statusneutral { background: #f3f4f6; color: #4b5563; }
-  .score-interpretation {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #e5e7eb;
-  }
-  .score-interpretation h3 {
-    font-size: 1rem;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  .interpretation-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  @media (min-width: 640px) {
-    .interpretation-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .interpretation-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-  }
-  .interpretation-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    flex-shrink: 0;
-  }
-  .metrics-section {
-    margin: 30px 0;
-    width: 100%;
-  }
-  .metrics-section h2 {
-    text-align: center;
-    margin-bottom: 24px;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-  }
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    width: 100%;
-  }
-  @media (min-width: 640px) {
-    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .metrics-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .metric-card {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 20px;
-    transition: transform 0.2s;
-  }
-  .metric-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  }
-  .metric-header {
-    margin-bottom: 12px;
-  }
-  .metric-name {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  .metric-value {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-    line-height: 1.2;
-  }
-  .metric-description {
-    font-size: 0.85rem;
-    color: #4b5563;
-    margin-bottom: 12px;
-  }
-  .metric-status {
-    font-size: 0.75rem;
-    padding: 4px 12px;
-    border-radius: 50px;
-    display: inline-block;
-    background: #f3f4f6;
-    color: #4b5563;
-  }
-  .guidelines-section, .tips-section, .faq-section, .benefits-section {
-    padding: 40px 0;
-    border-top: 1px solid #e5e7eb;
-    width: 100%;
-  }
-  .guidelines-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    width: 100%;
-  }
-  @media (min-width: 640px) {
-    .guidelines-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  .guideline-card {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .guideline-header {
-    background: #000000;
-    color: #ffffff;
-    padding: 16px;
-  }
-  .guideline-metric {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .guideline-ideal {
-    font-size: 0.9rem;
-    opacity: 0.9;
-  }
-  .guideline-body {
-    padding: 16px;
-  }
-  .guideline-description {
-    color: #4b5563;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
-  }
-  .guideline-tip {
-    background: #ffffff;
-    padding: 12px;
-    border-radius: 6px;
-    border-left: 3px solid #000000;
-    font-size: 0.85rem;
-  }
-  .tips-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    width: 100%;
-  }
-  @media (min-width: 640px) {
-    .tips-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  .tip-card {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .tip-number {
-    width: 40px;
-    height: 40px;
-    background: #000000;
-    color: #ffffff;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-  }
-  .tip-content {
-    color: #4b5563;
-    font-size: 0.95rem;
-  }
-  .faq-list {
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  .faq-item {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
-  .faq-item:hover {
-    border-color: #000000;
-  }
-  .faq-item.active {
-    border-color: #000000;
-  }
-  .faq-question {
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-  }
-  .faq-question h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0;
-    flex: 1;
-    word-wrap: break-word;
-  }
-  .faq-toggle {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: #4b5563;
-    width: 24px;
-    text-align: center;
-  }
-  .faq-answer {
-    padding: 0 16px 16px;
-    color: #4b5563;
-    border-top: 1px solid #e5e7eb;
-  }
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    width: 100%;
-  }
-  @media (min-width: 640px) {
-    .benefits-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .benefit-card {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 24px;
-    height: 100%;
-  }
-  .benefit-title {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-  }
-  .benefit-description {
-    color: #4b5563;
-    line-height: 1.6;
-    font-size: 0.95rem;
-  }
-  .cta-section {
-    background: #ffffff;
-    padding: 40px 0;
-    text-align: center;
-    border-top: 1px solid #e5e7eb;
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .cta-section { padding: 60px 0; }
-  }
-  .cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
-  .cta-title {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    margin-bottom: 16px;
-    word-wrap: break-word;
-  }
-  .cta-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    margin-bottom: 24px;
-    color: #4b5563;
-  }
-  .cta-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-  }
-  .cta-button-primary, .cta-button-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s;
-    min-width: 200px;
-  }
-  @media (max-width: 480px) {
-    .cta-button-primary, .cta-button-secondary {
-      width: 100%;
-      min-width: auto;
-    }
-  }
-  .cta-button-primary {
-    background: #000000;
-    color: #ffffff;
-    border: 1px solid #000000;
-  }
-  .cta-button-primary:hover {
-    background: #333333;
-  }
-  .cta-button-secondary {
-    background: transparent;
-    color: #000000;
-    border: 2px solid #000000;
-  }
-  .cta-button-secondary:hover {
-    background: #f5f5f5;
-  }
-  .cta-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-  }
-  .cta-feature {
-    color: #4b5563;
-    font-size: 0.9rem;
-  }
-  
-  /* INTERNAL LINKING FOOTER STYLES */
-  .internal-linking-footer {
-    margin-top: 60px;
-    padding: 40px 0;
-    border-top: 1px solid #e5e7eb;
-    background: #f9fafb;
-  }
-  .footer-links-title {
-    text-align: center;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: #111827;
-  }
-  .footer-links-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  @media (min-width: 640px) {
-    .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .footer-links-grid { grid-template-columns: repeat(5, 1fr); }
-  }
-  .footer-link-card {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 16px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100%;
-  }
-  .footer-link-card:hover {
-    border-color: #000000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-  .footer-link-text {
-    color: #111827;
-    font-weight: 600;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    margin-bottom: 4px;
-  }
-  .footer-link-sub {
-    color: #6b7280;
-    font-size: 0.8rem;
-  }
-
-  .seo-hidden {
-    display: none;
-  }
-  hr { border: none; border-top: 1px solid #e5e7eb; margin: 40px 0; }
-  .text-small { font-size: 0.85rem; color: #4b5563; }
-  .text-success { color: #10b981; font-weight: 600; }
-  .text-warning { color: #f59e0b; font-weight: 600; }
-  .text-danger { color: #ef4444; font-weight: 600; }
-  .center-text { text-align: center; }
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-primary:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:100%; display:flex; flex-direction:column; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.25rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+  textarea, input, select { font-family:var(--font-body); background:var(--input-bg); border:var(--input-border); color:var(--input-text); padding:var(--input-padding); border-radius:var(--input-radius); font-size:var(--font-size-body-md); width:100%; transition:border-color var(--transition-fast); }
+  textarea:focus, input:focus, select:focus { outline:none; border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(242,202,80,0.1); }
+  textarea::placeholder, input::placeholder { color:var(--input-placeholder); }
+  textarea { min-height:100px; resize:vertical; }
+  select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23f2ca50' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.5rem; }
+  select option { background:var(--bg-surface); color:var(--text-primary); }
+  .score-circle { width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: var(--font-weight-extrabold); font-family: var(--font-display); margin: 0 auto 1rem; }
+  .score-high { background: rgba(76, 175, 80, 0.1); border: 3px solid var(--success-color); color: var(--success-color); box-shadow: 0 0 30px rgba(76, 175, 80, 0.2); }
+  .score-medium { background: rgba(255, 152, 0, 0.1); border: 3px solid var(--warning-color); color: var(--warning-color); box-shadow: 0 0 30px rgba(255, 152, 0, 0.2); }
+  .score-low { background: rgba(255, 180, 171, 0.1); border: 3px solid var(--error-color); color: var(--error-color); box-shadow: 0 0 30px rgba(255, 180, 171, 0.2); }
+  .guideline-card { background:var(--card-bg); border-radius:0.5rem; overflow:hidden; border:var(--card-border); }
+  .guideline-header { background:var(--bg-surface-high); padding:1rem 1.25rem; border-bottom:0.5px solid var(--border-gold-filament); }
+  .guideline-body { padding:1.25rem; }
+  .tip-card { background:var(--card-bg); border-radius:0.5rem; padding:1rem 1.25rem; border:var(--card-border); display:flex; align-items:center; gap:0.75rem; }
 `;
 
-// Current year for dynamic content
+// ============================================================================
+// CONSTANTS
+// ============================================================================
 const CURRENT_YEAR = new Date().getFullYear();
-const CURRENT_DATE = new Date().toISOString().split('T')[0];
-const LAST_MODIFIED = new Date().toISOString();
+const SITE_URL = 'https://professionalresumefree.com';
 
-// FAQ Data
-const FAQS = [
-  {
-    question: "What is resume readability and why does it matter?",
-    answer: "Readability refers to how easily your resume can be read and understood. It matters because recruiters spend only 6-7 seconds scanning resumes. Good readability ensures your key qualifications stand out immediately to both humans and ATS systems."
-  },
-  {
-    question: "What is the ideal Flesch-Kincaid Grade Level for resumes?",
-    answer: "Aim for a grade level between 8-10. This makes your resume accessible to most readers while maintaining professionalism. Higher levels (11+) can sound too academic, while lower levels (below 8) might appear too simplistic."
-  },
-  {
-    question: "How do bullet points affect readability?",
-    answer: "Properly formatted bullet points improve readability by 40%. They break up text, highlight achievements, and make information scannable. Our tool analyzes bullet point usage and suggests optimal formatting for ATS compatibility."
-  },
-  {
-    question: "What's the ideal average sentence length for resumes?",
-    answer: "15-20 words per sentence is optimal. Shorter sentences (under 10 words) can feel choppy, while longer sentences (over 25 words) become difficult to parse quickly. Mix sentence lengths for natural flow."
-  },
-  {
-    question: "Does passive voice really hurt my resume?",
-    answer: "Yes! Active voice is 30% more effective. Instead of 'Responsibilities were managed by me,' use 'Managed responsibilities.' Active voice creates stronger, more confident statements that emphasize your agency and achievements."
-  },
-  {
-    question: "How does readability affect ATS (Applicant Tracking System) screening?",
-    answer: "ATS systems parse readable content more accurately. Optimal sentence structure, clear formatting, and appropriate complexity scores increase your resume's chances of passing automated screening and reaching human recruiters."
-  }
-];
-
-// Readability Guidelines
-const READABILITY_GUIDELINES = [
-  {
-    metric: "Flesch-Kincaid Grade",
-    ideal: "8-10",
-    description: "Represents U.S. grade level needed to understand text",
-    tip: "Aim for 9th grade level - professional but accessible"
-  },
-  {
-    metric: "Average Sentence Length",
-    ideal: "15-20 words",
-    description: "Optimal words per sentence for scannability",
-    tip: "Vary sentence length for natural rhythm"
-  },
-  {
-    metric: "Reading Ease Score",
-    ideal: "60-70",
-    description: "Higher scores = easier to read (0-100 scale)",
-    tip: "Balance professionalism with accessibility"
-  },
-  {
-    metric: "Passive Voice",
-    ideal: "< 10%",
-    description: "Percentage of sentences using passive voice",
-    tip: "Use active voice for stronger impact"
-  }
-];
-
-// Writing Tips
-const WRITING_TIPS = [
-  "Start sentences with action verbs",
-  "Use numbers to quantify achievements",
-  "Keep paragraphs to 3-4 lines maximum",
-  "Use consistent verb tenses",
-  "Avoid jargon and buzzwords",
-  "Include industry-specific keywords",
-  "Proofread for spelling and grammar",
-  "Use white space effectively",
-  "Focus on achievements, not duties",
-  "Tailor language to target role"
-];
-
-// SEO-optimized keywords
+// SEO Keywords - Injected from Page 1 Blueprint
 const SEO_KEYWORDS = [
   'resume readability checker',
   'free resume readability analyzer',
@@ -887,54 +144,212 @@ const SEO_KEYWORDS = [
   'resume writing best practices tool'
 ];
 
-export default function ResumeReadabilityChecker({ seoData, buildTimestamp }) {
-  const [text, setText] = useState('');
-  const [readabilityStats, setReadabilityStats] = useState({
-    fleschKincaidGrade: 0,
-    fleschReadingEase: 0,
-    averageSentenceLength: 0,
-    sentenceCount: 0,
-    wordCount: 0,
-    characterCount: 0,
-    syllableCount: 0,
-    passiveSentences: 0,
-    bulletPoints: 0,
-    complexWords: 0
+const FAQS = [
+  { question: "What is resume readability and why does it matter?", answer: "Readability refers to how easily your resume can be read and understood. It matters because recruiters spend only 6-7 seconds scanning resumes. Good readability ensures your key qualifications stand out immediately to both humans and ATS systems." },
+  { question: "What is the ideal Flesch-Kincaid Grade Level for resumes?", answer: "Aim for a grade level between 8-10. This makes your resume accessible to most readers while maintaining professionalism. Higher levels (11+) can sound too academic, while lower levels (below 8) might appear too simplistic." },
+  { question: "How do bullet points affect readability?", answer: "Properly formatted bullet points improve readability by 40%. They break up text, highlight achievements, and make information scannable. Our tool analyzes bullet point usage and suggests optimal formatting for ATS compatibility." },
+  { question: "What's the ideal average sentence length for resumes?", answer: "15-20 words per sentence is optimal. Shorter sentences (under 10 words) can feel choppy, while longer sentences (over 25 words) become difficult to parse quickly. Mix sentence lengths for natural flow." },
+  { question: "Does passive voice really hurt my resume?", answer: "Yes! Active voice is 30% more effective. Instead of 'Responsibilities were managed by me,' use 'Managed responsibilities.' Active voice creates stronger, more confident statements that emphasize your agency and achievements." },
+  { question: "How does readability affect ATS screening?", answer: "ATS systems parse readable content more accurately. Optimal sentence structure, clear formatting, and appropriate complexity scores increase your resume's chances of passing automated screening and reaching human recruiters." }
+];
+
+const READABILITY_GUIDELINES = [
+  { metric: "Flesch-Kincaid Grade", ideal: "8-10", description: "Represents U.S. grade level needed to understand text", tip: "Aim for 9th grade level - professional but accessible" },
+  { metric: "Average Sentence Length", ideal: "15-20 words", description: "Optimal words per sentence for scannability", tip: "Vary sentence length for natural rhythm" },
+  { metric: "Reading Ease Score", ideal: "60-70", description: "Higher scores = easier to read (0-100 scale)", tip: "Balance professionalism with accessibility" },
+  { metric: "Passive Voice", ideal: "< 10%", description: "Percentage of sentences using passive voice", tip: "Use active voice for stronger impact" }
+];
+
+const WRITING_TIPS = [
+  "Start sentences with action verbs",
+  "Use numbers to quantify achievements",
+  "Keep paragraphs to 3-4 lines maximum",
+  "Use consistent verb tenses throughout",
+  "Avoid jargon and buzzwords",
+  "Include industry-specific keywords",
+  "Proofread for spelling and grammar",
+  "Use white space effectively",
+  "Focus on achievements, not duties",
+  "Tailor language to target role"
+];
+
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
+  FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
+  FiTool, FiLayers, FiUser, FiBookOpen, FiAward, FiDownload, FiShield, FiArrowRight,
+  FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
+  FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
+  FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
+  FiActivity, FiType, FiAlignLeft
+};
+
+// ============================================================================
+// ANALYSIS FUNCTIONS
+// ============================================================================
+function countSyllables(word) {
+  word = word.toLowerCase();
+  if (word.length <= 3) return 1;
+  word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+  word = word.replace(/^y/, '');
+  const syllables = word.match(/[aeiouy]{1,2}/g);
+  return syllables ? syllables.length : 1;
+}
+
+function calculateReadability(content) {
+  if (!content.trim()) {
+    return { fleschKincaidGrade: 0, fleschReadingEase: 0, averageSentenceLength: 0, sentenceCount: 0, wordCount: 0, characterCount: 0, syllableCount: 0, passiveSentences: 0, bulletPoints: 0, complexWords: 0 };
+  }
+  const sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  const words = content.trim().split(/\s+/).filter(w => w.length > 0);
+  const characters = content.replace(/\s+/g, '').length;
+  const bulletPoints = (content.match(/^[•\-*]\s+/gm) || []).length;
+  let totalSyllables = 0;
+  let complexWords = 0;
+  words.forEach(word => {
+    const syllables = countSyllables(word);
+    totalSyllables += syllables;
+    if (syllables >= 3) complexWords++;
   });
+  const passiveSentences = sentences.filter(sentence =>
+    /\b(am|is|are|was|were|be|been|being)\b\s+\w+ed\b/i.test(sentence) ||
+    /\b(has|have|had)\s+been\s+\w+ed\b/i.test(sentence)
+  ).length;
+  const sentenceCount = sentences.length;
+  const wordCount = words.length;
+  const averageSentenceLength = sentenceCount > 0 ? wordCount / sentenceCount : 0;
+  let fleschReadingEase = 0;
+  let fleschKincaidGrade = 0;
+  if (sentenceCount > 0 && wordCount > 0) {
+    const ASL = wordCount / sentenceCount;
+    const ASW = totalSyllables / wordCount;
+    fleschReadingEase = Math.max(0, Math.min(100, 206.835 - (1.015 * ASL) - (84.6 * ASW)));
+    fleschKincaidGrade = Math.max(1, Math.min(20, (0.39 * ASL) + (11.8 * ASW) - 15.59));
+  }
+  return {
+    fleschKincaidGrade: parseFloat(fleschKincaidGrade.toFixed(1)),
+    fleschReadingEase: parseFloat(fleschReadingEase.toFixed(1)),
+    averageSentenceLength: parseFloat(averageSentenceLength.toFixed(1)),
+    sentenceCount, wordCount, characterCount: characters, syllableCount: totalSyllables,
+    passiveSentences, bulletPoints, complexWords
+  };
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => {
+  const { currentDate, lastModifiedDate } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
+  const canonicalUrl = `${SITE_URL}/free-resume-readability-checker`;
+  const pageTitle = `Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization ${CURRENT_YEAR}`;
+  const pageDescription = `Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions. No sign up required.`;
+
+  const [text, setText] = useState('');
+  const [readabilityStats, setReadabilityStats] = useState(calculateReadability(''));
   const [activeFaq, setActiveFaq] = useState(null);
   const textareaRef = useRef(null);
+  const toolRef = useRef(null);
 
-  // Schema data - UPDATED WITHOUT www
+  useEffect(() => {
+    const timer = setTimeout(() => { setReadabilityStats(calculateReadability(text)); }, 300);
+    return () => clearTimeout(timer);
+  }, [text]);
+
+  const handleReset = () => { setText(''); setReadabilityStats(calculateReadability('')); textareaRef.current?.focus(); };
+
+  const getStatus = (type, value) => {
+    if (value === 0) return { status: 'neutral', text: 'No data' };
+    switch(type) {
+      case 'grade':
+        if (value >= 8 && value <= 10) return { status: 'good', text: 'Ideal range' };
+        return { status: 'warning', text: value < 8 ? 'Too simple' : 'Too complex' };
+      case 'ease':
+        if (value >= 60 && value <= 70) return { status: 'good', text: 'Optimal' };
+        return { status: 'warning', text: value < 60 ? 'Hard to read' : 'Too simple' };
+      case 'length':
+        if (value >= 15 && value <= 20) return { status: 'good', text: 'Perfect' };
+        return { status: 'warning', text: value < 15 ? 'Too short' : 'Too long' };
+      case 'passive':
+        const pct = readabilityStats.sentenceCount > 0 ? (readabilityStats.passiveSentences / readabilityStats.sentenceCount) * 100 : 0;
+        if (pct < 10) return { status: 'good', text: 'Good' };
+        return { status: 'warning', text: 'Reduce passive voice' };
+      default: return { status: 'neutral', text: 'N/A' };
+    }
+  };
+
+  const gradeStatus = getStatus('grade', readabilityStats.fleschKincaidGrade);
+  const easeStatus = getStatus('ease', readabilityStats.fleschReadingEase);
+  const lengthStatus = getStatus('length', readabilityStats.averageSentenceLength);
+  const passiveStatus = getStatus('passive', 0);
+
+  const calculateOverallScore = () => {
+    if (readabilityStats.wordCount === 0) return 0;
+    let score = 0;
+    if (readabilityStats.fleschKincaidGrade >= 8 && readabilityStats.fleschKincaidGrade <= 10) score += 30;
+    else if (readabilityStats.fleschKincaidGrade >= 7 && readabilityStats.fleschKincaidGrade <= 11) score += 20;
+    else if (readabilityStats.fleschKincaidGrade >= 6 && readabilityStats.fleschKincaidGrade <= 12) score += 10;
+    if (readabilityStats.fleschReadingEase >= 60 && readabilityStats.fleschReadingEase <= 70) score += 30;
+    else if (readabilityStats.fleschReadingEase >= 50 && readabilityStats.fleschReadingEase <= 80) score += 20;
+    else if (readabilityStats.fleschReadingEase >= 40 && readabilityStats.fleschReadingEase <= 90) score += 10;
+    if (readabilityStats.averageSentenceLength >= 15 && readabilityStats.averageSentenceLength <= 20) score += 20;
+    else if (readabilityStats.averageSentenceLength >= 12 && readabilityStats.averageSentenceLength <= 25) score += 10;
+    const passivePercent = readabilityStats.sentenceCount > 0 ? (readabilityStats.passiveSentences / readabilityStats.sentenceCount) * 100 : 0;
+    if (passivePercent < 10) score += 20;
+    else if (passivePercent < 20) score += 10;
+    return Math.min(100, Math.round(score));
+  };
+
+  const overallScore = calculateOverallScore();
+  const getScoreColor = (s) => { if (s >= 80) return 'score-high'; if (s >= 60) return 'score-medium'; return 'score-low'; };
+
+  // Schema Data - Injected from Page 1 Blueprint
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://professionalresumefree.com/free-resume-readability-checker",
-        "url": "https://professionalresumefree.com/free-resume-readability-checker",
-        "name": `Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization ${CURRENT_YEAR}`,
-        "description": "Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions.",
+        "@id": `${canonicalUrl}`,
+        "url": canonicalUrl,
+        "name": pageTitle,
+        "description": pageDescription,
         "datePublished": "2024-01-01",
-        "dateModified": LAST_MODIFIED,
+        "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US"
       },
       {
         "@type": "SoftwareApplication",
         "name": "Resume Readability Checker Tool",
         "description": "Free professional resume readability analyzer with Flesch-Kincaid scoring, ATS optimization, and writing quality assessment",
-        "url": "https://professionalresumefree.com/free-resume-readability-checker",
+        "url": canonicalUrl,
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.8",
-          "ratingCount": "325"
-        }
+          "ratingCount": "325",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "featureList": [
+          "Flesch-Kincaid Analysis",
+          "Reading Ease Scoring",
+          "Sentence Analysis",
+          "ATS Optimization Tips",
+          "Passive Voice Detection",
+          "Bullet Point Analysis",
+          "Free Forever"
+        ],
+        "softwareVersion": `${CURRENT_YEAR}.1.0`
       },
       {
         "@type": "FAQPage",
@@ -950,245 +365,44 @@ export default function ResumeReadabilityChecker({ seoData, buildTimestamp }) {
     ]
   };
 
-  // Helper function to count syllables
-  const countSyllables = useCallback((word) => {
-    word = word.toLowerCase();
-    if (word.length <= 3) return 1;
-    
-    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
-    word = word.replace(/^y/, '');
-    
-    const syllables = word.match(/[aeiouy]{1,2}/g);
-    return syllables ? syllables.length : 1;
-  }, []);
-
-  // Calculate readability metrics
-  const calculateReadability = useCallback((content) => {
-    if (!content.trim()) {
-      return {
-        fleschKincaidGrade: 0,
-        fleschReadingEase: 0,
-        averageSentenceLength: 0,
-        sentenceCount: 0,
-        wordCount: 0,
-        characterCount: 0,
-        syllableCount: 0,
-        passiveSentences: 0,
-        bulletPoints: 0,
-        complexWords: 0
-      };
-    }
-
-    // Basic counts
-    const sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    const words = content.trim().split(/\s+/).filter(w => w.length > 0);
-    const characters = content.replace(/\s+/g, '').length;
-    
-    // Count bullet points
-    const bulletPoints = (content.match(/^[•\-*]\s+/gm) || []).length;
-    
-    // Count syllables
-    let totalSyllables = 0;
-    let complexWords = 0;
-    
-    words.forEach(word => {
-      const syllables = countSyllables(word);
-      totalSyllables += syllables;
-      if (syllables >= 3) complexWords++;
-    });
-    
-    // Count passive sentences (simplified detection)
-    const passiveSentences = sentences.filter(sentence => 
-      /\b(am|is|are|was|were|be|been|being)\b\s+\w+ed\b/i.test(sentence) ||
-      /\b(has|have|had)\s+been\s+\w+ed\b/i.test(sentence)
-    ).length;
-    
-    // Calculate metrics
-    const sentenceCount = sentences.length;
-    const wordCount = words.length;
-    const averageSentenceLength = sentenceCount > 0 ? wordCount / sentenceCount : 0;
-    
-    // Flesch Reading Ease
-    let fleschReadingEase = 0;
-    if (sentenceCount > 0 && wordCount > 0) {
-      const ASL = wordCount / sentenceCount;
-      const ASW = totalSyllables / wordCount;
-      fleschReadingEase = 206.835 - (1.015 * ASL) - (84.6 * ASW);
-      fleschReadingEase = Math.max(0, Math.min(100, fleschReadingEase));
-    }
-    
-    // Flesch-Kincaid Grade Level
-    let fleschKincaidGrade = 0;
-    if (sentenceCount > 0 && wordCount > 0) {
-      const ASL = wordCount / sentenceCount;
-      const ASW = totalSyllables / wordCount;
-      fleschKincaidGrade = (0.39 * ASL) + (11.8 * ASW) - 15.59;
-      fleschKincaidGrade = Math.max(1, Math.min(20, fleschKincaidGrade));
-    }
-    
-    return {
-      fleschKincaidGrade: parseFloat(fleschKincaidGrade.toFixed(1)),
-      fleschReadingEase: parseFloat(fleschReadingEase.toFixed(1)),
-      averageSentenceLength: parseFloat(averageSentenceLength.toFixed(1)),
-      sentenceCount,
-      wordCount,
-      characterCount: characters,
-      syllableCount: totalSyllables,
-      passiveSentences,
-      bulletPoints,
-      complexWords
-    };
-  }, [countSyllables]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setReadabilityStats(calculateReadability(text));
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [text, calculateReadability]);
-
-  const handleReset = () => {
-    setText('');
-    setReadabilityStats(calculateReadability(''));
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
-  };
-
-  // Determine status for each metric
-  const getFleschKincaidStatus = () => {
-    const grade = readabilityStats.fleschKincaidGrade;
-    if (grade === 0) return { status: 'neutral', text: 'No data' };
-    if (grade >= 8 && grade <= 10) return { status: 'good', text: 'Ideal range' };
-    if (grade < 8) return { status: 'warning', text: 'Too simple' };
-    return { status: 'warning', text: 'Too complex' };
-  };
-
-  const getReadingEaseStatus = () => {
-    const ease = readabilityStats.fleschReadingEase;
-    if (ease === 0) return { status: 'neutral', text: 'No data' };
-    if (ease >= 60 && ease <= 70) return { status: 'good', text: 'Optimal' };
-    if (ease < 60) return { status: 'warning', text: 'Hard to read' };
-    return { status: 'warning', text: 'Too simple' };
-  };
-
-  const getSentenceLengthStatus = () => {
-    const length = readabilityStats.averageSentenceLength;
-    if (length === 0) return { status: 'neutral', text: 'No data' };
-    if (length >= 15 && length <= 20) return { status: 'good', text: 'Perfect' };
-    if (length < 15) return { status: 'warning', text: 'Too short' };
-    return { status: 'warning', text: 'Too long' };
-  };
-
-  const getPassiveVoiceStatus = () => {
-    const passivePercent = readabilityStats.sentenceCount > 0 
-      ? (readabilityStats.passiveSentences / readabilityStats.sentenceCount) * 100 
-      : 0;
-    
-    if (passivePercent === 0) return { status: 'neutral', text: 'No data' };
-    if (passivePercent < 10) return { status: 'good', text: 'Good' };
-    return { status: 'warning', text: 'Reduce passive voice' };
-  };
-
-  const fleschKincaidStatus = getFleschKincaidStatus();
-  const readingEaseStatus = getReadingEaseStatus();
-  const sentenceLengthStatus = getSentenceLengthStatus();
-  const passiveVoiceStatus = getPassiveVoiceStatus();
-
-  // Overall readability score (0-100)
-  const calculateOverallScore = () => {
-    if (readabilityStats.wordCount === 0) return 0;
-    
-    let score = 0;
-    let factors = 0;
-    
-    // Flesch-Kincaid Grade (max 30 points)
-    if (readabilityStats.fleschKincaidGrade >= 8 && readabilityStats.fleschKincaidGrade <= 10) {
-      score += 30;
-    } else if (readabilityStats.fleschKincaidGrade >= 7 && readabilityStats.fleschKincaidGrade <= 11) {
-      score += 20;
-    } else if (readabilityStats.fleschKincaidGrade >= 6 && readabilityStats.fleschKincaidGrade <= 12) {
-      score += 10;
-    }
-    factors++;
-    
-    // Reading Ease (max 30 points)
-    if (readabilityStats.fleschReadingEase >= 60 && readabilityStats.fleschReadingEase <= 70) {
-      score += 30;
-    } else if (readabilityStats.fleschReadingEase >= 50 && readabilityStats.fleschReadingEase <= 80) {
-      score += 20;
-    } else if (readabilityStats.fleschReadingEase >= 40 && readabilityStats.fleschReadingEase <= 90) {
-      score += 10;
-    }
-    factors++;
-    
-    // Sentence Length (max 20 points)
-    if (readabilityStats.averageSentenceLength >= 15 && readabilityStats.averageSentenceLength <= 20) {
-      score += 20;
-    } else if (readabilityStats.averageSentenceLength >= 12 && readabilityStats.averageSentenceLength <= 25) {
-      score += 10;
-    } else if (readabilityStats.averageSentenceLength >= 10 && readabilityStats.averageSentenceLength <= 30) {
-      score += 5;
-    }
-    factors++;
-    
-    // Passive Voice (max 20 points)
-    const passivePercent = readabilityStats.sentenceCount > 0 
-      ? (readabilityStats.passiveSentences / readabilityStats.sentenceCount) * 100 
-      : 0;
-    
-    if (passivePercent < 10) {
-      score += 20;
-    } else if (passivePercent < 20) {
-      score += 10;
-    } else if (passivePercent < 30) {
-      score += 5;
-    }
-    factors++;
-    
-    return Math.min(100, Math.round((score / (factors * 10)) * 100));
-  };
-
-  const overallScore = calculateOverallScore();
-  const getOverallScoreColor = () => {
-    if (overallScore >= 80) return '#10b981';
-    if (overallScore >= 60) return '#f59e0b';
-    return '#ef4444';
-  };
-
   return (
     <>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* Primary Metadata */}
-        <title>Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization {CURRENT_YEAR}</title>
-        <meta name="description" content={`Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions. No sign up required.`} />
+        {/* Primary Meta Tags - Injected from Page 1 Blueprint */}
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="last-modified" content={LAST_MODIFIED} />
         
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Free Resume Readability Checker - Flesch-Kincaid Analysis & ATS Optimization" />
         <meta name="chatgpt-fts:description" content="Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, and actionable suggestions." />
         <meta name="chatgpt-fts:keywords" content="resume readability, Flesch-Kincaid, ATS optimization, resume analysis" />
-        <meta name="chatgpt-fts:last-updated" content={CURRENT_DATE} />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         
-        {/* Canonical URL - UPDATED without www */}
-        <link rel="canonical" href="https://professionalresumefree.com/free-resume-readability-checker" />
+        {/* Freshness Meta Tags */}
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta name="theme-color" content="#131315" />
         
-        {/* Open Graph - UPDATED without www */}
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Open Graph - Injected from Page 1 Blueprint */}
         <meta property="og:title" content="Free Resume Readability Checker – Professional Flesch-Kincaid Analysis" />
         <meta property="og:description" content="Analyze and improve your resume's readability. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips. Free online tool." />
-        <meta property="og:url" content="https://professionalresumefree.com/free-resume-readability-checker" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
-        <meta property="og:updated_time" content={LAST_MODIFIED} />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
         
-        {/* Twitter Card */}
+        {/* Twitter Card - Injected from Page 1 Blueprint */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Readability Checker - ATS & Flesch-Kincaid Analysis" />
         <meta name="twitter:description" content="Professional readability analysis with Flesch-Kincaid scoring and ATS optimization for your resume." />
@@ -1204,455 +418,313 @@ export default function ResumeReadabilityChecker({ seoData, buildTimestamp }) {
       <div style={{display: 'none'}} aria-hidden="true">
         <span itemProp="tool-type">Readability Checker</span>
         <span itemProp="year">{CURRENT_YEAR}</span>
-        <span itemProp="last-updated">{CURRENT_DATE}</span>
+        <span itemProp="last-updated">{safeCurrentDate}</span>
         <span itemProp="build-timestamp">{buildTimestamp}</span>
       </div>
 
-      <div className="container">
-        {/* Breadcrumb Navigation */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <ol>
-            <li><Link href="/">Home</Link></li>
-            <li className="breadcrumb-separator">›</li>
-            <li><Link href="/free-resume-tools">Resume Tools</Link></li>
-            <li className="breadcrumb-separator">›</li>
-            <li className="breadcrumb-current">Readability Checker</li>
-          </ol>
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol>
+              <li><Link href="/"><FiHome size={14} /> Home</Link></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li><Link href="/free-resume-tools"><FiTool size={14} /> Resume Tools</Link></li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li><span aria-current="page"><FiEye size={14} /> Readability Checker</span></li>
+            </ol>
+          </div>
         </nav>
 
-        {/* Header Section */}
-        <header className="header">
-          <h1>Resume Readability Checker</h1>
-          <p>
-            Professional Flesch-Kincaid analysis with ATS optimization guidance
-            <span 
-              className="rating-stars"
-              style={{ marginLeft: '12px', display: 'inline-block' }}
-            >
-              ★★★★★
-              <span className="rating-value">4.8/5</span>
-            </span>
-          </p>
-          
-          <div className="trust-badge">
-            <div className="trust-item">
-              <span className="trust-icon">✓</span>
-              <span>Free Forever</span>
-            </div>
-            <div className="trust-item">
-              <span className="trust-icon">✓</span>
-              <span>No Sign Up Required</span>
-            </div>
-            <div className="trust-item">
-              <span className="trust-icon">✓</span>
-              <span>ATS Optimized</span>
-            </div>
-          </div>
-          
-          <div className="rating-text">
-            Trusted by 12,500+ job seekers
-          </div>
-        </header>
-
-        <main>
-          {/* Main Editor Section */}
-          <div className="editor-section">
-            <div className="editor-header">
-              <h2>Analyze Your Resume Readability</h2>
-              <p>
-                Paste your resume content below for comprehensive readability analysis. Our tool calculates Flesch-Kincaid scores, sentence metrics, and provides actionable improvement suggestions.
+        {/* Hero */}
+        <section className="section" id="main-content">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">✦ Free Tool • No Sign Up • Flesch-Kincaid • ATS Optimized</div>
+              <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                Resume <span className="gradient-text">Readability</span> Checker – Professional Flesch-Kincaid Analysis & ATS Optimization {CURRENT_YEAR}
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                Professional Flesch-Kincaid analysis with <strong>ATS optimization guidance</strong>. Analyze and improve your resume's readability with comprehensive metrics, sentence analysis, and actionable suggestions. <strong>Free forever.</strong>
               </p>
-            </div>
-            
-            <div className="textarea-container">
-              <textarea
-                ref={textareaRef}
-                className="textarea"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder={`Paste your resume content here...
-                
-Example:
-MARKETING MANAGER
-ABC Corporation | 2020-Present
-
-• Increased social media engagement by 150% through targeted campaign strategies
-• Managed $500K annual marketing budget, achieving 25% ROI improvement
-• Led cross-functional teams to launch 3 successful product campaigns
-
-SKILLS
-Digital Marketing | SEO Optimization | Team Leadership | Budget Management`}
-                rows={15}
-                autoFocus
-                aria-label="Resume text input for readability analysis"
-              />
               
-              <div className="button-group">
-                <button
-                  className="reset-button"
-                  onClick={handleReset}
-                  type="button"
-                  aria-label="Clear all text and reset analysis"
-                >
-                  Clear All Text
-                </button>
-                <div className="word-count-display">
-                  {readabilityStats.wordCount} words • {readabilityStats.sentenceCount} sentences • {readabilityStats.characterCount} characters
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                <span className="feature-badge">✓ Free Forever</span>
+                <span className="feature-badge">✓ No Sign Up Required</span>
+                <span className="feature-badge">✓ ATS Optimized</span>
+              </div>
+
+              <div style={{ padding: '1.5rem', background: 'var(--card-bg)', borderRadius: '0.5rem', border: 'var(--card-border)', marginBottom: '2rem', display: 'inline-block' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center' }}>
+                  <span style={{ color: 'var(--accent-primary)', fontSize: '1.3rem' }}>★★★★★</span>
+                  <span style={{ fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)' }}>4.8/5</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Trusted by 12,500+ job seekers</span>
                 </div>
+              </div>
+
+              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {[{ value: "4.8/5", label: "User Rating" }, { value: "12K+", label: "Job Seekers" }, { value: "6", label: "Metrics Analyzed" }, { value: "100%", label: "Private & Secure" }].map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.value}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>{s.label}</div></div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiEye /> Analyze Your Resume Readability</button>
+                <Link href="/resume-templates" className="btn-outline"><FiFileText /> Browse ATS Templates</Link>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Overall Score Section */}
-          <div className="score-section">
-            <div className="score-header">
-              <h2>Overall Readability Assessment</h2>
-              <div className="score-subtitle">
-                Based on Flesch-Kincaid, sentence analysis, and writing quality metrics
+        {/* Checker Tool */}
+        <section ref={toolRef} className="section section-alt" aria-labelledby="checker-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="checker-title">Analyze Your Resume Readability</h2>
+              <p className="section-subtitle">Paste your resume content below for comprehensive readability analysis. Our tool calculates Flesch-Kincaid scores, sentence metrics, and provides actionable improvement suggestions.</p>
+            </div>
+
+            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <textarea ref={textareaRef} value={text} onChange={(e) => setText(e.target.value)} placeholder={`Paste your resume content here for free readability analysis...\n\nExample:\nMARKETING MANAGER\nABC Corporation | 2020-Present\n\n• Increased social media engagement by 150% through targeted campaign strategies\n• Managed $500K annual marketing budget, achieving 25% ROI improvement\n• Led cross-functional teams to launch 3 successful product campaigns\n\nSKILLS\nDigital Marketing | SEO Optimization | Team Leadership | Budget Management`} rows={15} style={{ marginBottom: '1rem' }} aria-label="Resume text input for readability analysis" />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                <button onClick={handleReset} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem' }} aria-label="Clear all text and reset analysis"><FiRefreshCw size={16} /> Clear All Text</button>
+                <span className="text-small">{readabilityStats.wordCount} words • {readabilityStats.sentenceCount} sentences • {readabilityStats.characterCount} characters</span>
               </div>
             </div>
-            
-            <div className="score-container">
-              <div 
-                className="score-circle"
-                style={{ 
-                  background: `conic-gradient(${getOverallScoreColor()} ${overallScore * 3.6}deg, #e5e7eb 0deg)`
-                }}
-                aria-label={`Overall readability score: ${overallScore} out of 100`}
-              >
-                <div className="score-inner">
-                  <div className="score-value">{overallScore}</div>
-                  <div className="score-label">/100</div>
-                </div>
-              </div>
-              
-              <div className="score-breakdown">
-                <div className="score-category">
-                  <div className="category-label">Flesch-Kincaid Grade</div>
-                  <div className={`category-score score${fleschKincaidStatus.status}`}>
-                    {readabilityStats.fleschKincaidGrade.toFixed(1)}
+
+            {/* Results */}
+            {text.trim() && (
+              <div style={{ maxWidth: '900px', margin: '2rem auto 0', animation: 'slideUp 0.5s var(--easing-smooth)' }}>
+                <div className="card-executive" style={{ marginBottom: '1.5rem' }}>
+                  <div className="section-header" style={{ marginBottom: '1.5rem' }}>
+                    <h2 className="section-title">Overall Readability Assessment</h2>
+                    <p className="section-subtitle">Based on Flesch-Kincaid, sentence analysis, and writing quality metrics</p>
                   </div>
-                  <div className={`category-status status${fleschKincaidStatus.status}`}>
-                    {fleschKincaidStatus.text}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                    <div className={`score-circle ${getScoreColor(overallScore)}`} aria-label={`Overall readability score: ${overallScore} out of 100`}>{overallScore}/100</div>
+                    <div className="grid" style={{ flex: 1, minWidth: '280px', margin: 0 }}>
+                      <div className="stat-card">
+                        <div className="stat-number" style={{ color: gradeStatus.status === 'good' ? 'var(--success-color)' : 'var(--warning-color)' }}>{readabilityStats.fleschKincaidGrade}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Flesch-Kincaid Grade ({gradeStatus.text})</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-number" style={{ color: easeStatus.status === 'good' ? 'var(--success-color)' : 'var(--warning-color)' }}>{readabilityStats.fleschReadingEase}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Reading Ease ({easeStatus.text})</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-number" style={{ color: lengthStatus.status === 'good' ? 'var(--success-color)' : 'var(--warning-color)' }}>{readabilityStats.averageSentenceLength}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Avg. Words/Sentence ({lengthStatus.text})</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-number" style={{ color: passiveStatus.status === 'good' ? 'var(--success-color)' : 'var(--warning-color)' }}>
+                          {readabilityStats.sentenceCount > 0 ? `${((readabilityStats.passiveSentences / readabilityStats.sentenceCount) * 100).toFixed(0)}%` : '0%'}
+                        </div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Passive Voice ({passiveStatus.text})</div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="score-category">
-                  <div className="category-label">Reading Ease</div>
-                  <div className={`category-score score${readingEaseStatus.status}`}>
-                    {readabilityStats.fleschReadingEase.toFixed(0)}
-                  </div>
-                  <div className={`category-status status${readingEaseStatus.status}`}>
-                    {readingEaseStatus.text}
-                  </div>
-                </div>
-                
-                <div className="score-category">
-                  <div className="category-label">Sentence Length</div>
-                  <div className={`category-score score${sentenceLengthStatus.status}`}>
-                    {readabilityStats.averageSentenceLength.toFixed(1)}
-                  </div>
-                  <div className={`category-status status${sentenceLengthStatus.status}`}>
-                    {sentenceLengthStatus.text}
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+                    <div className="feature-badge" style={{ background: 'rgba(76,175,80,0.1)', color: 'var(--success-color)', border: '0.5px solid rgba(76,175,80,0.3)' }}>80-100: Excellent</div>
+                    <div className="feature-badge" style={{ background: 'rgba(255,152,0,0.1)', color: 'var(--warning-color)', border: '0.5px solid rgba(255,152,0,0.3)' }}>60-79: Good</div>
+                    <div className="feature-badge" style={{ background: 'rgba(255,180,171,0.1)', color: 'var(--error-color)', border: '0.5px solid rgba(255,180,171,0.3)' }}>0-59: Needs Improvement</div>
                   </div>
                 </div>
-                
-                <div className="score-category">
-                  <div className="category-label">Passive Voice</div>
-                  <div className={`category-score score${passiveVoiceStatus.status}`}>
-                    {readabilityStats.sentenceCount > 0 
-                      ? `${((readabilityStats.passiveSentences / readabilityStats.sentenceCount) * 100).toFixed(0)}%`
-                      : '0%'
-                    }
+
+                {/* Detailed Metrics */}
+                <div className="grid">
+                  <div className="card-executive" style={{ textAlign: 'center' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Bullet Points</h3>
+                    <div className="stat-number">{readabilityStats.bulletPoints}</div>
+                    <p className="text-small">{readabilityStats.bulletPoints > 5 ? 'Good usage of bullet points' : 'Consider adding more bullet points'}</p>
                   </div>
-                  <div className={`category-status status${passiveVoiceStatus.status}`}>
-                    {passiveVoiceStatus.text}
+                  <div className="card-executive" style={{ textAlign: 'center' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Complex Words</h3>
+                    <div className="stat-number">{readabilityStats.complexWords}</div>
+                    <p className="text-small">{readabilityStats.complexWords < readabilityStats.wordCount * 0.1 ? 'Good balance of vocabulary' : 'Consider simplifying language'}</p>
                   </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="score-interpretation">
-              <h3>Score Interpretation</h3>
-              <div className="interpretation-grid">
-                <div className="interpretation-item">
-                  <div className="interpretation-color" style={{ backgroundColor: '#ef4444' }}></div>
-                  <div>
-                    <strong>0-59:</strong> Needs Improvement
-                  </div>
-                </div>
-                <div className="interpretation-item">
-                  <div className="interpretation-color" style={{ backgroundColor: '#f59e0b' }}></div>
-                  <div>
-                    <strong>60-79:</strong> Good
-                  </div>
-                </div>
-                <div className="interpretation-item">
-                  <div className="interpretation-color" style={{ backgroundColor: '#10b981' }}></div>
-                  <div>
-                    <strong>80-100:</strong> Excellent
+                  <div className="card-executive" style={{ textAlign: 'center' }}>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Total Syllables</h3>
+                    <div className="stat-number">{readabilityStats.syllableCount}</div>
+                    <p className="text-small">Lower syllable count = easier reading</p>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
+        </section>
 
-          {/* Detailed Metrics Section */}
-          <div className="metrics-section">
-            <h2>Detailed Readability Metrics</h2>
-            <div className="metrics-grid">
-              <div className="metric-card">
-                <div className="metric-header">
-                  <div className="metric-name">Flesch-Kincaid Grade</div>
-                </div>
-                <div className="metric-value">{readabilityStats.fleschKincaidGrade.toFixed(1)}</div>
-                <div className="metric-description">
-                  U.S. grade level required to understand your resume
-                </div>
-                <div className={`metric-status status${fleschKincaidStatus.status}`}>
-                  {fleschKincaidStatus.text}
-                </div>
-              </div>
-              
-              <div className="metric-card">
-                <div className="metric-header">
-                  <div className="metric-name">Reading Ease</div>
-                </div>
-                <div className="metric-value">{readabilityStats.fleschReadingEase.toFixed(0)}</div>
-                <div className="metric-description">
-                  Higher scores = easier to read (0-100 scale)
-                </div>
-                <div className={`metric-status status${readingEaseStatus.status}`}>
-                  {readingEaseStatus.text}
-                </div>
-              </div>
-              
-              <div className="metric-card">
-                <div className="metric-header">
-                  <div className="metric-name">Sentence Length</div>
-                </div>
-                <div className="metric-value">{readabilityStats.averageSentenceLength.toFixed(1)} words</div>
-                <div className="metric-description">
-                  Average words per sentence (ideal: 15-20)
-                </div>
-                <div className={`metric-status status${sentenceLengthStatus.status}`}>
-                  {sentenceLengthStatus.text}
-                </div>
-              </div>
-              
-              <div className="metric-card">
-                <div className="metric-header">
-                  <div className="metric-name">Passive Sentences</div>
-                </div>
-                <div className="metric-value">
-                  {readabilityStats.passiveSentences} of {readabilityStats.sentenceCount}
-                </div>
-                <div className="metric-description">
-                  Sentences using passive voice (aim for less than 10%)
-                </div>
-                <div className={`metric-status status${passiveVoiceStatus.status}`}>
-                  {passiveVoiceStatus.text}
-                </div>
-              </div>
-              
-              <div className="metric-card">
-                <div className="metric-header">
-                  <div className="metric-name">Bullet Points</div>
-                </div>
-                <div className="metric-value">{readabilityStats.bulletPoints}</div>
-                <div className="metric-description">
-                  Effective for highlighting achievements
-                </div>
-                <div className="metric-status">
-                  {readabilityStats.bulletPoints > 5 ? 'Good usage' : 'Consider adding more'}
-                </div>
-              </div>
-              
-              <div className="metric-card">
-                <div className="metric-header">
-                  <div className="metric-name">Complex Words</div>
-                </div>
-                <div className="metric-value">{readabilityStats.complexWords}</div>
-                <div className="metric-description">
-                  Words with 3+ syllables (use strategically)
-                </div>
-                <div className="metric-status">
-                  {readabilityStats.complexWords < readabilityStats.wordCount * 0.1 
-                    ? 'Good balance' 
-                    : 'Consider simplifying'
-                  }
-                </div>
-              </div>
+        {/* Guidelines */}
+        <section className="section" aria-labelledby="guidelines-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="guidelines-title">Professional Readability Guidelines</h2>
+              <p className="section-subtitle">Industry standards for optimal resume readability based on ATS and recruiter research</p>
             </div>
-          </div>
-
-          {/* Guidelines Section */}
-          <section className="guidelines-section">
-            <h2 className="section-title">Professional Readability Guidelines</h2>
-            <p className="section-subtitle">
-              Industry standards for optimal resume readability (based on ATS and recruiter research)
-            </p>
-            
-            <div className="guidelines-grid">
-              {READABILITY_GUIDELINES.map((guideline, index) => (
-                <div key={index} className="guideline-card">
+            <div className="grid">
+              {READABILITY_GUIDELINES.map((g, i) => (
+                <div key={i} className="guideline-card">
                   <div className="guideline-header">
-                    <div className="guideline-metric">{guideline.metric}</div>
-                    <div className="guideline-ideal">Ideal: {guideline.ideal}</div>
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0, color: 'var(--accent-primary)' }}>{g.metric}</h3>
+                    <span className="text-small">Ideal: {g.ideal}</span>
                   </div>
                   <div className="guideline-body">
-                    <div className="guideline-description">
-                      {guideline.description}
-                    </div>
-                    <div className="guideline-tip">
-                      <strong>Tip:</strong> {guideline.tip}
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>{g.description}</p>
+                    <div style={{ background: 'var(--bg-surface-low)', padding: '0.75rem', borderRadius: '0.375rem', borderLeft: '3px solid var(--accent-primary)' }}>
+                      <strong style={{ fontSize: 'var(--font-size-body-sm)' }}>Tip:</strong> <span style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{g.tip}</span>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Improvement Tips Section */}
-          <section className="tips-section">
-            <h2 className="section-title">Actionable Improvement Tips</h2>
-            <div className="tips-grid">
-              {WRITING_TIPS.map((tip, index) => (
-                <div key={index} className="tip-card">
-                  <div className="tip-number">{String(index + 1).padStart(2, '0')}</div>
-                  <div className="tip-content">{tip}</div>
+        {/* Tips */}
+        <section className="section section-alt" aria-labelledby="tips-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="tips-title">Actionable Improvement Tips for Better Readability</h2>
+              <p className="section-subtitle">Proven strategies to enhance your resume's readability and impact</p>
+            </div>
+            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+              {WRITING_TIPS.map((tip, i) => (
+                <div key={i} className="tip-card">
+                  <span style={{ width: '40px', height: '40px', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container))', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'var(--font-weight-bold)', color: 'var(--accent-on-primary)', flexShrink: 0, fontSize: 'var(--font-size-body-sm)' }}>{String(i + 1).padStart(2, '0')}</span>
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{tip}</span>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* FAQ Section */}
-          <section className="faq-section">
-            <h2 className="section-title">Frequently Asked Questions</h2>
-            <div className="faq-list">
-              {FAQS.map((faq, index) => (
-                <div 
-                  key={index} 
-                  className={`faq-item ${activeFaq === index ? 'active' : ''}`}
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === index ? null : index)}
-                >
+        {/* FAQ */}
+        <section className="section" aria-labelledby="faq-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="faq-title">Frequently Asked Questions About Resume Readability</h2>
+              <p className="section-subtitle">Everything you need to know about resume readability and ATS optimization in {CURRENT_YEAR}</p>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)} aria-expanded={activeFaq === i}>
                   <div className="faq-question">
-                    <h3>{faq.question}</h3>
-                    <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '▲' : '▼'}</span>
                   </div>
-                  {activeFaq === index && (
-                    <div className="faq-answer">
-                      <p>{faq.answer}</p>
-                    </div>
-                  )}
+                  {activeFaq === i && <div className="faq-answer"><p>{faq.answer}</p></div>}
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Benefits Section */}
-          <section className="benefits-section">
-            <h2 className="section-title">Why Readability Matters for Resumes</h2>
-            <div className="benefits-grid">
-              <div className="benefit-card">
-                <h3 className="benefit-title">ATS Optimization</h3>
-                <p className="benefit-description">
-                  Applicant Tracking Systems parse readable content more accurately. Optimal sentence structure and word choice improve your resume's chances of passing automated screening.
-                </p>
+        {/* Benefits Section */}
+        <section className="section section-alt" aria-labelledby="benefits-title">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="benefits-title">Why Readability Matters for Your Resume</h2>
+              <p className="section-subtitle">Improving readability boosts your chances with both ATS systems and human recruiters</p>
+            </div>
+            <div className="grid">
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>ATS Optimization</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>Applicant Tracking Systems parse readable content more accurately. Optimal sentence structure and word choice improve your resume's chances of passing automated screening.</p>
               </div>
-              
-              <div className="benefit-card">
-                <h3 className="benefit-title">Recruiter Attention</h3>
-                <p className="benefit-description">
-                  With only 6-7 seconds per resume scan, clear, readable content ensures your key qualifications are immediately apparent to busy recruiters and hiring managers.
-                </p>
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Recruiter Attention</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>With only 6-7 seconds per resume scan, clear, readable content ensures your key qualifications are immediately apparent to busy recruiters and hiring managers.</p>
               </div>
-              
-              <div className="benefit-card">
-                <h3 className="benefit-title">Professional Impact</h3>
-                <p className="benefit-description">
-                  Well-written, readable resumes demonstrate communication skills and attention to detail—qualities valued in any professional role.
-                </p>
+              <div className="card-executive" style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Professional Impact</h3>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>Well-written, readable resumes demonstrate communication skills and attention to detail—qualities valued in any professional role.</p>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Call to Action Section */}
-          <section className="cta-section">
-            <div className="cta-content">
-              <h2 className="cta-title">Ready to Perfect Your Resume?</h2>
-              <p className="cta-subtitle">
-                Use our complete suite of free resume tools to create a job-winning resume
-              </p>
-              <div className="cta-buttons">
-                <Link href="/free-resume-builder" className="cta-button-primary">
-                  Try Free Resume Builder
-                </Link>
-                <Link href="/resume-templates" className="cta-button-secondary">
-                  Browse ATS Templates
-                </Link>
-              </div>
-              <div className="cta-features">
-                <span className="cta-feature">✓ Completely Free</span>
-                <span className="cta-feature">✓ No Sign Up Required</span>
-                <span className="cta-feature">✓ ATS Optimized</span>
-                <span className="cta-feature">✓ Professional Results</span>
-              </div>
+        {/* CTA */}
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-title">
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }} id="cta-title">
+              Ready to Perfect Your Resume Readability?
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Join 12,500+ professionals who improved their resume readability with our free analysis tool. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              <button onClick={() => { handleReset(); toolRef.current?.scrollIntoView({ behavior: 'smooth' }); }} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiEye /> Analyze Readability Now</button>
+              <Link href="/resume-templates" className="btn-outline"><FiGrid /> Browse ATS Templates</Link>
             </div>
-          </section>
-
-          {/* Internal Linking Footer - New Section for SEO/GEO Boost */}
-          <section className="internal-linking-footer">
-            <h3 className="footer-links-title">Related Career Resources</h3>
-            <div className="footer-links-grid">
-              <a href="/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds" className="footer-link-card">
-                <span className="footer-link-text">Write a hook summary</span>
-                <span className="footer-link-sub">Grab Recruiter Attention</span>
-              </a>
-              <a href="/free-resume-bullet-point-generator" className="footer-link-card">
-                <span className="footer-link-text">Bullet point generator</span>
-                <span className="footer-link-sub">Improve Structure</span>
-              </a>
-              <a href="/best-ats-resume-format-2026" className="footer-link-card">
-                <span className="footer-link-text">Best ATS resume format</span>
-                <span className="footer-link-sub">2026 Standards</span>
-              </a>
-              <a href="/resume-mistakes-americans-make-and-how-to-fix-them" className="footer-link-card">
-                <span className="footer-link-text">Common resume mistakes</span>
-                <span className="footer-link-sub">How to Fix Them</span>
-              </a>
-              <a href="/free-resume-word-and-character-counter" className="footer-link-card">
-                <span className="footer-link-text">Word & character counter</span>
-                <span className="footer-link-sub">Check Length Limits</span>
-              </a>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Completely Free</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> No Sign Up Required</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> ATS Optimized</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Professional Results</span>
             </div>
-          </section>
+            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 12,500+ resumes • Updated for {CURRENT_YEAR} hiring standards</p>
+          </div>
+        </section>
 
-        </main>
-      </div>
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement your readability check with these powerful tools and guides</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3", desc: "CAR methodology bullets" },
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume score" },
+                { href: "/free-resume-formatting-checker", text: "Formatting Checker", iconName: "FiLayout", desc: "Layout & spacing analysis" },
+                { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Guide", iconName: "FiFileText", desc: "Hook recruiters fast" },
+                { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • © {CURRENT_YEAR} Professional Resume Free. All rights reserved.</span>
+        </div>
+      </main>
     </>
   );
-}
+};
 
-// SSG with ISR
+// SSG with ISR - Injected from Page 1 Blueprint
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
-  
+  const buildTime = new Date(buildTimestamp);
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
   return {
     props: {
       seoData: {
-        currentDate: CURRENT_DATE,
-        lastModifiedDate: LAST_MODIFIED,
+        currentDate,
+        lastModifiedDate,
         buildTimestamp,
         pageType: 'tool',
         toolName: 'Resume Readability Checker'
       },
-      buildTimestamp
+      buildTimestamp,
+      lastModified: lastModifiedDate
     },
-    // Revalidate every hour
+    // Revalidate every hour for fresh content
     revalidate: 3600,
   };
 }
+
+export default ResumeReadabilityChecker;

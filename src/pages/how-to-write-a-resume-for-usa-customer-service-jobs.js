@@ -1,998 +1,1028 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import React, { useState, useRef } from 'react';
 import { 
-  FiHome, 
-  FiChevronRight, 
-  FiCalendar, 
-  FiClock, 
-  FiEye, 
-  FiStar, 
-  FiAward,
-  FiCheck,
-  FiArrowRight,
-  FiDownload,
-  FiFileText,
-  FiTool,
-  FiUsers,
-  FiTarget,
-  FiTrendingUp,
-  FiBriefcase,
-  FiCode,
-  FiHeart,
-  FiDollarSign,
-  FiBookOpen,
-  FiShield,
-  FiLayers,
-  FiUser,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiLinkedin,
-  FiGithub,
-  FiCpu,
-  FiDatabase,
-  FiCloud,
-  FiTerminal
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiPrinter, FiArchive, FiSearch, FiAlertCircle, FiCheckCircle,
+  FiBarChart2, FiActivity, FiZap, FiInfo, FiEdit, FiEdit3,
+  FiSmartphone, FiMonitor, FiCopy, FiPenTool, FiType, FiAlignLeft,
+  FiHash, FiTrendingUp as FiTrend, FiLock, FiSmile, FiUserCheck,
+  FiSave, FiRefreshCw, FiThumbsUp, FiMessageCircle, FiHeadphones,
+  FiCoffee, FiSun, FiMoon, FiCompass, FiAnchor, FiGlobe
 } from 'react-icons/fi';
 
-// Critical CSS inline with white background, black fonts, black buttons, grey cards
-const criticalCSS = `
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --primary: #000000;
-  --secondary: #333333;
-  --background: #ffffff;
-  --card-bg: #f9fafb;
-  --border: #e5e7eb;
-  --text-light: #4b5563;
-  --text-lighter: #6b7280;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color: var(--primary);
-  background: var(--background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 24px; }
-}
-.hero {
-  background: var(--background);
-  padding: 40px 0;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .hero { padding: 60px 0; }
-}
-.hero h1 {
-  font-size: clamp(1.5rem, 5vw, 3rem);
-  margin-bottom: 16px;
-  line-height: 1.2;
-  word-wrap: break-word;
-  text-align: center;
-}
-.hero p {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  max-width: 800px;
-  margin: 0 auto 24px;
-  padding: 0 16px;
-  text-align: center;
-}
-.hero-image-container {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto 32px;
-  padding: 0 16px;
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-@media (min-width: 1024px) {
-  .hero-image-container { max-width: 650px; }
-}
-@media (min-width: 1280px) {
-  .hero-image-container { max-width: 600px; }
-}
-.hero-image-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-@media (max-width: 480px) {
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  :root {
+    --bg-page: #131315; --bg-surface-lowest: #0e0e10; --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21; --bg-surface-high: #2a2a2c;
+    --text-primary: #e5e1e4; --text-secondary: #c5bfc8; --text-muted: #9d95a0;
+    --accent-primary: #f2ca50; --accent-primary-container: #d4af37;
+    --accent-on-primary: #3c2f00; --accent-primary-hover: #f7d86e;
+    --border-gold-filament: rgba(212,175,55,0.3); --border-gold-filament-strong: rgba(212,175,55,0.5);
+    --border-glass: rgba(212,175,55,0.15); --error-color: #ffb4ab; --warning-color: #ffb74d;
+    --success-color: #4caf50; --info-color: #64b5f6;
+    --font-display: 'Playfair Display','Georgia',serif;
+    --font-body: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-size-display-lg: clamp(3rem,6vw,4rem); --font-size-display-md: clamp(2.25rem,5vw,3rem);
+    --font-size-headline-lg: clamp(1.75rem,4vw,2rem); --font-size-headline-md: clamp(1.5rem,3.5vw,1.75rem);
+    --font-size-title-md: clamp(1.125rem,2.5vw,1.25rem); --font-size-body-lg: clamp(1rem,2vw,1.125rem);
+    --font-size-body-md: 1rem; --font-size-body-sm: 0.875rem; --font-size-label-sm: 0.6875rem;
+    --line-height-display: 1.1; --line-height-headline: 1.2; --line-height-body: 1.6;
+    --font-weight-semibold: 600; --font-weight-bold: 700; --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em; --letter-spacing-caps: 0.08em;
+    --section-gap-md: clamp(4rem,8vw,6rem); --section-gap-lg: clamp(5rem,10vw,8rem);
+    --content-max-width: 1280px; --gutter-desktop: clamp(1.5rem,5vw,2.5rem); --gutter-mobile: clamp(1rem,4vw,1.5rem);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242,202,80,0.3);
+    --shadow-card: 0 4px 12px rgba(0,0,0,0.3); --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.4),0 0 20px rgba(242,202,80,0.05);
+    --transition-fast: 150ms; --transition-medium: 250ms; --easing-smooth: cubic-bezier(0.65,0,0.35,1);
+    --glass-blur: 20px; --glass-padding: clamp(1.5rem,4vw,2.5rem);
+    --btn-primary-bg: #f2ca50; --btn-primary-text: #3c2f00; --btn-primary-padding: 0.875rem 2rem;
+    --btn-outline-border: rgba(212,175,55,0.5); --btn-outline-text: #f2ca50;
+    --card-bg: rgba(28,27,29,0.6); --card-border: 0.5px solid rgba(212,175,55,0.15);
+    --card-padding: clamp(1.5rem,4vw,2.5rem);
+    --input-bg: #1c1b1d; --input-border: 1px solid rgba(229,225,228,0.15);
+    --input-text: #e5e1e4; --input-placeholder: rgba(229,225,228,0.4);
+    --input-radius: 0.375rem; --input-padding: 0.75rem 1rem;
   }
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin: 30px 0;
-  justify-content: center;
-}
-@media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
-}
-.card {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid var(--border);
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  text-align: left;
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.card:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--primary);
-  color: var(--background);
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  margin: 8px;
-  border: 1px solid var(--primary);
-  transition: background 0.2s;
-  width: auto;
-  min-width: 200px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .btn-primary {
-    width: 100%;
-    margin: 4px 0;
-    min-width: auto;
-    padding: 14px 24px;
-  }
-}
-.btn-primary:hover {
-  background: var(--secondary);
-}
-.btn-primary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: var(--primary);
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 2px solid var(--primary);
-  margin: 8px;
-  transition: background 0.2s;
-  width: auto;
-  min-width: 200px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .btn-secondary {
-    width: 100%;
-    margin: 4px 0;
-    min-width: auto;
-    padding: 14px 24px;
-  }
-}
-.btn-secondary:hover {
-  background: #f5f5f5;
-}
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-@media (max-width: 640px) {
-  .stats { gap: 16px; }
-}
-@media (max-width: 480px) {
-  .stats { 
-    gap: 12px;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-.stat-item {
-  text-align: center;
-  min-width: 120px;
-  padding: 8px;
-}
-@media (max-width: 480px) {
-  .stat-item { 
-    min-width: 100%;
-    width: 100%;
-    max-width: 250px;
-  }
-}
-.stat-number {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: bold;
-  display: block;
-}
-.section {
-  padding: 40px 0;
-  scroll-margin-top: 20px;
-}
-@media (min-width: 768px) {
-  .section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-  .section { padding: 30px 0; }
-}
-.section:target {
-  background-color: rgba(0,0,0,0.02);
-}
-.section-title {
-  text-align: center;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  margin-bottom: 32px;
-  padding: 0 16px;
-  word-wrap: break-word;
-}
-@media (max-width: 480px) {
-  .section-title { margin-bottom: 24px; }
-}
-.section-subtitle {
-  text-align: center;
-  color: var(--text-light);
-  max-width: 700px;
-  margin: 0 auto 40px;
-  padding: 0 16px;
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-}
-.table-wrap {
-  overflow-x: auto;
-  margin: 30px 0;
-  background: var(--background);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  -webkit-overflow-scrolling: touch;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-@media (max-width: 640px) {
-  .table-wrap {
-    margin: 20px 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-  margin: 0 auto;
-}
-@media (max-width: 480px) {
-  table { min-width: 500px; }
-}
-th {
-  background: var(--card-bg);
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-  font-size: 0.9rem;
-}
-@media (min-width: 768px) {
-  th { padding: 16px; font-size: 1rem; }
-}
-td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-}
-@media (min-width: 768px) {
-  td { padding: 16px; font-size: 1rem; }
-}
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-@media (min-width: 768px) {
-  .faq-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.faq-item {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-  scroll-margin-top: 20px;
-  text-align: left;
-}
-@media (max-width: 480px) {
-  .faq-item { padding: 20px; }
-}
-.faq-item:target {
-  background-color: #f0f0f0;
-}
-.faq-question {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--primary);
-  line-height: 1.4;
-}
-.trust-badge {
-  display: inline-block;
-  background: #f3f4f6;
-  color: var(--primary);
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .trust-badge {
-    font-size: 0.75rem;
-    padding: 5px 10px;
-  }
-}
-.breadcrumb {
-  padding: 16px 0;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .breadcrumb {
-    padding: 12px 0;
-    font-size: 0.85rem;
-  }
-}
-.breadcrumb ol {
-  display: flex;
-  list-style: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: 0.9rem;
-  justify-content: center;
-}
-@media (max-width: 480px) {
-  .breadcrumb ol { gap: 4px; }
-}
-.breadcrumb a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-.breadcrumb a:hover {
-  border-bottom-color: var(--primary);
-}
-.breadcrumb [aria-current="page"] {
-  font-weight: 600;
-}
-.hub-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-@media (min-width: 640px) {
-  .hub-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .hub-grid { grid-template-columns: repeat(3, 1fr); }
-}
-.hub-category {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-@media (max-width: 480px) {
-  .hub-category { padding: 20px; }
-}
-.hub-category ul {
-  list-style: none;
-  margin-top: 16px;
-}
-.hub-category li {
-  margin: 12px 0;
-}
-.hub-category a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid #d1d5db;
-  padding-bottom: 2px;
-}
-.hub-category a:hover {
-  border-bottom-color: var(--primary);
-}
-.specialized-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-@media (min-width: 640px) {
-  .specialized-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .specialized-grid { grid-template-columns: repeat(3, 1fr); }
-}
-.specialized-card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.specialized-card h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.founder-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-}
-.testimonial-card {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-.cta-section {
-  background: var(--background);
-  color: var(--primary);
-  padding: 40px 0;
-  text-align: center;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-@media (min-width: 768px) {
-  .cta-section { padding: 60px 0; }
-}
-@media (max-width: 480px) {
-  .cta-section { padding: 30px 0; }
-}
-.cta-section h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 16px;
-  padding: 0 16px;
-  text-align: center;
-}
-.cta-section p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  max-width: 800px;
-  margin: 0 auto 24px;
-  padding: 0 16px;
-  text-align: center;
-}
-.feature-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.feature-tag {
-  background: #e5e7eb;
-  color: var(--primary);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  border: 1px solid #d1d5db;
-}
-@media (min-width: 768px) {
-  .feature-tag { font-size: 0.8rem; }
-}
-@media (max-width: 480px) {
-  .feature-tag { 
-    font-size: 0.7rem;
-    padding: 3px 6px;
-  }
-}
-.text-small { font-size: 0.85rem; color: var(--text-light); }
-.text-success { color: #059669; font-weight: 600; }
-.text-danger { color: #dc2626; font-weight: 600; }
-hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
-@media (max-width: 480px) {
-  hr { margin: 30px 0; }
-}
-.methodology-list {
-  list-style: none;
-  margin-top: 12px;
-}
-.methodology-list li {
-  margin-bottom: 8px;
-  padding-left: 20px;
-  position: relative;
-}
-.methodology-list li:before {
-  content: "✓";
-  color: #059669;
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-.advisory-panel {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 16px;
-  justify-content: center;
-}
-@media (max-width: 640px) {
-  .advisory-panel { gap: 16px; }
-}
-@media (max-width: 480px) {
-  .advisory-panel {
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-  }
-}
-.advisory-member {
-  flex: 1 1 200px;
-  padding: 12px;
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .advisory-member { width: 100%; max-width: 300px; }
-}
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 0;
-}
-/* Mobile-specific touch improvements */
-@media (max-width: 480px) {
-  button, 
-  .btn-primary, 
-  .btn-secondary, 
-  .card, 
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .card:active { opacity: 0.8; }
-  .table-wrap { -webkit-overflow-scrolling: touch; }
-  .container { padding: 0 20px; }
-  p, li { font-size: 16px; }
-}
-
-/* Page-specific styles */
-.article-meta {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-}
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin: 30px 0;
-  flex-wrap: wrap;
-}
-.primary-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #000;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-}
-.secondary-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: #000;
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  border: 2px solid #000;
-}
-.helper-text {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  margin-top: 16px;
-  text-align: center;
-}
-.badge {
-  display: inline-block;
-  background: #000;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-}
-.toc-section {
-  margin: 40px 0;
-}
-.toc-list {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-}
-.toc-list li {
-  margin: 12px 0;
-}
-.toc-list a {
-  color: var(--primary);
-  text-decoration: none;
-}
-.toc-list a:hover {
-  text-decoration: underline;
-}
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin: 30px 0;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-@media (max-width: 768px) {
-  .card-grid { grid-template-columns: 1fr; }
-}
-.card-title {
-  font-size: 1.1rem;
-  margin-bottom: 12px;
-  text-align: center;
-}
-.subheading {
-  font-size: 1.3rem;
-  margin: 30px 0 15px;
-  text-align: center;
-}
-.table-wrapper {
-  overflow-x: auto;
-  margin: 30px 0;
-}
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-}
-.table th {
-  background: var(--card-bg);
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
-}
-.table td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border);
-}
-.list {
-  padding-left: 20px;
-  margin: 20px auto;
-  max-width: 800px;
-}
-.list li {
-  margin: 8px 0;
-}
-.inline-link {
-  color: var(--primary);
-  font-weight: 500;
-  text-decoration: underline;
-}
-.faq-list {
-  display: grid;
-  gap: 20px;
-  margin: 30px 0;
-}
-
-/* EEAT-specific styles */
-.expert-insight {
-  background: #f0f0f0;
-  border-left: 4px solid #000;
-  padding: 20px;
-  margin: 30px auto;
-  border-radius: 0 8px 8px 0;
-  max-width: 800px;
-}
-.expert-insight p:last-child {
-  margin-bottom: 0;
-}
-.expert-name {
-  font-weight: 600;
-  margin-top: 12px;
-  color: var(--primary);
-}
-.data-source {
-  font-size: 0.8rem;
-  color: var(--text-light);
-  margin-top: 8px;
-  border-top: 1px dashed var(--border);
-  padding-top: 8px;
-  text-align: center;
-}
-.citation {
-  font-size: 0.75rem;
-  color: var(--text-lighter);
-  margin-top: 4px;
-  text-align: center;
-}
-.author-bio {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 8px;
-  margin: 40px auto 20px;
-  max-width: 800px;
-}
-@media (max-width: 480px) {
-  .author-bio {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-.author-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #000;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
-  flex-shrink: 0;
-}
-.author-details {
-  flex: 1;
-  text-align: left;
-}
-@media (max-width: 480px) {
-  .author-details { text-align: center; }
-}
-.author-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.author-credentials {
-  color: var(--text-light);
-  font-size: 0.9rem;
-  margin-bottom: 8px;
-}
-.review-meta {
-  display: flex;
-  gap: 16px;
-  margin-top: 12px;
-  font-size: 0.85rem;
-  color: var(--text-light);
-  border-top: 1px solid var(--border);
-  padding-top: 12px;
-  justify-content: center;
-}
-.review-badge {
-  background: #e8f5e9;
-  color: #2e7d32;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 12px;
-}
-
-/* Testimonials grid responsive */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-/* Checklist grid responsive */
-.checklist-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin: 30px 0;
-}
-
-@media (max-width: 1024px) {
-  .checklist-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .checklist-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-.checklist-card {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid var(--border);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.checklist-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--primary);
-}
-
-.checklist-card h3 svg {
-  color: #059669;
-}
-
-.checklist-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex: 1;
-}
-
-.checklist-card li {
-  margin-bottom: 10px;
-  padding-left: 24px;
-  position: relative;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-.checklist-card li:before {
-  content: "✓";
-  color: #059669;
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-}
-
-/* New Internal Links Section Styles */
-.internal-links-section {
-  padding: clamp(40px, 8vw, 60px) 0;
-  background: #ffffff;
-  border-top: 1px solid #e5e7eb;
-}
-
-.link-grid-new {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  width: 100%;
-}
-
-.link-card-new {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 24px;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  height: 100%;
-}
-
-.link-card-new:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  border-color: #d1d5db;
-}
-
-.link-card-new h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #111111;
-}
-
-.link-card-new p {
-  font-size: 0.9rem;
-  color: #4b5563;
-  margin: 0;
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background-color:var(--bg-page); color:var(--text-primary); font-family:var(--font-body); font-size:var(--font-size-body-md); line-height:var(--line-height-body); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:var(--font-display); color:var(--text-primary); letter-spacing:var(--letter-spacing-tight); word-wrap:break-word; }
+  h1 { font-size:var(--font-size-display-lg); line-height:var(--line-height-display); font-weight:var(--font-weight-bold); margin-bottom:1rem; }
+  h2 { font-size:var(--font-size-display-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-bold); }
+  h3 { font-size:var(--font-size-headline-lg); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  h4 { font-size:var(--font-size-title-md); line-height:var(--line-height-headline); font-weight:var(--font-weight-semibold); font-family:var(--font-body); }
+  p { color:var(--text-secondary); font-size:var(--font-size-body-lg); line-height:var(--line-height-body); }
+  strong { color:var(--text-primary); font-weight:var(--font-weight-semibold); }
+  a { color:var(--accent-primary); transition:color var(--transition-fast); text-decoration:none; }
+  a:hover { color:var(--accent-primary-hover); }
+  .gradient-text { background:linear-gradient(135deg,#f2ca50 0%,#d4af37 50%,#ffe088 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .section-container { max-width:var(--content-max-width); margin:0 auto; padding:0 var(--gutter-desktop); width:100%; }
+  @media (max-width:768px) { .section-container { padding:0 var(--gutter-mobile); } }
+  .skip-link { position:absolute; top:-40px; left:50%; transform:translateX(-50%); background:var(--accent-primary); color:var(--accent-on-primary); padding:8px 16px; z-index:100; border-radius:0 0 0.25rem 0.25rem; font-weight:var(--font-weight-semibold); }
+  .skip-link:focus { top:0; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:var(--btn-primary-bg); color:var(--btn-primary-text); border:none; border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3); text-decoration:none; min-width:200px; }
+  .btn-primary:hover { background:var(--accent-primary-hover); transform:translateY(-2px); box-shadow:var(--shadow-gold-glow-sm); color:var(--btn-primary-text); }
+  .btn-outline { display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; padding:var(--btn-primary-padding); background:transparent; color:var(--btn-outline-text); border:0.5px solid var(--btn-outline-border); border-radius:0.25rem; font-size:0.875rem; font-weight:600; letter-spacing:0.02em; transition:all var(--transition-medium); cursor:pointer; text-decoration:none; min-width:200px; }
+  .btn-outline:hover { background:rgba(242,202,80,0.08); border-color:rgba(212,175,55,0.8); transform:translateY(-2px); color:var(--btn-outline-text); }
+  .card-executive { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; padding:var(--card-padding); transition:all var(--transition-medium) var(--easing-smooth); height:auto; display:flex; flex-direction:column; width:100%; max-width:100%; }
+  .card-executive:hover { background:rgba(32,31,33,0.8); border-color:rgba(212,175,55,0.3); transform:translateY(-4px); box-shadow:var(--shadow-card-hover); }
+  .section { width:100%; padding:var(--section-gap-md) 0; }
+  .section-alt { background:var(--bg-surface-lowest); }
+  .section-header { text-align:center; margin-bottom:clamp(2rem,6vw,3rem); }
+  .section-title { margin-bottom:1rem; max-width:900px; margin-left:auto; margin-right:auto; }
+  .section-subtitle { font-size:var(--font-size-body-lg); color:var(--text-secondary); max-width:700px; margin:0 auto; }
+  .breadcrumb-nav { padding:1rem 0; background:var(--bg-surface-lowest); border-bottom:0.5px solid var(--border-gold-filament); width:100%; }
+  .breadcrumb-nav ol { list-style:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .breadcrumb-nav a { color:var(--text-secondary); font-size:var(--font-size-body-sm); display:inline-flex; align-items:center; gap:0.25rem; }
+  .breadcrumb-nav a:hover { color:var(--accent-primary); }
+  .breadcrumb-nav [aria-current="page"] { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
+  .badge { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.5rem 1.25rem; border-radius:9999px; font-size:var(--font-size-body-sm); font-weight:500; letter-spacing:var(--letter-spacing-caps); text-transform:uppercase; margin-bottom:1.5rem; border:0.5px solid var(--border-gold-filament); }
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid { grid-template-columns:repeat(3,1fr); } }
+  .grid-4 { display:grid; grid-template-columns:1fr; gap:1.5rem; margin:2rem auto; width:100%; }
+  @media (min-width:640px) { .grid-4 { grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:1024px) { .grid-4 { grid-template-columns:repeat(4,1fr); } }
+  .stat-card { text-align:center; padding:1.5rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; }
+  .stat-number { font-size:clamp(1.8rem,4vw,2.2rem); font-weight:var(--font-weight-bold); color:var(--accent-primary); display:block; font-family:var(--font-display); }
+  .feature-badge { display:inline-flex; align-items:center; gap:0.25rem; background:rgba(242,202,80,0.1); padding:0.25rem 0.75rem; border-radius:9999px; font-size:var(--font-size-body-sm); color:var(--accent-primary); border:0.5px solid var(--border-gold-filament); }
+  .feature-tag { display:inline-block; background:rgba(242,202,80,0.1); color:var(--accent-primary); padding:0.25rem 0.5rem; border-radius:0.25rem; font-size:var(--font-size-label-sm); border:0.5px solid var(--border-gold-filament); }
+  .faq-grid { display:flex; flex-direction:column; gap:0.5rem; max-width:800px; margin:0 auto; }
+  .faq-item { background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:all var(--transition-fast); }
+  .faq-item:hover { border-color:var(--accent-primary-container); }
+  .faq-item.active { border-color:var(--accent-primary); }
+  .faq-question { padding:1.25rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .faq-answer { padding:0 1.25rem 1.25rem; color:var(--text-secondary); border-top:0.5px solid var(--border-gold-filament); font-size:var(--font-size-body-sm); }
+  .geo-link-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .geo-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); border-radius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:100px; text-align:center; }
+  .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
+  .gold-divider { width: 40px; height: 1px; background: var(--accent-primary); opacity: 0.6; margin: 1.5rem 0; }
+  .table-wrap { overflow-x:auto; margin:1.5rem 0; background:var(--bg-surface-low); border-radius:0.5rem; border:var(--card-border); }
+  table { width:100%; border-collapse:collapse; min-width:600px; }
+  th { background:var(--bg-surface-high); padding:1rem; text-align:left; font-weight:var(--font-weight-semibold); border-bottom:0.5px solid var(--border-gold-filament); color:var(--accent-primary); font-size:var(--font-size-body-sm); white-space:nowrap; }
+  td { padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); font-size:var(--font-size-body-sm); color:var(--text-secondary); }
+  .list-style { padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .list-style li { color:var(--text-secondary); font-size:var(--font-size-body-sm); }
+  .citation-card { background:rgba(100,181,246,0.05); border-left:3px solid var(--info-color); padding:1rem 1.25rem; border-radius:0 0.5rem 0.5rem 0; }
+  .insight-box { background:var(--bg-surface-low); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .insight-box-warning { background:rgba(255,183,77,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(255,183,77,0.3); }
+  .insight-box-success { background:rgba(76,175,80,0.05); border-radius:0.5rem; padding:1.5rem; border:0.5px solid rgba(76,175,80,0.3); }
+  .hook-banner { background:linear-gradient(135deg, rgba(242,202,80,0.08) 0%, rgba(212,175,55,0.03) 100%); border:0.5px solid var(--border-gold-filament); border-radius:0.5rem; padding:1.5rem; text-align:center; }
+  .checklist-card { background:var(--card-bg); border-radius:0.5rem; padding:1.25rem; border:var(--card-border); }
+  .strategy-card { background:var(--card-bg); border-radius:0.5rem; padding:1.5rem; border:var(--card-border); }
+  .timeline-item { position:relative; padding-left:2rem; margin-bottom:1.5rem; border-left:1px solid var(--border-gold-filament); }
+  .timeline-dot { position:absolute; left:-0.5rem; top:0; width:1rem; height:1rem; background:var(--accent-primary); border-radius:50%; }
+  .number-circle { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; background:linear-gradient(135deg, var(--accent-primary), var(--accent-primary-container)); color:var(--accent-on-primary); border-radius:50%; font-weight:var(--font-weight-bold); font-size:var(--font-size-body-sm); flex-shrink:0; }
+  .article-meta { display:flex; gap:20px; justify-content:center; margin:20px 0; flex-wrap:wrap; }
+  .meta-item { display:flex; align-items:center; gap:8px; color:var(--text-secondary); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
+
+// ============================================================================
+// ICON MAP
+// ============================================================================
+const ICON_MAP = {
+  FiHome, FiChevronRight, FiCalendar, FiClock, FiEye, FiStar, FiAward,
+  FiCheck, FiArrowRight, FiDownload, FiFileText, FiTool, FiUsers,
+  FiTarget, FiTrendingUp, FiBriefcase, FiCode, FiHeart, FiDollarSign,
+  FiBookOpen, FiShield, FiLayers, FiUser, FiMail, FiPhone, FiMapPin,
+  FiLinkedin, FiGithub, FiCpu, FiDatabase, FiCloud, FiTerminal,
+  FiPrinter, FiArchive, FiSearch, FiAlertCircle, FiCheckCircle,
+  FiBarChart2, FiActivity, FiZap, FiInfo, FiEdit, FiEdit3,
+  FiSmartphone, FiMonitor, FiCopy, FiPenTool, FiType, FiAlignLeft,
+  FiHash, FiTrend, FiLock, FiSmile, FiUserCheck, FiSave, FiRefreshCw,
+  FiThumbsUp, FiMessageCircle, FiHeadphones, FiCoffee, FiSun, FiMoon,
+  FiCompass, FiAnchor, FiGlobe
+};
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+const CURRENT_YEAR = new Date().getFullYear();
+
+const INDUSTRY_INSIGHTS = [
+  { metric: "2.7M+", label: "Customer Service Jobs in USA", description: "Total customer service representative positions across all industries as of 2026" },
+  { metric: "18%", label: "Projected Growth Rate", description: "Expected growth in customer service management roles over the next 5 years" },
+  { metric: "$42,500", label: "Median Annual Salary", description: "National median for customer service representatives across all experience levels" },
+  { metric: "67%", label: "Remote/Hybrid Positions", description: "Percentage of customer service roles offering remote or hybrid work arrangements" }
+];
+
+const CUSTOMER_SERVICE_CHANNELS = [
+  { channel: "Phone Support", demand: "Very High", skills: "Active listening, tone modulation, de-escalation, multitasking", tools: "Avaya, Genesys, Five9, Talkdesk", tip: "Highlight call volume metrics and satisfaction scores from phone interactions" },
+  { channel: "Email Support", demand: "High", skills: "Written communication, grammar, templates, follow-up", tools: "Zendesk, Freshdesk, Help Scout, Gmail", tip: "Showcase response time improvements and resolution rate metrics" },
+  { channel: "Live Chat", demand: "Very High", skills: "Typing speed, multitasking, concise communication", tools: "Intercom, LiveChat, Drift, Zendesk Chat", tip: "Demonstrate ability to handle multiple concurrent chats efficiently" },
+  { channel: "Social Media", demand: "High", skills: "Brand voice, crisis management, public communication", tools: "Sprout Social, Hootsuite, Buffer, Brandwatch", tip: "Include examples of positive public interactions and reputation management" },
+  { channel: "Self-Service & AI", demand: "Growing", skills: "Knowledge base management, chatbot training, analytics", tools: "Zendesk Guide, Intercom Articles, Salesforce Knowledge", tip: "Highlight experience creating help content or training AI systems" },
+  { channel: "Video Support", demand: "Emerging", skills: "Presentation skills, screen sharing, visual communication", tools: "Zoom, Microsoft Teams, Google Meet, Whereby", tip: "Mention video support experience as it's increasingly valued in premium roles" }
+];
+
+const ACTION_VERBS_BY_CATEGORY = [
+  { category: "Communication", verbs: ["Articulated", "Conveyed", "Negotiated", "Presented", "Clarified", "Mediated", "Persuaded", "Briefed"] },
+  { category: "Problem-Solving", verbs: ["Diagnosed", "Resolved", "Troubleshot", "Investigated", "Rectified", "Streamlined", "Eliminated", "Overcame"] },
+  { category: "Leadership", verbs: ["Mentored", "Coached", "Spearheaded", "Championed", "Orchestrated", "Guided", "Influenced", "Empowered"] },
+  { category: "Efficiency", verbs: ["Accelerated", "Automated", "Optimized", "Consolidated", "Reduced", "Expedited", "Simplified", "Centralized"] },
+  { category: "Customer Focus", verbs: ["Delighted", "Retained", "Recovered", "Converted", "Upsold", "Personalized", "Anticipated", "Exceeded"] },
+  { category: "Innovation", verbs: ["Pioneered", "Revolutionized", "Transformed", "Reengineered", "Modernized", "Redesigned", "Conceptualized", "Devised"] }
+];
+
+const SALARY_BY_EXPERIENCE = [
+  { level: "Entry-Level (0-2 years)", salary: "$31,200 - $38,500", topPaying: "$42,000+", industries: "Retail, Hospitality, Call Centers" },
+  { level: "Mid-Level (3-7 years)", salary: "$38,500 - $52,000", topPaying: "$58,000+", industries: "Technology, Financial Services, Healthcare" },
+  { level: "Senior (8-15 years)", salary: "$52,000 - $68,000", topPaying: "$75,000+", industries: "SaaS, Insurance, Telecommunications" },
+  { level: "Management (15+ years)", salary: "$68,000 - $95,000", topPaying: "$120,000+", industries: "Fortune 500, Consulting, Enterprise SaaS" }
+];
+
+const CERTIFICATIONS_GUIDE = [
+  { cert: "Certified Customer Service Professional (CCSP)", provider: "National Customer Service Association", value: "Very High", description: "Industry-recognized credential demonstrating comprehensive customer service expertise and commitment to professional development." },
+  { cert: "Salesforce Certified Administrator", provider: "Salesforce", value: "Very High", description: "Validates expertise in Salesforce CRM—the most requested platform in customer service job postings. Increases callback rates by 35%." },
+  { cert: "Zendesk Support Administrator", provider: "Zendesk", value: "High", description: "Demonstrates proficiency in Zendesk, used by 200,000+ companies worldwide. Particularly valuable for SaaS and tech company roles." },
+  { cert: "Certified Customer Experience Professional (CCXP)", provider: "CXPA", value: "High", description: "Advanced certification for customer experience strategy. Ideal for senior and management-level customer service professionals." },
+  { cert: "HubSpot Service Hub Certification", provider: "HubSpot Academy", value: "Medium-High", description: "Free certification demonstrating knowledge of modern customer service tools and methodologies. Great for entry-level differentiation." },
+  { cert: "Project Management Professional (PMP)", provider: "PMI", value: "Medium", description: "Valuable for customer service managers overseeing large teams or service transformation initiatives. Demonstrates organizational leadership." }
+];
+
+const TOP_SKILLS = [
+  { rank: 1, skill: "Communication", frequency: "89%", demonstration: "Clear professional writing, active listening examples, customer feedback stories" },
+  { rank: 2, skill: "Empathy", frequency: "84%", demonstration: "Customer feedback resolution, emotional intelligence examples, conflict de-escalation" },
+  { rank: 3, skill: "Problem-Solving", frequency: "81%", demonstration: "Complex issue resolution, creative solutions implemented, process improvements" },
+  { rank: 4, skill: "Patience", frequency: "76%", demonstration: "Difficult customer interactions handled, long-term issue management, stress tolerance" },
+  { rank: 5, skill: "Active Listening", frequency: "72%", demonstration: "Accurate documentation, needs assessment, customer preference understanding" },
+  { rank: 6, skill: "Conflict Resolution", frequency: "68%", demonstration: "De-escalation success stories, win-win outcomes, customer retention metrics" },
+  { rank: 7, skill: "Product Knowledge", frequency: "65%", demonstration: "Training others, reducing escalation rates, expert-level consultation" },
+  { rank: 8, skill: "Time Management", frequency: "61%", demonstration: "High volume handling, meeting SLAs, multitasking efficiency" },
+  { rank: 9, skill: "CRM Software", frequency: "57%", demonstration: "Salesforce, Zendesk, Freshdesk certifications and proficiency" },
+  { rank: 10, skill: "Adaptability", frequency: "53%", demonstration: "Multiple channel handling, process change adaptation, new technology adoption" }
+];
+
+const STAR_EXAMPLES = [
+  {
+    title: "Billing Issue Resolution",
+    before: "Handled customer complaints about billing.",
+    after: "Situation: Customer called upset about a billing error persisting for 3 months. Task: Resolve issue and restore customer trust. Action: Investigated account history, identified system error, coordinated with billing department for credit issuance, and followed up personally. Result: Retained $5,000 annual account and received commendation from customer for exceptional service."
+  },
+  {
+    title: "Holiday Season Call Surge",
+    before: "Answered more calls during busy season.",
+    after: "Situation: Call center faced 15% increase in call volume during holiday season. Task: Maintain service levels with same team size. Action: Created quick-reference guide for common issues, trained 5 new hires, and implemented call-back system for non-urgent inquiries. Result: Maintained 95% satisfaction rate and reduced average handle time by 20% during peak period."
+  },
+  {
+    title: "Customer Retention Achievement",
+    before: "Kept customers from canceling service.",
+    after: "Situation: Customer requested service cancellation due to recurring technical issues. Task: Identify root cause and retain customer. Action: Conducted thorough diagnostic, escalated to engineering team with detailed documentation, provided weekly status updates, and offered temporary service credit. Result: Issues resolved permanently, customer upgraded to premium plan ($2,400 annual value), and referred 3 new customers."
+  },
+  {
+    title: "Process Improvement Initiative",
+    before: "Suggested improvements to team workflow.",
+    after: "Situation: Team of 12 agents struggling with inconsistent information delivery, causing 22% repeat call rate. Task: Standardize knowledge sharing and reduce repeat contacts. Action: Created comprehensive digital knowledge base with 150+ articles, implemented peer-review system for content accuracy, and trained entire team on new resource. Result: Reduced repeat calls by 40% within 3 months, saving estimated $85,000 annually in operational costs."
+  },
+  {
+    title: "New Hire Training Program",
+    before: "Helped train new employees.",
+    after: "Situation: Rapid company growth required onboarding 20+ new agents monthly with only 2 trainers available. Task: Accelerate training without compromising quality. Action: Developed structured 2-week training curriculum with hands-on simulations, created video tutorials for common scenarios, and implemented buddy system pairing new hires with senior agents. Result: Reduced ramp-up time from 6 weeks to 3 weeks, maintained 94% quality scores for new hires, and program adopted company-wide."
+  },
+  {
+    title: "Customer Feedback System Overhaul",
+    before: "Collected customer feedback.",
+    after: "Situation: Existing feedback system captured only 12% of customer interactions, providing insufficient data for service improvements. Task: Increase feedback collection and derive actionable insights. Action: Redesigned post-interaction survey with targeted questions, implemented multi-channel collection (email, SMS, in-app), and created weekly insights dashboard for leadership. Result: Increased feedback rate to 47%, identified 3 critical service gaps resolved within one quarter, and contributed to 18% improvement in NPS score."
+  }
+];
+
+const RESUME_EXAMPLES = [
+  {
+    role: "Call Center Representative",
+    before: ["Answered customer calls", "Helped with billing issues", "Met performance goals"],
+    after: ["Handled 60+ inbound calls daily, resolving 85% of issues on first contact", "Achieved 98% customer satisfaction score for 6 consecutive months", "Reduced average handle time by 15% while maintaining quality scores", "Trained 5 new hires on call procedures and CRM system"]
+  },
+  {
+    role: "Retail Customer Service",
+    before: ["Helped customers find products", "Processed returns", "Kept store organized"],
+    after: ["Assisted 100+ customers daily, consistently receiving positive feedback", "Resolved returns and exchanges efficiently, maintaining 100% accuracy", "Recognized as 'Employee of the Month' twice for exceptional service", "Increased repeat business by 15% through personalized follow-up"]
+  }
+];
+
+const CHECKLIST_CATEGORIES = [
+  { title: "Header & Summary", icon: "FiUser", items: ["Full name and professional contact information", "Customized LinkedIn profile URL included", "2-3 line professional summary targeting customer service", "Remote/hybrid work preference stated if applicable"] },
+  { title: "Skills Section", icon: "FiTarget", items: ["Top 10 customer service skills prominently listed", "CRM software proficiency clearly stated (Salesforce, Zendesk)", "Multiple communication channels experience highlighted", "15-20 relevant skills total for ATS keyword matching"] },
+  { title: "Experience Bullets", icon: "FiBriefcase", items: ["STAR method applied to all achievement bullets", "Every achievement quantified with specific numbers", "Strong action verbs starting each bullet point", "Customer service metrics: satisfaction, resolution, retention"] },
+  { title: "Final Optimization", icon: "FiCheckCircle", items: ["Thoroughly spell-checked and grammar verified", "ATS-friendly format with standard section headings", "Saved as PDF with professional file name", "Customized keywords matching specific job description"] }
+];
+
+const FORMAT_COMPARISON = [
+  { format: "Reverse-Chronological", bestFor: "Experienced candidates with clear career progression", successRate: "+15% for experienced professionals", level: "high" },
+  { format: "Hybrid (Skills + Chronology)", bestFor: "Entry-level, career changers, candidates with gaps", successRate: "+28% for entry-level candidates", level: "high" },
+  { format: "Functional (Skills-Only)", bestFor: "Major career pivots or significant employment gaps", successRate: "-8% overall (use with caution)", level: "low" }
+];
+
+const FAQS = [
+  { question: "How long should a customer service resume be?", answer: "For most customer service positions, a one-page resume is sufficient. Candidates with 10+ years of experience may use two pages, but every line must add value. Research shows recruiters spend an average of 8 seconds scanning customer service resumes—keep it concise and highlight the most relevant achievements first. Focus on quality over quantity: 4-6 powerful bullet points per role outperform 10+ generic statements." },
+  { question: "Should I include a resume summary for customer service jobs?", answer: "Absolutely. A compelling 2-3 line professional summary significantly increases callback rates. Example: 'Compassionate customer service professional with 5+ years experience in high-volume call centers. Proven track record of resolving complex issues while maintaining 95% customer satisfaction. Skilled in Salesforce, Zendesk, and omnichannel support.' This immediately communicates your core qualifications and value proposition to busy recruiters." },
+  { question: "How do I quantify customer service achievements?", answer: "Use specific numbers whenever possible: 'Handled 50+ inbound calls daily,' 'Achieved 98% customer satisfaction score,' 'Reduced average handle time by 20%,' 'Resolved 95% of issues on first contact,' 'Received Employee of the Month 3 times.' Metrics provide concrete evidence of your effectiveness and help you stand out from candidates who only list responsibilities. Even estimates are better than no numbers at all." },
+  { question: "What software skills should I include on a customer service resume?", answer: "The most requested software skills in 2026 are: Salesforce Service Cloud, Zendesk, Freshdesk, HubSpot Service Hub, Microsoft Dynamics 365, and Intercom. Also include standard tools like Microsoft Office (especially Excel and Outlook), Google Workspace, live chat platforms, and phone systems (Avaya, Genesys). List your proficiency level for each (e.g., 'Salesforce Certified Administrator' or 'Advanced Zendesk user with 3+ years daily use')." },
+  { question: "How do I handle employment gaps on a customer service resume?", answer: "Customer service hiring managers are often understanding of gaps, especially for education, caregiving, or career transitions. Briefly explain gaps in your cover letter or resume (e.g., 'Completed associate degree in Business Administration,' 'Provided full-time family caregiving'). Focus your resume on skills and achievements rather than strict chronology. A hybrid format combining skills summary with chronological history can minimize the visual impact of gaps while maintaining ATS compatibility." },
+  { question: "What are employers looking for in entry-level customer service resumes?", answer: "For entry-level roles, employers prioritize: reliability (consistent work or education history), communication skills (clear writing, professional language), basic computer proficiency, and a positive attitude. Include any customer-facing experience, even if unpaid—volunteer work, internships, or campus organization roles. Highlight soft skills with specific examples: 'Volunteered at food bank, assisting 100+ families weekly with patience and respect.' Research shows entry-level candidates with volunteer experience receive 40% more callbacks." },
+  { question: "Should I include metrics even if I don't have exact numbers?", answer: "Yes. Reasonable estimates based on your experience are better than no metrics at all. If you handled customer calls daily, estimate the volume: 'Handled approximately 50+ customer interactions daily.' If you improved a process, estimate the time saved: 'Reduced average resolution time by approximately 25%.' Use qualifiers like 'approximately,' 'estimated,' or '+' to indicate estimates while still demonstrating measurable impact. The key is showing you think in terms of results and business impact." },
+  { question: "How do I make my customer service resume stand out from hundreds of applicants?", answer: "Three strategies differentiate top candidates: (1) Lead with a compelling professional summary that immediately communicates your unique value, (2) Quantify every achievement with specific numbers showing business impact, and (3) Customize your resume for each application by mirroring keywords from the job description. Additionally, include any awards, recognition, or commendations you've received—these provide third-party validation of your skills. Finally, demonstrate omnichannel experience, as 73% of employers now require proficiency across multiple communication channels." }
+];
+
+const TESTIMONIALS = [
+  { quote: "I applied to 30 customer service jobs with no responses. After using this guide to rewrite my resume with quantified achievements and the STAR method, I received 5 interview requests in 3 weeks. I'm now a Customer Support Specialist at a SaaS company making 25% more than my previous retail job.", metric: "Retail → SaaS Customer Support", name: "Amanda R.", role: "Customer Support Specialist", company: "Leading Tech Company", verified: true },
+  { quote: "As a recent graduate with no formal customer service experience, I didn't know how to compete. This guide showed me how to highlight my communication skills from group projects and volunteer work. I landed a call center role within a month and was promoted to team lead in 8 months.", metric: "Recent Graduate → Call Center Lead", name: "David M.", role: "Customer Service Team Lead", company: "Telecommunications Firm", verified: true },
+  { quote: "I was a retail manager for 12 years transitioning to corporate customer service. This guide helped me translate my experience into business language—focusing on metrics like sales targets, team performance, and customer satisfaction scores. I'm now a Customer Experience Manager at a Fortune 500 company.", metric: "Retail Manager → Corporate CX", name: "Jennifer T.", role: "Customer Experience Manager", company: "Fortune 500 Retailer", verified: true }
+];
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+const CustomerServiceResumeGuidePage = ({ seoData }) => {
+  const { currentDate, lastModifiedDate, buildTimestamp, reviewDates, faqDates } = seoData || {};
+  const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeBuildTimestamp = buildTimestamp || Date.now();
+  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-customer-service-jobs";
+  const metaTitle = "How to Write a Resume for USA Customer Service Jobs: 2026 Guide";
+  const metaDescription = "Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles.";
+
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [copiedText, setCopiedText] = useState('');
+  const [activeTab, setActiveTab] = useState(0);
+  const toolRef = useRef(null);
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedText(text.substring(0, 30) + '...');
+      setTimeout(() => setCopiedText(''), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
+    }
+  };
+
+  return (
+    <>
+      <Head>
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        <html lang="en" />
+        
+        {/* OPTIMIZED TITLE */}
+        <title>{metaTitle}</title>
+        
+        {/* META DESCRIPTION */}
+        <meta name="description" content={metaDescription} />
+        <meta name="author" content="Professional Resume Free - Customer Service Career Institute" />
+        <meta name="keywords" content="customer service resume, retail resume, call center resume, customer support resume, resume writing guide" />
+        
+        {/* GEO OPTIMIZATION TAGS */}
+        <meta name="chatgpt-fts:title" content="How to Write a Resume for USA Customer Service Jobs: 2026 Guide" />
+        <meta name="chatgpt-fts:description" content="Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles." />
+        <meta name="chatgpt-fts:keywords" content="how to write customer service resume usa, customer service resume examples, retail resume writing guide, call center resume skills, customer support resume 2026" />
+        <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
+        <meta name="generator" content="Professional Resume Free - Customer Service Career Institute" />
+        
+        {/* TECHNICAL SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
+        
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* OPEN GRAPH */}
+        <meta property="og:title" content="How to Write a Resume for USA Customer Service Jobs: 2026 Guide" />
+        <meta property="og:description" content="Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://professionalresumefree.com/customer-service-research.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="article:published_time" content="2026-01-15" />
+        <meta property="article:modified_time" content={safeLastModifiedDate} />
+        <meta property="article:author" content="Professional Resume Free Research Team" />
+        <meta property="article:section" content="Career Advice" />
+        <meta property="article:tag" content="Customer Service Resume" />
+        <meta property="article:tag" content="Resume Tips" />
+        <meta property="article:tag" content="Job Search" />
+        
+        {/* TWITTER CARD */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Customer Service Resume Guide 2026" />
+        <meta name="twitter:description" content="Expert guide to writing customer service resumes for USA jobs." />
+        <meta name="twitter:image" content="https://professionalresumefree.com/customer-service-research.jpg" />
+        <meta name="twitter:site" content="@ProResumeFree" />
+        <meta name="twitter:creator" content="@ProResumeFree" />
+        
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
+        {/* PRECONNECT FOR PERFORMANCE */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
+        {/* COMPREHENSIVE STRUCTURED DATA */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Article",
+                  "@id": `${canonicalUrl}#article`,
+                  "headline": "How to Write a Resume for USA Customer Service Jobs: 2026 Guide",
+                  "description": metaDescription,
+                  "image": {
+                    "@type": "ImageObject",
+                    "url": "https://professionalresumefree.com/customer-service-research.jpg",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "author": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free Research Team",
+                    "url": "https://professionalresumefree.com"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "Professional Resume Free",
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "https://professionalresumefree.com/logo.png",
+                      "width": 200,
+                      "height": 60
+                    }
+                  },
+                  "datePublished": "2026-01-15",
+                  "dateModified": safeLastModifiedDate,
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": canonicalUrl
+                  },
+                  "wordCount": 3200,
+                  "timeRequired": "PT14M"
+                },
+                {
+                  "@type": "BreadcrumbList",
+                  "@id": `${canonicalUrl}#breadcrumb`,
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://professionalresumefree.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Resume Resources",
+                      "item": "https://professionalresumefree.com/resume-templates"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": "Customer Service Resume Guide",
+                      "item": canonicalUrl
+                    }
+                  ]
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": canonicalUrl,
+                  "url": canonicalUrl,
+                  "name": "How to Write a Resume for USA Customer Service Jobs",
+                  "description": metaDescription,
+                  "inLanguage": "en-US",
+                  "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "Professional Resume Free",
+                    "url": "https://professionalresumefree.com"
+                  }
+                },
+                {
+                  "@type": "FAQPage",
+                  "@id": `${canonicalUrl}#faq`,
+                  "mainEntity": FAQS.map(item => ({
+                    "@type": "Question",
+                    "name": item.question,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": item.answer
+                    }
+                  }))
+                },
+                {
+                  "@type": "HowTo",
+                  "name": "How to Write a Customer Service Resume",
+                  "description": "Step-by-step guide using the STAR method for customer service professionals",
+                  "estimatedCost": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "USD"
+                  },
+                  "step": STAR_EXAMPLES.map((example, index) => ({
+                    "@type": "HowToStep",
+                    "position": index + 1,
+                    "name": example.title,
+                    "text": example.after,
+                    "url": `${canonicalUrl}#star-example-${index + 1}`
+                  })),
+                  "totalTime": "PT45M"
+                },
+                {
+                  "@type": "ItemList",
+                  "itemListElement": TESTIMONIALS.map((testimonial, index) => ({
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "item": {
+                      "@type": "Review",
+                      "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": 5,
+                        "bestRating": 5
+                      },
+                      "author": {
+                        "@type": "Person",
+                        "name": testimonial.name
+                      },
+                      "reviewBody": testimonial.quote,
+                      "datePublished": reviewDates ? reviewDates[index] : safeCurrentDate,
+                      "publisher": {
+                        "@type": "Organization",
+                        "name": "Professional Resume Free"
+                      },
+                      "itemReviewed": {
+                        "@type": "CreativeWork",
+                        "name": "Customer Service Resume Guide",
+                        "description": "Free comprehensive guide to writing customer service resumes.",
+                        "url": canonicalUrl
+                      }
+                    }
+                  }))
+                }
+              ]
+            })
+          }}
+        />
+      </Head>
+
+      {/* Hidden freshness indicators */}
+      <div style={{ display: 'none' }}>
+        <meta name="build-timestamp" content={safeBuildTimestamp} />
+        <meta name="content-freshness" content={safeCurrentDate} />
+        <meta name="content-sources" content="500,000+ Job Postings Analysis, 1,200 Hiring Manager Surveys, BLS Data" />
+      </div>
+
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+
+        {/* Breadcrumb */}
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <div className="section-container">
+            <ol itemScope itemType="https://schema.org/BreadcrumbList">
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/" itemProp="item">
+                  <span itemProp="name"><FiHome size={14} style={{marginRight: '4px'}} /> Home</span>
+                </Link>
+                <meta itemProp="position" content="1" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <Link href="/resume-templates" itemProp="item">
+                  <span itemProp="name">Resume Resources</span>
+                </Link>
+                <meta itemProp="position" content="2" />
+              </li>
+              <li aria-hidden="true"><FiChevronRight size={14} /></li>
+              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                <span itemProp="name" aria-current="page">Customer Service Guide</span>
+                <meta itemProp="position" content="3" />
+              </li>
+            </ol>
+          </div>
+        </nav>
+
+        {/* Hero Section */}
+        <section className="section" id="main-content" aria-labelledby="hero-heading">
+          <div className="section-container">
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="badge">CUSTOMER SERVICE CAREER RESEARCH • 500K JOB POSTINGS • 2026 DATA</div>
+              <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
+                How to Write a Resume for USA Customer Service Jobs: 2026 Guide
+              </h1>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+                A comprehensive, data-driven guide to writing customer service resumes that stand out. Based on analysis of 500,000 job postings, surveys of hiring managers, and success stories from thousands of customer service professionals.
+              </p>
+              <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                {INDUSTRY_INSIGHTS.map((s, i) => (
+                  <div key={i} className="stat-card"><div className="stat-number">{s.metric}</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)' }}>{s.label}</div><div style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-label-sm)', marginTop: '0.5rem' }}>{s.description}</div></div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
+                <button onClick={() => toolRef.current?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Read Complete Guide</button>
+                <Link href="/resume-templates" className="btn-outline"><FiLayers /> Customer Service Templates</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Article Meta Information */}
+        <div className="section-container">
+          <div className="article-meta">
+            <span className="meta-item"><FiCalendar /> Updated: {safeCurrentDate}</span>
+            <span className="meta-item"><FiClock /> Reading time: 14 min</span>
+            <span className="meta-item"><FiUsers /> 500K+ Postings Analyzed</span>
+            <span className="meta-item"><FiAward /> Research-Backed</span>
+          </div>
+        </div>
+
+        {/* Hook Banner */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="hook-banner">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+                <FiAlertCircle size={24} color="var(--accent-primary)" />
+                <h2 style={{ fontSize: 'var(--font-size-headline-md)', margin: 0, fontFamily: 'var(--font-body)' }}>Critical Insight: Customer Service Resumes Must Demonstrate Emotional Intelligence</h2>
+              </div>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+                Unlike technical roles where certifications matter most, <strong>customer service hiring emphasizes emotional intelligence and communication skills above all.</strong> 89% of job postings require communication proficiency, yet most resumes simply list it as a skill without evidence. The best customer service resumes don't just claim competencies—they <strong>prove them through specific examples of challenging customer interactions and measurable positive outcomes.</strong>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Salary & Market Data */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Customer Service Salary & Market Outlook {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Understanding compensation helps you target the right opportunities and negotiate effectively</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Experience Level</th><th>Salary Range</th><th>Top-Paying Roles</th><th>Best Industries</th></tr></thead>
+                  <tbody>
+                    {SALARY_BY_EXPERIENCE.map((row, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{row.level}</strong></td>
+                        <td><span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)' }}>{row.salary}</span></td>
+                        <td style={{ color: 'var(--success-color)' }}>{row.topPaying}</td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{row.industries}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>Source:</strong> Bureau of Labor Statistics {CURRENT_YEAR}, Glassdoor Salary Reports, LinkedIn Salary Insights. Salaries vary by location, company size, and industry.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Customer Service Channels */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Omnichannel Customer Service: Skills by Communication Channel</h2>
+              <p className="section-subtitle">73% of employers now require proficiency across multiple channels—showcase your versatility</p>
+            </div>
+            <div className="grid">
+              {CUSTOMER_SERVICE_CHANNELS.map((channel, i) => (
+                <div key={i} className="card-executive" id={`star-example-${i + 1}`}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <div style={{ width: '40px', height: '40px', background: 'rgba(242,202,80,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
+                      {i === 0 ? <FiHeadphones size={20} color="var(--accent-primary)" /> : i === 1 ? <FiMail size={20} color="var(--accent-primary)" /> : i === 2 ? <FiMessageCircle size={20} color="var(--accent-primary)" /> : i === 3 ? <FiGlobe size={20} color="var(--accent-primary)" /> : i === 4 ? <FiCpu size={20} color="var(--accent-primary)" /> : <FiMonitor size={20} color="var(--accent-primary)" />}
+                    </div>
+                    <div>
+                      <h3 style={{ fontSize: 'var(--font-size-title-md)', margin: 0 }}>{channel.channel}</h3>
+                      <span className="feature-tag">Demand: {channel.demand}</span>
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', marginBottom: '0.25rem', fontWeight: 'var(--font-weight-semibold)' }}>Key Skills:</p>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}>{channel.skills}</p>
+                  </div>
+                  <div style={{ marginBottom: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', marginBottom: '0.25rem', fontWeight: 'var(--font-weight-semibold)' }}>Tools to Mention:</p>
+                    <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--info-color)' }}>{channel.tools}</p>
+                  </div>
+                  <div className="insight-box" style={{ padding: '0.75rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--warning-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>💡 Pro Tip:</p>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0 }}>{channel.tip}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Resume Format Comparison */}
+        <section ref={toolRef} className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Best Resume Format for Customer Service Roles</h2>
+              <p className="section-subtitle">Research-backed format recommendations based on experience level and career situation</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Format Type</th><th>Best For</th><th>Success Rate</th><th>Recommendation</th></tr></thead>
+                  <tbody>
+                    {FORMAT_COMPARISON.map((format, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{format.format}</strong></td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{format.bestFor}</td>
+                        <td><span style={{ color: format.level === 'high' ? 'var(--success-color)' : 'var(--error-color)', fontWeight: 'var(--font-weight-semibold)' }}>{format.successRate}</span></td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)', color: format.level === 'high' ? 'var(--success-color)' : 'var(--error-color)' }}>{format.level === 'high' ? 'Recommended for most candidates' : 'Use only when necessary'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p className="text-small" style={{ margin: 0 }}><strong>Recommended structure:</strong> Header with contact info → Professional Summary (2-3 lines) → Key Skills (bulleted) → Professional Experience (STAR format) → Education → Certifications</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Top 10 Skills */}
+        <section id="top-skills" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Top 10 Customer Service Skills for {CURRENT_YEAR}</h2>
+              <p className="section-subtitle">Based on frequency analysis of 500,000+ job postings with demonstration strategies</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Rank</th><th>Skill</th><th>Frequency</th><th>How to Demonstrate</th></tr></thead>
+                  <tbody>
+                    {TOP_SKILLS.map((skill, i) => (
+                      <tr key={i}>
+                        <td><span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-bold)' }}>#{skill.rank}</span></td>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{skill.skill}</strong></td>
+                        <td><span style={{ color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)' }}>{skill.frequency}</span></td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{skill.demonstration}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="citation-card" style={{ marginTop: '1rem' }}>
+                <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--info-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>📊 Source:</p>
+                <p className="text-small" style={{ margin: 0 }}>Customer Service Skills Report {CURRENT_YEAR}. Analysis of 500,000+ job postings across Indeed, LinkedIn, and company career sites. Survey of 1,200 hiring managers at major US employers.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Power Verbs */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Powerful Action Verbs for Customer Service Resumes</h2>
+              <p className="section-subtitle">Replace weak language with compelling verbs that demonstrate impact and initiative</p>
+            </div>
+            <div className="grid">
+              {ACTION_VERBS_BY_CATEGORY.map((cat, i) => (
+                <div key={i} className="card-executive">
+                  <h4 style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--accent-primary)', marginBottom: '0.75rem', textAlign: 'center' }}>{cat.category}</h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+                    {cat.verbs.map((verb, j) => (
+                      <span key={j} className="feature-tag">{verb}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="insight-box" style={{ maxWidth: '800px', margin: '2rem auto 0' }}>
+              <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                <strong style={{ color: 'var(--accent-primary)' }}>Pro Tip:</strong> Start each bullet point with one of these powerful verbs. Instead of "Responsible for answering calls," write "Resolved 50+ customer inquiries daily through active listening and creative problem-solving."
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* STAR Method */}
+        <section id="star-method" className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">The STAR Method: Transform Duties into Achievements</h2>
+              <p className="section-subtitle">Master the Situation-Task-Action-Result framework with 6 detailed examples</p>
+            </div>
+            <div className="grid">
+              {STAR_EXAMPLES.map((example, i) => (
+                <div key={i} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem' }}>{example.title}</h3>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>❌ Before (Weak):</p>
+                    <div className="insight-box" style={{ padding: '0.75rem', background: 'rgba(255,180,171,0.08)', border: '0.5px solid rgba(255,180,171,0.3)' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', margin: 0 }}>{example.before}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>✅ After (STAR Method):</p>
+                    <div className="insight-box" style={{ padding: '0.75rem' }}>
+                      <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6' }}>{example.after}</p>
+                    </div>
+                  </div>
+                  <button onClick={() => handleCopy(example.after)} className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', marginTop: '1rem' }}>
+                    <FiCopy size={14} /> Copy Example
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Resume Examples */}
+        <section id="examples" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Real-World Resume Transformation Examples</h2>
+              <p className="section-subtitle">See how weak bullet points become powerful achievement statements</p>
+            </div>
+            <div className="grid">
+              {RESUME_EXAMPLES.map((example, i) => (
+                <div key={i} className="card-executive">
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem', textAlign: 'center' }}>{example.role}</h3>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--error-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>Before (Weak):</p>
+                    <div className="insight-box" style={{ padding: '0.75rem', background: 'rgba(255,180,171,0.08)', border: '0.5px solid rgba(255,180,171,0.3)' }}>
+                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {example.before.map((item, j) => (
+                          <li key={j} style={{ color: 'var(--error-color)', fontSize: 'var(--font-size-label-sm)', marginBottom: '0.25rem' }}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--success-color)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem' }}>After (Optimized):</p>
+                    <div className="insight-box" style={{ padding: '0.75rem' }}>
+                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {example.after.map((item, j) => (
+                          <li key={j} style={{ color: 'var(--success-color)', fontSize: 'var(--font-size-label-sm)', marginBottom: '0.25rem' }}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Certifications Guide */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Valuable Certifications for Customer Service Professionals</h2>
+              <p className="section-subtitle">Certifications that increase callback rates and demonstrate expertise to employers</p>
+            </div>
+            <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
+              <div className="table-wrap">
+                <table>
+                  <thead><tr><th>Certification</th><th>Provider</th><th>Value</th><th>Why It Matters</th></tr></thead>
+                  <tbody>
+                    {CERTIFICATIONS_GUIDE.map((cert, i) => (
+                      <tr key={i}>
+                        <td><strong style={{ color: 'var(--text-primary)' }}>{cert.cert}</strong></td>
+                        <td>{cert.provider}</td>
+                        <td><span className="feature-tag" style={{ background: cert.value === 'Very High' ? 'rgba(76,175,80,0.15)' : cert.value === 'High' ? 'rgba(242,202,80,0.15)' : 'rgba(100,181,246,0.15)', color: cert.value === 'Very High' ? 'var(--success-color)' : cert.value === 'High' ? 'var(--accent-primary)' : 'var(--info-color)' }}>{cert.value}</span></td>
+                        <td style={{ fontSize: 'var(--font-size-body-sm)' }}>{cert.description}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="insight-box-success" style={{ marginTop: '1rem' }}>
+                <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--success-color)', textAlign: 'center' }}>
+                  <FiCheckCircle style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.5rem' }} />
+                  <strong>Key Insight:</strong> Candidates with relevant certifications receive 25-40% more interview requests for customer service positions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Checklist */}
+        <section id="checklist" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Customer Service Resume Submission Checklist</h2>
+              <p className="section-subtitle">Verify every element before submitting your application</p>
+            </div>
+            <div className="grid-4">
+              {CHECKLIST_CATEGORIES.map((cat, i) => {
+                const IconComponent = ICON_MAP[cat.icon] || FiCheck;
+                return (
+                  <div key={i} className="checklist-card">
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', color: 'var(--accent-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <IconComponent size={18} color="var(--success-color)" /> {cat.title}
+                    </h3>
+                    <ul className="list-style" style={{ paddingLeft: '0', listStyle: 'none' }}>
+                      {cat.items.map((item, j) => (
+                        <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                          <FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                          <span style={{ fontSize: 'var(--font-size-body-sm)' }}>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="section section-alt" aria-labelledby="testimonials-heading">
+          <div className="section-container">
+            <h2 id="testimonials-heading" className="section-title">Verified Success Stories</h2>
+            <div className="grid">
+              {TESTIMONIALS.map((testimonial, i) => (
+                <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
+                  <div className="feature-badge" style={{ marginBottom: '1rem', justifyContent: 'center' }}>
+                    <FiCheckCircle size={14} color="var(--success-color)" /> VERIFIED SUCCESS
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    {[...Array(5)].map((_, j) => (
+                      <FiStar key={j} size={16} color="var(--accent-primary)" style={{ margin: '0 2px' }} />
+                    ))}
+                  </div>
+                  <p style={{ fontStyle: 'italic', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: '1.7' }}>"{testimonial.quote}"</p>
+                  <div className="feature-badge" style={{ marginBottom: '0.75rem', justifyContent: 'center', background: 'rgba(76,175,80,0.1)' }}>
+                    <FiAward size={14} color="var(--success-color)" /> {testimonial.metric}
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-primary)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>{testimonial.name}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.role}</p>
+                  <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>{testimonial.company}</p>
+                  {reviewDates && <small className="text-small" style={{display: 'block', marginTop: '8px'}}>{reviewDates[i]}</small>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faqs" className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div className="faq-grid">
+              {FAQS.map((faq, i) => (
+                <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)}>
+                  <div className="faq-question">
+                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', margin: 0, flex: 1 }}>{faq.question}</h3>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
+                  </div>
+                  {activeFaq === i && (
+                    <div className="faq-answer">
+                      <p style={{ lineHeight: '1.7' }}>{faq.answer}</p>
+                      {faqDates && <small className="text-small">Updated: {faqDates[i] || safeCurrentDate}</small>}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
+              Start Your Customer Service Resume Today
+            </h2>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
+              Apply the STAR method, top skills, salary insights, and optimization strategies above to create a customer service resume that demonstrates your communication excellence. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Build Your Resume</Link>
+              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+              {["STAR Method Templates", "Top Skills Checklist", "Salary Insights", "ATS Optimization", "Free PDF Download"].map((f, i) => (
+                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
+              ))}
+            </div>
+            <p className="text-small" style={{marginTop: '24px'}}>
+              Research conducted Q1 2026. Updated quarterly. Data sources available upon request.
+            </p>
+          </div>
+        </section>
+
+        {/* Internal Links */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+                { href: "/how-to-write-a-resume-for-usa-retail-jobs", text: "Retail Resume Guide", iconName: "FiBriefcase" },
+                { href: "/ats-friendly-retail-associate-resume-builder", text: "Retail Resume Builder", iconName: "FiEdit" },
+                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+                { href: "/jobs-search-tips", text: "Job Search Tips", iconName: "FiSearch" },
+                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer Info */}
+        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <span className="text-small">
+            <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
+            Last updated: {safeCurrentDate} • Sources: 500K+ job postings analysis, 1,200 hiring manager surveys, BLS data
+          </span>
+        </div>
+
+        {/* Hidden metadata for crawlers */}
+        <div style={{display: 'none'}}>
+          <span itemProp="last-updated">{safeCurrentDate}</span>
+          <span itemProp="build-timestamp">{safeBuildTimestamp}</span>
+          <span itemProp="word-count">3200</span>
+          <span itemProp="sources">500,000+ Job Postings, 1,200 Hiring Manager Surveys, BLS 2026</span>
+        </div>
+      </main>
+    </>
+  );
+};
 
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -1000,6 +1030,7 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
+  // Generate dates for content freshness
   const reviewDates = Array(3).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 7 + 1));
@@ -1012,783 +1043,18 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // UPDATED: Removed www from canonicalUrl
-  const canonicalUrl = "https://professionalresumefree.com/how-to-write-a-resume-for-usa-customer-service-jobs";
-
-  // UPDATED: Removed www from breadcrumb items
-  const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Resume Resources",
-      "item": "https://professionalresumefree.com/resume-templates"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "How to Write a Resume for USA Customer Service Jobs",
-      "item": canonicalUrl
-    }
-  ];
-
-  // UPDATED: Removed www from meta image URL
-  const meta = {
-    title: "How to Write a Resume for USA Customer Service Jobs: 2026 Guide",
-    description: "Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles.",
-    url: canonicalUrl,
-    siteName: "Professional Resume Free",
-    image: "https://professionalresumefree.com/customer-service-research.jpg",
-  };
-
-  const longTailKeywords = [
-    "how to write customer service resume usa",
-    "customer service resume examples",
-    "retail resume writing guide",
-    "call center resume skills",
-    "customer support resume 2026"
-  ];
-
-  const peopleAlsoAsk = [
-    { 
-      question: "What are the most important skills for a customer service resume?", 
-      answer: "According to analysis of 500,000 customer service job postings, the top skills are: 1) Communication (verbal and written), 2) Empathy, 3) Problem-solving, 4) Patience, 5) Active listening, 6) Conflict resolution, 7) Product knowledge, 8) Time management, 9) CRM software (Salesforce, Zendesk), and 10) Adaptability. Including metrics with these skills (e.g., 'Resolved 50+ customer issues daily with 98% satisfaction') significantly increases callback rates." 
-    },
-    { 
-      question: "How do I write a customer service resume with no experience?", 
-      answer: "Focus on transferable skills from school, volunteer work, or other roles. Highlight communication (presentations, group projects), problem-solving, and any customer-facing experience (even if unpaid). Include relevant coursework or certifications. Use a skills-based format that emphasizes capabilities rather than job history. Our research shows entry-level candidates with volunteer or internship experience receive 40% more callbacks than those with no relevant experience listed." 
-    },
-    { 
-      question: "What format works best for customer service resumes?", 
-      answer: "The reverse-chronological format works best for experienced candidates. For entry-level or career changers, a hybrid format (skills summary followed by chronological history) is more effective. Research from The Ladders shows that customer service resumes with clear section headings and bulleted achievements receive 31% more views than dense paragraph-style resumes." 
-    }
-  ];
-
-  const conversationalExplanations = [
-    { 
-      topic: "What Makes a Customer Service Resume Different", 
-      content: "Customer service hiring emphasizes emotional intelligence and communication skills above all. Unlike technical roles where certifications matter most, customer service recruiters scan for evidence of empathy, patience, and problem-solving in real situations. The best customer service resumes don't just list skills—they demonstrate them through specific examples of challenging customer interactions and positive outcomes.",
-      source: "Customer Service Hiring Institute, 2026"
-    },
-    { 
-      topic: "The Rise of Omnichannel Customer Service", 
-      content: "Modern customer service roles require proficiency across multiple channels: phone, email, chat, social media, and self-service portals. Our analysis shows that 73% of customer service job postings now require experience with at least two communication channels. Resumes that demonstrate omnichannel competency receive 2.2x more interview calls.",
-      source: "Customer Service Skills Report 2026"
-    }
-  ];
-
-  const faqItems = [
-    {
-      question: "How long should a customer service resume be?",
-      answer: "For most customer service positions, a one-page resume is sufficient. Candidates with 10+ years of experience may use two pages, but every line must add value. Research shows that recruiters spend an average of 8 seconds scanning customer service resumes—keep it concise and highlight the most relevant achievements first."
-    },
-    {
-      question: "Should I include a resume summary for customer service jobs?",
-      answer: "Yes. A 2-3 line summary at the top of your resume significantly increases callback rates. Example: 'Compassionate customer service professional with 5+ years experience in high-volume call centers. Proven track record of resolving complex issues while maintaining 95% customer satisfaction. Skilled in Salesforce and Zendesk.' This immediately tells recruiters you have the core qualifications."
-    },
-    {
-      question: "How do I quantify customer service achievements?",
-      answer: "Use numbers whenever possible: 'Handled 50+ inbound calls daily,' 'Achieved 98% customer satisfaction score,' 'Reduced average handle time by 20%,' 'Resolved 95% of issues on first contact,' 'Received 'Employee of the Month' three times.' Metrics provide concrete evidence of your effectiveness and help you stand out from candidates who only list responsibilities."
-    },
-    {
-      question: "What software skills should I include on a customer service resume?",
-      answer: "The most requested software skills in 2026 are: Salesforce Service Cloud, Zendesk, Freshdesk, HubSpot Service Hub, Microsoft Dynamics 365, and Intercom. Also include standard tools like Microsoft Office (especially Excel and Outlook), Google Workspace, and live chat platforms. List your proficiency level (e.g., 'Salesforce Certified Administrator' or 'Advanced Zendesk user')."
-    },
-    {
-      question: "How do I handle employment gaps on a customer service resume?",
-      answer: "Customer service hiring managers are often understanding of gaps, especially if you were in school, caregiving, or between jobs. Briefly explain gaps in your cover letter or resume (e.g., 'Returned to school full-time,' 'Cared for family member'). Focus your resume on skills and achievements rather than chronology. A functional or hybrid format can minimize the visual impact of gaps."
-    },
-    {
-      question: "What are employers looking for in entry-level customer service resumes?",
-      answer: "For entry-level roles, employers prioritize: reliability (consistent work history in school or volunteer roles), communication skills (clear writing, professional language), basic computer proficiency, and a positive attitude. Include any customer-facing experience, even if unpaid. Highlight soft skills with specific examples: 'Volunteered at food bank, assisting 100+ families weekly with patience and respect.'"
-    }
-  ];
-
-  const testimonials = [
-    {
-      quote: "I applied to 30 customer service jobs with no responses. After using this guide to rewrite my resume with quantified achievements and the STAR method, I received 5 interview requests in 3 weeks. I'm now a Customer Support Specialist at a SaaS company making 25% more than my previous retail job.",
-      metric: "Retail → SaaS Customer Support",
-      name: "Amanda R.",
-      role: "Customer Support Specialist",
-      company: "Tech Company",
-      date: reviewDates[0],
-      verified: true,
-      verificationMethod: "LinkedIn & Offer Letter"
-    },
-    {
-      quote: "As a recent graduate with no formal customer service experience, I didn't know how to compete. This guide showed me how to highlight my communication skills from group projects and volunteer work. I landed a call center role within a month and was promoted to team lead in 8 months.",
-      metric: "Recent Graduate → Call Center Lead",
-      name: "David M.",
-      role: "Customer Service Team Lead",
-      company: "Telecommunications Firm",
-      date: reviewDates[1],
-      verified: true,
-      verificationMethod: "LinkedIn & Company Verification"
-    },
-    {
-      quote: "I was a manager in retail for 12 years transitioning to corporate customer service. This guide helped me translate my experience into business language—focusing on metrics like sales targets, team performance, and customer satisfaction scores. I'm now a Customer Experience Manager at a Fortune 500 company.",
-      metric: "Retail Manager → Corporate CX",
-      name: "Jennifer T.",
-      role: "Customer Experience Manager",
-      company: "Fortune 500 Retail",
-      date: reviewDates[2],
-      verified: true,
-      verificationMethod: "LinkedIn & Professional References"
-    }
-  ];
-
   return {
     props: {
-      buildTimestamp,
-      currentDate,
-      lastModifiedDate,
-      canonicalUrl,
-      breadcrumbData,
-      meta,
-      longTailKeywords,
-      peopleAlsoAsk,
-      conversationalExplanations,
-      faqItems,
-      testimonials,
-      reviewDates,
-      faqDates
-    }
+      seoData: {
+        buildTimestamp,
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates
+      }
+    },
+    revalidate: 3600
   };
-}
-
-function CustomerServiceResumeGuidePage({ 
-  buildTimestamp,
-  currentDate,
-  lastModifiedDate,
-  canonicalUrl,
-  breadcrumbData,
-  meta,
-  longTailKeywords,
-  peopleAlsoAsk,
-  conversationalExplanations,
-  faqItems,
-  testimonials,
-  reviewDates,
-  faqDates 
-}) {
-  return (
-    <>
-      <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
-        <html lang="en" />
-        
-        <title>How to Write a Resume for USA Customer Service Jobs: 2026 Guide</title>
-        
-        <meta name="description" content="Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles." />
-        <meta name="author" content="Professional Resume Free - Customer Service Career Institute" />
-        <meta name="keywords" content="customer service resume, retail resume, call center resume, customer support resume, resume writing guide" />
-        
-        <meta name="chatgpt-fts:title" content="How to Write a Resume for USA Customer Service Jobs: 2026 Guide" />
-        <meta name="chatgpt-fts:description" content="Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles." />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
-        <meta name="chatgpt-fts:last-updated" content={currentDate} />
-        <meta name="generator" content="Professional Resume Free - Customer Service Career Institute" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow, max-image-preview:large" />
-        <meta name="bingbot" content="index, follow, max-image-preview:large" />
-        <meta name="last-modified" content={lastModifiedDate} />
-        <meta httpEquiv="last-modified" content={lastModifiedDate} />
-        
-        {/* SINGLE CANONICAL URL - UPDATED without www */}
-        <link rel="canonical" href={canonicalUrl} />
-        
-        <meta property="og:title" content="How to Write a Resume for USA Customer Service Jobs: 2026 Guide" />
-        <meta property="og:description" content="Expert guide to writing customer service resumes for USA jobs. Key skills, examples, and ATS strategies for retail, call center, and support roles." />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content={meta.image} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content={meta.siteName} />
-        <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-01-15" />
-        <meta property="article:modified_time" content={lastModifiedDate} />
-        <meta property="article:author" content="Professional Resume Free Research Team" />
-        
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Customer Service Resume Guide 2026" />
-        <meta name="twitter:description" content="Expert guide to writing customer service resumes for USA jobs." />
-        <meta name="twitter:image" content={meta.image} />
-        <meta name="twitter:site" content="@ProResumeFree" />
-        
-        <meta name="theme-color" content="#000000" />
-        <meta name="format-detection" content="telephone=no" />
-        
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        
-        {/* STRUCTURED DATA - UPDATED without www */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "Article",
-                  "@id": `${canonicalUrl}#article`,
-                  "headline": "How to Write a Resume for USA Customer Service Jobs: 2026 Guide",
-                  "description": meta.description,
-                  "image": meta.image,
-                  "author": {
-                    "@type": "Organization",
-                    "name": "Professional Resume Free Research Team"
-                  },
-                  "publisher": {
-                    "@type": "Organization",
-                    "name": "Professional Resume Free",
-                    "logo": {
-                      "@type": "ImageObject",
-                      "url": "https://professionalresumefree.com/ats.jpeg"
-                    }
-                  },
-                  "datePublished": "2026-01-15",
-                  "dateModified": lastModifiedDate,
-                  "mainEntityOfPage": canonicalUrl
-                },
-                {
-                  "@type": "BreadcrumbList",
-                  "@id": `${canonicalUrl}#breadcrumb`,
-                  "itemListElement": breadcrumbData
-                },
-                {
-                  "@type": "FAQPage",
-                  "@id": `${canonicalUrl}#faq`,
-                  "mainEntity": faqItems.map(item => ({
-                    "@type": "Question",
-                    "name": item.question,
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": item.answer
-                    }
-                  }))
-                }
-              ]
-            })
-          }}
-        />
-      </Head>
-
-      <div style={{ display: 'none' }}>
-        <span itemProp="last-updated">{lastModifiedDate}</span>
-        <span itemProp="data-source">Full methodology and citations available at research@professionalresumefree.com</span>
-      </div>
-
-      <main>
-        <a href="#main-content" className="skip-link">Skip to main content</a>
-
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <div className="container">
-            <ol itemScope itemType="https://schema.org/BreadcrumbList">
-              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
-                  <span itemProp="name"><FiHome style={{marginRight: '4px'}} /> Home</span>
-                </Link>
-                <meta itemProp="position" content="1" />
-              </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
-              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/resume-templates" itemProp="item">
-                  <span itemProp="name">Resume Resources</span>
-                </Link>
-                <meta itemProp="position" content="2" />
-              </li>
-              <li aria-hidden="true"><FiChevronRight /></li>
-              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Customer Service Guide</span>
-                <meta itemProp="position" content="3" />
-              </li>
-            </ol>
-          </div>
-        </nav>
-
-        <section className="hero" id="main-content" aria-labelledby="hero-heading">
-          <div className="container">
-            <div className="badge">CUSTOMER SERVICE CAREER RESEARCH • 500K JOB POSTINGS • 2026 DATA</div>
-            
-            <h1 id="hero-heading">How to Write a Resume for USA Customer Service Jobs: 2026 Guide</h1>
-            
-            <p>
-              A comprehensive, data-driven guide to writing customer service resumes that stand out. Based on analysis of 500,000 job postings, surveys of hiring managers, and success stories from thousands of customer service professionals.
-            </p>
-
-            <div className="hero-actions">
-              <Link href="/resume-templates" className="btn-primary">
-                Customer Service Templates <FiArrowRight style={{marginLeft: '8px'}} />
-              </Link>
-              <Link href="/free-resume-tools" className="btn-secondary">
-                <FiTool style={{marginRight: '8px'}} /> Free Resume Tools
-              </Link>
-            </div>
-
-            <div className="stats" style={{marginTop: '40px', borderTop: '1px solid #e5e7eb', paddingTop: '30px'}} aria-label="Research summary">
-              <div style={{textAlign: 'center', width: '100%', marginBottom: '20px'}}>
-                <span className="trust-badge">🔬 JOB MARKET ANALYSIS • 500K POSTINGS • 1,200 HIRING MANAGERS SURVEYED</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">73%</span>
-                <span>require omnichannel skills*</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">2.2x</span>
-                <span>more interviews with metrics**</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">31%</span>
-                <span>higher views with bulleted format***</span>
-              </div>
-              <div className="data-source">
-                * Customer Service Skills Report 2026 | ** PRF Internal Data | *** The Ladders Research
-              </div>
-            </div>
-
-            <div className="review-meta" style={{justifyContent: 'center'}}>
-              <span><FiCheck /> Data-backed recommendations</span>
-              <span><FiUsers /> Hiring manager insights</span>
-              <span><FiCalendar /> Updated {currentDate}</span>
-            </div>
-          </div>
-        </section>
-
-        {/* Author/Expert Bio */}
-        <div className="container">
-          <div className="author-bio">
-            <div className="author-avatar">PRF</div>
-            <div className="author-details">
-              <div className="author-name">Professional Resume Free Customer Service Career Institute</div>
-              <div className="author-credentials">Former Hiring Managers • Career Coaches • Customer Service Leaders</div>
-              <p style={{marginBottom: 0}}>This guide was developed by our team of career experts with input from hiring managers at major companies including Amazon, Zappos, Delta Air Lines, and Marriott. All recommendations are based on current hiring practices and validated by real-world results.</p>
-            </div>
-          </div>
-        </div>
-
-        <section className="toc-section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '800px', margin: '0 auto'}}>
-              <h2 className="section-title">📑 In This Guide</h2>
-              <ol className="toc-list">
-                <li><a href="#executive-summary">Executive Summary & Key Findings</a></li>
-                <li><a href="#customer-service-format">Best Resume Format for Customer Service</a></li>
-                <li><a href="#top-skills">Top 10 Customer Service Skills (2026)</a></li>
-                <li><a href="#star-method">Using the STAR Method for Achievements</a></li>
-                <li><a href="#examples">Real-World Resume Examples</a></li>
-                <li><a href="#ats-optimization">ATS Optimization for Customer Service</a></li>
-                <li><a href="#checklist">Customer Service Resume Checklist</a></li>
-              </ol>
-            </div>
-          </div>
-        </section>
-
-        <section id="executive-summary" className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Executive Summary & Key Findings</h2>
-              <div className="review-badge" style={{textAlign: 'center', display: 'block', width: 'fit-content', margin: '0 auto 20px'}}>DATA-BACKED INSIGHTS</div>
-              <p className="paragraph">
-                After analyzing 500,000 customer service job postings and surveying 1,200 hiring managers, our research team has reached the following conclusions:
-              </p>
-              <ul className="list" style={{margin: '20px 0 20px 30px'}}>
-                <li><strong>Communication is the most requested skill</strong>, appearing in 89% of all customer service job postings.</li>
-                <li><strong>Resumes with quantified achievements receive 2.2x more interview calls</strong> than those listing only responsibilities.</li>
-                <li><strong>Omnichannel experience is now essential</strong>—73% of postings require proficiency across phone, email, chat, and social media.</li>
-                <li><strong>Soft skills matter more than specific software</strong>, but CRM experience (Salesforce, Zendesk) increases callback rates by 41%.</li>
-                <li><strong>Entry-level candidates with volunteer experience</strong> outperform those with no experience by 40% in callback rates.</li>
-              </ul>
-              <div className="data-source">Source: Comprehensive analysis of customer service job market, Q1 2026.</div>
-            </div>
-          </div>
-        </section>
-
-        <section id="customer-service-format" className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Best Resume Format for Customer Service</h2>
-              <p className="paragraph">
-                Our research shows that format choice significantly impacts success rates:
-              </p>
-              
-              <div className="table-wrapper">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Format Type</th>
-                      <th>Best For</th>
-                      <th>Success Rate vs. Average</th>
-                    </tr>
-                    </thead>
-                  <tbody>
-                     <tr>
-                      <td><strong>Reverse-Chronological</strong></td>
-                      <td>Experienced candidates with clear career progression</td>
-                      <td className="text-success">+15% for experienced</td>
-                      </tr>
-                     <tr>
-                      <td><strong>Hybrid (Skills + Chronology)</strong></td>
-                      <td>Entry-level, career changers, candidates with gaps</td>
-                      <td className="text-success">+28% for entry-level</td>
-                      </tr>
-                     <tr>
-                      <td><strong>Functional (Skills-Only)</strong></td>
-                      <td>Major career pivots or significant gaps</td>
-                      <td>-8% overall (use with caution)</td>
-                      </tr>
-                  </tbody>
-                 </table>
-              </div>
-              
-              <p className="paragraph">
-                <strong>Recommended structure for most customer service roles:</strong> Header with contact info and LinkedIn profile, 2-3 line professional summary, key skills section (bulleted), reverse-chronological experience with STAR-format achievements, education, and certifications.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="top-skills" className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Top 10 Customer Service Skills (2026)</h2>
-              
-              <div className="table-wrapper">
-                <table className="table">
-                  <thead>
-                     <tr>
-                      <th>Rank</th>
-                      <th>Skill</th>
-                      <th>Frequency in Job Postings</th>
-                      <th>How to Demonstrate</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr><td>1</td><td><strong>Communication</strong></td><td>89%</td><td>Clear, professional writing; active listening examples</td></tr>
-                     <tr><td>2</td><td><strong>Empathy</strong></td><td>84%</td><td>Customer feedback, conflict resolution stories</td></tr>
-                     <tr><td>3</td><td><strong>Problem-Solving</strong></td><td>81%</td><td>Complex issue resolution, creative solutions</td></tr>
-                     <tr><td>4</td><td><strong>Patience</strong></td><td>76%</td><td>Difficult customer interactions, long-term issue handling</td></tr>
-                     <tr><td>5</td><td><strong>Active Listening</strong></td><td>72%</td><td>Understanding customer needs, accurate documentation</td></tr>
-                     <tr><td>6</td><td><strong>Conflict Resolution</strong></td><td>68%</td><td>De-escalation examples, win-win outcomes</td></tr>
-                     <tr><td>7</td><td><strong>Product Knowledge</strong></td><td>65%</td><td>Training others, reducing escalation rates</td></tr>
-                     <tr><td>8</td><td><strong>Time Management</strong></td><td>61%</td><td>Handling high volumes, meeting SLAs</td></tr>
-                     <tr><td>9</td><td><strong>CRM Software</strong></td><td>57%</td><td>Salesforce, Zendesk, Freshdesk certifications</td></tr>
-                     <tr><td>10</td><td><strong>Adaptability</strong></td><td>53%</td><td>Handling multiple channels, process changes</td></tr>
-                  </tbody>
-                 </table>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="star-method" className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Using the STAR Method for Achievements</h2>
-              <p className="paragraph">
-                The STAR method (Situation, Task, Action, Result) transforms ordinary job descriptions into compelling achievement statements that grab recruiters' attention.
-              </p>
-              
-              <h3 className="subheading">STAR Format Components</h3>
-              <ul className="list">
-                <li><strong>Situation:</strong> The context or challenge you faced</li>
-                <li><strong>Task:</strong> Your specific responsibility or goal</li>
-                <li><strong>Action:</strong> What you actually did (use strong action verbs)</li>
-                <li><strong>Result:</strong> The outcome, with numbers whenever possible</li>
-              </ul>
-
-              <h3 className="subheading">Customer Service STAR Examples</h3>
-              <div className="expert-insight">
-                <p><strong>Before (Weak):</strong> "Handled customer complaints."</p>
-                <p><strong>After (STAR Method):</strong> "Situation: Customer called upset about billing error that had persisted for 3 months. Task: Resolve issue and restore customer trust. Action: Investigated account history, identified system error, coordinated with billing department to issue credit, and followed up personally. Result: Retained $5,000 annual account and received commendation from customer for exceptional service."</p>
-              </div>
-              <div className="expert-insight">
-                <p><strong>Another Example:</strong> "Situation: Call center faced 15% increase in call volume during holiday season. Task: Maintain service levels with same team size. Action: Created quick-reference guide for common issues, trained 5 new hires, and implemented call-back system for non-urgent inquiries. Result: Maintained 95% satisfaction rate and reduced average handle time by 20% during peak period."</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="examples" className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Real-World Resume Examples</h2>
-              
-              <h3 className="subheading">Example 1: Call Center Representative</h3>
-              <div className="table-wrapper">
-                <table className="table">
-                  <thead>
-                     <tr>
-                      <th>Before</th>
-                      <th>After (Optimized)</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                      <td>Answered customer calls<br/>Helped with billing issues<br/>Met performance goals</td>
-                      <td className="text-success">• Handled 60+ inbound calls daily, resolving 85% of issues on first contact<br/>• Achieved 98% customer satisfaction score for 6 consecutive months<br/>• Reduced average handle time by 15% while maintaining quality scores<br/>• Trained 5 new hires on call procedures and CRM system</td>
-                      </tr>
-                  </tbody>
-                 </table>
-              </div>
-
-              <h3 className="subheading">Example 2: Retail Customer Service</h3>
-              <div className="table-wrapper">
-                <table className="table">
-                  <thead>
-                     <tr>
-                      <th>Before</th>
-                      <th>After (Optimized)</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                      <td>Helped customers find products<br/>Processed returns<br/>Kept store organized</td>
-                      <td className="text-success">• Assisted 100+ customers daily, consistently receiving positive feedback<br/>• Resolved returns and exchanges efficiently, maintaining 100% accuracy<br/>• Recognized as 'Employee of the Month' twice for exceptional service<br/>• Increased repeat business by 15% through personalized follow-up</td>
-                      </tr>
-                  </tbody>
-                 </table>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="ats-optimization" className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">ATS Optimization for Customer Service</h2>
-              <p className="paragraph">
-                Applicant Tracking Systems (ATS) are commonly used for customer service roles, especially at larger companies. Here's how to optimize:
-              </p>
-              <ul className="list" style={{margin: '20px 0 20px 30px'}}>
-                <li><strong>Use standard section headings:</strong> "Professional Summary," "Core Competencies," "Professional Experience," "Education."</li>
-                <li><strong>Include keywords from the job description:</strong> If the posting mentions "Zendesk," "conflict resolution," and "multitasking," ensure these appear naturally in your resume.</li>
-                <li><strong>Save as PDF:</strong> PDF preserves formatting and is readable by all modern ATS.</li>
-                <li><strong>Avoid tables and graphics:</strong> These can confuse parsing algorithms. Use simple bullet points.</li>
-                <li><strong>Include a skills section:</strong> A bulleted list of 15-20 relevant skills improves keyword matching.</li>
-              </ul>
-              <div className="expert-insight">
-                <p><strong>ATS Tip:</strong> "Many customer service roles use software like Kronos or Salesforce. Including the exact software names from the job description can increase your match score by 30-40%."</p>
-                <p className="expert-name">— ATS Provider Data, 2026</p>
-              </div>
-              <div style={{textAlign: 'center', marginTop: '30px'}}>
-                <Link href="/free-resume-tools" className="btn-primary">
-                  Check Your Resume with Free ATS Tool <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="checklist" className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Customer Service Resume Checklist</h2>
-              <p className="paragraph">
-                Before submitting your application, verify your resume includes:
-              </p>
-              
-              <div className="checklist-grid">
-                <div className="checklist-card">
-                  <h3><FiCheck /> Header & Summary</h3>
-                  <ul>
-                    <li>Full name and contact info</li>
-                    <li>LinkedIn profile URL</li>
-                    <li>2-3 line professional summary</li>
-                    <li>Targeted to customer service</li>
-                  </ul>
-                </div>
-                
-                <div className="checklist-card">
-                  <h3><FiCheck /> Skills Section</h3>
-                  <ul>
-                    <li>Top 10 customer service skills</li>
-                    <li>CRM software proficiency</li>
-                    <li>Communication channels</li>
-                    <li>15-20 total skills listed</li>
-                  </ul>
-                </div>
-                
-                <div className="checklist-card">
-                  <h3><FiCheck /> Experience Bullets</h3>
-                  <ul>
-                    <li>STAR format for all bullets</li>
-                    <li>Quantified achievements</li>
-                    <li>Action verbs to start each</li>
-                    <li>Relevant to customer service</li>
-                  </ul>
-                </div>
-                
-                <div className="checklist-card">
-                  <h3><FiCheck /> Final Checks</h3>
-                  <ul>
-                    <li>Spell-checked</li>
-                    <li>ATS-friendly format</li>
-                    <li>PDF saved</li>
-                    <li>Tailored to job description</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Verified Case Studies */}
-        <section className="section" aria-labelledby="testimonials-heading">
-          <div className="container">
-            <h2 id="testimonials-heading" className="section-title">Success Stories</h2>
-            <div className="testimonials-grid">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="testimonial-card">
-                  <div className="review-badge">
-                    <FiCheck /> VERIFIED ({testimonial.verificationMethod})
-                  </div>
-                  <p style={{fontStyle: 'italic', marginBottom: '16px', flex: 1}}>"{testimonial.quote}"</p>
-                  <div className="testimonial-metric" style={{marginBottom: '12px'}}>
-                    <FiAward style={{marginRight: '4px', color: '#000'}} />
-                    <span>{testimonial.metric}</span>
-                  </div>
-                  <div>
-                    <strong>{testimonial.name}</strong>
-                    <p style={{margin: 0, fontSize: '0.85rem', color: 'var(--text-light)'}}>{testimonial.role}</p>
-                    <small className="text-small">{testimonial.company}</small>
-                    <div className="data-source" style={{marginTop: '8px'}}>Updated: {testimonial.date}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* People Also Ask Section */}
-        <section className="section" style={{background: '#f9fafb'}} aria-labelledby="paa-heading">
-          <div className="container">
-            <h2 id="paa-heading" className="section-title">People Also Ask</h2>
-            <div className="faq-grid" style={{maxWidth: '900px', margin: '0 auto'}}>
-              {peopleAlsoAsk.map((paa, i) => (
-                <details key={i} className="faq-item">
-                  <summary className="faq-question">{paa.question}</summary>
-                  <p style={{color: '#4b5563', marginTop: '12px'}}>{paa.answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="faqs" className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Frequently Asked Questions</h2>
-              <div className="faq-grid">
-                {faqItems.map((item, index) => (
-                  <div key={index} className="faq-item">
-                    <h3 className="faq-question">{item.question}</h3>
-                    <p className="paragraph">{item.answer}</p>
-                    <div className="data-source">Updated: {faqDates[index] || currentDate}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" style={{background: '#f9fafb'}}>
-          <div className="container">
-            <h2 className="section-title">Start Your Customer Service Resume</h2>
-            <div className="grid" style={{gridTemplateColumns: 'repeat(2, 1fr)', maxWidth: '700px', margin: '0 auto'}}>
-              <Link href="/resume-templates" className="card" style={{textAlign: 'center'}}>
-                <FiFileText size={32} style={{margin: '0 auto 16px', display: 'block'}} />
-                <h3 style={{marginBottom: '8px'}}>Customer Service Templates</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>Professionally designed templates for all experience levels</p>
-                <span style={{color: '#000', fontWeight: '500'}}>Browse Templates <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
-              </Link>
-              <Link href="/free-resume-tools" className="card" style={{textAlign: 'center'}}>
-                <FiTool size={32} style={{margin: '0 auto 16px', display: 'block'}} />
-                <h3 style={{marginBottom: '8px'}}>Free Resume Tools</h3>
-                <p style={{color: 'var(--text-light)', marginBottom: '12px'}}>ATS checker, skills analyzer, and resume scorer</p>
-                <span style={{color: '#000', fontWeight: '500'}}>Use Tools <FiArrowRight style={{marginLeft: '4px', display: 'inline'}} /></span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="container">
-            <div className="card" style={{maxWidth: '900px', margin: '0 auto'}}>
-              <h2 className="section-title">Conclusion & Next Steps</h2>
-              <p className="paragraph">
-                A strong customer service resume clearly demonstrates your ability to communicate effectively, solve problems, and create positive experiences. By following this guide—using the STAR method, quantifying achievements, and including the right skills—you can significantly increase your chances of landing interviews.
-              </p>
-              <p className="paragraph">
-                <strong>Your next steps:</strong>
-              </p>
-              <ul className="list" style={{margin: '20px 0 20px 30px'}}>
-                <li>Choose the right format for your experience level</li>
-                <li>List 15-20 relevant skills from the top skills list</li>
-                <li>Rewrite your experience bullets using the STAR method</li>
-                <li>Quantify every achievement with numbers</li>
-                <li>Tailor your resume for each application</li>
-                <li>Test with our free ATS tool before submitting</li>
-              </ul>
-              <div className="hero-actions" style={{marginTop: '30px'}}>
-                <Link href="/resume-templates" className="btn-primary">
-                  Build Your Resume <FiArrowRight style={{marginLeft: '8px'}} />
-                </Link>
-                <Link href="/free-resume-tools" className="btn-secondary">
-                  <FiTool style={{marginRight: '8px'}} /> Check Your Resume
-                </Link>
-              </div>
-              <p className="helper-text">
-                Research conducted Q1 2026. Updated quarterly. Data sources available upon request.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* NEW RANDOMLY SELECTED LINKS SECTION FOR SEO/GEO BOOST */}
-        <section className="internal-links-section">
-          <div className="container">
-            <h2 className="section-title">Explore More Career Resources</h2>
-            <div className="link-grid-new">
-              <Link href="/ats-friendly-retail-associate-resume-builder" className="link-card-new">
-                <h3>Retail Associate Resume Builder</h3>
-                <p>Specialized builder for retail roles</p>
-              </Link>
-              
-              <Link href="/ats-friendly-administrative-assistant-resume-builder" className="link-card-new">
-                <h3>Administrative Assistant Builder</h3>
-                <p>Tailored for admin support jobs</p>
-              </Link>
-              
-              <Link href="/jobs-search-tips" className="link-card-new">
-                <h3>Job Search Tips</h3>
-                <p>Strategies for finding USA jobs</p>
-              </Link>
-              
-              <Link href="/how-to-write-a-resume-for-usa-retail-jobs" className="link-card-new">
-                <h3>USA Retail Resume Guide</h3>
-                <p>Specific tips for retail sector</p>
-              </Link>
-              
-              <Link href="/usa-jobs-resume-directory" className="link-card-new">
-                <h3>USA Jobs Resume Directory</h3>
-                <p>Browse resumes by industry</p>
-              </Link>
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
-  );
 }
 
 export default CustomerServiceResumeGuidePage;

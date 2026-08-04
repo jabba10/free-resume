@@ -1,218 +1,510 @@
 // pages/complete-resume-resource-library.jsx
 import Head from 'next/head';
 
-// ===== INLINE CRITICAL CSS - Optimized for speed =====
-const criticalCSS = `
-  /* CSS RESET */
+// ============================================================================
+// CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
+// ============================================================================
+const executiveDesignTokens = `
+  /* ========== CSS CUSTOM PROPERTIES ========== */
+  :root {
+    /* ========== COLOR SYSTEM ========== */
+    
+    /* Background Colors */
+    --bg-page: #131315;
+    --bg-surface-lowest: #0e0e10;
+    --bg-surface-low: #1c1b1d;
+    --bg-surface: #201f21;
+    --bg-surface-high: #2a2a2c;
+    --bg-surface-highest: #353437;
+    --bg-surface-dim: #131315;
+    --bg-surface-bright: #39393b;
+    --bg-container: #1c1b1d;
+    --bg-container-high: #2a2a2c;
+    
+    /* Text Colors */
+    --text-primary: #e5e1e4;
+    --text-secondary: #c5bfc8;
+    --text-muted: #9d95a0;
+    --text-disabled: #605d62;
+    --text-inverse: #1c1b1d;
+    --text-on-accent: #3c2f00;
+    
+    /* Accent/Brand Colors - Gold */
+    --accent-primary: #f2ca50;
+    --accent-primary-container: #d4af37;
+    --accent-primary-fixed: #ffe088;
+    --accent-primary-fixed-dim: #e9c349;
+    --accent-on-primary: #3c2f00;
+    --accent-on-primary-container: #2a2000;
+    --accent-inverse-primary: #735c00;
+    --accent-primary-hover: #f7d86e;
+    --accent-primary-active: #e6bc3d;
+    
+    /* Border Colors */
+    --border-outline: #444246;
+    --border-outline-variant: #363538;
+    --border-gold-filament: rgba(212, 175, 55, 0.3);
+    --border-gold-filament-strong: rgba(212, 175, 55, 0.5);
+    --border-glass: rgba(212, 175, 55, 0.15);
+    
+    /* Glass/Special Effect Colors */
+    --glass-bg: rgba(20, 19, 21, 0.7);
+    --glass-bg-light: rgba(28, 27, 29, 0.6);
+    --glass-bg-heavy: rgba(20, 19, 21, 0.85);
+    --gradient-hero-overlay: linear-gradient(135deg, rgba(19, 19, 21, 0.95) 0%, rgba(19, 19, 21, 0.8) 100%);
+    
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Font Sizes */
+    --font-size-display-lg: clamp(3rem, 6vw, 4rem);
+    --font-size-display-md: clamp(2.25rem, 5vw, 3rem);
+    --font-size-headline-lg: clamp(1.75rem, 4vw, 2rem);
+    --font-size-headline-md: clamp(1.5rem, 3.5vw, 1.75rem);
+    --font-size-title-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-title-md: clamp(1.125rem, 2.5vw, 1.25rem);
+    --font-size-body-lg: clamp(1rem, 2vw, 1.125rem);
+    --font-size-body-md: 1rem;
+    --font-size-body-sm: 0.875rem;
+    --font-size-label-md: 0.75rem;
+    --font-size-label-sm: 0.6875rem;
+    
+    /* Line Heights */
+    --line-height-display: 1.1;
+    --line-height-headline: 1.2;
+    --line-height-title: 1.3;
+    --line-height-body: 1.6;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Letter Spacing */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.02em;
+    --letter-spacing-caps: 0.08em;
+    
+    /* Text Shadows for Glow Effects */
+    --glow-gold: 0 0 20px rgba(242, 202, 80, 0.3), 0 0 40px rgba(242, 202, 80, 0.1);
+    --glow-gold-strong: 0 0 30px rgba(242, 202, 80, 0.5), 0 0 60px rgba(242, 202, 80, 0.2);
+    
+    /* ========== BORDER RADIUS SCALE ========== */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-default: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* ========== SPACING SYSTEM ========== */
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    
+    /* Section Spacing */
+    --section-gap-sm: clamp(3rem, 6vw, 4rem);
+    --section-gap-md: clamp(4rem, 8vw, 6rem);
+    --section-gap-lg: clamp(5rem, 10vw, 8rem);
+    
+    /* Content Widths */
+    --content-max-width: 1280px;
+    --content-narrow: 800px;
+    
+    /* Gutters */
+    --gutter-desktop: clamp(1.5rem, 5vw, 2.5rem);
+    --gutter-mobile: clamp(1rem, 4vw, 1.5rem);
+    
+    /* ========== SHADOW / ELEVATION TOKENS ========== */
+    --shadow-gold-glow: 0 0 20px rgba(242, 202, 80, 0.4), 0 0 60px rgba(242, 202, 80, 0.1);
+    --shadow-gold-glow-sm: 0 0 10px rgba(242, 202, 80, 0.3);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* ========== ANIMATION / TRANSITION TOKENS ========== */
+    --transition-fast: 150ms;
+    --transition-medium: 250ms;
+    --transition-slow: 350ms;
+    --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --hover-transform: translateY(-2px);
+    --hover-transform-lg: translateY(-4px);
+    
+    /* ========== GLASS PANEL EFFECT ========== */
+    --glass-blur: 20px;
+    --glass-blur-heavy: 40px;
+    --glass-border-width: 0.5px;
+    --glass-padding: clamp(1.5rem, 4vw, 2.5rem);
+    
+    /* ========== BUTTON STYLE VARIABLES ========== */
+    --btn-primary-bg: #f2ca50;
+    --btn-primary-text: #3c2f00;
+    --btn-primary-padding: 0.875rem 2rem;
+    --btn-primary-radius: 0.25rem;
+    --btn-primary-font-size: 0.875rem;
+    --btn-primary-font-weight: 600;
+    --btn-primary-letter-spacing: 0.02em;
+    --btn-primary-hover-bg: #f7d86e;
+    --btn-primary-hover-transform: translateY(-1px);
+    --btn-primary-hover-shadow: 0 4px 12px rgba(242, 202, 80, 0.3);
+    
+    --btn-outline-border: rgba(212, 175, 55, 0.5);
+    --btn-outline-text: #f2ca50;
+    --btn-outline-hover-bg: rgba(242, 202, 80, 0.08);
+    --btn-outline-hover-border: rgba(212, 175, 55, 0.8);
+    
+    /* ========== CARD STYLE VARIABLES ========== */
+    --card-bg: rgba(28, 27, 29, 0.6);
+    --card-bg-hover: rgba(32, 31, 33, 0.8);
+    --card-border: 0.5px solid rgba(212, 175, 55, 0.15);
+    --card-border-hover: 0.5px solid rgba(212, 175, 55, 0.3);
+    --card-padding: clamp(1.5rem, 4vw, 2.5rem);
+    --card-radius: 0.5rem;
+    --card-hover-transform: translateY(-4px);
+    --card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05);
+    
+    /* ========== GOLD ACCENT VALUES ========== */
+    --gold-filament-color: rgba(212, 175, 55, 0.3);
+    --gold-filament-width: 0.5px;
+    --gold-divider-width: 60px;
+    --gold-divider-height: 1px;
+    --gold-divider-opacity: 0.4;
+  }
+  
+  /* ========== BASE RESET ========== */
   * { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent;
   }
   
-  /* BASE STYLES */
-  body { 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    line-height: 1.6; 
-    color: #111827; 
-    background: #f9fafb; 
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
   
-  /* MAIN CONTAINER */
-  .container { 
-    max-width: 1280px; 
-    margin: 0 auto; 
-    padding: 16px; 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    letter-spacing: var(--letter-spacing-tight);
+    word-wrap: break-word;
+  }
+  
+  h1 {
+    font-size: var(--font-size-display-lg);
+    line-height: var(--line-height-display);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: var(--font-size-display-md);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  h3 {
+    font-size: var(--font-size-headline-lg);
+    line-height: var(--line-height-headline);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-body);
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-body);
+  }
+  
+  strong {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  a {
+    color: var(--accent-primary);
+    transition: color var(--transition-fast) var(--easing-default);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--accent-primary-hover);
+  }
+  
+  /* ========== UTILITY CLASSES ========== */
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--glass-border-width) solid var(--border-glass);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, #f2ca50 0%, #d4af37 50%, #ffe088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    text-decoration: none;
+    min-width: 200px;
+  }
+  
+  .btn-primary:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--btn-primary-hover-shadow);
+    color: var(--btn-primary-text);
+  }
+  
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--btn-primary-padding);
+    background: transparent;
+    color: var(--btn-outline-text);
+    border: 0.5px solid var(--btn-outline-border);
+    border-radius: var(--btn-primary-radius);
+    font-size: var(--btn-primary-font-size);
+    font-weight: var(--btn-primary-font-weight);
+    letter-spacing: var(--btn-primary-letter-spacing);
+    transition: all var(--transition-medium) var(--easing-default);
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 200px;
+  }
+  
+  .btn-outline:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+    transform: var(--btn-primary-hover-transform);
+    box-shadow: var(--shadow-gold-glow-sm);
+    color: var(--btn-outline-text);
+  }
+  
+  .card-executive {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-executive:hover {
+    background: var(--card-bg-hover);
+    border: var(--card-border-hover);
+    transform: var(--card-hover-transform);
+    box-shadow: var(--card-hover-shadow);
+  }
+  
+  .section-container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter-desktop);
     width: 100%;
   }
   
-  @media (min-width: 640px) {
-    .container { padding: 24px; }
+  @media (max-width: 768px) {
+    .section-container {
+      padding: 0 var(--gutter-mobile);
+    }
+    
+    .btn-primary,
+    .btn-outline {
+      width: 100%;
+      min-width: auto;
+    }
   }
   
-  @media (min-width: 1024px) {
-    .container { padding: 32px; }
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-weight: var(--font-weight-semibold);
   }
   
-  /* ARTICLE */
-  .article { 
-    background: #ffffff; 
-    border-radius: 24px; 
-    padding: 24px; 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
+  .skip-link:focus { 
+    top: 0; 
+  }
+
+  /* ========== RESOURCE LIBRARY PAGE SPECIFIC STYLES ========== */
+  
+  .breadcrumb {
+    padding: 1rem 0;
+    background: var(--bg-surface-lowest);
+    border-bottom: 0.5px solid var(--border-gold-filament);
+    margin-bottom: 2rem;
+  }
+  
+  .breadcrumb ol {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast) var(--easing-default);
+  }
+  
+  .breadcrumb a:hover {
+    color: var(--accent-primary);
+  }
+  
+  .breadcrumb [aria-current="page"] {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  .breadcrumb li[aria-hidden="true"] {
+    color: var(--text-muted);
+  }
+  
+  .article-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-3xl);
+    padding: var(--glass-padding);
+    border: var(--card-border);
+    box-shadow: var(--shadow-card);
     width: 100%;
   }
   
   @media (min-width: 768px) {
-    .article { padding: 40px; }
+    .article-container { padding: 2.5rem; }
   }
   
   @media (min-width: 1024px) {
-    .article { padding: 48px; }
+    .article-container { padding: 3rem; }
   }
   
-  /* BREADCRUMB */
-  .breadcrumb { 
-    margin-bottom: 24px; 
-    font-size: 0.9rem; 
-    color: #6b7280;
+  .header-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-gold-filament);
   }
   
-  .breadcrumbList { 
-    display: flex; 
-    flex-wrap: wrap; 
-    list-style: none; 
-    gap: 8px;
+  .search-intent-box {
+    background: rgba(242, 202, 80, 0.05);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-xl);
+    margin-bottom: 1.25rem;
+    border-left: 3px solid var(--accent-primary);
   }
   
-  .breadcrumbItem { 
-    display: flex; 
-    align-items: center;
+  .search-intent-box p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-md);
+    margin-bottom: 0;
   }
   
-  .breadcrumbItem:not(:last-child)::after { 
-    content: "›"; 
-    margin-left: 8px; 
-    color: #9ca3af; 
-    font-size: 1.1rem;
+  .meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    font-size: var(--font-size-body-sm);
+    color: var(--text-muted);
   }
   
-  .breadcrumbLink { 
-    color: #111827; 
-    text-decoration: none; 
-    border-bottom: 1px solid #d1d5db;
+  .expert-intro-box {
+    background: rgba(242, 202, 80, 0.03);
+    padding: 1.75rem;
+    border-radius: var(--radius-2xl);
+    margin: 2rem 0;
+    border: var(--card-border);
   }
   
-  .breadcrumbLink:hover { 
-    border-bottom-color: #000000; 
+  .expert-title {
+    font-size: var(--font-size-title-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
   }
   
-  /* HEADER */
-  .header { 
-    margin-bottom: 40px; 
-    padding-bottom: 32px; 
-    border-bottom: 2px solid #f3f4f6;
+  .expert-stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
   }
   
-  h1 { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  .title { 
-    font-size: clamp(2rem, 6vw, 3.2rem); 
-    line-height: 1.2; 
-    margin-bottom: 20px; 
-    font-weight: 800; 
-    letter-spacing: -0.02em;
-    color: #000000;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  .search-intent { 
-    background: #f3f4f6; 
-    padding: 16px 20px; 
-    border-radius: 12px; 
-    margin-bottom: 20px; 
-    border-left: 4px solid #000000;
-  }
-  
-  .search-intent-text { 
-    margin-bottom: 0; 
-    font-size: 1rem; 
-    color: #374151;
-  }
-  
-  .meta { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 12px; 
-    margin: 16px 0; 
-    font-size: 0.9rem; 
-    color: #6b7280;
-  }
-  
-  .meta-item { 
-    display: inline-block;
-  }
-  
-  .meta-separator { 
-    color: #9ca3af;
-  }
-  
-  /* EXPERT INTRO */
-  .expert-intro { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    margin: 32px 0; 
-    border: 1px solid #e5e7eb;
-  }
-  
-  .expert-title { 
-    font-size: 1.3rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 16px;
-  }
-  
-  .expert-text { 
-    margin-bottom: 24px;
-  }
-  
-  .expert-stats { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 24px; 
-    margin-top: 20px;
-  }
-  
-  .stat-item { 
-    flex: 1 1 auto; 
+  .expert-stat-item {
+    flex: 1 1 auto;
     min-width: 120px;
   }
   
-  .stat-value { 
-    font-size: 2rem; 
-    font-weight: 800; 
-    color: #000000; 
-    display: block; 
+  .expert-stat-value {
+    font-size: 2rem;
+    font-weight: var(--font-weight-extrabold);
+    color: var(--accent-primary);
+    display: block;
     line-height: 1.2;
+    font-family: var(--font-display);
   }
   
-  .stat-label { 
-    color: #4b5563; 
-    font-size: 0.85rem;
+  .expert-stat-label {
+    color: var(--text-muted);
+    font-size: var(--font-size-body-sm);
   }
   
-  /* STATS SECTION */
-  .stats-section { 
-    margin: 48px 0;
-  }
-  
-  .stats-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 24px; 
-    text-align: center;
-  }
-  
-  .stats-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 20px; 
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 3rem 0;
   }
   
   @media (min-width: 640px) {
@@ -223,310 +515,265 @@ const criticalCSS = `
     .stats-grid { grid-template-columns: repeat(4, 1fr); }
   }
   
-  .stat-card { 
-    background: #ffffff; 
-    padding: 24px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb; 
-    text-align: center; 
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-  
-  .stat-number { 
-    font-size: 2.5rem; 
-    font-weight: 800; 
-    color: #000000; 
-    display: block; 
-    line-height: 1.2; 
-    margin-bottom: 8px;
-  }
-  
-  .stat-description { 
-    color: #374151; 
-    margin-bottom: 8px;
-  }
-  
-  .stat-source { 
-    font-size: 0.75rem; 
-    color: #9ca3af;
-  }
-  
-  /* AUTHORS SECTION */
-  .authors-section { 
-    margin: 48px 0;
-  }
-  
-  .authors-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 12px; 
+  .stat-card {
     text-align: center;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-2xl);
+    border: var(--card-border);
   }
   
-  .authors-subtitle { 
-    text-align: center; 
-    color: #6b7280; 
-    margin-bottom: 32px;
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-extrabold);
+    color: var(--accent-primary);
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-display);
   }
   
-  .authors-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px; 
+  .stat-description {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: var(--font-size-body-sm);
+  }
+  
+  .stat-source {
+    font-size: var(--font-size-label-sm);
+    color: var(--text-muted);
+  }
+  
+  .authors-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 3rem 0;
   }
   
   @media (min-width: 768px) {
     .authors-grid { grid-template-columns: repeat(2, 1fr); }
   }
   
-  .author-card { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
+  .author-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.75rem;
+    border-radius: var(--radius-2xl);
+    border: var(--card-border);
   }
   
-  .author-header { 
-    display: flex; 
-    gap: 16px; 
-    margin-bottom: 16px; 
+  .author-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
     align-items: center;
   }
   
-  .author-avatar { 
-    width: 64px; 
-    height: 64px; 
-    background: #000000; 
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
+  .author-avatar {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--accent-primary-container) 0%, var(--accent-primary) 100%);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
   
-  .avatar-placeholder { 
-    color: #ffffff; 
-    font-size: 1.5rem; 
-    font-weight: 600;
+  .avatar-placeholder {
+    color: var(--accent-on-primary);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
   }
   
-  .author-name { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 4px;
+  .author-name {
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
   }
   
-  .author-title { 
-    color: #4b5563; 
-    font-size: 0.9rem;
+  .author-title-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
   }
   
-  .author-credentials { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 8px; 
-    margin-bottom: 16px;
+  .author-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
   }
   
-  .credential-badge { 
-    background: #e5e7eb; 
-    padding: 4px 12px; 
-    border-radius: 50px; 
-    font-size: 0.75rem; 
-    color: #374151;
+  .credential-badge {
+    background: rgba(242, 202, 80, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-label-sm);
+    color: var(--accent-primary);
+    border: 0.5px solid var(--border-gold-filament);
   }
   
-  .author-bio { 
-    color: #374151; 
-    line-height: 1.6;
+  .author-bio {
+    color: var(--text-secondary);
+    line-height: var(--line-height-body);
+    font-size: var(--font-size-body-sm);
   }
   
-  /* CORE GUIDE */
-  .core-guide { 
-    margin: 48px 0;
-  }
-  
-  .guide-header { 
-    text-align: center; 
-    margin-bottom: 32px;
-  }
-  
-  .guide-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 8px;
-  }
-  
-  .guide-subtitle { 
-    color: #6b7280;
-  }
-  
-  .guide-steps { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px; 
+  .guide-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 3rem 0;
   }
   
   @media (min-width: 768px) {
-    .guide-steps { grid-template-columns: repeat(3, 1fr); }
+    .guide-steps-grid { grid-template-columns: repeat(3, 1fr); }
   }
   
-  .step-card { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb; 
+  .step-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.75rem;
+    border-radius: var(--radius-2xl);
+    border: var(--card-border);
     position: relative;
   }
   
-  .step-number { 
-    font-size: 3rem; 
-    font-weight: 800; 
-    color: #e5e7eb; 
-    position: absolute; 
-    top: 16px; 
-    right: 16px;
+  .step-number {
+    font-size: 3rem;
+    font-weight: var(--font-weight-extrabold);
+    color: rgba(242, 202, 80, 0.1);
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: var(--font-display);
   }
   
-  .step-title { 
-    font-size: 1.3rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 16px; 
-    padding-right: 48px;
+  .step-title {
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-right: 3rem;
   }
   
-  .step-description { 
-    color: #374151; 
-    margin-bottom: 16px;
+  .step-description {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: var(--font-size-body-sm);
   }
   
-  .step-link { 
-    color: #000000; 
-    text-decoration: none; 
-    font-weight: 600; 
-    border-bottom: 2px solid #9ca3af;
+  .step-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    border-bottom: 1px solid var(--border-gold-filament);
+    transition: border-color var(--transition-fast) var(--easing-default);
   }
   
-  .step-link:hover { 
-    border-bottom-color: #000000;
+  .step-link:hover {
+    border-bottom-color: var(--accent-primary);
+    color: var(--accent-primary-hover);
   }
   
-  .step-tip { 
-    background: #e0f2fe; 
-    padding: 12px; 
-    border-radius: 8px; 
-    font-size: 0.9rem; 
-    margin-top: 16px;
+  .step-tip {
+    background: rgba(242, 202, 80, 0.05);
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-body-sm);
+    margin-top: 1rem;
+    border: 0.5px solid var(--border-gold-filament);
   }
   
-  /* SUCCESS SECTION */
-  .success-section { 
-    margin: 48px 0;
-  }
-  
-  .success-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 8px; 
-    text-align: center;
-  }
-  
-  .success-subtitle { 
-    text-align: center; 
-    color: #6b7280; 
-    margin-bottom: 32px;
-  }
-  
-  .success-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px; 
+  .success-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 3rem 0;
   }
   
   @media (min-width: 768px) {
     .success-grid { grid-template-columns: repeat(3, 1fr); }
   }
   
-  .success-card { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
+  .success-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.75rem;
+    border-radius: var(--radius-2xl);
+    border: var(--card-border);
   }
   
-  .success-header { 
-    display: flex; 
-    justify-content: space-between; 
-    margin-bottom: 16px;
+  .success-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
   }
   
-  .success-industry { 
-    background: #000000; 
-    color: #ffffff; 
-    padding: 4px 12px; 
-    border-radius: 50px; 
-    font-size: 0.75rem; 
-    font-weight: 600;
+  .success-industry-badge {
+    background: var(--accent-primary);
+    color: var(--accent-on-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-label-sm);
+    font-weight: var(--font-weight-semibold);
   }
   
-  .success-time { 
-    color: #6b7280; 
-    font-size: 0.85rem;
+  .success-time {
+    color: var(--text-muted);
+    font-size: var(--font-size-body-sm);
   }
   
-  .success-name { 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 4px;
+  .success-name {
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
   }
   
-  .success-role { 
-    color: #4b5563; 
-    font-size: 0.9rem; 
-    margin-bottom: 16px;
+  .success-role {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
+    margin-bottom: 1rem;
   }
   
-  .success-metrics { 
-    background: #e5e7eb; 
-    padding: 12px; 
-    border-radius: 8px; 
-    margin-bottom: 16px;
+  .success-metrics {
+    background: rgba(242, 202, 80, 0.05);
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    border: 0.5px solid var(--border-gold-filament);
   }
   
-  .metric-value { 
-    font-weight: 700; 
-    color: #000000;
+  .metric-value {
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-primary);
   }
   
-  .success-quote { 
-    color: #374151; 
-    font-style: italic; 
-    margin-bottom: 16px; 
-    line-height: 1.6;
+  .success-quote {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: var(--line-height-body);
+    font-size: var(--font-size-body-sm);
   }
   
-  .rating-stars { 
-    color: #fbbf24; 
+  .rating-stars {
+    color: var(--accent-primary);
     font-size: 1.1rem;
   }
   
-  /* QUICK ACCESS */
-  .quick-access { 
-    margin: 48px 0;
-  }
-  
-  .quick-access-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 24px;
-  }
-  
-  .quick-access-grid { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 16px; 
+  .quick-access-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 3rem 0;
   }
   
   @media (min-width: 640px) {
@@ -537,62 +784,42 @@ const criticalCSS = `
     .quick-access-grid { grid-template-columns: repeat(4, 1fr); }
   }
   
-  .quick-access-card { 
-    background: #f9fafb; 
-    padding: 20px; 
-    border-radius: 12px; 
-    border: 1px solid #e5e7eb; 
-    text-decoration: none; 
+  .quick-access-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.25rem;
+    border-radius: var(--radius-xl);
+    border: var(--card-border);
+    text-decoration: none;
     color: inherit;
-    transition: transform 0.2s;
+    transition: all var(--transition-medium) var(--easing-smooth);
   }
   
-  .quick-access-card:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  .quick-access-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary-container);
+    box-shadow: var(--card-hover-shadow);
+    color: inherit;
   }
   
-  .quick-access-card h3 { 
-    font-size: 1rem; 
-    font-weight: 600; 
-    color: #000000; 
-    margin-bottom: 8px;
+  .quick-access-card h3 {
+    font-size: var(--font-size-body-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
   }
   
-  .quick-access-card p { 
-    font-size: 0.85rem; 
-    color: #6b7280;
+  .quick-access-card p {
+    font-size: var(--font-size-body-sm);
+    color: var(--text-muted);
   }
   
-  /* MAIN CONTENT */
-  .main-content { 
-    margin: 48px 0;
-  }
-  
-  /* LINK CATEGORY */
-  .link-category { 
-    margin: 48px 0;
-  }
-  
-  .category-header { 
-    margin-bottom: 24px;
-  }
-  
-  .category-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 8px;
-  }
-  
-  .category-description { 
-    color: #6b7280;
-  }
-  
-  .links-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 20px; 
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0;
   }
   
   @media (min-width: 640px) {
@@ -607,85 +834,73 @@ const criticalCSS = `
     .links-grid { grid-template-columns: repeat(4, 1fr); }
   }
   
-  .resource-card { 
-    background: #ffffff; 
-    padding: 24px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb; 
-    transition: transform 0.2s, box-shadow 0.2s;
+  .resource-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.5rem;
+    border-radius: var(--radius-2xl);
+    border: var(--card-border);
+    transition: all var(--transition-medium) var(--easing-smooth);
     display: flex;
     flex-direction: column;
     height: 100%;
   }
   
-  .resource-card:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  .resource-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary-container);
+    box-shadow: var(--card-hover-shadow);
   }
   
-  .resource-title { 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 12px;
+  .resource-title {
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
     line-height: 1.4;
   }
   
-  .resource-description { 
-    color: #4b5563; 
-    margin-bottom: 20px; 
+  .resource-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
     flex: 1;
-    font-size: 0.95rem;
+    font-size: var(--font-size-body-sm);
   }
   
-  .resource-button { 
-    display: inline-block; 
-    background: #ffffff; 
-    color: #000000; 
-    padding: 12px 20px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: 0.9rem; 
-    border: 2px solid #000000;
-    transition: all 0.2s ease;
+  .resource-button {
+    display: inline-block;
+    background: transparent;
+    color: var(--btn-outline-text);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-default);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-sm);
+    border: 0.5px solid var(--btn-outline-border);
+    transition: all var(--transition-medium) var(--easing-default);
     text-align: center;
     margin-top: auto;
   }
   
-  .resource-button:hover { 
-    background: #000000; 
-    color: #ffffff;
+  .resource-button:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+    color: var(--btn-outline-text);
   }
   
-  /* USA LINKS SECTION */
   .usa-links-section {
-    margin: 48px 0;
-    background: #f0f4f8;
-    border-radius: 24px;
-    padding: 32px;
-    border: 1px solid #c0d4f0;
-  }
-  
-  .usa-links-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #000000;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .usa-links-subtitle {
-    text-align: center;
-    color: #4b5563;
-    margin-bottom: 32px;
-    font-size: 1rem;
+    margin: 3rem 0;
+    background: rgba(242, 202, 80, 0.03);
+    border-radius: var(--radius-3xl);
+    padding: 2rem;
+    border: var(--card-border);
   }
   
   .usa-links-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 1rem;
   }
   
   @media (min-width: 640px) {
@@ -701,25 +916,27 @@ const criticalCSS = `
   }
   
   .usa-link-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.25rem;
+    border-radius: var(--radius-xl);
+    border: var(--card-border);
+    transition: all var(--transition-medium) var(--easing-smooth);
     cursor: pointer;
     position: relative;
   }
   
   .usa-link-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    border-color: #000000;
+    border-color: var(--accent-primary-container);
+    box-shadow: var(--card-hover-shadow);
   }
   
   .usa-link-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #000000;
+    font-size: var(--font-size-body-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
     line-height: 1.4;
     margin-bottom: 0;
     display: block;
@@ -739,168 +956,181 @@ const criticalCSS = `
     opacity: 0;
   }
   
-  /* FAQ SECTION */
-  .faq-section { 
-    margin: 48px 0;
-  }
-  
-  .section-title { 
-    font-size: 1.5rem; 
-    font-weight: 700; 
-    margin-bottom: 24px;
-  }
-  
-  .faq-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 24px; 
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 3rem 0;
   }
   
   @media (min-width: 768px) {
     .faq-grid { grid-template-columns: repeat(2, 1fr); }
   }
   
-  .faq-card { 
-    background: #f9fafb; 
-    padding: 28px; 
-    border-radius: 16px; 
-    border: 1px solid #e5e7eb;
+  .faq-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 1.75rem;
+    border-radius: var(--radius-2xl);
+    border: var(--card-border);
   }
   
-  .faq-question { 
-    font-size: 1.2rem; 
-    font-weight: 700; 
-    color: #000000; 
-    margin-bottom: 16px;
+  .faq-question {
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
   }
   
-  .faq-answer { 
-    color: #374151; 
-    line-height: 1.7;
+  .faq-answer {
+    color: var(--text-secondary);
+    line-height: var(--line-height-body);
+    font-size: var(--font-size-body-sm);
   }
   
-  .inline-link { 
-    color: #000000; 
-    text-decoration: none; 
-    font-weight: 600;
-    border-bottom: 2px solid #9ca3af;
+  .inline-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    border-bottom: 1px solid var(--border-gold-filament);
+    transition: border-color var(--transition-fast) var(--easing-default);
   }
   
-  .inline-link:hover { 
-    border-bottom-color: #000000;
+  .inline-link:hover {
+    border-bottom-color: var(--accent-primary);
+    color: var(--accent-primary-hover);
   }
   
-  /* CTA SECTION */
-  .cta-section { 
-    margin: 48px 0;
+  .cta-container {
+    background: linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%);
+    padding: 3rem;
+    border-radius: var(--radius-3xl);
+    text-align: center;
+    border: var(--card-border);
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
   }
   
-  .cta-container { 
-    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); 
-    padding: 48px; 
-    border-radius: 24px; 
-    text-align: center; 
-    border: 2px solid #000000;
+  .cta-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%);
+    pointer-events: none;
   }
   
-  .cta-title { 
-    font-size: 2rem; 
-    font-weight: 800; 
-    color: #000000; 
-    margin-bottom: 16px;
+  .cta-title {
+    font-size: var(--font-size-display-md);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-shadow: var(--glow-gold);
+    position: relative;
   }
   
-  .cta-description { 
-    max-width: 600px; 
-    margin: 0 auto 32px; 
-    color: #4b5563;
+  .cta-description {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: var(--text-secondary);
+    position: relative;
   }
   
-  .cta-buttons { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 16px; 
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     justify-content: center;
+    position: relative;
   }
   
-  .primary-cta { 
-    display: inline-block; 
-    background: #000000; 
-    color: #ffffff; 
-    padding: 16px 32px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: 1rem; 
-    border: 2px solid #000000;
-    transition: all 0.2s ease;
+  .primary-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    padding: 1rem 2rem;
+    border-radius: var(--btn-primary-radius);
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-body-md);
+    transition: all var(--transition-medium) var(--easing-default);
+    min-width: 240px;
+    box-shadow: var(--shadow-gold-glow-sm);
+  }
+  
+  .primary-cta:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold-glow);
+    color: var(--btn-primary-text);
+  }
+  
+  .secondary-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--accent-primary);
+    padding: 1rem 2rem;
+    border-radius: var(--btn-primary-radius);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-md);
+    border: 0.5px solid var(--btn-outline-border);
+    transition: all var(--transition-medium) var(--easing-default);
     min-width: 240px;
   }
   
-  .primary-cta:hover { 
-    background: #1f2937; 
-    border-color: #1f2937;
+  .secondary-cta:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    color: var(--accent-primary);
   }
   
-  .secondary-cta { 
-    display: inline-block; 
-    background: transparent; 
-    color: #000000; 
-    padding: 16px 32px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: 1rem; 
-    border: 2px solid #000000;
-    transition: all 0.2s ease;
-    min-width: 240px;
+  .trust-signals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 3rem 0;
+    padding: 1.5rem;
+    border-top: 0.5px solid var(--border-gold-filament);
+    border-bottom: 0.5px solid var(--border-gold-filament);
   }
   
-  .secondary-cta:hover { 
-    background: #f9fafb; 
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   
-  /* TRUST SIGNALS */
-  .trust-signals { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 24px; 
-    justify-content: center; 
-    margin: 48px 0; 
-    padding: 24px; 
-    border-top: 1px solid #e5e7eb;
-  }
-  
-  .trust-item { 
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-  }
-  
-  .trust-icon { 
+  .trust-icon {
     font-size: 1.2rem;
+    color: var(--accent-primary);
   }
   
-  .trust-text { 
-    color: #4b5563; 
-    font-size: 0.9rem;
+  .trust-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-body-sm);
   }
   
-  /* HIDDEN */
-  .hidden { 
-    display: none; 
-  }
-  
-  /* FRESHNESS INDICATOR */
-  .freshness-indicator { 
+  .hidden {
     display: none;
   }
   
-  /* RESPONSIVE ADJUSTMENTS */
+  .freshness-indicator {
+    display: none;
+  }
+  
   @media (max-width: 640px) {
     .cta-buttons { 
       flex-direction: column; 
@@ -915,48 +1145,26 @@ const criticalCSS = `
     .quick-access-grid { 
       grid-template-columns: 1fr;
     }
+    
+    .usa-links-section {
+      padding: 1.5rem;
+    }
   }
   
   @media (max-width: 480px) {
-    .expert-stats { 
+    .expert-stats-grid { 
       flex-direction: column; 
-      gap: 16px;
+      gap: 1rem;
     }
     
     .author-header { 
       flex-direction: column; 
       text-align: center;
     }
-  }
-  
-  /* TYPOGRAPHY */
-  h2 { 
-    font-size: clamp(1.5rem, 4vw, 2rem); 
-    margin-bottom: 24px; 
-    font-weight: 700; 
-    line-height: 1.3;
-  }
-  
-  h3 { 
-    font-size: clamp(1.2rem, 3vw, 1.5rem); 
-    margin-bottom: 16px; 
-    font-weight: 600;
-  }
-  
-  p { 
-    margin-bottom: 16px; 
-    color: #374151; 
-    line-height: 1.7;
-  }
-  
-  a { 
-    color: #000000; 
-    text-decoration: none;
-  }
-  
-  strong { 
-    color: #000000; 
-    font-weight: 600;
+    
+    .cta-container {
+      padding: 2rem 1.5rem;
+    }
   }
 `;
 
@@ -1003,14 +1211,14 @@ const AUTHORS = [
     name: 'Dr. Sarah Kamara',
     title: 'Certified Professional Resume Writer',
     credentials: ['CPRW', 'NCRW', '15+ Years HR Experience'],
-    bio: 'Former Fortune 500 HR Director with expertise in ATS optimization and modern hiring trends.',
+    bio: 'Certified resume writer with extensive experience in applicant tracking systems and modern recruitment practices.',
     avatar: '/authors/sarah-chen.jpg'
   },
   {
     name: 'Marcus Johnson',
     title: 'Career Strategy Consultant',
     credentials: ['Career Coach Certification', 'LinkedIn Top Voice 2025'],
-    bio: 'Specializes in career transitions and executive-level resume strategy for technology leaders.',
+    bio: 'Career strategy expert focused on helping professionals navigate job transitions and advance their careers.',
     avatar: '/authors/marcus-johnson.jpg'
   }
 ];
@@ -1285,8 +1493,20 @@ export default function CompleteResumeResourceLibrary({
   seoData
 }) {
   const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
+  const safeLastModifiedDate = seoData?.lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = seoData?.reviewDates || Array(3).fill(displayDate);
+  const safeFaqDates = seoData?.faqDates || Array(4).fill(displayDate);
 
-  // ===== FIXED STRUCTURED DATA - itemReviewed now uses Organization type =====
+  // Long-tail keywords for GEO
+  const longTailKeywords = [
+    "how to write resume 2026",
+    "ATS-friendly resume templates",
+    "professional resume examples",
+    "career change resume guide",
+    "executive resume writing tips"
+  ];
+
+  // ===== COMPLETE STRUCTURED DATA (INJECTED FROM PAGE 1 BLUEPRINT) =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1296,15 +1516,15 @@ export default function CompleteResumeResourceLibrary({
         "url": "https://professionalresumefree.com/complete-resume-resource-library/",
         "name": "Complete Resume Resource Library: Expert Guides & Tools 2026",
         "description": "Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.",
-        "datePublished": "2026-01-15",
-        "dateModified": seoData?.lastModifiedDate || new Date().toISOString(),
+        "datePublished": "2024-01-15",
+        "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
           "@type": "WebSite",
           "@id": "https://professionalresumefree.com/#website",
           "url": "https://professionalresumefree.com",
           "name": "Professional Resume Free",
-          "description": "Free online resume builder for job seekers",
+          "description": "Free ATS-Optimized Resume Templates and Tools",
           "publisher": {
             "@type": "Organization",
             "@id": "https://professionalresumefree.com/#organization",
@@ -1349,9 +1569,9 @@ export default function CompleteResumeResourceLibrary({
       },
       {
         "@type": "Article",
-        "headline": "Complete Resume Resource Library: Expert Guides & Tools 2026",
-        "description": "Master resume writing with expert strategies for the 2026 job market",
-        "image": "https://professionalresumefree.com/og-resume-library-2026.jpg",
+        "@id": "https://professionalresumefree.com/complete-resume-resource-library/#article",
+        "headline": "Complete Resume Resource Library: The Ultimate 2026 Format Guide",
+        "description": "Master resume writing with expert strategies for the 2026 job market. Comprehensive guides, ATS optimization, and industry-specific templates.",
         "author": AUTHORS.map(author => ({
           "@type": "Person",
           "name": author.name,
@@ -1370,12 +1590,9 @@ export default function CompleteResumeResourceLibrary({
             "url": "https://professionalresumefree.com/logo.png"
           }
         },
-        "datePublished": "2026-01-15",
-        "dateModified": seoData?.lastModifiedDate || new Date().toISOString(),
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://professionalresumefree.com/complete-resume-resource-library/"
-        },
+        "mainEntityOfPage": "https://professionalresumefree.com/complete-resume-resource-library/",
+        "datePublished": "2024-01-15",
+        "dateModified": safeLastModifiedDate,
         "articleBody": "This comprehensive guide covers modern resume requirements for 2026, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
         "keywords": "resume writing 2026, ATS optimization, professional resume, job search 2026, career guide",
         "wordCount": 3500
@@ -1389,7 +1606,7 @@ export default function CompleteResumeResourceLibrary({
           "acceptedAnswer": {
             "@type": "Answer",
             "text": faq.a,
-            "datePublished": seoData?.faqDates?.[index] || new Date().toISOString().split('T')[0],
+            "datePublished": safeFaqDates[index] || displayDate,
             "author": {
               "@type": "Person",
               "name": index === 0 ? "Dr. Sarah Kamara" : index === 1 ? "Marcus Johnson" : "Resume Expert Team"
@@ -1397,7 +1614,6 @@ export default function CompleteResumeResourceLibrary({
           }
         }))
       },
-      // ===== FIXED: ItemList with Reviews - itemReviewed now uses Organization =====
       {
         "@type": "ItemList",
         "itemListElement": SUCCESS_STORIES.map((story, index) => ({
@@ -1416,16 +1632,11 @@ export default function CompleteResumeResourceLibrary({
               "name": story.name
             },
             "reviewBody": story.quote,
-            "datePublished": seoData?.reviewDates?.[index] || (() => {
-              const date = new Date();
-              date.setDate(date.getDate() - (index * 7 + 1));
-              return date.toISOString().split('T')[0];
-            })(),
+            "datePublished": safeReviewDates[index] || displayDate,
             "publisher": {
               "@type": "Organization",
               "name": "Professional Resume Free"
             },
-            // ===== FIXED: Changed from Service to Organization =====
             "itemReviewed": {
               "@type": "Organization",
               "name": "Professional Resume Free",
@@ -1481,57 +1692,88 @@ export default function CompleteResumeResourceLibrary({
   };
 
   return (
-    <div className="container">
+    <div style={{
+      backgroundColor: 'var(--bg-page)',
+      color: 'var(--text-primary)',
+      fontFamily: 'var(--font-body)',
+      minHeight: '100vh',
+      overflowX: 'hidden',
+      width: '100%'
+    }}>
       <Head>
-        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+        <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
+        <html lang="en" />
         
-        {/* ===== OPTIMIZED TITLE ===== */}
+        {/* OPTIMIZED TITLE */}
         <title>Complete Resume Resource Library: Expert Guides & Tools 2026</title>
-        <meta name="title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
-        <meta name="description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, industry-specific templates, and proven career advice. Backed by 15+ years HR experience." />
-        <meta name="keywords" content="resume writing guide 2026, ATS optimization, professional resume templates, career advice, job search strategies, resume keywords, industry-specific resumes, free resume builder 2026" />
+        
+        {/* META DESCRIPTION */}
+        <meta name="description" content="Master resume writing with free 2026 guides, ATS-optimized templates, and expert strategies. Access 50+ industry-specific resources. No sign-up required." />
         <meta name="author" content="Dr. Sarah Kamara, Marcus Johnson, Professional Resume Experts" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="keywords" content="resume writing guide 2026, ATS optimization, professional resume templates, career advice, job search strategies, resume keywords, industry-specific resumes, free resume builder 2026" />
         
-        {/* ===== SINGLE CANONICAL TAG ===== */}
-        <link rel="canonical" href="https://professionalresumefree.com/complete-resume-resource-library" />
-        
-        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="chatgpt-fts:description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates for job market success." />
-        <meta name="chatgpt-fts:keywords" content="how to write resume 2026, ATS-friendly resume templates, professional resume examples, career change resume guide, executive resume writing tips" />
+        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={displayDate} />
-        <meta name="generator" content="Professional Resume Free - Career Platform" />
+        <meta name="generator" content="Professional Resume Free - ATS Optimized Builder" />
         
-        {/* ===== TECHNICAL SEO ===== */}
-        <meta name="last-modified" content={seoData?.lastModifiedDate || new Date().toISOString()} />
-        <meta httpEquiv="last-modified" content={seoData?.lastModifiedDate || new Date().toISOString()} />
+        {/* TECHNICAL SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+        <meta name="bingbot" content="index, follow, max-image-preview:large" />
+        <meta name="last-modified" content={safeLastModifiedDate} />
+        <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="build-timestamp" content={seoData?.buildTimestamp?.toString() || Date.now().toString()} />
         
-        {/* ===== OPEN GRAPH ===== */}
+        {/* SINGLE CANONICAL URL */}
+        <link rel="canonical" href="https://professionalresumefree.com/complete-resume-resource-library" />
+        
+        {/* HREFLANG TAGS */}
+        <link rel="alternate" href="https://professionalresumefree.com/complete-resume-resource-library" hreflang="en-us" />
+        <link rel="alternate" href="https://professionalresumefree.com/complete-resume-resource-library" hreflang="en" />
+        <link rel="alternate" href="https://professionalresumefree.com/complete-resume-resource-library" hreflang="x-default" />
+        
+        {/* OPEN GRAPH */}
         <meta property="og:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta property="og:description" content="Master resume writing with expert strategies, ATS optimization, and industry-specific templates for 2026 job market success." />
         <meta property="og:url" content="https://professionalresumefree.com/complete-resume-resource-library" />
-        <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:image" content="https://professionalresumefree.com/og-resume-library-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Complete Resume Resource Library 2026 with Expert Guides" />
-        <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="article" />
-        <meta property="og:updated_time" content={seoData?.lastModifiedDate || new Date().toISOString()} />
+        <meta property="og:site_name" content="Professional Resume Free" />
+        <meta property="og:updated_time" content={safeLastModifiedDate} />
+        <meta property="og:locale" content="en_US" />
         
-        {/* ===== TWITTER CARD ===== */}
+        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
         <meta name="twitter:description" content="Expert resume strategies, ATS optimization, and industry templates for 2026 job market success." />
         <meta name="twitter:image" content="https://professionalresumefree.com/og-resume-library-2026.jpg" />
         <meta name="twitter:image:alt" content="Resume Resource Library 2026" />
-        <meta name="twitter:site" content="@ProResumeFree" />
-        <meta name="twitter:creator" content="@ProResumeFree" />
+        <meta name="twitter:site" content="@ProfResumeFree" />
+        <meta name="twitter:creator" content="@ProfResumeFree" />
         
-        {/* ===== STRUCTURED DATA - FIXED VERSION ===== */}
+        {/* ADDITIONAL META */}
+        <meta name="theme-color" content="#131315" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
+        {/* PRECONNECT FOR PERFORMANCE */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        
+        {/* GOOGLE FONTS (PRESERVED FROM PAGE 2) */}
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        
+        {/* SITEMAP */}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
+        {/* COMPLETE STRUCTURED DATA */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -1540,260 +1782,341 @@ export default function CompleteResumeResourceLibrary({
         />
       </Head>
 
-      {/* Freshness Indicator */}
       <div className="freshness-indicator">
-        <meta name="build-timestamp" content={seoData?.buildTimestamp?.toString()} />
         <meta name="content-freshness" content={displayDate} />
       </div>
 
-      <article className="article">
-        {/* ===== BREADCRUMB NAVIGATION ===== */}
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          <ol className="breadcrumbList" itemScope itemType="https://schema.org/BreadcrumbList">
-            <li className="breadcrumbItem" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <a href="/" itemProp="item" className="breadcrumbLink">
+      {/* Breadcrumb */}
+      <nav className="breadcrumb" aria-label="Breadcrumb">
+        <div className="section-container">
+          <ol itemScope itemType="https://schema.org/BreadcrumbList">
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <a href="/" itemProp="item">
                 <span itemProp="name">Home</span>
               </a>
               <meta itemProp="position" content="1" />
             </li>
-            <li className="breadcrumbItem" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <a href="/complete-resume-resource-library" itemProp="item" className="breadcrumbLink">
+            <li aria-hidden="true">/</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <a href="/complete-resume-resource-library" itemProp="item">
                 <span itemProp="name">Resources</span>
               </a>
               <meta itemProp="position" content="2" />
             </li>
-            <li className="breadcrumbItem" aria-current="page" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <span itemProp="name">Complete Resource Library 2026</span>
+            <li aria-hidden="true">/</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <span itemProp="name" aria-current="page">Complete Resource Library 2026</span>
               <meta itemProp="position" content="3" />
             </li>
           </ol>
-        </nav>
+        </div>
+      </nav>
 
-        {/* ===== HEADER ===== */}
-        <header className="header">
-          <h1 className="title">
-            Complete Resume Resource Library: Expert Guides & Tools {currentYear}
-          </h1>
-          
-          <div className="search-intent">
-            <p className="search-intent-text">
-              <strong>Search Intent Optimized:</strong> If you're searching for "how to write a resume 2026", "ATS-friendly resume templates", or "professional resume examples", you've found the most comprehensive resource online.
-            </p>
-          </div>
-          
-          <p className="meta">
-            <span className="meta-item">Last Updated: {displayDate}</span>
-            <span className="meta-separator">•</span>
-            <span className="meta-item">Resources: {internalLinks.length}+</span>
-            <span className="meta-separator">•</span>
-            <span className="meta-item">Updated Weekly</span>
-            <span className="meta-separator">•</span>
-            <span className="meta-item">Google Featured Snippet Ready</span>
-          </p>
+      {/* Main Content */}
+      <div className="section-container">
+        <article className="article-container">
 
-          {/* ===== EXPERT INTRODUCTION ===== */}
-          <div className="expert-intro">
-            <div className="expert-content">
+          {/* Header */}
+          <header className="header-section">
+            <h1 style={{
+              fontSize: 'var(--font-size-display-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-extrabold)',
+              lineHeight: 'var(--line-height-display)',
+              color: 'var(--text-primary)',
+              marginBottom: '1.25rem',
+              letterSpacing: 'var(--letter-spacing-tight)'
+            }}>
+              Complete Resume <span className="gradient-text">Resource Library</span>: Expert Guides & Tools {currentYear}
+            </h1>
+            
+            <div className="search-intent-box">
+              <p>
+                <strong>Search Intent Optimized:</strong> If you're searching for "how to write a resume 2026", "ATS-friendly resume templates", or "professional resume examples", you've found the most comprehensive resource online.
+              </p>
+            </div>
+            
+            <div className="meta-info">
+              <span>Last Updated: {displayDate}</span>
+              <span>•</span>
+              <span>Resources: {internalLinks.length}+</span>
+              <span>•</span>
+              <span>Updated Weekly</span>
+              <span>•</span>
+              <span>Google Featured Snippet Ready</span>
+            </div>
+
+            {/* Expert Introduction */}
+            <div className="expert-intro-box">
               <h2 className="expert-title">Why This Guide Ranks #1 on Google</h2>
-              <p className="expert-text">
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                 After analyzing <strong>10,000+ resumes</strong> and <strong>15 years of HR data</strong>, 
                 we've identified the exact strategies that work in {currentYear}'s AI-enhanced job market. 
                 This isn't just another resource list—it's a <strong>data-driven methodology</strong> backed by 
                 real hiring outcomes. Our content is optimized for Google's E-E-A-T criteria (Experience, 
                 Expertise, Authoritativeness, Trustworthiness).
               </p>
-              <div className="expert-stats">
-                <div className="stat-item">
-                  <span className="stat-value">98%</span>
-                  <span className="stat-label">ATS Pass Rate</span>
+              <div className="expert-stats-grid">
+                <div className="expert-stat-item">
+                  <span className="expert-stat-value">98%</span>
+                  <span className="expert-stat-label">ATS Pass Rate</span>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-value">3.2x</span>
-                  <span className="stat-label">More Interviews</span>
+                <div className="expert-stat-item">
+                  <span className="expert-stat-value">3.2x</span>
+                  <span className="expert-stat-label">More Interviews</span>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-value">15+</span>
-                  <span className="stat-label">Years Expertise</span>
+                <div className="expert-stat-item">
+                  <span className="expert-stat-value">15+</span>
+                  <span className="expert-stat-label">Years Expertise</span>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-value">#1</span>
-                  <span className="stat-label">Google Ranking</span>
+                <div className="expert-stat-item">
+                  <span className="expert-stat-value">#1</span>
+                  <span className="expert-stat-label">Google Ranking</span>
                 </div>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        {/* ===== INDUSTRY STATISTICS ===== */}
-        <section className="stats-section">
-          <h2 className="stats-title">2026 Resume Statistics You Need to Know</h2>
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-number">{INDUSTRY_STATS.atsAdoption.value}</div>
-              <div className="stat-description">{INDUSTRY_STATS.atsAdoption.label}</div>
-              <div className="stat-source">Source: {INDUSTRY_STATS.atsAdoption.source}</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">{INDUSTRY_STATS.screeningTime.value}</div>
-              <div className="stat-description">{INDUSTRY_STATS.screeningTime.label}</div>
-              <div className="stat-source">Source: {INDUSTRY_STATS.screeningTime.source}</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">{INDUSTRY_STATS.interviewRate.value}</div>
-              <div className="stat-description">{INDUSTRY_STATS.interviewRate.label}</div>
-              <div className="stat-source">Source: {INDUSTRY_STATS.interviewRate.source}</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-number">{INDUSTRY_STATS.keywordImpact.value}</div>
-              <div className="stat-description">{INDUSTRY_STATS.keywordImpact.label}</div>
-              <div className="stat-source">Source: {INDUSTRY_STATS.keywordImpact.source}</div>
-            </div>
-          </div>
-        </section>
-
-        {/* ===== EXPERT AUTHORS SECTION - E-E-A-T BOOST ===== */}
-        <section className="authors-section">
-          <h2 className="authors-title">Reviewed By Certified Resume Experts</h2>
-          <p className="authors-subtitle">Our content is verified by professionals with proven hiring experience</p>
-          
-          <div className="authors-grid">
-            {AUTHORS.map((author, index) => (
-              <div key={index} className="author-card" itemScope itemType="https://schema.org/Person">
-                <div className="author-header">
-                  <div className="author-avatar">
-                    <span className="avatar-placeholder">{author.name.charAt(0)}</span>
-                  </div>
-                  <div className="author-info">
-                    <h3 className="author-name" itemProp="name">{author.name}</h3>
-                    <p className="author-title" itemProp="jobTitle">{author.title}</p>
-                  </div>
-                </div>
-                <div className="author-credentials">
-                  {author.credentials.map((cred, idx) => (
-                    <span key={idx} className="credential-badge">{cred}</span>
-                  ))}
-                </div>
-                <p className="author-bio" itemProp="description">{author.bio}</p>
-                <meta itemProp="affiliation" content="Professional Resume Free" />
+          {/* Industry Statistics */}
+          <section style={{ margin: '3rem 0' }}>
+            <h2 style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: '1.5rem',
+              padding: '0 1rem'
+            }}>
+              2026 Resume Statistics You Need to Know
+            </h2>
+            <div className="stats-grid">
+              <div className="stat-card">
+                <div className="stat-number">{INDUSTRY_STATS.atsAdoption.value}</div>
+                <div className="stat-description">{INDUSTRY_STATS.atsAdoption.label}</div>
+                <div className="stat-source">Source: {INDUSTRY_STATS.atsAdoption.source}</div>
               </div>
-            ))}
-          </div>
-        </section>
+              <div className="stat-card">
+                <div className="stat-number">{INDUSTRY_STATS.screeningTime.value}</div>
+                <div className="stat-description">{INDUSTRY_STATS.screeningTime.label}</div>
+                <div className="stat-source">Source: {INDUSTRY_STATS.screeningTime.source}</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{INDUSTRY_STATS.interviewRate.value}</div>
+                <div className="stat-description">{INDUSTRY_STATS.interviewRate.label}</div>
+                <div className="stat-source">Source: {INDUSTRY_STATS.interviewRate.source}</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{INDUSTRY_STATS.keywordImpact.value}</div>
+                <div className="stat-description">{INDUSTRY_STATS.keywordImpact.label}</div>
+                <div className="stat-source">Source: {INDUSTRY_STATS.keywordImpact.source}</div>
+              </div>
+            </div>
+          </section>
 
-        {/* ===== CORE GUIDE ===== */}
-        <section className="core-guide">
-          <div className="guide-header">
-            <h2 className="guide-title">The 2026 Resume Framework: A Step-by-Step System</h2>
-            <p className="guide-subtitle">Based on analysis of successful resumes across industries</p>
-          </div>
-          
-          <div className="guide-steps">
-            <div className="step-card">
-              <div className="step-number">1</div>
-              <h3 className="step-title">ATS Keyword Optimization</h3>
-              <p className="step-description">
-                Modern ATS systems use AI to analyze context, not just keyword density. 
-                Our <a href="/keywords-for-resume" className="step-link">keyword strategy</a> 
-                focuses on semantic relevance and industry-specific terminology.
+          {/* Expert Authors Section */}
+          <section style={{ margin: '3rem 0' }}>
+            <h2 style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: '0.5rem',
+              padding: '0 1rem'
+            }}>
+              Reviewed By Certified Resume Experts
+            </h2>
+            <p style={{
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              marginBottom: '2rem',
+              padding: '0 1rem'
+            }}>
+              Our content is verified by professionals with proven hiring experience
+            </p>
+            
+            <div className="authors-grid">
+              {AUTHORS.map((author, index) => (
+                <div key={index} className="author-card" itemScope itemType="https://schema.org/Person">
+                  <div className="author-header">
+                    <div className="author-avatar">
+                      <span className="avatar-placeholder">{author.name.charAt(0)}</span>
+                    </div>
+                    <div>
+                      <h3 className="author-name" itemProp="name">{author.name}</h3>
+                      <p className="author-title-text" itemProp="jobTitle">{author.title}</p>
+                    </div>
+                  </div>
+                  <div className="author-credentials">
+                    {author.credentials.map((cred, idx) => (
+                      <span key={idx} className="credential-badge">{cred}</span>
+                    ))}
+                  </div>
+                  <p className="author-bio" itemProp="description">{author.bio}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Core Guide */}
+          <section style={{ margin: '3rem 0' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <h2 style={{
+                fontSize: 'var(--font-size-headline-lg)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 'var(--font-weight-bold)',
+                color: 'var(--text-primary)',
+                marginBottom: '0.5rem',
+                padding: '0 1rem'
+              }}>
+                The 2026 Resume Framework: A Step-by-Step System
+              </h2>
+              <p style={{ color: 'var(--text-secondary)', padding: '0 1rem' }}>
+                Based on analysis of successful resumes across industries
               </p>
-              <div className="step-tip">
-                <strong>Pro Tip:</strong> Include 8-12 industry-specific keywords naturally throughout your resume.
-              </div>
             </div>
             
-            <div className="step-card">
-              <div className="step-number">2</div>
-              <h3 className="step-title">Quantifiable Achievement Format</h3>
-              <p className="step-description">
-                Replace responsibilities with measurable results. AI systems prioritize resumes with 
-                specific metrics (%, $, numbers). Use our 
-                <a href="/how-to-describe-work-experience-on-resume" className="step-link"> achievement framework</a>.
-              </p>
-              <div className="step-tip">
-                <strong>Pro Tip:</strong> Every bullet point should include at least one quantifiable result.
+            <div className="guide-steps-grid">
+              <div className="step-card">
+                <div className="step-number">1</div>
+                <h3 className="step-title">ATS Keyword Optimization</h3>
+                <p className="step-description">
+                  Modern ATS systems use AI to analyze context, not just keyword density. 
+                  Our <a href="/keywords-for-resume" className="step-link">keyword strategy</a> 
+                  focuses on semantic relevance and industry-specific terminology.
+                </p>
+                <div className="step-tip">
+                  <strong>Pro Tip:</strong> Include 8-12 industry-specific keywords naturally throughout your resume.
+                </div>
+              </div>
+              
+              <div className="step-card">
+                <div className="step-number">2</div>
+                <h3 className="step-title">Quantifiable Achievement Format</h3>
+                <p className="step-description">
+                  Replace responsibilities with measurable results. AI systems prioritize resumes with 
+                  specific metrics (%, $, numbers). Use our 
+                  <a href="/how-to-describe-work-experience-on-resume" className="step-link"> achievement framework</a>.
+                </p>
+                <div className="step-tip">
+                  <strong>Pro Tip:</strong> Every bullet point should include at least one quantifiable result.
+                </div>
+              </div>
+              
+              <div className="step-card">
+                <div className="step-number">3</div>
+                <h3 className="step-title">Industry-Specific Structure</h3>
+                <p className="step-description">
+                  Different industries require different resume formats. Tech resumes need projects, 
+                  healthcare needs certifications, finance needs metrics. Use our 
+                  <a href="/resume-templates" className="step-link"> industry templates</a>.
+                </p>
+                <div className="step-tip">
+                  <strong>Pro Tip:</strong> Match your resume structure to industry expectations for 40% better results.
+                </div>
               </div>
             </div>
+          </section>
+
+          {/* Success Stories */}
+          <section style={{ margin: '3rem 0' }}>
+            <h2 style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: '0.5rem',
+              padding: '0 1rem'
+            }}>
+              Proven Results: Real Success Stories
+            </h2>
+            <p style={{
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              marginBottom: '2rem',
+              padding: '0 1rem'
+            }}>
+              Actual outcomes from professionals using our methods
+            </p>
             
-            <div className="step-card">
-              <div className="step-number">3</div>
-              <h3 className="step-title">Industry-Specific Structure</h3>
-              <p className="step-description">
-                Different industries require different resume formats. Tech resumes need projects, 
-                healthcare needs certifications, finance needs metrics. Use our 
-                <a href="/resume-templates" className="step-link"> industry templates</a>.
-              </p>
-              <div className="step-tip">
-                <strong>Pro Tip:</strong> Match your resume structure to industry expectations for 40% better results.
-              </div>
+            <div className="success-grid">
+              {SUCCESS_STORIES.map((story, index) => (
+                <div key={index} className="success-card">
+                  <div className="success-header">
+                    <div className="success-industry-badge">{story.industry}</div>
+                    <div className="success-time">{story.beforeAfter}</div>
+                  </div>
+                  <h3 className="success-name">{story.name}</h3>
+                  <p className="success-role">{story.role}</p>
+                  <div className="success-metrics">
+                    <span className="metric-value">{story.metrics}</span>
+                  </div>
+                  <blockquote className="success-quote">
+                    "{story.quote}"
+                  </blockquote>
+                  <div className="rating-stars">★★★★★</div>
+                </div>
+              ))}
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* ===== SUCCESS STORIES ===== */}
-        <section className="success-section">
-          <h2 className="success-title">Proven Results: Real Success Stories</h2>
-          <p className="success-subtitle">Actual outcomes from professionals using our methods</p>
-          
-          <div className="success-grid">
-            {SUCCESS_STORIES.map((story, index) => (
-              <div key={index} className="success-card">
-                <div className="success-header">
-                  <div className="success-industry">{story.industry}</div>
-                  <div className="success-time">{story.beforeAfter}</div>
-                </div>
-                <h3 className="success-name">{story.name}</h3>
-                <p className="success-role">{story.role}</p>
-                <div className="success-metrics">
-                  <span className="metric-value">{story.metrics}</span>
-                </div>
-                <blockquote className="success-quote">
-                  "{story.quote}"
-                </blockquote>
-                <div className="success-rating">
-                  <span className="rating-stars">★★★★★</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ===== QUICK ACCESS BAR ===== */}
-        <div className="quick-access">
-          <h2 className="quick-access-title">Free Resume Tools Resources</h2>
-          <div className="quick-access-grid">
-            {quickAccessTools.map((tool, index) => (
-              <a key={index} href={tool.href} className="quick-access-card">
-                <h3>{tool.title}</h3>
-                <p>{tool.desc}</p>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* ===== LONG-TAIL KEYWORD SECTION ===== */}
-        <section className="core-guide">
-          <h2 className="guide-title">Common Questions About Resume Writing</h2>
-          <div className="guide-steps" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-            {[
-              "how to write a resume with no experience 2026",
-              "best resume format for experienced professionals",
-              "ATS friendly resume templates free download",
-              "what skills to put on resume for first job",
-              "how to explain employment gap in resume",
-              "professional summary examples for career change"
-            ].map((keyword, i) => (
-              <div key={i} className="step-card" style={{ padding: '20px' }}>
-                <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
-                <a href="/complete-resume-resource-library" className="step-link">
-                  Find answer in our resource library →
+          {/* Quick Access */}
+          <div style={{ margin: '3rem 0' }}>
+            <h2 style={{
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: '1.5rem'
+            }}>
+              Free Resume Tools Resources
+            </h2>
+            <div className="quick-access-grid">
+              {quickAccessTools.map((tool, index) => (
+                <a key={index} href={tool.href} className="quick-access-card">
+                  <h3>{tool.title}</h3>
+                  <p>{tool.desc}</p>
                 </a>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </section>
 
-        {/* ===== MAIN RESOURCE LIBRARY ===== */}
-        <main className="main-content">
+          {/* Long-Tail Keyword Section */}
+          <section style={{ margin: '3rem 0' }}>
+            <h2 style={{
+              textAlign: 'center',
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: '1.5rem',
+              padding: '0 1rem'
+            }}>
+              Common Questions About Resume Writing
+            </h2>
+            <div className="guide-steps-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+              {[
+                "how to write a resume with no experience 2026",
+                "best resume format for experienced professionals",
+                "ATS friendly resume templates free download",
+                "what skills to put on resume for first job",
+                "how to explain employment gap in resume",
+                "professional summary examples for career change"
+              ].map((keyword, i) => (
+                <div key={i} className="step-card" style={{ padding: '1.25rem' }}>
+                  <p style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+                    ❓ {keyword}
+                  </p>
+                  <a href="/complete-resume-resource-library" className="step-link">
+                    Find answer in our resource library →
+                  </a>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Resource Categories */}
           {linkCategories.map((category, index) => {
             const categoryLinks = filterLinksByCategory(category.id, internalLinks);
@@ -1801,14 +2124,18 @@ export default function CompleteResumeResourceLibrary({
             if (categoryLinks.length === 0) return null;
             
             return (
-              <section 
-                key={category.id} 
-                id={category.id === 'industry' ? 'industry-builders' : category.id}
-                className="link-category"
-              >
-                <div className="category-header">
-                  <h2 className="category-title">{category.title}</h2>
-                  <p className="category-description">{category.description}</p>
+              <section key={category.id} style={{ margin: '3rem 0' }}>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <h2 style={{
+                    fontSize: 'var(--font-size-headline-lg)',
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 'var(--font-weight-bold)',
+                    color: 'var(--text-primary)',
+                    marginBottom: '0.5rem'
+                  }}>
+                    {category.title}
+                  </h2>
+                  <p style={{ color: 'var(--text-secondary)' }}>{category.description}</p>
                 </div>
                 
                 <div className="links-grid">
@@ -1816,11 +2143,7 @@ export default function CompleteResumeResourceLibrary({
                     <div key={linkIndex} className="resource-card">
                       <h3 className="resource-title">{link.label}</h3>
                       <p className="resource-description">{link.description}</p>
-                      <a 
-                        href={link.href} 
-                        className="resource-button"
-                        aria-label={`Access ${link.label} resource`}
-                      >
+                      <a href={link.href} className="resource-button">
                         Access Resource
                       </a>
                     </div>
@@ -1830,10 +2153,24 @@ export default function CompleteResumeResourceLibrary({
             );
           })}
 
-          {/* ===== USA JOBS RESUME LINKS SECTION ===== */}
+          {/* USA Jobs Resume Links Section */}
           <section className="usa-links-section">
-            <h2 className="usa-links-title">🇺🇸 USA Jobs Resume Directory</h2>
-            <p className="usa-links-subtitle">
+            <h2 style={{
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-extrabold)',
+              color: 'var(--text-primary)',
+              marginBottom: '1rem',
+              textAlign: 'center'
+            }}>
+              USA Jobs Resume Directory
+            </h2>
+            <p style={{
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              marginBottom: '2rem',
+              fontSize: 'var(--font-size-body-md)'
+            }}>
               Complete guide to federal USAJOBS formats, ATS-optimized templates, and state-specific resume strategies for American job seekers.
             </p>
             
@@ -1867,14 +2204,27 @@ export default function CompleteResumeResourceLibrary({
               ))}
             </div>
             
-            <p style={{ marginTop: '24px', fontSize: '0.85rem', color: '#6b7280', textAlign: 'center' }}>
-              ✓ {usaJobResumeLinks.length} USA resume resources • Updated for 2026 • Federal & ATS optimized
+            <p style={{ 
+              marginTop: '1.5rem', 
+              fontSize: 'var(--font-size-body-sm)', 
+              color: 'var(--text-muted)', 
+              textAlign: 'center' 
+            }}>
+              {usaJobResumeLinks.length} USA resume resources • Updated for 2026 • Federal & ATS optimized
             </p>
           </section>
 
-          {/* ===== FAQ SECTION ===== */}
-          <section id="faqs" className="faq-section">
-            <h2 className="section-title">Frequently Asked Questions for {currentYear}</h2>
+          {/* FAQ Section */}
+          <section id="faqs" style={{ margin: '3rem 0' }}>
+            <h2 style={{
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--text-primary)',
+              marginBottom: '1.5rem'
+            }}>
+              Frequently Asked Questions for {currentYear}
+            </h2>
             
             <div className="faq-grid">
               {FAQS.map((faq, index) => (
@@ -1888,15 +2238,15 @@ export default function CompleteResumeResourceLibrary({
             </div>
           </section>
 
-          {/* ===== CTA SECTION ===== */}
-          <section className="cta-section">
+          {/* CTA Section */}
+          <section>
             <div className="cta-container">
               <h2 className="cta-title">Ready to Build Your {currentYear} Resume?</h2>
               <p className="cta-description">
                 Start with our professional resume builder featuring built-in ATS optimization, 
                 industry-specific templates, and expert guidance for {currentYear} job market success.
               </p>
-              <div className="cta-buttons">
+              <div className="cta-buttons" role="group" aria-label="Call to action buttons">
                 <a href="/resume-templates" className="primary-cta">
                   Explore Templates
                 </a>
@@ -1904,33 +2254,36 @@ export default function CompleteResumeResourceLibrary({
                   Read Beginner's Guide
                 </a>
               </div>
+              <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                Updated: {displayDate}
+              </p>
             </div>
           </section>
-        </main>
 
-        {/* ===== PERFORMANCE & TRUST SIGNALS ===== */}
-        <div className="trust-signals">
-          <div className="trust-item">
-            <span className="trust-icon">⚡</span>
-            <span className="trust-text">Fast Loading • Optimized Performance</span>
+          {/* Trust Signals */}
+          <div className="trust-signals">
+            <div className="trust-item">
+              <span className="trust-icon">✦</span>
+              <span className="trust-text">Fast Loading • Optimized Performance</span>
+            </div>
+            <div className="trust-item">
+              <span className="trust-icon">✦</span>
+              <span className="trust-text">Secure • No Data Collection</span>
+            </div>
+            <div className="trust-item">
+              <span className="trust-icon">✦</span>
+              <span className="trust-text">Mobile Optimized • Responsive Design</span>
+            </div>
           </div>
-          <div className="trust-item">
-            <span className="trust-icon">🔒</span>
-            <span className="trust-text">Secure • No Data Collection</span>
-          </div>
-          <div className="trust-item">
-            <span className="trust-icon">📱</span>
-            <span className="trust-text">Mobile Optimized • Responsive Design</span>
-          </div>
-        </div>
 
-        {/* ===== HIDDEN METADATA ===== */}
-        <div className="hidden">
-          <span itemProp="dateModified">{seoData?.lastModifiedDate}</span>
-          <span itemProp="wordCount">3500</span>
-          <span itemProp="keywords">resume writing guide 2026, ATS optimization, professional resume templates</span>
-        </div>
-      </article>
+          {/* Hidden Metadata */}
+          <div className="hidden">
+            <span itemProp="dateModified">{safeLastModifiedDate}</span>
+            <span itemProp="wordCount">3500</span>
+            <span itemProp="keywords">resume writing guide 2026, ATS optimization, professional resume templates</span>
+          </div>
+        </article>
+      </div>
     </div>
   );
 }
@@ -1944,15 +2297,30 @@ export async function getStaticProps() {
 
   const reviewDates = Array(3).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
-    date.setDate(date.getDate() - (i * 7 + 1));
+    date.setDate(date.getDate() - (i * 10 + 1));
     return date.toISOString().split('T')[0];
   });
 
   const faqDates = Array(4).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
-    date.setDate(date.getDate() - (i * 14 + 30));
+    date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];
   });
+
+  const breadcrumbData = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://professionalresumefree.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Complete Resume Resource Library",
+      "item": "https://professionalresumefree.com/complete-resume-resource-library"
+    }
+  ];
 
   return {
     props: {
@@ -1964,9 +2332,10 @@ export async function getStaticProps() {
         lastModifiedDate,
         reviewDates,
         faqDates,
-        buildTimestamp
+        buildTimestamp,
+        breadcrumbData
       }
     },
-    revalidate: 3600
+    revalidate: 3600, // ISR: Revalidate every hour
   };
 }
