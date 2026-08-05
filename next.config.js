@@ -8,31 +8,14 @@ const SITE_URL = 'https://professionalresumefree.com';
 const SITE_NAME = 'Professional Resume Free';
 
 const CACHE = {
-  // Immutable static assets with content hashing (1 year)
   IMMUTABLE: 'public, max-age=31536000, immutable',
-  
-  // AI files - 24h cache with extended stale period (7 days)
   AI_FILES: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800, stale-if-error=604800',
-  
-  // Dynamic AI/API responses - 1h cache with 24h stale
   AI_DYNAMIC: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400',
-  
-  // HTML pages - 30min browser, 1h CDN with 24h stale
   HTML: 'public, max-age=1800, s-maxage=3600, stale-while-revalidate=86400',
-  
-  // Sitemaps - 12h cache (aligns with typical crawl frequency)
   SITEMAP: 'public, max-age=43200, s-maxage=43200, stale-while-revalidate=86400',
-  
-  // Robots.txt - 24h cache
   ROBOTS: 'public, max-age=86400, s-maxage=86400',
-  
-  // Schema structured data - 24h cache
   SCHEMA: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
-  
-  // Catch-all production cache
   PRODUCTION: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
-  
-  // Development - never cache
   DEVELOPMENT: 'no-cache, no-store, must-revalidate',
 };
 
@@ -95,7 +78,7 @@ const CONTENT_SECURITY_POLICY = [
 ].join('; ');
 
 // ============================================================================
-// HELPER FUNCTIONS
+// HELPERS
 // ============================================================================
 
 function cacheHeaders(cacheControl, contentType = null) {
@@ -104,11 +87,9 @@ function cacheHeaders(cacheControl, contentType = null) {
     { key: 'ETag', value: 'true' },
     { key: 'Last-Modified', value: 'true' },
   ];
-  
   if (contentType) {
     headers.unshift({ key: 'Content-Type', value: contentType });
   }
-  
   return headers;
 }
 
@@ -117,15 +98,10 @@ function generateAILinkHeader() {
     `<${SITE_URL}/llms.txt>; rel="help"; type="text/plain"`,
     `<${SITE_URL}/llms-full.txt>; rel="alternate"; type="text/plain"`,
     `<${SITE_URL}/api/ai-context.json>; rel="alternate"; type="application/json"`,
-    
-    ...AI_MANIFESTS.map(manifest => 
-      `<${SITE_URL}${manifest}>; rel="service"`
-    ),
-    
+    ...AI_MANIFESTS.map(manifest => `<${SITE_URL}${manifest}>; rel="service"`),
     `<${SITE_URL}/schema/organization.json>; rel="alternate"; type="application/ld+json"`,
     `<${SITE_URL}/schema/website.json>; rel="alternate"; type="application/ld+json"`,
   ];
-  
   return links.join(', ');
 }
 
@@ -147,13 +123,8 @@ function securityHeaders() {
     { key: 'X-Frame-Options', value: 'DENY' },
     { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
     { key: 'X-DNS-Prefetch-Control', value: 'on' },
-    { 
-      key: 'Strict-Transport-Security', 
-      value: 'max-age=63072000; includeSubDomains; preload' 
-    },
-    { 
-      key: 'Permissions-Policy', 
-      value: [
+    { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+    { key: 'Permissions-Policy', value: [
         'camera=()',
         'microphone=()',
         'geolocation=()',
@@ -169,41 +140,28 @@ function securityHeaders() {
 }
 
 // ============================================================================
-// NEXT.JS CONFIGURATION
+// NEXT CONFIG
 // ============================================================================
 
 const nextConfig = {
-  // --------------------------------------------------------------------------
-  // Core Configuration
-  // --------------------------------------------------------------------------
-  trailingSlash: false,         // Clean URLs without trailing slash (Natively redirects /path/ to /path)
+  trailingSlash: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   compress: true,
-  output: 'standalone',
   generateEtags: true,
-  
-  // --------------------------------------------------------------------------
-  // Compiler Options
-  // --------------------------------------------------------------------------
+
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
       ? { exclude: ['error', 'warn'] }
       : false,
   },
 
-  // --------------------------------------------------------------------------
-  // Experimental Features
-  // --------------------------------------------------------------------------
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
     middlewarePrefetch: 'flexible',
   },
 
-  // --------------------------------------------------------------------------
-  // Image Optimization
-  // --------------------------------------------------------------------------
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -211,7 +169,7 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
     qualities: [75, 85],
     dangerouslyAllowSVG: false,
-    contentDispositionType: 'inline', // FIXED: Renders images inline inside web layout instead of treating them as forced file downloads
+    contentDispositionType: 'inline',
     remotePatterns: [
       {
         protocol: 'https',
@@ -221,16 +179,10 @@ const nextConfig = {
     ],
   },
 
-  // --------------------------------------------------------------------------
-  // Import Optimization
-  // --------------------------------------------------------------------------
   modularizeImports: {
     lodash: { transform: 'lodash/{{member}}' },
   },
 
-  // --------------------------------------------------------------------------
-  // Rewrites
-  // --------------------------------------------------------------------------
   async rewrites() {
     return [
       {
@@ -240,26 +192,17 @@ const nextConfig = {
     ];
   },
 
-  // --------------------------------------------------------------------------
-  // Redirects
-  // --------------------------------------------------------------------------
   async redirects() {
     return [
-      // Force non-www Canonical Domains (Strips 'www.' and redirects dynamically preserving paths)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.professionalresumefree.com' }],
         destination: 'https://professionalresumefree.com/:path*',
         permanent: true,
       },
-      // FIXED: Conflicting trailing-slash code completely removed.
-      // FIXED: Loop code targeting `/resume-templates/` completely removed.
     ];
   },
 
-  // --------------------------------------------------------------------------
-  // Headers
-  // --------------------------------------------------------------------------
   async headers() {
     const isProduction = process.env.NODE_ENV === 'production';
     const aiLinkHeader = generateAILinkHeader();
