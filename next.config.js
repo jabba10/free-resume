@@ -15,22 +15,18 @@ const GOATCOUNTER_DOMAINS = [
 ];
 
 const CACHE = {
-  // FIXED: Reduced immutable cache from 1 year to 1 week with revalidation
   IMMUTABLE: 'public, max-age=604800, immutable',
-  // FIXED: Added a short-term cache for static assets with revalidation
   STATIC_ASSETS: 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
-  // FIXED: Added cache-busting friendly config for JS/CSS bundles
   BUNDLES: 'public, max-age=31536000, immutable',
   AI_FILES: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800, stale-if-error=604800',
   AI_DYNAMIC: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400',
-  // FIXED: Reduced HTML cache from 1800 to 300 seconds (5 minutes)
-  HTML: 'public, max-age=300, s-maxage=600, stale-while-revalidate=86400, must-revalidate',
+  // Aggressive no-cache for HTML to force Vercel edge to update
+  HTML: 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0',
   SITEMAP: 'public, max-age=43200, s-maxage=43200, stale-while-revalidate=86400',
   ROBOTS: 'public, max-age=86400, s-maxage=86400',
   SCHEMA: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
-  PRODUCTION: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+  PRODUCTION: 'public, max-age=300, s-maxage=600, stale-while-revalidate=3600, must-revalidate',
   DEVELOPMENT: 'no-cache, no-store, must-revalidate',
-  // FIXED: Added no-cache for HTML pages to always check for updates
   NO_CACHE: 'no-cache, no-store, must-revalidate, proxy-revalidate',
 };
 
@@ -152,8 +148,6 @@ function securityHeaders() {
     },
     { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
     { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
-    // FIXED: Added Pragma header to prevent caching
-    { key: 'Pragma', value: 'no-cache' },
     { key: 'Vary', value: 'Accept-Encoding, Accept' },
   ];
 }
@@ -163,17 +157,19 @@ function securityHeaders() {
 // ============================================================================
 
 const nextConfig = {
+  // Generate unique build ID for cache busting
+  generateBuildId: async () => {
+    return `build-${Date.now()}`;
+  },
+
   trailingSlash: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   compress: true,
   generateEtags: true,
 
-  // FIXED: Added onDemandEntries to control page caching
   onDemandEntries: {
-    // period (in ms) where the server will keep pages in memory
     maxInactiveAge: 25 * 1000,
-    // number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 2,
   },
 
@@ -193,8 +189,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // FIXED: Reduced minimumCacheTTL from 1 year to 1 hour
-    minimumCacheTTL: 3600,
+    minimumCacheTTL: 60,
     qualities: [75, 85],
     dangerouslyAllowSVG: false,
     contentDispositionType: 'inline',
@@ -211,7 +206,6 @@ const nextConfig = {
     lodash: { transform: 'lodash/{{member}}' },
   },
 
-  // Removed GoatCounter rewrite - not needed
   async rewrites() {
     return [];
   },
@@ -230,6 +224,7 @@ const nextConfig = {
   async headers() {
     const isProduction = process.env.NODE_ENV === 'production';
     const aiLinkHeader = generateAILinkHeader();
+    const buildId = `build-${Date.now()}`;
 
     const aiFileHeaders = AI_FILES.map((file) => ({
       source: file,
@@ -255,7 +250,7 @@ const nextConfig = {
     }));
 
     return [
-      // FIXED: Differentiated between hashed bundles and other static files
+      // JS/CSS bundles with hashes - safe to cache long-term
       {
         source: '/_next/static/chunks/:path*',
         headers: [
@@ -274,14 +269,14 @@ const nextConfig = {
           { key: 'Cache-Control', value: CACHE.BUNDLES },
         ],
       },
-      // FIXED: Other static files get shorter cache with revalidation
+      // Other static files with shorter cache
       {
         source: '/_next/static/:path*',
         headers: [
           { key: 'Cache-Control', value: CACHE.STATIC_ASSETS },
         ],
       },
-      // FIXED: Images now have shorter cache with revalidation
+      // Images with revalidation
       {
         source: `/:path*.(${STATIC_EXTENSIONS.images})`,
         headers: [
@@ -289,6 +284,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, max-image-preview:large' },
         ],
       },
+      // Fonts - immutable is fine
       {
         source: `/:path*.(${STATIC_EXTENSIONS.fonts})`,
         headers: [
@@ -296,6 +292,7 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
+      // Media files
       {
         source: `/:path*.(${STATIC_EXTENSIONS.media})`,
         headers: [
@@ -303,6 +300,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, max-video-preview:large' },
         ],
       },
+      // Documents
       {
         source: `/:path*.(${STATIC_EXTENSIONS.documents})`,
         headers: [
@@ -310,6 +308,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, follow' },
         ],
       },
+      // AI sitemap
       {
         source: '/ai-sitemap.xml',
         headers: [
@@ -318,6 +317,7 @@ const nextConfig = {
           { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="alternate"` },
         ],
       },
+      // AI index
       {
         source: '/ai/index.html',
         headers: [
@@ -327,6 +327,7 @@ const nextConfig = {
           { key: 'X-Original-Content', value: 'true' },
         ],
       },
+      // AI API
       {
         source: '/api/ai-context.json',
         headers: [
@@ -336,6 +337,7 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
         ],
       },
+      // Sitemap
       {
         source: '/sitemap.xml',
         headers: [
@@ -344,6 +346,7 @@ const nextConfig = {
           { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="self"` },
         ],
       },
+      // Robots.txt
       {
         source: '/robots.txt',
         headers: [
@@ -352,6 +355,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
+      // RSS Feed
       {
         source: '/feed.xml',
         headers: [
@@ -359,6 +363,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
+      // Atom Feed
       {
         source: '/atom.xml',
         headers: [
@@ -366,7 +371,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      // FIXED: HTML pages now use shorter cache with must-revalidate
+      // MAIN PAGES - No cache to force fresh content from Vercel edge
       {
         source: '/(|resume-templates|free-resume-tools|resume-builder)',
         headers: [
@@ -374,11 +379,14 @@ const nextConfig = {
           { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
           { key: 'X-Robots-Tag', value: generateRobotsTag() },
           { key: 'X-Original-Content', value: 'true' },
-          // FIXED: Added Clear-Site-Data header for major updates
-          // Remove this after the new design is showing properly
+          // Vercel-specific cache control
+          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
+          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
+          // Clear browser cache on first visit
           { key: 'Clear-Site-Data', value: '"cache"' },
         ],
       },
+      // Resume templates
       {
         source: '/resume-templates/:slug*',
         headers: [
@@ -387,8 +395,11 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: generateRobotsTag() },
           { key: 'X-Original-Content', value: 'true' },
           { key: 'X-Page-Type', value: 'template' },
+          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
+          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
         ],
       },
+      // Blog posts
       {
         source: '/blog/:slug*',
         headers: [
@@ -398,9 +409,11 @@ const nextConfig = {
           { key: 'X-Original-Content', value: 'true' },
           { key: 'X-Page-Type', value: 'article' },
           { key: 'X-Article-Type', value: 'blog' },
+          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
+          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
         ],
       },
-      // FIXED: All other routes use production cache with revalidation
+      // All other routes
       {
         source: '/:path*',
         headers: [
@@ -420,9 +433,13 @@ const nextConfig = {
           { key: 'AI-Semantic-Version', value: '1.0' },
           { key: 'X-Content-Freshness', value: 'dynamic' },
           { key: 'X-Original-Source', value: SITE_URL },
+          // Vercel edge cache busting
+          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
+          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
           ...securityHeaders(),
         ],
       },
+      // 404 page
       {
         source: '/404',
         headers: [
@@ -430,6 +447,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
+      // 500 page
       {
         source: '/500',
         headers: [
