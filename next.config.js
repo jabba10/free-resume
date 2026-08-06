@@ -7,6 +7,13 @@
 const SITE_URL = 'https://professionalresumefree.com';
 const SITE_NAME = 'Professional Resume Free';
 
+// GoatCounter domains - MUST include gc.zgo.at where the script is hosted
+const GOATCOUNTER_DOMAINS = [
+  'https://gc.zgo.at',                                    // Script source (count.js)
+  'https://professionalresumefree.goatcounter.com',        // Your count endpoint
+  'https://*.goatcounter.com',                             // Any GoatCounter subdomain
+];
+
 const CACHE = {
   IMMUTABLE: 'public, max-age=31536000, immutable',
   AI_FILES: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800, stale-if-error=604800',
@@ -61,13 +68,15 @@ const STATIC_EXTENSIONS = {
   documents: 'pdf|doc|docx|xls|xlsx|csv',
 };
 
+// FIXED: Added gc.zgo.at and wildcard to all relevant CSP directives
+const goatcounterSources = GOATCOUNTER_DOMAINS.join(' ');
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://professionalresumefree.goatcounter.com",
+  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${goatcounterSources}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https: blob:",
+  `img-src 'self' data: https: blob: ${goatcounterSources}`,
   "font-src 'self' data:",
-  "connect-src 'self' https://professionalresumefree.goatcounter.com",
+  `connect-src 'self' ${goatcounterSources}`,
   "media-src 'self'",
   "frame-src 'none'",
   "object-src 'none'",
@@ -183,13 +192,10 @@ const nextConfig = {
     lodash: { transform: 'lodash/{{member}}' },
   },
 
+  // FIXED: Removed GoatCounter rewrite - it's not needed and can cause issues
+  // GoatCounter loads directly from gc.zgo.at, not through a rewrite
   async rewrites() {
-    return [
-      {
-        source: '/stats',
-        destination: 'https://professionalresumefree.goatcounter.com',
-      },
-    ];
+    return [];
   },
 
   async redirects() {

@@ -9,34 +9,60 @@ import Footer from "../Components/Footer";
 import "./globals.css";
 
 /**
- * Optional: Client-side tracker for custom events only
- * Pageviews are tracked automatically via middleware (bot-filtered)
+ * Client-side tracker for GoatCounter pageviews
+ * Optimized for SSG (Static Site Generation)
  */
-function NextlyticsCustomEvents() {
+function GoatCounterTracker() {
   const router = useRouter();
 
   useEffect(() => {
+    // Wait for GoatCounter to be available, then track initial page
+    const initGoatCounter = () => {
+      if (typeof window !== 'undefined' && window.goatcounter) {
+        window.goatcounter.count({
+          path: location.pathname + location.search,
+          title: document.title,
+          event: false,
+        });
+      }
+    };
+
+    // Check if GoatCounter is already loaded
+    if (window.goatcounter) {
+      initGoatCounter();
+    } else {
+      // If not loaded yet, wait for it
+      window.addEventListener('load', () => {
+        setTimeout(initGoatCounter, 100); // Small delay to ensure GoatCounter is initialized
+      });
+    }
+
+    // Track route changes for client-side navigation
     const handleRouteChange = (url) => {
-      // Google Analytics (keep if you want dual tracking)
+      // Google Analytics
       gtag.pageview(url);
 
-      // GoatCounter (keep if you want)
-      if (window.goatcounter && window.goatcounter.count) {
-        window.goatcounter.count({ path: url });
+      // GoatCounter - track pageview on route change
+      if (typeof window !== 'undefined' && window.goatcounter) {
+        window.goatcounter.count({
+          path: url,
+          title: document.title,
+          event: false,
+        });
       }
-      // ✅ Nextlytics pageviews are auto-tracked via middleware (no client call needed)
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
-    return () => router.events.off("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
   }, [router.events]);
 
   return null;
 }
 
 /**
- * Main App component - NO NextlyticsClient wrapper to avoid ctx error
- * Middleware handles ALL pageview tracking server-side
+ * Main App component - Optimized for SSG
  */
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -140,14 +166,15 @@ function MyApp({ Component, pageProps }) {
         </>
       )}
 
-      {/* ========== GOATCOUNTER ANALYTICS ========== */}
-      <Script data-goatcounter="https://professionalresumefree.goatcounter.com/count" src="https://gc.zgo.at/count.js" strategy="afterInteractive" async />
+      {/* ========== GOATCOUNTER ANALYTICS - SSG OPTIMIZED ========== */}
+      <Script 
+        data-goatcounter="https://professionalresumefree.goatcounter.com/count"
+        src="https://gc.zgo.at/count.js"
+        strategy="lazyOnload"
+      />
 
-      {/* ========== BROWSERCONFIG.XML FOR MICROSOFT APPS ========== */}
-      <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
-
-      {/* ========== NEXTLYTICS CLIENT-SIDE TRACKER (for custom events) ========== */}
-      <NextlyticsCustomEvents />
+      {/* ========== GOATCOUNTER TRACKER COMPONENT ========== */}
+      <GoatCounterTracker />
 
       {/* ========== MAIN APP CONTENT ========== */}
       <Navbar />
@@ -159,5 +186,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-// ✅ Export directly - NO getInitialProps needed (middleware handles tracking)
 export default MyApp;
