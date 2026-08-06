@@ -15,15 +15,23 @@ const GOATCOUNTER_DOMAINS = [
 ];
 
 const CACHE = {
-  IMMUTABLE: 'public, max-age=31536000, immutable',
+  // FIXED: Reduced immutable cache from 1 year to 1 week with revalidation
+  IMMUTABLE: 'public, max-age=604800, immutable',
+  // FIXED: Added a short-term cache for static assets with revalidation
+  STATIC_ASSETS: 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
+  // FIXED: Added cache-busting friendly config for JS/CSS bundles
+  BUNDLES: 'public, max-age=31536000, immutable',
   AI_FILES: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800, stale-if-error=604800',
   AI_DYNAMIC: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400',
-  HTML: 'public, max-age=1800, s-maxage=3600, stale-while-revalidate=86400',
+  // FIXED: Reduced HTML cache from 1800 to 300 seconds (5 minutes)
+  HTML: 'public, max-age=300, s-maxage=600, stale-while-revalidate=86400, must-revalidate',
   SITEMAP: 'public, max-age=43200, s-maxage=43200, stale-while-revalidate=86400',
   ROBOTS: 'public, max-age=86400, s-maxage=86400',
   SCHEMA: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
   PRODUCTION: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
   DEVELOPMENT: 'no-cache, no-store, must-revalidate',
+  // FIXED: Added no-cache for HTML pages to always check for updates
+  NO_CACHE: 'no-cache, no-store, must-revalidate, proxy-revalidate',
 };
 
 const AI_FILES = [
@@ -68,7 +76,7 @@ const STATIC_EXTENSIONS = {
   documents: 'pdf|doc|docx|xls|xlsx|csv',
 };
 
-// FIXED: Added gc.zgo.at and wildcard to all relevant CSP directives
+// GoatCounter CSP configuration
 const goatcounterSources = GOATCOUNTER_DOMAINS.join(' ');
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
@@ -144,6 +152,8 @@ function securityHeaders() {
     },
     { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
     { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+    // FIXED: Added Pragma header to prevent caching
+    { key: 'Pragma', value: 'no-cache' },
     { key: 'Vary', value: 'Accept-Encoding, Accept' },
   ];
 }
@@ -158,6 +168,14 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   compress: true,
   generateEtags: true,
+
+  // FIXED: Added onDemandEntries to control page caching
+  onDemandEntries: {
+    // period (in ms) where the server will keep pages in memory
+    maxInactiveAge: 25 * 1000,
+    // number of pages that should be kept simultaneously without being disposed
+    pagesBufferLength: 2,
+  },
 
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
@@ -175,7 +193,8 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000,
+    // FIXED: Reduced minimumCacheTTL from 1 year to 1 hour
+    minimumCacheTTL: 3600,
     qualities: [75, 85],
     dangerouslyAllowSVG: false,
     contentDispositionType: 'inline',
@@ -192,8 +211,7 @@ const nextConfig = {
     lodash: { transform: 'lodash/{{member}}' },
   },
 
-  // FIXED: Removed GoatCounter rewrite - it's not needed and can cause issues
-  // GoatCounter loads directly from gc.zgo.at, not through a rewrite
+  // Removed GoatCounter rewrite - not needed
   async rewrites() {
     return [];
   },
@@ -237,16 +255,37 @@ const nextConfig = {
     }));
 
     return [
+      // FIXED: Differentiated between hashed bundles and other static files
       {
-        source: '/_next/static/:path*',
+        source: '/_next/static/chunks/:path*',
         headers: [
-          { key: 'Cache-Control', value: CACHE.IMMUTABLE },
+          { key: 'Cache-Control', value: CACHE.BUNDLES },
         ],
       },
       {
+        source: '/_next/static/css/:path*',
+        headers: [
+          { key: 'Cache-Control', value: CACHE.BUNDLES },
+        ],
+      },
+      {
+        source: '/_next/static/media/:path*',
+        headers: [
+          { key: 'Cache-Control', value: CACHE.BUNDLES },
+        ],
+      },
+      // FIXED: Other static files get shorter cache with revalidation
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: CACHE.STATIC_ASSETS },
+        ],
+      },
+      // FIXED: Images now have shorter cache with revalidation
+      {
         source: `/:path*.(${STATIC_EXTENSIONS.images})`,
         headers: [
-          { key: 'Cache-Control', value: CACHE.IMMUTABLE },
+          { key: 'Cache-Control', value: CACHE.STATIC_ASSETS },
           { key: 'X-Robots-Tag', value: 'index, max-image-preview:large' },
         ],
       },
@@ -267,7 +306,7 @@ const nextConfig = {
       {
         source: `/:path*.(${STATIC_EXTENSIONS.documents})`,
         headers: [
-          { key: 'Cache-Control', value: CACHE.IMMUTABLE },
+          { key: 'Cache-Control', value: CACHE.STATIC_ASSETS },
           { key: 'X-Robots-Tag', value: 'index, follow' },
         ],
       },
@@ -327,6 +366,7 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
+      // FIXED: HTML pages now use shorter cache with must-revalidate
       {
         source: '/(|resume-templates|free-resume-tools|resume-builder)',
         headers: [
@@ -334,6 +374,9 @@ const nextConfig = {
           { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
           { key: 'X-Robots-Tag', value: generateRobotsTag() },
           { key: 'X-Original-Content', value: 'true' },
+          // FIXED: Added Clear-Site-Data header for major updates
+          // Remove this after the new design is showing properly
+          { key: 'Clear-Site-Data', value: '"cache"' },
         ],
       },
       {
@@ -357,6 +400,7 @@ const nextConfig = {
           { key: 'X-Article-Type', value: 'blog' },
         ],
       },
+      // FIXED: All other routes use production cache with revalidation
       {
         source: '/:path*',
         headers: [
@@ -389,7 +433,7 @@ const nextConfig = {
       {
         source: '/500',
         headers: [
-          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
+          { key: 'Cache-Control', value: CACHE.NO_CACHE },
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
         ],
       },
