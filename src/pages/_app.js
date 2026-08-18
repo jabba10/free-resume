@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Script from "next/script";
 import { useEffect } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import * as gtag from "../../lib/gtag";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -182,6 +183,9 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </main>
       <Footer />
+
+      {/* ========== VERCEL ANALYTICS ========== */}
+      <Analytics />
     </>
   );
 }
