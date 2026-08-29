@@ -1131,6 +1131,63 @@ const executiveDesignTokens = `
     display: none;
   }
   
+  /* ========== TOP CTA BOX STYLES ========== */
+  .top-cta-box {
+    background: linear-gradient(135deg, rgba(242, 202, 80, 0.1) 0%, rgba(242, 202, 80, 0.05) 100%);
+    border: 0.5px solid rgba(242, 202, 80, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: 1.5rem;
+    margin: 1.5rem 0 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(242, 202, 80, 0.1);
+  }
+  
+  .top-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-body-md);
+    transition: all var(--transition-medium) var(--easing-smooth);
+    flex: 1;
+    min-width: 220px;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .top-cta-primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    box-shadow: var(--shadow-gold-glow-sm);
+  }
+  
+  .top-cta-primary:hover {
+    background: var(--btn-primary-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold-glow);
+    color: var(--btn-primary-text);
+  }
+  
+  .top-cta-secondary {
+    background: transparent;
+    color: var(--accent-primary);
+    border: 0.5px solid var(--btn-outline-border);
+  }
+  
+  .top-cta-secondary:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+    transform: translateY(-2px);
+    color: var(--accent-primary-hover);
+  }
+  
   @media (max-width: 640px) {
     .cta-buttons { 
       flex-direction: column; 
@@ -1148,6 +1205,16 @@ const executiveDesignTokens = `
     
     .usa-links-section {
       padding: 1.5rem;
+    }
+    
+    .top-cta-box {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .top-cta-link {
+      width: 100%;
+      min-width: auto;
     }
   }
   
@@ -1829,6 +1896,16 @@ export default function CompleteResumeResourceLibrary({
             }}>
               Complete Resume <span className="gradient-text">Resource Library</span>: Expert Guides & Tools {currentYear}
             </h1>
+
+            {/* Top CTA - Moved just below H1 */}
+            <div className="top-cta-box">
+              <a href="/free-resume-builder" className="top-cta-link top-cta-primary">
+                🚀 Build Your Free Resume Now
+              </a>
+              <a href="/resume-templates" className="top-cta-link top-cta-secondary">
+                📄 Browse 46+ ATS Templates
+              </a>
+            </div>
             
             <div className="search-intent-box">
               <p>
@@ -2238,7 +2315,7 @@ export default function CompleteResumeResourceLibrary({
             </div>
           </section>
 
-          {/* CTA Section */}
+          {/* Bottom CTA Section */}
           <section>
             <div className="cta-container">
               <h2 className="cta-title">Ready to Build Your {currentYear} Resume?</h2>

@@ -134,6 +134,8 @@ const Footer = () => {
     { href: '/free-resume-keyword-density-analyzer-tool', label: 'Keyword Density Analyzer' },
     { href: '/resume-keywords-finder', label: 'Keywords Finder' },
     { href: '/keywords-for-resume', label: 'Keywords for Resume' },
+    { href: '/free-resume-tools', label: 'Free Resume Tools' },
+    { href: '/resume-calculators', label: 'Resume Calculators' },
   ];
 
   const advancedTips = [

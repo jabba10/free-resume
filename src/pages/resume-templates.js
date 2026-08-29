@@ -1032,6 +1032,66 @@ const ResumeTemplates = ({
     }
   ];
 
+  // Pillar to Cluster Links for SEO
+  const pillarToClusterLinks = [
+    {
+      anchor_text: "Free Resume Builder — Start Now",
+      url: "/free-resume-builder"
+    },
+    {
+      anchor_text: "Resume Calculators — 15+ Tools",
+      url: "/resume-calculators"
+    },
+    {
+      anchor_text: "Free Resume Tools Suite",
+      url: "/free-resume-tools"
+    },
+    {
+      anchor_text: "USA Jobs Resume Directory",
+      url: "/usa-jobs-resume-directory"
+    },
+    {
+      anchor_text: "Complete Resume Resource Library",
+      url: "/complete-resume-resource-library"
+    }
+  ];
+
+  // Contextual Tool Links for SEO
+  const contextualToolLinks = [
+    {
+      anchor_text: "ATS Resume Checker",
+      url: "/free-ats-resume-checker"
+    },
+    {
+      anchor_text: "Resume Score Checker",
+      url: "/free-resume-score-checker"
+    },
+    {
+      anchor_text: "Resume Formatting Guide",
+      url: "/resume-formatting-guide"
+    },
+    {
+      anchor_text: "Best ATS Format 2026",
+      url: "/best-ats-resume-format-2026"
+    },
+    {
+      anchor_text: "Keywords for Resume",
+      url: "/keywords-for-resume"
+    },
+    {
+      anchor_text: "Resume Keywords Finder",
+      url: "/resume-keywords-finder"
+    },
+    {
+      anchor_text: "Cover Letter Guides",
+      url: "/cover-letter-guides"
+    },
+    {
+      anchor_text: "How to Write a Professional Summary",
+      url: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds"
+    }
+  ];
+
   // Template categories data with ALL industry-specific links
   const templateCategories = [
     {
@@ -1995,6 +2055,48 @@ const ResumeTemplates = ({
                   <span className="related-link-desc">{link.desc}</span>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Boost Your Application Success Section */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Boost Your Application Success</h2>
+              <p className="section-subtitle">
+                Explore these additional resources to maximize your job search effectiveness
+              </p>
+            </div>
+            
+            {/* Pillar to Cluster Links */}
+            <div className="related-links-grid">
+              {pillarToClusterLinks.map((link, index) => (
+                <Link href={link.url} key={index} className="related-link-card">
+                  <span className="related-link-title">{link.anchor_text}</span>
+                </Link>
+              ))}
+            </div>
+
+            {/* Contextual Tool Links */}
+            <div style={{ marginTop: '2rem', width: '100%' }}>
+              <h3 style={{
+                fontSize: 'var(--font-size-title-lg)',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 'var(--font-weight-semibold)',
+                color: 'var(--text-primary)',
+                marginBottom: '1.5rem',
+                textAlign: 'center'
+              }}>
+                Related Tools & Guides
+              </h3>
+              <div className="related-links-grid">
+                {contextualToolLinks.map((link, index) => (
+                  <Link href={link.url} key={index} className="related-link-card">
+                    <span className="related-link-title">{link.anchor_text}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>

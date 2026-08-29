@@ -107,6 +107,45 @@ const executiveDesignTokens = `
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } .calculator-link-card { flex-direction:column; text-align:center; } }
+  
+  /* ===== ADDED: PILLAR LINKS SECTION ===== */
+  .pillar-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+    width: 100%;
+  }
+  .pillar-link-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--card-border);
+    border-radius: var(--radius-xl);
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-medium) var(--easing-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .pillar-link-card:hover {
+    border-color: var(--accent-primary-container);
+    transform: translateX(6px);
+    box-shadow: var(--shadow-card-hover);
+    color: inherit;
+  }
+  .pillar-link-card span {
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    font-size: var(--font-size-body-sm);
+  }
+  .pillar-link-card .arrow-icon {
+    color: var(--accent-primary);
+    flex-shrink: 0;
+  }
 `;
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -717,6 +756,38 @@ const ResumeCalculatorsPage = ({
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== NEW: PILLAR LINKS SECTION ===== */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">More Free Resume Resources</h2>
+              <p className="section-subtitle">Explore our complete suite of free resume tools and resources</p>
+            </div>
+            <div className="pillar-links-grid">
+              <Link href="/free-resume-builder" className="pillar-link-card">
+                <span>🚀 Free Resume Builder — Start Now</span>
+                <FiArrowRight className="arrow-icon" size={18} />
+              </Link>
+              <Link href="/resume-templates" className="pillar-link-card">
+                <span>📄 Browse 46+ ATS-Friendly Resume Templates</span>
+                <FiArrowRight className="arrow-icon" size={18} />
+              </Link>
+              <Link href="/free-resume-tools" className="pillar-link-card">
+                <span>🛠️ 12+ Free Resume Tools</span>
+                <FiArrowRight className="arrow-icon" size={18} />
+              </Link>
+              <Link href="/usa-jobs-resume-directory" className="pillar-link-card">
+                <span>🇺🇸 USA Jobs Resume Directory</span>
+                <FiArrowRight className="arrow-icon" size={18} />
+              </Link>
+              <Link href="/complete-resume-resource-library" className="pillar-link-card">
+                <span>📚 Complete Resume Resource Library</span>
+                <FiArrowRight className="arrow-icon" size={18} />
+              </Link>
             </div>
           </div>
         </section>

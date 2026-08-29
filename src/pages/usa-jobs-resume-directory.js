@@ -212,6 +212,16 @@ const executiveDesignTokens = `
     --gold-divider-width: 60px;
     --gold-divider-height: 1px;
     --gold-divider-opacity: 0.4;
+    
+    /* ========== QUICK START BOX ========== */
+    --quickstart-bg: rgba(242, 202, 80, 0.08);
+    --quickstart-border: 0.5px solid rgba(242, 202, 80, 0.4);
+    --quickstart-radius: 1rem;
+    --quickstart-padding: clamp(1.5rem, 4vw, 2rem);
+    --quickstart-shadow: 0 0 20px rgba(242, 202, 80, 0.15);
+    --quickstart-link-bg: rgba(242, 202, 80, 0.15);
+    --quickstart-link-hover-bg: rgba(242, 202, 80, 0.25);
+    --quickstart-link-border: 0.5px solid rgba(242, 202, 80, 0.3);
   }
   
   /* ========== BASE RESET ========== */
@@ -839,9 +849,67 @@ const executiveDesignTokens = `
     white-space: nowrap;
     border-width: 0;
   }
+  
+  /* ========== QUICK START BOX STYLES ========== */
+  .quickstart-box {
+    background: var(--quickstart-bg);
+    border: var(--quickstart-border);
+    border-radius: var(--quickstart-radius);
+    padding: var(--quickstart-padding);
+    margin: 2rem auto;
+    max-width: 800px;
+    box-shadow: var(--quickstart-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+  
+  .quickstart-box h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: var(--font-size-headline-md);
+    color: var(--accent-primary);
+  }
+  
+  .quickstart-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .quickstart-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--quickstart-link-bg);
+    border: var(--quickstart-link-border);
+    border-radius: var(--radius-lg);
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-sm);
+    text-decoration: none;
+    transition: all var(--transition-medium) var(--easing-smooth);
+    flex: 1;
+    min-width: 200px;
+    justify-content: center;
+  }
+  
+  .quickstart-link:hover {
+    background: var(--quickstart-link-hover-bg);
+    border-color: var(--accent-primary-container);
+    transform: var(--hover-transform);
+    box-shadow: var(--shadow-gold-glow-sm);
+    color: var(--accent-primary-hover);
+  }
+  
+  .quickstart-icon {
+    font-size: 1.25rem;
+    color: var(--accent-primary);
+  }
 
   @media (max-width: 480px) {
-    button, .btn-primary, .btn-outline, .btn-cta, .card-executive, a {
+    button, .btn-primary, .btn-outline, .btn-cta, .card-executive, a, .quickstart-link {
       touch-action: manipulation;
     }
     
@@ -861,6 +929,16 @@ const executiveDesignTokens = `
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
+    }
+    
+    .quickstart-links {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .quickstart-link {
+      width: 100%;
+      min-width: auto;
     }
   }
 `;
@@ -1056,8 +1134,54 @@ const getUniqueLinks = (links) => {
 const uniqueResourceLinks = getUniqueLinks(allResourceLinks);
 
 // ============================================================================
+// QUICK START PILLAR LINKS
+// ============================================================================
+
+const quickStartLinks = [
+  {
+    href: "/free-resume-builder",
+    label: "Free Resume Builder",
+    icon: "📝",
+    description: "Start building your resume now"
+  },
+  {
+    href: "/resume-templates",
+    label: "Resume Templates",
+    icon: "📄",
+    description: "Browse ATS-friendly templates"
+  },
+  {
+    href: "/free-ats-resume-checker",
+    label: "Free ATS Checker",
+    icon: "✓",
+    description: "Check if your resume passes ATS"
+  }
+];
+
+// ============================================================================
 // COMPONENTS
 // ============================================================================
+
+const QuickStartBox = ({ links }) => (
+  <div className="quickstart-box" role="navigation" aria-label="Quick Start Links">
+    <h2 style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
+      ⚡ Quick Start
+    </h2>
+    <div className="quickstart-links">
+      {links.map((link, index) => (
+        <Link 
+          key={index} 
+          href={link.href} 
+          className="quickstart-link"
+          aria-label={`${link.label} - ${link.description}`}
+        >
+          <span className="quickstart-icon" aria-hidden="true">{link.icon}</span>
+          <span>{link.label}</span>
+        </Link>
+      ))}
+    </div>
+  </div>
+);
 
 const LazySection = ({ children, threshold = 0.1 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -1842,6 +1966,9 @@ export default function USAJobsResumeDirectory({ seoData }) {
             }}>
               Federal USAJOBS Formats • ATS-Optimized Templates • All 50 States
             </h2>
+            
+            {/* Quick Start Box - Added at top of page */}
+            <QuickStartBox links={quickStartLinks} />
             
             <div className="info-box">
               <span>Federal Resume Guide</span>
