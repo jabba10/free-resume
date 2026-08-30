@@ -9,25 +9,48 @@ const SITE_NAME = 'Professional Resume Free';
 
 // GoatCounter domains - MUST include gc.zgo.at where the script is hosted
 const GOATCOUNTER_DOMAINS = [
-  'https://gc.zgo.at',                                    // Script source (count.js)
-  'https://professionalresumefree.goatcounter.com',        // Your count endpoint
-  'https://*.goatcounter.com',                             // Any GoatCounter subdomain
+  'https://gc.zgo.at',
+  'https://professionalresumefree.goatcounter.com',
+  'https://*.goatcounter.com',
 ];
 
+// Optimized cache strategy for maximum performance and crawl budget
 const CACHE = {
-  IMMUTABLE: 'public, max-age=604800, immutable',
-  STATIC_ASSETS: 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
+  // Long-term caching for static assets with hash (1 year)
+  IMMUTABLE: 'public, max-age=31536000, immutable',
   BUNDLES: 'public, max-age=31536000, immutable',
-  AI_FILES: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800, stale-if-error=604800',
+  
+  // Static assets with revalidation (7 days)
+  STATIC_ASSETS: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400',
+  
+  // HTML pages - Use stale-while-revalidate for SEO
+  HTML: 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400, stale-if-error=86400',
+  
+  // AI files - cache for 1 week
+  AI_FILES: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400, stale-if-error=86400',
+  
+  // AI dynamic content - shorter cache
   AI_DYNAMIC: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400',
-  // Aggressive no-cache for HTML to force Vercel edge to update
-  HTML: 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0',
-  SITEMAP: 'public, max-age=43200, s-maxage=43200, stale-while-revalidate=86400',
+  
+  // Sitemaps and robots
+  SITEMAP: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
   ROBOTS: 'public, max-age=86400, s-maxage=86400',
-  SCHEMA: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
+  
+  // Schema.org structured data
+  SCHEMA: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400',
+  
+  // Production fallback
   PRODUCTION: 'public, max-age=300, s-maxage=600, stale-while-revalidate=3600, must-revalidate',
   DEVELOPMENT: 'no-cache, no-store, must-revalidate',
-  NO_CACHE: 'no-cache, no-store, must-revalidate, proxy-revalidate',
+  
+  // API routes
+  API: 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
+  
+  // Feeds
+  FEEDS: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+  
+  // 404 pages
+  NOT_FOUND: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
 };
 
 const AI_FILES = [
@@ -97,12 +120,13 @@ const CONTENT_SECURITY_POLICY = [
 function cacheHeaders(cacheControl, contentType = null) {
   const headers = [
     { key: 'Cache-Control', value: cacheControl },
-    { key: 'ETag', value: 'true' },
-    { key: 'Last-Modified', value: 'true' },
+    { key: 'Vary', value: 'Accept-Encoding' },
   ];
+  
   if (contentType) {
     headers.unshift({ key: 'Content-Type', value: contentType });
   }
+  
   return headers;
 }
 
@@ -148,7 +172,23 @@ function securityHeaders() {
     },
     { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
     { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
-    { key: 'Vary', value: 'Accept-Encoding, Accept' },
+  ];
+}
+
+function performanceHeaders() {
+  return [
+    { key: 'X-Cache-Tags', value: SITE_NAME },
+    { key: 'X-Content-Type-Options', value: 'nosniff' },
+    { key: 'Accept-CH', value: 'Sec-CH-Viewport-Width, Sec-CH-DPR, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Mobile' },
+    { key: 'Critical-CH', value: 'Sec-CH-Viewport-Width, Sec-CH-DPR' },
+  ];
+}
+
+function seoHeaders() {
+  return [
+    { key: 'X-Robots-Tag', value: generateRobotsTag() },
+    { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
+    ...performanceHeaders(),
   ];
 }
 
@@ -157,9 +197,10 @@ function securityHeaders() {
 // ============================================================================
 
 const nextConfig = {
-  // Generate unique build ID for cache busting
+  // Use content-based build ID for better caching
   generateBuildId: async () => {
-    return `build-${Date.now()}`;
+    // Use environment variable or fallback to a stable build ID
+    return process.env.GIT_HASH || process.env.VERCEL_GIT_COMMIT_SHA || 'build-v1';
   },
 
   trailingSlash: false,
@@ -167,10 +208,13 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   compress: true,
   generateEtags: true,
+  
+  // Enable SWC minification for faster builds
+  swcMinify: true,
 
   onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
+    maxInactiveAge: 60 * 1000,
+    pagesBufferLength: 5,
   },
 
   compiler: {
@@ -183,20 +227,28 @@ const nextConfig = {
     optimizeCss: true,
     scrollRestoration: true,
     middlewarePrefetch: 'flexible',
+    optimizePackageImports: ['lodash', 'date-fns', 'framer-motion'],
+    serverComponentsExternalPackages: ['sharp'],
+    optimisticClientCache: true,
   },
 
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
-    qualities: [75, 85],
+    minimumCacheTTL: 86400,
     dangerouslyAllowSVG: false,
     contentDispositionType: 'inline',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'professionalresumefree.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.professionalresumefree.com',
         pathname: '/**',
       },
     ],
@@ -224,7 +276,6 @@ const nextConfig = {
   async headers() {
     const isProduction = process.env.NODE_ENV === 'production';
     const aiLinkHeader = generateAILinkHeader();
-    const buildId = `build-${Date.now()}`;
 
     const aiFileHeaders = AI_FILES.map((file) => ({
       source: file,
@@ -250,64 +301,69 @@ const nextConfig = {
     }));
 
     return [
-      // JS/CSS bundles with hashes - safe to cache long-term
+      // ============================================================
+      // STATIC ASSETS - Maximum caching for performance
+      // ============================================================
+      
+      // JS/CSS bundles with hashes - 1 year cache
       {
         source: '/_next/static/chunks/:path*',
-        headers: [
-          { key: 'Cache-Control', value: CACHE.BUNDLES },
-        ],
+        headers: cacheHeaders(CACHE.BUNDLES),
       },
       {
         source: '/_next/static/css/:path*',
-        headers: [
-          { key: 'Cache-Control', value: CACHE.BUNDLES },
-        ],
+        headers: cacheHeaders(CACHE.BUNDLES),
       },
       {
         source: '/_next/static/media/:path*',
-        headers: [
-          { key: 'Cache-Control', value: CACHE.BUNDLES },
-        ],
+        headers: cacheHeaders(CACHE.BUNDLES),
       },
-      // Other static files with shorter cache
+      // Other Next.js static files
       {
         source: '/_next/static/:path*',
-        headers: [
-          { key: 'Cache-Control', value: CACHE.STATIC_ASSETS },
-        ],
+        headers: cacheHeaders(CACHE.IMMUTABLE),
       },
-      // Images with revalidation
+      
+      // Images - 7 days cache with revalidation
       {
         source: `/:path*.(${STATIC_EXTENSIONS.images})`,
         headers: [
-          { key: 'Cache-Control', value: CACHE.STATIC_ASSETS },
+          ...cacheHeaders(CACHE.STATIC_ASSETS),
           { key: 'X-Robots-Tag', value: 'index, max-image-preview:large' },
         ],
       },
-      // Fonts - immutable is fine
+      
+      // Fonts - 1 year immutable
       {
         source: `/:path*.(${STATIC_EXTENSIONS.fonts})`,
         headers: [
-          { key: 'Cache-Control', value: CACHE.IMMUTABLE },
+          ...cacheHeaders(CACHE.IMMUTABLE),
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // Media files
+      
+      // Media files - 1 year immutable
       {
         source: `/:path*.(${STATIC_EXTENSIONS.media})`,
         headers: [
-          { key: 'Cache-Control', value: CACHE.IMMUTABLE },
+          ...cacheHeaders(CACHE.IMMUTABLE),
           { key: 'X-Robots-Tag', value: 'index, max-video-preview:large' },
         ],
       },
-      // Documents
+      
+      // Documents - 7 days cache
       {
         source: `/:path*.(${STATIC_EXTENSIONS.documents})`,
         headers: [
-          { key: 'Cache-Control', value: CACHE.STATIC_ASSETS },
+          ...cacheHeaders(CACHE.STATIC_ASSETS),
           { key: 'X-Robots-Tag', value: 'index, follow' },
         ],
       },
+      
+      // ============================================================
+      // SEO & AI FILES
+      // ============================================================
+      
       // AI sitemap
       {
         source: '/ai-sitemap.xml',
@@ -317,16 +373,16 @@ const nextConfig = {
           { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="alternate"` },
         ],
       },
+      
       // AI index
       {
         source: '/ai/index.html',
         headers: [
           ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
           { key: 'X-Robots-Tag', value: generateRobotsTag() },
-          { key: 'X-Original-Content', value: 'true' },
         ],
       },
+      
       // AI API
       {
         source: '/api/ai-context.json',
@@ -337,16 +393,26 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
         ],
       },
-      // Sitemap
+      
+      // Sitemap - 1 hour cache
       {
         source: '/sitemap.xml',
         headers: [
           ...cacheHeaders(CACHE.SITEMAP, 'application/xml; charset=utf-8'),
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
-          { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="self"` },
         ],
       },
-      // Robots.txt
+      
+      // Sitemap index
+      {
+        source: '/sitemap-index.xml',
+        headers: [
+          ...cacheHeaders(CACHE.SITEMAP, 'application/xml; charset=utf-8'),
+          { key: 'X-Robots-Tag', value: 'noindex, follow' },
+        ],
+      },
+      
+      // Robots.txt - 24 hours cache
       {
         source: '/robots.txt',
         headers: [
@@ -355,106 +421,164 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
+      
       // RSS Feed
       {
         source: '/feed.xml',
         headers: [
-          ...cacheHeaders('public, max-age=3600, s-maxage=3600', 'application/rss+xml; charset=utf-8'),
+          ...cacheHeaders(CACHE.FEEDS, 'application/rss+xml; charset=utf-8'),
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
+      
       // Atom Feed
       {
         source: '/atom.xml',
         headers: [
-          ...cacheHeaders('public, max-age=3600, s-maxage=3600', 'application/atom+xml; charset=utf-8'),
+          ...cacheHeaders(CACHE.FEEDS, 'application/atom+xml; charset=utf-8'),
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      // MAIN PAGES - No cache to force fresh content from Vercel edge
+      
+      // ============================================================
+      // MAIN PAGES - Optimized for SEO with stale-while-revalidate
+      // ============================================================
+      
+      // Homepage
       {
-        source: '/(|resume-templates|free-resume-tools|resume-builder)',
+        source: '/',
         headers: [
-          ...cacheHeaders(CACHE.HTML),
-          { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
-          { key: 'X-Robots-Tag', value: generateRobotsTag() },
-          { key: 'X-Original-Content', value: 'true' },
-          // Vercel-specific cache control
-          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
-          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
-          // Clear browser cache on first visit
-          { key: 'Clear-Site-Data', value: '"cache"' },
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
+          { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="sitemap"` },
         ],
       },
-      // Resume templates
+      
+      // Resume templates listing
+      {
+        source: '/resume-templates',
+        headers: [
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
+          { key: 'X-Page-Type', value: 'listing' },
+        ],
+      },
+      
+      // Individual resume templates
       {
         source: '/resume-templates/:slug*',
         headers: [
-          ...cacheHeaders(CACHE.HTML),
-          { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
-          { key: 'X-Robots-Tag', value: generateRobotsTag() },
-          { key: 'X-Original-Content', value: 'true' },
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
           { key: 'X-Page-Type', value: 'template' },
-          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
-          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
         ],
       },
-      // Blog posts
+      
+      // Blog listing
+      {
+        source: '/blog',
+        headers: [
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
+          { key: 'X-Page-Type', value: 'listing' },
+        ],
+      },
+      
+      // Individual blog posts
       {
         source: '/blog/:slug*',
         headers: [
-          ...cacheHeaders(CACHE.HTML),
-          { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
-          { key: 'X-Robots-Tag', value: generateRobotsTag() },
-          { key: 'X-Original-Content', value: 'true' },
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
           { key: 'X-Page-Type', value: 'article' },
           { key: 'X-Article-Type', value: 'blog' },
-          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
-          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
         ],
       },
-      // All other routes
+      
+      // Free tools listing
+      {
+        source: '/free-resume-tools',
+        headers: [
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
+          { key: 'X-Page-Type', value: 'listing' },
+        ],
+      },
+      
+      // Individual tools
+      {
+        source: '/free-resume-tools/:path*',
+        headers: [
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
+          { key: 'X-Page-Type', value: 'tool' },
+        ],
+      },
+      
+      // Resume builder
+      {
+        source: '/resume-builder',
+        headers: [
+          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
+          ...seoHeaders(),
+          { key: 'X-Page-Type', value: 'application' },
+        ],
+      },
+      
+      // ============================================================
+      // API ROUTES - Cached with stale-while-revalidate
+      // ============================================================
+      
+      // API routes
+      {
+        source: '/api/:path*',
+        headers: [
+          ...cacheHeaders(CACHE.API, 'application/json; charset=utf-8'),
+          { key: 'X-Robots-Tag', value: 'noindex, follow' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
+        ],
+      },
+      
+      // ============================================================
+      // CATCH-ALL ROUTE - For any other pages
+      // ============================================================
+      
+      // All other routes - cached HTML with full headers
       {
         source: '/:path*',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: isProduction ? CACHE.PRODUCTION : CACHE.DEVELOPMENT,
-          },
+          ...cacheHeaders(isProduction ? CACHE.PRODUCTION : CACHE.DEVELOPMENT, 'text/html; charset=utf-8'),
           { key: 'X-Robots-Tag', value: generateRobotsTag() },
           { key: 'Link', value: aiLinkHeader },
-          { key: 'AI-Cache-Optimized', value: 'true' },
-          { key: 'AI-Cache-TTL', value: '3600' },
-          { key: 'AI-Cache-Strategy', value: 'stale-while-revalidate' },
-          { key: 'AI-Content-Version', value: '2.0' },
-          { key: 'AI-Indexable', value: 'true' },
-          { key: 'AI-Content-Type', value: 'comprehensive' },
-          { key: 'AI-Entity-Rich', value: 'true' },
-          { key: 'AI-Semantic-Version', value: '1.0' },
-          { key: 'X-Content-Freshness', value: 'dynamic' },
-          { key: 'X-Original-Source', value: SITE_URL },
-          // Vercel edge cache busting
-          { key: 'CDN-Cache-Control', value: 'no-store, max-age=0' },
-          { key: 'Vercel-CDN-Cache-Control', value: 'no-store, max-age=0' },
           ...securityHeaders(),
+          ...performanceHeaders(),
         ],
       },
-      // 404 page
+      
+      // ============================================================
+      // ERROR PAGES
+      // ============================================================
+      
+      // 404 page - cache for 1 hour
       {
         source: '/404',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=3600' },
+          ...cacheHeaders(CACHE.NOT_FOUND, 'text/html; charset=utf-8'),
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      // 500 page
+      
+      // 500 page - no cache
       {
         source: '/500',
         headers: [
-          { key: 'Cache-Control', value: CACHE.NO_CACHE },
+          ...cacheHeaders(CACHE.DEVELOPMENT, 'text/html; charset=utf-8'),
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
         ],
       },
+      
+      // Spread all the file-specific headers
       ...aiFileHeaders,
       ...aiManifestHeaders,
       ...schemaHeaders,
