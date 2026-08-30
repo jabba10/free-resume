@@ -7,18 +7,28 @@
 const SITE_URL = 'https://professionalresumefree.com';
 const SITE_NAME = 'Professional Resume Free';
 
-// GoatCounter domains - MUST include gc.zgo.at where the script is hosted
+// GoatCounter domains
 const GOATCOUNTER_DOMAINS = [
   'https://gc.zgo.at',
   'https://professionalresumefree.goatcounter.com',
   'https://*.goatcounter.com',
 ];
 
-// Optimized cache strategy for maximum performance and crawl budget
+// Google Analytics domains
+const GOOGLE_ANALYTICS_DOMAINS = [
+  'https://www.google-analytics.com',
+  'https://ssl.google-analytics.com',
+  'https://*.google-analytics.com',
+  'https://*.analytics.google.com',
+  'https://*.g.doubleclick.net',
+  'https://*.google.com',
+  'https://*.googletagmanager.com',
+];
+
+// Optimized cache strategy
 const CACHE = {
-  // Long-term caching for static assets with hash (1 year)
+  // Long-term caching for static assets (1 year)
   IMMUTABLE: 'public, max-age=31536000, immutable',
-  BUNDLES: 'public, max-age=31536000, immutable',
   
   // Static assets with revalidation (7 days)
   STATIC_ASSETS: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400',
@@ -28,9 +38,6 @@ const CACHE = {
   
   // AI files - cache for 1 week
   AI_FILES: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400, stale-if-error=86400',
-  
-  // AI dynamic content - shorter cache
-  AI_DYNAMIC: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400',
   
   // Sitemaps and robots
   SITEMAP: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
@@ -48,9 +55,6 @@ const CACHE = {
   
   // Feeds
   FEEDS: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
-  
-  // 404 pages
-  NOT_FOUND: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
 };
 
 const AI_FILES = [
@@ -95,51 +99,14 @@ const STATIC_EXTENSIONS = {
   documents: 'pdf|doc|docx|xls|xlsx|csv',
 };
 
-// GoatCounter CSP configuration
-const goatcounterSources = GOATCOUNTER_DOMAINS.join(' ');
-const CONTENT_SECURITY_POLICY = [
-  "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${goatcounterSources}`,
-  "style-src 'self' 'unsafe-inline'",
-  `img-src 'self' data: https: blob: ${goatcounterSources}`,
-  "font-src 'self' data:",
-  `connect-src 'self' ${goatcounterSources}`,
-  "media-src 'self'",
-  "frame-src 'none'",
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "manifest-src 'self'",
-  "worker-src 'self'",
-].join('; ');
-
 // ============================================================================
 // HELPERS
 // ============================================================================
 
-function cacheHeaders(cacheControl, contentType = null) {
-  const headers = [
+function cacheHeaders(cacheControl) {
+  return [
     { key: 'Cache-Control', value: cacheControl },
-    { key: 'Vary', value: 'Accept-Encoding' },
   ];
-  
-  if (contentType) {
-    headers.unshift({ key: 'Content-Type', value: contentType });
-  }
-  
-  return headers;
-}
-
-function generateAILinkHeader() {
-  const links = [
-    `<${SITE_URL}/llms.txt>; rel="help"; type="text/plain"`,
-    `<${SITE_URL}/llms-full.txt>; rel="alternate"; type="text/plain"`,
-    `<${SITE_URL}/api/ai-context.json>; rel="alternate"; type="application/json"`,
-    ...AI_MANIFESTS.map(manifest => `<${SITE_URL}${manifest}>; rel="service"`),
-    `<${SITE_URL}/schema/organization.json>; rel="alternate"; type="application/ld+json"`,
-    `<${SITE_URL}/schema/website.json>; rel="alternate"; type="application/ld+json"`,
-  ];
-  return links.join(', ');
 }
 
 function generateRobotsTag() {
@@ -153,90 +120,28 @@ function generateRobotsTag() {
   ].join(', ');
 }
 
-function securityHeaders() {
-  return [
-    { key: 'Content-Security-Policy', value: CONTENT_SECURITY_POLICY },
-    { key: 'X-Content-Type-Options', value: 'nosniff' },
-    { key: 'X-Frame-Options', value: 'DENY' },
-    { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-    { key: 'X-DNS-Prefetch-Control', value: 'on' },
-    { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-    { key: 'Permissions-Policy', value: [
-        'camera=()',
-        'microphone=()',
-        'geolocation=()',
-        'interest-cohort=()',
-        'autoplay=()',
-        'payment=()',
-      ].join(', ') 
-    },
-    { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
-    { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
-  ];
-}
-
-function performanceHeaders() {
-  return [
-    { key: 'X-Cache-Tags', value: SITE_NAME },
-    { key: 'X-Content-Type-Options', value: 'nosniff' },
-    { key: 'Accept-CH', value: 'Sec-CH-Viewport-Width, Sec-CH-DPR, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Mobile' },
-    { key: 'Critical-CH', value: 'Sec-CH-Viewport-Width, Sec-CH-DPR' },
-  ];
-}
-
-function seoHeaders() {
-  return [
-    { key: 'X-Robots-Tag', value: generateRobotsTag() },
-    { key: 'Link', value: '<https://ogp.me/>; rel="profile"' },
-    ...performanceHeaders(),
-  ];
-}
-
 // ============================================================================
 // NEXT CONFIG
 // ============================================================================
 
 const nextConfig = {
-  // Use content-based build ID for better caching
-  generateBuildId: async () => {
-    return process.env.GIT_HASH || process.env.VERCEL_GIT_COMMIT_SHA || 'build-v1';
-  },
-
-  trailingSlash: false,
   reactStrictMode: true,
-  productionBrowserSourceMaps: false,
   compress: true,
   generateEtags: true,
+  swcMinify: true,
   
-  // FIXED: Moved from experimental to top-level key for Next.js 16+
-  serverExternalPackages: ['sharp'],
-
-  onDemandEntries: {
-    maxInactiveAge: 60 * 1000,
-    pagesBufferLength: 5,
+  // Stable build ID
+  generateBuildId: async () => {
+    return process.env.VERCEL_GIT_COMMIT_SHA || 'build-v1';
   },
 
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production'
-      ? { exclude: ['error', 'warn'] }
-      : false,
-  },
-
-  experimental: {
-    // FIXED: Set optimizeCss to false (prevents CSS inlining errors breaking Navbars)
-    optimizeCss: false,
-    scrollRestoration: true,
-    optimizePackageImports: ['lodash', 'date-fns', 'framer-motion'],
-  },
-
+  // Images optimization
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 86400,
     dangerouslyAllowSVG: false,
-    contentDispositionType: 'inline',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: 'https',
@@ -251,14 +156,7 @@ const nextConfig = {
     ],
   },
 
-  modularizeImports: {
-    lodash: { transform: 'lodash/{{member}}' },
-  },
-
-  async rewrites() {
-    return [];
-  },
-
+  // Redirects
   async redirects() {
     return [
       {
@@ -270,61 +168,39 @@ const nextConfig = {
     ];
   },
 
+  // Headers - SIMPLIFIED AND SAFE
   async headers() {
-    // FIXED: Bypass header overrides completely during development mode
-    if (process.env.NODE_ENV !== 'production') {
-      return [];
-    }
-
-    const aiLinkHeader = generateAILinkHeader();
+    const isProduction = process.env.NODE_ENV === 'production';
 
     const aiFileHeaders = AI_FILES.map((file) => ({
       source: file,
-      headers: cacheHeaders(
-        CACHE.AI_FILES,
-        file.endsWith('.json') 
-          ? 'application/json; charset=utf-8' 
-          : 'text/plain; charset=utf-8'
-      ),
+      headers: cacheHeaders(CACHE.AI_FILES),
     }));
 
     const aiManifestHeaders = AI_MANIFESTS.map((file) => ({
       source: file,
-      headers: cacheHeaders(CACHE.AI_FILES, 'application/json; charset=utf-8'),
+      headers: cacheHeaders(CACHE.AI_FILES),
     }));
 
     const schemaHeaders = STRUCTURED_DATA_FILES.map((file) => ({
       source: file,
-      headers: [
-        ...cacheHeaders(CACHE.SCHEMA, 'application/ld+json; charset=utf-8'),
-        { key: 'Link', value: '<https://schema.org/>; rel="profile"' },
-      ],
+      headers: cacheHeaders(CACHE.SCHEMA),
     }));
 
     return [
-      {
-        source: '/_next/static/chunks/:path*',
-        headers: cacheHeaders(CACHE.BUNDLES),
-      },
-      {
-        source: '/_next/static/css/:path*',
-        headers: cacheHeaders(CACHE.BUNDLES),
-      },
-      {
-        source: '/_next/static/media/:path*',
-        headers: cacheHeaders(CACHE.BUNDLES),
-      },
+      // Static assets - 1 year cache
       {
         source: '/_next/static/:path*',
         headers: cacheHeaders(CACHE.IMMUTABLE),
       },
+      
+      // Images - 7 days cache
       {
         source: `/:path*.(${STATIC_EXTENSIONS.images})`,
-        headers: [
-          ...cacheHeaders(CACHE.STATIC_ASSETS),
-          { key: 'X-Robots-Tag', value: 'index, max-image-preview:large' },
-        ],
+        headers: cacheHeaders(CACHE.STATIC_ASSETS),
       },
+      
+      // Fonts - 1 year cache
       {
         source: `/:path*.(${STATIC_EXTENSIONS.fonts})`,
         headers: [
@@ -332,181 +208,60 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
+      
+      // Media files - 1 year cache
       {
         source: `/:path*.(${STATIC_EXTENSIONS.media})`,
-        headers: [
-          ...cacheHeaders(CACHE.IMMUTABLE),
-          { key: 'X-Robots-Tag', value: 'index, max-video-preview:large' },
-        ],
+        headers: cacheHeaders(CACHE.IMMUTABLE),
       },
+      
+      // Documents - 7 days cache
       {
         source: `/:path*.(${STATIC_EXTENSIONS.documents})`,
-        headers: [
-          ...cacheHeaders(CACHE.STATIC_ASSETS),
-          { key: 'X-Robots-Tag', value: 'index, follow' },
-        ],
+        headers: cacheHeaders(CACHE.STATIC_ASSETS),
       },
-      {
-        source: '/ai-sitemap.xml',
-        headers: [
-          ...cacheHeaders(CACHE.AI_FILES, 'application/xml; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-          { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="alternate"` },
-        ],
-      },
-      {
-        source: '/ai/index.html',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: generateRobotsTag() },
-        ],
-      },
-      {
-        source: '/api/ai-context.json',
-        headers: [
-          ...cacheHeaders(CACHE.AI_DYNAMIC, 'application/json; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
-        ],
-      },
-      {
-        source: '/sitemap.xml',
-        headers: [
-          ...cacheHeaders(CACHE.SITEMAP, 'application/xml; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-        ],
-      },
-      {
-        source: '/sitemap-index.xml',
-        headers: [
-          ...cacheHeaders(CACHE.SITEMAP, 'application/xml; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-        ],
-      },
-      {
-        source: '/robots.txt',
-        headers: [
-          { key: 'Content-Type', value: 'text/plain; charset=utf-8' },
-          { key: 'Cache-Control', value: CACHE.ROBOTS },
-          { key: 'X-Robots-Tag', value: 'noindex' },
-        ],
-      },
-      {
-        source: '/feed.xml',
-        headers: [
-          ...cacheHeaders(CACHE.FEEDS, 'application/rss+xml; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-        ],
-      },
-      {
-        source: '/atom.xml',
-        headers: [
-          ...cacheHeaders(CACHE.FEEDS, 'application/atom+xml; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-        ],
-      },
-      {
-        source: '/',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="sitemap"` },
-        ],
-      },
-      {
-        source: '/resume-templates',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'X-Page-Type', value: 'listing' },
-        ],
-      },
-      {
-        source: '/resume-templates/:slug*',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'X-Page-Type', value: 'template' },
-        ],
-      },
-      {
-        source: '/blog',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'X-Page-Type', value: 'listing' },
-        ],
-      },
-      {
-        source: '/blog/:slug*',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'X-Page-Type', value: 'article' },
-          { key: 'X-Article-Type', value: 'blog' },
-        ],
-      },
-      {
-        source: '/free-resume-tools',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'X-Page-Type', value: 'listing' },
-        ],
-      },
-      {
-        source: '/free-resume-tools/:path*',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'X-Page-Type', value: 'tool' },
-        ],
-      },
-      {
-        source: '/resume-builder',
-        headers: [
-          ...cacheHeaders(CACHE.HTML, 'text/html; charset=utf-8'),
-          ...seoHeaders(),
-          { key: 'X-Page-Type', value: 'application' },
-        ],
-      },
-      {
-        source: '/api/:path*',
-        headers: [
-          ...cacheHeaders(CACHE.API, 'application/json; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
-        ],
-      },
-      {
-        source: '/:path*',
-        headers: [
-          ...cacheHeaders(CACHE.PRODUCTION, 'text/html; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: generateRobotsTag() },
-          { key: 'Link', value: aiLinkHeader },
-          ...securityHeaders(),
-          ...performanceHeaders(),
-        ],
-      },
-      {
-        source: '/404',
-        headers: [
-          ...cacheHeaders(CACHE.NOT_FOUND, 'text/html; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, follow' },
-        ],
-      },
-      {
-        source: '/500',
-        headers: [
-          ...cacheHeaders(CACHE.DEVELOPMENT, 'text/html; charset=utf-8'),
-          { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
-        ],
-      },
+      
+      // AI files
       ...aiFileHeaders,
       ...aiManifestHeaders,
       ...schemaHeaders,
+      
+      // Sitemap
+      {
+        source: '/sitemap.xml',
+        headers: [
+          ...cacheHeaders(CACHE.SITEMAP),
+          { key: 'X-Robots-Tag', value: 'noindex, follow' },
+        ],
+      },
+      
+      // Robots.txt
+      {
+        source: '/robots.txt',
+        headers: cacheHeaders(CACHE.ROBOTS),
+      },
+      
+      // HTML pages - Safe caching for SEO
+      {
+        source: '/:path*',
+        headers: [
+          ...cacheHeaders(isProduction ? CACHE.HTML : CACHE.DEVELOPMENT),
+          { key: 'X-Robots-Tag', value: generateRobotsTag() },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'X-DNS-Prefetch-Control', value: 'on' },
+        ],
+      },
+      
+      // API routes
+      {
+        source: '/api/:path*',
+        headers: [
+          ...cacheHeaders(CACHE.API),
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
+      },
     ];
   },
 };

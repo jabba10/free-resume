@@ -1,32 +1,52 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  // Initialize mounted state
-  useEffect(() => {
-    setIsMounted(true);
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
   }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  // Handle resize for responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 1024;
+      setIsMobile(mobile);
+      
+      // Close menu if resizing to desktop
+      if (!mobile && isMenuOpen) {
+        closeMenu();
+      }
+    };
+
+    // Set initial state
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, [isMenuOpen, closeMenu]);
 
   // Close menu when route changes
   useEffect(() => {
     closeMenu();
-  }, [pathname]);
+  }, [pathname, closeMenu]);
 
   // Close menu on escape key press
   useEffect(() => {
@@ -40,26 +60,34 @@ const Navbar = () => {
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, []);
+  }, [closeMenu]);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isMenuOpen && isMobile) {
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
+      document.body.style.top = `-${window.scrollY}px`;
     } else {
-      document.body.style.overflow = 'unset';
-      document.body.style.position = 'static';
-      document.body.style.width = 'auto';
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      }
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
-      document.body.style.position = 'static';
-      document.body.style.width = 'auto';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isMobile]);
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -71,34 +99,21 @@ const Navbar = () => {
     { href: '/contact', label: 'Contact' }
   ];
 
-  // Don't render during SSR to avoid hydration issues
-  if (!isMounted) {
-    return (
-      <header className={styles.header}>
-        <div className={styles.container}>
-          <div className={styles.brand}>
-            <Link href="/" className={styles.logo}>
-              <span className={styles.logoText}>ProfessionalResumeFree</span>
-            </Link>
-          </div>
-        </div>
-      </header>
-    );
-  }
-
   return (
     <header className={styles.header}>
       <div className={styles.container}>
+        {/* Brand/Logo */}
         <div className={styles.brand}>
           <Link href="/" className={styles.logo} onClick={closeMenu}>
             <span className={styles.logoText}>ProfessionalResumeFree</span>
           </Link>
         </div>
 
+        {/* Mobile Menu Button */}
         <button 
           className={`${styles.menuToggle} ${isMenuOpen ? styles.open : ''}`} 
           onClick={toggleMenu}
-          aria-label="Toggle navigation"
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={isMenuOpen}
           aria-controls="main-navigation"
           type="button"
@@ -108,13 +123,23 @@ const Navbar = () => {
           <span></span>
         </button>
 
+        {/* Overlay for mobile */}
+        {isMenuOpen && isMobile && (
+          <div 
+            className={styles.overlay} 
+            onClick={closeMenu}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Navigation */}
         <nav 
           id="main-navigation"
           className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`}
-          aria-hidden={!isMenuOpen}
+          aria-hidden={!isMenuOpen && isMobile}
         >
           <ul className={styles.navList}>
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <li key={item.href} className={styles.navItem}>
                 <Link 
                   href={item.href} 
@@ -123,6 +148,7 @@ const Navbar = () => {
                   }`}
                   onClick={closeMenu}
                   aria-current={pathname === item.href ? 'page' : undefined}
+                  tabIndex={!isMenuOpen && isMobile ? -1 : 0}
                 >
                   {item.label}
                 </Link>
@@ -130,15 +156,6 @@ const Navbar = () => {
             ))}
           </ul>
         </nav>
-
-        {/* Overlay for mobile menu */}
-        {isMenuOpen && (
-          <div 
-            className={styles.overlay} 
-            onClick={closeMenu}
-            aria-hidden="true"
-          />
-        )}
       </div>
     </header>
   );
