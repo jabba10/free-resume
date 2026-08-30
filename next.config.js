@@ -199,7 +199,6 @@ function seoHeaders() {
 const nextConfig = {
   // Use content-based build ID for better caching
   generateBuildId: async () => {
-    // Use environment variable or fallback to a stable build ID
     return process.env.GIT_HASH || process.env.VERCEL_GIT_COMMIT_SHA || 'build-v1';
   },
 
@@ -209,8 +208,8 @@ const nextConfig = {
   compress: true,
   generateEtags: true,
   
-  // Enable SWC minification for faster builds
-  swcMinify: true,
+  // FIXED: Moved from experimental to top-level key for Next.js 16+
+  serverExternalPackages: ['sharp'],
 
   onDemandEntries: {
     maxInactiveAge: 60 * 1000,
@@ -224,12 +223,10 @@ const nextConfig = {
   },
 
   experimental: {
-    optimizeCss: true,
+    // FIXED: Set optimizeCss to false (prevents CSS inlining errors breaking Navbars)
+    optimizeCss: false,
     scrollRestoration: true,
-    middlewarePrefetch: 'flexible',
     optimizePackageImports: ['lodash', 'date-fns', 'framer-motion'],
-    serverComponentsExternalPackages: ['sharp'],
-    optimisticClientCache: true,
   },
 
   images: {
@@ -274,7 +271,11 @@ const nextConfig = {
   },
 
   async headers() {
-    const isProduction = process.env.NODE_ENV === 'production';
+    // FIXED: Bypass header overrides completely during development mode
+    if (process.env.NODE_ENV !== 'production') {
+      return [];
+    }
+
     const aiLinkHeader = generateAILinkHeader();
 
     const aiFileHeaders = AI_FILES.map((file) => ({
@@ -301,11 +302,6 @@ const nextConfig = {
     }));
 
     return [
-      // ============================================================
-      // STATIC ASSETS - Maximum caching for performance
-      // ============================================================
-      
-      // JS/CSS bundles with hashes - 1 year cache
       {
         source: '/_next/static/chunks/:path*',
         headers: cacheHeaders(CACHE.BUNDLES),
@@ -318,13 +314,10 @@ const nextConfig = {
         source: '/_next/static/media/:path*',
         headers: cacheHeaders(CACHE.BUNDLES),
       },
-      // Other Next.js static files
       {
         source: '/_next/static/:path*',
         headers: cacheHeaders(CACHE.IMMUTABLE),
       },
-      
-      // Images - 7 days cache with revalidation
       {
         source: `/:path*.(${STATIC_EXTENSIONS.images})`,
         headers: [
@@ -332,8 +325,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, max-image-preview:large' },
         ],
       },
-      
-      // Fonts - 1 year immutable
       {
         source: `/:path*.(${STATIC_EXTENSIONS.fonts})`,
         headers: [
@@ -341,8 +332,6 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      
-      // Media files - 1 year immutable
       {
         source: `/:path*.(${STATIC_EXTENSIONS.media})`,
         headers: [
@@ -350,8 +339,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, max-video-preview:large' },
         ],
       },
-      
-      // Documents - 7 days cache
       {
         source: `/:path*.(${STATIC_EXTENSIONS.documents})`,
         headers: [
@@ -359,12 +346,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'index, follow' },
         ],
       },
-      
-      // ============================================================
-      // SEO & AI FILES
-      // ============================================================
-      
-      // AI sitemap
       {
         source: '/ai-sitemap.xml',
         headers: [
@@ -373,8 +354,6 @@ const nextConfig = {
           { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="alternate"` },
         ],
       },
-      
-      // AI index
       {
         source: '/ai/index.html',
         headers: [
@@ -382,8 +361,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: generateRobotsTag() },
         ],
       },
-      
-      // AI API
       {
         source: '/api/ai-context.json',
         headers: [
@@ -393,8 +370,6 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
         ],
       },
-      
-      // Sitemap - 1 hour cache
       {
         source: '/sitemap.xml',
         headers: [
@@ -402,8 +377,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      
-      // Sitemap index
       {
         source: '/sitemap-index.xml',
         headers: [
@@ -411,8 +384,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      
-      // Robots.txt - 24 hours cache
       {
         source: '/robots.txt',
         headers: [
@@ -421,8 +392,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex' },
         ],
       },
-      
-      // RSS Feed
       {
         source: '/feed.xml',
         headers: [
@@ -430,8 +399,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      
-      // Atom Feed
       {
         source: '/atom.xml',
         headers: [
@@ -439,12 +406,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      
-      // ============================================================
-      // MAIN PAGES - Optimized for SEO with stale-while-revalidate
-      // ============================================================
-      
-      // Homepage
       {
         source: '/',
         headers: [
@@ -453,8 +414,6 @@ const nextConfig = {
           { key: 'Link', value: `<${SITE_URL}/sitemap.xml>; rel="sitemap"` },
         ],
       },
-      
-      // Resume templates listing
       {
         source: '/resume-templates',
         headers: [
@@ -463,8 +422,6 @@ const nextConfig = {
           { key: 'X-Page-Type', value: 'listing' },
         ],
       },
-      
-      // Individual resume templates
       {
         source: '/resume-templates/:slug*',
         headers: [
@@ -473,8 +430,6 @@ const nextConfig = {
           { key: 'X-Page-Type', value: 'template' },
         ],
       },
-      
-      // Blog listing
       {
         source: '/blog',
         headers: [
@@ -483,8 +438,6 @@ const nextConfig = {
           { key: 'X-Page-Type', value: 'listing' },
         ],
       },
-      
-      // Individual blog posts
       {
         source: '/blog/:slug*',
         headers: [
@@ -494,8 +447,6 @@ const nextConfig = {
           { key: 'X-Article-Type', value: 'blog' },
         ],
       },
-      
-      // Free tools listing
       {
         source: '/free-resume-tools',
         headers: [
@@ -504,8 +455,6 @@ const nextConfig = {
           { key: 'X-Page-Type', value: 'listing' },
         ],
       },
-      
-      // Individual tools
       {
         source: '/free-resume-tools/:path*',
         headers: [
@@ -514,8 +463,6 @@ const nextConfig = {
           { key: 'X-Page-Type', value: 'tool' },
         ],
       },
-      
-      // Resume builder
       {
         source: '/resume-builder',
         headers: [
@@ -524,12 +471,6 @@ const nextConfig = {
           { key: 'X-Page-Type', value: 'application' },
         ],
       },
-      
-      // ============================================================
-      // API ROUTES - Cached with stale-while-revalidate
-      // ============================================================
-      
-      // API routes
       {
         source: '/api/:path*',
         headers: [
@@ -539,28 +480,16 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
         ],
       },
-      
-      // ============================================================
-      // CATCH-ALL ROUTE - For any other pages
-      // ============================================================
-      
-      // All other routes - cached HTML with full headers
       {
         source: '/:path*',
         headers: [
-          ...cacheHeaders(isProduction ? CACHE.PRODUCTION : CACHE.DEVELOPMENT, 'text/html; charset=utf-8'),
+          ...cacheHeaders(CACHE.PRODUCTION, 'text/html; charset=utf-8'),
           { key: 'X-Robots-Tag', value: generateRobotsTag() },
           { key: 'Link', value: aiLinkHeader },
           ...securityHeaders(),
           ...performanceHeaders(),
         ],
       },
-      
-      // ============================================================
-      // ERROR PAGES
-      // ============================================================
-      
-      // 404 page - cache for 1 hour
       {
         source: '/404',
         headers: [
@@ -568,8 +497,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
         ],
       },
-      
-      // 500 page - no cache
       {
         source: '/500',
         headers: [
@@ -577,8 +504,6 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
         ],
       },
-      
-      // Spread all the file-specific headers
       ...aiFileHeaders,
       ...aiManifestHeaders,
       ...schemaHeaders,
