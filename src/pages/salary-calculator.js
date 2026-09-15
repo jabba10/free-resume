@@ -293,6 +293,14 @@ const SalaryCalculatorPage = ({ seoData }) => {
         {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={canonicalUrl} />
         
+        {/* RSS FEED — discovered by AI crawlers */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Professional Resume Free — RSS Feed"
+          href="https://professionalresumefree.com/feed.xml"
+        />
+        
         {/* HREFLANG TAGS */}
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
@@ -747,6 +755,7 @@ const SalaryCalculatorPage = ({ seoData }) => {
                 <FiDollarSign /> Calculate Your Salary Now
               </button>
               <Link href="/free-resume-builder" className="btn-outline"><FiFileText /> Build Your Resume</Link>
+              <Link href="/salary-calculator" className="btn-outline"><FiPieChart /> Salary Calculator (This Page)</Link>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
               {["6 Salary Breakdowns", "Tax Estimation", "Overtime Calculator", "Instant Results", "100% Free"].map((f, i) => (
@@ -765,6 +774,8 @@ const SalaryCalculatorPage = ({ seoData }) => {
             </div>
             <div className="geo-link-grid">
               {[
+                { href: "/salary-calculator", text: "Free Salary Calculator (This Tool)", iconName: "FiDollarSign" },
+                { href: "/resume-calculators", text: "15+ Resume Calculators Hub", iconName: "FiPieChart" },
                 { href: "/free-resume-builder", text: "Free ATS-Friendly Resume Builder", iconName: "FiFileText" },
                 { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiTarget" },
                 { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" },
@@ -791,6 +802,7 @@ const SalaryCalculatorPage = ({ seoData }) => {
         <div style={{display: 'none'}}>
           <span itemProp="last-updated">{safeCurrentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp || Date.now()}</span>
+          <span itemProp="page-url">{canonicalUrl}</span>
         </div>
       </main>
     </>

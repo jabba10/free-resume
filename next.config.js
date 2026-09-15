@@ -53,8 +53,8 @@ const CACHE = {
   // API routes
   API: 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
   
-  // Feeds
-  FEEDS: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+  // RSS Feeds — 1 hour CDN cache, background revalidate
+  FEEDS: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400',
 };
 
 const AI_FILES = [
@@ -156,6 +156,18 @@ const nextConfig = {
     ],
   },
 
+  // ==========================================================================
+  // REWRITES — Map /feed.xml to the dynamic API route
+  // ==========================================================================
+  async rewrites() {
+    return [
+      {
+        source: '/feed.xml',
+        destination: '/api/feed.xml',
+      },
+    ];
+  },
+
   // Redirects
   async redirects() {
     return [
@@ -219,6 +231,32 @@ const nextConfig = {
       {
         source: `/:path*.(${STATIC_EXTENSIONS.documents})`,
         headers: cacheHeaders(CACHE.STATIC_ASSETS),
+      },
+      
+      // ========================================================================
+      // RSS FEED — Explicit headers for /feed.xml
+      // ========================================================================
+      {
+        source: '/feed.xml',
+        headers: [
+          { key: 'Content-Type', value: 'application/rss+xml; charset=utf-8' },
+          ...cacheHeaders(CACHE.FEEDS),
+          // Allow AI crawlers to read the feed but not index it as a page
+          { key: 'X-Robots-Tag', value: 'noindex, follow' },
+          // Explicit allow for AI feed readers
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Vary', value: 'Accept' },
+        ],
+      },
+      // Also cover the API route directly (in case anyone hits /api/feed.xml)
+      {
+        source: '/api/feed.xml',
+        headers: [
+          { key: 'Content-Type', value: 'application/rss+xml; charset=utf-8' },
+          ...cacheHeaders(CACHE.FEEDS),
+          { key: 'X-Robots-Tag', value: 'noindex, follow' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
       },
       
       // AI files

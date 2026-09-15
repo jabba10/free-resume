@@ -1147,6 +1147,14 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <link rel="describedby" type="text/plain" href={`${baseUrl}/llms.txt`} title="AI Site Index — Machine-Readable Summary" />
         <link rel="alternate" type="text/plain" href={`${baseUrl}/llms-full.txt`} title="AI Full Content Index — Complete Site Content" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+        {/* ── RSS FEED — Discovered by AI crawlers ── */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Professional Resume Free — RSS Feed"
+          href={`${baseUrl}/feed.xml`}
+        />
         
         {/* JSON Feed for AI Crawlers */}
         <link rel="alternate" type="application/feed+json" href={`${baseUrl}/feed.json`} title="AI Content Feed" />
@@ -1187,10 +1195,6 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-        {/* ── WebSub ── */}
-        <link rel="hub" href="https://pubsubhubbub.appspot.com/" />
-        <link rel="self" href={`${baseUrl}/feed.xml`} />
 
         {/* ── PERFORMANCE HINTS ── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1246,7 +1250,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <section className="hero-section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div className="hero-content">
-              {/* Trust Badge — Now directly below stats with reduced gap */}
+              {/* Trust Badge */}
               <div className="trust-badge" aria-label="Trust indicators" style={{ marginBottom: '1.5rem' }}>
                 Based on Industry ATS Standards | 46+ Templates | 12+ Free Tools | 15+ Calculators
               </div>
@@ -1277,7 +1281,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 and <strong>15+ calculators</strong>.
               </p>
 
-              {/* 🔥 Primary CTAs — Tier 1 Links #1, #2, #3, #4 */}
+              {/* 🔥 Primary CTAs */}
               <div className="button-container" role="group" aria-label="Primary call to action">
                 <Link href="/free-resume-builder" className="btn-cta" aria-label="Build your free resume now — no sign-up required">
                   🚀 Build Your Free Resume Now
@@ -1290,7 +1294,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 </Link>
               </div>
 
-              {/* 🔥 Trust Badge Links — Tier 1 #3 (AI) + Tier 2 #10 (Keyword Matcher) */}
+              {/* 🔥 Trust Badge Links */}
               <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -1330,7 +1334,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 </Link>
               </div>
 
-              {/* Hero Image — KEPT */}
+              {/* Hero Image */}
               <div className="hero-image-container">
                 <Image
                   src="/ats.jpeg"
@@ -1343,7 +1347,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 />
               </div>
 
-              {/* 🔥 Secondary CTAs — Tier 1 #5, Tier 3 #14, #15 */}
+              {/* 🔥 Secondary CTAs */}
               <div className="button-container" role="group" aria-label="Secondary call to action buttons">
                 <Link href="/free-cover-letter-generator" className="btn-primary" aria-label="Generate a free cover letter">
                   📝 Free Cover Letter Generator
@@ -1356,7 +1360,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 </Link>
               </div>
 
-              {/* llms.txt Banner — KEPT */}
+              {/* llms.txt Banner */}
               <div className="llms-banner" role="note" aria-label="AI and developer resources">
                 <strong style={{ color: 'var(--accent-primary)' }}>AI & Developer Access:</strong>
                 Machine-readable site index at{' '}
@@ -1365,7 +1369,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 <a href={`${baseUrl}/llms-full.txt`} rel="noopener" aria-label="llms-full.txt — complete AI-readable content">/llms-full.txt</a>
               </div>
 
-              {/* AI Definition Box — KEPT */}
+              {/* AI Definition Box */}
               <div className="ai-definition-box" itemScope itemType="https://schema.org/DefinedTerm">
                 <span itemProp="name">
                   <p style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-bold)', marginBottom: '0.5rem' }}>
@@ -1420,7 +1424,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
             </div>
 
             <div className="featured-tools-grid">
-              {/* 🔥 Tool 1: ATS Checker — Tier 1 #2 */}
+              {/* Tool 1: ATS Checker */}
               <Link href="/free-ats-resume-checker" className="tool-card featured">
                 <div className="tool-icon">✅</div>
                 <h3>Free ATS Resume Checker</h3>
@@ -1428,7 +1432,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 <span className="tool-badge">🔥 Most Used</span>
               </Link>
 
-              {/* 🔥 Tool 2: Score Checker — Tier 2 #9 */}
+              {/* Tool 2: Score Checker */}
               <Link href="/free-resume-score-checker" className="tool-card">
                 <div className="tool-icon">⭐</div>
                 <h3>Free Resume Score Checker</h3>
@@ -1436,7 +1440,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 <span className="tool-badge">Essential</span>
               </Link>
 
-              {/* 🔥 Tool 3: Keyword Matcher — Tier 2 #10 */}
+              {/* Tool 3: Keyword Matcher */}
               <Link href="/free-resume-keyword-matcher" className="tool-card">
                 <div className="tool-icon">🎯</div>
                 <h3>Resume Keyword Matcher</h3>
@@ -1444,7 +1448,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 <span className="tool-badge">Strategic</span>
               </Link>
 
-              {/* 🔥 Tool 4: Cover Letter — Tier 1 #5 */}
+              {/* Tool 4: Cover Letter */}
               <Link href="/free-cover-letter-generator" className="tool-card">
                 <div className="tool-icon">📝</div>
                 <h3>Free Cover Letter Generator</h3>
@@ -1452,26 +1456,26 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 <span className="tool-badge">Popular</span>
               </Link>
 
-              {/* 🔥 Tool 5: Calculators — Tier 3 #14 */}
+              {/* Tool 5: Salary Calculator — NEWLY ADDED */}
+              <Link href="/salary-calculator" className="tool-card">
+                <div className="tool-icon">💰</div>
+                <h3>Free Salary Calculator</h3>
+                <p>Convert hourly to annual pay with tax estimates and benchmarks</p>
+                <span className="tool-badge">New</span>
+              </Link>
+
+              {/* Tool 6: Calculators */}
               <Link href="/resume-calculators" className="tool-card">
                 <div className="tool-icon">📊</div>
                 <h3>Resume Calculators</h3>
-                <p>15+ calculators — Strength, Value, Skill Gap & more</p>
+                <p>15+ calculators — Strength, Value, Skill Gap &amp; more</p>
                 <span className="tool-badge">15+ Tools</span>
-              </Link>
-
-              {/* 🔥 Tool 6: All Tools — Tier 3 #15 */}
-              <Link href="/free-resume-tools" className="tool-card">
-                <div className="tool-icon">🛠️</div>
-                <h3>All Free Tools</h3>
-                <p>12+ tools to optimize your resume from every angle</p>
-                <span className="tool-badge">12+ Tools</span>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* ===== USA DIRECTORY & GUIDES — REMOVED FLAG EMOJI AND "All 50 States" TEXT ===== */}
+        {/* ===== USA DIRECTORY & GUIDES ===== */}
         <section className="section" aria-labelledby="usa-heading">
           <div className="section-container">
             <div className="section-header">
@@ -1482,14 +1486,12 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
             </div>
 
             <div className="usa-directory-grid">
-              {/* 🔥 USA Directory — Tier 2 #6 */}
               <Link href="/usa-jobs-resume-directory" className="usa-card large">
                 <h3>USA Jobs Resume Directory</h3>
                 <p>Complete guide for federal USAJOBS, state-specific formats, and industry-focused resumes. Trusted by American job seekers nationwide.</p>
                 <span className="usa-tag">Complete USA Coverage</span>
               </Link>
 
-              {/* 🔥 How to Write a Resume — Tier 3 #12 */}
               <Link href="/how-to-write-a-resume" className="usa-card">
                 <h3>How to Write a Resume That Gets Hired</h3>
                 <p>Step-by-step guide with expert strategies. Everything from scratch to interview-ready.</p>
@@ -1497,7 +1499,6 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
               </Link>
             </div>
 
-            {/* 🔥 Link Row — Tier 2 #7, #8, Tier 3 #13, Tier 1 #3 */}
             <div className="link-row">
               <Link href="/best-ats-resume-format-2026" className="link-with-arrow">
                 📄 Best ATS Resume Format 2026 →
@@ -1579,7 +1580,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
               <div className="button-container" role="group" aria-label="Final call to action buttons">
                 <Link href="/free-resume-builder" className="btn-cta">🚀 Build Your Free Resume Now</Link>
                 <Link href="/resume-templates" className="btn-primary">📄 Browse 46+ Templates</Link>
-                <Link href="/free-resume-tools" className="btn-outline">🛠️ Explore 12+ Free Tools</Link>
+                <Link href="/salary-calculator" className="btn-outline">💰 Free Salary Calculator</Link>
               </div>
               <p className="text-small" style={{ marginTop: '2rem', color: 'var(--text-muted)' }}>
                 ✓ 100% Free • ✓ No Sign Up • ✓ Privacy Protected • ✓ Instant PDF Download • ✓ ATS-Optimized • ✓ Based on Industry Standards
@@ -1600,6 +1601,10 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                   <a href={`${baseUrl}/api/ai-context.json`} style={{ color: 'var(--text-disabled)' }}>
                     /api/ai-context.json
                   </a>
+                  {' '}· RSS feed at{' '}
+                  <a href={`${baseUrl}/feed.xml`} style={{ color: 'var(--text-disabled)' }}>
+                    /feed.xml
+                  </a>
                 </p>
                 <p style={{ marginTop: '0.5rem' }}>
                   Data fresh as of: {displayDate} · Build: {buildTimestamp}
@@ -1619,6 +1624,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           <span itemProp="llms-index">{baseUrl}/llms.txt</span>
           <span itemProp="llms-full">{baseUrl}/llms-full.txt</span>
           <span itemProp="ai-context">{baseUrl}/api/ai-context.json</span>
+          <span itemProp="rss-feed">{baseUrl}/feed.xml</span>
           <span itemProp="user-count">125000</span>
           <span itemProp="resumes-created">500000</span>
           
