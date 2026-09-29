@@ -43,7 +43,8 @@ import {
   FiCode,
   FiShoppingBag,
   FiMonitor,
-  FiTruck
+  FiTruck,
+  FiLink as FiLinkIcon
 } from 'react-icons/fi';
 import Link from 'next/link';
 
@@ -304,15 +305,27 @@ const careerFlowStyles = `
   .cf-share-close-btn { display: inline-block; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 12px 32px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); }
   .cf-share-close-btn:hover { filter: brightness(1.1); box-shadow: 0 0 18px rgba(242, 202, 80, 0.3); transform: translateY(-1px); }
 
+  /* ========== RELATED RESOURCES SECTION ========== */
+  .cf-related-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: var(--cf-surface-container-lowest); border-top: 0.5px solid rgba(153, 144, 124, 0.1); }
+  .cf-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1100px; margin: 0 auto; }
+  .cf-related-card { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; transition: all var(--cf-transition-base); text-decoration: none; color: inherit; height: 100%; min-height: 84px; }
+  .cf-related-card:hover { background: rgba(32, 31, 33, 0.8); border-color: var(--cf-primary-container); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05); }
+  .cf-related-card:focus-visible { outline: 2px solid var(--cf-primary); outline-offset: 2px; }
+  .cf-related-card-inner { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+  .cf-related-card-icon { width: 42px; height: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: rgba(242, 202, 80, 0.08); border: 0.5px solid rgba(212, 175, 55, 0.25); color: var(--cf-primary); font-size: 18px; }
+  .cf-related-card-title { font-family: var(--cf-font-body); font-size: 15px; font-weight: 600; color: var(--cf-on-background); line-height: 1.4; word-break: break-word; overflow-wrap: anywhere; }
+  .cf-related-card-arrow { flex-shrink: 0; color: var(--cf-primary); font-size: 18px; transition: transform var(--cf-transition-base); }
+  .cf-related-card:hover .cf-related-card-arrow { transform: translateX(4px); }
+
   @media (min-width: 1024px) { .cf-layout { flex-direction: row; gap: 48px; } .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; } .cf-form-section { max-width: 500px; } .cf-faq-grid { grid-template-columns: repeat(2, 1fr); } .cf-form-group { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 1023px) { :root { --cf-margin-desktop: 32px; --cf-section-gap: 80px; } .cf-container { padding: 0 var(--cf-margin-desktop); } .cf-hero { padding: 100px 0 60px; min-height: auto; } .cf-hero-title { font-size: 48px; } .cf-layout { padding: 60px var(--cf-margin-desktop); gap: 32px; } .cf-form-group { grid-template-columns: 1fr 1fr; } .cf-faq-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } }
-  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } }
-  @media (max-width: 360px) { .cf-hero-title { font-size: 24px; } .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; } }
-  @media print { .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; } .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; } .cf-universal-template, .cf-section { page-break-inside: avoid; } }
+  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section, .cf-related-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } .cf-related-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } .cf-related-card { padding: 16px 18px; gap: 12px; } .cf-related-card-icon { width: 36px; height: 36px; font-size: 16px; } .cf-related-card-title { font-size: 14px; } }
+  @media (max-width: 360px) { .cf-hero-title { font-size: 24px; } .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; } .cf-related-card { padding: 14px 16px; } .cf-related-card-icon { width: 32px; height: 32px; font-size: 14px; } }
+  @media print { .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-related-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; } .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; } .cf-universal-template, .cf-section { page-break-inside: avoid; } }
 `;
 
-const AccountantResume = ({ seoData, buildTimestamp }) => {
+const AccountantResume = ({ seoData, buildTimestamp, currentYear }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const {
     currentDate,
@@ -351,6 +364,30 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // ============= INTERNAL LINKS =============
+  const internalLinks = [
+    {
+      link: "/ats-friendly-finance-resume-builder",
+      anchorText: "Finance Resume Builder for Accountants"
+    },
+    {
+      link: "/ats-friendly-business-analyst-resume-builder",
+      anchorText: "Business Analyst Resume Builder"
+    },
+    {
+      link: "/ats-friendly-ceo-resume-builder",
+      anchorText: "CEO Resume Builder"
+    },
+    {
+      link: "/best-resume-examples-for-usa-management-positions",
+      anchorText: "Management Resume Examples"
+    },
+    {
+      link: "/basic-resume-format",
+      anchorText: "Basic Resume Format Guide"
+    }
+  ];
 
   // Testimonials for Accountant Industry
   const testimonials = [
@@ -531,7 +568,7 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
     );
   };
 
-  const pageTitle = "Free Accounting Resume Builder 2026 | ATS CPA Resume Maker";
+  const pageTitle = `Free Accounting Resume Builder ${currentYear} | ATS CPA Resume Maker`;
 
   return (
     <>
@@ -540,8 +577,8 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
         <Head>
           <title>{pageTitle}</title>
           <meta name="title" content={pageTitle} />
-          <meta name="description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up." />
-          <meta name="keywords" content="accounting resume builder, CPA resume templates, finance resume builder, accountant CV, ATS friendly accounting resume, free resume builder for accountants, financial analyst resume, audit resume, tax accountant CV, Big 4 resume templates" />
+          <meta name="description" content={`Build your professional accounting resume for free in ${currentYear}. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up.`} />
+          <meta name="keywords" content={`accounting resume builder, CPA resume templates, finance resume builder, accountant CV, ATS friendly accounting resume, free resume builder for accountants, financial analyst resume, audit resume, tax accountant CV, Big 4 resume templates`} />
           <meta name="author" content="Professional Accounting Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -551,7 +588,7 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
           <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-accountant-resume-builder" />
           <meta property="og:title" content={pageTitle} />
-          <meta property="og:description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up required." />
+          <meta property="og:description" content={`Build your professional accounting resume for free in ${currentYear}. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up required.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-accounting-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -566,7 +603,7 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={pageTitle} />
-          <meta name="twitter:description" content="Build your professional accounting resume for free in 2026. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up." />
+          <meta name="twitter:description" content={`Build your professional accounting resume for free in ${currentYear}. ATS-friendly CPA templates help you land interviews faster. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-accounting-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Accounting Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@ProResumeFree" />
@@ -595,7 +632,7 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
                     "url": "https://professionalresumefree.com/ats-friendly-accountant-resume-builder",
                     "name": pageTitle,
                     "description": "Create professional ATS-optimized accounting resumes for free. Land interviews 3x faster with our accounting resume builder.",
-                    "datePublished": "2026-01-01",
+                    "datePublished": `${currentYear}-01-01`,
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
                     "isPartOf": {
@@ -656,7 +693,7 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -675,7 +712,7 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-accounting-resume-builder.jpg",
                       "applicationSuite": "Accounting Career Tools",
                       "countriesSupported": "Global",
@@ -848,8 +885,8 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Accounting Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Accounting <span className="cf-gradient-text">Resume Builder 2026: Create Your ATS CPA Resume & Get Hired</span></h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">{`Best Free Accounting Resume Builder ${currentYear}`}</span></div>
+              <h1 className="cf-hero-title">{`Free Accounting `}<span className="cf-gradient-text">{`Resume Builder ${currentYear}: Create Your ATS CPA Resume & Get Hired`}</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized accounting resume for free in minutes.</strong> Our accounting resume builder ensures your financial expertise and credentials get noticed by firms and employers worldwide.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free accounting resume now—no sign-up required"><span className="cf-btn-text">Start Building Your Accounting Resume Now</span><FiArrowRight className="cf-btn-icon"/><div className="cf-btn-pulse"></div></button>
@@ -998,6 +1035,32 @@ const AccountantResume = ({ seoData, buildTimestamp }) => {
 
         <section className="cf-cta-section" aria-labelledby="cta-title"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Accounting Career?</h2><p className="cf-cta-subtitle">Join 3 million+ accounting professionals who landed their dream jobs with our free ATS-friendly accounting resume builder.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free accounting resume now—no sign-up required"><span className="cf-cta-btn-text">Create Your Free Accounting Resume Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Accounting</span></div></div></div></section>
 
+        {/* ============= RELATED RESOURCES / INTERNAL LINKS SECTION ============= */}
+        <section className="cf-related-section" aria-labelledby="cf-related-heading">
+          <div className="cf-container">
+            <div className="cf-section-header">
+              <h2 id="cf-related-heading">Related Finance & Accounting Resume Resources</h2>
+              <p>Explore our other free resume builders and guides tailored for finance and accounting professionals.</p>
+            </div>
+            <nav className="cf-related-grid" aria-label="Related finance and accounting resume resources">
+              {internalLinks.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.link}
+                  className="cf-related-card"
+                  title={item.anchorText}
+                >
+                  <span className="cf-related-card-inner">
+                    <span className="cf-related-card-icon" aria-hidden="true"><FiLinkIcon /></span>
+                    <span className="cf-related-card-title">{item.anchorText}</span>
+                  </span>
+                  <FiArrowRight className="cf-related-card-arrow" aria-hidden="true" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Accounting Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><AccountantTemplate formData={formData}/></div></div></div></div>)}
 
         {showSharePopup && (
@@ -1021,6 +1084,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   // Generate review dates for structured data
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -1051,7 +1115,8 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
-      buildTimestamp
+      buildTimestamp,
+      currentYear
     },
     // ISR: Revalidate every hour (3600 seconds)
     revalidate: 3600

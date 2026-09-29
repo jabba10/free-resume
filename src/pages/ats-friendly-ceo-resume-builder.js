@@ -41,7 +41,8 @@ import {
   FiCode,
   FiShoppingBag,
   FiMonitor,
-  FiTruck
+  FiTruck,
+  FiLink as FiLinkIcon
 } from 'react-icons/fi';
 import Link from 'next/link';
 
@@ -309,15 +310,27 @@ const careerFlowStyles = `
   .cf-share-close-btn { display: inline-block; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 12px 32px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); }
   .cf-share-close-btn:hover { filter: brightness(1.1); box-shadow: 0 0 18px rgba(242, 202, 80, 0.3); transform: translateY(-1px); }
 
+  /* ========== RELATED RESOURCES SECTION ========== */
+  .cf-related-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: var(--cf-surface-container-lowest); border-top: 0.5px solid rgba(153, 144, 124, 0.1); }
+  .cf-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1100px; margin: 0 auto; }
+  .cf-related-card { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; transition: all var(--cf-transition-base); text-decoration: none; color: inherit; height: 100%; min-height: 84px; }
+  .cf-related-card:hover { background: rgba(32, 31, 33, 0.8); border-color: var(--cf-primary-container); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05); }
+  .cf-related-card:focus-visible { outline: 2px solid var(--cf-primary); outline-offset: 2px; }
+  .cf-related-card-inner { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+  .cf-related-card-icon { width: 42px; height: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: rgba(242, 202, 80, 0.08); border: 0.5px solid rgba(212, 175, 55, 0.25); color: var(--cf-primary); font-size: 18px; }
+  .cf-related-card-title { font-family: var(--cf-font-body); font-size: 15px; font-weight: 600; color: var(--cf-on-background); line-height: 1.4; word-break: break-word; overflow-wrap: anywhere; }
+  .cf-related-card-arrow { flex-shrink: 0; color: var(--cf-primary); font-size: 18px; transition: transform var(--cf-transition-base); }
+  .cf-related-card:hover .cf-related-card-arrow { transform: translateX(4px); }
+
   @media (min-width: 1024px) { .cf-layout { flex-direction: row; gap: 48px; } .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; } .cf-form-section { max-width: 500px; } .cf-faq-grid { grid-template-columns: repeat(2, 1fr); } .cf-form-group { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 1023px) { :root { --cf-margin-desktop: 32px; --cf-section-gap: 80px; } .cf-container { padding: 0 var(--cf-margin-desktop); } .cf-hero { padding: 100px 0 60px; min-height: auto; } .cf-hero-title { font-size: 48px; } .cf-layout { padding: 60px var(--cf-margin-desktop); gap: 32px; } .cf-form-group { grid-template-columns: 1fr 1fr; } .cf-faq-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-expertise-grid { grid-template-columns: 1fr; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } }
-  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } }
-  @media (max-width: 360px) { .cf-hero-title { font-size: 24px; } .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; } }
-  @media print { .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; } .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; } .cf-universal-template, .cf-section { page-break-inside: avoid; } }
+  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-expertise-grid { grid-template-columns: 1fr; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section, .cf-related-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } .cf-related-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } .cf-related-card { padding: 16px 18px; gap: 12px; } .cf-related-card-icon { width: 36px; height: 36px; font-size: 16px; } .cf-related-card-title { font-size: 14px; } }
+  @media (max-width: 360px) { .cf-hero-title { font-size: 24px; } .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; } .cf-related-card { padding: 14px 16px; } .cf-related-card-icon { width: 32px; height: 32px; font-size: 14px; } }
+  @media print { .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-related-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; } .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; } .cf-universal-template, .cf-section { page-break-inside: avoid; } }
 `;
 
-const CeoResume = ({ seoData, buildTimestamp }) => {
+const CeoResume = ({ seoData, buildTimestamp, currentYear }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const {
     currentDate,
@@ -336,6 +349,9 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Dynamic year — advances automatically when ISR rebuilds the page
+  const year = currentYear || new Date().getFullYear();
+
   const defaultExperience = () => ({ employer: '', position: '', location: '', startDate: '', endDate: '', description: '', achievements: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', program: '', location: '', startDate: '', endDate: '', honors: '', isEditing: false, editIndex: null });
   const defaultExpertise = () => ({ name: '', category: '', isEditing: false, editIndex: null });
@@ -347,7 +363,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
   const defaultSocialLink = () => ({ platform: '', url: '', isEditing: false, editIndex: null });
 
   const [formData, setFormData] = useState({ fullName: '', title: '', email: '', phone: '', address: '', summary: '', experience: [], education: [], expertise: [], certifications: [], boardPositions: [], achievements: [], publications: [], speakingEngagements: [], socialLinks: [] });
-  const [fontSizes, setFontSizes] = useState({ name: 16, title: 10, sectionTitle: 10, contactInfo: 7, jobTitle: 10, company: 8, degree: 9, institution: 8, date: 7, regularText: 8, bulletText: 8, skillText: 8, achievementText: 9 });
+  const [fontSizes, setFontSizes] = useState({ name: 16, title: 10, sectionTitle: 8, contactInfo: 7, jobTitle: 10, company: 8, degree: 9, institution: 8, date: 7, regularText: 8, bulletText: 8, skillText: 8, achievementText: 9 });
   const [currentExperience, setCurrentExperience] = useState(defaultExperience());
   const [currentEducation, setCurrentEducation] = useState(defaultEducation());
   const [currentExpertise, setCurrentExpertise] = useState(defaultExpertise());
@@ -362,6 +378,30 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // ============= INTERNAL LINKS =============
+  const internalLinks = [
+    {
+      link: "/ats-friendly-marketing-executive-manager-resume-builder",
+      anchorText: "Marketing Executive Resume Builder"
+    },
+    {
+      link: "/ats-friendly-finance-resume-builder",
+      anchorText: "Finance Resume Builder"
+    },
+    {
+      link: "/best-resume-examples-for-usa-management-positions",
+      anchorText: "Management Position Resume Examples"
+    },
+    {
+      link: "/ats-friendly-project-manager-resume-builder",
+      anchorText: "Project Manager Resume Builder"
+    },
+    {
+      link: "/ats-friendly-business-analyst-resume-builder",
+      anchorText: "Business Analyst Resume Builder"
+    }
+  ];
 
   // Testimonials for Structured Data
   const testimonials = [
@@ -410,7 +450,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
   ];
 
   const faqs = [
-    { question: "Is this executive resume builder truly free for C-suite professionals?", answer: "Yes, our executive resume builder is completely free with no hidden costs. Create, edit, and download your professional CEO/C-suite resume in PDF format without any payment required. We believe in empowering business leaders with professional tools." },
+    { question: `Is this executive resume builder truly free for C-suite professionals in ${year}?`, answer: `Yes, our executive resume builder is completely free with no hidden costs in ${year}. Create, edit, and download your professional CEO/C-suite resume in PDF format without any payment required. We believe in empowering business leaders with professional tools.` },
     { question: "What makes this builder different for executive-level resumes?", answer: "Our executive resume builder is specifically designed for C-suite professionals with board-level formatting, strategic focus areas, achievement quantification, and proper executive summary structuring that search committees and boards expect." },
     { question: "Can I download my executive resume as PDF without creating an account?", answer: "Absolutely! Download your professional executive resume in PDF format without creating an account. Everything is completely free and accessible immediately for CEOs, board members, and senior executives." },
     { question: "How many executive resume templates are available?", answer: "We offer professionally designed executive resume templates for CEOs, CFOs, COOs, board directors, managing directors, and all C-suite positions. All templates feature board-level formatting and strategic presentation." },
@@ -419,7 +459,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
-  const resetFontSizes = () => setFontSizes({ name: 16, title: 10, sectionTitle: 10, contactInfo: 7, jobTitle: 10, company: 8, degree: 9, institution: 8, date: 7, regularText: 8, bulletText: 8, skillText: 8, achievementText: 9 });
+  const resetFontSizes = () => setFontSizes({ name: 16, title: 10, sectionTitle: 8, contactInfo: 7, jobTitle: 10, company: 8, degree: 9, institution: 8, date: 7, regularText: 8, bulletText: 8, skillText: 8, achievementText: 9 });
   const getSocialIcon = () => <FiGlobe />;
   const formatSocialUrl = (url) => url ? url.replace(/(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '') : '';
   const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -516,10 +556,10 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
             {formData.socialLinks.map((link, i) => (<div key={i} className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt` }}>{getSocialIcon(link.platform)} {formatSocialUrl(link.url)}</div>))}
           </div>
         </header>
-        {hasSummary && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EXECUTIVE PROFILE</h2><p className="cf-summary-text" style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p></section>}
-        {hasExperience && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EXECUTIVE EXPERIENCE</h2>{formData.experience.map((exp, i) => (<div key={i} className="cf-experience-item"><div className="cf-experience-header"><h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h3><p className="cf-company" style={{ fontSize: `${fontSizes.company}pt` }}>{exp.employer}{exp.location && `, ${exp.location}`}</p><p className="cf-date" style={{ fontSize: `${fontSizes.date}pt` }}>{exp.startDate} – {exp.endDate || 'Present'}</p></div><ul className="cf-bullet-list">{exp.description.split('\n').filter(l => l.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}</ul>{exp.achievements && <><h4 className="cf-achievement-title">Key Achievements:</h4><ul className="cf-bullet-list">{exp.achievements.split('\n').filter(l => l.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}</ul></>}</div>))}</section>}
+        {hasSummary && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFILE</h2><p className="cf-summary-text" style={{ fontSize: `${fontSizes.regularText}pt` }}>{formData.summary}</p></section>}
+        {hasExperience && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EXPERIENCE</h2>{formData.experience.map((exp, i) => (<div key={i} className="cf-experience-item"><div className="cf-experience-header"><h3 style={{ fontSize: `${fontSizes.jobTitle}pt` }}>{exp.position}</h3><p className="cf-company" style={{ fontSize: `${fontSizes.company}pt` }}>{exp.employer}{exp.location && `, ${exp.location}`}</p><p className="cf-date" style={{ fontSize: `${fontSizes.date}pt` }}>{exp.startDate} – {exp.endDate || 'Present'}</p></div><ul className="cf-bullet-list">{exp.description.split('\n').filter(l => l.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}</ul>{exp.achievements && <><h4 className="cf-achievement-title">Key Achievements:</h4><ul className="cf-bullet-list">{exp.achievements.split('\n').filter(l => l.trim()).map((line, j) => <li key={j} style={{ fontSize: `${fontSizes.bulletText}pt` }}>{line}</li>)}</ul></>}</div>))}</section>}
         {hasEducation && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>EDUCATION</h2>{formData.education.map((edu, i) => (<div key={i} className="cf-education-item"><h3 style={{ fontSize: `${fontSizes.degree}pt` }}>{edu.degree}{edu.program && `, ${edu.program}`}</h3><p className="cf-institution-text" style={{ fontSize: `${fontSizes.institution}pt` }}>{edu.institution}{edu.location && `, ${edu.location}`}</p><p className="cf-date" style={{ fontSize: `${fontSizes.date}pt` }}>{edu.startDate} – {edu.endDate || 'Present'}{edu.honors && ` • ${edu.honors}`}</p></div>))}</section>}
-        {hasExpertise && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>CORE COMPETENCIES</h2><div className="cf-expertise-grid">{Object.entries(formData.expertise.reduce((acc, expertise) => { const cat = expertise.category || 'General'; if (!acc[cat]) acc[cat] = []; acc[cat].push(expertise.name); return acc; }, {})).map(([categoryName, skills]) => (<div key={categoryName} className="cf-expertise-category"><h3 className="cf-expertise-category-title">{categoryName}</h3><ul className="cf-skills-list">{skills.map((skill, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{skill}</li>)}</ul></div>))}</div></section>}
+        {hasExpertise && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>COMPETENCIES</h2><div className="cf-expertise-grid">{Object.entries(formData.expertise.reduce((acc, expertise) => { const cat = expertise.category || 'General'; if (!acc[cat]) acc[cat] = []; acc[cat].push(expertise.name); return acc; }, {})).map(([categoryName, skills]) => (<div key={categoryName} className="cf-expertise-category"><h3 className="cf-expertise-category-title">{categoryName}</h3><ul className="cf-skills-list">{skills.map((skill, i) => <li key={i} style={{ fontSize: `${fontSizes.skillText}pt` }}>{skill}</li>)}</ul></div>))}</div></section>}
         {hasAchievements && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>SELECT ACHIEVEMENTS</h2><ul className="cf-bullet-list">{formData.achievements.map((a, i) => (<li key={i} style={{ fontSize: `${fontSizes.achievementText}pt` }}><strong style={{ fontWeight: 700 }}>{a.title}:</strong> {a.description} {a.metrics && `(${a.metrics})`} {a.year && `• ${a.year}`}</li>))}</ul></section>}
         {hasBoardPositions && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>BOARD APPOINTMENTS & GOVERNANCE</h2>{formData.boardPositions.map((b, i) => (<div key={i} className="cf-board-item" style={{ fontSize: `${fontSizes.regularText}pt` }}><strong style={{ fontWeight: 700 }}>{b.position}</strong> • {b.organization} • {b.startDate} – {b.endDate || 'Present'}</div>))}</section>}
         {hasCertifications && <section className="cf-section"><h2 className="cf-section-title" style={{ fontSize: `${fontSizes.sectionTitle}pt` }}>PROFESSIONAL CERTIFICATIONS</h2>{formData.certifications.map((c, i) => (<div key={i} className="cf-cert-item" style={{ fontSize: `${fontSizes.regularText}pt` }}><strong style={{ fontWeight: 700 }}>{c.name}</strong>{c.issuingAuthority && ` • ${c.issuingAuthority}`}{c.year && ` • ${c.year}`}</div>))}</section>}
@@ -536,9 +576,9 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Executive Resume Builder 2026 | CEO/C-Suite Templates</title>
-          <meta name="title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
-          <meta name="description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
+          <title>{`Free Executive Resume Builder ${year} | CEO/C-Suite Templates`}</title>
+          <meta name="title" content={`Free Executive Resume Builder ${year} | CEO/C-Suite Templates`} />
+          <meta name="description" content={`Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for ${year}.`} />
           <meta name="keywords" content="executive resume builder, CEO resume templates, C-suite resume builder, board resume, executive CV, free resume builder for business leaders, senior executive resume, managing director CV, board director resume, leadership resume" />
           <meta name="author" content="Professional Executive Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -548,8 +588,8 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
           <link rel="canonical" href={canonicalUrl} />
-          <meta property="og:title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
-          <meta property="og:description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
+          <meta property="og:title" content={`Free Executive Resume Builder ${year} | CEO/C-Suite Templates`} />
+          <meta property="og:description" content={`Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for ${year}.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-executive-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -563,8 +603,8 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Executive Resume Builder 2026 | CEO/C-Suite Templates" />
-          <meta name="twitter:description" content="Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for 2026." />
+          <meta name="twitter:title" content={`Free Executive Resume Builder ${year} | CEO/C-Suite Templates`} />
+          <meta name="twitter:description" content={`Create a professional executive resume for free. CEO-optimized templates trusted by 25K+ business leaders. Download PDF in minutes. Updated for ${year}.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-executive-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Executive Resume Builder with Board-Level Templates" />
           <meta name="twitter:site" content="@ProResumeFree" />
@@ -590,9 +630,9 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Executive Resume Builder 2026 | CEO/C-Suite Templates",
-                    "description": "Create professional executive resumes for free. Land board-level interviews with our CEO resume builder.",
-                    "datePublished": "2026-01-01",
+                    "name": `Free Executive Resume Builder ${year} | CEO/C-Suite Templates`,
+                    "description": `Create professional executive resumes for free. Land board-level interviews with our CEO resume builder. Updated for ${year}.`,
+                    "datePublished": "2020-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
                     "isPartOf": {
@@ -645,7 +685,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
                     },
                     "mainEntity": {
                       "@type": "SoftwareApplication",
-                      "name": "Executive Resume Builder - CEO/C-Suite Resume Maker",
+                      "name": `Executive Resume Builder - CEO/C-Suite Resume Maker ${year}`,
                       "applicationCategory": "BusinessApplication",
                       "operatingSystem": "Any",
                       "offers": {
@@ -653,7 +693,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${year + 1}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -672,7 +712,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${year}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-executive-resume-builder.jpg",
                       "applicationSuite": "Executive Career Tools",
                       "countriesSupported": "Global",
@@ -815,7 +855,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
                         },
                         "itemReviewed": {
                           "@type": "SoftwareApplication",
-                          "name": "Executive Resume Builder - CEO/C-Suite Resume Maker",
+                          "name": `Executive Resume Builder - CEO/C-Suite Resume Maker ${year}`,
                           "applicationCategory": "BusinessApplication",
                           "operatingSystem": "Any",
                           "offers": {
@@ -851,8 +891,8 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Executive Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Executive <span className="cf-gradient-text">Resume Builder 2026</span></h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Executive Resume Builder {year}</span></div>
+              <h1 className="cf-hero-title">Free Executive <span className="cf-gradient-text">Resume Builder {year}</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, board-level executive resume for free in minutes.</strong> Our CEO resume builder ensures your leadership experience and strategic achievements get noticed by boards and search committees.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free executive resume now—no sign-up required">
@@ -888,13 +928,13 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
 
           <div className="cf-form-section">
             <div className="cf-form-nav">
-              {[{id:'personal',label:'Executive Profile',icon:<FiUser/>},{id:'experience',label:'Executive Experience',icon:<FiBriefcase/>},{id:'education',label:'Education',icon:<FiBook/>},{id:'expertise',label:'Core Competencies',icon:<FiTarget/>},{id:'achievements',label:'Key Achievements',icon:<FiAward/>},{id:'settings',label:'Font Settings',icon:<FiSettings/>}].map(item => (<button key={item.id} className={`cf-nav-btn ${activeSection===item.id?'cf-nav-btn-active':''}`} onClick={()=>setActiveSection(item.id)}>{item.icon}<span>{item.label}</span></button>))}
+              {[{id:'personal',label:'Profile',icon:<FiUser/>},{id:'experience',label:'Experience',icon:<FiBriefcase/>},{id:'education',label:'Education',icon:<FiBook/>},{id:'expertise',label:'Competencies',icon:<FiTarget/>},{id:'achievements',label:'Key Achievements',icon:<FiAward/>},{id:'settings',label:'Font Settings',icon:<FiSettings/>}].map(item => (<button key={item.id} className={`cf-nav-btn ${activeSection===item.id?'cf-nav-btn-active':''}`} onClick={()=>setActiveSection(item.id)}>{item.icon}<span>{item.label}</span></button>))}
             </div>
 
             <div className="cf-form-content">
               {activeSection==='personal'&&(
                 <div className="cf-form-section-content">
-                  <h3 className="cf-form-section-title"><FiUser/> Executive Profile</h3>
+                  <h3 className="cf-form-section-title"><FiUser/> Profile</h3>
                   <div className="cf-form-card">
                     <div className="cf-form-group"><label className="cf-form-label">Full Name*<input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="John A. Smith" required className="cf-form-input"/></label><label className="cf-form-label">Current/Desired Title*<input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder="Chief Executive Officer" required className="cf-form-input"/></label></div>
                     <div className="cf-form-group"><label className="cf-form-label">Email*<input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="john.smith@executive.com" required className="cf-form-input"/></label><label className="cf-form-label">Phone<input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className="cf-form-input"/></label></div>
@@ -915,16 +955,16 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
 
               {activeSection==='experience'&&(
                 <div className="cf-form-section-content">
-                  <h3 className="cf-form-section-title"><FiBriefcase/> Executive Experience</h3><p className="cf-section-desc">List your executive positions in reverse chronological order. Focus on strategic leadership and P&L impact.</p>
+                  <h3 className="cf-form-section-title"><FiBriefcase/> Experience</h3><p className="cf-section-desc">List your executive positions in reverse chronological order. Focus on strategic leadership and P&L impact.</p>
                   <div className="cf-form-card">
                     <div className="cf-form-group"><label className="cf-form-label">Position Title*<input value={currentExperience.position} onChange={e=>setCurrentExperience({...currentExperience,position:e.target.value})} placeholder="Chief Executive Officer" required className="cf-form-input"/></label><label className="cf-form-label">Company/Organization*<input value={currentExperience.employer} onChange={e=>setCurrentExperience({...currentExperience,employer:e.target.value})} placeholder="Global Technology Corporation" required className="cf-form-input"/></label></div>
                     <div className="cf-form-group"><label className="cf-form-label">Location<input value={currentExperience.location} onChange={e=>setCurrentExperience({...currentExperience,location:e.target.value})} placeholder="New York, NY" className="cf-form-input"/></label></div>
                     <div className="cf-form-group"><label className="cf-form-label">Start Date<input type="text" placeholder="Month Year" value={currentExperience.startDate} onChange={e=>setCurrentExperience({...currentExperience,startDate:e.target.value})} className="cf-form-input"/></label><label className="cf-form-label">End Date<input type="text" placeholder="Month Year or Present" value={currentExperience.endDate} onChange={e=>setCurrentExperience({...currentExperience,endDate:e.target.value})} className="cf-form-input"/></label></div>
                     <label className="cf-form-label">Key Responsibilities & Scope*<textarea value={currentExperience.description} onChange={e=>setCurrentExperience({...currentExperience,description:e.target.value})} placeholder="• Led global organization of 5,000+ employees with $2B annual revenue..." required className="cf-form-textarea" rows="6"/><div className="cf-char-count">{currentExperience.description.length}/1500 characters</div></label>
                     <label className="cf-form-label">Key Strategic Achievements<textarea value={currentExperience.achievements} onChange={e=>setCurrentExperience({...currentExperience,achievements:e.target.value})} placeholder="• Led digital transformation increasing EBITDA by 35% over 3 years..." className="cf-form-textarea" rows="6"/><div className="cf-char-count">{currentExperience.achievements?.length||0}/2000 characters</div></label>
-                    <div className="cf-form-actions"><button onClick={addExperience} className="cf-add-btn" disabled={!currentExperience.position||!currentExperience.employer}><FiPlus/> {currentExperience.isEditing?'Update Executive Experience':'Add Executive Experience'}</button>{currentExperience.isEditing&&<button onClick={()=>setCurrentExperience(defaultExperience())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                    <div className="cf-form-actions"><button onClick={addExperience} className="cf-add-btn" disabled={!currentExperience.position||!currentExperience.employer}><FiPlus/> {currentExperience.isEditing?'Update Experience':'Add Experience'}</button>{currentExperience.isEditing&&<button onClick={()=>setCurrentExperience(defaultExperience())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
                   </div>
-                  <div className="cf-form-card"><h4 className="cf-sub-section-title">Your Executive Experience</h4>{formData.experience.length===0?<p className="cf-empty-msg">No executive experience added yet</p>:<div className="cf-items-list">{formData.experience.map((exp,i)=>(<div key={i} className="cf-list-item"><div className="cf-item-content"><div className="cf-item-header"><strong className="cf-item-title">{exp.position}</strong><span className="cf-item-subtitle">at {exp.employer}</span></div><div className="cf-item-meta"><span>{exp.location}</span><span>{exp.startDate} – {exp.endDate||'Present'}</span></div><div className="cf-item-desc"><h4>Responsibilities:</h4>{exp.description.split('\n').filter(l=>l.trim()).map((line,j)=><p key={j} className="cf-bullet-point">• {line}</p>)}{exp.achievements&&<><h4>Achievements:</h4>{exp.achievements.split('\n').filter(l=>l.trim()).map((line,j)=><p key={j} className="cf-bullet-point">• {line}</p>)}</>}</div></div><div className="cf-item-actions"><button onClick={()=>editExperience(i)} className="cf-edit-btn" aria-label={`Edit ${exp.position} experience`}><FiEdit2/></button><button onClick={()=>deleteExperience(i)} className="cf-delete-btn" aria-label={`Delete ${exp.position} experience`}><FiTrash2/></button></div></div>))}</div>}</div>
+                  <div className="cf-form-card"><h4 className="cf-sub-section-title">Your Experience</h4>{formData.experience.length===0?<p className="cf-empty-msg">No experience added yet</p>:<div className="cf-items-list">{formData.experience.map((exp,i)=>(<div key={i} className="cf-list-item"><div className="cf-item-content"><div className="cf-item-header"><strong className="cf-item-title">{exp.position}</strong><span className="cf-item-subtitle">at {exp.employer}</span></div><div className="cf-item-meta"><span>{exp.location}</span><span>{exp.startDate} – {exp.endDate||'Present'}</span></div><div className="cf-item-desc"><h4>Responsibilities:</h4>{exp.description.split('\n').filter(l=>l.trim()).map((line,j)=><p key={j} className="cf-bullet-point">• {line}</p>)}{exp.achievements&&<><h4>Achievements:</h4>{exp.achievements.split('\n').filter(l=>l.trim()).map((line,j)=><p key={j} className="cf-bullet-point">• {line}</p>)}</>}</div></div><div className="cf-item-actions"><button onClick={()=>editExperience(i)} className="cf-edit-btn" aria-label={`Edit ${exp.position} experience`}><FiEdit2/></button><button onClick={()=>deleteExperience(i)} className="cf-delete-btn" aria-label={`Delete ${exp.position} experience`}><FiTrash2/></button></div></div>))}</div>}</div>
                   <div className="cf-form-card">
                     <h4 className="cf-sub-section-title"><FiUsers/> Board Appointments & Governance</h4><p className="cf-section-desc">List your board directorships, advisory roles, and governance experience</p>
                     <div className="cf-form-card">
@@ -962,7 +1002,7 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
 
               {activeSection==='expertise'&&(
                 <div className="cf-form-section-content">
-                  <h3 className="cf-form-section-title"><FiTarget/> Core Competencies</h3>
+                  <h3 className="cf-form-section-title"><FiTarget/> Competencies</h3>
                   <div className="cf-form-card">
                     <h4 className="cf-sub-section-title">Areas of Executive Expertise</h4><p className="cf-section-desc">List your core competencies by category (Strategic Leadership, Financial Management, etc.)</p>
                     <div className="cf-expertise-input">
@@ -1007,10 +1047,10 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
 
               {activeSection==='settings'&&(
                 <div className="cf-form-section-content">
-                  <h3 className="cf-form-section-title"><FiSettings/> Font Size Settings</h3><p className="cf-section-desc">Customize font sizes for your executive resume PDF. All sizes are in points (pt).</p>
+                  <h3 className="cf-form-section-title"><FiSettings/> Font Settings</h3><p className="cf-section-desc">Customize font sizes for your executive resume PDF. All sizes are in points (pt).</p>
                   <div className="cf-form-card">
                     <div className="cf-font-grid">
-                      {[{key:'name',label:'Name'},{key:'title',label:'Title'},{key:'sectionTitle',label:'Section Titles'},{key:'jobTitle',label:'Job Titles'},{key:'company',label:'Company Names'},{key:'degree',label:'Degrees'},{key:'institution',label:'Institution Names'},{key:'date',label:'Dates'},{key:'regularText',label:'Regular Text'},{key:'bulletText',label:'Bullet Points'},{key:'contactInfo',label:'Contact Info'},{key:'skillText',label:'Skills Text'},{key:'achievementText',label:'Achievement Text'}].map(({key,label})=>(<div key={key} className="cf-font-control"><label className="cf-font-label"><span>{label}</span><span className="cf-font-value">{fontSizes[key]}pt</span></label><input type="range" min={key==='date'?4:6} max={key==='name'?24:key==='sectionTitle'||key==='title'?18:key==='jobTitle'||key==='degree'?16:14} value={fontSizes[key]} onChange={e=>handleFontSizeChange(key,e.target.value)} className="cf-font-slider"/></div>))}
+                      {[{key:'name',label:'Name'},{key:'title',label:'Title'},{key:'sectionTitle',label:'Section Titles'},{key:'jobTitle',label:'Job Titles'},{key:'company',label:'Company Names'},{key:'degree',label:'Degrees'},{key:'institution',label:'Institution Names'},{key:'date',label:'Dates'},{key:'regularText',label:'Regular Text'},{key:'bulletText',label:'Bullet Points'},{key:'contactInfo',label:'Contact Info'},{key:'skillText',label:'Skills Text'},{key:'achievementText',label:'Achievement Text'}].map(({key,label})=>(<div key={key} className="cf-font-control"><label className="cf-font-label"><span>{label}</span><span className="cf-font-value">{fontSizes[key]}pt</span></label><input type="range" min={key==='date'?4:6} max={key==='name'?24:key==='sectionTitle'?14:key==='title'?18:key==='jobTitle'||key==='degree'?16:14} value={fontSizes[key]} onChange={e=>handleFontSizeChange(key,e.target.value)} className="cf-font-slider"/></div>))}
                     </div>
                     <button onClick={resetFontSizes} className="cf-reset-btn">Reset to Default Font Sizes</button>
                   </div>
@@ -1046,6 +1086,32 @@ const CeoResume = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
+        {/* ============= RELATED RESOURCES / INTERNAL LINKS SECTION ============= */}
+        <section className="cf-related-section" aria-labelledby="cf-related-heading">
+          <div className="cf-container">
+            <div className="cf-section-header">
+              <h2 id="cf-related-heading">Related Executive & Leadership Resume Resources</h2>
+              <p>Explore our other free ATS-friendly resume builders for executives, managers, and business leaders.</p>
+            </div>
+            <nav className="cf-related-grid" aria-label="Related executive and leadership resume resources">
+              {internalLinks.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.link}
+                  className="cf-related-card"
+                  title={item.anchorText}
+                >
+                  <span className="cf-related-card-inner">
+                    <span className="cf-related-card-icon" aria-hidden="true"><FiLinkIcon /></span>
+                    <span className="cf-related-card-title">{item.anchorText}</span>
+                  </span>
+                  <FiArrowRight className="cf-related-card-arrow" aria-hidden="true" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Executive Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><ExecutiveTemplate formData={formData}/></div></div></div></div>)}
 
         {showSharePopup && (
@@ -1069,6 +1135,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   // Generate review dates for structured data
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -1099,7 +1166,8 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
-      buildTimestamp
+      buildTimestamp,
+      currentYear
     },
     // ISR: Revalidate every hour (3600 seconds)
     revalidate: 3600

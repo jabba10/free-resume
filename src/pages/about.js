@@ -651,7 +651,7 @@ const useResponsiveIconSize = (small, medium, large) => {
   return size;
 };
 
-const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
+const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate, currentYear }) => {
   const lockIconSize = useResponsiveIconSize(28, 32, 36);
   const featureIconSize = useResponsiveIconSize(24, 26, 28);
   const globeIconSize = useResponsiveIconSize(24, 26, 28);
@@ -787,29 +787,24 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
   // ============= INTERNAL LINKS =============
   const internalLinks = [
     {
-      href: "/free-resume-readability-checker",
-      text: "Free Resume Readability Checker for USA Job Applications",
-      description: "Ensure your resume scores high on clarity and ATS compatibility"
+      href: `/${currentYear}-resume-writing-guide-with-modern-tips`,
+      text: `${currentYear} Resume Writing Guide`
     },
     {
-      href: "/ats-friendly-logistics-transportation-resume-builder",
-      text: "ATS-Friendly Logistics & Transportation Resume Builder",
-      description: "Optimized templates for drivers, warehouse, and supply chain roles"
+      href: "/best-resume-examples-for-career-changers-in-the-usa",
+      text: "Resume Examples for Career Changers"
     },
     {
-      href: "/how-long-should-a-resume-be-usa-recruiter-insights",
-      text: "How Long Should Your Resume Be? USA Recruiter Insights 2026",
-      description: "Data-backed guidance from American hiring managers"
+      href: "/best-resume-examples-for-usa-management-positions",
+      text: "Management Position Resume Samples"
     },
     {
-      href: "/ats-friendly-driver-resume-builder",
-      text: "Professional Driver Resume Builder - ATS Optimized for USA Jobs",
-      description: "CDL, delivery, and transportation career templates"
+      href: "/ats-friendly-ceo-resume-builder",
+      text: "Executive CEO Resume Builder"
     },
     {
-      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
-      text: "Pass AI Resume Screens: 2026 ATS Algorithm Guide for USA Applicants",
-      description: "Beat automated screening with proven optimization tactics"
+      href: `/best-ats-resume-format-${currentYear}`,
+      text: `ATS Format Best Practices ${currentYear}`
     }
   ];
 
@@ -1771,8 +1766,11 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                 href={link.href}
                 style={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  padding: 'clamp(1rem, 2vw, 1.25rem)',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  padding: 'clamp(1.25rem, 2.5vw, 1.5rem)',
                   background: 'var(--card-bg)',
                   backdropFilter: 'blur(var(--glass-blur))',
                   WebkitBackdropFilter: 'blur(var(--glass-blur))',
@@ -1798,37 +1796,47 @@ const AboutPage = ({ currentDate, lastModifiedDate, nextUpdateDate }) => {
                   }
                 }}
               >
-                <span style={{
-                  fontSize: 'var(--font-size-body-md)',
-                  fontWeight: 'var(--font-weight-semibold)',
-                  color: 'var(--text-primary)',
-                  marginBottom: '0.5rem',
-                  lineHeight: '1.4'
-                }}>
-                  {link.text}
-                </span>
-                
-                <span style={{
-                  fontSize: 'var(--font-size-body-sm)',
-                  color: 'var(--text-secondary)',
-                  lineHeight: '1.5',
-                  flex: 1
-                }}>
-                  {link.description}
-                </span>
-                
-                <span style={{
+                <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
-                  marginTop: '0.75rem',
-                  fontSize: 'var(--font-size-body-sm)',
-                  color: 'var(--accent-primary)',
-                  fontWeight: 'var(--font-weight-medium)'
+                  gap: 'clamp(0.5rem, 1.5vw, 0.85rem)',
+                  flex: 1,
+                  minWidth: 0
                 }}>
-                  <FiArrowRight size={14} />
-                  Explore Resource
-                </span>
+                  <div style={{
+                    width: 'clamp(36px, 7vw, 42px)',
+                    height: 'clamp(36px, 7vw, 42px)',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'rgba(242, 202, 80, 0.08)',
+                    border: '0.5px solid var(--border-gold-filament)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    color: 'var(--accent-primary)'
+                  }}>
+                    <FiLinkIcon size={18} />
+                  </div>
+                  
+                  <span style={{
+                    fontSize: 'var(--font-size-body-md)',
+                    fontWeight: 'var(--font-weight-semibold)',
+                    color: 'var(--text-primary)',
+                    lineHeight: '1.4',
+                    wordBreak: 'break-word',
+                    overflowWrap: 'anywhere'
+                  }}>
+                    {link.text}
+                  </span>
+                </div>
+                
+                <FiArrowRight 
+                  size={18}
+                  style={{
+                    color: 'var(--accent-primary)',
+                    flexShrink: 0
+                  }}
+                />
               </Link>
             ))}
           </div>
@@ -1858,6 +1866,7 @@ export async function getStaticProps() {
   const now = new Date();
   const currentDate = now.toISOString().split('T')[0];
   const lastModifiedDate = now.toISOString();
+  const currentYear = now.getFullYear();
   
   const nextDate = new Date(now);
   nextDate.setDate(nextDate.getDate() + 7);
@@ -1867,7 +1876,8 @@ export async function getStaticProps() {
     props: {
       currentDate,
       lastModifiedDate,
-      nextUpdateDate
+      nextUpdateDate,
+      currentYear
     },
     revalidate: 3600
   };

@@ -585,10 +585,10 @@ const AIResumeGuide = ({
   lastModifiedDate,
   buildTimestamp,
   faqDates,
-  reviewDates
+  reviewDates,
+  currentYear
 }) => {
   const [activeSection, setActiveSection] = useState(0);
-  const currentYear = new Date().getFullYear();
 
   const freshnessIndicator = buildTimestamp 
     ? new Date(buildTimestamp).toISOString().split('T')[0]
@@ -716,11 +716,11 @@ const AIResumeGuide = ({
   ];
 
   const internalLinks = [
-    { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained", desc: "Master the latest AI screening tactics used by USA employers in 2026." },
-    { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", title: "Most In-Demand Resume Keywords for USA Job Seekers", desc: "Boost your GEO ranking with high-volume keywords for the American market." },
-    { href: "/ats-friendly-software-developer-and-software-engineer-resume-builder", title: "ATS-Friendly Software Developer & Engineer Resume Builder", desc: "Specialized templates for tech roles, optimized for engineering ATS filters." },
-    { href: "/free-resume-readability-checker", title: "Free Resume Readability Checker Tool", desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready." },
-    { href: "/resume-trends-in-the-usa-for-2026", title: "Top Resume Trends in the USA for 2026", desc: "Stay ahead of the curve with the latest formatting and content trends." }
+    { href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", title: "AI & Machine Learning Engineer Resume Builder" },
+    { href: "/ats-friendly-software-developer-and-software-engineer-resume-builder", title: "Software Engineer Resume Builder"},
+    { href: "/ats-friendly-data-analyst-resume-builder", title: "Data Analyst Resume Builder" },
+    { href: `/${currentYear}-resume-writing-guide-with-modern-tips`, title: `Modern Resume Writing Tips for ${currentYear}` },
+    { href: "/ats-friendly-tech-resume-builder", title: "Tech Resume Builder" }
   ];
 
   const canonicalUrl = "https://professionalresumefree.com/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume";
@@ -749,15 +749,15 @@ const AIResumeGuide = ({
         <html lang="en" />
         
         {/* OPTIMIZED TITLE - Under 70 characters */}
-        <title>AI Resume Builders 2026: Create Better Resumes 3x Faster (Free)</title>
+        <title>{`AI Resume Builders ${currentYear}: Create Better Resumes 3x Faster (Free)`}</title>
         
         {/* OPTIMIZED META DESCRIPTION */}
         <meta name="description" content={`Master AI resume building with ${templateCount}+ templates & ${toolCount}+ tools. Create ATS-optimized resumes 3x faster. Get 40% more interviews. Free, no sign-up.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="AI resume builder, artificial intelligence resume, AI resume writing, AI resume generator, resume AI tools, AI resume optimization, AI resume creator, best AI resume builder 2026, AI resume assistant, resume writing AI, AI powered resume, AI resume templates, AI resume maker, AI resume software" />
+        <meta name="keywords" content={`AI resume builder, artificial intelligence resume, AI resume writing, AI resume generator, resume AI tools, AI resume optimization, AI resume creator, best AI resume builder ${currentYear}, AI resume assistant, resume writing AI, AI powered resume, AI resume templates, AI resume maker, AI resume software`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="AI Resume Builders Guide 2026: Complete Tutorial with Templates" />
+        <meta name="chatgpt-fts:title" content={`AI Resume Builders Guide ${currentYear}: Complete Tutorial with Templates`} />
         <meta name="chatgpt-fts:description" content="Learn to use AI resume builders effectively. Step-by-step guide with templates and tools. Create optimized resumes that get 40% more interviews." />
         <meta name="chatgpt-fts:keywords" content="how to use AI resume builder, best AI resume tools, AI resume writing tips, AI resume optimization guide" />
         <meta name="chatgpt-fts:last-updated" content={displayDate} />
@@ -775,13 +775,13 @@ const AIResumeGuide = ({
         <link rel="canonical" href={canonicalUrl} />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="AI Resume Builders 2026: Create Better Resumes 3x Faster (Free)" />
+        <meta property="og:title" content={`AI Resume Builders ${currentYear}: Create Better Resumes 3x Faster (Free)`} />
         <meta property="og:description" content={`Master AI resume building with ${templateCount}+ templates & ${toolCount}+ tools. Create ATS-optimized resumes 3x faster. Get 40% more interviews.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ai-resume-builder-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="AI Resume Builder Guide 2026 - Create optimized resumes with artificial intelligence" />
+        <meta property="og:image:alt" content={`AI Resume Builder Guide ${currentYear} - Create optimized resumes with artificial intelligence`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -796,10 +796,10 @@ const AIResumeGuide = ({
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Resume Builders 2026: Create Better Resumes 3x Faster (Free)" />
+        <meta name="twitter:title" content={`AI Resume Builders ${currentYear}: Create Better Resumes 3x Faster (Free)`} />
         <meta name="twitter:description" content={`Master AI resume building with ${templateCount}+ templates & ${toolCount}+ tools. Get 40% more interviews.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/twitter-ai-resume-guide.jpg" />
-        <meta name="twitter:image:alt" content="AI Resume Builder Guide 2026" />
+        <meta name="twitter:image:alt" content={`AI Resume Builder Guide ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -820,7 +820,7 @@ const AIResumeGuide = ({
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "AI Resume Builders 2026: Complete Guide to Artificial Intelligence Resume Writing",
+                  "name": `AI Resume Builders ${currentYear}: Complete Guide to Artificial Intelligence Resume Writing`,
                   "description": `Master AI resume building with ${templateCount}+ templates & ${toolCount}+ tools. Create ATS-optimized resumes 3x faster with our comprehensive guide.`,
                   "dateModified": safeLastModifiedDate,
                   "datePublished": "2024-01-01",
@@ -867,8 +867,8 @@ const AIResumeGuide = ({
                 },
                 {
                   "@type": "Article",
-                  "headline": "AI Resume Builders 2026: How to Use Artificial Intelligence to Write Your Best Resume",
-                  "description": "A comprehensive guide to using AI resume builders effectively in 2026",
+                  "headline": `AI Resume Builders ${currentYear}: How to Use Artificial Intelligence to Write Your Best Resume`,
+                  "description": `A comprehensive guide to using AI resume builders effectively in ${currentYear}`,
                   "image": "https://professionalresumefree.com/ai-resume-builder-guide.jpg",
                   "author": {
                     "@type": "Organization",
@@ -957,7 +957,7 @@ const AIResumeGuide = ({
                 {
                   "@type": "Product",
                   "@id": `${canonicalUrl}#product`,
-                  "name": "AI Resume Builder Guide 2026",
+                  "name": `AI Resume Builder Guide ${currentYear}`,
                   "description": "Comprehensive guide to AI-powered resume creation",
                   "url": canonicalUrl,
                   "brand": {
@@ -1014,7 +1014,7 @@ const AIResumeGuide = ({
               </li>
               <li aria-hidden="true">/</li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span aria-current="page" itemProp="name">AI Resume Guide 2026</span>
+                <span aria-current="page" itemProp="name">{`AI Resume Guide ${currentYear}`}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -1026,7 +1026,7 @@ const AIResumeGuide = ({
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="hero-tag" aria-label="AI Technology">
-                🤖 AI Career Technology Guide {currentYear}
+                {`🤖 AI Career Technology Guide ${currentYear}`}
               </div>
               
               <h1 id="hero-heading" style={{
@@ -1036,7 +1036,7 @@ const AIResumeGuide = ({
                 lineHeight: 'var(--line-height-display)',
                 marginBottom: '1.25rem'
               }}>
-                AI Resume Builders 2026:{' '}
+                {`AI Resume Builders ${currentYear}:`}{' '}
                 <span className="gradient-text">Create Better Resumes 3x Faster</span>
               </h1>
               
@@ -1049,7 +1049,7 @@ const AIResumeGuide = ({
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
                 <span className="feature-badge">✅ AI Optimization Techniques</span>
                 <span className="feature-badge">✅ Human-AI Collaboration</span>
-                <span className="feature-badge">✅ {currentYear} Best Practices</span>
+                <span className="feature-badge">{`✅ ${currentYear} Best Practices`}</span>
                 <span className="feature-badge">✅ Industry-Specific Templates</span>
               </div>
 
@@ -1108,7 +1108,7 @@ const AIResumeGuide = ({
         <section className="section" aria-labelledby="tools-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="tools-heading">AI Resume Tools for {currentYear} ({toolCount})</h2>
+              <h2 className="section-title" id="tools-heading">{`AI Resume Tools for ${currentYear} (${toolCount})`}</h2>
               <p className="section-subtitle">Leverage cutting-edge AI technology to optimize every aspect of your resume</p>
             </div>
             <div className="grid">
@@ -1180,7 +1180,7 @@ const AIResumeGuide = ({
         <section className="section section-alt" aria-labelledby="expert-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="expert-heading">Expert Answers: AI Resume Best Practices for {currentYear}</h2>
+              <h2 className="section-title" id="expert-heading">{`Expert Answers: AI Resume Best Practices for ${currentYear}`}</h2>
               <p className="section-subtitle">Data-backed strategies for maximizing AI resume effectiveness</p>
             </div>
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
@@ -1200,7 +1200,7 @@ const AIResumeGuide = ({
         <section className="section" aria-labelledby="collaboration-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="collaboration-heading">AI-Human Collaboration Framework for {currentYear}</h2>
+              <h2 className="section-title" id="collaboration-heading">{`AI-Human Collaboration Framework for ${currentYear}`}</h2>
               <p className="section-subtitle">Understanding where AI excels and where human touch is essential</p>
             </div>
             <div className="table-wrap">
@@ -1245,7 +1245,7 @@ const AIResumeGuide = ({
                   <p style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><strong>Template:</strong> {study.template}</p>
                   <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><strong>Time to result:</strong> {study.timeToResult}</p>
                   <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
-                    <meta itemProp="name" content="AI Resume Builder Guide 2026" />
+                    <meta itemProp="name" content={`AI Resume Builder Guide ${currentYear}`} />
                     <meta itemProp="url" content={canonicalUrl} />
                   </div>
                   <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
@@ -1262,7 +1262,7 @@ const AIResumeGuide = ({
         <section id="guide" className="section" aria-labelledby="guide-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="guide-heading">Complete AI Resume Creation Guide for {currentYear}</h2>
+              <h2 className="section-title" id="guide-heading">{`Complete AI Resume Creation Guide for ${currentYear}`}</h2>
               <p className="section-subtitle">Follow this proven framework to create AI-optimized resumes that stand out</p>
             </div>
 
@@ -1382,7 +1382,7 @@ const AIResumeGuide = ({
         <section className="section" aria-labelledby="mistakes-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="mistakes-heading">Common AI Resume Mistakes to Avoid in {currentYear}</h2>
+              <h2 className="section-title" id="mistakes-heading">{`Common AI Resume Mistakes to Avoid in ${currentYear}`}</h2>
               <p className="section-subtitle">These errors can undermine your AI-optimized resume</p>
             </div>
             <div className="mistakes-grid">
@@ -1419,7 +1419,7 @@ const AIResumeGuide = ({
                     <small className="text-small">{t.date}</small>
                   </div>
                   <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Product">
-                    <meta itemProp="name" content="AI Resume Builder Guide 2026" />
+                    <meta itemProp="name" content={`AI Resume Builder Guide ${currentYear}`} />
                     <meta itemProp="url" content={canonicalUrl} />
                   </div>
                   <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
@@ -1494,7 +1494,7 @@ const AIResumeGuide = ({
         <section className="section section-alt" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Recommended Resources for Job Seekers in {currentYear}</h2>
+              <h2 className="section-title" id="resources-heading">{`Recommended Resources for Job Seekers in ${currentYear}`}</h2>
               <p className="section-subtitle">Explore our specialized guides to maximize your interview chances</p>
             </div>
             
@@ -1523,6 +1523,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
   
   const faqDates = Array(6).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
@@ -1542,7 +1543,8 @@ export async function getStaticProps() {
       lastModifiedDate,
       buildTimestamp,
       faqDates,
-      reviewDates
+      reviewDates,
+      currentYear
     },
     revalidate: 3600 // Revalidate every hour for strong freshness signals
   };

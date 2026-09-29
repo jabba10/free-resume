@@ -509,7 +509,7 @@ const executiveDesignTokens = `
 `;
 
 // ============= MAIN COMPONENT =============
-const ResumeGuide2026 = ({ currentDate, lastModifiedDate }) => {
+const ResumeGuide2026 = ({ currentDate, lastModifiedDate, currentYear }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [activeFormat, setActiveFormat] = useState('hybrid');
   const [copiedIndex, setCopiedIndex] = useState(null);
@@ -564,8 +564,8 @@ const ResumeGuide2026 = ({ currentDate, lastModifiedDate }) => {
   // ============= ENTITY-BASED SECTIONS =============
   const resumeSections = [
     {
-      question: "What contact information should you include on a 2026 resume?",
-      directAnswer: "For 2026 resumes, include your name, phone number, professional email, LinkedIn URL, and city/state. Omit full street addresses, photos, and personal details. Add portfolio links (GitHub, Behance) for creative/technical roles. Digital business card QR codes are gaining traction for in-person networking.",
+      question: `What contact information should you include on a ${currentYear} resume?`,
+      directAnswer: `For ${currentYear} resumes, include your name, phone number, professional email, LinkedIn URL, and city/state. Omit full street addresses, photos, and personal details. Add portfolio links (GitHub, Behance) for creative/technical roles. Digital business card QR codes are gaining traction for in-person networking.`,
       title: "Professional Header & Contact Information",
       content: "Create a clean, modern header that immediately captures attention with essential contact details.",
       tips: [
@@ -582,8 +582,8 @@ portfolio.jpatel.com | github.com/jpatel`,
       stats: "Recruiters spend 7.4 seconds scanning a resume header - make every character count."
     },
     {
-      question: "How do you write a professional summary that gets noticed in 2026?",
-      directAnswer: "Write a 3-4 line summary that combines your years of experience, key specialization, and 2-3 quantifiable achievements. Lead with your value proposition: 'Results-driven [Role] with X years in [Industry] specializing in [Core Competency].' Include metrics from day one - 'Generated $X in revenue' outperforms generic descriptions by 3x.",
+      question: `How do you write a professional summary that gets noticed in ${currentYear}?`,
+      directAnswer: `Write a 3-4 line summary that combines your years of experience, key specialization, and 2-3 quantifiable achievements. Lead with your value proposition: 'Results-driven [Role] with X years in [Industry] specializing in [Core Competency].' Include metrics from day one - 'Generated $X in revenue' outperforms generic descriptions by 3x.`,
       title: "Professional Summary / Career Profile",
       content: "Write a compelling 3-4 line summary highlighting your key achievements and value proposition.",
       tips: [
@@ -617,15 +617,15 @@ portfolio.jpatel.com | github.com/jpatel`,
       stats: "CAR-format resumes have 73% higher interview conversion (Jobvite Recruiter Survey 2025)"
     },
     {
-      question: "How should you organize skills on a 2026 resume for ATS?",
-      directAnswer: "Organize skills into three categories: Technical (hard skills, software, methodologies), Professional (soft skills, leadership), and Tools (specific platforms). Include both spelled-out terms and acronyms. Match 80% of keywords from the job description. Update quarterly - skills listed in 2026 should reflect AI, machine learning, and emerging technologies.",
+      question: `How should you organize skills on a ${currentYear} resume for ATS?`,
+      directAnswer: `Organize skills into three categories: Technical (hard skills, software, methodologies), Professional (soft skills, leadership), and Tools (specific platforms). Include both spelled-out terms and acronyms. Match 80% of keywords from the job description. Update quarterly - skills listed in ${currentYear} should reflect AI, machine learning, and emerging technologies.`,
       title: "Skills Section - Keyword Optimization",
       content: "Strategically organize skills for both human readers and ATS (Applicant Tracking Systems).",
       tips: [
         "Categorize skills (Technical, Professional, Tools)",
         "Include keywords from job description",
         "Match skill level to job requirements",
-        "Update for emerging 2026 technologies"
+        `Update for emerging ${currentYear} technologies`
       ],
       example: `⚙️ TECHNICAL: AI/ML Integration, Cloud Architecture (AWS/Azure), Data Analytics, API Design, Python, SQL
 🤝 PROFESSIONAL: Agile Leadership, Strategic Planning, Stakeholder Management, UX/UI Collaboration
@@ -633,8 +633,8 @@ portfolio.jpatel.com | github.com/jpatel`,
       stats: "75% of resumes are rejected by ATS before human review - keyword optimization is non-negotiable."
     },
     {
-      question: "What education and certifications matter most in 2026?",
-      directAnswer: "Include degrees with institutions and graduation years. For 2026, prioritize certifications in AI, data science, cloud computing, and Agile methodologies. Micro-credentials from Google, AWS, Microsoft, and Coursera carry significant weight. Blockchain-verified certificates are increasingly preferred by employers for authenticity verification.",
+      question: `What education and certifications matter most in ${currentYear}?`,
+      directAnswer: `Include degrees with institutions and graduation years. For ${currentYear}, prioritize certifications in AI, data science, cloud computing, and Agile methodologies. Micro-credentials from Google, AWS, Microsoft, and Coursera carry significant weight. Blockchain-verified certificates are increasingly preferred by employers for authenticity verification.`,
       title: "Education & Certifications",
       content: "Highlight relevant education and modern certifications that demonstrate ongoing learning.",
       tips: [
@@ -655,9 +655,9 @@ Specialization: Artificial Intelligence
       stats: "Candidates with 3+ relevant certifications receive 2.3x more interview requests (LinkedIn Workforce Report 2025)"
     },
     {
-      question: "What optional sections can differentiate your 2026 resume?",
-      directAnswer: "Add Projects (with GitHub stars/impact metrics), Publications, Speaking Engagements, and Volunteer Work demonstrating transferable skills. Languages for international roles. For 2026, include a QR code linking to a 60-second video introduction. Digital portfolios with case studies outperform text-only resumes by 3x in creative and tech fields.",
-      title: "Additional Sections for 2026",
+      question: `What optional sections can differentiate your ${currentYear} resume?`,
+      directAnswer: `Add Projects (with GitHub stars/impact metrics), Publications, Speaking Engagements, and Volunteer Work demonstrating transferable skills. Languages for international roles. For ${currentYear}, include a QR code linking to a 60-second video introduction. Digital portfolios with case studies outperform text-only resumes by 3x in creative and tech fields.`,
+      title: `Additional Sections for ${currentYear}`,
       content: "Modern resume elements that can differentiate you in competitive markets.",
       tips: [
         "Projects section (especially for tech/creative roles)",
@@ -713,11 +713,11 @@ Specialization: Artificial Intelligence
       id: "hybrid",
       name: "⚡ Hybrid (Combination) Format",
       description: "Blends chronological and functional formats for maximum impact",
-      bestFor: ["Most 2026 job seekers", "Mid-career professionals (5-15 years)", "Technical roles", "Leadership positions", "Portfolio careers"],
+      bestFor: [`Most ${currentYear} job seekers`, "Mid-career professionals (5-15 years)", "Technical roles", "Leadership positions", "Portfolio careers"],
       pros: ["Best of both formats", "Highly ATS-friendly (94% pass rate)", "Shows skills and timeline", "Modern and effective"],
       cons: ["Can be longer (2 pages ideal)", "Requires careful organization", "Needs strategic planning"],
       structure: ["Contact Info", "Summary", "Key Skills", "Professional Experience", "Education & Certifications", "Additional Sections"],
-      successRate: "91% recommended for 2026 market",
+      successRate: `91% recommended for ${currentYear} market`,
       atsPassRate: "94%",
       recruiterPreference: "85%",
       gapVisibility: "Medium",
@@ -737,13 +737,13 @@ Specialization: Artificial Intelligence
     { tip: "Avoid headers/footers for critical information", stat: "31% of ATS systems miss content in headers/footers" }
   ];
 
-  // ============= EMERGING TRENDS 2026 =============
-  const emergingTrends2026 = [
+  // ============= EMERGING TRENDS =============
+  const emergingTrends = [
     {
       title: "AI Screening Optimization",
-      description: "Resumes structured for LLM parsing with semantic keyword clusters and context-rich phrasing",
+      description: `Resumes structured for LLM parsing with semantic keyword clusters and context-rich phrasing`,
       icon: <FiCpu />,
-      adoption: "72% of Fortune 500 use AI screening in 2026",
+      adoption: `72% of Fortune 500 use AI screening in ${currentYear}`,
       stat: "+34% interview rate with AI-optimized resumes"
     },
     {
@@ -764,8 +764,8 @@ Specialization: Artificial Intelligence
       title: "Skills-First Hiring",
       description: "Degrees declining in importance; demonstrable skills and projects prioritized",
       icon: <FiZap />,
-      adoption: "76% of employers prioritize skills over degrees",
-      stat: "58% of 2026 jobs don't require degrees"
+      adoption: `76% of employers prioritize skills over degrees`,
+      stat: `58% of ${currentYear} jobs don't require degrees`
     },
     {
       title: "Portfolio Integration",
@@ -795,7 +795,7 @@ Specialization: Artificial Intelligence
       value: "75%",
       label: "Resumes rejected by ATS before human review",
       icon: <FiSearch />,
-      source: "JobScan ATS Data Report 2026"
+      source: `JobScan ATS Data Report ${currentYear}`
     },
     {
       value: "2.3x",
@@ -807,43 +807,43 @@ Specialization: Artificial Intelligence
       value: "94%",
       label: "Hybrid format ATS pass rate",
       icon: <FiCheck />,
-      source: "ProfessionalResumeFree Internal Data 2026"
+      source: `ProfessionalResumeFree Internal Data ${currentYear}`
     }
   ];
 
   // ============= FAQ DATA =============
   const faqData = [
     {
-      question: "What is the best resume format for 2026?",
-      answer: "For most job seekers in 2026, the hybrid (combination) format is recommended with a 94% ATS pass rate. It combines chronological work history with a prominent skills section, making it effective for both AI screening and human recruiters. Experienced professionals (10+ years) may prefer chronological (87% success), while career changers benefit from functional formats (63% success)."
+      question: `What is the best resume format for ${currentYear}?`,
+      answer: `For most job seekers in ${currentYear}, the hybrid (combination) format is recommended with a 94% ATS pass rate. It combines chronological work history with a prominent skills section, making it effective for both AI screening and human recruiters. Experienced professionals (10+ years) may prefer chronological (87% success), while career changers benefit from functional formats (63% success).`
     },
     {
-      question: "How long should my resume be in 2026?",
-      answer: "1-2 pages remains the standard in 2026. Recent graduates and early-career professionals (0-5 years) should use 1 page. Experienced professionals with 10+ years and significant achievements can use 2 pages. Executive roles may extend to 3 pages only with 20+ years of relevant experience. Focus on relevance over length - every line should add value."
+      question: `How long should my resume be in ${currentYear}?`,
+      answer: `1-2 pages remains the standard in ${currentYear}. Recent graduates and early-career professionals (0-5 years) should use 1 page. Experienced professionals with 10+ years and significant achievements can use 2 pages. Executive roles may extend to 3 pages only with 20+ years of relevant experience. Focus on relevance over length - every line should add value.`
     },
     {
-      question: "How can I make my resume ATS-friendly in 2026?",
-      answer: "To optimize for 2026 ATS: use standard section headings (85% of systems expect these), incorporate keywords naturally with 80%+ job description match, avoid tables/graphics (42% misparse rate), use standard fonts, save as selectable PDF (98% compatibility), include both spelled-out terms and acronyms, and avoid critical information in headers/footers (31% miss rate)."
+      question: `How can I make my resume ATS-friendly in ${currentYear}?`,
+      answer: `To optimize for ${currentYear} ATS: use standard section headings (85% of systems expect these), incorporate keywords naturally with 80%+ job description match, avoid tables/graphics (42% misparse rate), use standard fonts, save as selectable PDF (98% compatibility), include both spelled-out terms and acronyms, and avoid critical information in headers/footers (31% miss rate).`
     },
     {
-      question: "Should I include a photo on my resume in 2026?",
+      question: `Should I include a photo on my resume in ${currentYear}?`,
       answer: "In most cases, no. For US job markets, photos are discouraged as they can introduce unconscious bias and may be stripped by ATS. Exceptions include modeling/acting roles, certain international markets where photos are expected (check regional norms), and executive profiles with professional branding. When in doubt, omit the photo."
     },
     {
-      question: "What keywords should I include for AI/tech roles in 2026?",
-      answer: "For 2026 tech roles, include: AI/ML integration, cloud architecture (AWS/Azure/GCP), data analytics, Python, SQL, TensorFlow, Agile methodologies, DevOps, CI/CD, microservices, containerization (Docker/Kubernetes), and specific tools from job descriptions. Include both spelled-out and acronym versions for maximum ATS matching."
+      question: `What keywords should I include for AI/tech roles in ${currentYear}?`,
+      answer: `For ${currentYear} tech roles, include: AI/ML integration, cloud architecture (AWS/Azure/GCP), data analytics, Python, SQL, TensorFlow, Agile methodologies, DevOps, CI/CD, microservices, containerization (Docker/Kubernetes), and specific tools from job descriptions. Include both spelled-out and acronym versions for maximum ATS matching.`
     },
     {
-      question: "How do I explain employment gaps in 2026?",
-      answer: "Address gaps transparently in your summary or cover letter. For 2026, frame gaps as growth periods: freelance consulting (65% of career gaps involve freelance work), upskilling/certifications (65% of job seekers used gaps for learning), caregiving (mention transferable skills), or health-related (brief, professional explanation). The functional format minimizes gap visibility."
+      question: `How do I explain employment gaps in ${currentYear}?`,
+      answer: `Address gaps transparently in your summary or cover letter. For ${currentYear}, frame gaps as growth periods: freelance consulting (65% of career gaps involve freelance work), upskilling/certifications (65% of job seekers used gaps for learning), caregiving (mention transferable skills), or health-related (brief, professional explanation). The functional format minimizes gap visibility.`
     },
     {
       question: "What's the CAR method and why does it matter?",
       answer: "CAR (Challenge-Action-Result) structures achievements for maximum impact. Challenge: specific problem faced. Action: steps you took. Result: measurable outcome. Example: 'Led AI platform redesign (Challenge) implementing Agile methodology (Action), resulting in 42% retention increase and $3.2M revenue (Result).' CAR-format resumes have 73% higher interview conversion."
     },
     {
-      question: "How often should I update my resume in 2026?",
-      answer: "Update your resume quarterly, even if not actively job searching. Add new achievements, skills, certifications, and projects while fresh. For active job seekers, tailor resumes for each application (82% higher response rate). Use version control (e.g., 'Resume_2026_CompanyName.docx') to track iterations."
+      question: `How often should I update my resume in ${currentYear}?`,
+      answer: `Update your resume quarterly, even if not actively job searching. Add new achievements, skills, certifications, and projects while fresh. For active job seekers, tailor resumes for each application (82% higher response rate). Use version control (e.g., 'Resume_${currentYear}_CompanyName.docx') to track iterations.`
     }
   ];
 
@@ -856,10 +856,34 @@ Specialization: Artificial Intelligence
   if (!mounted) return null;
 
   // SINGLE CANONICAL URL
-  const canonicalUrl = "https://professionalresumefree.com/2026-resume-writing-guide-with-modern-tips";
+  const canonicalUrl = `https://professionalresumefree.com/${currentYear}-resume-writing-guide-with-modern-tips`;
 
   // OPTIMIZED TITLE - UNDER 70 CHARACTERS
-  const pageTitle = "2026 Resume Guide: ATS Tips & CAR Method Examples";
+  const pageTitle = `${currentYear} Resume Guide: ATS Tips & CAR Method Examples`;
+
+  // ============= INTERNAL LINKS DATA =============
+  const internalLinks = [
+    {
+      link: "/ats-friendly-tech-resume-builder",
+      anchorText: `Tech Industry Resume Builder for ${currentYear}`
+    },
+    {
+      link: "/basic-resume-format",
+      anchorText: "Simple Resume Format That Works"
+    },
+    {
+      link: `/best-ats-resume-format-${currentYear}`,
+      anchorText: `Top ATS Resume Format for ${currentYear}`
+    },
+    {
+      link: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume",
+      anchorText: "AI Resume Builder Tutorial"
+    },
+    {
+      link: "/best-fonts-and-designs-for-usa-resumes",
+      anchorText: "Best Fonts for US Resumes"
+    }
+  ];
 
   return (
     <>
@@ -875,13 +899,13 @@ Specialization: Artificial Intelligence
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
-        {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS (58 chars) ===== */}
+        {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS ===== */}
         <title>{pageTitle}</title>
         
         {/* ===== META DESCRIPTION ===== */}
-        <meta name="description" content="Expert 2026 resume guide: Compare chronological (87%), functional (63%), and hybrid (94% ATS pass) formats. CAR method examples, ATS keywords, emerging trends. Updated weekly." />
+        <meta name="description" content={`Expert ${currentYear} resume guide: Compare chronological (87%), functional (63%), and hybrid (94% ATS pass) formats. CAR method examples, ATS keywords, emerging trends. Updated weekly.`} />
         <meta name="author" content="Isata Kamara - Professional Resume Writer (10+ Years Experience)" />
-        <meta name="keywords" content="2026 resume writing guide, chronological resume format 2026, functional resume format examples, hybrid resume format, CAR method resume writing, ATS resume optimization 2026, resume keywords 2026, professional resume writing tips, resume format comparison" />
+        <meta name="keywords" content={`${currentYear} resume writing guide, chronological resume format ${currentYear}, functional resume format examples, hybrid resume format, CAR method resume writing, ATS resume optimization ${currentYear}, resume keywords ${currentYear}, professional resume writing tips, resume format comparison`} />
         
         {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -900,15 +924,15 @@ Specialization: Artificial Intelligence
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content="2026 Resume Guide: Formats, CAR Method & ATS Optimization" />
-        <meta name="chatgpt-fts:description" content="Complete guide to 2026 resumes by Isata Kamara (10+ years, 8,500+ reviews). Format comparison, CAR method, ATS keywords, emerging trends. Updated weekly." />
+        <meta name="chatgpt-fts:title" content={`${currentYear} Resume Guide: Formats, CAR Method & ATS Optimization`} />
+        <meta name="chatgpt-fts:description" content={`Complete guide to ${currentYear} resumes by Isata Kamara (10+ years, 8,500+ reviews). Format comparison, CAR method, ATS keywords, emerging trends. Updated weekly.`} />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         
         {/* ===== OPEN GRAPH ===== */}
         <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content="Expert 2026 resume guide by Isata Kamara (10+ years, 8,500+ reviews). Format comparison, CAR method, ATS keywords, emerging trends. Updated weekly." />
+        <meta property="og:description" content={`Expert ${currentYear} resume guide by Isata Kamara (10+ years, 8,500+ reviews). Format comparison, CAR method, ATS keywords, emerging trends. Updated weekly.`} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://professionalresumefree.com/resume-guide-2026.jpg" />
+        <meta property="og:image" content={`https://professionalresumefree.com/resume-guide-${currentYear}.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
@@ -921,8 +945,8 @@ Specialization: Artificial Intelligence
         {/* ===== TWITTER CARD ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content="Expert 2026 resume guide: Compare formats with success rates, CAR method examples, ATS keywords. Updated weekly." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/resume-guide-2026.jpg" />
+        <meta name="twitter:description" content={`Expert ${currentYear} resume guide: Compare formats with success rates, CAR method examples, ATS keywords. Updated weekly.`} />
+        <meta name="twitter:image" content={`https://professionalresumefree.com/resume-guide-${currentYear}.jpg`} />
         
         <meta name="theme-color" content="#131315" />
         
@@ -957,7 +981,7 @@ Specialization: Artificial Intelligence
                 "@type": "Article",
                 "@id": `${canonicalUrl}#article`,
                 "headline": pageTitle,
-                "description": "Complete guide to writing effective resumes for the 2026 job market. Covers chronological, functional, and hybrid formats with success rates.",
+                "description": `Complete guide to writing effective resumes for the ${currentYear} job market. Covers chronological, functional, and hybrid formats with success rates.`,
                 "author": { "@id": "https://professionalresumefree.com/#isatakamara" },
                 "datePublished": lastModifiedDate,
                 "dateModified": lastModifiedDate,
@@ -978,8 +1002,8 @@ Specialization: Artificial Intelligence
               },
               {
                 "@type": "HowTo",
-                "name": "How to Write a Resume in 2026",
-                "description": "Step-by-step guide to creating an effective 2026 resume",
+                "name": `How to Write a Resume in ${currentYear}`,
+                "description": `Step-by-step guide to creating an effective ${currentYear} resume`,
                 "step": resumeSections.map((section, index) => ({
                   "@type": "HowToStep",
                   "position": index + 1,
@@ -1014,7 +1038,7 @@ Specialization: Artificial Intelligence
                 lineHeight: 'var(--line-height-display)',
                 marginBottom: '1.25rem'
               }}>
-                2026 Resume Writing Guide:{' '}
+                {currentYear} Resume Writing Guide:{' '}
                 <span className="gradient-text">ATS-Optimized Templates & CAR Method</span>
               </h1>
               
@@ -1035,7 +1059,7 @@ Specialization: Artificial Intelligence
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <span className="feature-badge"><FiCheck /> 3 Formats Compared</span>
                 <span className="feature-badge"><FiCheck /> CAR Method Examples</span>
-                <span className="feature-badge"><FiCheck /> ATS Keywords 2026</span>
+                <span className="feature-badge"><FiCheck /> ATS Keywords {currentYear}</span>
                 <span className="feature-badge"><FiCheck /> Success Statistics</span>
               </div>
             </div>
@@ -1068,7 +1092,7 @@ Specialization: Artificial Intelligence
                   I'm <strong>Isata Kamara</strong>, a Professional Resume Writer with <strong>10+ years of experience</strong> in career documentation and resume optimization. I've personally reviewed over <strong>8,500 resumes</strong> across 300+ companies including Fortune 500 organizations. I served as an <strong>HR professional</strong> for several years, reviewing 1,500+ candidates, and have been featured in <strong>CareerBuilder and industry resume panels</strong> for my resume strategies.
                 </p>
                 <p style={{ marginBottom: '1.5rem', lineHeight: '1.6' }}>
-                  Every recommendation in this 2026 guide is backed by <strong>verified data from ATS providers, recruiter surveys, and placement outcomes</strong> from my clients (84% placement rate within 90 days). I analyze <strong>1.2M+ data points annually</strong> from ATS systems, recruiter behavior, and job market trends.
+                  Every recommendation in this {currentYear} guide is backed by <strong>verified data from ATS providers, recruiter surveys, and placement outcomes</strong> from my clients (84% placement rate within 90 days). I analyze <strong>1.2M+ data points annually</strong> from ATS systems, recruiter behavior, and job market trends.
                 </p>
                 
                 <div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }}>
@@ -1127,7 +1151,7 @@ Specialization: Artificial Intelligence
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title">
-                Resume Format Comparison for 2026:{' '}
+                Resume Format Comparison for {currentYear}:{' '}
                 <span className="gradient-text">Chronological vs Functional vs Hybrid</span>
               </h2>
               <p className="section-subtitle">
@@ -1206,7 +1230,7 @@ Specialization: Artificial Intelligence
                         <td>Best For</td>
                         <td>10+ years experience</td>
                         <td>Career changers</td>
-                        <td>Most 2026 job seekers</td>
+                        <td>Most {currentYear} job seekers</td>
                       </tr>
                       <tr>
                         <td>Success Rate</td>
@@ -1226,7 +1250,7 @@ Specialization: Artificial Intelligence
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Step-by-Step Resume Writing Guide for 2026</h2>
+              <h2 className="section-title">Step-by-Step Resume Writing Guide for {currentYear}</h2>
               <p className="section-subtitle">
                 Each section starts with a <strong>direct answer</strong> to your key questions, followed by expert examples.
               </p>
@@ -1267,7 +1291,7 @@ Specialization: Artificial Intelligence
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
                 <div className="card-executive">
                   <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', fontSize: 'var(--font-size-title-md)' }}>
-                    <FiCheck style={{ color: 'var(--accent-primary)' }} /> Best Practices for 2026
+                    <FiCheck style={{ color: 'var(--accent-primary)' }} /> Best Practices for {currentYear}
                   </h4>
                   <ul style={{ listStyle: 'none' }}>
                     {resumeSections[activeSection].tips.map((tip, index) => (
@@ -1302,7 +1326,7 @@ Specialization: Artificial Intelligence
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">ATS Optimization for 2026: Keywords, Formatting & Success Rates</h2>
+              <h2 className="section-title">ATS Optimization for {currentYear}: Keywords, Formatting & Success Rates</h2>
               <p className="section-subtitle">
                 <strong>75% of resumes are rejected by ATS before human review.</strong> Follow these data-backed tips.
               </p>
@@ -1322,18 +1346,18 @@ Specialization: Artificial Intelligence
           </div>
         </section>
 
-        {/* ============= EMERGING TRENDS 2026 ============= */}
+        {/* ============= EMERGING TRENDS ============= */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Emerging Resume Trends for 2026</h2>
+              <h2 className="section-title">Emerging Resume Trends for {currentYear}</h2>
               <p className="section-subtitle">
                 Stay ahead with these <strong>adoption rates and statistics</strong> based on analysis of 1.2M+ job applications.
               </p>
             </div>
 
             <div className="grid">
-              {emergingTrends2026.map((trend, index) => (
+              {emergingTrends.map((trend, index) => (
                 <div key={index} className="card-executive">
                   <div style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--accent-primary)' }}>{trend.icon}</div>
                   <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{trend.title}</h3>
@@ -1354,7 +1378,7 @@ Specialization: Artificial Intelligence
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Frequently Asked Questions About 2026 Resumes</h2>
+              <h2 className="section-title">Frequently Asked Questions About {currentYear} Resumes</h2>
               <p className="section-subtitle">Expert answers from 8,500+ job seekers</p>
             </div>
 
@@ -1381,7 +1405,7 @@ Specialization: Artificial Intelligence
                 color: 'var(--text-primary)', 
                 marginBottom: '1rem' 
               }}>
-                Ready to Create Your 2026 Resume?
+                Ready to Create Your {currentYear} Resume?
               </h2>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                 Use our <strong>ATS-optimized resume builder</strong> with templates for all formats. 
@@ -1400,7 +1424,7 @@ Specialization: Artificial Intelligence
               </div>
               
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
-                {['ATS-Friendly Templates (94%)', 'All 3 Formats Included', 'Expert Tips (10+ years)', 'Free PDF Download', 'Updated for 2026', 'CAR Method Examples'].map((feature, idx) => (
+                {['ATS-Friendly Templates (94%)', 'All 3 Formats Included', 'Expert Tips (10+ years)', 'Free PDF Download', `Updated for ${currentYear}`, 'CAR Method Examples'].map((feature, idx) => (
                   <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
                     <FiCheck style={{ color: 'var(--accent-primary)' }} /> {feature}
                   </div>
@@ -1410,8 +1434,105 @@ Specialization: Artificial Intelligence
           </div>
         </section>
 
-        {/* Update Strategy */}
-        <div style={{ padding: '1rem 0', background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+        {/* ============= INTERNAL LINKS / RELATED RESOURCES SECTION ============= */}
+        <section className="section" aria-labelledby="related-resources-heading" style={{ paddingTop: 'var(--section-gap-md)', paddingBottom: 'var(--section-gap-md)' }}>
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="related-resources-heading">
+                Related Resume Resources for {currentYear}
+              </h2>
+              <p className="section-subtitle">
+                Explore our expert guides and tools to build a stronger, more effective resume.
+              </p>
+            </div>
+
+            <nav
+              aria-label="Related resume resources"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: '1.25rem',
+                maxWidth: '1100px',
+                margin: '0 auto',
+                width: '100%'
+              }}
+            >
+              {internalLinks.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.link}
+                  className="card-executive"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                    padding: 'clamp(1.25rem, 3vw, 1.75rem)',
+                    minHeight: '100%',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flex: 1, minWidth: 0 }}>
+                    <div
+                      aria-hidden="true"
+                      style={{
+                        fontSize: '1.4rem',
+                        color: 'var(--accent-primary)',
+                        flexShrink: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '0.5rem',
+                        background: 'rgba(242, 202, 80, 0.08)',
+                        border: '0.5px solid var(--border-gold-filament)'
+                      }}
+                    >
+                      <FiLink />
+                    </div>
+                    <span
+                      style={{
+                        fontSize: 'var(--font-size-body-md)',
+                        fontWeight: 'var(--font-weight-semibold)',
+                        color: 'var(--text-primary)',
+                        lineHeight: '1.4',
+                        wordBreak: 'break-word',
+                        overflowWrap: 'anywhere'
+                      }}
+                    >
+                      {item.anchorText}
+                    </span>
+                  </div>
+                  <FiArrowRight
+                    aria-hidden="true"
+                    style={{
+                      color: 'var(--accent-primary)',
+                      flexShrink: 0,
+                      fontSize: '1.25rem'
+                    }}
+                  />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+
+        {/* ============= HIDDEN FROM VISITORS ============= */}
+        {/* Update Strategy - hidden from visitors (kept in DOM for SEO/crawlers) */}
+        <div
+          aria-hidden="true"
+          style={{
+            display: 'none',
+            padding: '1rem 0',
+            background: 'var(--bg-surface-lowest)',
+            borderTop: '0.5px solid var(--border-gold-filament)',
+            textAlign: 'center'
+          }}
+        >
           <div className="section-container">
             <p className="text-small">
               <FiClock style={{ display: 'inline', marginRight: '0.5rem' }} />
@@ -1420,12 +1541,21 @@ Specialization: Artificial Intelligence
           </div>
         </div>
 
-        {/* Last Updated */}
-        <footer style={{ padding: '1rem 0', background: 'var(--bg-page)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+        {/* Last Updated - hidden from visitors (kept in DOM for SEO/crawlers) */}
+        <footer
+          aria-hidden="true"
+          style={{
+            display: 'none',
+            padding: '1rem 0',
+            background: 'var(--bg-page)',
+            borderTop: '0.5px solid var(--border-gold-filament)',
+            textAlign: 'center'
+          }}
+        >
           <div className="section-container">
             <p className="text-small">
               <FiCalendar style={{ display: 'inline', marginRight: '0.5rem' }} />
-              Guide updated: {currentDate} • Version 2026.2 • Based on 8,500+ resume reviews
+              Guide updated: {currentDate} • Version {currentYear}.2 • Based on 8,500+ resume reviews
             </p>
           </div>
         </footer>
@@ -1439,9 +1569,10 @@ export async function getStaticProps() {
   const now = new Date();
   const currentDate = now.toISOString().split('T')[0];
   const lastModifiedDate = now.toISOString();
+  const currentYear = now.getFullYear();
   
   return {
-    props: { currentDate, lastModifiedDate },
+    props: { currentDate, lastModifiedDate, currentYear },
     revalidate: 3600 // Revalidate every hour for freshness
   };
 }

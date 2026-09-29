@@ -46,7 +46,8 @@ import {
   FiDollarSign,
   FiShoppingBag,
   FiMonitor,
-  FiTruck
+  FiTruck,
+  FiLink as FiLinkIcon
 } from 'react-icons/fi';
 import Link from 'next/link';
 
@@ -329,6 +330,18 @@ const careerFlowStyles = `
   .cf-share-close-btn { display: inline-block; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 12px 32px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); }
   .cf-share-close-btn:hover { filter: brightness(1.1); box-shadow: 0 0 18px rgba(242, 202, 80, 0.3); transform: translateY(-1px); }
 
+  /* ========== RELATED RESOURCES SECTION ========== */
+  .cf-related-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: var(--cf-surface-container-lowest); border-top: 0.5px solid rgba(153, 144, 124, 0.1); }
+  .cf-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1100px; margin: 0 auto; }
+  .cf-related-card { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; transition: all var(--cf-transition-base); text-decoration: none; color: inherit; height: 100%; min-height: 84px; }
+  .cf-related-card:hover { background: rgba(32, 31, 33, 0.8); border-color: var(--cf-primary-container); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05); }
+  .cf-related-card:focus-visible { outline: 2px solid var(--cf-primary); outline-offset: 2px; }
+  .cf-related-card-inner { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+  .cf-related-card-icon { width: 42px; height: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: rgba(242, 202, 80, 0.08); border: 0.5px solid rgba(212, 175, 55, 0.25); color: var(--cf-primary); font-size: 18px; }
+  .cf-related-card-title { font-family: var(--cf-font-body); font-size: 15px; font-weight: 600; color: var(--cf-on-background); line-height: 1.4; word-break: break-word; overflow-wrap: anywhere; }
+  .cf-related-card-arrow { flex-shrink: 0; color: var(--cf-primary); font-size: 18px; transition: transform var(--cf-transition-base); }
+  .cf-related-card:hover .cf-related-card-arrow { transform: translateX(4px); }
+
   @media (min-width: 1024px) {
     .cf-layout { flex-direction: row; gap: 48px; }
     .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; }
@@ -366,7 +379,7 @@ const careerFlowStyles = `
     .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .cf-faq-grid { grid-template-columns: 1fr; }
-    .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); }
+    .cf-faq-section, .cf-cta-section, .cf-related-section { padding: 60px var(--cf-margin-mobile); }
     .cf-section-header h2, .cf-cta-title { font-size: 28px; }
     .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; }
     .cf-modal-page { width: 100%; height: auto; min-height: 400px; }
@@ -375,6 +388,7 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-related-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
@@ -402,21 +416,26 @@ const careerFlowStyles = `
     .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-related-card { padding: 16px 18px; gap: 12px; }
+    .cf-related-card-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-related-card-title { font-size: 14px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-related-card { padding: 14px 16px; }
+    .cf-related-card-icon { width: 32px; height: 32px; font-size: 14px; }
   }
 
   @media print {
-    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; }
+    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-related-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; }
     .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; }
     .cf-universal-template, .cf-section { page-break-inside: avoid; }
   }
 `;
 
-const Resume = ({ seoData, buildTimestamp }) => {
+const Resume = ({ seoData, buildTimestamp, currentYear }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
   const freshnessIndicator = buildTimestamp ? new Date(buildTimestamp).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
@@ -424,6 +443,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic year — advances automatically when ISR rebuilds the page
+  const year = currentYear || new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', clientType: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', qualification: '', certificateNumber: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -449,6 +471,30 @@ const Resume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // ============= INTERNAL LINKS =============
+  const internalLinks = [
+    {
+      link: "/ats-friendly-aged-care-worker-resume-builder",
+      anchorText: "Aged Care Worker Resume Builder"
+    },
+    {
+      link: "/ats-friendly-healthcare-assistant-resume-builder",
+      anchorText: "Healthcare Assistant Resume Builder"
+    },
+    {
+      link: "/ats-friendly-support-worker-resume-builder",
+      anchorText: "Support Worker Resume Builder"
+    },
+    {
+      link: "/ats-friendly-disability-support-worker-resume-builder",
+      anchorText: "Disability Support Worker Resume Builder"
+    },
+    {
+      link: "/ats-friendly-nurse-resume-builder",
+      anchorText: "Nurse Resume Builder"
+    }
+  ];
 
   const testimonials = [
     {
@@ -497,8 +543,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
 
   const faqs = [
     {
-      question: "Is this care assistant CV builder completely free for UK job seekers?",
-      answer: "Yes, our care assistant CV builder is 100% free with no hidden costs. Create, edit, and download your professional care CV in PDF format without any payment required. Designed specifically for UK care industry standards."
+      question: `Is this care assistant CV builder completely free for UK job seekers in ${year}?`,
+      answer: `Yes, our care assistant CV builder is 100% free with no hidden costs in ${year}. Create, edit, and download your professional care CV in PDF format without any payment required. Designed specifically for UK care industry standards.`
     },
     {
       question: "What UK-specific care features does your builder include?",
@@ -627,9 +673,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-GB">
         <Head>
-          <title>Free Care Assistant CV Builder 2026 | UK-Specific Templates</title>
-          <meta name="title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
-          <meta name="description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
+          <title>{`Free Care Assistant CV Builder ${year} | UK-Specific Templates`}</title>
+          <meta name="title" content={`Free Care Assistant CV Builder ${year} | UK-Specific Templates`} />
+          <meta name="description" content={`Create a professional care assistant CV for free in ${year}. UK-specific templates for care workers. DBS-check ready. Download PDF instantly.`} />
           <meta name="keywords" content="care assistant CV builder, UK care CV templates, healthcare assistant CV builder, care worker CV, DBS-check CV, CQC-compliant CV, free CV builder for care workers UK, NHS care CV, domiciliary care CV, elderly care CV" />
           <meta name="author" content="Professional Care Assistant CV Free UK" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -643,8 +689,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-IE" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
-          <meta property="og:description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
+          <meta property="og:title" content={`Free Care Assistant CV Builder ${year} | UK-Specific Templates`} />
+          <meta property="og:description" content={`Create a professional care assistant CV for free in ${year}. UK-specific templates for care workers. DBS-check ready. Download PDF instantly.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-care-assistant-cv-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -657,8 +703,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Care Assistant CV Builder 2026 | UK-Specific Templates" />
-          <meta name="twitter:description" content="Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly." />
+          <meta name="twitter:title" content={`Free Care Assistant CV Builder ${year} | UK-Specific Templates`} />
+          <meta name="twitter:description" content={`Create a professional care assistant CV for free in ${year}. UK-specific templates for care workers. DBS-check ready. Download PDF instantly.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-care-assistant-cv-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Care Assistant CV Builder with UK Templates" />
           <meta name="twitter:site" content="@CareCVFreeUK" />
@@ -684,9 +730,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Care Assistant CV Builder 2026 | UK-Specific Templates",
-                    "description": "Create a professional care assistant CV for free in 2026. UK-specific templates for care workers. DBS-check ready. Download PDF instantly.",
-                    "datePublished": "2026-01-01",
+                    "name": `Free Care Assistant CV Builder ${year} | UK-Specific Templates`,
+                    "description": `Create a professional care assistant CV for free in ${year}. UK-specific templates for care workers. DBS-check ready. Download PDF instantly.`,
+                    "datePublished": "2020-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-GB",
                     "isPartOf": {
@@ -739,7 +785,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                     },
                     "mainEntity": {
                       "@type": "SoftwareApplication",
-                      "name": "Care Assistant CV Builder - UK Optimized Care CV Maker",
+                      "name": `Care Assistant CV Builder - UK Optimized Care CV Maker ${year}`,
                       "applicationCategory": "BusinessApplication",
                       "operatingSystem": "Any",
                       "offers": {
@@ -747,7 +793,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "GBP",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${year + 1}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -767,7 +813,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${year}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-care-assistant-cv-builder.jpg",
                       "applicationSuite": "UK Care Career Tools",
                       "countriesSupported": "United Kingdom",
@@ -910,7 +956,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         },
                         "itemReviewed": {
                           "@type": "SoftwareApplication",
-                          "name": "Care Assistant CV Builder - UK Optimized Care CV Maker",
+                          "name": `Care Assistant CV Builder - UK Optimized Care CV Maker ${year}`,
                           "applicationCategory": "BusinessApplication",
                           "operatingSystem": "Any",
                           "offers": {
@@ -957,11 +1003,11 @@ const Resume = ({ seoData, buildTimestamp }) => {
             <div className="cf-hero-content">
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon"/>
-                <span className="cf-trust-text">Best Free Care Assistant CV Builder 2026</span>
+                <span className="cf-trust-text">Best Free Care Assistant CV Builder {year}</span>
               </div>
               
               <h1 className="cf-hero-title">
-                Free Care Assistant <span className="cf-gradient-text">CV Builder 2026: Start Now</span>
+                Free Care Assistant <span className="cf-gradient-text">CV Builder {year}: Start Now</span>
               </h1>
               
               <p className="cf-hero-subtitle">
@@ -1136,6 +1182,32 @@ const Resume = ({ seoData, buildTimestamp }) => {
 
         <section className="cf-cta-section" aria-labelledby="cta-title"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Care Career in the UK?</h2><p className="cf-cta-subtitle">Join 250,000+ UK care professionals who landed their dream jobs with our free ATS-friendly care assistant CV builder optimized for UK employers.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free care assistant CV now—optimized for UK job market"><span className="cf-cta-btn-text">Create Your Free Care CV Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • UK-specific templates • DBS-check ready • CQC-compliant formatting</span></div></div></div></section>
 
+        {/* ============= RELATED RESOURCES / INTERNAL LINKS SECTION ============= */}
+        <section className="cf-related-section" aria-labelledby="cf-related-heading">
+          <div className="cf-container">
+            <div className="cf-section-header">
+              <h2 id="cf-related-heading">Related Care & Healthcare Resume Resources</h2>
+              <p>Explore our other free ATS-friendly resume builders for care and health support roles.</p>
+            </div>
+            <nav className="cf-related-grid" aria-label="Related care and healthcare resume resources">
+              {internalLinks.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.link}
+                  className="cf-related-card"
+                  title={item.anchorText}
+                >
+                  <span className="cf-related-card-inner">
+                    <span className="cf-related-card-icon" aria-hidden="true"><FiLinkIcon /></span>
+                    <span className="cf-related-card-title">{item.anchorText}</span>
+                  </span>
+                  <FiArrowRight className="cf-related-card-arrow" aria-hidden="true" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Care Assistant CV Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><CareAssistantTemplate formData={formData}/></div></div></div></div>)}
 
         {showSharePopup && (
@@ -1158,6 +1230,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   const reviewDates = Array(6).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
@@ -1179,7 +1252,8 @@ export async function getStaticProps() {
         reviewDates,
         faqDates
       },
-      buildTimestamp
+      buildTimestamp,
+      currentYear
     },
     revalidate: 3600
   };
