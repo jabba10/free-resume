@@ -276,7 +276,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -288,6 +288,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -323,6 +337,7 @@ const careerFlowStyles = `
     .cf-layout { padding: 60px var(--cf-margin-desktop); gap: 32px; }
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -352,6 +367,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -379,11 +398,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -412,6 +439,9 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
+
   const defaultExperience = () => ({ employer: '', position: '', clientType: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', qualification: '', certNumber: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
   const defaultCertification = () => ({ name: '', issuingBody: '', certNumber: '', expiryDate: '', isEditing: false, editIndex: null });
@@ -436,6 +466,35 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-support-worker-resume-builder",
+      title: "Support Worker Resume Builder",
+      icon: <FiUsers />
+    },
+    {
+      target: "/ats-friendly-aged-care-worker-resume-builder",
+      title: "Aged Care Worker Resume Builder",
+      icon: <FiHeart />
+    },
+    {
+      target: "/ats-friendly-care-assistant-resume-builder",
+      title: "Care Assistant Resume Builder",
+      icon: <FiActivity />
+    },
+    {
+      target: "/ats-friendly-healthcare-assistant-resume-builder",
+      title: "Healthcare Assistant Resume Builder",
+      icon: <FiShield />
+    },
+    {
+      target: "/ats-friendly-government-education-non-profit-resume-builder",
+      title: "Government & Non-Profit Resume Builder",
+      icon: <FiBriefcase />
+    }
+  ];
 
   // Testimonials for Structured Data - Australian context
   const testimonials = [
@@ -484,12 +543,12 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
   ];
 
   const faqs = [
-    { question: "Is this disability support resume builder free for Australian job seekers?", answer: "Yes, our disability support resume builder is completely free with no hidden costs. Created specifically for Australian support workers, NDIS providers, and disability services employers." },
+    { question: `Is this disability support resume builder free for Australian job seekers in ${currentYear}?`, answer: `Yes, our disability support resume builder is completely free in ${currentYear} with no hidden costs. Created specifically for Australian support workers, NDIS providers, and disability services employers.` },
     { question: "What makes this builder specific to Australian Disability Support Workers?", answer: "Our templates include NDIS-specific sections, Australian qualification formats, NDIS Worker Screening Check, and industry-standard terminology used by Australian disability service providers." },
     { question: "Can I include my NDIS Worker Number and certifications?", answer: "Absolutely! We have dedicated sections for NDIS Worker Screening Check, First Aid certificates, manual handling, and other essential Australian disability support qualifications." },
     { question: "Are the templates ATS-friendly for Australian disability providers?", answer: "Yes, our templates are optimized for Australian ATS systems used by major disability service providers like Scope, Aruma, Life Without Barriers, and NDIS-registered organisations." },
     { question: "What Australian-specific sections does the builder include?", answer: "NDIS Worker Details, Australian Qualifications Framework (AQF) certifications, Disability Services Act compliance, Client Rights & Dignity of Risk principles, and Australian working rights." },
-    { question: "Can I download my resume as PDF for Australian job applications?", answer: "Yes, download your professionally formatted disability support resume in PDF format - completely free, no watermarks, ready for Australian job applications." }
+    { question: `Can I download my resume as PDF for Australian job applications in ${currentYear}?`, answer: "Yes, download your professionally formatted disability support resume in PDF format - completely free, no watermarks, ready for Australian job applications." }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -605,9 +664,9 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-AU">
         <Head>
-          <title>Free NDIS Resume Builder 2026 | Disability Support Worker Australia</title>
-          <meta name="title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
-          <meta name="description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
+          <title>Free NDIS Resume Builder {currentYear} | Disability Support Worker Australia</title>
+          <meta name="title" content={`Free NDIS Resume Builder ${currentYear} | Disability Support Worker Australia`} />
+          <meta name="description" content={`Create your professional NDIS resume for free in ${currentYear}. Australian disability support templates help support workers land interviews faster. Start now—no sign-up.`} />
           <meta name="keywords" content="disability support resume builder, NDIS resume templates, support worker resume Australia, disability care resume, ATS friendly disability resume, free resume builder for support workers, NDIS worker screening, Australian disability sector jobs, support worker CV, disability services resume" />
           <meta name="author" content="Australian Disability Support Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -617,8 +676,8 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
           <link rel="canonical" href={canonicalUrl} />
-          <meta property="og:title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
-          <meta property="og:description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
+          <meta property="og:title" content={`Free NDIS Resume Builder ${currentYear} | Disability Support Worker Australia`} />
+          <meta property="og:description" content={`Create your professional NDIS resume for free in ${currentYear}. Australian disability support templates help support workers land interviews faster. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-disability-support-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -629,8 +688,8 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free NDIS Resume Builder 2026 | Disability Support Worker Australia" />
-          <meta name="twitter:description" content="Create your professional NDIS resume for free in 2026. Australian disability support templates help support workers land interviews faster. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free NDIS Resume Builder ${currentYear} | Disability Support Worker Australia`} />
+          <meta name="twitter:description" content={`Create your professional NDIS resume for free in ${currentYear}. Australian disability support templates help support workers land interviews faster. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-disability-support-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free NDIS Resume Builder with Australian Templates" />
           <meta name="twitter:site" content="@DisabilityResumeAU" />
@@ -656,8 +715,8 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free NDIS Resume Builder 2026 - Disability Support Worker Australia",
-                    "description": "Create professional ATS-optimized disability support resumes for free. Australian NDIS-specific templates for Support Workers.",
+                    "name": `Free NDIS Resume Builder ${currentYear} - Disability Support Worker Australia`,
+                    "description": `Create professional ATS-optimized disability support resumes for free in ${currentYear}. Australian NDIS-specific templates for Support Workers.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-AU",
@@ -718,7 +777,7 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "AUD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -737,7 +796,7 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-disability-support-resume-builder.jpg",
                       "applicationSuite": "Disability Support Career Tools",
                       "countriesSupported": "Australia",
@@ -765,7 +824,7 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "HowTo",
                     "name": "How to Create a Professional Disability Support Resume for Australian Jobs",
-                    "description": "Step-by-step guide to create an ATS-optimized disability support resume for Australian NDIS providers",
+                    "description": `Step-by-step guide to create an ATS-optimized disability support resume for Australian NDIS providers in ${currentYear}`,
                     "totalTime": "PT15M",
                     "estimatedCost": {
                       "@type": "MonetaryAmount",
@@ -916,8 +975,8 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free NDIS Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free NDIS <span className="cf-gradient-text">Resume Builder 2026: Create Your Australian Support Worker CV & Get Hired</span></h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free NDIS Resume Builder {currentYear}</span></div>
+              <h1 className="cf-hero-title">Free NDIS <span className="cf-gradient-text">Resume Builder {currentYear}: Create Your Australian Support Worker CV & Get Hired</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, NDIS-optimized disability support resume for free in minutes.</strong> Our Australian resume builder ensures your experience gets noticed by disability service providers and NDIS organisations.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free disability support resume now—no sign-up required">
@@ -1099,6 +1158,24 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
                 </button>
               </div>
               <div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • NDIS Optimized for Australia</span></div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

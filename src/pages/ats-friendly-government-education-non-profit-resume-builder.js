@@ -284,7 +284,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -296,6 +296,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -332,6 +346,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -361,6 +376,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -388,11 +407,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-gov-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -420,6 +447,9 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
+
   const defaultExperience = () => ({ organization: '', position: '', department: '', location: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', major: '', location: '', startDate: '', endDate: '', honors: '', isEditing: false, editIndex: null });
   const defaultSkill = () => ({ name: '', category: 'Policy', isEditing: false, editIndex: null });
@@ -446,6 +476,35 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-teacher-resume-builder",
+      title: "Teacher Resume Builder",
+      icon: <FiBookOpen />
+    },
+    {
+      target: "/ats-friendly-administrative-assistant-resume-builder",
+      title: "Administrative Assistant Resume Builder",
+      icon: <FiBriefcase />
+    },
+    {
+      target: "/ats-friendly-support-worker-resume-builder",
+      title: "Support Worker Resume Builder",
+      icon: <FiUsers />
+    },
+    {
+      target: "/best-resume-examples-for-career-changers-in-the-usa",
+      title: "Career Changer Resume Examples",
+      icon: <FiTrendingUp />
+    },
+    {
+      target: "/ats-friendly-disability-support-worker-resume-builder",
+      title: "Disability Support Worker Resume Builder",
+      icon: <FiHeart />
+    }
+  ];
 
   // Testimonials for Structured Data - Government/Non-profit focused
   const testimonials = [
@@ -496,8 +555,8 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
   // FAQ Data for Structured Data
   const faqs = [
     {
-      question: "Is this government resume builder free and suitable for USAJobs applications?",
-      answer: "Yes, our government resume builder is completely free and optimized for USAJobs and federal application systems. We include government-specific formatting, GS-grade templates, and SF-171 compatible structures."
+      question: `Is this government resume builder free and suitable for USAJobs applications in ${currentYear}?`,
+      answer: `Yes, our government resume builder is completely free in ${currentYear} and optimized for USAJobs and federal application systems. We include government-specific formatting, GS-grade templates, and SF-171 compatible structures.`
     },
     {
       question: "What makes a government resume different from a corporate resume?",
@@ -516,7 +575,7 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
       answer: "Yes, we offer specialized templates for international organizations including UN agencies, World Bank, and international NGOs with appropriate terminology and formatting."
     },
     {
-      question: "Can I highlight public service and volunteer experience appropriately?",
+      question: `Can I highlight public service and volunteer experience appropriately in ${currentYear}?`,
       answer: "Our builder includes dedicated sections for public service, volunteer work, and community engagement with government-preferred formatting and emphasis on civic contributions."
     }
   ];
@@ -633,7 +692,6 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
     );
   };
 
-  // SINGLE CANONICAL URL - WITHOUT www
   const canonicalUrl = "https://professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder";
 
   return (
@@ -641,9 +699,9 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Government Resume Builder 2026 | USAJobs Templates</title>
-          <meta name="title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
-          <meta name="description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
+          <title>Free Government Resume Builder {currentYear} | USAJobs Templates</title>
+          <meta name="title" content={`Free Government Resume Builder ${currentYear} | USAJobs Templates`} />
+          <meta name="description" content={`Create a professional government resume for free in ${currentYear}. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly.`} />
           <meta name="keywords" content="government resume builder, non-profit resume, USAJobs resume, federal resume, public sector resume, NGO resume, grant writer resume, policy analyst resume, government job resume, ATS friendly government resume" />
           <meta name="author" content="Professional Government Resume Builder" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -652,12 +710,9 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
           <meta name="last-modified" content={safeLastModifiedDate} />
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-          
-          {/* SINGLE CANONICAL URL - WITHOUT www */}
           <link rel="canonical" href={canonicalUrl} />
-          
-          <meta property="og:title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
-          <meta property="og:description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
+          <meta property="og:title" content={`Free Government Resume Builder ${currentYear} | USAJobs Templates`} />
+          <meta property="og:description" content={`Create a professional government resume for free in ${currentYear}. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-government-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -671,8 +726,8 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Government Resume Builder 2026 | USAJobs Templates" />
-          <meta name="twitter:description" content="Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly." />
+          <meta name="twitter:title" content={`Free Government Resume Builder ${currentYear} | USAJobs Templates`} />
+          <meta name="twitter:description" content={`Create a professional government resume for free in ${currentYear}. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-government-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Government Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@GovResumeFree" />
@@ -698,8 +753,8 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Government Resume Builder 2026 | USAJobs Templates",
-                    "description": "Create a professional government resume for free in 2026. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly.",
+                    "name": `Free Government Resume Builder ${currentYear} | USAJobs Templates`,
+                    "description": `Create a professional government resume for free in ${currentYear}. USAJobs-compatible templates for federal jobs, non-profit roles. Download PDF instantly.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
@@ -759,7 +814,7 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -778,7 +833,7 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-government-resume-builder.jpg",
                       "applicationSuite": "Public Sector Career Tools",
                       "countriesSupported": "Global",
@@ -806,7 +861,7 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "HowTo",
                     "name": "How to Create a Professional Government Resume with Our Free Builder",
-                    "description": "Step-by-step guide to create an ATS-optimized government or non-profit resume for free",
+                    "description": `Step-by-step guide to create an ATS-optimized government or non-profit resume for free in ${currentYear}`,
                     "totalTime": "PT20M",
                     "estimatedCost": {
                       "@type": "MonetaryAmount",
@@ -887,13 +942,12 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon" />
                 <span className="cf-trust-text">
-                   Best Free Government Resume Builder 2026
+                  Best Free Government Resume Builder {currentYear}
                 </span>
               </div>
               
-              {/* SINGLE H1 TAG */}
               <h1 className="cf-hero-title">
-                Free Government Resume Builder 2026: Start Now
+                Free Government Resume Builder {currentYear}: Start Now
               </h1>
               
               <p className="cf-hero-subtitle">
@@ -922,7 +976,6 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                 </button>
               </div>
 
-              
               <div className="cf-industry-badges">
                 <div className="cf-badge-grid">
                   <span className="cf-badge-item"><FiFlag /> Federal Government</span>
@@ -953,7 +1006,7 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                   <div className="cf-form-card">
                     <div className="cf-form-group"><label className="cf-form-label">Full Name*<input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="John Smith, MPA" required className="cf-form-input"/></label><label className="cf-form-label">Email*<input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="john.smith@government.gov" required className="cf-form-input"/></label></div>
                     <div className="cf-form-group"><label className="cf-form-label">Phone<input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className="cf-form-input"/></label><label className="cf-form-label">Location<input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Washington, DC" className="cf-form-input"/></label></div>
-                    <label className="cf-form-label">Security Clearance<input type="text" name="clearance" value={formData.clearance} onChange={handleInputChange} placeholder="Top Secret/SCI (2024)" className="cf-form-input"/><small className="cf-form-hint">Format: Level (Investigation Date)</small></label>
+                    <label className="cf-form-label">Security Clearance<input type="text" name="clearance" value={formData.clearance} onChange={handleInputChange} placeholder="Top Secret/SCI (2024)" className="cf-form-input"/></label>
                   </div>
                   <div className="cf-form-card"><label className="cf-form-label">Professional Summary*<textarea name="summary" value={formData.summary} onChange={handleInputChange} placeholder="Dedicated public sector professional with 10+ years of experience in federal government policy analysis and program management. Expertise in legislative affairs, budget oversight, and interagency coordination. Proven track record in developing and implementing evidence-based policies that improve government efficiency and public service delivery. Strong background in stakeholder engagement and cross-functional team leadership." required className="cf-form-textarea" rows="6"/><div className="cf-char-count">{formData.summary.length}/500 characters</div></label></div>
                   <div className="cf-form-card">
@@ -1144,6 +1197,24 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                 <FiCheck className="cf-guarantee-icon" />
                 <span className="cf-guarantee-text">USAJobs Compatible • Federal Formatting • No Sign Up Required • Free Forever • ATS Optimized</span>
               </div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1202,7 +1273,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data - WITHOUT www
+  // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://professionalresumefree.com/' },
     { name: 'Government Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-government-education-non-profit-resume-builder' }
@@ -1219,7 +1290,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    // ISR: Revalidate every 24 hours (86400 seconds)
+    // ISR: Revalidate every hour (3600 seconds)
     revalidate: 3600
   };
 }

@@ -281,7 +281,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -293,6 +293,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -329,6 +343,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -358,6 +373,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -385,11 +404,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-eng-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -417,6 +444,9 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
+
   const defaultExperience = () => ({ company: '', position: '', technologies: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', major: '', gpa: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
   const defaultTechnicalSkill = () => ({ category: '', skills: '', isEditing: false, editIndex: null });
@@ -441,6 +471,35 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-advanced-manufacturing-and-automation-resume-builder",
+      title: "Advanced Manufacturing Resume Builder",
+      icon: <FiCpu />
+    },
+    {
+      target: "/ats-friendly-industrial-manufacturing-resume-builder",
+      title: "Industrial Manufacturing Resume Builder",
+      icon: <FiLayers />
+    },
+    {
+      target: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder",
+      title: "AI & ML Engineering Resume",
+      icon: <FiDatabase />
+    },
+    {
+      target: "/best-resume-examples-for-usa-engineering-jobs",
+      title: "US Engineering Job Resume Examples",
+      icon: <FiFileText />
+    },
+    {
+      target: "/ats-friendly-construction-worker-resume-builder",
+      title: "Construction Worker Resume Builder",
+      icon: <FiTool />
+    }
+  ];
 
   // Testimonials for Structured Data
   const testimonials = [
@@ -489,12 +548,12 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
   ];
 
   const faqs = [
-    { question: "Is this engineering resume builder really free with no hidden costs?", answer: "Yes, our engineering resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional engineering resume in PDF format without any payment required." },
+    { question: `Is this engineering resume builder really free with no hidden costs in ${currentYear}?`, answer: `Yes, our engineering resume builder is completely free in ${currentYear} with no hidden costs or watermarks. Create, edit, and download your professional engineering resume in PDF format without any payment required.` },
     { question: "What does ATS-friendly mean for engineering resumes?", answer: "ATS-friendly means our engineering resume templates are optimized to pass through Applicant Tracking Systems used by 95% of tech companies and engineering firms. This ensures your technical skills and experience are properly scanned and recognized." },
     { question: "Can I download my engineering resume as PDF without creating an account?", answer: "Absolutely! Download your professional engineering resume in PDF format without creating an account. Everything is completely free and accessible immediately for all engineering disciplines." },
     { question: "How many engineering resume templates are available for free?", answer: "We offer professionally designed ATS-friendly engineering resume templates for software, mechanical, electrical, civil, chemical engineers and all technical specialties. All templates are completely free and optimized for engineering hiring." },
     { question: "How does your engineering resume builder work?", answer: "Our builder uses ATS-optimized engineering templates with proper technical terminology formatting. We guide you to highlight technical experience, projects, certifications, and specialized skills that engineering employers look for." },
-    { question: "Can I include engineering projects and GitHub links in my resume?", answer: "Yes! Our builder has dedicated sections for engineering projects, technical skills, and professional links including GitHub, LinkedIn, and portfolio websites." }
+    { question: `Can I include engineering projects and GitHub links in my resume in ${currentYear}?`, answer: "Yes! Our builder has dedicated sections for engineering projects, technical skills, and professional links including GitHub, LinkedIn, and portfolio websites." }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -610,9 +669,9 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Engineering Resume Builder 2026 | ATS Technical Templates</title>
-          <meta name="title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
-          <meta name="description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
+          <title>Free Engineering Resume Builder {currentYear} | ATS Technical Templates</title>
+          <meta name="title" content={`Free Engineering Resume Builder ${currentYear} | ATS Technical Templates`} />
+          <meta name="description" content={`Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta name="keywords" content="engineering resume builder, technical resume templates, software engineer resume, mechanical engineer resume, electrical engineer resume, civil engineer resume, ATS friendly engineering resume, free resume builder for engineers, technical resume, engineering CV, engineering career" />
           <meta name="author" content="Professional Engineering Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -622,8 +681,8 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
           <link rel="canonical" href={canonicalUrl} />
-          <meta property="og:title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
-          <meta property="og:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
+          <meta property="og:title" content={`Free Engineering Resume Builder ${currentYear} | ATS Technical Templates`} />
+          <meta property="og:description" content={`Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-engineering-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -637,8 +696,8 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Engineering Resume Builder 2026 | ATS Technical Templates" />
-          <meta name="twitter:description" content="Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for 2026." />
+          <meta name="twitter:title" content={`Free Engineering Resume Builder ${currentYear} | ATS Technical Templates`} />
+          <meta name="twitter:description" content={`Create a professional engineering resume for free. ATS-friendly technical templates trusted by 5M+ engineers. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-engineering-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Engineering Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@ProResumeFree" />
@@ -664,8 +723,8 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Engineering Resume Builder 2026 | ATS Technical Templates",
-                    "description": "Create professional ATS-optimized engineering resumes for free. Land interviews 3x faster with our engineering resume builder.",
+                    "name": `Free Engineering Resume Builder ${currentYear} | ATS Technical Templates`,
+                    "description": `Create professional ATS-optimized engineering resumes for free. Land interviews 3x faster with our engineering resume builder.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
@@ -727,7 +786,7 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -746,7 +805,7 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-engineering-resume-builder.jpg",
                       "applicationSuite": "Engineering Career Tools",
                       "countriesSupported": "Global",
@@ -774,7 +833,7 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "HowTo",
                     "name": "How to Create a Professional Engineering Resume with Our Free Builder",
-                    "description": "Step-by-step guide to create an ATS-optimized engineering resume for free",
+                    "description": `Step-by-step guide to create an ATS-optimized engineering resume for free in ${currentYear}`,
                     "totalTime": "PT15M",
                     "estimatedCost": {
                       "@type": "MonetaryAmount",
@@ -925,8 +984,8 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Engineering Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Engineering <span className="cf-gradient-text">Resume Builder 2026</span></h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Engineering Resume Builder {currentYear}</span></div>
+              <h1 className="cf-hero-title">Free Engineering <span className="cf-gradient-text">Resume Builder {currentYear}</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized engineering resume for free in minutes.</strong> Our technical resume builder ensures your engineering experience and skills get noticed by tech companies and engineering firms.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free engineering resume now—no sign-up required">
@@ -1117,6 +1176,24 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
                 </button>
               </div>
               <div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Engineering</span></div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

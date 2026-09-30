@@ -41,7 +41,8 @@ import {
   FiMonitor,
   FiTruck,
   FiHeart,
-  FiShield
+  FiShield,
+  FiLink as FiLinkIcon
 } from 'react-icons/fi';
 import Link from 'next/link';
 
@@ -312,6 +313,18 @@ const careerFlowStyles = `
   .cf-share-close-btn { display: inline-block; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 12px 32px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); }
   .cf-share-close-btn:hover { filter: brightness(1.1); box-shadow: 0 0 18px rgba(242, 202, 80, 0.3); transform: translateY(-1px); }
 
+  /* ========== RELATED RESOURCES SECTION ========== */
+  .cf-related-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: var(--cf-surface-container-lowest); border-top: 0.5px solid rgba(153, 144, 124, 0.1); }
+  .cf-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1100px; margin: 0 auto; }
+  .cf-related-card { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; transition: all var(--cf-transition-base); text-decoration: none; color: inherit; height: 100%; min-height: 84px; }
+  .cf-related-card:hover { background: rgba(32, 31, 33, 0.8); border-color: var(--cf-primary-container); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 202, 80, 0.05); }
+  .cf-related-card:focus-visible { outline: 2px solid var(--cf-primary); outline-offset: 2px; }
+  .cf-related-card-inner { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+  .cf-related-card-icon { width: 42px; height: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: rgba(242, 202, 80, 0.08); border: 0.5px solid rgba(212, 175, 55, 0.25); color: var(--cf-primary); font-size: 18px; }
+  .cf-related-card-title { font-family: var(--cf-font-body); font-size: 15px; font-weight: 600; color: var(--cf-on-background); line-height: 1.4; word-break: break-word; overflow-wrap: anywhere; }
+  .cf-related-card-arrow { flex-shrink: 0; color: var(--cf-primary); font-size: 18px; transition: transform var(--cf-transition-base); }
+  .cf-related-card:hover .cf-related-card-arrow { transform: translateX(4px); }
+
   @media (min-width: 1024px) {
     .cf-layout { flex-direction: row; gap: 48px; }
     .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; }
@@ -349,7 +362,7 @@ const careerFlowStyles = `
     .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .cf-faq-grid { grid-template-columns: 1fr; }
-    .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); }
+    .cf-faq-section, .cf-cta-section, .cf-related-section { padding: 60px var(--cf-margin-mobile); }
     .cf-section-header h2, .cf-cta-title { font-size: 28px; }
     .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; }
     .cf-modal-page { width: 100%; height: auto; min-height: 400px; }
@@ -358,6 +371,7 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-related-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
@@ -385,21 +399,26 @@ const careerFlowStyles = `
     .cf-modal-page .cf-retail-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-related-card { padding: 16px 18px; gap: 12px; }
+    .cf-related-card-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-related-card-title { font-size: 14px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-related-card { padding: 14px 16px; }
+    .cf-related-card-icon { width: 32px; height: 32px; font-size: 14px; }
   }
 
   @media print {
-    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; }
+    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-related-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; }
     .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; }
     .cf-retail-template, .cf-section { page-break-inside: avoid; }
   }
 `;
 
-const RetailResume = ({ seoData, buildTimestamp }) => {
+const RetailResume = ({ seoData, buildTimestamp, currentYear }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -416,6 +435,9 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic year — advances automatically when ISR rebuilds the page
+  const year = currentYear || new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', department: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', program: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -441,6 +463,30 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // ============= INTERNAL LINKS =============
+  const internalLinks = [
+    {
+      link: "/ats-friendly-retail-associate-resume-builder",
+      anchorText: "Retail Associate Resume Builder"
+    },
+    {
+      link: "/ats-friendly-sales-associate-resume-builder",
+      anchorText: "Sales Associate Resume Builder"
+    },
+    {
+      link: "/ats-friendly-customer-service-resume-builder",
+      anchorText: "Customer Service Resume Builder"
+    },
+    {
+      link: "/ats-friendly-chef-cook-resume-builder",
+      anchorText: "Chef & Cook Resume Builder"
+    },
+    {
+      link: "/ats-friendly-warehouse-worker-resume-builder",
+      anchorText: "Warehouse Worker Resume Builder"
+    }
+  ];
 
   // Testimonials for Structured Data
   const testimonials = [
@@ -489,7 +535,7 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
   ];
 
   const faqs = [
-    { question: "Is this retail resume builder really free with no hidden costs?", answer: "Yes, our retail resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional retail resume in PDF format without any payment required." },
+    { question: `Is this retail resume builder really free with no hidden costs in ${year}?`, answer: `Yes, our retail resume builder is completely free with no hidden costs or watermarks in ${year}. Create, edit, and download your professional retail resume in PDF format without any payment required.` },
     { question: "What does ATS-friendly mean for retail resumes?", answer: "ATS-friendly means our retail resume templates are optimized to pass through Applicant Tracking Systems used by 95% of retail companies. This ensures your sales achievements and retail experience are properly scanned and recognized." },
     { question: "Can I download my retail resume as PDF without creating an account?", answer: "Absolutely! Download your professional retail resume in PDF format without creating an account. Everything is completely free and accessible immediately for retail professionals." },
     { question: "How many retail resume templates are available for free?", answer: "We offer professionally designed ATS-friendly retail resume templates for store managers, sales associates, visual merchandisers, buyers, and all retail positions. All templates are completely free and optimized for retail hiring." },
@@ -609,9 +655,9 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates</title>
-          <meta name="title" content="Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates" />
-          <meta name="description" content="Create your professional retail resume for free in 2026. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up." />
+          <title>{`Free Retail Resume Builder ${year} | ATS-Friendly Store Manager Templates`}</title>
+          <meta name="title" content={`Free Retail Resume Builder ${year} | ATS-Friendly Store Manager Templates`} />
+          <meta name="description" content={`Create your professional retail resume for free in ${year}. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up.`} />
           <meta name="keywords" content="retail resume builder, retail resume templates, store manager resume, sales associate resume, ATS friendly retail resume, free resume builder for retail professionals, retail CV, retail sales resume, visual merchandiser resume, retail management resume" />
           <meta name="author" content="Professional Retail Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -621,8 +667,8 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
           <link rel="canonical" href={canonicalUrl} />
-          <meta property="og:title" content="Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates" />
-          <meta property="og:description" content="Create your professional retail resume for free in 2026. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up." />
+          <meta property="og:title" content={`Free Retail Resume Builder ${year} | ATS-Friendly Store Manager Templates`} />
+          <meta property="og:description" content={`Create your professional retail resume for free in ${year}. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-retail-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -636,8 +682,8 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Retail Resume Builder 2026 | ATS-Friendly Store Manager Templates" />
-          <meta name="twitter:description" content="Create your professional retail resume for free in 2026. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free Retail Resume Builder ${year} | ATS-Friendly Store Manager Templates`} />
+          <meta name="twitter:description" content={`Create your professional retail resume for free in ${year}. ATS-optimized templates help store managers, sales associates & retail staff land interviews faster. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-retail-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Retail Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@ProResumeFree" />
@@ -663,9 +709,9 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Retail Resume Builder 2026 - ATS Friendly Retail Templates",
+                    "name": `Free Retail Resume Builder ${year} - ATS Friendly Retail Templates`,
                     "description": "Create professional ATS-optimized retail resumes for free. Land interviews 3x faster with our retail resume builder.",
-                    "datePublished": "2026-01-01",
+                    "datePublished": "2020-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
                     "isPartOf": {
@@ -718,7 +764,7 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
                     },
                     "mainEntity": {
                       "@type": "SoftwareApplication",
-                      "name": "Retail Resume Builder - ATS Optimized Retail Resume Maker",
+                      "name": `Retail Resume Builder - ATS Optimized Retail Resume Maker ${year}`,
                       "applicationCategory": "BusinessApplication",
                       "operatingSystem": "Any",
                       "offers": {
@@ -726,7 +772,7 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${year + 1}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -745,7 +791,7 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${year}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-retail-resume-builder.jpg",
                       "applicationSuite": "Retail Career Tools",
                       "countriesSupported": "Global",
@@ -888,7 +934,7 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
                         },
                         "itemReviewed": {
                           "@type": "SoftwareApplication",
-                          "name": "Retail Resume Builder - ATS Optimized Retail Resume Maker",
+                          "name": `Retail Resume Builder - ATS Optimized Retail Resume Maker ${year}`,
                           "applicationCategory": "BusinessApplication",
                           "operatingSystem": "Any",
                           "offers": {
@@ -924,8 +970,8 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Retail Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Retail Resume <span className="cf-gradient-text">Builder 2026: Create Your ATS Store Manager Resume & Get Hired</span></h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Retail Resume Builder {year}</span></div>
+              <h1 className="cf-hero-title">Free Retail Resume <span className="cf-gradient-text">Builder {year}: Create Your ATS Store Manager Resume & Get Hired</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized retail resume for free in minutes.</strong> Our retail resume builder ensures your sales achievements and retail experience get noticed by employers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free retail resume now—no sign-up required">
@@ -1108,6 +1154,32 @@ const RetailResume = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
+        {/* ============= RELATED RESOURCES / INTERNAL LINKS SECTION ============= */}
+        <section className="cf-related-section" aria-labelledby="cf-related-heading">
+          <div className="cf-container">
+            <div className="cf-section-header">
+              <h2 id="cf-related-heading">Related Retail, Sales & Service Resume Resources</h2>
+              <p>Explore our other free ATS-friendly resume builders for retail, sales, service, and hospitality roles.</p>
+            </div>
+            <nav className="cf-related-grid" aria-label="Related retail, sales and service resume resources">
+              {internalLinks.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.link}
+                  className="cf-related-card"
+                  title={item.anchorText}
+                >
+                  <span className="cf-related-card-inner">
+                    <span className="cf-related-card-icon" aria-hidden="true"><FiLinkIcon /></span>
+                    <span className="cf-related-card-title">{item.anchorText}</span>
+                  </span>
+                  <FiArrowRight className="cf-related-card-arrow" aria-hidden="true" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
+
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Retail Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><RetailTemplate formData={formData}/></div></div></div></div>)}
 
         {showSharePopup && (
@@ -1131,6 +1203,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   // Generate review dates for structured data
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -1161,7 +1234,8 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
-      buildTimestamp
+      buildTimestamp,
+      currentYear
     },
     // ISR: Revalidate every hour (3600 seconds)
     revalidate: 3600
