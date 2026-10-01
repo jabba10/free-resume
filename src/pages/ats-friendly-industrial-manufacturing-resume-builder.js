@@ -287,7 +287,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -299,6 +299,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -335,6 +349,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -364,6 +379,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -391,11 +410,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-industrial-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -413,6 +440,9 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
+
   const defaultExperience = () => ({ company: '', position: '', department: '', location: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', field: '', location: '', startDate: '', endDate: '', gpa: '', isEditing: false, editIndex: null });
   const defaultTechnicalSkill = () => ({ name: '', category: 'Mechanical', proficiency: 'Advanced', isEditing: false, editIndex: null });
@@ -422,7 +452,6 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
   const defaultLanguage = () => ({ name: '', proficiency: '', isEditing: false, editIndex: null });
   const defaultSocialLink = () => ({ platform: '', url: '', isEditing: false, editIndex: null });
   const defaultSafetyRecord = () => ({ description: '', period: '', isEditing: false, editIndex: null });
-  const defaultProfessionalAffiliation = () => ({ organization: '', isEditing: false, editIndex: null });
 
   const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', address: '', summary: '', experience: [], education: [], technicalSkills: [], certifications: [], projects: [], software: [], languages: [], socialLinks: [], safetyRecords: [], professionalAffiliations: [] });
   const [fontSizes, setFontSizes] = useState({ name: 14, sectionTitle: 10, contactInfo: 7, jobTitle: 9, company: 8, degree: 9, institution: 7, institutionDate: 6, regularText: 8, bulletText: 8, skillText: 7, certificationText: 8, projectText: 8 });
@@ -441,6 +470,35 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-advanced-manufacturing-and-automation-resume-builder",
+      title: "Advanced Manufacturing Resume Builder",
+      icon: <FiCpu />
+    },
+    {
+      target: "/ats-friendly-engineering-resume-builder",
+      title: "Engineering Resume Builder",
+      icon: <FiHardDrive />
+    },
+    {
+      target: "/ats-friendly-construction-worker-resume-builder",
+      title: "Construction Worker Resume Builder",
+      icon: <FiTool />
+    },
+    {
+      target: "/ats-friendly-warehouse-worker-resume-builder",
+      title: "Warehouse Worker Resume Builder",
+      icon: <FiPackage />
+    },
+    {
+      target: "/ats-friendly-electrician-resume-builder",
+      title: "Electrician Resume Builder",
+      icon: <FiZap />
+    }
+  ];
 
   // Industrial-specific testimonials for structured data
   const testimonials = [
@@ -490,12 +548,12 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
 
   // Expanded FAQs matching Page 1's 6-item pattern
   const faqs = [
-    { question: "Is this industrial resume builder free and suitable for manufacturing job applications?", answer: "Yes, our industrial resume builder is completely free and optimized for manufacturing, engineering, and industrial job applications. We include industry-specific formatting, technical skill templates, and ATS optimization for industrial hiring systems." },
+    { question: `Is this industrial resume builder free and suitable for manufacturing job applications in ${currentYear}?`, answer: `Yes, our industrial resume builder is completely free in ${currentYear} and optimized for manufacturing, engineering, and industrial job applications. We include industry-specific formatting, technical skill templates, and ATS optimization for industrial hiring systems.` },
     { question: "What makes an industrial resume different from a corporate resume?", answer: "Industrial resumes emphasize technical skills, certifications (OSHA, Six Sigma, PMP), project management with budgets, safety records, equipment proficiency, and measurable production improvements. Our builder addresses all these unique industrial requirements." },
     { question: "Can I use this for engineering and technical job applications?", answer: "Absolutely! We include specialized sections for engineering disciplines, CAD software proficiency, technical certifications, project portfolios, and industry-specific terminology for mechanical, electrical, and industrial engineering roles." },
     { question: "How do I properly format technical skills and certifications?", answer: "Our builder includes categorized technical skill sections (Mechanical, Electrical, Software), proper certification formatting with issuing authorities and expiry dates, and industry-standard terminology for industrial credentials." },
     { question: "Does this builder include safety and compliance sections?", answer: "Yes, we offer dedicated safety record sections, OSHA compliance documentation, incident-free periods, and safety certification formatting that are critical for industrial and manufacturing roles." },
-    { question: "Can I highlight production improvements and cost savings?", answer: "Our builder includes quantifiable achievement sections with specific metrics for production improvements, cost reductions, efficiency gains, and quality improvements that industrial employers value." }
+    { question: `Can I highlight production improvements and cost savings in ${currentYear}?`, answer: "Our builder includes quantifiable achievement sections with specific metrics for production improvements, cost reductions, efficiency gains, and quality improvements that industrial employers value." }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -610,7 +668,6 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
     );
   };
 
-  // SINGLE CANONICAL URL - WITHOUT www
   const canonicalUrl = "https://professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder";
 
   return (
@@ -618,10 +675,9 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          {/* OPTIMIZED TITLE - UNDER 70 CHARACTERS */}
-          <title>Free Industrial Resume Builder 2026 | Manufacturing Templates</title>
-          <meta name="title" content="Free Industrial Resume Builder 2026 | Manufacturing Templates" />
-          <meta name="description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
+          <title>Free Industrial Resume Builder {currentYear} | Manufacturing Templates</title>
+          <meta name="title" content={`Free Industrial Resume Builder ${currentYear} | Manufacturing Templates`} />
+          <meta name="description" content={`Create your professional industrial resume for free in ${currentYear}. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up.`} />
           <meta name="keywords" content="industrial resume builder, manufacturing resume, engineering resume, technical resume, mechanical resume, electrical resume, plant manager resume, maintenance supervisor resume, industrial engineer resume, ATS friendly industrial resume" />
           <meta name="author" content="Professional Industrial Resume Builder" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -630,12 +686,9 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
           <meta name="last-modified" content={safeLastModifiedDate} />
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-          
-          {/* SINGLE CANONICAL URL - WITHOUT www */}
           <link rel="canonical" href={canonicalUrl} />
-          
-          <meta property="og:title" content="Free Industrial Resume Builder 2026 | Manufacturing Templates" />
-          <meta property="og:description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
+          <meta property="og:title" content={`Free Industrial Resume Builder ${currentYear} | Manufacturing Templates`} />
+          <meta property="og:description" content={`Create your professional industrial resume for free in ${currentYear}. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-industrial-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -649,8 +702,8 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Industrial Resume Builder 2026 | Manufacturing Templates" />
-          <meta name="twitter:description" content="Create your professional industrial resume for free in 2026. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free Industrial Resume Builder ${currentYear} | Manufacturing Templates`} />
+          <meta name="twitter:description" content={`Create your professional industrial resume for free in ${currentYear}. ATS-optimized templates for manufacturing, engineering & technical roles. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-industrial-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Industrial Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@IndustrialResume" />
@@ -676,8 +729,8 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Industrial Resume Builder 2026 | Manufacturing Templates",
-                    "description": "Create professional ATS-optimized resumes for industrial, manufacturing, engineering, and technical jobs. Industry-specific templates with technical skill formatting.",
+                    "name": `Free Industrial Resume Builder ${currentYear} | Manufacturing Templates`,
+                    "description": `Create professional ATS-optimized resumes for industrial, manufacturing, engineering, and technical jobs. Industry-specific templates with technical skill formatting.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
@@ -737,7 +790,7 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -756,7 +809,7 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-industrial-resume-builder.jpg",
                       "applicationSuite": "Industrial Career Tools",
                       "countriesSupported": "Global",
@@ -784,7 +837,7 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "HowTo",
                     "name": "How to Create a Professional Industrial Resume with Our Free Builder",
-                    "description": "Step-by-step guide to create an ATS-optimized industrial or manufacturing resume for free",
+                    "description": `Step-by-step guide to create an ATS-optimized industrial or manufacturing resume for free in ${currentYear}`,
                     "totalTime": "PT20M",
                     "estimatedCost": {
                       "@type": "MonetaryAmount",
@@ -857,12 +910,11 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
             <div className="cf-hero-content">
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon"/>
-                <span className="cf-trust-text">Best Free Industrial Resume Builder 2026</span>
+                <span className="cf-trust-text">Best Free Industrial Resume Builder {currentYear}</span>
               </div>
               
-              {/* SINGLE H1 TAG */}
               <h1 className="cf-hero-title">
-                Free Industrial Resume Builder 2026
+                Free Industrial Resume Builder {currentYear}
               </h1>
               
               <p className="cf-hero-subtitle">
@@ -1078,6 +1130,24 @@ const IndustrialResume = ({ seoData, buildTimestamp }) => {
                 <FiCheck className="cf-guarantee-icon"/>
                 <span className="cf-guarantee-text">Technical Skill Formatting • Industry-Specific Templates • No Sign Up Required • Free Forever • ATS Optimized</span>
               </div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1120,7 +1190,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data - WITHOUT www
+  // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://professionalresumefree.com/' },
     { name: 'Industrial Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-industrial-manufacturing-resume-builder' }

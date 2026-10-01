@@ -280,7 +280,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -292,6 +292,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -328,6 +342,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -357,6 +372,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -384,11 +403,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-legal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -405,6 +432,9 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', practiceArea: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', honors: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -432,6 +462,35 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-government-education-non-profit-resume-builder",
+      title: "Government & Non-Profit Resume Builder",
+      icon: <FiShield />
+    },
+    {
+      target: "/ats-friendly-business-analyst-resume-builder",
+      title: "Business Analyst Resume Builder",
+      icon: <FiTrendingUp />
+    },
+    {
+      target: "/ats-friendly-finance-resume-builder",
+      title: "Finance Resume Builder",
+      icon: <FiBarChart />
+    },
+    {
+      target: "/best-resume-examples-for-career-changers-in-the-usa",
+      title: "Career Changer Resume Examples",
+      icon: <FiLayers />
+    },
+    {
+      target: "/about",
+      title: "About ProfessionalResumeFree",
+      icon: <FiFileText />
+    }
+  ];
 
   // Legal-specific testimonials for structured data
   const testimonials = [
@@ -481,12 +540,12 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
 
   // Expanded FAQs matching Page 1's 6-item pattern
   const faqs = [
-    { question: "Is this legal resume builder completely free with no watermarks?", answer: "Yes, our legal resume builder is 100% free with no hidden costs, watermarks, or limitations. Create, edit, and download professional legal resumes in PDF format without any payment required." },
+    { question: `Is this legal resume builder completely free with no watermarks in ${currentYear}?`, answer: `Yes, our legal resume builder is 100% free in ${currentYear} with no hidden costs, watermarks, or limitations. Create, edit, and download professional legal resumes in PDF format without any payment required.` },
     { question: "What makes your legal resume templates ATS-friendly?", answer: "Our legal resume templates are specifically optimized for Applicant Tracking Systems used by 95% of law firms, corporate legal departments, and government agencies worldwide. They ensure proper scanning of legal credentials, bar admissions, and practice areas." },
     { question: "Can I use this builder for international legal job applications?", answer: "Absolutely! We support legal resumes for jurisdictions worldwide including US, UK, Canada, Australia, EU, and international law positions. Templates include proper formatting for different legal systems and qualifications." },
     { question: "How many legal practice area templates are available?", answer: "We offer professionally designed ATS-friendly templates for all major practice areas: Corporate Law, Litigation, International Law, IP, Tax, Family Law, Criminal Law, Immigration, and specialized fields across global jurisdictions." },
     { question: "Does the builder support multiple bar admissions and jurisdictions?", answer: "Yes, you can add multiple bar admissions, jurisdictions, and court admissions with proper formatting for each. Our templates are designed for attorneys practicing in multiple states or countries." },
-    { question: "Can I include legal publications and speaking engagements?", answer: "Absolutely! Our builder includes dedicated sections for legal publications, articles, speaking engagements, CLE presentations, and professional recognition to showcase your thought leadership." }
+    { question: `Can I include legal publications and speaking engagements in ${currentYear}?`, answer: "Absolutely! Our builder includes dedicated sections for legal publications, articles, speaking engagements, CLE presentations, and professional recognition to showcase your thought leadership." }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -599,7 +658,6 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
     );
   };
 
-  // SINGLE CANONICAL URL - WITHOUT www
   const canonicalUrl = "https://professionalresumefree.com/ats-friendly-legal-resume-builder";
 
   return (
@@ -607,9 +665,9 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Legal Resume Builder 2026 | ATS Attorney Templates</title>
-          <meta name="title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
-          <meta name="description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
+          <title>Free Legal Resume Builder {currentYear} | ATS Attorney Templates</title>
+          <meta name="title" content={`Free Legal Resume Builder ${currentYear} | ATS Attorney Templates`} />
+          <meta name="description" content={`Create a professional legal resume for free in ${currentYear}. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.`} />
           <meta name="keywords" content="legal resume builder, attorney resume templates, lawyer resume builder, law firm resume, ATS friendly legal resume, free resume builder for attorneys, legal CV, lawyer CV, international law resume, bar admission resume" />
           <meta name="author" content="Professional Legal Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -618,12 +676,9 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
           <meta name="last-modified" content={safeLastModifiedDate} />
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-          
-          {/* SINGLE CANONICAL URL - WITHOUT www */}
           <link rel="canonical" href={canonicalUrl} />
-          
-          <meta property="og:title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
-          <meta property="og:description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
+          <meta property="og:title" content={`Free Legal Resume Builder ${currentYear} | ATS Attorney Templates`} />
+          <meta property="og:description" content={`Create a professional legal resume for free in ${currentYear}. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-legal-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -637,8 +692,8 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Legal Resume Builder 2026 | ATS Attorney Templates" />
-          <meta name="twitter:description" content="Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly." />
+          <meta name="twitter:title" content={`Free Legal Resume Builder ${currentYear} | ATS Attorney Templates`} />
+          <meta name="twitter:description" content={`Create a professional legal resume for free in ${currentYear}. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-legal-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Legal Resume Builder with ATS Templates for Global Jurisdictions" />
           <meta name="twitter:site" content="@LegalResumeFree" />
@@ -663,8 +718,8 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Legal Resume Builder 2026 | ATS Attorney Templates",
-                    "description": "Create a professional legal resume for free in 2026. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.",
+                    "name": `Free Legal Resume Builder ${currentYear} | ATS Attorney Templates`,
+                    "description": `Create a professional legal resume for free in ${currentYear}. ATS-optimized templates for attorneys, paralegals. Bar admissions formatting. Download PDF instantly.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
@@ -726,7 +781,7 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -745,7 +800,7 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-legal-resume-builder.jpg",
                       "applicationSuite": "Legal Career Tools",
                       "countriesSupported": "Global",
@@ -773,7 +828,7 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "HowTo",
                     "name": "How to Create a Professional Legal Resume with Our Free Builder",
-                    "description": "Step-by-step guide to create an ATS-optimized legal resume for free",
+                    "description": `Step-by-step guide to create an ATS-optimized legal resume for free in ${currentYear}`,
                     "totalTime": "PT20M",
                     "estimatedCost": {
                       "@type": "MonetaryAmount",
@@ -935,12 +990,11 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
             <div className="cf-hero-content">
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon"/>
-                <span className="cf-trust-text">Best Free Legal Resume Builder 2026</span>
+                <span className="cf-trust-text">Best Free Legal Resume Builder {currentYear}</span>
               </div>
               
-              {/* SINGLE H1 TAG */}
               <h1 className="cf-hero-title">
-                Free Legal Resume Builder 2026: Start Now
+                Free Legal Resume Builder {currentYear}: Start Now
               </h1>
               
               <p className="cf-hero-subtitle">
@@ -1146,6 +1200,24 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
                 <FiCheck className="cf-guarantee-icon"/>
                 <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Legal • Global Jurisdiction Support</span>
               </div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1188,7 +1260,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data - WITHOUT www
+  // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://professionalresumefree.com/' },
     { name: 'Legal Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-legal-resume-builder' }

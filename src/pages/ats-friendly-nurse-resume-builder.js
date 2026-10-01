@@ -302,7 +302,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -311,9 +311,18 @@ const careerFlowStyles = `
   .cf-cta-btn-text { position: relative; z-index: 1; }
   .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
   .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
-  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); margin-bottom: 48px; }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-related-links-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; border-top: 0.5px solid rgba(212, 175, 55, 0.15); }
+  .cf-related-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; letter-spacing: 0.02em; }
+  .cf-related-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cf-related-link-card { display: flex; align-items: center; justify-content: space-between; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 18px 22px; text-decoration: none; transition: all var(--cf-transition-base); text-align: left; }
+  .cf-related-link-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); background: rgba(242, 202, 80, 0.06); }
+  .cf-related-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); letter-spacing: 0.02em; line-height: 1.4; }
+  .cf-related-link-arrow { color: var(--cf-primary); font-size: 18px; flex-shrink: 0; margin-left: 12px; transition: transform var(--cf-transition-base); }
+  .cf-related-link-card:hover .cf-related-link-arrow { transform: translateX(6px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -379,6 +388,7 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-related-links-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
@@ -406,6 +416,9 @@ const careerFlowStyles = `
     .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-related-links-title { font-size: 18px; }
+    .cf-related-link-card { padding: 14px 18px; }
+    .cf-related-link-title { font-size: 13px; }
   }
 
   @media (max-width: 360px) {
@@ -441,6 +454,9 @@ const Resume = ({
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic Year Calculation - Automatically updates 2026 → 2027 → 2028 and beyond
+  const currentYear = new Date().getFullYear();
 
   // --- Default item factories ---
   const defaultExperience = () => ({
@@ -621,6 +637,15 @@ const Resume = ({
     }
   ];
 
+  // --- Internal Links for Related Resources ---
+  const relatedLinks = [
+    { target: "/ats-friendly-registered-practical-nurse-resume-builder", title: "Registered Practical Nurse Resume Builder" },
+    { target: "/ats-friendly-nurse-practitioner-resume-builder", title: "Nurse Practitioner Resume Builder" },
+    { target: "/ats-friendly-medical-assistant-resume-builder", title: "Medical Assistant Resume Builder" },
+    { target: "/ats-friendly-healthcare-assistant-resume-builder", title: "Healthcare Assistant Resume Builder" },
+    { target: "/ats-friendly-medical-resume-builder", title: "Medical Resume Builder" }
+  ];
+
   const handleFontSizeChange = (key, value) => {
     setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
   };
@@ -742,9 +767,9 @@ const Resume = ({
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates</title>
-          <meta name="title" content="Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates" />
-          <meta name="description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
+          <title>{`Free Nurse Resume Builder ${currentYear}: ATS-Optimized Nursing Templates`}</title>
+          <meta name="title" content={`Free Nurse Resume Builder ${currentYear}: ATS-Optimized Nursing Templates`} />
+          <meta name="description" content={`Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta name="keywords" content="nurse resume builder, nursing resume templates, RN resume, ATS friendly nurse resume, free resume builder for nurses, nursing CV, healthcare resume, ICU nurse resume, travel nurse resume, international nurse resume, new grad nurse resume" />
           <meta name="author" content="Professional Nurse Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -763,8 +788,8 @@ const Resume = ({
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates" />
-          <meta property="og:description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
+          <meta property="og:title" content={`Free Nurse Resume Builder ${currentYear}: ATS-Optimized Nursing Templates`} />
+          <meta property="og:description" content={`Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-nurse-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -778,8 +803,8 @@ const Resume = ({
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Nurse Resume Builder 2026: ATS-Optimized Nursing Templates" />
-          <meta name="twitter:description" content="Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for 2026." />
+          <meta name="twitter:title" content={`Free Nurse Resume Builder ${currentYear}: ATS-Optimized Nursing Templates`} />
+          <meta name="twitter:description" content={`Create a professional nursing resume for free. ATS-optimized templates trusted by 2M+ nurses. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-nurse-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Nurse Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@NurseResumeFree" />
@@ -805,7 +830,7 @@ const Resume = ({
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Nurse Resume Builder 2026 | ATS-Optimized Templates",
+                    "name": `Free Nurse Resume Builder ${currentYear} | ATS-Optimized Templates`,
                     "description": "Create professional ATS-optimized nursing resumes for free. Land interviews 3x faster with our nurse resume builder.",
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
@@ -868,7 +893,7 @@ const Resume = ({
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -887,7 +912,7 @@ const Resume = ({
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-nurse-resume-builder.jpg",
                       "applicationSuite": "Nursing Career Tools",
                       "countriesSupported": "Global",
@@ -1083,7 +1108,7 @@ const Resume = ({
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon" />
                 <span className="cf-trust-text">
-                  #1 Free Nurse Resume Builder 2026
+                  #1 Free Nurse Resume Builder {currentYear}
                 </span>
               </div>
               
@@ -1312,6 +1337,19 @@ const Resume = ({
               <div className="cf-cta-guarantee">
                 <FiCheck className="cf-guarantee-icon" />
                 <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Nursing</span>
+              </div>
+
+              {/* Related Resources - Placed beneath the guarantee text */}
+              <div className="cf-related-links-wrap">
+                <h3 className="cf-related-links-title">Explore More Free Healthcare Resume Builders</h3>
+                <div className="cf-related-links-grid">
+                  {relatedLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-related-link-card" prefetch={false}>
+                      <span className="cf-related-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-related-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

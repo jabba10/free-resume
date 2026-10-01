@@ -220,7 +220,7 @@ const careerFlowStyles = `
   .cf-bullet-list { margin: 3pt 0 0; padding-left: 8pt; list-style-type: disc; }
   .cf-bullet-list li { margin-bottom: 2pt; text-align: justify; line-height: 1.25; }
   .cf-skills-list { display: flex; flex-wrap: wrap; gap: 3pt; list-style: none; padding: 0; margin: 3pt 0 0; }
-  .cf-skills-list li { background: #f8f9fa; padding: 1.5pt 4pt; border-radius: 1.5pt; border: 0.5pt solid #dee2e6; }
+  .cf-skills-list li { background: #f8f9fa; padding: 1.5pt 4pt; border-radius: 1.5pt; border: 0.5pt solid #dee2e6; display: flex; align-items: center; gap: 4pt; }
   .cf-cert-item, .cf-reference-item, .cf-training-item { margin-bottom: 3pt; line-height: 1.25; }
   .cf-skills-categories { margin-top: 16px; }
   .cf-skill-category { margin-bottom: 12px; }
@@ -296,7 +296,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -308,6 +308,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -344,6 +358,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -373,6 +388,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -400,11 +419,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -422,6 +449,9 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', department: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', qualification: '', awardingBody: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -443,6 +473,35 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-medical-assistant-resume-builder",
+      title: "Medical Assistant Resume Builder",
+      icon: <FiActivity />
+    },
+    {
+      target: "/ats-friendly-nurse-resume-builder",
+      title: "Nurse Resume Builder",
+      icon: <FiHeart />
+    },
+    {
+      target: "/ats-friendly-care-assistant-resume-builder",
+      title: "Care Assistant Resume Builder",
+      icon: <FiUsers />
+    },
+    {
+      target: "/ats-friendly-aged-care-worker-resume-builder",
+      title: "Aged Care Worker Resume Builder",
+      icon: <FiBriefcase />
+    },
+    {
+      target: "/best-resume-examples-for-usa-healthcare-jobs",
+      title: "US Healthcare Resume Examples",
+      icon: <FiFileText />
+    }
+  ];
 
   // Testimonials for Structured Data (UK Healthcare Assistant focused)
   const testimonials = [
@@ -470,12 +529,12 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
   ];
 
   const faqs = [
-    { question: "Is this healthcare assistant CV builder free for UK job seekers?", answer: "Yes, our healthcare assistant CV builder is completely free for UK job seekers. Create, edit, and download your professional CV in NHS-compatible format without any payment required." },
+    { question: `Is this healthcare assistant CV builder free for UK job seekers in ${currentYear}?`, answer: `Yes, our healthcare assistant CV builder is completely free in ${currentYear} for UK job seekers. Create, edit, and download your professional CV in NHS-compatible format without any payment required.` },
     { question: "What UK-specific content does this healthcare assistant CV builder include?", answer: "Our builder includes UK-specific sections like DBS status, NHS competencies, CQC standards knowledge, NVQ/SVQ qualifications, and UK healthcare terminology expected by NHS and private care employers." },
     { question: "Can I download my healthcare assistant CV as PDF for NHS applications?", answer: "Absolutely! Download your healthcare assistant CV in ATS-friendly PDF format optimized for NHS applications, care home submissions, and UK healthcare recruitment systems." },
     { question: "What healthcare assistant templates are available for UK job seekers?", answer: "We offer professionally designed templates for NHS healthcare assistants, senior HCAs, mental health HCAs, paediatric HCAs, and care home assistants - all formatted for UK job applications." },
     { question: "Does this builder include NHS values and competencies?", answer: "Yes, our builder includes sections specifically for NHS values, core competencies, and the 6Cs of caring (Care, Compassion, Competence, Communication, Courage, Commitment)." },
-    { question: "Can I add my NVQ/SVQ qualifications to the CV?", answer: "Yes, our education section is specifically designed for UK qualifications including NVQ Levels 2/3 in Health and Social Care, SVQ qualifications, and other UK-recognized certifications." }
+    { question: `Can I add my NVQ/SVQ qualifications to the CV in ${currentYear}?`, answer: "Yes, our education section is specifically designed for UK qualifications including NVQ Levels 2/3 in Health and Social Care, SVQ qualifications, and other UK-recognized certifications." }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -571,7 +630,6 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
     );
   };
 
-  // SINGLE CANONICAL URL - WITHOUT www
   const canonicalUrl = "https://professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder";
 
   return (
@@ -579,9 +637,9 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-GB">
         <Head>
-          <title>Free Healthcare Assistant CV Builder UK | NHS Templates 2026</title>
-          <meta name="title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
-          <meta name="description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare. Download PDF instantly." />
+          <title>Free Healthcare Assistant CV Builder UK | NHS Templates {currentYear}</title>
+          <meta name="title" content={`Free Healthcare Assistant CV Builder UK | NHS Templates ${currentYear}`} />
+          <meta name="description" content={`Create your NHS-compliant healthcare assistant CV for free in ${currentYear}. UK-specific templates for NHS, care homes, and private healthcare. Download PDF instantly.`} />
           <meta name="keywords" content="healthcare assistant CV UK, NHS CV builder, care assistant resume, UK healthcare CV, NHS jobs, healthcare assistant template, free CV builder UK, healthcare CV download" />
           <meta name="author" content="UK Healthcare Assistant CV Builder" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -590,12 +648,9 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
           <meta name="last-modified" content={safeLastModifiedDate} />
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-          
-          {/* SINGLE CANONICAL URL - WITHOUT www */}
           <link rel="canonical" href={canonicalUrl} />
-          
-          <meta property="og:title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
-          <meta property="og:description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare." />
+          <meta property="og:title" content={`Free Healthcare Assistant CV Builder UK | NHS Templates ${currentYear}`} />
+          <meta property="og:description" content={`Create your NHS-compliant healthcare assistant CV for free in ${currentYear}. UK-specific templates for NHS, care homes, and private healthcare.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-healthcare-assistant-cv-builder.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -606,8 +661,8 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale" content="en_GB" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Healthcare Assistant CV Builder UK | NHS Templates 2026" />
-          <meta name="twitter:description" content="Create your NHS-compliant healthcare assistant CV for free in 2026. UK-specific templates for NHS, care homes, and private healthcare." />
+          <meta name="twitter:title" content={`Free Healthcare Assistant CV Builder UK | NHS Templates ${currentYear}`} />
+          <meta name="twitter:description" content={`Create your NHS-compliant healthcare assistant CV for free in ${currentYear}. UK-specific templates for NHS, care homes, and private healthcare.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-healthcare-assistant-cv-builder.jpg" />
           <meta name="twitter:image:alt" content="Free Healthcare Assistant CV Builder for UK Job Seekers" />
           <meta name="theme-color" content="#005EB8" />
@@ -626,8 +681,8 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Healthcare Assistant CV Builder UK | NHS-Compliant Templates 2026",
-                    "description": "Create professional NHS-compliant healthcare assistant CVs for free. UK-specific templates for NHS, care homes, and private healthcare.",
+                    "name": `Free Healthcare Assistant CV Builder UK | NHS-Compliant Templates ${currentYear}`,
+                    "description": `Create professional NHS-compliant healthcare assistant CVs for free. UK-specific templates for NHS, care homes, and private healthcare.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-GB",
@@ -683,7 +738,7 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "GBP",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -702,7 +757,7 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-cv-builder.jpg",
                       "applicationSuite": "UK Healthcare Career Tools",
                       "countriesSupported": "United Kingdom",
@@ -760,7 +815,7 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
             <div className="cf-hero-content">
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon"/>
-                <span className="cf-trust-text">Best Free NHS CV Builder 2026</span>
+                <span className="cf-trust-text">Best Free NHS CV Builder {currentYear}</span>
               </div>
               <h1 className="cf-hero-title">
                 Free Healthcare Assistant CV Builder: Create Yours in 5 Minutes
@@ -954,6 +1009,24 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
                 <FiCheck className="cf-guarantee-icon"/>
                 <span className="cf-guarantee-text">No credit card required • Free forever • NHS Compliant • Download in minutes</span>
               </div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -996,7 +1069,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data - WITHOUT www
+  // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://professionalresumefree.com/' },
     { name: 'Healthcare Assistant CV Builder', item: 'https://professionalresumefree.com/ats-friendly-healthcare-assistant-resume-builder' }

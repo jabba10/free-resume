@@ -284,7 +284,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -296,6 +296,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -332,6 +346,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -361,6 +376,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -388,11 +407,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-logistics-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -419,6 +446,9 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
 
   // --- Testimonials for Structured Data (Logistics Industry) ---
   const testimonials = [
@@ -469,8 +499,8 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
   // --- FAQ Data for Structured Data (Logistics Industry) ---
   const faqs = [
     {
-      question: "Is this logistics resume builder really free with no hidden costs?",
-      answer: "Yes, our logistics resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional logistics resume in PDF format without any payment required."
+      question: `Is this logistics resume builder really free with no hidden costs in ${currentYear}?`,
+      answer: `Yes, our logistics resume builder is completely free in ${currentYear} with no hidden costs or watermarks. Create, edit, and download your professional logistics resume in PDF format without any payment required.`
     },
     {
       question: "What does ATS-friendly mean for logistics resumes?",
@@ -489,7 +519,7 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
       answer: "Our builder uses ATS-optimized logistics templates with proper industry terminology formatting. We guide you to highlight supply chain experience, certifications, and specialized skills that logistics employers look for."
     },
     {
-      question: "Can I edit my logistics resume after downloading it?",
+      question: `Can I edit my logistics resume after downloading it in ${currentYear}?`,
       answer: "Yes, you can always come back and edit your logistics resume. Your work saves automatically, and you can download updated versions as many times as needed—completely free."
     }
   ];
@@ -520,6 +550,35 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-driver-resume-builder",
+      title: "Driver Resume Builder",
+      icon: <FiTruck />
+    },
+    {
+      target: "/ats-friendly-warehouse-worker-resume-builder",
+      title: "Warehouse Worker Resume Builder",
+      icon: <FiPackage />
+    },
+    {
+      target: "/ats-friendly-industrial-manufacturing-resume-builder",
+      title: "Industrial Manufacturing Resume Builder",
+      icon: <FiBriefcase />
+    },
+    {
+      target: "/ats-friendly-construction-worker-resume-builder",
+      title: "Construction Worker Resume Builder",
+      icon: <FiTool />
+    },
+    {
+      target: "/ats-friendly-security-guard-resume-builder",
+      title: "Security Guard Resume Builder",
+      icon: <FiShield />
+    }
+  ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
   const resetFontSizes = () => setFontSizes({ name: 14, sectionTitle: 10, contactInfo: 7, jobTitle: 9, company: 7, degree: 9, institution: 7, institutionDate: 6, regularText: 8, bulletText: 8, skillText: 7, certificationText: 8, achievementText: 8 });
@@ -639,9 +698,9 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Logistics Resume Builder 2026 | ATS Supply Chain Templates</title>
-          <meta name="title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
-          <meta name="description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals. Download PDF instantly." />
+          <title>Free Logistics Resume Builder {currentYear} | ATS Supply Chain Templates</title>
+          <meta name="title" content={`Free Logistics Resume Builder ${currentYear} | ATS Supply Chain Templates`} />
+          <meta name="description" content={`Create your ATS-optimized logistics resume for free in ${currentYear}. Professional supply chain templates trusted by 500K+ logistics professionals. Download PDF instantly.`} />
           <meta name="keywords" content="logistics resume builder, supply chain resume templates, warehouse resume builder, transportation resume, ATS friendly logistics resume, free resume builder for logistics professionals, supply chain CV, logistics manager resume, warehouse supervisor resume, transportation coordinator resume" />
           <meta name="author" content="Professional Logistics Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -650,18 +709,15 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
           <meta name="last-modified" content={safeLastModifiedDate} />
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-          
-          {/* SINGLE CANONICAL URL - WITHOUT www */}
           <link rel="canonical" href={canonicalUrl} />
-          
           <link rel="alternate" href={canonicalUrl} hreflang="en" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
-          <meta property="og:description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals." />
+          <meta property="og:title" content={`Free Logistics Resume Builder ${currentYear} | ATS Supply Chain Templates`} />
+          <meta property="og:description" content={`Create your ATS-optimized logistics resume for free in ${currentYear}. Professional supply chain templates trusted by 500K+ logistics professionals.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-logistics-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -675,8 +731,8 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Logistics Resume Builder 2026 | ATS Supply Chain Templates" />
-          <meta name="twitter:description" content="Create your ATS-optimized logistics resume for free in 2026. Professional supply chain templates trusted by 500K+ logistics professionals." />
+          <meta name="twitter:title" content={`Free Logistics Resume Builder ${currentYear} | ATS Supply Chain Templates`} />
+          <meta name="twitter:description" content={`Create your ATS-optimized logistics resume for free in ${currentYear}. Professional supply chain templates trusted by 500K+ logistics professionals.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-logistics-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Logistics Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@ProResumeFree" />
@@ -702,7 +758,7 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Logistics Resume Builder - ATS Friendly Supply Chain Templates 2026",
+                    "name": `Free Logistics Resume Builder - ATS Friendly Supply Chain Templates ${currentYear}`,
                     "description": "Create professional ATS-optimized logistics resumes for free. Land interviews 3x faster with our logistics resume builder.",
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
@@ -765,7 +821,7 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -784,7 +840,7 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-logistics-resume-builder.jpg",
                       "applicationSuite": "Logistics Career Tools",
                       "countriesSupported": "Global",
@@ -812,7 +868,7 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "HowTo",
                     "name": "How to Create a Professional Logistics Resume with Our Free Builder",
-                    "description": "Step-by-step guide to create an ATS-optimized logistics resume for free",
+                    "description": `Step-by-step guide to create an ATS-optimized logistics resume for free in ${currentYear}`,
                     "totalTime": "PT15M",
                     "estimatedCost": {
                       "@type": "MonetaryAmount",
@@ -980,13 +1036,12 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon" />
                 <span className="cf-trust-text">
-                  Best Free Logistics Resume Builder 2026
+                  Best Free Logistics Resume Builder {currentYear}
                 </span>
               </div>
               
-              {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
               <h1 className="cf-hero-title">
-                Create Your Logistics Resume <span className="cf-gradient-text">2026</span>
+                Create Your Logistics Resume <span className="cf-gradient-text">{currentYear}</span>
               </h1>
               
               <p className="cf-hero-subtitle">
@@ -2088,6 +2143,24 @@ const LogisticsResume = ({ seoData, buildTimestamp }) => {
                 <FiCheck className="cf-guarantee-icon" />
                 <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Logistics</span>
               </div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -2146,7 +2219,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data - WITHOUT www
+  // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://professionalresumefree.com/' },
     { name: 'Logistics Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-logistics-transportation-resume-builder' }
@@ -2163,7 +2236,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    // ISR: Revalidate every 24 hours (86400 seconds)
+    // ISR: Revalidate every hour (3600 seconds)
     revalidate: 3600
   };
 }

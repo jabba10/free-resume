@@ -278,7 +278,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -290,6 +290,20 @@ const careerFlowStyles = `
   .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  /* Internal links below guarantee text */
+  .cf-cta-internal-links { margin-top: 40px; padding-top: 40px; border-top: 0.5px solid rgba(153, 144, 124, 0.15); }
+  .cf-cta-internal-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; text-align: center; }
+  .cf-cta-internal-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .cf-cta-internal-link-card { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; transition: all var(--cf-transition-base); position: relative; overflow: hidden; text-align: left; }
+  .cf-cta-internal-link-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); background: rgba(242, 202, 80, 0.05); }
+  .cf-cta-internal-link-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 2px; background: rgba(242, 202, 80, 0.1); border: 0.5px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); font-size: 18px; flex-shrink: 0; transition: all var(--cf-transition-base); }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-icon { background: rgba(242, 202, 80, 0.2); transform: scale(1.05); }
+  .cf-cta-internal-link-content { flex: 1; min-width: 0; }
+  .cf-cta-internal-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); margin: 0; transition: color var(--cf-transition-fast); line-height: 1.4; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-title { color: var(--cf-primary); }
+  .cf-cta-internal-link-arrow { color: var(--cf-outline); font-size: 16px; transition: all var(--cf-transition-base); flex-shrink: 0; }
+  .cf-cta-internal-link-card:hover .cf-cta-internal-link-arrow { color: var(--cf-primary); transform: translateX(4px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -326,6 +340,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-cta-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -355,6 +370,10 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-cta-internal-links-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cf-cta-internal-link-card { padding: 16px 18px; gap: 12px; }
+    .cf-cta-internal-link-icon { width: 36px; height: 36px; font-size: 16px; }
+    .cf-cta-internal-link-title { font-size: 13px; }
   }
 
   @media (max-width: 480px) {
@@ -382,11 +401,19 @@ const careerFlowStyles = `
     .cf-modal-page .cf-hr-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-cta-internal-links { margin-top: 32px; padding-top: 32px; }
+    .cf-cta-internal-links-title { font-size: 17px; margin-bottom: 18px; }
+    .cf-cta-internal-link-card { padding: 14px 16px; gap: 10px; }
+    .cf-cta-internal-link-icon { width: 32px; height: 32px; font-size: 14px; }
+    .cf-cta-internal-link-title { font-size: 12px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
+    .cf-cta-internal-link-card { padding: 12px 14px; gap: 8px; }
+    .cf-cta-internal-link-icon { width: 28px; height: 28px; font-size: 13px; }
+    .cf-cta-internal-link-title { font-size: 11px; }
   }
 
   @media print {
@@ -403,6 +430,9 @@ const HRResume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic year for automatic updates
+  const currentYear = new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', department: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', program: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -428,6 +458,35 @@ const HRResume = ({ seoData, buildTimestamp }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
+
+  // Internal links data
+  const internalLinks = [
+    {
+      target: "/ats-friendly-administrative-assistant-resume-builder",
+      title: "Administrative Assistant Resume Builder",
+      icon: <FiFileText />
+    },
+    {
+      target: "/ats-friendly-customer-service-resume-builder",
+      title: "Customer Service Resume Builder",
+      icon: <FiUsers />
+    },
+    {
+      target: "/ats-friendly-marketing-executive-manager-resume-builder",
+      title: "Marketing Executive Resume Builder",
+      icon: <FiTrendingUp />
+    },
+    {
+      target: "/ats-friendly-government-education-non-profit-resume-builder",
+      title: "Government & Non-Profit Resume Builder",
+      icon: <FiShield />
+    },
+    {
+      target: "/basic-resume-format",
+      title: "Basic Resume Format",
+      icon: <FiLayers />
+    }
+  ];
 
   // HR-specific testimonials for structured data
   const testimonials = [
@@ -477,12 +536,12 @@ const HRResume = ({ seoData, buildTimestamp }) => {
 
   // Expanded FAQs matching Page 1's 6-item pattern
   const faqs = [
-    { question: "Is this HR resume builder specifically designed for HR Assistant/Coordinator roles?", answer: "Yes, our builder is exclusively designed for HR professionals worldwide. It includes HR-specific templates, content suggestions, and formatting optimized for HR roles across different countries and industries." },
+    { question: `Is this HR resume builder specifically designed for HR Assistant/Coordinator roles in ${currentYear}?`, answer: `Yes, our builder is exclusively designed for HR professionals worldwide in ${currentYear}. It includes HR-specific templates, content suggestions, and formatting optimized for HR roles across different countries and industries.` },
     { question: "What HR-specific features does the builder include?", answer: "Our builder includes HRIS systems proficiency sections, compliance documentation, recruitment metrics templates, global HR experience formatting, and ATS optimization for HR keywords used by recruiters worldwide." },
     { question: "Can I customize my resume for different countries' HR standards?", answer: "Absolutely! Our templates support multiple HR standards including GDPR compliance documentation, different employment law formats, and regional HR certification requirements for global job applications." },
     { question: "How many HR resume templates are available?", answer: "We offer professionally designed ATS-friendly HR templates for HR Assistants, HR Coordinators, HR Generalists, Recruitment Specialists, and HR Systems professionals. All templates are optimized for global HR job markets." },
     { question: "Does it include HR metrics and compliance documentation sections?", answer: "Yes, we have dedicated sections for HR metrics (time-to-hire, cost-per-hire), compliance documentation, HRIS proficiency, recruitment statistics, and employee relations achievements." },
-    { question: "Is the resume builder free for international HR job seekers?", answer: "Completely free! Create, edit, and download professional HR resumes in PDF format without any payment. Perfect for HR professionals seeking opportunities worldwide." }
+    { question: `Is the resume builder free for international HR job seekers in ${currentYear}?`, answer: "Completely free! Create, edit, and download professional HR resumes in PDF format without any payment. Perfect for HR professionals seeking opportunities worldwide." }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -590,7 +649,6 @@ const HRResume = ({ seoData, buildTimestamp }) => {
     );
   };
 
-  // SINGLE CANONICAL URL - WITHOUT www
   const canonicalUrl = "https://professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder";
 
   return (
@@ -598,9 +656,9 @@ const HRResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free HR Resume Builder 2026: Assistant & Coordinator Templates</title>
-          <meta name="title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
-          <meta name="description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
+          <title>Free HR Resume Builder {currentYear}: Assistant & Coordinator Templates</title>
+          <meta name="title" content={`Free HR Resume Builder ${currentYear}: Assistant & Coordinator Templates`} />
+          <meta name="description" content={`Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta name="keywords" content="hr resume builder, hr assistant resume, hr coordinator resume, human resources resume, ATS friendly hr resume, free resume builder for hr professionals, global hr resume, hr recruitment resume, hr generalist resume, hr specialist resume" />
           <meta name="author" content="Professional HR Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -609,12 +667,9 @@ const HRResume = ({ seoData, buildTimestamp }) => {
           <meta name="last-modified" content={safeLastModifiedDate} />
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-          
-          {/* SINGLE CANONICAL URL - WITHOUT www */}
           <link rel="canonical" href={canonicalUrl} />
-          
-          <meta property="og:title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
-          <meta property="og:description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
+          <meta property="og:title" content={`Free HR Resume Builder ${currentYear}: Assistant & Coordinator Templates`} />
+          <meta property="og:description" content={`Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-hr-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -628,8 +683,8 @@ const HRResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free HR Resume Builder 2026: Assistant & Coordinator Templates" />
-          <meta name="twitter:description" content="Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for 2026." />
+          <meta name="twitter:title" content={`Free HR Resume Builder ${currentYear}: Assistant & Coordinator Templates`} />
+          <meta name="twitter:description" content={`Create a professional HR resume for free. ATS-friendly templates trusted by 3M+ HR professionals. Download PDF in minutes. Updated for ${currentYear}.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-hr-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free HR Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@HRResumeFree" />
@@ -655,8 +710,8 @@ const HRResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free HR Resume Builder 2026: Assistant & Coordinator Templates",
-                    "description": "Create professional ATS-optimized HR resumes for free. Land HR Assistant/Coordinator roles 3x faster with our HR resume builder.",
+                    "name": `Free HR Resume Builder ${currentYear}: Assistant & Coordinator Templates`,
+                    "description": `Create professional ATS-optimized HR resumes for free. Land HR Assistant/Coordinator roles 3x faster with our HR resume builder.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
@@ -718,7 +773,7 @@ const HRResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -737,7 +792,7 @@ const HRResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-hr-resume-builder.jpg",
                       "applicationSuite": "HR Career Tools",
                       "countriesSupported": "Global",
@@ -765,7 +820,7 @@ const HRResume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "HowTo",
                     "name": "How to Create a Professional HR Resume with Our Free Builder",
-                    "description": "Step-by-step guide to create an ATS-optimized HR resume for HR Assistants and Coordinators",
+                    "description": `Step-by-step guide to create an ATS-optimized HR resume for HR Assistants and Coordinators in ${currentYear}`,
                     "totalTime": "PT15M",
                     "estimatedCost": {
                       "@type": "MonetaryAmount",
@@ -925,12 +980,11 @@ const HRResume = ({ seoData, buildTimestamp }) => {
             <div className="cf-hero-content">
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon"/>
-                <span className="cf-trust-text">Best Free HR Resume Builder 2026</span>
+                <span className="cf-trust-text">Best Free HR Resume Builder {currentYear}</span>
               </div>
               
-              {/* SINGLE H1 TAG */}
               <h1 className="cf-hero-title">
-                Free HR Resume Builder 2026
+                Free HR Resume Builder {currentYear}
               </h1>
               
               <p className="cf-hero-subtitle">
@@ -1139,6 +1193,24 @@ const HRResume = ({ seoData, buildTimestamp }) => {
                 <FiCheck className="cf-guarantee-icon"/>
                 <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for HR • Global HR Standards</span>
               </div>
+
+              {/* Internal Links Below the Guarantee Text */}
+              <div className="cf-cta-internal-links">
+                <h3 className="cf-cta-internal-links-title">Explore More Free ATS Resume Builders</h3>
+                <div className="cf-cta-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-cta-internal-link-card" prefetch={false}>
+                      <div className="cf-cta-internal-link-icon">
+                        {link.icon}
+                      </div>
+                      <div className="cf-cta-internal-link-content">
+                        <p className="cf-cta-internal-link-title">{link.title}</p>
+                      </div>
+                      <FiArrowRight className="cf-cta-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1181,7 +1253,7 @@ export async function getStaticProps() {
     return date.toISOString().split('T')[0];
   });
 
-  // Breadcrumb data for structured data - WITHOUT www
+  // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://professionalresumefree.com/' },
     { name: 'HR Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-hr-assistant-coordinator-resume-builder' }
