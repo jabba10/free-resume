@@ -274,7 +274,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -283,9 +283,18 @@ const careerFlowStyles = `
   .cf-cta-btn-text { position: relative; z-index: 1; }
   .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
   .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
-  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); margin-bottom: 48px; }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-related-links-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; border-top: 0.5px solid rgba(212, 175, 55, 0.15); }
+  .cf-related-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; letter-spacing: 0.02em; }
+  .cf-related-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cf-related-link-card { display: flex; align-items: center; justify-content: space-between; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 18px 22px; text-decoration: none; transition: all var(--cf-transition-base); text-align: left; }
+  .cf-related-link-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); background: rgba(242, 202, 80, 0.06); }
+  .cf-related-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); letter-spacing: 0.02em; line-height: 1.4; }
+  .cf-related-link-arrow { color: var(--cf-primary); font-size: 18px; flex-shrink: 0; margin-left: 12px; transition: transform var(--cf-transition-base); }
+  .cf-related-link-card:hover .cf-related-link-arrow { transform: translateX(6px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -307,8 +316,8 @@ const careerFlowStyles = `
 
   @media (min-width: 1024px) { .cf-layout { flex-direction: row; gap: 48px; } .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; } .cf-form-section { max-width: 500px; } .cf-faq-grid { grid-template-columns: repeat(2, 1fr); } .cf-form-group { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 1023px) { :root { --cf-margin-desktop: 32px; --cf-section-gap: 80px; } .cf-container { padding: 0 var(--cf-margin-desktop); } .cf-hero { padding: 100px 0 60px; min-height: auto; } .cf-hero-title { font-size: 48px; } .cf-layout { padding: 60px var(--cf-margin-desktop); gap: 32px; } .cf-form-group { grid-template-columns: 1fr 1fr; } .cf-faq-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } }
-  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } }
+  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } .cf-related-links-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } .cf-related-links-title { font-size: 18px; } .cf-related-link-card { padding: 14px 18px; } .cf-related-link-title { font-size: 13px; } }
   @media (max-width: 360px) { .cf-hero-title { font-size: 24px; } .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; } }
   @media print { .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; } .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; } .cf-universal-template, .cf-section { page-break-inside: avoid; } }
 `;
@@ -331,6 +340,9 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic Year Calculation - Automatically updates 2026 → 2027 → 2028 and beyond
+  const currentYear = new Date().getFullYear();
 
   // --- Default item factories ---
   const defaultExperience = () => ({
@@ -526,6 +538,15 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
       question: "Can I edit my project management resume after downloading it?",
       answer: "Yes, you can always come back and edit your project management resume. Your work saves automatically, and you can download updated versions as many times as needed—completely free."
     }
+  ];
+
+  // --- Internal Links for Related Resources ---
+  const relatedLinks = [
+    { target: "/ats-friendly-business-analyst-resume-builder", title: "Business Analyst Resume Builder" },
+    { target: "/ats-friendly-ceo-resume-builder", title: "CEO Resume Builder" },
+    { target: "/ats-friendly-marketing-executive-manager-resume-builder", title: "Marketing Executive Resume Builder" },
+    { target: "/ats-friendly-engineering-resume-builder", title: "Engineering Resume Builder" },
+    { target: "/best-resume-examples-for-usa-management-positions", title: "Management Position Resume Examples" }
   ];
 
   // --- Font Size Handler ---
@@ -991,9 +1012,9 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free PM Resume Builder 2026 | ATS Project Manager Templates</title>
-          <meta name="title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
-          <meta name="description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
+          <title>{`Free PM Resume Builder ${currentYear} | ATS Project Manager Templates`}</title>
+          <meta name="title" content={`Free PM Resume Builder ${currentYear} | ATS Project Manager Templates`} />
+          <meta name="description" content={`Create a professional project manager resume for free in ${currentYear}. ATS-optimized templates for PMs worldwide. Download PDF instantly.`} />
           <meta name="keywords" content="project manager resume builder, PM resume templates, project management CV, ATS friendly PM resume, free resume builder for project managers, construction project manager, IT project manager, agile PM resume, global project manager, PMP resume" />
           <meta name="author" content="Professional Project Manager Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -1003,8 +1024,8 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
           <meta name="revisit-after" content="1 days" />
           <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
           <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-project-manager-resume-builder" />
-          <meta property="og:title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
-          <meta property="og:description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
+          <meta property="og:title" content={`Free PM Resume Builder ${currentYear} | ATS Project Manager Templates`} />
+          <meta property="og:description" content={`Create a professional project manager resume for free in ${currentYear}. ATS-optimized templates for PMs worldwide. Download PDF instantly.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-pm-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -1018,8 +1039,8 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free PM Resume Builder 2026 | ATS Project Manager Templates" />
-          <meta name="twitter:description" content="Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly." />
+          <meta name="twitter:title" content={`Free PM Resume Builder ${currentYear} | ATS Project Manager Templates`} />
+          <meta name="twitter:description" content={`Create a professional project manager resume for free in ${currentYear}. ATS-optimized templates for PMs worldwide. Download PDF instantly.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-pm-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Project Manager Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@PMResumeFree" />
@@ -1044,8 +1065,8 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder#webpage",
                     "url": "https://professionalresumefree.com/ats-friendly-project-manager-resume-builder",
-                    "name": "Free PM Resume Builder 2026 | ATS Project Manager Templates",
-                    "description": "Create a professional project manager resume for free in 2026. ATS-optimized templates for PMs worldwide. Download PDF instantly.",
+                    "name": `Free PM Resume Builder ${currentYear} | ATS Project Manager Templates`,
+                    "description": `Create a professional project manager resume for free in ${currentYear}. ATS-optimized templates for PMs worldwide. Download PDF instantly.`,
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
@@ -1107,7 +1128,7 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -1126,7 +1147,7 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-pm-resume-builder.jpg",
                       "applicationSuite": "Project Management Career Tools",
                       "countriesSupported": "Global",
@@ -1322,12 +1343,12 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon"/>
                 <span className="cf-trust-text">
-                 Best Free PM Resume Builder 2026
+                 Best Free PM Resume Builder {currentYear}
                 </span>
               </div>
               
               <h2 className="cf-hero-title">
-                Free PM <span className="cf-gradient-text">Resume Builder 2026</span>
+                Free PM <span className="cf-gradient-text">Resume Builder {currentYear}</span>
               </h2>
               
               <p className="cf-hero-subtitle">
@@ -2460,6 +2481,19 @@ const ProjectManagerResume = ({ seoData, buildTimestamp }) => {
               <div className="cf-cta-guarantee">
                 <FiCheck className="cf-guarantee-icon" />
                 <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Global Hiring</span>
+              </div>
+
+              {/* Related Resources - Placed beneath the guarantee text */}
+              <div className="cf-related-links-wrap">
+                <h3 className="cf-related-links-title">Explore More Free Management & Business Resume Builders</h3>
+                <div className="cf-related-links-grid">
+                  {relatedLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-related-link-card" prefetch={false}>
+                      <span className="cf-related-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-related-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

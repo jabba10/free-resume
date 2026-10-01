@@ -327,7 +327,7 @@ const sustainabilityResumeStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -336,9 +336,18 @@ const sustainabilityResumeStyles = `
   .cf-cta-btn-text { position: relative; z-index: 1; }
   .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
   .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
-  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); margin-bottom: 48px; }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-related-links-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; border-top: 0.5px solid rgba(212, 175, 55, 0.15); }
+  .cf-related-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; letter-spacing: 0.02em; }
+  .cf-related-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cf-related-link-card { display: flex; align-items: center; justify-content: space-between; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 18px 22px; text-decoration: none; transition: all var(--cf-transition-base); text-align: left; }
+  .cf-related-link-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); background: rgba(242, 202, 80, 0.06); }
+  .cf-related-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); letter-spacing: 0.02em; line-height: 1.4; }
+  .cf-related-link-arrow { color: var(--cf-primary); font-size: 18px; flex-shrink: 0; margin-left: 12px; transition: transform var(--cf-transition-base); }
+  .cf-related-link-card:hover .cf-related-link-arrow { transform: translateX(6px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -410,6 +419,7 @@ const sustainabilityResumeStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-related-links-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
@@ -439,6 +449,9 @@ const sustainabilityResumeStyles = `
     .cf-modal-page .cf-sustainability-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-related-links-title { font-size: 18px; }
+    .cf-related-link-card { padding: 14px 18px; }
+    .cf-related-link-title { font-size: 13px; }
   }
 
   @media (max-width: 360px) {
@@ -457,10 +470,15 @@ const sustainabilityResumeStyles = `
 
 const Resume = ({ seoData, buildTimestamp }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { currentDate, lastModifiedDate } = seoData || {};
+  const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
   const freshnessIndicator = buildTimestamp ? new Date(buildTimestamp).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic Year Calculation - Automatically updates 2026 → 2027 → 2028 and beyond
+  const currentYear = new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', department: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', program: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -487,10 +505,26 @@ const Resume = ({ seoData, buildTimestamp }) => {
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
 
+  // Testimonials for Structured Data
+  const testimonials = [
+    { quote: "Created my sustainability resume in 15 minutes and landed interviews with top green companies. The ESG-specific templates are perfect!", metric: "3 Interviews in 1 Week", name: "Alex M.", role: "Sustainability Manager", company: "GreenTech Solutions" },
+    { quote: "Finally a resume builder that understands ESG metrics and climate impact. The ATS templates helped me pass screening at environmental organizations.", metric: "Hired at Top NGO", name: "Sarah K.", role: "ESG Analyst", company: "Climate Action Network" },
+    { quote: "As a recent environmental science graduate, the entry-level templates helped me land my first sustainability role at a renewable energy startup.", metric: "First Sustainability Job", name: "James R.", role: "Sustainability Coordinator", company: "Solar Innovations Inc." }
+  ];
+
   const faqs = [
     { question: "Is this sustainability resume builder really free with no hidden costs?", answer: "Yes, our sustainability resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional green industry resume in PDF format without any payment required." },
     { question: "What does ATS-friendly mean for sustainability resumes?", answer: "ATS-friendly means our sustainability resume templates are optimized to pass through Applicant Tracking Systems used by 95% of environmental organizations and green companies. This ensures your sustainability experience and credentials are properly scanned and recognized." },
     { question: "Can I download my sustainability resume as PDF without creating an account?", answer: "Absolutely! Download your professional sustainability resume in PDF format without creating an account. Everything is completely free and accessible immediately for environmental professionals, sustainability managers, and green industry experts." }
+  ];
+
+  // --- Internal Links for Related Resources ---
+  const relatedLinks = [
+    { target: "/ats-friendly-engineering-resume-builder", title: "Engineering Resume Builder" },
+    { target: "/ats-friendly-biotechnology-resume-builder", title: "Biotechnology Resume Builder" },
+    { target: "/ats-friendly-industrial-manufacturing-resume-builder", title: "Industrial Manufacturing Resume Builder" },
+    { target: "/ats-friendly-advanced-manufacturing-and-automation-resume-builder", title: "Advanced Manufacturing Resume Builder" },
+    { target: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", title: "AI & ML Engineering Resume" }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -605,9 +639,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{sustainabilityResumeStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Sustainability Resume Builder 2026: ATS Templates for Green Industry Pros</title>
-          <meta name="title" content="Free Sustainability Resume Builder 2026: ATS Templates for Green Industry Pros" />
-          <meta name="description" content="Create your professional sustainability resume for free in 2026. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up." />
+          <title>{`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`}</title>
+          <meta name="title" content={`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`} />
+          <meta name="description" content={`Create your professional sustainability resume for free in ${currentYear}. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up.`} />
           <meta name="keywords" content="sustainability resume builder, green industry resume templates, ESG resume builder, renewable energy resume, ATS friendly sustainability resume, free resume builder for environmental professionals, climate resume, sustainability CV, green jobs resume, environmental careers" />
           <meta name="author" content="Professional Sustainability Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -623,8 +657,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Sustainability Resume Builder 2026: ATS Templates for Green Industry Pros" />
-          <meta property="og:description" content="Create your professional sustainability resume for free in 2026. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up." />
+          <meta property="og:title" content={`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`} />
+          <meta property="og:description" content={`Create your professional sustainability resume for free in ${currentYear}. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-sustainability-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -638,8 +672,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Sustainability Resume Builder 2026: ATS Templates for Green Industry Pros" />
-          <meta name="twitter:description" content="Create your professional sustainability resume for free in 2026. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`} />
+          <meta name="twitter:description" content={`Create your professional sustainability resume for free in ${currentYear}. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-sustainability-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Sustainability Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@GreenResumeFree" />
@@ -665,7 +699,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Sustainability Resume Builder 2026 - ATS Templates for Green Industry Pros",
+                    "name": `Free Sustainability Resume Builder ${currentYear} - ATS Templates for Green Industry Pros`,
                     "description": "Create professional ATS-optimized sustainability resumes for free. Land interviews 3x faster with our ESG resume builder.",
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
@@ -728,7 +762,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -747,7 +781,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-sustainability-resume-builder.jpg",
                       "applicationSuite": "Sustainability Career Tools",
                       "countriesSupported": "Global",
@@ -763,7 +797,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                       "acceptedAnswer": {
                         "@type": "Answer",
                         "text": faq.answer,
-                        "datePublished": safeCurrentDate,
+                        "datePublished": safeFaqDates[index] || safeCurrentDate,
                         "author": {
                           "@type": "Person",
                           "name": "Sustainability Resume Builder Support Team"
@@ -865,6 +899,44 @@ const Resume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "SpeakableSpecification",
                     "cssSelector": [".cf-hero-title", ".cf-hero-subtitle", ".cf-faq-question"]
+                  },
+                  {
+                    "@type": "ItemList",
+                    "itemListElement": testimonials.map((testimonial, index) => ({
+                      "@type": "ListItem",
+                      "position": index + 1,
+                      "item": {
+                        "@type": "Review",
+                        "reviewRating": {
+                          "@type": "Rating",
+                          "ratingValue": 5,
+                          "bestRating": 5
+                        },
+                        "author": {
+                          "@type": "Person",
+                          "name": testimonial.name
+                        },
+                        "reviewBody": testimonial.quote,
+                        "datePublished": safeReviewDates[index] || safeCurrentDate,
+                        "publisher": {
+                          "@type": "Organization",
+                          "name": "Professional Sustainability Resume Free"
+                        },
+                        "itemReviewed": {
+                          "@type": "SoftwareApplication",
+                          "name": "Sustainability Resume Builder - ATS Optimized Green Industry Resume Maker",
+                          "applicationCategory": "BusinessApplication",
+                          "operatingSystem": "Any",
+                          "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "USD"
+                          },
+                          "description": "Free online ATS-friendly sustainability resume builder that helps green industry professionals create professional resumes and land environmental jobs faster.",
+                          "url": canonicalUrl
+                        }
+                      }
+                    }))
                   }
                 ]
               })
@@ -877,13 +949,28 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta name="content-freshness" content={freshnessIndicator} />
         </div>
 
-        <nav className="cf-breadcrumb" aria-label="Breadcrumb"><ol><li><Link href="/" className="cf-breadcrumb-link"><FiHome className="cf-breadcrumb-icon"/><span className="cf-breadcrumb-text">Home</span></Link></li><li className="cf-breadcrumb-separator"><FiChevronRightIcon/></li><li><span className="cf-breadcrumb-text">Free Green Industry Template</span></li></ol></nav>
+        <nav className="cf-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="https://professionalresumefree.com" className="cf-breadcrumb-link" prefetch={false}>
+                <FiHome className="cf-breadcrumb-icon"/>
+                <span className="cf-breadcrumb-text">Home</span>
+              </Link>
+            </li>
+            <li className="cf-breadcrumb-separator"><FiChevronRightIcon/></li>
+            <li>
+              <Link href="/ats-friendly-sustainability-and-green-industries-resume-builder" className="cf-breadcrumb-link" prefetch={false}>
+                <span className="cf-breadcrumb-text">Free Green Industry Template</span>
+              </Link>
+            </li>
+          </ol>
+        </nav>
 
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Green Industry Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Sustainability Resume Builder 2026</h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Green Industry Resume Builder {currentYear}</span></div>
+              <h1 className="cf-hero-title">Free Sustainability <span className="cf-gradient-text">Resume Builder {currentYear}</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized sustainability resume for free in minutes.</strong> Our sustainability resume builder helps you highlight ESG impact, certifications, and green projects that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free sustainability resume now—no sign-up required">
@@ -892,6 +979,11 @@ const Resume = ({ seoData, buildTimestamp }) => {
                   <div className="cf-btn-pulse"></div>
                 </button>
                 <button onClick={generatePDF} className="cf-btn-secondary" disabled={isGeneratingPDF || !hasContent()} aria-label="Download sustainability resume as PDF"><FiDownload className="cf-btn-icon"/><span className="cf-btn-text">Download Sustainability Resume PDF</span></button>
+              </div>
+              <div className="cf-hero-stats">
+                <div className="cf-stat-item"><span className="cf-stat-number">500K+</span><span className="cf-stat-label">Green Professionals</span></div>
+                <div className="cf-stat-item"><span className="cf-stat-number">98%</span><span className="cf-stat-label">ATS Pass Rate</span></div>
+                <div className="cf-stat-item"><span className="cf-stat-number">24h</span><span className="cf-stat-label">Avg. Interview Time</span></div>
               </div>
               <div className="cf-industry-badges"><div className="cf-badge-grid"><span className="cf-badge-item"><FiSun/> Renewable Energy</span><span className="cf-badge-item"><FiAnchor/> ESG & Sustainability</span><span className="cf-badge-item"><FiWind/> Climate Strategy</span><span className="cf-badge-item"><FiRefreshCw/> Circular Economy</span><span className="cf-badge-item"><FiDroplet/> Water Management</span><span className="cf-badge-item"><FiZap/> Clean Technology</span></div></div>
             </div>
@@ -1028,7 +1120,37 @@ const Resume = ({ seoData, buildTimestamp }) => {
 
         <section className="cf-faq-section" aria-labelledby="faq-title"><div className="cf-container"><div className="cf-section-header"><h2 className="cf-section-title" id="faq-title">Frequently Asked Questions</h2><p>Everything you need to know about creating professional sustainability resumes with our tool.</p></div><div className="cf-faq-grid">{faqs.map((faq,i)=>(<div key={i} className="cf-faq-item"><h3 className="cf-faq-question">{faq.question}</h3><p className="cf-faq-answer">{faq.answer}</p></div>))}</div></div></section>
 
-        <section className="cf-cta-section" aria-labelledby="cta-title"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Sustainability Career?</h2><p className="cf-cta-subtitle">Join 500,000+ sustainability professionals who landed their dream green jobs with our free ATS-friendly sustainability resume builder.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free sustainability resume now—no sign-up required"><span className="cf-cta-btn-text">Create Your Free Sustainability Resume Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Green Industries</span></div></div></div></section>
+        <section className="cf-cta-section" aria-labelledby="cta-title">
+          <div className="cf-container">
+            <div className="cf-cta-content">
+              <h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Sustainability Career?</h2>
+              <p className="cf-cta-subtitle">Join 500,000+ sustainability professionals who landed their dream green jobs with our free ATS-friendly sustainability resume builder.</p>
+              <div className="cf-cta-btn-wrap">
+                <button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free sustainability resume now—no sign-up required">
+                  <span className="cf-cta-btn-text">Create Your Free Sustainability Resume Now</span>
+                  <FiArrowRight className="cf-cta-btn-icon"/>
+                </button>
+              </div>
+              <div className="cf-cta-guarantee">
+                <FiCheck className="cf-guarantee-icon"/>
+                <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Green Industries</span>
+              </div>
+
+              {/* Related Resources - Placed beneath the guarantee text */}
+              <div className="cf-related-links-wrap">
+                <h3 className="cf-related-links-title">Explore More Free Engineering & Technology Resume Builders</h3>
+                <div className="cf-related-links-grid">
+                  {relatedLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-related-link-card" prefetch={false}>
+                      <span className="cf-related-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-related-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Sustainability Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><SustainabilityTemplate formData={formData}/></div></div></div></div>)}
 

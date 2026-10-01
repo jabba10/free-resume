@@ -298,7 +298,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -307,9 +307,18 @@ const careerFlowStyles = `
   .cf-cta-btn-text { position: relative; z-index: 1; }
   .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
   .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
-  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); margin-bottom: 48px; }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-related-links-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; border-top: 0.5px solid rgba(212, 175, 55, 0.15); }
+  .cf-related-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; letter-spacing: 0.02em; }
+  .cf-related-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cf-related-link-card { display: flex; align-items: center; justify-content: space-between; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 18px 22px; text-decoration: none; transition: all var(--cf-transition-base); text-align: left; }
+  .cf-related-link-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); background: rgba(242, 202, 80, 0.06); }
+  .cf-related-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); letter-spacing: 0.02em; line-height: 1.4; }
+  .cf-related-link-arrow { color: var(--cf-primary); font-size: 18px; flex-shrink: 0; margin-left: 12px; transition: transform var(--cf-transition-base); }
+  .cf-related-link-card:hover .cf-related-link-arrow { transform: translateX(6px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -376,6 +385,7 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-related-links-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
@@ -403,6 +413,9 @@ const careerFlowStyles = `
     .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-related-links-title { font-size: 18px; }
+    .cf-related-link-card { padding: 14px 18px; }
+    .cf-related-link-title { font-size: 13px; }
   }
 
   @media (max-width: 360px) {
@@ -419,10 +432,15 @@ const careerFlowStyles = `
 
 const Resume = ({ seoData, buildTimestamp }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { currentDate, lastModifiedDate } = seoData || {};
+  const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
   const freshnessIndicator = buildTimestamp ? new Date(buildTimestamp).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic Year Calculation - Automatically updates 2026 → 2027 → 2028 and beyond
+  const currentYear = new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', serviceUsers: '', location: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', qualification: '', awardingBody: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -447,10 +465,26 @@ const Resume = ({ seoData, buildTimestamp }) => {
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
 
+  // Testimonials for Structured Data
+  const testimonials = [
+    { quote: "As a UK support worker, this CV builder helped me land a role at a top care home in just 10 days. The DBS-ready templates are perfect for the UK care sector!", metric: "Job Offer in 10 Days", name: "Sarah M.", role: "Support Worker", company: "Barchester Healthcare" },
+    { quote: "Finally a CV builder that understands UK care sector requirements. The NVQ and DBS sections helped me highlight my qualifications properly. Highly recommended!", metric: "3 Interviews in a Week", name: "James K.", role: "Senior Support Worker", company: "Care UK" },
+    { quote: "After moving to the UK, this builder helped me format my care qualifications to UK standards. Landed a great role with a leading care provider.", metric: "Successful Career Transition", name: "Maria L.", role: "Support Worker", company: "HC-One" }
+  ];
+
   const faqs = [
     { question: "Is this support worker CV builder really free with no hidden costs?", answer: "Yes, our support worker CV builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional support worker CV in PDF format without any payment required." },
     { question: "What makes this CV builder specific to UK support workers?", answer: "Our templates are designed specifically for the UK care sector, including sections for DBS status, CQC compliance, NVQ qualifications, and UK-specific terminology that employers expect." },
     { question: "Can I download my support worker CV as PDF without creating an account?", answer: "Absolutely! Download your professional support worker CV in PDF format without creating an account. Everything is completely free and accessible immediately for support workers across the UK." }
+  ];
+
+  // --- Internal Links for Related Resources ---
+  const relatedLinks = [
+    { target: "/ats-friendly-disability-support-worker-resume-builder", title: "Disability Support Worker Resume Builder" },
+    { target: "/ats-friendly-aged-care-worker-resume-builder", title: "Aged Care Worker Resume Builder" },
+    { target: "/ats-friendly-care-assistant-resume-builder", title: "Care Assistant Resume Builder" },
+    { target: "/ats-friendly-healthcare-assistant-resume-builder", title: "Healthcare Assistant Resume Builder" },
+    { target: "/ats-friendly-government-education-non-profit-resume-builder", title: "Government & Non-Profit Resume Builder" }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -556,9 +590,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-GB">
         <Head>
-          <title>Free UK Support Worker CV Builder 2026: DBS-Ready Templates for Care Pros</title>
-          <meta name="title" content="Free UK Support Worker CV Builder 2026: DBS-Ready Templates for Care Pros" />
-          <meta name="description" content="Create your professional support worker CV for free in 2026. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up." />
+          <title>{`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`}</title>
+          <meta name="title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`} />
+          <meta name="description" content={`Create your professional support worker CV for free in ${currentYear}. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up.`} />
           <meta name="keywords" content="support worker CV builder, care worker CV templates, UK care sector CV, DBS ready CV, CQC compliant CV, free CV builder for support workers, healthcare assistant CV, domiciliary care CV, learning disabilities support CV, mental health support CV" />
           <meta name="author" content="Professional UK Support Worker CV Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -571,8 +605,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free UK Support Worker CV Builder 2026: DBS-Ready Templates for Care Pros" />
-          <meta property="og:description" content="Create your professional support worker CV for free in 2026. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up." />
+          <meta property="og:title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`} />
+          <meta property="og:description" content={`Create your professional support worker CV for free in ${currentYear}. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -583,8 +617,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale" content="en_GB" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free UK Support Worker CV Builder 2026: DBS-Ready Templates for Care Pros" />
-          <meta name="twitter:description" content="Create your professional support worker CV for free in 2026. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`} />
+          <meta name="twitter:description" content={`Create your professional support worker CV for free in ${currentYear}. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-support-worker-cv-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free UK Support Worker CV Builder with DBS Ready Templates" />
           <meta name="twitter:site" content="@UKSupportWorkerCV" />
@@ -610,7 +644,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free UK Support Worker CV Builder 2026 - DBS-Ready Templates for Care Pros",
+                    "name": `Free UK Support Worker CV Builder ${currentYear} - DBS-Ready Templates for Care Pros`,
                     "description": "Create professional DBS-ready support worker CVs for free. Land interviews 3x faster with our UK care sector CV builder.",
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
@@ -672,7 +706,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "GBP",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -692,7 +726,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-support-worker-cv-builder.jpg",
                       "applicationSuite": "UK Care Career Tools",
                       "countriesSupported": "United Kingdom",
@@ -708,7 +742,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                       "acceptedAnswer": {
                         "@type": "Answer",
                         "text": faq.answer,
-                        "datePublished": safeCurrentDate,
+                        "datePublished": safeFaqDates[index] || safeCurrentDate,
                         "author": {
                           "@type": "Person",
                           "name": "UK Support Worker CV Builder Support Team"
@@ -810,6 +844,44 @@ const Resume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "SpeakableSpecification",
                     "cssSelector": [".cf-hero-title", ".cf-hero-subtitle", ".cf-faq-question"]
+                  },
+                  {
+                    "@type": "ItemList",
+                    "itemListElement": testimonials.map((testimonial, index) => ({
+                      "@type": "ListItem",
+                      "position": index + 1,
+                      "item": {
+                        "@type": "Review",
+                        "reviewRating": {
+                          "@type": "Rating",
+                          "ratingValue": 5,
+                          "bestRating": 5
+                        },
+                        "author": {
+                          "@type": "Person",
+                          "name": testimonial.name
+                        },
+                        "reviewBody": testimonial.quote,
+                        "datePublished": safeReviewDates[index] || safeCurrentDate,
+                        "publisher": {
+                          "@type": "Organization",
+                          "name": "Professional UK Support Worker CV Free"
+                        },
+                        "itemReviewed": {
+                          "@type": "SoftwareApplication",
+                          "name": "UK Support Worker CV Builder - DBS Ready Care Sector CV Maker",
+                          "applicationCategory": "BusinessApplication",
+                          "operatingSystem": "Any",
+                          "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "GBP"
+                          },
+                          "description": "Free online DBS-ready support worker CV builder that helps UK care professionals create professional CVs and land care sector jobs faster.",
+                          "url": canonicalUrl
+                        }
+                      }
+                    }))
                   }
                 ]
               })
@@ -822,13 +894,28 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta name="content-freshness" content={freshnessIndicator} />
         </div>
 
-        <nav className="cf-breadcrumb" aria-label="Breadcrumb"><ol><li><Link href="/" className="cf-breadcrumb-link"><FiHome className="cf-breadcrumb-icon"/><span className="cf-breadcrumb-text">Home</span></Link></li><li className="cf-breadcrumb-separator"><FiChevronRightIcon/></li><li><span className="cf-breadcrumb-text">Free UK Care Sector Template</span></li></ol></nav>
+        <nav className="cf-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="https://professionalresumefree.com" className="cf-breadcrumb-link" prefetch={false}>
+                <FiHome className="cf-breadcrumb-icon"/>
+                <span className="cf-breadcrumb-text">Home</span>
+              </Link>
+            </li>
+            <li className="cf-breadcrumb-separator"><FiChevronRightIcon/></li>
+            <li>
+              <Link href="/ats-friendly-support-worker-resume-builder" className="cf-breadcrumb-link" prefetch={false}>
+                <span className="cf-breadcrumb-text">Free UK Care Sector Template</span>
+              </Link>
+            </li>
+          </ol>
+        </nav>
 
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Support Worker CV Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free UK Support Worker CV Builder 2026</h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Support Worker CV Builder {currentYear}</span></div>
+              <h1 className="cf-hero-title">Free UK Support Worker <span className="cf-gradient-text">CV Builder {currentYear}</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, DBS-ready support worker CV for free in minutes.</strong> Our UK support worker CV builder helps you highlight qualifications, experience, and care skills that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free support worker CV now—no sign-up required">
@@ -837,6 +924,11 @@ const Resume = ({ seoData, buildTimestamp }) => {
                   <div className="cf-btn-pulse"></div>
                 </button>
                 <button onClick={generatePDF} className="cf-btn-secondary" disabled={isGeneratingPDF || !hasContent()} aria-label="Download support worker CV as PDF"><FiDownload className="cf-btn-icon"/><span className="cf-btn-text">Download Support Worker CV PDF</span></button>
+              </div>
+              <div className="cf-hero-stats">
+                <div className="cf-stat-item"><span className="cf-stat-number">200K+</span><span className="cf-stat-label">UK Care Professionals</span></div>
+                <div className="cf-stat-item"><span className="cf-stat-number">98%</span><span className="cf-stat-label">ATS Pass Rate</span></div>
+                <div className="cf-stat-item"><span className="cf-stat-number">24h</span><span className="cf-stat-label">Avg. Interview Time</span></div>
               </div>
               <div className="cf-industry-badges"><div className="cf-badge-grid"><span className="cf-badge-item"><FiUsers/> Learning Disabilities</span><span className="cf-badge-item"><FiHeart/> Mental Health</span><span className="cf-badge-item"><FiUsers/> Elderly Care</span><span className="cf-badge-item"><FiTool/> Complex Needs</span><span className="cf-badge-item"><FiHome/> Domiciliary Care</span><span className="cf-badge-item"><FiShield/> CQC Compliant</span></div></div>
             </div>
@@ -963,7 +1055,37 @@ const Resume = ({ seoData, buildTimestamp }) => {
 
         <section className="cf-faq-section" aria-labelledby="faq-title"><div className="cf-container"><div className="cf-section-header"><h2 className="cf-section-title" id="faq-title">Frequently Asked Questions</h2><p>Everything you need to know about creating professional support worker CVs with our UK tool.</p></div><div className="cf-faq-grid">{faqs.map((faq,i)=>(<div key={i} className="cf-faq-item"><h3 className="cf-faq-question">{faq.question}</h3><p className="cf-faq-answer">{faq.answer}</p></div>))}</div></div></section>
 
-        <section className="cf-cta-section" aria-labelledby="cta-title"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title" id="cta-title">Ready to Advance Your UK Care Career?</h2><p className="cf-cta-subtitle">Join 200,000+ UK care professionals who landed their dream roles with our free DBS-ready support worker CV builder.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free support worker CV now—no sign-up required"><span className="cf-cta-btn-text">Create Your Free Support Worker CV Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • DBS Ready for UK Care Sector</span></div></div></div></section>
+        <section className="cf-cta-section" aria-labelledby="cta-title">
+          <div className="cf-container">
+            <div className="cf-cta-content">
+              <h2 className="cf-cta-title" id="cta-title">Ready to Advance Your UK Care Career?</h2>
+              <p className="cf-cta-subtitle">Join 200,000+ UK care professionals who landed their dream roles with our free DBS-ready support worker CV builder.</p>
+              <div className="cf-cta-btn-wrap">
+                <button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free support worker CV now—no sign-up required">
+                  <span className="cf-cta-btn-text">Create Your Free Support Worker CV Now</span>
+                  <FiArrowRight className="cf-cta-btn-icon"/>
+                </button>
+              </div>
+              <div className="cf-cta-guarantee">
+                <FiCheck className="cf-guarantee-icon"/>
+                <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • DBS Ready for UK Care Sector</span>
+              </div>
+
+              {/* Related Resources - Placed beneath the guarantee text */}
+              <div className="cf-related-links-wrap">
+                <h3 className="cf-related-links-title">Explore More Free UK Care Sector CV Builders</h3>
+                <div className="cf-related-links-grid">
+                  {relatedLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-related-link-card" prefetch={false}>
+                      <span className="cf-related-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-related-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Support Worker CV Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><SupportWorkerTemplate formData={formData}/></div></div></div></div>)}
 

@@ -40,7 +40,9 @@ import {
   FiCode,
   FiMonitor,
   FiTruck,
-  FiHeart
+  FiHeart,
+  FiActivity,
+  FiShield
 } from 'react-icons/fi';
 import Link from 'next/link';
 
@@ -146,25 +148,6 @@ const careerFlowStyles = `
   .cf-resume-builder ::selection { background: rgba(242, 202, 80, 0.3); color: var(--cf-on-background); }
   .cf-container { width: 100%; max-width: var(--cf-container-max); margin: 0 auto; padding: 0 var(--cf-margin-desktop); box-sizing: border-box; }
   .cf-freshness-indicator { display: none; }
-
-  .cf-navbar { position: fixed; top: 0; width: 100%; background: rgba(19, 19, 21, 0.8); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 0.5px solid rgba(212, 175, 55, 0.3); box-shadow: var(--cf-shadow-nav); z-index: 50; }
-  .cf-navbar-inner { display: flex; justify-content: space-between; align-items: center; padding: 24px var(--cf-margin-desktop); max-width: var(--cf-container-max); margin: 0 auto; }
-  .cf-logo { font-family: var(--cf-font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--cf-primary); text-decoration: none; }
-  .cf-nav-links { display: none; gap: 40px; }
-  .cf-nav-link { font-family: var(--cf-font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-on-surface-variant); text-decoration: none; transition: color var(--cf-transition-base); }
-  .cf-nav-link:hover, .cf-nav-link-active { color: var(--cf-primary); }
-  .cf-nav-link-active { border-bottom: 1px solid var(--cf-primary); padding-bottom: 4px; }
-  .cf-nav-actions { display: flex; align-items: center; gap: 24px; }
-  .cf-nav-login { font-family: var(--cf-font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-on-surface-variant); text-decoration: none; transition: color var(--cf-transition-base); display: none; }
-  .cf-nav-login:hover { color: var(--cf-primary); }
-  .cf-nav-cta { background: var(--cf-primary); color: var(--cf-on-primary); font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 10px 24px; border: none; border-radius: 2px; cursor: pointer; transition: all var(--cf-transition-base); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
-  .cf-nav-cta:hover { box-shadow: 0 0 20px rgba(242, 202, 80, 0.4); transform: translateY(-1px); }
-  .cf-mobile-toggle { display: flex; align-items: center; justify-content: center; background: none; border: 1px solid rgba(212, 175, 55, 0.3); color: var(--cf-primary); width: 40px; height: 40px; border-radius: 4px; cursor: pointer; font-size: 24px; transition: all var(--cf-transition-base); }
-  .cf-mobile-toggle:hover { background: rgba(242, 202, 80, 0.1); }
-  .cf-mobile-menu { display: none; flex-direction: column; background: rgba(19, 19, 21, 0.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 0.5px solid rgba(212, 175, 55, 0.3); padding: 16px var(--cf-margin-mobile); gap: 12px; }
-  .cf-mobile-menu-open { display: flex; }
-  .cf-mobile-nav-link { font-family: var(--cf-font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cf-on-surface-variant); text-decoration: none; padding: 12px 16px; border-radius: 4px; transition: all var(--cf-transition-base); }
-  .cf-mobile-nav-link:hover, .cf-mobile-nav-link-active { color: var(--cf-primary); background: rgba(242, 202, 80, 0.05); }
 
   .cf-breadcrumb { background: var(--cf-surface-container-lowest); padding: 16px 0; border-bottom: 0.5px solid var(--cf-outline-variant); }
   .cf-breadcrumb ol { display: flex; align-items: center; list-style: none; margin: 0; padding: 0 var(--cf-margin-desktop); flex-wrap: wrap; max-width: var(--cf-container-max); margin-left: auto; margin-right: auto; }
@@ -314,7 +297,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -323,9 +306,18 @@ const careerFlowStyles = `
   .cf-cta-btn-text { position: relative; z-index: 1; }
   .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
   .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
-  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); margin-bottom: 48px; }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-related-links-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; border-top: 0.5px solid rgba(212, 175, 55, 0.15); }
+  .cf-related-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; letter-spacing: 0.02em; }
+  .cf-related-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cf-related-link-card { display: flex; align-items: center; justify-content: space-between; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 18px 22px; text-decoration: none; transition: all var(--cf-transition-base); text-align: left; }
+  .cf-related-link-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); background: rgba(242, 202, 80, 0.06); }
+  .cf-related-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); letter-spacing: 0.02em; line-height: 1.4; }
+  .cf-related-link-arrow { color: var(--cf-primary); font-size: 18px; flex-shrink: 0; margin-left: 12px; transition: transform var(--cf-transition-base); }
+  .cf-related-link-card:hover .cf-related-link-arrow { transform: translateX(6px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -349,9 +341,6 @@ const careerFlowStyles = `
     .cf-layout { flex-direction: row; gap: 48px; }
     .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; }
     .cf-form-section { max-width: 500px; }
-    .cf-nav-links { display: flex; }
-    .cf-nav-login { display: inline; }
-    .cf-mobile-toggle { display: none; }
     .cf-faq-grid { grid-template-columns: repeat(2, 1fr); }
     .cf-form-group { grid-template-columns: 1fr 1fr; }
   }
@@ -359,7 +348,6 @@ const careerFlowStyles = `
   @media (max-width: 1023px) {
     :root { --cf-margin-desktop: 32px; --cf-section-gap: 80px; }
     .cf-container { padding: 0 var(--cf-margin-desktop); }
-    .cf-navbar-inner { padding: 20px var(--cf-margin-desktop); }
     .cf-hero { padding: 100px 0 60px; min-height: auto; }
     .cf-hero-title { font-size: 48px; }
     .cf-layout { padding: 60px var(--cf-margin-desktop); gap: 32px; }
@@ -370,8 +358,6 @@ const careerFlowStyles = `
 
   @media (max-width: 768px) {
     :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; }
-    .cf-navbar-inner { padding: 16px var(--cf-margin-desktop); }
-    .cf-logo { font-size: 20px; }
     .cf-hero { padding: 80px 0 40px; }
     .cf-hero-title { font-size: 36px; }
     .cf-hero-subtitle { font-size: 14px; }
@@ -397,12 +383,11 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-related-links-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
     :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; }
-    .cf-navbar-inner { padding: 12px var(--cf-margin-desktop); }
-    .cf-nav-cta { padding: 8px 16px; font-size: 12px; }
     .cf-hero-title { font-size: 28px; }
     .cf-hero-subtitle { font-size: 13px; }
     .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; }
@@ -426,17 +411,18 @@ const careerFlowStyles = `
     .cf-modal-page .cf-sales-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-related-links-title { font-size: 18px; }
+    .cf-related-link-card { padding: 14px 18px; }
+    .cf-related-link-title { font-size: 13px; }
   }
 
   @media (max-width: 360px) {
     .cf-hero-title { font-size: 24px; }
-    .cf-logo { font-size: 18px; }
-    .cf-nav-cta { padding: 6px 12px; font-size: 11px; }
     .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; }
   }
 
   @media print {
-    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-navbar, .cf-mobile-menu, .cf-modal { display: none !important; }
+    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; }
     .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; }
     .cf-sales-template, .cf-section { page-break-inside: avoid; }
   }
@@ -445,12 +431,20 @@ const careerFlowStyles = `
 const SalesResume = ({ seoData, buildTimestamp }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
-  const freshnessIndicator = buildTimestamp ? new Date(buildTimestamp).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+
+  const freshnessIndicator = buildTimestamp 
+    ? new Date(buildTimestamp).toISOString().split('T')[0]
+    : new Date().toISOString().split('T')[0];
+
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
 
+  // Dynamic Year Calculation - Automatically updates 2026 → 2027 → 2028 and beyond
+  const currentYear = new Date().getFullYear();
+
+  // --- Default item factories ---
   const defaultExperience = () => ({ company: '', position: '', location: '', startDate: '', endDate: '', achievements: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', field: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
   const defaultSkill = () => ({ name: '', proficiency: '', isEditing: false, editIndex: null });
@@ -460,8 +454,40 @@ const SalesResume = ({ seoData, buildTimestamp }) => {
   const defaultLanguage = () => ({ name: '', proficiency: '', isEditing: false, editIndex: null });
   const defaultSocialLink = () => ({ platform: '', url: '', isEditing: false, editIndex: null });
 
-  const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', address: '', headline: '', summary: '', experience: [], education: [], skills: [], certifications: [], achievements: [], products: [], languages: [], socialLinks: [] });
-  const [fontSizes, setFontSizes] = useState({ name: 14, headlineText: 10, sectionTitle: 10, contactInfo: 7, jobTitle: 9, company: 7, degree: 9, institution: 7, institutionDate: 6, regularText: 8, bulletText: 8, skillText: 7, metricText: 8 });
+  // --- State ---
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    address: '',
+    headline: '',
+    summary: '',
+    experience: [],
+    education: [],
+    skills: [],
+    certifications: [],
+    achievements: [],
+    products: [],
+    languages: [],
+    socialLinks: []
+  });
+
+  const [fontSizes, setFontSizes] = useState({
+    name: 14,
+    headlineText: 10,
+    sectionTitle: 10,
+    contactInfo: 7,
+    jobTitle: 9,
+    company: 7,
+    degree: 9,
+    institution: 7,
+    institutionDate: 6,
+    regularText: 8,
+    bulletText: 8,
+    skillText: 7,
+    metricText: 8
+  });
+
   const [currentExperience, setCurrentExperience] = useState(defaultExperience());
   const [currentEducation, setCurrentEducation] = useState(defaultEducation());
   const [currentSkill, setCurrentSkill] = useState(defaultSkill());
@@ -476,25 +502,40 @@ const SalesResume = ({ seoData, buildTimestamp }) => {
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
 
+  // Testimonials for Structured Data
   const testimonials = [
     { quote: "Created my sales resume in 15 minutes and landed 5 interviews in 2 weeks. The sales-specific templates highlight revenue achievements perfectly!", metric: "5 Interviews in 2 Weeks", name: "Michael T.", role: "Sales Executive", company: "Tech Solutions Inc." },
     { quote: "Finally a resume builder that understands sales metrics. The revenue-focused templates helped me showcase my 150% quota attainment effectively.", metric: "150% Quota Achievement", name: "Sarah K.", role: "Account Executive", company: "SaaS Corporation" },
     { quote: "As a recent graduate entering sales, the entry-level sales templates helped me land my first BDR role with a 20% higher offer than expected.", metric: "20% Higher Starting Salary", name: "Alex R.", role: "Business Development Rep", company: "Enterprise Software" }
   ];
 
+  // FAQ Data for Structured Data
   const faqs = [
     { question: "Is this sales resume builder really free with no hidden costs?", answer: "Yes, our sales resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional sales resume in PDF format without any payment required." },
     { question: "What does ATS-friendly mean for sales resumes?", answer: "ATS-friendly means our sales resume templates are optimized to pass through Applicant Tracking Systems used by 95% of companies. This ensures your revenue achievements, quotas, and sales metrics are properly scanned and recognized by hiring systems." },
     { question: "Can I download my sales resume as PDF without creating an account?", answer: "Absolutely! Download your professional sales resume in PDF format without creating an account. Everything is completely free and accessible immediately for sales professionals worldwide." }
   ];
 
+  // --- Internal Links for Related Resources ---
+  const relatedLinks = [
+    { target: "/ats-friendly-retail-associate-resume-builder", title: "Retail Associate Resume Builder" },
+    { target: "/ats-friendly-customer-service-resume-builder", title: "Customer Service Resume Builder" },
+    { target: "/ats-friendly-consumer-retail-resume-builder", title: "Consumer Retail Resume Builder" },
+    { target: "/ats-friendly-marketing-executive-manager-resume-builder", title: "Marketing Executive Resume Builder" },
+    { target: "/ats-friendly-hr-assistant-coordinator-resume-builder", title: "HR Assistant Resume Builder" }
+  ];
+
+  // --- Font Size Handler ---
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
   const resetFontSizes = () => setFontSizes({ name: 14, headlineText: 10, sectionTitle: 10, contactInfo: 7, jobTitle: 9, company: 7, degree: 9, institution: 7, institutionDate: 6, regularText: 8, bulletText: 8, skillText: 7, metricText: 8 });
+
+  // --- Utility Functions ---
   const getSocialIcon = () => <FiGlobe />;
   const formatSocialUrl = (url) => url ? url.replace(/(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '') : '';
   const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const hasContent = () => formData.fullName || formData.email || formData.headline || formData.summary || formData.socialLinks.length > 0 || formData.experience.length > 0 || formData.education.length > 0 || formData.skills.length > 0 || formData.certifications.length > 0 || formData.achievements.length > 0 || formData.products.length > 0 || formData.languages.length > 0;
 
+  // --- Item CRUD Functions ---
   const createAddFunction = (key, current, setter, defaultFunc, isValid) => () => {
     if (!isValid()) return;
     const item = { ...current };
@@ -538,6 +579,7 @@ const SalesResume = ({ seoData, buildTimestamp }) => {
   const editSocialLink = (index) => setCurrentSocialLink({ platform: formData.socialLinks[index].platform, url: formData.socialLinks[index].url.replace(/^https?:\/\//, '').replace(/\/$/, ''), isEditing: true, editIndex: index });
   const deleteSocialLink = (index) => { const updated = [...formData.socialLinks]; updated.splice(index, 1); setFormData({ ...formData, socialLinks: updated }); };
 
+  // --- PDF Generation ---
   const generatePDF = async () => {
     if (isGeneratingPDF) return;
     setIsGeneratingPDF(true);
@@ -559,6 +601,7 @@ const SalesResume = ({ seoData, buildTimestamp }) => {
     finally { setIsGeneratingPDF(false); }
   };
 
+  // --- Sales Resume Template ---
   const SalesTemplate = ({ formData }) => {
     const hasHeadline = formData.headline?.trim().length > 0;
     const hasSummary = formData.summary?.trim().length > 0;
@@ -596,158 +639,828 @@ const SalesResume = ({ seoData, buildTimestamp }) => {
     );
   };
 
+  // SINGLE CANONICAL URL - WITHOUT www
+  const canonicalUrl = "https://professionalresumefree.com/ats-friendly-sales-associate-resume-builder";
+
   return (
     <>
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Sales Resume Builder 2026 | ATS-Friendly Sales Template</title>
-          <meta name="description" content="Create your ATS-optimized sales resume for free in 2026. Land interviews faster with our sales templates trusted by 3M+ sales professionals." />
-          <meta name="robots" content="index, follow" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="canonical" href="https://professionalresumefree.com/ats-friendly-sales-associate-resume-builder" />
+          <title>{`Free Sales Resume Builder ${currentYear} | ATS-Friendly Sales Template`}</title>
+          <meta name="title" content={`Free Sales Resume Builder ${currentYear} | ATS-Friendly Sales Template`} />
+          <meta name="description" content={`Create your ATS-optimized sales resume for free in ${currentYear}. Land interviews faster with our sales templates trusted by 3M+ sales professionals.`} />
+          <meta name="keywords" content="sales resume builder, sales associate resume, account executive resume, sales manager resume, BDR resume, sales CV, ATS friendly sales resume, free resume builder for sales, sales job resume, revenue resume" />
+          <meta name="author" content="Professional Sales Resume Free" />
+          <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+          <meta name="date" content={safeCurrentDate} />
+          <meta name="last-modified" content={safeLastModifiedDate} />
+          <meta name="revisit-after" content="1 days" />
+          <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+          <link rel="canonical" href={canonicalUrl} />
+          <link rel="alternate" href={canonicalUrl} hreflang="en" />
+          <link rel="alternate" href={canonicalUrl} hreflang="en-US" />
+          <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
+          <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
+          <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
+          <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
+          <meta property="og:title" content={`Free Sales Resume Builder ${currentYear} | ATS-Friendly Sales Template`} />
+          <meta property="og:description" content={`Create your ATS-optimized sales resume for free in ${currentYear}. Land interviews faster with our sales templates trusted by 3M+ sales professionals.`} />
+          <meta property="og:image" content="https://professionalresumefree.com/images/og-sales-resume-builder-preview.jpg" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content="Free Sales Resume Builder - Create Professional Sales Resumes Online" />
+          <meta property="og:url" content={canonicalUrl} />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Professional Sales Resume Free" />
+          <meta property="og:locale" content="en_US" />
+          <meta property="og:locale:alternate" content="en_GB" />
+          <meta property="og:locale:alternate" content="en_CA" />
+          <meta property="og:locale:alternate" content="en_AU" />
+          <meta property="og:updated_time" content={safeLastModifiedDate} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={`Free Sales Resume Builder ${currentYear} | ATS-Friendly Sales Template`} />
+          <meta name="twitter:description" content={`Create your ATS-optimized sales resume for free in ${currentYear}. Land interviews faster with our sales templates trusted by 3M+ sales professionals.`} />
+          <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-sales-resume-builder-preview.jpg" />
+          <meta name="twitter:image:alt" content="Free Sales Resume Builder with ATS Templates" />
+          <meta name="twitter:site" content="@SalesResumeFree" />
+          <meta name="twitter:creator" content="@SalesResumeFree" />
+          <meta name="theme-color" content="#1a4a8d" />
+          <meta name="msapplication-TileColor" content="#1a4a8d" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="manifest" href="/site.webmanifest" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          
+          <script
+            type="application/ld+json"
+            key="structured-data"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                  {
+                    "@type": "WebPage",
+                    "@id": `${canonicalUrl}#webpage`,
+                    "url": canonicalUrl,
+                    "name": `Free Sales Resume Builder ${currentYear} | ATS-Friendly Sales Template`,
+                    "description": `Create your ATS-optimized sales resume for free in ${currentYear}. Land interviews faster with our sales templates trusted by 3M+ sales professionals.`,
+                    "datePublished": "2026-01-01",
+                    "dateModified": safeLastModifiedDate,
+                    "inLanguage": "en-US",
+                    "isPartOf": {
+                      "@type": "WebSite",
+                      "@id": "https://professionalresumefree.com/#website",
+                      "url": "https://professionalresumefree.com",
+                      "name": "Professional Sales Resume Free",
+                      "description": "Free online resume builder for sales professionals",
+                      "publisher": {
+                        "@type": "Organization",
+                        "@id": "https://professionalresumefree.com/#organization",
+                        "name": "Professional Sales Resume Free",
+                        "url": "https://professionalresumefree.com",
+                        "logo": {
+                          "@type": "ImageObject",
+                          "url": "https://professionalresumefree.com/logo.png",
+                          "width": 512,
+                          "height": 512
+                        },
+                        "sameAs": [
+                          "https://twitter.com/SalesResumeFree",
+                          "https://www.linkedin.com/company/professional-resume-free",
+                          "https://www.facebook.com/ProfessionalResumeFree"
+                        ]
+                      }
+                    },
+                    "primaryImageOfPage": {
+                      "@type": "ImageObject",
+                      "url": "https://professionalresumefree.com/images/og-sales-resume-builder-preview.jpg",
+                      "width": 1200,
+                      "height": 630
+                    },
+                    "breadcrumb": {
+                      "@type": "BreadcrumbList",
+                      "itemListElement": [
+                        {
+                          "@type": "ListItem",
+                          "position": 1,
+                          "name": "Home",
+                          "item": "https://professionalresumefree.com"
+                        },
+                        {
+                          "@type": "ListItem",
+                          "position": 2,
+                          "name": "Sales Resume Builder",
+                          "item": canonicalUrl
+                        }
+                      ]
+                    },
+                    "mainEntity": {
+                      "@type": "SoftwareApplication",
+                      "name": "Sales Resume Builder - ATS Optimized Sales Resume Maker",
+                      "applicationCategory": "BusinessApplication",
+                      "operatingSystem": "Any",
+                      "offers": {
+                        "@type": "Offer",
+                        "price": "0",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/InStock",
+                        "priceValidUntil": `${currentYear}-12-31`
+                      },
+                      "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": 4.9,
+                        "ratingCount": 35218,
+                        "bestRating": 5,
+                        "worstRating": 1
+                      },
+                      "description": "Free online ATS-friendly sales resume builder for sales associates, executives, account managers, and sales leaders.",
+                      "featureList": [
+                        "Sales ATS-Optimized Templates",
+                        "Revenue Achievement Formatting",
+                        "One-Click PDF Download",
+                        "Sales Metrics Highlighting",
+                        "Mobile-Friendly Editor",
+                        "No Sign Up Required",
+                        "Free Forever"
+                      ],
+                      "softwareVersion": `${currentYear}.1.0`,
+                      "screenshot": "https://professionalresumefree.com/images/screenshot-sales-resume-builder.jpg",
+                      "applicationSuite": "Sales Career Tools",
+                      "countriesSupported": "Global",
+                      "fileSize": "Web Application"
+                    }
+                  },
+                  {
+                    "@type": "FAQPage",
+                    "@id": `${canonicalUrl}#faqpage`,
+                    "mainEntity": faqs.map((faq, index) => ({
+                      "@type": "Question",
+                      "name": faq.question,
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.answer,
+                        "datePublished": safeFaqDates[index] || safeCurrentDate,
+                        "author": {
+                          "@type": "Person",
+                          "name": "Sales Resume Builder Support Team"
+                        }
+                      },
+                      "mainEntityOfPage": `${canonicalUrl}#webpage`
+                    }))
+                  },
+                  {
+                    "@type": "HowTo",
+                    "name": "How to Create a Professional Sales Resume with Our Free Builder",
+                    "description": "Step-by-step guide to create an ATS-optimized sales resume for free",
+                    "totalTime": "PT15M",
+                    "estimatedCost": {
+                      "@type": "MonetaryAmount",
+                      "currency": "USD",
+                      "value": "0"
+                    },
+                    "step": [
+                      {
+                        "@type": "HowToStep",
+                        "position": 1,
+                        "name": "Enter Your Sales Information",
+                        "text": "Add your sales experience, revenue achievements, quotas, and sales metrics using our guided forms.",
+                        "url": `${canonicalUrl}#editor`,
+                        "image": "https://professionalresumefree.com/images/step1-sales-info.jpg"
+                      },
+                      {
+                        "@type": "HowToStep",
+                        "position": 2,
+                        "name": "Highlight Sales Achievements",
+                        "text": "Use our achievement section to quantify your revenue results, quota attainment, and sales impact.",
+                        "url": `${canonicalUrl}#achievements`,
+                        "image": "https://professionalresumefree.com/images/step2-sales-achievements.jpg"
+                      },
+                      {
+                        "@type": "HowToStep",
+                        "position": 3,
+                        "name": "Customize and Optimize",
+                        "text": "Use our sales-specific suggestions to improve formatting and ATS compatibility for sales roles.",
+                        "url": `${canonicalUrl}#optimize`,
+                        "image": "https://professionalresumefree.com/images/step3-optimize.jpg"
+                      },
+                      {
+                        "@type": "HowToStep",
+                        "position": 4,
+                        "name": "Download Your Sales Resume",
+                        "text": "Export your professional sales resume as PDF - completely free, no watermarks.",
+                        "url": `${canonicalUrl}#download`,
+                        "image": "https://professionalresumefree.com/images/step4-download.jpg"
+                      }
+                    ]
+                  },
+                  {
+                    "@type": "Service",
+                    "serviceType": "Online Sales Resume Building Service",
+                    "provider": {
+                      "@type": "Organization",
+                      "name": "Professional Sales Resume Free",
+                      "url": "https://professionalresumefree.com",
+                      "contactPoint": {
+                        "@type": "ContactPoint",
+                        "telephone": "+1-800-555-1234",
+                        "contactType": "Customer Support",
+                        "availableLanguage": "en"
+                      }
+                    },
+                    "areaServed": {
+                      "@type": "Country",
+                      "name": "Global"
+                    },
+                    "hasOfferCatalog": {
+                      "@type": "OfferCatalog",
+                      "name": "Free Sales Resume Building Services",
+                      "itemListElement": [
+                        {
+                          "@type": "Offer",
+                          "itemOffered": {
+                            "@type": "Service",
+                            "name": "Sales ATS Resume Templates"
+                          }
+                        },
+                        {
+                          "@type": "Offer",
+                          "itemOffered": {
+                            "@type": "Service",
+                            "name": "Sales Resume Metrics Formatting"
+                          }
+                        }
+                      ]
+                    },
+                    "description": "Free ATS-friendly sales resume builder for sales professionals worldwide",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "0",
+                      "priceCurrency": "USD"
+                    }
+                  },
+                  {
+                    "@type": "SpeakableSpecification",
+                    "cssSelector": [".cf-hero-title", ".cf-hero-subtitle", ".cf-faq-question"]
+                  },
+                  {
+                    "@type": "ItemList",
+                    "itemListElement": testimonials.map((testimonial, index) => ({
+                      "@type": "ListItem",
+                      "position": index + 1,
+                      "item": {
+                        "@type": "Review",
+                        "reviewRating": {
+                          "@type": "Rating",
+                          "ratingValue": 5,
+                          "bestRating": 5
+                        },
+                        "author": {
+                          "@type": "Person",
+                          "name": testimonial.name
+                        },
+                        "reviewBody": testimonial.quote,
+                        "datePublished": safeReviewDates[index] || safeCurrentDate,
+                        "publisher": {
+                          "@type": "Organization",
+                          "name": "Professional Sales Resume Free"
+                        },
+                        "itemReviewed": {
+                          "@type": "SoftwareApplication",
+                          "name": "Sales Resume Builder - ATS Optimized Sales Resume Maker",
+                          "applicationCategory": "BusinessApplication",
+                          "operatingSystem": "Any",
+                          "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "USD"
+                          },
+                          "description": "Free online ATS-friendly sales resume builder that helps sales professionals create professional resumes and land sales jobs faster.",
+                          "url": canonicalUrl
+                        }
+                      }
+                    }))
+                  }
+                ]
+              })
+            }}
+          />
         </Head>
 
-        <div className="cf-freshness-indicator" style={{ display: 'none' }}><meta name="content-freshness" content={freshnessIndicator} /></div>
+        {/* Freshness Indicator */}
+        <div className="cf-freshness-indicator" style={{ display: 'none' }}>
+          <meta name="build-timestamp" content={buildTimestamp} />
+          <meta name="content-freshness" content={freshnessIndicator} />
+        </div>
 
-        <nav className="cf-breadcrumb"><ol><li><Link href="https://professionalresumefree.com" className="cf-breadcrumb-link"><FiHome className="cf-breadcrumb-icon"/><span className="cf-breadcrumb-text">Home</span></Link></li><li className="cf-breadcrumb-separator"><FiChevronRightIcon/></li><li><Link href="/ats-friendly-sales-associate-resume-builder" className="cf-breadcrumb-link"><span className="cf-breadcrumb-text">Free Sales Template</span></Link></li></ol></nav>
+        {/* Breadcrumb Navigation */}
+        <nav className="cf-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="https://professionalresumefree.com" className="cf-breadcrumb-link" prefetch={false}>
+                <FiHome className="cf-breadcrumb-icon"/>
+                <span className="cf-breadcrumb-text">Home</span>
+              </Link>
+            </li>
+            <li className="cf-breadcrumb-separator">
+              <FiChevronRightIcon/>
+            </li>
+            <li>
+              <Link href="/ats-friendly-sales-associate-resume-builder" className="cf-breadcrumb-link" prefetch={false}>
+                <span className="cf-breadcrumb-text">Free Sales Template</span>
+              </Link>
+            </li>
+          </ol>
+        </nav>
 
+        {/* Hero Section */}
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Sales Resume Builder 2026</span></div>
-              <h2 className="cf-hero-title">Free Sales Resume <span className="cf-gradient-text">Builder 2026</span></h2>
-              <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized sales resume for free in minutes.</strong> Our sales resume builder helps you highlight revenue achievements, quotas, and sales metrics that impress hiring managers.</p>
+              <div className="cf-trust-badge">
+                <FiStar className="cf-trust-icon"/>
+                <span className="cf-trust-text">Best Free Sales Resume Builder {currentYear}</span>
+              </div>
+              <h2 className="cf-hero-title">
+                Free Sales Resume <span className="cf-gradient-text">Builder {currentYear}</span>
+              </h2>
+              <p className="cf-hero-subtitle">
+                Create a <strong className="cf-hero-highlight">professional, ATS-optimized sales resume for free in minutes.</strong> Our sales resume builder helps you highlight revenue achievements, quotas, and sales metrics that impress hiring managers.
+              </p>
               <div className="cf-cta-buttons">
-                <button onClick={() => setActiveSection('personal')} className="cf-btn-primary"><span className="cf-btn-text">Start Building Your Sales Resume Now</span><FiArrowRight className="cf-btn-icon"/><div className="cf-btn-pulse"></div></button>
-                <button onClick={generatePDF} className="cf-btn-secondary" disabled={isGeneratingPDF || !hasContent()}><FiDownload className="cf-btn-icon"/><span className="cf-btn-text">Download Sales Resume PDF</span></button>
+                <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free sales resume now—no sign-up required">
+                  <span className="cf-btn-text">Start Building Your Sales Resume Now</span>
+                  <FiArrowRight className="cf-btn-icon"/>
+                  <div className="cf-btn-pulse"></div>
+                </button>
+                <button onClick={generatePDF} className="cf-btn-secondary" aria-label="Download sales resume as PDF" disabled={isGeneratingPDF || !hasContent()}>
+                  <FiDownload className="cf-btn-icon"/>
+                  <span className="cf-btn-text">Download Sales Resume PDF</span>
+                </button>
               </div>
               <div className="cf-hero-stats">
                 <div className="cf-stat-item"><span className="cf-stat-number">3M+</span><span className="cf-stat-label">Sales Professionals</span></div>
                 <div className="cf-stat-item"><span className="cf-stat-number">98%</span><span className="cf-stat-label">ATS Pass Rate</span></div>
                 <div className="cf-stat-item"><span className="cf-stat-number">24h</span><span className="cf-stat-label">Avg. Interview Time</span></div>
               </div>
-              <div className="cf-industry-badges"><div className="cf-badge-grid"><span className="cf-badge-item"><FiDollarSign/> Sales Associate</span><span className="cf-badge-item"><FiTrendingUp/> Sales Executive</span><span className="cf-badge-item"><FiUsers/> Account Manager</span><span className="cf-badge-item"><FiTarget/> BDR/SDR</span><span className="cf-badge-item"><FiBarChart/> Sales Manager</span><span className="cf-badge-item"><FiShoppingBag/> Retail Sales</span></div></div>
+              <div className="cf-industry-badges">
+                <div className="cf-badge-grid">
+                  <span className="cf-badge-item"><FiDollarSign/> Sales Associate</span>
+                  <span className="cf-badge-item"><FiTrendingUp/> Sales Executive</span>
+                  <span className="cf-badge-item"><FiUsers/> Account Manager</span>
+                  <span className="cf-badge-item"><FiTarget/> BDR/SDR</span>
+                  <span className="cf-badge-item"><FiBarChart/> Sales Manager</span>
+                  <span className="cf-badge-item"><FiShoppingBag/> Retail Sales</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* Main Content */}
         <div className="cf-layout">
           <div className="cf-preview-section">
-            <div className="cf-preview-header"><div className="cf-preview-actions"><button onClick={() => setShowFullPreview(!showFullPreview)} className="cf-preview-btn"><FiEye/> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}</button><button onClick={generatePDF} className="cf-download-btn" disabled={isGeneratingPDF || !hasContent()}><FiDownload/>{isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}</button></div></div>
-            <div className={`cf-preview-container ${showFullPreview ? 'cf-full-preview' : ''}`}><div className="cf-resume-card"><div className="cf-preview-content"><div className="cf-resume-preview" ref={resumeRef}><SalesTemplate formData={formData}/></div></div></div></div>
+            <div className="cf-preview-header">
+              <div className="cf-preview-actions">
+                <button onClick={() => setShowFullPreview(!showFullPreview)} className="cf-preview-btn">
+                  <FiEye/> {showFullPreview ? 'Hide Full Preview' : 'Show Full Preview'}
+                </button>
+                <button onClick={generatePDF} className="cf-download-btn" disabled={isGeneratingPDF || !hasContent()}>
+                  <FiDownload/>{isGeneratingPDF ? 'Generating PDF...' : 'Download PDF'}
+                </button>
+              </div>
+            </div>
+            <div className={`cf-preview-container ${showFullPreview ? 'cf-full-preview' : ''}`}>
+              <div className="cf-resume-card">
+                <div className="cf-preview-content">
+                  <div className="cf-resume-preview" ref={resumeRef}>
+                    <SalesTemplate formData={formData}/>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div className="cf-form-section">
             <div className="cf-form-nav">
-              {[{id:'personal',label:'Personal',icon:<FiUser/>},{id:'experience',label:'Sales Exp.',icon:<FiBriefcase/>},{id:'achievements',label:'Achievements',icon:<FiTrendingUp/>},{id:'skills',label:'Skills & Certs',icon:<FiTarget/>},{id:'settings',label:'Font Settings',icon:<FiSettings/>}].map(item => (<button key={item.id} className={`cf-nav-btn ${activeSection===item.id?'cf-nav-btn-active':''}`} onClick={()=>setActiveSection(item.id)}>{item.icon}<span>{item.label}</span></button>))}
+              {[
+                {id:'personal',label:'Personal',icon:<FiUser/>},
+                {id:'experience',label:'Sales Exp.',icon:<FiBriefcase/>},
+                {id:'education',label:'Education',icon:<FiBook/>},
+                {id:'achievements',label:'Achievements',icon:<FiTrendingUp/>},
+                {id:'skills',label:'Skills & Certs',icon:<FiTarget/>},
+                {id:'settings',label:'Font Settings',icon:<FiSettings/>}
+              ].map(item => (
+                <button key={item.id} className={`cf-nav-btn ${activeSection===item.id?'cf-nav-btn-active':''}`} onClick={()=>setActiveSection(item.id)}>
+                  {item.icon}<span>{item.label}</span>
+                </button>
+              ))}
             </div>
+
             <div className="cf-form-content">
               {activeSection==='personal'&&(
                 <div className="cf-form-section-content">
                   <h3 className="cf-form-section-title"><FiUser/> Personal Information</h3>
                   <div className="cf-form-card">
-                    <div className="cf-form-group"><label className="cf-form-label">Full Name*<input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="John Smith, Sales Executive" required className="cf-form-input"/></label><label className="cf-form-label">Email*<input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="john.smith@salespro.com" required className="cf-form-input"/></label></div>
-                    <div className="cf-form-group"><label className="cf-form-label">Phone<input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className="cf-form-input"/></label><label className="cf-form-label">Location<input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="City, Country (Remote OK)" className="cf-form-input"/></label></div>
-                  </div>
-                  <div className="cf-form-card"><label className="cf-form-label">Professional Headline<input type="text" name="headline" value={formData.headline} onChange={handleInputChange} placeholder="Top-performing Sales Executive | 150%+ Quota Attainment | $2M+ Revenue Generated" className="cf-form-input"/><div className="cf-char-count">{formData.headline.length}/120 characters</div></label></div>
-                  <div className="cf-form-card"><label className="cf-form-label">Professional Summary*<textarea name="summary" value={formData.summary} onChange={handleInputChange} placeholder="Results-driven Sales Executive with 8+ years of experience exceeding quotas and driving revenue growth..." required className="cf-form-textarea" rows="6"/><div className="cf-char-count">{formData.summary.length}/500 characters</div></label></div>
-                  <div className="cf-form-card">
-                    <h4 className="cf-sub-section-title"><FiGlobe/> Professional Links</h4><p className="cf-section-desc">Add your professional profiles (LinkedIn, portfolio, etc.)</p>
-                    <div className="cf-social-input">
-                      <select value={currentSocialLink.platform} onChange={e=>setCurrentSocialLink({...currentSocialLink,platform:e.target.value})} className="cf-form-select"><option value="">Select Platform</option><option value="LinkedIn">LinkedIn</option><option value="Portfolio">Sales Portfolio</option><option value="Website">Personal Website</option><option value="GitHub">GitHub</option><option value="Twitter">Twitter/X</option></select>
-                      <input type="url" placeholder="https://linkedin.com/in/yourprofile" value={currentSocialLink.url} onChange={e=>setCurrentSocialLink({...currentSocialLink,url:e.target.value})} className="cf-form-input"/>
-                      <div className="cf-form-actions"><button onClick={addSocialLink} className="cf-add-btn" disabled={!currentSocialLink.platform||!currentSocialLink.url}><FiPlus/> {currentSocialLink.isEditing?'Update':'Add Link'}</button>{currentSocialLink.isEditing&&<button onClick={()=>setCurrentSocialLink(defaultSocialLink())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">Full Name*<input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="John Smith, Sales Executive" required className="cf-form-input"/></label>
+                      <label className="cf-form-label">Email*<input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="john.smith@salespro.com" required className="cf-form-input"/></label>
                     </div>
-                    <div className="cf-items-list">{formData.socialLinks.length===0?<p className="cf-empty-msg">No professional links added yet</p>:formData.socialLinks.map((link,i)=>(<div key={i} className="cf-list-item"><div className="cf-item-info"><span className="cf-item-platform">{link.platform}</span><span className="cf-item-url">{formatSocialUrl(link.url)}</span></div><div className="cf-item-actions"><button onClick={()=>editSocialLink(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteSocialLink(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}</div>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">Phone<input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="(555) 123-4567" className="cf-form-input"/></label>
+                      <label className="cf-form-label">Location<input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="City, Country (Remote OK)" className="cf-form-input"/></label>
+                    </div>
+                  </div>
+                  <div className="cf-form-card">
+                    <label className="cf-form-label">Professional Headline
+                      <input type="text" name="headline" value={formData.headline} onChange={handleInputChange} placeholder="Top-performing Sales Executive | 150%+ Quota Attainment | $2M+ Revenue Generated" className="cf-form-input"/>
+                      <div className="cf-char-count">{formData.headline.length}/120 characters</div>
+                    </label>
+                  </div>
+                  <div className="cf-form-card">
+                    <label className="cf-form-label">Professional Summary*
+                      <textarea name="summary" value={formData.summary} onChange={handleInputChange} placeholder="Results-driven Sales Executive with 8+ years of experience exceeding quotas and driving revenue growth..." required className="cf-form-textarea" rows="6"/>
+                      <div className="cf-char-count">{formData.summary.length}/500 characters</div>
+                    </label>
+                  </div>
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title"><FiGlobe/> Professional Links</h4>
+                    <p className="cf-section-desc">Add your professional profiles (LinkedIn, portfolio, etc.)</p>
+                    <div className="cf-social-input">
+                      <select value={currentSocialLink.platform} onChange={e=>setCurrentSocialLink({...currentSocialLink,platform:e.target.value})} className="cf-form-select">
+                        <option value="">Select Platform</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Portfolio">Sales Portfolio</option>
+                        <option value="Website">Personal Website</option>
+                        <option value="GitHub">GitHub</option>
+                        <option value="Twitter">Twitter/X</option>
+                      </select>
+                      <input type="url" placeholder="https://linkedin.com/in/yourprofile" value={currentSocialLink.url} onChange={e=>setCurrentSocialLink({...currentSocialLink,url:e.target.value})} className="cf-form-input"/>
+                      <div className="cf-form-actions">
+                        <button onClick={addSocialLink} className="cf-add-btn" disabled={!currentSocialLink.platform||!currentSocialLink.url}>
+                          <FiPlus/> {currentSocialLink.isEditing?'Update':'Add Link'}
+                        </button>
+                        {currentSocialLink.isEditing&&(
+                          <button onClick={()=>setCurrentSocialLink(defaultSocialLink())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="cf-items-list">
+                      {formData.socialLinks.length===0?<p className="cf-empty-msg">No professional links added yet</p>:formData.socialLinks.map((link,i)=>(
+                        <div key={i} className="cf-list-item">
+                          <div className="cf-item-info">
+                            <span className="cf-item-platform">{link.platform}</span>
+                            <span className="cf-item-url">{formatSocialUrl(link.url)}</span>
+                          </div>
+                          <div className="cf-item-actions">
+                            <button onClick={()=>editSocialLink(i)} className="cf-edit-btn"><FiEdit2/></button>
+                            <button onClick={()=>deleteSocialLink(i)} className="cf-delete-btn"><FiTrash2/></button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
+
               {activeSection==='experience'&&(
                 <div className="cf-form-section-content">
                   <h3 className="cf-form-section-title"><FiBriefcase/> Sales Experience</h3>
                   <p className="cf-section-desc">List your sales positions in reverse chronological order (most recent first)</p>
                   <div className="cf-form-card">
-                    <div className="cf-form-group"><label className="cf-form-label">Position Title*<input value={currentExperience.position} onChange={e=>setCurrentExperience({...currentExperience,position:e.target.value})} placeholder="Senior Sales Executive" required className="cf-form-input"/></label><label className="cf-form-label">Company*<input value={currentExperience.company} onChange={e=>setCurrentExperience({...currentExperience,company:e.target.value})} placeholder="Tech Solutions Inc." required className="cf-form-input"/></label></div>
-                    <label className="cf-form-label">Location<input value={currentExperience.location} onChange={e=>setCurrentExperience({...currentExperience,location:e.target.value})} placeholder="New York, NY (Remote)" className="cf-form-input"/></label>
-                    <div className="cf-form-group"><label className="cf-form-label">Start Date*<input type="text" placeholder="Month Year (e.g., January 2020)" value={currentExperience.startDate} onChange={e=>setCurrentExperience({...currentExperience,startDate:e.target.value})} required className="cf-form-input"/></label><label className="cf-form-label">End Date<input type="text" placeholder="Month Year or Present" value={currentExperience.endDate} onChange={e=>setCurrentExperience({...currentExperience,endDate:e.target.value})} className="cf-form-input"/></label></div>
-                    <label className="cf-form-label">Key Sales Achievements & Responsibilities*<textarea value={currentExperience.achievements} onChange={e=>setCurrentExperience({...currentExperience,achievements:e.target.value})} placeholder="• Consistently exceeded quarterly quotas by 120-150%, generating $1.2M+ in annual revenue..." required className="cf-form-textarea" rows="8"/><div className="cf-char-count">{currentExperience.achievements.length}/2000 characters</div></label>
-                    <div className="cf-form-actions"><button onClick={addExperience} className="cf-add-btn" disabled={!currentExperience.position||!currentExperience.company||!currentExperience.startDate}><FiPlus/> {currentExperience.isEditing?'Update Sales Experience':'Add Sales Experience'}</button>{currentExperience.isEditing&&<button onClick={()=>setCurrentExperience(defaultExperience())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
-                  </div>
-                  <div className="cf-form-card"><h4 className="cf-sub-section-title">Your Sales Experience</h4>{formData.experience.length===0?<p className="cf-empty-msg">No sales experience added yet</p>:<div className="cf-items-list">{formData.experience.map((exp,i)=>(<div key={i} className="cf-list-item"><div className="cf-item-content"><div className="cf-item-header"><strong className="cf-item-title">{exp.position}</strong><span className="cf-item-subtitle">at {exp.company}</span></div><div className="cf-item-meta"><span>{exp.startDate} – {exp.endDate||'Present'}</span>{exp.location&&<span>{exp.location}</span>}</div><div className="cf-item-desc">{exp.achievements.split('\n').filter(l=>l.trim()).map((line,j)=><p key={j} className="cf-bullet-point">• {line}</p>)}</div></div><div className="cf-item-actions"><button onClick={()=>editExperience(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteExperience(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}</div>}</div>
-                  <div className="cf-form-card">
-                    <h4 className="cf-sub-section-title"><FiBook/> Education</h4><p className="cf-section-desc">Add your educational background</p>
-                    <div className="cf-skills-input">
-                      <div className="cf-form-group"><label className="cf-form-label">Institution*<input value={currentEducation.institution} onChange={e=>setCurrentEducation({...currentEducation,institution:e.target.value})} placeholder="University of Business" className="cf-form-input"/></label><label className="cf-form-label">Degree*<input value={currentEducation.degree} onChange={e=>setCurrentEducation({...currentEducation,degree:e.target.value})} placeholder="Bachelor of Business Administration" className="cf-form-input"/></label></div>
-                      <div className="cf-form-group"><label className="cf-form-label">Field of Study<input value={currentEducation.field} onChange={e=>setCurrentEducation({...currentEducation,field:e.target.value})} placeholder="Marketing, Sales Management" className="cf-form-input"/></label><label className="cf-form-label">Graduation Date<input type="text" placeholder="Month Year or Expected" value={currentEducation.endDate} onChange={e=>setCurrentEducation({...currentEducation,endDate:e.target.value})} className="cf-form-input"/></label></div>
-                      <div className="cf-form-actions"><button onClick={addEducation} className="cf-add-btn" disabled={!currentEducation.institution||!currentEducation.degree}><FiPlus/> {currentEducation.isEditing?'Update Education':'Add Education'}</button>{currentEducation.isEditing&&<button onClick={()=>setCurrentEducation(defaultEducation())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">Position Title*
+                        <input value={currentExperience.position} onChange={e=>setCurrentExperience({...currentExperience,position:e.target.value})} placeholder="Senior Sales Executive" required className="cf-form-input"/>
+                      </label>
+                      <label className="cf-form-label">Company*
+                        <input value={currentExperience.company} onChange={e=>setCurrentExperience({...currentExperience,company:e.target.value})} placeholder="Tech Solutions Inc." required className="cf-form-input"/>
+                      </label>
                     </div>
-                    <div className="cf-items-list">{formData.education.map((edu,i)=>(<div key={i} className="cf-list-item"><div><strong>{edu.degree}</strong>{edu.field&&` in ${edu.field}`}{edu.institution&&` – ${edu.institution}`}{edu.endDate&&` (${edu.endDate})`}</div><div className="cf-item-actions"><button onClick={()=>editEducation(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteEducation(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}{formData.education.length===0&&<p className="cf-empty-msg">No education added yet</p>}</div>
+                    <label className="cf-form-label">Location
+                      <input value={currentExperience.location} onChange={e=>setCurrentExperience({...currentExperience,location:e.target.value})} placeholder="New York, NY (Remote)" className="cf-form-input"/>
+                    </label>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">Start Date*
+                        <input type="text" placeholder="Month Year (e.g., January 2020)" value={currentExperience.startDate} onChange={e=>setCurrentExperience({...currentExperience,startDate:e.target.value})} required className="cf-form-input"/>
+                      </label>
+                      <label className="cf-form-label">End Date
+                        <input type="text" placeholder="Month Year or Present" value={currentExperience.endDate} onChange={e=>setCurrentExperience({...currentExperience,endDate:e.target.value})} className="cf-form-input"/>
+                      </label>
+                    </div>
+                    <label className="cf-form-label">Key Sales Achievements & Responsibilities*
+                      <textarea value={currentExperience.achievements} onChange={e=>setCurrentExperience({...currentExperience,achievements:e.target.value})} placeholder="• Consistently exceeded quarterly quotas by 120-150%, generating $1.2M+ in annual revenue..." required className="cf-form-textarea" rows="8"/>
+                      <div className="cf-char-count">{currentExperience.achievements.length}/2000 characters</div>
+                    </label>
+                    <div className="cf-form-actions">
+                      <button onClick={addExperience} className="cf-add-btn" disabled={!currentExperience.position||!currentExperience.company||!currentExperience.startDate}>
+                        <FiPlus/> {currentExperience.isEditing?'Update Sales Experience':'Add Sales Experience'}
+                      </button>
+                      {currentExperience.isEditing&&(
+                        <button onClick={()=>setCurrentExperience(defaultExperience())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Your Sales Experience</h4>
+                    {formData.experience.length===0?<p className="cf-empty-msg">No sales experience added yet</p>:(
+                      <div className="cf-items-list">
+                        {formData.experience.map((exp,i)=>(
+                          <div key={i} className="cf-list-item">
+                            <div className="cf-item-content">
+                              <div className="cf-item-header">
+                                <strong className="cf-item-title">{exp.position}</strong>
+                                <span className="cf-item-subtitle">at {exp.company}</span>
+                              </div>
+                              <div className="cf-item-meta">
+                                <span>{exp.startDate} – {exp.endDate||'Present'}</span>
+                                {exp.location&&<span>{exp.location}</span>}
+                              </div>
+                              <div className="cf-item-desc">
+                                {exp.achievements.split('\n').filter(l=>l.trim()).map((line,j)=><p key={j} className="cf-bullet-point">• {line}</p>)}
+                              </div>
+                            </div>
+                            <div className="cf-item-actions">
+                              <button onClick={()=>editExperience(i)} className="cf-edit-btn"><FiEdit2/></button>
+                              <button onClick={()=>deleteExperience(i)} className="cf-delete-btn"><FiTrash2/></button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
+
+              {activeSection==='education'&&(
+                <div className="cf-form-section-content">
+                  <h3 className="cf-form-section-title"><FiBook/> Education</h3>
+                  <p className="cf-section-desc">Add your educational background</p>
+                  <div className="cf-form-card">
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">Institution*
+                        <input value={currentEducation.institution} onChange={e=>setCurrentEducation({...currentEducation,institution:e.target.value})} placeholder="University of Business" className="cf-form-input"/>
+                      </label>
+                      <label className="cf-form-label">Degree*
+                        <input value={currentEducation.degree} onChange={e=>setCurrentEducation({...currentEducation,degree:e.target.value})} placeholder="Bachelor of Business Administration" className="cf-form-input"/>
+                      </label>
+                    </div>
+                    <div className="cf-form-group">
+                      <label className="cf-form-label">Field of Study
+                        <input value={currentEducation.field} onChange={e=>setCurrentEducation({...currentEducation,field:e.target.value})} placeholder="Marketing, Sales Management" className="cf-form-input"/>
+                      </label>
+                      <label className="cf-form-label">Graduation Date
+                        <input type="text" placeholder="Month Year or Expected" value={currentEducation.endDate} onChange={e=>setCurrentEducation({...currentEducation,endDate:e.target.value})} className="cf-form-input"/>
+                      </label>
+                    </div>
+                    <div className="cf-form-actions">
+                      <button onClick={addEducation} className="cf-add-btn" disabled={!currentEducation.institution||!currentEducation.degree}>
+                        <FiPlus/> {currentEducation.isEditing?'Update Education':'Add Education'}
+                      </button>
+                      {currentEducation.isEditing&&(
+                        <button onClick={()=>setCurrentEducation(defaultEducation())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="cf-form-card">
+                    <h4 className="cf-sub-section-title">Your Education</h4>
+                    {formData.education.length===0?<p className="cf-empty-msg">No education added yet</p>:(
+                      <div className="cf-items-list">
+                        {formData.education.map((edu,i)=>(
+                          <div key={i} className="cf-list-item">
+                            <div>
+                              <strong>{edu.degree}</strong>
+                              {edu.field&&` in ${edu.field}`}
+                              {edu.institution&&` – ${edu.institution}`}
+                              {edu.endDate&&` (${edu.endDate})`}
+                            </div>
+                            <div className="cf-item-actions">
+                              <button onClick={()=>editEducation(i)} className="cf-edit-btn"><FiEdit2/></button>
+                              <button onClick={()=>deleteEducation(i)} className="cf-delete-btn"><FiTrash2/></button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {activeSection==='achievements'&&(
                 <div className="cf-form-section-content">
                   <h3 className="cf-form-section-title"><FiTrendingUp/> Key Sales Achievements</h3>
                   <div className="cf-form-card">
-                    <h4 className="cf-sub-section-title">Highlight Key Sales Achievements</h4><p className="cf-section-desc">Quantify your sales success with specific metrics and results</p>
+                    <h4 className="cf-sub-section-title">Highlight Key Sales Achievements</h4>
+                    <p className="cf-section-desc">Quantify your sales success with specific metrics and results</p>
                     <div className="cf-skills-input">
-                      <div className="cf-form-group"><label className="cf-form-label">Achievement Title*<input value={currentAchievement.title} onChange={e=>setCurrentAchievement({...currentAchievement,title:e.target.value})} placeholder="Quota Attainment" className="cf-form-input"/></label><label className="cf-form-label">Metric/Result*<input value={currentAchievement.metric} onChange={e=>setCurrentAchievement({...currentAchievement,metric:e.target.value})} placeholder="Consistently achieved 150%+ of quota" className="cf-form-input"/></label></div>
-                      <label className="cf-form-label">Impact/Details<input value={currentAchievement.result} onChange={e=>setCurrentAchievement({...currentAchievement,result:e.target.value})} placeholder="Ranked top 5% of 200-person sales team, generating $2.1M in annual revenue" className="cf-form-input"/></label>
-                      <div className="cf-form-actions"><button onClick={addAchievement} className="cf-add-btn" disabled={!currentAchievement.title.trim()||!currentAchievement.metric.trim()}><FiPlus/> {currentAchievement.isEditing?'Update Achievement':'Add Achievement'}</button>{currentAchievement.isEditing&&<button onClick={()=>setCurrentAchievement(defaultAchievement())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">Achievement Title*
+                          <input value={currentAchievement.title} onChange={e=>setCurrentAchievement({...currentAchievement,title:e.target.value})} placeholder="Quota Attainment" className="cf-form-input"/>
+                        </label>
+                        <label className="cf-form-label">Metric/Result*
+                          <input value={currentAchievement.metric} onChange={e=>setCurrentAchievement({...currentAchievement,metric:e.target.value})} placeholder="Consistently achieved 150%+ of quota" className="cf-form-input"/>
+                        </label>
+                      </div>
+                      <label className="cf-form-label">Impact/Details
+                        <input value={currentAchievement.result} onChange={e=>setCurrentAchievement({...currentAchievement,result:e.target.value})} placeholder="Ranked top 5% of 200-person sales team, generating $2.1M in annual revenue" className="cf-form-input"/>
+                      </label>
+                      <div className="cf-form-actions">
+                        <button onClick={addAchievement} className="cf-add-btn" disabled={!currentAchievement.title.trim()||!currentAchievement.metric.trim()}>
+                          <FiPlus/> {currentAchievement.isEditing?'Update Achievement':'Add Achievement'}
+                        </button>
+                        {currentAchievement.isEditing&&(
+                          <button onClick={()=>setCurrentAchievement(defaultAchievement())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                        )}
+                      </div>
                     </div>
-                    <div className="cf-items-list">{formData.achievements.map((a,i)=>(<div key={i} className="cf-list-item"><div><strong>{a.title}:</strong> {a.metric} – {a.result}</div><div className="cf-item-actions"><button onClick={()=>editAchievement(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteAchievement(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}{formData.achievements.length===0&&<p className="cf-empty-msg">No achievements added yet</p>}</div>
+                    <div className="cf-items-list">
+                      {formData.achievements.map((a,i)=>(
+                        <div key={i} className="cf-list-item">
+                          <div><strong>{a.title}:</strong> {a.metric} – {a.result}</div>
+                          <div className="cf-item-actions">
+                            <button onClick={()=>editAchievement(i)} className="cf-edit-btn"><FiEdit2/></button>
+                            <button onClick={()=>deleteAchievement(i)} className="cf-delete-btn"><FiTrash2/></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.achievements.length===0&&<p className="cf-empty-msg">No achievements added yet</p>}
+                    </div>
                   </div>
                   <div className="cf-form-card">
-                    <h4 className="cf-sub-section-title">Products & Industries Experience</h4><p className="cf-section-desc">List products, services, or industries you have sales experience with</p>
+                    <h4 className="cf-sub-section-title">Products & Industries Experience</h4>
+                    <p className="cf-section-desc">List products, services, or industries you have sales experience with</p>
                     <div className="cf-skills-input">
-                      <div className="cf-form-group"><label className="cf-form-label">Product/Industry*<input value={currentProduct.name} onChange={e=>setCurrentProduct({...currentProduct,name:e.target.value})} placeholder="SaaS, Enterprise Software, Medical Devices" className="cf-form-input"/></label><label className="cf-form-label">Years/Specialization<input value={currentProduct.experience} onChange={e=>setCurrentProduct({...currentProduct,experience:e.target.value})} placeholder="5+ years, B2B Enterprise Sales" className="cf-form-input"/></label></div>
-                      <div className="cf-form-actions"><button onClick={addProduct} className="cf-add-btn" disabled={!currentProduct.name.trim()}><FiPlus/> {currentProduct.isEditing?'Update Product':'Add Product'}</button>{currentProduct.isEditing&&<button onClick={()=>setCurrentProduct(defaultProduct())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">Product/Industry*
+                          <input value={currentProduct.name} onChange={e=>setCurrentProduct({...currentProduct,name:e.target.value})} placeholder="SaaS, Enterprise Software, Medical Devices" className="cf-form-input"/>
+                        </label>
+                        <label className="cf-form-label">Years/Specialization
+                          <input value={currentProduct.experience} onChange={e=>setCurrentProduct({...currentProduct,experience:e.target.value})} placeholder="5+ years, B2B Enterprise Sales" className="cf-form-input"/>
+                        </label>
+                      </div>
+                      <div className="cf-form-actions">
+                        <button onClick={addProduct} className="cf-add-btn" disabled={!currentProduct.name.trim()}>
+                          <FiPlus/> {currentProduct.isEditing?'Update Product':'Add Product'}
+                        </button>
+                        {currentProduct.isEditing&&(
+                          <button onClick={()=>setCurrentProduct(defaultProduct())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                        )}
+                      </div>
                     </div>
-                    <div className="cf-items-list">{formData.products.map((p,i)=>(<div key={i} className="cf-list-item"><div><strong>{p.name}</strong>{p.experience&&` – ${p.experience}`}</div><div className="cf-item-actions"><button onClick={()=>editProduct(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteProduct(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}{formData.products.length===0&&<p className="cf-empty-msg">No products added yet</p>}</div>
+                    <div className="cf-items-list">
+                      {formData.products.map((p,i)=>(
+                        <div key={i} className="cf-list-item">
+                          <div><strong>{p.name}</strong>{p.experience&&` – ${p.experience}`}</div>
+                          <div className="cf-item-actions">
+                            <button onClick={()=>editProduct(i)} className="cf-edit-btn"><FiEdit2/></button>
+                            <button onClick={()=>deleteProduct(i)} className="cf-delete-btn"><FiTrash2/></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.products.length===0&&<p className="cf-empty-msg">No products added yet</p>}
+                    </div>
                   </div>
                   <div className="cf-form-card">
-                    <h4 className="cf-sub-section-title">Languages</h4><p className="cf-section-desc">List languages you speak for international sales roles</p>
+                    <h4 className="cf-sub-section-title">Languages</h4>
+                    <p className="cf-section-desc">List languages you speak for international sales roles</p>
                     <div className="cf-skills-input">
-                      <div className="cf-form-group"><label className="cf-form-label">Language*<input value={currentLanguage.name} onChange={e=>setCurrentLanguage({...currentLanguage,name:e.target.value})} placeholder="Spanish" className="cf-form-input"/></label><label className="cf-form-label">Proficiency Level<input value={currentLanguage.proficiency} onChange={e=>setCurrentLanguage({...currentLanguage,proficiency:e.target.value})} placeholder="Fluent, Business Professional" className="cf-form-input"/></label></div>
-                      <div className="cf-form-actions"><button onClick={addLanguage} className="cf-add-btn" disabled={!currentLanguage.name.trim()}><FiPlus/> {currentLanguage.isEditing?'Update Language':'Add Language'}</button>{currentLanguage.isEditing&&<button onClick={()=>setCurrentLanguage(defaultLanguage())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">Language*
+                          <input value={currentLanguage.name} onChange={e=>setCurrentLanguage({...currentLanguage,name:e.target.value})} placeholder="Spanish" className="cf-form-input"/>
+                        </label>
+                        <label className="cf-form-label">Proficiency Level
+                          <input value={currentLanguage.proficiency} onChange={e=>setCurrentLanguage({...currentLanguage,proficiency:e.target.value})} placeholder="Fluent, Business Professional" className="cf-form-input"/>
+                        </label>
+                      </div>
+                      <div className="cf-form-actions">
+                        <button onClick={addLanguage} className="cf-add-btn" disabled={!currentLanguage.name.trim()}>
+                          <FiPlus/> {currentLanguage.isEditing?'Update Language':'Add Language'}
+                        </button>
+                        {currentLanguage.isEditing&&(
+                          <button onClick={()=>setCurrentLanguage(defaultLanguage())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                        )}
+                      </div>
                     </div>
-                    <div className="cf-items-list">{formData.languages.map((l,i)=>(<div key={i} className="cf-list-item"><div>{l.name}{l.proficiency&&` (${l.proficiency})`}</div><div className="cf-item-actions"><button onClick={()=>editLanguage(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteLanguage(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}{formData.languages.length===0&&<p className="cf-empty-msg">No languages added yet</p>}</div>
+                    <div className="cf-items-list">
+                      {formData.languages.map((l,i)=>(
+                        <div key={i} className="cf-list-item">
+                          <div>{l.name}{l.proficiency&&` (${l.proficiency})`}</div>
+                          <div className="cf-item-actions">
+                            <button onClick={()=>editLanguage(i)} className="cf-edit-btn"><FiEdit2/></button>
+                            <button onClick={()=>deleteLanguage(i)} className="cf-delete-btn"><FiTrash2/></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.languages.length===0&&<p className="cf-empty-msg">No languages added yet</p>}
+                    </div>
                   </div>
                 </div>
               )}
+
               {activeSection==='skills'&&(
                 <div className="cf-form-section-content">
                   <h3 className="cf-form-section-title"><FiTarget/> Sales Skills & Certifications</h3>
                   <div className="cf-form-card">
-                    <h4 className="cf-sub-section-title">Sales Skills & Competencies</h4><p className="cf-section-desc">List your key sales skills and proficiency levels</p>
+                    <h4 className="cf-sub-section-title">Sales Skills & Competencies</h4>
+                    <p className="cf-section-desc">List your key sales skills and proficiency levels</p>
                     <div className="cf-skills-input">
-                      <div className="cf-form-group"><label className="cf-form-label">Skill Name*<input value={currentSkill.name} onChange={e=>setCurrentSkill({...currentSkill,name:e.target.value})} placeholder="Consultative Selling, Negotiation, CRM Management" className="cf-form-input"/></label><label className="cf-form-label">Proficiency Level<input value={currentSkill.proficiency} onChange={e=>setCurrentSkill({...currentSkill,proficiency:e.target.value})} placeholder="Expert, Advanced, Proficient" className="cf-form-input"/></label></div>
-                      <div className="cf-form-actions"><button onClick={addSkill} className="cf-add-btn" disabled={!currentSkill.name.trim()}><FiPlus/> {currentSkill.isEditing?'Update Skill':'Add Skill'}</button>{currentSkill.isEditing&&<button onClick={()=>setCurrentSkill(defaultSkill())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">Skill Name*
+                          <input value={currentSkill.name} onChange={e=>setCurrentSkill({...currentSkill,name:e.target.value})} placeholder="Consultative Selling, Negotiation, CRM Management" className="cf-form-input"/>
+                        </label>
+                        <label className="cf-form-label">Proficiency Level
+                          <input value={currentSkill.proficiency} onChange={e=>setCurrentSkill({...currentSkill,proficiency:e.target.value})} placeholder="Expert, Advanced, Proficient" className="cf-form-input"/>
+                        </label>
+                      </div>
+                      <div className="cf-form-actions">
+                        <button onClick={addSkill} className="cf-add-btn" disabled={!currentSkill.name.trim()}>
+                          <FiPlus/> {currentSkill.isEditing?'Update Skill':'Add Skill'}
+                        </button>
+                        {currentSkill.isEditing&&(
+                          <button onClick={()=>setCurrentSkill(defaultSkill())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                        )}
+                      </div>
                     </div>
-                    <div className="cf-items-list">{formData.skills.map((s,i)=>(<div key={i} className="cf-list-item"><div><strong>{s.name}</strong>{s.proficiency&&` (${s.proficiency})`}</div><div className="cf-item-actions"><button onClick={()=>editSkill(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteSkill(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}{formData.skills.length===0&&<p className="cf-empty-msg">No skills added yet</p>}</div>
+                    <div className="cf-items-list">
+                      {formData.skills.map((s,i)=>(
+                        <div key={i} className="cf-list-item">
+                          <div><strong>{s.name}</strong>{s.proficiency&&` (${s.proficiency})`}</div>
+                          <div className="cf-item-actions">
+                            <button onClick={()=>editSkill(i)} className="cf-edit-btn"><FiEdit2/></button>
+                            <button onClick={()=>deleteSkill(i)} className="cf-delete-btn"><FiTrash2/></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.skills.length===0&&<p className="cf-empty-msg">No skills added yet</p>}
+                    </div>
                   </div>
                   <div className="cf-form-card">
-                    <h4 className="cf-sub-section-title">Sales Certifications</h4><p className="cf-section-desc">Add your professional sales certifications</p>
+                    <h4 className="cf-sub-section-title">Sales Certifications</h4>
+                    <p className="cf-section-desc">Add your professional sales certifications</p>
                     <div className="cf-skills-input">
-                      <div className="cf-form-group"><label className="cf-form-label">Certification Name*<input value={currentCertification.name} onChange={e=>setCurrentCertification({...currentCertification,name:e.target.value})} placeholder="Salesforce Certified Sales Professional" className="cf-form-input"/></label><label className="cf-form-label">Issuing Organization<input value={currentCertification.issuingOrg} onChange={e=>setCurrentCertification({...currentCertification,issuingOrg:e.target.value})} placeholder="Salesforce, HubSpot, Microsoft" className="cf-form-input"/></label></div>
-                      <label className="cf-form-label">Date Earned/Expires<input value={currentCertification.date} onChange={e=>setCurrentCertification({...currentCertification,date:e.target.value})} placeholder="June 2023 - June 2025" className="cf-form-input"/></label>
-                      <div className="cf-form-actions"><button onClick={addCertification} className="cf-add-btn" disabled={!currentCertification.name.trim()}><FiPlus/> {currentCertification.isEditing?'Update Certification':'Add Certification'}</button>{currentCertification.isEditing&&<button onClick={()=>setCurrentCertification(defaultCertification())} className="cf-cancel-btn"><FiX/> Cancel</button>}</div>
+                      <div className="cf-form-group">
+                        <label className="cf-form-label">Certification Name*
+                          <input value={currentCertification.name} onChange={e=>setCurrentCertification({...currentCertification,name:e.target.value})} placeholder="Salesforce Certified Sales Professional" className="cf-form-input"/>
+                        </label>
+                        <label className="cf-form-label">Issuing Organization
+                          <input value={currentCertification.issuingOrg} onChange={e=>setCurrentCertification({...currentCertification,issuingOrg:e.target.value})} placeholder="Salesforce, HubSpot, Microsoft" className="cf-form-input"/>
+                        </label>
+                      </div>
+                      <label className="cf-form-label">Date Earned/Expires
+                        <input value={currentCertification.date} onChange={e=>setCurrentCertification({...currentCertification,date:e.target.value})} placeholder="June 2023 - June 2025" className="cf-form-input"/>
+                      </label>
+                      <div className="cf-form-actions">
+                        <button onClick={addCertification} className="cf-add-btn" disabled={!currentCertification.name.trim()}>
+                          <FiPlus/> {currentCertification.isEditing?'Update Certification':'Add Certification'}
+                        </button>
+                        {currentCertification.isEditing&&(
+                          <button onClick={()=>setCurrentCertification(defaultCertification())} className="cf-cancel-btn"><FiX/> Cancel</button>
+                        )}
+                      </div>
                     </div>
-                    <div className="cf-items-list">{formData.certifications.map((c,i)=>(<div key={i} className="cf-list-item"><div><strong>{c.name}</strong>{c.issuingOrg&&` – ${c.issuingOrg}`}{c.date&&` (${c.date})`}</div><div className="cf-item-actions"><button onClick={()=>editCertification(i)} className="cf-edit-btn"><FiEdit2/></button><button onClick={()=>deleteCertification(i)} className="cf-delete-btn"><FiTrash2/></button></div></div>))}{formData.certifications.length===0&&<p className="cf-empty-msg">No certifications added yet</p>}</div>
+                    <div className="cf-items-list">
+                      {formData.certifications.map((c,i)=>(
+                        <div key={i} className="cf-list-item">
+                          <div><strong>{c.name}</strong>{c.issuingOrg&&` – ${c.issuingOrg}`}{c.date&&` (${c.date})`}</div>
+                          <div className="cf-item-actions">
+                            <button onClick={()=>editCertification(i)} className="cf-edit-btn"><FiEdit2/></button>
+                            <button onClick={()=>deleteCertification(i)} className="cf-delete-btn"><FiTrash2/></button>
+                          </div>
+                        </div>
+                      ))}
+                      {formData.certifications.length===0&&<p className="cf-empty-msg">No certifications added yet</p>}
+                    </div>
                   </div>
                 </div>
               )}
+
               {activeSection==='settings'&&(
                 <div className="cf-form-section-content">
                   <h3 className="cf-form-section-title"><FiSettings/> Font Size Settings</h3>
                   <p className="cf-section-desc">Customize font sizes for your resume PDF. All sizes are in points (pt).</p>
                   <div className="cf-form-card">
                     <div className="cf-font-grid">
-                      {[{key:'name',label:'Name'},{key:'headlineText',label:'Headline'},{key:'sectionTitle',label:'Section Titles'},{key:'jobTitle',label:'Job Titles'},{key:'degree',label:'Degrees'},{key:'institution',label:'Company/Institution Names'},{key:'institutionDate',label:'Institution Dates'},{key:'regularText',label:'Regular Text'},{key:'bulletText',label:'Bullet Points'},{key:'contactInfo',label:'Contact Info'},{key:'skillText',label:'Skills Text'},{key:'metricText',label:'Metrics Text'}].map(({key,label})=>(
+                      {[
+                        {key:'name',label:'Name'},
+                        {key:'headlineText',label:'Headline'},
+                        {key:'sectionTitle',label:'Section Titles'},
+                        {key:'jobTitle',label:'Job Titles'},
+                        {key:'degree',label:'Degrees'},
+                        {key:'institution',label:'Company/Institution Names'},
+                        {key:'institutionDate',label:'Institution Dates'},
+                        {key:'regularText',label:'Regular Text'},
+                        {key:'bulletText',label:'Bullet Points'},
+                        {key:'contactInfo',label:'Contact Info'},
+                        {key:'skillText',label:'Skills Text'},
+                        {key:'metricText',label:'Metrics Text'}
+                      ].map(({key,label})=>(
                         <div key={key} className="cf-font-control">
-                          <label className="cf-font-label"><span>{label}</span><span className="cf-font-value">{fontSizes[key]}pt</span></label>
+                          <label className="cf-font-label">
+                            <span>{label}</span>
+                            <span className="cf-font-value">{fontSizes[key]}pt</span>
+                          </label>
                           <input type="range" min={key==='institutionDate'?4:6} max={key==='name'?24:key==='headlineText'||key==='sectionTitle'?18:key==='jobTitle'||key==='degree'?16:14} value={fontSizes[key]} onChange={e=>handleFontSizeChange(key,e.target.value)} className="cf-font-slider"/>
                         </div>
                       ))}
@@ -760,12 +1473,77 @@ const SalesResume = ({ seoData, buildTimestamp }) => {
           </div>
         </div>
 
-        <section className="cf-faq-section"><div className="cf-container"><div className="cf-section-header"><h2>Frequently Asked Questions</h2><p>Everything you need to know about creating professional sales resumes with our tool.</p></div><div className="cf-faq-grid">{faqs.map((faq,i)=>(<div key={i} className="cf-faq-item"><h3 className="cf-faq-question">{faq.question}</h3><p className="cf-faq-answer">{faq.answer}</p></div>))}</div></div></section>
+        {/* FAQ Section */}
+        <section className="cf-faq-section" aria-labelledby="faq-title">
+          <div className="cf-container">
+            <div className="cf-section-header">
+              <h2 id="faq-title">Frequently Asked Questions</h2>
+              <p>Everything you need to know about creating professional sales resumes with our tool.</p>
+            </div>
+            <div className="cf-faq-grid">
+              {faqs.map((faq,i)=>(
+                <div key={i} className="cf-faq-item">
+                  <h3 className="cf-faq-question">{faq.question}</h3>
+                  <p className="cf-faq-answer">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <section className="cf-cta-section"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title">Ready to Close Your Next Career Deal?</h2><p className="cf-cta-subtitle">Join 3 million+ sales professionals who landed their dream roles with our free ATS-friendly sales resume builder.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn"><span className="cf-cta-btn-text">Create Your Free Sales Resume Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Sales</span></div></div></div></section>
+        {/* CTA Section */}
+        <section className="cf-cta-section" aria-labelledby="cta-title">
+          <div className="cf-container">
+            <div className="cf-cta-content">
+              <h2 className="cf-cta-title" id="cta-title">Ready to Close Your Next Career Deal?</h2>
+              <p className="cf-cta-subtitle">
+                Join 3 million+ sales professionals who landed their dream roles with our free ATS-friendly sales resume builder.
+              </p>
+              <div className="cf-cta-btn-wrap">
+                <button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free sales resume now—no sign-up required">
+                  <span className="cf-cta-btn-text">Create Your Free Sales Resume Now</span>
+                  <FiArrowRight className="cf-cta-btn-icon"/>
+                </button>
+              </div>
+              <div className="cf-cta-guarantee">
+                <FiCheck className="cf-guarantee-icon"/>
+                <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Sales</span>
+              </div>
 
-        {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Sales Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><SalesTemplate formData={formData}/></div></div></div></div>)}
+              {/* Related Resources - Placed beneath the guarantee text */}
+              <div className="cf-related-links-wrap">
+                <h3 className="cf-related-links-title">Explore More Free Business & Sales Resume Builders</h3>
+                <div className="cf-related-links-grid">
+                  {relatedLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-related-link-card" prefetch={false}>
+                      <span className="cf-related-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-related-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
+        {/* Full Preview Modal */}
+        {showFullPreview&&(
+          <div className="cf-modal" onClick={()=>setShowFullPreview(false)}>
+            <div className="cf-modal-content" onClick={e=>e.stopPropagation()}>
+              <div className="cf-modal-header">
+                <h3>Full Sales Resume Preview</h3>
+                <button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button>
+              </div>
+              <div className="cf-modal-pages">
+                <div className="cf-modal-page">
+                  <SalesTemplate formData={formData}/>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Share Popup */}
         {showSharePopup && (
           <div className="cf-share-overlay" onClick={() => setShowSharePopup(false)}>
             <div className="cf-share-card" onClick={e => e.stopPropagation()}>
@@ -781,10 +1559,40 @@ const SalesResume = ({ seoData, buildTimestamp }) => {
   );
 };
 
+// SSG + ISR Implementation
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildTime = new Date(buildTimestamp);
-  return { props: { seoData: { currentDate: buildTime.toISOString().split('T')[0], lastModifiedDate: buildTime.toISOString() }, buildTimestamp }, revalidate: 3600 };
+  const currentDate = buildTime.toISOString().split('T')[0];
+  const lastModifiedDate = buildTime.toISOString();
+
+  // Generate review dates for structured data
+  const reviewDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 10 + 1));
+    return date.toISOString().split('T')[0];
+  });
+
+  // Generate FAQ dates for structured data
+  const faqDates = Array(6).fill(null).map((_, i) => {
+    const date = new Date(buildTimestamp);
+    date.setDate(date.getDate() - (i * 15 + 30));
+    return date.toISOString().split('T')[0];
+  });
+
+  return {
+    props: {
+      seoData: {
+        currentDate,
+        lastModifiedDate,
+        reviewDates,
+        faqDates
+      },
+      buildTimestamp
+    },
+    // ISR: Revalidate every 24 hours (86400 seconds)
+    revalidate: 86400
+  };
 }
 
 export default SalesResume;

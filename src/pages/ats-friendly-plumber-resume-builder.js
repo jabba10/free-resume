@@ -283,7 +283,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -292,9 +292,18 @@ const careerFlowStyles = `
   .cf-cta-btn-text { position: relative; z-index: 1; }
   .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
   .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
-  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); margin-bottom: 48px; }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-related-links-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; border-top: 0.5px solid rgba(212, 175, 55, 0.15); }
+  .cf-related-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; letter-spacing: 0.02em; }
+  .cf-related-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cf-related-link-card { display: flex; align-items: center; justify-content: space-between; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 18px 22px; text-decoration: none; transition: all var(--cf-transition-base); text-align: left; }
+  .cf-related-link-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); background: rgba(242, 202, 80, 0.06); }
+  .cf-related-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); letter-spacing: 0.02em; line-height: 1.4; }
+  .cf-related-link-arrow { color: var(--cf-primary); font-size: 18px; flex-shrink: 0; margin-left: 12px; transition: transform var(--cf-transition-base); }
+  .cf-related-link-card:hover .cf-related-link-arrow { transform: translateX(6px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -360,6 +369,7 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-related-links-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
@@ -387,6 +397,9 @@ const careerFlowStyles = `
     .cf-modal-page .cf-plumber-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-related-links-title { font-size: 18px; }
+    .cf-related-link-card { padding: 14px 18px; }
+    .cf-related-link-title { font-size: 13px; }
   }
 
   @media (max-width: 360px) {
@@ -414,6 +427,9 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic Year Calculation - Automatically updates 2026 → 2027 → 2028 and beyond
+  const currentYear = new Date().getFullYear();
 
   // Testimonials for Structured Data
   const testimonials = [
@@ -512,6 +528,15 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
       question: "Can I edit my plumbing resume after downloading it?",
       answer: "Yes, you can always come back and edit your plumbing resume. Your work saves automatically, and you can download updated versions as many times as needed—completely free."
     }
+  ];
+
+  // --- Internal Links for Related Resources ---
+  const relatedLinks = [
+    { target: "/ats-friendly-electrician-resume-builder", title: "Electrician Resume Builder" },
+    { target: "/ats-friendly-construction-worker-resume-builder", title: "Construction Worker Resume Builder" },
+    { target: "/ats-friendly-industrial-manufacturing-resume-builder", title: "Industrial Manufacturing Resume Builder" },
+    { target: "/ats-friendly-advanced-manufacturing-and-automation-resume-builder", title: "Advanced Manufacturing Resume Builder" },
+    { target: "/ats-friendly-driver-resume-builder", title: "Driver Resume Builder" }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -626,9 +651,9 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros</title>
-          <meta name="title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
-          <meta name="description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
+          <title>{`Free Plumber Resume Builder ${currentYear} | ATS Plumbing Templates for Pros`}</title>
+          <meta name="title" content={`Free Plumber Resume Builder ${currentYear} | ATS Plumbing Templates for Pros`} />
+          <meta name="description" content={`Create your professional plumbing resume for free in ${currentYear}. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up.`} />
           <meta name="keywords" content="plumber resume builder, plumbing resume templates, pipefitter resume, apprentice plumber resume, ATS friendly plumbing resume, free resume builder for plumbers, construction resume, plumbing CV, plumbing technician resume, master plumber resume" />
           <meta name="author" content="Professional Plumber Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -647,8 +672,8 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
-          <meta property="og:description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
+          <meta property="og:title" content={`Free Plumber Resume Builder ${currentYear} | ATS Plumbing Templates for Pros`} />
+          <meta property="og:description" content={`Create your professional plumbing resume for free in ${currentYear}. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-plumber-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -662,8 +687,8 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Plumber Resume Builder 2026 | ATS Plumbing Templates for Pros" />
-          <meta name="twitter:description" content="Create your professional plumbing resume for free in 2026. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free Plumber Resume Builder ${currentYear} | ATS Plumbing Templates for Pros`} />
+          <meta name="twitter:description" content={`Create your professional plumbing resume for free in ${currentYear}. ATS-optimized templates help plumbers, pipefitters & apprentices land jobs faster. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-plumber-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Plumber Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@ProResumeFree" />
@@ -689,7 +714,7 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Plumber Resume Builder 2026 - ATS Plumbing Templates for Pros",
+                    "name": `Free Plumber Resume Builder ${currentYear} - ATS Plumbing Templates for Pros`,
                     "description": "Create professional ATS-optimized plumbing resumes for free. Land jobs 3x faster with our plumber resume builder.",
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
@@ -752,7 +777,7 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -771,7 +796,7 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-plumber-resume-builder.jpg",
                       "applicationSuite": "Plumbing Career Tools",
                       "countriesSupported": "Global",
@@ -967,13 +992,13 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
               <div className="cf-trust-badge">
                 <FiStar className="cf-trust-icon" />
                 <span className="cf-trust-text">
-                  Best Free Plumber Resume Builder 2026
+                  Best Free Plumber Resume Builder {currentYear}
                 </span>
               </div>
               
               {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
               <h1 className="cf-hero-title">
-                Free Plumber Resume <span className="cf-gradient-text">Builder 2026</span>
+                Free Plumber Resume <span className="cf-gradient-text">Builder {currentYear}</span>
               </h1>
               
               <p className="cf-hero-subtitle">
@@ -1201,6 +1226,19 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
               <div className="cf-cta-guarantee">
                 <FiCheck className="cf-guarantee-icon" />
                 <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Plumbing</span>
+              </div>
+
+              {/* Related Resources - Placed beneath the guarantee text */}
+              <div className="cf-related-links-wrap">
+                <h3 className="cf-related-links-title">Explore More Free Trade & Industrial Resume Builders</h3>
+                <div className="cf-related-links-grid">
+                  {relatedLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-related-link-card" prefetch={false}>
+                      <span className="cf-related-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-related-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
