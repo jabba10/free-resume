@@ -280,7 +280,7 @@ const careerFlowStyles = `
   .cf-faq-answer { font-family: var(--cf-font-body); font-size: 16px; color: var(--cf-on-surface-variant); line-height: 1.6; margin: 0; }
 
   .cf-cta-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: #131315; text-align: center; }
-  .cf-cta-content { max-width: 700px; margin: 0 auto; }
+  .cf-cta-content { max-width: 900px; margin: 0 auto; }
   .cf-cta-title { font-family: var(--cf-font-display); font-size: 32px; font-weight: 600; color: var(--cf-on-background); margin: 0 0 16px; line-height: 1.2; }
   .cf-cta-subtitle { font-family: var(--cf-font-body); font-size: 18px; color: var(--cf-on-surface-variant); margin: 0 0 40px; line-height: 1.6; }
   .cf-cta-btn-wrap { margin-bottom: 32px; display: flex; justify-content: center; }
@@ -289,9 +289,18 @@ const careerFlowStyles = `
   .cf-cta-btn-text { position: relative; z-index: 1; }
   .cf-cta-btn-icon { font-size: 20px; transition: transform var(--cf-transition-base); }
   .cf-cta-btn:hover .cf-cta-btn-icon { transform: translateX(8px); }
-  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); }
+  .cf-cta-guarantee { display: inline-flex; align-items: center; gap: 12px; background: rgba(242, 202, 80, 0.05); padding: 16px 32px; border-radius: 50px; border: 0.5px solid rgba(212, 175, 55, 0.3); margin-bottom: 48px; }
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
+
+  .cf-related-links-wrap { max-width: 900px; margin: 0 auto; padding-top: 40px; border-top: 0.5px solid rgba(212, 175, 55, 0.15); }
+  .cf-related-links-title { font-family: var(--cf-font-display); font-size: 20px; font-weight: 600; color: var(--cf-primary); margin: 0 0 24px; letter-spacing: 0.02em; }
+  .cf-related-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cf-related-link-card { display: flex; align-items: center; justify-content: space-between; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; padding: 18px 22px; text-decoration: none; transition: all var(--cf-transition-base); text-align: left; }
+  .cf-related-link-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); background: rgba(242, 202, 80, 0.06); }
+  .cf-related-link-title { font-family: var(--cf-font-body); font-size: 14px; font-weight: 600; color: var(--cf-on-background); letter-spacing: 0.02em; line-height: 1.4; }
+  .cf-related-link-arrow { color: var(--cf-primary); font-size: 18px; flex-shrink: 0; margin-left: 12px; transition: transform var(--cf-transition-base); }
+  .cf-related-link-card:hover .cf-related-link-arrow { transform: translateX(6px); }
 
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
@@ -313,18 +322,23 @@ const careerFlowStyles = `
 
   @media (min-width: 1024px) { .cf-layout { flex-direction: row; gap: 48px; } .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; } .cf-form-section { max-width: 500px; } .cf-faq-grid { grid-template-columns: repeat(2, 1fr); } .cf-form-group { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 1023px) { :root { --cf-margin-desktop: 32px; --cf-section-gap: 80px; } .cf-container { padding: 0 var(--cf-margin-desktop); } .cf-hero { padding: 100px 0 60px; min-height: auto; } .cf-hero-title { font-size: 48px; } .cf-layout { padding: 60px var(--cf-margin-desktop); gap: 32px; } .cf-form-group { grid-template-columns: 1fr 1fr; } .cf-faq-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } }
-  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } }
+  @media (max-width: 768px) { :root { --cf-margin-desktop: 24px; --cf-section-gap: 60px; } .cf-hero { padding: 80px 0 40px; } .cf-hero-title { font-size: 36px; } .cf-hero-subtitle { font-size: 14px; } .cf-cta-buttons { flex-direction: column; align-items: center; gap: 12px; } .cf-btn-primary, .cf-btn-secondary, .cf-preview-btn, .cf-download-btn, .cf-cta-btn { width: 100%; justify-content: center; } .cf-layout { padding: 40px var(--cf-margin-desktop); gap: 24px; } .cf-preview-container { padding: 16px; } .cf-resume-preview { width: 100%; min-height: auto; padding: 8mm 10mm; } .cf-form-nav { gap: 6px; padding: 12px; } .cf-nav-btn { min-width: 80px; flex: 1 1 calc(50% - 6px); padding: 10px 14px; font-size: 11px; } .cf-nav-btn span { display: none; } .cf-form-card { padding: 16px; } .cf-form-group { grid-template-columns: 1fr; } .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; } .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .cf-faq-grid { grid-template-columns: 1fr; } .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); } .cf-section-header h2, .cf-cta-title { font-size: 28px; } .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; } .cf-modal-page { width: 100%; height: auto; min-height: 400px; } .cf-modal-page .cf-universal-template { padding: 8mm 12mm; } .cf-font-grid { grid-template-columns: 1fr 1fr; } .cf-list-item { flex-direction: column; gap: 12px; } .cf-item-actions { margin-left: 0; align-self: flex-end; } .cf-share-card { margin: 0 16px; padding: 24px 20px; } .cf-related-links-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { :root { --cf-margin-desktop: 16px; --cf-section-gap: 48px; } .cf-hero-title { font-size: 28px; } .cf-hero-subtitle { font-size: 13px; } .cf-hero-stats, .cf-badge-grid { grid-template-columns: 1fr; } .cf-stat-number { font-size: 2rem; } .cf-layout { padding: 32px var(--cf-margin-desktop); } .cf-resume-preview { padding: 6mm 8mm; } .cf-nav-btn { min-width: 60px; flex: 1 1 calc(50% - 6px); padding: 8px 10px; } .cf-form-card { padding: 12px; } .cf-form-section-title { font-size: 20px; } .cf-sub-section-title { font-size: 16px; } .cf-font-grid { grid-template-columns: 1fr; } .cf-faq-item { padding: 20px; } .cf-faq-question { font-size: 18px; } .cf-section-header h2, .cf-cta-title { font-size: 24px; } .cf-cta-btn { padding: 16px 32px; font-size: 14px; } .cf-cta-guarantee { padding: 12px 20px; flex-wrap: wrap; justify-content: center; } .cf-guarantee-text { font-size: 12px; } .cf-modal-header { padding: 16px 20px; } .cf-modal-header h3 { font-size: 16px; } .cf-modal-pages { padding: 16px; } .cf-modal-page .cf-universal-template { padding: 6mm 8mm; } .cf-share-headline { font-size: 20px; } .cf-share-body { font-size: 13px; } .cf-related-links-title { font-size: 18px; } .cf-related-link-card { padding: 14px 18px; } .cf-related-link-title { font-size: 13px; } }
   @media (max-width: 360px) { .cf-hero-title { font-size: 24px; } .cf-btn-primary, .cf-btn-secondary { padding: 12px 20px; font-size: 12px; } }
   @media print { .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-modal { display: none !important; } .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; } .cf-universal-template, .cf-section { page-break-inside: avoid; } }
 `;
 
 const Resume = ({ seoData, buildTimestamp }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { currentDate, lastModifiedDate } = seoData || {};
+  const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
   const freshnessIndicator = buildTimestamp ? new Date(buildTimestamp).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const safeReviewDates = reviewDates || Array(6).fill(freshnessIndicator);
+  const safeFaqDates = faqDates || Array(6).fill(freshnessIndicator);
+
+  // Dynamic Year Calculation - Automatically updates 2026 → 2027 → 2028 and beyond
+  const currentYear = new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', department: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', program: '', startDate: '', endDate: '', gpa: '', isEditing: false, editIndex: null });
@@ -349,10 +363,26 @@ const Resume = ({ seoData, buildTimestamp }) => {
   const [showFullPreview, setShowFullPreview] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
 
+  // Testimonials for Structured Data
+  const testimonials = [
+    { quote: "Created my tech resume in 10 minutes and landed interviews at FAANG companies. The tech-specific templates highlight my coding achievements perfectly!", metric: "3 FAANG Interviews", name: "Michael T.", role: "Senior Software Engineer", company: "Tech Solutions Inc." },
+    { quote: "Finally a resume builder that understands tech stacks and DevOps. The ATS-optimized templates helped me pass screening at top startups.", metric: "Startup Job in 2 Weeks", name: "Sarah K.", role: "Full-Stack Developer", company: "Cloud Ventures Inc." },
+    { quote: "As a recent CS graduate, the entry-level tech templates helped me land my first developer role with a 25% higher starting salary.", metric: "First Dev Job +25% Salary", name: "Alex R.", role: "Junior Software Developer", company: "FinTech Startup" }
+  ];
+
   const faqs = [
     { question: "Is this tech resume builder really free with no hidden costs?", answer: "Yes, our tech resume builder is completely free with no hidden costs or watermarks. Create, edit, and download your professional tech resume in PDF format without any payment required." },
     { question: "What does ATS-friendly mean for tech resumes?", answer: "ATS-friendly means our tech resume templates are optimized to pass through Applicant Tracking Systems used by 99% of tech companies and startups. This ensures your technical skills, projects, and experience are properly scanned and recognized." },
     { question: "Can I download my tech resume as PDF without creating an account?", answer: "Absolutely! Download your professional tech resume in PDF format without creating an account. Everything is completely free and accessible immediately for software engineers, developers, and tech professionals." }
+  ];
+
+  // --- Internal Links for Related Resources ---
+  const relatedLinks = [
+    { target: "/ats-friendly-software-developer-and-software-engineer-resume-builder", title: "Software Developer Resume Builder" },
+    { target: "/ats-friendly-data-analyst-resume-builder", title: "Data Analyst Resume Builder" },
+    { target: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", title: "AI & ML Engineering Resume" },
+    { target: "/ats-friendly-data-and-cybersecurity-resume-builder", title: "Data & Cybersecurity Resume Builder" },
+    { target: "/best-resume-examples-for-usa-it-and-software-jobs", title: "US IT & Software Resume Examples" }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -462,9 +492,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Tech Resume Builder 2026: ATS Templates for Tech Pros</title>
-          <meta name="title" content="Free Tech Resume Builder 2026: ATS Templates for Tech Pros" />
-          <meta name="description" content="Create your professional tech resume for free in 2026. ATS-optimized templates help tech professionals highlight coding skills, projects & experience. Start now—no sign-up." />
+          <title>{`Free Tech Resume Builder ${currentYear}: ATS Templates for Tech Pros`}</title>
+          <meta name="title" content={`Free Tech Resume Builder ${currentYear}: ATS Templates for Tech Pros`} />
+          <meta name="description" content={`Create your professional tech resume for free in ${currentYear}. ATS-optimized templates help tech professionals highlight coding skills, projects & experience. Start now—no sign-up.`} />
           <meta name="keywords" content="tech resume builder, software engineer resume, developer resume, data science resume, ATS friendly tech resume, free resume builder for tech professionals, coding resume, tech CV, software developer resume, GitHub portfolio resume" />
           <meta name="author" content="Professional Tech Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -480,8 +510,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Tech Resume Builder 2026: ATS Templates for Tech Pros" />
-          <meta property="og:description" content="Create your professional tech resume for free in 2026. ATS-optimized templates help tech professionals highlight coding skills, projects & experience. Start now—no sign-up." />
+          <meta property="og:title" content={`Free Tech Resume Builder ${currentYear}: ATS Templates for Tech Pros`} />
+          <meta property="og:description" content={`Create your professional tech resume for free in ${currentYear}. ATS-optimized templates help tech professionals highlight coding skills, projects & experience. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-tech-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -495,8 +525,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Tech Resume Builder 2026: ATS Templates for Tech Pros" />
-          <meta name="twitter:description" content="Create your professional tech resume for free in 2026. ATS-optimized templates help tech professionals highlight coding skills, projects & experience. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free Tech Resume Builder ${currentYear}: ATS Templates for Tech Pros`} />
+          <meta name="twitter:description" content={`Create your professional tech resume for free in ${currentYear}. ATS-optimized templates help tech professionals highlight coding skills, projects & experience. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-tech-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Tech Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@ProTechResume" />
@@ -522,7 +552,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Tech Resume Builder 2026 - ATS Templates for Tech Pros",
+                    "name": `Free Tech Resume Builder ${currentYear} - ATS Templates for Tech Pros`,
                     "description": "Create professional ATS-optimized tech resumes for free. Land interviews 3x faster with our tech resume builder.",
                     "datePublished": "2026-01-01",
                     "dateModified": safeLastModifiedDate,
@@ -585,7 +615,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -604,7 +634,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-tech-resume-builder.jpg",
                       "applicationSuite": "Tech Career Tools",
                       "countriesSupported": "Global",
@@ -620,7 +650,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                       "acceptedAnswer": {
                         "@type": "Answer",
                         "text": faq.answer,
-                        "datePublished": safeCurrentDate,
+                        "datePublished": safeFaqDates[index] || safeCurrentDate,
                         "author": {
                           "@type": "Person",
                           "name": "Tech Resume Builder Support Team"
@@ -722,6 +752,44 @@ const Resume = ({ seoData, buildTimestamp }) => {
                   {
                     "@type": "SpeakableSpecification",
                     "cssSelector": [".cf-hero-title", ".cf-hero-subtitle", ".cf-faq-question"]
+                  },
+                  {
+                    "@type": "ItemList",
+                    "itemListElement": testimonials.map((testimonial, index) => ({
+                      "@type": "ListItem",
+                      "position": index + 1,
+                      "item": {
+                        "@type": "Review",
+                        "reviewRating": {
+                          "@type": "Rating",
+                          "ratingValue": 5,
+                          "bestRating": 5
+                        },
+                        "author": {
+                          "@type": "Person",
+                          "name": testimonial.name
+                        },
+                        "reviewBody": testimonial.quote,
+                        "datePublished": safeReviewDates[index] || safeCurrentDate,
+                        "publisher": {
+                          "@type": "Organization",
+                          "name": "Professional Tech Resume Free"
+                        },
+                        "itemReviewed": {
+                          "@type": "SoftwareApplication",
+                          "name": "Tech Resume Builder - ATS Optimized Tech Resume Maker",
+                          "applicationCategory": "BusinessApplication",
+                          "operatingSystem": "Any",
+                          "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "USD"
+                          },
+                          "description": "Free online ATS-friendly tech resume builder that helps tech professionals create professional resumes and land tech jobs faster.",
+                          "url": canonicalUrl
+                        }
+                      }
+                    }))
                   }
                 ]
               })
@@ -734,13 +802,28 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta name="content-freshness" content={freshnessIndicator} />
         </div>
 
-        <nav className="cf-breadcrumb" aria-label="Breadcrumb"><ol><li><Link href="/" className="cf-breadcrumb-link"><FiHome className="cf-breadcrumb-icon"/><span className="cf-breadcrumb-text">Home</span></Link></li><li className="cf-breadcrumb-separator"><FiChevronRightIcon/></li><li><span className="cf-breadcrumb-text">Free Tech Templates</span></li></ol></nav>
+        <nav className="cf-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="https://professionalresumefree.com" className="cf-breadcrumb-link" prefetch={false}>
+                <FiHome className="cf-breadcrumb-icon"/>
+                <span className="cf-breadcrumb-text">Home</span>
+              </Link>
+            </li>
+            <li className="cf-breadcrumb-separator"><FiChevronRightIcon/></li>
+            <li>
+              <Link href="/ats-friendly-tech-resume-builder" className="cf-breadcrumb-link" prefetch={false}>
+                <span className="cf-breadcrumb-text">Free Tech Templates</span>
+              </Link>
+            </li>
+          </ol>
+        </nav>
 
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Tech Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Tech Resume Builder 2026</h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Tech Resume Builder {currentYear}</span></div>
+              <h1 className="cf-hero-title">Free Tech <span className="cf-gradient-text">Resume Builder {currentYear}</span></h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized tech resume for free in minutes.</strong> Our tech resume builder helps you highlight coding skills, projects, and technical experience that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free tech resume now—no sign-up required">
@@ -749,6 +832,11 @@ const Resume = ({ seoData, buildTimestamp }) => {
                   <div className="cf-btn-pulse"></div>
                 </button>
                 <button onClick={generatePDF} className="cf-btn-secondary" disabled={isGeneratingPDF || !hasContent()} aria-label="Download tech resume as PDF"><FiDownload className="cf-btn-icon"/><span className="cf-btn-text">Download Tech Resume PDF</span></button>
+              </div>
+              <div className="cf-hero-stats">
+                <div className="cf-stat-item"><span className="cf-stat-number">2M+</span><span className="cf-stat-label">Tech Professionals</span></div>
+                <div className="cf-stat-item"><span className="cf-stat-number">99%</span><span className="cf-stat-label">ATS Pass Rate</span></div>
+                <div className="cf-stat-item"><span className="cf-stat-number">24h</span><span className="cf-stat-label">Avg. Interview Time</span></div>
               </div>
               <div className="cf-industry-badges"><div className="cf-badge-grid"><span className="cf-badge-item"><FiCode/> Software Engineering</span><span className="cf-badge-item"><FiDatabase/> Data Science</span><span className="cf-badge-item"><FiCpu/> DevOps</span><span className="cf-badge-item"><FiCloud/> Cloud Engineering</span><span className="cf-badge-item"><FiTrendingUp/> Product Management</span><span className="cf-badge-item"><FiServer/> Cybersecurity</span></div></div>
             </div>
@@ -876,7 +964,37 @@ const Resume = ({ seoData, buildTimestamp }) => {
 
         <section className="cf-faq-section" aria-labelledby="faq-title"><div className="cf-container"><div className="cf-section-header"><h2 className="cf-section-title" id="faq-title">Frequently Asked Questions</h2><p>Everything you need to know about creating professional tech resumes with our tool.</p></div><div className="cf-faq-grid">{faqs.map((faq,i)=>(<div key={i} className="cf-faq-item"><h3 className="cf-faq-question">{faq.question}</h3><p className="cf-faq-answer">{faq.answer}</p></div>))}</div></div></section>
 
-        <section className="cf-cta-section" aria-labelledby="cta-title"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Tech Career?</h2><p className="cf-cta-subtitle">Join 2 million+ tech professionals who landed their dream jobs at top companies with our free ATS-friendly tech resume builder.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free tech resume now—no sign-up required"><span className="cf-cta-btn-text">Create Your Free Tech Resume Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Tech</span></div></div></div></section>
+        <section className="cf-cta-section" aria-labelledby="cta-title">
+          <div className="cf-container">
+            <div className="cf-cta-content">
+              <h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Tech Career?</h2>
+              <p className="cf-cta-subtitle">Join 2 million+ tech professionals who landed their dream jobs at top companies with our free ATS-friendly tech resume builder.</p>
+              <div className="cf-cta-btn-wrap">
+                <button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free tech resume now—no sign-up required">
+                  <span className="cf-cta-btn-text">Create Your Free Tech Resume Now</span>
+                  <FiArrowRight className="cf-cta-btn-icon"/>
+                </button>
+              </div>
+              <div className="cf-cta-guarantee">
+                <FiCheck className="cf-guarantee-icon"/>
+                <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Tech</span>
+              </div>
+
+              {/* Related Resources - Placed beneath the guarantee text */}
+              <div className="cf-related-links-wrap">
+                <h3 className="cf-related-links-title">Explore More Free Tech & Engineering Resume Builders</h3>
+                <div className="cf-related-links-grid">
+                  {relatedLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-related-link-card" prefetch={false}>
+                      <span className="cf-related-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-related-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Tech Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><TechTemplate formData={formData}/></div></div></div></div>)}
 

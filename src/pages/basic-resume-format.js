@@ -572,6 +572,7 @@ export async function getStaticProps() {
 // ============================================================================
 export default function BasicResumeFormat({ seoData, buildTimestamp }) {
   const [activeSection, setActiveSection] = useState('section1');
+  const currentYear = new Date().getFullYear();
 
   // SEO data with fallbacks
   const {
@@ -594,52 +595,32 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
   // Canonical URL for this page
   const canonicalUrl = "https://professionalresumefree.com/basic-resume-format";
 
-  // ========== SEO-OPTIMIZED TITLE (from Page 1 blueprint) ==========
-  const optimizedTitle = "Basic Resume Format 2026: Free ATS Guide & Templates (No Sign-Up)";
+  // ========== SEO-OPTIMIZED TITLE (dynamic year) ==========
+  const optimizedTitle = `Basic Resume Format ${currentYear}: Free ATS Guide & Templates (No Sign-Up)`;
 
-  // ========== LONG-TAIL KEYWORDS (from Page 1 blueprint) ==========
+  // ========== LONG-TAIL KEYWORDS ==========
   const longTailKeywords = [
-    "how to format a resume for applicant tracking systems 2026",
+    `how to format a resume for applicant tracking systems ${currentYear}`,
     "best resume format for career changers with no experience",
     "free ats-friendly resume templates with instant pdf download",
     "professional resume format for executives and c-suite positions",
-    "resume formatting guide for software engineers 2026"
+    `resume formatting guide for software engineers ${currentYear}`
   ];
 
-  // ========== INTERNAL LINKS FOR SEO/GEO BOOST (from Page 1 blueprint) ==========
-  const internalLinks = [
-    {
-      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
-      title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained",
-      desc: "Master the latest AI screening tactics used by USA employers in 2026."
-    },
-    {
-      href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
-      title: "Most In-Demand Resume Keywords for USA Job Seekers",
-      desc: "Boost your GEO ranking with high-volume keywords for the American market."
-    },
-    {
-      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
-      title: "ATS-Friendly Software Developer & Engineer Resume Builder",
-      desc: "Specialized templates for tech roles, optimized for engineering ATS filters."
-    },
-    {
-      href: "/free-resume-readability-checker",
-      title: "Free Resume Readability Checker Tool",
-      desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready."
-    },
-    {
-      href: "/resume-trends-in-the-usa-for-2026",
-      title: "Top Resume Trends in the USA for 2026",
-      desc: "Stay ahead of the curve with the latest formatting and content trends."
-    }
+  // ========== NEW INTERNAL LINKS (placed beneath guarantee text in CTA section) ==========
+  const newInternalLinks = [
+    { target: "/best-ats-resume-format-2026", title: "Best ATS Resume Format 2026" },
+    { target: "/2026-resume-writing-guide-with-modern-tips", title: "2026 Resume Writing Guide" },
+    { target: "/best-fonts-and-designs-for-usa-resumes", title: "Best Fonts & Designs for US Resumes" },
+    { target: "/ats-friendly-administrative-assistant-resume-builder", title: "Administrative Assistant Resume Builder" },
+    { target: "/ats-friendly-customer-service-resume-builder", title: "Customer Service Resume Builder" }
   ];
 
-  // ========== FAQ DATA (from Page 1 blueprint) ==========
+  // ========== FAQ DATA ==========
   const faqs = [
     {
-      question: "What is the best resume format to pass ATS in 2026?",
-      answer: "The chronological format remains the most ATS-friendly option in 2026, with 95% compatibility. However, modern hybrid formats combining chronological structure with skills sections are gaining popularity for better keyword optimization and visual hierarchy."
+      question: `What is the best resume format to pass ATS in ${currentYear}?`,
+      answer: `The chronological format remains the most ATS-friendly option in ${currentYear}, with 95% compatibility. However, modern hybrid formats combining chronological structure with skills sections are gaining popularity for better keyword optimization and visual hierarchy.`
     },
     {
       question: "How long should my resume be for maximum impact?",
@@ -671,7 +652,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
     }
   ];
 
-  // ========== TESTIMONIALS (from Page 1 blueprint) ==========
+  // ========== TESTIMONIALS ==========
   const testimonials = [
     {
       quote: "Following this guide helped me optimize my resume for ATS. Landed 3 interviews in 2 weeks after months of nothing.",
@@ -703,7 +684,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
     }
   ];
 
-  // ========== INDUSTRY FORMATS (from Page 1 blueprint) ==========
+  // ========== INDUSTRY FORMATS ==========
   const industryFormats = [
     {
       title: "Tech & Software Engineering",
@@ -749,7 +730,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
     }
   ];
 
-  // ========== PEOPLE ALSO ASK (from Page 1 blueprint) ==========
+  // ========== PEOPLE ALSO ASK ==========
   const peopleAlsoAsk = [
     {
       question: "Is PDF or Word better for ATS resume submission?",
@@ -765,7 +746,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
     }
   ];
 
-  // ========== CONVERSATIONAL EXPLANATIONS (from Page 1 blueprint) ==========
+  // ========== CONVERSATIONAL EXPLANATIONS ==========
   const conversationalExplanations = [
     {
       topic: "Resume Format in Plain English",
@@ -780,12 +761,12 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                               */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -793,22 +774,22 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
         {/* SEO: Language declaration */}
         <html lang="en" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
+        {/* ===== SEO TITLE ===== */}
         <title>{optimizedTitle}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content="Master ATS-friendly resume formatting with our free 2026 guide. 46+ templates, expert tips, and instant PDF download. No sign-up required. Land 3x more interviews." />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Master ATS-friendly resume formatting with our free ${currentYear} guide. 46+ templates, expert tips, and instant PDF download. No sign-up required. Land 3x more interviews.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="basic resume format, ATS resume template, free resume builder, professional resume format, resume formatting guide 2026, ATS-friendly resume, resume examples" />
+        <meta name="keywords" content={`basic resume format, ATS resume template, free resume builder, professional resume format, resume formatting guide ${currentYear}, ATS-friendly resume, resume examples`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content="Basic Resume Format Guide 2026: Free ATS Templates & Tools" />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Basic Resume Format Guide ${currentYear}: Free ATS Templates & Tools`} />
         <meta name="chatgpt-fts:description" content="Create an ATS-optimized resume with the correct format. Free templates, expert guidance, and instant PDF download. No sign-up required." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - ATS Optimized Builder" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -816,11 +797,11 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content="Basic Resume Format 2026: Free ATS Guide & Templates" />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Basic Resume Format ${currentYear}: Free ATS Guide & Templates`} />
         <meta property="og:description" content="Master ATS-friendly resume formatting. Free templates, expert tips, instant PDF download. No sign-up required." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -832,24 +813,24 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Basic Resume Format 2026: Free ATS Guide" />
+        <meta name="twitter:title" content={`Basic Resume Format ${currentYear}: Free ATS Guide`} />
         <meta name="twitter:description" content="Master resume formatting for ATS success. Free templates & tools. No sign-up." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Basic Resume Format Guide" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== SITEMAP (from Page 1) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script
           type="application/ld+json"
@@ -862,7 +843,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
                   "name": optimizedTitle,
-                  "description": "Master ATS-friendly resume formatting with our free 2026 guide. 46+ templates, expert tips, and instant PDF download.",
+                  "description": `Master ATS-friendly resume formatting with our free ${currentYear} guide. 46+ templates, expert tips, and instant PDF download.`,
                   "dateModified": safeLastModifiedDate,
                   "datePublished": "2024-01-01",
                   "inLanguage": "en-US",
@@ -891,7 +872,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
                 },
                 {
                   "@type": "Article",
-                  "headline": "Basic Resume Format: Complete 2026 Professional Guide",
+                  "headline": `Basic Resume Format: Complete ${currentYear} Professional Guide`,
                   "description": "Comprehensive guide to mastering basic resume formats with ATS optimization",
                   "author": {
                     "@type": "Organization",
@@ -977,7 +958,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
       </Head>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{
         backgroundColor: 'var(--bg-page)',
@@ -1026,7 +1007,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
                 lineHeight: 'var(--line-height-display)',
                 marginBottom: '1.25rem'
               }}>
-                Basic Resume Format 2026:{' '}
+                Basic Resume Format {currentYear}:{' '}
                 <span className="gradient-text">Free ATS Guide & Templates</span>
               </h1>
               
@@ -1156,7 +1137,7 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
             </div>
             <div className="card-executive" style={{ marginTop: '2rem' }}>
               <h3 style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)', fontSize: 'var(--font-size-title-md)' }}>Expert Insight:</h3>
-              <p style={{ fontSize: 'var(--font-size-body-sm)' }}>Based on analysis of <strong>10,000 successful resumes</strong> in 2026, 78% of ATS-optimized resumes use a modified chronological format. This format presents work experience in reverse chronological order while emphasizing skills and achievements that align with target job descriptions.</p>
+              <p style={{ fontSize: 'var(--font-size-body-sm)' }}>Based on analysis of <strong>10,000 successful resumes</strong> in {currentYear}, 78% of ATS-optimized resumes use a modified chronological format. This format presents work experience in reverse chronological order while emphasizing skills and achievements that align with target job descriptions.</p>
             </div>
           </div>
         </section>
@@ -1302,72 +1283,13 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
           </div>
         </section>
 
-        {/* Internal Links Section */}
-        <section className="section section-alt" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Continue Your Resume Journey</h2>
-              <p className="section-subtitle">Explore more resources to perfect your job application</p>
-            </div>
-            <div className="internal-links-grid">
-              <Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="internal-link-card">
-                <FiCpu className="link-icon" />
-                <div className="link-content"><h3>AI Resume Builders Guide</h3><p>Leverage AI to write your best resume</p></div>
-                <FiArrowRight className="link-arrow" />
-              </Link>
-              <Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="internal-link-card">
-                <FiEdit className="link-icon" />
-                <div className="link-content"><h3>ChatGPT Resume Prompts 2026</h3><p>Expert prompt engineering for better bullets</p></div>
-                <FiArrowRight className="link-arrow" />
-              </Link>
-              <Link href="/resume-templates" className="internal-link-card">
-                <FiFileText className="link-icon" />
-                <div className="link-content"><h3>Free ATS Resume Templates</h3><p>Download 46+ professionally designed templates</p></div>
-                <FiArrowRight className="link-arrow" />
-              </Link>
-              <Link href="/free-resume-tools" className="internal-link-card">
-                <FiTool className="link-icon" />
-                <div className="link-content"><h3>Free Resume Optimization Tools</h3><p>Access 12+ tools for ATS checking</p></div>
-                <FiArrowRight className="link-arrow" />
-              </Link>
-              <Link href="/ats-friendly-medical-resume-builder" className="internal-link-card">
-                <FiHeart className="link-icon" />
-                <div className="link-content"><h3>Medical Resume Templates</h3><p>Healthcare & nursing optimized formats</p></div>
-                <FiArrowRight className="link-arrow" />
-              </Link>
-              <Link href="/ats-friendly-tech-resume-builder" className="internal-link-card">
-                <FiCode className="link-icon" />
-                <div className="link-content"><h3>Tech Resume Templates</h3><p>Software engineering & IT optimized formats</p></div>
-                <FiArrowRight className="link-arrow" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Recommended Resources for SEO/GEO Boost */}
-        <section className="section" aria-labelledby="recommended-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="recommended-heading">Recommended Resources for Job Seekers</h2>
-              <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
-            </div>
-            <div className="internal-links-grid">
-              {internalLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="resource-card">
-                  <div className="resource-title">{link.title}</div>
-                  <div className="resource-desc">{link.desc}</div>
-                  <div className="resource-cta">Read Guide <FiArrowRight size={16} /></div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA Section */}
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
         <section className="cta-section" aria-labelledby="cta-heading">
           <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-              <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242, 202, 80, 0.3)' }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242, 202, 80, 0.3)' }} id="cta-heading">
                 Ready to Build Your Professional Resume?
               </h2>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
@@ -1387,6 +1309,87 @@ export default function BasicResumeFormat({ seoData, buildTimestamp }) {
               <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
                 Data fresh as of: {safeCurrentDate}
               </p>
+
+              {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+              <div style={{
+                marginTop: '3rem',
+                paddingTop: '3rem',
+                borderTop: '0.5px solid rgba(153, 144, 124, 0.15)',
+                textAlign: 'center'
+              }}>
+                <div style={{ marginBottom: '1.75rem' }}>
+                  <h3 style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(1.25rem, 3vw, 1.5rem)',
+                    fontWeight: 'var(--font-weight-semibold)',
+                    color: 'var(--text-primary)',
+                    margin: '0 0 0.5rem'
+                  }}>
+                    Explore Other Resume Builders
+                  </h3>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'var(--font-size-body-sm)',
+                    color: 'var(--text-secondary)',
+                    margin: 0,
+                    lineHeight: 1.5
+                  }}>
+                    Find the perfect resume builder for your specific industry role.
+                  </p>
+                </div>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                  gap: '0.875rem',
+                  textAlign: 'left'
+                }}>
+                  {newInternalLinks.map((link, index) => (
+                    <Link
+                      key={index}
+                      href={link.target}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '1.125rem 1.375rem',
+                        background: 'var(--glass-bg)',
+                        backdropFilter: 'blur(20px)',
+                        WebkitBackdropFilter: 'blur(20px)',
+                        border: '0.5px solid var(--border-gold-filament)',
+                        borderRadius: '0.25rem',
+                        textDecoration: 'none',
+                        transition: 'all 250ms cubic-bezier(0.65, 0, 0.35, 1)',
+                        color: 'inherit'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.6)';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'var(--border-gold-filament)';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    >
+                      <span style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '0.9375rem',
+                        fontWeight: 'var(--font-weight-semibold)',
+                        color: 'var(--text-primary)'
+                      }}>
+                        {link.title}
+                      </span>
+                      <FiArrowRight style={{
+                        color: 'var(--accent-primary)',
+                        fontSize: '1.125rem',
+                        flexShrink: 0,
+                        marginLeft: '0.5rem'
+                      }} />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

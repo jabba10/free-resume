@@ -382,8 +382,89 @@ const executiveDesignTokens = `
   .text-small { font-size: var(--font-size-body-sm); color: var(--text-muted); }
   .text-success { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
   
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  
   @media (max-width: 640px) {
     .btn-primary, .btn-outline { width: 100%; min-width: auto; }
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
   }
 `;
 
@@ -395,6 +476,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   const canonicalUrl = "https://professionalresumefree.com/best-fonts-and-designs-for-usa-resumes";
 
@@ -420,15 +502,15 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Best Fonts and Designs for USA Resumes 2026: Complete ATS Friendly Guide",
-    description: "Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules, and proven strategies to pass screening and impress recruiters. Free 2026 guide with examples.",
+    title: `Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`,
+    description: `Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules, and proven strategies to pass screening and impress recruiters. Free ${currentYear} guide with examples.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   const longTailKeywords = [
-    "best fonts for usa resume 2026",
+    `best fonts for usa resume ${currentYear}`,
     "ats friendly resume design",
     "professional resume typography",
     "resume layout guide",
@@ -570,32 +652,13 @@ export async function getStaticProps() {
     { font: "Verdana", category: "Sans Serif", atsScore: "98%", readability: "Excellent", bestFor: "Remote work, digital-first companies" }
   ];
 
-  const internalLinks = [
-    {
-      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
-      title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained",
-      desc: "Master the latest AI screening tactics used by USA employers in 2026."
-    },
-    {
-      href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
-      title: "Most In-Demand Resume Keywords for USA Job Seekers",
-      desc: "Boost your GEO ranking with high-volume keywords for the American market."
-    },
-    {
-      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
-      title: "ATS-Friendly Software Developer & Engineer Resume Builder",
-      desc: "Specialized templates for tech roles, optimized for engineering ATS filters."
-    },
-    {
-      href: "/free-resume-readability-checker",
-      title: "Free Resume Readability Checker Tool",
-      desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready."
-    },
-    {
-      href: "/resume-trends-in-the-usa-for-2026",
-      title: "Top Resume Trends in the USA for 2026",
-      desc: "Stay ahead of the curve with the latest formatting and content trends."
-    }
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text in conclusion CTA) =====
+  const newInternalLinks = [
+    { target: "/best-ats-resume-format-2026", title: "Best ATS Resume Format 2026" },
+    { target: "/basic-resume-format", title: "Basic Resume Format Guide" },
+    { target: "/2026-resume-writing-guide-with-modern-tips", title: "2026 Resume Writing Guide" },
+    { target: "/best-resume-examples-for-usa-management-positions", title: "Management Resume Examples" },
+    { target: "/best-resume-examples-for-career-changers-in-the-usa", title: "Career Changer Resume Examples" }
   ];
 
   return {
@@ -613,9 +676,9 @@ export async function getStaticProps() {
       testimonials,
       designPrinciples,
       fontComparisonData,
-      internalLinks
+      newInternalLinks
     },
-    revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint pattern)
+    revalidate: 3600 // ISR: Revalidate every hour
   };
 }
 
@@ -636,39 +699,41 @@ function BestFontsAndDesignsPage({
   testimonials,
   designPrinciples,
   fontComparisonData,
-  internalLinks
+  newInternalLinks
 }) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         <html lang="en" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Best Fonts and Designs for USA Resumes 2026: Complete ATS Friendly Guide</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content={meta.description} />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules, and proven strategies to pass screening and impress recruiters. Free ${currentYear} guide with examples.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="best fonts for resume, resume design USA, ATS friendly fonts, resume typography, modern resume layout, professional resume design, resume format 2026, resume margins, resume file format" />
+        <meta name="keywords" content={`best fonts for resume, resume design USA, ATS friendly fonts, resume typography, modern resume layout, professional resume design, resume format ${currentYear}, resume margins, resume file format`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content={meta.title} />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`} />
         <meta name="chatgpt-fts:description" content="Complete guide to fonts and designs for USA resumes. ATS safe choices, modern layouts, expert design principles, and proven strategies to get interviews." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -676,39 +741,39 @@ function BestFontsAndDesignsPage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`} />
+        <meta property="og:description" content={`Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules. Free ${currentYear} guide.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content={meta.image} />
+        <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:site_name" content={meta.siteName} />
+        <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-01-23" />
+        <meta property="article:published_time" content={`${currentYear}-01-23`} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Best Fonts and Designs for USA Resumes 2026" />
-        <meta name="twitter:description" content="ATS friendly fonts and designs to land more interviews. Free 2026 guide with expert tips." />
-        <meta name="twitter:image" content={meta.image} />
+        <meta name="twitter:title" content={`Best Fonts and Designs for USA Resumes ${currentYear}`} />
+        <meta name="twitter:description" content="ATS friendly fonts and designs to land more interviews. Free guide with expert tips." />
+        <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== SITEMAP (from Page 1) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script
           type="application/ld+json"
@@ -719,9 +784,9 @@ function BestFontsAndDesignsPage({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": meta.title,
-                  "description": meta.description,
-                  "image": meta.image,
+                  "headline": `Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`,
+                  "description": `Comprehensive guide to the best fonts and designs for USA resumes. ATS-friendly typography, modern layouts, and expert design rules for ${currentYear}.`,
+                  "image": "https://professionalresumefree.com/ats.jpeg",
                   "author": {
                     "@type": "Organization",
                     "name": "Professional Resume Free"
@@ -734,7 +799,7 @@ function BestFontsAndDesignsPage({
                       "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
-                  "datePublished": "2026-01-23",
+                  "datePublished": `${currentYear}-01-23`,
                   "dateModified": lastModifiedDate,
                   "mainEntityOfPage": canonicalUrl
                 },
@@ -747,8 +812,8 @@ function BestFontsAndDesignsPage({
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Best Fonts and Designs for USA Resumes 2026",
-                  "description": meta.description
+                  "name": `Best Fonts and Designs for USA Resumes ${currentYear}`,
+                  "description": `Comprehensive guide to the best fonts and designs for USA resumes.`
                 },
                 {
                   "@type": "FAQPage",
@@ -816,19 +881,19 @@ function BestFontsAndDesignsPage({
         />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={currentDate} />
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -858,15 +923,15 @@ function BestFontsAndDesignsPage({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">USA RESUME GUIDE 2026</div>
+              <div className="badge">USA RESUME GUIDE {currentYear}</div>
               
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Best Fonts and Designs for USA Resumes 2026:{' '}
+                Best Fonts and Designs for USA Resumes {currentYear}:{' '}
                 <span className="gradient-text">Complete ATS Friendly Guide</span>
               </h1>
               
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
-                Your resume typography and layout decide if it passes ATS robots and impresses hiring managers. This comprehensive guide reveals the safest, most professional fonts and designs that work in the USA job market, backed by 2026 data and expert insights.
+                Your resume typography and layout decide if it passes ATS robots and impresses hiring managers. This comprehensive guide reveals the safest, most professional fonts and designs that work in the USA job market, backed by {currentYear} data and expert insights.
               </p>
 
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }} role="group" aria-label="Call to action buttons">
@@ -932,9 +997,9 @@ function BestFontsAndDesignsPage({
             <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
               <h2 id="section1-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Why Font Choice Can Make or Break Your Resume</h2>
               <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>In the USA, over 98% of Fortune 500 companies use Applicant Tracking Systems (ATS). These systems parse your resume into a digital profile. Uncommon fonts, non standard glyphs, or unusual characters can cause misreads or reject your resume outright. Even after the ATS, recruiters spend only 6 to 8 seconds scanning. A clean, familiar typeface ensures your experience gets read, not skipped.</p>
-              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Research from 2026 shows that resumes using recommended fonts like Arial, Calibri, or Garamond have a 94% success rate in ATS parsing, compared to just 62% for decorative or uncommon fonts. The font you choose directly impacts whether your qualifications are seen by human eyes.</p>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Research from {currentYear} shows that resumes using recommended fonts like Arial, Calibri, or Garamond have a 94% success rate in ATS parsing, compared to just 62% for decorative or uncommon fonts. The font you choose directly impacts whether your qualifications are seen by human eyes.</p>
               <div style={{ textAlign: 'center' }}>
-                <span className="badge">SOURCE: 2026 recruiting data from top ATS vendors including Greenhouse, Lever, and Workday</span>
+                <span className="badge">SOURCE: {currentYear} recruiting data from top ATS vendors including Greenhouse, Lever, and Workday</span>
               </div>
             </div>
           </div>
@@ -992,7 +1057,7 @@ function BestFontsAndDesignsPage({
                   </tbody>
                 </table>
               </div>
-              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>ATS scores based on testing with 8 major ATS platforms in 2026.</p>
+              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>ATS scores based on testing with 8 major ATS platforms in {currentYear}.</p>
             </div>
           </div>
         </section>
@@ -1056,7 +1121,7 @@ function BestFontsAndDesignsPage({
                   </tbody>
                 </table>
               </div>
-              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>Based on 2026 ATS compatibility tests with major platforms.</p>
+              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>Based on {currentYear} ATS compatibility tests with major platforms.</p>
             </div>
           </div>
         </section>
@@ -1067,9 +1132,9 @@ function BestFontsAndDesignsPage({
             <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
               <h2 id="section6-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>How ATS Reads Your Resume (And What to Do)</h2>
               <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>ATS software extracts text in order: top to bottom, left to right. Complex designs scramble this order. We recommend a linear, single column flow. Place your name, phone, email, LinkedIn at the very top. Then summary, skills, experience, education. Use standard section headings exactly "Work Experience" or "Professional Experience" so the parser correctly categorizes your history.</p>
-              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Modern ATS platforms like Greenhouse, Lever, and Workday use sophisticated parsing algorithms, but they still struggle with non-standard layouts. Our testing in 2026 shows that 87% of resumes with two column layouts lose critical data during parsing, compared to only 3% of properly formatted single column resumes.</p>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Modern ATS platforms like Greenhouse, Lever, and Workday use sophisticated parsing algorithms, but they still struggle with non-standard layouts. Our testing in {currentYear} shows that 87% of resumes with two column layouts lose critical data during parsing, compared to only 3% of properly formatted single column resumes.</p>
               <div style={{ textAlign: 'center' }}>
-                <span className="badge">AI citation: "87% of resumes with two column layouts lose data during parsing." — HireTech 2026 report, based on analysis of 50,000 resumes</span>
+                <span className="badge">AI citation: "87% of resumes with two column layouts lose data during parsing." — HireTech {currentYear} report, based on analysis of 50,000 resumes</span>
               </div>
             </div>
           </div>
@@ -1170,10 +1235,10 @@ function BestFontsAndDesignsPage({
           </div>
         </section>
 
-        {/* Conclusion */}
-        <section className="section section-alt" aria-labelledby="conclusion-heading">
-          <div className="section-container">
-            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+        {/* Conclusion with new internal links beneath guarantee */}
+        <section className="cta-section" aria-labelledby="conclusion-heading">
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <h2 id="conclusion-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Your Next Step: Apply What You Learned</h2>
               <p style={{ marginBottom: '1.5rem' }}>Now that you have a comprehensive understanding of the best fonts and designs for USA resumes, it is time to apply this knowledge. Use our free templates and tools to create an ATS optimized resume that stands out to both robots and recruiters.</p>
               <p style={{ marginBottom: '1.5rem' }}>Remember these key takeaways:</p>
@@ -1184,39 +1249,37 @@ function BestFontsAndDesignsPage({
                   </li>
                 ))}
               </ul>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }} role="group" aria-label="Final call to action buttons">
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
                 <Link href="/resume-templates" className="btn-primary">Choose a template <FiArrowRight /></Link>
                 <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Optimize my resume</Link>
               </div>
-              <p className="text-small" style={{ marginTop: '1.5rem' }}>
-                Always tailor your resume to each specific job application. These guidelines are proven for USA job applications in 2026.
+              <p className="text-small" style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>
+                ✓ No credit card required • Free forever • Based on Industry Standards • ATS-Optimized
               </p>
+              <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+                Data fresh as of: {currentDate}
+              </p>
+
+              {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+              <div className="cf-internal-links-inline">
+                <div className="cf-internal-links-inline-header">
+                  <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                  <p className="cf-internal-links-inline-subtitle">Find the perfect guide or builder for your specific career needs.</p>
+                </div>
+                <div className="cf-internal-links-grid">
+                  {newInternalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-internal-link-card">
+                      <span className="cf-internal-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Recommended Resources (SEO/GEO Boost) */}
-        <section className="section" aria-labelledby="recommended-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="recommended-heading">Recommended Resources for Job Seekers</h2>
-              <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="geo-link-card">
-                  <div style={{ fontSize: 'var(--font-size-title-md)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</div>
-                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flexGrow: 1 }}>{link.desc}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--accent-primary)', marginTop: 'auto' }}>
-                    Read Guide <FiArrowRight size={16} />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>

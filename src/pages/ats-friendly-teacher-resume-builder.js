@@ -1159,7 +1159,7 @@ export async function getStaticProps() {
   // Breadcrumb data for structured data
   const breadcrumbData = [
     { name: 'Home', item: 'https://professionalresumefree.com/' },
-    { name: 'Teacher Resume Builder', item: 'https://professionalresumefree.com/' }
+    { name: 'Teacher Resume Builder', item: 'https://professionalresumefree.com/ats-friendly-teacher-resume-builder' }
   ];
 
   return {

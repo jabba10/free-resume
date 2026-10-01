@@ -318,6 +318,73 @@ const careerFlowStyles = `
   .cf-guarantee-icon { color: var(--cf-primary); font-size: 20px; }
   .cf-guarantee-text { font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; color: var(--cf-on-surface-variant); }
 
+  /* Internal Links Section (now inside CTA) */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--cf-font-display);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--cf-on-background);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--cf-font-body);
+    font-size: 15px;
+    color: var(--cf-on-surface-variant);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--cf-glass-bg);
+    backdrop-filter: var(--cf-glass-blur);
+    -webkit-backdrop-filter: var(--cf-glass-blur);
+    border: var(--cf-gold-border);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all var(--cf-transition-base);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--cf-font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cf-on-background);
+    transition: color var(--cf-transition-fast);
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--cf-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--cf-outline);
+    font-size: 18px;
+    transition: all var(--cf-transition-base);
+    flex-shrink: 0;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--cf-primary);
+    transform: translateX(4px);
+  }
+
   .cf-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: auto; }
   .cf-modal-content { background: var(--cf-surface-container); border-radius: 4px; max-width: 900px; width: 100%; max-height: 90vh; overflow: auto; border: var(--cf-gold-border); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: modalSlideIn 0.3s ease-out; }
   .cf-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 32px; border-bottom: 0.5px solid rgba(212, 175, 55, 0.3); background: var(--cf-surface-container-lowest); border-radius: 4px 4px 0 0; }
@@ -342,6 +409,7 @@ const careerFlowStyles = `
     .cf-form-section { max-width: 500px; }
     .cf-faq-grid { grid-template-columns: repeat(2, 1fr); }
     .cf-form-group { grid-template-columns: 1fr 1fr; }
+    .cf-internal-links-grid { grid-template-columns: repeat(3, 1fr); }
   }
 
   @media (max-width: 1023px) {
@@ -353,6 +421,7 @@ const careerFlowStyles = `
     .cf-form-group { grid-template-columns: 1fr 1fr; }
     .cf-faq-grid { grid-template-columns: 1fr 1fr; }
     .cf-breadcrumb ol { padding: 0 var(--cf-margin-desktop); }
+    .cf-internal-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -382,6 +451,9 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
   }
 
   @media (max-width: 480px) {
@@ -409,6 +481,11 @@ const careerFlowStyles = `
     .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
   }
 
   @media (max-width: 360px) {
@@ -429,6 +506,7 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
   const freshnessIndicator = buildTimestamp ? new Date(buildTimestamp).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
   const safeCurrentDate = currentDate || freshnessIndicator;
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
+  const currentYear = new Date().getFullYear();
 
   const defaultExperience = () => ({ employer: '', position: '', facilityType: '', startDate: '', endDate: '', description: '', isEditing: false, editIndex: null });
   const defaultEducation = () => ({ institution: '', degree: '', specialization: '', startDate: '', endDate: '', isEditing: false, editIndex: null });
@@ -461,6 +539,14 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
     { question: "Is this veterinary resume builder really free with no hidden costs?", answer: "Yes, our veterinary and specialized healthcare resume builder is completely free with no hidden costs, watermarks, or payment required." },
     { question: "What does ATS-friendly mean for veterinary resumes?", answer: "ATS-friendly means our veterinary resume templates are optimized to pass through Applicant Tracking Systems used by veterinary hospitals and animal healthcare facilities." },
     { question: "Can I download my veterinary resume as PDF without creating an account?", answer: "Absolutely! Download your professional veterinary resume in PDF format without creating an account or providing any payment information." }
+  ];
+
+  const internalLinks = [
+    { target: "/ats-friendly-medical-resume-builder", title: "Medical Resume Builder" },
+    { target: "/ats-friendly-nurse-resume-builder", title: "Nurse Resume Builder" },
+    { target: "/ats-friendly-medical-assistant-resume-builder", title: "Medical Assistant Resume Builder" },
+    { target: "/ats-friendly-healthcare-assistant-resume-builder", title: "Healthcare Assistant Resume Builder" },
+    { target: "/ats-friendly-biotechnology-resume-builder", title: "Biotechnology Resume Builder" }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -582,9 +668,9 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Veterinary Resume Builder 2026: ATS Templates for Animal Healthcare Pros</title>
-          <meta name="title" content="Free Veterinary Resume Builder 2026: ATS Templates for Animal Healthcare Pros" />
-          <meta name="description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates help animal healthcare professionals highlight clinical experience, certifications & skills. Start now—no sign-up." />
+          <title>Free Veterinary Resume Builder {currentYear}: ATS Templates for Animal Healthcare Pros</title>
+          <meta name="title" content={`Free Veterinary Resume Builder ${currentYear}: ATS Templates for Animal Healthcare Pros`} />
+          <meta name="description" content={`Create your professional veterinary resume for free in ${currentYear}. ATS-optimized templates help animal healthcare professionals highlight clinical experience, certifications & skills. Start now—no sign-up.`} />
           <meta name="keywords" content="veterinary resume builder, vet resume templates, veterinarian CV, vet technician resume, animal healthcare resume, ATS friendly veterinary resume, free resume builder for veterinarians, veterinary surgeon CV, exotic animal specialist resume, veterinary practice manager resume" />
           <meta name="author" content="Professional Veterinary Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -600,8 +686,8 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Veterinary Resume Builder 2026: ATS Templates for Animal Healthcare Pros" />
-          <meta property="og:description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates help animal healthcare professionals highlight clinical experience, certifications & skills. Start now—no sign-up." />
+          <meta property="og:title" content={`Free Veterinary Resume Builder ${currentYear}: ATS Templates for Animal Healthcare Pros`} />
+          <meta property="og:description" content={`Create your professional veterinary resume for free in ${currentYear}. ATS-optimized templates help animal healthcare professionals highlight clinical experience, certifications & skills. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-veterinary-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -615,8 +701,8 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Veterinary Resume Builder 2026: ATS Templates for Animal Healthcare Pros" />
-          <meta name="twitter:description" content="Create your professional veterinary resume for free in 2026. ATS-optimized templates help animal healthcare professionals highlight clinical experience, certifications & skills. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free Veterinary Resume Builder ${currentYear}: ATS Templates for Animal Healthcare Pros`} />
+          <meta name="twitter:description" content={`Create your professional veterinary resume for free in ${currentYear}. ATS-optimized templates help animal healthcare professionals highlight clinical experience, certifications & skills. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-veterinary-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Veterinary Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@VetResumeFree" />
@@ -642,9 +728,9 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Veterinary Resume Builder 2026 - ATS Templates for Animal Healthcare Pros",
+                    "name": `Free Veterinary Resume Builder ${currentYear} - ATS Templates for Animal Healthcare Pros`,
                     "description": "Create professional ATS-optimized veterinary resumes for free. Land interviews faster with our animal healthcare resume builder.",
-                    "datePublished": "2026-01-01",
+                    "datePublished": `${currentYear}-01-01`,
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
                     "isPartOf": {
@@ -705,7 +791,7 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -724,7 +810,7 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-veterinary-resume-builder.jpg",
                       "applicationSuite": "Veterinary Career Tools",
                       "countriesSupported": "Global",
@@ -859,8 +945,8 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Veterinary Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Veterinary Resume Builder 2026</h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Veterinary Resume Builder {currentYear}</span></div>
+              <h1 className="cf-hero-title">Free Veterinary Resume Builder {currentYear}</h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized veterinary resume for free in minutes.</strong> Our veterinary resume builder helps you highlight clinical experience, certifications, and animal healthcare skills that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free veterinary resume now—no sign-up required">
@@ -1019,7 +1105,39 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
 
         <section className="cf-faq-section" aria-labelledby="faq-title"><div className="cf-container"><div className="cf-section-header"><h2 className="cf-section-title" id="faq-title">Frequently Asked Questions</h2><p>Everything you need to know about creating professional veterinary resumes with our tool.</p></div><div className="cf-faq-grid">{faqs.map((faq,i)=>(<div key={i} className="cf-faq-item"><h3 className="cf-faq-question">{faq.question}</h3><p className="cf-faq-answer">{faq.answer}</p></div>))}</div></div></section>
 
-        <section className="cf-cta-section" aria-labelledby="cta-title"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Veterinary Career?</h2><p className="cf-cta-subtitle">Join thousands of veterinary professionals who landed their dream jobs with our free ATS-friendly veterinary resume builder.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free veterinary resume now—no sign-up required"><span className="cf-cta-btn-text">Create Your Free Veterinary Resume Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Veterinary Jobs</span></div></div></div></section>
+        <section className="cf-cta-section" aria-labelledby="cta-title">
+          <div className="cf-container">
+            <div className="cf-cta-content">
+              <h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Veterinary Career?</h2>
+              <p className="cf-cta-subtitle">Join thousands of veterinary professionals who landed their dream jobs with our free ATS-friendly veterinary resume builder.</p>
+              <div className="cf-cta-btn-wrap">
+                <button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free veterinary resume now—no sign-up required">
+                  <span className="cf-cta-btn-text">Create Your Free Veterinary Resume Now</span>
+                  <FiArrowRight className="cf-cta-btn-icon"/>
+                </button>
+              </div>
+              <div className="cf-cta-guarantee">
+                <FiCheck className="cf-guarantee-icon"/>
+                <span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized for Veterinary Jobs</span>
+              </div>
+
+              <div className="cf-internal-links-inline">
+                <div className="cf-internal-links-inline-header">
+                  <h3 className="cf-internal-links-inline-title">Explore Other Resume Builders</h3>
+                  <p className="cf-internal-links-inline-subtitle">Find the perfect resume builder for your specific healthcare role.</p>
+                </div>
+                <div className="cf-internal-links-grid">
+                  {internalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-internal-link-card">
+                      <span className="cf-internal-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Veterinary Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><VeterinaryTemplate formData={formData}/></div></div></div></div>)}
 
@@ -1075,7 +1193,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    // ISR: Revalidate every 24 hours (86400 seconds)
+    // ISR: Revalidate every hour (3600 seconds)
     revalidate: 3600
   };
 }

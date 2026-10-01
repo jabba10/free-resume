@@ -385,8 +385,89 @@ const executiveDesignTokens = `
   .text-small { font-size: var(--font-size-body-sm); color: var(--text-muted); }
   .text-success { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
   
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 640px) {
     .btn-primary, .btn-outline { width: 100%; min-width: auto; }
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
   }
 `;
 
@@ -416,70 +497,50 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
 
   // Long-tail keywords for GEO optimization (from Page 1 blueprint)
   const longTailKeywords = [
-    "how to format a resume for applicant tracking systems 2026",
+    `how to format a resume for applicant tracking systems ${currentYear}`,
     "best ats resume format for career changers",
     "ats-friendly resume templates with instant download",
-    "professional resume format for executives 2026",
-    "resume formatting guide for software engineers 2026"
+    `professional resume format for executives ${currentYear}`,
+    `resume formatting guide for software engineers ${currentYear}`
   ];
 
-  // Internal links for SEO/GEO boost (from Page 1 blueprint)
-  const internalLinks = [
-    {
-      href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained",
-      title: "How to Pass the AI Resume Screen: 2026 ATS Algorithms Explained",
-      desc: "Master the latest AI screening tactics used by USA employers in 2026."
-    },
-    {
-      href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
-      title: "Most In-Demand Resume Keywords for USA Job Seekers",
-      desc: "Boost your GEO ranking with high-volume keywords for the American market."
-    },
-    {
-      href: "/ats-friendly-software-developer-and-software-engineer-resume-builder",
-      title: "ATS-Friendly Software Developer & Engineer Resume Builder",
-      desc: "Specialized templates for tech roles, optimized for engineering ATS filters."
-    },
-    {
-      href: "/free-resume-readability-checker",
-      title: "Free Resume Readability Checker Tool",
-      desc: "Ensure your AI-generated content is clear, concise, and recruiter-ready."
-    },
-    {
-      href: "/resume-trends-in-the-usa-for-2026",
-      title: "Top Resume Trends in the USA for 2026",
-      desc: "Stay ahead of the curve with the latest formatting and content trends."
-    }
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text in CTA section) =====
+  const newInternalLinks = [
+    { target: "/basic-resume-format", title: "Basic Resume Format Guide" },
+    { target: "/2026-resume-writing-guide-with-modern-tips", title: "2026 Resume Writing Guide" },
+    { target: "/best-fonts-and-designs-for-usa-resumes", title: "Best Fonts & Designs for US Resumes" },
+    { target: "/ats-friendly-tech-resume-builder", title: "Tech Resume Builder" },
+    { target: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume", title: "AI Resume Builder Guide" }
   ];
 
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Best ATS Resume Format 2026: Complete Guide (70 chars)</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Best ATS Resume Format ${currentYear}: Complete Guide (70 chars)`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content="Discover the best ATS resume format for 2026. Complete guide with templates, formatting rules, and optimization strategies to beat Applicant Tracking Systems." />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Discover the best ATS resume format for ${currentYear}. Complete guide with templates, formatting rules, and optimization strategies to beat Applicant Tracking Systems.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="ATS resume format, best resume format 2026, ATS-friendly resume, resume formatting, applicant tracking system, hybrid resume format, chronological resume, functional resume" />
+        <meta name="keywords" content={`ATS resume format, best resume format ${currentYear}, ATS-friendly resume, resume formatting, applicant tracking system, hybrid resume format, chronological resume, functional resume`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content="Best ATS Resume Format 2026: Complete Optimization Guide" />
-        <meta name="chatgpt-fts:description" content="Complete guide to ATS-friendly resume formats for 2026. Compare chronological, functional, and hybrid formats with success rates and ATS compatibility scores." />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Best ATS Resume Format ${currentYear}: Complete Optimization Guide`} />
+        <meta name="chatgpt-fts:description" content={`Complete guide to ATS-friendly resume formats for ${currentYear}. Compare chronological, functional, and hybrid formats with success rates and ATS compatibility scores.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={lastUpdated} />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <meta name="googlebot" content="index, follow" />
@@ -487,12 +548,12 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <meta name="last-modified" content={lastModified} />
         <meta httpEquiv="last-modified" content={lastModified} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content="Best ATS Resume Format 2026: Complete Guide | Professional Resume Free" />
-        <meta property="og:description" content="Definitive guide to ATS resume formats for 2026. Templates, formatting rules, and optimization strategies that pass every Applicant Tracking System." />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Best ATS Resume Format ${currentYear}: Complete Guide | Professional Resume Free`} />
+        <meta property="og:description" content={`Definitive guide to ATS resume formats for ${currentYear}. Templates, formatting rules, and optimization strategies that pass every Applicant Tracking System.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/og-ats-resume-format.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -504,21 +565,21 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <meta property="article:modified_time" content={lastModified} />
         <meta property="article:author" content="Professional Resume Free" />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Best ATS Resume Format 2026: Complete Guide" />
-        <meta name="twitter:description" content="The ultimate guide to ATS-friendly resume formats that work in 2026. Compare formats, get templates, and optimize for success." />
+        <meta name="twitter:title" content={`Best ATS Resume Format ${currentYear}: Complete Guide`} />
+        <meta name="twitter:description" content={`The ultimate guide to ATS-friendly resume formats that work in ${currentYear}. Compare formats, get templates, and optimize for success.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/og-ats-resume-format.jpg" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         
-        {/* ===== SITEMAP (from Page 1 blueprint) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -527,8 +588,8 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
               {
                 "@type": "Article",
                 "@id": `${canonicalUrl}/#article`,
-                "headline": "Best ATS Resume Format 2026: Complete Optimization Guide",
-                "description": "Comprehensive guide to ATS-optimized resume formats and templates for 2026 job applications",
+                "headline": `Best ATS Resume Format ${currentYear}: Complete Optimization Guide`,
+                "description": `Comprehensive guide to ATS-optimized resume formats and templates for ${currentYear} job applications`,
                 "image": "https://professionalresumefree.com/og-ats-resume-format.jpg",
                 "author": {
                   "@type": "Organization",
@@ -543,7 +604,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
                     "url": "https://professionalresumefree.com/logo.png"
                   }
                 },
-                "datePublished": "2026-01-01",
+                "datePublished": `${currentYear}-01-01`,
                 "dateModified": lastModified,
                 "mainEntityOfPage": {
                   "@type": "WebPage",
@@ -563,7 +624,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
                   {
                     "@type": "ListItem",
                     "position": 2,
-                    "name": "Best ATS Resume Format 2026",
+                    "name": `Best ATS Resume Format ${currentYear}`,
                     "item": canonicalUrl
                   }
                 ]
@@ -574,10 +635,10 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
                 "mainEntity": [
                   {
                     "@type": "Question",
-                    "name": "What is the best resume format for ATS in 2026?",
+                    "name": `What is the best resume format for ATS in ${currentYear}?`,
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "The hybrid/combination format is currently the best for ATS in 2026. It combines the chronological structure's clarity with the functional format's skills emphasis, optimizing for both ATS parsing and human readability.",
+                      "text": `The hybrid/combination format is currently the best for ATS in ${currentYear}. It combines the chronological structure's clarity with the functional format's skills emphasis, optimizing for both ATS parsing and human readability.`,
                       "dateModified": lastModified
                     }
                   },
@@ -603,7 +664,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
               },
               {
                 "@type": "HowTo",
-                "name": "How to Format Your Resume for ATS in 2026",
+                "name": `How to Format Your Resume for ATS in ${currentYear}`,
                 "description": "Step-by-step guide to creating an ATS-optimized resume format",
                 "step": [
                   {
@@ -632,7 +693,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
       </Head>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{
         backgroundColor: 'var(--bg-page)',
@@ -654,7 +715,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
               </li>
               <li aria-hidden="true">/</li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span aria-current="page" itemProp="name">Best ATS Resume Format 2026</span>
+                <span aria-current="page" itemProp="name">Best ATS Resume Format {currentYear}</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>
@@ -666,7 +727,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Best ATS Resume Format 2026:{' '}
+                Best ATS Resume Format {currentYear}:{' '}
                 <span className="gradient-text">Complete Guide</span>
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '1.5rem', maxWidth: '800px', margin: '0 auto 1.5rem' }}>
@@ -686,7 +747,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
           <div className="section-container">
             <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
               <h2 style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem' }}>Your Resume Format Determines Its ATS Fate</h2>
-              <p style={{ marginBottom: '1.5rem' }}>According to 2026 data, 75% of resumes are rejected by ATS before human review due to formatting issues. Our analysis of 20,000 successful applications reveals that optimized formatting increases interview rates by 82%.</p>
+              <p style={{ marginBottom: '1.5rem' }}>According to {currentYear} data, 75% of resumes are rejected by ATS before human review due to formatting issues. Our analysis of 20,000 successful applications reveals that optimized formatting increases interview rates by 82%.</p>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Link href="/resume-templates" className="btn-primary">Get ATS-Optimized Resume Templates</Link>
               </div>
@@ -738,7 +799,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <section id="section-7" className="section" aria-labelledby="section7-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="section7-heading" className="section-title">7. File Formats & ATS Compatibility for 2026</h2>
+              <h2 id="section7-heading" className="section-title">7. File Formats & ATS Compatibility for {currentYear}</h2>
               <p className="section-subtitle">Understanding which file format to use can make or break your ATS success</p>
             </div>
             
@@ -812,7 +873,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
             </div>
 
             <div className="card-executive" style={{ maxWidth: '800px', margin: '2rem auto 0', textAlign: 'center', border: '0.5px solid var(--border-gold-filament-strong)' }}>
-              <h3 style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>2026 File Format Recommendation</h3>
+              <h3 style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }}>{currentYear} File Format Recommendation</h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                 <div style={{ padding: '1rem', background: 'var(--bg-surface)', borderRadius: '0.5rem' }}>
                   <h4 style={{ color: 'var(--accent-primary)' }}>Primary: .docx</h4>
@@ -831,7 +892,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <section id="section-8" className="section section-alt" aria-labelledby="section8-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="section8-heading" className="section-title">8. ATS-Optimized Templates & Examples for 2026</h2>
+              <h2 id="section8-heading" className="section-title">8. ATS-Optimized Templates & Examples for {currentYear}</h2>
               <p className="section-subtitle">Ready-to-use templates designed for maximum ATS compatibility</p>
             </div>
             
@@ -897,7 +958,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <section id="section-10" className="section section-alt" aria-labelledby="section10-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="section10-heading" className="section-title">10. Step-by-Step ATS Formatting Guide for 2026</h2>
+              <h2 id="section10-heading" className="section-title">10. Step-by-Step ATS Formatting Guide for {currentYear}</h2>
               <p className="section-subtitle">Follow these steps for a perfectly formatted ATS-friendly resume</p>
             </div>
             
@@ -927,7 +988,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <section id="section-11" className="section" aria-labelledby="section11-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="section11-heading" className="section-title">11. ATS Testing & Validation for 2026 Formats</h2>
+              <h2 id="section11-heading" className="section-title">11. ATS Testing & Validation for {currentYear} Formats</h2>
               <p className="section-subtitle">Ensure your resume passes every ATS with these testing methods</p>
             </div>
             
@@ -970,7 +1031,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <section id="section-12" className="section section-alt" aria-labelledby="section12-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="section12-heading" className="section-title">12. Common ATS Formatting Mistakes to Avoid in 2026</h2>
+              <h2 id="section12-heading" className="section-title">12. Common ATS Formatting Mistakes to Avoid in {currentYear}</h2>
               <p className="section-subtitle">These errors can cost you the interview—learn what to avoid</p>
             </div>
             
@@ -1008,7 +1069,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
             
             <div className="faq-grid">
               {[
-                { q: "What is the best resume format for ATS in 2026?", a: "The hybrid/combination format is currently the best for ATS in 2026. It combines a skills summary section with a chronological work experience section, scoring 95/100 in ATS compatibility tests." },
+                { q: `What is the best resume format for ATS in ${currentYear}?`, a: `The hybrid/combination format is currently the best for ATS in ${currentYear}. It combines a skills summary section with a chronological work experience section, scoring 95/100 in ATS compatibility tests.` },
                 { q: "Should I use PDF or Word for ATS applications?", a: "For optimal ATS compatibility, use .docx format (98% ATS compatibility). Keep a text-based .pdf version for interviews and human review." },
                 { q: "Can I use columns or tables in my ATS resume?", a: "No, avoid columns and tables entirely. ATS systems struggle with multi-column layouts and often parse them incorrectly, scrambling information or losing content." },
                 { q: "How important are fonts for ATS compatibility?", a: "Extremely important. Use standard, system fonts like Arial, Calibri, Times New Roman, or Georgia for near-perfect ATS compatibility." },
@@ -1029,7 +1090,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
           <div className="section-container">
             <div className="card-executive" style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
               <h2 id="takeaways-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem' }}>Key Takeaways and Next Steps</h2>
-              <p style={{ marginBottom: '1.5rem' }}>Mastering ATS resume formatting in 2026 requires understanding both technology and best practices.</p>
+              <p style={{ marginBottom: '1.5rem' }}>Mastering ATS resume formatting in {currentYear} requires understanding both technology and best practices.</p>
               <ul style={{ listStyle: 'none', padding: 0, textAlign: 'left', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
                 {["Format Choice Matters: Hybrid format performs best", "Simplicity is Key: Avoid complex layouts and graphics", "File Format Strategy: Submit .docx for ATS", "Testing is Essential: Validate with ATS simulators", "Continuous Updates: ATS technology evolves"].map((item, i) => (
                   <li key={i} style={{ paddingLeft: '1.5rem', position: 'relative', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem' }}>
@@ -1054,7 +1115,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
             <div className="resource-link-grid">
               {[
                 { href: "/how-to-write-a-resume", title: "How to Write a Resume", desc: "Complete guide to writing a professional resume that passes ATS screening" },
-                { href: "/resume-templates", title: "ATS Resume Templates", desc: "Browse our collection of ATS-optimized resume templates for 2026" },
+                { href: "/resume-templates", title: "ATS Resume Templates", desc: `Browse our collection of ATS-optimized resume templates for ${currentYear}` },
                 { href: "/free-resume-tools", title: "Free Resume Tools", desc: "Access our free ATS checkers, keyword analyzers, and formatting tools" }
               ].map((link, i) => (
                 <Link key={i} href={link.href} className="resource-link-card">
@@ -1066,23 +1127,48 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
           </div>
         </section>
 
-        {/* Recommended Resources (SEO/GEO Boost) */}
-        <section className="section section-alt" aria-labelledby="recommended-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="recommended-heading">Recommended Resources for Job Seekers</h2>
-              <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="geo-link-card">
-                  <div style={{ fontSize: 'var(--font-size-title-md)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</div>
-                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flexGrow: 1 }}>{link.desc}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--accent-primary)', marginTop: 'auto' }}>
-                    Read Guide <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                  </div>
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
+        <section className="cta-section" aria-labelledby="final-cta-heading">
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="final-cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242, 202, 80, 0.3)' }}>
+                Ready to Build Your ATS-Optimized Resume?
+              </h2>
+              <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                Create your perfectly formatted resume in minutes. Choose from 46+ templates and use 12+ free tools. No sign-up required.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow)' }}>
+                  Browse 46+ Templates <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </Link>
-              ))}
+                <Link href="/free-resume-tools" className="btn-outline" style={{ borderColor: 'var(--accent-primary)', color: 'var(--accent-primary)' }}>
+                  Explore 12+ Free Tools <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </Link>
+              </div>
+              <p className="text-small" style={{ marginTop: '2rem', color: 'var(--text-muted)' }}>
+                ✓ No credit card required • Free forever • Based on Industry Standards • ATS-Optimized
+              </p>
+              <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+                Data fresh as of: {lastUpdated}
+              </p>
+
+              {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+              <div className="cf-internal-links-inline">
+                <div className="cf-internal-links-inline-header">
+                  <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                  <p className="cf-internal-links-inline-subtitle">Find the perfect guide or builder for your specific career needs.</p>
+                </div>
+                <div className="cf-internal-links-grid">
+                  {newInternalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-internal-link-card">
+                      <span className="cf-internal-link-title">{link.title}</span>
+                      <svg className="cf-internal-link-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1091,7 +1177,7 @@ export default function BestATSResumeFormat2026({ lastUpdated, lastModified }) {
         <div style={{ padding: '1rem 0', background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <div className="section-container">
             <p className="text-small">
-              Last updated: {lastUpdated} • Next update: {new Date(new Date(lastUpdated).setDate(new Date(lastUpdated).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+              Last updated: {lastUpdated} • Next update: {new Date(new Date(lastUpdated).setDate(new Date(lastUpdated).getDate() + 7)).toISOString().split('T')[0]} • Version {currentYear}.1
             </p>
           </div>
         </div>
