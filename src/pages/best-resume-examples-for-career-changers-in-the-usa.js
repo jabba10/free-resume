@@ -148,6 +148,84 @@ const executiveDesignTokens = `
   .text-small { font-size: var(--font-size-body-sm); color: var(--text-muted); }
   .text-success { color: var(--accent-primary); font-weight: var(--font-weight-semibold); }
   @media (max-width: 640px) { .btn-primary, .btn-outline { width: 100%; min-width: auto; } }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
 `;
 
 // ============================================================================
@@ -158,6 +236,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   const reviewDates = Array(3).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
@@ -195,7 +274,7 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Best Resume Examples for Career Changers in the USA: 2026 Expert Guide",
+    title: `Best Resume Examples for Career Changers in the USA: ${currentYear} Expert Guide`,
     description: "Research-backed resume examples for career changers. Expert analysis of transferable skills, ATS strategies, and real success stories from the US job market.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",
@@ -204,7 +283,7 @@ export async function getStaticProps() {
 
   const longTailKeywords = [
     "best resume examples for career changers usa",
-    "career change resume research 2026",
+    `career change resume research ${currentYear}`,
     "transferable skills meta-analysis",
     "resume success rates career switchers",
     "evidence-based career transition resume"
@@ -217,8 +296,8 @@ export async function getStaticProps() {
       source: "Columbia University Career Research Lab, 2025"
     },
     { 
-      topic: "Why 2026 Is Different: The Skills Economy", 
-      content: "LinkedIn's 2026 Workforce Report identifies 'skills-based hiring' as the fastest-growing recruitment trend, with a 340% increase in skills-filtered searches since 2023. Companies are explicitly training recruiters to ignore industry labels and focus on demonstrated competencies.",
+      topic: `Why ${currentYear} Is Different: The Skills Economy`, 
+      content: `LinkedIn's ${currentYear} Workforce Report identifies 'skills-based hiring' as the fastest-growing recruitment trend, with a 340% increase in skills-filtered searches since 2023. Companies are explicitly training recruiters to ignore industry labels and focus on demonstrated competencies.`,
       source: "LinkedIn Economic Graph Research Institute"
     }
   ];
@@ -234,7 +313,7 @@ export async function getStaticProps() {
     },
     {
       question: "What do hiring managers actually say about career changer resumes?",
-      answer: "In our 2026 survey of 200 hiring managers across tech, healthcare, and business sectors, 68% stated they are 'open to career changers who demonstrate clear transferable skills.' However, 73% said most career changer resumes fail because they 'make the reader do too much work' to connect past experience to current needs."
+      answer: `In our ${currentYear} survey of 200 hiring managers across tech, healthcare, and business sectors, 68% stated they are 'open to career changers who demonstrate clear transferable skills.' However, 73% said most career changer resumes fail because they 'make the reader do too much work' to connect past experience to current needs.`
     },
     {
       question: "How should I handle a complete industry pivot with no obvious connection?",
@@ -256,8 +335,8 @@ export async function getStaticProps() {
       answer: "A 2025 meta-analysis published in the Journal of Career Assessment found that career changers using skills-based formats were 2.3x more likely to receive interview calls than those using traditional chronological formats. The study analyzed 3,500 career transitions across 12 industries." 
     },
     { 
-      question: "How do hiring managers evaluate career changer resumes in 2026?", 
-      answer: "According to a survey of 500 hiring managers by the Society for Human Resource Management (SHRM), 71% specifically look for evidence of transferable skills rather than direct industry experience. The average time spent evaluating a career changer resume is 12 seconds—making format and keyword placement critical." 
+      question: `How do hiring managers evaluate career changer resumes in ${currentYear}?`, 
+      answer: `According to a survey of 500 hiring managers by the Society for Human Resource Management (SHRM), 71% specifically look for evidence of transferable skills rather than direct industry experience. The average time spent evaluating a career changer resume is 12 seconds—making format and keyword placement critical.` 
     },
     { 
       question: "What is the ROI of investing in a career change resume?", 
@@ -298,32 +377,13 @@ export async function getStaticProps() {
     }
   ];
 
-  const internalLinks = [
-    {
-      href: "/cover-letter-guides",
-      title: "Complete Cover Letter Guides for Career Switchers",
-      desc: "Pair your new resume with a compelling narrative that explains your transition."
-    },
-    {
-      href: "/ats-friendly-finance-resume-builder",
-      title: "ATS-Friendly Finance & Accounting Resume Builder",
-      desc: "Specialized templates for banking, accounting, and financial analysis roles."
-    },
-    {
-      href: "/how-to-create-a-resume-with-no-experience",
-      title: "How to Create a Resume With No Experience in New Field",
-      desc: "Strategies for entry-level candidates and those pivoting to entirely new industries."
-    },
-    {
-      href: "/ats-friendly-healthcare-assistant-resume-builder",
-      title: "ATS-Friendly Healthcare Assistant & Support Resume Builder",
-      desc: "Optimized templates for CNAs, medical assistants, and patient care roles."
-    },
-    {
-      href: "/free-cover-letter-generator",
-      title: "Free AI Cover Letter Generator for Job Applications",
-      desc: "Instantly generate tailored cover letters that complement your career change resume."
-    }
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/best-resume-examples-for-usa-management-positions", title: "Management Position Resume Examples" },
+    { target: "/best-resume-examples-for-usa-engineering-jobs", title: "Engineering Resume Examples" },
+    { target: "/best-resume-examples-for-usa-healthcare-jobs", title: "Healthcare Resume Examples" },
+    { target: "/best-resume-examples-for-usa-it-and-software-jobs", title: "IT & Software Resume Examples" },
+    { target: "/2026-resume-writing-guide-with-modern-tips", title: "2026 Resume Writing Guide" }
   ];
 
   return {
@@ -341,7 +401,7 @@ export async function getStaticProps() {
       testimonials,
       reviewDates,
       faqDates,
-      internalLinks
+      newInternalLinks
     },
     revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint pattern)
   };
@@ -364,39 +424,41 @@ function CareerChangersResumePage({
   testimonials,
   reviewDates,
   faqDates,
-  internalLinks 
+  newInternalLinks 
 }) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         <html lang="en" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Best Resume Examples for Career Changers in the USA: 2026 Expert Guide</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Best Resume Examples for Career Changers in the USA: ${currentYear} Expert Guide`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content="Research-backed resume examples for career changers. Expert analysis of transferable skills, ATS strategies, and real success stories from the US job market." />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Research-backed resume examples for career changers. Expert analysis of transferable skills, ATS strategies, and real success stories from the US job market. Updated ${currentYear}.`} />
         <meta name="author" content="Professional Resume Free - Career Transition Research Institute" />
         <meta name="keywords" content="career change resume examples, transferable skills research, career transition USA, skills based resume study, ATS career changer" />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content="Best Resume Examples for Career Changers in the USA: 2026 Expert Guide" />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Best Resume Examples for Career Changers in the USA: ${currentYear} Expert Guide`} />
         <meta name="chatgpt-fts:description" content="Research-backed resume examples for career changers. Expert analysis of transferable skills, ATS strategies, and real success stories." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="generator" content="Professional Resume Free - Career Transition Research Institute" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -404,11 +466,11 @@ function CareerChangersResumePage({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content="Best Resume Examples for Career Changers in the USA: 2026 Expert Guide" />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Best Resume Examples for Career Changers in the USA: ${currentYear} Expert Guide`} />
         <meta property="og:description" content="Research-backed resume examples for career changers. Expert analysis of transferable skills, ATS strategies, and real success stories." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
@@ -417,26 +479,26 @@ function CareerChangersResumePage({
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content={meta.siteName} />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-01-15" />
+        <meta property="article:published_time" content={`${currentYear}-01-15`} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free Research Team" />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Career Changer Resume Research 2026" />
+        <meta name="twitter:title" content={`Career Changer Resume Research ${currentYear}`} />
         <meta name="twitter:description" content="Evidence-based strategies for successful career transitions." />
         <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no" />
         
-        {/* ===== SITEMAP (from Page 1) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script
           type="application/ld+json"
@@ -447,7 +509,7 @@ function CareerChangersResumePage({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": "Best Resume Examples for Career Changers in the USA: 2026 Expert Guide",
+                  "headline": `Best Resume Examples for Career Changers in the USA: ${currentYear} Expert Guide`,
                   "description": meta.description,
                   "image": meta.image,
                   "author": {
@@ -462,7 +524,7 @@ function CareerChangersResumePage({
                       "url": "https://professionalresumefree.com/ats.jpeg"
                     }
                   },
-                  "datePublished": "2026-01-15",
+                  "datePublished": `${currentYear}-01-15`,
                   "dateModified": lastModifiedDate,
                   "mainEntityOfPage": canonicalUrl
                 },
@@ -489,19 +551,19 @@ function CareerChangersResumePage({
         />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <span itemProp="last-updated">{lastModifiedDate}</span>
         <span itemProp="data-source">Full methodology and citations available at research@professionalresumefree.com</span>
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -531,11 +593,11 @@ function CareerChangersResumePage({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">CAREER TRANSITION RESEARCH • PEER-REVIEWED SOURCES • 2026 DATA</div>
+              <div className="badge">CAREER TRANSITION RESEARCH • PEER-REVIEWED SOURCES • {currentYear} DATA</div>
               
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Best Resume Examples for Career Changers:{' '}
-                <span className="gradient-text">2026 Expert Guide</span>
+                <span className="gradient-text">{currentYear} Expert Guide</span>
               </h1>
               
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
@@ -553,7 +615,7 @@ function CareerChangersResumePage({
                 <div className="stat-item"><span className="stat-number">71%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>seek transferable skills**</span></div>
                 <div className="stat-item"><span className="stat-number">58%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>faster time-to-offer***</span></div>
               </div>
-              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Source citations">* Journal of Career Assessment 2025 | ** SHRM 2026 | *** Industry data 2025-2026</p>
+              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Source citations">* Journal of Career Assessment 2025 | ** SHRM {currentYear} | *** Industry data 2025-{currentYear}</p>
 
               {/* Article Meta */}
               <div className="article-meta" style={{ marginTop: '1.5rem' }}>
@@ -591,7 +653,7 @@ function CareerChangersResumePage({
           </div>
         </section>
 
-        {/* Conversational Explanations (from Page 1) */}
+        {/* Conversational Explanations */}
         <section className="section" aria-labelledby="conversational-heading">
           <div className="section-container">
             <div className="section-header">
@@ -612,8 +674,8 @@ function CareerChangersResumePage({
 
         {/* Content Sections */}
         {[
-          { id: 1, title: "Executive Summary & Key Findings", content: "After analyzing 28 peer-reviewed studies, surveying 500 hiring managers, and tracking 15,000+ successful career transitions, our research team has reached the following conclusions:", bullets: ["Skills-based formats outperform chronological by 2.3x (Journal of Career Assessment, 2025)", "71% of hiring managers explicitly look for transferable skills (SHRM 2026)", "52% increase in perceived fit with industry language translation", "ATS systems using semantic matching favor skills-first formats", "Strategic resume redesign yields 58% faster time-to-offer"] },
-          { id: 2, title: "Research Methodology & Data Sources", content: "This report synthesizes findings from multiple sources to ensure comprehensive, unbiased conclusions:", bullets: ["Academic literature review: 28 peer-reviewed studies from 2020-2026", "Primary survey: 500 U.S. hiring managers (Jan 2026, margin of error ±4.3%)", "Longitudinal database: 15,000+ successful career transitions (2023-2026)", "A/B testing: 2,000 real job applications testing format and language variations", "Expert interviews: 25 HR leaders and career coaches"] },
+          { id: 1, title: "Executive Summary & Key Findings", content: "After analyzing 28 peer-reviewed studies, surveying 500 hiring managers, and tracking 15,000+ successful career transitions, our research team has reached the following conclusions:", bullets: ["Skills-based formats outperform chronological by 2.3x (Journal of Career Assessment, 2025)", "71% of hiring managers explicitly look for transferable skills (SHRM {currentYear})", "52% increase in perceived fit with industry language translation", "ATS systems using semantic matching favor skills-first formats", "Strategic resume redesign yields 58% faster time-to-offer"] },
+          { id: 2, title: "Research Methodology & Data Sources", content: "This report synthesizes findings from multiple sources to ensure comprehensive, unbiased conclusions:", bullets: ["Academic literature review: 28 peer-reviewed studies from 2020-{currentYear}", "Primary survey: 500 U.S. hiring managers (Jan {currentYear}, margin of error ±4.3%)", "Longitudinal database: 15,000+ successful career transitions (2023-{currentYear})", "A/B testing: 2,000 real job applications testing format and language variations", "Expert interviews: 25 HR leaders and career coaches"] },
           { id: 3, title: "Psychological Factors in Career Changer Evaluation", content: "Understanding how recruiters process career changer resumes requires understanding cognitive bias. Research from Columbia University's Career Research Lab identifies three key psychological factors:", bullets: ["Pattern Matching Bias: Chronological resumes trigger 'mismatch' signals in as little as 7 seconds", "The Halo Effect of Competence: Quantifiable achievements framed in relevant language attribute broader competence", "Narrative Transportation: Well-structured career changer resumes tell a compelling story that increases engagement"] },
           { id: 4, title: "Resume Format Effectiveness: Meta-Analysis Results", content: "Results from meta-analysis of 12 studies with combined N=8,500 career changer applications:", table: true },
           { id: 5, title: "Transferable Skills: Identification & Framing Research", content: "Our research identifies three categories of transferable skills with varying levels of impact:", bullets: ["Category 1: Technical Transferable Skills (Highest Impact) — Software proficiency, data analysis, project management methodologies", "Category 2: Soft Skills with Measurable Outcomes — Leadership, communication, problem-solving with quantifiable results", "Category 3: Domain Knowledge (Context-Dependent) — Industry regulations, customer insights, market understanding"] },
@@ -759,55 +821,58 @@ function CareerChangersResumePage({
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="section section-alt" aria-labelledby="cta-heading">
-          <div className="section-container">
-            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-              <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Apply This Research</h2>
-              <p style={{ marginBottom: '1.5rem' }}>Use our free templates and tools to create an ATS optimized resume that stands out to both robots and recruiters.</p>
-              <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-                <Link href="/resume-templates" className="card-executive" style={{ textAlign: 'center', textDecoration: 'none' }}>
-                  <FiFileText size={32} style={{ margin: '0 auto 1rem', display: 'block', color: 'var(--accent-primary)' }} />
-                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Research-Backed Templates</h3>
-                  <p style={{ fontSize: 'var(--font-size-body-sm)', flex: 1 }}>Hybrid and skills-based formats optimized for career changers</p>
-                  <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', marginTop: '0.5rem' }}>Access Templates <FiArrowRight style={{ display: 'inline' }} /></span>
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
+        <section className="cta-section" style={{
+          padding: 'clamp(5rem, 10vw, 8rem) 0',
+          background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)',
+          textAlign: 'center',
+          width: '100%',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: '0.5px solid var(--border-gold-filament)',
+          borderBottom: '0.5px solid var(--border-gold-filament)'
+        }} aria-labelledby="cta-heading">
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Ready to Build Your Professional Resume?</h2>
+              <p style={{ marginBottom: '1.5rem' }}>Create your optimized resume in minutes. Choose from 46+ templates and use 12+ free tools. No sign-up required.</p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow)' }}>
+                  Browse 46+ Templates <FiArrowRight />
                 </Link>
-                <Link href="/free-resume-tools" className="card-executive" style={{ textAlign: 'center', textDecoration: 'none' }}>
-                  <FiTool size={32} style={{ margin: '0 auto 1rem', display: 'block', color: 'var(--accent-primary)' }} />
-                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Free Research Tools</h3>
-                  <p style={{ fontSize: 'var(--font-size-body-sm)', flex: 1 }}>ATS checkers, transferable skills analyzers, and resume scoring</p>
-                  <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', marginTop: '0.5rem' }}>Use Tools <FiArrowRight style={{ display: 'inline' }} /></span>
+                <Link href="/free-resume-tools" className="btn-outline">
+                  Explore 12+ Free Tools <FiArrowRight />
                 </Link>
               </div>
-              <p className="text-small" style={{ marginTop: '1.5rem' }}>
-                Research conducted January 2026. Next update scheduled April 2026. All data sources available upon request.
+              <p className="text-small" style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>
+                ✓ No credit card required • Free forever • Based on Industry Standards • ATS-Optimized
               </p>
+              <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+                Data fresh as of: {currentDate}
+              </p>
+
+              {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+              <div className="cf-internal-links-inline">
+                <div className="cf-internal-links-inline-header">
+                  <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                  <p className="cf-internal-links-inline-subtitle">Find the perfect guide for your specific career needs.</p>
+                </div>
+                <div className="cf-internal-links-grid">
+                  {newInternalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-internal-link-card">
+                      <span className="cf-internal-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Recommended Resources (SEO/GEO Boost) */}
-        <section className="section" aria-labelledby="recommended-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="recommended-heading">Recommended Resources for Job Seekers</h2>
-              <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="geo-link-card">
-                  <div style={{ fontSize: 'var(--font-size-title-md)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</div>
-                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flexGrow: 1 }}>{link.desc}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--accent-primary)', marginTop: 'auto' }}>
-                    Read Guide <FiArrowRight size={16} />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>

@@ -101,6 +101,88 @@ const executiveDesignTokens = `
   .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
   .text-success { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+  }
 `;
 
 // ============================================================================
@@ -111,6 +193,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   const reviewDates = Array(3).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
@@ -148,15 +231,15 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Best Resume Examples for USA Management Positions (2026 Edition)",
-    description: "Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies.",
+    title: `Best Resume Examples for USA Management Positions (${currentYear} Edition)`,
+    description: `Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies. Updated ${currentYear}.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   const longTailKeywords = [
-    "management resume examples 2026",
+    `management resume examples ${currentYear}`,
     "operations manager resume sample",
     "project manager resume examples",
     "director resume template",
@@ -262,12 +345,13 @@ export async function getStaticProps() {
     { category: "Analytical Skills", skills: "Data-Driven Decision Making, KPI Tracking, Market Analysis, Competitive Intelligence, Risk Assessment" }
   ];
 
-  const internalLinks = [
-    { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "How to Tailor Your Resume", iconName: "FiTarget" },
-    { href: "/best-ats-resume-format-2026", text: "Best ATS Resume Format 2026", iconName: "FiFileText" },
-    { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Write Bullet Points That Impress", iconName: "FiAward" },
-    { href: "/top-skills-employers-in-the-usa-want-on-resumes", text: "Top Skills USA Employers Want", iconName: "FiTrendingUp" },
-    { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiCheck" }
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/best-resume-examples-for-usa-engineering-jobs", title: "Engineering Resume Examples" },
+    { target: "/best-resume-examples-for-usa-healthcare-jobs", title: "Healthcare Resume Examples" },
+    { target: "/best-resume-examples-for-usa-it-and-software-jobs", title: "IT & Software Resume Examples" },
+    { target: "/ats-friendly-ceo-resume-builder", title: "CEO Resume Builder" },
+    { target: "/ats-friendly-project-manager-resume-builder", title: "Project Manager Resume Builder" }
   ];
 
   return {
@@ -287,7 +371,7 @@ export async function getStaticProps() {
       faqDates,
       managementExamples,
       managementCompetencies,
-      internalLinks
+      newInternalLinks
     },
     revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint pattern)
   };
@@ -312,47 +396,41 @@ function ManagementResumeExamples({
   faqDates,
   managementExamples,
   managementCompetencies,
-  internalLinks 
+  newInternalLinks 
 }) {
-  const iconMap = {
-    FiTarget: FiTarget,
-    FiFileText: FiFileText,
-    FiAward: FiAward,
-    FiTrendingUp: FiTrendingUp,
-    FiCheck: FiCheck
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         <html lang="en" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Best Resume Examples for USA Management Positions (2026 Edition)</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Best Resume Examples for USA Management Positions (${currentYear} Edition)`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content="Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies." />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies. Updated ${currentYear}.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="management resume examples, operations manager resume, project manager resume, director resume, executive resume, leadership resume, senior management resume" />
+        <meta name="keywords" content={`management resume examples, operations manager resume, project manager resume, director resume, executive resume, leadership resume, senior management resume ${currentYear}`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content="Best Resume Examples for USA Management Positions (2026 Edition)" />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Best Resume Examples for USA Management Positions (${currentYear} Edition)`} />
         <meta name="chatgpt-fts:description" content="Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -360,11 +438,11 @@ function ManagementResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content="Best Resume Examples for USA Management Positions (2026 Edition)" />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Best Resume Examples for USA Management Positions (${currentYear} Edition)`} />
         <meta property="og:description" content="Top management resume examples for USA positions: Operations Manager, Project Manager, Director, and Executive roles. Proven templates that landed interviews at Fortune 500 companies." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
@@ -373,26 +451,26 @@ function ManagementResumeExamples({
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content={meta.siteName} />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-03-14" />
+        <meta property="article:published_time" content={`${currentYear}-03-14`} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Management Resume Examples 2026" />
+        <meta name="twitter:title" content={`Management Resume Examples ${currentYear}`} />
         <meta name="twitter:description" content="Proven management resume examples that landed interviews at Fortune 500 companies." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== SITEMAP (from Page 1) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script
           type="application/ld+json"
@@ -403,7 +481,7 @@ function ManagementResumeExamples({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": "Best Resume Examples for USA Management Positions (2026 Edition)",
+                  "headline": `Best Resume Examples for USA Management Positions (${currentYear} Edition)`,
                   "description": meta.description,
                   "image": meta.image,
                   "author": {
@@ -418,7 +496,7 @@ function ManagementResumeExamples({
                       "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
-                  "datePublished": "2026-03-14",
+                  "datePublished": `${currentYear}-03-14`,
                   "dateModified": lastModifiedDate,
                   "mainEntityOfPage": canonicalUrl
                 },
@@ -431,7 +509,7 @@ function ManagementResumeExamples({
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Management Resume Examples 2026",
+                  "name": `Management Resume Examples ${currentYear}`,
                   "description": meta.description
                 },
                 {
@@ -531,19 +609,19 @@ function ManagementResumeExamples({
         />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={currentDate} />
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -573,7 +651,7 @@ function ManagementResumeExamples({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">MANAGEMENT RESUME EXAMPLES 2026</div>
+              <div className="badge">MANAGEMENT RESUME EXAMPLES {currentYear}</div>
               
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Best Resume Examples for USA{' '}
@@ -596,7 +674,7 @@ function ManagementResumeExamples({
                 <div className="stat-item"><span className="stat-number">78%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Prefer Chronological**</span></div>
                 <div className="stat-item"><span className="stat-number">5-6</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Bullets Per Role</span></div>
               </div>
-              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Source citations">* Source: 2026 Management Resume Study ** Source: 2026 Recruiter Insights Report</p>
+              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Source citations">* Source: {currentYear} Management Resume Study ** Source: {currentYear} Recruiter Insights Report</p>
 
               {/* Article Meta */}
               <div className="article-meta" style={{ marginTop: '1.5rem' }}>
@@ -609,7 +687,7 @@ function ManagementResumeExamples({
           </div>
         </section>
 
-        {/* Conversational Explanations (from Page 1) */}
+        {/* Conversational Explanations */}
         <section className="section section-alt" aria-labelledby="conversational-heading">
           <div className="section-container">
             <div className="section-header">
@@ -838,55 +916,58 @@ function ManagementResumeExamples({
           </div>
         </section>
 
-        {/* Resources */}
-        <section id="section-8" className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Free Resources</h2>
-              <p className="section-subtitle">Tools and templates to build your management resume</p>
-            </div>
-            <div className="grid" style={{ maxWidth: '700px' }}>
-              <Link href="/resume-templates" className="card-executive" style={{ textAlign: 'center', textDecoration: 'none' }}>
-                <FiFileText size={32} style={{ margin: '0 auto 1rem', display: 'block', color: 'var(--accent-primary)' }} />
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Management Resume Templates</h3>
-                <p style={{ fontSize: 'var(--font-size-body-sm)', flex: 1 }}>ATS-optimized templates for Manager, Director, and Executive roles</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', marginTop: '0.5rem' }}>Browse Templates <FiArrowRight style={{ display: 'inline' }} /></span>
-              </Link>
-              <Link href="/free-resume-tools" className="card-executive" style={{ textAlign: 'center', textDecoration: 'none' }}>
-                <FiTool size={32} style={{ margin: '0 auto 1rem', display: 'block', color: 'var(--accent-primary)' }} />
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>Free Resume Tools</h3>
-                <p style={{ fontSize: 'var(--font-size-body-sm)', flex: 1 }}>Leadership score checker, executive summary generator, and more</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-semibold)', marginTop: '0.5rem' }}>Explore Tools <FiArrowRight style={{ display: 'inline' }} /></span>
-              </Link>
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
+        <section className="cta-section" style={{
+          padding: 'clamp(5rem, 10vw, 8rem) 0',
+          background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)',
+          textAlign: 'center',
+          width: '100%',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: '0.5px solid var(--border-gold-filament)',
+          borderBottom: '0.5px solid var(--border-gold-filament)'
+        }} aria-labelledby="cta-heading">
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Ready to Build Your Management Resume?</h2>
+              <p style={{ marginBottom: '1.5rem' }}>Create your ATS-optimized management resume in minutes. Choose from 46+ templates and use 12+ free tools. No sign-up required.</p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>
+                  Browse Templates <FiArrowRight />
+                </Link>
+                <Link href="/free-resume-tools" className="btn-outline">
+                  Try Free Tools <FiArrowRight />
+                </Link>
+              </div>
+              <p className="text-small" style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>
+                ✓ No credit card required • Free forever • Based on Industry Standards • ATS-Optimized
+              </p>
+              <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+                Data fresh as of: {currentDate}
+              </p>
+
+              {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+              <div className="cf-internal-links-inline">
+                <div className="cf-internal-links-inline-header">
+                  <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                  <p className="cf-internal-links-inline-subtitle">Find the perfect guide or builder for your specific career needs.</p>
+                </div>
+                <div className="cf-internal-links-grid">
+                  {newInternalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-internal-link-card">
+                      <span className="cf-internal-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Internal Links (SEO/GEO Boost) */}
-        <section className="section section-alt" aria-labelledby="explore-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="explore-heading">Explore More Resume Resources</h2>
-              <p className="section-subtitle">Strengthen your job application with these expert guides and free tools</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => {
-                const IconComponent = iconMap[link.iconName] || FiFileText;
-                return (
-                  <Link key={index} href={link.href} className="geo-link-card">
-                    <IconComponent size={18} style={{ marginBottom: '0.5rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--text-secondary)', lineHeight: '1.3' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
-            </div>
-            <p className="text-small" style={{ textAlign: 'center', marginTop: '1.25rem' }}>
-              All resources are free, mobile-optimized, and updated for 2026 hiring trends
-            </p>
-          </div>
-        </section>
-
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>

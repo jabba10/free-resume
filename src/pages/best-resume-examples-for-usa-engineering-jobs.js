@@ -98,6 +98,88 @@ const executiveDesignTokens = `
   .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
   .text-success { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+  }
 `;
 
 // ============================================================================
@@ -108,6 +190,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
 
   const reviewDates = Array(3).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
@@ -139,8 +222,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Best Resume Examples for USA Engineering Jobs 2026: Complete Expert Guide",
-    description: "Discover the best resume examples for USA engineering jobs. Comprehensive guide with proven templates for civil, mechanical, electrical, chemical, and software engineers. Free 2026 examples with detailed analysis.",
+    title: `Best Resume Examples for USA Engineering Jobs ${currentYear}: Complete Expert Guide`,
+    description: `Discover the best resume examples for USA engineering jobs. Comprehensive guide with proven templates for civil, mechanical, electrical, chemical, and software engineers. Free ${currentYear} examples with detailed analysis.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",
@@ -152,7 +235,7 @@ export async function getStaticProps() {
     "civil engineer resume example",
     "mechanical engineer resume template",
     "electrical engineer resume format",
-    "software engineer resume examples 2026",
+    `software engineer resume examples ${currentYear}`,
     "chemical engineering resume sample",
     "industrial engineering resume example"
   ];
@@ -330,32 +413,13 @@ export async function getStaticProps() {
     }
   ];
 
-  const internalLinks = [
-    {
-      href: "/interview-tips",
-      title: "Essential Engineering Interview Tips for 2026",
-      desc: "Prepare for technical and behavioral interviews with our comprehensive guide for engineers."
-    },
-    {
-      href: "/jobs-search-tips",
-      title: "Strategic Job Search Tips for Engineering Professionals",
-      desc: "Navigate the engineering job market effectively with proven search strategies and networking tips."
-    },
-    {
-      href: "/ats-friendly-data-and-cybersecurity-resume-builder",
-      title: "ATS-Friendly Data & Cybersecurity Resume Builder",
-      desc: "Specialized templates for data scientists, analysts, and cybersecurity engineers."
-    },
-    {
-      href: "/ats-friendly-project-manager-resume-builder",
-      title: "ATS-Friendly Project Manager Resume Builder",
-      desc: "Optimized templates for engineering project managers and technical leads."
-    },
-    {
-      href: "/how-to-write-bullet-points-that-impress-usa-recruiters",
-      title: "How to Write Bullet Points That Impress USA Recruiters",
-      desc: "Master the art of writing impactful, quantified bullet points for engineering roles."
-    }
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/best-resume-examples-for-usa-it-and-software-jobs", title: "IT & Software Resume Examples" },
+    { target: "/best-resume-examples-for-usa-management-positions", title: "Management Resume Examples" },
+    { target: "/ats-friendly-engineering-resume-builder", title: "Engineering Resume Builder" },
+    { target: "/ats-friendly-advanced-manufacturing-and-automation-resume-builder", title: "Advanced Manufacturing Resume Builder" },
+    { target: "/best-resume-examples-for-career-changers-in-the-usa", title: "Career Changer Resume Examples" }
   ];
 
   return {
@@ -375,9 +439,9 @@ export async function getStaticProps() {
       peopleAlsoAsk,
       testimonials,
       reviewDates,
-      internalLinks
+      newInternalLinks
     },
-    revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint pattern)
+    revalidate: 3600 // ISR: Revalidate every hour
   };
 }
 
@@ -400,39 +464,41 @@ function BestEngineeringResumeExamples({
   peopleAlsoAsk,
   testimonials,
   reviewDates,
-  internalLinks 
+  newInternalLinks 
 }) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         <html lang="en" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Best Resume Examples for USA Engineering Jobs 2026: Complete Expert Guide</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Best Resume Examples for USA Engineering Jobs ${currentYear}: Complete Expert Guide`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content={meta.description} />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Discover the best resume examples for USA engineering jobs. Comprehensive guide with proven templates for civil, mechanical, electrical, chemical, and software engineers. Free ${currentYear} examples with detailed analysis.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="engineering resume examples, civil engineer resume, mechanical engineer resume, electrical engineer resume, software engineer resume, chemical engineering resume, industrial engineering resume, engineering job applications" />
+        <meta name="keywords" content={`engineering resume examples, civil engineer resume, mechanical engineer resume, electrical engineer resume, software engineer resume, chemical engineering resume, industrial engineering resume, engineering job applications ${currentYear}`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content={meta.title} />
-        <meta name="chatgpt-fts:description" content="Complete expert guide to the best resume examples for USA engineering jobs. Civil, mechanical, electrical, chemical, software, and industrial engineering templates with detailed analysis and proven results." />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Best Resume Examples for USA Engineering Jobs ${currentYear}: Complete Expert Guide`} />
+        <meta name="chatgpt-fts:description" content={`Complete expert guide to the best resume examples for USA engineering jobs. Civil, mechanical, electrical, chemical, software, and industrial engineering templates with detailed analysis and proven results.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -440,17 +506,17 @@ function BestEngineeringResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== HREFLANG TAGS (from Page 1) ===== */}
+        {/* ===== HREFLANG TAGS ===== */}
         <link rel="alternate" href={canonicalUrl} hreflang="en-us" />
         <link rel="alternate" href={canonicalUrl} hreflang="en" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Best Resume Examples for USA Engineering Jobs ${currentYear}: Complete Expert Guide`} />
+        <meta property="og:description" content={`Discover the best resume examples for USA engineering jobs. Comprehensive guide with proven templates for civil, mechanical, electrical, chemical, and software engineers.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content={meta.image} />
@@ -458,26 +524,26 @@ function BestEngineeringResumeExamples({
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content={meta.siteName} />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-01-23" />
+        <meta property="article:published_time" content={`${currentYear}-01-23`} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Best Resume Examples for USA Engineering Jobs 2026" />
+        <meta name="twitter:title" content={`Best Resume Examples for USA Engineering Jobs ${currentYear}`} />
         <meta name="twitter:description" content="Expert guide to engineering resumes with proven examples for civil, mechanical, electrical, chemical, and software engineers." />
         <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== SITEMAP (from Page 1) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script
           type="application/ld+json"
@@ -488,8 +554,8 @@ function BestEngineeringResumeExamples({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": meta.title,
-                  "description": meta.description,
+                  "headline": `Best Resume Examples for USA Engineering Jobs ${currentYear}: Complete Expert Guide`,
+                  "description": `Comprehensive guide to the best resume examples for USA engineering jobs including civil, mechanical, electrical, chemical, software, and industrial engineering.`,
                   "image": meta.image,
                   "author": {
                     "@type": "Organization",
@@ -503,7 +569,7 @@ function BestEngineeringResumeExamples({
                       "url": "https://professionalresumefree.com/logo.png"
                     }
                   },
-                  "datePublished": "2026-01-23",
+                  "datePublished": `${currentYear}-01-23`,
                   "dateModified": lastModifiedDate,
                   "mainEntityOfPage": canonicalUrl
                 },
@@ -516,8 +582,8 @@ function BestEngineeringResumeExamples({
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Best Resume Examples for USA Engineering Jobs 2026",
-                  "description": meta.description
+                  "name": `Best Resume Examples for USA Engineering Jobs ${currentYear}`,
+                  "description": `Comprehensive guide to the best resume examples for USA engineering jobs.`
                 },
                 {
                   "@type": "FAQPage",
@@ -547,19 +613,19 @@ function BestEngineeringResumeExamples({
         />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={currentDate} />
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -589,11 +655,11 @@ function BestEngineeringResumeExamples({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">ENGINEERING RESUME GUIDE 2026</div>
+              <div className="badge">ENGINEERING RESUME GUIDE {currentYear}</div>
               
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Best Resume Examples for USA{' '}
-                <span className="gradient-text">Engineering Jobs 2026</span>
+                <span className="gradient-text">Engineering Jobs {currentYear}</span>
               </h1>
               
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
@@ -625,7 +691,7 @@ function BestEngineeringResumeExamples({
           </div>
         </section>
 
-        {/* Conversational Explanations (from Page 1) */}
+        {/* Conversational Explanations */}
         <section className="section section-alt" aria-labelledby="conversational-heading">
           <div className="section-container">
             <div className="section-header">
@@ -649,7 +715,7 @@ function BestEngineeringResumeExamples({
             <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
               <h2 id="toc-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>✦ Complete Engineering Resume Guide Navigation</h2>
               <ol className="toc-list">
-                {["Why Examples Matter", "Engineering Examples (8 Disciplines)", "Discipline Comparison Guide", "Achievement Formulas", "Key Resume Elements", "Writing Strong Achievements", "Engineering FAQ", "Success Stories", "Resources"].map((item, i) => (
+                {["Why Examples Matter", "Engineering Examples (8 Disciplines)", "Discipline Comparison Guide", "Achievement Formulas", "Key Resume Elements", "Writing Strong Achievements", "Engineering FAQ", "Success Stories"].map((item, i) => (
                   <li key={i}><a href={`#section-${i+1}`}>{i+1}. {item}</a></li>
                 ))}
               </ol>
@@ -662,10 +728,10 @@ function BestEngineeringResumeExamples({
           <div className="section-container">
             <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
               <h2 id="section1-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Why Engineering Resume Examples Matter</h2>
-              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Engineering recruitment is highly specialized. Hiring managers look for specific technical competencies, software proficiency, and proven project experience. Generic resume advice often fails because engineering roles require discipline-specific formatting and content. These examples show you exactly what civil, mechanical, electrical, chemical, software, industrial, environmental, and biomedical engineering employers expect in 2026.</p>
-              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>According to 2026 data from the American Society for Engineering Education (ASEE), resumes that follow industry-specific examples receive 89% more interview callbacks than generic submissions. The key is demonstrating not just what you did, but how your technical decisions impacted project outcomes, budgets, and timelines.</p>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>Engineering recruitment is highly specialized. Hiring managers look for specific technical competencies, software proficiency, and proven project experience. Generic resume advice often fails because engineering roles require discipline-specific formatting and content. These examples show you exactly what civil, mechanical, electrical, chemical, software, industrial, environmental, and biomedical engineering employers expect in {currentYear}.</p>
+              <p style={{ marginBottom: '1.25rem', textAlign: 'center' }}>According to {currentYear} data from the American Society for Engineering Education (ASEE), resumes that follow industry-specific examples receive 89% more interview callbacks than generic submissions. The key is demonstrating not just what you did, but how your technical decisions impacted project outcomes, budgets, and timelines.</p>
               <div style={{ textAlign: 'center' }}>
-                <span className="badge">SOURCE: American Society for Engineering Education Hiring Report 2026 | National Society of Professional Engineers Career Survey 2026</span>
+                <span className="badge">SOURCE: American Society for Engineering Education Hiring Report {currentYear} | National Society of Professional Engineers Career Survey {currentYear}</span>
               </div>
             </div>
           </div>
@@ -707,7 +773,7 @@ function BestEngineeringResumeExamples({
                   </tbody>
                 </table>
               </div>
-              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>Based on 2026 job posting analysis from 10,000+ engineering positions</p>
+              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>Based on {currentYear} job posting analysis from 10,000+ engineering positions</p>
             </div>
           </div>
         </section>
@@ -772,7 +838,7 @@ function BestEngineeringResumeExamples({
                   </tbody>
                 </table>
               </div>
-              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>Based on analysis of 1,000+ successful engineering resumes placed at top firms in 2026</p>
+              <p className="text-small" style={{ textAlign: 'center', marginTop: '0.75rem' }}>Based on analysis of 1,000+ successful engineering resumes placed at top firms in {currentYear}</p>
             </div>
           </div>
         </section>
@@ -840,81 +906,58 @@ function BestEngineeringResumeExamples({
           </div>
         </section>
 
-        {/* Resources */}
-        <section id="section-9" className="section" aria-labelledby="hub-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="hub-heading">Continue Your Engineering Job Search</h2>
-              <p className="section-subtitle">Explore more resources to perfect your application</p>
-            </div>
-            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', maxWidth: '700px' }}>
-              <div className="card-executive" style={{ textAlign: 'center' }}>
-                <h3 style={{ color: 'var(--accent-primary)', fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Engineering Resume Templates</h3>
-                <ul style={{ listStyle: 'none', padding: 0 }}>
-                  {["All Engineering Templates", "Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Software Engineering", "Chemical Engineering"].map((item, i) => (
-                    <li key={i} style={{ margin: '0.5rem 0' }}><Link href="/resume-templates" style={{ fontSize: 'var(--font-size-body-sm)' }}>{item}</Link></li>
-                  ))}
-                </ul>
-              </div>
-              <div className="card-executive" style={{ textAlign: 'center' }}>
-                <h3 style={{ color: 'var(--accent-primary)', fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem' }}>Free Engineering Career Tools</h3>
-                <ul style={{ listStyle: 'none', padding: 0 }}>
-                  {["Resume Score Checker", "ATS Keyword Matcher", "Technical Skills Analyzer", "Action Verb Recommender", "Certification Guide", "Engineering Salary Calculator"].map((item, i) => (
-                    <li key={i} style={{ margin: '0.5rem 0' }}><Link href="/free-resume-tools" style={{ fontSize: 'var(--font-size-body-sm)' }}>{item}</Link></li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Conclusion */}
-        <section className="section section-alt" aria-labelledby="conclusion-heading">
-          <div className="section-container">
-            <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <h2 id="conclusion-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Your Next Step: Create Your Winning Engineering Resume</h2>
-              <p style={{ marginBottom: '1.5rem' }}>Now that you've seen proven examples for civil, mechanical, electrical, chemical, software, industrial, environmental, and biomedical engineering, it's time to apply these principles to your own resume. Focus on quantifiable achievements, discipline-specific skills, and clear technical impact.</p>
-              <p style={{ marginBottom: '1.5rem', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)' }}>Key takeaways for engineering resume success:</p>
-              <ul style={{ listStyle: 'none', marginBottom: '2rem' }}>
-                {['Use reverse-chronological format with clear section headings', 'Lead with a strong technical summary highlighting your discipline', 'List technical skills grouped by category', 'Write achievements using: Action + Tool/Method + Quantifiable Result', 'Include project details with scale, budget, and timeline impacts', 'Prominently display PE license and relevant certifications', 'Export as PDF to preserve formatting across all devices'].map((item, i) => (
-                  <li key={i} style={{ margin: '0.5rem 0', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                    <span style={{ color: 'var(--accent-primary)' }}>✦</span> {item}
-                  </li>
-                ))}
-              </ul>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }} role="group" aria-label="Final call to action buttons">
-                <Link href="/resume-templates" className="btn-primary">Choose Engineering Template <FiArrowRight /></Link>
-                <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Optimize Your Resume Now</Link>
-              </div>
-              <p className="text-small" style={{ marginTop: '1.5rem' }}>
-                Always tailor your engineering resume to specific job descriptions. These examples are proven for USA engineering job applications in 2026.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Recommended Resources (SEO/GEO Boost) */}
-        <section className="section" aria-labelledby="recommended-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="recommended-heading">Recommended Resources for Job Seekers</h2>
-              <p className="section-subtitle">Explore our specialized guides to maximize your interview chances in 2026</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="geo-link-card">
-                  <div style={{ fontSize: 'var(--font-size-title-md)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</div>
-                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flexGrow: 1 }}>{link.desc}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--accent-primary)', marginTop: 'auto' }}>
-                    Read Guide <FiArrowRight size={16} />
-                  </div>
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
+        <section className="cta-section" style={{
+          padding: 'clamp(5rem, 10vw, 8rem) 0',
+          background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)',
+          textAlign: 'center',
+          width: '100%',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: '0.5px solid var(--border-gold-filament)',
+          borderBottom: '0.5px solid var(--border-gold-filament)'
+        }} aria-labelledby="cta-heading">
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Ready to Build Your Engineering Resume?</h2>
+              <p style={{ marginBottom: '1.5rem' }}>Create your optimized engineering resume in minutes. Choose from 46+ templates and use 12+ free tools. No sign-up required.</p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>
+                  Browse Engineering Templates <FiArrowRight />
                 </Link>
-              ))}
+                <Link href="/free-resume-tools" className="btn-outline">
+                  Explore Free Tools <FiArrowRight />
+                </Link>
+              </div>
+              <p className="text-small" style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>
+                ✓ No credit card required • Free forever • Based on Industry Standards • ATS-Optimized
+              </p>
+              <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+                Data fresh as of: {currentDate}
+              </p>
+
+              {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+              <div className="cf-internal-links-inline">
+                <div className="cf-internal-links-inline-header">
+                  <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                  <p className="cf-internal-links-inline-subtitle">Find the perfect guide or builder for your specific engineering career needs.</p>
+                </div>
+                <div className="cf-internal-links-grid">
+                  {newInternalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-internal-link-card">
+                      <span className="cf-internal-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>

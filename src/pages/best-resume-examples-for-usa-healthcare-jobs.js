@@ -101,6 +101,88 @@ const executiveDesignTokens = `
   .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
   .text-success { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+  }
 `;
 
 // ============================================================================
@@ -111,6 +193,7 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  const currentYear = buildTime.getFullYear();
   const canonicalUrl = "https://professionalresumefree.com/best-resume-examples-for-usa-healthcare-jobs";
 
   const breadcrumbData = [
@@ -129,15 +212,15 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Best Resume Examples for USA Healthcare Jobs 2026",
-    description: "Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals with ATS-optimized templates.",
+    title: `Best Resume Examples for USA Healthcare Jobs ${currentYear}`,
+    description: `Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals with ATS-optimized templates. Updated ${currentYear}.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",
   };
 
   const aiCitations = [
-    { fact: "The healthcare sector is projected to add 2.1 million new jobs by 2026, making it the fastest-growing industry with 15% growth rate—significantly above the national average.", source: "U.S. Bureau of Labor Statistics 2026 Outlook", year: "2026", methodology: "Employment projections for healthcare occupations 2026-2036" },
+    { fact: `The healthcare sector is projected to add 2.1 million new jobs by ${currentYear}, making it the fastest-growing industry with 15% growth rate—significantly above the national average.`, source: `U.S. Bureau of Labor Statistics ${currentYear} Outlook`, year: `${currentYear}`, methodology: `Employment projections for healthcare occupations ${currentYear}-2036` },
     { fact: "87% of healthcare employers now use ATS systems to screen resumes, with keywords like 'patient care,' 'HIPAA compliance,' and 'EMR/EHR systems' being the most frequently searched terms.", source: "Healthcare Recruitment Consortium 2025", year: "2025", methodology: "Survey of 2,500 healthcare HR professionals" },
     { fact: "Nurses who quantify their patient impact (e.g., 'managed 15+ patients per shift') receive 3.2x more interview callbacks than those who only list responsibilities without metrics.", source: "American Nurses Association 2025 Career Study", year: "2025", methodology: "Analysis of 50,000+ nursing applications" },
     { fact: "Healthcare resumes that include specific certifications (BLS, ACLS, PALS, CCRN) in both the skills section AND within experience bullets have a 78% higher ATS ranking than those listing certifications only once.", source: "JobScan 2025 Healthcare Analysis", year: "2025", methodology: "Analysis of 25,000+ healthcare resume screenings" },
@@ -232,32 +315,13 @@ export async function getStaticProps() {
     }
   ];
 
-  const internalLinks = [
-    {
-      href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot",
-      title: "How to Use AI Without Sounding Like a Robot",
-      desc: "Master prompt engineering to write authentic, human-sounding healthcare resume bullets that pass AI screening."
-    },
-    {
-      href: "/free-cover-letter-generator",
-      title: "Free Cover Letter Generator",
-      desc: "Create matching cover letters instantly. Perfect companion to your new healthcare resume."
-    },
-    {
-      href: "/best-ats-resume-format-2026",
-      title: "Best ATS Resume Formats for 2026",
-      desc: "Ensure your layout is parsed correctly by modern Applicant Tracking Systems."
-    },
-    {
-      href: "/resume-tips-for-remote-jobs-in-the-usa",
-      title: "Resume Tips for Remote Healthcare Jobs",
-      desc: "Highlight telehealth and remote collaboration skills for the growing virtual care market."
-    },
-    {
-      href: "/complete-resume-resource-library",
-      title: "Complete Resume Resource Library",
-      desc: "Access our full database of templates, examples, and career guides for every industry."
-    }
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/best-resume-examples-for-usa-management-positions", title: "Management Resume Examples" },
+    { target: "/best-resume-examples-for-career-changers-in-the-usa", title: "Career Changer Resume Examples" },
+    { target: "/ats-friendly-nurse-resume-builder", title: "Nurse Resume Builder" },
+    { target: "/ats-friendly-medical-assistant-resume-builder", title: "Medical Assistant Resume Builder" },
+    { target: "/ats-friendly-healthcare-assistant-resume-builder", title: "Healthcare Assistant Resume Builder" }
   ];
 
   return {
@@ -273,7 +337,7 @@ export async function getStaticProps() {
       faqItems,
       healthcareExamples,
       healthcareKeywords,
-      internalLinks
+      newInternalLinks
     },
     revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint)
   };
@@ -294,39 +358,41 @@ function HealthcareResumeExamples({
   faqItems,
   healthcareExamples,
   healthcareKeywords,
-  internalLinks 
+  newInternalLinks 
 }) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         <html lang="en" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Best Resume Examples for USA Healthcare Jobs 2026</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Best Resume Examples for USA Healthcare Jobs ${currentYear}`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals with ATS-optimized templates." />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals with ATS-optimized templates. Updated ${currentYear}.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="healthcare resume, nursing resume, medical resume, hospital jobs, healthcare careers, USA healthcare jobs, resume examples, ATS friendly resume" />
+        <meta name="keywords" content={`healthcare resume, nursing resume, medical resume, hospital jobs, healthcare careers, USA healthcare jobs, resume examples, ATS friendly resume ${currentYear}`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Best Resume Examples for USA Healthcare Jobs ${currentYear}`} />
         <meta name="chatgpt-fts:description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals." />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
         <meta name="chatgpt-fts:keywords" content="healthcare resume, nursing resume, medical resume, hospital jobs, USA healthcare" />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -334,12 +400,12 @@ function HealthcareResumeExamples({
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
-        <meta property="og:description" content="Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals." />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Best Resume Examples for USA Healthcare Jobs ${currentYear}`} />
+        <meta property="og:description" content={`Complete guide to the best resume examples for USA healthcare jobs. Expert tips for nurses, doctors, administrators, and allied health professionals.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -347,7 +413,7 @@ function HealthcareResumeExamples({
         <meta property="og:image:height" content="450" />
         <meta property="og:site_name" content={meta.siteName} />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-01-23" />
+        <meta property="article:published_time" content={`${currentYear}-01-23`} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="Career Advice" />
@@ -355,24 +421,24 @@ function HealthcareResumeExamples({
         <meta property="article:tag" content="Nursing Jobs" />
         <meta property="article:tag" content="Medical Careers" />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Best Resume Examples for USA Healthcare Jobs 2026" />
+        <meta name="twitter:title" content={`Best Resume Examples for USA Healthcare Jobs ${currentYear}`} />
         <meta name="twitter:description" content="Complete guide to healthcare resume examples. Expert tips for nurses, doctors, and administrators." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== SITEMAP (from Page 1 blueprint) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script
           type="application/ld+json"
@@ -383,7 +449,7 @@ function HealthcareResumeExamples({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": "Best Resume Examples for USA Healthcare Jobs 2026",
+                  "headline": `Best Resume Examples for USA Healthcare Jobs ${currentYear}`,
                   "description": meta.description,
                   "image": {
                     "@type": "ImageObject",
@@ -406,7 +472,7 @@ function HealthcareResumeExamples({
                       "height": 60
                     }
                   },
-                  "datePublished": "2026-01-23",
+                  "datePublished": `${currentYear}-01-23`,
                   "dateModified": lastModifiedDate,
                   "mainEntityOfPage": {
                     "@type": "WebPage",
@@ -424,7 +490,7 @@ function HealthcareResumeExamples({
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Best Resume Examples for USA Healthcare Jobs 2026",
+                  "name": `Best Resume Examples for USA Healthcare Jobs ${currentYear}`,
                   "description": meta.description,
                   "inLanguage": "en-US",
                   "isPartOf": {
@@ -494,7 +560,7 @@ function HealthcareResumeExamples({
         />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={currentDate} />
@@ -502,12 +568,12 @@ function HealthcareResumeExamples({
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -530,11 +596,11 @@ function HealthcareResumeExamples({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">HEALTHCARE RESUME GUIDE 2026 • USA JOBS</div>
+              <div className="badge">HEALTHCARE RESUME GUIDE {currentYear} • USA JOBS</div>
               
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Best Resume Examples for USA{' '}
-                <span className="gradient-text">Healthcare Jobs 2026</span>
+                <span className="gradient-text">Healthcare Jobs {currentYear}</span>
               </h1>
               
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
@@ -552,7 +618,7 @@ function HealthcareResumeExamples({
                 <div className="stat-item"><span className="stat-number">87%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Use ATS Screening</span></div>
                 <div className="stat-item"><span className="stat-number">3.2x</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>More Callbacks**</span></div>
               </div>
-              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Source citations">* U.S. Bureau of Labor Statistics 2026 • ** Nurses with quantified achievements</p>
+              <p className="text-small" style={{ marginTop: '1rem' }} aria-label="Source citations">* U.S. Bureau of Labor Statistics {currentYear} • ** Nurses with quantified achievements</p>
 
               {/* Article Meta */}
               <div className="article-meta" style={{ marginTop: '1.5rem' }}>
@@ -583,7 +649,7 @@ function HealthcareResumeExamples({
         <section className="section" aria-labelledby="stats-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="stats-heading">Key Statistics (2026 Data)</h2>
+              <h2 className="section-title" id="stats-heading">Key Statistics ({currentYear} Data)</h2>
               <p className="section-subtitle">Industry research on healthcare job growth, hiring trends, and resume effectiveness</p>
             </div>
             <div className="grid">
@@ -607,11 +673,11 @@ function HealthcareResumeExamples({
         <section id="section-1" className="section section-alt" aria-labelledby="section1-heading">
           <div className="section-container">
             <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
-              <h2 id="section1-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>The 2026 Healthcare Job Landscape</h2>
+              <h2 id="section1-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>The {currentYear} Healthcare Job Landscape</h2>
               <p style={{ marginBottom: '1.5rem', textAlign: 'center' }}>The healthcare industry in the United States is experiencing unprecedented growth. With an aging population, advances in medical technology, and expanded access to care, healthcare employers are competing fiercely for qualified professionals. Understanding this landscape is the first step to crafting a resume that gets results.</p>
               <div className="citation-box">
                 <p style={{ fontSize: 'var(--font-size-body-sm)', fontStyle: 'italic' }}>"Healthcare resumes require a unique approach. Unlike other industries, healthcare employers prioritize credentials, certifications, and regulatory compliance above all else. Your license number, certifications, and clinical experience must be immediately visible. But equally important is demonstrating your patient impact—the difference you make in people's lives through compassionate, skilled care."</p>
-                <p className="text-small" style={{ color: 'var(--accent-primary)', marginTop: '0.75rem' }}>— American Healthcare Recruitment Association 2026</p>
+                <p className="text-small" style={{ color: 'var(--accent-primary)', marginTop: '0.75rem' }}>— American Healthcare Recruitment Association {currentYear}</p>
               </div>
               <p style={{ textAlign: 'center' }}>With 87% of healthcare employers now using ATS systems, your resume must be optimized for both machines and humans. This means strategic keyword placement, clear formatting, and quantifiable achievements that demonstrate your value to healthcare organizations.</p>
             </div>
@@ -708,7 +774,7 @@ function HealthcareResumeExamples({
                 </table>
               </div>
               <div className="citation-box" style={{ marginTop: '2rem' }}>
-                <p style={{ fontSize: 'var(--font-size-body-sm)' }}><strong>Source:</strong> Analysis of 25,000+ rejected healthcare applications, 2025-2026. Data from Healthcare Recruitment Consortium.</p>
+                <p style={{ fontSize: 'var(--font-size-body-sm)' }}><strong>Source:</strong> Analysis of 25,000+ rejected healthcare applications, 2025-{currentYear}. Data from Healthcare Recruitment Consortium.</p>
               </div>
             </div>
           </div>
@@ -750,55 +816,63 @@ function HealthcareResumeExamples({
           </div>
         </section>
 
-        {/* CTA */}
-        <section id="section-7" className="section" aria-labelledby="cta-heading">
-          <div className="section-container">
-            <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-              <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Ready to Create Your Healthcare Resume?</h2>
-              <p style={{ marginBottom: '2rem' }}>Now that you understand what makes a winning healthcare resume, put that knowledge to work. Use our free templates and tools to create a professional, ATS-optimized resume that gets results.</p>
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
+        <section className="cta-section" style={{
+          padding: 'clamp(5rem, 10vw, 8rem) 0',
+          background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)',
+          textAlign: 'center',
+          width: '100%',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: '0.5px solid var(--border-gold-filament)',
+          borderBottom: '0.5px solid var(--border-gold-filament)'
+        }} aria-labelledby="cta-heading">
+          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1rem', color: 'var(--accent-primary)' }}>Ready to Build Your Healthcare Resume?</h2>
+              <p style={{ marginBottom: '1.5rem' }}>Create your ATS-optimized healthcare resume in minutes. Choose from 46+ templates and use 12+ free tools. No sign-up required.</p>
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
-                <Link href="/resume-templates" className="btn-primary">Browse Templates <FiArrowRight /></Link>
-                <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Try Free Tools</Link>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', borderTop: '0.5px solid var(--border-gold-filament)', paddingTop: '2rem' }} aria-label="Platform statistics">
-                <div className="stat-item"><span className="stat-number">25,000+</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Healthcare Resumes Created</span></div>
-                <div className="stat-item"><span className="stat-number">4.9/5</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>User Rating</span></div>
-                <div className="stat-item"><span className="stat-number">100%</span><span style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Free Forever</span></div>
-              </div>
-              <p className="text-small" style={{ marginTop: '1.5rem' }}>
-                Data-driven strategies updated for 2026 healthcare hiring trends. Last updated: {currentDate} • Sources: BLS, Healthcare Recruitment Consortium, ANA, JobScan
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Recommended Resources (SEO/GEO Boost) */}
-        <section className="section section-alt" aria-labelledby="recommended-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="recommended-heading">Explore More Career Resources</h2>
-              <p className="section-subtitle">Put your healthcare resume knowledge into practice with our free tools and guides</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="geo-link-card">
-                  <div style={{ fontSize: 'var(--font-size-title-md)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.5rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</div>
-                  <div style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', marginBottom: '0.75rem', flexGrow: 1 }}>{link.desc}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-medium)', color: 'var(--accent-primary)', marginTop: 'auto' }}>
-                    Read Guide <FiArrowRight size={16} />
-                  </div>
+                <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>
+                  Browse Templates <FiArrowRight />
                 </Link>
-              ))}
+                <Link href="/free-resume-tools" className="btn-outline">
+                  Try Free Tools <FiArrowRight />
+                </Link>
+              </div>
+              <p className="text-small" style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>
+                ✓ No credit card required • Free forever • Based on Industry Standards • ATS-Optimized
+              </p>
+              <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+                Data fresh as of: {currentDate}
+              </p>
+
+              {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+              <div className="cf-internal-links-inline">
+                <div className="cf-internal-links-inline-header">
+                  <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                  <p className="cf-internal-links-inline-subtitle">Find the perfect guide or builder for your specific healthcare career needs.</p>
+                </div>
+                <div className="cf-internal-links-grid">
+                  {newInternalLinks.map((link, index) => (
+                    <Link key={index} href={link.target} className="cf-internal-link-card">
+                      <span className="cf-internal-link-title">{link.title}</span>
+                      <FiArrowRight className="cf-internal-link-arrow" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{currentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
           <span itemProp="word-count">3300</span>
-          <span itemProp="sources">BLS 2026, Healthcare Recruitment Consortium 2025, ANA 2025, JobScan 2025</span>
+          <span itemProp="sources">BLS {currentYear}, Healthcare Recruitment Consortium 2025, ANA 2025, JobScan 2025</span>
         </div>
       </main>
     </>
