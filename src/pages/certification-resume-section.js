@@ -101,6 +101,88 @@ const executiveDesignTokens = `
   .text-success { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
   .text-danger { color:var(--error-color); font-weight:var(--font-weight-semibold); }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } .filter-bar { flex-direction:column; align-items:stretch; } }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+  }
 `;
 
 // ============================================================================
@@ -111,6 +193,7 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeCertificateDates = certificateDates || Array(12).fill(safeCurrentDate);
+  const currentYear = new Date().getFullYear();
   const canonicalUrl = "https://professionalresumefree.com/certification-resume-section";
 
   // Long-tail keywords for GEO optimization
@@ -120,6 +203,15 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
     "ATS friendly certification section",
     "professional certificate templates free",
     "how to add certificates to resume ATS"
+  ];
+
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/how-to-describe-work-experience-on-resume", title: "Describe Work Experience Guide" },
+    { target: "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume", title: "List Prompt Engineering Skills" },
+    { target: "/comprehensive-resume-guide-2026", title: "Comprehensive Resume Guide 2026" },
+    { target: "/chronological-resume-example", title: "Chronological Resume Example" },
+    { target: "/how-to-write-a-resume", title: "How to Write a Resume" }
   ];
 
   const certificateCategories = [
@@ -173,22 +265,10 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
   ];
 
   const peopleAlsoAsk = [
-    {
-      question: "How do I format certifications on a resume for ATS?",
-      answer: "Use standard section headings like 'Certifications' or 'Professional Certificates'. List the certification name, issuing organization, and date earned. Avoid graphics or special formatting. Our templates handle this automatically with ATS-optimized layouts."
-    },
-    {
-      question: "Should I list expired certifications on my resume?",
-      answer: "Only list expired certifications if they are highly relevant and you've maintained the knowledge. Note the expiration date clearly, or focus on current certifications that demonstrate up-to-date skills. Expired certs can still show experience depth."
-    },
-    {
-      question: "Where do certifications go on a resume?",
-      answer: "Certifications typically appear after Education or Skills sections. For roles where certifications are critical (IT, healthcare), they can be placed near the top. Our templates optimize placement based on industry standards."
-    },
-    {
-      question: "Do online course certificates count on resumes?",
-      answer: "Yes, especially from recognized platforms like Coursera, edX, or LinkedIn Learning. Group them under 'Professional Development' if you have many. Focus on those that demonstrate practical, job-relevant skills."
-    }
+    { question: "How do I format certifications on a resume for ATS?", answer: "Use standard section headings like 'Certifications' or 'Professional Certificates'. List the certification name, issuing organization, and date earned. Avoid graphics or special formatting. Our templates handle this automatically with ATS-optimized layouts." },
+    { question: "Should I list expired certifications on my resume?", answer: "Only list expired certifications if they are highly relevant and you've maintained the knowledge. Note the expiration date clearly, or focus on current certifications that demonstrate up-to-date skills. Expired certs can still show experience depth." },
+    { question: "Where do certifications go on a resume?", answer: "Certifications typically appear after Education or Skills sections. For roles where certifications are critical (IT, healthcare), they can be placed near the top. Our templates optimize placement based on industry standards." },
+    { question: "Do online course certificates count on resumes?", answer: "Yes, especially from recognized platforms like Coursera, edX, or LinkedIn Learning. Group them under 'Professional Development' if you have many. Focus on those that demonstrate practical, job-relevant skills." }
   ];
 
   const successStories = [
@@ -207,24 +287,7 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
     { feature: "Expiration Tracking", ourTemplates: "✅ Visual indicators", otherTemplates: "❌ Not supported", impact: "High" }
   ];
 
-  const internalLinks = [
-    { href: "/resume-skills-section", text: "How to List Skills on Your Resume", iconName: "FiTarget", desc: "Complement certs with strong skills" },
-    { href: "/resume-formatting-guide", text: "Professional Resume Formatting Guide", iconName: "FiFileText", desc: "Perfect layout for 2026" },
-    { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", iconName: "FiSearch", desc: "Match resume to job descriptions" },
-    { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "Beat ATS Optimization Tips", iconName: "FiZap", desc: "Advanced strategies for ATS" },
-    { href: "/resume-trends-in-the-usa-for-2026", text: "2026 USA Resume Trends", iconName: "FiTrendingUp", desc: "Stay ahead with market insights" },
-    { href: "/ats-friendly-medical-resume-builder", text: "Medical & Healthcare Resumes", iconName: "FiHeart", desc: "Specialized for clinical roles" },
-    { href: "/ats-friendly-finance-resume-builder", text: "Finance Resume Builder", iconName: "FiDollarSign", desc: "Banking and accounting templates" },
-    { href: "/free-cover-letter-generator", text: "Free Cover Letter Generator", iconName: "FiEdit", desc: "Pair with your resume instantly" },
-    { href: "/how-to-write-a-resume", text: "Complete Resume Writing Guide", iconName: "FiBook", desc: "Step-by-step for beginners" },
-    { href: "/ats-friendly-tech-resume-builder", text: "Tech & IT Resume Templates", iconName: "FiMonitor", desc: "Developer and engineer formats" },
-    { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Resume Tips", iconName: "FiSmartphone", desc: "Optimize for virtual positions" },
-    { href: "/complete-resume-resource-library", text: "Complete Resource Library", iconName: "FiDatabase", desc: "All guides and tools in one place" }
-  ];
-
-  const iconMap = { FiTarget, FiFileText, FiSearch, FiZap, FiTrendingUp, FiHeart, FiDollarSign, FiEdit, FiBook, FiMonitor, FiSmartphone, FiDatabase, FiTool, FiCpu, FiAward };
-
-  // Schema data for JSON-LD (from Page 1)
+  // Schema data for JSON-LD
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -232,8 +295,8 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
         "@type": "WebPage",
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
-        "name": "Certification Resume Section: 120+ ATS Templates (2026)",
-        "description": "Create a professional certification section for your resume. 120+ ATS-optimized templates to showcase certificates.",
+        "name": `Certification Resume Section: 120+ ATS Templates (${currentYear})`,
+        "description": `Create a professional certification section for your resume. 120+ ATS-optimized templates to showcase certificates. Updated ${currentYear}.`,
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
@@ -334,34 +397,34 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         <html lang="en-US" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Certification Resume Section: 120+ ATS Templates (2026)</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Certification Resume Section: 120+ ATS Templates (${currentYear})`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content="Create a professional certification section for your resume. 120+ ATS-optimized templates to showcase certificates. Free download. 40% more interviews." />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Create a professional certification section for your resume. 120+ ATS-optimized templates to showcase certificates. Free download. 40% more interviews. Updated ${currentYear}.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="certification resume section, professional certifications on resume, ATS optimized certificate layout, free certificate templates, resume builder with certificates, certification section examples, how to list certificates on resume, professional certificate examples, ATS friendly certification format" />
+        <meta name="keywords" content={`certification resume section, professional certifications on resume, ATS optimized certificate layout, free certificate templates, resume builder with certificates, certification section examples, how to list certificates on resume, professional certificate examples, ATS friendly certification format ${currentYear}`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content="Certification Resume Section: 120+ ATS Templates (2026)" />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Certification Resume Section: 120+ ATS Templates (${currentYear})`} />
         <meta name="chatgpt-fts:description" content="Create professional certificate sections for your resume. ATS-optimized templates to showcase certifications. Free instant download. No sign-up." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Certificate Section Builder" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -370,11 +433,11 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         <meta name="revisit-after" content="7 days" />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content="Certification Resume Section: 120+ ATS Templates (2026)" />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Certification Resume Section: 120+ ATS Templates (${currentYear})`} />
         <meta property="og:description" content="Create a professional certification section for your resume. 120+ ATS-optimized templates to showcase certificates. Free download." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/images/og-certificate-resume-section.jpg" />
@@ -386,56 +449,56 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Certification Resume Section: 120+ ATS Templates (2026)" />
+        <meta name="twitter:title" content={`Certification Resume Section: 120+ ATS Templates (${currentYear})`} />
         <meta name="twitter:description" content="Professional certificate section templates for resumes. ATS-optimized. Free download." />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-certificate-resume-section.jpg" />
         <meta name="twitter:image:alt" content="Certificate Resume Section Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
-        {/* ===== TWITTER LABEL TAGS (from Page 1 blueprint) ===== */}
+        {/* ===== TWITTER LABEL TAGS ===== */}
         <meta name="twitter:label1" content="Templates" />
         <meta name="twitter:data1" content="120+" />
         <meta name="twitter:label2" content="Interview Boost" />
         <meta name="twitter:data2" content="40%" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="msapplication-TileColor" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== ARTICLE META (from Page 1) ===== */}
+        {/* ===== ARTICLE META ===== */}
         <meta property="article:published_time" content="2024-01-01T00:00:00+00:00" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="Resume Resources" />
         <meta property="article:tag" content="certifications, professional development, resume templates, ATS optimization" />
         
-        {/* ===== SITEMAP (from Page 1) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap-certificates.xml" />
         
-        {/* ===== ENHANCED STRUCTURED DATA JSON-LD (from Page 1) ===== */}
+        {/* ===== ENHANCED STRUCTURED DATA JSON-LD ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData)
         }} />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp || Date.now()} />
         <meta name="content-freshness" content={safeCurrentDate} />
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED)                                 */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -734,7 +797,7 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
             </div>
             <div className="grid">
               {[
-                { title: "IT & Technology", desc: "List technical certs by vendor (AWS, Microsoft, Cisco). Include certification IDs for verification. Prioritize cloud and security certifications for 2026 job markets.", icon: <FiCpu size={28} /> },
+                { title: "IT & Technology", desc: `List technical certs by vendor (AWS, Microsoft, Cisco). Include certification IDs for verification. Prioritize cloud and security certifications for ${currentYear} job markets.`, icon: <FiCpu size={28} /> },
                 { title: "Healthcare & Medical", desc: "Display license numbers prominently. Include state of issuance and expiration dates. Group by clinical specialty for maximum impact with healthcare recruiters.", icon: <FiHeart size={28} /> },
                 { title: "Finance & Accounting", desc: "Place CPA, CFA, and Series licenses near your name. Include regulatory body and membership status. Quantify the exams passed and years of licensure.", icon: <FiDollarSign size={28} /> },
                 { title: "Project Management", desc: "Highlight PMP, PRINCE2, and Agile certifications. Include hours led and methodologies mastered. Show progressive certification levels from entry to advanced.", icon: <FiTarget size={28} /> },
@@ -751,7 +814,9 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Final CTA */}
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
         <section aria-labelledby="cta-heading" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
@@ -764,42 +829,32 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action">
               <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiDownload /> Build Your Certificate Section</Link>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-              {["ATS-Optimized Templates", "No Sign Up Required", "Free PDF Download", "Professional Designs"].map((f, i) => (
-                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck style={{ color: 'var(--accent-primary)' }} /> {f}</span>
-              ))}
-            </div>
-            <p className="text-small" style={{ marginTop: '2rem', color: 'var(--text-disabled)' }}>
-              Data fresh as of: {safeCurrentDate} | 120+ templates tested with major ATS platforms
+            <p className="text-small" style={{ color: 'var(--text-muted)' }}>
+              ✓ No credit card required • Free forever • ATS-Optimized • No Sign Up Required
             </p>
-          </div>
-        </section>
+            <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+              Data fresh as of: {safeCurrentDate}
+            </p>
 
-        {/* Internal Links (SEO/GEO Boost) */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Explore More Resume Resources</h2>
-              <p className="section-subtitle">Strengthen your application with these expert guides and free tools</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, i) => {
-                const IconComponent = iconMap[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card" aria-label={link.text}>
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+            {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+            <div className="cf-internal-links-inline">
+              <div className="cf-internal-links-inline-header">
+                <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                <p className="cf-internal-links-inline-subtitle">Find the perfect guide for your specific resume needs.</p>
+              </div>
+              <div className="cf-internal-links-grid">
+                {newInternalLinks.map((link, index) => (
+                  <Link key={index} href={link.target} className="cf-internal-link-card">
+                    <span className="cf-internal-link-title">{link.title}</span>
+                    <FiArrowRight className="cf-internal-link-arrow" />
                   </Link>
-                );
-              })}
+                ))}
+              </div>
             </div>
-            <p className="text-small" style={{ textAlign: 'center', marginTop: '1.25rem' }}>
-              All resources are free, mobile-optimized, and updated for 2026 hiring trends
-            </p>
           </div>
         </section>
 
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="templates-count">120+</span>
           <span itemProp="last-updated">{safeCurrentDate}</span>
@@ -811,7 +866,7 @@ const CertificateResumeSection = ({ seoData, buildTimestamp }) => {
 };
 
 // ============================================================================
-// SEO-ENHANCED getStaticProps (with ISR from Page 1)
+// SEO-ENHANCED getStaticProps (with ISR)
 // ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -834,7 +889,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    revalidate: 3600 // ISR: Revalidate every hour (from Page 1 blueprint)
+    revalidate: 3600 // ISR: Revalidate every hour
   };
 }
 

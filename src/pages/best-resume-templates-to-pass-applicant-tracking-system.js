@@ -105,6 +105,88 @@ const executiveDesignTokens = `
   .text-danger { color:var(--error-color); font-weight:var(--font-weight-semibold); }
   .text-warning { color:var(--warning-color); font-weight:var(--font-weight-semibold); }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+  }
 `;
 
 // Template Data (PRESERVED FROM PAGE 2)
@@ -193,7 +275,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
   // Icon map for resolving icon names
   const iconMap = { FiShield, FiSearch, FiTrendingUp, FiBriefcase, FiEdit, FiFileText, FiX, FiTarget, FiCheck };
 
-  // Long-tail keywords for GEO (from Page 1)
+  // Long-tail keywords for GEO
   const longTailKeywords = [
     "how to format resume to pass applicant tracking system",
     "best resume templates for ATS",
@@ -201,50 +283,50 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
     "free ATS friendly resume templates"
   ];
 
-  // Internal links
-  const internalLinks = [
-    { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "How to Beat ATS Optimization Tips", iconName: "FiShield" },
-    { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", iconName: "FiSearch" },
-    { href: "/best-resume-examples-for-career-changers-in-the-usa", text: "Best Resume Examples for Career Changers", iconName: "FiTrendingUp" },
-    { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Resume Tips for Remote Jobs in USA", iconName: "FiBriefcase" },
-    { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "How to Write a Professional Summary", iconName: "FiEdit" }
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/free-ats-resume-checker", title: "Free ATS Resume Checker Tool" },
+    { target: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", title: "Beat the ATS Optimization Guide" },
+    { target: "/free-resume-template-selector", title: "Resume Template Selector Tool" },
+    { target: "/creative-resume-templates", title: "Creative Resume Template Collection" },
+    { target: "/free-resume-builder", title: "Free Online Resume Builder" }
   ];
 
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         <html lang="en" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Best Resume Templates to Pass Applicant Tracking Systems (2026)</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Best Resume Templates to Pass Applicant Tracking Systems (${currentYear})`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
-        <meta name="description" content="Discover the best resume templates to pass applicant tracking systems. Proven ATS-friendly formats with keyword optimization. Free instant download. No sign-up." />
+        {/* ===== META DESCRIPTION ===== */}
+        <meta name="description" content={`Discover the best resume templates to pass applicant tracking systems. Proven ATS-friendly formats with keyword optimization. Free instant download. No sign-up. Updated ${currentYear}.`} />
         
-        {/* ===== META KEYWORDS (from Page 1 - full comprehensive list) ===== */}
-        <meta name="keywords" content="best resume templates to pass applicant tracking systems, resume templates to beat ATS, ATS friendly resume templates, applicant tracking system resume templates, resume templates that pass ATS, ATS optimized resume templates, resume templates 2026, professional resume templates, ATS compatible resume templates, resume format for ATS, ATS proof resume templates, free ATS resume templates, best resume format for ATS, resume templates for job applications, ATS resume builder templates" />
+        {/* ===== META KEYWORDS ===== */}
+        <meta name="keywords" content={`best resume templates to pass applicant tracking systems, resume templates to beat ATS, ATS friendly resume templates, applicant tracking system resume templates, resume templates that pass ATS, ATS optimized resume templates, resume templates ${currentYear}, professional resume templates, ATS compatible resume templates, resume format for ATS, ATS proof resume templates, free ATS resume templates, best resume format for ATS, resume templates for job applications, ATS resume builder templates`} />
         
-        {/* ===== AUTHOR META (from Page 1) ===== */}
+        {/* ===== AUTHOR META ===== */}
         <meta name="author" content="Professional Resume Free" />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
-        <meta name="chatgpt-fts:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
+        <meta name="chatgpt-fts:title" content={`Best Resume Templates to Pass Applicant Tracking Systems (${currentYear})`} />
         <meta name="chatgpt-fts:description" content="ATS-optimized resume templates proven to pass applicant tracking systems. Free instant download. No sign-up required." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={displayDate} />
         <meta name="generator" content="Professional Resume Free - ATS Optimized Templates" />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
@@ -252,11 +334,11 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         <meta name="last-modified" content={lastModifiedDate} />
         <meta httpEquiv="last-modified" content={lastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
-        <meta property="og:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
+        {/* ===== OPEN GRAPH TAGS ===== */}
+        <meta property="og:title" content={`Best Resume Templates to Pass Applicant Tracking Systems (${currentYear})`} />
         <meta property="og:description" content="Discover the best resume templates to pass applicant tracking systems. Proven ATS-friendly formats with keyword optimization. Free instant download." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats-templates-preview.jpg" />
@@ -268,37 +350,37 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         <meta property="og:updated_time" content={lastModifiedDate} />
         <meta property="og:locale" content="en_US" />
         
-        {/* ===== ARTICLE META TAGS (from Page 1) ===== */}
+        {/* ===== ARTICLE META TAGS ===== */}
         <meta property="article:published_time" content={`${currentDate}T00:00:00+00:00`} />
         <meta property="article:modified_time" content={lastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="Career Resources" />
         <meta property="article:tag" content="resume templates, ATS, applicant tracking system, job search, career advice" />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Best Resume Templates to Pass Applicant Tracking Systems (2026)" />
+        <meta name="twitter:title" content={`Best Resume Templates to Pass Applicant Tracking Systems (${currentYear})`} />
         <meta name="twitter:description" content="ATS-optimized resume templates proven to pass applicant tracking systems. Free instant download." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats-templates-preview.jpg" />
         <meta name="twitter:image:alt" content="Best Resume Templates to Pass Applicant Tracking Systems" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
-        {/* ===== TWITTER LABEL TAGS (from Page 1 - unique feature) ===== */}
+        {/* ===== TWITTER LABEL TAGS ===== */}
         <meta name="twitter:label1" content="Templates" />
         <meta name="twitter:data1" content="10" />
         <meta name="twitter:label2" content="ATS Score" />
         <meta name="twitter:data2" content="90-99%" />
         
-        {/* ===== ADDITIONAL META (from Page 1) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== SITEMAP (from Page 1) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
+        {/* ENHANCED STRUCTURED DATA JSON-LD                                        */}
         {/* ======================================================================== */}
         <script
           type="application/ld+json"
@@ -310,7 +392,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Best Resume Templates to Pass Applicant Tracking Systems (2026)",
+                  "name": `Best Resume Templates to Pass Applicant Tracking Systems (${currentYear})`,
                   "description": "Discover the best resume templates to pass applicant tracking systems. Proven ATS-friendly formats with keyword optimization. Free instant download.",
                   "dateModified": lastModifiedDate,
                   "datePublished": "2024-01-01",
@@ -360,7 +442,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
                 },
                 {
                   "@type": "Article",
-                  "headline": "Best Resume Templates to Pass Applicant Tracking Systems (2026)",
+                  "headline": `Best Resume Templates to Pass Applicant Tracking Systems (${currentYear})`,
                   "description": "A comprehensive guide to choosing resume templates that successfully pass applicant tracking systems, with proven formatting and keyword strategies.",
                   "author": {
                     "@type": "Organization",
@@ -459,19 +541,19 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
         />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={displayDate} />
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -782,34 +864,26 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
             <p className="text-small" style={{ marginTop: '2rem', color: 'var(--text-disabled)' }}>
               Data fresh as of: {displayDate} | Tested with 12 major ATS platforms including Workday, Taleo, and iCIMS
             </p>
-          </div>
-        </section>
 
-        {/* Internal Links (SEO/GEO Boost) */}
-        <section className="section" aria-labelledby="explore-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="explore-heading">Explore More Resume Resources</h2>
-              <p className="section-subtitle">Related guides to strengthen your job application</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => {
-                const IconComponent = iconMap[link.iconName] || FiFileText;
-                return (
-                  <Link key={index} href={link.href} className="geo-link-card" aria-label={link.text}>
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+            {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+            <div className="cf-internal-links-inline">
+              <div className="cf-internal-links-inline-header">
+                <h3 className="cf-internal-links-inline-title">Explore Other Resume Resources</h3>
+                <p className="cf-internal-links-inline-subtitle">Find the perfect tool or guide for your specific job search needs.</p>
+              </div>
+              <div className="cf-internal-links-grid">
+                {newInternalLinks.map((link, index) => (
+                  <Link key={index} href={link.target} className="cf-internal-link-card">
+                    <span className="cf-internal-link-title">{link.title}</span>
+                    <FiArrowRight className="cf-internal-link-arrow" />
                   </Link>
-                );
-              })}
+                ))}
+              </div>
             </div>
-            <p className="text-small" style={{ marginTop: '1.25rem', textAlign: 'center' }}>
-              These links help you discover related resume guides, tools, and tips to strengthen your job application.
-            </p>
           </div>
         </section>
 
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="templates-count">10</span>
           <span itemProp="last-updated">{displayDate}</span>
@@ -821,7 +895,7 @@ const ATSResumeTemplates = ({ currentDate, lastModifiedDate, buildTimestamp }) =
 };
 
 // ============================================================================
-// SEO-ENHANCED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
+// SEO-ENHANCED getStaticProps
 // ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -835,7 +909,7 @@ export async function getStaticProps() {
       lastModifiedDate,
       buildTimestamp
     },
-    revalidate: 3600 // ISR: Revalidate every hour (from Page 1 blueprint)
+    revalidate: 3600 // ISR: Revalidate every hour
   };
 }
 

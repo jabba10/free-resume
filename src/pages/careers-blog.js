@@ -92,6 +92,88 @@ const executiveDesignTokens = `
   .geo-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-2px); box-shadow:var(--shadow-card-hover); color:inherit; }
   .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+  }
 `;
 
 // ============================================================================
@@ -111,7 +193,7 @@ export async function getStaticProps() {
         buildTimestamp
       }
     },
-    revalidate: 3600 // ISR: Regenerate every hour (from Page 1 blueprint)
+    revalidate: 3600 // ISR: Regenerate every hour
   };
 }
 
@@ -125,30 +207,39 @@ const CareerBlog = ({ seoData }) => {
   const currentYear = new Date().getFullYear();
   const canonicalUrl = "https://professionalresumefree.com/careers-blog";
 
-  // Long-tail keywords for GEO (from Page 1)
+  // Long-tail keywords for GEO
   const longTailKeywords = [
     `career change guide ${currentYear} how to successfully switch careers`,
-    "step by step career transition strategies 2026",
+    `step by step career transition strategies ${currentYear}`,
     "how to write career change resume",
     "career development strategies for professionals",
-    "successful career change roadmap 2026"
+    `successful career change roadmap ${currentYear}`
+  ];
+
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/career-terminology", title: "Career Terminology Glossary" },
+    { target: "/comprehensive-resume-guide-2026", title: "Comprehensive Resume Guide 2026" },
+    { target: "/interview-tips", title: "Interview Preparation Tips" },
+    { target: "/how-to-write-a-resume", title: "Resume Writing Basics" },
+    { target: "/complete-resume-resource-library", title: "Resume Resource Library" }
   ];
 
   const careerDevelopmentStrategies = [
-    { title: "Continuous Learning & Skill Development for 2026", content: "Master in-demand technologies and methodologies for 2026 job markets. Our data shows professionals who upskill quarterly earn 35% more and receive 60% more opportunities.", icon: <FiTrendingUp size={24} />, tips: ["Quarterly upskilling through online platforms (Coursera, Udemy, LinkedIn Learning)", "Annual industry conference attendance with 500% ROI on networking", "Professional certification programs with 85% industry recognition rates", "Micro-learning for rapid skill acquisition (15 min daily = 91 hours yearly)"], metrics: "35% higher earnings, 60% more opportunities" },
-    { title: "Strategic Networking & Relationship Building Framework", content: "Build professional relationships with 2026's 500% networking ROI methodology. Each quality connection generates 3-5 new opportunities annually.", icon: <FiUsers size={24} />, tips: ["Quarterly industry events with 50+ targeted connections", "Daily LinkedIn engagement (15 min = 300% visibility increase)", "Monthly mentorship sessions (93% career acceleration impact)", "Professional association membership (75% higher promotion rates)"], metrics: "500% ROI, 3-5 opportunities per connection" },
-    { title: "Goal Setting & Career Roadmapping System", content: "Create SMART career roadmaps with 89% success rates for 2026 professional growth. Structured planning reduces transition time by 65%.", icon: <FiTarget size={24} />, tips: ["Annual SMART goal setting with quarterly 90-day sprints", "Monthly progress tracking with 15 key career metrics", "Bi-annual career plan reviews with 40% adjustment rates", "Career dashboard with 25+ development KPIs"], metrics: "89% success rate, 65% faster transitions" }
+    { title: `Continuous Learning & Skill Development for ${currentYear}`, content: `Master in-demand technologies and methodologies for ${currentYear} job markets. Our data shows professionals who upskill quarterly earn 35% more and receive 60% more opportunities.`, icon: <FiTrendingUp size={24} />, tips: ["Quarterly upskilling through online platforms (Coursera, Udemy, LinkedIn Learning)", "Annual industry conference attendance with 500% ROI on networking", "Professional certification programs with 85% industry recognition rates", "Micro-learning for rapid skill acquisition (15 min daily = 91 hours yearly)"], metrics: "35% higher earnings, 60% more opportunities" },
+    { title: "Strategic Networking & Relationship Building Framework", content: `Build professional relationships with ${currentYear}'s 500% networking ROI methodology. Each quality connection generates 3-5 new opportunities annually.`, icon: <FiUsers size={24} />, tips: ["Quarterly industry events with 50+ targeted connections", "Daily LinkedIn engagement (15 min = 300% visibility increase)", "Monthly mentorship sessions (93% career acceleration impact)", "Professional association membership (75% higher promotion rates)"], metrics: "500% ROI, 3-5 opportunities per connection" },
+    { title: "Goal Setting & Career Roadmapping System", content: `Create SMART career roadmaps with 89% success rates for ${currentYear} professional growth. Structured planning reduces transition time by 65%.`, icon: <FiTarget size={24} />, tips: ["Annual SMART goal setting with quarterly 90-day sprints", "Monthly progress tracking with 15 key career metrics", "Bi-annual career plan reviews with 40% adjustment rates", "Career dashboard with 25+ development KPIs"], metrics: "89% success rate, 65% faster transitions" }
   ];
 
   const careerChangeStrategies = [
-    { title: "Comprehensive Self-Assessment & Market Analysis", content: "Evaluate skills, interests, and 2026 market demand with 92% accuracy assessment tools. Identify careers with 45% growth projections.", icon: <FiSearch size={24} />, tips: ["Career aptitude tests with 95% industry alignment accuracy", "Transferable skill mapping across 200+ industry categories", "Market demand analysis for 2026's top 50 growth careers", "Personal brand positioning for 300% visibility increase"], metrics: "92% assessment accuracy, 45% growth careers" },
+    { title: "Comprehensive Self-Assessment & Market Analysis", content: `Evaluate skills, interests, and ${currentYear} market demand with 92% accuracy assessment tools. Identify careers with 45% growth projections.`, icon: <FiSearch size={24} />, tips: ["Career aptitude tests with 95% industry alignment accuracy", "Transferable skill mapping across 200+ industry categories", `Market demand analysis for ${currentYear}'s top 50 growth careers`, "Personal brand positioning for 300% visibility increase"], metrics: "92% assessment accuracy, 45% growth careers" },
     { title: "Strategic Skill Transition & Development Blueprint", content: "Bridge skill gaps with 78% efficiency using targeted learning pathways. Our graduates achieve 85% career transition success rates.", icon: <FiRefreshCw size={24} />, tips: ["120-day skill gap bridging programs with 90% completion rates", "Portfolio development with 10+ real-world projects", "Industry certification pathways (3-6 month completion)", "Freelance experience building (500+ hours minimum)"], metrics: "78% efficiency, 85% transition success" },
-    { title: "Targeted Job Search & Transition Execution", content: "Execute career transitions with 89% success rates using proven 2026 methodologies. Average transition time: 4-8 months.", icon: <FiUsers size={24} />, tips: ["ATS-optimized career change resumes (90% pass rates)", "Strategic networking (15-20 connections weekly)", "Industry research (10+ target companies monthly)", "Interview preparation system (95% confidence scores)"], metrics: "89% success rate, 4-8 month transitions" }
+    { title: "Targeted Job Search & Transition Execution", content: `Execute career transitions with 89% success rates using proven ${currentYear} methodologies. Average transition time: 4-8 months.`, icon: <FiUsers size={24} />, tips: ["ATS-optimized career change resumes (90% pass rates)", "Strategic networking (15-20 connections weekly)", "Industry research (10+ target companies monthly)", "Interview preparation system (95% confidence scores)"], metrics: "89% success rate, 4-8 month transitions" }
   ];
 
   const stats = [
-    { value: "72%", label: "Workers planning career changes in 2026 (Gallup Research)", icon: <FiTrendingUp size={24} /> },
-    { value: "4-8 mo", label: "Successful transition timeframe (2026 Industry Standard)", icon: <FiTarget size={24} /> },
+    { value: "72%", label: `Workers planning career changes in ${currentYear} (Gallup Research)`, icon: <FiTrendingUp size={24} /> },
+    { value: "4-8 mo", label: `Successful transition timeframe (${currentYear} Industry Standard)`, icon: <FiTarget size={24} /> },
     { value: "89%", label: "Career change success with structured plans (NACE Data)", icon: <FiAward size={24} /> }
   ];
 
@@ -157,10 +248,10 @@ const CareerBlog = ({ seoData }) => {
   ];
 
   const faqs = [
-    { question: "How long does a successful career change typically take in 2026?", answer: "Successful career transitions take 4-8 months with proper planning according to 2026 industry data. This includes 2-3 months for skill assessment and development, 1-2 months for networking and portfolio building, and 1-3 months for targeted job searching. Structured planning reduces transition time by 65% and increases success rates to 89%." },
-    { question: "What are the most important steps for changing careers in 2026?", answer: "The 6 critical steps for 2026 career changes: 1) Comprehensive self-assessment (92% accuracy tools), 2) Market analysis of 45% growth careers, 3) Strategic skill development (78% efficiency pathways), 4) Portfolio building (10+ real projects), 5) Targeted networking (15-20 weekly connections), 6) ATS-optimized application strategy (90% pass rates). Structured roadmaps deliver 89% success rates." },
-    { question: "How do I write a resume for a career change in 2026?", answer: "For 2026 career change resumes: Use functional/combination formats, highlight transferable skills (5-7 core competencies), include quantifiable achievements (3-5 per role), showcase recent training/education, and optimize for ATS with 15-20 job-specific keywords. Our career change templates achieve 90% ATS pass rates and 65% more interviews." },
-    { question: "What percentage of workers are considering career changes in 2026?", answer: "72% of workers are actively considering or planning career changes in 2026 according to Gallup Research. Primary drivers include: 45% seek better work-life balance, 30% pursue higher earnings, 15% desire industry alignment with personal values, and 10% seek remote/hybrid opportunities. Structured planning delivers 89% success rates." }
+    { question: `How long does a successful career change typically take in ${currentYear}?`, answer: `Successful career transitions take 4-8 months with proper planning according to ${currentYear} industry data. This includes 2-3 months for skill assessment and development, 1-2 months for networking and portfolio building, and 1-3 months for targeted job searching. Structured planning reduces transition time by 65% and increases success rates to 89%.` },
+    { question: `What are the most important steps for changing careers in ${currentYear}?`, answer: `The 6 critical steps for ${currentYear} career changes: 1) Comprehensive self-assessment (92% accuracy tools), 2) Market analysis of 45% growth careers, 3) Strategic skill development (78% efficiency pathways), 4) Portfolio building (10+ real projects), 5) Targeted networking (15-20 weekly connections), 6) ATS-optimized application strategy (90% pass rates). Structured roadmaps deliver 89% success rates.` },
+    { question: `How do I write a resume for a career change in ${currentYear}?`, answer: `For ${currentYear} career change resumes: Use functional/combination formats, highlight transferable skills (5-7 core competencies), include quantifiable achievements (3-5 per role), showcase recent training/education, and optimize for ATS with 15-20 job-specific keywords. Our career change templates achieve 90% ATS pass rates and 65% more interviews.` },
+    { question: `What percentage of workers are considering career changes in ${currentYear}?`, answer: `72% of workers are actively considering or planning career changes in ${currentYear} according to Gallup Research. Primary drivers include: 45% seek better work-life balance, 30% pursue higher earnings, 15% desire industry alignment with personal values, and 10% seek remote/hybrid opportunities. Structured planning delivers 89% success rates.` }
   ];
 
   const stepByStepProcess = [
@@ -171,17 +262,7 @@ const CareerBlog = ({ seoData }) => {
     { step: 5, title: "Job Search Phase (Weeks 25-32)", description: "Execute targeted applications with 90% ATS optimization", duration: "8 weeks", successRate: "75%" }
   ];
 
-  const internalLinks = [
-    { href: "/interview-tips", text: "Master Your Job Interviews", iconName: "FiUserCheck", desc: "Ace your interviews with expert tips and common question guides." },
-    { href: "/ats-friendly-tech-resume-builder", text: "Tech & Engineering Resumes", iconName: "FiCode", desc: "Specialized ATS-friendly templates for developers and engineers." },
-    { href: "/ats-friendly-finance-resume-builder", text: "Finance & Accounting Resumes", iconName: "FiDollarSign", desc: "Tailored formats for banking, accounting, and financial roles." },
-    { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher Tool", iconName: "FiAlignLeft", desc: "Match your resume against job descriptions to boost ATS scores." },
-    { href: "/resume-trends-in-the-usa-for-2026", text: "2026 Resume Trends Report", iconName: "FiZap", desc: "Stay ahead with the latest hiring trends and format changes." }
-  ];
-
-  const iconMap = { FiUserCheck, FiCode, FiDollarSign, FiAlignLeft, FiZap, FiTrendingUp, FiTarget, FiAward, FiFileText };
-
-  // Schema data (from Page 1)
+  // Schema data
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -191,7 +272,7 @@ const CareerBlog = ({ seoData }) => {
         "url": canonicalUrl,
         "name": `Career Change Guide ${currentYear}: How to Successfully Switch Careers & Advance`,
         "description": `Step-by-step career change strategies for ${currentYear}. Learn how to transition careers, develop new skills, write career change resumes, and land dream jobs with 89% success rates.`,
-        "datePublished": "2026-01-01",
+        "datePublished": `${currentYear}-01-01`,
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
@@ -252,7 +333,7 @@ const CareerBlog = ({ seoData }) => {
             "url": "https://professionalresumefree.com/logo.png"
           }
         },
-        "datePublished": "2026-01-01",
+        "datePublished": `${currentYear}-01-01`,
         "dateModified": safeLastModifiedDate,
         "mainEntityOfPage": {
           "@type": "WebPage",
@@ -311,33 +392,33 @@ const CareerBlog = ({ seoData }) => {
   return (
     <>
       {/* ======================================================================== */}
-      {/* SEO-ENHANCED HEAD SECTION (INJECTED FROM PAGE 1 BLUEPRINT)               */}
+      {/* SEO-ENHANCED HEAD SECTION                                                */}
       {/* ======================================================================== */}
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED FROM PAGE 2) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         <html lang="en-US" />
         
-        {/* ===== SEO TITLE (from Page 1) ===== */}
-        <title>Career Change Guide 2026: How to Successfully Switch Careers (65 chars)</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Career Change Guide ${currentYear}: How to Successfully Switch Careers (65 chars)`}</title>
         
-        {/* ===== META DESCRIPTION (from Page 1) ===== */}
+        {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content={`Step-by-step career change strategies for ${currentYear} with 89% success rates. Learn how to transition careers, develop new skills, write career change resumes, and land dream jobs using proven methodologies.`} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content={`career change guide ${currentYear}, how to change careers, career transition strategies, career development plan, switching careers successfully, career change resume tips, professional development ${currentYear}, career advancement strategies, job transition guide`} />
         
-        {/* ===== GEO OPTIMIZATION TAGS (from Page 1) ===== */}
+        {/* ===== GEO OPTIMIZATION TAGS ===== */}
         <meta name="chatgpt-fts:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
         <meta name="chatgpt-fts:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers and land dream jobs.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         
-        {/* ===== TECHNICAL SEO (from Page 1) ===== */}
+        {/* ===== TECHNICAL SEO ===== */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
@@ -345,10 +426,10 @@ const CareerBlog = ({ seoData }) => {
         <meta name="last-modified" content={safeLastModifiedDate} />
         <meta httpEquiv="last-modified" content={safeLastModifiedDate} />
         
-        {/* ===== CANONICAL URL (from Page 1) ===== */}
+        {/* ===== CANONICAL URL ===== */}
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* ===== OPEN GRAPH TAGS (from Page 1) ===== */}
+        {/* ===== OPEN GRAPH TAGS ===== */}
         <meta property="og:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers & Advance`} />
         <meta property="og:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers, develop skills, and land dream jobs with expert guidance.`} />
         <meta property="og:url" content={canonicalUrl} />
@@ -358,46 +439,44 @@ const CareerBlog = ({ seoData }) => {
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-01-01" />
+        <meta property="article:published_time" content={`${currentYear}-01-01`} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         
-        {/* ===== TWITTER CARD TAGS (from Page 1) ===== */}
+        {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`Career Change Guide ${currentYear}: How to Successfully Switch Careers`} />
         <meta name="twitter:description" content={`Proven career change strategies for ${currentYear} with 89% success rates. Learn step-by-step how to transition careers and land dream jobs.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/career-blog-preview.jpg" />
         <meta name="twitter:site" content="@ProResumeFree" />
         
-        {/* ===== ADDITIONAL META (from Page 1 blueprint best practices) ===== */}
+        {/* ===== ADDITIONAL META ===== */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
-        {/* ===== SITEMAP (from Page 1 blueprint) ===== */}
+        {/* ===== SITEMAP ===== */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* ======================================================================== */}
-        {/* ENHANCED STRUCTURED DATA JSON-LD (INJECTED FROM PAGE 1 BLUEPRINT)       */}
-        {/* ======================================================================== */}
+        {/* ===== ENHANCED STRUCTURED DATA JSON-LD ===== */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaData)
         }} />
       </Head>
 
-      {/* Hidden freshness indicators (from Page 1) */}
+      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={safeCurrentDate} />
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED FROM PAGE 2)                    */}
+      {/* MAIN CONTENT                                                            */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup (from Page 1) */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -421,7 +500,7 @@ const CareerBlog = ({ seoData }) => {
               <div className="badge">✦ Data-Driven Career Success System {currentYear}</div>
               
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Career Change Guide 2026:{' '}
+                Career Change Guide {currentYear}:{' '}
                 <span className="gradient-text">How to Successfully Switch Careers</span>
               </h1>
               
@@ -593,7 +672,9 @@ const CareerBlog = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
         <section aria-labelledby="cta-title" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
@@ -608,35 +689,27 @@ const CareerBlog = ({ seoData }) => {
                 Build Your Career Change Resume Now <FiArrowRight />
               </Link>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1.5rem', fontSize: 'var(--font-size-body-sm)' }}>
-              <FiCheck style={{ color: 'var(--accent-primary)' }} />
-              <span style={{ color: 'var(--text-secondary)' }}>No credit card required • Free forever • 90% ATS Optimization • 89% Success Rate</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-              {["Career Change Templates", "Transferable Skills Focus", "Industry-Specific Formats"].map((item, i) => (
-                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck style={{ color: 'var(--accent-primary)' }} /> {item}</span>
-              ))}
-            </div>
-          </div>
-        </section>
+            <p className="text-small" style={{ color: 'var(--text-muted)' }}>
+              ✓ No credit card required • Free forever • 90% ATS Optimization • 89% Success Rate
+            </p>
+            <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+              Data fresh as of: {safeCurrentDate}
+            </p>
 
-        {/* Internal Links (SEO/GEO Boost) */}
-        <section className="section" aria-labelledby="internal-links-title">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="internal-links-title">Continue Your Professional Development Journey</h2>
-              <p className="section-subtitle">Explore related career resources to strengthen your application</p>
-            </div>
-            <div className="geo-link-grid">
-              {internalLinks.map((link, index) => {
-                const IconComponent = iconMap[link.iconName] || FiFileText;
-                return (
-                  <Link key={index} href={link.href} className="geo-link-card" aria-label={link.text}>
-                    <IconComponent size={24} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+            {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+            <div className="cf-internal-links-inline">
+              <div className="cf-internal-links-inline-header">
+                <h3 className="cf-internal-links-inline-title">Explore Other Career Resources</h3>
+                <p className="cf-internal-links-inline-subtitle">Find the perfect guide or tool for your specific career development needs.</p>
+              </div>
+              <div className="cf-internal-links-grid">
+                {newInternalLinks.map((link, index) => (
+                  <Link key={index} href={link.target} className="cf-internal-link-card">
+                    <span className="cf-internal-link-title">{link.title}</span>
+                    <FiArrowRight className="cf-internal-link-arrow" />
                   </Link>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -646,12 +719,12 @@ const CareerBlog = ({ seoData }) => {
           <div className="section-container">
             <p className="text-small">
               <FiCalendar style={{ display: 'inline', marginRight: '0.5rem' }} />
-              Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+              Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version {currentYear}.1
             </p>
           </div>
         </div>
 
-        {/* Hidden metadata for crawlers (from Page 1) */}
+        {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{safeCurrentDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>

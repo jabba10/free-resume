@@ -126,6 +126,88 @@ const executiveDesignTokens = `
   @media (max-width:380px) {
     .salary-projection-grid { grid-template-columns: 1fr; }
   }
+
+  /* ========== INTERNAL LINKS STYLES (beneath guarantee text) ========== */
+  .cf-internal-links-inline {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 0.5px solid rgba(153, 144, 124, 0.15);
+    text-align: left;
+  }
+  .cf-internal-links-inline-header {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .cf-internal-links-inline-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+  .cf-internal-links-inline-subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .cf-internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cf-internal-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid var(--border-gold-filament);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 250ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .cf-internal-link-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cf-internal-link-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    transition: color 150ms ease;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-title {
+    color: var(--accent-primary);
+  }
+  .cf-internal-link-arrow {
+    color: var(--accent-primary);
+    font-size: 18px;
+    transition: all 250ms ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .cf-internal-link-card:hover .cf-internal-link-arrow {
+    color: var(--accent-primary-hover);
+    transform: translateX(4px);
+  }
+  @media (max-width: 640px) {
+    .cf-internal-links-inline { margin-top: 28px; padding-top: 28px; }
+    .cf-internal-links-inline-title { font-size: 18px; }
+    .cf-internal-links-inline-subtitle { font-size: 13px; }
+    .cf-internal-link-card { padding: 14px 16px; }
+    .cf-internal-link-title { font-size: 14px; }
+    .cf-internal-links-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .cf-internal-links-inline { margin-top: 36px; padding-top: 36px; }
+    .cf-internal-links-inline-title { font-size: 20px; }
+  }
 `;
 
 // Data Constants (UNCHANGED)
@@ -257,14 +339,24 @@ const CareerPathCalculatorPage = ({ seoData }) => {
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const canonicalUrl = "https://professionalresumefree.com/career-path-calculator";
+  const currentYear = new Date().getFullYear();
 
   // Long-tail keywords for GEO optimization
   const longTailKeywords = [
-    "free career path calculator 2026",
+    `free career path calculator ${currentYear}`,
     "career progression calculator with salary projections",
     "tech career paths salary forecast tool",
     "career growth calculator with skills roadmap",
     "career planning tool for professionals"
+  ];
+
+  // ===== NEW INTERNAL LINKS (placed beneath guarantee text) =====
+  const newInternalLinks = [
+    { target: "/experience-level-calculator", title: "Experience Level Calculator" },
+    { target: "/cost-of-living-calculator", title: "Cost of Living Calculator" },
+    { target: "/immigration-points-calculator", title: "Immigration Points Calculator" },
+    { target: "/country-resume-format-calculator", title: "Country Resume Format Calculator" },
+    { target: "/free-resume-tools", title: "All Free Resume Tools" }
   ];
 
   // Calculator State
@@ -387,11 +479,11 @@ const CareerPathCalculatorPage = ({ seoData }) => {
       {
         "@type": "WebApplication",
         "@id": `${canonicalUrl}/#webapp`,
-        "name": "Free Career Path Calculator 2026",
+        "name": `Free Career Path Calculator ${currentYear}`,
         "url": canonicalUrl,
         "applicationCategory": "BusinessApplication",
-        "description": "Free online career path calculator with 10-year salary projections, skill roadmaps, and growth forecasts for technology careers. Compare 5 career paths across 10 industries with personalized projections.",
-        "datePublished": "2026-01-15",
+        "description": `Free online career path calculator with 10-year salary projections, skill roadmaps, and growth forecasts for technology careers. Compare 5 career paths across 10 industries with personalized projections.`,
+        "datePublished": `${currentYear}-01-15`,
         "dateModified": safeLastModifiedDate,
         "offers": {
           "@type": "Offer",
@@ -423,9 +515,9 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         "@type": "WebPage",
         "@id": canonicalUrl,
         "url": canonicalUrl,
-        "name": `Free Career Path Calculator ${CURRENT_YEAR} - Salary Projections, Growth & Skills | No Sign Up`,
+        "name": `Free Career Path Calculator ${currentYear} - Salary Projections, Growth & Skills | No Sign Up`,
         "description": `Plan your career with our free calculator. Get 10-year salary projections, skill roadmaps, and growth forecasts for tech careers. Compare paths, see earnings potential, and identify required skills. 100% private.`,
-        "datePublished": "2026-01-15",
+        "datePublished": `${currentYear}-01-15`,
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
@@ -513,23 +605,23 @@ const CareerPathCalculatorPage = ({ seoData }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Google Fonts for Executive Design (PRESERVED) */}
+        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         <html lang="en-US" />
         
-        {/* ===== SEO TITLE ===== */}
-        <title>Free Career Path Calculator 2026 - Salary Projections, Growth & Skills | No Sign Up</title>
+        {/* ===== SEO TITLE (dynamic year) ===== */}
+        <title>{`Free Career Path Calculator ${currentYear} - Salary Projections, Growth & Skills | No Sign Up`}</title>
         
         {/* ===== META DESCRIPTION ===== */}
-        <meta name="description" content={`Plan your career with our free calculator. Get 10-year salary projections, skill roadmaps, and growth forecasts for tech careers. Compare paths, see earnings potential, and identify required skills. 100% private.`} />
+        <meta name="description" content={`Plan your career with our free calculator. Get 10-year salary projections, skill roadmaps, and growth forecasts for tech careers. Compare paths, see earnings potential, and identify required skills. 100% private. Updated ${currentYear}.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content={`career path calculator ${CURRENT_YEAR}, career progression calculator, salary projection tool, career growth forecast, tech career paths, software engineer salary, data scientist career, career roadmap, skills development, career planning tool, ${CURRENT_YEAR} career outlook, professional growth calculator`} />
+        <meta name="keywords" content={`career path calculator ${currentYear}, career progression calculator, salary projection tool, career growth forecast, tech career paths, software engineer salary, data scientist career, career roadmap, skills development, career planning tool, ${currentYear} career outlook, professional growth calculator`} />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content={`Free Career Path Calculator ${CURRENT_YEAR} - Salary Projections & Growth Forecasts`} />
+        <meta name="chatgpt-fts:title" content={`Free Career Path Calculator ${currentYear} - Salary Projections & Growth Forecasts`} />
         <meta name="chatgpt-fts:description" content={`Plan your career trajectory with detailed salary projections, skill roadmaps, and growth analytics. Compare 5 tech career paths across 10 industries. Free and private.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -547,7 +639,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== OPEN GRAPH TAGS ===== */}
-        <meta property="og:title" content={`Free Career Path Calculator ${CURRENT_YEAR} - Salary Projections, Growth & Skills | No Sign Up`} />
+        <meta property="og:title" content={`Free Career Path Calculator ${currentYear} - Salary Projections, Growth & Skills | No Sign Up`} />
         <meta property="og:description" content={`Plan your career trajectory with detailed salary projections, skill roadmaps, and growth analytics. Compare 5 tech career paths across 10 industries. Free, private, no sign-up required.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -561,7 +653,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         
         {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Career Path Calculator ${CURRENT_YEAR} - Salary Projections & Growth`} />
+        <meta name="twitter:title" content={`Free Career Path Calculator ${currentYear} - Salary Projections & Growth`} />
         <meta name="twitter:description" content={`Get 10-year salary projections, skill roadmaps, and growth forecasts. Compare tech career paths. Free and private.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Free Career Path Calculator" />
@@ -579,7 +671,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         
         {/* ===== ARTICLE META ===== */}
-        <meta property="article:published_time" content="2026-01-15" />
+        <meta property="article:published_time" content={`${currentYear}-01-15`} />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         <meta property="article:author" content="Professional Resume Free" />
         <meta property="article:section" content="Career Tools" />
@@ -601,12 +693,12 @@ const CareerPathCalculatorPage = ({ seoData }) => {
       </div>
 
       {/* ======================================================================== */}
-      {/* MAIN CONTENT (DESIGN & LAYOUT PRESERVED)                                 */}
+      {/* MAIN CONTENT                                                             */}
       {/* ======================================================================== */}
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
 
-        {/* Breadcrumb - Enhanced with Schema.org markup */}
+        {/* Breadcrumb */}
         <nav className="breadcrumb-nav" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
@@ -627,10 +719,10 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ Free Tool • No Sign Up • Instant Results • {CURRENT_YEAR} Data</div>
+              <div className="badge">✦ Free Tool • No Sign Up • Instant Results • {currentYear} Data</div>
               
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free <span className="gradient-text">Career Path</span> Calculator {CURRENT_YEAR}
+                Free <span className="gradient-text">Career Path</span> Calculator {currentYear}
               </h1>
               
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
@@ -915,7 +1007,9 @@ const CareerPathCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* ======================================================================== */}
+        {/* FINAL CTA SECTION (with new internal links beneath guarantee)            */}
+        {/* ======================================================================== */}
         <section aria-labelledby="cta-heading" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
@@ -925,37 +1019,33 @@ const CareerPathCalculatorPage = ({ seoData }) => {
             <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
               Explore career trajectories and make informed decisions about your professional future. <strong>100% Free. No Sign-Up. Instant Results. Complete Privacy.</strong>
             </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }} role="group" aria-label="Call to action">
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Call to action">
               <Link href="/salary-calculator" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Use Free Salary Calculator">
                 <FiDollarSign /> Salary Calculator
               </Link>
               <Link href="/free-resume-builder" className="btn-outline" aria-label="Build Your Resume"><FiFileText /> Build Your Resume</Link>
             </div>
-          </div>
-        </section>
+            <p className="text-small" style={{ color: 'var(--text-muted)' }}>
+              ✓ No credit card required • Free forever • Instant Results • 100% Private & Secure
+            </p>
+            <p className="text-small" style={{ marginTop: '0.5rem', color: 'var(--text-disabled)' }}>
+              Data fresh as of: {safeCurrentDate}
+            </p>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Tools</h2>
-              <p className="section-subtitle">Complement your career planning with these powerful resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign" },
-                { href: "/cost-of-living-calculator", text: "Cost of Living Comparison", iconName: "FiMapPin" },
-                { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiGlobe" },
-                { href: "/free-resume-builder", text: "ATS-Friendly Resume Builder", iconName: "FiFileText" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card" aria-label={link.text}>
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+            {/* ===== NEW INTERNAL LINKS BENEATH GUARANTEE ===== */}
+            <div className="cf-internal-links-inline">
+              <div className="cf-internal-links-inline-header">
+                <h3 className="cf-internal-links-inline-title">Explore Other Career Tools</h3>
+                <p className="cf-internal-links-inline-subtitle">Complement your career planning with these powerful resources.</p>
+              </div>
+              <div className="cf-internal-links-grid">
+                {newInternalLinks.map((link, index) => (
+                  <Link key={index} href={link.target} className="cf-internal-link-card">
+                    <span className="cf-internal-link-title">{link.title}</span>
+                    <FiArrowRight className="cf-internal-link-arrow" />
                   </Link>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -964,7 +1054,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small">
             <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
-            Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version 2026.1
+            Last updated: {safeCurrentDate} • Next update: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 7)).toISOString().split('T')[0]} • Version {currentYear}.1
           </span>
           <span className="text-small" style={{ marginLeft: '1rem' }}>
             <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
