@@ -112,6 +112,11 @@ const executiveDesignTokens = `
 `;
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
 // ============================================================================
 export async function getStaticProps() {
@@ -119,6 +124,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -159,13 +167,12 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600, // ISR: Revalidate every hour
   };
 }
-
-const CURRENT_YEAR = new Date().getFullYear();
 
 const VERB_CATEGORIES = [
   { id: 'leadership', name: 'Leadership & Management', verbs: ['Directed', 'Managed', 'Led', 'Supervised', 'Oversaw', 'Coordinated', 'Organized', 'Mentored', 'Coached', 'Facilitated', 'Empowered', 'Delegated', 'Guided', 'Chaired', 'Steered', 'Orchestrated'] },
@@ -207,7 +214,7 @@ const FAQS = [
   { question: "How many action verbs should I use per resume?", answer: "Aim for variety—use 15-25 unique action verbs across your resume. Each bullet point should start with a strong verb. Avoid generic openers and choose verbs that precisely describe your specific contribution to each achievement." }
 ];
 
-const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
+const ResumeActionVerbRecommender = ({ seoData, buildTimestamp, currentYear: propYear }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -215,6 +222,9 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
     faqDates,
     breadcrumbData
   } = seoData || {};
+
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
 
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
@@ -227,8 +237,8 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
 
   const canonicalUrl = "https://professionalresumefree.com/free-action-verb-recommender";
   
-  // Optimized title - approximately 70 characters
-  const optimizedTitle = "Free Resume Action Verb Recommender - 150+ Power Verbs for 2026";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Free Resume Action Verb Recommender - 150+ Power Verbs for ${currentYear}`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
@@ -280,15 +290,15 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
 
   const handleClearAll = () => { setSelectedVerbs([]); setSearchQuery(''); setSelectedCategory('all'); };
 
+  // ============================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ============================================================================
   const internalLinks = [
-    { href: "/free-resume-bullet-point-generator", text: "Resume Bullet Point Generator", iconName: "FiEdit", desc: "Turn verbs into achievements" },
-    { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Write Bullet Points That Impress", iconName: "FiTarget", desc: "Master resume writing" },
-    { href: "/free-resume-summary-generator", text: "Resume Summary Generator", iconName: "FiFileText", desc: "Craft compelling summaries" },
-    { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Prompt Guide", iconName: "FiZap", desc: "AI-powered refinement" },
-    { href: "/best-resume-examples-for-usa-it-and-software-jobs", text: "IT & Software Resume Examples", iconName: "FiCpu", desc: "Verbs in context" },
-    { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch", desc: "Match resume to jobs" },
-    { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" },
-    { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get instant quality score" }
+    { href: "/free-resume-bullet-point-generator", text: "Resume Bullet Point Generator", iconName: "FiEdit" },
+    { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Bullet Points That Impress Recruiters", iconName: "FiTarget" },
+    { href: "/free-resume-summary-generator", text: "Resume Summary Generator", iconName: "FiFileText" },
+    { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiGrid" },
+    { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Bullets Guide", iconName: "FiZap" }
   ];
 
   const iconMap = { FiEdit, FiTarget, FiFileText, FiZap, FiCpu, FiSearch, FiGrid, FiAward, FiStar, FiCheck, FiBookOpen, FiTrendingUp };
@@ -304,7 +314,7 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
         "name": optimizedTitle,
-        "description": "Free resume action verb recommender with 150+ powerful verbs categorized by industry. Find strong action verbs to replace weak words and optimize your resume for ATS systems.",
+        "description": `Free resume action verb recommender with 150+ powerful verbs categorized by industry. Find strong action verbs to replace weak words and optimize your resume for ATS systems.`,
         "datePublished": safeCurrentDate,
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
@@ -357,13 +367,13 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
           "No Sign Up Required",
           "Free Forever"
         ],
-        "softwareVersion": `${CURRENT_YEAR}.1.0`,
+        "softwareVersion": `${currentYear}.1.0`,
         "dateModified": safeLastModifiedDate
       },
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Free Resume Action Verb Recommender: 150+ Power Verbs for 2026",
+        "headline": `Free Resume Action Verb Recommender: 150+ Power Verbs for ${currentYear}`,
         "description": "Find powerful action verbs to strengthen your resume bullet points. 150+ verbs categorized by industry with weak verb replacement guide and one-click copy.",
         "author": {
           "@type": "Organization",
@@ -444,16 +454,16 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Free resume action verb recommender with 150+ powerful verbs categorized by industry. Find strong action verbs to replace weak words and optimize your resume for ATS systems." />
+        <meta name="description" content={`Free resume action verb recommender with 150+ powerful verbs categorized by industry. Find strong action verbs to replace weak words and optimize your resume for ATS systems. Updated for ${currentYear}.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="resume action verbs, power verbs for resumes, resume verb recommendations, action verb generator, professional resume verbs, strong verbs for resumes, resume writing tips, career achievement verbs, resume optimization, ATS-friendly verbs, free resume verb finder, powerful resume words, strong action verbs, resume bullet points, professional vocabulary" />
+        <meta name="keywords" content={`resume action verbs, power verbs for resumes, resume verb recommendations, action verb generator, professional resume verbs, strong verbs for resumes, resume writing tips, career achievement verbs, resume optimization, ATS-friendly verbs, free resume verb finder, powerful resume words, strong action verbs, resume bullet points, professional vocabulary ${currentYear}`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Free Resume Action Verb Recommender - 150+ Power Verbs for 2026" />
+        <meta name="chatgpt-fts:title" content={`Free Resume Action Verb Recommender - 150+ Power Verbs for ${currentYear}`} />
         <meta name="chatgpt-fts:description" content="Find powerful action verbs for your resume. 150+ verbs categorized by industry. Free tool with examples and weak verb replacements." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -477,7 +487,7 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Free Resume Action Verb Recommender - 150+ Power Verbs for 2026" />
+        <meta property="og:title" content={`Free Resume Action Verb Recommender - 150+ Power Verbs for ${currentYear}`} />
         <meta property="og:description" content="Free resume action verb recommender with 150+ powerful verbs. Find strong action verbs for your resume. Industry-specific categories and weak verb replacements." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -494,7 +504,7 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
         <meta name="twitter:title" content="Free Resume Action Verb Recommender - 150+ Power Verbs" />
         <meta name="twitter:description" content="150+ powerful action verbs for your resume. Free tool with industry-specific categories and weak verb replacements." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
-        <meta name="twitter:image:alt" content="Action Verb Recommender 2026" />
+        <meta name="twitter:image:alt" content={`Action Verb Recommender ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -541,7 +551,7 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Action Verb Recommender 2026</span>
+                <span itemProp="name" aria-current="page">Action Verb Recommender {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -552,7 +562,7 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge" aria-label="Trust indicators">✦ Free Tool • No Sign Up • 150+ Professional Verbs | Updated {CURRENT_YEAR}</div>
+              <div className="badge" aria-label="Trust indicators">✦ Free Tool • No Sign Up • 150+ Professional Verbs | Updated {currentYear}</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Resume <span className="gradient-text">Action Verb Recommender</span>
               </h1>
@@ -561,7 +571,7 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
               </p>
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }} aria-label="Key statistics">
                 <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
-                  <span className="badge">📊 Based on {CURRENT_YEAR} Hiring Standards</span>
+                  <span className="badge">📊 Based on {currentYear} Hiring Standards</span>
                 </div>
                 <div className="stat-card"><div className="stat-number">150+</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Action Verbs</div></div>
                 <div className="stat-card"><div className="stat-number">7</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Categories</div></div>
@@ -835,7 +845,9 @@ const ResumeActionVerbRecommender = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Enhance Your Resume Further")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">

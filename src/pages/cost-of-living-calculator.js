@@ -8,7 +8,7 @@ import {
   FiHelpCircle, FiDatabase, FiAlertCircle, FiLock, FiServer,
   FiBriefcase, FiHome as FiHouse, FiCoffee, FiShoppingCart,
   FiTruck, FiActivity, FiWifi, FiBook, FiFilm, FiHeart,
-  FiUsers, FiClock
+  FiUsers, FiClock, FiCompass, FiGlobe, FiLayers, FiBarChart2
 } from 'react-icons/fi';
 
 // ============================================================================
@@ -128,8 +128,10 @@ const executiveDesignTokens = `
   }
 `;
 
-// Data Constants
-const CURRENT_YEAR = new Date().getFullYear();
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 const CITIES = [
   { name: 'New York, NY', index: 100 },
@@ -184,13 +186,14 @@ const ICON_MAP = {
   FiPieChart, FiShield, FiZap, FiTarget, FiAward, FiGrid, FiFileText,
   FiArrowRight, FiRefreshCw, FiTrash2, FiHelpCircle, FiDatabase, FiAlertCircle,
   FiLock, FiServer, FiBriefcase, FiHouse, FiCoffee, FiShoppingCart, FiTruck,
-  FiActivity, FiWifi, FiBook, FiFilm, FiHeart, FiUsers, FiClock
+  FiActivity, FiWifi, FiBook, FiFilm, FiHeart, FiUsers, FiClock,
+  FiCompass, FiGlobe, FiLayers, FiBarChart2
 };
 
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
+const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp, currentYear: propYear }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -198,6 +201,9 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
     faqDates,
     breadcrumbData
   } = seoData || {};
+
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
 
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
@@ -211,25 +217,25 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
 
   const canonicalUrl = "https://professionalresumefree.com/cost-of-living-calculator";
   
-  // Optimized title - approximately 70 characters
-  const optimizedTitle = "Free Cost of Living Calculator 2026 - Compare Cities, Salary & Expenses";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Free Cost of Living Calculator ${currentYear} - Compare Cities, Salary & Expenses`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
     "cost of living calculator by city",
-    "compare cost of living between two cities 2026",
+    `compare cost of living between two cities ${currentYear}`,
     "how to calculate equivalent salary for relocation",
     "free cost of living comparison tool USA",
     "monthly expenses breakdown by city calculator",
     "salary adjustment calculator for new city",
-    "cost of living index comparison 2026"
+    `cost of living index comparison ${currentYear}`
   ];
 
   // People Also Ask for GEO
   const peopleAlsoAsk = [
     { question: "How do I calculate cost of living between two cities?", answer: "Enter your current salary and select your current city and target city. Our calculator instantly shows you the equivalent salary needed and a detailed breakdown of how expenses differ across housing, food, transportation, and other categories." },
     { question: "What salary do I need to maintain my lifestyle in a new city?", answer: "The equivalent salary depends on the cost of living index difference between cities. For example, moving from New York (index 100) to Austin (index 58.9) means you need about 41% less salary to maintain the same lifestyle. Our calculator computes this automatically." },
-    { question: "Which US city has the highest cost of living in 2026?", answer: "New York, NY and San Francisco, CA consistently rank as the most expensive US cities. Our calculator compares 15 major metropolitan areas with detailed expense breakdowns to help you understand exactly where your money goes in each location." }
+    { question: `Which US city has the highest cost of living in ${currentYear}?`, answer: "New York, NY and San Francisco, CA consistently rank as the most expensive US cities. Our calculator compares 15 major metropolitan areas with detailed expense breakdowns to help you understand exactly where your money goes in each location." }
   ];
 
   // Calculator State
@@ -308,6 +314,17 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
   };
 
   // ==========================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ==========================================================================
+  const featuredInternalLinks = [
+    { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiCompass" },
+    { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiGlobe" },
+    { href: "/country-resume-format-calculator", text: "Country Resume Format Calculator", iconName: "FiLayers" },
+    { href: "/experience-level-calculator", text: "Experience Level Calculator", iconName: "FiBarChart2" },
+    { href: "/immigration-resume-readiness-calculator", text: "Immigration Resume Readiness Calculator", iconName: "FiTarget" }
+  ];
+
+  // ==========================================================================
   // COMPLETE STRUCTURED DATA (INJECTED FROM PAGE 1 BLUEPRINT)
   // ==========================================================================
   const structuredData = {
@@ -359,7 +376,7 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Free Cost of Living Calculator: Compare Cities & Calculate Equivalent Salary 2026",
+        "headline": `Free Cost of Living Calculator: Compare Cities & Calculate Equivalent Salary ${currentYear}`,
         "description": "Use our free cost of living calculator to compare expenses across 15 major US cities. Calculate equivalent salary needed for relocation with detailed breakdowns of housing, food, transportation, and more.",
         "author": {
           "@type": "Organization",
@@ -445,16 +462,16 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Compare cost of living between any two US cities. Calculate equivalent salary needed to maintain your lifestyle. Free tool with detailed expense breakdowns, no sign-up required. 100% private." />
+        <meta name="description" content={`Compare cost of living between any two US cities. Calculate equivalent salary needed to maintain your lifestyle. Free ${currentYear} tool with detailed expense breakdowns, no sign-up required. 100% private.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="cost of living calculator, cost of living comparison, salary comparison by city, relocation calculator, cost of living index, compare cities cost of living, equivalent salary calculator, moving expenses calculator, 2026 cost of living, city cost comparison, living wage calculator, expenses by city" />
+        <meta name="keywords" content={`cost of living calculator, cost of living comparison, salary comparison by city, relocation calculator, cost of living index, compare cities cost of living, equivalent salary calculator, moving expenses calculator, ${currentYear} cost of living, city cost comparison, living wage calculator, expenses by city`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Free Cost of Living Calculator 2026 - Compare Cities, Salary & Expenses" />
+        <meta name="chatgpt-fts:title" content={`Free Cost of Living Calculator ${currentYear} - Compare Cities, Salary & Expenses`} />
         <meta name="chatgpt-fts:description" content="Calculate equivalent salary needed when relocating between US cities. Free cost of living comparison with detailed expense breakdowns. No sign-up required." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -478,13 +495,13 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Free Cost of Living Calculator 2026 - Compare Cities, Salary & Expenses" />
+        <meta property="og:title" content={`Free Cost of Living Calculator ${currentYear} - Compare Cities, Salary & Expenses`} />
         <meta property="og:description" content="Compare cost of living between any two US cities. Calculate equivalent salary needed to maintain your lifestyle. Free tool with detailed expense breakdowns." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:image:alt" content="Free Cost of Living Calculator 2026 - Compare Cities & Salaries" />
+        <meta property="og:image:alt" content={`Free Cost of Living Calculator ${currentYear} - Compare Cities & Salaries`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -492,10 +509,10 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Cost of Living Calculator 2026 - Compare Cities & Salaries" />
+        <meta name="twitter:title" content={`Free Cost of Living Calculator ${currentYear} - Compare Cities & Salaries`} />
         <meta name="twitter:description" content="Instantly compare cost of living across US cities. Free, private, no sign-up required. Calculate equivalent salary for relocation." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
-        <meta name="twitter:image:alt" content="Cost of Living Calculator 2026" />
+        <meta name="twitter:image:alt" content={`Cost of Living Calculator ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -542,7 +559,7 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Cost of Living Calculator 2026</span>
+                <span itemProp="name" aria-current="page">Cost of Living Calculator {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -553,16 +570,16 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge" aria-label="Trust indicators">🏙️ Free Tool • No Sign Up • Instant Results | Updated {CURRENT_YEAR}</div>
+              <div className="badge" aria-label="Trust indicators">🏙️ Free Tool • No Sign Up • Instant Results | Updated {currentYear}</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free <span className="gradient-text">Cost of Living</span> Calculator {CURRENT_YEAR}
+                Free <span className="gradient-text">Cost of Living</span> Calculator {currentYear}
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Compare <strong>cost of living between any two US cities</strong>. Calculate how much salary you need in a new city to maintain your lifestyle. Detailed expense breakdowns included. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
               </p>
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))' }} aria-label="Key statistics">
                 <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
-                  <span className="badge">📊 Based on {CURRENT_YEAR} Market Data</span>
+                  <span className="badge">📊 Based on {currentYear} Market Data</span>
                 </div>
                 <div className="stat-card">
                   <div className="stat-number">15+</div>
@@ -587,7 +604,7 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
                 <span><FiUsers size={14} style={{ display: 'inline' }} /> Trusted by 500K+ Users</span>
               </div>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem' }} aria-label="Footnote">
-                * Based on {CURRENT_YEAR} Market Data | Quarterly Updates
+                * Based on {currentYear} Market Data | Quarterly Updates
               </p>
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }} role="group" aria-label="Additional tools">
                 <Link href="/salary-calculator" className="btn-outline" aria-label="Try our free salary calculator"><FiDollarSign /> Salary Calculator</Link>
@@ -871,20 +888,17 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Financial Tools")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Financial Tools & Resources</h2>
-              <p className="section-subtitle">Complement your cost analysis with these powerful career resources</p>
+              <h2 id="resources-heading" className="section-title">Explore More Career Calculators</h2>
+              <p className="section-subtitle">Powerful tools to plan your career, immigration, and relocation journey</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign" },
-                { href: "/free-resume-builder", text: "ATS-Friendly Resume Builder", iconName: "FiFileText" },
-                { href: "/free-resume-readability-checker", text: "ATS Resume Checker", iconName: "FiTarget" },
-                { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" }
-              ].map((link, i) => {
+              {featuredInternalLinks.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -920,6 +934,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(3).fill(null).map((_, i) => {
@@ -960,6 +977,7 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600, // ISR: Revalidate every hour

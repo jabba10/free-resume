@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -80,8 +79,18 @@ const executiveDesignTokens = `
   .text-small { font-size:var(--font-size-body-sm); color:var(--text-muted); }
   .text-success { color:var(--accent-primary); font-weight:var(--font-weight-semibold); }
   .text-danger { color:var(--error-color); font-weight:var(--font-weight-semibold); }
+  .featured-links-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; }
+  .featured-link-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.25rem 1rem; background:var(--card-bg); backdrop-filter:blur(var(--glass-blur)); -webkit-backdrop-filter:blur(var(--glass-blur)); border:var(--card-border); borderRadius:0.5rem; text-decoration:none; color:inherit; transition:all var(--transition-medium) var(--easing-smooth); min-height:110px; text-align:center; }
+  .featured-link-card:hover { border-color:var(--accent-primary-container); transform:translateY(-3px); box-shadow:var(--shadow-card-hover); color:inherit; }
+  .featured-link-title { font-size:var(--font-size-body-sm); font-weight:var(--font-weight-semibold); color:var(--text-primary); line-height:1.4; margin-bottom:0.375rem; }
+  .featured-link-cta { font-size:var(--font-size-label-sm); color:var(--accent-primary); font-weight:var(--font-weight-medium); }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
+
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 // ============================================================================
 // SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
@@ -91,6 +100,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(3).fill(null).map((_, i) => {
@@ -117,13 +129,14 @@ export async function getStaticProps() {
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Comprehensive Resume Guide 2026",
+      "name": `Comprehensive Resume Guide ${currentYear}`,
       "item": "https://professionalresumefree.com/comprehensive-resume-guide-2026"
     }
   ];
 
   return {
     props: {
+      currentYear,
       seoData: {
         currentDate,
         lastModifiedDate,
@@ -137,7 +150,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
+export default function ComprehensiveResumeGuide({ seoData, buildTimestamp, currentYear: propYear }) {
   const {
     currentDate,
     lastModifiedDate,
@@ -156,7 +169,8 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
   const safeReviewDates = reviewDates || Array(3).fill(freshnessIndicator);
   const safeFaqDates = faqDates || Array(8).fill(freshnessIndicator);
 
-  const currentYear = new Date().getFullYear();
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
   const displayDate = safeCurrentDate;
   const canonicalUrl = "https://professionalresumefree.com/comprehensive-resume-guide-2026";
   
@@ -164,12 +178,12 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
   const [expandedFAQ, setExpandedFAQ] = useState(null);
   const [flippedCards, setFlippedCards] = useState({});
 
-  // Optimized title - exactly 70 characters
-  const optimizedTitle = "Comprehensive Resume Guide 2026: Expert Tips & Free Templates";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Comprehensive Resume Guide ${currentYear}: Expert Tips & Free Templates`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
-    "comprehensive resume writing guide 2026",
+    `comprehensive resume writing guide ${currentYear}`,
     "best resume format for experienced professionals",
     "how to write an ATS-friendly resume",
     "free resume templates with expert tips",
@@ -177,11 +191,11 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
   ];
 
   const faqs = [
-    { question: "What is the best resume format for 2026?", answer: "The combination/hybrid format is most effective, offering 40% higher interview rates. It merges skills showcase with chronological experience, appealing to both ATS and human recruiters. Key advantage: works for career changers AND traditional paths." },
-    { question: "How long should my resume be in 2026?", answer: "Entry-level: 1 page, Mid-level (5-10 years): 1-2 pages, Senior (10+ years): 2 pages. Every word must add value. Pro tip: If you're struggling to fill space, you need more achievements, not more words." },
-    { question: "What are the most important resume trends for 2026?", answer: "AI-powered keyword optimization, achievement-focused bullets, skills-based sections, mobile-responsive design, and digital portfolio integration. ATS compatibility remains critical—92% of Fortune 500 companies use automated screening." },
-    { question: "How do I make my resume ATS-friendly in 2026?", answer: "Use standard headings, include job-specific keywords naturally, avoid complex tables/graphics, save as machine-readable PDF, and use our free ATS checker tool. Our templates achieve 98% parse rates across 12 major platforms." },
-    { question: "Should I include a photo on my resume in 2026?", answer: "No, avoid photos in the US and UK to prevent bias. Omit photos to stay ATS-friendly and professional for most English-speaking markets. Exceptions: acting, modeling, certain European/Asian markets." },
+    { question: `What is the best resume format for ${currentYear}?`, answer: "The combination/hybrid format is most effective, offering 40% higher interview rates. It merges skills showcase with chronological experience, appealing to both ATS and human recruiters. Key advantage: works for career changers AND traditional paths." },
+    { question: `How long should my resume be in ${currentYear}?`, answer: "Entry-level: 1 page, Mid-level (5-10 years): 1-2 pages, Senior (10+ years): 2 pages. Every word must add value. Pro tip: If you're struggling to fill space, you need more achievements, not more words." },
+    { question: `What are the most important resume trends for ${currentYear}?`, answer: "AI-powered keyword optimization, achievement-focused bullets, skills-based sections, mobile-responsive design, and digital portfolio integration. ATS compatibility remains critical—92% of Fortune 500 companies use automated screening." },
+    { question: `How do I make my resume ATS-friendly in ${currentYear}?`, answer: "Use standard headings, include job-specific keywords naturally, avoid complex tables/graphics, save as machine-readable PDF, and use our free ATS checker tool. Our templates achieve 98% parse rates across 12 major platforms." },
+    { question: `Should I include a photo on my resume in ${currentYear}?`, answer: "No, avoid photos in the US and UK to prevent bias. Omit photos to stay ATS-friendly and professional for most English-speaking markets. Exceptions: acting, modeling, certain European/Asian markets." },
     { question: "How do I handle employment gaps on my resume?", answer: "Use the combination/hybrid format to emphasize skills first. If gaps are under 6 months, they're usually acceptable without explanation. For longer gaps, briefly mention professional development, freelancing, or caregiving in a positive light." },
     { question: "What file formats do employers prefer for resumes?", answer: "PDF is the gold standard (preserves formatting). Some ATS prefer .docx. Always check the job posting for specific requirements. Never submit image-based PDFs, JPEGs, or PNGs—they're unreadable by ATS." },
     { question: "How many skills should I list on my resume?", answer: "10-15 core competencies organized into 3-4 categories (Technical, Leadership, Industry-Specific). Prioritize skills explicitly mentioned in the job description. Quality over quantity—every skill listed should be demonstrable." }
@@ -189,14 +203,14 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
 
   // People Also Ask for GEO
   const peopleAlsoAsk = [
-    { question: "Is PDF or Word better for resume submission in 2026?", answer: "PDF is generally better as it preserves formatting across all systems. However, ensure it's a standard, machine-readable PDF (not scanned). Our builder generates perfect ATS-friendly PDFs automatically with proper formatting preserved." },
-    { question: "Do recruiters prefer chronological or hybrid resumes in 2026?", answer: "Recruiters strongly prefer hybrid/combination resumes (85%) as they show both clear career progression and relevant skills. Chronological resumes follow at 78% preference. Functional resumes are viewed with suspicion (12% preference) as they can hide gaps or lack of experience." }
+    { question: `Is PDF or Word better for resume submission in ${currentYear}?`, answer: "PDF is generally better as it preserves formatting across all systems. However, ensure it's a standard, machine-readable PDF (not scanned). Our builder generates perfect ATS-friendly PDFs automatically with proper formatting preserved." },
+    { question: `Do recruiters prefer chronological or hybrid resumes in ${currentYear}?`, answer: "Recruiters strongly prefer hybrid/combination resumes (85%) as they show both clear career progression and relevant skills. Chronological resumes follow at 78% preference. Functional resumes are viewed with suspicion (12% preference) as they can hide gaps or lack of experience." }
   ];
 
   const resumeFormats = [
     { name: "Chronological", icon: <FiClock size={32} />, bestFor: "Stable career path, same industry", pros: ["Clear progression", "Recruiter preferred", "ATS-friendly"], cons: ["Shows gaps", "Not ideal for career changes"], atsRate: "85%", recruiterPref: "78%", color: "#f2ca50" },
     { name: "Functional", icon: <FiLayers size={32} />, bestFor: "Career changes, employment gaps", pros: ["Skills-focused", "Hides gaps", "Flexible"], cons: ["Suspicious to recruiters", "Lower ATS scores"], atsRate: "65%", recruiterPref: "12%", color: "#ffb74d" },
-    { name: "Combination (Hybrid)", icon: <FiStar size={32} />, bestFor: "Most professionals in 2026", pros: ["Best of both", "High ATS scores", "Versatile", "Gap-friendly"], cons: ["Can be longer", "Needs careful structure"], atsRate: "92%", recruiterPref: "85%", color: "#f2ca50" }
+    { name: "Combination (Hybrid)", icon: <FiStar size={32} />, bestFor: `Most professionals in ${currentYear}`, pros: ["Best of both", "High ATS scores", "Versatile", "Gap-friendly"], cons: ["Can be longer", "Needs careful structure"], atsRate: "92%", recruiterPref: "85%", color: "#f2ca50" }
   ];
 
   const caseStudies = [
@@ -216,15 +230,15 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
     { id: 8, title: "Tailor & submit", desc: "Customize for each application and apply", done: false }
   ];
 
+  // ============================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ============================================================================
   const internalLinks = [
-    { href: "/resume-tips-for-usa-college-students-and-graduates", text: "Resume Tips for College Students", iconName: "FiBookOpen", desc: "Essential advice for entering the workforce" },
-    { href: "/free-cover-letter-generator", text: "Free Cover Letter Generator", iconName: "FiEdit", desc: "Create matching cover letters instantly" },
-    { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "AI Resume Writing Guide", iconName: "FiZap", desc: "Master prompt engineering for resumes" },
-    { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Resume Tips", iconName: "FiSmartphone", desc: "Optimize for virtual positions" },
-    { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "Federal Resume Guide", iconName: "FiDatabase", desc: "Navigate USAJobs requirements" },
-    { href: "/ats-friendly-medical-resume-builder", text: "Healthcare Resume Templates", iconName: "FiHeart", desc: "Specialized for clinical roles" },
-    { href: "/ats-friendly-tech-resume-builder", text: "Tech Resume Templates", iconName: "FiCpu", desc: "Developer and engineer formats" },
-    { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch", desc: "Match resume to job descriptions" }
+    { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiBookOpen", cta: "Start Learning →" },
+    { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiTarget", cta: "Read Guide →" },
+    { href: "/complete-resume-resource-library", text: "Complete Resume Resource Library", iconName: "FiDatabase", cta: "Explore Library →" },
+    { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Writing Guide", iconName: "FiZap", cta: "Master Summaries →" },
+    { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Bullet Points That Impress Recruiters", iconName: "FiList", cta: "Write Better Bullets →" }
   ];
 
   const iconMap = { FiBookOpen, FiEdit, FiZap, FiSmartphone, FiDatabase, FiHeart, FiCpu, FiSearch, FiFileText, FiTarget, FiClipboard, FiList };
@@ -240,7 +254,7 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
         "name": optimizedTitle,
-        "description": "Master resume writing in 2026 with our complete guide. 46+ templates, 12+ free tools, expert strategies, and ATS tips. Get 40% more interviews.",
+        "description": `Master resume writing in ${currentYear} with our complete guide. 46+ templates, 12+ free tools, expert strategies, and ATS tips. Get 40% more interviews.`,
         "datePublished": "2024-01-15",
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
@@ -266,7 +280,7 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Comprehensive Resume Guide: The Ultimate 2026 Format Guide",
+        "headline": `Comprehensive Resume Guide: The Ultimate ${currentYear} Format Guide`,
         "description": "Master the art of resume writing with detailed format guides, step-by-step templates, and expert tips for showcasing your career effectively.",
         "author": {
           "@type": "Organization",
@@ -307,7 +321,7 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
       {
         "@type": "HowTo",
         "name": "How to Write a Professional Resume: Step-by-Step Guide",
-        "description": "Complete guide to creating a professional resume in 2026",
+        "description": `Complete guide to creating a professional resume in ${currentYear}`,
         "estimatedCost": {
           "@type": "MonetaryAmount",
           "value": "0",
@@ -391,17 +405,17 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Master resume writing in 2026 with our complete guide. 46+ templates, 12+ free tools, expert strategies, and ATS tips. Get 40% more interviews." />
+        <meta name="description" content={`Master resume writing in ${currentYear} with our complete guide. 46+ templates, 12+ free tools, expert strategies, and ATS tips. Get 40% more interviews.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="comprehensive resume guide 2026, resume writing tips, ATS-friendly resume, resume format guide, free resume templates, professional resume examples, resume checklist, career advice 2026" />
+        <meta name="keywords" content={`comprehensive resume guide ${currentYear}, resume writing tips, ATS-friendly resume, resume format guide, free resume templates, professional resume examples, resume checklist, career advice`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Comprehensive Resume Guide 2026: Expert Tips & Free Templates" />
-        <meta name="chatgpt-fts:description" content="Create an ATS-optimized resume with our comprehensive 2026 guide. 46+ templates, 12+ free tools, and expert strategies." />
+        <meta name="chatgpt-fts:title" content={`Comprehensive Resume Guide ${currentYear}: Expert Tips & Free Templates`} />
+        <meta name="chatgpt-fts:description" content={`Create an ATS-optimized resume with our comprehensive ${currentYear} guide. 46+ templates, 12+ free tools, and expert strategies.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - ATS Optimized Builder" />
@@ -424,13 +438,13 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Comprehensive Resume Guide 2026: Expert Tips & Free Templates" />
-        <meta property="og:description" content="Master resume writing with our complete 2026 guide. 46+ templates, 12+ free tools, and expert ATS optimization tips. Get 40% more interviews." />
+        <meta property="og:title" content={`Comprehensive Resume Guide ${currentYear}: Expert Tips & Free Templates`} />
+        <meta property="og:description" content={`Master resume writing with our complete ${currentYear} guide. 46+ templates, 12+ free tools, and expert ATS optimization tips. Get 40% more interviews.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:image:alt" content="Comprehensive Resume Guide 2026" />
+        <meta property="og:image:alt" content={`Comprehensive Resume Guide ${currentYear}`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -438,10 +452,10 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Comprehensive Resume Guide 2026: Expert Tips & Free Templates" />
-        <meta name="twitter:description" content="Master resume writing with our complete 2026 guide. Free templates, tools, and expert ATS tips." />
+        <meta name="twitter:title" content={`Comprehensive Resume Guide ${currentYear}: Expert Tips & Free Templates`} />
+        <meta name="twitter:description" content={`Master resume writing with our complete ${currentYear} guide. Free templates, tools, and expert ATS tips.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
-        <meta name="twitter:image:alt" content="Comprehensive Resume Guide 2026" />
+        <meta name="twitter:image:alt" content={`Comprehensive Resume Guide ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -488,7 +502,7 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Comprehensive Resume Guide 2026</span>
+                <span itemProp="name" aria-current="page">Comprehensive Resume Guide {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -502,7 +516,7 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
               <div>
                 <div className="badge" aria-label="Trust indicators">✦ Complete Resume Guide {currentYear} | 46+ Templates | 12+ Free Tools</div>
                 <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                  Master Your <span className="gradient-text">Resume</span> in 2026
+                  Master Your <span className="gradient-text">Resume</span> in {currentYear}
                 </h1>
                 <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
                   <strong>46+ templates, 12+ free tools</strong>, and expert strategies to get <strong>40% more interviews</strong>. Your complete roadmap to resume mastery. No sign-up required.
@@ -538,7 +552,7 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
               <span><FiUsers size={14} style={{ display: 'inline' }} /> Trusted by 500K+ Professionals</span>
             </div>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem', textAlign: 'center' }} aria-label="Footnote">
-              * Based on 2026 Hiring Data | SHRM Survey
+              * Based on {currentYear} Hiring Data | SHRM Survey
             </p>
           </div>
         </section>
@@ -811,20 +825,23 @@ export default function ComprehensiveResumeGuide({ seoData, buildTimestamp }) {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Resources")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Strengthen your job application with expert guides</p>
+              <h2 id="resources-heading" className="section-title">Explore More Resume Resources</h2>
+              <p className="section-subtitle">Deepen your resume expertise with these comprehensive guides</p>
             </div>
-            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div className="featured-links-grid">
               {internalLinks.map((link, i) => {
                 const IconComponent = iconMap[link.iconName] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.25rem 1rem', background: 'var(--card-bg)', backdropFilter: 'blur(var(--glass-blur))', border: 'var(--card-border)', borderRadius: '0.5rem', textDecoration: 'none', color: 'inherit', transition: 'all var(--transition-medium) var(--easing-smooth)', minHeight: '100px', textAlign: 'center' }}>
-                    <IconComponent size={24} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  <Link key={i} href={link.href} className="featured-link-card">
+                    <IconComponent size={22} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span className="featured-link-title">{link.text}</span>
+                    <span className="featured-link-cta">{link.cta}</span>
                   </Link>
                 );
               })}

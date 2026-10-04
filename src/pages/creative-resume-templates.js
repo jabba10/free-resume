@@ -106,6 +106,11 @@ const executiveDesignTokens = `
 `;
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
 // ============================================================================
 export async function getStaticProps() {
@@ -113,6 +118,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -153,13 +161,14 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600, // ISR: Revalidate every hour (from Page 1 blueprint)
   };
 }
 
-export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
+export default function CreativeResumeTemplates({ seoData, buildTimestamp, currentYear: propYear }) {
   const {
     currentDate,
     lastModifiedDate,
@@ -167,6 +176,9 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
     faqDates,
     breadcrumbData
   } = seoData || {};
+
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
 
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
@@ -179,15 +191,14 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
   const safeFaqDates = faqDates || Array(8).fill(freshnessIndicator);
 
   const canonicalUrl = "https://professionalresumefree.com/creative-resume-templates";
-  const currentYear = new Date().getFullYear();
 
-  // Optimized title - exactly 70 characters
-  const optimizedTitle = "Creative Resume Templates 2026: 50+ Pro Designs (Free)";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Creative Resume Templates ${currentYear}: 50+ Pro Designs (Free)`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
     "creative resume templates with modern designs",
-    "ATS-friendly creative resume formats 2026",
+    `ATS-friendly creative resume formats ${currentYear}`,
     "professional creative CV templates free download",
     "best creative resume designs by industry",
     "how to make creative resume stand out"
@@ -196,7 +207,7 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
   // People Also Ask for GEO
   const peopleAlsoAsk = [
     { question: "Are creative resume templates ATS-friendly?", answer: "Many modern creative templates are designed with ATS compatibility in mind. Look for clean formatting, standard headings, and proper keyword placement. Always test through an ATS scanner before submission." },
-    { question: "What's the best creative resume format for 2026?", answer: "The Minimalist Creative format achieves the highest ATS scores (98/100) while still providing visual distinction. For creative roles, Portfolio Hybrid formats showcase work samples effectively. Always match creativity level to your industry." }
+    { question: `What's the best creative resume format for ${currentYear}?`, answer: "The Minimalist Creative format achieves the highest ATS scores (98/100) while still providing visual distinction. For creative roles, Portfolio Hybrid formats showcase work samples effectively. Always match creativity level to your industry." }
   ];
 
   const templateCategories = [
@@ -254,18 +265,18 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
     { step: "Final polish & export as PDF", done: false }
   ];
 
+  // ============================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ============================================================================
   const internalLinks = [
-    { href: "/modern-resume-design-2026", text: "Modern Resume Design Trends", iconName: "FiPenTool", desc: "2026 design innovations" },
-    { href: "/best-ats-resume-format-2026", text: "Best ATS Resume Formats", iconName: "FiFileText", desc: "ATS-optimized layouts" },
-    { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "AI Writing Guide", iconName: "FiZap", desc: "Natural AI-powered content" },
-    { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch", desc: "Match resume to job descriptions" },
-    { href: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026", text: "Skills-First vs Chronological", iconName: "FiTrendingUp", desc: "Format comparison guide" },
-    { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get instant quality score" },
-    { href: "/free-cover-letter-generator", text: "Cover Letter Generator", iconName: "FiEdit", desc: "Create matching letters" },
-    { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
+    { href: "/functional-resume-templates", text: "Functional Resume Templates", iconName: "FiLayers" },
+    { href: "/free-resume-template-selector", text: "Resume Template Selector", iconName: "FiTarget" },
+    { href: "/best-resume-templates-to-pass-applicant-tracking-system", text: "ATS-Friendly Template Guide", iconName: "FiShield" },
+    { href: "/high-traffic-resume-templates-americans-search-for", text: "High-Traffic Resume Templates", iconName: "FiTrendingUp" },
+    { href: "/free-resume-builder", text: "Free Resume Builder", iconName: "FiEdit" }
   ];
 
-  const iconMap = { FiPenTool, FiFileText, FiZap, FiSearch, FiTrendingUp, FiAward, FiEdit, FiGrid, FiStar, FiCheck, FiTarget, FiBookOpen };
+  const iconMap = { FiPenTool, FiFileText, FiZap, FiSearch, FiTrendingUp, FiAward, FiEdit, FiGrid, FiStar, FiCheck, FiTarget, FiBookOpen, FiLayers, FiShield };
 
   // ============================================================================
   // COMPLETE STRUCTURED DATA (INJECTED FROM PAGE 1 BLUEPRINT)
@@ -278,8 +289,8 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
         "name": optimizedTitle,
-        "description": "Discover 2026's best creative resume templates. Expert-selected designs, ATS-compatible formats, and industry-specific templates. Download free samples.",
-        "datePublished": "2026-01-01T00:00:00.000Z",
+        "description": `Discover ${currentYear}'s best creative resume templates. Expert-selected designs, ATS-compatible formats, and industry-specific templates. Download free samples.`,
+        "datePublished": "2024-01-01T00:00:00.000Z",
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
         "isPartOf": {
@@ -314,8 +325,8 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Creative Resume Templates: The Complete 2026 Design Guide",
-        "description": "Comprehensive expert guide to selecting and using creative resume templates for maximum impact in the 2026 job market.",
+        "headline": `Creative Resume Templates: The Complete ${currentYear} Design Guide`,
+        "description": `Comprehensive expert guide to selecting and using creative resume templates for maximum impact in the ${currentYear} job market.`,
         "author": {
           "@type": "Organization",
           "name": "Professional Resume Design Experts"
@@ -329,10 +340,10 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
           }
         },
         "mainEntityOfPage": canonicalUrl,
-        "datePublished": "2026-01-01",
+        "datePublished": "2024-01-01",
         "dateModified": safeCurrentDate,
         "articleSection": "Career Advice",
-        "keywords": "creative resume templates, professional resume design, ATS resume templates, modern resume templates 2026"
+        "keywords": `creative resume templates, professional resume design, ATS resume templates, modern resume templates ${currentYear}`
       },
       {
         "@type": "FAQPage",
@@ -376,7 +387,7 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
       {
         "@type": "Product",
         "@id": `${canonicalUrl}#product`,
-        "name": "Creative Resume Templates 2026",
+        "name": `Creative Resume Templates ${currentYear}`,
         "description": "Professional creative resume templates for job seekers",
         "url": canonicalUrl,
         "image": "https://professionalresumefree.com/images/creative-resume-templates-preview.jpg",
@@ -425,16 +436,16 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Discover 2026's best creative resume templates. Expert-selected designs, ATS-compatible formats, and industry-specific templates. Download free samples." />
+        <meta name="description" content={`Discover ${currentYear}'s best creative resume templates. Expert-selected designs, ATS-compatible formats, and industry-specific templates. Download free samples.`} />
         <meta name="author" content="Professional Resume Free Team" />
-        <meta name="keywords" content="creative resume templates, professional resume design, ATS resume templates, modern resume templates 2026, free resume templates, creative cv templates, graphic design resumes, portfolio resumes" />
+        <meta name="keywords" content={`creative resume templates, professional resume design, ATS resume templates, modern resume templates ${currentYear}, free resume templates, creative cv templates, graphic design resumes, portfolio resumes`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Creative Resume Templates 2026: Ultimate Design Guide & 50+ Pro Templates" />
+        <meta name="chatgpt-fts:title" content={`Creative Resume Templates ${currentYear}: Ultimate Design Guide & 50+ Pro Templates`} />
         <meta name="chatgpt-fts:description" content="Create standout resumes with expert-selected creative templates. ATS-compatible formats, industry-specific designs, and free samples available." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -459,26 +470,26 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Creative Resume Templates: Ultimate 2026 Guide with 50+ Pro Designs" />
+        <meta property="og:title" content={`Creative Resume Templates: Ultimate ${currentYear} Guide with 50+ Pro Designs`} />
         <meta property="og:description" content="Expert analysis of the best creative resume templates for modern job seekers. ATS-compatible, industry-specific designs with free samples." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/images/og-creative-resume-templates.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Creative Resume Templates 2026 - Professional Resume Free" />
+        <meta property="og:image:alt" content={`Creative Resume Templates ${currentYear} - Professional Resume Free`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content="2026-01-01T00:00:00.000Z" />
+        <meta property="article:published_time" content="2024-01-01T00:00:00.000Z" />
         <meta property="article:modified_time" content={safeLastModifiedDate} />
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Creative Resume Templates: Ultimate 2026 Guide with 50+ Pro Designs" />
+        <meta name="twitter:title" content={`Creative Resume Templates: Ultimate ${currentYear} Guide with 50+ Pro Designs`} />
         <meta name="twitter:description" content="Professional creative resume templates for standout applications. ATS-compatible, industry-specific designs." />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-creative-resume-templates.jpg" />
-        <meta name="twitter:image:alt" content="Creative Resume Templates 2026" />
+        <meta name="twitter:image:alt" content={`Creative Resume Templates ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -525,7 +536,7 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Creative Resume Templates 2026</span>
+                <span itemProp="name" aria-current="page">Creative Resume Templates {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -539,7 +550,7 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
               <div className="badge" aria-label="Trust indicators">✦ Creative Resume Design Guide {currentYear} | 50+ Pro Designs | ATS-Compatible</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Creative Resume Templates:{' '}
-                <span className="gradient-text">50+ Pro Designs for 2026</span>
+                <span className="gradient-text">50+ Pro Designs for {currentYear}</span>
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Expert-selected creative templates backed by design psychology research. <strong>40% more recruiter views</strong> and <strong>23% more interviews</strong> with strategically designed resumes. <strong>100% Free. No Sign-Up.</strong>
@@ -578,7 +589,7 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
         <section className="section section-alt" aria-labelledby="intro-heading">
           <div className="section-container">
             <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto' }}>
-              <h2 id="intro-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Mastering Creative Resume Design in 2026</h2>
+              <h2 id="intro-heading" style={{ fontSize: 'var(--font-size-headline-lg)', marginBottom: '1.25rem', textAlign: 'center', color: 'var(--accent-primary)' }}>Mastering Creative Resume Design in {currentYear}</h2>
               <p style={{ textAlign: 'center', marginBottom: '1rem' }}>In today's competitive job market, creative resume templates have evolved from niche design elements to essential tools for standing out. This guide provides a comprehensive roadmap for selecting, customizing, and deploying creative templates.</p>
               <p style={{ textAlign: 'center' }}>LinkedIn Talent Solutions reports creatively designed resumes receive <strong>40% more views</strong> and <strong>23% more interview requests</strong> when used appropriately.</p>
             </div>
@@ -846,7 +857,9 @@ export default function CreativeResumeTemplates({ seoData, buildTimestamp }) {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Resume Resources")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">

@@ -1005,18 +1005,24 @@ export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const lastModified = new Date().toISOString();
   
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
+  
   return {
     props: {
       lastModified,
-      buildTimestamp
+      buildTimestamp,
+      currentYear
     },
     revalidate: 3600
   };
 }
 
-export default function ContactPage({ lastModified, buildTimestamp }) {
+export default function ContactPage({ lastModified, buildTimestamp, currentYear: propYear }) {
   const [copySuccess, setCopySuccess] = useState(false);
-  const currentYear = new Date().getFullYear();
+  
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : new Date().getFullYear();
   const displayDate = lastModified ? lastModified.split('T')[0] : new Date().toISOString().split('T')[0];
   const canonicalUrl = "https://professionalresumefree.com/contact";
 
@@ -1076,6 +1082,17 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
     { value: "50K+", label: "Happy Users" }
   ];
 
+  // ============================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ============================================================================
+  const featuredInternalLinks = [
+    { href: "/careers-blog", title: "Careers Blog", icon: "📚" },
+    { href: "/complete-resume-resource-library", title: "Resume Resource Library", icon: "📖" },
+    { href: "/free-resume-tools", title: "Free Resume Tools", icon: "🛠️" },
+    { href: "/cover-letter-guides", title: "Cover Letter Guides", icon: "✉️" },
+    { href: "/interview-tips", title: "Interview Tips", icon: "🎯" }
+  ];
+
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText('contact@professionalresumefree.com');
@@ -1106,8 +1123,8 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
-        <title>Contact Us: Email Support for Resume Builder (24h Response) 2026</title>
+        {/* OPTIMIZED TITLE - dynamic year */}
+        <title>{`Contact Us: Email Support for Resume Builder (24h Response) ${currentYear}`}</title>
         
         {/* OPTIMIZED META DESCRIPTION */}
         <meta name="description" content="Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions. 24-hour response time." />
@@ -1133,7 +1150,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         <link rel="canonical" href={canonicalUrl} />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Contact Us: Email Support for Resume Builder (24h Response) 2026" />
+        <meta property="og:title" content={`Contact Us: Email Support for Resume Builder (24h Response) ${currentYear}`} />
         <meta property="og:description" content="Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/contact-support.jpg" />
@@ -1147,7 +1164,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Contact Us: Email Support for Resume Builder (24h Response) 2026" />
+        <meta name="twitter:title" content={`Contact Us: Email Support for Resume Builder (24h Response) ${currentYear}`} />
         <meta name="twitter:description" content="Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions." />
         <meta name="twitter:image" content="https://professionalresumefree.com/twitter-contact-support.jpg" />
         <meta name="twitter:image:alt" content="Contact Professional Resume Free Support" />
@@ -1171,7 +1188,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Contact Us: Email Support for Resume Builder (24h Response) 2026",
+                  "name": `Contact Us: Email Support for Resume Builder (24h Response) ${currentYear}`,
                   "description": "Contact our support team via email for resume builder assistance. Free help with templates, technical issues, and career questions.",
                   "dateModified": lastModified,
                   "datePublished": "2024-01-01",
@@ -1762,14 +1779,16 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
           </div>
         </section>
 
-        {/* Internal Links Section */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Helpful Self-Service Resources")
+            ============================================================================ */}
         <section style={{
           padding: 'var(--section-gap-sm) 0',
           borderTop: '0.5px solid var(--border-gold-filament)',
           width: '100%'
-        }} aria-labelledby="internal-links-heading">
+        }} aria-labelledby="featured-links-heading">
           <div className="section-container">
-            <h2 id="internal-links-heading" style={{
+            <h2 id="featured-links-heading" style={{
               textAlign: 'center',
               fontSize: 'var(--font-size-headline-lg)',
               fontFamily: 'var(--font-display)',
@@ -1778,7 +1797,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
               marginBottom: 'clamp(0.5rem, 1.5vw, 0.75rem)',
               padding: '0 0.5rem'
             }}>
-              Helpful Self-Service Resources
+              Explore More Resume Resources
             </h2>
             
             <p style={{
@@ -1788,7 +1807,7 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
               marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
               padding: '0 0.5rem'
             }}>
-              Find instant answers and tools to improve your resume before contacting support
+              Continue your job search journey with our expert guides and free tools
             </p>
             
             <div style={{
@@ -1797,35 +1816,12 @@ export default function ContactPage({ lastModified, buildTimestamp }) {
               gap: 'clamp(0.75rem, 1.5vw, 1rem)',
               width: '100%'
             }}>
-              <Link href="/resume-templates" className="internal-link-card">
-                <span className="internal-link-icon">📄</span>
-                <span className="internal-link-title">Browse Free Resume Templates</span>
-                <span className="internal-link-desc">Access 46+ ATS-friendly designs instantly</span>
-              </Link>
-              
-              <Link href="/free-resume-tools" className="internal-link-card">
-                <span className="internal-link-icon">🛠️</span>
-                <span className="internal-link-title">Explore Free Resume Tools</span>
-                <span className="internal-link-desc">Checkers, generators, and analyzers</span>
-              </Link>
-              
-              <Link href="/how-to-write-a-resume" className="internal-link-card">
-                <span className="internal-link-icon">📝</span>
-                <span className="internal-link-title">How to Write a Resume Guide</span>
-                <span className="internal-link-desc">Step-by-step instructions for beginners</span>
-              </Link>
-              
-              <Link href="/free-ats-resume-checker" className="internal-link-card">
-                <span className="internal-link-icon">✅</span>
-                <span className="internal-link-title">Free ATS Resume Checker</span>
-                <span className="internal-link-desc">Scan your resume for compatibility issues</span>
-              </Link>
-              
-              <Link href="/resume-mistakes-americans-make-and-how-to-fix-them" className="internal-link-card">
-                <span className="internal-link-icon">⚠️</span>
-                <span className="internal-link-title">Common Resume Mistakes & Fixes</span>
-                <span className="internal-link-desc">Avoid errors that cost you interviews</span>
-              </Link>
+              {featuredInternalLinks.map((link, i) => (
+                <Link key={i} href={link.href} className="internal-link-card">
+                  <span className="internal-link-icon" role="img" aria-hidden="true">{link.icon}</span>
+                  <span className="internal-link-title">{link.title}</span>
+                </Link>
+              ))}
             </div>
             
             <p style={{

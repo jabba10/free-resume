@@ -10,7 +10,8 @@ import {
   FiCpu, FiMonitor, FiBarChart2, FiCoffee, FiCloud,
   FiCheckCircle, FiGlobe, FiTrendingUp, FiPlus, FiMinus,
   FiSearch, FiXCircle, FiEdit, FiClipboard, FiLayout,
-  FiAlertTriangle, FiActivity, FiLayers, FiHash, FiCheck
+  FiAlertTriangle, FiActivity, FiLayers, FiHash, FiCheck,
+  FiCompass, FiEdit3
 } from 'react-icons/fi';
 
 // ============================================================================
@@ -133,8 +134,10 @@ const executiveDesignTokens = `
   }
 `;
 
-// Data Constants
-const CURRENT_YEAR = new Date().getFullYear();
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 const EXPERIENCE_LEVELS = {
   junior: { name: 'Junior', minYears: 0, maxYears: 2, color: 'level-junior', icon: '🌱', salaryMultiplier: 0.7 },
@@ -176,13 +179,25 @@ const ICON_MAP = {
   FiUsers, FiFlag, FiHeart, FiMapPin, FiDollarSign, FiClock, FiCpu,
   FiMonitor, FiBarChart2, FiCoffee, FiCloud, FiCheckCircle, FiGlobe, FiTrendingUp,
   FiPlus, FiMinus, FiSearch, FiXCircle, FiEdit, FiClipboard, FiLayout,
-  FiAlertTriangle, FiActivity, FiLayers, FiHash, FiCheck
+  FiAlertTriangle, FiActivity, FiLayers, FiHash, FiCheck,
+  FiCompass, FiEdit3
 };
+
+// ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiCompass" },
+  { href: "/cost-of-living-calculator", text: "Cost of Living Calculator", iconName: "FiDollarSign" },
+  { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiGlobe" },
+  { href: "/country-resume-format-calculator", text: "Country Resume Format Calculator", iconName: "FiMapPin" },
+  { href: "/how-to-create-a-resume-with-no-experience", text: "No Experience Resume Guide", iconName: "FiEdit3" }
+];
 
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
+const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp, currentYear: propYear }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -190,6 +205,9 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
     faqDates,
     breadcrumbData
   } = seoData || {};
+
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
 
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
@@ -202,13 +220,13 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
 
   const canonicalUrl = "https://professionalresumefree.com/experience-level-calculator";
   
-  // Optimized title - approximately 70 characters
-  const optimizedTitle = "Free Experience Level Calculator 2026 - Career Level Assessment";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Free Experience Level Calculator ${currentYear} - Career Level Assessment`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
     "experience level calculator by years worked",
-    "career level assessment tool free 2026",
+    `career level assessment tool free ${currentYear}`,
     "how to determine professional seniority level",
     "years of experience to job title calculator",
     "work experience level finder with salary estimates",
@@ -421,7 +439,7 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
         "name": optimizedTitle,
-        "description": "Calculate your professional experience level with our free tool. Add work history, rate skills, and get your career level (Junior to Principal) with salary estimates. 100% private, no sign-up.",
+        "description": `Calculate your professional experience level with our free tool. Add work history, rate skills, and get your career level (Junior to Principal) with salary estimates. 100% private, no sign-up.`,
         "datePublished": "2024-01-15",
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
@@ -462,7 +480,7 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Experience Level Calculator: Determine Your Career Level 2026",
+        "headline": `Experience Level Calculator: Determine Your Career Level ${currentYear}`,
         "description": "Use our free experience level calculator to determine your professional career level from Junior to Principal. Includes years of experience calculation, skill assessment, and salary benchmarking.",
         "author": {
           "@type": "Organization",
@@ -548,16 +566,16 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Calculate your professional experience level with our free tool. Add work history, rate skills, and get your career level (Junior to Principal) with salary estimates. 100% private, no sign-up." />
+        <meta name="description" content={`Calculate your professional experience level with our free tool. Add work history, rate skills, and get your career level (Junior to Principal) with salary estimates. ${currentYear} version, 100% private, no sign-up.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="experience level calculator, years of experience calculator, career level finder, professional level assessment, work experience calculator, seniority level tool, job level calculator, career progression tracker, experience years counter, professional seniority calculator, 2026 career levels, experience evaluator" />
+        <meta name="keywords" content={`experience level calculator, years of experience calculator, career level finder, professional level assessment, work experience calculator, seniority level tool, job level calculator, career progression tracker, experience years counter, professional seniority calculator, ${currentYear} career levels, experience evaluator`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Free Experience Level Calculator 2026 - Determine Your Career Level" />
+        <meta name="chatgpt-fts:title" content={`Free Experience Level Calculator ${currentYear} - Determine Your Career Level`} />
         <meta name="chatgpt-fts:description" content="Calculate your professional experience level based on work history and skill assessments. Get career level placement from Junior to Principal with salary estimates." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -581,13 +599,13 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Free Experience Level Calculator 2026 - Determine Your Career Level" />
+        <meta property="og:title" content={`Free Experience Level Calculator ${currentYear} - Determine Your Career Level`} />
         <meta property="og:description" content="Calculate your professional level based on years of experience and skill assessments. Get salary estimates and see your progression path. Free and private." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:image:alt" content="Free Experience Level Calculator 2026 - Career Level Assessment" />
+        <meta property="og:image:alt" content={`Free Experience Level Calculator ${currentYear} - Career Level Assessment`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -595,10 +613,10 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Experience Level Calculator 2026 - Determine Your Career Level" />
+        <meta name="twitter:title" content={`Free Experience Level Calculator ${currentYear} - Determine Your Career Level`} />
         <meta name="twitter:description" content="Calculate your professional experience level. Add work history, rate skills, and get career level with salary estimates. Free and private." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
-        <meta name="twitter:image:alt" content="Experience Level Calculator 2026" />
+        <meta name="twitter:image:alt" content={`Experience Level Calculator ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -645,7 +663,7 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Experience Level Calculator 2026</span>
+                <span itemProp="name" aria-current="page">Experience Level Calculator {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -656,16 +674,16 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge" aria-label="Trust indicators">⏱️ Free Tool • No Sign Up • Instant Results | Updated {CURRENT_YEAR}</div>
+              <div className="badge" aria-label="Trust indicators">⏱️ Free Tool • No Sign Up • Instant Results | Updated {currentYear}</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free <span className="gradient-text">Experience Level</span> Calculator {CURRENT_YEAR}
+                Free <span className="gradient-text">Experience Level</span> Calculator {currentYear}
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Determine your <strong>professional experience level</strong> based on years of work history and skill assessments. Get career level placement from Junior to Principal with salary estimates and progression tracking. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
               </p>
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))' }} aria-label="Key statistics">
                 <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
-                  <span className="badge">📊 Based on {CURRENT_YEAR} Career Progression Data</span>
+                  <span className="badge">📊 Based on {currentYear} Career Progression Data</span>
                 </div>
                 <div className="stat-card"><div className="stat-number">5</div><div className="stat-label">Career Levels</div></div>
                 <div className="stat-card"><div className="stat-number">5</div><div className="stat-label">Skill Categories</div></div>
@@ -678,7 +696,7 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
                 <span><FiUsers size={14} style={{ display: 'inline' }} /> Trusted by 500K+ Users</span>
               </div>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem' }} aria-label="Footnote">
-                * Based on {CURRENT_YEAR} Career Progression Standards | Regular Updates
+                * Based on {currentYear} Career Progression Standards | Regular Updates
               </p>
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }} role="group" aria-label="Additional tools">
                 <Link href="/salary-calculator" className="btn-outline" aria-label="Try our free salary calculator"><FiDollarSign /> Salary Calculator</Link>
@@ -1067,7 +1085,9 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Tools")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">
@@ -1075,12 +1095,7 @@ const ExperienceLevelCalculatorPage = ({ seoData, buildTimestamp }) => {
               <p className="section-subtitle">Complement your experience assessment with these powerful resources</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp" },
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign" },
-                { href: "/job-fit-calculator", text: "Job Fit Calculator", iconName: "FiTarget" },
-                { href: "/skill-gap-calculator", text: "Skill Gap Calculator", iconName: "FiSearch" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -1116,6 +1131,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(3).fill(null).map((_, i) => {
@@ -1156,6 +1174,7 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600, // ISR: Revalidate every hour

@@ -106,6 +106,11 @@ const executiveDesignTokens = `
 `;
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
 // ============================================================================
 export async function getStaticProps() {
@@ -114,6 +119,9 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
   const lastVerified = buildTime.toISOString().split('T')[0];
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -155,13 +163,14 @@ export async function getStaticProps() {
         breadcrumbData
       },
       buildTimestamp,
+      currentYear,
       lastVerified
     },
     revalidate: 3600, // ISR: Revalidate every hour
   };
 }
 
-const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
+const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified, currentYear: propYear }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -169,6 +178,9 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
     faqDates,
     breadcrumbData
   } = seoData || {};
+
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
 
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
@@ -179,16 +191,15 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const displayDate = safeCurrentDate.split('T')[0];
   const canonicalUrl = "https://professionalresumefree.com/cover-letter-guides";
-  const currentYear = new Date().getFullYear();
   const safeReviewDates = reviewDates || Array(6).fill(displayDate);
   const safeFaqDates = faqDates || Array(12).fill(displayDate);
 
-  // Optimized title - exactly 70 characters
-  const optimizedTitle = "Cover Letter Guide 2026: 8 Templates & Expert Writing Tips (Free)";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Cover Letter Guide ${currentYear}: 8 Templates & Expert Writing Tips (Free)`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
-    "cover letter writing guide 2026",
+    `cover letter writing guide ${currentYear}`,
     "free cover letter templates with examples",
     "how to write an ATS-friendly cover letter",
     "professional cover letter format tips",
@@ -197,8 +208,8 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
 
   // People Also Ask for GEO
   const peopleAlsoAsk = [
-    { question: "Is a cover letter still necessary in 2026?", answer: "83% of hiring managers and 91% of recruiters consider cover letters essential. AI-powered ATS analyze cover letters for cultural fit indicators. Customized cover letters yield 3.2x more interviews." },
-    { question: "What is the best cover letter format for 2026?", answer: "The professional standard format achieves 98/100 ATS scores. Use clean formatting, standard fonts, and achievement-focused bullet points. Our templates pass 95%+ of applicant tracking systems." },
+    { question: `Is a cover letter still necessary in ${currentYear}?`, answer: "83% of hiring managers and 91% of recruiters consider cover letters essential. AI-powered ATS analyze cover letters for cultural fit indicators. Customized cover letters yield 3.2x more interviews." },
+    { question: `What is the best cover letter format for ${currentYear}?`, answer: "The professional standard format achieves 98/100 ATS scores. Use clean formatting, standard fonts, and achievement-focused bullet points. Our templates pass 95%+ of applicant tracking systems." },
     { question: "How do I write a cover letter that beats ATS screening?", answer: "Include keywords from the job description naturally. Use standard section headings. Save as machine-readable PDF. Our ATS-optimized templates achieve industry-leading pass rates across major platforms." }
   ];
 
@@ -270,7 +281,7 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
   ];
 
   const faqs = [
-    { question: "Is a cover letter still necessary in 2026?", answer: "83% of hiring managers and 91% of recruiters consider cover letters essential. AI-powered ATS analyze cover letters for cultural fit indicators. Customized cover letters yield 3.2x more interviews." },
+    { question: `Is a cover letter still necessary in ${currentYear}?`, answer: "83% of hiring managers and 91% of recruiters consider cover letters essential. AI-powered ATS analyze cover letters for cultural fit indicators. Customized cover letters yield 3.2x more interviews." },
     { question: "What is the optimal cover letter length?", answer: "300-450 words (3-4 paragraphs) maintains engagement while providing sufficient ATS keyword context. Letters over 500 words see 47% completion rate drops." },
     { question: "How does AI affect cover letter screening?", answer: "Modern ATS use NLP to evaluate letters across 127 semantic dimensions. Top quartile letters for readability/relevance are 4.1x more likely to reach human reviewers." },
     { question: "What salutation works best when hiring manager is unknown?", answer: "'Dear Hiring Manager' outperforms 'To Whom It May Concern' by 38%. 'Dear [Department] Team' improves results 56%. Identifying the manager improves response 2.3x." },
@@ -295,19 +306,15 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
     { template: "Executive", atsScore: "92/100", customization: "Very High", bestUse: "C-Suite, Board, VP Level" }
   ];
 
+  // ============================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ============================================================================
   const internalLinks = [
-    { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", iconName: "FiBarChart", desc: "Match keywords instantly" },
-    { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "USA Customer Service Resume", iconName: "FiBriefcase", desc: "Specialized industry templates" },
-    { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Resume Tips", iconName: "FiMonitor", desc: "Optimize for virtual positions" },
-    { href: "/best-resume-examples-for-usa-engineering-jobs", text: "Engineering Resume Examples", iconName: "FiCode", desc: "Developer and engineer formats" },
-    { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "AI Resume Writing Guide", iconName: "FiMessageCircle", desc: "Natural AI-powered resumes" },
-    { href: "/free-cover-letter-generator", text: "Free Cover Letter Generator", iconName: "FiEdit", desc: "Create letters in 5 minutes" },
-    { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiFileText", desc: "46+ professional formats" },
-    { href: "/comprehensive-resume-guide-2026", text: "Complete Resume Guide 2026", iconName: "FiBookOpen", desc: "Expert strategies and tips" },
-    { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "Federal Resume Guide", iconName: "FiDatabase", desc: "USAJobs requirements" },
-    { href: "/free-resume-readability-checker", text: "Resume Readability Checker", iconName: "FiSearch", desc: "Improve clarity and flow" },
-    { href: "/resume-trends-in-the-usa-for-2026", text: "2026 USA Resume Trends", iconName: "FiTrendingUp", desc: "Stay ahead of market changes" },
-    { href: "/free-resume-score-checker", text: "Free Resume Score Checker", iconName: "FiAward", desc: "Get instant quality score" }
+    { href: "/free-cover-letter-generator", text: "Free Cover Letter Generator", iconName: "FiEdit" },
+    { href: "/complete-resume-resource-library", text: "Complete Resume Resource Library", iconName: "FiBookOpen" },
+    { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiFileText" },
+    { href: "/interview-tips", text: "Interview Tips", iconName: "FiMessageCircle" },
+    { href: "/careers-blog", text: "Careers Blog", iconName: "FiTrendingUp" }
   ];
 
   const iconMap = { FiBarChart, FiBriefcase, FiMonitor, FiCode, FiMessageCircle, FiEdit, FiFileText, FiBookOpen, FiStar, FiTrendingUp, FiTarget, FiSearch, FiDatabase, FiAward, FiZap, FiHeart, FiDollarSign, FiTool, FiCpu, FiSmartphone, FiGlobe, FiMail, FiSend, FiCoffee, FiAnchor };
@@ -323,7 +330,7 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
         "name": optimizedTitle,
-        "description": "Master cover letter writing in 2026 with 8 proven templates, industry-specific guides, email best practices, and salary negotiation tips. Get 3.2x more interviews.",
+        "description": `Master cover letter writing in ${currentYear} with 8 proven templates, industry-specific guides, email best practices, and salary negotiation tips. Get 3.2x more interviews.`,
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
@@ -359,8 +366,8 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Cover Letter Writing Guide 2026: Complete Professional Guide with 8 Templates",
-        "description": "A complete guide to creating professional cover letters for the 2026 job market. Includes 8 templates, industry-specific strategies, email best practices, and salary negotiation tips.",
+        "headline": `Cover Letter Writing Guide ${currentYear}: Complete Professional Guide with 8 Templates`,
+        "description": `A complete guide to creating professional cover letters for the ${currentYear} job market. Includes 8 templates, industry-specific strategies, email best practices, and salary negotiation tips.`,
         "image": "https://professionalresumefree.com/cover-letter-guide.jpg",
         "author": {
           "@type": "Person",
@@ -380,7 +387,7 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
         "articleSection": "Career Development",
-        "keywords": "cover letter guide 2026, cover letter templates, how to write cover letter, professional cover letter, ATS cover letter"
+        "keywords": `cover letter guide ${currentYear}, cover letter templates, how to write cover letter, professional cover letter, ATS cover letter`
       },
       {
         "@type": "FAQPage",
@@ -477,16 +484,16 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Master cover letter writing in 2026 with 8 proven templates, industry-specific guides, email best practices, and salary negotiation tips. Get 3.2x more interviews." />
+        <meta name="description" content={`Master cover letter writing in ${currentYear} with 8 proven templates, industry-specific guides, email best practices, and salary negotiation tips. Get 3.2x more interviews.`} />
         <meta name="author" content="Sahr Jabba, Career Strategy Specialist" />
-        <meta name="keywords" content="cover letter guide 2026, cover letter templates, how to write cover letter, professional cover letter, ATS cover letter, job application letter, cover letter examples, free cover letter builder, industry-specific cover letter, email cover letter best practices, salary negotiation tips" />
+        <meta name="keywords" content={`cover letter guide ${currentYear}, cover letter templates, how to write cover letter, professional cover letter, ATS cover letter, job application letter, cover letter examples, free cover letter builder, industry-specific cover letter, email cover letter best practices, salary negotiation tips`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Cover Letter Writing Guide 2026: Complete Tutorial with 8 Templates" />
+        <meta name="chatgpt-fts:title" content={`Cover Letter Writing Guide ${currentYear}: Complete Tutorial with 8 Templates`} />
         <meta name="chatgpt-fts:description" content="Learn to write professional cover letters with expert strategies, 8 templates, industry-specific guides, and ATS optimization tips. Get 3.2x more interviews." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={displayDate} />
@@ -510,13 +517,13 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Cover Letter Guide 2026: 8 Templates & Expert Writing Tips (Free)" />
-        <meta property="og:description" content="Master cover letter writing in 2026 with 8 proven templates, industry-specific guides, and ATS optimization tips. Get 3.2x more interviews." />
+        <meta property="og:title" content={`Cover Letter Guide ${currentYear}: 8 Templates & Expert Writing Tips (Free)`} />
+        <meta property="og:description" content={`Master cover letter writing in ${currentYear} with 8 proven templates, industry-specific guides, and ATS optimization tips. Get 3.2x more interviews.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/cover-letter-guide.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Cover Letter Guide 2026 - Professional templates and writing tips" />
+        <meta property="og:image:alt" content={`Cover Letter Guide ${currentYear} - Professional templates and writing tips`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -531,10 +538,10 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Cover Letter Guide 2026: 8 Templates & Expert Writing Tips (Free)" />
-        <meta name="twitter:description" content="Master cover letter writing in 2026 with 8 proven templates, industry guides, and ATS tips. Get 3.2x more interviews." />
+        <meta name="twitter:title" content={`Cover Letter Guide ${currentYear}: 8 Templates & Expert Writing Tips (Free)`} />
+        <meta name="twitter:description" content={`Master cover letter writing in ${currentYear} with 8 proven templates, industry guides, and ATS tips. Get 3.2x more interviews.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/twitter-cover-letter-guide.jpg" />
-        <meta name="twitter:image:alt" content="Cover Letter Guide 2026" />
+        <meta name="twitter:image:alt" content={`Cover Letter Guide ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -581,7 +588,7 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Cover Letter Guides 2026</span>
+                <span itemProp="name" aria-current="page">Cover Letter Guides {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -594,7 +601,7 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge" aria-label="Trust indicators">✦ Cover Letter Guide {currentYear} | 8 Templates | 3.2x More Interviews</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Cover Letter Guide 2026:{' '}
+                Cover Letter Guide {currentYear}:{' '}
                 <span className="gradient-text">8 Templates & Expert Tips</span>
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
@@ -921,7 +928,9 @@ const CoverLetterGuides = ({ seoData, buildTimestamp, lastVerified }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Resources")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">

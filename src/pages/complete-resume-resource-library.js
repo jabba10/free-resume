@@ -889,7 +889,7 @@ const executiveDesignTokens = `
     color: var(--btn-outline-text);
   }
   
-  .usa-links-section {
+  .featured-links-section {
     margin: 3rem 0;
     background: rgba(242, 202, 80, 0.03);
     border-radius: var(--radius-3xl);
@@ -897,49 +897,59 @@ const executiveDesignTokens = `
     border: var(--card-border);
   }
   
-  .usa-links-grid {
+  .featured-links-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
   }
   
   @media (min-width: 640px) {
-    .usa-links-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-links-grid { grid-template-columns: repeat(2, 1fr); }
   }
   
   @media (min-width: 1024px) {
-    .usa-links-grid { grid-template-columns: repeat(3, 1fr); }
+    .featured-links-grid { grid-template-columns: repeat(3, 1fr); }
   }
   
-  @media (min-width: 1280px) {
-    .usa-links-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  
-  .usa-link-card {
+  .featured-link-card {
     background: var(--card-bg);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    padding: 1.25rem;
+    padding: 1.5rem;
     border-radius: var(--radius-xl);
     border: var(--card-border);
     transition: all var(--transition-medium) var(--easing-smooth);
     cursor: pointer;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 110px;
+    text-decoration: none;
+    color: inherit;
   }
   
-  .usa-link-card:hover {
+  .featured-link-card:hover {
     transform: translateY(-3px);
     border-color: var(--accent-primary-container);
     box-shadow: var(--card-hover-shadow);
+    color: inherit;
   }
   
-  .usa-link-title {
+  .featured-link-title {
     font-size: var(--font-size-body-md);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
     line-height: 1.4;
-    margin-bottom: 0;
-    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .featured-link-cta {
+    font-size: var(--font-size-body-sm);
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-medium);
   }
   
   .invisible-link-for-crawlers {
@@ -1203,7 +1213,7 @@ const executiveDesignTokens = `
       grid-template-columns: 1fr;
     }
     
-    .usa-links-section {
+    .featured-links-section {
       padding: 1.5rem;
     }
     
@@ -1235,42 +1245,10 @@ const executiveDesignTokens = `
   }
 `;
 
-// ===== USA JOBS RESUME LINKS (33 LINKS) =====
-const usaJobResumeLinks = [
-  { url: "/most-googled-resume-questions-in-the-usa", text: "Most Googled Resume Questions in the USA" },
-  { url: "/most-in-demand-resume-keywords-for-usa-job-seekers", text: "Most In-Demand Resume Keywords for USA Job Seekers" },
-  { url: "/most-popular-resume-layouts-for-usa-tech-jobs", text: "Most Popular Resume Layouts for USA Tech Jobs" },
-  { url: "/high-traffic-resume-templates-americans-search-for", text: "High Traffic Resume Templates Americans Search For" },
-  { url: "/how-long-should-a-resume-be-usa-recruiter-insights", text: "How Long Should a Resume Be? USA Recruiter Insights" },
-  { url: "/best-fonts-and-designs-for-usa-resumes", text: "Best Fonts and Designs for USA Resumes" },
-  { url: "/best-resume-examples-for-career-changers-in-the-usa", text: "Best Resume Examples for Career Changers in the USA" },
-  { url: "/best-resume-examples-for-usa-engineering-jobs", text: "Best Resume Examples for USA Engineering Jobs" },
-  { url: "/best-resume-examples-for-usa-healthcare-jobs", text: "Best Resume Examples for USA Healthcare Jobs" },
-  { url: "/best-resume-examples-for-usa-it-and-software-jobs", text: "Best Resume Examples for USA IT and Software Jobs" },
-  { url: "/best-resume-examples-for-usa-management-positions", text: "Best Resume Examples for USA Management Positions" },
-  { url: "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume", text: "How to List Prompt Engineering as a Skill on Your Professional Resume" },
-  { url: "/how-to-optimize-your-resume-for-linkedin-recruiters", text: "How to Optimize Your Resume for LinkedIn Recruiters" },
-  { url: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "How to Pass the AI Resume Screen 2026: ATS Algorithms Explained" },
-  { url: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "How to Tailor Your Resume for Any USA Job Posting" },
-  { url: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "How to Use ChatGPT to Improve Your Resume Bullets: Prompt Engineering Guide 2026" },
-  { url: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "How to Use ChatGPT to Write a Resume That Does Not Sound Like a Robot" },
-  { url: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "How to Write a Federal Resume for USA Government Jobs" },
-  { url: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "How to Write a Resume for USA Administrative Jobs" },
-  { url: "/how-to-write-a-resume-for-usa-sales-and-marketing-roles", text: "How to Write a Resume for USA Sales and Marketing Roles" },
-  { url: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "How to Write a Resume for USA Customer Service Jobs" },
-  { url: "/how-to-write-a-resume-for-usa-finance-and-accounting-roles", text: "How to Write a Resume for USA Finance and Accounting Roles" },
-  { url: "/how-to-write-a-resume-for-usa-hospitality-jobs", text: "How to Write a Resume for USA Hospitality Jobs" },
-  { url: "/how-to-write-a-resume-for-usa-retail-jobs", text: "How to Write a Resume for USA Retail Jobs" },
-  { url: "/how-to-write-a-resume-for-usa-teaching-and-education-jobs", text: "How to Write a Resume for USA Teaching and Education Jobs" },
-  { url: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "How to Write Bullet Points That Impress USA Recruiters" },
-  { url: "/the-death-of-the-objective-statement-what-to-write-instead", text: "The Death of the Objective Statement: What to Write Instead" },
-  { url: "/top-skills-employers-in-the-usa-want-on-resumes", text: "Top Skills Employers in the USA Want on Resumes" },
-  { url: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026", text: "Why Skills-First Resumes Are Replacing Chronological Layouts in 2026" },
-  { url: "/resume-mistakes-americans-make-and-how-to-fix-them", text: "Resume Mistakes Americans Make and How to Fix Them" },
-  { url: "/resume-tips-for-remote-jobs-in-the-usa", text: "Resume Tips for Remote Jobs in the USA" },
-  { url: "/resume-tips-for-usa-college-students-and-graduates", text: "Resume Tips for USA College Students and Graduates" },
-  { url: "/resume-trends-in-the-usa-for-2026", text: "Resume Trends in the USA for 2026" }
-];
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 // Author data for E-E-A-T
 const AUTHORS = [
@@ -1292,10 +1270,10 @@ const AUTHORS = [
 
 // Industry statistics data
 const INDUSTRY_STATS = {
-  atsAdoption: { value: '98%', label: 'of Fortune 500 companies use ATS', source: 'LinkedIn Hiring Report 2026' },
+  atsAdoption: { value: '98%', label: 'of Fortune 500 companies use ATS', source: 'LinkedIn Hiring Report' },
   screeningTime: { value: '7.4s', label: 'Average resume screening time', source: 'Ladders Eye-Tracking Study' },
   interviewRate: { value: '3x', label: 'Higher interview rate with ATS-optimized resumes', source: 'Our Client Data Analysis' },
-  keywordImpact: { value: '80%', label: 'More likely to pass initial screening with proper keywords', source: 'Jobscan ATS Research 2026' }
+  keywordImpact: { value: '80%', label: 'More likely to pass initial screening with proper keywords', source: 'Jobscan ATS Research' }
 };
 
 // Internal links data - ALL items included
@@ -1374,7 +1352,7 @@ const internalLinks = [
   
   // ATS & Optimization
   { href: '/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software', label: 'Beat the ATS', description: 'Advanced strategies for automated screening', category: 'ats' },
-  { href: '/best-ats-resume-format-2026', label: 'Best ATS Format 2026', description: 'Latest standards for Taleo & Workday', category: 'ats' },
+  { href: '/best-ats-resume-format-2026', label: 'Best ATS Format', description: 'Latest standards for Taleo & Workday', category: 'ats' },
   { href: '/keywords-for-resume', label: 'Keywords for Resume', description: 'Industry-specific keyword libraries', category: 'ats' },
   { href: '/resume-keywords-finder', label: 'Keywords Finder Tool', description: 'Analyze job descriptions for keywords', category: 'ats' },
   
@@ -1390,7 +1368,7 @@ const internalLinks = [
   { href: '/chronological-resume-example', label: 'Chronological Example', description: 'Real-world reverse-chronological format', category: 'formats' },
   { href: '/functional-resume-templates', label: 'Functional Templates', description: 'Skills-based for career changers', category: 'formats' },
   { href: '/one-page-resume-template', label: 'One Page Template', description: 'Condensed formats for impact', category: 'formats' },
-  { href: '/modern-resume-design-2026', label: 'Modern Design 2026', description: 'Contemporary visual trends', category: 'formats' },
+  { href: '/modern-resume-design-2026', label: 'Modern Design', description: 'Contemporary visual trends', category: 'formats' },
   { href: '/creative-resume-templates', label: 'Creative Templates', description: 'Design-forward for creative industries', category: 'formats' },
   { href: '/basic-resume-format', label: 'Basic Format', description: 'Essential structure principles', category: 'formats' },
   { href: '/simple-resume-template', label: 'Simple Template', description: 'Clean, minimalist designs', category: 'formats' },
@@ -1402,7 +1380,7 @@ const internalLinks = [
   // Career Resources
   { href: '/jobs-search-tips', label: 'Job Search Tips', description: 'Proven strategies for interviews', category: 'career' },
   { href: '/jobs-boards', label: 'Job Boards', description: 'Curated list by industry', category: 'career' },
-  { href: '/careers-blog', label: 'Career Development Guide', description: 'Strategic career planning 2026', category: 'career' },
+  { href: '/careers-blog', label: 'Career Development Guide', description: 'Strategic career planning', category: 'career' },
 ];
 
 // Group links by category
@@ -1539,6 +1517,17 @@ const FAQS = [
   }
 ];
 
+// ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const featuredInternalLinks = [
+  { href: "/comprehensive-resume-guide-2026", title: "Comprehensive Resume Guide", cta: "Read Full Guide →" },
+  { href: "/how-to-write-a-resume", title: "How to Write a Resume Guide", cta: "Start Learning →" },
+  { href: "/cover-letter-guides", title: "Cover Letter Guides", cta: "Explore Guides →" },
+  { href: "/free-resume-tools", title: "Free Resume Tools Collection", cta: "Access Tools →" },
+  { href: "/careers-blog", title: "Careers Blog", cta: "Visit Blog →" }
+];
+
 // Function to filter links by category
 const filterLinksByCategory = (categoryId, internalLinks) => {
   const category = linkCategories.find(cat => cat.id === categoryId);
@@ -1556,9 +1545,11 @@ const filterLinksByCategory = (categoryId, internalLinks) => {
 export default function CompleteResumeResourceLibrary({ 
   totalResources, 
   lastBuildDate,
-  currentYear = '2026',
+  currentYear,
   seoData
 }) {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const displayYear = currentYear || getCurrentYear();
   const displayDate = seoData?.currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = seoData?.lastModifiedDate || new Date().toISOString();
   const safeReviewDates = seoData?.reviewDates || Array(3).fill(displayDate);
@@ -1566,7 +1557,7 @@ export default function CompleteResumeResourceLibrary({
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
-    "how to write resume 2026",
+    `how to write resume ${displayYear}`,
     "ATS-friendly resume templates",
     "professional resume examples",
     "career change resume guide",
@@ -1581,8 +1572,8 @@ export default function CompleteResumeResourceLibrary({
         "@type": "WebPage",
         "@id": "https://professionalresumefree.com/complete-resume-resource-library/#webpage",
         "url": "https://professionalresumefree.com/complete-resume-resource-library/",
-        "name": "Complete Resume Resource Library: Expert Guides & Tools 2026",
-        "description": "Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.",
+        "name": `Complete Resume Resource Library: Expert Guides & Tools ${displayYear}`,
+        "description": `Comprehensive ${displayYear} resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates.`,
         "datePublished": "2024-01-15",
         "dateModified": safeLastModifiedDate,
         "inLanguage": "en-US",
@@ -1607,7 +1598,7 @@ export default function CompleteResumeResourceLibrary({
         },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://professionalresumefree.com/og-resume-library-2026.jpg",
+          "url": "https://professionalresumefree.com/og-resume-library.jpg",
           "width": 1200,
           "height": 630
         },
@@ -1629,7 +1620,7 @@ export default function CompleteResumeResourceLibrary({
             {
               "@type": "ListItem",
               "position": 3,
-              "name": "Complete Resource Library 2026"
+              "name": `Complete Resource Library ${displayYear}`
             }
           ]
         }
@@ -1637,8 +1628,8 @@ export default function CompleteResumeResourceLibrary({
       {
         "@type": "Article",
         "@id": "https://professionalresumefree.com/complete-resume-resource-library/#article",
-        "headline": "Complete Resume Resource Library: The Ultimate 2026 Format Guide",
-        "description": "Master resume writing with expert strategies for the 2026 job market. Comprehensive guides, ATS optimization, and industry-specific templates.",
+        "headline": `Complete Resume Resource Library: The Ultimate ${displayYear} Format Guide`,
+        "description": `Master resume writing with expert strategies for the ${displayYear} job market. Comprehensive guides, ATS optimization, and industry-specific templates.`,
         "author": AUTHORS.map(author => ({
           "@type": "Person",
           "name": author.name,
@@ -1660,8 +1651,8 @@ export default function CompleteResumeResourceLibrary({
         "mainEntityOfPage": "https://professionalresumefree.com/complete-resume-resource-library/",
         "datePublished": "2024-01-15",
         "dateModified": safeLastModifiedDate,
-        "articleBody": "This comprehensive guide covers modern resume requirements for 2026, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
-        "keywords": "resume writing 2026, ATS optimization, professional resume, job search 2026, career guide",
+        "articleBody": "This comprehensive guide covers modern resume requirements, ATS optimization strategies, professional formatting guidelines, impactful content writing techniques, industry-specific examples, and common mistakes to avoid.",
+        "keywords": `resume writing ${displayYear}, ATS optimization, professional resume, job search, career guide`,
         "wordCount": 3500
       },
       {
@@ -1771,17 +1762,17 @@ export default function CompleteResumeResourceLibrary({
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
-        <title>Complete Resume Resource Library: Expert Guides & Tools 2026</title>
+        {/* OPTIMIZED TITLE - dynamic year */}
+        <title>{`Complete Resume Resource Library: Expert Guides & Tools ${displayYear}`}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Master resume writing with free 2026 guides, ATS-optimized templates, and expert strategies. Access 50+ industry-specific resources. No sign-up required." />
+        <meta name="description" content={`Master resume writing with free ${displayYear} guides, ATS-optimized templates, and expert strategies. Access 50+ industry-specific resources. No sign-up required.`} />
         <meta name="author" content="Dr. Sarah Kamara, Marcus Johnson, Professional Resume Experts" />
-        <meta name="keywords" content="resume writing guide 2026, ATS optimization, professional resume templates, career advice, job search strategies, resume keywords, industry-specific resumes, free resume builder 2026" />
+        <meta name="keywords" content={`resume writing guide ${displayYear}, ATS optimization, professional resume templates, career advice, job search strategies, resume keywords, industry-specific resumes, free resume builder`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
-        <meta name="chatgpt-fts:description" content="Comprehensive 2026 resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates for job market success." />
+        <meta name="chatgpt-fts:title" content={`Complete Resume Resource Library: Expert Guides & Tools ${displayYear}`} />
+        <meta name="chatgpt-fts:description" content={`Comprehensive ${displayYear} resume writing guide with expert strategies, ATS optimization tips, and industry-specific templates for job market success.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={displayDate} />
         <meta name="generator" content="Professional Resume Free - ATS Optimized Builder" />
@@ -1804,13 +1795,13 @@ export default function CompleteResumeResourceLibrary({
         <link rel="alternate" href="https://professionalresumefree.com/complete-resume-resource-library" hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
-        <meta property="og:description" content="Master resume writing with expert strategies, ATS optimization, and industry-specific templates for 2026 job market success." />
+        <meta property="og:title" content={`Complete Resume Resource Library: Expert Guides & Tools ${displayYear}`} />
+        <meta property="og:description" content={`Master resume writing with expert strategies, ATS optimization, and industry-specific templates for ${displayYear} job market success.`} />
         <meta property="og:url" content="https://professionalresumefree.com/complete-resume-resource-library" />
-        <meta property="og:image" content="https://professionalresumefree.com/og-resume-library-2026.jpg" />
+        <meta property="og:image" content="https://professionalresumefree.com/og-resume-library.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Complete Resume Resource Library 2026 with Expert Guides" />
+        <meta property="og:image:alt" content={`Complete Resume Resource Library ${displayYear} with Expert Guides`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -1818,10 +1809,10 @@ export default function CompleteResumeResourceLibrary({
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Complete Resume Resource Library: Expert Guides & Tools 2026" />
-        <meta name="twitter:description" content="Expert resume strategies, ATS optimization, and industry templates for 2026 job market success." />
-        <meta name="twitter:image" content="https://professionalresumefree.com/og-resume-library-2026.jpg" />
-        <meta name="twitter:image:alt" content="Resume Resource Library 2026" />
+        <meta name="twitter:title" content={`Complete Resume Resource Library: Expert Guides & Tools ${displayYear}`} />
+        <meta name="twitter:description" content={`Expert resume strategies, ATS optimization, and industry templates for ${displayYear} job market success.`} />
+        <meta name="twitter:image" content="https://professionalresumefree.com/og-resume-library.jpg" />
+        <meta name="twitter:image:alt" content={`Resume Resource Library ${displayYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         <meta name="twitter:creator" content="@ProfResumeFree" />
         
@@ -1872,7 +1863,7 @@ export default function CompleteResumeResourceLibrary({
             </li>
             <li aria-hidden="true">/</li>
             <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-              <span itemProp="name" aria-current="page">Complete Resource Library 2026</span>
+              <span itemProp="name" aria-current="page">{`Complete Resource Library ${displayYear}`}</span>
               <meta itemProp="position" content="3" />
             </li>
           </ol>
@@ -1894,7 +1885,7 @@ export default function CompleteResumeResourceLibrary({
               marginBottom: '1.25rem',
               letterSpacing: 'var(--letter-spacing-tight)'
             }}>
-              Complete Resume <span className="gradient-text">Resource Library</span>: Expert Guides & Tools {currentYear}
+              Complete Resume <span className="gradient-text">Resource Library</span>: Expert Guides & Tools {displayYear}
             </h1>
 
             {/* Top CTA - Moved just below H1 */}
@@ -1909,7 +1900,7 @@ export default function CompleteResumeResourceLibrary({
             
             <div className="search-intent-box">
               <p>
-                <strong>Search Intent Optimized:</strong> If you're searching for "how to write a resume 2026", "ATS-friendly resume templates", or "professional resume examples", you've found the most comprehensive resource online.
+                <strong>Search Intent Optimized:</strong> If you're searching for "how to write a resume {displayYear}", "ATS-friendly resume templates", or "professional resume examples", you've found the most comprehensive resource online.
               </p>
             </div>
             
@@ -1928,7 +1919,7 @@ export default function CompleteResumeResourceLibrary({
               <h2 className="expert-title">Why This Guide Ranks #1 on Google</h2>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                 After analyzing <strong>10,000+ resumes</strong> and <strong>15 years of HR data</strong>, 
-                we've identified the exact strategies that work in {currentYear}'s AI-enhanced job market. 
+                we've identified the exact strategies that work in {displayYear}'s AI-enhanced job market. 
                 This isn't just another resource list—it's a <strong>data-driven methodology</strong> backed by 
                 real hiring outcomes. Our content is optimized for Google's E-E-A-T criteria (Experience, 
                 Expertise, Authoritativeness, Trustworthiness).
@@ -1965,7 +1956,7 @@ export default function CompleteResumeResourceLibrary({
               marginBottom: '1.5rem',
               padding: '0 1rem'
             }}>
-              2026 Resume Statistics You Need to Know
+              {displayYear} Resume Statistics You Need to Know
             </h2>
             <div className="stats-grid">
               <div className="stat-card">
@@ -2047,7 +2038,7 @@ export default function CompleteResumeResourceLibrary({
                 marginBottom: '0.5rem',
                 padding: '0 1rem'
               }}>
-                The 2026 Resume Framework: A Step-by-Step System
+                The {displayYear} Resume Framework: A Step-by-Step System
               </h2>
               <p style={{ color: 'var(--text-secondary)', padding: '0 1rem' }}>
                 Based on analysis of successful resumes across industries
@@ -2175,7 +2166,7 @@ export default function CompleteResumeResourceLibrary({
             </h2>
             <div className="guide-steps-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
               {[
-                "how to write a resume with no experience 2026",
+                `how to write a resume with no experience ${displayYear}`,
                 "best resume format for experienced professionals",
                 "ATS friendly resume templates free download",
                 "what skills to put on resume for first job",
@@ -2230,67 +2221,6 @@ export default function CompleteResumeResourceLibrary({
             );
           })}
 
-          {/* USA Jobs Resume Links Section */}
-          <section className="usa-links-section">
-            <h2 style={{
-              fontSize: 'var(--font-size-headline-lg)',
-              fontFamily: 'var(--font-display)',
-              fontWeight: 'var(--font-weight-extrabold)',
-              color: 'var(--text-primary)',
-              marginBottom: '1rem',
-              textAlign: 'center'
-            }}>
-              USA Jobs Resume Directory
-            </h2>
-            <p style={{
-              textAlign: 'center',
-              color: 'var(--text-secondary)',
-              marginBottom: '2rem',
-              fontSize: 'var(--font-size-body-md)'
-            }}>
-              Complete guide to federal USAJOBS formats, ATS-optimized templates, and state-specific resume strategies for American job seekers.
-            </p>
-            
-            <div className="usa-links-grid">
-              {usaJobResumeLinks.map((link, index) => (
-                <div 
-                  key={index} 
-                  className="usa-link-card"
-                  onClick={() => window.location.href = link.url}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      window.location.href = link.url;
-                    }
-                  }}
-                  role="link"
-                  tabIndex={0}
-                  aria-label={`Navigate to: ${link.text}`}
-                >
-                  <span className="usa-link-title">{link.text}</span>
-                  
-                  <a 
-                    href={link.url} 
-                    className="invisible-link-for-crawlers"
-                    aria-hidden="true"
-                    tabIndex={-1}
-                  >
-                    {link.text} - {link.url}
-                  </a>
-                </div>
-              ))}
-            </div>
-            
-            <p style={{ 
-              marginTop: '1.5rem', 
-              fontSize: 'var(--font-size-body-sm)', 
-              color: 'var(--text-muted)', 
-              textAlign: 'center' 
-            }}>
-              {usaJobResumeLinks.length} USA resume resources • Updated for 2026 • Federal & ATS optimized
-            </p>
-          </section>
-
           {/* FAQ Section */}
           <section id="faqs" style={{ margin: '3rem 0' }}>
             <h2 style={{
@@ -2300,7 +2230,7 @@ export default function CompleteResumeResourceLibrary({
               color: 'var(--text-primary)',
               marginBottom: '1.5rem'
             }}>
-              Frequently Asked Questions for {currentYear}
+              Frequently Asked Questions for {displayYear}
             </h2>
             
             <div className="faq-grid">
@@ -2318,10 +2248,10 @@ export default function CompleteResumeResourceLibrary({
           {/* Bottom CTA Section */}
           <section>
             <div className="cta-container">
-              <h2 className="cta-title">Ready to Build Your {currentYear} Resume?</h2>
+              <h2 className="cta-title">Ready to Build Your {displayYear} Resume?</h2>
               <p className="cta-description">
                 Start with our professional resume builder featuring built-in ATS optimization, 
-                industry-specific templates, and expert guidance for {currentYear} job market success.
+                industry-specific templates, and expert guidance for {displayYear} job market success.
               </p>
               <div className="cta-buttons" role="group" aria-label="Call to action buttons">
                 <a href="/resume-templates" className="primary-cta">
@@ -2335,6 +2265,54 @@ export default function CompleteResumeResourceLibrary({
                 Updated: {displayDate}
               </p>
             </div>
+          </section>
+
+          {/* ============================================================================
+              FEATURED INTERNAL LINKS SECTION
+              Positioned directly beneath the "Ready to Build Your Resume?" CTA block
+              ============================================================================ */}
+          <section className="featured-links-section">
+            <h2 style={{
+              fontSize: 'var(--font-size-headline-lg)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 'var(--font-weight-extrabold)',
+              color: 'var(--text-primary)',
+              marginBottom: '1rem',
+              textAlign: 'center'
+            }}>
+              Featured Resume Resources
+            </h2>
+            <p style={{
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              marginBottom: '2rem',
+              fontSize: 'var(--font-size-body-md)'
+            }}>
+              Essential guides and tools to accelerate your job search success in {displayYear}
+            </p>
+            
+            <div className="featured-links-grid">
+              {featuredInternalLinks.map((link, index) => (
+                <a 
+                  key={index} 
+                  href={link.href}
+                  className="featured-link-card"
+                  aria-label={`Navigate to: ${link.title}`}
+                >
+                  <span className="featured-link-title">{link.title}</span>
+                  <span className="featured-link-cta">{link.cta}</span>
+                </a>
+              ))}
+            </div>
+            
+            <p style={{ 
+              marginTop: '1.5rem', 
+              fontSize: 'var(--font-size-body-sm)', 
+              color: 'var(--text-muted)', 
+              textAlign: 'center' 
+            }}>
+              {featuredInternalLinks.length} featured resources • Updated for {displayYear} • Expert-curated
+            </p>
           </section>
 
           {/* Trust Signals */}
@@ -2357,7 +2335,7 @@ export default function CompleteResumeResourceLibrary({
           <div className="hidden">
             <span itemProp="dateModified">{safeLastModifiedDate}</span>
             <span itemProp="wordCount">3500</span>
-            <span itemProp="keywords">resume writing guide 2026, ATS optimization, professional resume templates</span>
+            <span itemProp="keywords">{`resume writing guide ${displayYear}, ATS optimization, professional resume templates`}</span>
           </div>
         </article>
       </div>
@@ -2371,6 +2349,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+  
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   const reviewDates = Array(3).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
@@ -2403,7 +2384,7 @@ export async function getStaticProps() {
     props: {
       totalResources: internalLinks.length,
       lastBuildDate: currentDate,
-      currentYear: '2026',
+      currentYear: currentYear, // ← Dynamic year passed as string
       seoData: {
         currentDate,
         lastModifiedDate,

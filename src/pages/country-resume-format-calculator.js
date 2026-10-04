@@ -7,7 +7,7 @@ import {
   FiCalendar, FiShield, FiStar, FiGrid, FiArrowRight, FiRefreshCw,
   FiHelpCircle, FiAlertCircle, FiCheckCircle, FiXCircle, FiEdit,
   FiFlag, FiMapPin, FiLayout, FiAlertTriangle, FiCamera, FiUsers,
-  FiClock
+  FiClock, FiDollarSign, FiCompass, FiAward, FiTrendingUp
 } from 'react-icons/fi';
 
 const executiveDesignTokens = `
@@ -90,7 +90,10 @@ const executiveDesignTokens = `
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } }
 `;
 
-const CURRENT_YEAR = new Date().getFullYear();
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 const COUNTRY_FORMATS = {
   'usa': { name: 'United States', photo: false, maxPages: 2, sections: ['Professional Summary','Work Experience','Education','Skills'], personalInfo: ['Name','Email','Phone','LinkedIn'], avoidInfo: ['Photo','Age','Marital Status','Religion','Race'], tips: 'Focus on achievements with metrics. Resume format preferred. No photo needed. Keep to 1-2 pages.' },
@@ -120,9 +123,20 @@ const FAQS = [
   { question: "What personal information should I never include on an international resume?", answer: "Never include your social security number, passport number (unless specifically requested), religion (except in some Middle Eastern countries where it's optional), or political affiliation. Always research the specific country's anti-discrimination laws." }
 ];
 
-const ICON_MAP = { FiHome, FiChevronRight, FiGlobe, FiTarget, FiFileText, FiCalendar, FiShield, FiStar, FiGrid, FiArrowRight, FiRefreshCw, FiHelpCircle, FiAlertCircle, FiCheckCircle, FiXCircle, FiEdit, FiFlag, FiMapPin, FiLayout, FiAlertTriangle, FiCamera, FiUsers, FiClock };
+const ICON_MAP = { FiHome, FiChevronRight, FiGlobe, FiTarget, FiFileText, FiCalendar, FiShield, FiStar, FiGrid, FiArrowRight, FiRefreshCw, FiHelpCircle, FiAlertCircle, FiCheckCircle, FiXCircle, FiEdit, FiFlag, FiMapPin, FiLayout, FiAlertTriangle, FiCamera, FiUsers, FiClock, FiDollarSign, FiCompass, FiAward, FiTrendingUp };
 
-const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
+// ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/cost-of-living-calculator", text: "Cost of Living Calculator", iconName: "FiDollarSign" },
+  { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiGlobe" },
+  { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiCompass" },
+  { href: "/internship-resume-india-guide", text: "Internship Resume India Guide", iconName: "FiAward" },
+  { href: "/experience-level-calculator", text: "Experience Level Calculator", iconName: "FiTrendingUp" }
+];
+
+const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp, currentYear: propYear }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -130,6 +144,9 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
     faqDates,
     breadcrumbData
   } = seoData || {};
+
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
 
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
@@ -142,13 +159,13 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
 
   const canonicalUrl = "https://professionalresumefree.com/country-resume-format-calculator";
   
-  // Optimized title - approximately 70 characters
-  const optimizedTitle = "Free Country Resume Format Calculator 2026 - International CV Guide";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Free Country Resume Format Calculator ${currentYear} - International CV Guide`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
     "country resume format requirements by nation",
-    "international resume format guide 2026",
+    `international resume format guide ${currentYear}`,
     "resume photo rules by country calculator",
     "how to write CV for different countries",
     "country-specific resume section ordering",
@@ -225,7 +242,7 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Country Resume Format Calculator: International CV Guide 2026",
+        "headline": `Country Resume Format Calculator: International CV Guide ${currentYear}`,
         "description": "Get the exact resume format requirements for USA, UK, Germany, Japan, France, Australia, Canada, UAE, India, and Singapore. Learn photo rules, section ordering, and personal info conventions.",
         "author": {
           "@type": "Organization",
@@ -308,16 +325,16 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Get resume format requirements for 10 countries. Learn photo rules, section ordering, personal info conventions, and page limits. International job application guide. Free, private." />
+        <meta name="description" content={`Get resume format requirements for 10 countries. Learn photo rules, section ordering, personal info conventions, and page limits. Free ${currentYear} international job application guide. 100% private.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="country resume format, international resume guide, CV format by country, resume photo rules, global resume standards, country CV requirements, international job application, resume format calculator, country-specific resume, international CV guide 2026" />
+        <meta name="keywords" content={`country resume format, international resume guide, CV format by country, resume photo rules, global resume standards, country CV requirements, international job application, resume format calculator, country-specific resume, international CV guide ${currentYear}`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Free Country Resume Format Calculator 2026 - International CV Guide" />
+        <meta name="chatgpt-fts:title" content={`Free Country Resume Format Calculator ${currentYear} - International CV Guide`} />
         <meta name="chatgpt-fts:description" content="Get country-specific resume format requirements for 10 countries. Learn photo rules, section ordering, and personal info conventions. Free, no sign-up required." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -341,13 +358,13 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Free Country Resume Format Calculator 2026 - International CV Guide" />
+        <meta property="og:title" content={`Free Country Resume Format Calculator ${currentYear} - International CV Guide`} />
         <meta property="og:description" content="Get country-specific resume format requirements for 10 countries. Learn photo rules, section ordering, and personal info conventions. Free, private, no sign-up." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:image:alt" content="Free Country Resume Format Calculator 2026 - International CV Guide" />
+        <meta property="og:image:alt" content={`Free Country Resume Format Calculator ${currentYear} - International CV Guide`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -355,10 +372,10 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Country Resume Format Calculator 2026 - International CV Guide" />
+        <meta name="twitter:title" content={`Free Country Resume Format Calculator ${currentYear} - International CV Guide`} />
         <meta name="twitter:description" content="Get country-specific resume format requirements. Learn photo rules, section ordering, and personal info conventions. Free, private." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
-        <meta name="twitter:image:alt" content="Country Resume Format Calculator 2026" />
+        <meta name="twitter:image:alt" content={`Country Resume Format Calculator ${currentYear}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -398,7 +415,7 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">Country Resume Format Calculator 2026</span>
+                <span itemProp="name" aria-current="page">Country Resume Format Calculator {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -408,14 +425,14 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge" aria-label="Trust indicators">🌍 Free Tool • No Sign Up • Instant Results | Updated {CURRENT_YEAR}</div>
-              <h1 id="hero-heading">Free <span className="gradient-text">Country Resume Format</span> Calculator {CURRENT_YEAR}</h1>
+              <div className="badge" aria-label="Trust indicators">🌍 Free Tool • No Sign Up • Instant Results | Updated {currentYear}</div>
+              <h1 id="hero-heading">Free <span className="gradient-text">Country Resume Format</span> Calculator {currentYear}</h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Get <strong>country-specific resume format requirements</strong> for 10 countries. Learn photo rules, section ordering, and personal info conventions. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
               </p>
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))' }} aria-label="Key statistics">
                 <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
-                  <span className="badge">📊 Based on {CURRENT_YEAR} International Hiring Standards</span>
+                  <span className="badge">📊 Based on {currentYear} International Hiring Standards</span>
                 </div>
                 <div className="stat-card"><div className="stat-number">10</div><div className="stat-label">Countries</div></div>
                 <div className="stat-card"><div className="stat-number">Photo</div><div className="stat-label">Guidelines</div></div>
@@ -428,7 +445,7 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
                 <span><FiUsers size={14} style={{ display: 'inline' }} /> Trusted by 500K+ Users</span>
               </div>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.75rem' }} aria-label="Footnote">
-                * Based on {CURRENT_YEAR} International Hiring Standards | Regular Updates
+                * Based on {currentYear} International Hiring Standards | Regular Updates
               </p>
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }} role="group" aria-label="Additional tools">
                 <Link href="/free-resume-builder" className="btn-outline" aria-label="Build your professional resume"><FiEdit /> Build Your Resume</Link>
@@ -556,19 +573,26 @@ const CountryResumeFormatCalculatorPage = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION
+            Positioned beneath the CTA section
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">
               <h2 id="resources-heading" className="section-title">Explore More International Career Tools</h2>
-              <p className="section-subtitle" style={{ color: 'var(--text-secondary)' }}>Complement your international job search with these resources</p>
+              <p className="section-subtitle" style={{ color: 'var(--text-secondary)' }}>Complement your international job search with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiGlobe" },
-                { href: "/immigration-resume-readiness-calculator", text: "Immigration Resume Readiness", iconName: "FiFileText" },
-                { href: "/free-resume-builder", text: "ATS Resume Builder", iconName: "FiEdit" },
-                { href: "/salary-calculator", text: "Salary Calculator", iconName: "FiDollarSign" }
-              ].map((link, i) => { const Icon = ICON_MAP[link.iconName] || FiFileText; return <Link key={i} href={link.href} className="geo-link-card"><Icon size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} /><span style={{ fontSize: '0.6875rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{link.text}</span></Link>; })}
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: '0.6875rem', fontWeight: 600, color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -595,6 +619,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(3).fill(null).map((_, i) => {
@@ -635,6 +662,7 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600, // ISR: Revalidate every hour

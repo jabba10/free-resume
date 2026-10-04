@@ -115,6 +115,11 @@ const executiveDesignTokens = `
 `;
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
 // ============================================================================
 export async function getStaticProps() {
@@ -177,6 +182,9 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
     breadcrumbData
   } = seoData || {};
 
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = getCurrentYear();
+
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
     ? new Date(buildTimestamp).toISOString().split('T')[0]
@@ -190,13 +198,13 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
   // Canonical URL
   const canonicalUrl = "https://professionalresumefree.com/chronological-resume-example";
 
-  // Optimized title - exactly 70 characters
-  const optimizedTitle = "Chronological Resume Example 2026: Free Guide & ATS Templates";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Chronological Resume Example ${currentYear}: Free Guide & ATS Templates`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
     "chronological resume example with work history",
-    "reverse chronological resume format template 2026",
+    `reverse chronological resume format template ${currentYear}`,
     "how to write a chronological resume for experienced professionals",
     "free chronological resume builder with ats optimization",
     "chronological vs functional resume examples for career changers"
@@ -216,7 +224,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
   // People Also Ask for GEO
   const peopleAlsoAsk = [
     { question: "Is PDF or Word better for chronological resume submission?", answer: "PDF is generally better as it preserves formatting across all systems. However, ensure it's a standard, machine-readable PDF (not scanned). Our builder generates perfect ATS-friendly PDFs automatically with chronological formatting preserved." },
-    { question: "Do recruiters prefer chronological or functional resumes in 2026?", answer: "Recruiters strongly prefer chronological resumes (85%) as they show clear career progression. Functional resumes are viewed with suspicion (10% preference) as they can hide gaps or lack of experience. Hybrid formats make up the remaining 5%." },
+    { question: `Do recruiters prefer chronological or functional resumes in ${currentYear}?`, answer: "Recruiters strongly prefer chronological resumes (85%) as they show clear career progression. Functional resumes are viewed with suspicion (10% preference) as they can hide gaps or lack of experience. Hybrid formats make up the remaining 5%." },
     { question: "How do I show promotions within the same company on a chronological resume?", answer: "List the company once, then create sub-entries for each position. For example: 'Company Name (2018-Present) - Senior Role (2021-Present) / Junior Role (2018-2021)'. This shows progression while maintaining chronological order." }
   ];
 
@@ -248,18 +256,18 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
     ]
   };
 
+  // ============================================================================
+  // NEW INTERNAL LINKS (replaces old "Free Tools & Resources" section)
+  // ============================================================================
   const internalLinks = [
-    { href: "/free-action-verb-recommender", text: "Free Action Verb Recommender", iconName: "FiZap", desc: "Powerful verbs for chronological resumes" },
-    { href: "/free-resume-formatting-checker", text: "Free Resume Formatting Checker", iconName: "FiFileText", desc: "Check formatting for ATS compatibility" },
-    { href: "/free-resume-keyword-density-analyzer-tool", text: "Free Resume Keyword Density Analyzer", iconName: "FiDatabase", desc: "Optimize keywords in your resume" },
-    { href: "/free-resume-readability-checker", text: "Free Resume Readability Checker", iconName: "FiBookOpen", desc: "Ensure easy readability" },
-    { href: "/free-resume-word-and-character-counter", text: "Free Word & Character Counter", iconName: "FiEdit", desc: "Count words and characters" },
-    { href: "/ats-friendly-tech-resume-builder", text: "Tech Resume Templates", iconName: "FiCpu", desc: "Developer and engineer formats" },
-    { href: "/how-to-write-a-resume", text: "Complete Resume Writing Guide", iconName: "FiBookmark", desc: "Step-by-step for beginners" },
-    { href: "/resume-trends-in-the-usa-for-2026", text: "2026 USA Resume Trends", iconName: "FiTrendingUp", desc: "Stay ahead with market insights" }
+    { href: "/functional-resume-templates", text: "Functional Resume Templates", iconName: "FiLayers" },
+    { href: "/creative-resume-templates", text: "Creative Resume Templates", iconName: "FiPenTool" },
+    { href: "/certification-resume-section", text: "Certification Resume Section Guide", iconName: "FiAward" },
+    { href: "/how-to-describe-work-experience-on-resume", text: "How to Describe Work Experience", iconName: "FiBriefcase" },
+    { href: "/comprehensive-resume-guide-2026", text: `Comprehensive Resume Guide ${currentYear}`, iconName: "FiBookOpen" }
   ];
 
-  const iconMap = { FiZap, FiFileText, FiDatabase, FiBookOpen, FiEdit, FiCpu, FiBookmark, FiTrendingUp, FiTool, FiHeart, FiDollarSign };
+  const iconMap = { FiZap, FiFileText, FiDatabase, FiBookOpen, FiEdit, FiCpu, FiBookmark, FiTrendingUp, FiTool, FiHeart, FiDollarSign, FiLayers, FiPenTool, FiAward, FiBriefcase };
 
   // ============================================================================
   // COMPLETE STRUCTURED DATA (INJECTED FROM PAGE 1 BLUEPRINT)
@@ -298,7 +306,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Chronological Resume Example: The Ultimate 2026 Format Guide",
+        "headline": `Chronological Resume Example: The Ultimate ${currentYear} Format Guide`,
         "description": "Master the chronological resume format with detailed examples, step-by-step templates, and expert tips for showcasing your career progression effectively.",
         "author": {
           "@type": "Organization",
@@ -379,16 +387,16 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE - 70 characters exactly */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION - Optimized */}
-        <meta name="description" content="Master chronological resume format with free 2026 examples & templates. See real ATS-optimized samples for all career levels. No sign-up required." />
+        <meta name="description" content={`Master chronological resume format with free ${currentYear} examples & templates. See real ATS-optimized samples for all career levels. No sign-up required.`} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="chronological resume example, reverse chronological resume, resume format, resume template, chronological format, work experience resume, career progression resume, ATS-friendly chronological resume" />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Chronological Resume Example 2026: Free ATS Guide & Templates" />
+        <meta name="chatgpt-fts:title" content={`Chronological Resume Example ${currentYear}: Free ATS Guide & Templates`} />
         <meta name="chatgpt-fts:description" content="Create an ATS-optimized chronological resume with real examples and free templates. No sign-up required." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -411,8 +419,8 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Chronological Resume Example 2026: Free Guide & Templates" />
-        <meta property="og:description" content="Master chronological resume format with free 2026 examples. ATS-optimized templates included." />
+        <meta property="og:title" content={`Chronological Resume Example ${currentYear}: Free Guide & Templates`} />
+        <meta property="og:description" content={`Master chronological resume format with free ${currentYear} examples. ATS-optimized templates included.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta property="og:image:width" content="800" />
@@ -425,7 +433,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Chronological Resume Example 2026: Free Guide" />
+        <meta name="twitter:title" content={`Chronological Resume Example ${currentYear}: Free Guide`} />
         <meta name="twitter:description" content="Master chronological resume format. Free examples & templates. No sign-up." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Chronological Resume Example Guide" />
@@ -490,9 +498,9 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
                 ✦ Based on Industry ATS Standards | 85% Employer Preference | Free Templates
               </div>
               
-              {/* SINGLE H1 TAG */}
+              {/* SINGLE H1 TAG - dynamic year */}
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Chronological Resume Example 2026:{' '}
+                Chronological Resume Example {currentYear}:{' '}
                 <span className="gradient-text">Free Guide & ATS Templates</span>
               </h1>
               
@@ -514,7 +522,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
               {/* Stats Section */}
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }} aria-label="Key statistics">
                 <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
-                  <span className="badge">✦ Based on 2026 Hiring Data</span>
+                  <span className="badge">✦ Based on {currentYear} Hiring Data</span>
                 </div>
                 <div className="stat-card">
                   <div className="stat-number">85%</div>
@@ -538,7 +546,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
                 </div>
               </div>
               <p className="text-small" style={{ marginTop: '1.25rem' }} aria-label="Footnote">
-                * Society for Human Resource Management (SHRM) 2026 Survey
+                * Society for Human Resource Management (SHRM) {currentYear} Survey
                 ** Based on user feedback after implementing chronological format
               </p>
 
@@ -578,7 +586,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
               <a href="#formatting-tips" className="toc-card">
                 <div className="toc-number">04</div>
                 <h3 style={{ fontSize: 'var(--font-size-title-md)' }}>Formatting Tips</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}>Professional guidelines for 2026</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}>Professional guidelines for {currentYear}</p>
               </a>
               <a href="#ats-optimization" className="toc-card">
                 <div className="toc-number">05</div>
@@ -753,7 +761,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
         <section id="formatting-tips" className="section" aria-labelledby="section4-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="section4-heading" className="section-title">Professional Formatting Tips for 2026</h2>
+              <h2 id="section4-heading" className="section-title">Professional Formatting Tips for {currentYear}</h2>
               <p className="section-subtitle">Guidelines that ensure your resume looks professional and passes ATS</p>
             </div>
             <div className="grid">
@@ -991,12 +999,14 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
           </div>
         </section>
 
-        {/* Internal Links - Resource Hub */}
+        {/* ============================================================================
+            NEW INTERNAL LINKS SECTION (replaces old "Free Tools & Resources")
+            ============================================================================ */}
         <section className="section section-alt" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Free Tools & Resources</h2>
-              <p className="section-subtitle">Strengthen your application with expert guides and tools</p>
+              <h2 id="resources-heading" className="section-title">Related Resume Resources</h2>
+              <p className="section-subtitle">Explore more resume formats, templates, and expert guides</p>
             </div>
             <div className="geo-link-grid">
               {internalLinks.map((link, i) => {
@@ -1020,7 +1030,7 @@ export default function ChronologicalResumeExample({ seoData, buildTimestamp }) 
               Create Your Perfect Chronological Resume
             </h2>
             <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Use our professional resume builder with pre-designed chronological templates, ATS optimization tools, and expert guidance to create a resume that gets results in 2026.
+              Use our professional resume builder with pre-designed chronological templates, ATS optimization tools, and expert guidance to create a resume that gets results in {currentYear}.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }} role="group" aria-label="Final call to action buttons">
               <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>
