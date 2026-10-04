@@ -14,6 +14,11 @@ import {
 } from 'react-icons/fi';
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
 // ============================================================================
 const executiveDesignTokens = `
@@ -122,7 +127,7 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
+const SITE_URL = 'https://professionalresumefree.com';
 
 // SEO Keywords - Injected from Page 1 Blueprint
 const SEO_KEYWORDS = [
@@ -168,6 +173,17 @@ const OPTIMIZATION_TIPS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-resume-keyword-matcher", text: "Resume Keyword Matcher", iconName: "FiSearch" },
+  { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "Tailor Your Resume Guide", iconName: "FiTarget" },
+  { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "ATS Optimization Tips", iconName: "FiShield" },
+  { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+  { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiCheck" }
+];
+
+// ============================================================================
 // ICON MAP
 // ============================================================================
 const ICON_MAP = {
@@ -209,13 +225,16 @@ function analyzeKeywords(content, keywordList) {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp }) => {
+const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = "https://professionalresumefree.com/free-resume-keyword-density-analyzer-tool";
-  const pageTitle = `Resume Keyword Density Analyzer – ATS Optimization & Strategic Keyword Placement ${CURRENT_YEAR}`;
-  const pageDescription = `Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance. Improve your resume's visibility with AI-powered keyword analysis. ${CURRENT_YEAR}`;
+  const pageTitle = `Resume Keyword Density Analyzer – ATS Optimization & Strategic Keyword Placement ${currentYear}`;
+  const pageDescription = `Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance. Improve your resume's visibility with keyword analysis. ${currentYear}`;
 
   const [text, setText] = useState('');
   const [keywords, setKeywords] = useState('');
@@ -364,7 +383,7 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp })
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": `${CURRENT_YEAR}-12-31`
+            "priceValidUntil": `${currentYear}-12-31`
           },
           "aggregateRating": {
             "@type": "AggregateRating",
@@ -383,7 +402,7 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp })
             "No Sign Up Required",
             "Free Forever"
           ],
-          "softwareVersion": `${CURRENT_YEAR}.1.0`,
+          "softwareVersion": `${currentYear}.1.0`,
           "screenshot": "https://professionalresumefree.com/images/screenshot-keyword-analyzer.jpg",
           "applicationSuite": "Career Tools",
           "countriesSupported": "Global",
@@ -548,10 +567,10 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp })
       {/* Hidden SEO Elements */}
       <div style={{display: 'none'}} aria-hidden="true">
         <span itemProp="tool-type">Keyword Density Analyzer</span>
-        <span itemProp="year">{CURRENT_YEAR}</span>
+        <span itemProp="year">{currentYear}</span>
         <span itemProp="last-updated">{safeCurrentDate}</span>
         <span itemProp="dateModified">{safeLastModifiedDate}</span>
-        <span itemProp="softwareVersion">{CURRENT_YEAR}.1.0</span>
+        <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
       </div>
 
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
@@ -576,7 +595,7 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp })
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • ATS Optimized • Updated {safeCurrentDate}</div>
               <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Resume <span className="gradient-text">Keyword Density</span> Analyzer – ATS Optimization Tool {CURRENT_YEAR}
+                Resume <span className="gradient-text">Keyword Density</span> Analyzer – ATS Optimization Tool {currentYear}
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 <strong>Optimize your resume keywords for ATS systems</strong> with our free keyword density analyzer. Get industry-specific suggestions, strategic placement guidance, and actionable insights to improve your resume's visibility. <strong>Free forever.</strong>
@@ -760,7 +779,7 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp })
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title">Frequently Asked Questions About Resume Keyword Optimization</h2>
-              <p className="section-subtitle">Everything you need to know about resume keyword optimization and ATS systems in {CURRENT_YEAR}.</p>
+              <p className="section-subtitle">Everything you need to know about resume keyword optimization and ATS systems in {currentYear}.</p>
             </div>
             <div className="faq-grid">
               {FAQS.map((faq, i) => (
@@ -796,11 +815,13 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp })
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Instant Analysis</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Detailed Recommendations</span>
             </div>
-            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 12,000+ resumes • Updated for {CURRENT_YEAR} hiring standards</p>
+            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 12,000+ resumes • Updated for {currentYear} hiring standards</p>
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Resources")
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -808,13 +829,7 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp })
               <p className="section-subtitle">Complement your keyword analysis with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch", desc: "Match resume to job descriptions" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume score" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3", desc: "CAR methodology bullets" },
-                { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "Pass AI Resume Screens", iconName: "FiTarget", desc: `${CURRENT_YEAR} ATS guide` },
-                { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", text: "In-Demand Resume Keywords", iconName: "FiTrendingUp", desc: "USA job seeker data" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -843,6 +858,9 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
+
   const reviewDates = Array(6).fill(null).map((_, i) => {
     const date = new Date(buildTimestamp);
     date.setDate(date.getDate() - (i * 10 + 1));
@@ -864,7 +882,8 @@ export async function getStaticProps() {
         faqDates
       },
       buildTimestamp,
-      lastModified: lastModifiedDate
+      lastModified: lastModifiedDate,
+      currentYear
     },
     // Revalidate every 1 hour (3600 seconds)
     revalidate: 3600

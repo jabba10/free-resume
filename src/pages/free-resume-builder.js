@@ -32,7 +32,12 @@ import {
   FiShoppingBag,
   FiMonitor,
   FiTruck,
-  FiHeart
+  FiHeart,
+  FiFileText,
+  FiGrid,
+  FiSearch,
+  FiLayers,
+  FiPenTool
 } from 'react-icons/fi';
 import Link from 'next/link';
 
@@ -337,6 +342,18 @@ const careerFlowStyles = `
   .cf-share-close-btn { display: inline-block; background: var(--cf-primary); color: var(--cf-on-primary); border: none; padding: 12px 32px; border-radius: 2px; font-family: var(--cf-font-body); font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all var(--cf-transition-base); }
   .cf-share-close-btn:hover { filter: brightness(1.1); box-shadow: 0 0 18px rgba(242, 202, 80, 0.3); transform: translateY(-1px); }
 
+  /* ==========================================================================
+     NEW INTERNAL LINKS SECTION (matches cf- design tokens)
+     ========================================================================== */
+  .cf-resources-section { padding: var(--cf-section-gap) var(--cf-margin-mobile); background: var(--cf-surface-container-lowest); border-top: 0.5px solid rgba(153, 144, 124, 0.1); }
+  .cf-resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 1200px; margin: 0 auto; }
+  .cf-resource-card { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 20px; background: var(--cf-glass-bg); backdrop-filter: var(--cf-glass-blur); -webkit-backdrop-filter: var(--cf-glass-blur); border: var(--cf-gold-border); border-radius: 4px; text-decoration: none; color: inherit; transition: all var(--cf-transition-base); min-height: 140px; text-align: center; }
+  .cf-resource-card:hover { border-color: rgba(212, 175, 55, 0.5); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); color: inherit; }
+  .cf-resource-icon { font-size: 28px; color: var(--cf-primary); margin-bottom: 16px; transition: transform var(--cf-transition-base); }
+  .cf-resource-card:hover .cf-resource-icon { transform: scale(1.1); }
+  .cf-resource-title { font-family: var(--cf-font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; color: var(--cf-on-surface-variant); line-height: 1.5; }
+  .cf-resource-card:hover .cf-resource-title { color: var(--cf-primary); }
+
   @media (min-width: 1024px) {
     .cf-layout { flex-direction: row; gap: 48px; }
     .cf-preview-section { position: sticky; top: 100px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; }
@@ -380,7 +397,7 @@ const careerFlowStyles = `
     .cf-hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .cf-badge-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .cf-faq-grid { grid-template-columns: 1fr; }
-    .cf-faq-section, .cf-cta-section { padding: 60px var(--cf-margin-mobile); }
+    .cf-faq-section, .cf-cta-section, .cf-resources-section { padding: 60px var(--cf-margin-mobile); }
     .cf-section-header h2, .cf-cta-title { font-size: 28px; }
     .cf-modal-content { margin: 0; border-radius: 0; max-height: 100vh; width: 100%; }
     .cf-modal-page { width: 100%; height: auto; min-height: 400px; }
@@ -389,6 +406,7 @@ const careerFlowStyles = `
     .cf-list-item { flex-direction: column; gap: 12px; }
     .cf-item-actions { margin-left: 0; align-self: flex-end; }
     .cf-share-card { margin: 0 16px; padding: 24px 20px; }
+    .cf-resources-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   }
 
   @media (max-width: 480px) {
@@ -418,6 +436,8 @@ const careerFlowStyles = `
     .cf-modal-page .cf-universal-template { padding: 6mm 8mm; }
     .cf-share-headline { font-size: 20px; }
     .cf-share-body { font-size: 13px; }
+    .cf-resources-grid { grid-template-columns: 1fr; }
+    .cf-resource-card { min-height: 120px; padding: 20px 16px; }
   }
 
   @media (max-width: 360px) {
@@ -428,13 +448,21 @@ const careerFlowStyles = `
   }
 
   @media print {
-    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-navbar, .cf-mobile-menu, .cf-modal { display: none !important; }
+    .cf-resume-builder, .cf-layout, .cf-preview-section, .cf-form-section, .cf-faq-section, .cf-cta-section, .cf-hero, .cf-breadcrumb, .cf-navbar, .cf-mobile-menu, .cf-modal, .cf-resources-section { display: none !important; }
     .cf-resume-preview { display: block !important; box-shadow: none !important; margin: 0 !important; padding: 10mm 15mm !important; width: 100% !important; height: auto !important; page-break-inside: avoid; background: #ffffff !important; border: none !important; }
     .cf-universal-template, .cf-section { page-break-inside: avoid; }
   }
 `;
 
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
 const Resume = ({ seoData, buildTimestamp }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = getCurrentYear();
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentDate, lastModifiedDate } = seoData || {};
   const freshnessIndicator = buildTimestamp ? new Date(buildTimestamp).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
@@ -471,6 +499,17 @@ const Resume = ({ seoData, buildTimestamp }) => {
     { question: "Is this resume builder really free with no hidden costs?", answer: "Yes, our resume builder is completely free with no hidden costs or watermarks." },
     { question: "What does ATS-friendly mean for resumes?", answer: "ATS-friendly means our resume templates are optimized to pass through Applicant Tracking Systems used by 95% of companies." },
     { question: "Can I download my resume as PDF without creating an account?", answer: "Absolutely! Download your professional resume in PDF format without creating an account." }
+  ];
+
+  // ============================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ============================================================================
+  const featuredInternalLinks = [
+    { href: "/free-resume-template-selector", text: "Resume Template Selector", icon: FiGrid },
+    { href: "/free-resume-tools", text: "Free Resume Tools", icon: FiTool },
+    { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", icon: FiSearch },
+    { href: "/creative-resume-templates", text: "Creative Resume Templates", icon: FiPenTool },
+    { href: "/functional-resume-templates", text: "Functional Resume Templates", icon: FiLayers }
   ];
 
   const handleFontSizeChange = (key, value) => setFontSizes(prev => ({ ...prev, [key]: Math.max(4, Math.min(24, parseInt(value) || prev[key])) }));
@@ -585,10 +624,10 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>Free Professional Resume Builder 2026: ATS-Friendly Templates for Job Seekers</title>
-          <meta name="title" content="Free Professional Resume Builder 2026: ATS-Friendly Templates for Job Seekers" />
-          <meta name="description" content="Create your professional resume for free in 2026. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up." />
-          <meta name="keywords" content="resume builder, professional resume templates, ATS friendly resume, free resume builder, online resume maker, CV builder, job application resume, career resume templates, professional CV maker" />
+          <title>{`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`}</title>
+          <meta name="title" content={`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`} />
+          <meta name="description" content={`Create your professional resume for free in ${currentYear}. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up.`} />
+          <meta name="keywords" content={`resume builder, professional resume templates, ATS friendly resume, free resume builder, online resume maker, CV builder, job application resume, career resume templates, professional CV maker ${currentYear}`} />
           <meta name="author" content="Professional Resume Free" />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -603,8 +642,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content="Free Professional Resume Builder 2026: ATS-Friendly Templates for Job Seekers" />
-          <meta property="og:description" content="Create your professional resume for free in 2026. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up." />
+          <meta property="og:title" content={`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`} />
+          <meta property="og:description" content={`Create your professional resume for free in ${currentYear}. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
@@ -618,8 +657,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Free Professional Resume Builder 2026: ATS-Friendly Templates for Job Seekers" />
-          <meta name="twitter:description" content="Create your professional resume for free in 2026. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up." />
+          <meta name="twitter:title" content={`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`} />
+          <meta name="twitter:description" content={`Create your professional resume for free in ${currentYear}. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Professional Resume Builder with ATS Templates" />
           <meta name="twitter:site" content="@ProResumeFree" />
@@ -645,9 +684,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": "Free Professional Resume Builder 2026 - ATS-Friendly Templates for Job Seekers",
+                    "name": `Free Professional Resume Builder ${currentYear} - ATS-Friendly Templates for Job Seekers`,
                     "description": "Create professional ATS-optimized resumes for free. Land interviews faster with our universal resume builder.",
-                    "datePublished": "2026-01-01",
+                    "datePublished": "2024-01-01",
                     "dateModified": safeLastModifiedDate,
                     "inLanguage": "en-US",
                     "isPartOf": {
@@ -708,7 +747,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "price": "0",
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock",
-                        "priceValidUntil": "2026-12-31"
+                        "priceValidUntil": `${currentYear}-12-31`
                       },
                       "aggregateRating": {
                         "@type": "AggregateRating",
@@ -727,7 +766,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                         "No Sign Up Required",
                         "Free Forever"
                       ],
-                      "softwareVersion": "2026.1.0",
+                      "softwareVersion": `${currentYear}.1.0`,
                       "screenshot": "https://professionalresumefree.com/images/screenshot-resume-builder.jpg",
                       "applicationSuite": "Career Tools",
                       "countriesSupported": "Global",
@@ -862,8 +901,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
         <section className="cf-hero">
           <div className="cf-container">
             <div className="cf-hero-content">
-              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Resume Builder 2026</span></div>
-              <h1 className="cf-hero-title">Free Professional Resume Builder 2026</h1>
+              <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Resume Builder {currentYear}</span></div>
+              <h1 className="cf-hero-title">Free Professional Resume Builder {currentYear}</h1>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized resume for free in minutes.</strong> Our resume builder helps you highlight experience, skills, and achievements that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free professional resume now—no sign-up required">
@@ -1021,6 +1060,29 @@ const Resume = ({ seoData, buildTimestamp }) => {
 
         <section className="cf-cta-section" aria-labelledby="cta-title"><div className="cf-container"><div className="cf-cta-content"><h2 className="cf-cta-title" id="cta-title">Ready to Advance Your Career?</h2><p className="cf-cta-subtitle">Join 5 million+ professionals who landed their dream jobs with our free ATS-friendly resume builder.</p><div className="cf-cta-btn-wrap"><button onClick={()=>setActiveSection('personal')} className="cf-cta-btn" aria-label="Create your free professional resume now—no sign-up required"><span className="cf-cta-btn-text">Create Your Free Resume Now</span><FiArrowRight className="cf-cta-btn-icon"/></button></div><div className="cf-cta-guarantee"><FiCheck className="cf-guarantee-icon"/><span className="cf-guarantee-text">No credit card required • Free forever • Download in minutes • ATS Optimized</span></div></div></div></section>
 
+        {/* ============================================================================
+            NEW INTERNAL LINKS SECTION (matches cf- design tokens)
+            ============================================================================ */}
+        <section className="cf-resources-section" aria-labelledby="resources-title">
+          <div className="cf-container">
+            <div className="cf-section-header">
+              <h2 className="cf-section-title" id="resources-title">Explore More Resume Resources</h2>
+              <p>Strengthen your job application with our complete suite of free tools</p>
+            </div>
+            <div className="cf-resources-grid">
+              {featuredInternalLinks.map((link, i) => {
+                const IconComponent = link.icon;
+                return (
+                  <Link key={i} href={link.href} className="cf-resource-card">
+                    <IconComponent className="cf-resource-icon" />
+                    <span className="cf-resource-title">{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {showFullPreview&&(<div className="cf-modal" onClick={()=>setShowFullPreview(false)}><div className="cf-modal-content" onClick={e=>e.stopPropagation()}><div className="cf-modal-header"><h3>Full Resume Preview</h3><button className="cf-close-btn" onClick={()=>setShowFullPreview(false)}><FiX/></button></div><div className="cf-modal-pages"><div className="cf-modal-page"><UniversalTemplate formData={formData}/></div></div></div></div>)}
 
         {showSharePopup && (
@@ -1047,6 +1109,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate review dates for structured data
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -1077,9 +1142,10 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
+      currentYear,
       buildTimestamp
     },
-    // ISR: Revalidate every 24 hours (86400 seconds)
+    // ISR: Revalidate every hour
     revalidate: 3600
   };
 }

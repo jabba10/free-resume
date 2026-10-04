@@ -14,6 +14,11 @@ import {
 } from 'react-icons/fi';
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
 // ============================================================================
 const executiveDesignTokens = `
@@ -134,7 +139,6 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 
 const INDUSTRY_TEMPLATES = [
@@ -169,7 +173,7 @@ const HOW_TO_STEPS = [
   { name: "Enter Your Role Details", text: "Start by entering your job title, industry, and company size. This helps us generate industry-relevant content with appropriate metrics and terminology that resonates with hiring managers in your field.", icon: 'FiEdit3' },
   { name: "Add Skills & Technical Expertise", text: "List the skills, technologies, software, and tools you used. Include both technical and soft skills. This information helps create bullet points that showcase your specific capabilities and expertise to potential employers.", icon: 'FiStar' },
   { name: "Describe Responsibilities & Achievements", text: "Briefly describe your daily responsibilities and major accomplishments. Even if achievements aren't quantified yet, describe what you did—we'll help add the numbers and impact metrics that make bullet points compelling.", icon: 'FiZap' },
-  { name: "Generate Professional Bullet Points", text: "Our AI-powered system creates professional, impact-focused bullet points using CAR methodology. Each point includes context, action, and measurable results tailored to your industry and experience level.", icon: 'FiCheck' }
+  { name: "Generate Professional Bullet Points", text: "Our system creates professional, impact-focused bullet points using CAR methodology. Each point includes context, action, and measurable results tailored to your industry and experience level.", icon: 'FiCheck' }
 ];
 
 const REVIEWS = [
@@ -179,17 +183,28 @@ const REVIEWS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-action-verb-recommender", text: "Action Verb Recommender", iconName: "FiZap" },
+  { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "How to Write Impressive Bullet Points", iconName: "FiTarget" },
+  { href: "/free-resume-summary-generator", text: "Resume Summary Generator", iconName: "FiFileText" },
+  { href: "/free-resume-objective-generator", text: "Resume Objective Generator", iconName: "FiEdit3" },
+  { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Bullet Improvement Guide", iconName: "FiCpu" }
+];
+
+// ============================================================================
 // SCHEMA DATA (Injected from Page 1 Blueprint)
 // ============================================================================
-const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => ({
+const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate, currentYear) => ({
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
       "@id": `${SITE_URL}/free-resume-bullet-point-generator/#webpage`,
       "url": `${SITE_URL}/free-resume-bullet-point-generator`,
-      "name": `Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${CURRENT_YEAR}`,
-      "description": `Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${CURRENT_YEAR}.`,
+      "name": `Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear}`,
+      "description": `Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${currentYear}.`,
       "datePublished": "2024-01-01",
       "dateModified": lastModifiedDate,
       "inLanguage": "en-US",
@@ -236,7 +251,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
     {
       "@type": "WebApplication",
       "name": "Free Resume Bullet Point Generator",
-      "description": "Professional resume bullet point generator with AI-powered CAR methodology for any job application",
+      "description": "Professional resume bullet point generator with CAR methodology for any job application",
       "url": `${SITE_URL}/free-resume-bullet-point-generator`,
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
@@ -245,7 +260,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
         "price": "0",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "priceValidUntil": "2026-12-31"
+        "priceValidUntil": `${currentYear}-12-31`
       },
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -267,14 +282,14 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
         "url": SITE_URL
       },
       "featureList": [
-        "AI-Powered CAR Methodology",
+        "CAR Methodology Framework",
         "6 Industry-Specific Templates",
         "Privacy-First Design",
         "No Sign Up Required",
         "Instant Generation",
         "Download Multiple Formats"
       ],
-      "softwareVersion": "2026.1.0",
+      "softwareVersion": `${currentYear}.1.0`,
       "screenshot": `${SITE_URL}/images/screenshot-bullet-point-generator.jpg`,
       "applicationSuite": "Career Tools",
       "countriesSupported": "Global"
@@ -331,11 +346,11 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
         "@type": "OfferCatalog",
         "name": "Free Resume Bullet Point Services",
         "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Bullet Point Generation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bullet Point Generation" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Industry-Specific Template Selection" } }
         ]
       },
-      "description": "Free AI-powered resume bullet point generator for job seekers worldwide",
+      "description": "Free resume bullet point generator for job seekers worldwide",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     },
     {
@@ -360,7 +375,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Any",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-            "description": "Professional resume bullet point generator with AI-powered CAR methodology for any job application",
+            "description": "Professional resume bullet point generator with CAR methodology for any job application",
             "url": `${SITE_URL}/free-resume-bullet-point-generator`
           }
         }
@@ -451,16 +466,11 @@ function generateBulletPoints(formData) {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
+const ResumeBulletPointGenerator = ({ seoData, buildTimestamp, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
-  
-  // Use SEO data with fallbacks
-  const safeSeoData = seoData || {
-    currentDate: new Date().toISOString().split('T')[0],
-    lastModifiedDate: new Date().toISOString(),
-    reviewDates: Array(REVIEWS.length).fill(new Date().toISOString().split('T')[0]),
-    faqDates: Array(FAQS.length).fill(new Date().toISOString().split('T')[0])
-  };
 
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
@@ -534,9 +544,9 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
         {/* Basic Meta Tags - Injected from Page 1 Blueprint */}
-        <title>Free Resume Bullet Point Generator - CAR Method & ATS Optimized {CURRENT_YEAR} | Resume Bullet Points Builder</title>
-        <meta name="description" content={`Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${CURRENT_YEAR}.`} />
-        <meta name="keywords" content="resume bullet point generator, CAR method resume, resume achievements, quantifiable bullet points, resume writing, career tools, free resume builder, ATS resume, professional resume, job search tools 2026" />
+        <title>{`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear} | Resume Bullet Points Builder`}</title>
+        <meta name="description" content={`Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${currentYear}.`} />
+        <meta name="keywords" content={`resume bullet point generator, CAR method resume, resume achievements, quantifiable bullet points, resume writing, career tools, free resume builder, ATS resume, professional resume, job search tools ${currentYear}`} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -564,7 +574,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Open Graph Protocol - Injected from Page 1 Blueprint */}
-        <meta property="og:title" content={`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${CURRENT_YEAR}`} />
+        <meta property="og:title" content={`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear}`} />
         <meta property="og:description" content="Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes with our AI-powered tool." />
         <meta property="og:image" content={`${SITE_URL}/images/og-resume-bullet-point-generator.jpg`} />
         <meta property="og:image:width" content="1200" />
@@ -578,7 +588,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
         
         {/* Twitter Cards - Injected from Page 1 Blueprint */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${CURRENT_YEAR}`} />
+        <meta name="twitter:title" content={`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear}`} />
         <meta name="twitter:description" content="Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes with AI." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-resume-bullet-point-generator.jpg`} />
         <meta name="twitter:image:alt" content="Free Resume Bullet Point Generator with AI Templates" />
@@ -599,7 +609,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getSchemaData(safeFaqDates, safeReviewDates, safeCurrentDate, safeLastModifiedDate))
+            __html: JSON.stringify(getSchemaData(safeFaqDates, safeReviewDates, safeCurrentDate, safeLastModifiedDate, currentYear))
           }}
         />
       </Head>
@@ -641,10 +651,10 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • CAR Methodology • ATS Optimized</div>
               <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free <span className="gradient-text">Resume Bullet Point Generator</span> - CAR Method & ATS Optimized {CURRENT_YEAR}
+                Free <span className="gradient-text">Resume Bullet Point Generator</span> - CAR Method & ATS Optimized {currentYear}
               </h1>
               <p className="section-subtitle" style={{ maxWidth: '900px', marginBottom: '2rem' }}>
-                Transform vague responsibilities into powerful, quantifiable achievements that pass ATS screening. Our AI-powered generator uses CAR methodology (Context-Action-Result) with industry-specific templates for maximum impact in {CURRENT_YEAR}.
+                Transform vague responsibilities into powerful, quantifiable achievements that pass ATS screening. Our professional generator uses CAR methodology (Context-Action-Result) with industry-specific templates for maximum impact in {currentYear}.
                 <strong style={{ display: 'inline-block', background: '#131315', color: '#f2ca50', padding: '4px 12px', borderRadius: '50px', fontSize: '0.9rem', marginLeft: '12px', border: '0.5px solid var(--border-gold-filament)' }}>
                   Trusted by 500,000+ job seekers
                 </strong>
@@ -846,7 +856,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title" id="how-it-works-title">How to Generate Professional Resume Bullet Points: 4 Simple Steps</h2>
-              <p className="section-subtitle">Our AI-powered bullet point generator makes it easy to create ATS-optimized achievements</p>
+              <p className="section-subtitle">Our bullet point generator makes it easy to create ATS-optimized achievements</p>
             </div>
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
               {HOW_TO_STEPS.map((step, idx) => {
@@ -874,8 +884,8 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
             </div>
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', maxWidth: '1000px', margin: '0 auto' }}>
               {[
-                "how to write resume bullet points with no experience",
-                "best resume bullet point format for 2026",
+                `how to write resume bullet points with no experience`,
+                `best resume bullet point format for ${currentYear}`,
                 "resume achievement examples for career change",
                 "what to include in resume bullet points",
                 "CAR method vs STAR method for resumes",
@@ -978,7 +988,9 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Enhance Your Resume Further")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-title">
           <div className="section-container">
             <div className="section-header">
@@ -986,14 +998,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
               <p className="section-subtitle">Complement your bullet points with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher Tool", iconName: "FiSearch" },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-summary-generator", text: "Free Resume Summary Generator", iconName: "FiFileText" },
-                { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" },
-                { href: "/free-cover-letter-generator", text: "Free Cover Letter Generator", iconName: "FiEdit" },
-                { href: "/interview-tips", text: "Expert Interview Tips", iconName: "FiUserCheck" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -1006,18 +1011,18 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Footer Info - Freshness Signals */}
+        {/* Footer Info - Freshness Signals (Copyright removed) */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small">
             <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
-            Last updated: {safeCurrentDate} • Build: {freshnessIndicator} • © {CURRENT_YEAR} Professional Resume Free. All rights reserved.
+            Last updated: {safeCurrentDate} • Build: {freshnessIndicator}
           </span>
         </div>
         
         {/* Hidden Metadata */}
         <div style={{ display: 'none' }} aria-hidden="true">
           <span itemProp="dateModified">{safeLastModifiedDate}</span>
-          <span itemProp="softwareVersion">2026.1.0</span>
+          <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
         </div>
       </main>
     </>
@@ -1032,6 +1037,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate dynamic review dates (staggered backward from build time)
   const reviewDates = Array(REVIEWS.length).fill(null).map((_, i) => {
@@ -1055,6 +1063,7 @@ export async function getStaticProps() {
         reviewDates,
         faqDates
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600 // Revalidate every hour (ISR strategy from Page 1)

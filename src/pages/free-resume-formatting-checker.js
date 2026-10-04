@@ -10,8 +10,14 @@ import {
   FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
   FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
   FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
-  FiAlertTriangle, FiAlertCircle, FiActivity, FiServer, FiMonitor
+  FiAlertTriangle, FiAlertCircle, FiActivity, FiServer, FiMonitor,
+  FiAward as FiScoreIcon, FiBookOpen as FiReadIcon, FiHash
 } from 'react-icons/fi';
+
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 // ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
@@ -119,23 +125,25 @@ const executiveDesignTokens = `
   .metric-card { text-align:center; padding:1rem; background:var(--card-bg); border-radius:0.5rem; border:var(--card-border); }
   .issue-row { display:grid; grid-template-columns:1fr; gap:0.5rem; padding:0.75rem 1rem; border-bottom:0.5px solid var(--border-glass); }
   @media (min-width:768px) { .issue-row { grid-template-columns:2fr 1fr 2fr; gap:1rem; align-items:center; } }
+  .issue-header { display:none; }
+  @media (min-width:768px) { .issue-header { display:grid; background:var(--bg-surface-high); padding:0.75rem 1rem; font-weight:var(--font-weight-semibold); color:var(--accent-primary); grid-template-columns:2fr 1fr 2fr; gap:1rem; border-radius:0.25rem 0.25rem 0 0; } }
 `;
 
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
+const SITE_URL = 'https://professionalresumefree.com';
 
 // SEO Keywords - Expanded from Page 1 Blueprint
 const SEO_KEYWORDS = [
-  'resume formatting checker 2024',
+  'resume formatting checker',
   'ATS formatting analyzer free',
   'professional resume layout verification',
   'resume structure analyzer tool',
   'formatting compliance checker',
   'ATS compatible resume formatting',
   'resume spacing analyzer',
-  'professional formatting guide 2024',
+  'professional formatting guide',
   'resume layout optimization',
   'free formatting analysis tool',
   'resume ATS compatibility test',
@@ -160,20 +168,20 @@ const INDUSTRY_STATS = [
 ];
 
 const FAQS = [
-  { question: "Why is resume formatting so important for getting hired in 2024-2025?", answer: "Professional resume formatting is critical because 75% of resumes are rejected by ATS before human review. Proper formatting ensures: 1) ATS systems can parse your information correctly, 2) Recruiters can scan your resume in 6-7 seconds, 3) Your professional experience stands out clearly, and 4) You demonstrate attention to detail—a key skill employers value. Formatting errors can reduce interview chances by up to 60%." },
+  { question: "Why is resume formatting so important for getting hired?", answer: "Professional resume formatting is critical because 75% of resumes are rejected by ATS before human review. Proper formatting ensures: 1) ATS systems can parse your information correctly, 2) Recruiters can scan your resume in 6-7 seconds, 3) Your professional experience stands out clearly, and 4) You demonstrate attention to detail—a key skill employers value. Formatting errors can reduce interview chances by up to 60%." },
   { question: "What are the most common resume formatting mistakes that cause ATS rejection?", answer: "Top ATS-killing formatting mistakes include: using tables or columns (85% parsing failure rate), headers/footers (not read by ATS), graphics/charts/images (completely ignored), fancy fonts/unusual symbols, inconsistent spacing, PDFs saved as images, text boxes/shapes, and color-coded sections. Our free checker identifies all these issues instantly." },
-  { question: "What's the best file format for resumes to pass ATS in 2024?", answer: "For 2024-2025 job applications: 1) Submit PDF for most applications (preserves formatting), 2) Always have a .txt version for manual pasting, 3) Use .docx only if specified, 4) Never use .jpg/.png formats. Our analyzer checks format compatibility and provides specific recommendations based on your target industry and job level." },
+  { question: "What's the best file format for resumes to pass ATS?", answer: "For current job applications: 1) Submit PDF for most applications (preserves formatting), 2) Always have a .txt version for manual pasting, 3) Use .docx only if specified, 4) Never use .jpg/.png formats. Our analyzer checks format compatibility and provides specific recommendations based on your target industry and job level." },
   { question: "How does white space affect resume readability and ATS scoring?", answer: "Optimal white space (30-40%) improves resume readability by 50% and ATS scores by 20-30%. Benefits include: 1) Guides recruiter's eye to key information, 2) Reduces cognitive load, 3) Creates professional appearance, 4) Helps ATS distinguish between sections, 5) Makes your resume stand out in crowded applicant pools." },
   { question: "Should creative professionals use designer resume templates?", answer: "Only for design roles (graphic designers, UX/UI, creative directors). Even then: 1) Maintain ATS-compatible text version, 2) Keep creative elements minimal, 3) Ensure all text is selectable/copyable, 4) Test with multiple ATS systems. For 95% of roles, clean professional formatting outperforms creative designs by 3:1 in interview callback rates." },
-  { question: "How often should I update my resume formatting?", answer: "Every 6-12 months or when: 1) Changing industries, 2) Adding significant achievements, 3) Job market trends change, 4) ATS systems update (they evolve annually). Our tool provides real-time 2024-2025 formatting standards based on current hiring data from Fortune 500 companies." },
-  { question: "What's the ideal resume length and structure for 2024?", answer: "Optimal structure: 1) 1-page for <10 years experience, 2) 2-pages for executives/senior roles, 3) Clear section hierarchy, 4) Reverse chronological order, 5) Quantifiable achievements, 6) Skills grouped by relevance. We analyze your structure against 2024 hiring manager preferences from LinkedIn and Glassdoor data." },
+  { question: "How often should I update my resume formatting?", answer: "Every 6-12 months or when: 1) Changing industries, 2) Adding significant achievements, 3) Job market trends change, 4) ATS systems update (they evolve annually). Our tool provides real-time formatting standards based on current hiring data from Fortune 500 companies." },
+  { question: "What's the ideal resume length and structure?", answer: "Optimal structure: 1) 1-page for <10 years experience, 2) 2-pages for executives/senior roles, 3) Clear section hierarchy, 4) Reverse chronological order, 5) Quantifiable achievements, 6) Skills grouped by relevance. We analyze your structure against current hiring manager preferences from LinkedIn and Glassdoor data." },
   { question: "Does font choice really matter for ATS compatibility?", answer: "Absolutely. Use only ATS-friendly fonts: Arial, Calibri, Georgia, Helvetica, Times New Roman, or Garamond. Avoid: script fonts, decorative fonts, monospace (except coding roles), and multiple font families. Our checker identifies font issues and provides specific replacement recommendations." }
 ];
 
 const FORMATTING_GUIDELINES = [
   { category: "ATS-Optimized Typography", icon: 'FiFileText', rules: ["Use 1 professional font family maximum (2 variants allowed)", "Body text: 11-12pt, Headers: 14-16pt, Name: 18-22pt", "ATS-friendly fonts only: Arial, Calibri, Times New Roman", "Avoid decorative, script, or display fonts completely"] },
   { category: "Professional Spacing & Layout", icon: 'FiLayout', rules: ["Margins: 0.75 inch standard, 0.5 inch for dense content", "Line spacing: 1.15 for readability, 1.5 for dense sections", "Section spacing: 12pt between major sections", "White space: 30-40% of total page for optimal scanning"] },
-  { category: "2024 Resume Structure", icon: 'FiTarget', rules: ["Contact header: Name, phone, email, LinkedIn, location", "Professional summary: 3-4 lines highlighting key achievements", "Work experience: Reverse chronological with quantifiable results", "Education: Degree, institution, graduation year, honors"] },
+  { category: "Resume Structure", icon: 'FiTarget', rules: ["Contact header: Name, phone, email, LinkedIn, location", "Professional summary: 3-4 lines highlighting key achievements", "Work experience: Reverse chronological with quantifiable results", "Education: Degree, institution, graduation year, honors"] },
   { category: "ATS Compatibility Standards", icon: 'FiShield', rules: ["No tables, columns, or text boxes (100% ATS rejection)", "No headers/footers (invisible to ATS parsing)", "No images, charts, or graphics (parsed as blank space)", "Standard bullet points only (• not →, ■, or →)"] },
   { category: "Content Optimization", icon: 'FiEdit3', rules: ["Use action verbs: Led, Managed, Increased, Reduced, Developed", "Quantify achievements: percentages, dollar amounts, time periods", "Include relevant keywords from job description", "Focus on achievements, not just responsibilities"] }
 ];
@@ -193,6 +201,17 @@ const COMMON_ISSUES = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+  { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+  { href: "/free-resume-readability-checker", text: "Resume Readability Checker", iconName: "FiBookOpen" },
+  { href: "/free-resume-word-and-character-counter", text: "Resume Word Counter", iconName: "FiHash" },
+  { href: "/how-long-should-a-resume-be-usa-recruiter-insights", text: "Ideal Resume Length Guide", iconName: "FiFileText" }
+];
+
+// ============================================================================
 // ICON MAP
 // ============================================================================
 const ICON_MAP = {
@@ -202,11 +221,12 @@ const ICON_MAP = {
   FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
   FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
   FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
-  FiAlertTriangle, FiAlertCircle, FiActivity, FiServer, FiMonitor
+  FiAlertTriangle, FiAlertCircle, FiActivity, FiServer, FiMonitor,
+  FiScoreIcon, FiReadIcon, FiHash
 };
 
 // ============================================================================
-// ANALYSIS FUNCTION
+// ANALYSIS FUNCTION (UNCHANGED)
 // ============================================================================
 function analyzeFormatting(content) {
   if (!content.trim()) {
@@ -242,7 +262,7 @@ function analyzeFormatting(content) {
   }
 
   const lineLengths = lines.map(line => line.length).filter(len => len > 0);
-  const avgLineLength = lineLengths.reduce((a, b) => a + b, 0) / lineLengths.length;
+  const avgLineLength = lineLengths.length > 0 ? lineLengths.reduce((a, b) => a + b, 0) / lineLengths.length : 0;
   const inconsistentLines = lines.filter((line) => line.trim().length > 0 && Math.abs(line.length - avgLineLength) > avgLineLength * 0.5).length;
   if (inconsistentLines > lines.length * 0.2) {
     issueCategories.spacingIssues.push('Inconsistent line lengths - Affects readability and ATS parsing');
@@ -309,12 +329,15 @@ function analyzeFormatting(content) {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeFormattingChecker = ({ seoData, lastModified, buildTimestamp }) => {
+const ResumeFormattingChecker = ({ seoData, lastModified, buildTimestamp, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = "https://professionalresumefree.com/free-resume-formatting-checker";
-  const pageTitle = `Free Resume Formatting Checker ${CURRENT_YEAR} - ATS Compatibility Analyzer`;
+  const pageTitle = `Free Resume Formatting Checker ${currentYear} - ATS Compatibility Analyzer`;
   const pageDescription = `Free professional resume formatting analyzer. Check ATS compatibility, spacing, structure instantly. 75% of resumes fail ATS due to formatting. Fix yours now with detailed recommendations.`;
 
   const [text, setText] = useState('');
@@ -438,7 +461,7 @@ PROFESSIONAL SKILLS
           "Detailed Recommendations",
           "Free Forever"
         ],
-        "softwareVersion": `${CURRENT_YEAR}.2.0`,
+        "softwareVersion": `${currentYear}.2.0`,
         "dateModified": safeLastModifiedDate
       },
       {
@@ -454,7 +477,7 @@ PROFESSIONAL SKILLS
       },
       {
         "@type": "HowTo",
-        "name": `How to Format Your Resume for ATS in ${CURRENT_YEAR}`,
+        "name": `How to Format Your Resume for ATS in ${currentYear}`,
         "description": "Step-by-step guide to professional resume formatting that passes ATS systems",
         "totalTime": "PT15M",
         "step": [
@@ -537,7 +560,7 @@ PROFESSIONAL SKILLS
         {/* GEO Optimization Tags */}
         <meta name="chatgpt-fts:title" content="Free Resume Formatting Checker - ATS Compatibility Analysis Tool" />
         <meta name="chatgpt-fts:description" content="Analyze your resume formatting instantly. Check ATS compatibility, spacing, structure, and professional standards. Free tool with detailed recommendations." />
-        <meta name="chatgpt-fts:keywords" content="resume formatting, ATS checker, resume analysis, formatting tool 2024" />
+        <meta name="chatgpt-fts:keywords" content="resume formatting, ATS checker, resume analysis, formatting tool" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         
         {/* SINGLE CANONICAL URL */}
@@ -553,7 +576,7 @@ PROFESSIONAL SKILLS
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Resume Formatting Checker ${CURRENT_YEAR}`} />
+        <meta name="twitter:title" content={`Free Resume Formatting Checker ${currentYear}`} />
         <meta name="twitter:description" content="Free ATS formatting analysis tool. Check your resume now." />
         
         {/* Structured Data */}
@@ -566,7 +589,7 @@ PROFESSIONAL SKILLS
       {/* Hidden SEO Elements */}
       <div style={{display: 'none'}} aria-hidden="true">
         <span itemProp="tool-type">Resume Formatting Checker</span>
-        <span itemProp="year">{CURRENT_YEAR}</span>
+        <span itemProp="year">{currentYear}</span>
         <span itemProp="last-updated">{safeCurrentDate}</span>
       </div>
 
@@ -615,7 +638,7 @@ PROFESSIONAL SKILLS
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title">Analyze Your Resume Formatting Instantly</h2>
-              <p className="section-subtitle">Paste your resume content below for comprehensive {CURRENT_YEAR} formatting analysis. Our tool checks ATS compatibility, spacing consistency, structure, and professional standards.</p>
+              <p className="section-subtitle">Paste your resume content below for comprehensive {currentYear} formatting analysis. Our tool checks ATS compatibility, spacing consistency, structure, and professional standards.</p>
             </div>
 
             <div className="card-executive" style={{ maxWidth: '1000px', margin: '0 auto' }}>
@@ -772,9 +795,9 @@ Our tool analyzes:
                       {formattingIssues.formattingScore < 70 && (
                         <li style={{ display: 'flex', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} />Check spacing consistency and ensure proper section headers.</li>
                       )}
-                      <li style={{ display: 'flex', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} /> Use standard bullet points (•) consistently throughout your resume.</li>
-                      <li style={{ display: 'flex', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} /> Maintain 30-40% white space for optimal readability.</li>
-                      <li style={{ display: 'flex', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} /> Save as PDF to preserve formatting across all devices.</li>
+                      <li style={{ display: 'flex', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} />Use standard bullet points (•) consistently throughout your resume.</li>
+                      <li style={{ display: 'flex', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} />Maintain 30-40% white space for optimal readability.</li>
+                      <li style={{ display: 'flex', gap: '0.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)' }}><FiCheck size={14} color="var(--success-color)" style={{ flexShrink: 0, marginTop: '2px' }} />Save as PDF to preserve formatting across all devices.</li>
                     </ul>
                   </div>
                 </div>
@@ -787,7 +810,7 @@ Our tool analyzes:
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">{CURRENT_YEAR} Professional Resume Formatting Guidelines</h2>
+              <h2 className="section-title">{currentYear} Professional Resume Formatting Guidelines</h2>
               <p className="section-subtitle">Industry standards for optimal resume formatting and ATS compatibility based on current hiring data.</p>
             </div>
             <div className="grid">
@@ -824,8 +847,10 @@ Our tool analyzes:
               <p className="section-subtitle">Top formatting mistakes that cause ATS rejection and how to fix them.</p>
             </div>
             <div className="card-executive" style={{ maxWidth: '900px', margin: '0 auto', overflow: 'hidden' }}>
-              <div style={{ display: 'none', '@media (min-width:768px)': { display: 'grid' }, background: 'var(--bg-surface-high)', padding: '0.75rem 1rem', fontWeight: 'var(--font-weight-semibold)', color: 'var(--accent-primary)', gridTemplateColumns: '2fr 1fr 2fr', gap: '1rem', borderRadius: '0.25rem 0.25rem 0 0' }}>
-                <div>Issue</div><div>Impact</div><div>Solution</div>
+              <div className="issue-header">
+                <div>Issue</div>
+                <div>Impact</div>
+                <div>Solution</div>
               </div>
               {COMMON_ISSUES.map((item, i) => (
                 <div key={i} className="issue-row">
@@ -846,7 +871,7 @@ Our tool analyzes:
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title">Frequently Asked Questions About Resume Formatting</h2>
-              <p className="section-subtitle">Everything you need to know about professional resume formatting in {CURRENT_YEAR}.</p>
+              <p className="section-subtitle">Everything you need to know about professional resume formatting.</p>
             </div>
             <div className="faq-grid">
               {FAQS.map((faq, i) => (
@@ -882,11 +907,13 @@ Our tool analyzes:
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Instant Analysis</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Detailed Recommendations</span>
             </div>
-            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 50,000+ resumes • Updated for {CURRENT_YEAR} hiring standards</p>
+            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 50,000+ resumes • Updated for {currentYear} hiring standards</p>
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Resume Resources")
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -894,13 +921,7 @@ Our tool analyzes:
               <p className="section-subtitle">Complement your formatting check with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Test your resume score" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3", desc: "CAR methodology bullets" },
-                { href: "/best-ats-resume-format-2026", text: "Best ATS Resume Format", iconName: "FiFileText", desc: `${CURRENT_YEAR} format guide` },
-                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Guide", iconName: "FiCpu", desc: "Prompt engineering" },
-                { href: "/free-resume-tools", text: "Complete Free Tools Suite", iconName: "FiTool", desc: "All career tools" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -927,16 +948,20 @@ export async function getStaticProps() {
   const buildTimestamp = new Date().toISOString();
   const lastModified = new Date().toISOString();
   const currentDate = new Date().toISOString().split('T')[0];
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
   
   return {
     props: {
       lastModified,
       buildTimestamp,
+      currentYear,
       seoData: {
         currentDate,
         lastModifiedDate: lastModified,
         lastUpdated: buildTimestamp,
-        buildYear: CURRENT_YEAR,
+        buildYear: currentYear,
         pageType: 'tool',
         contentType: 'formatting_checker'
       }

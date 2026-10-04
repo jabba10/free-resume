@@ -13,6 +13,11 @@ import {
 } from 'react-icons/fi';
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
 // ============================================================================
 const executiveDesignTokens = `
@@ -113,7 +118,6 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 
 // SEO Keywords - Injected from Page 1 Blueprint
@@ -122,7 +126,7 @@ const SEO_KEYWORDS = [
   'ATS-friendly resume objective creator',
   'professional objective statement generator',
   'career objective builder free',
-  'resume summary generator 2024',
+  'resume summary generator',
   'custom resume objective tool',
   'job application objective maker',
   'career level objective generator',
@@ -157,7 +161,7 @@ const HOW_TO_STEPS = [
   { name: "Select Your Career Level", text: "Choose your current career stage for age-appropriate objective statements that match your experience.", icon: 'FiUser' },
   { name: "Enter Target Job Title", text: "Specify the exact job title you're targeting for customized professional phrasing.", icon: 'FiBriefcase' },
   { name: "Choose Your Industry", text: "Select your industry for sector-specific language and terminology that resonates.", icon: 'FiTarget' },
-  { name: "Define Your Key Goal", text: "Select your primary career objective to generate goal-oriented statements.", icon: 'FiFlag' },
+  { name: "Define Your Key Goal", text: "Select your primary career objective to generate goal-oriented statements.", icon: 'FiStar' },
   { name: "Generate & Customize", text: "Generate multiple professional options and customize for each application.", icon: 'FiZap' }
 ];
 
@@ -165,6 +169,17 @@ const REVIEWS = [
   { name: "Jennifer Carter", position: "HR Manager at TechCorp", rating: 5, review: "The objective statements generated are professional and ATS-friendly. Much better than generic templates found online. Our recruiting team sees immediate improvement in candidate quality.", verified: true },
   { name: "Michael Torres", position: "Software Engineer transitioning to Management", rating: 5, review: "As a career changer, the specific templates for my situation were invaluable. Landed 3 interviews in 2 weeks using the generated objectives.", verified: true },
   { name: "Sarah Johnson", position: "Recent Graduate | Business Administration", rating: 5, review: "Perfect for entry-level candidates. The objectives helped me stand out despite limited experience. Got my first job offer using this tool!", verified: true }
+];
+
+// ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-resume-summary-generator", text: "Resume Summary Generator", iconName: "FiFileText" },
+  { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
+  { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Guide", iconName: "FiTarget" },
+  { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiTool" },
+  { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiBookOpen" }
 ];
 
 // Breadcrumb data - Injected from Page 1 Blueprint
@@ -187,7 +202,7 @@ const ICON_MAP = {
 };
 
 // ============================================================================
-// GENERATION HELPERS (simplified)
+// GENERATION HELPERS
 // ============================================================================
 function getEntrySkill(goal) {
   const map = { 'gain professional experience': 'academic knowledge and practical skills', 'transition into new industry': 'adaptable skills and strong work ethic', 'advance to leadership role': 'leadership potential and team collaboration' };
@@ -241,13 +256,16 @@ function generateObjectives(formData) {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => {
+const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = `${SITE_URL}/free-resume-objective-generator`;
-  const pageTitle = `Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR} | Get 3x More Interviews`;
-  const pageDescription = `Generate targeted, ATS-friendly resume objectives tailored to your career level (${CURRENT_YEAR}). Professional statements that get 3x more interviews. 100% free, no signup required.`;
+  const pageTitle = `Free Resume Objective Generator – Professional & ATS-Safe ${currentYear} | Get 3x More Interviews`;
+  const pageDescription = `Generate targeted, ATS-friendly resume objectives tailored to your career level (${currentYear}). Professional statements that get 3x more interviews. 100% free, no signup required.`;
 
   const [formData, setFormData] = useState({ careerLevel: '', jobTitle: '', industry: '', keyGoal: '' });
   const [objectives, setObjectives] = useState([]);
@@ -282,7 +300,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
         "@type": "WebPage",
         "@id": `${canonicalUrl}#webpage`,
         "url": canonicalUrl,
-        "name": `Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR}`,
+        "name": `Free Resume Objective Generator – Professional & ATS-Safe ${currentYear}`,
         "description": pageDescription,
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
@@ -340,7 +358,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "priceValidUntil": `${CURRENT_YEAR}-12-31`
+          "priceValidUntil": `${currentYear}-12-31`
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -357,7 +375,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
           "No Sign Up Required",
           "Free Forever"
         ],
-        "softwareVersion": `${CURRENT_YEAR}.1.0`,
+        "softwareVersion": `${currentYear}.1.0`,
         "applicationSuite": "Career Tools",
         "countriesSupported": "Global"
       },
@@ -469,7 +487,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
         {/* Open Graph - Injected from Page 1 Blueprint */}
-        <meta property="og:title" content={`Free Resume Objective Generator – Professional & ATS-Safe ${CURRENT_YEAR}`} />
+        <meta property="og:title" content={`Free Resume Objective Generator – Professional & ATS-Safe ${currentYear}`} />
         <meta property="og:description" content="Generate professional resume objectives instantly. Tailored to your career level and goals. 100% free, no signup. ATS-optimized for 3x more interviews." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -483,7 +501,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
         
         {/* Twitter Card - Injected from Page 1 Blueprint */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Resume Objective Generator ${CURRENT_YEAR}`} />
+        <meta name="twitter:title" content={`Free Resume Objective Generator ${currentYear}`} />
         <meta name="twitter:description" content="Generate professional, ATS-friendly resume objectives tailored to your career level. 100% free, no signup." />
         <meta name="twitter:image" content={`${SITE_URL}/twitter-objective-generator.jpg`} />
         <meta name="twitter:image:alt" content="Free Resume Objective Generator with ATS Templates" />
@@ -507,10 +525,10 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
       {/* Hidden SEO Elements */}
       <div style={{display: 'none'}} aria-hidden="true">
         <span itemProp="tool-type">Resume Objective Generator</span>
-        <span itemProp="year">{CURRENT_YEAR}</span>
+        <span itemProp="year">{currentYear}</span>
         <span itemProp="last-updated">{safeCurrentDate}</span>
         <span itemProp="dateModified">{safeLastModifiedDate}</span>
-        <span itemProp="softwareVersion">{CURRENT_YEAR}.1.0</span>
+        <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
       </div>
 
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
@@ -535,7 +553,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • ATS Optimized • Updated {safeCurrentDate}</div>
               <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free Resume <span className="gradient-text">Objective</span> Generator – Professional & ATS-Safe {CURRENT_YEAR}
+                Free Resume <span className="gradient-text">Objective</span> Generator – Professional & ATS-Safe {currentYear}
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Create targeted, compelling objective statements tailored to your career level, industry, and goals. All statements optimized for Applicant Tracking Systems (ATS). <strong>100% free, no signup required.</strong> Used by <strong>250,000+ professionals</strong> to get <strong>3x more interviews</strong>.
@@ -653,8 +671,8 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
             </div>
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
               {[
-                "how to write a resume objective with no experience",
-                "professional resume objective examples 2026",
+                `how to write a resume objective with no experience`,
+                `professional resume objective examples ${currentYear}`,
                 "what to write in objective on a resume",
                 "resume objective for career change examples",
                 "senior level resume objective statements",
@@ -727,7 +745,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title" id="faq-title">Frequently Asked Questions About Resume Objectives</h2>
-              <p className="section-subtitle">Everything you need to know about creating professional resume objectives in {CURRENT_YEAR}</p>
+              <p className="section-subtitle">Everything you need to know about creating professional resume objectives in {currentYear}</p>
             </div>
             <div className="faq-grid">
               {FAQS.map((faq, i) => (
@@ -768,11 +786,13 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> ATS Optimized</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Mobile Friendly</span>
             </div>
-            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 250,000+ resumes • Updated for {CURRENT_YEAR} hiring standards</p>
+            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 250,000+ resumes • Updated for {currentYear} hiring standards</p>
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Resources")
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -780,13 +800,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
               <p className="section-subtitle">Complement your objective with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", iconName: "FiSearch", desc: "Match resume to job descriptions" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume score" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3", desc: "CAR methodology bullets" },
-                { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Guide", iconName: "FiFileText", desc: "Hook recruiters fast" },
-                { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -801,7 +815,7 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp }) => 
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • © {CURRENT_YEAR} Professional Resume Free. All rights reserved.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate}</span>
         </div>
       </main>
     </>
@@ -814,6 +828,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   const reviewDates = REVIEWS.map((_, i) => {
     const date = new Date(buildTimestamp);
@@ -836,7 +853,8 @@ export async function getStaticProps() {
         faqDates
       },
       buildTimestamp,
-      lastModified: lastModifiedDate
+      lastModified: lastModifiedDate,
+      currentYear
     },
     // Revalidate every hour for fresh content
     revalidate: 3600,

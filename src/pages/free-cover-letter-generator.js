@@ -129,9 +129,13 @@ const executiveDesignTokens = `
 `;
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 
 const TEMPLATE_VARIANTS = [
@@ -153,7 +157,7 @@ const FAQS = [
 ];
 
 const FEATURES = [
-  { icon: 'FiZap', title: 'AI-Powered Generation', desc: 'Advanced algorithms create personalized cover letters that match your experience level, industry, and target role with natural, compelling language.', stat: 'Instant' },
+  { icon: 'FiZap', title: 'Smart Generation', desc: 'Advanced algorithms create personalized cover letters that match your experience level, industry, and target role with natural, compelling language.', stat: 'Instant' },
   { icon: 'FiLayout', title: '6 Professional Templates', desc: 'Choose from Standard, Creative, Executive, Entry Level, Technical, and Healthcare templates with auto-adjusted tone and structure.', stat: 'Versatile' },
   { icon: 'FiTarget', title: 'Keyword Optimization', desc: 'Automatically incorporates industry-specific keywords and action verbs that ATS systems and hiring managers look for.', stat: 'ATS-Ready' },
   { icon: 'FiShield', title: 'Complete Privacy', desc: 'All processing happens in your browser. Your personal data is never uploaded, stored, or shared with any third party.', stat: '100% Safe' },
@@ -187,15 +191,15 @@ const REVIEWS = [
 // ============================================================================
 // SCHEMA DATA (Injected from Page 1 Blueprint)
 // ============================================================================
-const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => ({
+const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate, currentYear) => ({
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
       "@id": `${SITE_URL}/free-cover-letter-generator/#webpage`,
       "url": `${SITE_URL}/free-cover-letter-generator`,
-      "name": "Free Cover Letter Generator - Professional Templates & AI Customization 2026",
-      "description": `Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our AI-powered tool. Privacy-first, no signup required. ${CURRENT_YEAR}`,
+      "name": `Free Cover Letter Generator - Professional Templates ${currentYear}`,
+      "description": `Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our tool. Privacy-first, no signup required. ${currentYear}`,
       "datePublished": "2024-01-01",
       "dateModified": lastModifiedDate,
       "inLanguage": "en-US",
@@ -241,7 +245,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
     {
       "@type": "WebApplication",
       "name": "Free Cover Letter Generator",
-      "description": "Professional cover letter generator with AI-powered customization for any job application",
+      "description": "Professional cover letter generator with template-based customization for any job application",
       "url": `${SITE_URL}/free-cover-letter-generator`,
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
@@ -250,7 +254,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
         "price": "0",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "priceValidUntil": "2026-12-31"
+        "priceValidUntil": `${currentYear}-12-31`
       },
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -272,14 +276,14 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
         "url": SITE_URL
       },
       "featureList": [
-        "AI-Powered Customization",
+        "Template-Based Customization",
         "Multiple Template Styles",
         "Privacy-First Design",
         "No Sign Up Required",
         "Instant Generation",
         "Download Multiple Formats"
       ],
-      "softwareVersion": "2026.1.0",
+      "softwareVersion": `${currentYear}.1.0`,
       "screenshot": `${SITE_URL}/images/screenshot-cover-letter-generator.jpg`,
       "applicationSuite": "Career Tools",
       "countriesSupported": "Global"
@@ -336,11 +340,11 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
         "@type": "OfferCatalog",
         "name": "Free Cover Letter Services",
         "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Cover Letter Generation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cover Letter Generation" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Professional Template Selection" } }
         ]
       },
-      "description": "Free AI-powered cover letter generator for job seekers worldwide",
+      "description": "Free cover letter generator for job seekers worldwide",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
     },
     {
@@ -365,7 +369,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Any",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-            "description": "Professional cover letter generator with AI-powered customization for any job application",
+            "description": "Professional cover letter generator with template-based customization for any job application",
             "url": `${SITE_URL}/free-cover-letter-generator`
           }
         }
@@ -373,6 +377,17 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate) => 
     }
   ]
 });
+
+// ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/cover-letter-guides", text: "Cover Letter Guides", iconName: "FiFileText" },
+  { href: "/free-resume-builder", text: "Free Resume Builder", iconName: "FiEdit3" },
+  { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiGrid" },
+  { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiBookOpen" },
+  { href: "/interview-tips", text: "Interview Tips", iconName: "FiUserCheck" }
+];
 
 // ============================================================================
 // ICON MAP
@@ -421,16 +436,11 @@ function generateCoverLetter(formData) {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
+const CoverLetterGenerator = ({ seoData, buildTimestamp, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate, reviewDates, faqDates } = seoData || {};
-  
-  // Use SEO data with fallbacks
-  const safeSeoData = seoData || {
-    currentDate: new Date().toISOString().split('T')[0],
-    lastModifiedDate: new Date().toISOString(),
-    reviewDates: Array(REVIEWS.length).fill(new Date().toISOString().split('T')[0]),
-    faqDates: Array(FAQS.length).fill(new Date().toISOString().split('T')[0])
-  };
 
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
@@ -464,7 +474,7 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
     jobTitle: 'Senior Marketing Manager', yearsExperience: '8',
     keySkills: 'Digital Marketing, Team Leadership, Campaign Strategy, Data Analysis, Content Creation, SEO/SEM, Marketing Automation, Budget Management',
     keyAchievements: 'Increased lead generation by 45% through strategic multi-channel campaigns\nReduced marketing costs by 22% while improving ROI by 35%\nManaged and mentored a team of 8 marketing specialists\nImplemented marketing automation saving 30 hours weekly',
-    whyCompany: "I have followed Tech Innovations Inc.'s growth in the AI marketing space and am particularly impressed with your recent launch of the predictive analytics platform. Your commitment to innovation aligns perfectly with my experience in data-driven marketing strategies.",
+    whyCompany: "I have followed Tech Innovations Inc.'s growth in the marketing technology space and am particularly impressed with your recent launch of the predictive analytics platform. Your commitment to innovation aligns perfectly with my experience in data-driven marketing strategies.",
     templateVariant: 'standard'
   };
 
@@ -500,9 +510,9 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
         {/* Basic Meta Tags - Injected from Page 1 Blueprint */}
-        <title>Free Cover Letter Generator - Professional Templates & AI Customization {CURRENT_YEAR} | Cover Letter Builder</title>
-        <meta name="description" content={`Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our AI-powered tool. Privacy-first, no signup required. ${CURRENT_YEAR}`} />
-        <meta name="keywords" content="free cover letter generator, professional cover letter, AI cover letter, cover letter template, job application letter, cover letter builder, ATS cover letter, customizable cover letter" />
+        <title>{`Free Cover Letter Generator - Professional Templates ${currentYear} | Cover Letter Builder`}</title>
+        <meta name="description" content={`Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our tool. Privacy-first, no signup required. ${currentYear}`} />
+        <meta name="keywords" content={`free cover letter generator, professional cover letter, cover letter template, job application letter, cover letter builder, ATS cover letter, customizable cover letter ${currentYear}`} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -514,9 +524,9 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
         <meta name="build-timestamp" content={buildTimestamp} />
         
         {/* GEO Optimization Tags - Injected from Page 1 Blueprint */}
-        <meta name="chatgpt-fts:title" content="Free Cover Letter Generator - Professional Templates & AI Customization" />
-        <meta name="chatgpt-fts:description" content="Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our AI-powered tool. Privacy-first, no signup required." />
-        <meta name="chatgpt-fts:keywords" content="cover letter generator, AI cover letter, professional cover letter, job application letter" />
+        <meta name="chatgpt-fts:title" content={`Free Cover Letter Generator - Professional Templates ${currentYear}`} />
+        <meta name="chatgpt-fts:description" content="Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our tool. Privacy-first, no signup required." />
+        <meta name="chatgpt-fts:keywords" content="cover letter generator, professional cover letter, job application letter, cover letter builder" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Cover Letter Generator" />
         
@@ -530,12 +540,12 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Open Graph Protocol - Injected from Page 1 Blueprint */}
-        <meta property="og:title" content={`Free Cover Letter Generator - Professional Templates & AI Customization ${CURRENT_YEAR}`} />
-        <meta property="og:description" content="Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our AI-powered tool." />
+        <meta property="og:title" content={`Free Cover Letter Generator - Professional Templates ${currentYear}`} />
+        <meta property="og:description" content="Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our tool." />
         <meta property="og:image" content={`${SITE_URL}/images/og-cover-letter-generator.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free AI-Powered Cover Letter Generator - Create Professional Cover Letters Online" />
+        <meta property="og:image:alt" content="Free Cover Letter Generator - Create Professional Cover Letters Online" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
@@ -544,10 +554,10 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
         
         {/* Twitter Cards - Injected from Page 1 Blueprint */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Cover Letter Generator - Professional Templates & AI Customization ${CURRENT_YEAR}`} />
-        <meta name="twitter:description" content="Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with AI." />
+        <meta name="twitter:title" content={`Free Cover Letter Generator - Professional Templates ${currentYear}`} />
+        <meta name="twitter:description" content="Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-cover-letter-generator.jpg`} />
-        <meta name="twitter:image:alt" content="Free Cover Letter Generator with AI Templates" />
+        <meta name="twitter:image:alt" content="Free Cover Letter Generator with Templates" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
         
@@ -565,7 +575,7 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getSchemaData(safeFaqDates, safeReviewDates, safeCurrentDate, safeLastModifiedDate))
+            __html: JSON.stringify(getSchemaData(safeFaqDates, safeReviewDates, safeCurrentDate, safeLastModifiedDate, currentYear))
           }}
         />
       </Head>
@@ -602,10 +612,10 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • 6 Templates • Instant Results</div>
               <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free <span className="gradient-text">Cover Letter Generator</span> - Professional Templates & AI Customization {CURRENT_YEAR}
+                Free <span className="gradient-text">Cover Letter Generator</span> - Professional Templates {currentYear}
               </h1>
               <p className="section-subtitle" style={{ maxWidth: '900px', marginBottom: '2rem' }}>
-                Create customized cover letters in minutes. Our AI-powered generator crafts professional letters tailored to your specific job application.
+                Create customized cover letters in minutes. Our professional generator crafts compelling letters tailored to your specific job application.
                 <strong style={{ display: 'inline-block', background: '#131315', color: '#f2ca50', padding: '4px 12px', borderRadius: '50px', fontSize: '0.9rem', marginLeft: '12px', border: '0.5px solid var(--border-gold-filament)' }}>
                   Trusted by 500,000+ job seekers
                 </strong>
@@ -804,7 +814,7 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title" id="how-it-works-title">How to Create a Professional Cover Letter: 4 Simple Steps</h2>
-              <p className="section-subtitle">Our AI-powered cover letter generator makes it easy to create customized applications</p>
+              <p className="section-subtitle">Our cover letter generator makes it easy to create customized applications</p>
             </div>
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
               {HOW_TO_STEPS.map((step, idx) => {
@@ -821,7 +831,7 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
               })}
             </div>
             <div className="section-header" style={{ marginTop: '3rem' }}>
-              <h2 className="section-title">Expert Cover Letter Writing Tips for {CURRENT_YEAR}</h2>
+              <h2 className="section-title">Expert Cover Letter Writing Tips for {currentYear}</h2>
               <p className="section-subtitle">Follow these best practices to make your cover letter stand out to hiring managers</p>
             </div>
             <div className="grid">
@@ -884,8 +894,8 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
             </div>
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', maxWidth: '1000px', margin: '0 auto' }}>
               {[
-                "how to write a cover letter with no experience",
-                "best cover letter format for 2026",
+                `how to write a cover letter with no experience`,
+                `best cover letter format for ${currentYear}`,
                 "cover letter samples for career change",
                 "what to include in a cover letter",
                 "cover letter vs resume differences",
@@ -964,7 +974,9 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Free Career Resources")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-title">
           <div className="section-container">
             <div className="section-header">
@@ -972,14 +984,7 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
               <p className="section-subtitle">Strengthen your job application with our complete suite of free tools</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-builder", text: "Free ATS-Friendly Resume Builder", iconName: "FiFileText" },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiSearch" },
-                { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" },
-                { href: "/free-resume-summary-generator", text: "Free Resume Summary Generator", iconName: "FiEdit3" },
-                { href: "/interview-tips", text: "Expert Interview Tips", iconName: "FiUserCheck" },
-                { href: "/careers-blog", text: "Latest Career Advice & Trends", iconName: "FiBookOpen" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -992,18 +997,18 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Footer Info - Freshness Signals */}
+        {/* Footer Info - Freshness Signals (Copyright removed) */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small">
             <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
-            Last updated: {safeCurrentDate} • Build: {freshnessIndicator} • © {CURRENT_YEAR} Professional Resume Free. All rights reserved.
+            Last updated: {safeCurrentDate} • Build: {freshnessIndicator}
           </span>
         </div>
         
         {/* Hidden Metadata */}
         <div style={{ display: 'none' }} aria-hidden="true">
           <span itemProp="dateModified">{safeLastModifiedDate}</span>
-          <span itemProp="softwareVersion">2026.1.0</span>
+          <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
         </div>
       </main>
     </>
@@ -1018,6 +1023,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate dynamic review dates (staggered backward from build time)
   const reviewDates = Array(REVIEWS.length).fill(null).map((_, i) => {
@@ -1041,6 +1049,7 @@ export async function getStaticProps() {
         reviewDates,
         faqDates
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600 // Revalidate every hour (ISR strategy from Page 1)

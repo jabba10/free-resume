@@ -10,8 +10,13 @@ import {
   FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
   FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
   FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
-  FiActivity, FiType, FiAlignLeft
+  FiActivity, FiType, FiAlignLeft, FiHash
 } from 'react-icons/fi';
+
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 // ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
@@ -122,7 +127,6 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 
 // SEO Keywords - Injected from Page 1 Blueprint
@@ -134,7 +138,7 @@ const SEO_KEYWORDS = [
   'resume readability score checker',
   'professional resume writing analysis',
   'resume optimization tool free',
-  'readability analysis tool 2025',
+  'readability analysis tool',
   'resume editing software free',
   'job application readability checker',
   'resume quality checker online',
@@ -174,6 +178,17 @@ const WRITING_TIPS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-resume-formatting-checker", text: "Resume Formatting Checker", iconName: "FiLayout" },
+  { href: "/free-resume-word-and-character-counter", text: "Word & Character Counter", iconName: "FiHash" },
+  { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+  { href: "/how-long-should-a-resume-be-usa-recruiter-insights", text: "Resume Length Insights", iconName: "FiFileText" },
+  { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiTool" }
+];
+
+// ============================================================================
 // ICON MAP
 // ============================================================================
 const ICON_MAP = {
@@ -183,11 +198,11 @@ const ICON_MAP = {
   FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
   FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
   FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
-  FiActivity, FiType, FiAlignLeft
+  FiActivity, FiType, FiAlignLeft, FiHash
 };
 
 // ============================================================================
-// ANALYSIS FUNCTIONS
+// ANALYSIS FUNCTIONS (UNCHANGED)
 // ============================================================================
 function countSyllables(word) {
   word = word.toLowerCase();
@@ -240,12 +255,15 @@ function calculateReadability(content) {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => {
+const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = `${SITE_URL}/free-resume-readability-checker`;
-  const pageTitle = `Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization ${CURRENT_YEAR}`;
+  const pageTitle = `Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization ${currentYear}`;
   const pageDescription = `Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions. No sign up required.`;
 
   const [text, setText] = useState('');
@@ -331,7 +349,8 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": `${currentYear}-12-31`
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -349,7 +368,7 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
           "Bullet Point Analysis",
           "Free Forever"
         ],
-        "softwareVersion": `${CURRENT_YEAR}.1.0`
+        "softwareVersion": `${currentYear}.1.0`
       },
       {
         "@type": "FAQPage",
@@ -395,7 +414,7 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Open Graph - Injected from Page 1 Blueprint */}
-        <meta property="og:title" content="Free Resume Readability Checker – Professional Flesch-Kincaid Analysis" />
+        <meta property="og:title" content={`Free Resume Readability Checker – Professional Flesch-Kincaid Analysis ${currentYear}`} />
         <meta property="og:description" content="Analyze and improve your resume's readability. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips. Free online tool." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
@@ -417,7 +436,7 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
       {/* Hidden SEO Elements */}
       <div style={{display: 'none'}} aria-hidden="true">
         <span itemProp="tool-type">Readability Checker</span>
-        <span itemProp="year">{CURRENT_YEAR}</span>
+        <span itemProp="year">{currentYear}</span>
         <span itemProp="last-updated">{safeCurrentDate}</span>
         <span itemProp="build-timestamp">{buildTimestamp}</span>
       </div>
@@ -444,7 +463,7 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • Flesch-Kincaid • ATS Optimized</div>
               <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Resume <span className="gradient-text">Readability</span> Checker – Professional Flesch-Kincaid Analysis & ATS Optimization {CURRENT_YEAR}
+                Resume <span className="gradient-text">Readability</span> Checker – Professional Flesch-Kincaid Analysis & ATS Optimization {currentYear}
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Professional Flesch-Kincaid analysis with <strong>ATS optimization guidance</strong>. Analyze and improve your resume's readability with comprehensive metrics, sentence analysis, and actionable suggestions. <strong>Free forever.</strong>
@@ -603,7 +622,7 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title" id="faq-title">Frequently Asked Questions About Resume Readability</h2>
-              <p className="section-subtitle">Everything you need to know about resume readability and ATS optimization in {CURRENT_YEAR}</p>
+              <p className="section-subtitle">Everything you need to know about resume readability and ATS optimization in {currentYear}</p>
             </div>
             <div className="faq-grid">
               {FAQS.map((faq, i) => (
@@ -663,11 +682,13 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> ATS Optimized</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Professional Results</span>
             </div>
-            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 12,500+ resumes • Updated for {CURRENT_YEAR} hiring standards</p>
+            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 12,500+ resumes • Updated for {currentYear} hiring standards</p>
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Resources")
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -675,13 +696,7 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
               <p className="section-subtitle">Complement your readability check with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3", desc: "CAR methodology bullets" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume score" },
-                { href: "/free-resume-formatting-checker", text: "Formatting Checker", iconName: "FiLayout", desc: "Layout & spacing analysis" },
-                { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Guide", iconName: "FiFileText", desc: "Hook recruiters fast" },
-                { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -696,7 +711,7 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp }) => 
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • © {CURRENT_YEAR} Professional Resume Free. All rights reserved.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate}</span>
         </div>
       </main>
     </>
@@ -710,6 +725,9 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
+
   return {
     props: {
       seoData: {
@@ -720,7 +738,8 @@ export async function getStaticProps() {
         toolName: 'Resume Readability Checker'
       },
       buildTimestamp,
-      lastModified: lastModifiedDate
+      lastModified: lastModifiedDate,
+      currentYear
     },
     // Revalidate every hour for fresh content
     revalidate: 3600,

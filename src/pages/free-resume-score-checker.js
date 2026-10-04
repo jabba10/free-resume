@@ -10,8 +10,13 @@ import {
   FiLayout, FiEdit3, FiSave, FiPrinter, FiRefreshCw, FiInfo,
   FiChevronDown, FiChevronUp, FiPlus, FiMinus, FiLock, FiSmile,
   FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
-  FiActivity, FiAlertTriangle, FiAlertCircle
+  FiActivity, FiAlertTriangle, FiAlertCircle, FiHash
 } from 'react-icons/fi';
+
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 // ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
@@ -120,7 +125,6 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 
 // SEO Keywords - Injected from Page 1 Blueprint
@@ -135,7 +139,7 @@ const SEO_KEYWORDS = [
   'instant resume analysis',
   'privacy-first resume checker',
   'browser-based resume analyzer',
-  'resume score checker 2026',
+  'resume score checker',
   'free ATS resume analyzer',
   'resume compatibility test',
   'resume scanner online free',
@@ -161,7 +165,7 @@ const FAQS = [
 
 const HOW_TO_STEPS = [
   { name: "Paste Your Resume", text: "Copy and paste your resume text into the analyzer. Remove personal contact information for privacy.", icon: 'FiClipboard' },
-  { name: "Instant Analysis", text: "Our AI-powered algorithm analyzes 5 key dimensions in real-time as you type.", icon: 'FiZap' },
+  { name: "Instant Analysis", text: "Our advanced algorithm analyzes 5 key dimensions in real-time as you type.", icon: 'FiZap' },
   { name: "Review Scores", text: "Get detailed scores for ATS compatibility, impact, structure, keywords, and professional polish.", icon: 'FiBarChart2' },
   { name: "Implement Suggestions", text: "Follow our actionable improvement suggestions with before/after examples.", icon: 'FiCheck' },
   { name: "Optimize & Apply", text: "Update your resume based on recommendations and apply with confidence.", icon: 'FiTarget' }
@@ -174,6 +178,17 @@ const REVIEWS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+  { href: "/free-resume-formatting-checker", text: "Formatting Checker", iconName: "FiLayout" },
+  { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
+  { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiHash" },
+  { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiTool" }
+];
+
+// ============================================================================
 // ICON MAP
 // ============================================================================
 const ICON_MAP = {
@@ -183,7 +198,7 @@ const ICON_MAP = {
   FiCopy, FiX, FiGrid, FiList, FiSmartphone, FiBriefcase, FiLayout, FiEdit3,
   FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
   FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
-  FiActivity, FiAlertTriangle, FiAlertCircle
+  FiActivity, FiAlertTriangle, FiAlertCircle, FiHash
 };
 
 // ============================================================================
@@ -201,7 +216,7 @@ function calculateATSScore(text) {
   const nonStandardHeadings = headingLines.filter(heading => !STANDARD_HEADINGS.some(standard => heading.toLowerCase().includes(standard)));
   if (nonStandardHeadings.length > 2) { score -= 15; issues.push('Using creative/non-standard section headings'); improvements.push('Use standard headings like "Work Experience", "Education", "Skills"'); }
   if (text.includes('|') || (text.includes('+') && text.includes('-') && text.length < 1000)) { score -= 20; issues.push('Table-like formatting detected'); improvements.push('Convert tables to bullet points'); }
-  return { score: Math.max(0, score), issues, improvements, examples: { before: '• My Journey • What I Bring', after: '• Work Experience • Skills' } };
+  return { category: 'ATS Compatibility', score: Math.max(0, score), issues, improvements, examples: { before: '• My Journey • What I Bring', after: '• Work Experience • Skills' } };
 }
 
 function calculateImpactScore(text) {
@@ -217,7 +232,7 @@ function calculateImpactScore(text) {
   const passiveIndicators = ['responsible for', 'duties included', 'was tasked with', 'helped with'];
   const passiveFound = passiveIndicators.filter(indicator => text.toLowerCase().includes(indicator));
   if (passiveFound.length > 0) { score -= passiveFound.length * 10; issues.push('Passive language detected'); improvements.push('Convert to active voice: "Managed team" instead of "Was responsible for managing team"'); }
-  return { score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'Responsible for managing social media accounts', after: 'Grew social media following by 150% through targeted campaigns' } };
+  return { category: 'Impact & Achievements', score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'Responsible for managing social media accounts', after: 'Grew social media following by 150% through targeted campaigns' } };
 }
 
 function calculateStructureScore(text) {
@@ -232,7 +247,7 @@ function calculateStructureScore(text) {
   const bulletPoints = lines.filter(line => line.trim().startsWith('•') || line.trim().match(/^[*-]\s/));
   const bulletRatio = bulletPoints.length / lines.filter(l => l.trim().length > 0).length;
   if (bulletRatio < 0.5) { score -= 25; issues.push('Too many paragraph blocks'); improvements.push('Use bullet points for achievements (70%+ of content)'); }
-  return { score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'Managed projects and teams.', after: '• Managed 5 projects with $2M budget' } };
+  return { category: 'Structure & Readability', score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'Managed projects and teams.', after: '• Managed 5 projects with $2M budget' } };
 }
 
 function calculateKeywordScore(text) {
@@ -245,7 +260,7 @@ function calculateKeywordScore(text) {
   if (keywordMatches.length < 3) { score -= 30; issues.push('Missing strong action keywords'); improvements.push(`Include keywords like ${strongKeywords.slice(0, 5).join(', ')}`); }
   const fluffFound = FLUFF_WORDS.filter(fluff => textLower.includes(fluff));
   if (fluffFound.length > 0) { score -= fluffFound.length * 10; issues.push('Overused phrases detected'); improvements.push(`Replace "${fluffFound[0]}" with specific examples`); }
-  return { score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'Hardworking team player', after: 'Collaborated with cross-functional teams to deliver projects 20% faster' } };
+  return { category: 'Keyword Relevance', score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'Hardworking team player', after: 'Collaborated with cross-functional teams to deliver projects 20% faster' } };
 }
 
 function calculatePolishScore(text) {
@@ -254,7 +269,7 @@ function calculatePolishScore(text) {
   const improvements = [];
   if (text.includes('!!!') || text.includes('??') || text.includes(':-)')) { score -= 20; issues.push('Unprofessional symbols/punctuation'); improvements.push('Remove multiple exclamation points, question marks, and emoticons'); }
   if (/[a-zA-Z0-9._%+-]+@(aol|yahoo|hotmail|gmail|outlook|live|msn)\.com/i.test(text)) { score -= 10; issues.push('Consider using a more professional email domain'); improvements.push('Use first.last@provider.com format'); }
-  return { score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'coolguy123@gmail.com', after: 'john.smith@professional.com' } };
+  return { category: 'Professional Polish', score: Math.max(0, Math.min(100, score)), issues, improvements, examples: { before: 'coolguy123@gmail.com', after: 'john.smith@professional.com' } };
 }
 
 function analyzeResume(text) {
@@ -271,12 +286,15 @@ function analyzeResume(text) {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
+const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = `${SITE_URL}/free-resume-score-checker`;
-  const pageTitle = `Free Resume Score Checker - ATS Analysis & Professional Review ${CURRENT_YEAR}`;
+  const pageTitle = `Free Resume Score Checker - ATS Analysis & Professional Review ${currentYear}`;
   const pageDescription = `Get an instant, professional resume score with ATS compatibility analysis. Our free resume checker analyzes 5 key dimensions in real-time. 100% free, no signup, privacy-first tool trusted by 50,000+ users.`;
 
   const [resumeText, setResumeText] = useState('');
@@ -322,7 +340,8 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock"
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": `${currentYear}-12-31`
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -352,7 +371,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
           "Privacy-First Browser Analysis",
           "Real-Time Suggestions"
         ],
-        "softwareVersion": `${CURRENT_YEAR}.1.0`,
+        "softwareVersion": `${currentYear}.1.0`,
         "countriesSupported": "Global"
       },
       {
@@ -442,45 +461,10 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
           "url": canonicalUrl,
-          "priceValidUntil": `${CURRENT_YEAR}-12-31`,
+          "priceValidUntil": `${currentYear}-12-31`,
           "eligibleRegion": {
             "@type": "Country",
             "name": "Worldwide"
-          },
-          "shippingDetails": {
-            "@type": "OfferShippingDetails",
-            "shippingRate": {
-              "@type": "MonetaryAmount",
-              "value": "0",
-              "currency": "USD"
-            },
-            "shippingDestination": {
-              "@type": "DefinedRegion",
-              "addressCountry": "US"
-            },
-            "deliveryTime": {
-              "@type": "ShippingDeliveryTime",
-              "handlingTime": {
-                "@type": "QuantitativeValue",
-                "minValue": "0",
-                "maxValue": "0",
-                "unitCode": "DAY"
-              },
-              "transitTime": {
-                "@type": "QuantitativeValue",
-                "minValue": "0",
-                "maxValue": "0",
-                "unitCode": "DAY"
-              }
-            }
-          },
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "applicableCountry": "US",
-            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-            "merchantReturnDays": "0",
-            "returnMethod": "https://schema.org/ReturnNotPermitted",
-            "returnFees": "https://schema.org/FreeReturn"
           }
         },
         "aggregateRating": {
@@ -528,7 +512,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* OPTIMIZED TITLE - UNDER 70 CHARACTERS */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
@@ -544,7 +528,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Open Graph */}
-        <meta property="og:title" content={`Free Resume Score Checker - ATS Analysis & Professional Review ${CURRENT_YEAR}`} />
+        <meta property="og:title" content={`Free Resume Score Checker - ATS Analysis & Professional Review ${currentYear}`} />
         <meta property="og:description" content="Get your resume score in 60 seconds. No signup required. Privacy-first ATS compatibility analysis for job applications." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -556,7 +540,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
         
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Resume Score Checker - ATS Analysis & Review ${CURRENT_YEAR}`} />
+        <meta name="twitter:title" content={`Free Resume Score Checker - ATS Analysis & Review ${currentYear}`} />
         <meta name="twitter:description" content="Instantly check your resume's ATS compatibility and get actionable improvements. Free, privacy-first tool." />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -581,10 +565,10 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
       {/* Hidden SEO Elements */}
       <div style={{display: 'none'}} aria-hidden="true">
         <span itemProp="tool-type">Resume Score Checker</span>
-        <span itemProp="year">{CURRENT_YEAR}</span>
+        <span itemProp="year">{currentYear}</span>
         <span itemProp="last-updated">{safeCurrentDate}</span>
         <span itemProp="dateModified">{safeLastModifiedDate}</span>
-        <span itemProp="softwareVersion">{CURRENT_YEAR}.1.0</span>
+        <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
       </div>
 
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
@@ -607,7 +591,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • 5-D Analysis • Privacy First</div>
               <h1 style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free Resume <span className="gradient-text">Score</span> Checker - ATS Analysis & Professional Review {CURRENT_YEAR}
+                Free Resume <span className="gradient-text">Score</span> Checker - ATS Analysis & Professional Review {currentYear}
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Get an instant, professional resume analysis with <strong>ATS compatibility scoring</strong>. 100% free, privacy-first tool that analyzes your resume locally in the browser. No data leaves your computer. <strong>Free forever.</strong>
@@ -688,7 +672,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
                     </div>
                     {results.feedback.map((item, i) => (
                       <div key={i} className="feedback-card">
-                        <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--accent-primary)' }}>{item.category || 'Feedback'} ({item.score}/100)</h3>
+                        <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--accent-primary)' }}>{item.category} ({item.score}/100)</h3>
                         {item.issues.map((issue, j) => (
                           <div key={`i-${j}`} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', fontSize: 'var(--font-size-body-sm)' }}>
                             <FiAlertCircle size={16} color="var(--error-color)" style={{ flexShrink: 0, marginTop: '2px' }} />
@@ -806,7 +790,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title" id="faq-title">Frequently Asked Questions About Resume Scoring</h2>
-              <p className="section-subtitle">Everything you need to know about resume scoring and ATS optimization in {CURRENT_YEAR}</p>
+              <p className="section-subtitle">Everything you need to know about resume scoring and ATS optimization in {currentYear}</p>
             </div>
             <div className="faq-grid">
               {FAQS.map((faq, i) => (
@@ -842,11 +826,13 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> ATS Optimized</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)' }}><FiCheck size={14} color="var(--success-color)" /> Privacy First</span>
             </div>
-            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 50,000+ resumes • Updated for {CURRENT_YEAR} hiring standards</p>
+            <p className="text-small" style={{ marginTop: '2rem' }}>Based on analysis of 50,000+ resumes • Updated for {currentYear} hiring standards</p>
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Resources")
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -854,13 +840,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
               <p className="section-subtitle">Complement your score analysis with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Full compatibility test" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3", desc: "CAR methodology bullets" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch", desc: "Match to job descriptions" },
-                { href: "/how-to-write-a-resume", text: "Complete Resume Guide", iconName: "FiFileText", desc: "Step-by-step writing guide" },
-                { href: "/resume-templates", text: "ATS Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -875,7 +855,7 @@ const FreeResumeScoreChecker = ({ seoData, lastModified, buildTimestamp }) => {
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • © {CURRENT_YEAR} Professional Resume Free. All rights reserved.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate}</span>
         </div>
       </main>
     </>
@@ -888,6 +868,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // FIXED: Use review.date if available, otherwise generate a fallback date
   const reviewDates = REVIEWS.map((review, i) => {
@@ -913,7 +896,8 @@ export async function getStaticProps() {
         buildTimestamp
       },
       buildTimestamp,
-      lastModified: lastModifiedDate
+      lastModified: lastModifiedDate,
+      currentYear
     },
     // Revalidate every hour for fresh content
     revalidate: 3600,

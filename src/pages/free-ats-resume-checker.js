@@ -118,6 +118,11 @@ const executiveDesignTokens = `
 `;
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // SEO-OPTIMIZED getStaticProps (INJECTED FROM PAGE 1 BLUEPRINT)
 // ============================================================================
 export async function getStaticProps() {
@@ -125,6 +130,9 @@ export async function getStaticProps() {
   const buildTime = new Date(buildTimestamp);
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
 
   // Generate freshness review dates
   const reviewDates = Array(6).fill(null).map((_, i) => {
@@ -165,14 +173,12 @@ export async function getStaticProps() {
         faqDates,
         breadcrumbData
       },
+      currentYear,
       buildTimestamp
     },
     revalidate: 3600, // ISR: Revalidate every hour
   };
 }
-
-// Data Constants
-const CURRENT_YEAR = new Date().getFullYear();
 
 const FEATURES = [
   { icon: 'FiSearch', title: 'Keyword Optimization', desc: 'Deep scan your resume against job descriptions to identify missing critical keywords that ATS systems look for.', stat: 'AI-Powered' },
@@ -206,9 +212,20 @@ const CRITICAL_KEYWORDS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "ATS Optimization Tips", iconName: "FiTarget" },
+  { href: "/best-resume-templates-to-pass-applicant-tracking-system", text: "ATS Resume Template Guide", iconName: "FiLayout" },
+  { href: "/free-resume-score-checker", text: "Free Resume Score Checker", iconName: "FiAward" },
+  { href: "/free-resume-formatting-checker", text: "Resume Formatting Checker", iconName: "FiCheckCircle" },
+  { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "AI Resume Screen Explained", iconName: "FiCpu" }
+];
+
+// ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
+const ATSResumeCheckerPage = ({ seoData, buildTimestamp, currentYear: propYear }) => {
   const {
     currentDate,
     lastModifiedDate,
@@ -216,6 +233,9 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
     faqDates,
     breadcrumbData
   } = seoData || {};
+
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
 
   // Fallback freshness values
   const freshnessIndicator = buildTimestamp 
@@ -228,8 +248,8 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
 
   const canonicalUrl = "https://professionalresumefree.com/free-resume-readability-checker";
   
-  // Optimized title - approximately 70 characters
-  const optimizedTitle = "Free ATS Resume Checker 2026 - Test Your Resume Score Instantly";
+  // Optimized title - dynamic year
+  const optimizedTitle = `Free ATS Resume Checker ${currentYear} - Test Your Resume Score Instantly`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
@@ -237,7 +257,7 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
     "resume ATS compatibility test tool",
     "check if resume passes applicant tracking systems",
     "free ATS scanner for resume analysis",
-    "resume keyword optimization checker 2026"
+    `resume keyword optimization checker ${currentYear}`
   ];
 
   // People Also Ask for GEO
@@ -393,13 +413,13 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
           "No Sign Up Required",
           "Mobile-Friendly Interface"
         ],
-        "softwareVersion": `${CURRENT_YEAR}.1.0`,
+        "softwareVersion": `${currentYear}.1.0`,
         "dateModified": safeLastModifiedDate
       },
       {
         "@type": "Article",
         "@id": `${canonicalUrl}#article`,
-        "headline": "Free ATS Resume Checker: Test Your Resume Score Instantly 2026",
+        "headline": `Free ATS Resume Checker: Test Your Resume Score Instantly ${currentYear}`,
         "description": "Check if your resume passes ATS screening with our free instant analysis tool. Get compatibility score, keyword optimization tips, and actionable fixes.",
         "author": {
           "@type": "Organization",
@@ -489,16 +509,16 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
+        {/* OPTIMIZED TITLE - dynamic year */}
         <title>{optimizedTitle}</title>
         
         {/* META DESCRIPTION */}
-        <meta name="description" content="Check if your resume passes ATS screening. Free instant analysis with compatibility score, keyword optimization, and actionable fixes. 100% private, no sign-up required." />
+        <meta name="description" content={`Check if your resume passes ATS screening. Free ${currentYear} instant analysis with compatibility score, keyword optimization, and actionable fixes. 100% private, no sign-up required.`} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content="ATS resume checker, applicant tracking system, resume compatibility, ATS optimization, free resume scanner, resume parsing issues, ATS formatting, resume analysis, ATS friendly resume, resume checker tool, resume readability checker, ATS score test" />
+        <meta name="keywords" content={`ATS resume checker, applicant tracking system, resume compatibility, ATS optimization, free resume scanner, resume parsing issues, ATS formatting, resume analysis, ATS friendly resume, resume checker tool, resume readability checker, ATS score test ${currentYear}`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Free ATS Resume Checker - Instant ATS Compatibility Analysis 2026" />
+        <meta name="chatgpt-fts:title" content={`Free ATS Resume Checker - Instant ATS Compatibility Analysis ${currentYear}`} />
         <meta name="chatgpt-fts:description" content="Free ATS resume checker that analyzes 50+ parsing factors instantly. Get detailed feedback on formatting issues, keywords, and ATS compatibility. Privacy-first browser tool." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -524,7 +544,7 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis 2026" />
+        <meta property="og:title" content={`Free ATS Resume Checker - Applicant Tracking System Compatibility Analysis ${currentYear}`} />
         <meta property="og:description" content="Analyze 50+ ATS parsing factors instantly. Privacy-first tool that works entirely in your browser. Get actionable fixes and improve your resume score." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -538,7 +558,7 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free ATS Resume Checker - Instant Compatibility Analysis 2026" />
+        <meta name="twitter:title" content={`Free ATS Resume Checker - Instant Compatibility Analysis ${currentYear}`} />
         <meta name="twitter:description" content="Analyze your resume for 50+ ATS parsing issues. Privacy-first, browser-based tool. No signup required." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="ATS Resume Checker Tool Preview" />
@@ -588,7 +608,7 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span itemProp="name" aria-current="page">ATS Resume Checker 2026</span>
+                <span itemProp="name" aria-current="page">ATS Resume Checker {currentYear}</span>
                 <meta itemProp="position" content="3" />
               </li>
             </ol>
@@ -599,7 +619,7 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge" aria-label="Trust indicators">✦ Free Tool • No Sign Up • Instant Results | Updated {CURRENT_YEAR}</div>
+              <div className="badge" aria-label="Trust indicators">✦ Free Tool • No Sign Up • Instant Results | Updated {currentYear}</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Free <span className="gradient-text">ATS Resume</span> Checker
               </h1>
@@ -608,7 +628,7 @@ const ATSResumeCheckerPage = ({ seoData, buildTimestamp }) => {
               </p>
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }} aria-label="Key statistics">
                 <div style={{ textAlign: 'center', width: '100%', marginBottom: '20px', gridColumn: '1 / -1' }}>
-                  <span className="badge">📊 Based on {CURRENT_YEAR} ATS Standards</span>
+                  <span className="badge">📊 Based on {currentYear} ATS Standards</span>
                 </div>
                 <div className="stat-card"><div className="stat-number">98%</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Fortune 500 Use ATS</div></div>
                 <div className="stat-card"><div className="stat-number">75%</div><div style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>Resumes Rejected</div></div>
@@ -824,7 +844,9 @@ Senior Developer | ABC Tech Corp | 2020-Present
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Enhance Your Resume Further")
+            ============================================================================ */}
         <section className="section" aria-labelledby="resources-heading">
           <div className="section-container">
             <div className="section-header">
@@ -832,12 +854,7 @@ Senior Developer | ABC Tech Corp | 2020-Present
               <p className="section-subtitle">Complement your ATS check with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-builder", text: "Free ATS-Friendly Resume Builder", iconName: "FiFileText" },
-                { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "Pass AI Resume Screens: 2026 ATS Guide", iconName: "FiTarget" },
-                { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
