@@ -14,6 +14,11 @@ import {
 } from 'react-icons/fi';
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS - FIXED OVERLAY ISSUES
 // ============================================================================
 const executiveDesignTokens = `
@@ -203,7 +208,6 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 const PAGE_URL = `${SITE_URL}/free-resume-summary-generator`;
 
@@ -259,6 +263,17 @@ const FAQS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-resume-objective-generator", text: "Resume Objective Generator", iconName: "FiTarget" },
+  { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
+  { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary That Hooks Recruiters", iconName: "FiFileText" },
+  { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiTool" },
+  { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiBookOpen" }
+];
+
+// ============================================================================
 // ICON MAP
 // ============================================================================
 const ICON_MAP = {
@@ -274,7 +289,10 @@ const ICON_MAP = {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeSummaryGenerator = ({ seoData }) => {
+const ResumeSummaryGenerator = ({ seoData, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
@@ -335,7 +353,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         "@type": "WebPage",
         "@id": `${PAGE_URL}#webpage`,
         "url": PAGE_URL,
-        "name": "Free Resume Summary Generator - Professional Career Profile Builder 2026",
+        "name": `Free Resume Summary Generator - Professional Career Profile Builder ${currentYear}`,
         "description": "Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary.",
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
@@ -394,7 +412,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": `${currentYear}-12-31`
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -412,7 +430,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           "Free PDF Export",
           "No Sign Up Required"
         ],
-        "softwareVersion": "2026.1.0",
+        "softwareVersion": `${currentYear}.1.0`,
         "screenshot": `${SITE_URL}/images/summary-generator-screenshot.jpg`,
         "applicationSuite": "Career Tools",
         "countriesSupported": "Global",
@@ -574,12 +592,12 @@ const ResumeSummaryGenerator = ({ seoData }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* OPTIMIZED TITLE - Under 70 characters */}
-        <title>Free Resume Summary Generator | Professional Career Profile Builder</title>
+        {/* OPTIMIZED TITLE - dynamic year */}
+        <title>{`Free Resume Summary Generator | Professional Career Profile Builder ${currentYear}`}</title>
         
         <meta
           name="description"
-          content={`Create ATS-friendly professional resume summaries instantly. ${CURRENT_YEAR}'s best free resume summary generator with 20+ templates, keyword optimization & industry-specific suggestions.`}
+          content={`Create ATS-friendly professional resume summaries instantly. ${currentYear}'s best free resume summary generator with 20+ templates, keyword optimization & industry-specific suggestions.`}
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
@@ -609,7 +627,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
+        <meta property="og:title" content={`Free Resume Summary Generator | Professional Career Profile Builder ${currentYear}`} />
         <meta property="og:description" content="Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -623,7 +641,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Summary Generator | Professional Career Profile Builder" />
+        <meta name="twitter:title" content={`Free Resume Summary Generator | Professional Career Profile Builder ${currentYear}`} />
         <meta name="twitter:description" content="Create professional ATS-friendly resume summaries instantly. 20+ templates, keyword optimization, free to use." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-resume-summary-generator.jpg`} />
         <meta name="twitter:image:alt" content="Professional Resume Summary Generator" />
@@ -679,7 +697,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • 20+ Templates • ATS Optimized</div>
               <h1 className="section-title" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free Resume Summary Generator {CURRENT_YEAR}
+                Free Resume Summary Generator {currentYear}
               </h1>
               <p className="section-subtitle" style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Create compelling professional summaries that get noticed by employers. Choose from 20+ templates, add keywords, and download your perfect summary. <strong>Optimized for ATS systems and human recruiters.</strong>
@@ -972,7 +990,9 @@ const ResumeSummaryGenerator = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Recommended Career Resources")
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -980,13 +1000,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
               <p className="section-subtitle">Explore our complete suite of resume tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-keyword-density-analyzer-tool", text: "Free Keyword Density Analyzer", iconName: "FiHash" },
-                { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "AI Resume Writing Guide", iconName: "FiCpu" },
-                { href: "/ats-friendly-data-and-cybersecurity-resume-builder", text: "Cybersecurity Resume Builder", iconName: "FiShield" },
-                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Resume Tips", iconName: "FiSmartphone" },
-                { href: "/best-resume-examples-for-usa-management-positions", text: "Management Resume Examples", iconName: "FiBriefcase" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -1007,7 +1021,7 @@ const ResumeSummaryGenerator = ({ seoData }) => {
         {/* Hidden Metadata */}
         <div style={{ display: 'none' }}>
           <span itemProp="dateModified">{safeLastModifiedDate}</span>
-          <span itemProp="softwareVersion">2026.1.0</span>
+          <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
         </div>
       </main>
     </>
@@ -1018,6 +1032,9 @@ const ResumeSummaryGenerator = ({ seoData }) => {
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildDate = new Date(buildTimestamp).toISOString().split('T')[0];
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
   
   return {
     props: {
@@ -1025,7 +1042,8 @@ export async function getStaticProps() {
         currentDate: buildDate,
         lastModifiedDate: new Date(buildTimestamp).toISOString(),
         buildTimestamp
-      }
+      },
+      currentYear
     },
     revalidate: 3600,
   };

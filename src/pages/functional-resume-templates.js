@@ -197,6 +197,15 @@ const HOW_TO_STEPS = [
   }
 ];
 
+// Internal links for bottom of page
+const INTERNAL_LINKS = [
+  { target: "/creative-resume-templates", title: "Creative Resume Templates" },
+  { target: "/chronological-resume-example", title: "Chronological Resume Example" },
+  { target: "/free-resume-template-selector", title: "Template Selector" },
+  { target: "/best-resume-templates-to-pass-applicant-tracking-system", title: "ATS Resume Templates" },
+  { target: "/free-resume-builder", title: "Free Resume Builder" }
+];
+
 // ============================================================================
 // ICON MAP
 // ============================================================================
@@ -906,51 +915,20 @@ const FunctionalResumeTemplates = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Ready to Create Your Perfect Functional Resume?
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Use our professional resume builder with functional templates and ATS optimization tools. Join 50,000+ career changers who have improved their resumes. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Build your free functional resume now"><FiFileText /> Build Your Free Resume Now</Link>
-              <Link href="/free-resume-tools" className="btn-outline" aria-label="Explore all free resume tools"><FiTool /> Explore Free Tools</Link>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> 100% Free - No Sign Up Required</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> ATS-Optimized Templates</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Instant Download - No Watermarks</span>
-            </div>
-          </div>
-        </section>
-
         {/* Internal Links */}
-        <section className="section">
+        <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Explore our complete suite of resume tools and guides</p>
+              <h2 className="section-title">Explore Related Resume Resources</h2>
+              <p className="section-subtitle">Discover more templates and tools to support your job search</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-summary-generator", text: "Resume Summary Generator", iconName: "FiFileText" },
-                { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
+              {INTERNAL_LINKS.map((link, i) => (
+                <Link key={i} href={link.target} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

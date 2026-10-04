@@ -23,8 +23,16 @@ import {
   FiDownload,
   FiCopy,
   FiCpu,
-  FiGlobe
+  FiGlobe,
+  FiGrid,
+  FiLayout,
+  FiEdit3
 } from 'react-icons/fi';
+
+// ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
 
 // ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
@@ -735,6 +743,39 @@ const executiveDesignTokens = `
     font-size: var(--font-size-body-md);
   }
   
+  /* ==========================================================================
+     NEW GEO LINK GRID (matching other pages)
+     ========================================================================== */
+  .geo-link-grid { 
+    display:grid; 
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); 
+    gap:1rem; 
+    width:100%; 
+  }
+  .geo-link-card { 
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    justify-content:center; 
+    padding:1.25rem 1rem; 
+    background:var(--card-bg); 
+    backdrop-filter:blur(var(--glass-blur)); 
+    -webkit-backdrop-filter:blur(var(--glass-blur)); 
+    border:var(--card-border); 
+    border-radius:0.5rem; 
+    text-decoration:none; 
+    color:inherit; 
+    transition:all var(--transition-medium) var(--easing-smooth); 
+    min-height:100px; 
+    text-align:center; 
+  }
+  .geo-link-card:hover { 
+    border-color:var(--accent-primary-container); 
+    transform:translateY(-3px); 
+    box-shadow:var(--card-hover-shadow); 
+    color:inherit; 
+  }
+  
   .faq-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -779,79 +820,6 @@ const executiveDesignTokens = `
     text-align: left;
   }
   
-  .cta-section {
-    padding: var(--section-gap-lg) 0;
-    background: linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%);
-    text-align: center;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    border-top: 0.5px solid var(--border-gold-filament);
-    border-bottom: 0.5px solid var(--border-gold-filament);
-  }
-  
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  
-  .cta-content {
-    max-width: 700px;
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .cta-title {
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    text-align: center;
-    text-shadow: var(--glow-gold);
-  }
-  
-  .cta-subtitle {
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .cta-section .btn-primary {
-    box-shadow: var(--shadow-gold-glow);
-  }
-  
-  .cta-guarantee {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-  }
-  
-  .guarantee-icon {
-    width: 20px;
-    height: 20px;
-    color: var(--accent-primary);
-  }
-  
-  .guarantee-text {
-    color: var(--text-secondary);
-    font-size: var(--font-size-body-sm);
-    text-align: center;
-  }
-  
   .text-small {
     font-size: var(--font-size-body-sm);
     color: var(--text-muted);
@@ -877,8 +845,12 @@ const executiveDesignTokens = `
 // Main Page Component
 const ResumeToolsPage = ({ 
   seoData,
-  buildTimestamp
+  buildTimestamp,
+  currentYear: propYear
 }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const {
     currentDate,
     lastModifiedDate
@@ -893,7 +865,7 @@ const ResumeToolsPage = ({
   const SITE_URL = 'https://professionalresumefree.com';
   const PAGE_URL = `${SITE_URL}/free-resume-tools`;
 
-  // Stats data - Updated to match Page 1 blueprint trust signals
+  // Stats data - dynamic year
   const stats = [
     { number: '12+', label: 'Free Resume Tools', icon: <FiTool /> },
     { number: '4.9/5', label: 'User Rating', icon: <FiStar /> },
@@ -983,7 +955,7 @@ const ResumeToolsPage = ({
       url: "/free-resume-builder"
     },
     {
-      anchor_text: "Browse 46+ ATS-Friendly Resume Templates",
+      anchor_text: `Browse 46+ ATS-Friendly Resume Templates`,
       url: "/resume-templates"
     },
     {
@@ -1008,7 +980,7 @@ const ResumeToolsPage = ({
       tool: "ATS Resume Checker"
     },
     {
-      anchor_text: "Best ATS Format 2026",
+      anchor_text: `Best ATS Format ${currentYear}`,
       url: "/best-ats-resume-format-2026",
       tool: "ATS Resume Checker"
     },
@@ -1039,6 +1011,25 @@ const ResumeToolsPage = ({
     }
   ];
 
+  // ============================================================================
+  // NEW FEATURED INTERNAL LINKS (5 curated links)
+  // ============================================================================
+  const featuredInternalLinks = [
+    { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
+    { href: "/free-resume-builder", text: "Free Resume Builder", iconName: "FiEdit3" },
+    { href: "/free-cover-letter-generator", text: "Cover Letter Generator", iconName: "FiFileText" },
+    { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+    { href: "/free-resume-template-selector", text: "Template Selector Tool", iconName: "FiGrid" }
+  ];
+
+  // Icon Map
+  const ICON_MAP = {
+    FiShield, FiEdit3, FiFileText, FiAward, FiGrid,
+    FiHome, FiChevronRight, FiArrowRight, FiCheck, FiStar,
+    FiUsers, FiTool, FiEdit, FiTarget, FiTrendingUp, FiBarChart,
+    FiSearch, FiZap
+  };
+
   // FAQ Data for structured schema
   const faqItems = [
     {
@@ -1063,7 +1054,7 @@ const ResumeToolsPage = ({
     },
     {
       question: "How often are the tools updated?",
-      answer: "A fresh shift arrives each month, guided by user feedback. Moving forward ties closely to modern work setups, evolving hire trends, plus smarter ways people shape resumes beyond 2025."
+      answer: `A fresh shift arrives each month, guided by user feedback. Moving forward ties closely to modern work setups, evolving hire trends, plus smarter ways people shape resumes beyond ${currentYear}.`
     }
   ];
 
@@ -1086,11 +1077,11 @@ const ResumeToolsPage = ({
     "word counter for resume",
     "keyword density analyzer",
     "resume analysis tools",
-    "free career tools 2026",
+    `free career tools ${currentYear}`,
     "job search tools"
   ];
 
-  // ===== ENHANCED STRUCTURED DATA - Following Page 1 Blueprint =====
+  // ===== ENHANCED STRUCTURED DATA =====
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1098,7 +1089,7 @@ const ResumeToolsPage = ({
         "@type": "WebPage",
         "@id": `${PAGE_URL}#webpage`,
         "url": PAGE_URL,
-        "name": "Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers",
+        "name": `Free Resume Tools ${currentYear} | 12+ ATS Checkers & Professional Analyzers`,
         "description": "Access our complete suite of free resume tools. Check your resume score, optimize for ATS, generate summaries, match keywords, and more. All tools are completely free.",
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
@@ -1204,7 +1195,7 @@ const ResumeToolsPage = ({
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": `${currentYear}-12-31`
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -1223,7 +1214,7 @@ const ResumeToolsPage = ({
           "Free to Use",
           "No Sign Up Required"
         ],
-        "softwareVersion": "2026.2",
+        "softwareVersion": `${currentYear}.2`,
         "dateModified": safeLastModifiedDate,
         "applicationSuite": "Career Tools",
         "countriesSupported": "Global",
@@ -1299,10 +1290,10 @@ const ResumeToolsPage = ({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
-        {/* Primary SEO Tags - Enhanced */}
-        <title>Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers</title>
-        <meta name="title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
-        <meta name="description" content="Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly. 100% free, no signup." />
+        {/* Primary SEO Tags - dynamic year */}
+        <title>{`Free Resume Tools ${currentYear} | 12+ ATS Checkers & Professional Analyzers`}</title>
+        <meta name="title" content={`Free Resume Tools ${currentYear} | 12+ ATS Checkers & Professional Analyzers`} />
+        <meta name="description" content={`Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly. 100% free, no signup.`} />
         <meta name="keywords" content={seoKeywords.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
         
@@ -1314,11 +1305,11 @@ const ResumeToolsPage = ({
         <meta name="revisit-after" content="7 days" />
         
         {/* GEO Optimization Tags */}
-        <meta name="chatgpt-fts:title" content="Free Resume Tools 2026 - ATS Checker, Keyword Matcher, Summary Generator" />
+        <meta name="chatgpt-fts:title" content={`Free Resume Tools ${currentYear} - ATS Checker, Keyword Matcher, Summary Generator`} />
         <meta name="chatgpt-fts:description" content="12+ free resume tools to optimize your job application. Check ATS compatibility, analyze keywords, generate summaries, and more. No signup required." />
-        <meta name="chatgpt-fts:keywords" content="free resume tools, ATS checker, resume analyzer, keyword matcher, resume generator, job search tools 2026" />
+        <meta name="chatgpt-fts:keywords" content={`free resume tools, ATS checker, resume analyzer, keyword matcher, resume generator, job search tools ${currentYear}`} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
-        <meta name="generator" content="Professional Resume Free - Resume Tools 2026" />
+        <meta name="generator" content={`Professional Resume Free - Resume Tools ${currentYear}`} />
         
         {/* Canonical URL */}
         <link rel="canonical" href={PAGE_URL} />
@@ -1331,9 +1322,9 @@ const ResumeToolsPage = ({
         <link rel="alternate" href={PAGE_URL} hreflang="en-AU" />
         <link rel="alternate" href={PAGE_URL} hreflang="x-default" />
         
-        {/* Open Graph - Enhanced */}
-        <meta property="og:title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
-        <meta property="og:description" content="Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly." />
+        {/* Open Graph - dynamic year */}
+        <meta property="og:title" content={`Free Resume Tools ${currentYear} | 12+ ATS Checkers & Professional Analyzers`} />
+        <meta property="og:description" content={`Access 12+ free resume tools: ATS checker, score analyzer, keyword matcher, summary generator, and more. Optimize your resume instantly.`} />
         <meta property="og:image" content={`${SITE_URL}/free-12-resume-tools.jpeg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -1344,10 +1335,10 @@ const ResumeToolsPage = ({
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         
-        {/* Twitter Card - Enhanced */}
+        {/* Twitter Card - dynamic year */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Tools 2026 | 12+ ATS Checkers & Professional Analyzers" />
-        <meta name="twitter:description" content="12+ free resume tools to optimize your job application. ATS checker, keyword matcher, summary generator, and more. No signup." />
+        <meta name="twitter:title" content={`Free Resume Tools ${currentYear} | 12+ ATS Checkers & Professional Analyzers`} />
+        <meta name="twitter:description" content={`12+ free resume tools to optimize your job application. ATS checker, keyword matcher, summary generator, and more. No signup.`} />
         <meta name="twitter:image" content={`${SITE_URL}/free-12-resume-tools.jpeg`} />
         <meta name="twitter:image:alt" content="Professional Resume Tools Collection" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -1400,7 +1391,7 @@ const ResumeToolsPage = ({
                 <FiChevronRight size={16} />
               </li>
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <span aria-current="page" itemProp="name">Free Resume Tools 2026</span>
+                <span aria-current="page" itemProp="name">{`Free Resume Tools ${currentYear}`}</span>
                 <meta itemProp="position" content="2" />
               </li>
             </ol>
@@ -1421,7 +1412,7 @@ const ResumeToolsPage = ({
                 letterSpacing: 'var(--letter-spacing-tight)'
               }}>
                 Free Resume Tools{' '}
-                <span className="gradient-text">2026</span>
+                <span className="gradient-text">{currentYear}</span>
               </h1>
               
               <p className="section-subtitle" style={{
@@ -1452,7 +1443,7 @@ const ResumeToolsPage = ({
                 />
               </div>
 
-              {/* Hero Stats - Updated with trust signals */}
+              {/* Hero Stats */}
               <div className="hero-stats">
                 {stats.map((stat, index) => (
                   <div key={index} className="hero-stat-item">
@@ -1541,7 +1532,7 @@ const ResumeToolsPage = ({
           </div>
         </section>
 
-        {/* Internal Linking Section - Enhanced with Pillar and Contextual Links */}
+        {/* Internal Linking Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -1632,33 +1623,25 @@ const ResumeToolsPage = ({
           </div>
         </section>
 
-        {/* Final CTA - Enhanced */}
-        <section className="cta-section" aria-labelledby="cta-title">
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old Final CTA)
+            ============================================================================ */}
+        <section className="section">
           <div className="section-container">
-            <div className="cta-content">
-              <h2 className="cta-title" id="cta-title">Ready to Optimize Your Resume?</h2>
-              <p className="cta-subtitle">
-                Start using our free tools today and create a resume that stands out to employers and ATS systems. Join 50,000+ successful job seekers.
-              </p>
-              <div className="cta-buttons">
-                <Link href="/resume-templates" className="btn-primary" aria-label="Browse all free resume templates">
-                  Browse 45+ Templates
-                  <FiArrowRight aria-hidden="true" />
-                </Link>
-                <Link href="/free-resume-builder" className="btn-outline" aria-label="Start with the free resume builder">
-                  Start Free Builder
-                  <FiArrowRight aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="cta-guarantee">
-                <FiCheck className="guarantee-icon" aria-hidden="true" />
-                <span className="guarantee-text">
-                  No credit card required • Free forever • Instant results • Privacy focused
-                </span>
-              </div>
-              <p className="text-small" style={{ marginTop: '1.25rem', color: 'var(--text-muted)' }}>
-                Updated: {safeCurrentDate} • 12+ tools • 100% free
-              </p>
+            <div className="section-header">
+              <h2 className="section-title">Explore More Resume Tools & Resources</h2>
+              <p className="section-subtitle">Boost your application success with these essential tools</p>
+            </div>
+            <div className="geo-link-grid">
+              {featuredInternalLinks.map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -1666,7 +1649,7 @@ const ResumeToolsPage = ({
         {/* Hidden Metadata */}
         <div style={{ display: 'none' }}>
           <span itemProp="dateModified">{safeLastModifiedDate}</span>
-          <span itemProp="softwareVersion">2026.2</span>
+          <span itemProp="softwareVersion">{`${currentYear}.2`}</span>
         </div>
       </main>
     </>
@@ -1680,6 +1663,9 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
+
   return {
     props: {
       seoData: {
@@ -1687,7 +1673,8 @@ export async function getStaticProps() {
         lastModifiedDate,
         buildTimestamp
       },
-      buildTimestamp
+      buildTimestamp,
+      currentYear
     },
     // Revalidate every hour for fresh content
     revalidate: 3600

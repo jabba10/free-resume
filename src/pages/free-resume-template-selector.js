@@ -12,6 +12,11 @@ import {
 } from 'react-icons/fi';
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
 // ============================================================================
 const executiveDesignTokens = `
@@ -115,7 +120,6 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 const PAGE_URL = `${SITE_URL}/free-resume-template-selector`;
 
@@ -257,6 +261,17 @@ const FAQS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/creative-resume-templates", text: "Creative Resume Templates", iconName: "FiPenTool" },
+  { href: "/functional-resume-templates", text: "Functional Resume Templates", iconName: "FiLayers" },
+  { href: "/best-resume-templates-to-pass-applicant-tracking-system", text: "ATS-Friendly Resume Templates", iconName: "FiShield" },
+  { href: "/high-traffic-resume-templates-americans-search-for", text: "Most-Searched Resume Templates", iconName: "FiTrendingUp" },
+  { href: "/free-resume-builder", text: "Free Resume Builder", iconName: "FiEdit" }
+];
+
+// ============================================================================
 // ICON MAP
 // ============================================================================
 const ICON_MAP = {
@@ -272,7 +287,10 @@ const ICON_MAP = {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeTemplateSelector = ({ seoData }) => {
+const ResumeTemplateSelector = ({ seoData, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
@@ -307,7 +325,7 @@ const ResumeTemplateSelector = ({ seoData }) => {
         "@type": "WebPage",
         "@id": `${PAGE_URL}#webpage`,
         "url": PAGE_URL,
-        "name": "Free Resume Template Selector - Professional ATS-Friendly Templates 2026",
+        "name": `Free Resume Template Selector - Professional ATS-Friendly Templates ${currentYear}`,
         "description": "Browse our curated collection of 47+ industry-specific ATS-friendly resume builders with expert advice. Download free templates for all industries.",
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
@@ -366,7 +384,7 @@ const ResumeTemplateSelector = ({ seoData }) => {
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": `${currentYear}-12-31`
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -384,7 +402,7 @@ const ResumeTemplateSelector = ({ seoData }) => {
           "Free Downloads",
           "No Sign Up Required"
         ],
-        "softwareVersion": "2026.1.0",
+        "softwareVersion": `${currentYear}.1.0`,
         "applicationSuite": "Career Tools",
         "countriesSupported": "Global",
         "fileSize": "Web Application"
@@ -517,12 +535,12 @@ const ResumeTemplateSelector = ({ seoData }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* OPTIMIZED TITLE - Under 70 characters */}
-        <title>Free Resume Template Selector | Professional ATS-Friendly Templates</title>
+        {/* OPTIMIZED TITLE - dynamic year */}
+        <title>{`Free Resume Template Selector | Professional ATS-Friendly Templates ${currentYear}`}</title>
         
         <meta
           name="description"
-          content={`Browse our curated collection of professional resume templates with ATS compatibility ratings. Download free .docx and PDF templates for all industries. ${CURRENT_YEAR} Edition`}
+          content={`Browse our curated collection of professional resume templates with ATS compatibility ratings. Download free .docx and PDF templates for all industries. ${currentYear} Edition`}
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
@@ -552,8 +570,8 @@ const ResumeTemplateSelector = ({ seoData }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Free Resume Template Selector | Professional ATS-Friendly Templates" />
-        <meta property="og:description" content={`Browse and download professional resume templates with ATS compatibility ratings. Free .docx and PDF formats. ${CURRENT_YEAR}`} />
+        <meta property="og:title" content={`Free Resume Template Selector | Professional ATS-Friendly Templates ${currentYear}`} />
+        <meta property="og:description" content={`Browse and download professional resume templates with ATS compatibility ratings. Free .docx and PDF formats. ${currentYear}`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={`${SITE_URL}/images/og-template-selector.jpg`} />
@@ -566,7 +584,7 @@ const ResumeTemplateSelector = ({ seoData }) => {
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Resume Template Selector | Professional ATS-Friendly Templates" />
+        <meta name="twitter:title" content={`Free Resume Template Selector | Professional ATS-Friendly Templates ${currentYear}`} />
         <meta name="twitter:description" content="Browse and download professional resume templates with ATS compatibility ratings. 47+ industry-specific builders, free to use." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-template-selector.jpg`} />
         <meta name="twitter:image:alt" content="Professional Resume Template Selector" />
@@ -622,7 +640,7 @@ const ResumeTemplateSelector = ({ seoData }) => {
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ 47+ Industry-Specific Builders • ATS Optimized • Expert Advice • 100% Free</div>
               <h1 className="section-title" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Free Resume Template Selector {CURRENT_YEAR}
+                Free Resume Template Selector {currentYear}
               </h1>
               <p className="section-subtitle" style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Browse our curated collection of professional resume templates with ATS compatibility ratings. Download free .docx and PDF templates optimized for your industry and career level. <strong>Optimized for ATS systems and human recruiters.</strong>
@@ -821,9 +839,6 @@ const ResumeTemplateSelector = ({ seoData }) => {
                   <strong>4.</strong> Land more interviews<br/>
                   <strong>All 100% free. No signup required.</strong>
                 </p>
-                <Link href="/free-resume-builder" className="btn-primary" style={{ marginTop: '0.75rem', justifyContent: 'center' }}>
-                  <FiEdit size={16} /> Start With General Builder
-                </Link>
               </div>
             </div>
           </div>
@@ -854,7 +869,9 @@ const ResumeTemplateSelector = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links Section */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old "Explore More Career Resources")
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -862,13 +879,7 @@ const ResumeTemplateSelector = ({ seoData }) => {
               <p className="section-subtitle">Complement your resume with these powerful tools</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiBarChart2" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit" },
-                { href: "/free-cover-letter-generator", text: "Cover Letter Generator", iconName: "FiFileText" },
-                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -881,28 +892,6 @@ const ResumeTemplateSelector = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Stop Using Generic Templates. Start Getting Interviews.
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Choose your industry-specific ATS resume builder above and give yourself the <strong>40% advantage</strong> that specialized templates provide. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-              <button onClick={() => { setSelectedCategory('all'); setSearchQuery(''); toolRef.current?.scrollIntoView?.({ behavior: 'smooth' }); }} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Browse all resume builders"><FiGrid /> Browse All Builders</button>
-              <Link href="/free-resume-builder" className="btn-outline" aria-label="Start with the general resume builder"><FiEdit /> Start General Builder</Link>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> 100% Free - No Sign Up Required</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> ATS-Optimized Templates</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Instant Downloads - No Watermarks</span>
-            </div>
-          </div>
-        </section>
-
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTime}</span>
@@ -911,7 +900,7 @@ const ResumeTemplateSelector = ({ seoData }) => {
         {/* Hidden Metadata */}
         <div style={{ display: 'none' }}>
           <span itemProp="dateModified">{safeLastModifiedDate}</span>
-          <span itemProp="softwareVersion">2026.1.0</span>
+          <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
         </div>
       </main>
     </>
@@ -922,6 +911,9 @@ const ResumeTemplateSelector = ({ seoData }) => {
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
   const buildDate = new Date(buildTimestamp).toISOString().split('T')[0];
+
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
   
   return {
     props: {
@@ -929,7 +921,8 @@ export async function getStaticProps() {
         currentDate: buildDate,
         lastModifiedDate: new Date(buildTimestamp).toISOString(),
         buildTimestamp
-      }
+      },
+      currentYear
     },
     revalidate: 3600,
   };

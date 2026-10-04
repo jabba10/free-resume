@@ -14,6 +14,11 @@ import {
 } from 'react-icons/fi';
 
 // ============================================================================
+// DYNAMIC YEAR HELPER (auto-updates 2026 → 2027 → 2028+)
+// ============================================================================
+const getCurrentYear = () => new Date().getFullYear();
+
+// ============================================================================
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
 // ============================================================================
 const executiveDesignTokens = `
@@ -115,7 +120,6 @@ const executiveDesignTokens = `
 // ============================================================================
 // CONSTANTS
 // ============================================================================
-const CURRENT_YEAR = new Date().getFullYear();
 const SITE_URL = 'https://professionalresumefree.com';
 const PAGE_URL = `${SITE_URL}/free-resume-word-and-character-counter`;
 
@@ -182,6 +186,17 @@ const HOW_TO_STEPS = [
 ];
 
 // ============================================================================
+// NEW FEATURED INTERNAL LINKS (5 curated links)
+// ============================================================================
+const FEATURED_INTERNAL_LINKS = [
+  { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
+  { href: "/free-resume-formatting-checker", text: "Formatting Checker", iconName: "FiLayout" },
+  { href: "/how-long-should-a-resume-be-usa-recruiter-insights", text: "How Long Should a Resume Be", iconName: "FiClock" },
+  { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiTool" },
+  { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide", iconName: "FiBookOpen" }
+];
+
+// ============================================================================
 // ICON MAP
 // ============================================================================
 const ICON_MAP = {
@@ -197,7 +212,10 @@ const ICON_MAP = {
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
-const ResumeWordCharacterCounter = ({ seoData }) => {
+const ResumeWordCharacterCounter = ({ seoData, currentYear: propYear }) => {
+  // Dynamic year (auto-updates: 2026 → 2027 → 2028+)
+  const currentYear = propYear ? parseInt(propYear, 10) : getCurrentYear();
+
   const { currentDate, lastModifiedDate } = seoData || {};
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
@@ -252,7 +270,7 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
         "@type": "WebPage",
         "@id": `${PAGE_URL}#webpage`,
         "url": PAGE_URL,
-        "name": `Resume Word & Character Counter - Professional Length Checker ${CURRENT_YEAR}`,
+        "name": `Resume Word & Character Counter - Professional Length Checker ${currentYear}`,
         "description": "Free professional resume word counter and character counter with ATS optimization guidance. Check your resume length against industry standards with real-time analysis.",
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
@@ -317,7 +335,7 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31"
+          "priceValidUntil": `${currentYear}-12-31`
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -336,7 +354,7 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
           "No Sign Up Required",
           "Free Forever"
         ],
-        "softwareVersion": "2026.1.0",
+        "softwareVersion": `${currentYear}.1.0`,
         "applicationSuite": "Career Tools",
         "countriesSupported": "Global",
         "fileSize": "Web Application"
@@ -458,11 +476,11 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Primary Meta Tags - Enhanced following Page 1 blueprint */}
-        <title>Resume Word & Character Counter – Professional Length Checker {CURRENT_YEAR} | Free ATS Optimized Tool</title>
+        {/* Primary Meta Tags - dynamic year */}
+        <title>{`Resume Word & Character Counter – Professional Length Checker ${currentYear} | Free ATS Optimized Tool`}</title>
         <meta 
           name="description" 
-          content={`Free professional resume word counter and character counter with ATS optimization. Check your resume length against industry standards. Real-time analysis with word count, character count, and professional recommendations. ${CURRENT_YEAR}`}
+          content={`Free professional resume word counter and character counter with ATS optimization. Check your resume length against industry standards. Real-time analysis with word count, character count, and professional recommendations. ${currentYear}`}
         />
         <meta name="keywords" content={SEO_KEYWORDS.join(', ')} />
         <meta name="author" content="Professional Resume Free" />
@@ -491,8 +509,8 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
-        {/* Open Graph - Enhanced */}
-        <meta property="og:title" content={`Resume Word & Character Counter – Professional Length Checker ${CURRENT_YEAR}`} />
+        {/* Open Graph - dynamic year */}
+        <meta property="og:title" content={`Resume Word & Character Counter – Professional Length Checker ${currentYear}`} />
         <meta property="og:description" content="Free professional resume word counter with ATS optimization guidance. Check length, characters, and get industry-standard recommendations." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -504,7 +522,7 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
         <meta property="og:locale" content="en_US" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
         
-        {/* Twitter Cards - Enhanced */}
+        {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Resume Word & Character Counter" />
         <meta name="twitter:description" content="Professional resume length checker with ATS optimization and real-time analysis" />
@@ -563,7 +581,7 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge">✦ Free Tool • No Sign Up • Real-Time Analysis • ATS Optimized</div>
               <h1 className="section-title" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
-                Resume Word & Character Counter <span style={{ display: 'inline-block', background: 'var(--accent-primary)', color: 'var(--accent-on-primary)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.9rem', marginLeft: '0.5rem', verticalAlign: 'middle' }}>{CURRENT_YEAR}</span>
+                Resume Word & Character Counter <span style={{ display: 'inline-block', background: 'var(--accent-primary)', color: 'var(--accent-on-primary)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.9rem', marginLeft: '0.5rem', verticalAlign: 'middle' }}>{currentYear}</span>
               </h1>
               <p className="section-subtitle" style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                 Professional resume length analyzer with <strong>ATS optimization guidance</strong>. Check your resume length against industry standards with real-time word count, character count, and professional recommendations. <strong>Optimized for ATS systems and human recruiters.</strong>
@@ -712,7 +730,7 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
             </div>
             <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
               {[
-                "how many words should a resume be 2026",
+                `how many words should a resume be ${currentYear}`,
                 "resume word count for experienced professionals",
                 "ideal resume length for ATS systems",
                 "one page resume word count guideline",
@@ -807,43 +825,17 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Ready to Optimize Your Resume Length?
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Use our free tools to create ATS-optimized resumes with perfect length and formatting. Join 10,000+ professionals who have improved their resumes. <strong>100% Free. No Sign-Up. Complete Privacy.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-              <button onClick={() => { handleReset(); toolRef.current?.scrollIntoView({ behavior: 'smooth' }); }} className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Start counting your resume words"><FiType /> Start Counting Now</button>
-              <Link href="/resume-templates" className="btn-outline" aria-label="Browse professional resume templates"><FiGrid /> View Templates</Link>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> 100% Free - No Sign Up Required</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> ATS-Optimized Analysis</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Instant Results - Private & Secure</span>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
+        {/* ============================================================================
+            NEW FEATURED INTERNAL LINKS SECTION (replaces old CTA + Resources)
+            ============================================================================ */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Explore our complete suite of resume tools and guides</p>
+              <h2 className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement your resume optimization with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield" },
-                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "How to Beat ATS Optimization", iconName: "FiTarget" },
-                { href: "/best-ats-resume-format-2026", text: "Best ATS Resume Format 2026", iconName: "FiFileText" },
-                { href: "/free-resume-keyword-matcher", text: "Free Resume Keyword Matcher", iconName: "FiSearch" },
-                { href: "/software-engineer-resume-example-and-writing-guide", text: "Software Engineer Resume Guide", iconName: "FiCode" }
-              ].map((link, i) => {
+              {FEATURED_INTERNAL_LINKS.map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
@@ -864,7 +856,7 @@ const ResumeWordCharacterCounter = ({ seoData }) => {
         {/* Hidden Metadata */}
         <div style={{ display: 'none' }}>
           <span itemProp="dateModified">{safeLastModifiedDate}</span>
-          <span itemProp="softwareVersion">2026.1.0</span>
+          <span itemProp="softwareVersion">{`${currentYear}.1.0`}</span>
         </div>
       </main>
     </>
@@ -878,13 +870,17 @@ export async function getStaticProps() {
   const currentDate = buildTime.toISOString().split('T')[0];
   const lastModifiedDate = buildTime.toISOString();
 
+  // Dynamic year - automatically updates to current year on every build/revalidation
+  const currentYear = new Date().getFullYear().toString();
+
   return {
     props: {
       seoData: {
         currentDate,
         lastModifiedDate,
         buildTimestamp
-      }
+      },
+      currentYear
     },
     // Revalidate every hour for fresh content
     revalidate: 3600,
