@@ -836,21 +836,20 @@ const DescribeWorkExperience = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section section-alt" aria-labelledby="resources-title">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-title">Explore More Free Resume Writing Resources</h2>
+              <h2 className="section-title" id="resources-title">Explore Related Resume Writing Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Resume Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Resume Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/free-resume-readability-checker", text: "Resume Readability Checker", iconName: "FiEye" },
-                { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" }
+                { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Bullet Points That Impress Recruiters", iconName: "FiEdit" },
+                { href: "/certification-resume-section", text: "Certification Resume Section", iconName: "FiAward" },
+                { href: "/chronological-resume-example", text: "Chronological Resume Example", iconName: "FiClock" },
+                { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Guide", iconName: "FiUserCheck" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
@@ -860,26 +859,6 @@ const DescribeWorkExperience = ({ seoData, buildTimestamp }) => {
                   </Link>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Ready to Transform Your Work Experience Descriptions?
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Apply these achievement formulas, the 8-step writing process, and industry examples to your resume today. Join thousands of professionals who increased their interview invitations by 73%. <strong>100% Free. No Sign-Up Required.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Get Professional Templates</Link>
-              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Explore Free Resume Tools</Link>
-            </div>
-            <div style={{ marginTop: '24px' }}>
-              <span style={{ background: 'rgba(255,255,255,0.1)', padding: '8px 16px', borderRadius: '50px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>✓ 100% Free • ✓ No Sign Up • ✓ Privacy Protected • ✓ Expert-Written Content</span>
             </div>
           </div>
         </section>

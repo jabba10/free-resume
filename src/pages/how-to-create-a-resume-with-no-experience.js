@@ -748,64 +748,26 @@ const NoExperienceResumeGuide = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Ready to Build Your First Resume in {currentYear}?
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Join thousands of students and career changers who landed their first jobs using our free templates and expert strategies. 
-              Browse <strong>46+ ATS-optimized templates</strong> and use <strong>12+ free tools</strong> to create your winning resume today. <strong>100% Free. No Sign-Up Required.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiDownload /> Browse Free Templates</Link>
-              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Try Free Resume Tools</Link>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> No Credit Card Required
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> Free Forever
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> Expert-Backed
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> ATS-Optimized
-              </span>
-            </div>
-            <p style={{ marginTop: '2rem', fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>
-              <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
-              Guide updated: {safeCurrentDate} | Next update: {new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
-            </p>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section">
+        {/* Internal Links Section */}
+        <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Related Career Resources</h2>
+              <h2 className="section-title">Explore Related Resume Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", sub: "Check Your ATS Score", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", sub: "AI-Powered Writing", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", sub: "Match Job Descriptions", iconName: "FiSearch" },
-                { href: "/free-resume-summary-generator", text: "Summary Generator", sub: "Professional Summaries", iconName: "FiFileText" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", sub: "Get Instant Feedback", iconName: "FiAward" },
-                { href: "/resume-templates", text: "All Resume Templates", sub: "46+ ATS-Optimized", iconName: "FiGrid" }
+                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiEdit3" },
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiTarget" },
+                { href: "/experience-level-calculator", text: "Experience Level Calculator", iconName: "FiTrendingUp" },
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit" },
+                { href: "/certification-resume-section", text: "Certification Resume Section", iconName: "FiAward" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
                     <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                    <span className="text-small" style={{ fontSize: 'var(--font-size-label-sm)' }}>{link.sub}</span>
                   </Link>
                 );
               })}

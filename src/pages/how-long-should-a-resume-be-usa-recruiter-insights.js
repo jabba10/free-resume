@@ -861,44 +861,20 @@ const ResumeLengthGuide = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Conclusion CTA */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Length Is a Signal, Not a Rule
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              A perfectly edited one-page resume beats a padded two-page resume every time. Use the industry-specific rules, space-saving strategies, and decision framework above to get your length right. <strong>100% Free. No Sign-Up Required.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }} aria-label="Build your resume now"><FiFileText /> Build Your Resume Now</Link>
-              <Link href="/free-resume-tools" className="btn-outline" aria-label="Explore free resume tools"><FiTool /> Free Resume Tools</Link>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> 100% Free - No Sign Up Required</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Data-Backed Recommendations</span>
-              <span><span style={{ color: '#10b981', fontWeight: '700' }}>✓</span> Updated Quarterly with Fresh Data</span>
-            </div>
-            <p className="text-small" style={{ marginTop: '1.5rem' }}>Data sources: Professional Resume Free {CURRENT_YEAR} Recruiter Survey (March {CURRENT_YEAR}), SHRM 2025 Resume Review Study, internal ATS analytics.</p>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section">
+        {/* Internal Links Section */}
+        <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Explore our complete suite of resume tools and guides</p>
+              <h2 className="section-title">Explore Related Resume Resources</h2>
+              <p className="section-subtitle">Find the perfect template or tool for your next job application</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch" },
+                { href: "/free-resume-word-and-character-counter", text: "Word & Character Counter", iconName: "FiType" },
                 { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
-                { href: "/free-resume-word-character-counter", text: "Word & Character Counter", iconName: "FiType" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
+                { href: "/free-resume-formatting-checker", text: "Formatting Checker", iconName: "FiLayout" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" },
+                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiEdit3" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (

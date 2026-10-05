@@ -757,64 +757,26 @@ const ATSOptimizationGuide = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Ready to Beat the ATS in {currentYear}?
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Create an <strong>ATS-optimized resume</strong> that passes automated screening and 
-              showcases your value to hiring managers. Get <strong>3x more interviews</strong> with 
-              our proven optimization framework. <strong>100% Free. No Sign-Up Required.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiDownload /> Create Your ATS Resume Now</Link>
-              <Link href="/free-ats-resume-checker" className="btn-outline"><FiShield /> Check Your ATS Score</Link>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> ATS-Optimized Templates
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> No Sign Up Required
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> Free Download
-              </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)' }}>
-                <FiCheckCircle style={{ color: 'var(--success-color)' }} /> {currentYear} Updated
-              </span>
-            </div>
-            <p style={{ marginTop: '2rem', fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)' }}>
-              <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
-              Data fresh as of: {safeCurrentDate} | Guide tested with 15+ major ATS platforms
-            </p>
-          </div>
-        </section>
-
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Related Career Resources</h2>
-              <p className="section-subtitle">Complement your ATS strategy with these powerful tools</p>
+              <h2 className="section-title">Explore Related ATS Resources</h2>
+              <p className="section-subtitle">Complement your ATS strategy with these powerful tools and guides</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", sub: "Check Your ATS Score", iconName: "FiShield" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", sub: "Match Job Descriptions", iconName: "FiSearch" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", sub: "AI-Powered Writing", iconName: "FiEdit3" },
-                { href: "/free-resume-readability-checker", text: "Readability Checker", sub: "Improve Clarity", iconName: "FiEye" },
-                { href: "/resume-templates", text: "ATS Resume Templates", sub: "Professional Designs", iconName: "FiGrid" }
+                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield" },
+                { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "AI Resume Screen Explained", iconName: "FiCpu" },
+                { href: "/free-resume-keyword-matcher", text: "Resume Keyword Matcher", iconName: "FiSearch" },
+                { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiBarChart2" },
+                { href: "/best-resume-templates-to-pass-applicant-tracking-system", text: "ATS Resume Template Guide", iconName: "FiGrid" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
                     <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                    <span className="text-small" style={{ fontSize: 'var(--font-size-label-sm)' }}>{link.sub}</span>
                   </Link>
                 );
               })}

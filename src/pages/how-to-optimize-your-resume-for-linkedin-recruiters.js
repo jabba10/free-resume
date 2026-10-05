@@ -674,80 +674,20 @@ const OptimizeResumeLinkedIn = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Quick Tools Hook */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Start Optimizing Right Now With Free Tools</h2>
-              <p className="section-subtitle">Apply these strategies immediately using our free, no-signup-required tools</p>
-            </div>
-            <div className="grid">
-              <Link href="/free-ats-resume-checker" className="card-executive" style={{ textDecoration: 'none', color: 'inherit', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
-                  <FiShield size={24} />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>ATS Resume Checker</h3>
-                  <p className="text-small" style={{ margin: 0 }}>Verify your resume passes automated screening systems</p>
-                </div>
-                <FiArrowRight size={16} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
-              </Link>
-              <Link href="/free-resume-keyword-matcher" className="card-executive" style={{ textDecoration: 'none', color: 'inherit', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
-                  <FiSearch size={24} />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>Keyword Matcher</h3>
-                  <p className="text-small" style={{ margin: 0 }}>Match your resume keywords against real job descriptions</p>
-                </div>
-                <FiArrowRight size={16} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
-              </Link>
-              <Link href="/free-resume-score-checker" className="card-executive" style={{ textDecoration: 'none', color: 'inherit', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '48px', height: '48px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)', border: '0.5px solid var(--border-gold-filament)', flexShrink: 0 }}>
-                  <FiAward size={24} />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', marginBottom: '0.25rem' }}>Resume Score Checker</h3>
-                  <p className="text-small" style={{ margin: 0 }}>Get an instant score showing your resume's optimization level</p>
-                </div>
-                <FiArrowRight size={16} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
-              Don't Be Invisible to 87% of Recruiters
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Apply these research-backed optimization strategies today and join the 24% of professionals who capture nearly all LinkedIn recruiter outreach. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiLinkedin /> Start Optimizing Now</Link>
-              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
+              <h2 className="section-title">Explore Related Career Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
+                { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "Tailor Your Resume Guide", iconName: "FiTarget" },
+                { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Guide", iconName: "FiUserCheck" },
+                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiEdit3" },
+                { href: "/interview-tips", text: "Interview Tips", iconName: "FiUsers" },
+                { href: "/careers-blog", text: "Careers Blog", iconName: "FiBookOpen" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
@@ -760,43 +700,6 @@ const OptimizeResumeLinkedIn = ({ seoData }) => {
             </div>
           </div>
         </section>
-
-        {/* Internal Linking Footer */}
-        <section className="internal-linking-footer">
-          <div className="section-container">
-            <h3 className="footer-links-title">Related Career Resources</h3>
-            <div className="footer-links-grid">
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="footer-link-card">
-                <span className="footer-link-text">Beat the ATS Algorithms</span>
-                <span className="footer-link-sub">Modern Hiring Software Tips</span>
-              </Link>
-              <Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="footer-link-card">
-                <span className="footer-link-text">AI Prompt Engineering</span>
-                <span className="footer-link-sub">Improve Resume Bullets</span>
-              </Link>
-              <Link href="/best-ats-resume-format-2026" className="footer-link-card">
-                <span className="footer-link-text">Best ATS Format 2026</span>
-                <span className="footer-link-sub">Pass Automated Screens</span>
-              </Link>
-              <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="footer-link-card">
-                <span className="footer-link-text">In-Demand Keywords</span>
-                <span className="footer-link-sub">USA Job Market Data</span>
-              </Link>
-              <Link href="/free-ats-resume-checker" className="footer-link-card">
-                <span className="footer-link-text">Free ATS Resume Checker</span>
-                <span className="footer-link-sub">Scan Your Document</span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Footer Info */}
-        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small">
-            <FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> 
-            Last updated: {safeCurrentDate} • Sources: LinkedIn Talent Solutions, Jobvite, Journal of Personnel Psychology
-          </span>
-        </div>
 
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>

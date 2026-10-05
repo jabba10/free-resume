@@ -585,25 +585,8 @@ const HowToListPromptEngineering = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
-              Ready to Optimize Your Resume?
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Now that you know how to list prompt engineering effectively, put that knowledge to work with our free tools and templates.
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiFileText /> Browse Templates</Link>
-              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Explore Free Tools</Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section">
+        {/* Internal Links Section */}
+        <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title">Expand Your AI Career Toolkit</h2>
@@ -611,12 +594,11 @@ const HowToListPromptEngineering = ({ seoData }) => {
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume", text: "AI Resume Builders Guide", iconName: "FiCpu", desc: "Leverage AI to write your best resume" },
-                { href: "/best-resume-examples-for-usa-it-and-software-jobs", text: "IT & Software Resume Examples", iconName: "FiCode", desc: "Tailored examples for tech professionals" },
-                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Bullet Guide", iconName: "FiTerminal", desc: "Advanced prompt engineering for bullets" },
-                { href: "/modern-resume-design-2026", text: "Modern Resume Design 2026", iconName: "FiLayout", desc: "Stay ahead with current design trends" },
-                { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiSearch", desc: "Optimize your resume's keyword balance" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid", desc: "46+ professional formats" }
+                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Bullets Guide", iconName: "FiTerminal" },
+                { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "ChatGPT Resume Writing Guide", iconName: "FiEdit3" },
+                { href: "/certification-resume-section", text: "Certification Resume Section", iconName: "FiAward" },
+                { href: "/how-to-describe-work-experience-on-resume", text: "Describe Work Experience", iconName: "FiFileText" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (

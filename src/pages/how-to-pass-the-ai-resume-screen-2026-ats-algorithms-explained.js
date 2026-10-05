@@ -715,21 +715,20 @@ const HowToPassAIResumeScreen = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
+              <h2 className="section-title">Explore Related ATS Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
+                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "ATS Optimization Tips", iconName: "FiShield" },
+                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiCheckCircle" },
+                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher Tool", iconName: "FiSearch" },
+                { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiBarChart2" },
+                { href: "/best-resume-templates-to-pass-applicant-tracking-system", text: "ATS Resume Templates", iconName: "FiGrid" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
