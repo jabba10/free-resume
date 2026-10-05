@@ -683,21 +683,20 @@ const HowToUseChatGPTResume = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
+              <h2 className="section-title">Explore Related AI Resume Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
+                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Bullets Guide", iconName: "FiEdit3" },
+                { href: "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume", text: "Prompt Engineering Skills", iconName: "FiCpu" },
                 { href: "/free-resume-summary-generator", text: "Summary Generator", iconName: "FiFileText" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (

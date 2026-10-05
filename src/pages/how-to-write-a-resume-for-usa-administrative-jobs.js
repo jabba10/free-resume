@@ -726,21 +726,20 @@ const AdministrativeResumeGuide = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
+              <h2 className="section-title">Explore Related Career Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/how-to-write-a-resume-for-usa-sales-and-marketing-roles", text: "Sales & Marketing Guide", iconName: "FiTrendingUp" },
-                { href: "/cover-letter-guides", text: "Cover Letter Guides", iconName: "FiBookOpen" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/interview-tips", text: "Interview Tips", iconName: "FiUsers" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+                { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "Customer Service Resume Guide", iconName: "FiUsers" },
+                { href: "/how-to-write-a-resume-for-usa-retail-jobs", text: "Retail Jobs Resume Guide", iconName: "FiBriefcase" },
+                { href: "/how-to-write-a-resume-for-usa-finance-and-accounting-roles", text: "Finance & Accounting Resume Guide", iconName: "FiDollarSign" },
+                { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "Federal Resume Guide", iconName: "FiShield" },
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiFileText" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (

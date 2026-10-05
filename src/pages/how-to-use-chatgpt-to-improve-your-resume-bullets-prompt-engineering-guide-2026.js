@@ -648,21 +648,20 @@ const ChatGPTResumeGuide = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
+              <h2 className="section-title">Explore Related ChatGPT & Resume Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/free-resume-summary-generator", text: "Summary Generator", iconName: "FiFileText" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
+                { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "ChatGPT Resume Writing Guide", iconName: "FiEdit3" },
+                { href: "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume", text: "Prompt Engineering Skills Guide", iconName: "FiCpu" },
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap" },
+                { href: "/free-action-verb-recommender", text: "Action Verb Recommender", iconName: "FiTarget" },
+                { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Bullet Points That Impress Recruiters", iconName: "FiStar" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (

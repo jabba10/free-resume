@@ -810,6 +810,33 @@ const TeachingResumeGuide = ({ seoData }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section section-alt" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources for educators</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "Administrative Jobs Resume Guide", iconName: "FiBriefcase" },
+                { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "Customer Service Resume Guide", iconName: "FiUsers" },
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiFileText" },
+                { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "Federal Resume Guide", iconName: "FiShield" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -828,34 +855,6 @@ const TeachingResumeGuide = ({ seoData }) => {
               {["6 State Guide", "Salary Data", "4 Grade Strategies", "6 Before/After", "Achievement Formulas", "Free PDF Download"].map((f, i) => (
                 <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources for educators</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/ats-friendly-teacher-resume-builder", text: "Teacher Resume Builder", iconName: "FiEdit" },
-                { href: "/resume-tips-for-usa-college-students-and-graduates", text: "College Graduate Tips", iconName: "FiStar" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/best-resume-examples-for-career-changers-in-the-usa", text: "Career Changer Examples", iconName: "FiTrendingUp" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
             </div>
           </div>
         </section>

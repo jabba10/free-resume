@@ -952,46 +952,20 @@ const ProfessionalSummaryGuide = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
-              Create Your 6-Second Professional Summary Today
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Use our free tools to generate customized professional summaries that capture attention and land interviews. <strong>100% Free. No Sign-Up Required. {CURRENT_YEAR} Edition.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/free-resume-summary-generator" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Free Summary Generator</Link>
-              <Link href="/resume-templates" className="btn-outline"><FiLayers /> Resume Templates</Link>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
-              {["6-Second Hook Formula", "All Career Levels", "Industry-Specific", "ATS Optimized"].map((f, i) => (
-                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
-              ))}
-            </div>
-            <p className="text-small" style={{marginTop: '24px'}}>
-              ✓ No sign-up required • Free forever • Updated {safeCurrentDate}
-            </p>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section">
+        {/* Internal Links Section */}
+        <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
+              <h2 className="section-title">Explore Related Resume Writing Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+                { href: "/free-resume-summary-generator", text: "Summary Generator Tool", iconName: "FiZap" },
+                { href: "/free-resume-objective-generator", text: "Objective Generator Tool", iconName: "FiTarget" },
+                { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Impressive Bullet Points Guide", iconName: "FiEdit" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBook" },
+                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiFileText" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (

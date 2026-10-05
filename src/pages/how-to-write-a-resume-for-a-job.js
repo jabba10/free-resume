@@ -773,27 +773,26 @@ const HowToMakeResume = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+              <h2 className="section-title">Continue Your Resume Writing Journey</h2>
+              <p className="section-subtitle">Explore more of our expert guides to accelerate your job search</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "Beat the ATS Guide", iconName: "FiTarget" },
-                { href: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume", text: "AI Resume Builders", iconName: "FiCpu" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/best-ats-resume-format-2026", text: "Best ATS Format 2026", iconName: "FiFileText" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+                { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "Tailor Resume to Job Posting", iconName: "FiTarget" },
+                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiFileText" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" },
+                { href: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "Administrative Jobs Resume Guide", iconName: "FiBriefcase" },
+                { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "Customer Service Resume Guide", iconName: "FiHeadphones" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}

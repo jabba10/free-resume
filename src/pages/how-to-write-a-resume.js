@@ -547,7 +547,7 @@ const HowToWriteAResume = ({ seoData }) => {
           </div>
         </div>
 
-        {/* Resume Wisdom - NEW BEAUTIFUL SECTION */}
+        {/* Resume Wisdom - BEAUTIFUL SECTION */}
         <section className="section section-alt" id="resume-wisdom">
           <div className="section-container">
             <div className="section-header">
@@ -584,7 +584,7 @@ const HowToWriteAResume = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Power Verbs - NEW BEAUTIFUL SECTION */}
+        {/* Power Verbs - BEAUTIFUL SECTION */}
         <section className="section section-alt" id="power-verbs">
           <div className="section-container">
             <div className="section-header">
@@ -778,6 +778,33 @@ const HowToWriteAResume = ({ seoData }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section section-alt" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Continue Your Career Journey</h2>
+              <p className="section-subtitle">Explore more of our lovingly crafted resources to accelerate your job search</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiTarget" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" },
+                { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Professional Summary Guide", iconName: "FiUserCheck" },
+                { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Bullet Points Guide", iconName: "FiEdit3" },
+                { href: "/complete-resume-resource-library", text: "Resume Resource Library", iconName: "FiLayers" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -796,35 +823,6 @@ const HowToWriteAResume = ({ seoData }) => {
               {["ATS-Optimized Templates", "6 Industry Guides", "Power Verbs Library", "Before/After Gallery", "Free PDF Download"].map((f, i) => (
                 <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Continue Your Career Journey</h2>
-              <p className="section-subtitle">Explore more of our lovingly crafted resources to accelerate your job search</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume's compatibility" },
-                { href: "/how-to-write-a-resume-for-usa-sales-and-marketing-roles", text: "Sales & Marketing Guide", iconName: "FiTrendingUp", desc: "Revenue-focused strategies" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap", desc: "AI-powered achievement writing" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get your resume graded" },
-                { href: "/how-to-write-a-resume-for-usa-teaching-and-education-jobs", text: "Teaching Resume Guide", iconName: "FiBookOpen", desc: "Education-specific strategies" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers", desc: "Beautiful ATS-ready designs" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
             </div>
           </div>
         </section>

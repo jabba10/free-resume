@@ -1,3 +1,4 @@
+
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useState, useRef } from 'react';
@@ -837,6 +838,33 @@ const SalesMarketingResumeGuide = ({ seoData }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section section-alt">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore Related Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/how-to-write-a-resume-for-usa-finance-and-accounting-roles", text: "Finance & Accounting Resume Guide", iconName: "FiDollarSign" },
+                { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "Customer Service Resume Guide", iconName: "FiHeadphones" },
+                { href: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "Administrative Jobs Resume Guide", iconName: "FiBriefcase" },
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiFileText" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -859,34 +887,6 @@ const SalesMarketingResumeGuide = ({ seoData }) => {
             <p className="text-small" style={{marginTop: '24px'}}>
               Data-driven strategies updated for 2026 sales and marketing hiring trends. Last updated: {safeCurrentDate} • Sources: LinkedIn, Salesforce, JobScan, Glassdoor, AMA
             </p>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/ats-friendly-marketing-executive-manager-resume-builder", text: "Marketing Resume Builder", iconName: "FiEdit" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/jobs-search-tips", text: "Job Search Tips", iconName: "FiSearch" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
-            </div>
           </div>
         </section>
 

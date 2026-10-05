@@ -780,46 +780,20 @@ GPA: 3.8 | magna cum laude`}
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
-              Build Your Finance Resume Today
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Apply these finance-specific strategies to create a resume that demonstrates precision, quantifies impact, and passes ATS screening. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Browse Finance Templates</Link>
-              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
-              {["ATS-Optimized Templates", "CPA/CFA Positioning", "Salary Insights", "Keyword Checklists", "Free PDF Download"].map((f, i) => (
-                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
-              ))}
-            </div>
-            <p className="text-small" style={{marginTop: '24px'}}>
-              Last updated {safeCurrentDate} · Professional Resume Free
-            </p>
-          </div>
-        </section>
-
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
+              <h2 className="section-title">Explore Related Career Resources</h2>
               <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/ats-friendly-finance-resume-builder", text: "Finance Resume Builder", iconName: "FiEdit" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/interview-tips", text: "Finance Interview Tips", iconName: "FiUsers" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
+                { href: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "Administrative Jobs Resume Guide", iconName: "FiBriefcase" },
+                { href: "/how-to-write-a-resume-for-usa-sales-and-marketing-roles", text: "Sales & Marketing Resume Guide", iconName: "FiTrendingUp" },
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiFileText" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" },
+                { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", text: "Bullet Points Guide", iconName: "FiEdit3" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (

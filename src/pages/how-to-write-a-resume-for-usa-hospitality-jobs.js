@@ -729,6 +729,33 @@ const HospitalityResumeGuide = ({ seoData }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title">Explore Related Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/how-to-write-a-resume-for-usa-retail-jobs", text: "Retail Jobs Resume Guide", iconName: "FiShoppingBag" },
+                { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "Customer Service Resume Guide", iconName: "FiHeart" },
+                { href: "/how-to-write-a-resume-for-usa-sales-and-marketing-roles", text: "Sales & Marketing Resume Guide", iconName: "FiTrendingUp" },
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiFileText" },
+                { href: "/interview-tips", text: "Interview Tips", iconName: "FiUsers" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -749,36 +776,8 @@ const HospitalityResumeGuide = ({ seoData }) => {
               ))}
             </div>
             <p className="text-small" style={{marginTop: '24px'}}>
-              Always tailor your hospitality resume to specific job descriptions. These examples are proven for USA hospitality job applications in 2026. Source data available from AHLA and NRA.
+              Always tailor your hospitality resume to specific job descriptions. These examples are proven for USA hospitality job applications in {CURRENT_YEAR}. Source data available from AHLA and NRA.
             </p>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/how-to-write-a-resume-for-usa-customer-service-jobs", text: "Customer Service Guide", iconName: "FiHeart" },
-                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Work Tips", iconName: "FiGlobe" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/jobs-boards", text: "Top Job Boards", iconName: "FiSearch" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
-            </div>
           </div>
         </section>
 

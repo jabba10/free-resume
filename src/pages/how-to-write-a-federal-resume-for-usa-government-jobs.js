@@ -652,38 +652,20 @@ const FederalResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem' }}>
-              Your Federal Career Deserves a Properly Structured Resume
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Apply the CCAR methodology, GS-level guidance, and agency-specific requirements above to create a federal resume that maximizes your crediting plan score. <strong>100% Free. No Sign-Up Required. OPM-Compliant. Updated for {CURRENT_YEAR}.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiShield /> Build Your Federal Resume</Link>
-              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
+        {/* Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert federal hiring resources</p>
+              <h2 className="section-title">Explore Related Resume Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit3" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher", iconName: "FiSearch" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/free-resume-readability-checker", text: "Readability Checker", iconName: "FiEye" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiGrid" }
+                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume for a Job", iconName: "FiTarget" },
+                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiEdit3" },
+                { href: "/how-to-write-a-resume-for-usa-administrative-jobs", text: "Administrative Jobs Resume Guide", iconName: "FiBriefcase" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" },
+                { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "Tailor Your Resume Guide", iconName: "FiSearch" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
