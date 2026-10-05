@@ -983,6 +983,33 @@ const InterviewTips = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section section-alt" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="resources-heading">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/careers-blog", text: "Careers Blog", iconName: "FiBookOpen" },
+                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiEdit3" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiFileText" },
+                { href: "/cover-letter-guides", text: "Cover Letter Guides", iconName: "FiMail" },
+                { href: "/career-terminology", text: "Career Terminology Glossary", iconName: "FiGlobe" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -1007,48 +1034,6 @@ const InterviewTips = ({ seoData, buildTimestamp }) => {
             </div>
           </div>
         </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Explore More Free Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume's compatibility" },
-                { href: "/how-to-write-a-resume", text: "Complete Resume Guide", iconName: "FiBookOpen", desc: "Master every resume section" },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap", desc: "AI-powered achievement writing" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get your resume professionally graded" },
-                { href: "/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot", text: "ChatGPT Resume Guide", iconName: "FiCpu", desc: "AI-assisted resume strategies" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers", desc: "500+ beautiful ATS-ready designs" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer Info */}
-        <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • Trusted by 4M+ job seekers • Sources: SHRM, LinkedIn, Glassdoor</span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
-        </div>
-
-        {/* Hidden Metadata */}
-        <div style={{ display: 'none' }} aria-hidden="true">
-          <span itemProp="dateModified">{safeLastModifiedDate}</span>
-          <span itemProp="version">2026.4</span>
-          <span itemProp="tipsCount">{MAIN_TIPS.length}</span>
-        </div>
       </main>
     </>
   );

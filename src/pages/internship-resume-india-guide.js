@@ -212,7 +212,7 @@ const SEVEN_DAY_PLAN = [
   { day: "Day 1-2", task: "Gather academic documents", detail: "Collect 10th and 12th marksheets, current semester grade reports. Note exact board names, school names, percentages/CGPA, and years. Having accurate data prevents errors that Indian recruiters notice immediately." },
   { day: "Day 3", task: "Audit your technical skills", detail: "List every technology you know. Categorize by proficiency (Advanced, Intermediate, Beginner). Be brutally honest—Indian technical interviewers will test claimed skills. Identify gaps you can fill with quick certifications before applying." },
   { day: "Day 4", task: "Document your projects deeply", detail: "Write detailed descriptions of 2-3 projects using STAR method. Include technologies used, your specific role, measurable outcomes, GitHub links, and any recognition received. One great project described well is worth more than five mentioned briefly." },
-  { day: "Day 5", task: "Build your first draft", detail: "Use our free Indian resume builder. Follow the 7-section structure from this guide. Focus on the Academic Details section—it's what Indian recruiters check first. Ensure clean, ATS-friendly formatting with standard section headings." },
+  { day: "Day 5", title: "Build your first draft", detail: "Use our free Indian resume builder. Follow the 7-section structure from this guide. Focus on the Academic Details section—it's what Indian recruiters check first. Ensure clean, ATS-friendly formatting with standard section headings." },
   { day: "Day 6", task: "Get feedback and refine", detail: "Show your resume to college placement cell, seniors who got placed, or professors. Indian campus placement officers have seen thousands of resumes—their feedback is invaluable. Incorporate suggestions and proofread for spelling/grammar errors." },
   { day: "Day 7", task: "Create company-specific versions", detail: "Customize for each target company. TCS version emphasizes academic consistency and communication. Amazon version highlights leadership and problem-solving. Infosys version showcases learning agility. One resume does not fit all Indian companies." }
 ];
@@ -907,6 +907,33 @@ const InternshipResumeIndia = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section section-alt" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 className="section-title" id="resources-heading">Explore More Career Resources</h2>
+              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/country-resume-format-calculator", text: "Country Resume Format Calculator", iconName: "FiGlobe" },
+                { href: "/immigration-resume-readiness-calculator", text: "Immigration Resume Readiness Calculator", iconName: "FiFlag" },
+                { href: "/how-to-create-a-resume-with-no-experience", text: "No Experience Resume Guide", iconName: "FiBookOpen" },
+                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiFileText" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -931,41 +958,6 @@ const InternshipResumeIndia = ({ seoData, buildTimestamp }) => {
             </div>
           </div>
         </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="resources-heading">More Free Resources for Indian Students</h2>
-              <p className="section-subtitle">Explore our free tools and guides to strengthen your application</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test if your resume passes Indian ATS" },
-                { href: "/how-to-create-a-resume-with-no-experience", text: "No Experience Guide", iconName: "FiBookOpen", desc: "Perfect for first-time interns" },
-                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "Beat the ATS", iconName: "FiTarget", desc: "Optimize for TCS, Infosys systems" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get your resume professionally scored" },
-                { href: "/resume-formatting-guide", text: "Formatting Guide", iconName: "FiEdit", desc: "Clean layouts that Indian recruiters prefer" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers", desc: "46+ templates for every industry" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer Info */}
-        <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • Based on NASSCOM {CURRENT_YEAR} & 500+ Indian HR interviews</span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
-        </div>
 
         {/* Hidden Metadata */}
         <div style={{ display: 'none' }} aria-hidden="true">

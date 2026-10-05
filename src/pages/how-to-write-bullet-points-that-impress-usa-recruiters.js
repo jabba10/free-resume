@@ -834,6 +834,33 @@ const BulletPointGuide = ({ seoData }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Continue Your Resume Mastery</h2>
+              <p className="section-subtitle">Explore more of our expertly crafted resources to accelerate your career</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap" },
+                { href: "/free-action-verb-recommender", text: "Action Verb Recommender", iconName: "FiEdit" },
+                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Bullets Guide", iconName: "FiCpu" },
+                { href: "/how-to-describe-work-experience-on-resume", text: "Describe Work Experience", iconName: "FiFileText" },
+                { href: "/comprehensive-resume-guide-2026", text: "Comprehensive Resume Guide 2026", iconName: "FiBookOpen" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -852,34 +879,6 @@ const BulletPointGuide = ({ seoData }) => {
               {["6 Bullet Formulas", "56 Power Verbs", "CAR Method", "Before/After Examples", "Free PDF Download"].map((f, i) => (
                 <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Continue Your Resume Mastery</h2>
-              <p className="section-subtitle">Explore more of our expertly crafted resources to accelerate your career</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap" },
-                { href: "/free-action-verb-recommender", text: "Action Verb Recommender", iconName: "FiEdit" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" },
-                { href: "/how-to-write-a-resume", text: "Complete Resume Guide", iconName: "FiBookOpen" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
             </div>
           </div>
         </section>

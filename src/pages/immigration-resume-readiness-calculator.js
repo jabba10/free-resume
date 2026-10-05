@@ -724,6 +724,33 @@ const ImmigrationResumeReadinessCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Explore More Immigration & Career Tools</h2>
+              <p className="section-subtitle">Complement your immigration planning with these powerful resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiGlobe" },
+                { href: "/country-resume-format-calculator", text: "Country Resume Format Calculator", iconName: "FiFlag" },
+                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp" },
+                { href: "/cost-of-living-calculator", text: "Cost of Living Calculator", iconName: "FiDollarSign" },
+                { href: "/internship-resume-india-guide", text: "Internship Resume India Guide", iconName: "FiBook" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -744,32 +771,6 @@ const ImmigrationResumeReadinessCalculatorPage = ({ seoData }) => {
               {["4 Countries", "6 Factors", "Instant Results", "Pass Mark Check", "100% Free"].map((f, i) => (
                 <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Immigration & Career Tools</h2>
-              <p className="section-subtitle">Complement your immigration planning with these powerful resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiGlobe" },
-                { href: "/country-resume-format-calculator", text: "Country Resume Format Guide", iconName: "FiFlag" },
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign" },
-                { href: "/cost-of-living-calculator", text: "Cost of Living Comparison", iconName: "FiTrendingUp" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
             </div>
           </div>
         </section>

@@ -803,6 +803,33 @@ const ImmigrationPointsCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
+        {/* Internal Links Section */}
+        <section className="section" aria-labelledby="resources-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="resources-heading" className="section-title">Explore Related Relocation & Career Tools</h2>
+              <p className="section-subtitle">Complement your immigration planning with these powerful resources</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/immigration-resume-readiness-calculator", text: "Immigration Resume Readiness Calculator", iconName: "FiTarget" },
+                { href: "/country-resume-format-calculator", text: "Country Resume Format Calculator", iconName: "FiGlobe" },
+                { href: "/cost-of-living-calculator", text: "Cost of Living Calculator", iconName: "FiMapPin" },
+                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp" },
+                { href: "/internship-resume-india-guide", text: "Internship Resume India Guide", iconName: "FiBook" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section id="next-steps" style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -826,41 +853,6 @@ const ImmigrationPointsCalculatorPage = ({ seoData }) => {
             </div>
           </div>
         </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career & Relocation Tools</h2>
-              <p className="section-subtitle">Complement your immigration planning with these powerful resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign" },
-                { href: "/cost-of-living-calculator", text: "Cost of Living Comparison", iconName: "FiMapPin" },
-                { href: "/free-resume-builder", text: "ATS-Friendly Resume Builder", iconName: "FiFileText" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiTarget" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer Info */}
-        <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Version {CURRENT_YEAR}.2 • Next review: {new Date(new Date(safeCurrentDate).setDate(new Date(safeCurrentDate).getDate() + 14)).toISOString().split('T')[0]}</span>
-          <span className="text-small" style={{ marginLeft: '1rem', display: 'block', marginTop: '0.5rem' }}>
-            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
-            For reference only. Points criteria subject to change. Always verify with official government sources.
-          </span>
-        </div>
 
         {/* Hidden metadata for crawlers */}
         <div style={{display: 'none'}}>
